@@ -4,34 +4,179 @@
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.AdditionElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageMultiplicationConsumer;
-
-@SuppressWarnings("unused")
 public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerminalConsumer {
 
-	private AdditionElements rule;
-	
+	private AdditionElements rule;	
+
 	private INonTerminalConsumer multiplicationConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer group$3$Consumer;
+
+	private IElementConsumer action$5$Consumer;
+
+	private IElementConsumer assignment$7$Consumer;
+
+	private IElementConsumer alternatives$8$Consumer;
+
+	private IElementConsumer keyword$9$Consumer;
+
+	private IElementConsumer keyword$10$Consumer;
+
+	private IElementConsumer assignment$11$Consumer;
+
+	private IElementConsumer ruleCall$12$Consumer;
+
 	private ICharacterClass keyword$9$Delimiter;
-	
+
 	private ICharacterClass keyword$10$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(group$3$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(multiplicationConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class Group$3$Consumer extends LoopGroupConsumer {
+		
+		protected Group$3$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(action$5$Consumer);
+			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(assignment$11$Consumer);
+		}
+	}
+
+	protected class Action$5$Consumer extends ElementConsumer<Action> {
+		
+		protected Action$5$Consumer(final Action action) {
+			super(action);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			consumeAction(getElement(), true);
+			return SUCCESS;
+		}
+	}
+
+	protected class Assignment$7$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$7$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return alternatives$8$Consumer;
+		}
+	}
+
+	protected class Alternatives$8$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$8$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$9$Consumer);
+			acceptor.accept(keyword$10$Consumer);
+		}
+	}
+
+	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$9$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$9$Delimiter());
+		}
+	}
+
+	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$10$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$10$Delimiter());
+		}
+	}
+
+	protected class Assignment$11$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$11$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$12$Consumer;
+		}
+	}
+
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getElement());
+		}
+	}
+
 	public SimpleExpressionsTestLanguageAdditionConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
@@ -39,152 +184,8 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$2(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele0ParserRuleCallMultiplication());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeGroup$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1Group());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$2(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$2(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(multiplicationConsumer, null, false, false, false, getRule().ele0ParserRuleCallMultiplication());
-	}
-
-	protected int consumeGroup$3(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		while(doConsumeGroup$3(entryPoint) == ConsumeResult.SUCCESS) {
-			marker.flush();
-		}
-		marker.rollback();
-		skipped(getRule().ele1Group());
-		return ConsumeResult.SUCCESS;
-	}
-
-	protected int doConsumeGroup$3(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().ele1Group());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeAction$5(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele100ActionOpvalues());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$7(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele101AssignmentOperator());
-					return result.getResult();
-				}
-			case 2:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$11(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele11AssignmentValues());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-	protected int consumeAction$5(int entryPoint) {
-		consumeAction(getRule().ele100ActionOpvalues(), true);
-		return ConsumeResult.SUCCESS;	
-	}
-
-	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$7(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$7(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele101AssignmentOperator());
-		return result.getResult(consumeAlternatives$8(entryPoint));
-	}
-	protected int consumeAlternatives$8(int entryPoint) throws Exception {
-		AlternativesResult result = createAlternativesResult();
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeKeyword$9(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 1:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeKeyword$10(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-		}
-		return result.getResult();
-	}
-	
-
-	protected int consumeKeyword$9(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele10100KeywordPlusSign(), "operator", false, false, getKeyword$9$Delimiter());
-	}
-
-	protected int consumeKeyword$10(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele10101KeywordHyphenMinus(), "operator", false, false, getKeyword$10$Delimiter());
-	}
-
-	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$11(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$11(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentValues());
-		return result.getResult(consumeRuleCall$12(entryPoint));
-	}
-
-	protected int consumeRuleCall$12(int entryPoint) throws Exception {
-		return consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getRule().ele110ParserRuleCallMultiplication());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public AdditionElements getRule() {
@@ -193,6 +194,19 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 	
 	public void setRule(AdditionElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallMultiplication());
+		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
+		action$5$Consumer = new Action$5$Consumer(rule.ele100ActionOpvalues());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele101AssignmentOperator());
+		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.ele1010Alternatives());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele10100KeywordPlusSign());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele10101KeywordHyphenMinus());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele10100KeywordPlusSign());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele10101KeywordHyphenMinus());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele11AssignmentValues());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele110ParserRuleCallMultiplication());
 	}
 	
 	@Override

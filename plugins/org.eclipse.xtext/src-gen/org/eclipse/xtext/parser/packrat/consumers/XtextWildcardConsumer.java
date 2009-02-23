@@ -4,46 +4,61 @@
 package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarAccess.WildcardElements;
 
-
-@SuppressWarnings("unused")
 public final class XtextWildcardConsumer extends NonTerminalConsumer {
 
-	private WildcardElements rule;
-	
+	private WildcardElements rule;	
+
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer keyword$2$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
-	
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return keyword$2$Consumer;
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), "isWildcard", false, true, getKeyword$2$Delimiter());
+		}
+	}
+
 	public XtextWildcardConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		return consumeKeyword$2(entryPoint);
-	}
-
-	protected int consumeKeyword$2(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0KeywordFullStop(), "isWildcard", false, true, getKeyword$2$Delimiter());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public WildcardElements getRule() {
@@ -52,6 +67,9 @@ public final class XtextWildcardConsumer extends NonTerminalConsumer {
 	
 	public void setRule(WildcardElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentIsWildcard());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordFullStop());
 	}
 	
 	@Override

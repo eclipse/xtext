@@ -69,17 +69,17 @@ public final class PackratParserGenUtil {
 	private PackratParserGenUtil() {
 		throw new UnsupportedOperationException(getClass().getName() + " may not be initialized.");
 	}
-	
+
 	/**
 	 * @param rule - the rule
 	 * @return <code>firstLetterToUpper(rule.name) + "Consumer"</code>
 	 */
 	public static String getConsumerClassName(AbstractRule rule) {
 		Grammar grammar = GrammarUtil.getGrammar(rule);
-		return (grammar != null ? GrammarUtil.getName(grammar) : "") + 
+		return (grammar != null ? GrammarUtil.getName(grammar) : "") +
 			(rule.getName() == null ? "Consumer" : Strings.toFirstUpper(rule.getName()) + "Consumer");
 	}
-	
+
 	/**
 	 * @param g
 	 * @return
@@ -148,7 +148,7 @@ public final class PackratParserGenUtil {
 			char c = myName.charAt(i);
 			if (c == '_') {
 				if (wasUnderscore) { // we may not strip more then one underscore in the middle
-					if (result.length() == 0) 
+					if (result.length() == 0)
 						result.append('_');
 					result.append('_');
 					wasUppercase = true;
@@ -194,7 +194,7 @@ public final class PackratParserGenUtil {
 		}
 		return result.toString();
 	}
-	
+
 	public static String getConsumeMethodName(AbstractElement element) {
 		return "consume" + element.eClass().getName()+ getElementIndex(element);
 	}
@@ -203,20 +203,24 @@ public final class PackratParserGenUtil {
 		final AbstractRule rule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
 		return getElementIndex(element, rule);
 	}
-	
+
 	private static String getElementIndex(AbstractElement element, EObject parent) {
 		return '$' + Integer.toString(next(indexes(EcoreUtil.getAllContents(parent, true), Filter.Util.<Object>same(element))));
 	}
-	
+
 	public static String getDelimiterFieldName(AbstractElement element) {
 		return getFieldName(element.eClass().getName(), getElementIndex(element) + "$Delimiter");
 	}
-	
+
+	public static String getConsumerFieldName(AbstractElement element) {
+		return getFieldName(element.eClass().getName(), getElementIndex(element) + "$Consumer");
+	}
+
 	public static String getGlobalDelimiterFieldName(AbstractElement element) {
 		// TODO make upperCase -> UPPER_CASE$1$DELIMITER
 		return getFieldName(element.eClass().getName(), getElementIndex(element, GrammarUtil.getGrammar(element)) + "$Delimiter");
 	}
-	
+
 	public static Iterable<Keyword> getConflictingKeywords(final AbstractRule rule, final Iterable<Keyword> allKeywords) {
 		return CollectionUtils.filter(allKeywords, new Filter<Keyword>() {
 			public boolean matches(Keyword param) {
@@ -239,7 +243,7 @@ public final class PackratParserGenUtil {
 			}
 		});
 	}
-	
+
 	// TODO SZ: replace return value with ICharacterClass or similar
 	public static List<AbstractRule> getConflictingLexerRules(final Keyword keyword, final Grammar grammar) {
 		AbstractRule rule = GrammarUtil.findRuleForName(grammar, "ID");
@@ -252,7 +256,7 @@ public final class PackratParserGenUtil {
 		}
 		return Collections.emptyList();
 	}
-	
+
 	public static List<String> getConflictingKeywords(final AbstractElement element, final Grammar grammar) {
 		if (element instanceof RuleCall) {
 			AbstractRule rule = ((RuleCall) element).getRule();
@@ -275,7 +279,7 @@ public final class PackratParserGenUtil {
 			}
 		})));
 	}
-	
+
 	// TODO think about super grammar
 	public static AbstractElement findFirstWithSameConflicts(final AbstractElement element, final Grammar grammar) {
 		final List<String> conflicting = getConflictingKeywords(element, grammar);

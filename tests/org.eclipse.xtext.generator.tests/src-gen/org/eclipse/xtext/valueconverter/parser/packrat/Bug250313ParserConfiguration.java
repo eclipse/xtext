@@ -5,7 +5,6 @@ package org.eclipse.xtext.valueconverter.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
@@ -25,10 +24,9 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
-@SuppressWarnings("unused")
 public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
-	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
     private Bug250313ModelConsumer modelConsumer;
     private Bug250313DatatypeConsumer datatypeConsumer;

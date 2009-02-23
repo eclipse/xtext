@@ -4,81 +4,63 @@
 package org.eclipse.xtext.resource.metamodel.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess.StartElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-
-@SuppressWarnings("unused")
 public final class MultiValueFeatureTestLanguageStartConsumer extends NonTerminalConsumer {
 
-	private StartElements rule;
-	
+	private StartElements rule;	
+
 	private ITerminalConsumer idConsumer;
 
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
 	private ISequenceMatcher ruleCall$2$Delimiter;
-	
+
+	protected class Assignment$1$Consumer extends MandatoryLoopAssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$2$Consumer;
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, "featureA", true, false, getElement(), getRuleCall$2$Delimiter());
+		}
+	}
+
 	public MultiValueFeatureTestLanguageStartConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
-		announceNextLevel();
-		switch(entryPoint) {
-			case -1:
-				result = ConsumeResult.EMPTY_MATCH;
-			case 0:
-				announceNextStep();
-				result = doConsumeAssignment$1(nextEntryPoint());
-				while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-					result = doConsumeAssignment$1(nextEntryPoint());
-				}
-			case 1:
-				if (result == ConsumeResult.SUCCESS) {
-					marker.flush();
-					announceNextStep();
-					while(doConsumeAssignment$1(nextEntryPoint())==ConsumeResult.SUCCESS) {
-						marker.flush();
-					}
-					marker.rollback();
-					skipped(getRule().eleAssignmentFeatureA());
-					announceLevelFinished();
-					return ConsumeResult.SUCCESS;
-				}
-				error("Could not find token.", getRule().eleAssignmentFeatureA());
-		}
-		announceLevelFinished();
-		marker.commit();
-		return result;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentFeatureA());
-		return result.getResult(consumeRuleCall$2(entryPoint));
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, "featureA", true, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public StartElements getRule() {
@@ -87,6 +69,9 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 	
 	public void setRule(StartElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentFeatureA());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0LexerRuleCallID());
 	}
 	
 	@Override

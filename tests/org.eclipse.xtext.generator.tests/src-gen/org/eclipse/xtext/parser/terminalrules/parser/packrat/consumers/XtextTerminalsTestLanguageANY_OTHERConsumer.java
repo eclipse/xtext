@@ -6,13 +6,9 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 
-
-@SuppressWarnings("unused")
 public final class XtextTerminalsTestLanguageANY_OTHERConsumer extends AbstractRuleAwareTerminalConsumer {
-
 
 	public XtextTerminalsTestLanguageANY_OTHERConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);

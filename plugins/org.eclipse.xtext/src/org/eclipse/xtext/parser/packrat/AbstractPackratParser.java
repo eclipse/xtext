@@ -29,8 +29,6 @@ import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.RecoveryState;
-import org.eclipse.xtext.parser.packrat.consumers.RecoveryStateHolder;
 import org.eclipse.xtext.parser.packrat.debug.DebugBacktracker;
 import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.debug.DebugConsumerUtility;
@@ -106,12 +104,9 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 
 	private Marker activeMarker;
 
-	private final RecoveryStateHolder recoveryStateHolder;
-
 	protected AbstractPackratParser(IParseResultFactory parseResultFactory, IGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 		this.parseResultFactory = parseResultFactory;
-		recoveryStateHolder = new RecoveryStateHolder();
 		backtracker = new Backtracker(this);
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
@@ -141,9 +136,6 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			}
 			public IMarkerFactory getMarkerFactory() {
 				return localMarkerFactory;
-			}
-			public RecoveryStateHolder getRecoveryStateHolder() {
-				return recoveryStateHolder;
 			}
 			public IParsedTokenAcceptor getTokenAcceptor() {
 				return localTokenAcceptor;
@@ -206,14 +198,11 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		IMarker rootMarker = mark();
 		IRootConsumerListener listener = new RootConsumerListener();
 		try {
-			recoveryStateHolder.setState(new RecoveryState());
 			consumer.consumeAsRoot(listener);
 			IParseResult result = getParseResultFactory().createParseResult(activeMarker, input);
 			rootMarker.commit();
 			if (activeMarker != null)
 				throw new IllegalStateException("cannot finish parse: active marker is still present.");
-			recoveryStateHolder.getState().assertLevelIsReset();
-			recoveryStateHolder.setState(null);
 			return result;
 		} catch(Exception e) {
 			throw new WrappedException(e);

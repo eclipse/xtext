@@ -3,17 +3,14 @@
 */
 package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-@SuppressWarnings("unused")
 public final class TerminalRulesTestLanguageDelimiters {
 
 	private TerminalRulesTestLanguageDelimiters() {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ISequenceMatcher ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

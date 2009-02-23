@@ -7,7 +7,6 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-@SuppressWarnings("unused")
 public final class TestLanguageDelimiters {
 
 	private TestLanguageDelimiters() {
@@ -15,16 +14,16 @@ public final class TestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static ISequenceMatcher ruleCall$18$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$18$Delimiter = new SetBasedKeywordMatcher(
 		"choice", "optional", "reducible");
 
-	public static ISequenceMatcher ruleCall$33$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$33$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

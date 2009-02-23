@@ -5,7 +5,6 @@ package org.eclipse.xtext.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.services.XtextGrammarAccess;
 
@@ -49,10 +48,9 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
-@SuppressWarnings("unused")
 public class XtextParserConfiguration extends AbstractParserConfiguration {
 
-	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
     private XtextGrammarConsumer grammarConsumer;
     private XtextGrammarIDConsumer grammarIdConsumer;

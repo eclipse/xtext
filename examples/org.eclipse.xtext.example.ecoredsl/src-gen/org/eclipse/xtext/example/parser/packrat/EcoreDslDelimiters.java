@@ -7,7 +7,6 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-@SuppressWarnings("unused")
 public final class EcoreDslDelimiters {
 
 	private EcoreDslDelimiters() {
@@ -15,18 +14,18 @@ public final class EcoreDslDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static ICharacterClass keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static ISequenceMatcher ruleCall$17$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$17$Delimiter = new SetBasedKeywordMatcher(
 		"import", "package", "nsURI", "nsPrefix", "datatype", "abstract", "interface", "class", "extends", "ID", "bag", "random", "readonly", "volatile", "transient", "unsettable", "derived", "attr", "local", "val", "ref", "enum", "super", "op", "void", "throws");
 
-	public static ISequenceMatcher ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

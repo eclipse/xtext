@@ -4,36 +4,91 @@
 package org.eclipse.xtext.valueconverter.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess.DatatypeElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-
-@SuppressWarnings("unused")
 public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 
-	private DatatypeElements rule;
-	
+	private DatatypeElements rule;	
+
 	private ITerminalConsumer idConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer keyword$4$Consumer;
+
+	private IElementConsumer ruleCall$5$Consumer;
+
 	private ICharacterClass keyword$4$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$3$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$5$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(keyword$4$Consumer);
+			acceptor.accept(ruleCall$5$Consumer);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$3$Delimiter());
+		}
+	}
+
+	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$4$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$5$Delimiter());
+		}
+	}
+
 	public Bug250313DatatypeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
@@ -42,82 +97,8 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele00LexerRuleCallID());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$4(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele01KeywordHyphenMinus());
-					return result.getResult();
-				}
-			case 2:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$5(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1LexerRuleCallID());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, null, false, false, getRule().ele00LexerRuleCallID(), getRuleCall$3$Delimiter());
-	}
-
-	protected int consumeKeyword$4(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$4(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$4(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele01KeywordHyphenMinus(), null, false, false, getKeyword$4$Delimiter());
-	}
-
-	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$5(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$5(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, null, false, false, getRule().ele1LexerRuleCallID(), getRuleCall$5$Delimiter());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public DatatypeElements getRule() {
@@ -126,6 +107,11 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	
 	public void setRule(DatatypeElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00LexerRuleCallID());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordHyphenMinus());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1LexerRuleCallID());
 	}
 	
 	@Override

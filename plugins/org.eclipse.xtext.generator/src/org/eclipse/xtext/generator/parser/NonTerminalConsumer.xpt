@@ -28,45 +28,48 @@
 package «this.consumerPackageName()»;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+«FOREACH eAllContents.typeSelect(AbstractElement).collect(e|e.metaType.name).toSet().sortBy(e|e) AS name-»
+import org.eclipse.xtext.«getTypeName(name)»;
+«ENDFOREACH-»
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
+«IF eAllContents.typeSelect(RuleCall).exists(e|e.rule.metaType != LexerRule && !((ParserRule)e.rule).terminal)-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+«ENDIF-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+«IF allDelimited().exists(e|e.metaType == Keyword)-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+«ENDIF-»
+«IF allDelimited().exists(e|e.metaType == RuleCall || e.metaType == CrossReference)-»
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+«ENDIF-»
 
 import «this.containingGrammar().grammarAccess()».«name»Elements;
 
-«FOREACH allCalledRules() AS calledRule-»
-import «calledRule.containingGrammar().getNamespace()».parser.packrat.consumers.«calledRule.consumerClassName()»;
-«ENDFOREACH-»
-
-@SuppressWarnings("unused")
 public final class «this.consumerClassName().toSimpleName()» extends NonTerminalConsumer {
 
-	private «this.name»Elements rule;
-	
+	private «this.name»Elements rule;	
 «FOREACH allCalledRules() AS calledRule-»
+
 	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;
 «ENDFOREACH-»
-
+«EXPAND defineConsumerField FOR alternatives-»
 «EXPAND delimiterField FOREACH allDelimited()-»
+«EXPAND defineConsumerClass FOR alternatives-»
+
 	public «this.consumerClassName().toSimpleName()»(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 «EXPAND delimiterFieldInit FOREACH allDelimited()-»
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return «alternatives.consumeMethodName()»(entryPoint);
+	protected int doConsume() throws Exception {
+		return «alternatives.consumerFieldName()».consume();
 	}
-«EXPAND defineConsume FOR alternatives-»
 
 	public «this.name»Elements getRule() {
 		return rule;
@@ -74,6 +77,8 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 	
 	public void setRule(«this.name»Elements rule) {
 		this.rule = rule;
+		
+«EXPAND assignConsumerField FOR alternatives-»
 	}
 	
 	@Override
@@ -102,18 +107,18 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE delimiterField FOR RuleCall-»
+
 	private ISequenceMatcher «delimiterFieldName()»;
-	
 «ENDDEFINE»
 
 «DEFINE delimiterField FOR CrossReference-»
+
 	private ISequenceMatcher «delimiterFieldName()»;
-	
 «ENDDEFINE»
 
 «DEFINE delimiterField FOR Keyword-»
+
 	private ICharacterClass «delimiterFieldName()»;
-	
 «ENDDEFINE»
 
 «DEFINE delimiterFieldInit FOR AbstractElement-»
@@ -169,324 +174,498 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 	
 «ENDDEFINE»
 
-«DEFINE defineConsume FOR AbstractElement-»
-«EXPAND defineConsumeDeclaration FOR this-»
+«REM»
+	IElementConsumer fields
+«ENDREM»
+
+«DEFINE defineConsumerField FOR AbstractElement-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsume FOR Alternatives-»
-«EXPAND defineConsumeDeclaration FOR this-»
-«EXPAND defineConsume(this) FOREACH groups-»
+«DEFINE defineConsumerField FOR Alternatives-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(this) FOREACH groups-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Alternatives parent) FOR AbstractElement-»
-«EXPAND defineConsume FOR this-»
+«DEFINE defineConsumerField(Alternatives parent) FOR AbstractElement-»
+«EXPAND defineConsumerField FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Alternatives parent) FOR Alternatives-»
+«DEFINE defineConsumerField(Alternatives parent) FOR Alternatives-»
 «IF isOptionalCardinality() || isMultipleCardinality()-»
-«EXPAND defineConsume FOR this-»
+«EXPAND defineConsumerField FOR this-»
 «ELSE-»
-«EXPAND defineConsume(this) FOREACH groups-»
+«EXPAND defineConsumerField(this) FOREACH groups-»
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsume FOR Group-»
-«EXPAND defineConsumeDeclaration FOR this-»
-«EXPAND defineConsume(this) FOREACH abstractTokens-»
+«DEFINE defineConsumerField FOR Group-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(this) FOREACH abstractTokens-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Group parent) FOR AbstractElement-»
-«EXPAND defineConsume FOR this-»
+«DEFINE defineConsumerField(Group parent) FOR AbstractElement-»
+«EXPAND defineConsumerField FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Group parent) FOR Group-»
+«DEFINE defineConsumerField(Group parent) FOR Group-»
 «IF isOptionalCardinality() || isMultipleCardinality()-»
-«EXPAND defineConsume FOR this-»
+«EXPAND defineConsumerField FOR this-»
 «ELSE-»
-«EXPAND defineConsume(this) FOREACH abstractTokens-»
+«EXPAND defineConsumerField(this) FOREACH abstractTokens-»
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsume FOR Assignment-»
-«EXPAND defineConsumeDeclaration FOR this-»
-«EXPAND defineConsume(this) FOR terminal-»
+«DEFINE defineConsumerField FOR Assignment-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(this) FOR terminal-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Assignment assignment) FOR AbstractElement-»
+«DEFINE defineConsumerField(Assignment assignment) FOR AbstractElement-»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-
-	protected int «consumeMethodName()»(int entryPoint) throws Exception {
-«EXPAND defineConsumeBody(assignment) FOR this-»
-	}
+«EXPAND defineConsumerFieldDeclaration FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Assignment assignment) FOR Alternatives-»
+«DEFINE defineConsumerField(Assignment assignment) FOR Alternatives-»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-	protected int «consumeMethodName()»(int entryPoint) throws Exception {
-«EXPAND defineConsumeBody(assignment) FOR this-»
-	}
-	
-«EXPAND defineConsume(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField(assignment, this) FOREACH groups-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR AbstractElement-»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-«EXPAND defineConsume(assignment) FOR this-»
+«EXPAND defineConsumerField(assignment) FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR Alternatives-»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-«EXPAND defineConsume(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerField(assignment, this) FOREACH groups-»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Assignment assignment) FOR Action-»
+«DEFINE defineConsumerField(Assignment assignment) FOR Action-»
 «ERROR "actions are not supported in assignments"»
 «ENDDEFINE»
 
-«DEFINE defineConsume(Assignment assignment) FOR Group-»
+«DEFINE defineConsumerField(Assignment assignment) FOR Group-»
 «ERROR "groups are not supported in assignments"»
 «ENDDEFINE»
 
-«DEFINE defineConsumeDeclaration FOR AbstractElement-»
+«DEFINE defineConsumerFieldDeclaration FOR AbstractElement-»
 
-	protected int «consumeMethodName()»(int entryPoint) throws Exception {
-«IF isQuestionMark()-»
-		IMarker marker = mark();
-		int result = do«consumeMethodName().toFirstUpper()»(entryPoint);
-		if (result != ConsumeResult.SUCCESS) {
-			marker.rollback();
-			skipped(getRule().«gaElementAccessor()»);
-		} else
-			marker.commit();
-		return ConsumeResult.SUCCESS;
-«ELSEIF isStar()-»
-		IMarker marker = mark();
-		while(do«consumeMethodName().toFirstUpper()»(entryPoint) == ConsumeResult.SUCCESS) {
-			marker.flush();
-		}
-		marker.rollback();
-		skipped(getRule().«gaElementAccessor()»);
-		return ConsumeResult.SUCCESS;
-«ELSEIF isPlus()-»
-		IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
-		announceNextLevel();
-		switch(entryPoint) {
-			case -1:
-				result = ConsumeResult.EMPTY_MATCH;
-			case 0:
-				announceNextStep();
-				result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
-				while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-					result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
-				}
-			case 1:
-				if (result == ConsumeResult.SUCCESS) {
-					marker.flush();
-					announceNextStep();
-					while(do«consumeMethodName().toFirstUpper()»(nextEntryPoint())==ConsumeResult.SUCCESS) {
-						marker.flush();
-					}
-					marker.rollback();
-					skipped(getRule().«gaElementAccessor()»);
-					announceLevelFinished();
-					return ConsumeResult.SUCCESS;
-				}
-				error("Could not find token.", getRule().«gaElementAccessMethodeName()»());
-		}
-		announceLevelFinished();
-		marker.commit();
-		return result;
+	private IElementConsumer «consumerFieldName()»;
+«ENDDEFINE»
+
+«REM»
+	IElementConsumer implementations
+«ENDREM»
+
+«DEFINE defineConsumerClass FOR AbstractElement-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass FOR Alternatives-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass(this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Alternatives parent) FOR AbstractElement-»
+«EXPAND defineConsumerClass FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Alternatives parent) FOR Alternatives-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsumerClass FOR this-»
 «ELSE-»
-		int result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = do«consumeMethodName().toFirstUpper()»(nextEntryPoint());
-		}
-		return result;
+«EXPAND defineConsumerClass(this) FOREACH groups-»
 «ENDIF-»
-	}
-
-	protected int do«consumeMethodName().toFirstUpper()»(int entryPoint) throws Exception {
-«EXPAND defineConsumeBody FOR this-»
-	}
 «ENDDEFINE»
 
-«DEFINE defineConsumeDeclaration FOR Action-»
+«DEFINE defineConsumerClass FOR Group-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass(this) FOREACH abstractTokens-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Group parent) FOR AbstractElement-»
+«EXPAND defineConsumerClass FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Group parent) FOR Group-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND defineConsumerClass FOR this-»
+«ELSE-»
+«EXPAND defineConsumerClass(this) FOREACH abstractTokens-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass FOR Assignment-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass(this) FOR terminal-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR AbstractElement-»
 «IF isQuestionMark() || isStar() || isPlus()-»
-«ERROR "multiplicity is not supported for actions"»
+«ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-	protected int «consumeMethodName()»(int entryPoint) {
-«EXPAND defineConsumeBody FOR this-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClass(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR Action-»
+«ERROR "actions are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClass(Assignment assignment) FOR Group-»
+«ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE defineConsumerClassDeclaration FOR AbstractElement-»
+«EXPAND defineConsumerClassDeclarationImpl-»
+«EXPAND consumerClassBody-»
 	}
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR AbstractElement-»
-«ERROR "defineConsumeBody for " + metaType-»
+«DEFINE defineConsumerClassDeclaration(Assignment assignment) FOR AbstractElement-»
+«EXPAND defineConsumerClassDeclarationImpl-»
+«EXPAND consumerClassBody(assignment)-»
+	}
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR Action-»
-		consumeAction(getRule().«gaElementAccessMethodeName()»(), «operator == "+="»);
-		return ConsumeResult.SUCCESS;	
-«ENDDEFINE»
+«DEFINE defineConsumerClassDeclarationImpl FOR AbstractElement-»
 
-«DEFINE defineConsumeBody FOR Alternatives-»
-		final AlternativesResult result = createAlternativesResult(getRule().«gaElementAccessor()»);
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-«EXPAND defineConsumeBodyInternal(this) FOR this-»
+	protected class «consumerFieldName().toFirstUpper()» extends «EXPAND parentConsumerClassName-» {
+		
+		protected «consumerFieldName().toFirstUpper()»(final «getTypeName(metaType.name)» «getTypeName(metaType.name).toFirstLower()») {
+			super(«getTypeName(metaType.name).toFirstLower()»);
 		}
-		return result.getResult();
+		
 «ENDDEFINE»
 
-«DEFINE defineConsumeBodyInternal(Alternatives start) FOR Alternatives-»
+«DEFINE parentConsumerClassName FOR AbstractElement-»
+«IF isQuestionMark()-»
+Optional«ELSEIF isPlus()-»
+MandatoryLoop«ELSEIF isStar()-»
+Loop«ENDIF-»
+«EXPAND parentConsumerClassNameImpl-»
+«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR AbstractElement-»
+ElementConsumer<«getTypeName(metaType.name)»>«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR Alternatives-»
+AlternativesConsumer«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR Assignment-»
+AssignmentConsumer«ENDDEFINE»
+
+«DEFINE parentConsumerClassNameImpl FOR Group-»
+GroupConsumer«ENDDEFINE»
+
+«REM»
+	consumerClassBody for unassigned elements
+«ENDREM»
+
+«DEFINE consumerClassBody FOR AbstractElement-»
+		@Override
+		protected int doConsume() throws Exception {
+«EXPAND doConsumeBody-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR Alternatives-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR Assignment-»
+		@Override
+		protected IElementConsumer getConsumer() {
+			return «terminal.consumerFieldName()-»;
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody FOR Group-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR AbstractElement-»
+«ERROR "doConsumeBody is not defined for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Alternatives-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Group-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Assignment-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Action-»
+			consumeAction(getElement(), «operator == "+="»);
+			return SUCCESS;
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR Keyword-»
+			return consumeKeyword(getElement(), null, false, false, get«delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR RuleCall-»
+«EXPAND doConsumeBody(this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR AbstractRule-»
+«ERROR "doConsumeBody for " + metaType.name-» 
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR LexerRule-»
+			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR ParserRule-»
+«IF !terminal-»
+			return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getElement());
+«ELSE-»
+			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+«ENDIF-»
+«ENDDEFINE»
+
+«REM»
+	consumerClassBody for assigned elements
+«ENDREM»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR AbstractElement-»
+		@Override
+		protected int doConsume() throws Exception {
+«EXPAND doConsumeBody(assignment)-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR Alternatives-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR Assignment-»
+		@Override
+		protected IElementConsumer getConsumer() {
+			return «terminal.consumerFieldName()-»;
+		}
+«ENDDEFINE»
+
+«DEFINE consumerClassBody(Assignment assignment) FOR Group-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR AbstractElement-»
+«ERROR "doConsumeBody is not defined for " + metaType.name-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR Alternatives-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR Keyword-»
+			return consumeKeyword(getElement(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR RuleCall-»
+«EXPAND doConsumeBody(assignment, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR AbstractRule-»
+«ERROR "doConsumeBody for " + metaType.name-» 
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR LexerRule-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR ParserRule-»
+«IF !terminal-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement());
+«ELSE-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment) FOR CrossReference-»
+«EXPAND doConsumeBody(assignment, this) FOR rule-»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR AbstractRule-»
+«ERROR "doConsumeBody(Assignment, CrossReference) for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
+«IF !terminal-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement());
+«ELSE-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»());
+«ENDIF-»
+«ENDDEFINE»
+
+«REM»
+	acceptConsumers 
+«ENDREM»
+
+«DEFINE acceptConsumers FOR Alternatives-»
+«EXPAND acceptConsumers(this) FOR this-»
+«ENDDEFINE»
+
+«DEFINE acceptConsumers(Alternatives start) FOR Alternatives-»
 «FOREACH groups AS g-»
 «IF g.metaType == Alternatives && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
-«EXPAND defineConsumeBodyInternal(start) FOR (Alternatives)g-»
+«EXPAND acceptConsumers(start) FOR (Alternatives) g-»
 «ELSE-»
-			case «g.indexInAlternatives(start)»:
-				result.nextAlternative();
-				if (result.isAlternativeDone(«g.consumeMethodName()»(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
+			acceptor.accept(«g.consumerFieldName()»);
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR Group-»
-		final GroupResult result = createGroupResult(getRule().«gaElementAccessor()»);
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-«EXPAND defineConsumeBodyInternal(this) FOR this-»
-		}
-		return result.getResult();
+«DEFINE acceptConsumers FOR Group-»
+«EXPAND acceptConsumers(this) FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBodyInternal(Group start) FOR Group-»
+«DEFINE acceptConsumers(Group start) FOR Group-»
 «FOREACH abstractTokens AS token-»
 «IF token.metaType == Group && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
-«EXPAND defineConsumeBodyInternal(start) FOR (Group)token-»
+«EXPAND acceptConsumers(start) FOR (Group)token-»
 «ELSE-»
-			case «token.indexInGroup(start)»:
-				result.nextStep();
-				if (result.didGroupFail(«token.consumeMethodName()»(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().«token.gaElementAccessMethodeName()»());
-					return result.getResult();
-				}
+			acceptor.accept(«token.consumerFieldName()»);
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR Keyword-»
-		return consumeKeyword(getRule().«gaElementAccessMethodeName()»(), null, false, false, get«delimiterFieldName().toFirstUpper()»());
+«REM»
+	IElementConsumer fields
+«ENDREM»
+
+«DEFINE assignConsumerField FOR AbstractElement-»
+«EXPAND assignConsumerFieldImpl FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR RuleCall-»
-«EXPAND defineConsumeBody(this) FOR rule-»
+«DEFINE assignConsumerField FOR Alternatives-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField(this) FOREACH groups-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody(RuleCall call) FOR AbstractRule-»
-«ERROR "defineConsumeBody for " + metaType.name-» 
+«DEFINE assignConsumerField(Alternatives parent) FOR AbstractElement-»
+«EXPAND assignConsumerField FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody(RuleCall call) FOR LexerRule-»
-		return consumeTerminal(«consumerFieldName()», null, false, false, getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(RuleCall call) FOR ParserRule-»
-«IF !terminal-»
-		return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getRule().«call.gaElementAccessMethodeName()»());
+«DEFINE assignConsumerField(Alternatives parent) FOR Alternatives-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND assignConsumerField FOR this-»
 «ELSE-»
-		return consumeTerminal(«consumerFieldName()», null, false, false, getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
+«EXPAND assignConsumerField(this) FOREACH groups-»
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR Assignment-»
-		final AssignmentResult result = createAssignmentResult(getRule().«gaElementAccessor()»);
-		return result.getResult(«terminal.consumeMethodName()»(entryPoint));
+«DEFINE assignConsumerField FOR Group-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField(this) FOREACH abstractTokens-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody(Assignment assignment) FOR AbstractElement-»
-«ERROR "defineConsumeBody(Assignment) for " + metaType.name»
+«DEFINE assignConsumerField(Group parent) FOR AbstractElement-»
+«EXPAND assignConsumerField FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody(Assignment assignment) FOR Keyword-»
-		return consumeKeyword(getRule().«gaElementAccessMethodeName()»(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»());
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment) FOR CrossReference-»
-«EXPAND defineConsumeBody(assignment, this) FOR rule-»
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment, CrossReference reference) FOR AbstractRule-»
-«ERROR "defineConsumeBody(Assignment, CrossReference) for " + metaType.name»
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
-		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
-«IF !terminal-»
-		return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»());
+«DEFINE assignConsumerField(Group parent) FOR Group-»
+«IF isOptionalCardinality() || isMultipleCardinality()-»
+«EXPAND assignConsumerField FOR this-»
 «ELSE-»
-		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«reference.gaElementAccessMethodeName()»(), get«reference.delimiterFieldName().toFirstUpper()»());
+«EXPAND assignConsumerField(this) FOREACH abstractTokens-»
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody(Assignment assignment) FOR RuleCall-»
-«EXPAND defineConsumeBody(assignment, this) FOR rule-»
+«DEFINE assignConsumerField FOR Assignment-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField(this) FOR terminal-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody(Assignment assignment, RuleCall call) FOR AbstractRule-»
-«ERROR "defineConsumeBody(Assignment, RuleCall) for " + metaType.name»
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment, RuleCall call) FOR LexerRule-»
-		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment, RuleCall call) FOR ParserRule-»
-«IF !terminal-»
-		return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»());
-«ELSE-»
-		return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getRule().«call.gaElementAccessMethodeName()»(), get«call.delimiterFieldName().toFirstUpper()»());
-«ENDIF-»
-«ENDDEFINE»
-
-«DEFINE defineConsumeBody(Assignment assignment) FOR Alternatives-»
+«DEFINE assignConsumerField(Assignment assignment) FOR AbstractElement-»
 «IF isQuestionMark() || isStar() || isPlus()-»
-«ERROR "multiplicity is not supported for alternatives in assignments"»
+«ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-		AlternativesResult result = createAlternativesResult();
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-«EXPAND defineConsumeBodyInternal(assignment, this) FOR this-»
-		}
-		return result.getResult();
+«EXPAND assignConsumerFieldImpl FOR this-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBodyInternal(Assignment assignment, Alternatives start) FOR Alternatives-»
-«FOREACH groups AS g-»
-«IF g.metaType == Alternatives && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
-«EXPAND defineConsumeBodyInternal(assignment, start) FOR (Alternatives)g-»
-«ELSE-»
-			case «g.indexInAlternatives(start)»:
-				result.nextAlternative();
-				if (result.isAlternativeDone(«g.consumeMethodName()»(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
+«DEFINE assignConsumerField(Assignment assignment) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-«ENDFOREACH-»
+«EXPAND assignConsumerField FOR this-»
+«EXPAND assignConsumerField(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment, Alternatives parent) FOR AbstractElement-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND assignConsumerField(assignment) FOR this-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment, Alternatives parent) FOR Alternatives-»
+«IF isQuestionMark() || isStar() || isPlus()-»
+«ERROR "multiplicities are not supported in assignments"»
+«ENDIF-»
+«EXPAND assignConsumerField(assignment, this) FOREACH groups-»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR Action-»
+«ERROR "actions are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR Group-»
+«ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE assignConsumerFieldImpl FOR AbstractElement-»
+		«consumerFieldName()» = new «consumerFieldName().toFirstUpper()»(rule.«gaElementAccessor()»);
 «ENDDEFINE»

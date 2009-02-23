@@ -5,7 +5,6 @@ package org.eclipse.xtext.example.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
@@ -35,10 +34,9 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
-@SuppressWarnings("unused")
 public class DomainmodelParserConfiguration extends AbstractParserConfiguration {
 
-	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
     private DomainmodelFileConsumer fileConsumer;
     private DomainmodelImportConsumer importConsumer;

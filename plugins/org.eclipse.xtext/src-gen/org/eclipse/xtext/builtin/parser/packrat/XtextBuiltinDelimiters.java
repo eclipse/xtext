@@ -3,11 +3,7 @@
 */
 package org.eclipse.xtext.builtin.parser.packrat;
 
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-@SuppressWarnings("unused")
 public final class XtextBuiltinDelimiters {
 
 	private XtextBuiltinDelimiters() {

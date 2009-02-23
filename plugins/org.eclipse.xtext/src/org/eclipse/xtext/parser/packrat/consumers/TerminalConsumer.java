@@ -25,7 +25,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 	private boolean hidden;
 
 	protected TerminalConsumer(ITerminalConsumerConfiguration configuration) {
-		super(configuration.getInput(), configuration.getTokenAcceptor(), configuration.getRecoveryStateHolder());
+		super(configuration.getInput(), configuration.getTokenAcceptor());
 	}
 
 	public final int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {

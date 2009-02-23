@@ -5,7 +5,6 @@ package org.eclipse.xtext.grammarinheritance.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 
@@ -26,10 +25,9 @@ import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENT
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
 import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
 
-@SuppressWarnings("unused")
 public class AbstractTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
-	private XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
 
     private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
     private AbstractTestLanguageAbstractCallOverridenParserRuleConsumer abstractCallOverridenParserRuleConsumer;

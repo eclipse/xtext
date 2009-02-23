@@ -7,22 +7,21 @@ import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-@SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageDelimiters {
 
 	private SimpleReconstrTestLanguageDelimiters() {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static ISequenceMatcher ruleCall$30$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$30$Delimiter = new SetBasedKeywordMatcher(
 		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw");
 
-	public static ICharacterClass keyword$36$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$36$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass keyword$67$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$67$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),

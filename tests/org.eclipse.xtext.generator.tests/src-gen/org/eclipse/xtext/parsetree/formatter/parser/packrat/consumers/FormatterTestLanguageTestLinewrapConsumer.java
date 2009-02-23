@@ -4,102 +4,95 @@
 package org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.TestLinewrapElements;
 
-import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
-
-@SuppressWarnings("unused")
 public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminalConsumer {
 
-	private TestLinewrapElements rule;
-	
+	private TestLinewrapElements rule;	
+
 	private INonTerminalConsumer lineConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer assignment$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private ICharacterClass keyword$2$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(assignment$3$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		}
+	}
+
+	protected class Assignment$3$Consumer extends LoopAssignmentConsumer {
+		
+		protected Assignment$3$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$4$Consumer;
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(lineConsumer, "items", true, false, false, getElement());
+		}
+	}
+
 	public FormatterTestLanguageTestLinewrapConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$2(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele0KeywordLinewrap());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1AssignmentItems());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeKeyword$2(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$2(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$2(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$2(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0KeywordLinewrap(), null, false, false, getKeyword$2$Delimiter());
-	}
-
-	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		while(doConsumeAssignment$3(entryPoint) == ConsumeResult.SUCCESS) {
-			marker.flush();
-		}
-		marker.rollback();
-		skipped(getRule().ele1AssignmentItems());
-		return ConsumeResult.SUCCESS;
-	}
-
-	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentItems());
-		return result.getResult(consumeRuleCall$4(entryPoint));
-	}
-
-	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(lineConsumer, "items", true, false, false, getRule().ele10ParserRuleCallLine());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public TestLinewrapElements getRule() {
@@ -108,6 +101,11 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 	
 	public void setRule(TestLinewrapElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLinewrap());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentItems());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallLine());
 	}
 	
 	@Override

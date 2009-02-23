@@ -5,7 +5,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess;
 
@@ -47,7 +46,6 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageWSConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageANY_OTHERConsumer;
 
-@SuppressWarnings("unused")
 public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
     private XtextTerminalsTestLanguageGrammarConsumer grammarConsumer;
