@@ -36,7 +36,7 @@
                class="org.eclipse.emf.index.ui.builder.ToggleNatureAction"
                enablesFor="+"
                id="org.eclipse.emf.index.ui.addRemoveNatureAction"
-               label="Add/Remove Sample Nature"
+               label="Add/Remove EMF Index Nature"
                menubarPath="additions">
          </action>
       </objectContribution>
@@ -86,7 +86,7 @@
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
                id="org.eclipse.emf.index.ui.menus.sampleMenu"
-               label="Sample Menu"
+               label="EMF Index"
                mnemonic="M">
             <command
                   commandId="org.eclipse.emf.index.ui.commands.sampleCommand"
@@ -103,7 +103,7 @@
                   commandId="org.eclipse.emf.index.ui.commands.sampleCommand"
                   icon="icons/sample.gif"
                   id="org.eclipse.emf.index.ui.toolbars.sampleCommand"
-                  tooltip="Say hello world">
+                  tooltip="Add/Remove EMF Index nature">
             </command>
          </toolbar>
       </menuContribution>
