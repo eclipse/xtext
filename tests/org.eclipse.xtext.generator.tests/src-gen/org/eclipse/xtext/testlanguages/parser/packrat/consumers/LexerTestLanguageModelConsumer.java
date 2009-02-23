@@ -4,56 +4,60 @@
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess.ModelElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguageElementConsumer;
-
-@SuppressWarnings("unused")
 public final class LexerTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private ModelElements rule;
-	
+	private ModelElements rule;	
+
 	private INonTerminalConsumer elementConsumer;
+
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
+	protected class Assignment$1$Consumer extends LoopAssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$2$Consumer;
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(elementConsumer, "children", true, false, false, getElement());
+		}
+	}
 
 	public LexerTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		while(doConsumeAssignment$1(entryPoint) == ConsumeResult.SUCCESS) {
-			marker.flush();
-		}
-		marker.rollback();
-		skipped(getRule().eleAssignmentChildren());
-		return ConsumeResult.SUCCESS;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentChildren());
-		return result.getResult(consumeRuleCall$2(entryPoint));
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(elementConsumer, "children", true, false, false, getRule().ele0ParserRuleCallElement());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public ModelElements getRule() {
@@ -62,6 +66,9 @@ public final class LexerTestLanguageModelConsumer extends NonTerminalConsumer {
 	
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentChildren());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallElement());
 	}
 	
 	@Override

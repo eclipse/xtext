@@ -5,7 +5,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess;
 
@@ -24,7 +23,6 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTer
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageWSConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.HiddenTerminalsTestLanguageANY_OTHERConsumer;
 
-@SuppressWarnings("unused")
 public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
     private HiddenTerminalsTestLanguageModelConsumer modelConsumer;

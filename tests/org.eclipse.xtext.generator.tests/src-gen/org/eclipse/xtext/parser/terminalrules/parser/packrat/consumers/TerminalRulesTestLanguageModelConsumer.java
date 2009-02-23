@@ -4,56 +4,268 @@
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess.ModelElements;
 
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageANY_OTHERConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageIDConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageINTConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageML_COMMENTConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageSL_COMMENTConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageSTRINGConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.TerminalRulesTestLanguageWSConsumer;
-
-@SuppressWarnings("unused")
 public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalConsumer {
 
-	private ModelElements rule;
-	
+	private ModelElements rule;	
+
 	private ITerminalConsumer anyOtherConsumer;
+
 	private ITerminalConsumer idConsumer;
+
 	private ITerminalConsumer intConsumer;
+
 	private ITerminalConsumer mlCommentConsumer;
+
 	private ITerminalConsumer slCommentConsumer;
+
 	private ITerminalConsumer stringConsumer;
+
 	private ITerminalConsumer wsConsumer;
 
+	private IElementConsumer alternatives$1$Consumer;
+
+	private IElementConsumer assignment$7$Consumer;
+
+	private IElementConsumer ruleCall$8$Consumer;
+
+	private IElementConsumer assignment$9$Consumer;
+
+	private IElementConsumer ruleCall$10$Consumer;
+
+	private IElementConsumer assignment$11$Consumer;
+
+	private IElementConsumer ruleCall$12$Consumer;
+
+	private IElementConsumer assignment$13$Consumer;
+
+	private IElementConsumer ruleCall$14$Consumer;
+
+	private IElementConsumer assignment$15$Consumer;
+
+	private IElementConsumer ruleCall$16$Consumer;
+
+	private IElementConsumer assignment$17$Consumer;
+
+	private IElementConsumer ruleCall$18$Consumer;
+
+	private IElementConsumer assignment$19$Consumer;
+
+	private IElementConsumer ruleCall$20$Consumer;
+
 	private ISequenceMatcher ruleCall$8$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$10$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$12$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$14$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$16$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$18$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$20$Delimiter;
-	
+
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(assignment$9$Consumer);
+			acceptor.accept(assignment$11$Consumer);
+			acceptor.accept(assignment$13$Consumer);
+			acceptor.accept(assignment$15$Consumer);
+			acceptor.accept(assignment$17$Consumer);
+			acceptor.accept(assignment$19$Consumer);
+		}
+	}
+
+	protected class Assignment$7$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$7$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$8$Consumer;
+		}
+	}
+
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, "idValue", false, false, getElement(), getRuleCall$8$Delimiter());
+		}
+	}
+
+	protected class Assignment$9$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$9$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$10$Consumer;
+		}
+	}
+
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(intConsumer, "intValue", false, false, getElement(), getRuleCall$10$Delimiter());
+		}
+	}
+
+	protected class Assignment$11$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$11$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$12$Consumer;
+		}
+	}
+
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(stringConsumer, "stringValue", false, false, getElement(), getRuleCall$12$Delimiter());
+		}
+	}
+
+	protected class Assignment$13$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$13$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$14$Consumer;
+		}
+	}
+
+	protected class RuleCall$14$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$14$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getElement(), getRuleCall$14$Delimiter());
+		}
+	}
+
+	protected class Assignment$15$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$15$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$16$Consumer;
+		}
+	}
+
+	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getElement(), getRuleCall$16$Delimiter());
+		}
+	}
+
+	protected class Assignment$17$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$17$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$18$Consumer;
+		}
+	}
+
+	protected class RuleCall$18$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$18$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(wsConsumer, "wsValue", false, false, getElement(), getRuleCall$18$Delimiter());
+		}
+	}
+
+	protected class Assignment$19$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$19$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$20$Consumer;
+		}
+	}
+
+	protected class RuleCall$20$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$20$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getElement(), getRuleCall$20$Delimiter());
+		}
+	}
+
 	public TerminalRulesTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
@@ -66,179 +278,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAlternatives$1(entryPoint);
-	}
-
-	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		int result = doConsumeAlternatives$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAlternatives$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
-		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$7(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 1:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$9(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 2:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$11(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 3:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$13(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 4:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$15(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 5:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$17(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 6:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$19(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$7(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$7(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele000000AssignmentIdValue());
-		return result.getResult(consumeRuleCall$8(entryPoint));
-	}
-
-	protected int consumeRuleCall$8(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, "idValue", false, false, getRule().ele0000000ParserRuleCallID(), getRuleCall$8$Delimiter());
-	}
-
-	protected int consumeAssignment$9(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$9(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$9(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$9(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele000001AssignmentIntValue());
-		return result.getResult(consumeRuleCall$10(entryPoint));
-	}
-
-	protected int consumeRuleCall$10(int entryPoint) throws Exception {
-		return consumeTerminal(intConsumer, "intValue", false, false, getRule().ele0000010ParserRuleCallINT(), getRuleCall$10$Delimiter());
-	}
-
-	protected int consumeAssignment$11(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$11(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$11(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$11(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentStringValue());
-		return result.getResult(consumeRuleCall$12(entryPoint));
-	}
-
-	protected int consumeRuleCall$12(int entryPoint) throws Exception {
-		return consumeTerminal(stringConsumer, "stringValue", false, false, getRule().ele000010ParserRuleCallSTRING(), getRuleCall$12$Delimiter());
-	}
-
-	protected int consumeAssignment$13(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$13(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$13(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$13(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele0001AssignmentMlCommentValue());
-		return result.getResult(consumeRuleCall$14(entryPoint));
-	}
-
-	protected int consumeRuleCall$14(int entryPoint) throws Exception {
-		return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getRule().ele00010ParserRuleCallML_COMMENT(), getRuleCall$14$Delimiter());
-	}
-
-	protected int consumeAssignment$15(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$15(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$15(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$15(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele001AssignmentSlCommentValue());
-		return result.getResult(consumeRuleCall$16(entryPoint));
-	}
-
-	protected int consumeRuleCall$16(int entryPoint) throws Exception {
-		return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getRule().ele0010ParserRuleCallSL_COMMENT(), getRuleCall$16$Delimiter());
-	}
-
-	protected int consumeAssignment$17(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$17(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$17(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$17(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentWsValue());
-		return result.getResult(consumeRuleCall$18(entryPoint));
-	}
-
-	protected int consumeRuleCall$18(int entryPoint) throws Exception {
-		return consumeTerminal(wsConsumer, "wsValue", false, false, getRule().ele010ParserRuleCallWS(), getRuleCall$18$Delimiter());
-	}
-
-	protected int consumeAssignment$19(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$19(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$19(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$19(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentAnyValue());
-		return result.getResult(consumeRuleCall$20(entryPoint));
-	}
-
-	protected int consumeRuleCall$20(int entryPoint) throws Exception {
-		return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getRule().ele10ParserRuleCallANY_OTHER(), getRuleCall$20$Delimiter());
+	protected int doConsume() throws Exception {
+		return alternatives$1$Consumer.consume();
 	}
 
 	public ModelElements getRule() {
@@ -247,6 +288,22 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
+		
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele000000AssignmentIdValue());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000ParserRuleCallID());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele000001AssignmentIntValue());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0000010ParserRuleCallINT());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele00001AssignmentStringValue());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele000010ParserRuleCallSTRING());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele0001AssignmentMlCommentValue());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele00010ParserRuleCallML_COMMENT());
+		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele001AssignmentSlCommentValue());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele0010ParserRuleCallSL_COMMENT());
+		assignment$17$Consumer = new Assignment$17$Consumer(rule.ele01AssignmentWsValue());
+		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.ele010ParserRuleCallWS());
+		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele1AssignmentAnyValue());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele10ParserRuleCallANY_OTHER());
 	}
 	
 	@Override

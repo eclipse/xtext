@@ -4,46 +4,205 @@
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess.NodeElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguageNodeConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-
-@SuppressWarnings("unused")
 public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 
-	private NodeElements rule;
-	
+	private NodeElements rule;	
+
 	private ITerminalConsumer idConsumer;
+
 	private INonTerminalConsumer nodeConsumer;
+
 	private ITerminalConsumer stringConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer assignment$7$Consumer;
+
+	private IElementConsumer ruleCall$8$Consumer;
+
+	private IElementConsumer keyword$9$Consumer;
+
+	private IElementConsumer assignment$10$Consumer;
+
+	private IElementConsumer ruleCall$11$Consumer;
+
+	private IElementConsumer keyword$12$Consumer;
+
+	private IElementConsumer keyword$13$Consumer;
+
+	private IElementConsumer assignment$14$Consumer;
+
+	private IElementConsumer ruleCall$15$Consumer;
+
+	private IElementConsumer keyword$16$Consumer;
+
 	private ICharacterClass keyword$9$Delimiter;
-	
+
 	private ICharacterClass keyword$12$Delimiter;
-	
+
 	private ICharacterClass keyword$13$Delimiter;
-	
+
 	private ICharacterClass keyword$16$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$8$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$11$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(keyword$9$Consumer);
+			acceptor.accept(assignment$10$Consumer);
+			acceptor.accept(keyword$12$Consumer);
+			acceptor.accept(keyword$13$Consumer);
+			acceptor.accept(assignment$14$Consumer);
+			acceptor.accept(keyword$16$Consumer);
+		}
+	}
+
+	protected class Assignment$7$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$7$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$8$Consumer;
+		}
+	}
+
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$8$Delimiter());
+		}
+	}
+
+	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$9$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter());
+		}
+	}
+
+	protected class Assignment$10$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$10$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$11$Consumer;
+		}
+	}
+
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(stringConsumer, "attrib", false, false, getElement(), getRuleCall$11$Delimiter());
+		}
+	}
+
+	protected class Keyword$12$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$12$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter());
+		}
+	}
+
+	protected class Keyword$13$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$13$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter());
+		}
+	}
+
+	protected class Assignment$14$Consumer extends LoopAssignmentConsumer {
+		
+		protected Assignment$14$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$15$Consumer;
+		}
+	}
+
+	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(nodeConsumer, "children", true, false, false, getElement());
+		}
+	}
+
+	protected class Keyword$16$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$16$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter());
+		}
+	}
+
 	public TreeTestLanguageNodeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
@@ -55,175 +214,8 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$7(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele000000AssignmentName());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$9(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele000001KeywordLeftParenthesis());
-					return result.getResult();
-				}
-			case 2:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$10(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele00001AssignmentAttrib());
-					return result.getResult();
-				}
-			case 3:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$12(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele0001KeywordRightParenthesis());
-					return result.getResult();
-				}
-			case 4:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$13(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele001KeywordLeftCurlyBracket());
-					return result.getResult();
-				}
-			case 5:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$14(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele01AssignmentChildren());
-					return result.getResult();
-				}
-			case 6:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$16(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1KeywordRightCurlyBracketSemicolon());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeAssignment$7(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$7(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$7(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$7(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele000000AssignmentName());
-		return result.getResult(consumeRuleCall$8(entryPoint));
-	}
-
-	protected int consumeRuleCall$8(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0000000LexerRuleCallID(), getRuleCall$8$Delimiter());
-	}
-
-	protected int consumeKeyword$9(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$9(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$9(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$9(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele000001KeywordLeftParenthesis(), null, false, false, getKeyword$9$Delimiter());
-	}
-
-	protected int consumeAssignment$10(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$10(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$10(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$10(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele00001AssignmentAttrib());
-		return result.getResult(consumeRuleCall$11(entryPoint));
-	}
-
-	protected int consumeRuleCall$11(int entryPoint) throws Exception {
-		return consumeTerminal(stringConsumer, "attrib", false, false, getRule().ele000010LexerRuleCallSTRING(), getRuleCall$11$Delimiter());
-	}
-
-	protected int consumeKeyword$12(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$12(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$12(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$12(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0001KeywordRightParenthesis(), null, false, false, getKeyword$12$Delimiter());
-	}
-
-	protected int consumeKeyword$13(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$13(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$13(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$13(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele001KeywordLeftCurlyBracket(), null, false, false, getKeyword$13$Delimiter());
-	}
-
-	protected int consumeAssignment$14(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		while(doConsumeAssignment$14(entryPoint) == ConsumeResult.SUCCESS) {
-			marker.flush();
-		}
-		marker.rollback();
-		skipped(getRule().ele01AssignmentChildren());
-		return ConsumeResult.SUCCESS;
-	}
-
-	protected int doConsumeAssignment$14(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele01AssignmentChildren());
-		return result.getResult(consumeRuleCall$15(entryPoint));
-	}
-
-	protected int consumeRuleCall$15(int entryPoint) throws Exception {
-		return consumeNonTerminal(nodeConsumer, "children", true, false, false, getRule().ele010ParserRuleCallNode());
-	}
-
-	protected int consumeKeyword$16(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$16(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$16(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$16(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele1KeywordRightCurlyBracketSemicolon(), null, false, false, getKeyword$16$Delimiter());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public NodeElements getRule() {
@@ -232,6 +224,18 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	
 	public void setRule(NodeElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele000000AssignmentName());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000LexerRuleCallID());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele000001KeywordLeftParenthesis());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele00001AssignmentAttrib());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele000010LexerRuleCallSTRING());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele0001KeywordRightParenthesis());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele001KeywordLeftCurlyBracket());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele01AssignmentChildren());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele010ParserRuleCallNode());
+		keyword$16$Consumer = new Keyword$16$Consumer(rule.ele1KeywordRightCurlyBracketSemicolon());
 	}
 	
 	@Override

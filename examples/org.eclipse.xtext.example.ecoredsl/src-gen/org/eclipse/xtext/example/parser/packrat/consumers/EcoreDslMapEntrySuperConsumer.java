@@ -4,49 +4,45 @@
 package org.eclipse.xtext.example.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess.MapEntrySuperElements;
 
-import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslMapEntryConsumer;
-
-@SuppressWarnings("unused")
 public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 
-	private MapEntrySuperElements rule;
-	
+	private MapEntrySuperElements rule;	
+
 	private INonTerminalConsumer mapEntryConsumer;
+
+	private IElementConsumer ruleCall$1$Consumer;
+
+	protected class RuleCall$1$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$1$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(mapEntryConsumer, null, false, false, false, getElement());
+		}
+	}
 
 	public EcoreDslMapEntrySuperConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeRuleCall$1(entryPoint);
-	}
-
-	protected int consumeRuleCall$1(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$1(int entryPoint) throws Exception {
-		return consumeNonTerminal(mapEntryConsumer, null, false, false, false, getRule().eleParserRuleCallMapEntry());
+	protected int doConsume() throws Exception {
+		return ruleCall$1$Consumer.consume();
 	}
 
 	public MapEntrySuperElements getRule() {
@@ -55,6 +51,8 @@ public final class EcoreDslMapEntrySuperConsumer extends NonTerminalConsumer {
 	
 	public void setRule(MapEntrySuperElements rule) {
 		this.rule = rule;
+		
+		ruleCall$1$Consumer = new RuleCall$1$Consumer(rule.eleParserRuleCallMapEntry());
 	}
 	
 	@Override

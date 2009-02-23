@@ -6,13 +6,9 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.AbstractRuleAwareTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 
-
-@SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageSL_COMMENTConsumer extends AbstractRuleAwareTerminalConsumer {
-
 
 	public HiddenTerminalsTestLanguageSL_COMMENTConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration);

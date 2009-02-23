@@ -4,157 +4,141 @@
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess.ReducibleRuleElements;
 
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TestLanguageTerminalRuleConsumer;
-
-@SuppressWarnings("unused")
 public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer {
 
-	private ReducibleRuleElements rule;
-	
+	private ReducibleRuleElements rule;	
+
 	private INonTerminalConsumer terminalRuleConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer keyword$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
+	private IElementConsumer group$5$Consumer;
+
+	private IElementConsumer action$6$Consumer;
+
+	private IElementConsumer assignment$8$Consumer;
+
+	private IElementConsumer ruleCall$9$Consumer;
+
 	private ICharacterClass keyword$3$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
+			acceptor.accept(group$5$Consumer);
+		}
+	}
+
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$3$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class Group$5$Consumer extends OptionalGroupConsumer {
+		
+		protected Group$5$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(action$6$Consumer);
+			acceptor.accept(assignment$8$Consumer);
+		}
+	}
+
+	protected class Action$6$Consumer extends ElementConsumer<Action> {
+		
+		protected Action$6$Consumer(final Action action) {
+			super(action);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			consumeAction(getElement(), true);
+			return SUCCESS;
+		}
+	}
+
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$8$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$9$Consumer;
+		}
+	}
+
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, false, getElement());
+		}
+	}
+
 	public TestLanguageReducibleRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele00KeywordReducible());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$4(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele01ParserRuleCallTerminalRule());
-					return result.getResult();
-				}
-			case 2:
-				result.nextStep();
-				if (result.didGroupFail(consumeGroup$5(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1Group());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeKeyword$3(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$3(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele00KeywordReducible(), null, false, false, getKeyword$3$Delimiter());
-	}
-
-	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$4(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$4(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getRule().ele01ParserRuleCallTerminalRule());
-	}
-
-	protected int consumeGroup$5(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		int result = doConsumeGroup$5(entryPoint);
-		if (result != ConsumeResult.SUCCESS) {
-			marker.rollback();
-			skipped(getRule().ele1Group());
-		} else
-			marker.commit();
-		return ConsumeResult.SUCCESS;
-	}
-
-	protected int doConsumeGroup$5(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().ele1Group());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeAction$6(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele10ActionReducibleCompositeactionFeature());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeAssignment$8(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele11AssignmentActionFeature());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-	protected int consumeAction$6(int entryPoint) {
-		consumeAction(getRule().ele10ActionReducibleCompositeactionFeature(), true);
-		return ConsumeResult.SUCCESS;	
-	}
-
-	protected int consumeAssignment$8(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$8(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$8(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$8(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele11AssignmentActionFeature());
-		return result.getResult(consumeRuleCall$9(entryPoint));
-	}
-
-	protected int consumeRuleCall$9(int entryPoint) throws Exception {
-		return consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, false, getRule().ele110ParserRuleCallTerminalRule());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public ReducibleRuleElements getRule() {
@@ -163,6 +147,14 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	
 	public void setRule(ReducibleRuleElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordReducible());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallTerminalRule());
+		group$5$Consumer = new Group$5$Consumer(rule.ele1Group());
+		action$6$Consumer = new Action$6$Consumer(rule.ele10ActionReducibleCompositeactionFeature());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele11AssignmentActionFeature());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele110ParserRuleCallTerminalRule());
 	}
 	
 	@Override

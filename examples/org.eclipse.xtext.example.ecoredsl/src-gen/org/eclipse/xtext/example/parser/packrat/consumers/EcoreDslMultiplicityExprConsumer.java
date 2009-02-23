@@ -4,34 +4,87 @@
 package org.eclipse.xtext.example.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Keyword;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess.MultiplicityExprElements;
 
-
-@SuppressWarnings("unused")
 public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer {
 
-	private MultiplicityExprElements rule;
-	
+	private MultiplicityExprElements rule;	
+
+	private IElementConsumer alternatives$1$Consumer;
+
+	private IElementConsumer keyword$3$Consumer;
+
+	private IElementConsumer keyword$4$Consumer;
+
+	private IElementConsumer keyword$5$Consumer;
 
 	private ICharacterClass keyword$3$Delimiter;
-	
+
 	private ICharacterClass keyword$4$Delimiter;
-	
+
 	private ICharacterClass keyword$5$Delimiter;
-	
+
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$3$Consumer);
+			acceptor.accept(keyword$4$Consumer);
+			acceptor.accept(keyword$5$Consumer);
+		}
+	}
+
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$3$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		}
+	}
+
+	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$4$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		}
+	}
+
+	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$5$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		}
+	}
+
 	public EcoreDslMultiplicityExprConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
@@ -40,76 +93,8 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAlternatives$1(entryPoint);
-	}
-
-	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		int result = doConsumeAlternatives$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAlternatives$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
-		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeKeyword$3(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 1:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeKeyword$4(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 2:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeKeyword$5(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeKeyword$3(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$3(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele00KeywordPlusSign(), null, false, false, getKeyword$3$Delimiter());
-	}
-
-	protected int consumeKeyword$4(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$4(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$4(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele01KeywordQuestionMark(), null, false, false, getKeyword$4$Delimiter());
-	}
-
-	protected int consumeKeyword$5(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$5(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$5(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$5(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele1KeywordAsterisk(), null, false, false, getKeyword$5$Delimiter());
+	protected int doConsume() throws Exception {
+		return alternatives$1$Consumer.consume();
 	}
 
 	public MultiplicityExprElements getRule() {
@@ -118,6 +103,11 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	
 	public void setRule(MultiplicityExprElements rule) {
 		this.rule = rule;
+		
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordPlusSign());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordQuestionMark());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele1KeywordAsterisk());
 	}
 	
 	@Override

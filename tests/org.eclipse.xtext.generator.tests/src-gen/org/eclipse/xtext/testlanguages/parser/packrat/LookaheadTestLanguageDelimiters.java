@@ -4,10 +4,7 @@
 package org.eclipse.xtext.testlanguages.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
-@SuppressWarnings("unused")
 public final class LookaheadTestLanguageDelimiters {
 
 	private LookaheadTestLanguageDelimiters() {
@@ -15,7 +12,7 @@ public final class LookaheadTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),

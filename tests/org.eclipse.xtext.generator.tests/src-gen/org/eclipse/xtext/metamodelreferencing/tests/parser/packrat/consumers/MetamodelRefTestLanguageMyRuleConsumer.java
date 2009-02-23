@@ -4,57 +4,63 @@
 package org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.MyRuleElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-
-@SuppressWarnings("unused")
 public final class MetamodelRefTestLanguageMyRuleConsumer extends NonTerminalConsumer {
 
-	private MyRuleElements rule;
-	
+	private MyRuleElements rule;	
+
 	private ITerminalConsumer idConsumer;
 
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
 	private ISequenceMatcher ruleCall$2$Delimiter;
-	
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$2$Consumer;
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$2$Delimiter());
+		}
+	}
+
 	public MetamodelRefTestLanguageMyRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentName());
-		return result.getResult(consumeRuleCall$2(entryPoint));
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, "name", false, false, getRule().ele0LexerRuleCallID(), getRuleCall$2$Delimiter());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public MyRuleElements getRule() {
@@ -63,6 +69,9 @@ public final class MetamodelRefTestLanguageMyRuleConsumer extends NonTerminalCon
 	
 	public void setRule(MyRuleElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentName());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0LexerRuleCallID());
 	}
 	
 	@Override

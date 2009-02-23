@@ -4,204 +4,179 @@
 package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageGrammarAccess.TermElements;
 
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageAtomConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageBooleanConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageManyStringsConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageParensConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageRef2Consumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageSpareConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTwoNumbersConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTypeConsumer;
-
-@SuppressWarnings("unused")
 public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalConsumer {
 
-	private TermElements rule;
-	
+	private TermElements rule;	
+
 	private INonTerminalConsumer atomConsumer;
+
 	private INonTerminalConsumer booleanConsumer;
+
 	private INonTerminalConsumer manyStringsConsumer;
+
 	private INonTerminalConsumer parensConsumer;
+
 	private INonTerminalConsumer ref2Consumer;
+
 	private INonTerminalConsumer spareConsumer;
+
 	private INonTerminalConsumer twoNumbersConsumer;
+
 	private INonTerminalConsumer typeConsumer;
+
+	private IElementConsumer alternatives$1$Consumer;
+
+	private IElementConsumer ruleCall$8$Consumer;
+
+	private IElementConsumer ruleCall$9$Consumer;
+
+	private IElementConsumer ruleCall$10$Consumer;
+
+	private IElementConsumer ruleCall$11$Consumer;
+
+	private IElementConsumer ruleCall$12$Consumer;
+
+	private IElementConsumer ruleCall$13$Consumer;
+
+	private IElementConsumer ruleCall$14$Consumer;
+
+	private IElementConsumer ruleCall$15$Consumer;
+
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$8$Consumer);
+			acceptor.accept(ruleCall$9$Consumer);
+			acceptor.accept(ruleCall$10$Consumer);
+			acceptor.accept(ruleCall$11$Consumer);
+			acceptor.accept(ruleCall$12$Consumer);
+			acceptor.accept(ruleCall$13$Consumer);
+			acceptor.accept(ruleCall$14$Consumer);
+			acceptor.accept(ruleCall$15$Consumer);
+		}
+	}
+
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(atomConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$14$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$14$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(booleanConsumer, null, false, false, false, getElement());
+		}
+	}
 
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAlternatives$1(entryPoint);
-	}
-
-	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		int result = doConsumeAlternatives$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAlternatives$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
-		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$8(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 1:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$9(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 2:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$10(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 3:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$11(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 4:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$12(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 5:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$13(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 6:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$14(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 7:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$15(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeRuleCall$8(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$8(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$8(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$8(int entryPoint) throws Exception {
-		return consumeNonTerminal(atomConsumer, null, false, false, false, getRule().ele0000000ParserRuleCallAtom());
-	}
-
-	protected int consumeRuleCall$9(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$9(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$9(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$9(int entryPoint) throws Exception {
-		return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getRule().ele0000001ParserRuleCallTwoNumbers());
-	}
-
-	protected int consumeRuleCall$10(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$10(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$10(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$10(int entryPoint) throws Exception {
-		return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getRule().ele000001ParserRuleCallManyStrings());
-	}
-
-	protected int consumeRuleCall$11(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$11(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$11(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$11(int entryPoint) throws Exception {
-		return consumeNonTerminal(parensConsumer, null, false, false, false, getRule().ele00001ParserRuleCallParens());
-	}
-
-	protected int consumeRuleCall$12(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$12(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$12(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$12(int entryPoint) throws Exception {
-		return consumeNonTerminal(typeConsumer, null, false, false, false, getRule().ele0001ParserRuleCallType());
-	}
-
-	protected int consumeRuleCall$13(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$13(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$13(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$13(int entryPoint) throws Exception {
-		return consumeNonTerminal(ref2Consumer, null, false, false, false, getRule().ele001ParserRuleCallRef2());
-	}
-
-	protected int consumeRuleCall$14(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$14(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$14(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$14(int entryPoint) throws Exception {
-		return consumeNonTerminal(spareConsumer, null, false, false, false, getRule().ele01ParserRuleCallSpare());
-	}
-
-	protected int consumeRuleCall$15(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$15(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$15(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$15(int entryPoint) throws Exception {
-		return consumeNonTerminal(booleanConsumer, null, false, false, false, getRule().ele1ParserRuleCallBoolean());
+	protected int doConsume() throws Exception {
+		return alternatives$1$Consumer.consume();
 	}
 
 	public TermElements getRule() {
@@ -210,6 +185,16 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setRule(TermElements rule) {
 		this.rule = rule;
+		
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000ParserRuleCallAtom());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000001ParserRuleCallTwoNumbers());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele000001ParserRuleCallManyStrings());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele00001ParserRuleCallParens());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele0001ParserRuleCallType());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele001ParserRuleCallRef2());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele01ParserRuleCallSpare());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele1ParserRuleCallBoolean());
 	}
 	
 	@Override

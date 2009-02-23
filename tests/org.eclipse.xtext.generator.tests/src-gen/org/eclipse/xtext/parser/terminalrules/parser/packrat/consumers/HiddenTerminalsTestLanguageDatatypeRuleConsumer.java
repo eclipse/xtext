@@ -4,32 +4,70 @@
 package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLanguageGrammarAccess.DatatypeRuleElements;
 
-
-@SuppressWarnings("unused")
 public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTerminalConsumer {
 
-	private DatatypeRuleElements rule;
-	
+	private DatatypeRuleElements rule;	
+
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer keyword$3$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
-	
+
 	private ICharacterClass keyword$3$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(keyword$3$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		}
+	}
+
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$3$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		}
+	}
+
 	public HiddenTerminalsTestLanguageDatatypeRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
@@ -37,63 +75,8 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$2(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele0KeywordRule());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1KeywordSemicolon());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeKeyword$2(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$2(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$2(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$2(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0KeywordRule(), null, false, false, getKeyword$2$Delimiter());
-	}
-
-	protected int consumeKeyword$3(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$3(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele1KeywordSemicolon(), null, false, false, getKeyword$3$Delimiter());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public DatatypeRuleElements getRule() {
@@ -102,6 +85,10 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	
 	public void setRule(DatatypeRuleElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordRule());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordSemicolon());
 	}
 	
 	@Override

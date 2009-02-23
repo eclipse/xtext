@@ -4,98 +4,96 @@
 package org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.TrickyG2Elements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.ComplexReconstrTestLanguageTrickyG1Consumer;
-
-@SuppressWarnings("unused")
 public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTerminalConsumer {
 
-	private TrickyG2Elements rule;
-	
+	private TrickyG2Elements rule;	
+
 	private ITerminalConsumer intConsumer;
+
 	private INonTerminalConsumer trickyG1Consumer;
 
+	private IElementConsumer alternatives$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer assignment$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private ISequenceMatcher ruleCall$4$Delimiter;
-	
+
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(assignment$3$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(trickyG1Consumer, null, false, false, false, getElement());
+		}
+	}
+
+	protected class Assignment$3$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$3$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$4$Consumer;
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(intConsumer, "val", false, false, getElement(), getRuleCall$4$Delimiter());
+		}
+	}
+
 	public ComplexReconstrTestLanguageTrickyG2Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAlternatives$1(entryPoint);
-	}
-
-	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		int result = doConsumeAlternatives$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAlternatives$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
-		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeRuleCall$2(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 1:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$3(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$2(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$2(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(trickyG1Consumer, null, false, false, false, getRule().ele0ParserRuleCallTrickyG1());
-	}
-
-	protected int consumeAssignment$3(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$3(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentVal());
-		return result.getResult(consumeRuleCall$4(entryPoint));
-	}
-
-	protected int consumeRuleCall$4(int entryPoint) throws Exception {
-		return consumeTerminal(intConsumer, "val", false, false, getRule().ele10LexerRuleCallINT(), getRuleCall$4$Delimiter());
+	protected int doConsume() throws Exception {
+		return alternatives$1$Consumer.consume();
 	}
 
 	public TrickyG2Elements getRule() {
@@ -104,6 +102,11 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 	
 	public void setRule(TrickyG2Elements rule) {
 		this.rule = rule;
+		
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTrickyG1());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentVal());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10LexerRuleCallINT());
 	}
 	
 	@Override

@@ -4,32 +4,99 @@
 package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.LookAhead4Elements;
 
-
-@SuppressWarnings("unused")
 public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalConsumer {
 
-	private LookAhead4Elements rule;
-	
+	private LookAhead4Elements rule;	
+
+	private IElementConsumer alternatives$1$Consumer;
+
+	private IElementConsumer assignment$2$Consumer;
+
+	private IElementConsumer keyword$3$Consumer;
+
+	private IElementConsumer assignment$4$Consumer;
+
+	private IElementConsumer keyword$5$Consumer;
 
 	private ICharacterClass keyword$3$Delimiter;
-	
+
 	private ICharacterClass keyword$5$Delimiter;
-	
+
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
+		
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
+			super(alternatives);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(assignment$2$Consumer);
+			acceptor.accept(assignment$4$Consumer);
+		}
+	}
+
+	protected class Assignment$2$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$2$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return keyword$3$Consumer;
+		}
+	}
+
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$3$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), "x", false, false, getKeyword$3$Delimiter());
+		}
+	}
+
+	protected class Assignment$4$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$4$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return keyword$5$Consumer;
+		}
+	}
+
+	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$5$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), "x", false, false, getKeyword$5$Delimiter());
+		}
+	}
+
 	public LookaheadTestLanguageLookAhead4Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
@@ -37,69 +104,8 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAlternatives$1(entryPoint);
-	}
-
-	protected int consumeAlternatives$1(int entryPoint) throws Exception {
-		int result = doConsumeAlternatives$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAlternatives$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAlternatives$1(int entryPoint) throws Exception {
-		final AlternativesResult result = createAlternativesResult(getRule().eleAlternatives());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$2(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-			case 1:
-				result.nextAlternative();
-				if (result.isAlternativeDone(consumeAssignment$4(nextEntryPoint()))) { 
-					return result.getResult(); 
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeAssignment$2(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$2(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$2(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$2(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele0AssignmentX());
-		return result.getResult(consumeKeyword$3(entryPoint));
-	}
-
-	protected int consumeKeyword$3(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele00KeywordC(), "x", false, false, getKeyword$3$Delimiter());
-	}
-
-	protected int consumeAssignment$4(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$4(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$4(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$4(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().ele1AssignmentX());
-		return result.getResult(consumeKeyword$5(entryPoint));
-	}
-
-	protected int consumeKeyword$5(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele10KeywordD(), "x", false, false, getKeyword$5$Delimiter());
+	protected int doConsume() throws Exception {
+		return alternatives$1$Consumer.consume();
 	}
 
 	public LookAhead4Elements getRule() {
@@ -108,6 +114,12 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 	
 	public void setRule(LookAhead4Elements rule) {
 		this.rule = rule;
+		
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentX());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordC());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentX());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordD());
 	}
 	
 	@Override

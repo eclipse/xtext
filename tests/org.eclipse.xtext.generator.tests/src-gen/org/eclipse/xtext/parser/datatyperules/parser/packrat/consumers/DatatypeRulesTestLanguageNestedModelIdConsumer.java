@@ -4,114 +4,95 @@
 package org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.NestedModelIdElements;
 
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageModelIdConsumer;
-
-@SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTerminalConsumer {
 
-	private NestedModelIdElements rule;
-	
+	private NestedModelIdElements rule;	
+
 	private INonTerminalConsumer modelIdConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer keyword$4$Consumer;
+
+	private IElementConsumer ruleCall$5$Consumer;
+
 	private ICharacterClass keyword$4$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(keyword$4$Consumer);
+			acceptor.accept(ruleCall$5$Consumer);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(modelIdConsumer, null, false, true, false, getElement());
+		}
+	}
+
+	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$4$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(modelIdConsumer, null, false, true, false, getElement());
+		}
+	}
+
 	public DatatypeRulesTestLanguageNestedModelIdConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele00ParserRuleCallModelId());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$4(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele01KeywordFullStop());
-					return result.getResult();
-				}
-			case 2:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$5(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1ParserRuleCallModelId());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeNonTerminal(modelIdConsumer, null, false, true, false, getRule().ele00ParserRuleCallModelId());
-	}
-
-	protected int consumeKeyword$4(int entryPoint) throws Exception {
-		int result = doConsumeKeyword$4(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeKeyword$4(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeKeyword$4(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele01KeywordFullStop(), null, false, false, getKeyword$4$Delimiter());
-	}
-
-	protected int consumeRuleCall$5(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$5(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$5(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$5(int entryPoint) throws Exception {
-		return consumeNonTerminal(modelIdConsumer, null, false, true, false, getRule().ele1ParserRuleCallModelId());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public NestedModelIdElements getRule() {
@@ -120,6 +101,11 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	
 	public void setRule(NestedModelIdElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallModelId());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordFullStop());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1ParserRuleCallModelId());
 	}
 	
 	@Override

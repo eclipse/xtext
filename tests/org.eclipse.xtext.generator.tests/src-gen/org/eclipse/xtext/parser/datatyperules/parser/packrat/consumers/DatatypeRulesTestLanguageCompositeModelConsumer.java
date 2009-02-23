@@ -4,78 +4,60 @@
 package org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.CompositeModelElements;
 
-import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageModelConsumer;
-
-@SuppressWarnings("unused")
 public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTerminalConsumer {
 
-	private CompositeModelElements rule;
-	
+	private CompositeModelElements rule;	
+
 	private INonTerminalConsumer modelConsumer;
+
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
+	protected class Assignment$1$Consumer extends MandatoryLoopAssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$2$Consumer;
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(modelConsumer, "model", true, false, false, getElement());
+		}
+	}
 
 	public DatatypeRulesTestLanguageCompositeModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		int result = ConsumeResult.SUCCESS;
-		announceNextLevel();
-		switch(entryPoint) {
-			case -1:
-				result = ConsumeResult.EMPTY_MATCH;
-			case 0:
-				announceNextStep();
-				result = doConsumeAssignment$1(nextEntryPoint());
-				while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-					result = doConsumeAssignment$1(nextEntryPoint());
-				}
-			case 1:
-				if (result == ConsumeResult.SUCCESS) {
-					marker.flush();
-					announceNextStep();
-					while(doConsumeAssignment$1(nextEntryPoint())==ConsumeResult.SUCCESS) {
-						marker.flush();
-					}
-					marker.rollback();
-					skipped(getRule().eleAssignmentModel());
-					announceLevelFinished();
-					return ConsumeResult.SUCCESS;
-				}
-				error("Could not find token.", getRule().eleAssignmentModel());
-		}
-		announceLevelFinished();
-		marker.commit();
-		return result;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentModel());
-		return result.getResult(consumeRuleCall$2(entryPoint));
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(modelConsumer, "model", true, false, false, getRule().ele0ParserRuleCallModel());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public CompositeModelElements getRule() {
@@ -84,6 +66,9 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 	
 	public void setRule(CompositeModelElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentModel());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallModel());
 	}
 	
 	@Override

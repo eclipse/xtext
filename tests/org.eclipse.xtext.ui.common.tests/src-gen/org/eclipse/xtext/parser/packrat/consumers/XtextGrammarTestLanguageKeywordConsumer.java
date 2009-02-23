@@ -4,57 +4,63 @@
 package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.KeywordElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-
-@SuppressWarnings("unused")
 public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalConsumer {
 
-	private KeywordElements rule;
-	
+	private KeywordElements rule;	
+
 	private ITerminalConsumer stringConsumer;
 
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
 	private ISequenceMatcher ruleCall$2$Delimiter;
-	
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$2$Consumer;
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$2$Delimiter());
+		}
+	}
+
 	public XtextGrammarTestLanguageKeywordConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentValue());
-		return result.getResult(consumeRuleCall$2(entryPoint));
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeTerminal(stringConsumer, "value", false, false, getRule().ele0LexerRuleCallSTRING(), getRuleCall$2$Delimiter());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public KeywordElements getRule() {
@@ -63,6 +69,9 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 	
 	public void setRule(KeywordElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentValue());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0LexerRuleCallSTRING());
 	}
 	
 	@Override

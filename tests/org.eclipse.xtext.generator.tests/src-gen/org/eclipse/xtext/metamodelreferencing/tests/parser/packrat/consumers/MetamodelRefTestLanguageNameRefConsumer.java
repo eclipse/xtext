@@ -4,57 +4,63 @@
 package org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.NameRefElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-
-@SuppressWarnings("unused")
 public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalConsumer {
 
-	private NameRefElements rule;
-	
+	private NameRefElements rule;	
+
 	private ITerminalConsumer idConsumer;
 
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer crossReference$2$Consumer;
+
 	private ISequenceMatcher crossReference$2$Delimiter;
-	
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return crossReference$2$Consumer;
+		}
+	}
+
+	protected class CrossReference$2$Consumer extends ElementConsumer<CrossReference> {
+		
+		protected CrossReference$2$Consumer(final CrossReference crossReference) {
+			super(crossReference);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(idConsumer, "rule", false, false, getElement(), getCrossReference$2$Delimiter());
+		}
+	}
+
 	public MetamodelRefTestLanguageNameRefConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		crossReference$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentRule());
-		return result.getResult(consumeCrossReference$2(entryPoint));
-	}
-
-	protected int consumeCrossReference$2(int entryPoint) throws Exception {
-		return consumeTerminal(idConsumer, "rule", false, false, getRule().ele0CrossReferenceEStringParserRule(), getCrossReference$2$Delimiter());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public NameRefElements getRule() {
@@ -63,6 +69,9 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 	
 	public void setRule(NameRefElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentRule());
+		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.ele0CrossReferenceEStringParserRule());
 	}
 	
 	@Override

@@ -35,7 +35,6 @@ public class EpatchComparingTest extends AbstractParserComparingTest {
 				catch (IOException e) {
 					throw new RuntimeException(e);
 				}
-				System.out.println(filename);
 				return Tuples.create(filename.substring(filename.lastIndexOf('/') + 1), model);
 			}
 		});
@@ -46,7 +45,7 @@ public class EpatchComparingTest extends AbstractParserComparingTest {
 		final ClassLoader classLoader = getClass().getClassLoader();
 		final String root = (getClass().getPackage().getName() + ".testcases.").replace('.', '/');
 		return new Iterator<String>() {
-			private int current = 18;
+			private int current = 1;
 
 			private String getCurrentAsString() {
 				if (current < 10)
@@ -85,7 +84,5 @@ public class EpatchComparingTest extends AbstractParserComparingTest {
 	protected IParser createSecondParser() {
 		return getPackratParser();
 	}
-
-
 
 }

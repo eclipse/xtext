@@ -4,54 +4,60 @@
 package org.eclipse.xtext.grammarinheritance.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.CallExtendedParserRuleElements;
 
-import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
-
-@SuppressWarnings("unused")
 public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends NonTerminalConsumer {
 
-	private CallExtendedParserRuleElements rule;
-	
+	private CallExtendedParserRuleElements rule;	
+
 	private INonTerminalConsumer abstractCallExtendedParserRuleConsumer;
+
+	private IElementConsumer assignment$1$Consumer;
+
+	private IElementConsumer ruleCall$2$Consumer;
+
+	protected class Assignment$1$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$1$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$2$Consumer;
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeNonTerminal(abstractCallExtendedParserRuleConsumer, "call", false, false, false, getElement());
+		}
+	}
 
 	public ConcreteTestLanguageCallExtendedParserRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeAssignment$1(entryPoint);
-	}
-
-	protected int consumeAssignment$1(int entryPoint) throws Exception {
-		int result = doConsumeAssignment$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeAssignment$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeAssignment$1(int entryPoint) throws Exception {
-		final AssignmentResult result = createAssignmentResult(getRule().eleAssignmentCall());
-		return result.getResult(consumeRuleCall$2(entryPoint));
-	}
-
-	protected int consumeRuleCall$2(int entryPoint) throws Exception {
-		return consumeNonTerminal(abstractCallExtendedParserRuleConsumer, "call", false, false, false, getRule().ele0ParserRuleCallAbstractCallExtendedParserRule());
+	protected int doConsume() throws Exception {
+		return assignment$1$Consumer.consume();
 	}
 
 	public CallExtendedParserRuleElements getRule() {
@@ -60,6 +66,9 @@ public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends No
 	
 	public void setRule(CallExtendedParserRuleElements rule) {
 		this.rule = rule;
+		
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentCall());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractCallExtendedParserRule());
 	}
 	
 	@Override

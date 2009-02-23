@@ -4,34 +4,74 @@
 package org.eclipse.xtext.example.parser.packrat.consumers;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
-import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
-import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
-import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
+import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess.SINTElements;
 
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-
-@SuppressWarnings("unused")
 public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 
-	private SINTElements rule;
-	
+	private SINTElements rule;	
+
 	private ITerminalConsumer intConsumer;
 
+	private IElementConsumer group$1$Consumer;
+
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
 	private ICharacterClass keyword$2$Delimiter;
-	
+
 	private ISequenceMatcher ruleCall$3$Delimiter;
-	
+
+	protected class Group$1$Consumer extends GroupConsumer {
+		
+		protected Group$1$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends OptionalElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume() throws Exception {
+			return consumeTerminal(intConsumer, null, false, false, getElement(), getRuleCall$3$Delimiter());
+		}
+	}
+
 	public EcoreDslSINTConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
@@ -39,66 +79,8 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 	}
 	
 	@Override
-	protected int doConsume(int entryPoint) throws Exception {
-		return consumeGroup$1(entryPoint);
-	}
-
-	protected int consumeGroup$1(int entryPoint) throws Exception {
-		int result = doConsumeGroup$1(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeGroup$1(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeGroup$1(int entryPoint) throws Exception {
-		final GroupResult result = createGroupResult(getRule().eleGroup());
-		switch(entryPoint) {
-			case -1: // use fall through semantics of switch case
-				result.reset();
-			case 0:
-				result.nextStep();
-				if (result.didGroupFail(consumeKeyword$2(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele0KeywordHyphenMinus());
-					return result.getResult();
-				}
-			case 1:
-				result.nextStep();
-				if (result.didGroupFail(consumeRuleCall$3(nextEntryPoint()))) {
-					// TODO improve error message
-					error("Another token expected.", getRule().ele1LexerRuleCallINT());
-					return result.getResult();
-				}
-		}
-		return result.getResult();
-	}
-
-	protected int consumeKeyword$2(int entryPoint) throws Exception {
-		IMarker marker = mark();
-		int result = doConsumeKeyword$2(entryPoint);
-		if (result != ConsumeResult.SUCCESS) {
-			marker.rollback();
-			skipped(getRule().ele0KeywordHyphenMinus());
-		} else
-			marker.commit();
-		return ConsumeResult.SUCCESS;
-	}
-
-	protected int doConsumeKeyword$2(int entryPoint) throws Exception {
-		return consumeKeyword(getRule().ele0KeywordHyphenMinus(), null, false, false, getKeyword$2$Delimiter());
-	}
-
-	protected int consumeRuleCall$3(int entryPoint) throws Exception {
-		int result = doConsumeRuleCall$3(nextEntryPoint());
-		while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-			result = doConsumeRuleCall$3(nextEntryPoint());
-		}
-		return result;
-	}
-
-	protected int doConsumeRuleCall$3(int entryPoint) throws Exception {
-		return consumeTerminal(intConsumer, null, false, false, getRule().ele1LexerRuleCallINT(), getRuleCall$3$Delimiter());
+	protected int doConsume() throws Exception {
+		return group$1$Consumer.consume();
 	}
 
 	public SINTElements getRule() {
@@ -107,6 +89,10 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 	
 	public void setRule(SINTElements rule) {
 		this.rule = rule;
+		
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHyphenMinus());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1LexerRuleCallINT());
 	}
 	
 	@Override
