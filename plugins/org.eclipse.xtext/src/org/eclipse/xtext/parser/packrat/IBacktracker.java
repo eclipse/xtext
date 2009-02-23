@@ -12,6 +12,14 @@ package org.eclipse.xtext.parser.packrat;
  */
 public interface IBacktracker {
 
-	boolean skipPreviousToken();
+	interface IBacktrackingResult extends IBacktracker {
+		boolean isSuccessful();
+
+		void commit();
+
+		void discard();
+	}
+
+	IBacktrackingResult skipPreviousToken();
 
 }

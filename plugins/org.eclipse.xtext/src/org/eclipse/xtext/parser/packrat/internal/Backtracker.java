@@ -21,7 +21,7 @@ public class Backtracker implements IBacktracker {
 		this.markerClient = markerClient;
 	}
 
-	public boolean skipPreviousToken() {
+	public IBacktrackingResult skipPreviousToken() {
 		return markerClient.getActiveMarker().skipPreviousToken();
 	}
 

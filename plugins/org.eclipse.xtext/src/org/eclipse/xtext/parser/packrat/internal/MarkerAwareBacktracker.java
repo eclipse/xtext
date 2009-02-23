@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.internal;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
@@ -26,19 +27,94 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implements IBacktracker, IMarkerVisitor {
+public class MarkerAwareBacktracker implements IBacktracker {
 
-	/**
-	 * @author Sebastian Zarnekow - Initial contribution and API
-	 */
-	private final static class Skipper extends AbstractParsedTokenVisitor {
-		private boolean continueSkip;
-		private int skippedOffset;
+	private final Marker marker;
+
+	public MarkerAwareBacktracker(Marker marker) {
+		this.marker = marker;
+	}
+
+	protected class NestedBacktrackingResult extends AbstractParsedTokenVisitor implements IBacktrackingResult, IMarkerVisitor {
+
+		private boolean result;
+
+		private boolean lookup;
+
 		private int stackSize;
 
-		private Skipper() {
-			this.continueSkip = true;
-			this.skippedOffset = 0;
+		private int skippedOffset;
+
+		private int errorStack;
+
+		private final Set<AbstractParsedToken> markedTokens;
+
+		private final NestedBacktrackingResult parent;
+
+		protected NestedBacktrackingResult(NestedBacktrackingResult parent) {
+			this.parent = parent;
+			this.result = false;
+			this.markedTokens = new HashSet<AbstractParsedToken>(8);
+		}
+
+		protected boolean isSkipped(AbstractParsedToken token) {
+			return markedTokens.contains(token) || (parent == null ? token.isSkipped() : parent.isSkipped(token));
+		}
+
+		private void commitImpl() {
+			for(AbstractParsedToken token: markedTokens) {
+				token.setSkipped(true);
+			}
+		}
+
+		public void commit() {
+			markedTokens.clear();
+			if (parent != null)
+				parent.commit();
+		}
+
+		public void discard() {
+			for(AbstractParsedToken token: markedTokens) {
+				token.setSkipped(false);
+			}
+			marker.getInput().setOffset(marker.getInput().getOffset() + skippedOffset);
+			markedTokens.clear();
+			if (parent != null)
+				parent.discard();
+		}
+
+		public boolean isSuccessful() {
+			return result;
+		}
+
+		public void skipPreviousTokenImpl() {
+			errorStack = 0;
+			result = false;
+			lookup = true;
+			stackSize = 0;
+			int idx = -1;
+			List<AbstractParsedToken> content = marker.getContent();
+			idx = content.size() - 1;
+			while(idx >= 0 && !result && lookup) {
+				content.get(idx).accept(this);
+				if (!result)
+					idx--;
+			}
+			if (result) {
+				Skipper skipper = new Skipper();
+				for (int i = idx; i < content.size(); i++)
+					content.get(i).accept(skipper);
+				idx = 0;
+				skippedOffset = skipper.skippedOffset;
+				marker.getInput().setOffset(marker.getInput().getOffset() - skipper.skippedOffset);
+				commitImpl();
+			}
+		}
+
+		public IBacktrackingResult skipPreviousToken() {
+			NestedBacktrackingResult result = new NestedBacktrackingResult(this);
+			result.skipPreviousTokenImpl();
+			return result;
 		}
 
 		@Override
@@ -48,178 +124,172 @@ public class MarkerAwareBacktracker extends AbstractParsedTokenVisitor implement
 
 		@Override
 		public void visitCompoundParsedToken(CompoundParsedToken token) {
-			if (!token.isSkipped()) {
-				token.setSkipped(continueSkip);
-				stackSize++;
-			}
-		}
-
-		@Override
-		public void visitCompoundParsedTokenEnd(CompoundParsedToken.End token) {
-			if (!token.isSkipped()) {
-				token.setSkipped(continueSkip);
-				stackSize--;
-				continueSkip = stackSize != 0;
-			}
-		}
-
-		@Override
-		public void visitParsedTerminal(ParsedTerminal token) {
-			if (!token.isSkipped()) {
-				token.setSkipped(continueSkip);
-				skippedOffset += token.getLength();
-				continueSkip = stackSize != 0;
+			if (lookup && !isSkipped(token)) {
+				if (errorStack != 0)
+					errorStack--;
+				if (stackSize == 0)
+					lookup = false;
+				else {
+					stackSize--;
+					if (GrammarUtil.isOptionalCardinality(token.getGrammarElement())) {
+						result = errorStack == 0;
+					}
+				}
 			}
 		}
 
 		@Override
 		public void visitParsedNonTerminal(ParsedNonTerminal token) {
-			if (!token.isSkipped()) {
-				token.setSkipped(continueSkip);
-				stackSize++;
+			if (lookup && !isSkipped(token)) {
+				if (stackSize == 0)
+					lookup = false;
+				else {
+					stackSize--;
+					if (errorStack != 0)
+						errorStack--;
+					EObject grammarElement = token.getGrammarElement();
+					if (grammarElement instanceof AbstractElement) {
+						if (GrammarUtil.isOptionalCardinality((AbstractElement) grammarElement)) {
+							result = errorStack == 0;
+						}
+					} else {
+						lookup = false;
+					}
+				}
 			}
 		}
 
 		@Override
 		public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
-			if (!token.isSkipped()) {
-				token.setSkipped(continueSkip);
-				stackSize--;
-				continueSkip = stackSize != 0;
+			if (lookup && !isSkipped(token)) {
+				if (errorStack != 0)
+					errorStack++;
+				stackSize++;
+			}
+		}
+
+		@Override
+		public void visitCompoundParsedTokenEnd(org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken.End token) {
+			if (lookup && !isSkipped(token)) {
+				if (errorStack != 0)
+					errorStack++;
+				stackSize++;
+			}
+		}
+
+		@Override
+		public void visitParsedTerminal(ParsedTerminal token) {
+			if (lookup && !token.isHidden() && !isSkipped(token) && (token.getGrammarElement() instanceof AbstractElement)) {
+				if (GrammarUtil.isOptionalCardinality((AbstractElement) token.getGrammarElement())) {
+					result = errorStack == 0;
+					lookup = !result;
+				}
 			}
 		}
 
 		@Override
 		public void visitErrorToken(ErrorToken token) {
-			if (!token.isSkipped()) {
-				token.setSkipped(true);
-			}
+			if (!isSkipped(token))
+				errorStack++;
 		}
 
-	}
-
-	private final Marker marker;
-
-	private boolean result;
-
-	private boolean lookup;
-
-	private final List<Marker> handledMarkers;
-
-	private int stackSize;
-
-	public MarkerAwareBacktracker(Marker marker) {
-		this.marker = marker;
-		this.result = false;
-		this.handledMarkers = new ArrayList<Marker>(4);
-	}
-
-	@Override
-	public void visitAbstractParsedToken(AbstractParsedToken token) {
-		//
-	}
-
-	@Override
-	public void visitCompoundParsedToken(CompoundParsedToken token) {
-		if (lookup && !token.isSkipped()) {
-			if (stackSize == 0)
-				lookup = false;
-			else {
-				stackSize--;
-				if (GrammarUtil.isOptionalCardinality(token.getGrammarElement())) {
-					result = true;
+		public void visitMarker(Marker marker) {
+			final List<AbstractParsedToken> content = marker.getContent();
+			if (!lookup) {
+				for(int i = 0; i < content.size(); i++) {
+					content.get(i).accept(this);
+				}
+			} else {
+				for(int i = content.size() - 1; i >= 0; i--) {
+					content.get(i).accept(this);
 				}
 			}
 		}
-	}
 
-	@Override
-	public void visitParsedNonTerminal(ParsedNonTerminal token) {
-		if (lookup && !token.isSkipped()) {
-			if (stackSize == 0)
-				lookup = false;
-			else {
-				stackSize--;
-				EObject grammarElement = token.getGrammarElement();
-				if (grammarElement instanceof AbstractElement) {
-					if (GrammarUtil.isOptionalCardinality((AbstractElement) grammarElement)) {
-						result = true;
+		private final class Skipper extends AbstractParsedTokenVisitor {
+			private boolean continueSkip;
+			private int skippedOffset;
+			private int stackSize;
+
+			private Skipper() {
+				this.continueSkip = true;
+				this.skippedOffset = 0;
+				this.stackSize = 0;
+			}
+
+			@Override
+			public void visitAbstractParsedToken(AbstractParsedToken token) {
+				//
+			}
+
+			@Override
+			public void visitCompoundParsedToken(CompoundParsedToken token) {
+				if (!isSkipped(token)) {
+					if (continueSkip) {
+						markedTokens.add(token);
+						stackSize++;
 					}
-				} else {
-					lookup = false;
 				}
 			}
-		}
-	}
 
-	@Override
-	public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
-		if (lookup && !token.isSkipped())
-			stackSize++;
-	}
-
-	@Override
-	public void visitCompoundParsedTokenEnd(org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken.End token) {
-		if (lookup && !token.isSkipped())
-			stackSize++;
-	}
-
-	@Override
-	public void visitParsedTerminal(ParsedTerminal token) {
-		if (lookup && !token.isHidden() && !token.isSkipped() && (token.getGrammarElement() instanceof AbstractElement)) {
-			if (GrammarUtil.isOptionalCardinality((AbstractElement) token.getGrammarElement())) {
-				result = true;
-				lookup = false;
+			@Override
+			public void visitCompoundParsedTokenEnd(CompoundParsedToken.End token) {
+				if (!isSkipped(token)) {
+					if (continueSkip) {
+						markedTokens.add(token);
+						stackSize--;
+						continueSkip = stackSize != 0;
+					}
+				}
 			}
+
+			@Override
+			public void visitParsedTerminal(ParsedTerminal token) {
+				if (!isSkipped(token)) {
+					if (continueSkip) {
+						markedTokens.add(token);
+						skippedOffset += token.getLength();
+						continueSkip = stackSize != 0;
+					}
+				}
+			}
+
+			@Override
+			public void visitParsedNonTerminal(ParsedNonTerminal token) {
+				if (!isSkipped(token)) {
+					if (continueSkip) {
+						markedTokens.add(token);
+						stackSize++;
+					}
+				}
+			}
+
+			@Override
+			public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
+				if (!isSkipped(token)) {
+					if (continueSkip) {
+						markedTokens.add(token);
+						stackSize--;
+						continueSkip = stackSize != 0;
+					}
+				}
+			}
+
+			@Override
+			public void visitErrorToken(ErrorToken token) {
+				if (!isSkipped(token)) {
+					markedTokens.add(token);
+				}
+			}
+
 		}
+
 	}
 
-	public boolean skipPreviousToken() {
-		result = false;
-		lookup = true;
-		handledMarkers.clear();
-		stackSize = 0;
-		Marker localMarker = this.marker;
-		List<AbstractParsedToken> content = null;
-		int idx = -1;
-		while(localMarker != null && !result && lookup) {
-			handledMarkers.add(localMarker);
-			content = localMarker.getContent();
-			idx = content.size() - 1;
-			while(idx >= 0 && !result && lookup) {
-				content.get(idx).accept(this);
-				if (!result)
-					idx--;
-			}
-			if (!result)
-				localMarker = localMarker.getParent();
-		}
-		if (result) {
-			Skipper skipper = new Skipper();
-			while(!handledMarkers.isEmpty()) {
-				Marker m = handledMarkers.remove(handledMarkers.size()-1);
-				content = m.getContent();
-				for (int i = idx; i < content.size(); i++)
-					content.get(i).accept(skipper);
-				idx = 0;
-			}
-			this.marker.getInput().setOffset(this.marker.getInput().getOffset() - skipper.skippedOffset);
-		}
-		handledMarkers.clear();
+	public IBacktrackingResult skipPreviousToken() {
+		NestedBacktrackingResult result = new NestedBacktrackingResult(null);
+		result.skipPreviousTokenImpl();
 		return result;
-	}
-
-	public void visitMarker(Marker marker) {
-		final List<AbstractParsedToken> content = marker.getContent();
-		if (!lookup) {
-			for(int i = 0; i < content.size(); i++) {
-				content.get(i).accept(this);
-			}
-		} else {
-			for(int i = content.size() - 1; i >= 0; i--) {
-				content.get(i).accept(this);
-			}
-		}
 	}
 
 }
