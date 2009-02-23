@@ -6,12 +6,14 @@ Bundle-SymbolicName: org.eclipse.xtext.ui.common;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.ui.core,
- org.eclipse.xtext.log4j;bundle-version="1.2.15"
+ org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.ui.ide;bundle-version="3.4.0"
 Export-Package: org.eclipse.xtext.ui.common.editor.contentassist,
  org.eclipse.xtext.ui.common.editor.contentassist.impl,
  org.eclipse.xtext.ui.common.editor.folding,
  org.eclipse.xtext.ui.common.editor.formatting,
  org.eclipse.xtext.ui.common.editor.hover,
+ org.eclipse.xtext.ui.common.editor.hyperlinking,
  org.eclipse.xtext.ui.common.editor.outline,
  org.eclipse.xtext.ui.common.editor.outline.impl,
  org.eclipse.xtext.ui.common.editor.preferencepage,

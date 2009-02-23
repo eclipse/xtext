@@ -55,8 +55,6 @@ public class XtextEditor extends TextEditor {
 	@Inject
 	private Provider<XtextDocumentProvider> documentProvider;
 
-	// TODO private IFoldingUpdater foldingSupport;
-
 	public XtextEditor() {
 		if (log.isDebugEnabled())
 			log.debug("Creating Xtext Editor. Instance: [" + this.toString() + "]");
@@ -68,7 +66,7 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
-		if (log.isDebugEnabled() ) {
+		if (log.isDebugEnabled()) {
 			log.debug("doSetInput:" + input);
 			log.debug("Editor instance is [" + this.toString() + "]");
 		}
@@ -142,7 +140,7 @@ public class XtextEditor extends TextEditor {
 
 	/**
 	 * @return true if content assist is available
-	 *
+	 * 
 	 */
 	public boolean isContentAssistAvailable() {
 		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
@@ -186,6 +184,15 @@ public class XtextEditor extends TextEditor {
 		if (outlinePage != null) {
 			outlinePage = null;
 		}
+	}
+
+	/**
+	 * TODO: get rid of this method. It is only here to support
+	 * org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler,
+	 * which needs access to the sourceviewer.
+	 */
+	public ISourceViewer getInternalSourceViewer() {
+		return getSourceViewer();
 	}
 
 	// @Override

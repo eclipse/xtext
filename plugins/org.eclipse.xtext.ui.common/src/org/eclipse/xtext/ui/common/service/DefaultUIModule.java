@@ -16,6 +16,7 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor;
+import org.eclipse.xtext.ui.common.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer;
@@ -23,7 +24,6 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.editor.DefaultHyperlinkDetector;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
