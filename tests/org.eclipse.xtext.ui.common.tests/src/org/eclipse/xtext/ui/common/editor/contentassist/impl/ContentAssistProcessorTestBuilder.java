@@ -119,7 +119,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
-			assertTrue("expect completionProposal text '" + completionProposal + "' ", Arrays.asList(expectedText)
+			assertTrue("expect completionProposal text '" + completionProposal.getDisplayString() + "' ", Arrays.asList(expectedText)
 					.contains(completionProposal.getDisplayString()));
 		}
 

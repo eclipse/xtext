@@ -32,6 +32,8 @@ public class Activator extends AbstractUIPlugin {
 		
 		injectors.put("org.eclipse.xtext.XtextGrammarTestLanguage",Guice.createInjector(new org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule(), new org.eclipse.xtext.XtextGrammarTestLanguageUiModule()));
 		
+		injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage",Guice.createInjector(new org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageRuntimeModule(), new org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageUiModule()));
+		
 		injectors.put("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage",Guice.createInjector(new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageRuntimeModule(), new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageUiModule()));
 		
 		injectors.put("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage",Guice.createInjector(new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule(), new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule()));

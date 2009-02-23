@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.ui.common.tests
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.xtextTest,
+ org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts,
  org.eclipse.xtext.parser.keywords.keywordsTestLanguage,
  org.eclipse.xtext.testlanguages.contentAssistTestLanguage,
  org.eclipse.xtext.testlanguages.referenceGrammar,

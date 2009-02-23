@@ -1,0 +1,9 @@
+language org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage
+
+generate twoContexts "http://www.eclipse.org/tmf/tests/2009/twoContexts"
+
+MainModel :
+	(elements+=AnElement)*;
+	
+AnElement :
+	name=ID ('refersTo' referred=[AnElement])? ';';
