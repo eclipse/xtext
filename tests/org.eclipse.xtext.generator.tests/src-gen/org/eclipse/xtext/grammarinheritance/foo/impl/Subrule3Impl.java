@@ -106,7 +106,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
     switch (featureID)
     {
       case FooPackage.SUBRULE3__SUB1:
-        return new Integer(getSub1());
+        return getSub1();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -122,7 +122,7 @@ public class Subrule3Impl extends ATypeImpl implements Subrule3
     switch (featureID)
     {
       case FooPackage.SUBRULE3__SUB1:
-        setSub1(((Integer)newValue).intValue());
+        setSub1((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

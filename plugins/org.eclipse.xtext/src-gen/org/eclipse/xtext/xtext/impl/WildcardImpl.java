@@ -104,7 +104,7 @@ public class WildcardImpl extends AbstractElementImpl implements Wildcard
     switch (featureID)
     {
       case XtextPackage.WILDCARD__IS_WILDCARD:
-        return isIsWildcard() ? Boolean.TRUE : Boolean.FALSE;
+        return isIsWildcard();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,7 +120,7 @@ public class WildcardImpl extends AbstractElementImpl implements Wildcard
     switch (featureID)
     {
       case XtextPackage.WILDCARD__IS_WILDCARD:
-        setIsWildcard(((Boolean)newValue).booleanValue());
+        setIsWildcard((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);

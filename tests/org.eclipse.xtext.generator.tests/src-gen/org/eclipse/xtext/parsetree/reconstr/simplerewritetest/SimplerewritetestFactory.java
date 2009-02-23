@@ -95,7 +95,7 @@ public interface SimplerewritetestFactory extends EFactory
    * @return a new object of class '<em>Boolean</em>'.
    * @generated
    */
-  org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean createBoolean();
+  Boolean createBoolean();
 
   /**
    * Returns a new object of class '<em>Op</em>'.

@@ -138,7 +138,7 @@ public class OverridingHiddensCallImpl extends EObjectImpl implements Overriding
       case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL__SPACES:
         return getSpaces();
       case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL__VALID:
-        return isValid() ? Boolean.TRUE : Boolean.FALSE;
+        return isValid();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -159,7 +159,7 @@ public class OverridingHiddensCallImpl extends EObjectImpl implements Overriding
         getSpaces().addAll((Collection<? extends String>)newValue);
         return;
       case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL__VALID:
-        setValid(((Boolean)newValue).booleanValue());
+        setValid((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);

@@ -1,203 +1,203 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="EpatchTestLanguage" basePackage="org.eclipse.xtext.parser.epatch" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/name"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/imports"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/imports"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/resources"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/resources"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/objects"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPatch/objects"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Import"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ModelImport"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ModelImport"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ModelImport/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ModelImport/name"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ResourceImport"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ResourceImport"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ResourceImport/uri"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ResourceImport/uri"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPackageImport"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPackageImport"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPackageImport/nsURI"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//EPackageImport/nsURI"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaImport"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaImport"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaImport/path"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaImport/path"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExtensionImport"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExtensionImport"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExtensionImport/path"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExtensionImport/path"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/name"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/leftUri"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/leftUri"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/leftRoot"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/leftRoot"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/rightUri"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/rightUri"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/rightRoot"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedResource/rightRoot"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject/name"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject/assignments"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject/assignments"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject/leftMig"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//NamedObject/leftMig"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/leftRes"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/leftRes"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/leftFrag"/>
-      </genFeatures>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/rightRes"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/rightFrag"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/rightMig"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment/feature"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//SingleAssignment"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//SingleAssignment/leftValue"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//SingleAssignment/rightValue"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ListAssignment"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ListAssignment/leftValues"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ListAssignment/rightValues"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/value"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/leftFrag"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/refObject"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/rightRes"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/refFeature"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/refIndex"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/rightFrag"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/newObject"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectRef/rightMig"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Assignment/feature"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//SingleAssignment"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//SingleAssignment/leftValue"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//SingleAssignment/rightValue"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ListAssignment"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ListAssignment/leftValues"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ListAssignment/rightValues"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/value"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/import"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/refObject"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/impFrag"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/refFeature"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/index"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/refIndex"/>
       </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/keyword"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/newObject"/>
       </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectNew"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectNew/import"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/import"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectNew/impFrag"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/impFrag"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/index"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//AssignmentValue/keyword"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectCopy"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//CreatedObject"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectNew"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectCopy/resource"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectNew/import"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectCopy/fragment"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectNew/impFrag"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration/first"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectCopy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectCopy/resource"/>
       </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration/asOp"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration/eachOp"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaExecutable"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaExecutable/method"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ObjectCopy/fragment"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExpressionExecutable"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration/first"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration/asOp"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Migration/eachOp"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//Executable"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaExecutable"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExpressionExecutable/exprstr"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//JavaExecutable/method"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExpressionExecutable"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.ecore#//ExpressionExecutable/exprstr"/>
       </genFeatures>
     </genClasses>
   </genPackages>

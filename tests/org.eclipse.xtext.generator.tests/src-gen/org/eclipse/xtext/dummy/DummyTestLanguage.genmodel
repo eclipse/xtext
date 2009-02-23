@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="DummyLang" basePackage="org.eclipse.xtext.dummy" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Model"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Model"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Model/elements"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Model/elements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element"/>
+      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element/optional"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element/optional"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element/name"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element/descriptions"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/DummyTestLanguage.ecore#//Element/descriptions"/>
       </genFeatures>
     </genClasses>
   </genPackages>

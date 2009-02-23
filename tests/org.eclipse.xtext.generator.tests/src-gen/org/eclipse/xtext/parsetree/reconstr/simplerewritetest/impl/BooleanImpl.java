@@ -149,7 +149,7 @@ public class BooleanImpl extends ExpressionImpl implements org.eclipse.xtext.par
     switch (featureID)
     {
       case SimplerewritetestPackage.BOOLEAN__BOOL:
-        return isBool() ? Boolean.TRUE : Boolean.FALSE;
+        return isBool();
       case SimplerewritetestPackage.BOOLEAN__VALUE:
         return getValue();
     }
@@ -167,7 +167,7 @@ public class BooleanImpl extends ExpressionImpl implements org.eclipse.xtext.par
     switch (featureID)
     {
       case SimplerewritetestPackage.BOOLEAN__BOOL:
-        setBool(((Boolean)newValue).booleanValue());
+        setBool((Boolean)newValue);
         return;
       case SimplerewritetestPackage.BOOLEAN__VALUE:
         setValue((String)newValue);

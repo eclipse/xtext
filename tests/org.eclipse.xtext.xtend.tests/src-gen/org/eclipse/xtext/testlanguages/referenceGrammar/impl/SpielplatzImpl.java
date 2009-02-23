@@ -284,7 +284,7 @@ public class SpielplatzImpl extends EObjectImpl implements Spielplatz
     switch (featureID)
     {
       case ReferenceGrammarPackage.SPIELPLATZ__GROESSE:
-        return new Integer(getGroesse());
+        return getGroesse();
       case ReferenceGrammarPackage.SPIELPLATZ__BESCHREIBUNG:
         return getBeschreibung();
       case ReferenceGrammarPackage.SPIELPLATZ__KINDER:
@@ -311,7 +311,7 @@ public class SpielplatzImpl extends EObjectImpl implements Spielplatz
     switch (featureID)
     {
       case ReferenceGrammarPackage.SPIELPLATZ__GROESSE:
-        setGroesse(((Integer)newValue).intValue());
+        setGroesse((Integer)newValue);
         return;
       case ReferenceGrammarPackage.SPIELPLATZ__BESCHREIBUNG:
         setBeschreibung((String)newValue);

@@ -179,9 +179,9 @@ public class TwoNumbersImpl extends ExpressionImpl implements TwoNumbers
     switch (featureID)
     {
       case SimplerewritetestPackage.TWO_NUMBERS__NUM1:
-        return new Integer(getNum1());
+        return getNum1();
       case SimplerewritetestPackage.TWO_NUMBERS__NUM2:
-        return new Integer(getNum2());
+        return getNum2();
       case SimplerewritetestPackage.TWO_NUMBERS__NUM3:
         return getNum3();
     }
@@ -200,10 +200,10 @@ public class TwoNumbersImpl extends ExpressionImpl implements TwoNumbers
     switch (featureID)
     {
       case SimplerewritetestPackage.TWO_NUMBERS__NUM1:
-        setNum1(((Integer)newValue).intValue());
+        setNum1((Integer)newValue);
         return;
       case SimplerewritetestPackage.TWO_NUMBERS__NUM2:
-        setNum2(((Integer)newValue).intValue());
+        setNum2((Integer)newValue);
         return;
       case SimplerewritetestPackage.TWO_NUMBERS__NUM3:
         getNum3().clear();

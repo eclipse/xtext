@@ -105,7 +105,7 @@ public class InheritingHiddensCallImpl extends EObjectImpl implements Inheriting
     switch (featureID)
     {
       case HiddenTerminalsTestLanguagePackage.INHERITING_HIDDENS_CALL__VALID:
-        return isValid() ? Boolean.TRUE : Boolean.FALSE;
+        return isValid();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,7 +121,7 @@ public class InheritingHiddensCallImpl extends EObjectImpl implements Inheriting
     switch (featureID)
     {
       case HiddenTerminalsTestLanguagePackage.INHERITING_HIDDENS_CALL__VALID:
-        setValid(((Boolean)newValue).booleanValue());
+        setValid((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
