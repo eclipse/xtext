@@ -7,20 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.boostrap;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.core.WorkflowFacade;
 
 /**
  * Run this class in order to generate the domain model grammar.
  */
-public class  GenerateXtextGrammars {
+public class GenerateXtextGrammars {
+
+	private static Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
 
 	public static void main(String... args) {
+
 		try {
+			logger.info("Generating Xtext and Xtext built-in languages.");
 			new WorkflowFacade("org/eclipse/xtext/boostrap/generateXtext.mwe").run();
-		} catch (Throwable e) {
+			logger.info("DONE.");
+		}
+		catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
 
 }
-

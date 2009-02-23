@@ -38,14 +38,20 @@ public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
 	}
 
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+		if (log.isInfoEnabled())
+			log.info("executing addToPluginXmlRt for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 	
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
+		if (log.isInfoEnabled())
+			log.info("executing addToPluginXmlUi for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
+		if (log.isInfoEnabled())
+			log.info("executing addToStandaloneSetup for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
 	
