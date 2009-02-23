@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.emf.index.ui.internal;
 
 import org.eclipse.emf.index.IIndexStore;
@@ -6,19 +13,14 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
- * The activator class controls the plug-in life cycle
+ * @author Jan Köhnlein - Initial contribution and API
  */
 public class EmfIndexUIPlugin extends AbstractUIPlugin {
 
-	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.emf.index.ui";
 
-	// The shared instance
 	private static EmfIndexUIPlugin plugin;
 	
-	/**
-	 * The constructor
-	 */
 	public EmfIndexUIPlugin() {
 	}
 
@@ -33,11 +35,6 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
-	/**
-	 * Returns the shared instance
-	 *
-	 * @return the shared instance
-	 */
 	public static EmfIndexUIPlugin getDefault() {
 		return plugin;
 	}
