@@ -8,7 +8,6 @@
 package org.eclipse.xtext.parser.packrat.internal;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.parser.packrat.IBacktracker;
@@ -123,6 +122,14 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return client.getNextMarker(parent, getOffset());
 	}
 
+	public Marker forkBefore(AbstractParsedToken token) {
+		Marker result = fork();
+		for(int i=0; i < content.size() && content.get(i) != token; i++) {
+			result.content.add(content.get(i));
+		}
+		return result;
+	}
+
 	public IMarker join(IMarker forkedMarker) {
 		if (!(forkedMarker instanceof Marker))
 			throw new IllegalArgumentException("forkedMarker is not supported: " + forkedMarker);
@@ -152,7 +159,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 	}
 
 	public List<AbstractParsedToken> getContent() {
-		return Collections.unmodifiableList(content);
+		return content;
 	}
 
 	public Marker getParent() {
@@ -199,7 +206,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return input;
 	}
 
-	public boolean skipPreviousToken() {
+	public IBacktrackingResult skipPreviousToken() {
 		if (danglingChildCount > 0)
 			throw new IllegalStateException("childCount has to be zero before backtracking.");
 		if (backtracker == null)

@@ -102,8 +102,17 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		public int consume() throws Exception {
 			int result = doConsume();
-			while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-				result = doConsume();
+			if (result != ConsumeResult.SUCCESS) {
+				IBacktracker.IBacktrackingResult backtrackingResult = skipPreviousToken();
+				while(result != ConsumeResult.SUCCESS && backtrackingResult.isSuccessful()) {
+					result = doConsume();
+					if (result != ConsumeResult.SUCCESS)
+						backtrackingResult = backtrackingResult.skipPreviousToken();
+				}
+				if (result == ConsumeResult.SUCCESS)
+					backtrackingResult.commit();
+				else
+					backtrackingResult.discard();
 			}
 			return result;
 		}
@@ -357,10 +366,18 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		@Override
 		public final int consume() throws Exception {
 			IMarker marker = mark();
-			int result = ConsumeResult.EMPTY_MATCH;
-			result = doConsume();
-			while(result != ConsumeResult.SUCCESS && skipPreviousToken()) {
-				result = doConsume();
+			int result = doConsume();
+			if (result != ConsumeResult.SUCCESS) {
+				IBacktracker.IBacktrackingResult backtrackingResult = skipPreviousToken();
+				while(result != ConsumeResult.SUCCESS && backtrackingResult.isSuccessful()) {
+					result = doConsume();
+					if (result != ConsumeResult.SUCCESS)
+						backtrackingResult = backtrackingResult.skipPreviousToken();
+				}
+				if (result == ConsumeResult.SUCCESS)
+					backtrackingResult.commit();
+				else
+					backtrackingResult.discard();
 			}
 			if (result == ConsumeResult.SUCCESS) {
 				marker.flush();
@@ -560,7 +577,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		return new AssignmentResult(assignmentConsumer);
 	}
 
-	public boolean skipPreviousToken() {
+	public IBacktracker.IBacktrackingResult skipPreviousToken() {
 		return backtracker.skipPreviousToken();
 	}
 
