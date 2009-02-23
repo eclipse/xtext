@@ -105,7 +105,7 @@ public class TrickyG2Impl extends EObjectImpl implements TrickyG2
     switch (featureID)
     {
       case ComplexrewritetestPackage.TRICKY_G2__VAL:
-        return new Integer(getVal());
+        return getVal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,7 +121,7 @@ public class TrickyG2Impl extends EObjectImpl implements TrickyG2
     switch (featureID)
     {
       case ComplexrewritetestPackage.TRICKY_G2__VAL:
-        setVal(((Integer)newValue).intValue());
+        setVal((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

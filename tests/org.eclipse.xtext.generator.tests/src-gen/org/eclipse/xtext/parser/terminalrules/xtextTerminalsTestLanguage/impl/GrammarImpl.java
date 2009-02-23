@@ -352,14 +352,14 @@ public class GrammarImpl extends EObjectImpl implements Grammar
     switch (featureID)
     {
       case XtextTerminalsTestLanguagePackage.GRAMMAR__ABSTRACT:
-        return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+        return isAbstract();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__NAME:
         return getName();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR:
         if (resolve) return getSuperGrammar();
         return basicGetSuperGrammar();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
-        return isDefinesHiddenTokens() ? Boolean.TRUE : Boolean.FALSE;
+        return isDefinesHiddenTokens();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__HIDDEN_TOKENS:
         return getHiddenTokens();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__METAMODEL_DECLARATIONS:
@@ -382,7 +382,7 @@ public class GrammarImpl extends EObjectImpl implements Grammar
     switch (featureID)
     {
       case XtextTerminalsTestLanguagePackage.GRAMMAR__ABSTRACT:
-        setAbstract(((Boolean)newValue).booleanValue());
+        setAbstract((Boolean)newValue);
         return;
       case XtextTerminalsTestLanguagePackage.GRAMMAR__NAME:
         setName((String)newValue);
@@ -391,7 +391,7 @@ public class GrammarImpl extends EObjectImpl implements Grammar
         setSuperGrammar((Grammar)newValue);
         return;
       case XtextTerminalsTestLanguagePackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
-        setDefinesHiddenTokens(((Boolean)newValue).booleanValue());
+        setDefinesHiddenTokens((Boolean)newValue);
         return;
       case XtextTerminalsTestLanguagePackage.GRAMMAR__HIDDEN_TOKENS:
         getHiddenTokens().clear();

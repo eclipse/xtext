@@ -193,7 +193,7 @@ public class EventImpl extends EObjectImpl implements Event
     switch (featureID)
     {
       case FowlerdslPackage.EVENT__RESETTING:
-        return isResetting() ? Boolean.TRUE : Boolean.FALSE;
+        return isResetting();
       case FowlerdslPackage.EVENT__NAME:
         return getName();
       case FowlerdslPackage.EVENT__CODE:
@@ -213,7 +213,7 @@ public class EventImpl extends EObjectImpl implements Event
     switch (featureID)
     {
       case FowlerdslPackage.EVENT__RESETTING:
-        setResetting(((Boolean)newValue).booleanValue());
+        setResetting((Boolean)newValue);
         return;
       case FowlerdslPackage.EVENT__NAME:
         setName((String)newValue);

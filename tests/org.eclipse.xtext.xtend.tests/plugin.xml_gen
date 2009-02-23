@@ -37,7 +37,7 @@
 
 
 
-    <extension
+	<extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -48,7 +48,7 @@
 			name="XtextGrammarTestLanguage Editor">
 		</editor>
 	</extension>
-	 <extension
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -78,6 +78,18 @@
 			id="org.eclipse.xtext.XtextGrammarTestLanguage.tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
 	</extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -114,7 +126,7 @@
 
 
 
-    <extension
+	<extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -125,7 +137,7 @@
 			name="KeywordsTestLanguage Editor">
 		</editor>
 	</extension>
-	 <extension
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -155,6 +167,18 @@
 			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
 	</extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -191,7 +215,7 @@
 
 
 
-    <extension
+	<extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -202,7 +226,7 @@
 			name="ContentAssistTestLanguage Editor">
 		</editor>
 	</extension>
-	 <extension
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -232,6 +256,18 @@
 			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
 	</extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -268,7 +304,7 @@
 
 
 
-    <extension
+	<extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -279,7 +315,7 @@
 			name="ReferenceGrammarTestLanguage Editor">
 		</editor>
 	</extension>
-	 <extension
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -309,6 +345,18 @@
 			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
 	</extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -345,7 +393,7 @@
 
 
 
-    <extension
+	<extension
 			point="org.eclipse.ui.editors">
 		<editor
 			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -356,7 +404,7 @@
 			name="TreeTestLanguage Editor">
 		</editor>
 	</extension>
-	 <extension
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -386,6 +434,18 @@
 			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.tasktags"
 			label="Task Tags">
 		</keyword>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
 	</extension>
 
 </plugin>

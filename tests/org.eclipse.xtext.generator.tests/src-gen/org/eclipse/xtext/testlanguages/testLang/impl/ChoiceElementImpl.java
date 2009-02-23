@@ -148,7 +148,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
     switch (featureID)
     {
       case TestLangPackage.CHOICE_ELEMENT__OPTIONAL_KEYWORD:
-        return isOptionalKeyword() ? Boolean.TRUE : Boolean.FALSE;
+        return isOptionalKeyword();
       case TestLangPackage.CHOICE_ELEMENT__NAME:
         return getName();
     }
@@ -166,7 +166,7 @@ public class ChoiceElementImpl extends AbstractElementImpl implements ChoiceElem
     switch (featureID)
     {
       case TestLangPackage.CHOICE_ELEMENT__OPTIONAL_KEYWORD:
-        setOptionalKeyword(((Boolean)newValue).booleanValue());
+        setOptionalKeyword((Boolean)newValue);
         return;
       case TestLangPackage.CHOICE_ELEMENT__NAME:
         setName((String)newValue);

@@ -105,7 +105,7 @@ public class ModelImpl extends EObjectImpl implements Model
     switch (featureID)
     {
       case HiddenTerminalsTestLanguagePackage.MODEL__VALID:
-        return isValid() ? Boolean.TRUE : Boolean.FALSE;
+        return isValid();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,7 +121,7 @@ public class ModelImpl extends EObjectImpl implements Model
     switch (featureID)
     {
       case HiddenTerminalsTestLanguagePackage.MODEL__VALID:
-        setValid(((Boolean)newValue).booleanValue());
+        setValid((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);

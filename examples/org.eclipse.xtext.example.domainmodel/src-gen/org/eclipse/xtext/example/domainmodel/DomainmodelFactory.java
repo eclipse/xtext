@@ -59,7 +59,7 @@ public interface DomainmodelFactory extends EFactory
    * @return a new object of class '<em>Package</em>'.
    * @generated
    */
-  org.eclipse.xtext.example.domainmodel.Package createPackage();
+  Package createPackage();
 
   /**
    * Returns a new object of class '<em>Type</em>'.

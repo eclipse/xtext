@@ -180,7 +180,7 @@ public class ElementImpl extends EObjectImpl implements Element
     switch (featureID)
     {
       case DummyLangPackage.ELEMENT__OPTIONAL:
-        return isOptional() ? Boolean.TRUE : Boolean.FALSE;
+        return isOptional();
       case DummyLangPackage.ELEMENT__NAME:
         return getName();
       case DummyLangPackage.ELEMENT__DESCRIPTIONS:
@@ -201,7 +201,7 @@ public class ElementImpl extends EObjectImpl implements Element
     switch (featureID)
     {
       case DummyLangPackage.ELEMENT__OPTIONAL:
-        setOptional(((Boolean)newValue).booleanValue());
+        setOptional((Boolean)newValue);
         return;
       case DummyLangPackage.ELEMENT__NAME:
         setName((String)newValue);

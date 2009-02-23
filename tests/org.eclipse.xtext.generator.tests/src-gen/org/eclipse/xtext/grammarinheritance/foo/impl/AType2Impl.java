@@ -153,7 +153,7 @@ public class AType2Impl extends RootRuleImpl implements AType2
       case FooPackage.ATYPE2__NAME:
         return getName();
       case FooPackage.ATYPE2__AGE:
-        return new Integer(getAge());
+        return getAge();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -172,7 +172,7 @@ public class AType2Impl extends RootRuleImpl implements AType2
         setName((String)newValue);
         return;
       case FooPackage.ATYPE2__AGE:
-        setAge(((Integer)newValue).intValue());
+        setAge((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

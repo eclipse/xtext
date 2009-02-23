@@ -148,9 +148,9 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
     switch (featureID)
     {
       case TransientvaluestestPackage.TEST_REQUIRED__REQUIRED1:
-        return new Integer(getRequired1());
+        return getRequired1();
       case TransientvaluestestPackage.TEST_REQUIRED__REQUIRED2:
-        return new Integer(getRequired2());
+        return getRequired2();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -166,10 +166,10 @@ public class TestRequiredImpl extends RootImpl implements TestRequired
     switch (featureID)
     {
       case TransientvaluestestPackage.TEST_REQUIRED__REQUIRED1:
-        setRequired1(((Integer)newValue).intValue());
+        setRequired1((Integer)newValue);
         return;
       case TransientvaluestestPackage.TEST_REQUIRED__REQUIRED2:
-        setRequired2(((Integer)newValue).intValue());
+        setRequired2((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);

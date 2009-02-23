@@ -258,13 +258,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
     switch (featureID)
     {
       case XtextTestPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
-        return isDefinesHiddenTokens() ? Boolean.TRUE : Boolean.FALSE;
+        return isDefinesHiddenTokens();
       case XtextTestPackage.PARSER_RULE__HIDDEN_TOKENS:
         return getHiddenTokens();
       case XtextTestPackage.PARSER_RULE__ALTERNATIVES:
         return getAlternatives();
       case XtextTestPackage.PARSER_RULE__TERMINAL:
-        return isTerminal() ? Boolean.TRUE : Boolean.FALSE;
+        return isTerminal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -281,7 +281,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
     switch (featureID)
     {
       case XtextTestPackage.PARSER_RULE__DEFINES_HIDDEN_TOKENS:
-        setDefinesHiddenTokens(((Boolean)newValue).booleanValue());
+        setDefinesHiddenTokens((Boolean)newValue);
         return;
       case XtextTestPackage.PARSER_RULE__HIDDEN_TOKENS:
         getHiddenTokens().clear();
@@ -291,7 +291,7 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
         setAlternatives((AbstractElement)newValue);
         return;
       case XtextTestPackage.PARSER_RULE__TERMINAL:
-        setTerminal(((Boolean)newValue).booleanValue());
+        setTerminal((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);

@@ -88,9 +88,9 @@ public class InheritanceTestAdapterFactory extends AdapterFactoryImpl
         return createElementAdapter();
       }
       @Override
-      public Adapter caseModel_1(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
+      public Adapter caseBaseInheritanceTest_Model(org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model object)
       {
-        return createModel_1Adapter();
+        return createBaseInheritanceTest_ModelAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -154,7 +154,7 @@ public class InheritanceTestAdapterFactory extends AdapterFactoryImpl
    * @see org.eclipse.xtext.grammarinheritance.baseInheritanceTest.Model
    * @generated
    */
-  public Adapter createModel_1Adapter()
+  public Adapter createBaseInheritanceTest_ModelAdapter()
   {
     return null;
   }

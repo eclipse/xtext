@@ -156,7 +156,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
     switch (featureID)
     {
       case FooPackage.CONCRETE_PARSER_RULE__MAGIC_NUMBER:
-        return new Double(getMagicNumber());
+        return getMagicNumber();
       case FooPackage.CONCRETE_PARSER_RULE__ELEMENTS:
         return getElements();
     }
@@ -175,7 +175,7 @@ public class ConcreteParserRuleImpl extends RootRuleImpl implements ConcretePars
     switch (featureID)
     {
       case FooPackage.CONCRETE_PARSER_RULE__MAGIC_NUMBER:
-        setMagicNumber(((Double)newValue).doubleValue());
+        setMagicNumber((Double)newValue);
         return;
       case FooPackage.CONCRETE_PARSER_RULE__ELEMENTS:
         getElements().clear();
