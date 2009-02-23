@@ -1,5 +1,8 @@
 package org.eclipse.emf.index.ecore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IIndexStore;
@@ -8,7 +11,8 @@ public class EPackageRegistryIndexFeeder {
 	
 	public static void feedEPackagesFromRegistry(IIndexStore indexStore) {
 		for (boolean hasChanged = true; hasChanged;) {
-			for (String nsURI : EPackage.Registry.INSTANCE.keySet()) {
+			List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
+			for (String nsURI : nsURIs) {
 				hasChanged = false;
 				EPackageDescriptor storedEPackages = indexStore.ePackageDAO().createQuery().nsURI(nsURI)
 						.executeSingleResult();
