@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -32,7 +32,7 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
  *
  * @generated
  */
-public class LineImpl extends EObjectImpl implements Line
+public class LineImpl extends MinimalEObjectImpl.Container implements Line
 {
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' attribute list.

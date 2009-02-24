@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.AnElement;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.TwoContextsPackage;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.impl.twoContexts.TwoCont
  *
  * @generated
  */
-public class AnElementImpl extends EObjectImpl implements AnElement
+public class AnElementImpl extends MinimalEObjectImpl.Container implements AnElement
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.metamodelreferencing.tests.otherTest.FooBar;
 import org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage;
  *
  * @generated
  */
-public class FooBarImpl extends EObjectImpl implements FooBar
+public class FooBarImpl extends MinimalEObjectImpl.Container implements FooBar
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

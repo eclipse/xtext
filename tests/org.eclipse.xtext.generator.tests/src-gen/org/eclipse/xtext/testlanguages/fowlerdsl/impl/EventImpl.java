@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.fowlerdsl.Event;
 import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
  *
  * @generated
  */
-public class EventImpl extends EObjectImpl implements Event
+public class EventImpl extends MinimalEObjectImpl.Container implements Event
 {
   /**
    * The default value of the '{@link #isResetting() <em>Resetting</em>}' attribute.

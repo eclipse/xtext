@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -32,7 +32,7 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyF;
  *
  * @generated
  */
-public class TrickyFImpl extends EObjectImpl implements TrickyF
+public class TrickyFImpl extends MinimalEObjectImpl.Container implements TrickyF
 {
   /**
    * The cached value of the '{@link #getName() <em>Name</em>}' attribute list.

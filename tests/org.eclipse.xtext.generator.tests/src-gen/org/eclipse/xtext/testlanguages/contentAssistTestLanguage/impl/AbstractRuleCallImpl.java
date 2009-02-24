@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.contentAssistTestLanguage.AbstractRule;
 import org.eclipse.xtext.testlanguages.contentAssistTestLanguage.AbstractRuleCall;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.testlanguages.contentAssistTestLanguage.ContentAssistTe
  *
  * @generated
  */
-public class AbstractRuleCallImpl extends EObjectImpl implements AbstractRuleCall
+public class AbstractRuleCallImpl extends MinimalEObjectImpl.Container implements AbstractRuleCall
 {
   /**
    * The cached value of the '{@link #getRule() <em>Rule</em>}' reference.

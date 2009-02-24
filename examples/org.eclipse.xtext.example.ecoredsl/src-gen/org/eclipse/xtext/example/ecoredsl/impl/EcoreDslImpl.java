@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -40,7 +40,7 @@ import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
  *
  * @generated
  */
-public class EcoreDslImpl extends EObjectImpl implements EcoreDsl
+public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreDsl
 {
   /**
    * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.

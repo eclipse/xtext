@@ -12,7 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage;
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
@@ -33,7 +33,7 @@ import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
  *
  * @generated
  */
-public class ModelImpl extends EObjectImpl implements Model
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
    * The default value of the '{@link #getId() <em>Id</em>}' attribute.

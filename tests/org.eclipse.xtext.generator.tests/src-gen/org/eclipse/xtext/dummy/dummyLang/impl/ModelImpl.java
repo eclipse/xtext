@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.dummy.dummyLang.Model;
  *
  * @generated
  */
-public class ModelImpl extends EObjectImpl implements Model
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.

@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguagePackage;
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HidingHiddens;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Inheri
  *
  * @generated
  */
-public class HidingHiddensImpl extends EObjectImpl implements HidingHiddens
+public class HidingHiddensImpl extends MinimalEObjectImpl.Container implements HidingHiddens
 {
   /**
    * The default value of the '{@link #getSpace() <em>Space</em>}' attribute.

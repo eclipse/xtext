@@ -7,7 +7,7 @@ package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1;
  *
  * @generated
  */
-public class TypeA1Impl extends EObjectImpl implements TypeA1
+public class TypeA1Impl extends MinimalEObjectImpl.Container implements TypeA1
 {
   /**
    * <!-- begin-user-doc -->

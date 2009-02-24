@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG2;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG2;
  *
  * @generated
  */
-public class TrickyG2Impl extends EObjectImpl implements TrickyG2
+public class TrickyG2Impl extends MinimalEObjectImpl.Container implements TrickyG2
 {
   /**
    * The default value of the '{@link #getVal() <em>Val</em>}' attribute.

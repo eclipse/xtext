@@ -7,7 +7,7 @@ package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Executable;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Executable;
  *
  * @generated
  */
-public class ExecutableImpl extends EObjectImpl implements Executable
+public class ExecutableImpl extends MinimalEObjectImpl.Container implements Executable
 {
   /**
    * <!-- begin-user-doc -->

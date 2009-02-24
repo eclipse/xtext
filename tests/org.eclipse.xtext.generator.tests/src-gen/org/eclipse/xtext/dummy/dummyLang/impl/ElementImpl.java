@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -36,7 +36,7 @@ import org.eclipse.xtext.dummy.dummyLang.Element;
  *
  * @generated
  */
-public class ElementImpl extends EObjectImpl implements Element
+public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 {
   /**
    * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute.

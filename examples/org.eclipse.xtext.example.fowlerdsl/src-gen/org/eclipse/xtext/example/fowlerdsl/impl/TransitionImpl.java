@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.fowlerdsl.Event;
 import org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.example.fowlerdsl.Transition;
  *
  * @generated
  */
-public class TransitionImpl extends EObjectImpl implements Transition
+public class TransitionImpl extends MinimalEObjectImpl.Container implements Transition
 {
   /**
    * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.

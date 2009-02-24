@@ -7,7 +7,7 @@ package org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Import;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Import;
  *
  * @generated
  */
-public class ImportImpl extends EObjectImpl implements Import
+public class ImportImpl extends MinimalEObjectImpl.Container implements Import
 {
   /**
    * <!-- begin-user-doc -->

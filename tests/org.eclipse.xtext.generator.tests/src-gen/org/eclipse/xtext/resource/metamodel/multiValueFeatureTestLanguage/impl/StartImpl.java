@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -31,7 +31,7 @@ import org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.Start;
  *
  * @generated
  */
-public class StartImpl extends EObjectImpl implements Start
+public class StartImpl extends MinimalEObjectImpl.Container implements Start
 {
   /**
    * The cached value of the '{@link #getFeatureA() <em>Feature A</em>}' attribute list.

@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Executable;
@@ -33,7 +33,7 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Migration;
  *
  * @generated
  */
-public class MigrationImpl extends EObjectImpl implements Migration
+public class MigrationImpl extends MinimalEObjectImpl.Container implements Migration
 {
   /**
    * The cached value of the '{@link #getFirst() <em>First</em>}' containment reference.

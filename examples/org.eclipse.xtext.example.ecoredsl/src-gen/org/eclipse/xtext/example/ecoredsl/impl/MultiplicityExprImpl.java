@@ -7,7 +7,7 @@ package org.eclipse.xtext.example.ecoredsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
 import org.eclipse.xtext.example.ecoredsl.MultiplicityExpr;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.example.ecoredsl.MultiplicityExpr;
  *
  * @generated
  */
-public class MultiplicityExprImpl extends EObjectImpl implements MultiplicityExpr
+public class MultiplicityExprImpl extends MinimalEObjectImpl.Container implements MultiplicityExpr
 {
   /**
    * <!-- begin-user-doc -->

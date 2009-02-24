@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Import;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.example.domainmodel.Import;
  *
  * @generated
  */
-public class ImportImpl extends EObjectImpl implements Import
+public class ImportImpl extends MinimalEObjectImpl.Container implements Import
 {
   /**
    * The default value of the '{@link #getImportURI() <em>Import URI</em>}' attribute.

@@ -7,7 +7,7 @@ package org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Content;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTe
  *
  * @generated
  */
-public class ContentImpl extends EObjectImpl implements Content
+public class ContentImpl extends MinimalEObjectImpl.Container implements Content
 {
   /**
    * <!-- begin-user-doc -->

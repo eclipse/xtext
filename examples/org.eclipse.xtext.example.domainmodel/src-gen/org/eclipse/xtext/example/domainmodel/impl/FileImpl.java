@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -38,7 +38,7 @@ import org.eclipse.xtext.example.domainmodel.NamedElement;
  *
  * @generated
  */
-public class FileImpl extends EObjectImpl implements File
+public class FileImpl extends MinimalEObjectImpl.Container implements File
 {
   /**
    * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.

@@ -7,7 +7,7 @@ package org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Root;
 import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TransientvaluestestPackage;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Transient
  *
  * @generated
  */
-public class RootImpl extends EObjectImpl implements Root
+public class RootImpl extends MinimalEObjectImpl.Container implements Root
 {
   /**
    * <!-- begin-user-doc -->

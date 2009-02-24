@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -35,7 +35,7 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyB;
  *
  * @generated
  */
-public class TrickyBImpl extends EObjectImpl implements TrickyB
+public class TrickyBImpl extends MinimalEObjectImpl.Container implements TrickyB
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

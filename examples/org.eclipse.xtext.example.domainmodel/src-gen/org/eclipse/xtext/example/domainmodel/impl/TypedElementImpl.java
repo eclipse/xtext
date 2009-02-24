@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.TypeRef;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.example.domainmodel.TypedElement;
  *
  * @generated
  */
-public class TypedElementImpl extends EObjectImpl implements TypedElement
+public class TypedElementImpl extends MinimalEObjectImpl.Container implements TypedElement
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.valueconverter.bug250313.Bug250313Package;
 import org.eclipse.xtext.valueconverter.bug250313.Child;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.valueconverter.bug250313.Child;
  *
  * @generated
  */
-public class ChildImpl extends EObjectImpl implements Child
+public class ChildImpl extends MinimalEObjectImpl.Container implements Child
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

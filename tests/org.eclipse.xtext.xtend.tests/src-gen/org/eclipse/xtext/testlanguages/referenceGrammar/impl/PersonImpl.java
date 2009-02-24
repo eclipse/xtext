@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.referenceGrammar.Person;
 import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
  *
  * @generated
  */
-public class PersonImpl extends EObjectImpl implements Person
+public class PersonImpl extends MinimalEObjectImpl.Container implements Person
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

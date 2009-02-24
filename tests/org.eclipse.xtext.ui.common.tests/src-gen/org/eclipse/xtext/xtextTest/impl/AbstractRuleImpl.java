@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.xtextTest.AbstractRule;
 import org.eclipse.xtext.xtextTest.TypeRef;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  *
  * @generated
  */
-public class AbstractRuleImpl extends EObjectImpl implements AbstractRule
+public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements AbstractRule
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

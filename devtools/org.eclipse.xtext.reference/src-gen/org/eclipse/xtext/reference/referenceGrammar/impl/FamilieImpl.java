@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
@@ -40,7 +40,7 @@ import org.eclipse.xtext.reference.referenceGrammar.ReferenceGrammarPackage;
  *
  * @generated
  */
-public class FamilieImpl extends EObjectImpl implements Familie
+public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

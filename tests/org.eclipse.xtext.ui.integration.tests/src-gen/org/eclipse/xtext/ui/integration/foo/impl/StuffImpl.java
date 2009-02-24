@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.ui.integration.foo.FooPackage;
 import org.eclipse.xtext.ui.integration.foo.Stuff;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.ui.integration.foo.Stuff;
  *
  * @generated
  */
-public class StuffImpl extends EObjectImpl implements Stuff
+public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

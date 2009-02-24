@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.AssignmentValue;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.CreatedObject;
@@ -41,7 +41,7 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedObject;
  *
  * @generated
  */
-public class AssignmentValueImpl extends EObjectImpl implements AssignmentValue
+public class AssignmentValueImpl extends MinimalEObjectImpl.Container implements AssignmentValue
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

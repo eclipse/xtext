@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -41,7 +41,7 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
  *
  * @generated
  */
-public class SomeContainerImpl extends EObjectImpl implements SomeContainer
+public class SomeContainerImpl extends MinimalEObjectImpl.Container implements SomeContainer
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

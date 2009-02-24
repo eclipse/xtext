@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguagePackage;
 import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.InheritingHiddensCall;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Inheri
  *
  * @generated
  */
-public class InheritingHiddensCallImpl extends EObjectImpl implements InheritingHiddensCall
+public class InheritingHiddensCallImpl extends MinimalEObjectImpl.Container implements InheritingHiddensCall
 {
   /**
    * The default value of the '{@link #isValid() <em>Valid</em>}' attribute.

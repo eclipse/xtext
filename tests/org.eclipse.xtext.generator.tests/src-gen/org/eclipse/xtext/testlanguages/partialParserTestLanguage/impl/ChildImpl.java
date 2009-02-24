@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Child;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Named;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTe
  *
  * @generated
  */
-public class ChildImpl extends EObjectImpl implements Child
+public class ChildImpl extends MinimalEObjectImpl.Container implements Child
 {
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.

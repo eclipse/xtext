@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.CreatedObject;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedResource;
  *
  * @generated
  */
-public class NamedResourceImpl extends EObjectImpl implements NamedResource
+public class NamedResourceImpl extends MinimalEObjectImpl.Container implements NamedResource
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

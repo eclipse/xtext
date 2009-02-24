@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.optionalEmpty.Greeting;
 import org.eclipse.xtext.testlanguages.optionalEmpty.Model;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage;
  *
  * @generated
  */
-public class ModelImpl extends EObjectImpl implements Model
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
    * The cached value of the '{@link #getChild() <em>Child</em>}' containment reference.

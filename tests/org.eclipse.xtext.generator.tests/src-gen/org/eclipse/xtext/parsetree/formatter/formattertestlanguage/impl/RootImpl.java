@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Root;
  *
  * @generated
  */
-public class RootImpl extends EObjectImpl implements Root
+public class RootImpl extends MinimalEObjectImpl.Container implements Root
 {
   /**
    * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.

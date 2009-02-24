@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.reference.referenceGrammar.Farbe;
 import org.eclipse.xtext.reference.referenceGrammar.ReferenceGrammarPackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.reference.referenceGrammar.ReferenceGrammarPackage;
  *
  * @generated
  */
-public class FarbeImpl extends EObjectImpl implements Farbe
+public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
 {
   /**
    * The default value of the '{@link #getWert() <em>Wert</em>}' attribute.
