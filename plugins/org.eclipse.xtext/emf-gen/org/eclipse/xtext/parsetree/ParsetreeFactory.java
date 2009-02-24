@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactory.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -19,47 +18,47 @@ import org.eclipse.emf.ecore.EFactory;
 public interface ParsetreeFactory extends EFactory
 {
   /**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+   * The singleton instance of the factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   ParsetreeFactory eINSTANCE = org.eclipse.xtext.parsetree.impl.ParsetreeFactoryImpl.init();
 
   /**
-	 * Returns a new object of class '<em>Composite Node</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Composite Node</em>'.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Composite Node</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Composite Node</em>'.
+   * @generated
+   */
   CompositeNode createCompositeNode();
 
   /**
-	 * Returns a new object of class '<em>Leaf Node</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Leaf Node</em>'.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Leaf Node</em>'.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Leaf Node</em>'.
+   * @generated
+   */
   LeafNode createLeafNode();
 
   /**
-	 * Returns a new object of class '<em>Syntax Error</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Syntax Error</em>'.
-	 * @generated
-	 */
-	SyntaxError createSyntaxError();
-
-		/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+   * Returns a new object of class '<em>Syntax Error</em>'.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+   * @return a new object of class '<em>Syntax Error</em>'.
+   * @generated
+   */
+  SyntaxError createSyntaxError();
+
+  /**
+   * Returns the package supported by this factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the package supported by this factory.
+   * @generated
+   */
   ParsetreePackage getParsetreePackage();
 
 } //ParsetreeFactory

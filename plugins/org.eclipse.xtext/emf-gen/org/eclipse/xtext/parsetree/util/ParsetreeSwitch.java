@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeSwitch.java,v 1.6 2008/07/01 10:18:08 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.util;
 
@@ -29,176 +28,185 @@ import org.eclipse.xtext.parsetree.*;
 public class ParsetreeSwitch<T>
 {
   /**
-	 * The cached model package
-	 * <!-- begin-user-doc -->
+   * The cached model package
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected static ParsetreePackage modelPackage;
 
   /**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the switch.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public ParsetreeSwitch()
   {
-		if (modelPackage == null) {
-			modelPackage = ParsetreePackage.eINSTANCE;
-		}
-	}
+    if (modelPackage == null)
+    {
+      modelPackage = ParsetreePackage.eINSTANCE;
+    }
+  }
 
   /**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
   public T doSwitch(EObject theEObject)
   {
-		return doSwitch(theEObject.eClass(), theEObject);
-	}
+    return doSwitch(theEObject.eClass(), theEObject);
+  }
 
   /**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
   protected T doSwitch(EClass theEClass, EObject theEObject)
   {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
+    if (theEClass.eContainer() == modelPackage)
+    {
+      return doSwitch(theEClass.getClassifierID(), theEObject);
+    }
+    else
+    {
+      List<EClass> eSuperTypes = theEClass.getESuperTypes();
+      return
+        eSuperTypes.isEmpty() ?
+          defaultCase(theEObject) :
+          doSwitch(eSuperTypes.get(0), theEObject);
+    }
+  }
 
   /**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+   * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+   * @return the first non-null result returned by a <code>caseXXX</code> call.
+   * @generated
+   */
   protected T doSwitch(int classifierID, EObject theEObject)
   {
-		switch (classifierID) {
-			case ParsetreePackage.COMPOSITE_NODE: {
-				CompositeNode compositeNode = (CompositeNode)theEObject;
-				T result = caseCompositeNode(compositeNode);
-				if (result == null) result = caseAbstractNode(compositeNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ParsetreePackage.ABSTRACT_NODE: {
-				AbstractNode abstractNode = (AbstractNode)theEObject;
-				T result = caseAbstractNode(abstractNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ParsetreePackage.LEAF_NODE: {
-				LeafNode leafNode = (LeafNode)theEObject;
-				T result = caseLeafNode(leafNode);
-				if (result == null) result = caseAbstractNode(leafNode);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ParsetreePackage.SYNTAX_ERROR: {
-				SyntaxError syntaxError = (SyntaxError)theEObject;
-				T result = caseSyntaxError(syntaxError);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
+    switch (classifierID)
+    {
+      case ParsetreePackage.COMPOSITE_NODE:
+      {
+        CompositeNode compositeNode = (CompositeNode)theEObject;
+        T result = caseCompositeNode(compositeNode);
+        if (result == null) result = caseAbstractNode(compositeNode);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ParsetreePackage.ABSTRACT_NODE:
+      {
+        AbstractNode abstractNode = (AbstractNode)theEObject;
+        T result = caseAbstractNode(abstractNode);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ParsetreePackage.LEAF_NODE:
+      {
+        LeafNode leafNode = (LeafNode)theEObject;
+        T result = caseLeafNode(leafNode);
+        if (result == null) result = caseAbstractNode(leafNode);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ParsetreePackage.SYNTAX_ERROR:
+      {
+        SyntaxError syntaxError = (SyntaxError)theEObject;
+        T result = caseSyntaxError(syntaxError);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      default: return defaultCase(theEObject);
+    }
+  }
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Composite Node</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Composite Node</em>'.
+   * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Composite Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Composite Node</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
   public T caseCompositeNode(CompositeNode object)
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Node</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Node</em>'.
+   * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Node</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
   public T caseAbstractNode(AbstractNode object)
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Leaf Node</em>'.
-	 * <!-- begin-user-doc -->
+   * Returns the result of interpreting the object as an instance of '<em>Leaf Node</em>'.
+   * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Leaf Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Leaf Node</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
   public T caseLeafNode(LeafNode object)
   {
-		return null;
-	}
+    return null;
+  }
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Syntax Error</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Syntax Error</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSyntaxError(SyntaxError object) {
-		return null;
-	}
+   * Returns the result of interpreting the object as an instance of '<em>Syntax Error</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Syntax Error</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSyntaxError(SyntaxError object)
+  {
+    return null;
+  }
 
-		/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * <!-- begin-user-doc -->
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+   * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch, but this is the last case anyway.
    * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+   * @generated
+   */
   public T defaultCase(EObject object)
   {
-		return null;
-	}
+    return null;
+  }
 
 } //ParsetreeSwitch

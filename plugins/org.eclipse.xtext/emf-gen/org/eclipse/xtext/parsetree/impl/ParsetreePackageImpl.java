@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.10 2008/11/27 15:59:42 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -30,403 +29,412 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePackage
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   private EClass compositeNodeEClass = null;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   private EClass abstractNodeEClass = null;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   private EClass leafNodeEClass = null;
 
   /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass syntaxErrorEClass = null;
-
-		/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
-	 * package URI value.
-	 * <p>Note: the correct way to create the package is via the static
-	 * factory method {@link #init init()}, which also performs
-	 * initialization of the package, or returns the registered package,
-	 * if one already exists.
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#eNS_URI
-	 * @see #init()
-	 * @generated
-	 */
-  private ParsetreePackageImpl()
-  {
-		super(eNS_URI, ParsetreeFactory.eINSTANCE);
-	}
+   * @generated
+   */
+  private EClass syntaxErrorEClass = null;
 
   /**
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the model <b>Package</b>, registered with
+   * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+   * package URI value.
+   * <p>Note: the correct way to create the package is via the static
+   * factory method {@link #init init()}, which also performs
+   * initialization of the package, or returns the registered package,
+   * if one already exists.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @see org.eclipse.emf.ecore.EPackage.Registry
+   * @see org.eclipse.xtext.parsetree.ParsetreePackage#eNS_URI
+   * @see #init()
+   * @generated
+   */
+  private ParsetreePackageImpl()
+  {
+    super(eNS_URI, ParsetreeFactory.eINSTANCE);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private static boolean isInited = false;
 
   /**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
-	 * <!-- begin-user-doc -->
+   * Creates, registers, and initializes the <b>Package</b> for this
+   * model, and for any others upon which it depends.  Simple
+   * dependencies are satisfied by calling this method on all
+   * dependent packages before doing anything else.  This method drives
+   * initialization for interdependent packages directly, in parallel
+   * with this package, itself.
+   * <p>Of this package and its interdependencies, all packages which
+   * have not yet been registered by their URI values are first created
+   * and registered.  The packages are then initialized in two steps:
+   * meta-model objects for all of the packages are created before any
+   * are initialized, since one package's meta-model objects may refer to
+   * those of another.
+   * <p>Invocation of this method will not affect any packages that have
+   * already been initialized.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #eNS_URI
-	 * @see #createPackageContents()
-	 * @see #initializePackageContents()
-	 * @generated
-	 */
+   * @see #eNS_URI
+   * @see #createPackageContents()
+   * @see #initializePackageContents()
+   * @generated
+   */
   public static ParsetreePackage init()
   {
-		if (isInited) return (ParsetreePackage)EPackage.Registry.INSTANCE.getEPackage(ParsetreePackage.eNS_URI);
+    if (isInited) return (ParsetreePackage)EPackage.Registry.INSTANCE.getEPackage(ParsetreePackage.eNS_URI);
 
-		// Obtain or create and register package
-		ParsetreePackageImpl theParsetreePackage = (ParsetreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ParsetreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ParsetreePackageImpl());
+    // Obtain or create and register package
+    ParsetreePackageImpl theParsetreePackage = (ParsetreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ParsetreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ParsetreePackageImpl());
 
-		isInited = true;
+    isInited = true;
 
-		// Create package meta-data objects
-		theParsetreePackage.createPackageContents();
+    // Create package meta-data objects
+    theParsetreePackage.createPackageContents();
 
-		// Initialize created meta-data
-		theParsetreePackage.initializePackageContents();
+    // Initialize created meta-data
+    theParsetreePackage.initializePackageContents();
 
-		// Mark meta-data to indicate it can't be changed
-		theParsetreePackage.freeze();
+    // Mark meta-data to indicate it can't be changed
+    theParsetreePackage.freeze();
 
-		return theParsetreePackage;
-	}
+    return theParsetreePackage;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EClass getCompositeNode()
   {
-		return compositeNodeEClass;
-	}
+    return compositeNodeEClass;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EReference getCompositeNode_Children()
   {
-		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(0);
-	}
+    return (EReference)compositeNodeEClass.getEStructuralFeatures().get(0);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCompositeNode_LookaheadLeafNodes() {
-		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(1);
-	}
-
-/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
+  public EReference getCompositeNode_LookaheadLeafNodes()
+  {
+    return (EReference)compositeNodeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAbstractNode()
   {
-		return abstractNodeEClass;
-	}
+    return abstractNodeEClass;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EReference getAbstractNode_Parent()
   {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(0);
-	}
+    return (EReference)abstractNodeEClass.getEStructuralFeatures().get(0);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EReference getAbstractNode_GrammarElement()
   {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
-	}
+    return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractNode_Element() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractNode_SyntaxError() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(3);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractNode_TotalOffset() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(4);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractNode_TotalLine() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(5);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractNode_TotalLength() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(6);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
+  public EReference getAbstractNode_Element()
+  {
+    return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAbstractNode_SyntaxError()
+  {
+    return (EReference)abstractNodeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractNode_TotalOffset()
+  {
+    return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractNode_TotalLine()
+  {
+    return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractNode_TotalLength()
+  {
+    return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getLeafNode()
   {
-		return leafNodeEClass;
-	}
+    return leafNodeEClass;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EAttribute getLeafNode_Text()
   {
-		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(0);
-	}
+    return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(0);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EAttribute getLeafNode_Feature()
   {
-		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(1);
-	}
+    return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(1);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EAttribute getLeafNode_Hidden()
   {
-		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(2);
-	}
+    return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(2);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSyntaxError() {
-		return syntaxErrorEClass;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSyntaxError_Message() {
-		return (EAttribute)syntaxErrorEClass.getEStructuralFeatures().get(0);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSyntaxError_Node() {
-		return (EReference)syntaxErrorEClass.getEStructuralFeatures().get(1);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
+  public EClass getSyntaxError()
+  {
+    return syntaxErrorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSyntaxError_Message()
+  {
+    return (EAttribute)syntaxErrorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSyntaxError_Node()
+  {
+    return (EReference)syntaxErrorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ParsetreeFactory getParsetreeFactory()
   {
-		return (ParsetreeFactory)getEFactoryInstance();
-	}
+    return (ParsetreeFactory)getEFactoryInstance();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   private boolean isCreated = false;
 
   /**
-	 * Creates the meta-model objects for the package.  This method is
-	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+   * Creates the meta-model objects for the package.  This method is
+   * guarded to have no affect on any invocation but its first.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void createPackageContents()
   {
-		if (isCreated) return;
-		isCreated = true;
+    if (isCreated) return;
+    isCreated = true;
 
-		// Create classes and their features
-		compositeNodeEClass = createEClass(COMPOSITE_NODE);
-		createEReference(compositeNodeEClass, COMPOSITE_NODE__CHILDREN);
-		createEReference(compositeNodeEClass, COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES);
+    // Create classes and their features
+    compositeNodeEClass = createEClass(COMPOSITE_NODE);
+    createEReference(compositeNodeEClass, COMPOSITE_NODE__CHILDREN);
+    createEReference(compositeNodeEClass, COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES);
 
-		abstractNodeEClass = createEClass(ABSTRACT_NODE);
-		createEReference(abstractNodeEClass, ABSTRACT_NODE__PARENT);
-		createEReference(abstractNodeEClass, ABSTRACT_NODE__GRAMMAR_ELEMENT);
-		createEReference(abstractNodeEClass, ABSTRACT_NODE__ELEMENT);
-		createEReference(abstractNodeEClass, ABSTRACT_NODE__SYNTAX_ERROR);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_OFFSET);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LINE);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LENGTH);
+    abstractNodeEClass = createEClass(ABSTRACT_NODE);
+    createEReference(abstractNodeEClass, ABSTRACT_NODE__PARENT);
+    createEReference(abstractNodeEClass, ABSTRACT_NODE__GRAMMAR_ELEMENT);
+    createEReference(abstractNodeEClass, ABSTRACT_NODE__ELEMENT);
+    createEReference(abstractNodeEClass, ABSTRACT_NODE__SYNTAX_ERROR);
+    createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_OFFSET);
+    createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LINE);
+    createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LENGTH);
 
-		leafNodeEClass = createEClass(LEAF_NODE);
-		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
-		createEAttribute(leafNodeEClass, LEAF_NODE__FEATURE);
-		createEAttribute(leafNodeEClass, LEAF_NODE__HIDDEN);
+    leafNodeEClass = createEClass(LEAF_NODE);
+    createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
+    createEAttribute(leafNodeEClass, LEAF_NODE__FEATURE);
+    createEAttribute(leafNodeEClass, LEAF_NODE__HIDDEN);
 
-		syntaxErrorEClass = createEClass(SYNTAX_ERROR);
-		createEAttribute(syntaxErrorEClass, SYNTAX_ERROR__MESSAGE);
-		createEReference(syntaxErrorEClass, SYNTAX_ERROR__NODE);
-	}
+    syntaxErrorEClass = createEClass(SYNTAX_ERROR);
+    createEAttribute(syntaxErrorEClass, SYNTAX_ERROR__MESSAGE);
+    createEReference(syntaxErrorEClass, SYNTAX_ERROR__NODE);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   private boolean isInitialized = false;
 
   /**
-	 * Complete the initialization of the package and its meta-model.  This
-	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+   * Complete the initialization of the package and its meta-model.  This
+   * method is guarded to have no affect on any invocation but its first.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void initializePackageContents()
   {
-		if (isInitialized) return;
-		isInitialized = true;
+    if (isInitialized) return;
+    isInitialized = true;
 
-		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
+    // Initialize package
+    setName(eNAME);
+    setNsPrefix(eNS_PREFIX);
+    setNsURI(eNS_URI);
 
-		// Create type parameters
+    // Create type parameters
 
-		// Set bounds for type parameters
+    // Set bounds for type parameters
 
-		// Add supertypes to classes
-		compositeNodeEClass.getESuperTypes().add(this.getAbstractNode());
-		leafNodeEClass.getESuperTypes().add(this.getAbstractNode());
+    // Add supertypes to classes
+    compositeNodeEClass.getESuperTypes().add(this.getAbstractNode());
+    leafNodeEClass.getESuperTypes().add(this.getAbstractNode());
 
-		// Initialize classes and features; add operations and parameters
-		initEClass(compositeNodeEClass, CompositeNode.class, "CompositeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCompositeNode_Children(), this.getAbstractNode(), this.getAbstractNode_Parent(), "children", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeNode_LookaheadLeafNodes(), this.getLeafNode(), null, "lookaheadLeafNodes", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    // Initialize classes and features; add operations and parameters
+    initEClass(compositeNodeEClass, CompositeNode.class, "CompositeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCompositeNode_Children(), this.getAbstractNode(), this.getAbstractNode_Parent(), "children", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCompositeNode_LookaheadLeafNodes(), this.getLeafNode(), null, "lookaheadLeafNodes", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractNode_Element(), ecorePackage.getEObject(), null, "element", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractNode_SyntaxError(), this.getSyntaxError(), this.getSyntaxError_Node(), "syntaxError", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_TotalOffset(), ecorePackage.getEInt(), "totalOffset", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_TotalLine(), ecorePackage.getEInt(), "totalLine", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_TotalLength(), ecorePackage.getEInt(), "totalLength", "-1", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+    initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAbstractNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractNode_Element(), ecorePackage.getEObject(), null, "element", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractNode_SyntaxError(), this.getSyntaxError(), this.getSyntaxError_Node(), "syntaxError", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractNode_TotalOffset(), ecorePackage.getEInt(), "totalOffset", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractNode_TotalLine(), ecorePackage.getEInt(), "totalLine", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractNode_TotalLength(), ecorePackage.getEInt(), "totalLength", "-1", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, ecorePackage.getEString(), "serialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, ecorePackage.getEString(), "serialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getAbstractNode(), "to", 1, 1, IS_UNIQUE, IS_ORDERED);
+    EOperation op = addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEParameter(op, this.getAbstractNode(), "to", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, this.getSyntaxError(), "allSyntaxErrors", 0, -1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, this.getSyntaxError(), "allSyntaxErrors", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "totalEndLine", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "totalEndLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getOffset", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getOffset", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getLine", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getLength", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getLength", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "endLine", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "endLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLeafNode_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLeafNode_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(syntaxErrorEClass, SyntaxError.class, "SyntaxError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSyntaxError_Message(), ecorePackage.getEString(), "message", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSyntaxError_Node(), this.getAbstractNode(), this.getAbstractNode_SyntaxError(), "node", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(syntaxErrorEClass, SyntaxError.class, "SyntaxError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSyntaxError_Message(), ecorePackage.getEString(), "message", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSyntaxError_Node(), this.getAbstractNode(), this.getAbstractNode_SyntaxError(), "node", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		// Create resource
-		createResource(eNS_URI);
-	}
+    // Create resource
+    createResource(eNS_URI);
+  }
 
 } //ParsetreePackageImpl

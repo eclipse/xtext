@@ -142,6 +142,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		genModel.setFacadeHelperClass(null);
 		genModel.setBundleManifest(false);
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+		genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			genPackage.setBasePackage(basePackage);
