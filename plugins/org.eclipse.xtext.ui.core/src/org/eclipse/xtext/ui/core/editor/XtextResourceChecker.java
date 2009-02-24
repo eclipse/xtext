@@ -168,6 +168,9 @@ public class XtextResourceChecker {
 		else if (feature instanceof EStructuralFeature) {
 			return (EStructuralFeature) feature;
 		}
+		else if (feature instanceof Integer) {
+			ele.eClass().getEStructuralFeature((Integer)feature);
+		}
 		return null;
 	}
 
