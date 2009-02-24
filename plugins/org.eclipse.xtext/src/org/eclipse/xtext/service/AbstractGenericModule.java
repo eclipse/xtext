@@ -53,6 +53,8 @@ public abstract class AbstractGenericModule implements Module {
 							if (arguments[0] instanceof WildcardType) {
 								WildcardType wct = (WildcardType) arguments[0];
 								Class<?> key = (Class<Object>) wct.getUpperBounds()[0];
+								if (!method.isAccessible())
+									method.setAccessible(true);
 								Class<?> invoke = (Class<?>) method.invoke(this, (Object[]) null);
 								if (LOG.isTraceEnabled())
 									LOG.trace("Adding binding from " + key.getName() + " to " + invoke.getName() +
