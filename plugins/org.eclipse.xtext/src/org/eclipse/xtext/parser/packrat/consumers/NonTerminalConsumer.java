@@ -56,7 +56,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		result.reset();
 		for(IElementConsumer consumer: groupElements) {
 			if (result.didGroupFail(consumer.consume())) {
-				result.error(groupConsumer.getErrorMessage());
+				if (result.result == ConsumeResult.EMPTY_MATCH) {
+					result.error(groupConsumer.getErrorMessage());
+					result.getResult();
+					return getOffset();
+				}
 				return result.getResult();
 			}
 		}
@@ -71,7 +75,13 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			if (result.isAlternativeDone(consumer.consume()))
 				return result.getResult();
 		}
-		result.error(alternativesConsumer.getErrorMessage());
+		if (result.bestResult == ConsumeResult.EMPTY_MATCH) {
+			result.fakeNextAlternative();
+			result.error(alternativesConsumer.getErrorMessage());
+			result.isAlternativeDone(ConsumeResult.SUCCESS);
+			result.getResult();
+			return getOffset();
+		}
 		return result.getResult();
 	}
 
@@ -105,9 +115,14 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			if (result != ConsumeResult.SUCCESS) {
 				IBacktracker.IBacktrackingResult backtrackingResult = skipPreviousToken();
 				while(result != ConsumeResult.SUCCESS && backtrackingResult.isSuccessful()) {
+					final IMarker marker = mark();
 					result = doConsume();
-					if (result != ConsumeResult.SUCCESS)
+					if (result != ConsumeResult.SUCCESS) {
+						marker.rollback();
 						backtrackingResult = backtrackingResult.skipPreviousToken();
+					} else {
+						marker.commit();
+					}
 				}
 				if (result == ConsumeResult.SUCCESS)
 					backtrackingResult.commit();
@@ -370,9 +385,14 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			if (result != ConsumeResult.SUCCESS) {
 				IBacktracker.IBacktrackingResult backtrackingResult = skipPreviousToken();
 				while(result != ConsumeResult.SUCCESS && backtrackingResult.isSuccessful()) {
+					final IMarker localMarker = mark();
 					result = doConsume();
-					if (result != ConsumeResult.SUCCESS)
+					if (result != ConsumeResult.SUCCESS) {
+						localMarker.rollback();
 						backtrackingResult = backtrackingResult.skipPreviousToken();
+					} else {
+						localMarker.commit();
+					}
 				}
 				if (result == ConsumeResult.SUCCESS)
 					backtrackingResult.commit();
@@ -492,6 +512,10 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			currentMarker = bestMarker.fork();
 		}
 
+		public void fakeNextAlternative() {
+			currentMarker = bestMarker.fork();
+		}
+
 		public void reset() {
 			bestResult = ConsumeResult.EMPTY_MATCH;
 		}
@@ -516,12 +540,14 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 	protected class GroupResult extends AbstractElementResult<Group> {
 		private int result;
+		private int groupIndex;
 		private final IMarker marker;
 
 		protected GroupResult(ElementConsumer<Group> elementConsumer) {
 			super(elementConsumer);
 			result = ConsumeResult.SUCCESS;
 			marker = mark();
+			groupIndex = -1;
 		}
 
 		public void reset() {
@@ -535,6 +561,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 
 		public boolean didGroupFail(int result) {
+			this.groupIndex++;
 			this.result = result;
 			return result != ConsumeResult.SUCCESS;
 		}
@@ -592,12 +619,12 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	public int consume(String feature, boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
-		int prevOffset = getOffset();
+//		int prevOffset = getOffset();
 		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), grammarElement != null ? grammarElement : getGrammarElement(), getDefaultType()));
 		int result = doConsume();
-		if (result != ConsumeResult.SUCCESS) {
-			getTokenAcceptor().accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultType() + ", but could not find."));
-		}
+//		if (result != ConsumeResult.SUCCESS) {
+//			getTokenAcceptor().accept(new ErrorToken(prevOffset, 0, null, "Expected " + getDefaultType() + ", but could not find."));
+//		}
 		getTokenAcceptor().accept(new ParsedNonTerminalEnd(getInput().getOffset(), feature, isMany, isDatatype, isBoolean));
 		marker.commit();
 		prevState.restore();

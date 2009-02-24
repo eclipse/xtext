@@ -43,34 +43,20 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		private int stackSize;
 
-		private int skippedOffset;
-
 		private int errorStack;
+
+		private int skippedOffset;
 
 		private final Set<AbstractParsedToken> markedTokens;
 
-		private final NestedBacktrackingResult parent;
-
-		protected NestedBacktrackingResult(NestedBacktrackingResult parent) {
-			this.parent = parent;
+		protected NestedBacktrackingResult() {
 			this.result = false;
 			this.markedTokens = new HashSet<AbstractParsedToken>(8);
-		}
-
-		protected boolean isSkipped(AbstractParsedToken token) {
-			return markedTokens.contains(token) || (parent == null ? token.isSkipped() : parent.isSkipped(token));
-		}
-
-		private void commitImpl() {
-			for(AbstractParsedToken token: markedTokens) {
-				token.setSkipped(true);
-			}
+			this.skippedOffset = 0;
 		}
 
 		public void commit() {
 			markedTokens.clear();
-			if (parent != null)
-				parent.commit();
 		}
 
 		public void discard() {
@@ -79,15 +65,13 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			}
 			marker.getInput().setOffset(marker.getInput().getOffset() + skippedOffset);
 			markedTokens.clear();
-			if (parent != null)
-				parent.discard();
 		}
 
 		public boolean isSuccessful() {
 			return result;
 		}
 
-		public void skipPreviousTokenImpl() {
+		public IBacktrackingResult skipPreviousToken() {
 			errorStack = 0;
 			result = false;
 			lookup = true;
@@ -105,16 +89,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				for (int i = idx; i < content.size(); i++)
 					content.get(i).accept(skipper);
 				idx = 0;
-				skippedOffset = skipper.skippedOffset;
+				skippedOffset += skipper.skippedOffset;
 				marker.getInput().setOffset(marker.getInput().getOffset() - skipper.skippedOffset);
-				commitImpl();
 			}
-		}
-
-		public IBacktrackingResult skipPreviousToken() {
-			NestedBacktrackingResult result = new NestedBacktrackingResult(this);
-			result.skipPreviousTokenImpl();
-			return result;
+			return this;
 		}
 
 		@Override
@@ -124,7 +102,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitCompoundParsedToken(CompoundParsedToken token) {
-			if (lookup && !isSkipped(token)) {
+			if (lookup && !token.isSkipped()) {
 				if (errorStack != 0)
 					errorStack--;
 				if (stackSize == 0)
@@ -140,7 +118,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitParsedNonTerminal(ParsedNonTerminal token) {
-			if (lookup && !isSkipped(token)) {
+			if (lookup && !token.isSkipped()) {
 				if (stackSize == 0)
 					lookup = false;
 				else {
@@ -161,7 +139,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
-			if (lookup && !isSkipped(token)) {
+			if (lookup && !token.isSkipped()) {
 				if (errorStack != 0)
 					errorStack++;
 				stackSize++;
@@ -170,7 +148,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitCompoundParsedTokenEnd(org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken.End token) {
-			if (lookup && !isSkipped(token)) {
+			if (lookup && !token.isSkipped()) {
 				if (errorStack != 0)
 					errorStack++;
 				stackSize++;
@@ -179,7 +157,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitParsedTerminal(ParsedTerminal token) {
-			if (lookup && !token.isHidden() && !isSkipped(token) && (token.getGrammarElement() instanceof AbstractElement)) {
+			if (lookup && !token.isHidden() && !token.isSkipped() && (token.getGrammarElement() instanceof AbstractElement)) {
 				if (GrammarUtil.isOptionalCardinality((AbstractElement) token.getGrammarElement())) {
 					result = errorStack == 0;
 					lookup = !result;
@@ -189,7 +167,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitErrorToken(ErrorToken token) {
-			if (!isSkipped(token))
+			if (!token.isSkipped())
 				errorStack++;
 		}
 
@@ -224,9 +202,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitCompoundParsedToken(CompoundParsedToken token) {
-				if (!isSkipped(token)) {
+				if (!token.isSkipped()) {
 					if (continueSkip) {
 						markedTokens.add(token);
+						token.setSkipped(true);
 						stackSize++;
 					}
 				}
@@ -234,9 +213,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitCompoundParsedTokenEnd(CompoundParsedToken.End token) {
-				if (!isSkipped(token)) {
+				if (!token.isSkipped()) {
 					if (continueSkip) {
 						markedTokens.add(token);
+						token.setSkipped(true);
 						stackSize--;
 						continueSkip = stackSize != 0;
 					}
@@ -245,9 +225,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitParsedTerminal(ParsedTerminal token) {
-				if (!isSkipped(token)) {
+				if (!token.isSkipped()) {
 					if (continueSkip) {
 						markedTokens.add(token);
+						token.setSkipped(true);
 						skippedOffset += token.getLength();
 						continueSkip = stackSize != 0;
 					}
@@ -256,9 +237,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitParsedNonTerminal(ParsedNonTerminal token) {
-				if (!isSkipped(token)) {
+				if (!token.isSkipped()) {
 					if (continueSkip) {
 						markedTokens.add(token);
+						token.setSkipped(true);
 						stackSize++;
 					}
 				}
@@ -266,9 +248,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
-				if (!isSkipped(token)) {
+				if (!token.isSkipped()) {
 					if (continueSkip) {
 						markedTokens.add(token);
+						token.setSkipped(true);
 						stackSize--;
 						continueSkip = stackSize != 0;
 					}
@@ -277,19 +260,16 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitErrorToken(ErrorToken token) {
-				if (!isSkipped(token)) {
+				if (!token.isSkipped()) {
 					markedTokens.add(token);
+					token.setSkipped(true);
 				}
 			}
-
 		}
-
 	}
 
 	public IBacktrackingResult skipPreviousToken() {
-		NestedBacktrackingResult result = new NestedBacktrackingResult(null);
-		result.skipPreviousTokenImpl();
-		return result;
+		return new NestedBacktrackingResult().skipPreviousToken();
 	}
 
 }
