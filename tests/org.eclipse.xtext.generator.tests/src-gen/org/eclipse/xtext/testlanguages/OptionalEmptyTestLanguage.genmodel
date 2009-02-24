@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="OptionalEmpty" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Model"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Model"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Model/child"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Model/child"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.ecore#//Greeting/name"/>
       </genFeatures>
     </genClasses>
   </genPackages>

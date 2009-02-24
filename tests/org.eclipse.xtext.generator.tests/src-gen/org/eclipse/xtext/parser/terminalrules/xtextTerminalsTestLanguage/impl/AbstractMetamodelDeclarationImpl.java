@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTe
  *
  * @generated
  */
-public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements AbstractMetamodelDeclaration
+public class AbstractMetamodelDeclarationImpl extends MinimalEObjectImpl.Container implements AbstractMetamodelDeclaration
 {
   /**
    * The cached value of the '{@link #getEPackage() <em>EPackage</em>}' reference.

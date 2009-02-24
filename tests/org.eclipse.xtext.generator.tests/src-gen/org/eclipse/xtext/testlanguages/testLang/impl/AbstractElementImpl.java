@@ -7,7 +7,7 @@ package org.eclipse.xtext.testlanguages.testLang.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.testLang.AbstractElement;
 import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  *
  * @generated
  */
-public class AbstractElementImpl extends EObjectImpl implements AbstractElement
+public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement
 {
   /**
    * <!-- begin-user-doc -->

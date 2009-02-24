@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.fowlerdsl.Command;
 import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
  *
  * @generated
  */
-public class CommandImpl extends EObjectImpl implements Command
+public class CommandImpl extends MinimalEObjectImpl.Container implements Command
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

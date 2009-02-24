@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
  *
  * @generated
  */
-public class CompositeModelImpl extends EObjectImpl implements CompositeModel
+public class CompositeModelImpl extends MinimalEObjectImpl.Container implements CompositeModel
 {
   /**
    * The cached value of the '{@link #getModel() <em>Model</em>}' containment reference list.

@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.contentAssistTestLanguage.Start;
  *
  * @generated
  */
-public class StartImpl extends EObjectImpl implements Start
+public class StartImpl extends MinimalEObjectImpl.Container implements Start
 {
   /**
    * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.

@@ -7,7 +7,7 @@ package org.eclipse.xtext.grammarinheritance.foo.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.grammarinheritance.foo.FooPackage;
 import org.eclipse.xtext.grammarinheritance.foo.RootRule;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.grammarinheritance.foo.RootRule;
  *
  * @generated
  */
-public class RootRuleImpl extends EObjectImpl implements RootRule
+public class RootRuleImpl extends MinimalEObjectImpl.Container implements RootRule
 {
   /**
    * <!-- begin-user-doc -->

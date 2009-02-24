@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.lookaheadLang.Alts;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  *
  * @generated
  */
-public class AltsImpl extends EObjectImpl implements Alts
+public class AltsImpl extends MinimalEObjectImpl.Container implements Alts
 {
   /**
    * The default value of the '{@link #getX() <em>X</em>}' attribute.

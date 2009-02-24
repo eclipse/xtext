@@ -7,7 +7,7 @@ package org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Root;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Root;
  *
  * @generated
  */
-public class RootImpl extends EObjectImpl implements Root
+public class RootImpl extends MinimalEObjectImpl.Container implements Root
 {
   /**
    * <!-- begin-user-doc -->

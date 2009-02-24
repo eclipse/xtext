@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  *
  * @generated
  */
-public class EntryImpl extends EObjectImpl implements Entry
+public class EntryImpl extends MinimalEObjectImpl.Container implements Entry
 {
   /**
    * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.

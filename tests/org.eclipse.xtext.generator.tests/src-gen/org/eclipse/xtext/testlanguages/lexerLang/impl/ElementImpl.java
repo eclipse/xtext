@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.lexerLang.Element;
 import org.eclipse.xtext.testlanguages.lexerLang.LexerLangPackage;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.testlanguages.lexerLang.LexerLangPackage;
  *
  * @generated
  */
-public class ElementImpl extends EObjectImpl implements Element
+public class ElementImpl extends MinimalEObjectImpl.Container implements Element
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -42,7 +42,7 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.Transition;
  *
  * @generated
  */
-public class StateImpl extends EObjectImpl implements State
+public class StateImpl extends MinimalEObjectImpl.Container implements State
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

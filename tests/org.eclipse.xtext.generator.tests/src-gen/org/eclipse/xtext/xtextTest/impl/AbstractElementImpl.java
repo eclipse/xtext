@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.xtextTest.AbstractElement;
 import org.eclipse.xtext.xtextTest.XtextTestPackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  *
  * @generated
  */
-public class AbstractElementImpl extends EObjectImpl implements AbstractElement
+public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement
 {
   /**
    * The default value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.

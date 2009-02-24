@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.referenceGrammar.Farbe;
 import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug;
  *
  * @generated
  */
-public class SpielzeugImpl extends EObjectImpl implements Spielzeug
+public class SpielzeugImpl extends MinimalEObjectImpl.Container implements Spielzeug
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

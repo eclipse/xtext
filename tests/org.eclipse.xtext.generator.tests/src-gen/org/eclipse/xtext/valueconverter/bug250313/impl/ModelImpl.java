@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -40,7 +40,7 @@ import org.eclipse.xtext.valueconverter.bug250313.Model;
  *
  * @generated
  */
-public class ModelImpl extends EObjectImpl implements Model
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

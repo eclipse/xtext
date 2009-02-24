@@ -7,7 +7,7 @@ package org.eclipse.xtext.testlanguages.referenceGrammar.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.referenceGrammar.Farbe;
 import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
  *
  * @generated
  */
-public class FarbeImpl extends EObjectImpl implements Farbe
+public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
 {
   /**
    * <!-- begin-user-doc -->

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Expression;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  *
  * @generated
  */
-public class ExpressionImpl extends EObjectImpl implements Expression
+public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
 {
   /**
    * The default value of the '{@link #getEm() <em>Em</em>}' attribute.

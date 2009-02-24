@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model;
 import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage;
@@ -34,7 +34,7 @@ import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Terminal
  *
  * @generated
  */
-public class ModelImpl extends EObjectImpl implements Model
+public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
    * The default value of the '{@link #getIdValue() <em>Id Value</em>}' attribute.

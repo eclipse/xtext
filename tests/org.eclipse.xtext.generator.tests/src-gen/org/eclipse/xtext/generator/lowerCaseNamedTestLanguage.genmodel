@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
-<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="LowerCaseNamedTestLanguage" basePackage="org.eclipse.xtext.generator" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.ecore#//Model"/>
+      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.ecore#//Model"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/peterfriese/Documents/Projects/Xtext/workspaces/workspace-Xtext-1/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.ecore#//Model/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.ecore#//Model/name"/>
       </genFeatures>
     </genClasses>
   </genPackages>

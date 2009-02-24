@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
@@ -35,7 +35,7 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Overri
  *
  * @generated
  */
-public class OverridingHiddensCallImpl extends EObjectImpl implements OverridingHiddensCall
+public class OverridingHiddensCallImpl extends MinimalEObjectImpl.Container implements OverridingHiddensCall
 {
   /**
    * The cached value of the '{@link #getSpaces() <em>Spaces</em>}' attribute list.

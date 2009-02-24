@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.testlanguages.optionalEmpty.Greeting;
 import org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage;
  *
  * @generated
  */
-public class GreetingImpl extends EObjectImpl implements Greeting
+public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeting
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

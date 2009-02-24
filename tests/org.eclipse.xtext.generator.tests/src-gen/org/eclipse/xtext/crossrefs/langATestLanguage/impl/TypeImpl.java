@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.crossrefs.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.crossrefs.langATestLanguage.Type;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.crossrefs.langATestLanguage.Type;
  *
  * @generated
  */
-public class TypeImpl extends EObjectImpl implements Type
+public class TypeImpl extends MinimalEObjectImpl.Container implements Type
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Assignment;
 import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePack
  *
  * @generated
  */
-public class AssignmentImpl extends EObjectImpl implements Assignment
+public class AssignmentImpl extends MinimalEObjectImpl.Container implements Assignment
 {
   /**
    * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.

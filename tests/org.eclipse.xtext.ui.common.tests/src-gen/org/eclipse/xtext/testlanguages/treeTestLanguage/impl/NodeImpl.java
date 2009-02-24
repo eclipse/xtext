@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -39,7 +39,7 @@ import org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage;
  *
  * @generated
  */
-public class NodeImpl extends EObjectImpl implements Node
+public class NodeImpl extends MinimalEObjectImpl.Container implements Node
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

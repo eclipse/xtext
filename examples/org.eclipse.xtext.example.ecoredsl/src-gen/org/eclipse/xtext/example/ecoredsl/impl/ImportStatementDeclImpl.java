@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
 import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
  *
  * @generated
  */
-public class ImportStatementDeclImpl extends EObjectImpl implements ImportStatementDecl
+public class ImportStatementDeclImpl extends MinimalEObjectImpl.Container implements ImportStatementDecl
 {
   /**
    * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
