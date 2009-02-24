@@ -43,8 +43,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		private int stackSize;
 
-		private int errorStack;
-
 		private int skippedOffset;
 
 		private final Set<AbstractParsedToken> markedTokens;
@@ -72,7 +70,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		}
 
 		public IBacktrackingResult skipPreviousToken() {
-			errorStack = 0;
 			result = false;
 			lookup = true;
 			stackSize = 0;
@@ -103,14 +100,12 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		@Override
 		public void visitCompoundParsedToken(CompoundParsedToken token) {
 			if (lookup && !token.isSkipped()) {
-				if (errorStack != 0)
-					errorStack--;
 				if (stackSize == 0)
 					lookup = false;
 				else {
 					stackSize--;
 					if (GrammarUtil.isOptionalCardinality(token.getGrammarElement())) {
-						result = errorStack == 0;
+						result = true;
 					}
 				}
 			}
@@ -123,12 +118,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					lookup = false;
 				else {
 					stackSize--;
-					if (errorStack != 0)
-						errorStack--;
 					EObject grammarElement = token.getGrammarElement();
 					if (grammarElement instanceof AbstractElement) {
 						if (GrammarUtil.isOptionalCardinality((AbstractElement) grammarElement)) {
-							result = errorStack == 0;
+							result = true;
 						}
 					} else {
 						lookup = false;
@@ -140,8 +133,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		@Override
 		public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
 			if (lookup && !token.isSkipped()) {
-				if (errorStack != 0)
-					errorStack++;
 				stackSize++;
 			}
 		}
@@ -149,8 +140,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		@Override
 		public void visitCompoundParsedTokenEnd(org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken.End token) {
 			if (lookup && !token.isSkipped()) {
-				if (errorStack != 0)
-					errorStack++;
 				stackSize++;
 			}
 		}
@@ -159,16 +148,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		public void visitParsedTerminal(ParsedTerminal token) {
 			if (lookup && !token.isHidden() && !token.isSkipped() && (token.getGrammarElement() instanceof AbstractElement)) {
 				if (GrammarUtil.isOptionalCardinality((AbstractElement) token.getGrammarElement())) {
-					result = errorStack == 0;
-					lookup = !result;
+					result = true;
+					lookup = false;
 				}
 			}
-		}
-
-		@Override
-		public void visitErrorToken(ErrorToken token) {
-			if (!token.isSkipped())
-				errorStack++;
 		}
 
 		public void visitMarker(Marker marker) {

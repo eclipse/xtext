@@ -34,7 +34,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 	private EStructuralFeature inheritingCall;
 	private EStructuralFeature overridingValid;
 	private EStructuralFeature inheritingValid;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		with(HiddenTerminalsTestLanguageStandaloneSetup.class);
@@ -54,7 +54,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		inheritingCall = inheritingHiddens.getEStructuralFeature("called");
 		overridingCall = overridingHiddens.getEStructuralFeature("called");
 	}
-	
+
 	public void testSetup() {
 		assertNotNull(withoutHiddens);
 		assertNotNull(withHiddens);
@@ -70,7 +70,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertNotNull(overridingCall);
 		assertNotNull(inheritingCall);
 	}
-	
+
 	public void testWithoutHiddens_01() throws Exception {
 		String model = "without hiddens ;";
 		Resource res = getResourceFromString(model);
@@ -80,7 +80,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(withoutHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testWithoutHiddens_02() throws Exception {
 		String model = "without hiddens;";
 		Resource res = getResourceFromString(model);
@@ -90,7 +90,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(withoutHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testWithHiddens_01() throws Exception {
 		String model = "with hiddens ;";
 		Resource res = getResourceFromString(model);
@@ -100,7 +100,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(withHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testWithHiddens_02() throws Exception {
 		String model = "with/* comment */hiddens;";
 		Resource res = getResourceFromString(model);
@@ -110,7 +110,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(withHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testOverridingHiddens_01() throws Exception {
 		String model = "overriding hiddens (call;);";
 		Resource res = getResourceFromString(model);
@@ -120,7 +120,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(overridingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testOverridingHiddens_02() throws Exception {
 		String model = "overriding hiddens ( call ; ) ;";
 		Resource res = getResourceFromString(model);
@@ -130,7 +130,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(overridingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testInheritingHiddens_01() throws Exception {
 		String model = "inheriting hiddens (call;);";
 		Resource res = getResourceFromString(model);
@@ -140,7 +140,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(inheritingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testInheritingHiddens_02() throws Exception {
 		String model = "inheriting hiddens ( call /*comment */ ; ) ;";
 		Resource res = getResourceFromString(model);
@@ -150,7 +150,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(inheritingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testInheritingHiddens_03() throws Exception {
 		String model = "inheriting hiddens ( hiding call; ) ;";
 		Resource res = getResourceFromString(model);
@@ -160,7 +160,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(inheritingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testInheritingHiddens_04() throws Exception {
 		String model = "inheriting hiddens (/*comment*/hiding call;/*comment*/) ;";
 		Resource res = getResourceFromString(model);
@@ -170,7 +170,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(inheritingHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testDatatypeHiddens_01() throws Exception {
 		String model = "datatype rule;";
 		Resource res = getResourceFromString(model);
@@ -180,7 +180,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(datatypeHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testDatatypeHiddens_02() throws Exception {
 		String model = "datatype rule  ;";
 		Resource res = getResourceFromString(model);
@@ -190,10 +190,11 @@ public class HiddensTest extends AbstractGeneratorTest {
 		assertEquals(datatypeHiddens, root.eClass());
 		assertTrue((Boolean) root.eGet(valid));
 	}
-	
+
 	public void testDatatypeHiddens_03() throws Exception {
 		String model = "datatype rule /* foo */ ;";
 		Resource res = getResourceFromString(model);
 		assertFalse(res.getErrors().isEmpty());
+		assertEquals(1, res.getErrors().size());
 	}
 }
