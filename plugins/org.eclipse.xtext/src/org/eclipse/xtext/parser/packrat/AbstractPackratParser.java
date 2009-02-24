@@ -178,11 +178,13 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	private class RootConsumerListener implements IRootConsumerListener {
 
 		public void beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer, int result, INonTerminalConsumerConfiguration configuration) {
-			if (result == ConsumeResult.SUCCESS && offset != length())
-				consumeHiddens();
-			if (offset != length()) {
-				configuration.getTokenAcceptor().accept(new ErrorToken(offset, length() - offset, null, "<EOF> expected."));
-				offset = length();
+			if (result == ConsumeResult.SUCCESS) {
+				if (offset != length())
+					consumeHiddens();
+				if (offset != length()) {
+					configuration.getTokenAcceptor().accept(new ErrorToken(offset, length() - offset, null, "<EOF> expected."));
+					offset = length();
+				}
 			}
 		}
 
@@ -223,10 +225,13 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		while(anySuccess) {
 			anySuccess = false;
 			for (ITerminalConsumer consumer: hiddens) {
+				IMarker marker = mark();
 				if (consumer.consume(null, false, false, null, ISequenceMatcher.Factory.nullMatcher()) == ConsumeResult.SUCCESS) {
 					anySuccess = true;
+					marker.commit();
 					break;
 				}
+				marker.rollback();
 			}
 		}
 	}
@@ -278,33 +283,33 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 
 		// either consume hiddens and have success or leave them and try again
 		// TODO: rollback hidden tokens step by step
-		IMarker marker = mark();
-		IMarker currentMarker = marker.fork();
+		IMarker bestMarker = mark();
+		IMarker currentMarker = bestMarker.fork();
 		int result = consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement);
 		if (result == ConsumeResult.SUCCESS) {
-			marker = currentMarker.join(marker);
-			marker.commit();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return result;
 		}
 		// no success, read hidden tokens and try again
-		marker = marker.join(currentMarker);
-		currentMarker = marker.fork();
+		bestMarker = currentMarker.join(bestMarker);
+		currentMarker = bestMarker.fork();
 		consumeHiddens();
 		int nextResult = consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement);
 		if (nextResult == ConsumeResult.SUCCESS) {
-			marker = currentMarker.join(marker);
-			marker.commit();
+			bestMarker = currentMarker.join(bestMarker);
+			bestMarker.commit();
 			return nextResult;
 		}
 		// keep better result
 		if (nextResult > result) {
-			marker = currentMarker.join(marker);
+			bestMarker = currentMarker.join(bestMarker);
 			result = nextResult;
 		} else {
-			marker = marker.join(currentMarker);
+			bestMarker = bestMarker.join(currentMarker);
 		}
 		// commit latest error
-		marker.commit();
+		bestMarker.commit();
 		return result;
 	}
 

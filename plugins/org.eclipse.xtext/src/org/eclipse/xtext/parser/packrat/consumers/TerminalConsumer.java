@@ -12,6 +12,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
@@ -29,25 +30,23 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 	}
 
 	public final int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching) {
-		int prevMarker = mark();
+		final int prevMarker = mark();
 		final int result = doConsume();
-		if (result == ConsumeResult.SUCCESS && notMatching.matches(getInput(), prevMarker, getInput().getOffset()- prevMarker)) {
-			getInput().setOffset(prevMarker);
+		if (prevMarker == getOffset())
 			return ConsumeResult.EMPTY_MATCH;
+		if (result != ConsumeResult.SUCCESS || notMatching.matches(getInput(), prevMarker, getInput().getOffset()- prevMarker)) {
+			getTokenAcceptor().accept(new ErrorToken(prevMarker, getInput().getOffset() - prevMarker, element, "Another token expected. Error message by : " + this));
+			return getInput().getOffset();
 		}
-		if (result == ConsumeResult.SUCCESS) {
-			if (feature != null) {
-				if (element instanceof CrossReference)
-					getTokenAcceptor().accept(new ParsedTerminalWithFeatureInfo(prevMarker, getInput().getOffset()-prevMarker,
-							element, isHidden(), feature));
-				else
-					getTokenAcceptor().accept(new ParsedTerminalWithFeature(prevMarker, getInput().getOffset()-prevMarker,
-							element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
-			} else
-				getTokenAcceptor().accept(new ParsedTerminal(prevMarker, getInput().getOffset()-prevMarker, element != null ? element : getGrammarElement(), isHidden()));
-		} else {
-			getInput().setOffset(prevMarker);
-		}
+		if (feature != null) {
+			if (element instanceof CrossReference)
+				getTokenAcceptor().accept(new ParsedTerminalWithFeatureInfo(prevMarker, getInput().getOffset()-prevMarker,
+						element, isHidden(), feature));
+			else
+				getTokenAcceptor().accept(new ParsedTerminalWithFeature(prevMarker, getInput().getOffset()-prevMarker,
+						element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName()));
+		} else
+			getTokenAcceptor().accept(new ParsedTerminal(prevMarker, getInput().getOffset()-prevMarker, element != null ? element : getGrammarElement(), isHidden()));
 		return result;
 	}
 
