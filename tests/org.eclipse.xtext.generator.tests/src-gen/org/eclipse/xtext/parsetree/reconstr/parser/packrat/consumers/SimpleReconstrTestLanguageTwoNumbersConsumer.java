@@ -85,8 +85,8 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "num1", false, false, getElement(), getRuleCall$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "num1", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 
@@ -109,8 +109,8 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "num2", false, false, getElement(), getRuleCall$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "num2", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -134,8 +134,8 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -158,8 +158,8 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "num3", true, false, getElement(), getRuleCall$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "num3", true, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 

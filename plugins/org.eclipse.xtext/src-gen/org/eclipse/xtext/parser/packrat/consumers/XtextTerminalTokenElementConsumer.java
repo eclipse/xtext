@@ -66,8 +66,8 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(characterRangeConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(characterRangeConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -78,8 +78,8 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -90,8 +90,8 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(parenthesizedTerminalElementConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parenthesizedTerminalElementConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -102,8 +102,8 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractNegatedTokenConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractNegatedTokenConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class XtextTerminalTokenElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(wildcardConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(wildcardConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

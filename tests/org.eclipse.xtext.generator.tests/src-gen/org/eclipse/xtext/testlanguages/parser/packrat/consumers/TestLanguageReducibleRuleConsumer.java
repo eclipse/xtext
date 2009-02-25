@@ -64,8 +64,8 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -76,8 +76,8 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -101,7 +101,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), true);
 			return SUCCESS;
 		}
@@ -126,8 +126,8 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(terminalRuleConsumer, "actionFeature", true, false, false, getElement(), optional);
 		}
 	}
 

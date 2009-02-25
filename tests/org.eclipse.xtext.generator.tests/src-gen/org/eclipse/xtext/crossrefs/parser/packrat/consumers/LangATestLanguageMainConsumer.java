@@ -68,8 +68,8 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(importConsumer, "imports", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(importConsumer, "imports", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -92,8 +92,8 @@ public final class LangATestLanguageMainConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(typeConsumer, "types", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(typeConsumer, "types", true, false, false, getElement(), optional);
 		}
 	}
 

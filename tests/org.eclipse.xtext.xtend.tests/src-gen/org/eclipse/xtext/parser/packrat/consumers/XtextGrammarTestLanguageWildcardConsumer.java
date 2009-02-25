@@ -46,8 +46,8 @@ public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "isWildcard", false, true, getKeyword$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "isWildcard", false, true, getKeyword$2$Delimiter(), optional);
 		}
 	}
 

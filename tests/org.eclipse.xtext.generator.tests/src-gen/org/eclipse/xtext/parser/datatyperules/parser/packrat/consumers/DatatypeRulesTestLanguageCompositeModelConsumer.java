@@ -46,8 +46,8 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(modelConsumer, "model", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(modelConsumer, "model", true, false, false, getElement(), optional);
 		}
 	}
 

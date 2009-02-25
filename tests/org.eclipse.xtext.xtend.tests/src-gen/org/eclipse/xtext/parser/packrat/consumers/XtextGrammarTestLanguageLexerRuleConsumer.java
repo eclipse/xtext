@@ -111,8 +111,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -123,8 +123,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -147,8 +147,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 
@@ -172,8 +172,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter(), optional);
 		}
 	}
 
@@ -196,8 +196,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -208,8 +208,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$15$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$15$Delimiter(), optional);
 		}
 	}
 
@@ -232,8 +232,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "body", false, false, getElement(), getRuleCall$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "body", false, false, getElement(), getRuleCall$17$Delimiter(), optional);
 		}
 	}
 
@@ -244,8 +244,8 @@ public final class XtextGrammarTestLanguageLexerRuleConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter(), optional);
 		}
 	}
 

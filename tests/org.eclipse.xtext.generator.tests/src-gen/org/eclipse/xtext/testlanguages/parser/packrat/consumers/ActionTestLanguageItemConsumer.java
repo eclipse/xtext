@@ -55,7 +55,7 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), false);
 			return SUCCESS;
 		}
@@ -80,8 +80,8 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 

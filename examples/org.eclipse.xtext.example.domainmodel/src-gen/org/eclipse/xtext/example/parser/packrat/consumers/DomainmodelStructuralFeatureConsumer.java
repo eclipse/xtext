@@ -51,8 +51,8 @@ public final class DomainmodelStructuralFeatureConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(attributeConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(attributeConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class DomainmodelStructuralFeatureConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(referenceConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(referenceConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

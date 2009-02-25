@@ -19,7 +19,7 @@ public interface ITerminalConsumer {
 	 * Scan the configured input source for a consumable terminal at the current offset.
 	 * If it can be found, create a configured parsed token and increase the offset of the input.
 	 */
-	int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching);
+	int consume(String feature, boolean isMany, boolean isBoolean, AbstractElement element, ISequenceMatcher notMatching, boolean optional);
 
 	/**
 	 * Scan the configured input source for a consumable terminal at the current offset.

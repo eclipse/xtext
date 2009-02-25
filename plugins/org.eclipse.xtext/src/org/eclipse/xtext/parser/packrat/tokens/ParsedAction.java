@@ -19,7 +19,7 @@ public class ParsedAction extends ParsedToken {
 	private final boolean isMany;
 
 	public ParsedAction(int offset, Action action, boolean isMany) {
-		super(offset, 0, action);
+		super(offset, 0, action, null, false);
 		this.isMany = isMany;
 	}
 

@@ -51,8 +51,8 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(resourceImportConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(resourceImportConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(ePackageImportConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ePackageImportConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

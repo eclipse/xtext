@@ -127,8 +127,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "feature", false, false, getElement(), getRuleCall$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "feature", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
 		}
 	}
 
@@ -139,8 +139,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -151,8 +151,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 
@@ -188,8 +188,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -213,8 +213,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter(), optional);
 		}
 	}
 
@@ -237,8 +237,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(listAssignmentValueConsumer, "leftValues", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -249,8 +249,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$19$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$19$Delimiter(), optional);
 		}
 	}
 
@@ -286,8 +286,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -311,8 +311,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$24$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$24$Delimiter(), optional);
 		}
 	}
 
@@ -335,8 +335,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(listAssignmentValueConsumer, "rightValues", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -347,8 +347,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$27$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$27$Delimiter(), optional);
 		}
 	}
 
@@ -359,8 +359,8 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$28$Delimiter(), optional);
 		}
 	}
 

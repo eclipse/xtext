@@ -61,8 +61,8 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(concreteParserRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(concreteParserRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -73,8 +73,8 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(callOverridenParserRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(callOverridenParserRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -85,8 +85,8 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(callExtendedParserRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(callExtendedParserRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -97,8 +97,8 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(overridableParserRule2Consumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(overridableParserRule2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

@@ -83,8 +83,8 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "feature", false, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "feature", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
@@ -95,8 +95,8 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -119,8 +119,8 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(singleAssignmentValueConsumer, "leftValue", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(singleAssignmentValueConsumer, "leftValue", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -131,8 +131,8 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 

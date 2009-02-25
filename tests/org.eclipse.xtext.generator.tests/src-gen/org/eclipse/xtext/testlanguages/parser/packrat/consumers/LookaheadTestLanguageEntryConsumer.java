@@ -46,8 +46,8 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(altsConsumer, "contents", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(altsConsumer, "contents", true, false, false, getElement(), optional);
 		}
 	}
 

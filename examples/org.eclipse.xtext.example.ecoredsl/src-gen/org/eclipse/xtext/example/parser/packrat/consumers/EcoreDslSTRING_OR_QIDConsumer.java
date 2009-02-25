@@ -54,8 +54,8 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, null, false, false, getElement(), getRuleCall$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, null, false, false, getElement(), getRuleCall$2$Delimiter(), optional);
 		}
 	}
 
@@ -66,8 +66,8 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(qidConsumer, null, false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(qidConsumer, null, false, true, false, getElement(), optional);
 		}
 	}
 

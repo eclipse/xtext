@@ -85,8 +85,8 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -109,8 +109,8 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 
@@ -121,8 +121,8 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -158,8 +158,8 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nestedConsumer, "nested", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedConsumer, "nested", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -182,8 +182,8 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(contentConsumer, "content", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(contentConsumer, "content", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -194,8 +194,8 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
 		}
 	}
 

@@ -18,8 +18,8 @@ public class ParsedNonTerminal extends ParsedToken {
 
 	private final EClassifier type;
 
-	public ParsedNonTerminal(int offset, EObject grammarElement, EClassifier type) {
-		super(offset, 0, grammarElement);
+	public ParsedNonTerminal(int offset, EObject grammarElement, EClassifier type, IParsedTokenSource origin, boolean optional) {
+		super(offset, 0, grammarElement, origin, optional);
 		this.type = type;
 	}
 

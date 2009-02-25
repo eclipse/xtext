@@ -112,8 +112,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -136,8 +136,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "groesse", false, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "groesse", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -160,8 +160,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "beschreibung", false, false, getElement(), getRuleCall$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "beschreibung", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 
@@ -172,8 +172,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 
@@ -212,8 +212,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(kindConsumer, "kinder", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(kindConsumer, "kinder", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -236,8 +236,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(erwachsenerConsumer, "erzieher", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -260,8 +260,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(spielzeugConsumer, "spielzeuge", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -284,8 +284,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(familieConsumer, "familie", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(familieConsumer, "familie", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -308,8 +308,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(customTypeParserRuleConsumer, "types", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -320,8 +320,8 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$26$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$26$Delimiter(), optional);
 		}
 	}
 

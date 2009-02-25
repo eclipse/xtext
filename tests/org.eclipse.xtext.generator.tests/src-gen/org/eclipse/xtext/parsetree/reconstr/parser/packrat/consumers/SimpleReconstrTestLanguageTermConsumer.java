@@ -81,8 +81,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(atomConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(atomConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -93,8 +93,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -105,8 +105,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -117,8 +117,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -129,8 +129,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -141,8 +141,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -153,8 +153,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -165,8 +165,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(booleanConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(booleanConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

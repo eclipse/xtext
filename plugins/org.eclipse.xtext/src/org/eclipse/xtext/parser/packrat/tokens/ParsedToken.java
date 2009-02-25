@@ -15,21 +15,35 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class ParsedToken extends AbstractParsedToken {
 
-	private EObject grammarElement;
-	
-	public ParsedToken(int offset, int length, EObject grammarElement) {
+	private final IParsedTokenSource source;
+
+	private final EObject grammarElement;
+
+	private final boolean optional;
+
+	public ParsedToken(int offset, int length, EObject grammarElement, IParsedTokenSource source, boolean optional) {
 		super(offset, length);
 		this.grammarElement = grammarElement;
+		this.source = source;
+		this.optional = optional;
 	}
-	
+
 	public EObject getGrammarElement() {
 		return grammarElement;
 	}
 
-	public void setGrammarElement(EObject grammarElement) {
-		this.grammarElement = grammarElement;
+//	public void setGrammarElement(EObject grammarElement) {
+//		this.grammarElement = grammarElement;
+//	}
+
+	public IParsedTokenSource getSource() {
+		return source;
 	}
-	
+
+	public boolean isOptional() {
+		return optional;
+	}
+
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
 		visitor.visitParsedToken(this);

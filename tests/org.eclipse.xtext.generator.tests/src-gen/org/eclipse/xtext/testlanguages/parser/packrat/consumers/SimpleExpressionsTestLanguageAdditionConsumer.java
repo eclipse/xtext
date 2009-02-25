@@ -72,8 +72,8 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(multiplicationConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(multiplicationConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -98,7 +98,7 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), true);
 			return SUCCESS;
 		}
@@ -136,8 +136,8 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "operator", false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -148,8 +148,8 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "operator", false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -172,8 +172,8 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(multiplicationConsumer, "values", true, false, false, getElement(), optional);
 		}
 	}
 

@@ -17,9 +17,9 @@ public class ParsedTerminalWithFeatureInfo extends ParsedTerminal {
 
 	private final String feature;
 
-	public ParsedTerminalWithFeatureInfo(int offset, int length, EObject grammarElement, 
-			boolean hidden, String feature) {
-		super(offset, length, grammarElement, hidden);
+	public ParsedTerminalWithFeatureInfo(int offset, int length, EObject grammarElement,
+			boolean hidden, String feature, IParsedTokenSource origin, boolean optional) {
+		super(offset, length, grammarElement, hidden, origin, optional);
 		this.feature = feature;
 	}
 

@@ -14,14 +14,15 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ParsedTerminalWithFeature extends ParsedTerminalWithFeatureInfo {
-	
+
 	private final boolean isMany;
 	private final boolean isBoolean;
 	private final String ruleName;
 
-	public ParsedTerminalWithFeature(int offset, int length, EObject grammarElement, 
-			boolean hidden, String feature, boolean isMany, boolean isBoolean, String ruleName) {
-		super(offset, length, grammarElement, hidden, feature);
+	public ParsedTerminalWithFeature(int offset, int length, EObject grammarElement,
+			boolean hidden, String feature, boolean isMany, boolean isBoolean, String ruleName,
+			IParsedTokenSource origin, boolean optional) {
+		super(offset, length, grammarElement, hidden, feature, origin, optional);
 		this.isMany = isMany;
 		this.isBoolean = isBoolean;
 		this.ruleName = ruleName;

@@ -56,8 +56,8 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(lexerRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(lexerRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -68,8 +68,8 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(parserRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parserRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -80,8 +80,8 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(terminalRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

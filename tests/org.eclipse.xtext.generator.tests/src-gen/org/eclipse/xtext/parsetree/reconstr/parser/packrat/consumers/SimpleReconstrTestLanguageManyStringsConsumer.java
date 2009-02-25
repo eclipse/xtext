@@ -65,8 +65,8 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -89,8 +89,8 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "str1", true, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "str1", true, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
@@ -113,8 +113,8 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "str2", true, false, getElement(), getRuleCall$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "str2", true, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 

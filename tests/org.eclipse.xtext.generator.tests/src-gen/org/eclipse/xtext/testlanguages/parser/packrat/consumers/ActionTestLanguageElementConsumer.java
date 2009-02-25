@@ -56,8 +56,8 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(itemConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(itemConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -68,7 +68,7 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), true);
 			return SUCCESS;
 		}
@@ -93,8 +93,8 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(itemConsumer, "items", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(itemConsumer, "items", true, false, false, getElement(), optional);
 		}
 	}
 

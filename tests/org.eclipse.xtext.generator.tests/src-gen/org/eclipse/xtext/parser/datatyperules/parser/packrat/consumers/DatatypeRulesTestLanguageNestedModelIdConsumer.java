@@ -56,8 +56,8 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(modelIdConsumer, null, false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(modelIdConsumer, null, false, true, false, getElement(), optional);
 		}
 	}
 
@@ -68,8 +68,8 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -80,8 +80,8 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(modelIdConsumer, null, false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(modelIdConsumer, null, false, true, false, getElement(), optional);
 		}
 	}
 

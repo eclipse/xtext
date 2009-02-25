@@ -226,7 +226,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			anySuccess = false;
 			for (ITerminalConsumer consumer: hiddens) {
 				IMarker marker = mark();
-				if (consumer.consume(null, false, false, null, ISequenceMatcher.Factory.nullMatcher()) == ConsumeResult.SUCCESS) {
+				if (consumer.consume(null, false, false, null, ISequenceMatcher.Factory.nullMatcher(), true) == ConsumeResult.SUCCESS) {
 					anySuccess = true;
 					marker.commit();
 					break;
@@ -259,15 +259,17 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 			markerBuffer[markerBufferSize++] = marker;
 	}
 
-	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy) {
+	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy, boolean optional) {
 		keywordConsumer.configure(keyword, notFollowedBy);
-		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher());
+		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher(), optional);
 	}
 
-	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean, AbstractElement grammarElement, ISequenceMatcher notMatching) {
+	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean,
+			AbstractElement grammarElement, ISequenceMatcher notMatching, boolean optional) {
 		IMarker marker = mark();
 		consumeHiddens();
-		int result = consumer.consume(feature, isMany, isBoolean, grammarElement, notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher());
+		int result = consumer.consume(feature, isMany, isBoolean, grammarElement,
+				notMatching != null ? notMatching : ISequenceMatcher.Factory.nullMatcher(), optional);
 		if (result == ConsumeResult.SUCCESS) {
 			marker.commit();
 			return result;
@@ -277,15 +279,15 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	}
 
 	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
-			boolean isDatatype, boolean isBoolean, AbstractElement grammarElement) throws Exception {
+			boolean isDatatype, boolean isBoolean, AbstractElement grammarElement, boolean optional) throws Exception {
 		if (!consumer.isDefiningHiddens())
-			return consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement);
+			return consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement, optional);
 
 		// either consume hiddens and have success or leave them and try again
 		// TODO: rollback hidden tokens step by step
 		IMarker bestMarker = mark();
 		IMarker currentMarker = bestMarker.fork();
-		int result = consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement);
+		int result = consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement, optional);
 		if (result == ConsumeResult.SUCCESS) {
 			bestMarker = currentMarker.join(bestMarker);
 			bestMarker.commit();
@@ -295,7 +297,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		bestMarker = currentMarker.join(bestMarker);
 		currentMarker = bestMarker.fork();
 		consumeHiddens();
-		int nextResult = consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement);
+		int nextResult = consumer.consume(feature, isMany, isDatatype, isBoolean, grammarElement, optional);
 		if (nextResult == ConsumeResult.SUCCESS) {
 			bestMarker = currentMarker.join(bestMarker);
 			bestMarker.commit();

@@ -51,8 +51,8 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(firstAbstractRuleChildConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(firstAbstractRuleChildConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(secondAbstractRuleChildConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(secondAbstractRuleChildConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

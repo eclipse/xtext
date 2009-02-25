@@ -156,8 +156,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "abstract", false, true, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "abstract", false, true, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -168,8 +168,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -192,8 +192,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(grammarIdConsumer, "name", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(grammarIdConsumer, "name", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -217,8 +217,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
@@ -241,8 +241,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(grammarIdConsumer, "superGrammar", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(grammarIdConsumer, "superGrammar", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -280,8 +280,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "definesHiddenTokens", false, true, getKeyword$21$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "definesHiddenTokens", false, true, getKeyword$21$Delimiter(), optional);
 		}
 	}
 
@@ -292,8 +292,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter(), optional);
 		}
 	}
 
@@ -329,8 +329,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getCrossReference$25$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getCrossReference$25$Delimiter(), optional);
 		}
 	}
 
@@ -354,8 +354,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$28$Delimiter(), optional);
 		}
 	}
 
@@ -378,8 +378,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getCrossReference$30$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "hiddenTokens", true, false, getElement(), getCrossReference$30$Delimiter(), optional);
 		}
 	}
 
@@ -390,8 +390,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter(), optional);
 		}
 	}
 
@@ -414,8 +414,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractMetamodelDeclarationConsumer, "metamodelDeclarations", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractMetamodelDeclarationConsumer, "metamodelDeclarations", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -438,8 +438,8 @@ public final class XtextGrammarConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractRuleConsumer, "rules", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractRuleConsumer, "rules", true, false, false, getElement(), optional);
 		}
 	}
 

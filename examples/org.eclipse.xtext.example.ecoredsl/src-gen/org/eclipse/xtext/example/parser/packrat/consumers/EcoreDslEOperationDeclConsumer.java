@@ -189,8 +189,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -226,8 +226,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "unique", false, true, getKeyword$15$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "unique", false, true, getKeyword$15$Delimiter(), optional);
 		}
 	}
 
@@ -250,8 +250,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "ordered", false, true, getKeyword$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "ordered", false, true, getKeyword$17$Delimiter(), optional);
 		}
 	}
 
@@ -262,8 +262,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter(), optional);
 		}
 	}
 
@@ -299,8 +299,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericType", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericType", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -311,8 +311,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter(), optional);
 		}
 	}
 
@@ -335,8 +335,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$24$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$24$Delimiter(), optional);
 		}
 	}
 
@@ -362,8 +362,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$28$Delimiter(), optional);
 		}
 	}
 
@@ -386,8 +386,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -411,8 +411,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter(), optional);
 		}
 	}
 
@@ -435,8 +435,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eTypeParameterDeclConsumer, "eTypeParameters", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -447,8 +447,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$35$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$35$Delimiter(), optional);
 		}
 	}
 
@@ -459,8 +459,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$36$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$36$Delimiter(), optional);
 		}
 	}
 
@@ -496,8 +496,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -521,8 +521,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$41$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$41$Delimiter(), optional);
 		}
 	}
 
@@ -545,8 +545,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eParameterDeclConsumer, "eParameters", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -557,8 +557,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$44$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$44$Delimiter(), optional);
 		}
 	}
 
@@ -583,8 +583,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$47$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$47$Delimiter(), optional);
 		}
 	}
 
@@ -607,8 +607,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -632,8 +632,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$51$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$51$Delimiter(), optional);
 		}
 	}
 
@@ -656,8 +656,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eGenericTypeReferenceDeclConsumer, "eGenericExceptions", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -668,8 +668,8 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$54$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$54$Delimiter(), optional);
 		}
 	}
 

@@ -77,8 +77,8 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -101,8 +101,8 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(wsConsumer, "spaces", true, false, getElement(), getRuleCall$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(wsConsumer, "spaces", true, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 
@@ -113,8 +113,8 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -137,8 +137,8 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(wsConsumer, "spaces", true, false, getElement(), getRuleCall$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(wsConsumer, "spaces", true, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 
@@ -161,8 +161,8 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "valid", false, true, getKeyword$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "valid", false, true, getKeyword$12$Delimiter(), optional);
 		}
 	}
 

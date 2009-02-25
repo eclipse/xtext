@@ -91,8 +91,8 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "metamodel", false, false, getElement(), getCrossReference$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "metamodel", false, false, getElement(), getCrossReference$4$Delimiter(), optional);
 		}
 	}
 
@@ -103,8 +103,8 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -127,8 +127,8 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "type", false, false, getElement(), getCrossReference$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "type", false, false, getElement(), getCrossReference$8$Delimiter(), optional);
 		}
 	}
 

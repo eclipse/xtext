@@ -64,8 +64,8 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
@@ -90,8 +90,8 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(testRequiredConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testRequiredConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -102,8 +102,8 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(testOptionalConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testOptionalConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(testListConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testListConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

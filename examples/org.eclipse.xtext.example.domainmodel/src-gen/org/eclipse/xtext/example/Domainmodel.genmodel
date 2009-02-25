@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.example.domainmodel/src-gen" forceOverwrite="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#/"/>
+    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//File"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//File"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//File/imports"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//File/imports"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//File/namedElements"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//File/namedElements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Import"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Import"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Import/importURI"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Import/importURI"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//NamedElement"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//NamedElement"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//NamedElement/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//NamedElement/name"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Package"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Package"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Package/namedElements"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Package/namedElements"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Type"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Type"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//DataType"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//DataType"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/superType"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/superType"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/features"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/features"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Feature"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Feature"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//StructuralFeature"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//StructuralFeature"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Attribute"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Attribute"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Reference"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Reference"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Reference/opposite"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Reference/opposite"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation/params"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation/params"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Parameter"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Parameter"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypedElement"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypedElement"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypedElement/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypedElement/name"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypedElement/type"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypedElement/type"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypeRef"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypeRef"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypeRef/referenced"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//TypeRef/referenced"/>
       </genFeatures>
     </genClasses>
   </genPackages>

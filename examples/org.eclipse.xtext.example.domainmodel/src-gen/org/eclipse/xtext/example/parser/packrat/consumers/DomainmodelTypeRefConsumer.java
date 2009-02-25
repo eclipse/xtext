@@ -48,8 +48,8 @@ public final class DomainmodelTypeRefConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "referenced", false, false, getElement(), getCrossReference$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "referenced", false, false, getElement(), getCrossReference$2$Delimiter(), optional);
 		}
 	}
 

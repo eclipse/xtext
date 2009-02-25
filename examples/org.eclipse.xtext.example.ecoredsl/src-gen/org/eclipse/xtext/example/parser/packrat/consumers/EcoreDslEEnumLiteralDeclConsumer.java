@@ -102,8 +102,8 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eAnnotationDeclConsumer, "eAnnotations", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -126,8 +126,8 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -151,8 +151,8 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -175,8 +175,8 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "value", false, false, getElement(), getRuleCall$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "value", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
 		}
 	}
 
@@ -199,8 +199,8 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "literal", false, false, getElement(), getRuleCall$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "literal", false, false, getElement(), getRuleCall$14$Delimiter(), optional);
 		}
 	}
 
@@ -211,8 +211,8 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$15$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$15$Delimiter(), optional);
 		}
 	}
 

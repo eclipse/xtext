@@ -46,8 +46,8 @@ public final class TwoContextsTestLanguageMainModelConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(anElementConsumer, "elements", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(anElementConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 

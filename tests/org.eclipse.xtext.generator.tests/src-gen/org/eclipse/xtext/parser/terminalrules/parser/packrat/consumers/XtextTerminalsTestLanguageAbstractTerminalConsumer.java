@@ -61,8 +61,8 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(keywordConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(keywordConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -73,8 +73,8 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -85,8 +85,8 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -97,8 +97,8 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(crossReferenceConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(crossReferenceConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

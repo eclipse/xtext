@@ -57,8 +57,8 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(trickyG1Consumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(trickyG1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -81,8 +81,8 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "val", false, false, getElement(), getRuleCall$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "val", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 

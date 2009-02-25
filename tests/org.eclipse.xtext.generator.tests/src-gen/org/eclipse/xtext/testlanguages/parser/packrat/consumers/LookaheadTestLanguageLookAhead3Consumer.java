@@ -68,8 +68,8 @@ public final class LookaheadTestLanguageLookAhead3Consumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -80,8 +80,8 @@ public final class LookaheadTestLanguageLookAhead3Consumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -104,8 +104,8 @@ public final class LookaheadTestLanguageLookAhead3Consumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "x", false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "x", false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -128,8 +128,8 @@ public final class LookaheadTestLanguageLookAhead3Consumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(lookAhead4Consumer, "z", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(lookAhead4Consumer, "z", false, false, false, getElement(), optional);
 		}
 	}
 

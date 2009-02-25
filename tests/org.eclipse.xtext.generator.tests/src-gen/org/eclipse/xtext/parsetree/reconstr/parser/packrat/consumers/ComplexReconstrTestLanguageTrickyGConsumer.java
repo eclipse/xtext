@@ -56,8 +56,8 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
@@ -80,8 +80,8 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(trickyG1Consumer, "tree", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(trickyG1Consumer, "tree", false, false, false, getElement(), optional);
 		}
 	}
 

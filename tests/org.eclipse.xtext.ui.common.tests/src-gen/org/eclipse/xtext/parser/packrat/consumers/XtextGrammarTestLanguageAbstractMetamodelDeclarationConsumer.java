@@ -51,8 +51,8 @@ public final class XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(generatedMetamodelConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(generatedMetamodelConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(referencedMetamodelConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(referencedMetamodelConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

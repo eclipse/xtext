@@ -68,8 +68,8 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -92,8 +92,8 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "import", false, false, getElement(), getCrossReference$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "import", false, false, getElement(), getCrossReference$5$Delimiter(), optional);
 		}
 	}
 
@@ -116,8 +116,8 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(fragmentConsumer, "impFrag", false, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(fragmentConsumer, "impFrag", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 

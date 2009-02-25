@@ -63,8 +63,8 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(groupConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(groupConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -89,7 +89,7 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), true);
 			return SUCCESS;
 		}
@@ -102,8 +102,8 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -126,8 +126,8 @@ public final class XtextTerminalsTestLanguageAlternativesConsumer extends NonTer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(groupConsumer, "groups", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(groupConsumer, "groups", true, false, false, getElement(), optional);
 		}
 	}
 

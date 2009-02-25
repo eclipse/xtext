@@ -48,8 +48,8 @@ public final class TestLanguageTerminalRuleConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "stringFeature", false, false, getElement(), getRuleCall$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "stringFeature", false, false, getElement(), getRuleCall$2$Delimiter(), optional);
 		}
 	}
 

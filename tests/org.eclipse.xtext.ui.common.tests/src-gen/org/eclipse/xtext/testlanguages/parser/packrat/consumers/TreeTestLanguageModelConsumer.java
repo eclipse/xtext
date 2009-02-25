@@ -46,8 +46,8 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nodeConsumer, "children", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nodeConsumer, "children", true, false, false, getElement(), optional);
 		}
 	}
 

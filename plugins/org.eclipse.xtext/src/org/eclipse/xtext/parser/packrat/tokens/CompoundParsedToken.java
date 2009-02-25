@@ -13,10 +13,10 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CompoundParsedToken extends ParsedToken {
+public abstract class CompoundParsedToken extends ParsedToken {
 
-	public CompoundParsedToken(int offset, AbstractElement grammarElement) {
-		super(offset, 0, grammarElement);
+	protected CompoundParsedToken(int offset, AbstractElement grammarElement, IParsedTokenSource origin, boolean optional) {
+		super(offset, 0, grammarElement, origin, optional);
 	}
 
 	@Override
