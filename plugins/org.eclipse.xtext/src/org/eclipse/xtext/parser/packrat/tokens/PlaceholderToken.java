@@ -21,7 +21,7 @@ public class PlaceholderToken extends ParsedToken {
 
 	@Override
 	public void accept(IParsedTokenVisitor visitor) {
-		// for now nothing to do
+		visitor.visitPlaceholder(this);
 	}
 
 }
