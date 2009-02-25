@@ -395,7 +395,7 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE consumerClassBody FOR AbstractElement-»
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 «EXPAND doConsumeBody-»
 		}
 «ENDDEFINE»
@@ -443,7 +443,7 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody FOR Keyword-»
-			return consumeKeyword(getElement(), null, false, false, get«delimiterFieldName().toFirstUpper()»());
+			return consumeKeyword(getElement(), null, false, false, get«delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody FOR RuleCall-»
@@ -455,14 +455,14 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(RuleCall call) FOR LexerRule-»
-			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(RuleCall call) FOR ParserRule-»
 «IF !terminal-»
-			return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getElement());
+			return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getElement(), optional);
 «ELSE-»
-			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDIF-»
 «ENDDEFINE»
 
@@ -472,7 +472,7 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE consumerClassBody(Assignment assignment) FOR AbstractElement-»
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 «EXPAND doConsumeBody(assignment)-»
 		}
 «ENDDEFINE»
@@ -507,7 +507,7 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment) FOR Keyword-»
-			return consumeKeyword(getElement(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»());
+			return consumeKeyword(getElement(), "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», get«delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment) FOR RuleCall-»
@@ -519,14 +519,14 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR LexerRule-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR ParserRule-»
 «IF !terminal-»
-			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement());
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
 «ELSE-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»());
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDIF-»
 «ENDDEFINE»
 
@@ -539,14 +539,14 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»());
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
 «IF !terminal-»
-			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement());
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
 «ELSE-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»());
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDIF-»
 «ENDDEFINE»
 
