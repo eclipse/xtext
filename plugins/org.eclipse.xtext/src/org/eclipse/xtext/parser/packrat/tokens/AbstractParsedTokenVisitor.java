@@ -68,7 +68,7 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 	}
 
 	public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
-		visitAbstractParsedToken(token);
+		visitAbstractParsedTokenEnd(token);
 	}
 
 	public void visitParsedTerminal(ParsedTerminal token) {

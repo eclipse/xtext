@@ -15,8 +15,8 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class AssignmentToken extends CompoundParsedToken {
 
-	public AssignmentToken(int offset, Assignment grammarElement) {
-		super(offset, grammarElement);
+	public AssignmentToken(int offset, Assignment grammarElement, IParsedTokenSource origin, boolean optional) {
+		super(offset, grammarElement, origin, optional);
 	}
 
 	@Override

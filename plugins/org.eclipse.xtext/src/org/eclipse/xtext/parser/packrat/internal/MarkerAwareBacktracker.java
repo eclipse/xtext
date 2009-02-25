@@ -11,9 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.parser.packrat.IBacktracker;
 import org.eclipse.xtext.parser.packrat.internal.Marker.IMarkerVisitor;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
@@ -104,9 +102,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					lookup = false;
 				else {
 					stackSize--;
-					if (GrammarUtil.isOptionalCardinality(token.getGrammarElement())) {
-						result = true;
-					}
+					result = token.isOptional();
 				}
 			}
 		}
@@ -118,14 +114,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					lookup = false;
 				else {
 					stackSize--;
-					EObject grammarElement = token.getGrammarElement();
-					if (grammarElement instanceof AbstractElement) {
-						if (GrammarUtil.isOptionalCardinality((AbstractElement) grammarElement)) {
-							result = true;
-						}
-					} else {
-						lookup = false;
-					}
+					result = token.isOptional();
 				}
 			}
 		}
@@ -147,10 +136,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		@Override
 		public void visitParsedTerminal(ParsedTerminal token) {
 			if (lookup && !token.isHidden() && !token.isSkipped() && (token.getGrammarElement() instanceof AbstractElement)) {
-				if (GrammarUtil.isOptionalCardinality((AbstractElement) token.getGrammarElement())) {
-					result = true;
-					lookup = false;
-				}
+				result = token.isOptional();
 			}
 		}
 

@@ -15,8 +15,8 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class GroupToken extends CompoundParsedToken {
 
-	public GroupToken(int offset, Group group) {
-		super(offset, group);
+	public GroupToken(int offset, Group group, IParsedTokenSource origin, boolean optional) {
+		super(offset, group, origin, optional);
 	}
 
 	@Override

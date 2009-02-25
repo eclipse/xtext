@@ -18,8 +18,8 @@ public class ParsedTerminal extends ParsedToken {
 
 	private final boolean hidden;
 
-	public ParsedTerminal(int offset, int length, EObject grammarElement, boolean hidden) {
-		super(offset, length, grammarElement);
+	public ParsedTerminal(int offset, int length, EObject grammarElement, boolean hidden, IParsedTokenSource origin, boolean optional) {
+		super(offset, length, grammarElement, origin, optional);
 		this.hidden = hidden;
 	}
 

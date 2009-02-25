@@ -15,8 +15,8 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class PlaceholderToken extends ParsedToken {
 
-	public PlaceholderToken(int offset, EObject grammarElement) {
-		super(offset, 0, grammarElement);
+	public PlaceholderToken(int offset, EObject grammarElement, IParsedTokenSource origin, boolean optional) {
+		super(offset, 0, grammarElement, origin, optional);
 	}
 
 	@Override

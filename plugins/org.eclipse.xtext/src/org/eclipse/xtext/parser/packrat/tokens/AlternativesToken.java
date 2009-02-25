@@ -15,8 +15,8 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  */
 public class AlternativesToken extends CompoundParsedToken {
 
-	public AlternativesToken(int offset, Alternatives alternatives) {
-		super(offset, alternatives);
+	public AlternativesToken(int offset, Alternatives alternatives, IParsedTokenSource origin, boolean optional) {
+		super(offset, alternatives, origin, optional);
 	}
 
 	@Override

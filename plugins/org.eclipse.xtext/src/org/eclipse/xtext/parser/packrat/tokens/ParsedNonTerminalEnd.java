@@ -12,7 +12,7 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ParsedNonTerminalEnd extends AbstractParsedToken {
+public class ParsedNonTerminalEnd extends AbstractParsedToken.End {
 
 	private final String feature;
 	private final boolean isMany;
@@ -20,7 +20,7 @@ public class ParsedNonTerminalEnd extends AbstractParsedToken {
 	private final boolean isBoolean;
 
 	public ParsedNonTerminalEnd(int offset, String feature, boolean isMany, boolean isDatatype, boolean isBoolean) {
-		super(offset, 0);
+		super(offset);
 		this.feature = feature;
 		this.isMany = isMany;
 		this.isDatatype = isDatatype;
@@ -47,5 +47,5 @@ public class ParsedNonTerminalEnd extends AbstractParsedToken {
 	public boolean isBoolean() {
 		return isBoolean;
 	}
-	
+
 }

@@ -14,11 +14,11 @@ import org.eclipse.xtext.parser.packrat.IParsedTokenVisitor;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ErrorToken extends ParsedToken {
-	
-	private String errorMessage;
-	
+
+	private final String errorMessage;
+
 	public ErrorToken(int offset, int length, AbstractElement grammarElement, String errorMessage) {
-		super(offset, length, grammarElement);
+		super(offset, length, grammarElement, null, false);
 		this.errorMessage = errorMessage;
 	}
 
@@ -40,5 +40,5 @@ public class ErrorToken extends ParsedToken {
 	public String toString() {
 		return super.toString() + " message: '" + errorMessage + "'";
 	}
-	
+
 }

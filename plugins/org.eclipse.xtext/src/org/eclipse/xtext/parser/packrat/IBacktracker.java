@@ -13,6 +13,7 @@ package org.eclipse.xtext.parser.packrat;
 public interface IBacktracker {
 
 	interface IBacktrackingResult extends IBacktracker {
+
 		boolean isSuccessful();
 
 		void commit();

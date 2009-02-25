@@ -18,7 +18,7 @@ public class FakedToken extends ParsedToken {
 	private final ParsedToken fake;
 
 	public FakedToken(int offset, int length, EObject grammarElement, ParsedToken fake) {
-		super(offset, length, grammarElement);
+		super(offset, length, grammarElement, null, false);
 		this.fake = fake;
 	}
 
@@ -30,5 +30,5 @@ public class FakedToken extends ParsedToken {
 	public ParsedToken getFake() {
 		return fake;
 	}
-	
+
 }
