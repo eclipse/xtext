@@ -94,8 +94,8 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -106,8 +106,8 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(trickyA1Consumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(trickyA1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -130,8 +130,8 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -168,7 +168,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), false);
 			return SUCCESS;
 		}
@@ -181,8 +181,8 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
@@ -206,7 +206,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), false);
 			return SUCCESS;
 		}
@@ -219,8 +219,8 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter(), optional);
 		}
 	}
 
@@ -243,8 +243,8 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "name", true, false, getElement(), getRuleCall$19$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "name", true, false, getElement(), getRuleCall$19$Delimiter(), optional);
 		}
 	}
 

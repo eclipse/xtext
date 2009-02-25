@@ -46,8 +46,8 @@ public final class ConcreteTestLanguageCallOverridenParserRuleConsumer extends N
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractCallOverridenParserRuleConsumer, "call", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractCallOverridenParserRuleConsumer, "call", false, false, false, getElement(), optional);
 		}
 	}
 

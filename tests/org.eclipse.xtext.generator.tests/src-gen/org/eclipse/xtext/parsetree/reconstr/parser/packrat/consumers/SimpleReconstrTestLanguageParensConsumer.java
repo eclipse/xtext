@@ -66,8 +66,8 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -78,8 +78,8 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(opConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(opConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -90,8 +90,8 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "em", false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "em", false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 

@@ -117,8 +117,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "idValue", false, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "idValue", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -141,8 +141,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "intValue", false, false, getElement(), getRuleCall$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "intValue", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 
@@ -165,8 +165,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "stringValue", false, false, getElement(), getRuleCall$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "stringValue", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
 		}
 	}
 
@@ -189,8 +189,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getElement(), getRuleCall$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getElement(), getRuleCall$14$Delimiter(), optional);
 		}
 	}
 
@@ -213,8 +213,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getElement(), getRuleCall$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getElement(), getRuleCall$16$Delimiter(), optional);
 		}
 	}
 
@@ -237,8 +237,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(wsConsumer, "wsValue", false, false, getElement(), getRuleCall$18$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(wsConsumer, "wsValue", false, false, getElement(), getRuleCall$18$Delimiter(), optional);
 		}
 	}
 
@@ -261,8 +261,8 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getElement(), getRuleCall$20$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getElement(), getRuleCall$20$Delimiter(), optional);
 		}
 	}
 

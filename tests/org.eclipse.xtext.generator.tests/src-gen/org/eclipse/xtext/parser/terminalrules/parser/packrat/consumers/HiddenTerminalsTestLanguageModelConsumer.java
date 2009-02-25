@@ -66,8 +66,8 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(withoutHiddensConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(withoutHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -78,8 +78,8 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(withHiddensConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(withHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -90,8 +90,8 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(overridingHiddensConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(overridingHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -102,8 +102,8 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(inheritingHiddensConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(inheritingHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(datatypeHiddensConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(datatypeHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

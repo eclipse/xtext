@@ -51,8 +51,8 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(objectRefConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(objectRefConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(createdObjectConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(createdObjectConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

@@ -107,8 +107,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nestedModelIdConsumer, "id", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedModelIdConsumer, "id", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -132,8 +132,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -156,8 +156,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(fractionConsumer, "value", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(fractionConsumer, "value", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -181,8 +181,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter(), optional);
 		}
 	}
 
@@ -205,8 +205,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(vectorConsumer, "vector", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(vectorConsumer, "vector", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -230,8 +230,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter(), optional);
 		}
 	}
 
@@ -254,8 +254,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(dotsConsumer, "dots", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(dotsConsumer, "dots", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -266,8 +266,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$19$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$19$Delimiter(), optional);
 		}
 	}
 

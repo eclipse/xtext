@@ -51,8 +51,8 @@ public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(kindConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(kindConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class ReferenceGrammarPersonConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(erwachsenerConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(erwachsenerConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

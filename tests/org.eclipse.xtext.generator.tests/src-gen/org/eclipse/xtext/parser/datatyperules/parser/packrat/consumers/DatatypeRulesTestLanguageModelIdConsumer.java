@@ -60,8 +60,8 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$3$Delimiter(), optional);
 		}
 	}
 
@@ -72,8 +72,8 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -84,8 +84,8 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 

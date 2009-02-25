@@ -48,8 +48,8 @@ public final class XtextGrammarTestLanguageRuleCallConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "rule", false, false, getElement(), getCrossReference$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "rule", false, false, getElement(), getCrossReference$2$Delimiter(), optional);
 		}
 	}
 

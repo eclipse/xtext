@@ -110,8 +110,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(objectNewConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(objectNewConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -122,8 +122,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(objectCopyConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(objectCopyConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -146,8 +146,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 
@@ -173,8 +173,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 
@@ -210,8 +210,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(monoSingleAssignmentConsumer, "assignments", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(monoSingleAssignmentConsumer, "assignments", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -234,8 +234,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(monoListAssignmentConsumer, "assignments", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(monoListAssignmentConsumer, "assignments", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -258,8 +258,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(migrationConsumer, "leftMig", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(migrationConsumer, "leftMig", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -270,8 +270,8 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$19$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$19$Delimiter(), optional);
 		}
 	}
 

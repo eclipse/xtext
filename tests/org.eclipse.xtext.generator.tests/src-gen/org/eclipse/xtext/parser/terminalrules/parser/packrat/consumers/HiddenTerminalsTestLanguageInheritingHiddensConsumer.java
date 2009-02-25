@@ -87,8 +87,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -99,8 +99,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -111,8 +111,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -148,8 +148,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -172,8 +172,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(hidingHiddensConsumer, "hidingCalled", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(hidingHiddensConsumer, "hidingCalled", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -184,8 +184,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
 		}
 	}
 
@@ -208,8 +208,8 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "valid", false, true, getKeyword$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "valid", false, true, getKeyword$16$Delimiter(), optional);
 		}
 	}
 

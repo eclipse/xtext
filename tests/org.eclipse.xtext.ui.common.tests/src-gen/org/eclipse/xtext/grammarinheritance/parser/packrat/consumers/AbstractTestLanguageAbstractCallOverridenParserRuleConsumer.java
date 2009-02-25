@@ -56,8 +56,8 @@ public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer e
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
@@ -80,8 +80,8 @@ public final class AbstractTestLanguageAbstractCallOverridenParserRuleConsumer e
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(overridableParserRuleConsumer, "elements", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(overridableParserRuleConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 

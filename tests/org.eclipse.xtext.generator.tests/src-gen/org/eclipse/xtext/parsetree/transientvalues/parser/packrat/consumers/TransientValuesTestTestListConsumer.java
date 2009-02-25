@@ -58,8 +58,8 @@ public final class TransientValuesTestTestListConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
@@ -82,8 +82,8 @@ public final class TransientValuesTestTestListConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "item", true, false, getElement(), getRuleCall$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "item", true, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 

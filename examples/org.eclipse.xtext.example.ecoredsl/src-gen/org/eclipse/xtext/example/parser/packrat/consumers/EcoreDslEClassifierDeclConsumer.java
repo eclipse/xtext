@@ -51,8 +51,8 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eClassDeclConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eClassDeclConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eDataTypeDeclConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eDataTypeDeclConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

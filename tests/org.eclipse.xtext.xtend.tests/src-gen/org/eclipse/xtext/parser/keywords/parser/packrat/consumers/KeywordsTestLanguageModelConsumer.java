@@ -82,8 +82,8 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "first", false, true, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "first", false, true, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -106,8 +106,8 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "second", false, true, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "second", false, true, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -130,8 +130,8 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "third", false, true, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "third", false, true, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -154,8 +154,8 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "forth", false, true, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "forth", false, true, getKeyword$11$Delimiter(), optional);
 		}
 	}
 

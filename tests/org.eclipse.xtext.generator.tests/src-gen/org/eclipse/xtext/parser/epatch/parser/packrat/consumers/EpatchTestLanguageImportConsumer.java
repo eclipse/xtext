@@ -56,8 +56,8 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(modelImportConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(modelImportConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -68,8 +68,8 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(javaImportConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(javaImportConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -80,8 +80,8 @@ public final class EpatchTestLanguageImportConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(extensionImportConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(extensionImportConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

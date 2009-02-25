@@ -51,8 +51,8 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(javaExecutableConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(javaExecutableConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(expressionExecutableConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(expressionExecutableConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

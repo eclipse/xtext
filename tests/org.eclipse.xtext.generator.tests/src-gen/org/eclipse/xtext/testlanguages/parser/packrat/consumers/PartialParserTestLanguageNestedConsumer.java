@@ -66,8 +66,8 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -78,8 +78,8 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -102,8 +102,8 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(someContainerConsumer, "nested", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(someContainerConsumer, "nested", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 

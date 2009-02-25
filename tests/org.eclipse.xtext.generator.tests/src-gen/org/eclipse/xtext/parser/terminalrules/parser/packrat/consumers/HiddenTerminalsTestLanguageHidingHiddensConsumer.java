@@ -66,8 +66,8 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -90,8 +90,8 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(wsConsumer, "space", false, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(wsConsumer, "space", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(inheritingHiddensCallConsumer, "called", false, false, false, getElement(), optional);
 		}
 	}
 

@@ -77,8 +77,8 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -89,8 +89,8 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -113,8 +113,8 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -137,8 +137,8 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "age", false, false, getElement(), getRuleCall$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "age", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 
@@ -149,8 +149,8 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 

@@ -91,8 +91,8 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "feature", false, false, getElement(), getRuleCall$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "feature", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 
@@ -129,8 +129,8 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "operator", false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -141,8 +141,8 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "operator", false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -153,8 +153,8 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "operator", false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -177,8 +177,8 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, false, getElement(), optional);
 		}
 	}
 

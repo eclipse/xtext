@@ -223,8 +223,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -263,8 +263,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "value", false, false, getKeyword$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "value", false, false, getKeyword$16$Delimiter(), optional);
 		}
 	}
 
@@ -275,8 +275,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$17$Delimiter(), optional);
 		}
 	}
 
@@ -287,8 +287,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nestedDatatypeConsumer, "value", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedDatatypeConsumer, "value", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -299,8 +299,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(datatypeConsumer, "value", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(datatypeConsumer, "value", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -311,8 +311,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "value", false, false, getElement(), getRuleCall$20$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "value", false, false, getElement(), getRuleCall$20$Delimiter(), optional);
 		}
 	}
 
@@ -336,8 +336,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter(), optional);
 		}
 	}
 
@@ -376,8 +376,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "multiValue", true, false, getKeyword$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "multiValue", true, false, getKeyword$28$Delimiter(), optional);
 		}
 	}
 
@@ -388,8 +388,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "multiValue", true, false, getElement(), getRuleCall$29$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "multiValue", true, false, getElement(), getRuleCall$29$Delimiter(), optional);
 		}
 	}
 
@@ -400,8 +400,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nestedDatatypeConsumer, "multiValue", true, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedDatatypeConsumer, "multiValue", true, true, false, getElement(), optional);
 		}
 	}
 
@@ -412,8 +412,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(datatypeConsumer, "multiValue", true, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(datatypeConsumer, "multiValue", true, true, false, getElement(), optional);
 		}
 	}
 
@@ -424,8 +424,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "multiValue", true, false, getElement(), getRuleCall$32$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "multiValue", true, false, getElement(), getRuleCall$32$Delimiter(), optional);
 		}
 	}
 
@@ -449,8 +449,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$34$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$34$Delimiter(), optional);
 		}
 	}
 
@@ -473,8 +473,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$36$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$36$Delimiter(), optional);
 		}
 	}
 
@@ -498,8 +498,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$38$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$38$Delimiter(), optional);
 		}
 	}
 
@@ -522,8 +522,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "multiValue", true, false, getElement(), getRuleCall$40$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "multiValue", true, false, getElement(), getRuleCall$40$Delimiter(), optional);
 		}
 	}
 
@@ -547,8 +547,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$42$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$42$Delimiter(), optional);
 		}
 	}
 
@@ -571,8 +571,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(datatypeConsumer, "value", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(datatypeConsumer, "value", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -596,8 +596,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$46$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$46$Delimiter(), optional);
 		}
 	}
 
@@ -620,8 +620,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(datatypeConsumer, "multiValue", true, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(datatypeConsumer, "multiValue", true, true, false, getElement(), optional);
 		}
 	}
 
@@ -645,8 +645,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$50$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$50$Delimiter(), optional);
 		}
 	}
 
@@ -669,8 +669,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nestedDatatypeConsumer, "value", false, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedDatatypeConsumer, "value", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -694,8 +694,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$54$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$54$Delimiter(), optional);
 		}
 	}
 
@@ -718,8 +718,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(nestedDatatypeConsumer, "multiValue", true, true, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedDatatypeConsumer, "multiValue", true, true, false, getElement(), optional);
 		}
 	}
 
@@ -744,8 +744,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$59$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$59$Delimiter(), optional);
 		}
 	}
 
@@ -768,8 +768,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(childConsumer, "children", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(childConsumer, "children", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -793,8 +793,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$63$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$63$Delimiter(), optional);
 		}
 	}
 
@@ -830,8 +830,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "ref", false, false, getElement(), getCrossReference$66$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "ref", false, false, getElement(), getCrossReference$66$Delimiter(), optional);
 		}
 	}
 
@@ -842,8 +842,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getCrossReference$68$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getCrossReference$68$Delimiter(), optional);
 		}
 	}
 

@@ -67,8 +67,8 @@ public final class ConcreteTestLanguageSubrule2Consumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -91,8 +91,8 @@ public final class ConcreteTestLanguageSubrule2Consumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
@@ -115,8 +115,8 @@ public final class ConcreteTestLanguageSubrule2Consumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "sub2", false, false, getElement(), getRuleCall$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "sub2", false, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 

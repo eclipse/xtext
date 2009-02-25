@@ -76,8 +76,8 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "wert", false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -88,8 +88,8 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "wert", false, false, getKeyword$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -100,8 +100,8 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "wert", false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -112,8 +112,8 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "wert", false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 

@@ -46,8 +46,8 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(greetingConsumer, "child", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(greetingConsumer, "child", false, false, false, getElement(), optional);
 		}
 	}
 

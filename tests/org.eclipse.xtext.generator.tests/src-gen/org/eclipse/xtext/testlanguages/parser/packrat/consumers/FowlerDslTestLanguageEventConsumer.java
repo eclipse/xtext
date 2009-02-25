@@ -79,8 +79,8 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "resetting", false, true, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "resetting", false, true, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -103,8 +103,8 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -127,8 +127,8 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "code", false, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "code", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 

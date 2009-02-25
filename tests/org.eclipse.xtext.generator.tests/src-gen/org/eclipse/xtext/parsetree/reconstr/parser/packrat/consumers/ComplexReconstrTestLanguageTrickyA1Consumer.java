@@ -48,8 +48,8 @@ public final class ComplexReconstrTestLanguageTrickyA1Consumer extends NonTermin
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$2$Delimiter(), optional);
 		}
 	}
 

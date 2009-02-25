@@ -68,8 +68,8 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -92,8 +92,8 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(ePackageDeclConsumer, "package", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ePackageDeclConsumer, "package", false, false, false, getElement(), optional);
 		}
 	}
 

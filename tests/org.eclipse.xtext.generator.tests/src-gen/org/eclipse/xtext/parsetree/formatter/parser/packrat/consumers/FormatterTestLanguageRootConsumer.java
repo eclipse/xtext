@@ -60,8 +60,8 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
@@ -85,8 +85,8 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(testLinewrapConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testLinewrapConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -97,8 +97,8 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(testIndentationConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testIndentationConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

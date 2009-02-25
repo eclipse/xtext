@@ -85,8 +85,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -109,8 +109,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(executableConsumer, "first", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(executableConsumer, "first", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -147,8 +147,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -171,8 +171,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(executableConsumer, "asOp", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(executableConsumer, "asOp", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -196,8 +196,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
@@ -220,8 +220,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(executableConsumer, "eachOp", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(executableConsumer, "eachOp", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -232,8 +232,8 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter(), optional);
 		}
 	}
 

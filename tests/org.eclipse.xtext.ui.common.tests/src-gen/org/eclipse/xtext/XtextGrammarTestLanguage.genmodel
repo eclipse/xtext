@@ -1,176 +1,176 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.ui.common.tests/src-gen" forceOverwrite="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="XtextTest" basePackage="org.eclipse.xtext" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#/"/>
+    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/abstract"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/abstract"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/name"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/superGrammar"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/superGrammar"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/definesHiddenTokens"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/definesHiddenTokens"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/hiddenTokens"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/hiddenTokens"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/metamodelDeclarations"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/metamodelDeclarations"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/rules"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Grammar/rules"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractRule"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractRule"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractRule/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractRule/name"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractRule/type"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractRule/type"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration/ePackage"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration/ePackage"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration/alias"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration/alias"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//GeneratedMetamodel"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//GeneratedMetamodel"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//GeneratedMetamodel/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//GeneratedMetamodel/name"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ReferencedMetamodel"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ReferencedMetamodel"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//LexerRule"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//LexerRule"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//LexerRule/body"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/definesHiddenTokens"/>
-      </genFeatures>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/hiddenTokens"/>
-      </genFeatures>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/alternatives"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/terminal"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//LexerRule/body"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//TypeRef"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//TypeRef/metamodel"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/definesHiddenTokens"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//TypeRef/type"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractElement"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractElement/cardinality"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment/feature"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment/operator"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/hiddenTokens"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment/terminal"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action/typeName"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/alternatives"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action/feature"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action/operator"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//ParserRule/terminal"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractNegatedToken"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractNegatedToken/terminal"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//NegatedToken"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//UpToToken"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Wildcard"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Wildcard/isWildcard"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CrossReference"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CrossReference/type"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//TypeRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//TypeRef/metamodel"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CrossReference/rule"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//TypeRef/type"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Keyword"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractElement"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Keyword/value"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractElement/cardinality"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//RuleCall"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment/feature"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment/operator"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Assignment/terminal"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action/typeName"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action/feature"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Action/operator"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractNegatedToken"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//AbstractNegatedToken/terminal"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//NegatedToken"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//UpToToken"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Wildcard"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Wildcard/isWildcard"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CrossReference"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CrossReference/type"/>
+      </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//RuleCall/rule"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CrossReference/rule"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Alternatives"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Alternatives/groups"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Keyword"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Keyword/value"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Group"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Group/abstractTokens"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//RuleCall"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//RuleCall/rule"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CharacterRange"/>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Alternatives"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CharacterRange/left"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Alternatives/groups"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Group"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//Group/abstractTokens"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CharacterRange"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CharacterRange/left"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/svenefftinge/Documents/workspace/ws-oaw5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CharacterRange/right"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/XtextGrammarTestLanguage.ecore#//CharacterRange/right"/>
       </genFeatures>
     </genClasses>
   </genPackages>

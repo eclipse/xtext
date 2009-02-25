@@ -116,8 +116,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -128,8 +128,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -166,8 +166,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "name", false, false, getKeyword$13$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "name", false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
@@ -178,8 +178,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "name", false, false, getElement(), getRuleCall$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "name", false, false, getElement(), getRuleCall$14$Delimiter(), optional);
 		}
 	}
 
@@ -190,8 +190,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$15$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$15$Delimiter(), optional);
 		}
 	}
 
@@ -214,8 +214,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "mutter", false, false, getElement(), getCrossReference$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "mutter", false, false, getElement(), getCrossReference$17$Delimiter(), optional);
 		}
 	}
 
@@ -238,8 +238,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "vater", false, false, getElement(), getCrossReference$20$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "vater", false, false, getElement(), getCrossReference$20$Delimiter(), optional);
 		}
 	}
 
@@ -262,8 +262,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "kinder", true, false, getElement(), getCrossReference$23$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "kinder", true, false, getElement(), getCrossReference$23$Delimiter(), optional);
 		}
 	}
 
@@ -287,8 +287,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$26$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$26$Delimiter(), optional);
 		}
 	}
 
@@ -311,8 +311,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "kinder", true, false, getElement(), getCrossReference$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "kinder", true, false, getElement(), getCrossReference$28$Delimiter(), optional);
 		}
 	}
 
@@ -323,8 +323,8 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$30$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$30$Delimiter(), optional);
 		}
 	}
 

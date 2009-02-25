@@ -48,8 +48,8 @@ public final class XtextTerminalsTestLanguageKeywordConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$2$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$2$Delimiter(), optional);
 		}
 	}
 

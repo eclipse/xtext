@@ -85,8 +85,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -109,8 +109,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eventConsumer, "events", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eventConsumer, "events", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -121,8 +121,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -133,8 +133,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 
@@ -157,8 +157,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(commandConsumer, "commands", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(commandConsumer, "commands", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -169,8 +169,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
 		}
 	}
 
@@ -193,8 +193,8 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(stateConsumer, "states", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(stateConsumer, "states", true, false, false, getElement(), optional);
 		}
 	}
 

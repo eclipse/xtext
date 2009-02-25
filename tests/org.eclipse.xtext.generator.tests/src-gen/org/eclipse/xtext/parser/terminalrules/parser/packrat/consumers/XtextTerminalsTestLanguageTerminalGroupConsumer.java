@@ -57,8 +57,8 @@ public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(terminalTokenConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(terminalTokenConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -82,7 +82,7 @@ public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
+		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), true);
 			return SUCCESS;
 		}
@@ -107,8 +107,8 @@ public final class XtextTerminalsTestLanguageTerminalGroupConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(terminalTokenConsumer, "abstractTokens", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(terminalTokenConsumer, "abstractTokens", true, false, false, getElement(), optional);
 		}
 	}
 

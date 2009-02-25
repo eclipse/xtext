@@ -87,8 +87,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -99,8 +99,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -111,8 +111,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
@@ -123,8 +123,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -147,8 +147,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(namedConsumer, "value", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(namedConsumer, "value", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -171,8 +171,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "referencedChildren", true, false, getElement(), getCrossReference$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "referencedChildren", true, false, getElement(), getCrossReference$14$Delimiter(), optional);
 		}
 	}
 
@@ -183,8 +183,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter(), optional);
 		}
 	}
 

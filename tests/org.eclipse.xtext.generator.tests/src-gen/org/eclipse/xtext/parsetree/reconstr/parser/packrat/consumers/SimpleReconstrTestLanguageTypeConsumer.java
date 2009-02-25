@@ -71,8 +71,8 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -95,8 +95,8 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -107,8 +107,8 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
@@ -131,8 +131,8 @@ public final class SimpleReconstrTestLanguageTypeConsumer extends NonTerminalCon
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getCrossReference$9$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getCrossReference$9$Delimiter(), optional);
 		}
 	}
 

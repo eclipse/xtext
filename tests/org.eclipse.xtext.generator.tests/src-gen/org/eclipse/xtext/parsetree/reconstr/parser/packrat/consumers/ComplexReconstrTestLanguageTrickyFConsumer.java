@@ -84,8 +84,8 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
@@ -121,8 +121,8 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$6$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -145,8 +145,8 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "type", true, false, getElement(), getRuleCall$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "type", true, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -182,8 +182,8 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", true, false, getElement(), getRuleCall$11$Delimiter(), optional);
 		}
 	}
 
@@ -206,8 +206,8 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "type", true, false, getElement(), getRuleCall$13$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "type", true, false, getElement(), getRuleCall$13$Delimiter(), optional);
 		}
 	}
 

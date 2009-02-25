@@ -51,8 +51,8 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(choiceRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(choiceRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(reducibleRuleConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(reducibleRuleConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

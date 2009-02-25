@@ -132,8 +132,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -156,8 +156,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
 		}
 	}
 
@@ -168,8 +168,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
@@ -180,8 +180,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
 		}
 	}
 
@@ -218,8 +218,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter(), optional);
 		}
 	}
 
@@ -242,8 +242,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "leftUri", false, false, getElement(), getRuleCall$19$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "leftUri", false, false, getElement(), getRuleCall$19$Delimiter(), optional);
 		}
 	}
 
@@ -266,8 +266,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(createdObjectConsumer, "leftRoot", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(createdObjectConsumer, "leftRoot", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -278,8 +278,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$22$Delimiter(), optional);
 		}
 	}
 
@@ -290,8 +290,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$23$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$23$Delimiter(), optional);
 		}
 	}
 
@@ -328,8 +328,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$26$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$26$Delimiter(), optional);
 		}
 	}
 
@@ -352,8 +352,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "rightUri", false, false, getElement(), getRuleCall$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "rightUri", false, false, getElement(), getRuleCall$28$Delimiter(), optional);
 		}
 	}
 
@@ -376,8 +376,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(createdObjectConsumer, "rightRoot", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(createdObjectConsumer, "rightRoot", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -388,8 +388,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$31$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$31$Delimiter(), optional);
 		}
 	}
 
@@ -400,8 +400,8 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$32$Delimiter(), optional);
 		}
 	}
 

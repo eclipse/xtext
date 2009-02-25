@@ -91,8 +91,8 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(assignmentConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(assignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -103,8 +103,8 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(actionConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(actionConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -115,8 +115,8 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractTerminalConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractTerminalConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -153,8 +153,8 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$10$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
@@ -165,8 +165,8 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$11$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 
@@ -177,8 +177,8 @@ public final class XtextGrammarTestLanguageAbstractTokenConsumer extends NonTerm
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$12$Delimiter(), optional);
 		}
 	}
 

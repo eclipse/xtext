@@ -61,8 +61,8 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(biSingleAssignmentConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(biSingleAssignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -73,8 +73,8 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(biListAssignmentConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(biListAssignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -85,8 +85,8 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(monoSingleAssignmentConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(monoSingleAssignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -97,8 +97,8 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(monoListAssignmentConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(monoListAssignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

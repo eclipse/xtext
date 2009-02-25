@@ -51,8 +51,8 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(childrenConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(childrenConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -63,8 +63,8 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(abstractChildrenConsumer, null, false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractChildrenConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 

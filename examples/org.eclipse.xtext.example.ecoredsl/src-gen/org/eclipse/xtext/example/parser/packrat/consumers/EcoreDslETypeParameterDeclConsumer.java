@@ -79,8 +79,8 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$3$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$3$Delimiter(), optional);
 		}
 	}
 
@@ -104,8 +104,8 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -128,8 +128,8 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(eGenericTypeDeclConsumer, "eBounds", true, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(eGenericTypeDeclConsumer, "eBounds", true, false, false, getElement(), optional);
 		}
 	}
 

@@ -133,8 +133,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$5$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
@@ -170,8 +170,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "refObject", false, false, getElement(), getCrossReference$8$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "refObject", false, false, getElement(), getCrossReference$8$Delimiter(), optional);
 		}
 	}
 
@@ -196,8 +196,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter(), optional);
 		}
 	}
 
@@ -220,8 +220,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "refFeature", false, false, getElement(), getRuleCall$14$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "refFeature", false, false, getElement(), getRuleCall$14$Delimiter(), optional);
 		}
 	}
 
@@ -246,8 +246,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter(), optional);
 		}
 	}
 
@@ -270,8 +270,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(intConsumer, "refIndex", false, false, getElement(), getRuleCall$19$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(intConsumer, "refIndex", false, false, getElement(), getRuleCall$19$Delimiter(), optional);
 		}
 	}
 
@@ -282,8 +282,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$20$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$20$Delimiter(), optional);
 		}
 	}
 
@@ -306,8 +306,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeNonTerminal(createdObjectConsumer, "newObject", false, false, false, getElement());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(createdObjectConsumer, "newObject", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -343,8 +343,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(idConsumer, "import", false, false, getElement(), getCrossReference$25$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "import", false, false, getElement(), getCrossReference$25$Delimiter(), optional);
 		}
 	}
 
@@ -367,8 +367,8 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		}
 		
 		@Override
-		protected int doConsume() throws Exception {
-			return consumeTerminal(fragmentConsumer, "impFrag", false, false, getElement(), getRuleCall$28$Delimiter());
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(fragmentConsumer, "impFrag", false, false, getElement(), getRuleCall$28$Delimiter(), optional);
 		}
 	}
 
