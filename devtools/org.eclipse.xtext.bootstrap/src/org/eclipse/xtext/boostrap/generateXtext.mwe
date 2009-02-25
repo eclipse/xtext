@@ -20,7 +20,7 @@
 			</fragments>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext">
-			<fragments file="org/eclipse/xtext/generator/standardRuntimeFragments.mwe"/>
+			<fragments file="org/eclipse/xtext/generator/StandardRuntimeFragments.mwe"/>
 		</language>
 	</component>
 </workflow>
