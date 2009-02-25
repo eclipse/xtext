@@ -33,6 +33,7 @@ import org.eclipse.xtext.parser.packrat.tokens.GroupToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenSource;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.PlaceholderToken;
 
 /**
@@ -381,6 +382,19 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		protected MandatoryLoopElementConsumer(Element element) {
 			super(element);
+		}
+
+		@Override
+		public int parseAgain(AbstractParsedToken token) throws Exception {
+			if (!((ParsedToken)token).isOptional())
+				return consume();
+			IMarker marker = mark();
+			while(doConsume(true) == ConsumeResult.SUCCESS) {
+				marker.flush();
+			}
+			marker.rollback();
+			skipped(this);
+			return ConsumeResult.SUCCESS;
 		}
 
 		@Override

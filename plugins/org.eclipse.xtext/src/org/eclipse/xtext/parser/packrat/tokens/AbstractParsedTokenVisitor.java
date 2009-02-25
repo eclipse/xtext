@@ -91,6 +91,10 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 		visitParsedToken(token);
 	}
 
+	public void visitPlaceholder(PlaceholderToken token) {
+		visitParsedToken(token);
+	}
+
 	public void exec(AbstractParsedToken param) {
 		param.accept(this);
 	}

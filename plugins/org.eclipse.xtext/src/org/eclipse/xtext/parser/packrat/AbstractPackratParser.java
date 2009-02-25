@@ -45,6 +45,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
+import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenSource;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
 
 /**
@@ -315,8 +316,13 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		return result;
 	}
 
-	public void consumeAction(Action action, boolean isMany) {
-		accept(new ParsedAction(offset, action, isMany));
+	public void consumeAction(final Action action, final boolean isMany) {
+		accept(new ParsedAction(offset, action, isMany, new IParsedTokenSource(){
+			public int parseAgain(AbstractParsedToken token) throws Exception {
+				consumeAction(action, isMany);
+				return ConsumeResult.SUCCESS;
+			}
+		}));
 	}
 
 	protected IParseResultFactory getParseResultFactory() {

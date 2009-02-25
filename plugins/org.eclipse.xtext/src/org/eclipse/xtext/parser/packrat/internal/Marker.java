@@ -26,7 +26,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 	private static final int INITIAL_CONTENT_SIZE = 100;
 	private static final int CONTENT_SIZE_TRESHOLD = INITIAL_CONTENT_SIZE * 2 / 3;
 
-	public interface IMarkerClient {
+	public interface IMarkerClient extends IMarkerFactory {
 		void setActiveMarker(Marker marker);
 		Marker getActiveMarker();
 		Marker getNextMarker(Marker parent, int offset);
@@ -122,10 +122,11 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return client.getNextMarker(parent, getOffset());
 	}
 
-	public Marker forkBefore(AbstractParsedToken token) {
+	public Marker fork(int before, int offset) {
 		Marker result = fork();
-		for(int i=0; i < content.size() && content.get(i) != token; i++) {
-			result.content.add(content.get(i));
+		if (before >= 1) {
+			result.content.addAll(content.subList(0, before));
+			result.getInput().setOffset(offset);
 		}
 		return result;
 	}
@@ -212,6 +213,15 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		if (backtracker == null)
 			backtracker = new MarkerAwareBacktracker(this);
 		return backtracker.skipPreviousToken();
+	}
+
+	public void discardLastOffset() {
+		lastOffset = -1;
+	}
+
+	public void replaceContent(List<AbstractParsedToken> tokens) {
+		content.clear();
+		content.addAll(tokens);
 	}
 
 }
