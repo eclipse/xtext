@@ -138,7 +138,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.xtext.source"
+         id="org.eclipse.xtext.ui.source"
          version="0.0.0"/>
          
    <plugin
