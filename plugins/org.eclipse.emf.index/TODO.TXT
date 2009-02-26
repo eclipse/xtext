@@ -11,5 +11,14 @@ Queries
 IndexFeeder
 - better pattern for element/factory matching
 
-Locking ?
+Locking 
 
+CrossRefDesc
+- index
+
+ResourceDescriptor
+- user data 
+
+Resource URI conversion
+ - no classpath URIs allowed
+ - cannonical URIs
