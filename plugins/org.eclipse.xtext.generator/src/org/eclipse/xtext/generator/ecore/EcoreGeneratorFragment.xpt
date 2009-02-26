@@ -13,18 +13,17 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
-«EXTENSION org::eclipse::xtext::generator::ecore::EcoreGenerator»
 
-«DEFINE generate FOR Grammar»
+«DEFINE generate(String basePackage) FOR Grammar»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar-»
+«DEFINE addToPluginXmlRt(String basePackage) FOR Grammar-»
 «IF !metamodelDeclarations.typeSelect(GeneratedMetamodel).isEmpty»
   <extension point="org.eclipse.emf.ecore.generated_package">
   «FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS p-»
     <package 
        uri = "«p.ePackage.nsURI»" 
-       class = "«getGeneratedEPackageName(this,p.ePackage)»"
+       class = "«basePackage».«p.name».«p.name.toFirstUpper()»Package"
        genModel = "«name.asPath() + ".genmodel"»" /> 
 	«ENDFOREACH»
   </extension>
@@ -32,13 +31,13 @@
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlUi FOR Grammar-»
+«DEFINE addToPluginXmlUi(String basePackage) FOR Grammar-»
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar-»
+«DEFINE addToStandaloneSetup(String basePackage) FOR Grammar-»
 	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS mmd-»
 	if (!EPackage.Registry.INSTANCE.containsKey("«mmd.ePackage.nsURI»")) {
-		EPackage.Registry.INSTANCE.put("«mmd.ePackage.nsURI»", «getGeneratedEPackageName(this,mmd.ePackage)».eINSTANCE);
+		EPackage.Registry.INSTANCE.put("«mmd.ePackage.nsURI»", «basePackage».«mmd.name».«mmd.name.toFirstUpper()»Package.eINSTANCE);
 	}
 	«ENDFOREACH-»
 «ENDDEFINE»
