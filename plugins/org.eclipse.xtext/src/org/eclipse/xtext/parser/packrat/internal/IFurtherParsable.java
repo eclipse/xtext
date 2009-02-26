@@ -5,13 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.packrat.tokens;
+package org.eclipse.xtext.parser.packrat.internal;
+
+import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenSource;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IParsedTokenSource {
+public interface IFurtherParsable<Token extends ParsedToken> {
 
-	int parseAgain(ParsedToken token) throws Exception;
+	boolean canParseFurther();
 
+	Token getToken();
+
+	Source<Token> getSource();
+
+	interface Source<Token extends ParsedToken> extends IParsedTokenSource {
+		int parseFurther(IFurtherParsable<Token> token) throws Exception;
+	}
 }

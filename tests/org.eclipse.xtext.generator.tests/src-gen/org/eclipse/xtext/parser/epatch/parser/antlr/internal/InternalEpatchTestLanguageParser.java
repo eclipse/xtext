@@ -4097,94 +4097,94 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
     // $ANTLR start ruleSingleAssignmentValue
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1838:1: ruleSingleAssignmentValue returns [EObject current=null] : ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_10= ruleCreatedObject ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1838:1: ruleSingleAssignmentValue returns [EObject current=null] : ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) ) ;
     public final EObject ruleSingleAssignmentValue() throws RecognitionException {
         EObject current = null;
 
         Token lv_keyword_0=null;
         Token lv_value_1=null;
-        Token lv_impFrag_3=null;
-        Token lv_refFeature_6=null;
-        Token lv_refIndex_8=null;
-        EObject lv_newObject_10 = null;
+        Token lv_refFeature_4=null;
+        Token lv_refIndex_6=null;
+        Token lv_impFrag_10=null;
+        EObject lv_newObject_8 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1843:6: ( ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_10= ruleCreatedObject ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_10= ruleCreatedObject ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1843:6: ( ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_10= ruleCreatedObject ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( ((LA39_0>=RULE_ID && LA39_0<=RULE_STRING)||LA39_0==33) ) {
+            if ( (LA39_0==RULE_STRING||(LA39_0>=33 && LA39_0<=35)) ) {
                 alt39=1;
             }
-            else if ( ((LA39_0>=34 && LA39_0<=35)) ) {
-                alt39=2;
+            else if ( (LA39_0==RULE_ID) ) {
+                int LA39_2 = input.LA(2);
+
+                if ( (LA39_2==RULE_FRAGMENT) ) {
+                    alt39=2;
+                }
+                else if ( (LA39_2==EOF||LA39_2==19||LA39_2==24||LA39_2==28) ) {
+                    alt39=1;
+                }
+                else {
+                    NoViableAltException nvae =
+                        new NoViableAltException("1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )", 39, 2, input);
+
+                    throw nvae;
+                }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_10= ruleCreatedObject ) )", 39, 0, input);
+                    new NoViableAltException("1844:1: ( ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) ) | ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) ) )", 39, 0, input);
 
                 throw nvae;
             }
             switch (alt39) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) )
                     int alt38=2;
                     int LA38_0 = input.LA(1);
 
-                    if ( (LA38_0==RULE_STRING||LA38_0==33) ) {
+                    if ( ((LA38_0>=RULE_ID && LA38_0<=RULE_STRING)||LA38_0==33) ) {
                         alt38=1;
                     }
-                    else if ( (LA38_0==RULE_ID) ) {
-                        int LA38_2 = input.LA(2);
-
-                        if ( (LA38_2==RULE_FRAGMENT) ) {
-                            alt38=1;
-                        }
-                        else if ( (LA38_2==EOF||LA38_2==19||LA38_2==24||LA38_2==28) ) {
-                            alt38=2;
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) )", 38, 2, input);
-
-                            throw nvae;
-                        }
+                    else if ( ((LA38_0>=34 && LA38_0<=35)) ) {
+                        alt38=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? ) )", 38, 0, input);
+                            new NoViableAltException("1844:2: ( ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) ) | (lv_newObject_8= ruleCreatedObject ) )", 38, 0, input);
 
                         throw nvae;
                     }
                     switch (alt38) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:3: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:3: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) )
                             {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:3: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) )
-                            int alt35=2;
-                            int LA35_0 = input.LA(1);
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:3: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) )
+                            int alt37=2;
+                            int LA37_0 = input.LA(1);
 
-                            if ( (LA35_0==RULE_STRING||LA35_0==33) ) {
-                                alt35=1;
+                            if ( (LA37_0==RULE_STRING||LA37_0==33) ) {
+                                alt37=1;
                             }
-                            else if ( (LA35_0==RULE_ID) ) {
-                                alt35=2;
+                            else if ( (LA37_0==RULE_ID) ) {
+                                alt37=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("1844:3: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) ) )", 35, 0, input);
+                                    new NoViableAltException("1844:3: ( ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) ) | ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? ) )", 37, 0, input);
 
                                 throw nvae;
                             }
-                            switch (alt35) {
+                            switch (alt37) {
                                 case 1 :
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1844:4: ( (lv_keyword_0= 'null' ) | (lv_value_1= RULE_STRING ) )
                                     {
@@ -4270,10 +4270,10 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:6: ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:6: ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? )
                                     {
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:6: ( ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT ) )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:7: ( RULE_ID ) (lv_impFrag_3= RULE_FRAGMENT )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:6: ( ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )? )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:7: ( RULE_ID ) ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )?
                                     {
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1887:7: ( RULE_ID )
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1890:3: RULE_ID
@@ -4286,31 +4286,112 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                             
                                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3977); 
 
-                                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringImport(), "import"); 
+                                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringNamedObject(), "refObject"); 
                                     	
 
                                     }
 
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1903:2: (lv_impFrag_3= RULE_FRAGMENT )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1905:6: lv_impFrag_3= RULE_FRAGMENT
-                                    {
-                                    lv_impFrag_3=(Token)input.LT(1);
-                                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4002); 
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1903:2: ( ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )? )?
+                                    int alt36=2;
+                                    int LA36_0 = input.LA(1);
 
-                                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00110LexerRuleCallFRAGMENT(), "impFrag"); 
-                                    	
+                                    if ( (LA36_0==19) ) {
+                                        alt36=1;
+                                    }
+                                    switch (alt36) {
+                                        case 1 :
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1903:3: ( '.' (lv_refFeature_4= RULE_ID ) ) ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )?
+                                            {
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1903:3: ( '.' (lv_refFeature_4= RULE_ID ) )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1903:4: '.' (lv_refFeature_4= RULE_ID )
+                                            {
+                                            match(input,19,FOLLOW_19_in_ruleSingleAssignmentValue3991); 
 
-                                    	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-                                    	            associateNodeWithAstElement(currentNode, current);
-                                    	        }
-                                    	        
-                                    	        try {
-                                    	       		set(current, "impFrag", lv_impFrag_3, "FRAGMENT", lastConsumedNode);
-                                    	        } catch (ValueConverterException vce) {
-                                    				handleValueConverterException(vce);
-                                    	        }
-                                    	    
+                                                    createLeafNode(grammarAccess.prSingleAssignmentValue().ele001100KeywordFullStop(), null); 
+                                                
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1907:1: (lv_refFeature_4= RULE_ID )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1909:6: lv_refFeature_4= RULE_ID
+                                            {
+                                            lv_refFeature_4=(Token)input.LT(1);
+                                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4013); 
+
+                                            		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0011010LexerRuleCallID(), "refFeature"); 
+                                            	
+
+                                            	        if (current==null) {
+                                            	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                                            	            associateNodeWithAstElement(currentNode, current);
+                                            	        }
+                                            	        
+                                            	        try {
+                                            	       		set(current, "refFeature", lv_refFeature_4, "ID", lastConsumedNode);
+                                            	        } catch (ValueConverterException vce) {
+                                            				handleValueConverterException(vce);
+                                            	        }
+                                            	    
+
+                                            }
+
+
+                                            }
+
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1927:3: ( ( '[' (lv_refIndex_6= RULE_INT ) ) ']' )?
+                                            int alt35=2;
+                                            int LA35_0 = input.LA(1);
+
+                                            if ( (LA35_0==29) ) {
+                                                alt35=1;
+                                            }
+                                            switch (alt35) {
+                                                case 1 :
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1927:4: ( '[' (lv_refIndex_6= RULE_INT ) ) ']'
+                                                    {
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1927:4: ( '[' (lv_refIndex_6= RULE_INT ) )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1927:5: '[' (lv_refIndex_6= RULE_INT )
+                                                    {
+                                                    match(input,29,FOLLOW_29_in_ruleSingleAssignmentValue4033); 
+
+                                                            createLeafNode(grammarAccess.prSingleAssignmentValue().ele0011100KeywordLeftSquareBracket(), null); 
+                                                        
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1931:1: (lv_refIndex_6= RULE_INT )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1933:6: lv_refIndex_6= RULE_INT
+                                                    {
+                                                    lv_refIndex_6=(Token)input.LT(1);
+                                                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSingleAssignmentValue4055); 
+
+                                                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00111010LexerRuleCallINT(), "refIndex"); 
+                                                    	
+
+                                                    	        if (current==null) {
+                                                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                                                    	            associateNodeWithAstElement(currentNode, current);
+                                                    	        }
+                                                    	        
+                                                    	        try {
+                                                    	       		set(current, "refIndex", lv_refIndex_6, "INT", lastConsumedNode);
+                                                    	        } catch (ValueConverterException vce) {
+                                                    				handleValueConverterException(vce);
+                                                    	        }
+                                                    	    
+
+                                                    }
+
+
+                                                    }
+
+                                                    match(input,31,FOLLOW_31_in_ruleSingleAssignmentValue4073); 
+
+                                                            createLeafNode(grammarAccess.prSingleAssignmentValue().ele001111KeywordRightSquareBracket(), null); 
+                                                        
+
+                                                    }
+                                                    break;
+
+                                            }
+
+
+                                            }
+                                            break;
 
                                     }
 
@@ -4327,131 +4408,31 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1924:6: ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1956:6: (lv_newObject_8= ruleCreatedObject )
                             {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1924:6: ( ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )? )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1924:7: ( RULE_ID ) ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )?
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1956:6: (lv_newObject_8= ruleCreatedObject )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1959:6: lv_newObject_8= ruleCreatedObject
                             {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1924:7: ( RULE_ID )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1927:3: RULE_ID
-                            {
+                             
+                            	        currentNode=createCompositeNode(grammarAccess.prSingleAssignmentValue().ele010ParserRuleCallCreatedObject(), currentNode); 
+                            	    
+                            pushFollow(FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue4119);
+                            lv_newObject_8=ruleCreatedObject();
+                            _fsp--;
 
-                            			if (current==null) {
+
+                            	        if (current==null) {
                             	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-                            	            associateNodeWithAstElement(currentNode, current);
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
-                                    
-                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4041); 
-
-                            		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0100CrossReferenceEStringNamedObject(), "refObject"); 
-                            	
-
-                            }
-
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1940:2: ( ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )? )?
-                            int alt37=2;
-                            int LA37_0 = input.LA(1);
-
-                            if ( (LA37_0==19) ) {
-                                alt37=1;
-                            }
-                            switch (alt37) {
-                                case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1940:3: ( '.' (lv_refFeature_6= RULE_ID ) ) ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )?
-                                    {
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1940:3: ( '.' (lv_refFeature_6= RULE_ID ) )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1940:4: '.' (lv_refFeature_6= RULE_ID )
-                                    {
-                                    match(input,19,FOLLOW_19_in_ruleSingleAssignmentValue4055); 
-
-                                            createLeafNode(grammarAccess.prSingleAssignmentValue().ele01100KeywordFullStop(), null); 
-                                        
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1944:1: (lv_refFeature_6= RULE_ID )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1946:6: lv_refFeature_6= RULE_ID
-                                    {
-                                    lv_refFeature_6=(Token)input.LT(1);
-                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4077); 
-
-                                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele011010LexerRuleCallID(), "refFeature"); 
-                                    	
-
-                                    	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-                                    	            associateNodeWithAstElement(currentNode, current);
-                                    	        }
-                                    	        
-                                    	        try {
-                                    	       		set(current, "refFeature", lv_refFeature_6, "ID", lastConsumedNode);
-                                    	        } catch (ValueConverterException vce) {
-                                    				handleValueConverterException(vce);
-                                    	        }
-                                    	    
-
-                                    }
-
-
-                                    }
-
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1964:3: ( ( '[' (lv_refIndex_8= RULE_INT ) ) ']' )?
-                                    int alt36=2;
-                                    int LA36_0 = input.LA(1);
-
-                                    if ( (LA36_0==29) ) {
-                                        alt36=1;
-                                    }
-                                    switch (alt36) {
-                                        case 1 :
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1964:4: ( '[' (lv_refIndex_8= RULE_INT ) ) ']'
-                                            {
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1964:4: ( '[' (lv_refIndex_8= RULE_INT ) )
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1964:5: '[' (lv_refIndex_8= RULE_INT )
-                                            {
-                                            match(input,29,FOLLOW_29_in_ruleSingleAssignmentValue4097); 
-
-                                                    createLeafNode(grammarAccess.prSingleAssignmentValue().ele011100KeywordLeftSquareBracket(), null); 
-                                                
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1968:1: (lv_refIndex_8= RULE_INT )
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1970:6: lv_refIndex_8= RULE_INT
-                                            {
-                                            lv_refIndex_8=(Token)input.LT(1);
-                                            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSingleAssignmentValue4119); 
-
-                                            		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0111010LexerRuleCallINT(), "refIndex"); 
-                                            	
-
-                                            	        if (current==null) {
-                                            	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-                                            	            associateNodeWithAstElement(currentNode, current);
-                                            	        }
-                                            	        
-                                            	        try {
-                                            	       		set(current, "refIndex", lv_refIndex_8, "INT", lastConsumedNode);
-                                            	        } catch (ValueConverterException vce) {
-                                            				handleValueConverterException(vce);
-                                            	        }
-                                            	    
-
-                                            }
-
-
-                                            }
-
-                                            match(input,31,FOLLOW_31_in_ruleSingleAssignmentValue4137); 
-
-                                                    createLeafNode(grammarAccess.prSingleAssignmentValue().ele01111KeywordRightSquareBracket(), null); 
-                                                
-
-                                            }
-                                            break;
-
-                                    }
-
-
-                                    }
-                                    break;
-
-                            }
-
+                            	        
+                            	        try {
+                            	       		set(current, "newObject", lv_newObject_8, "CreatedObject", currentNode);
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	        currentNode = currentNode.getParent();
+                            	    
 
                             }
 
@@ -4465,31 +4446,50 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1993:6: (lv_newObject_10= ruleCreatedObject )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1978:6: ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1993:6: (lv_newObject_10= ruleCreatedObject )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1996:6: lv_newObject_10= ruleCreatedObject
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1978:6: ( ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1978:7: ( RULE_ID ) (lv_impFrag_10= RULE_FRAGMENT )
                     {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.prSingleAssignmentValue().ele10ParserRuleCallCreatedObject(), currentNode); 
-                    	    
-                    pushFollow(FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue4183);
-                    lv_newObject_10=ruleCreatedObject();
-                    _fsp--;
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1978:7: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1981:3: RULE_ID
+                    {
 
+                    			if (current==null) {
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                            
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4153); 
+
+                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele100CrossReferenceEStringImport(), "import"); 
+                    	
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1994:2: (lv_impFrag_10= RULE_FRAGMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1996:6: lv_impFrag_10= RULE_FRAGMENT
+                    {
+                    lv_impFrag_10=(Token)input.LT(1);
+                    match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4178); 
+
+                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele110LexerRuleCallFRAGMENT(), "impFrag"); 
+                    	
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
                     	        try {
-                    	       		set(current, "newObject", lv_newObject_10, "CreatedObject", currentNode);
+                    	       		set(current, "impFrag", lv_impFrag_10, "FRAGMENT", lastConsumedNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
                     	        }
-                    	        currentNode = currentNode.getParent();
                     	    
+
+                    }
+
 
                     }
 
@@ -5835,15 +5835,15 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
     public static final BitSet FOLLOW_EOF_in_entryRuleSingleAssignmentValue3849 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_33_in_ruleSingleAssignmentValue3898 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue3939 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3977 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4002 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4041 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleSingleAssignmentValue4055 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4077 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_29_in_ruleSingleAssignmentValue4097 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSingleAssignmentValue4119 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_ruleSingleAssignmentValue4137 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue4183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3977 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleSingleAssignmentValue3991 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4013 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_29_in_ruleSingleAssignmentValue4033 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSingleAssignmentValue4055 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleSingleAssignmentValue4073 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue4119 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4153 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4178 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject4222 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleCreatedObject4232 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleObjectNew_in_ruleCreatedObject4281 = new BitSet(new long[]{0x0000000000002012L});

@@ -47,6 +47,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenSource;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -318,7 +319,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 
 	public void consumeAction(final Action action, final boolean isMany) {
 		accept(new ParsedAction(offset, action, isMany, new IParsedTokenSource(){
-			public int parseAgain(AbstractParsedToken token) throws Exception {
+			public int parseAgain(ParsedToken token) throws Exception {
 				consumeAction(action, isMany);
 				return ConsumeResult.SUCCESS;
 			}

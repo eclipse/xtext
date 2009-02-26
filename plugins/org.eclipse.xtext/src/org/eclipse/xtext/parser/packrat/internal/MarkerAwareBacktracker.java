@@ -155,6 +155,20 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		}
 
 		@Override
+		public void visitAlternativesToken(AlternativesToken token) {
+			if (lookup && !token.isSkipped()) {
+				if (stackSize == 0)
+					lookup = false;
+				else {
+					if (token.canParseFurther())
+						result = true;
+					else
+						super.visitAlternativesToken(token);
+				}
+			}
+		}
+
+		@Override
 		public void visitParsedNonTerminal(ParsedNonTerminal token) {
 			if (lookup && !token.isSkipped()) {
 				if (stackSize == 0)
@@ -195,6 +209,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			private boolean continueSkip;
 			private int skippedOffset;
 			private int stackSize;
+			private boolean first;
 
 			private Skipper() {
 				this.continueSkip = true;
@@ -204,12 +219,15 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			public int skip(final int idx) {
 				int i = idx;
+				first = true;
 				while(!visitedMarkers.isEmpty() && continueSkip) {
 					Marker localMarker = visitedMarkers.get(visitedMarkers.size() - 1);
 					List<AbstractParsedToken> content = localMarker.getContent();
 					while(i < content.size() && continueSkip) {
 						content.get(i).accept(this);
-						i++;
+						first = false;
+						if (continueSkip)
+							i++;
 					}
 					if (continueSkip)
 						visitedMarkers.remove(visitedMarkers.size() - 1);
@@ -228,6 +246,18 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					markedTokens.add(token);
 					token.setSkipped(true);
 					stackSize++;
+				}
+			}
+
+
+
+			@Override
+			public void visitAlternativesToken(AlternativesToken token) {
+				if (!token.isSkipped()) {
+					if (first && token.canParseFurther())
+						continueSkip = false;
+					else
+						super.visitAlternativesToken(token);
 				}
 			}
 
@@ -285,6 +315,8 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		private final class Replayer extends AbstractParsedTokenVisitor implements IMarkerVisitor {
 
+			private boolean first;
+
 			private int idx;
 
 			private int stackSize;
@@ -299,8 +331,10 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				this.stackSize = 0;
 			}
 
+			@SuppressWarnings("unchecked")
 			public boolean replay(int idx) {
 				this.idx = idx;
+				this.first = true;
 				final Marker markerToFork = visitedMarkers.get(visitedMarkers.size() - 1);
 				workingMarker = markerToFork.forkAfterSkipped(idx);
 				workingMarkers.add(workingMarker);
@@ -317,9 +351,15 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					contents = visitedMarkers.get(visitedMarkers.size() - 1).getContent();
 					while(replaySuccessful && replay()) {
 						if (replayToken != null) {
-							Marker localMarker = workingMarker.fork();
+							Marker localMarker = (Marker) workingMarker.getClient().mark();
 							try {
-								replaySuccessful = replayToken.getSource().parseAgain(replayToken) == ConsumeResult.SUCCESS;
+								if (first && (replayToken instanceof IFurtherParsable<?>)) {
+									IFurtherParsable<ParsedToken> continuedParsable = (IFurtherParsable<ParsedToken>) replayToken;
+									replaySuccessful = continuedParsable.getSource().parseFurther(continuedParsable) == ConsumeResult.SUCCESS;
+								} else {
+									replaySuccessful = replayToken.getSource().parseAgain(replayToken) == ConsumeResult.SUCCESS;
+								}
+								first = false;
 							} catch(Exception e) {
 								throw new WrappedException(e);
 							}
@@ -327,6 +367,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 								localMarker.commit();
 							else
 								localMarker.rollback();
+							localMarker = null;
 						}
 					}
 					if (replaySuccessful) {
