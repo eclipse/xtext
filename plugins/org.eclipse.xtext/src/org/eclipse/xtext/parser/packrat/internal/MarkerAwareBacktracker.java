@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.packrat.internal;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,9 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 	protected class NestedBacktrackingResult extends AbstractParsedTokenVisitor implements IBacktrackingResult, IMarkerVisitor {
 
-		private Marker workingMarker;
+		private final List<Marker> visitedMarkers;
+
+		private final List<Marker> workingMarkers;
 
 		private boolean result;
 
@@ -57,24 +60,38 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			this.result = false;
 			this.markedTokens = new HashSet<AbstractParsedToken>(8);
 			this.skippedOffset = 0;
+			this.visitedMarkers = new ArrayList<Marker>(4);
+			this.workingMarkers = new ArrayList<Marker>(4);
 		}
 
 		public void commit() {
-			if (workingMarker == null)
+			if (workingMarkers.isEmpty())
 				throw new IllegalStateException("Working marker may not be null");
-			marker.replaceContent(workingMarker.getContent());
-			marker.discardLastOffset();
-			marker.join(workingMarker);
+			Marker localMarker = marker;
+			for(int i = workingMarkers.size() - 1; i >= 0; i--) {
+				Marker workingMarker = workingMarkers.get(i);
+				localMarker.replaceContent(workingMarker.getContent());
+				localMarker.discardLastOffset();
+				workingMarker.forget();
+				localMarker = localMarker.getParent();
+			}
+			workingMarkers.clear();
+			markedTokens.clear();
 		}
 
 		public void discard() {
 			for(AbstractParsedToken token: markedTokens) {
 				token.setSkipped(false);
 			}
-			if (workingMarker != null) {
-				marker.join(workingMarker);
-				workingMarker = null;
+			discardImpl();
+		}
+
+		private void discardImpl() {
+			for(int i = workingMarkers.size() - 1; i >= 0; i--) {
+				Marker workingMarker = workingMarkers.get(i);
+				workingMarker.forget();
 			}
+			workingMarkers.clear();
 			markedTokens.clear();
 		}
 
@@ -83,48 +100,41 @@ public class MarkerAwareBacktracker implements IBacktracker {
 		}
 
 		public IBacktrackingResult skipPreviousToken() {
-			if (workingMarker != null) {
-				marker.join(workingMarker);
-				workingMarker = null;
-			}
-			result = false;
-			lookup = true;
-			stackSize = 0;
+			discardImpl();
+			init();
+			Marker localMarker = marker;
+			List<AbstractParsedToken> content = null;
 			int idx = -1;
-			List<AbstractParsedToken> content = marker.getContent();
-			idx = content.size() - 1;
-			while(idx >= 0 && !result && lookup) {
-				content.get(idx).accept(this);
-				if (!result)
-					idx--;
-			}
-			if (result) {
-				Skipper skipper = new Skipper();
-				while(idx < content.size() && skipper.continueSkip) {
-					content.get(idx).accept(skipper);
-					idx++;
+			while(localMarker != null && !result && lookup) {
+				visitedMarkers.add(localMarker);
+				content = localMarker.getContent();
+				idx = content.size() - 1;
+				while(idx >= 0 && !result && lookup) {
+					content.get(idx).accept(this);
+					if (!result)
+						idx--;
 				}
+				if (!result && lookup)
+					localMarker = localMarker.getParent();
+			}
+			if (result && content != null) {
+				Skipper skipper = new Skipper();
+				idx = skipper.skip(idx);
 				skippedOffset += skipper.skippedOffset;
-				if (idx < content.size()) {
-					workingMarker = marker.fork(idx, marker.getInput().getOffset() - skipper.skippedOffset);
-					final Replayer replayer = new Replayer(idx);
-					boolean replaySuccessful = true;
-					while (replaySuccessful && replayer.replay()) {
-						ParsedToken replayMe = replayer.currentReplayToken;
-						try {
-							replaySuccessful = replayMe.getSource().parseAgain(replayMe) == ConsumeResult.SUCCESS;
-						} catch(Exception e) {
-							throw new WrappedException(e);
-						}
-					}
-					if (!replaySuccessful) {
-						marker.join(workingMarker);
-						workingMarker = null;
+				if (!visitedMarkers.isEmpty()) {
+					final Replayer replayer = new Replayer();
+					if (!replayer.replay(idx))
 						return skipPreviousToken();
-					}
 				}
 			}
 			return this;
+		}
+
+		private void init() {
+			visitedMarkers.clear();
+			result = false;
+			lookup = true;
+			stackSize = 0;
 		}
 
 		@Override
@@ -165,38 +175,23 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		@Override
 		public void visitCompoundParsedTokenEnd(org.eclipse.xtext.parser.packrat.tokens.CompoundParsedToken.End token) {
-			if (lookup && !token.isSkipped()) {
+			if (!token.isSkipped()) {
 				stackSize++;
 			}
 		}
 
 		@Override
 		public void visitParsedTerminal(ParsedTerminal token) {
-			if (lookup && !token.isHidden() && !token.isSkipped() && (token.getGrammarElement() instanceof AbstractElement)) {
+			if (!token.isHidden() && !token.isSkipped() && (token.getGrammarElement() instanceof AbstractElement)) {
 				result = token.isOptional();
 			}
 		}
 
-		@Override
-		public void visitErrorToken(ErrorToken token) {
-			token.setSkipped(true);
-			markedTokens.add(token);
-		}
-
 		public void visitMarker(Marker marker) {
-			final List<AbstractParsedToken> content = marker.getContent();
-			if (!lookup) {
-				for(int i = 0; i < content.size(); i++) {
-					content.get(i).accept(this);
-				}
-			} else {
-				for(int i = content.size() - 1; i >= 0; i--) {
-					content.get(i).accept(this);
-				}
-			}
+			throw new IllegalStateException("Marker may not be content of other markers.");
 		}
 
-		private final class Skipper extends AbstractParsedTokenVisitor {
+		private final class Skipper extends AbstractParsedTokenVisitor implements IMarkerVisitor {
 			private boolean continueSkip;
 			private int skippedOffset;
 			private int stackSize;
@@ -207,6 +202,21 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				this.stackSize = 0;
 			}
 
+			public int skip(final int idx) {
+				int i = idx;
+				while(!visitedMarkers.isEmpty() && continueSkip) {
+					Marker localMarker = visitedMarkers.get(visitedMarkers.size() - 1);
+					List<AbstractParsedToken> content = localMarker.getContent();
+					while(i < content.size() && continueSkip) {
+						content.get(i).accept(this);
+						i++;
+					}
+					if (continueSkip)
+						visitedMarkers.remove(visitedMarkers.size() - 1);
+				}
+				return i;
+			}
+
 			@Override
 			public void visitAbstractParsedToken(AbstractParsedToken token) {
 				//
@@ -215,58 +225,48 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			@Override
 			public void visitCompoundParsedToken(CompoundParsedToken token) {
 				if (!token.isSkipped()) {
-					if (continueSkip) {
-						markedTokens.add(token);
-						token.setSkipped(true);
-						stackSize++;
-					}
+					markedTokens.add(token);
+					token.setSkipped(true);
+					stackSize++;
 				}
 			}
 
 			@Override
 			public void visitCompoundParsedTokenEnd(CompoundParsedToken.End token) {
 				if (!token.isSkipped()) {
-					if (continueSkip) {
-						markedTokens.add(token);
-						token.setSkipped(true);
-						stackSize--;
-						continueSkip = stackSize != 0;
-					}
+					markedTokens.add(token);
+					token.setSkipped(true);
+					stackSize--;
+					continueSkip = stackSize != 0;
 				}
 			}
 
 			@Override
 			public void visitParsedTerminal(ParsedTerminal token) {
 				if (!token.isSkipped()) {
-					if (continueSkip) {
-						markedTokens.add(token);
-						token.setSkipped(true);
-						skippedOffset += token.getLength();
-						continueSkip = stackSize != 0;
-					}
+					markedTokens.add(token);
+					token.setSkipped(true);
+					skippedOffset += token.getLength();
+					continueSkip = stackSize != 0;
 				}
 			}
 
 			@Override
 			public void visitParsedNonTerminal(ParsedNonTerminal token) {
 				if (!token.isSkipped()) {
-					if (continueSkip) {
-						markedTokens.add(token);
-						token.setSkipped(true);
-						stackSize++;
-					}
+					markedTokens.add(token);
+					token.setSkipped(true);
+					stackSize++;
 				}
 			}
 
 			@Override
 			public void visitParsedNonTerminalEnd(ParsedNonTerminalEnd token) {
 				if (!token.isSkipped()) {
-					if (continueSkip) {
-						markedTokens.add(token);
-						token.setSkipped(true);
-						stackSize--;
-						continueSkip = stackSize != 0;
-					}
+					markedTokens.add(token);
+					token.setSkipped(true);
+					stackSize--;
+					continueSkip = stackSize != 0;
 				}
 			}
 
@@ -277,43 +277,80 @@ public class MarkerAwareBacktracker implements IBacktracker {
 					token.setSkipped(true);
 				}
 			}
+
+			public void visitMarker(Marker marker) {
+				throw new IllegalStateException("Marker may not be content of other markers.");
+			}
 		}
 
-		private final class Replayer extends AbstractParsedTokenVisitor {
-
-			private ParsedToken nextReplayToken;
-			private ParsedToken currentReplayToken;
+		private final class Replayer extends AbstractParsedTokenVisitor implements IMarkerVisitor {
 
 			private int idx;
 
 			private int stackSize;
 
-			private final List<AbstractParsedToken> contents;
+			private ParsedToken replayToken;
 
-			private Replayer(int idx) {
-				this.idx = idx;
+			private List<AbstractParsedToken> contents;
+
+			private Marker workingMarker;
+
+			private Replayer() {
 				this.stackSize = 0;
-				this.contents = marker.getContent();
+			}
+
+			public boolean replay(int idx) {
+				this.idx = idx;
+				final Marker markerToFork = visitedMarkers.get(visitedMarkers.size() - 1);
+				workingMarker = markerToFork.forkAfterSkipped(idx);
+				workingMarkers.add(workingMarker);
+				int offset = workingMarker.getOffset();
+				for (int i = 0; i < workingMarker.getContent().size(); i++) {
+					AbstractParsedToken token = workingMarker.getContent().get(i);
+					if (!token.isSkipped())
+						offset+=token.getLength();
+				}
+				workingMarker.getInput().setOffset(offset);
+
+				boolean replaySuccessful = true;
+				while(!visitedMarkers.isEmpty() && replaySuccessful) {
+					contents = visitedMarkers.get(visitedMarkers.size() - 1).getContent();
+					while(replaySuccessful && replay()) {
+						if (replayToken != null) {
+							Marker localMarker = workingMarker.fork();
+							try {
+								replaySuccessful = replayToken.getSource().parseAgain(replayToken) == ConsumeResult.SUCCESS;
+							} catch(Exception e) {
+								throw new WrappedException(e);
+							}
+							if (replaySuccessful)
+								localMarker.commit();
+							else
+								localMarker.rollback();
+						}
+					}
+					if (replaySuccessful) {
+						visitedMarkers.remove(visitedMarkers.size() - 1);
+						if (!visitedMarkers.isEmpty()) {
+							workingMarker = (Marker) workingMarker.getClient().mark();
+							workingMarkers.add(workingMarker);
+							this.idx = 0;
+						}
+					}
+				}
+				return replaySuccessful;
 			}
 
 			public boolean replay() {
-				if (currentReplayToken == null)
-					prepare();
 				if (idx >= contents.size())
 					return false;
 				next();
-				return currentReplayToken != null && nextReplayToken != null;
-			}
-
-			private void prepare() {
-				if (idx >= contents.size())
-					next();
+				return replayToken != null;
 			}
 
 			private void next() {
-				currentReplayToken = nextReplayToken;
-				nextReplayToken = null;
-				while(idx < contents.size() && (nextReplayToken == null || stackSize != 0)) {
+				replayToken = null;
+				while(idx < contents.size() && (replayToken == null || stackSize != 0)) {
 					contents.get(idx).accept(this);
 					idx++;
 				}
@@ -323,7 +360,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			public void visitCompoundParsedToken(CompoundParsedToken token) {
 				if (!token.isSkipped()) {
 					if (stackSize == 0)
-						nextReplayToken = token;
+						replayToken = token;
 					stackSize++;
 				}
 			}
@@ -362,7 +399,7 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			public void visitParsedNonTerminal(ParsedNonTerminal token) {
 				if (!token.isSkipped()) {
 					if (stackSize == 0)
-						nextReplayToken = token;
+						replayToken = token;
 					stackSize++;
 				}
 			}
@@ -380,8 +417,12 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 			@Override
 			public void visitParsedToken(ParsedToken token) {
-				if (!token.isSkipped() && nextReplayToken == null)
-					nextReplayToken = token;
+				if (!token.isSkipped() && replayToken == null)
+					replayToken = token;
+			}
+
+			public void visitMarker(Marker marker) {
+				throw new IllegalStateException("Marker may not be content of other markers.");
 			}
 
 		}

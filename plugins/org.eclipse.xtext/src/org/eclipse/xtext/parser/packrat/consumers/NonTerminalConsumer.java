@@ -113,24 +113,33 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 
 		public int consume() throws Exception {
+			IMarker marker = mark();
 			int result = doConsume(false);
 			if (result != ConsumeResult.SUCCESS) {
+				IMarker forkedMarker = marker.fork();
 				IBacktracker.IBacktrackingResult backtrackingResult = skipPreviousToken();
 				while(result != ConsumeResult.SUCCESS && backtrackingResult.isSuccessful()) {
-					final IMarker marker = mark();
+					IMarker localMarker = mark();
 					result = doConsume(false);
 					if (result != ConsumeResult.SUCCESS) {
-						marker.rollback();
+						localMarker.rollback();
 						backtrackingResult = backtrackingResult.skipPreviousToken();
 					} else {
-						marker.commit();
+						localMarker.commit();
 					}
+					localMarker = null;
 				}
-				if (result == ConsumeResult.SUCCESS)
+				// TODO keep the better result
+				if (result == ConsumeResult.SUCCESS) {
 					backtrackingResult.commit();
-				else
+					marker = forkedMarker.join(marker);
+				} else {
 					backtrackingResult.discard();
+					marker = marker.join(forkedMarker);
+				}
+				forkedMarker = null;
 			}
+			marker.commit();
 			return result;
 		}
 
@@ -402,9 +411,10 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			IMarker marker = mark();
 			int result = doConsume(false);
 			if (result != ConsumeResult.SUCCESS) {
+				IMarker forkedMarker = marker.fork();
 				IBacktracker.IBacktrackingResult backtrackingResult = skipPreviousToken();
 				while(result != ConsumeResult.SUCCESS && backtrackingResult.isSuccessful()) {
-					final IMarker localMarker = mark();
+					IMarker localMarker = mark();
 					result = doConsume(false);
 					if (result != ConsumeResult.SUCCESS) {
 						localMarker.rollback();
@@ -412,11 +422,17 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 					} else {
 						localMarker.commit();
 					}
+					localMarker = null;
 				}
-				if (result == ConsumeResult.SUCCESS)
+				// TODO keep the better result
+				if (result == ConsumeResult.SUCCESS) {
 					backtrackingResult.commit();
-				else
+					marker = forkedMarker.join(marker);
+				} else {
 					backtrackingResult.discard();
+					marker = marker.join(forkedMarker);
+				}
+				forkedMarker = null;
 			}
 			if (result == ConsumeResult.SUCCESS) {
 				marker.flush();

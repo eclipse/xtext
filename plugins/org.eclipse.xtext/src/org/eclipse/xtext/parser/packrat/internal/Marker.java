@@ -24,7 +24,6 @@ import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarker, IParsedTokenAcceptor, IBacktracker {
 
 	private static final int INITIAL_CONTENT_SIZE = 100;
-	private static final int CONTENT_SIZE_TRESHOLD = INITIAL_CONTENT_SIZE * 2 / 3;
 
 	public interface IMarkerClient extends IMarkerFactory {
 		void setActiveMarker(Marker marker);
@@ -102,14 +101,10 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		if (parent != null) {
 			if (parent.danglingChildCount != 1)
 				throw new IllegalStateException("cannot commit if there exist any other forked children.");
-			if (content.size() > CONTENT_SIZE_TRESHOLD)
-				parent.content.add(this);
-			else {
-				if (!content.isEmpty())
-					parent.content.addAll(content);
-				client.releaseMarker(this);
-				content.clear();
-			}
+			if (!content.isEmpty())
+				parent.content.addAll(content);
+			client.releaseMarker(this);
+			content.clear();
 			parent.danglingChildCount--;
 		}
 		client.setActiveMarker(parent);
@@ -122,11 +117,10 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return client.getNextMarker(parent, getOffset());
 	}
 
-	public Marker fork(int before, int offset) {
+	public Marker forkAfterSkipped(int before) {
 		Marker result = fork();
 		if (before >= 1) {
 			result.content.addAll(content.subList(0, before));
-			result.getInput().setOffset(offset);
 		}
 		return result;
 	}
@@ -146,7 +140,7 @@ public class Marker extends AbstractParsedToken implements IMarkerFactory.IMarke
 		return this;
 	}
 
-	private void forget() {
+	void forget() {
 		if (parent != null) {
 			parent.danglingChildCount--;
 			if (parent.danglingChildCount < 0)
