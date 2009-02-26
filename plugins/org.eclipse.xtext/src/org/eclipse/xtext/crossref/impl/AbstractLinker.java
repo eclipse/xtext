@@ -6,12 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.crossref.impl;
+
+import org.eclipse.xtext.crossref.ILinker;
 
 /**
- * @author Peter Friese - Initial contribution and API
- * 
+ * @author Sven Efftinge - Initial contribution and API
+ *
  */
-public interface ILanguageService {
-    
+public abstract class AbstractLinker implements ILinker {
+
 }

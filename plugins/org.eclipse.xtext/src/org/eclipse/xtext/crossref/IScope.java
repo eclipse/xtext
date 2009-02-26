@@ -10,6 +10,8 @@ package org.eclipse.xtext.crossref;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Stable;
+import org.eclipse.xtext.crossref.impl.AbstractScope;
 
 /**
  * 
@@ -18,12 +20,13 @@ import org.eclipse.emf.ecore.EObject;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
+@Stable(since="0.7.0", subClass=AbstractScope.class)
 public interface IScope {
 	
     /**
      * The <code>NULLSCOPE</code> to be returned by the most outer scope
      */
-    public final static IScope NULLSCOPE = new IScope(){
+    public final static IScope NULLSCOPE = new AbstractScope(){
 
 		public Iterable<IScopedElement> getAllContents() {
 			return Collections.emptyList();

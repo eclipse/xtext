@@ -22,7 +22,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
@@ -38,7 +37,7 @@ import com.google.inject.Inject;
  * @author Michael Clay
  * @author Sebastian Zarnekow
  */
-public class DefaultLinkingService implements ILinkingService {
+public class DefaultLinkingService extends AbstractLinkingService {
 
 	@Inject
 	private IScopeProvider scopeProvider;

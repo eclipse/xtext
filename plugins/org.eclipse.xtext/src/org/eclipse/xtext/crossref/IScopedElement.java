@@ -8,11 +8,14 @@
 package org.eclipse.xtext.crossref;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Stable;
+import org.eclipse.xtext.crossref.impl.AbstractScopedElement;
 
 /**
  * Represents an element of an {@link IScope}.
  * @author Sven Efftinge - Initial contribution and API
  */
+@Stable(since="0.7.0", subClass=AbstractScopedElement.class)
 public interface IScopedElement {
 	
 	/**

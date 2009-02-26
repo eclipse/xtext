@@ -13,13 +13,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.conversion.IValueConverter;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
-public class AbstractAnnotationBasedValueConverterService implements IValueConverterService {
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ *
+ */
+@Stable(since="0.7.0")
+public class AbstractAnnotationBasedValueConverterService extends AbstractValueConverterService {
 	
 	private static Logger log = Logger.getLogger(AbstractAnnotationBasedValueConverterService.class);
 

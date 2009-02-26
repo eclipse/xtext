@@ -7,13 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion;
 
+import org.eclipse.xtext.Stable;
+import org.eclipse.xtext.conversion.impl.AbstractValueConverterService;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
- * TODO document me!
+ * @author Sven Efftinge - Initial contribution and API
+ *
  */
-public interface IValueConverterService extends ILanguageService {
+@Stable(since="0.7.0", subClass=AbstractValueConverterService.class)
+public interface IValueConverterService {
 
 	public Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException;
 

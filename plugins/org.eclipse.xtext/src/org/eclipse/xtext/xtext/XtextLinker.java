@@ -37,7 +37,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
