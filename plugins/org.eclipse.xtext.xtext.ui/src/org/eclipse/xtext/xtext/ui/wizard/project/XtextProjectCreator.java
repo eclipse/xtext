@@ -51,7 +51,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		String basePackage = getXtextProjectInfo().getBasePackage();
 		// DSL Project
-		List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parsetree.reconstr", basePackage + ".services");
+		List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".services");
 		final IProject dslProject = EclipseResourceUtil.createProject(getXtextProjectInfo().getProjectName(),
 				SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", 
@@ -85,7 +85,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
 						"org.eclipse.ui.editors;bundle-version=\"3.4.0\"",
 						"org.eclipse.ui.ide;bundle-version=\"3.4.0\"")), null, null, 
-						getXtextProjectInfo().getBasePackage() + ".ui.internal." + getXtextProjectInfo().getLanguageNameAbbreviation() + "Activator", monitor,
+						getXtextProjectInfo().getBasePackage() + ".internal." + getXtextProjectInfo().getLanguageNameAbbreviation() + "Activator", monitor,
 				null);
 
 		if (dslUIProject == null) {
