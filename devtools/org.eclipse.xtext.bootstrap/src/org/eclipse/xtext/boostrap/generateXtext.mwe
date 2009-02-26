@@ -17,6 +17,7 @@
 		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext">
 			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
 				<file.extensions value="${file.extensions}"/>
+				<basePackage value="org.eclipse"/>
 			</fragments>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext">

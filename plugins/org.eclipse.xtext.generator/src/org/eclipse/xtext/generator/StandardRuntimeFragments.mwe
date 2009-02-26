@@ -1,9 +1,10 @@
 <compose class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
 	<property name="genmodels" value=""/>
 	<property name="file.extensions" value=""/>
+	<property name="basePackage" value=""/>
 	<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
 	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genmodels}"/>
+	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genmodels}" basePackage="${basePackage}"/>
 	<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
 	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>

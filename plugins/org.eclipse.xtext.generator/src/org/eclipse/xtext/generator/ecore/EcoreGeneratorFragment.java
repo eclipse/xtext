@@ -8,15 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
-import static org.eclipse.xtext.EcoreUtil2.collect;
-import static org.eclipse.xtext.EcoreUtil2.typeSelect;
-import static org.eclipse.xtext.GrammarUtil.getNamespace;
-import static org.eclipse.xtext.XtextPackage.GENERATED_METAMODEL__EPACKAGE;
+import static org.eclipse.xtext.EcoreUtil2.*;
+import static org.eclipse.xtext.XtextPackage.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,6 +66,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return new String[] { "org.eclipse.emf.ecore", "org.eclipse.emf.common" };
 	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return Collections.singletonList((Object)getBasePackage(grammar));
+	}
 
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
@@ -86,7 +90,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		List<GeneratedMetamodel> list = typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		List<EPackage> packs = collect(list, GENERATED_METAMODEL__EPACKAGE, EPackage.class);
 		String path = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
-		generateEcoreJavaClasses(packs, getNamespace(grammar), path, grammar);
+		generateEcoreJavaClasses(packs, getBasePackage(grammar), path, grammar);
 	}
 
 	private String urisString;
@@ -119,7 +123,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return result;
 	}
 
-	public void generateEcoreJavaClasses(Collection<? extends EPackage> ps, String basePackage, final String uri,
+	public void generateEcoreJavaClasses(Collection<? extends EPackage> ps, final String basePackage, final String uri,
 			final Grammar grammar) throws ConfigurationException {
 
 		Collection<? extends EPackage> packs2 = EcoreUtil.copyAll(ps);
@@ -225,9 +229,22 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		if (diagnostic.getSeverity() != Diagnostic.OK)
 			log.info(diagnostic);
 	}
+	
+	
+	private String basePackage = null;
+	public void setBasePackage(String basePackage) {
+		if ("".equals(basePackage.trim()))
+			return;
+		this.basePackage = basePackage;
+	}
+	public String getBasePackage(Grammar g) {
+		if (basePackage==null)
+			return GrammarUtil.getNamespace(g);
+		return basePackage;
+	}
 
-	public static String getGeneratedEPackageName(Grammar g, EPackage pack) {
-		return GrammarUtil.getNamespace(g) + "." + pack.getName() + "." + Strings.toFirstUpper(pack.getName())
+	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
+		return getBasePackage(g) + "." +pack.getName() +"."+ Strings.toFirstUpper(pack.getName())
 				+ "Package";
 	}
 }

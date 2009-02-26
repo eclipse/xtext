@@ -35,7 +35,7 @@ public class XtextStandaloneSetup implements ISetup {
 	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/Xtext")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/Xtext", org.eclipse.xtext.xtext.XtextPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/Xtext", org.eclipse.xtext.XtextPackage.eINSTANCE);
 	}
 
 
