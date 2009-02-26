@@ -5,7 +5,7 @@
 	
 	<property name="ametamodel.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"/>
 	<property name="baseinheritance.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
-	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/model/xtext.genmodel"/>
+	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	
