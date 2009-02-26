@@ -35,7 +35,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.resource.XtextResource;
