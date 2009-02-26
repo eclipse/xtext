@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="KeywordsTestLanguage" basePackage="org.eclipse.xtext.parser.keywords" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#/"/>
+    <ecorePackage href="KeywordsTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model"/>
+      <ecoreClass href="KeywordsTestLanguage.ecore#//Model"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/first"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="KeywordsTestLanguage.ecore#//Model/first"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/second"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="KeywordsTestLanguage.ecore#//Model/second"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/third"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="KeywordsTestLanguage.ecore#//Model/third"/>
       </genFeatures>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.ecore#//Model/forth"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="KeywordsTestLanguage.ecore#//Model/forth"/>
       </genFeatures>
     </genClasses>
   </genPackages>

@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="ASCII"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
   <genPackages prefix="LookaheadLang" basePackage="org.eclipse.xtext.testlanguages" disposableProviderFactory="true">
-    <ecorePackage href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#/"/>
+    <ecorePackage href="LookaheadTestLanguage.ecore#/"/>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Entry"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//Entry"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Entry/contents"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="LookaheadTestLanguage.ecore#//Entry/contents"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//Alts"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//Alts/x"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="LookaheadTestLanguage.ecore#//Alts/x"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead0"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//LookAhead0"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead1"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//LookAhead1"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead1/y"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="LookaheadTestLanguage.ecore#//LookAhead1/y"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead2"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//LookAhead2"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead2/z"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="LookaheadTestLanguage.ecore#//LookAhead2/z"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead3"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//LookAhead3"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead3/z"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="LookaheadTestLanguage.ecore#//LookAhead3/z"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead4"/>
+      <ecoreClass href="LookaheadTestLanguage.ecore#//LookAhead4"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="file:/Users/zarnekow/EclipseWorkspaces/3.5M5/develop/../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.ecore#//LookAhead4/x"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="LookaheadTestLanguage.ecore#//LookAhead4/x"/>
       </genFeatures>
     </genClasses>
   </genPackages>
