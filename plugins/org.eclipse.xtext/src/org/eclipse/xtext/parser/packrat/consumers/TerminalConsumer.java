@@ -12,12 +12,12 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenSource;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -45,7 +45,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 			if (element instanceof CrossReference)
 				getTokenAcceptor().accept(new ParsedTerminalWithFeatureInfo(prevMarker, getInput().getOffset()-prevMarker,
 						element, isHidden(), feature, new IParsedTokenSource(){
-							public int parseAgain(AbstractParsedToken token) throws Exception {
+							public int parseAgain(ParsedToken token) throws Exception {
 								return consume(feature, isMany, isBoolean, element, notMatching, optional);
 							}
 						}, optional));
@@ -53,14 +53,14 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 				getTokenAcceptor().accept(new ParsedTerminalWithFeature(prevMarker, getInput().getOffset()-prevMarker,
 						element != null ? element : getGrammarElement(), isHidden(), feature, isMany, isBoolean, getRuleName(),
 						new IParsedTokenSource(){
-							public int parseAgain(AbstractParsedToken token) throws Exception {
+							public int parseAgain(ParsedToken token) throws Exception {
 								return consume(feature, isMany, isBoolean, element, notMatching, optional);
 							}
 						}, optional));
 		} else
 			getTokenAcceptor().accept(new ParsedTerminal(prevMarker, getInput().getOffset()-prevMarker, element != null ? element : getGrammarElement(), isHidden(),
 					new IParsedTokenSource(){
-						public int parseAgain(AbstractParsedToken token) throws Exception {
+						public int parseAgain(ParsedToken token) throws Exception {
 							return consume(feature, isMany, isBoolean, element, notMatching, optional);
 						}
 					}, optional));

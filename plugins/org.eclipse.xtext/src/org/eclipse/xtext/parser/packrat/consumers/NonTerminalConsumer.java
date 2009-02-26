@@ -23,9 +23,9 @@ import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler.IHiddenTokenState;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory.IMarker;
+import org.eclipse.xtext.parser.packrat.internal.IFurtherParsable;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-import org.eclipse.xtext.parser.packrat.tokens.AbstractParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.AlternativesToken;
 import org.eclipse.xtext.parser.packrat.tokens.AssignmentToken;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
@@ -69,12 +69,14 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		return result.getResult();
 	}
 
-	private int doConsumeAlternatives(ElementConsumer<Alternatives> alternativesConsumer, IElementConsumer[] alternativesElements, boolean optional) throws Exception {
-		final AlternativesResult result = createAlternativesResult(alternativesConsumer, optional);
+	private int doConsumeAlternatives(ElementConsumer<Alternatives> alternativesConsumer, IElementConsumer[] alternativesElements,
+			IFurtherParsable.Source<AlternativesToken> source, boolean optional, int entry) throws Exception {
+		final AlternativesResult result = createAlternativesResult(alternativesConsumer, source, optional, alternativesElements.length);
 		result.reset();
-		for(IElementConsumer consumer: alternativesElements) {
+		result.setAlternative(entry - 1);
+		for (int i = entry; i < alternativesElements.length; i++) {
 			result.nextAlternative();
-			if (result.isAlternativeDone(consumer.consume()))
+			if (result.isAlternativeDone(alternativesElements[i].consume()))
 				return result.getResult();
 		}
 		if (result.bestResult == ConsumeResult.EMPTY_MATCH) {
@@ -143,7 +145,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return result;
 		}
 
-		public int parseAgain(AbstractParsedToken token) throws Exception {
+		public int parseAgain(ParsedToken token) throws Exception {
 			return consume();
 		}
 
@@ -183,7 +185,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
 
-	protected abstract class AlternativesConsumer extends ElementConsumer<Alternatives> {
+	protected abstract class AlternativesConsumer extends ElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
 		private IElementConsumer[] consumers;
 
@@ -193,7 +195,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		@Override
 		protected final int doConsume(boolean optional) throws Exception {
-			return doConsumeAlternatives(this, getConsumers(), optional);
+			return doConsumeAlternatives(this, getConsumers(), this, optional, 0);
 		}
 
 		protected final IElementConsumer[] getConsumers() {
@@ -203,6 +205,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 				consumers = acceptor.getResult();
 			}
 			return consumers;
+		}
+
+		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
+			final AlternativesToken alternativesToken = token.getToken();
+			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
 		}
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
@@ -266,7 +273,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
 
-	protected abstract class OptionalAlternativesConsumer extends OptionalElementConsumer<Alternatives> {
+	protected abstract class OptionalAlternativesConsumer extends OptionalElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
 		private IElementConsumer[] consumers;
 
@@ -276,7 +283,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		@Override
 		protected final int doConsume(boolean optional) throws Exception {
-			return doConsumeAlternatives(this, getConsumers(), optional);
+			return doConsumeAlternatives(this, getConsumers(), this, optional, 0);
 		}
 
 		protected final IElementConsumer[] getConsumers() {
@@ -286,6 +293,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 				consumers = acceptor.getResult();
 			}
 			return consumers;
+		}
+
+		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
+			final AlternativesToken alternativesToken = token.getToken();
+			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
 		}
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
@@ -348,7 +360,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
 
-	protected abstract class LoopAlternativesConsumer extends LoopElementConsumer<Alternatives> {
+	protected abstract class LoopAlternativesConsumer extends LoopElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
 		private IElementConsumer[] consumers;
 
@@ -358,7 +370,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		@Override
 		protected final int doConsume(boolean optional) throws Exception {
-			return doConsumeAlternatives(this, getConsumers(), optional);
+			return doConsumeAlternatives(this, getConsumers(), this, optional, 0);
 		}
 
 		protected final IElementConsumer[] getConsumers() {
@@ -368,6 +380,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 				consumers = acceptor.getResult();
 			}
 			return consumers;
+		}
+
+		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
+			final AlternativesToken alternativesToken = token.getToken();
+			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
 		}
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
@@ -394,8 +411,8 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 
 		@Override
-		public int parseAgain(AbstractParsedToken token) throws Exception {
-			if (!((ParsedToken)token).isOptional())
+		public int parseAgain(ParsedToken token) throws Exception {
+			if (!token.isOptional())
 				return consume();
 			IMarker marker = mark();
 			while(doConsume(true) == ConsumeResult.SUCCESS) {
@@ -475,7 +492,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
 
-	protected abstract class MandatoryLoopAlternativesConsumer extends MandatoryLoopElementConsumer<Alternatives> {
+	protected abstract class MandatoryLoopAlternativesConsumer extends MandatoryLoopElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
 		private IElementConsumer[] consumers;
 
@@ -485,7 +502,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		@Override
 		protected final int doConsume(boolean optional) throws Exception {
-			return doConsumeAlternatives(this, getConsumers(), optional);
+			return doConsumeAlternatives(this, getConsumers(), this, optional, 0);
 		}
 
 		protected final IElementConsumer[] getConsumers() {
@@ -495,6 +512,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 				consumers = acceptor.getResult();
 			}
 			return consumers;
+		}
+
+		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
+			final AlternativesToken alternativesToken = token.getToken();
+			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
 		}
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
@@ -534,12 +556,18 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		private int alternative;
 		private IMarker bestMarker;
 		private IMarker currentMarker;
+		private final AlternativesToken begin;
 
-		protected AlternativesResult(ElementConsumer<Alternatives> elementConsumer) {
+		protected AlternativesResult(ElementConsumer<Alternatives> elementConsumer, AlternativesToken begin) {
 			super(elementConsumer);
 			alternative = -1;
 			bestResult = ConsumeResult.SUCCESS;
+			this.begin = begin;
 			bestMarker = mark();
+		}
+
+		public void setAlternative(int alternative) {
+			this.alternative = alternative;
 		}
 
 		public void nextAlternative() {
@@ -557,6 +585,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		public int getResult() {
 			bestMarker.commit();
+			begin.setAlternative(alternative);
 			getTokenAcceptor().accept(new AlternativesToken.End(getOffset(), alternative));
 			return bestResult;
 		}
@@ -624,9 +653,11 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		this.backtracker = configuration.getBacktracker();
 	}
 
-	private AlternativesResult createAlternativesResult(ElementConsumer<Alternatives> alternativesConsumer, boolean optional) {
-		getTokenAcceptor().accept(new AlternativesToken(getOffset(), alternativesConsumer.getElement(), alternativesConsumer, optional));
-		return new AlternativesResult(alternativesConsumer);
+	private AlternativesResult createAlternativesResult(ElementConsumer<Alternatives> alternativesConsumer,
+			IFurtherParsable.Source<AlternativesToken> source, boolean optional, int totalAlternatives) {
+		final AlternativesToken begin = new AlternativesToken(getOffset(), alternativesConsumer.getElement(), source, optional, totalAlternatives);
+		getTokenAcceptor().accept(begin);
+		return new AlternativesResult(alternativesConsumer, begin);
 	}
 
 	private GroupResult createGroupResult(ElementConsumer<Group> groupConsumer, boolean optional) {
@@ -657,7 +688,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		IMarker marker = mark();
 		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), grammarElement != null ? grammarElement : getGrammarElement(),
 				getDefaultType(), new IParsedTokenSource(){
-					public int parseAgain(AbstractParsedToken token) throws Exception {
+					public int parseAgain(ParsedToken token) throws Exception {
 						return consume(feature, isMany, isDatatype, isBoolean, grammarElement, optional);
 					}
 				}, optional));
@@ -673,7 +704,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		IMarker marker = mark();
 		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), getGrammarElement(),
 				getDefaultType(), new IParsedTokenSource(){
-					public int parseAgain(AbstractParsedToken token) throws Exception {
+					public int parseAgain(ParsedToken token) throws Exception {
 						throw new IllegalStateException("Cannot reparse root token");
 					}
 				}, false));

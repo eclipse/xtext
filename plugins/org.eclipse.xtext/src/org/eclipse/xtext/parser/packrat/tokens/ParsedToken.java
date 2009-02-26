@@ -32,10 +32,6 @@ public class ParsedToken extends AbstractParsedToken {
 		return grammarElement;
 	}
 
-//	public void setGrammarElement(EObject grammarElement) {
-//		this.grammarElement = grammarElement;
-//	}
-
 	public IParsedTokenSource getSource() {
 		return source;
 	}
