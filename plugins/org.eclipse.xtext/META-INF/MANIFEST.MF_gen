@@ -4,7 +4,7 @@ Bundle-Name: org.eclipse.xtext
 Bundle-SymbolicName: org.eclipse.xtext
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtext.xtext
+Export-Package: org.eclipse.xtext
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
