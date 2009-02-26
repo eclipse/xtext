@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
@@ -29,10 +30,14 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 
 	public void setUri(String uri) {
 		XtextResourceSet rs = new XtextResourceSet();
-		Resource resource = rs.getResource(URI.createURI(uri), true);
+		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
 		}
+		if (!resource.getErrors().isEmpty()) {
+			throw new IllegalStateException(resource.getErrors().toString());
+		}
+		
 		grammar = (Grammar) resource.getContents().get(0);
 		EValidator validator = EValidator.Registry.INSTANCE.getEValidator(XtextPackage.eINSTANCE);
 		if (validator != null) {
