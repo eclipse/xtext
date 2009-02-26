@@ -1895,16 +1895,20 @@ ruleSingleAssignmentValue returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringImport(), "import"); 
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00100CrossReferenceEStringNamedObject(), "refObject"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-)(	
+)(('.' 
+    {
+        createLeafNode(grammarAccess.prSingleAssignmentValue().ele001100KeywordFullStop(), null); 
+    }
+(	
 	
-	    lv_impFrag_3=	RULE_FRAGMENT
+	    lv_refFeature_4=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00110LexerRuleCallFRAGMENT(), "impFrag"); 
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0011010LexerRuleCallID(), "refFeature"); 
 	}
  
 	    {
@@ -1914,13 +1918,63 @@ ruleSingleAssignmentValue returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "impFrag", lv_impFrag_3, "FRAGMENT", lastConsumedNode);
+	       		set($current, "refFeature", lv_refFeature_4, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
 	
-)))
+))(('[' 
+    {
+        createLeafNode(grammarAccess.prSingleAssignmentValue().ele0011100KeywordLeftSquareBracket(), null); 
+    }
+(	
+	
+	    lv_refIndex_6=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00111010LexerRuleCallINT(), "refIndex"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "refIndex", lv_refIndex_6, "INT", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))']' 
+    {
+        createLeafNode(grammarAccess.prSingleAssignmentValue().ele001111KeywordRightSquareBracket(), null); 
+    }
+)?)?))
+    |(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.prSingleAssignmentValue().ele010ParserRuleCallCreatedObject(), currentNode); 
+	    }
+	    lv_newObject_8=ruleCreatedObject 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "newObject", lv_newObject_8, "CreatedObject", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+))
     |((	
 	
 		
@@ -1932,20 +1986,16 @@ ruleSingleAssignmentValue returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0100CrossReferenceEStringNamedObject(), "refObject"); 
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele100CrossReferenceEStringImport(), "import"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-)(('.' 
-    {
-        createLeafNode(grammarAccess.prSingleAssignmentValue().ele01100KeywordFullStop(), null); 
-    }
-(	
+)(	
 	
-	    lv_refFeature_6=	RULE_ID
+	    lv_impFrag_10=	RULE_FRAGMENT
 	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele011010LexerRuleCallID(), "refFeature"); 
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele110LexerRuleCallFRAGMENT(), "impFrag"); 
 	}
  
 	    {
@@ -1955,63 +2005,13 @@ ruleSingleAssignmentValue returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "refFeature", lv_refFeature_6, "ID", lastConsumedNode);
+	       		set($current, "impFrag", lv_impFrag_10, "FRAGMENT", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
 	
-))(('[' 
-    {
-        createLeafNode(grammarAccess.prSingleAssignmentValue().ele011100KeywordLeftSquareBracket(), null); 
-    }
-(	
-	
-	    lv_refIndex_8=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0111010LexerRuleCallINT(), "refIndex"); 
-	}
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-	            associateNodeWithAstElement(currentNode, $current);
-	        }
-	        
-	        try {
-	       		set($current, "refIndex", lv_refIndex_8, "INT", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
-	
-))']' 
-    {
-        createLeafNode(grammarAccess.prSingleAssignmentValue().ele01111KeywordRightSquareBracket(), null); 
-    }
-)?)?))
-    |(	
-	
-	    
-	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSingleAssignmentValue().ele10ParserRuleCallCreatedObject(), currentNode); 
-	    }
-	    lv_newObject_10=ruleCreatedObject 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        
-	        try {
-	       		set($current, "newObject", lv_newObject_10, "CreatedObject", currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-	
-));
+)));
 
 
 
