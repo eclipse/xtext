@@ -16,15 +16,12 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Moritz Eysholt
  */
-
-// TODO: rename to IAstSerializer
-public interface IParseTreeConstructor extends ILanguageService {
+public interface IParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object);
 

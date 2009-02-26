@@ -9,20 +9,25 @@ package org.eclipse.xtext.crossref;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.Stable;
+import org.eclipse.xtext.crossref.impl.AbstractScopeProvider;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  * @author Sven Efftinge
  */
-public interface IScopeProvider extends ILanguageService {
-	
+@Stable(since = "0.7.0", subClass = AbstractScopeProvider.class)
+public interface IScopeProvider {
+
 	/**
 	 * Returns a scope for the given context.
-	 *
-	 * @param context - the element from which an element shall be referenced 
-	 * @param reference - the reference to be filled.  
-	 * @return {@link IScope} representing the inner most {@link IScope} for the passed context and reference
+	 * 
+	 * @param context
+	 *            - the element from which an element shall be referenced
+	 * @param reference
+	 *            - the reference to be filled.
+	 * @return {@link IScope} representing the inner most {@link IScope} for the
+	 *         passed context and reference
 	 */
 	public IScope getScope(EObject context, EReference reference);
 }

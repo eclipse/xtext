@@ -23,7 +23,7 @@ import org.eclipse.xtext.util.Function;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractNestedScope implements IScope {
+public abstract class AbstractNestedScope extends AbstractScope implements IScope {
 
 	private IScope outer;
 	

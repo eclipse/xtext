@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.crossref.internal;
+package org.eclipse.xtext.crossref.impl;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,9 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -34,7 +32,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Linker implements ILinker {
+public class Linker extends AbstractLinker {
 
 	private static Logger log = Logger.getLogger(Linker.class);
 

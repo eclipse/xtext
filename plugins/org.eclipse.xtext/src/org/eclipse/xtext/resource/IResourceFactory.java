@@ -8,11 +8,10 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * TODO document why this is necessary
  */
-public interface IResourceFactory extends Resource.Factory, ILanguageService {
+public interface IResourceFactory extends Resource.Factory {
 
 }

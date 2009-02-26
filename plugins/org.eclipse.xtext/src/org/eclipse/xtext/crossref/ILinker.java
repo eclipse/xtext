@@ -8,15 +8,17 @@
 package org.eclipse.xtext.crossref;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Stable;
+import org.eclipse.xtext.crossref.impl.AbstractLinker;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ILinker extends ILanguageService{
+@Stable(since="0.7.0", subClass=AbstractLinker.class)
+public interface ILinker {
 	
 	/**
 	 * sets cross references in the passed {@link EObject} and it's {@link EObject#eAllContents()}, 

@@ -11,12 +11,11 @@ package org.eclipse.xtext.parser;
 import java.io.InputStream;
 
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IParser extends ILanguageService {
+public interface IParser {
 	
 	IParseResult parse(InputStream in);
 	

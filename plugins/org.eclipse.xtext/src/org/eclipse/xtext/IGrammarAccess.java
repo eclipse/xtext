@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * TODO Javadoc
  */
-public interface IGrammarAccess extends ILanguageService {
+public interface IGrammarAccess {
 
 	public interface IAbstractRuleAccess {
 		public AbstractRule getRule();

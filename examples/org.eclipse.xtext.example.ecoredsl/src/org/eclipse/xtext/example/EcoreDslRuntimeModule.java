@@ -24,7 +24,7 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
-import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;

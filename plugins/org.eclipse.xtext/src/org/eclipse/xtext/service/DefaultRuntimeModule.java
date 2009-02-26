@@ -12,7 +12,7 @@ import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
-import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;

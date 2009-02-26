@@ -8,17 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
- * TODO javadoc, find a more meaningful name
- * @author sven efftinge
+ * @author Sven Efftinge
  */
-public interface IAstFactory extends ILanguageService {
+public interface IAstFactory {
 
 	/**
 	 * creates an instance of the given type

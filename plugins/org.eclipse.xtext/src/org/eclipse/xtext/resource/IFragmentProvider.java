@@ -10,7 +10,6 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * Used to compute fragments (i.e. resource local IDs) for EObjects and
@@ -20,7 +19,7 @@ import org.eclipse.xtext.service.ILanguageService;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public interface IFragmentProvider extends ILanguageService {
+public interface IFragmentProvider {
 	/**
 	 * Computes the local ID of the given object. 
 	 * @param obj
