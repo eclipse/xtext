@@ -9,12 +9,11 @@
 package org.eclipse.xtext.ui.common.editor.folding;
 
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IFoldingStructureProvider extends ILanguageService {
+public interface IFoldingStructureProvider {
 	void updateFoldingStructure(ProjectionViewer projectionViewer);
 }
