@@ -73,7 +73,7 @@ ListAssignmentValue returns AssignmentValue:
 	 index=INT ":" (("[" refIndex=INT "]") | value=STRING | (refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?) | newObject=CreatedObject | (^import=[Import] impFrag=FRAGMENT));
 	
 SingleAssignmentValue returns AssignmentValue:
-	 keyword="null" | value=STRING | (^import=[Import] impFrag=FRAGMENT) | (refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?) | newObject=CreatedObject;
+	 keyword="null" | value=STRING | (refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?) | newObject=CreatedObject | (^import=[Import] impFrag=FRAGMENT);
 	
 CreatedObject: 
 	(ObjectNew|ObjectCopy) name=ID? ("{"
