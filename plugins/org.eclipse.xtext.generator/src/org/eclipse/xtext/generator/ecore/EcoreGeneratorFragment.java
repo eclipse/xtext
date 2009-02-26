@@ -129,10 +129,17 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		Collection<? extends EPackage> packs2 = EcoreUtil.copyAll(ps);
 
 		ResourceSet rs = new ResourceSetImpl();
-		Resource res2 = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
-				+ ".ecore").getAbsolutePath()));
-		Resource res = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
-				+ ".genmodel").getAbsolutePath()));
+		Resource res2;
+		Resource res;
+		try {
+			res2 = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
+					+ ".ecore").getCanonicalPath()));
+			res = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
+					+ ".genmodel").getCanonicalPath()));
+		} catch (IOException e1) {
+			throw new IllegalStateException("Couldn't compute canonical path for "+new File(uri + "/" + grammar.getName().replace('.', '/')
+					+ ".genmodel").getAbsolutePath());
+		}
 
 		GenModel genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
 		genModel.initialize(packs2);
