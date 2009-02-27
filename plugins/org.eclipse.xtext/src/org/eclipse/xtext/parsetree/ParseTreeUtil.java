@@ -445,7 +445,8 @@ public final class ParseTreeUtil {
 			else if (assignment.getTerminal() instanceof Alternatives) {
 				addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
 			}
-			if (!this.assignment.equals(assignment) && getRule(this.assignment).equals(getRule(assignment))) {
+			AbstractRule assigmentRule = getRule(this.assignment);
+			if (!this.assignment.equals(assignment) && null!=assigmentRule && assigmentRule.equals(getRule(assignment))) {
 				elementList.add(assignment);
 			}
 			return elementList;
@@ -507,7 +508,7 @@ public final class ParseTreeUtil {
 			}
 			else if (terminal instanceof RuleCall) {
 				rule = ((RuleCall) terminal).getRule();
-			}
+			} 
 			return rule;
 		}
 	}
