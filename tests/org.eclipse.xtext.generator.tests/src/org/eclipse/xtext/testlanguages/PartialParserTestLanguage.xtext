@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.testlanguages.PartialParserTestLanguage
+grammar org.eclipse.xtext.testlanguages.PartialParserTestLanguage
+
 generate partialParserTestLanguage "http://example.xtext.org/PartialParserTestLanguage"
 
 SomeContainer :

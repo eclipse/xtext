@@ -19,30 +19,30 @@ import org.eclipse.xtext.util.StringInputStream;
  */
 public class DynamicChannelTest extends AbstractGeneratorTest {
 
-	private String language = "language";
-	private String a = "a";
-	private String ext = "extends";
-	private String b = "b";
-	private String dot = ".";
-	private String c = "c";
-	private String space = " ";
-	private String comment = "/* comment \n*/";
-	private String lb = "\n";
-	private String rulename = "rulename";
-	private String d = "d";
-	private String returns = "returns";
-	private String name = "name";
-	private String ass = "=";
-	private String id = "ID";
-	private String sc = ";";
-	private String colon = ":";
-	private String model = "language a extends b. c\n/* comment \n*/rulename  returns \nd: name=ID;";
-	
+	private final String grammar = "grammar";
+	private final String a = "a";
+	private final String ext = "extends";
+	private final String b = "b";
+	private final String dot = ".";
+	private final String c = "c";
+	private final String space = " ";
+	private final String comment = "/* comment \n*/";
+	private final String lb = "\n";
+	private final String rulename = "rulename";
+	private final String d = "d";
+	private final String returns = "returns";
+	private final String name = "name";
+	private final String ass = "=";
+	private final String id = "ID";
+	private final String sc = ";";
+	private final String colon = ":";
+	private final String model = "grammar a extends b. c\n/* comment \n*/rulename  returns \nd: name=ID;";
+
 	@Override
 	protected void setUp() throws Exception {
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 	}
-	
+
 	public void testParseSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringInputStream(model));
 		assertNotNull(result);
@@ -51,13 +51,13 @@ public class DynamicChannelTest extends AbstractGeneratorTest {
 		assertNotNull(result.getParseErrors());
 		assertTrue(result.getParseErrors().isEmpty());
 	}
-	
+
 	public void testNodeModelOfSimpleLanguage() throws Exception {
 		IParseResult result = getParser().parse(new StringInputStream(model));
 		List<LeafNode> leafs = result.getRootNode().getLeafNodes();
 		assertEquals(23, leafs.size());
 		int i = 0;
-		checkLeaf(leafs.get(i++), language, false);
+		checkLeaf(leafs.get(i++), grammar, false);
 		checkLeaf(leafs.get(i++), space, true);
 		checkLeaf(leafs.get(i++), a, false);
 		checkLeaf(leafs.get(i++), space, true);

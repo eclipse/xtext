@@ -161,7 +161,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testTypesOfImplicitSuperGrammar() throws Exception {
-		final String xtextGrammar = "language test generate test 'http://test' MyRule: myFeature=INT;";
+		final String xtextGrammar = "grammar test generate test 'http://test' MyRule: myFeature=INT;";
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
 		transformer.removeGeneratedPackages();
@@ -183,7 +183,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testRuleWithoutExplicitReturnType() throws Exception {
-		final String grammar = "language test generate test 'http://test' MyRule: myFeature=INT;";
+		final String grammar = "grammar test generate test 'http://test' MyRule: myFeature=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EList<EClassifier> classifiers = ePackage.getEClassifiers();
 		assertEquals(1, classifiers.size());
@@ -192,7 +192,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testRulesWithExplicitReturnType() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA returns TypeA: featureA=INT; RuleB returns TypeB: featureB= INT;";
+		final String grammar = "grammar test generate test 'http://test' RuleA returns TypeA: featureA=INT; RuleB returns TypeB: featureB= INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		assertNotNull(ePackage.getEClassifier("TypeA"));
@@ -200,7 +200,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testSimpleHierarchy() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: RuleB; RuleB: featureB= INT;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: RuleB; RuleB: featureB= INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -214,7 +214,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testDiamondHierarchy() throws Exception {
-		final String grammar = "language test generate test 'http://test' " +
+		final String grammar = "grammar test generate test 'http://test' " +
 				"Model: name=ID value=SubNamed1 otherValue=SubNamed2 thirdValue=SubNamed3;" +
 				"Named: SubNamed1 | SubNamed2 | SubNamed3;" +
 				"SubNamed1: ConcreteNamed1 | ConcreteNamed2;" +
@@ -276,7 +276,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testSingleFeatures() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: featureA=INT;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: featureA=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -286,7 +286,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testBuiltInFeatureTypes() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: featureA=ID featureB=INT featureC=STRING;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: featureA=ID featureB=INT featureC=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -298,7 +298,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testCardinalityOfFeatures() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: featureA?=ID featureB=INT featureC+=STRING;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: featureA?=ID featureB=INT featureC+=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -310,7 +310,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testOptionalAssignmentsInGroup() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: (featureA?='abstract' featureB+=INT)?;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: (featureA?='abstract' featureB+=INT)?;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -321,7 +321,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testFeaturesAndInheritanceOptionalRuleCall() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -337,7 +337,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testFeaturesAndInheritanceMandatoryRuleCall() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -353,7 +353,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testFeaturesAndInheritanceOfMandatoryAlternativeRuleCalls() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID) featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID) featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -381,7 +381,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testFeaturesAndInheritanceOfOptionalOptionalRuleCalls() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID)? featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID)? featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -409,7 +409,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testFeaturesAndInheritanceOfNestedRuleCalls() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " RuleA: ((RuleB|RuleC featureC1=ID)? featureBC=ID | (RuleC|RuleD featureD1=ID) featureCD=ID) featureA=ID;";
 		grammar += " RuleB: featureB2=ID;";
 		grammar += " RuleC: featureC2=ID;";
@@ -451,7 +451,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testFeaturesAndInheritanceOfActions01() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: ({Add.a=current} '+'|{Sub.a=current} '-') featureAS=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: ({Add.a=current} '+'|{Sub.a=current} '-') featureAS=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -483,7 +483,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	public void testFeaturesAndInheritanceOfActions02() throws Exception {
 		String grammar = "";
-		grammar += "language org.eclipse.xtext.testlanguages.ActionTestLanguage ";
+		grammar += "grammar org.eclipse.xtext.testlanguages.ActionTestLanguage ";
 		grammar += "generate ActionLang";
 		grammar += " 'http://www.eclipse.org/2008/tmf/xtext/ActionLang'";
 		grammar += "";
@@ -517,7 +517,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testAssignedRuleCall() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: callA1=RuleB callA2+=RuleB simpleFeature=ID; RuleB: featureB=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: callA1=RuleB callA2+=RuleB simpleFeature=ID; RuleB: featureB=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -535,7 +535,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testAssignedCrossReference() throws Exception {
-		final String grammar = "language test generate test 'http://test' " +
+		final String grammar = "grammar test generate test 'http://test' " +
 				"RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; " +
 				"RuleB returns TypeB: featureB=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
@@ -555,7 +555,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testAssignedParenthesizedElement() throws Exception {
-		String grammar = " language test generate test 'http://test'";
+		String grammar = " grammar test generate test 'http://test'";
 		grammar += " RuleA: featureA1?=(RuleB) refA1=(RuleB) refA2=(RuleB|RuleC) refA3+=(RuleB|RuleC|RuleD) refA4=(RuleB|RuleD) featureA2+=('a'|'b');";
 		grammar += " RuleB returns TypeB: RuleC? featureB=ID;";
 		grammar += " RuleC: featureC=ID;";
@@ -586,7 +586,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testAssignedKeyword() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: featureA?=('+'|'-') featureB=('*'|'/');";
+		final String grammar = "grammar test generate test 'http://test' RuleA: featureA?=('+'|'-') featureB=('*'|'/');";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -597,13 +597,13 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testImportWithoutAlias() throws Exception {
-		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
+		final String grammar = "grammar test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
 		getEPackageFromGrammar(grammar);
 	}
 
 	public void testGenerateTwoModels() throws Exception {
 		String grammar = "";
-		grammar += " language test";
+		grammar += " grammar test";
 		grammar += " generate t1 'http://t1'";
 		grammar += " generate t2 'http://t2' as t2";
 		grammar += " RuleA: featureA=ID;";
@@ -627,7 +627,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	public void testUseSameModelAlias() throws Exception {
 		String grammar = "";
-		grammar += " language test";
+		grammar += " grammar test";
 		grammar += " generate t1 'http://t1' as target";
 		grammar += " generate t2 'http://t2' as target";
 		grammar += " RuleA: featureA=ID;"; // no alias => cannot be created
@@ -642,7 +642,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testModifyingSealedModel() throws Exception {
-		final String grammar = "language test " +
+		final String grammar = "grammar test " +
 				"generate test 'http://test' " +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"RuleA returns ecore::SomeNewTypeA: feature=ID;";
@@ -652,7 +652,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testImportingUnknownModel() throws Exception {
-		final String grammar = "language test " +
+		final String grammar = "grammar test " +
 				"generate test 'http://test' " +
 				"import 'http://www.unknownModel' as unknownModel " +
 				"RuleA: feature=ID;";
@@ -660,26 +660,26 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testMoreThanOneRuleCall() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
 				(EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
 
 	public void testRuleCallAndAction() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: RuleB {TypeC.B = current}; RuleB: featureB=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: RuleB {TypeC.B = current}; RuleB: featureB=ID;";
 		getEPackageFromGrammar(grammar);
 	}
 
 	public void testRuleCallActionAndRuleCall() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: RuleB {TypeC.B = current} RuleB; RuleB: featureB=ID;";
+		final String grammar = "grammar test generate test 'http://test' RuleA: RuleB {TypeC.B = current} RuleB; RuleB: featureB=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
 				(EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
 
 	public void testAddingFeatureTwice() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA returns TypeA: featureA=ID; RuleB returns TypeA: featureA=STRING;";
+		final String grammar = "grammar test generate test 'http://test' RuleA returns TypeA: featureA=ID; RuleB returns TypeA: featureA=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());
 		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
@@ -691,7 +691,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	public void testAddingDifferentFeaturesWithSameName01() throws Exception {
 		// simple datatypes do not have a common compatible type
-		final String grammar = "" + " language test generate test 'http://test'" + " RuleA returns TypeA: featureA=ID;"
+		final String grammar = "" + " grammar test generate test 'http://test'" + " RuleA returns TypeA: featureA=ID;"
 				+ " RuleB returns TypeA: featureA=INT;";
 
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoCompatibleFeatureTypeAvailable), (String) anyObject(),
@@ -706,7 +706,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testAddingDifferentFeaturesWithSameName02() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " RuleA returns TypeA: featureA=RuleD;";
 		grammar += " RuleB returns TypeA: featureA=RuleC;";
 		grammar += " RuleC: RuleD;";
@@ -727,7 +727,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	public void testAddingDifferentFeaturesWithSameName03() throws Exception {
 		// independent rules are combined as EObject
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " RuleA returns TypeA: featureA1=ID featureA2=RuleD featureA3=RuleC;";
 		grammar += " RuleB returns TypeA: featureA2=RuleC featureA4=INT;";
 		grammar += " RuleC: featureC=INT;";
@@ -752,7 +752,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testUplift01() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " RuleA: (RuleB|RuleC) featureA=ID;";
 		grammar += " RuleB: featureB=INT;";
 		grammar += " RuleC: (featureA=ID)?;";
@@ -776,7 +776,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testCallOfUndeclaredRule() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " RuleA: CallOfUndeclaredRule featureA=ID;";
 		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoSuchRuleAvailable), (String) anyObject(),
 				(EObject) anyObject());
@@ -786,7 +786,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testCycleInTypeHierarchy() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " RuleA: RuleB;";
 		grammar += " RuleB: RuleC;";
 		grammar += " RuleC: RuleA;";
@@ -818,7 +818,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testExpressionLikeLangauge() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += " Ex :	Atom  ({ChainExpression.left+=current} operator=('+'|'-'|'*'|'/') right=Atom )*;" +
 				"Atom returns Ex :   Number |  '(' Ex ')';" +
 				"Number : value=INT;";
@@ -829,7 +829,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testClassNameEString() throws Exception {
-		String grammar = "language test generate test 'http://test'";
+		String grammar = "grammar test generate test 'http://test'";
 		grammar += "Start returns EString: id=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("EString");
@@ -842,7 +842,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testNoException_01() throws Exception {
-		String grammar = "language test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+		String grammar = "grammar test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"generate test 'http://test'\n" +
 				"CompositeModel: (model+=Model)+;\n" +
 				"Model: id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ';'\n" +
@@ -857,7 +857,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testNoException_02() throws Exception {
-		String grammar = "language test generate test 'http://test'\n" +
+		String grammar = "grammar test generate test 'http://test'\n" +
 				"Model: (children+=Element)*;\n" +
 				"Element returns Type: Item ( { Item.items+=current } items+=Item );\n" +
 				"Item returns Type:	{ T";
@@ -868,7 +868,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	public void testNoException_03() throws Exception {
-		String grammar = "language test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+		String grammar = "grammar test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"generate test 'http://test'\n" +
 				"CompositeModel: (type+=EClassifier)+;\n" +
 				"EClassifier returns ecore::EClassifier: EDataType | EClass;\n" +
