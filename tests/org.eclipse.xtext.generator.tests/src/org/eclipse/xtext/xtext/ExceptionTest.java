@@ -19,28 +19,28 @@ import org.eclipse.xtext.util.Filter;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ExceptionTest extends AbstractGeneratorTest {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		with(XtextStandaloneSetup.class);
 	}
-	
+
 	public void testNoStackOverflow() throws Exception {
-		String model = "language test\n" +
+		String model = "grammar test\n" +
 			"import 'http://www.eclipse.org/2008/Xtext'	as xtext\n" +
 			"generate test 'http://eclipse.org/xtext/tests/SimpleTest'\n" +
 			"Foo : name=ID (nameRefs+=NameRef)*;\n" +
 			"NameRef returns xtext::RuleCall : rle=[ParserRule];\n" +
 			"MyRule returns xtext::ParserRule : name=ID;";
 		Resource r = getResourceFromString(model);
-		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());		
+		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());
 		r = getResourceFromString(model);
-		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());		
+		assertEquals(r.getErrors().toString(), 1, r.getErrors().size());
 	}
-	
+
 	public void testGeneratedMetamodelWithoutURI() throws Exception {
-		String model = 
-			"language test\n" +
+		String model =
+			"grammar test\n" +
 	        "generate test \n" +
 	        "import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" +
 	        "Keyword : \n" +
@@ -51,10 +51,10 @@ public class ExceptionTest extends AbstractGeneratorTest {
 		assertNotNull(filtered);
 		assertFalse(filtered.iterator().hasNext());
 	}
-	
+
 	public void testFirstAssignmentWithoutLeftSide() throws Exception {
-		String model = 
-			"language test\n" +
+		String model =
+			"grammar test\n" +
             "generate test \"test\"\n" +
             "Numbers: =INT n2=INT ;";
 		Resource r = getResourceFromString(model);

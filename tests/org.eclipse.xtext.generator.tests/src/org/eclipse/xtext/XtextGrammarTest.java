@@ -25,7 +25,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	}
 
 	public void testInstantiate() throws Exception {
-		EObject grammar = getModel("language foo generate foo 'bar' Foo : name=ID;");
+		EObject grammar = getModel("grammar foo generate foo 'bar' Foo : name=ID;");
 		assertWithXtend("'Foo'","rules.first().name",grammar);
 		assertWithXtend("'name'","rules.first().alternatives.feature",grammar);
 	}

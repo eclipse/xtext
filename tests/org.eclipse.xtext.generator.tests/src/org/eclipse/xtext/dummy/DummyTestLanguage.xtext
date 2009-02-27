@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.dummy.DummyTestLanguage
+grammar org.eclipse.xtext.dummy.DummyTestLanguage
 
 generate dummyLang "http://www.eclipse.org/2008/xtext/DummyLang"
 

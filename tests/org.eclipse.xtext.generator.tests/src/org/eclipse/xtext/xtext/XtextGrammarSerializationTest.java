@@ -32,10 +32,10 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 	}
 
 	public void testSimpleSerialization() throws Exception {
-		final String model = "language foo\n"
+		final String model = "grammar foo\n"
 			+ "generate mm \"http://bar\" as fooMM\n"
 			+ "StartRule returns T: name=ID;";
-		final String expectedModel = "language foo\n" + "\n"
+		final String expectedModel = "grammar foo\n" + "\n"
 			+ "generate mm \"http://bar\" as fooMM\n" + "\n"
 			+ "StartRule returns T:\n" + "  name=ID;";
 		doTestSerialization(model, expectedModel);
@@ -53,13 +53,13 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 	}
 
 	public void testMetamodelRefSerialization() throws Exception {
-		final String model = "language foo\n"
+		final String model = "grammar foo\n"
 			+ "import \"http://www.eclipse.org/2008/Xtext\" as xtext\n"
 			+ "generate mm \"http://bar\" as fooMM\n"
 			+ "Foo : name=ID (nameRefs+=NameRef)*;\n"
 			+ "NameRef returns xtext::RuleCall : rule=[ParserRule];\n"
 			+ "MyRule returns xtext::ParserRule : name=ID;";
-		final String expectedModel = "language foo\n" + "\n"
+		final String expectedModel = "grammar foo\n" + "\n"
 			+ "import \"http://www.eclipse.org/2008/Xtext\" as xtext\n"
 			+ "\n" + "generate mm \"http://bar\" as fooMM\n" + "\n"
 			+ "Foo:\n" + "  name=ID (nameRefs+=NameRef)*;\n" + "\n"

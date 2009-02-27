@@ -6,7 +6,8 @@
 * http://www.eclipse.org/legal/epl-v10.html
 *
 *******************************************************************************/
-language org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage
+grammar org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage
+
 generate referenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 	
 	Spielplatz :
