@@ -61,9 +61,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				}
 			}.doSwitch(semanticNode);
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	@Override
@@ -82,7 +80,8 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					}
 					return true;
 				}
-				
+
+				@Override
 				public Boolean caseAssignment(org.eclipse.xtext.Assignment object) {
 					return false;
 				}
@@ -98,9 +97,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				}
 			}.doSwitch(semanticNode);
 		}
-		else {
-			return true;
-		}
+		return true;
 	}
 
 	@Override
@@ -111,7 +108,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			return new XtextSwitch<ContentOutlineNode>() {
 				@Override
 				public ContentOutlineNode caseGrammar(Grammar object) {
-					outlineNode.setLabel("language " + GrammarUtil.getLanguageId(object));
+					outlineNode.setLabel("grammar " + GrammarUtil.getLanguageId(object));
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/language.gif"));
 					return outlineNode;
 				}
@@ -201,6 +198,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					return outlineNode;
 				}
 
+				@Override
 				public ContentOutlineNode caseKeyword(Keyword object) {
 					outlineNode.setLabel("'" + object.getValue() + "'");
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/keyword.gif"));
@@ -215,9 +213,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 			}.doSwitch(semanticNode);
 		}
-		else {
-			return outlineNode;
-		}
+		return outlineNode;
 	}
 
 }
