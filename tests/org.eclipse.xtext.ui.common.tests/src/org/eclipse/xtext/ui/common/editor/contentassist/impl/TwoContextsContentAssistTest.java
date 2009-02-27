@@ -25,25 +25,25 @@ import com.google.inject.Injector;
  *
  */
 public class TwoContextsContentAssistTest extends AbstractXtextTests {
-	
+
 	public void testTwoContexts() throws Exception {
 		System.err.println(getClass().getSimpleName()+" says: PLEASE ACTIVATE ME!");
 //    	newBuilder(getGrammarSetup())
 //                    .append("Foo; FooBar; Bar refersTo Foo").assertText(
 //                                    ";", "FooBar");
     }
-    
+
     /**
 	 * @return
 	 */
 	private ISetup getGrammarSetup() {
 		return new TwoContextsTestLanguageStandaloneSetup()
 		{
-			
+
 		@Override
 		public Injector createInjector() {
 			return Guice.createInjector(new TwoContextsTestLanguageRuntimeModule(), new TwoContextsTestLanguageUiModule(){
-				
+
 				@Override
 				public Class<? extends IProposalProvider> bindIProposalProvider() {
 					return TwoContextsTestLanguageTestProposals.class;
@@ -57,7 +57,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup);
 	}
-	
+
 	public static class TwoContextsTestLanguageTestProposals extends org.eclipse.xtext.ui.common.editor.contentassist.impl.GenTwoContextsTestLanguageProposals {
 		@Override
 		public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,

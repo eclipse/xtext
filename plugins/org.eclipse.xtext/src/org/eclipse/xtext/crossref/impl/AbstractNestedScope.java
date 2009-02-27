@@ -23,12 +23,12 @@ import org.eclipse.xtext.util.Function;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractNestedScope extends AbstractScope implements IScope {
+public abstract class AbstractNestedScope extends AbstractScope {
 
 	private IScope outer;
-	
+
 	private Iterable<IScopedElement> elements;
-	
+
 	public AbstractNestedScope(IScope outer) {
 		this.outer = outer;
 	}
@@ -37,7 +37,7 @@ public abstract class AbstractNestedScope extends AbstractScope implements IScop
 		this(outer);
 		this.elements = elements;
 	}
-	
+
 	public final Iterable<IScopedElement> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
 		return join(each(getContents(), new Function.WithoutResult<IScopedElement>() {
@@ -54,7 +54,7 @@ public abstract class AbstractNestedScope extends AbstractScope implements IScop
 	public IScope getOuterScope() {
 		return outer;
 	}
-	
+
 	protected void setOuterScope(IScope outer) {
 		this.outer = outer;
 	}
@@ -62,7 +62,7 @@ public abstract class AbstractNestedScope extends AbstractScope implements IScop
 	public Iterable<IScopedElement> getContents() {
 		return elements;
 	}
-	
+
 	public IScopedElement getScopedElement(EObject element) {
 		Iterable<IScopedElement> allContents = getAllContents();
 		for (IScopedElement scopedElement : allContents) {

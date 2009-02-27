@@ -14,8 +14,6 @@ public class BundleClasspathUriResolverTest extends AbstractClasspathUriResolver
 		_resolver = new BundleClasspathUriResolver();
 	}
 
-
-
 	public void testClasspathUriForFileInPlugin() {
 		URI classpathUri = URI.createURI("classpath:/org/eclipse/xtext/ui/core/util/simple.ecore");
 		URI normalizedUri = _resolver.resolve(Platform.getBundle(XtextUIIntegrationTestsPlugin.PLUGIN_ID), classpathUri);

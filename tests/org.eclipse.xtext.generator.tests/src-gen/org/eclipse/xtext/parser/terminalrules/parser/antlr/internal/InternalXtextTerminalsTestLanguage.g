@@ -83,9 +83,9 @@ ruleGrammar returns [EObject current=null]
     }:
 (((((((	
 	
-	    lv_abstract_0='abstract language' 
+	    lv_abstract_0='abstract' 
     {
-        createLeafNode(grammarAccess.prGrammar().ele0000000KeywordAbstractLanguage(), "abstract"); 
+        createLeafNode(grammarAccess.prGrammar().ele0000000KeywordAbstract(), "abstract"); 
     }
 
  
@@ -96,16 +96,15 @@ ruleGrammar returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "abstract", true, "abstract language", lastConsumedNode);
+	       		set($current, "abstract", true, "abstract", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
 	
-)
-    |'language' 
+)?'grammar' 
     {
-        createLeafNode(grammarAccess.prGrammar().ele000001KeywordLanguage(), null); 
+        createLeafNode(grammarAccess.prGrammar().ele000001KeywordGrammar(), null); 
     }
 )(	
 	

@@ -1,10 +1,10 @@
 /*******************************************************************************
- * __  ___            _   
+ * __  ___            _
  * \ \/ / |_ _____  __ |_
  *  \  /| __/ _ \ \/ / __|
  *  /  \| |_  __/>  <| |_
  * /_/\_\\__\___/_/\_\\__|
- * 
+ *
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -35,14 +35,14 @@ import com.google.inject.Injector;
 
 /**
  * Unit test for class <code>DefaultContentAssistProcessor</code>. Reused by Xtend implementation.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  * @author Jan Koehnlein
  * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
  */
-public class DefaultContentAssistProcessorTest extends AbstractXtextTests 
+public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 {
-	
+
 	private ISetup getRefGrammarSetup() {
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
 			@Override
@@ -51,7 +51,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			}
 		};
 	}
-	
+
 	private ISetup getXtextGrammarSetup() {
 		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
@@ -60,7 +60,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			}
 		};
 	}
-	
+
 	private ISetup getContentAssistGrammarSetup() {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
@@ -69,7 +69,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			}
 		};
 	}
-	
+
 	private ISetup getKeywordsLangSetup() {
 		return new KeywordsTestLanguageStandaloneSetup() {
 			@Override
@@ -78,7 +78,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			}
 		};
 	}
-	
+
 	public void testComputePrefix() throws Exception {
 		newBuilder(getRefGrammarSetup())
 		.append("foo fvdf dfv(").assertMatchString("(").reset()
@@ -87,7 +87,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		.append("foo fvdf dfv_ ").assertMatchString("").reset()
 		.append("").assertMatchString("");
 	}
-	
+
 	public void testComputeCompletionProposalsCount() throws Exception {
 		newBuilder(getRefGrammarSetup()).assertCount(1)
 			.append("spielplatz ").assertCount(1)
@@ -99,7 +99,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			.append("e1 ").assertCount(2)
 			.append("e2").assertCount(1);
 	}
-	
+
 	public void testComputeCompletionProposalsText() throws Exception {
 		newBuilder(getRefGrammarSetup()).assertText("spielplatz")
 			.applyText().assertText("1")
@@ -123,10 +123,10 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			.append("1 ").assertText(",",")")
 			.append("k2 ").assertText(",",")")
 		;
-		
-		
+
+
 	}
-	
+
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
 		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
@@ -141,17 +141,16 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		builder.append(" familie ( keyword e1 e2 K").assertText("k1", "k2", ",", ")");
 		builder.append(" familie ( keyword e1 e2 k1,K").assertText("k1", "k2", ",", ")");
 		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
-		;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * <p>
 	 * Tests proposals sample domain language.
 	 * </p>
-	 * 
+	 *
 	 * <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=260688">Bug 260688 </a>
-	 * 
+	 *
 //	 */
 //	public void testDomainLanguage() throws Exception {
 //		newBuilder(DomainModel)
@@ -176,36 +175,36 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 //		.append("c").assertCount(1)
 //		.append("k").assertCount(1);
 //	}
-	
-	
+
+
 	public void testCompleteRuleCall() throws Exception {
 		newBuilder(getXtextGrammarSetup())
-			.appendNl("language foo")
+			.appendNl("grammar foo")
 			.appendNl("generate foo \"foo\"")
 			.appendNl("R1 : (attr+=R2)*;")
 			.appendNl("R2 : (attr=INT)? prop=R3;")
 			.append("R3: attr+=").assertText(
-					"R1", 
+					"R1",
 					"R2",
 					"R3",
-					"\"Keyword_Value\"", 
-					"(", 
-					"[", 
+					"\"Keyword_Value\"",
+					"(",
+					"[",
 					"+=" // TODO: Why does this proposal come up?
 			);
 	}
-	
+
 	public void testCompleteAbstractRuleCall() throws Exception {
 		newBuilder(getContentAssistGrammarSetup())
 			.appendNl("abstract rules")
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
-					"R1", 
+					"R1",
 					"R2",
 					":" // TODO: Why does this proposal come up?
 			);
 	}
-	
+
 	public void testDefaultRule() throws Exception {
 		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
 		builder.assertText("spielplatz");
@@ -219,7 +218,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
      */
     public void testCompleteParserRule() throws Exception {
             newBuilder(getXtextGrammarSetup())
-                    .appendNl("language foo")
+                    .appendNl("grammar foo")
                     .appendNl("generate foo \"foo\"")
                     .appendNl("MyRule : 'foo' name=ID; ").assertText(
                                     "ParserRule_Name", "lexer", "native", "terminal"
@@ -234,22 +233,22 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
      */
     public void testCompleteAssignmentWithBacktracking() throws Exception {
     	newBuilder(getXtextGrammarSetup())
-                    .appendNl("language foo")
+                    .appendNl("grammar foo")
                     .appendNl("generate foo \"foo\"")
                     .append("MyRule : 'foo' name").assertText(
                                     "*", "+", "+=", ";", "=", "?", "?="
                     );
-	
+
     }
-    
+
     public void testKeywordWithBackslashes() throws Exception {
 		newBuilder(getKeywordsLangSetup())
 			.assertText("foo\\bar", "foo\\", "\\bar", "\\");
 	}
-	
+
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup);
 	}
-	
+
 }

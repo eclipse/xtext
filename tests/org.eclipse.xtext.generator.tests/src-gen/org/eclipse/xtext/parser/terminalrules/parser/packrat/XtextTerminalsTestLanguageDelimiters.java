@@ -14,7 +14,7 @@ public final class XtextTerminalsTestLanguageDelimiters {
 	}
 	
 	public static final ISequenceMatcher crossReference$28$Delimiter = new SetBasedKeywordMatcher(
-		"language", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
+		"abstract", "grammar", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
 
     // TODO: remove hardcoded character class from template
 	public static final ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.join(

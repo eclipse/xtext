@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
- language org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage
+ grammar org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage
+ 
  generate optionalEmpty "http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty" 
  
  Model:

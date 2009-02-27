@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage
+grammar org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage
 
 generate simpleTest "http://eclipse.org/xtext/tests/SimpleTest"
 generate otherTest "http://eclipse.org/xtext/tests/OtherTest" as other
