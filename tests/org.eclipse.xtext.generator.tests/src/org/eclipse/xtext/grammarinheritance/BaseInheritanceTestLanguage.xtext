@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
- language org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage
+ grammar org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage
  
  generate baseInheritanceTest "http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage"
  

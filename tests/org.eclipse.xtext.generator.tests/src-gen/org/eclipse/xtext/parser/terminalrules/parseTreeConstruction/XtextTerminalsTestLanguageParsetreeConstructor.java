@@ -198,7 +198,7 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_0_0_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -213,25 +213,32 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 }
 
 // not supported
-protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
-
-	public Grammar_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+protected class Grammar_0_0_0_0_0_Group extends GroupToken {
+	
+	public Grammar_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prGrammar().ele00000Alternatives();
+	public Group getGrammarElement() {
+		return grammarAccess.prGrammar().ele00000Group();
 	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Grammar_0_0_0_0_0_1_Keyword_language(current, this) : new Grammar_0_0_0_0_0_0_Assignment_abstract(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_0_0_1_Keyword_grammar(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_0_0_0_Assignment_abstract(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
@@ -239,7 +246,7 @@ protected class Grammar_0_0_0_0_0_Alternatives extends AlternativesToken {
 protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken  {
 	
 	public Grammar_0_0_0_0_0_0_Assignment_abstract(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
@@ -249,12 +256,12 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("abstract",IS_REQUIRED)) == null) return null;
+		if((value = current.getConsumable("abstract",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstract");
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prGrammar().ele0000000KeywordAbstractLanguage();
+			element = grammarAccess.prGrammar().ele0000000KeywordAbstract();
 			return new Solution(obj);
 		}
 
@@ -263,14 +270,14 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 }
 
 // not supported
-protected class Grammar_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
+protected class Grammar_0_0_0_0_0_1_Keyword_grammar extends KeywordToken  {
 	
-	public Grammar_0_0_0_0_0_1_Keyword_language(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_0_1_Keyword_grammar(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prGrammar().ele000001KeywordLanguage();
+		return grammarAccess.prGrammar().ele000001KeywordGrammar();
 	}	
 }
 

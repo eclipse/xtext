@@ -6,7 +6,8 @@
 * http://www.eclipse.org/legal/epl-v10.html 
 * 
 *******************************************************************************/
-language org.eclipse.xtext.reference.ReferenceGrammar 
+grammar org.eclipse.xtext.reference.ReferenceGrammar
+ 
 generate referenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar" 
 import "http://eclipse.org/xtext/reference/ReferenceModel" as ReferenceModel
 

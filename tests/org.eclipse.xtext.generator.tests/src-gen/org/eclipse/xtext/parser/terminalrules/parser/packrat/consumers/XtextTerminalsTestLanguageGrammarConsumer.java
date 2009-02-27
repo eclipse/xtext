@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Group;
@@ -36,8 +35,6 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 	private ITerminalConsumer idConsumer;
 
 	private IElementConsumer group$1$Consumer;
-
-	private IElementConsumer alternatives$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
@@ -115,7 +112,8 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(alternatives$6$Consumer);
+			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(keyword$9$Consumer);
 			acceptor.accept(assignment$10$Consumer);
 			acceptor.accept(group$12$Consumer);
 			acceptor.accept(group$17$Consumer);
@@ -124,20 +122,7 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		}
 	}
 
-	protected class Alternatives$6$Consumer extends AlternativesConsumer {
-		
-		protected Alternatives$6$Consumer(final Alternatives alternatives) {
-			super(alternatives);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(keyword$9$Consumer);
-		}
-	}
-
-	protected class Assignment$7$Consumer extends AssignmentConsumer {
+	protected class Assignment$7$Consumer extends OptionalAssignmentConsumer {
 		
 		protected Assignment$7$Consumer(final Assignment assignment) {
 			super(assignment);
@@ -469,10 +454,9 @@ public final class XtextTerminalsTestLanguageGrammarConsumer extends NonTerminal
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.ele00000Alternatives());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele000000AssignmentAbstract());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele0000000KeywordAbstractLanguage());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele000001KeywordLanguage());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele0000000KeywordAbstract());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele000001KeywordGrammar());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele00001AssignmentName());
 		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele000010ParserRuleCallGrammarID());
 		group$12$Consumer = new Group$12$Consumer(rule.ele0001Group());

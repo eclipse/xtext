@@ -40,7 +40,7 @@ public class JavaProjectSetupUtil {
 		project.open(null);
 		return project;
 	}
-	
+
 	public static void addProjectReference(IProject referencer, IProject referenced) throws CoreException {
 		IProjectDescription description = referencer.getDescription();
 		List<IProject> referencedProjects = new ArrayList<IProject>(Arrays.asList(description.getReferencedProjects()));
@@ -182,9 +182,8 @@ public class JavaProjectSetupUtil {
 	}
 
 	public static IClasspathEntry addJarToClasspath(IJavaProject javaProject,
-			IFile jarFile) throws JavaModelException, IOException {
-		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(jarFile
-				.getFullPath(), null, null);
+			IFile jarFile) throws JavaModelException {
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(jarFile.getFullPath(), null, null);
 		addToClasspath(javaProject, newLibraryEntry);
 		return newLibraryEntry;
 	}
