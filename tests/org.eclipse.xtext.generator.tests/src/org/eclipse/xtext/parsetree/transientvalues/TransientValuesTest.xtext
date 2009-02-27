@@ -6,9 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest
-generate transientvaluestest "http://simple/transientvaluestest"
+grammar org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest
 
+generate transientvaluestest "http://simple/transientvaluestest"
 
 Root:
 	"test" (TestRequired | TestOptional | TestList);

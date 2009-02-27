@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage
+grammar org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage
+
 generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
 
 Sequence: Addition ( {Sequence.expressions+=current} expressions+=Addition)*;

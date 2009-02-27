@@ -6,8 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
- language org.eclipse.xtext.testlanguages.TreeTestLanguage
- generate treeTestLanguage "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
+grammar org.eclipse.xtext.testlanguages.TreeTestLanguage
+
+generate treeTestLanguage "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
  
 Model:
   (children+=Node)*;

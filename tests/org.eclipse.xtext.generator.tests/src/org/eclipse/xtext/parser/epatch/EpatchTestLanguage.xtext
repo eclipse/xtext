@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.parser.epatch.EpatchTestLanguage
+grammar org.eclipse.xtext.parser.epatch.EpatchTestLanguage
 
 generate epatchTestLanguage "http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage"
 

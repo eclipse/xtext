@@ -18,14 +18,14 @@ public class XtextParserTest extends AbstractGeneratorTest {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 	}
-	
+
 	public void test_resolveReturnType() throws Exception {
-		Grammar model = (Grammar) getModel("language foo generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
+		Grammar model = (Grammar) getModel("grammar foo generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
 		assertWithXtend("'x'", "metamodelDeclarations.first().alias", model);
 	}
-	
+
 	public void testParseCrossRef() throws Exception {
-		Grammar model = (Grammar) getModel("language foo generate foo 'bar' as boo Model : 'a' stuff+=Stuff*; Stuff : 'stuff' name=ID refersTo=[Stuff];");
+		Grammar model = (Grammar) getModel("grammar foo generate foo 'bar' as boo Model : 'a' stuff+=Stuff*; Stuff : 'stuff' name=ID refersTo=[Stuff];");
 		assertWithXtend("'boo'", "eAllContents.typeSelect(xtext::CrossReference).first().type.metamodel.alias", model);
 		assertWithXtend("'Stuff'", "eAllContents.typeSelect(xtext::CrossReference).first().type.type.name", model);
 	}
