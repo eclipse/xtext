@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class PartialParserTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class PartialParserTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/PartialParserTestLanguage")) {
 		EPackage.Registry.INSTANCE.put("http://example.xtext.org/PartialParserTestLanguage", org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("partialparsertestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

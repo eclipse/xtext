@@ -24,10 +24,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Group c0000Group = (Group)c000Group.eContents().get(0);
-		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
-		private final Assignment c000000AssignmentAbstract = (Assignment)c00000Group.eContents().get(0);
-		private final Keyword c0000000KeywordAbstract = (Keyword)c000000AssignmentAbstract.eContents().get(0);
-		private final Keyword c000001KeywordGrammar = (Keyword)c00000Group.eContents().get(1);
+		private final Keyword c00000KeywordGrammar = (Keyword)c0000Group.eContents().get(0);
 		private final Assignment c00001AssignmentName = (Assignment)c0000Group.eContents().get(1);
 		private final RuleCall c000010ParserRuleCallGrammarID = (RuleCall)c00001AssignmentName.eContents().get(0);
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
@@ -72,16 +69,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group ele0000Group() { return c0000Group; }
 
 		// not supported
-		public Group ele00000Group() { return c00000Group; }
-
-		// not supported
-		public Assignment ele000000AssignmentAbstract() { return c000000AssignmentAbstract; }
-
-		// not supported
-		public Keyword ele0000000KeywordAbstract() { return c0000000KeywordAbstract; }
-
-		// not supported
-		public Keyword ele000001KeywordGrammar() { return c000001KeywordGrammar; }
+		public Keyword ele00000KeywordGrammar() { return c00000KeywordGrammar; }
 
 		// not supported
 		public Assignment ele00001AssignmentName() { return c00001AssignmentName; }

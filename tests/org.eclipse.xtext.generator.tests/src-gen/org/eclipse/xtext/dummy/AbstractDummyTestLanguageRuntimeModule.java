@@ -30,6 +30,10 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguagePackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.dummy.parseTreeConstruction.DummyTestLanguageParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.dummy.parser.antlr.internal.InternalDummyTestLanguageLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.dummy.parseTreeConstruction.DummyTestLanguageParsetreeConstructor.class;
 	}
 }

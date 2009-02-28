@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class MetamodelRefTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class MetamodelRefTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/AnotherSimpleTest")) {
 		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/AnotherSimpleTest", org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

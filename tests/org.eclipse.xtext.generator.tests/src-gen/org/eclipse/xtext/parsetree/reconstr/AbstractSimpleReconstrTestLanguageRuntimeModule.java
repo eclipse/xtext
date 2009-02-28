@@ -30,6 +30,10 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends De
 		return org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguagePackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.SimpleReconstrTestLanguageParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends De
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.SimpleReconstrTestLanguageParsetreeConstructor.class;
 	}
 }

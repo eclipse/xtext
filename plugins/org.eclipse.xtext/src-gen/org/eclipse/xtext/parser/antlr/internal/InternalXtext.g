@@ -81,38 +81,17 @@ ruleGrammar returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((((((	
-	
-	    lv_abstract_0='abstract' 
+((((('grammar' 
     {
-        createLeafNode(grammarAccess.prGrammar().ele0000000KeywordAbstract(), "abstract"); 
+        createLeafNode(grammarAccess.prGrammar().ele00000KeywordGrammar(), null); 
     }
-
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
-	            associateNodeWithAstElement(currentNode, $current);
-	        }
-	        
-	        try {
-	       		set($current, "abstract", true, "abstract", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
-	
-)?'grammar' 
-    {
-        createLeafNode(grammarAccess.prGrammar().ele000001KeywordGrammar(), null); 
-    }
-)(	
+(	
 	
 	    
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele000010ParserRuleCallGrammarID(), currentNode); 
 	    }
-	    lv_name_2=ruleGrammarID 
+	    lv_name_1=ruleGrammarID 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
@@ -120,7 +99,7 @@ ruleGrammar returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "name", lv_name_2, "GrammarID", currentNode);
+	       		set($current, "name", lv_name_1, "GrammarID", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -151,7 +130,7 @@ ruleGrammar returns [EObject current=null]
 	
 ))?)((((	
 	
-	    lv_definesHiddenTokens_5='hidden' 
+	    lv_definesHiddenTokens_4='hidden' 
     {
         createLeafNode(grammarAccess.prGrammar().ele0010000KeywordHidden(), "definesHiddenTokens"); 
     }
@@ -220,7 +199,7 @@ ruleGrammar returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele010ParserRuleCallAbstractMetamodelDeclaration(), currentNode); 
 	    }
-	    lv_metamodelDeclarations_11=ruleAbstractMetamodelDeclaration 
+	    lv_metamodelDeclarations_10=ruleAbstractMetamodelDeclaration 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
@@ -228,7 +207,7 @@ ruleGrammar returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		add($current, "metamodelDeclarations", lv_metamodelDeclarations_11, "AbstractMetamodelDeclaration", currentNode);
+	       		add($current, "metamodelDeclarations", lv_metamodelDeclarations_10, "AbstractMetamodelDeclaration", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -241,7 +220,7 @@ ruleGrammar returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele10ParserRuleCallAbstractRule(), currentNode); 
 	    }
-	    lv_rules_12=ruleAbstractRule 
+	    lv_rules_11=ruleAbstractRule 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
@@ -249,7 +228,7 @@ ruleGrammar returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		add($current, "rules", lv_rules_12, "AbstractRule", currentNode);
+	       		add($current, "rules", lv_rules_11, "AbstractRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

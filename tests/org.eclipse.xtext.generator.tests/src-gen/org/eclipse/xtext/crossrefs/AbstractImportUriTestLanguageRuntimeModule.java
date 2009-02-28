@@ -30,6 +30,10 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 		return org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguagePackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.crossrefs.parseTreeConstruction.ImportUriTestLanguageParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.crossrefs.parser.antlr.internal.InternalImportUriTestLanguageLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.crossrefs.parseTreeConstruction.ImportUriTestLanguageParsetreeConstructor.class;
 	}
 }

@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.builtin;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -31,11 +29,18 @@ public class XtextBuiltinStandaloneSetup implements ISetup {
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
 		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
-		return null;
+
+		Injector injector = createInjector();
+		register(injector);
+		return injector;
 	}
 	
-
-
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.builtin.XtextBuiltinRuntimeModule());
+	}
+	
+	public void register(Injector injector) {
 	//TODO registration of EValidators should be added here, too
 
+	}
 }

@@ -14,9 +14,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
-«DEFINE pre FOR Grammar»
-/*
-*/
+«DEFINE pre FOR Grammar-»
 package «setup().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -51,27 +49,20 @@ public class «setup().toSimpleName()» implements ISetup {
 		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 		«ENDIF-»
-		«IF !isAbstract()-»
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
-		«ELSE-»
-		return null;
-		«ENDIF-»
 	}
 	
-	«IF !isAbstract()-»
 	public Injector createInjector() {
 		return Guice.createInjector(new «guiceModuleRt()»());
 	}
 	
 	public void register(Injector injector) {
-	«ENDIF-»
 «ENDDEFINE»
 		
 «DEFINE post FOR Grammar»
-	«IF !isAbstract()-»
 	}
-	«ENDIF-»
 }
 «ENDDEFINE»

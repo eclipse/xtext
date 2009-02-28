@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.parsetree.transientvalues;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class TransientValuesTestStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class TransientValuesTestStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/transientvaluestest")) {
 		EPackage.Registry.INSTANCE.put("http://simple/transientvaluestest", org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TransientvaluestestPackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("transientvaluestest", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

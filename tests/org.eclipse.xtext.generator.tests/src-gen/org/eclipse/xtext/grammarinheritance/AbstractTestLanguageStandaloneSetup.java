@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,11 +22,18 @@ public class AbstractTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
-		return null;
+
+		Injector injector = createInjector();
+		register(injector);
+		return injector;
 	}
 	
-
-
+	public Injector createInjector() {
+		return Guice.createInjector(new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageRuntimeModule());
+	}
+	
+	public void register(Injector injector) {
 	//TODO registration of EValidators should be added here, too
 
+	}
 }

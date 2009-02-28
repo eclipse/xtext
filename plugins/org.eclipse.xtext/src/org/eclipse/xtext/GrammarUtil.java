@@ -215,10 +215,6 @@ public class GrammarUtil {
 		return Tuples.create(decl.getEPackage().getNsURI(), Strings.emptyIfNull(decl.getAlias()));
 	}
 
-	public static boolean isAbstract(Grammar grammarModel) {
-		return grammarModel.isAbstract();
-	}
-
 	public static String getTypeRefName(TypeRef typeRef) {
 		if (typeRef.getType() != null)
 			return typeRef.getType().getName();

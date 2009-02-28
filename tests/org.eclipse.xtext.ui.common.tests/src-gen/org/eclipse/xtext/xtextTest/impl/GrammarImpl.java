@@ -34,7 +34,6 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#getSuperGrammar <em>Super Grammar</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.GrammarImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
@@ -48,26 +47,6 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  */
 public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
 {
-  /**
-   * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isAbstract()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean ABSTRACT_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isAbstract()
-   * @generated
-   * @ordered
-   */
-  protected boolean abstract_ = ABSTRACT_EDEFAULT;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -167,29 +146,6 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
   protected EClass eStaticClass()
   {
     return XtextTestPackage.Literals.GRAMMAR;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isAbstract()
-  {
-    return abstract_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAbstract(boolean newAbstract)
-  {
-    boolean oldAbstract = abstract_;
-    abstract_ = newAbstract;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextTestPackage.GRAMMAR__ABSTRACT, oldAbstract, abstract_));
   }
 
   /**
@@ -351,8 +307,6 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
   {
     switch (featureID)
     {
-      case XtextTestPackage.GRAMMAR__ABSTRACT:
-        return isAbstract();
       case XtextTestPackage.GRAMMAR__NAME:
         return getName();
       case XtextTestPackage.GRAMMAR__SUPER_GRAMMAR:
@@ -381,9 +335,6 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
   {
     switch (featureID)
     {
-      case XtextTestPackage.GRAMMAR__ABSTRACT:
-        setAbstract((Boolean)newValue);
-        return;
       case XtextTestPackage.GRAMMAR__NAME:
         setName((String)newValue);
         return;
@@ -419,9 +370,6 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
   {
     switch (featureID)
     {
-      case XtextTestPackage.GRAMMAR__ABSTRACT:
-        setAbstract(ABSTRACT_EDEFAULT);
-        return;
       case XtextTestPackage.GRAMMAR__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -454,8 +402,6 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
   {
     switch (featureID)
     {
-      case XtextTestPackage.GRAMMAR__ABSTRACT:
-        return abstract_ != ABSTRACT_EDEFAULT;
       case XtextTestPackage.GRAMMAR__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XtextTestPackage.GRAMMAR__SUPER_GRAMMAR:
@@ -483,9 +429,7 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (abstract: ");
-    result.append(abstract_);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
     result.append(", definesHiddenTokens: ");
     result.append(definesHiddenTokens);

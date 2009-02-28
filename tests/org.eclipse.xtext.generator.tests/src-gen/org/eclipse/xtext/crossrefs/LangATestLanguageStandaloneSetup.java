@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.crossrefs;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class LangATestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class LangATestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/langATestLanguage")) {
 		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/langATestLanguage", org.eclipse.xtext.crossrefs.langATestLanguage.LangATestLanguagePackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("langatestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

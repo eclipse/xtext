@@ -276,7 +276,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGrammar_Abstract()
+  public EAttribute getGrammar_Name()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(0);
   }
@@ -286,19 +286,9 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGrammar_Name()
-  {
-    return (EAttribute)grammarEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getGrammar_SuperGrammar()
   {
-    return (EReference)grammarEClass.getEStructuralFeatures().get(2);
+    return (EReference)grammarEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -308,7 +298,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    */
   public EAttribute getGrammar_DefinesHiddenTokens()
   {
-    return (EAttribute)grammarEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)grammarEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -318,7 +308,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    */
   public EReference getGrammar_HiddenTokens()
   {
-    return (EReference)grammarEClass.getEStructuralFeatures().get(4);
+    return (EReference)grammarEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -328,7 +318,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    */
   public EReference getGrammar_MetamodelDeclarations()
   {
-    return (EReference)grammarEClass.getEStructuralFeatures().get(5);
+    return (EReference)grammarEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -338,7 +328,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    */
   public EReference getGrammar_Rules()
   {
-    return (EReference)grammarEClass.getEStructuralFeatures().get(6);
+    return (EReference)grammarEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -862,7 +852,6 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     // Create classes and their features
     grammarEClass = createEClass(GRAMMAR);
-    createEAttribute(grammarEClass, GRAMMAR__ABSTRACT);
     createEAttribute(grammarEClass, GRAMMAR__NAME);
     createEReference(grammarEClass, GRAMMAR__SUPER_GRAMMAR);
     createEAttribute(grammarEClass, GRAMMAR__DEFINES_HIDDEN_TOKENS);
@@ -988,7 +977,6 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     // Initialize classes and features; add operations and parameters
     initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getGrammar_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGrammar_Name(), ecorePackage.getEString(), "name", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGrammar_SuperGrammar(), this.getGrammar(), null, "superGrammar", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGrammar_DefinesHiddenTokens(), ecorePackage.getEBoolean(), "definesHiddenTokens", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

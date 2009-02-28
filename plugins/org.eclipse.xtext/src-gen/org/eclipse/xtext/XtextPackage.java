@@ -70,22 +70,13 @@ public interface XtextPackage extends EPackage
   int GRAMMAR = 0;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GRAMMAR__ABSTRACT = 0;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GRAMMAR__NAME = 1;
+  int GRAMMAR__NAME = 0;
 
   /**
    * The feature id for the '<em><b>Super Grammar</b></em>' reference.
@@ -94,7 +85,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GRAMMAR__SUPER_GRAMMAR = 2;
+  int GRAMMAR__SUPER_GRAMMAR = 1;
 
   /**
    * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
@@ -103,7 +94,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GRAMMAR__DEFINES_HIDDEN_TOKENS = 3;
+  int GRAMMAR__DEFINES_HIDDEN_TOKENS = 2;
 
   /**
    * The feature id for the '<em><b>Hidden Tokens</b></em>' reference list.
@@ -112,7 +103,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GRAMMAR__HIDDEN_TOKENS = 4;
+  int GRAMMAR__HIDDEN_TOKENS = 3;
 
   /**
    * The feature id for the '<em><b>Metamodel Declarations</b></em>' containment reference list.
@@ -121,7 +112,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GRAMMAR__METAMODEL_DECLARATIONS = 5;
+  int GRAMMAR__METAMODEL_DECLARATIONS = 4;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -130,7 +121,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GRAMMAR__RULES = 6;
+  int GRAMMAR__RULES = 5;
 
   /**
    * The number of structural features of the '<em>Grammar</em>' class.
@@ -139,7 +130,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GRAMMAR_FEATURE_COUNT = 7;
+  int GRAMMAR_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractRuleImpl <em>Abstract Rule</em>}' class.
@@ -992,17 +983,6 @@ public interface XtextPackage extends EPackage
   EClass getGrammar();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Abstract</em>'.
-   * @see org.eclipse.xtext.Grammar#isAbstract()
-   * @see #getGrammar()
-   * @generated
-   */
-  EAttribute getGrammar_Abstract();
-
-  /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1619,14 +1599,6 @@ public interface XtextPackage extends EPackage
      * @generated
      */
     EClass GRAMMAR = eINSTANCE.getGrammar();
-
-    /**
-     * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute GRAMMAR__ABSTRACT = eINSTANCE.getGrammar_Abstract();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

@@ -15,12 +15,7 @@
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
-              <abstractTokens xsi:type="xtext:Group">
-                <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="abstract" operator="?=">
-                  <terminal xsi:type="xtext:Keyword" value="abstract"/>
-                </abstractTokens>
-                <abstractTokens xsi:type="xtext:Keyword" value="grammar"/>
-              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value="grammar"/>
               <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
                 <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
               </abstractTokens>

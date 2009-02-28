@@ -30,6 +30,10 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 		return org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguagePackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.ConcreteTestLanguageParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.ConcreteTestLanguageParsetreeConstructor.class;
 	}
 }

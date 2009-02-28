@@ -19,7 +19,6 @@
 
 «REM»Contributed to Ui Plugin because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=264578 «ENDREM»
 «DEFINE addToPluginXmlUi(List[String] modelFileExtensions) FOR Grammar»
-«IF !abstract»
 <!-- adding resource factories -->
 «FOREACH modelFileExtensions AS ext»
 	<extension
@@ -30,16 +29,13 @@
 		</parser>
 	</extension>
 «ENDFOREACH»
-«ENDIF»
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»
-«IF !abstract»
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		«FOREACH modelFileExtensions AS modelFileExtension-»
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
 		«ENDFOREACH»
-«ENDIF»
 «ENDDEFINE»
 
 

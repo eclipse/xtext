@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -31,6 +29,7 @@ public class TerminalRulesTestLanguageStandaloneSetup implements ISetup {
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
 		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -44,13 +43,11 @@ public class TerminalRulesTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/TerminalRulesTest")) {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/TerminalRulesTest", org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("terminalrulestestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

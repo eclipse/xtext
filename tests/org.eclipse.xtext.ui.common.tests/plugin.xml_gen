@@ -24,7 +24,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -34,7 +33,6 @@
 			type="xtextgrammartestlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension
@@ -113,7 +111,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -123,7 +120,6 @@
 			type="twocontextstestlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension
@@ -183,6 +179,15 @@
 
 
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.grammarinheritance.AbstractTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			type="abstracttestlanguage">
+		</parser>
+	</extension>
 
 
 	<extension
@@ -261,7 +266,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -271,7 +275,6 @@
 			type="keywordstestlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension
@@ -350,7 +353,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -360,7 +362,6 @@
 			type="contentassisttestlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension
@@ -439,7 +440,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -449,7 +449,6 @@
 			type="referencegrammartestlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension
@@ -528,7 +527,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -538,7 +536,6 @@
 			type="treetestlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension

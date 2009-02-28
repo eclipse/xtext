@@ -51,7 +51,7 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 //	}
 
 	public void testParse_02() throws Exception {
-		String model = "/* comment */ abstract grammar a native c returns d: \"xy\";";
+		String model = "/* comment */ grammar a native c returns d: \"xy\";";
 		parseAndCompareToAntlr(model);
 	}
 

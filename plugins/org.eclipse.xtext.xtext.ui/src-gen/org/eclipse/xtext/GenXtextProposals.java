@@ -30,15 +30,6 @@ public class GenXtextProposals extends AbstractJavaProposalProvider {
 	
 	
 			
-	public List<? extends ICompletionProposal> completeGrammar_Abstract(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeGrammar_Abstract feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
 	public List<? extends ICompletionProposal> completeGrammar_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeGrammar_Name feature '" + assignment.getFeature() + "' terminal '"
