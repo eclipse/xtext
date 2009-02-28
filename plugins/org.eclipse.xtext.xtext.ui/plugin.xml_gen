@@ -3,7 +3,6 @@
 
 <plugin>
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -21,7 +20,6 @@
 			type="xtext2">
 		</parser>
 	</extension>
-
 
 
 	<extension
@@ -78,7 +76,5 @@
 			</activeWhen>
 		</handler>
 	</extension>
-
-
 
 </plugin>
