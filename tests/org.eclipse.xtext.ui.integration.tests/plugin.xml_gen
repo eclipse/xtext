@@ -24,7 +24,6 @@
 	</extension>
 
 
-
 <!-- adding resource factories -->
 
 	<extension
@@ -34,7 +33,6 @@
 			type="testlanguage">
 		</parser>
 	</extension>
-
 
 
 	<extension

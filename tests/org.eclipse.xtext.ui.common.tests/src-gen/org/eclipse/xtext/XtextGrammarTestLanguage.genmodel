@@ -5,9 +5,6 @@
     <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//Grammar"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Grammar/abstract"/>
-      </genFeatures>
-      <genFeatures createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Grammar/name"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">

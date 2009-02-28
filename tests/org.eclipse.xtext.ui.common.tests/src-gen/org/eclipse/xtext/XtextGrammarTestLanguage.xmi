@@ -16,12 +16,7 @@
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Group">
-                <abstractTokens xsi:type="xtext:Group">
-                  <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="abstract" operator="?=">
-                    <terminal xsi:type="xtext:Keyword" value="abstract"/>
-                  </abstractTokens>
-                  <abstractTokens xsi:type="xtext:Keyword" value="grammar"/>
-                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Keyword" value="grammar"/>
                 <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
                   <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
                 </abstractTokens>
@@ -654,7 +649,7 @@
       </alternatives>
     </rules>
   </xtext:Grammar>
-  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+  <xtext:Grammar name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
       <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
     </metamodelDeclarations>

@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://holla")) {
 		EPackage.Registry.INSTANCE.put("http://holla", org.eclipse.xtext.grammarinheritance.foo.FooPackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("concretetestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

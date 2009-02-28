@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class ContentAssistTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -38,11 +37,9 @@ public class ContentAssistTestLanguageStandaloneSetup implements ISetup {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/tests/ContentAssist", org.eclipse.xtext.testlanguages.contentAssistTestLanguage.ContentAssistTestLanguagePackage.eINSTANCE);
 	}
 
-
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("contentassisttestlanguage", resourceFactory);
 		
-
 	//TODO registration of EValidators should be added here, too
 
 	}

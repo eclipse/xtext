@@ -198,7 +198,7 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_0_0_0_Keyword_grammar(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -213,74 +213,16 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 }
 
 // not supported
-protected class Grammar_0_0_0_0_0_Group extends GroupToken {
+protected class Grammar_0_0_0_0_0_Keyword_grammar extends KeywordToken  {
 	
-	public Grammar_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prGrammar().ele00000Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_0_0_1_Keyword_grammar(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_0_0_0_Assignment_abstract(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken  {
-	
-	public Grammar_0_0_0_0_0_0_Assignment_abstract(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.prGrammar().ele000000AssignmentAbstract();
-	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("abstract",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("abstract");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prGrammar().ele0000000KeywordAbstract();
-			return new Solution(obj);
-		}
-
-		return null;
-	}
-}
-
-// not supported
-protected class Grammar_0_0_0_0_0_1_Keyword_grammar extends KeywordToken  {
-	
-	public Grammar_0_0_0_0_0_1_Keyword_grammar(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_0_0_Keyword_grammar(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prGrammar().ele000001KeywordGrammar();
+		return grammarAccess.prGrammar().ele00000KeywordGrammar();
 	}	
 }
-
 
 // not supported
 protected class Grammar_0_0_0_0_1_Assignment_name extends AssignmentToken  {

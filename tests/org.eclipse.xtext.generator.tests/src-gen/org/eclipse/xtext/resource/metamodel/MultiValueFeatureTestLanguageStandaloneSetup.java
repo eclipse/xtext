@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.resource.metamodel;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class MultiValueFeatureTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class MultiValueFeatureTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage")) {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage", org.eclipse.xtext.resource.metamodel.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

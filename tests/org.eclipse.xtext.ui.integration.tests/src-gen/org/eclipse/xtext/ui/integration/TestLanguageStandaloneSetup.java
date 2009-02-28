@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.ui.integration;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class TestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -38,11 +37,9 @@ public class TestLanguageStandaloneSetup implements ISetup {
 		EPackage.Registry.INSTANCE.put("http://foo", org.eclipse.xtext.ui.integration.foo.FooPackage.eINSTANCE);
 	}
 
-
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", resourceFactory);
 		
-
 	//TODO registration of EValidators should be added here, too
 
 	}

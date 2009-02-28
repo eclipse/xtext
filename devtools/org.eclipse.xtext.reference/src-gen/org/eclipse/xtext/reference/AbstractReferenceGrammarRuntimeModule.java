@@ -30,6 +30,10 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 		return org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarPackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.reference.parseTreeConstruction.ReferenceGrammarParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.reference.parser.antlr.internal.InternalReferenceGrammarLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.reference.parseTreeConstruction.ReferenceGrammarParsetreeConstructor.class;
 	}
 }

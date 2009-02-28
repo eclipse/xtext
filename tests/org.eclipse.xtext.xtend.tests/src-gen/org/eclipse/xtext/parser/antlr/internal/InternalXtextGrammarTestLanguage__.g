@@ -7,62 +7,61 @@ package org.eclipse.xtext.parser.antlr.internal;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-T11 : 'abstract' ;
-T12 : 'grammar' ;
-T13 : 'extends' ;
-T14 : 'hidden' ;
-T15 : '(' ;
-T16 : ',' ;
-T17 : ')' ;
-T18 : '.' ;
-T19 : 'generate' ;
-T20 : 'as' ;
-T21 : 'import' ;
-T22 : 'native' ;
-T23 : 'lexer' ;
-T24 : 'returns' ;
-T25 : ':' ;
-T26 : ';' ;
-T27 : 'terminal' ;
-T28 : '::' ;
-T29 : '|' ;
-T30 : '?' ;
-T31 : '*' ;
-T32 : '+' ;
-T33 : '+=' ;
-T34 : '=' ;
-T35 : '?=' ;
-T36 : '{' ;
-T37 : 'current' ;
-T38 : '}' ;
-T39 : '!' ;
-T40 : '->' ;
-T41 : '..' ;
-T42 : '[' ;
-T43 : ']' ;
+T11 : 'grammar' ;
+T12 : 'extends' ;
+T13 : 'hidden' ;
+T14 : '(' ;
+T15 : ',' ;
+T16 : ')' ;
+T17 : '.' ;
+T18 : 'generate' ;
+T19 : 'as' ;
+T20 : 'import' ;
+T21 : 'native' ;
+T22 : 'lexer' ;
+T23 : 'returns' ;
+T24 : ':' ;
+T25 : ';' ;
+T26 : 'terminal' ;
+T27 : '::' ;
+T28 : '|' ;
+T29 : '?' ;
+T30 : '*' ;
+T31 : '+' ;
+T32 : '+=' ;
+T33 : '=' ;
+T34 : '?=' ;
+T35 : '{' ;
+T36 : 'current' ;
+T37 : '}' ;
+T38 : '!' ;
+T39 : '->' ;
+T40 : '..' ;
+T41 : '[' ;
+T42 : ']' ;
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2340
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2319
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2342
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2321
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2344
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2323
 RULE_STRING : 
 			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
               '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
               ;
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2349
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2328
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2351
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2330
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2353
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2332
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2355
+// $ANTLR src "../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextGrammarTestLanguage.g" 2334
 RULE_ANY_OTHER : .;
 
 

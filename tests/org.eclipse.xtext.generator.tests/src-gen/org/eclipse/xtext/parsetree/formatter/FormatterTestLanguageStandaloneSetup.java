@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.parsetree.formatter;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class FormatterTestLanguageStandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class FormatterTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/formattertestlanguage")) {
 		EPackage.Registry.INSTANCE.put("http://simple/formattertestlanguage", org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("formattertestlanguage", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }

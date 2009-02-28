@@ -7,71 +7,70 @@ package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-T11 : 'abstract' ;
-T12 : 'grammar' ;
-T13 : 'extends' ;
-T14 : 'hidden' ;
-T15 : '(' ;
-T16 : ',' ;
-T17 : ')' ;
-T18 : '.' ;
-T19 : 'generate' ;
-T20 : 'as' ;
-T21 : 'import' ;
-T22 : 'native' ;
-T23 : 'lexer' ;
-T24 : 'returns' ;
-T25 : ':' ;
-T26 : ';' ;
-T27 : 'terminal' ;
-T28 : '::' ;
-T29 : '|' ;
-T30 : '?' ;
-T31 : '*' ;
-T32 : '+' ;
-T33 : '+=' ;
-T34 : '=' ;
-T35 : '?=' ;
-T36 : '{' ;
-T37 : 'current' ;
-T38 : '}' ;
-T39 : '!' ;
-T40 : '->' ;
-T41 : '..' ;
-T42 : '[' ;
-T43 : ']' ;
+T11 : 'grammar' ;
+T12 : 'extends' ;
+T13 : 'hidden' ;
+T14 : '(' ;
+T15 : ',' ;
+T16 : ')' ;
+T17 : '.' ;
+T18 : 'generate' ;
+T19 : 'as' ;
+T20 : 'import' ;
+T21 : 'native' ;
+T22 : 'lexer' ;
+T23 : 'returns' ;
+T24 : ':' ;
+T25 : ';' ;
+T26 : 'terminal' ;
+T27 : '::' ;
+T28 : '|' ;
+T29 : '?' ;
+T30 : '*' ;
+T31 : '+' ;
+T32 : '+=' ;
+T33 : '=' ;
+T34 : '?=' ;
+T35 : '{' ;
+T36 : 'current' ;
+T37 : '}' ;
+T38 : '!' ;
+T39 : '->' ;
+T40 : '..' ;
+T41 : '[' ;
+T42 : ']' ;
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2348
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2327
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
 
 
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2352
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2331
 RULE_INT : ('0'..'9')+;
 
 
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2356
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2335
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
 
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2360
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2339
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2364
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2343
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2368
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2347
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
 
 
-// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2372
+// $ANTLR src "../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalXtextTerminalsTestLanguage.g" 2351
 RULE_ANY_OTHER : .;
 
 

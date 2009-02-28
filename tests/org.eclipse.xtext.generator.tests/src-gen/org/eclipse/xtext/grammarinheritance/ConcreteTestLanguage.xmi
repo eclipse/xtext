@@ -148,7 +148,7 @@
       </alternatives>
     </rules>
   </xtext:Grammar>
-  <xtext:Grammar abstract="true" name="org.eclipse.xtext.grammarinheritance.AbstractTestLanguage" superGrammar="/2">
+  <xtext:Grammar name="org.eclipse.xtext.grammarinheritance.AbstractTestLanguage" superGrammar="/2">
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm">
       <ePackage href="http://www.eclipse.org/xtext/tests/grammarinheritance#/"/>
     </metamodelDeclarations>
@@ -232,7 +232,7 @@
       </type>
     </rules>
   </xtext:Grammar>
-  <xtext:Grammar abstract="true" name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/2/@rules.5 /2/@rules.3 /2/@rules.4">
+  <xtext:Grammar name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/2/@rules.5 /2/@rules.3 /2/@rules.4">
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
       <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
     </metamodelDeclarations>

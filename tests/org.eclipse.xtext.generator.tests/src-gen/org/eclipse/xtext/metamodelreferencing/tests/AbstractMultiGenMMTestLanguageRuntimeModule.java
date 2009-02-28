@@ -30,6 +30,10 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 		return org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MultiGenMMTestLanguagePackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction.MultiGenMMTestLanguageParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction.MultiGenMMTestLanguageParsetreeConstructor.class;
 	}
 }

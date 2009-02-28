@@ -1,6 +1,4 @@
 
-/*
-*/
 package org.eclipse.xtext.valueconverter;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -24,6 +22,7 @@ public class Bug250313StandaloneSetup implements ISetup {
 	public Injector createInjectorAndDoEMFRegistration() {
 		
 		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
@@ -37,13 +36,11 @@ public class Bug250313StandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://org.eclipse.xtext.valueconverter.Bug250313")) {
 		EPackage.Registry.INSTANCE.put("http://org.eclipse.xtext.valueconverter.Bug250313", org.eclipse.xtext.valueconverter.bug250313.Bug250313Package.eINSTANCE);
 	}
-
+	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug250313", resourceFactory);
 		
-
-	//TODO registration of EValidators should be added here, too
 
 	}
 }
