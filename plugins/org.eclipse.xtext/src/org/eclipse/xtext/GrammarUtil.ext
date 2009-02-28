@@ -12,9 +12,6 @@ import xtext;
 
 extension org::eclipse::xtext::Extensions reexport;
 
-Boolean isAbstract(Grammar this) :
-	JAVA org.eclipse.xtext.GrammarUtil.isAbstract(org.eclipse.xtext.Grammar);
-
 String getFragment(emf::EObject object) :
 	JAVA org.eclipse.xtext.EcoreUtil2.getURIFragment(org.eclipse.emf.ecore.EObject);
 	
