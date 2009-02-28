@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -37,7 +36,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		if (!resource.getErrors().isEmpty()) {
 			throw new IllegalStateException(resource.getErrors().toString());
 		}
-		
+
 		grammar = (Grammar) resource.getContents().get(0);
 		EValidator validator = EValidator.Registry.INSTANCE.getEValidator(XtextPackage.eINSTANCE);
 		if (validator != null) {
