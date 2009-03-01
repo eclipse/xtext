@@ -285,7 +285,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertAttributeConfiguration(ruleA, 0, "featureA", "EInt");
 	}
 
-	public void testBuiltInFeatureTypes() throws Exception {
+	public void testCommonTerminalsFeatureTypes() throws Exception {
 		final String grammar = "grammar test generate test 'http://test' RuleA: featureA=ID featureB=INT featureC=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");

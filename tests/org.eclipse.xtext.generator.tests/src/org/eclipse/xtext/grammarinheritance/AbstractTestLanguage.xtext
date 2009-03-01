@@ -29,6 +29,6 @@ AbstractCallExtendedParserRule returns mm::AModel:
 ExtendableParserRule returns mm::AType :
 	'element' name=ID;
 
-lexer REAL returns ecore::EDouble : "RULE_INT '.' RULE_INT";
+terminal REAL returns ecore::EDouble : INT '.' INT;
 
-lexer ID  		: "('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*";
+terminal ID  		: ('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
