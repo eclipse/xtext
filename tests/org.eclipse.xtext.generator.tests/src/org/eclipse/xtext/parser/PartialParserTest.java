@@ -194,9 +194,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			AbstractNode node = iter.next();
 			assertNotNull(node.getGrammarElement());
 			EObject grammarElement = node.getGrammarElement();
-			assertEquals(node.getParent() == null ||
-					((node instanceof LeafNode) && ((LeafNode) node).isHidden()),
-				grammarElement instanceof ParserRule);
+			assertEquals(node.getParent() == null, grammarElement instanceof ParserRule);
 		}
 	}
 

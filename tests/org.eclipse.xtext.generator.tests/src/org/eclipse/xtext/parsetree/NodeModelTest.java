@@ -14,10 +14,13 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -83,9 +86,17 @@ public class NodeModelTest extends AbstractGeneratorTest {
 			assertEquals(node, adapter.getParserNode());
 		} else {
 			assert (node.getGrammarElement() == null
-					|| node.getGrammarElement() instanceof Keyword || GrammarUtil
-					.isLexerRuleCall(node.getGrammarElement()));
+					|| node.getGrammarElement() instanceof Keyword ||
+					isTerminalRuleCall(node.getGrammarElement()));
 		}
+	}
+
+	public static boolean isTerminalRuleCall(EObject grammarElement) {
+		if (grammarElement instanceof RuleCall) {
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
+			return calledRule != null && (calledRule instanceof TerminalRule);
+		}
+		return false;
 	}
 
 	public void testTokenTexts() throws Exception {

@@ -87,8 +87,8 @@ ObjectNew:
 ObjectCopy:
 	"copy" resource=[NamedResource] fragment=FRAGMENT;
 	
-lexer FRAGMENT: 
-	"'#' ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'/'|'['|']'|'{'|'}'|'.'|'@')+";
+terminal FRAGMENT: 
+	'#' ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'/'|'['|']'|'{'|'}'|'.'|'@')+;
 	
 // ******************* migration *****************************
   
