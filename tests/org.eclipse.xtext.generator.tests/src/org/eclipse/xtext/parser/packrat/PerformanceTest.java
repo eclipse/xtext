@@ -40,10 +40,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 				modelBuilder.append("generate test" + i + " 'http://test' as mm" + i + "\n");
 		}
 		for(int i = 0; i < lexerRuleCount; i++) {
-			if (i % 2 == 0)
-				modelBuilder.append("native lexer" + i + ": 'content';\n");
-			else
-				modelBuilder.append("lexer native" + i + " returns type" + i + ": \"otherContent\";");
+			modelBuilder.append("terminal lexer" + i + ": 'content';\n");
 		}
 		this.model = modelBuilder.toString();
 		System.gc();

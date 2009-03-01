@@ -137,7 +137,7 @@ public final class ParseTreeUtil {
 			}
 			if (abstractNode == null && contextNode.getTotalOffset() + contextNode.getTotalLength() <= offsetPosition) {
 				EObject grammarElement = contextNode.getGrammarElement();
-				if (grammarElement instanceof AbstractElement || (grammarElement instanceof ParserRule && !((ParserRule) grammarElement).isTerminal())) {
+				if (grammarElement instanceof AbstractElement || grammarElement instanceof ParserRule) {
 					abstractNode = contextNode;
 				}
 			}

@@ -15,7 +15,7 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -43,7 +43,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 			}
 			fail();
 		}
-		List<ParserRule> lexerRules = GrammarUtil.allTerminalRules(element);
+		List<TerminalRule> lexerRules = GrammarUtil.allTerminalRules(element);
 		assertEquals(8, lexerRules.size());
 
 		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
@@ -54,7 +54,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	public void testConcreteLanguageToMetamodel() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		Grammar element = (Grammar) r.getParseResult().getRootASTElement();
-		List<ParserRule> lexerRules = GrammarUtil.allTerminalRules(element);
+		List<TerminalRule> lexerRules = GrammarUtil.allTerminalRules(element);
 		assertEquals(8, lexerRules.size());
 		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
 		EPackage metaModel = list.get(0);

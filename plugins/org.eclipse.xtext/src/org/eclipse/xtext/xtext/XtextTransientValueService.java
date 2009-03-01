@@ -21,8 +21,8 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.common.Terminals;
@@ -57,14 +57,14 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 				else if (rule.getName().equals(returnType.getType().getName())) {
 					return isTransient(returnType, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), -1);
 				}
-			} else if (rule instanceof LexerRule) {
+			} else if (rule instanceof TerminalRule) {
 				final TypeRef returnType = rule.getType();
 				return returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getType());
 			}
 		}
 		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Rule()) {
 			final CrossReference ref = (CrossReference) owner;
-			// TODO don't use literal but lexer rule
+			// TODO don't use literal but terminal rule
 			if (ref.getRule() != null && "ID".equals(ref.getRule().getName()))
 				return true;
 		}

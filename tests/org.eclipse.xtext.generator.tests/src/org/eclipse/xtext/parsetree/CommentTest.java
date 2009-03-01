@@ -9,8 +9,7 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -31,9 +30,7 @@ public class CommentTest extends AbstractGeneratorTest{
         AbstractNode node = getRootNode(model);
         EList<LeafNode> leafNodes = node.getLeafNodes();
         assertEquals(2, leafNodes.size());
-        assertTrue(leafNodes.get(0).getGrammarElement() instanceof ParserRule);
-        assertTrue(((ParserRule) leafNodes.get(0).getGrammarElement()).isTerminal());
-        assertTrue(leafNodes.get(1).getGrammarElement() instanceof ParserRule);
-        assertTrue(((ParserRule) leafNodes.get(1).getGrammarElement()).isTerminal());
+        assertTrue(leafNodes.get(0).getGrammarElement() instanceof TerminalRule);
+        assertTrue(leafNodes.get(1).getGrammarElement() instanceof TerminalRule);
     }
 }

@@ -73,8 +73,8 @@ Boolean isAssigned(emf::EObject this) :
 Boolean isDatatypeRule(ParserRule this) : 
 	JAVA org.eclipse.xtext.GrammarUtil.isDatatypeRule(org.eclipse.xtext.ParserRule);	
 	
-List[LexerRule] allLexerRules(Grammar this) :
-	JAVA org.eclipse.xtext.GrammarUtil.allLexerRules(org.eclipse.xtext.Grammar);
+List[TerminalRule] allTerminalRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allTerminalRules(org.eclipse.xtext.Grammar);
 
 List[ParserRule] allParserRules(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allParserRules(org.eclipse.xtext.Grammar);
