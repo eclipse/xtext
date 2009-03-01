@@ -65,7 +65,6 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 
 
-
 // Entry rule entryRuleEcoreDsl
 entryRuleEcoreDsl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEcoreDsl().getRule(), currentNode); }
@@ -129,8 +128,6 @@ ruleEcoreDsl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleImportStatementDecl
 entryRuleImportStatementDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prImportStatementDecl().getRule(), currentNode); }
@@ -152,8 +149,9 @@ ruleImportStatementDecl returns [EObject current=null]
     }
 ((	
 	
-	    lv_alias_1=RULE_ID	{
-		createLeafNode(grammarAccess.prImportStatementDecl().ele00100ParserRuleCallID(), "alias"); 
+	    lv_alias_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prImportStatementDecl().ele00100TerminalRuleCallID(), "alias"); 
 	}
  
 	    {
@@ -175,8 +173,9 @@ ruleImportStatementDecl returns [EObject current=null]
     }
 )?)(	
 	
-	    lv_importURI_3=RULE_STRING	{
-		createLeafNode(grammarAccess.prImportStatementDecl().ele010ParserRuleCallSTRING(), "importURI"); 
+	    lv_importURI_3=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prImportStatementDecl().ele010TerminalRuleCallSTRING(), "importURI"); 
 	}
  
 	    {
@@ -197,8 +196,6 @@ ruleImportStatementDecl returns [EObject current=null]
         createLeafNode(grammarAccess.prImportStatementDecl().ele1KeywordSemicolon(), null); 
     }
 );
-
-
 
 
 
@@ -275,8 +272,9 @@ ruleEPackageDecl returns [EObject current=null]
     }
 )(	
 	
-	    lv_nsURI_5=RULE_STRING	{
-		createLeafNode(grammarAccess.prEPackageDecl().ele00000010ParserRuleCallSTRING(), "nsURI"); 
+	    lv_nsURI_5=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prEPackageDecl().ele00000010TerminalRuleCallSTRING(), "nsURI"); 
 	}
  
 	    {
@@ -378,8 +376,6 @@ ruleEPackageDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleSubEPackageDecl
 entryRuleSubEPackageDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prSubEPackageDecl().getRule(), currentNode); }
@@ -422,8 +418,9 @@ ruleSubEPackageDecl returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prSubEPackageDecl().ele00010ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSubEPackageDecl().ele00010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -496,8 +493,6 @@ ruleSubEPackageDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEClassifierDecl
 entryRuleEClassifierDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEClassifierDecl().getRule(), currentNode); }
@@ -523,6 +518,10 @@ ruleEClassifierDecl returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prEClassifierDecl().ele0ParserRuleCallEClassDecl(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl(), currentNode); 
@@ -532,9 +531,11 @@ ruleEClassifierDecl returns [EObject current=null]
         $current = $this_EDataTypeDecl_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl(), null); 
+    }
 );
-
-
 
 
 
@@ -603,8 +604,9 @@ ruleEDataTypeDecl returns [EObject current=null]
     }
 (	
 	
-	    lv_name_3=RULE_ID	{
-		createLeafNode(grammarAccess.prEDataTypeDecl().ele0100010ParserRuleCallID(), "name"); 
+	    lv_name_3=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEDataTypeDecl().ele0100010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -659,9 +661,11 @@ ruleEDataTypeDecl returns [EObject current=null]
         $current = $this_EEnumDecl_7.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prEDataTypeDecl().ele1ParserRuleCallEEnumDecl(), null); 
+    }
 );
-
-
 
 
 
@@ -688,8 +692,9 @@ ruleEAnnotationDecl returns [EObject current=null]
     }
 (	
 	
-	    lv_source_1=RULE_STRING	{
-		createLeafNode(grammarAccess.prEAnnotationDecl().ele0000010ParserRuleCallSTRING(), "source"); 
+	    lv_source_1=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prEAnnotationDecl().ele0000010TerminalRuleCallSTRING(), "source"); 
 	}
  
 	    {
@@ -781,8 +786,6 @@ ruleEAnnotationDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEClassDecl
 entryRuleEClassDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEClassDecl().getRule(), currentNode); }
@@ -868,8 +871,9 @@ ruleEClassDecl returns [EObject current=null]
     }
 ))(	
 	
-	    lv_name_4=RULE_ID	{
-		createLeafNode(grammarAccess.prEClassDecl().ele00000010ParserRuleCallID(), "name"); 
+	    lv_name_4=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEClassDecl().ele00000010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1071,8 +1075,6 @@ ruleEClassDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEStructuralFeatureDecl
 entryRuleEStructuralFeatureDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEStructuralFeatureDecl().getRule(), currentNode); }
@@ -1098,6 +1100,10 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prEStructuralFeatureDecl().ele0ParserRuleCallEAttributeDecl(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl(), currentNode); 
@@ -1107,9 +1113,11 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
         $current = $this_EReferenceDecl_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl(), null); 
+    }
 );
-
-
 
 
 
@@ -1357,8 +1365,9 @@ ruleEAttributeDecl returns [EObject current=null]
     }
 (	
 	
-	    lv_lowerBound_12=RULE_INT	{
-		createLeafNode(grammarAccess.prEAttributeDecl().ele00010010ParserRuleCallINT(), "lowerBound"); 
+	    lv_lowerBound_12=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prEAttributeDecl().ele00010010TerminalRuleCallINT(), "lowerBound"); 
 	}
  
 	    {
@@ -1405,8 +1414,9 @@ ruleEAttributeDecl returns [EObject current=null]
     }
 )?)(	
 	
-	    lv_name_16=RULE_ID	{
-		createLeafNode(grammarAccess.prEAttributeDecl().ele0010ParserRuleCallID(), "name"); 
+	    lv_name_16=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEAttributeDecl().ele0010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1428,8 +1438,9 @@ ruleEAttributeDecl returns [EObject current=null]
     }
 (	
 	
-	    lv_defaultValueLiteral_18=RULE_STRING	{
-		createLeafNode(grammarAccess.prEAttributeDecl().ele0110ParserRuleCallSTRING(), "defaultValueLiteral"); 
+	    lv_defaultValueLiteral_18=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prEAttributeDecl().ele0110TerminalRuleCallSTRING(), "defaultValueLiteral"); 
 	}
  
 	    {
@@ -1450,8 +1461,6 @@ ruleEAttributeDecl returns [EObject current=null]
         createLeafNode(grammarAccess.prEAttributeDecl().ele1KeywordSemicolon(), null); 
     }
 );
-
-
 
 
 
@@ -1721,8 +1730,9 @@ ruleEReferenceDecl returns [EObject current=null]
     }
 (	
 	
-	    lv_lowerBound_13=RULE_INT	{
-		createLeafNode(grammarAccess.prEReferenceDecl().ele00010010ParserRuleCallINT(), "lowerBound"); 
+	    lv_lowerBound_13=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prEReferenceDecl().ele00010010TerminalRuleCallINT(), "lowerBound"); 
 	}
  
 	    {
@@ -1789,8 +1799,9 @@ ruleEReferenceDecl returns [EObject current=null]
 	
 ))?)(	
 	
-	    lv_name_19=RULE_ID	{
-		createLeafNode(grammarAccess.prEReferenceDecl().ele010ParserRuleCallID(), "name"); 
+	    lv_name_19=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEReferenceDecl().ele010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1811,8 +1822,6 @@ ruleEReferenceDecl returns [EObject current=null]
         createLeafNode(grammarAccess.prEReferenceDecl().ele1KeywordSemicolon(), null); 
     }
 );
-
-
 
 
 
@@ -1860,8 +1869,9 @@ ruleEEnumDecl returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prEEnumDecl().ele00010ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEEnumDecl().ele00010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1912,8 +1922,6 @@ ruleEEnumDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEEnumLiteralDecl
 entryRuleEEnumLiteralDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEEnumLiteralDecl().getRule(), currentNode); }
@@ -1952,8 +1960,9 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 )*(	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele00010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele00010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1975,8 +1984,9 @@ ruleEEnumLiteralDecl returns [EObject current=null]
     }
 (	
 	
-	    lv_value_3=RULE_INT	{
-		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele00110ParserRuleCallINT(), "value"); 
+	    lv_value_3=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele00110TerminalRuleCallINT(), "value"); 
 	}
  
 	    {
@@ -1994,8 +2004,9 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 	
 ))?)(	
 	
-	    lv_literal_4=RULE_STRING	{
-		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele010ParserRuleCallSTRING(), "literal"); 
+	    lv_literal_4=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele010TerminalRuleCallSTRING(), "literal"); 
 	}
  
 	    {
@@ -2021,8 +2032,6 @@ ruleEEnumLiteralDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleETypeParameterDecl
 entryRuleETypeParameterDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prETypeParameterDecl().getRule(), currentNode); }
@@ -2040,8 +2049,9 @@ ruleETypeParameterDecl returns [EObject current=null]
     }:
 ((	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prETypeParameterDecl().ele00ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prETypeParameterDecl().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -2083,8 +2093,6 @@ ruleETypeParameterDecl returns [EObject current=null]
 	    }
 	
 ))?);
-
-
 
 
 
@@ -2197,8 +2205,6 @@ ruleEGenericTypeReferenceDecl returns [EObject current=null]
 		// TODO assign feature to currentNode
 	
 )));
-
-
 
 
 
@@ -2372,8 +2378,6 @@ ruleEGenericTypeDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEOperationDecl
 entryRuleEOperationDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEOperationDecl().getRule(), currentNode); }
@@ -2485,8 +2489,9 @@ ruleEOperationDecl returns [EObject current=null]
     }
 ))(	
 	
-	    lv_name_6=RULE_ID	{
-		createLeafNode(grammarAccess.prEOperationDecl().ele00000010ParserRuleCallID(), "name"); 
+	    lv_name_6=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEOperationDecl().ele00000010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -2670,8 +2675,6 @@ ruleEOperationDecl returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEParameterDecl
 entryRuleEParameterDecl returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEParameterDecl().getRule(), currentNode); }
@@ -2731,8 +2734,9 @@ ruleEParameterDecl returns [EObject current=null]
 	
 ))(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prEParameterDecl().ele10ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEParameterDecl().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -2749,8 +2753,6 @@ ruleEParameterDecl returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -2780,9 +2782,11 @@ ruleMapEntrySuper returns [EObject current=null]
         $current = $this_MapEntry_0.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prMapEntrySuper().eleParserRuleCallMapEntry(), null); 
+    }
 ;
-
-
 
 
 
@@ -2805,8 +2809,9 @@ ruleMapEntry returns [EObject current=null]
     }:
 (((	
 	
-	    lv_detailKey_0=RULE_ID	{
-		createLeafNode(grammarAccess.prMapEntry().ele000ParserRuleCallID(), "detailKey"); 
+	    lv_detailKey_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prMapEntry().ele000TerminalRuleCallID(), "detailKey"); 
 	}
  
 	    {
@@ -2828,8 +2833,9 @@ ruleMapEntry returns [EObject current=null]
     }
 )(	
 	
-	    lv_detailValue_2=RULE_STRING	{
-		createLeafNode(grammarAccess.prMapEntry().ele10ParserRuleCallSTRING(), "detailValue"); 
+	    lv_detailValue_2=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prMapEntry().ele10TerminalRuleCallSTRING(), "detailValue"); 
 	}
  
 	    {
@@ -2846,8 +2852,6 @@ ruleMapEntry returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -2876,7 +2880,7 @@ ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.prQID().ele0ParserRuleCallID(), null); 
+    createLeafNode(grammarAccess.prQID().ele0TerminalRuleCallID(), null); 
     }
 ((
 	kw='.' 
@@ -2896,12 +2900,10 @@ ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.prQID().ele11ParserRuleCallID(), null); 
+    createLeafNode(grammarAccess.prQID().ele11TerminalRuleCallID(), null); 
     }
 )*)
     ;
-
-
 
 
 
@@ -2928,7 +2930,7 @@ ruleSTRING_OR_QID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 
     { 
-    createLeafNode(grammarAccess.prSTRING_OR_QID().ele0ParserRuleCallSTRING(), null); 
+    createLeafNode(grammarAccess.prSTRING_OR_QID().ele0TerminalRuleCallSTRING(), null); 
     }
 
     |
@@ -2944,8 +2946,6 @@ ruleSTRING_OR_QID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 )
     ;
-
-
 
 
 
@@ -2978,7 +2978,7 @@ ruleSINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.prSINT().ele1ParserRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prSINT().ele1TerminalRuleCallINT(), null); 
     }
 )
     ;
@@ -2986,103 +2986,18 @@ ruleSINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

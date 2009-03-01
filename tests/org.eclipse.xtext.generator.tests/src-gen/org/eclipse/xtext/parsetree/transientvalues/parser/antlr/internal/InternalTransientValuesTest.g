@@ -65,7 +65,6 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 
 
 
-
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
@@ -95,6 +94,10 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), currentNode); 
@@ -103,6 +106,10 @@ ruleRoot returns [EObject current=null]
     { 
         $current = $this_TestOptional_2.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), null); 
     }
 )
     |
@@ -114,9 +121,11 @@ ruleRoot returns [EObject current=null]
         $current = $this_TestList_3.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), null); 
+    }
 ));
-
-
 
 
 
@@ -143,8 +152,9 @@ ruleTestRequired returns [EObject current=null]
     }
 (	
 	
-	    lv_required1_1=RULE_INT	{
-		createLeafNode(grammarAccess.prTestRequired().ele010ParserRuleCallINT(), "required1"); 
+	    lv_required1_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestRequired().ele010TerminalRuleCallINT(), "required1"); 
 	}
  
 	    {
@@ -162,8 +172,9 @@ ruleTestRequired returns [EObject current=null]
 	
 ))(	
 	
-	    lv_required2_2=RULE_INT	{
-		createLeafNode(grammarAccess.prTestRequired().ele10ParserRuleCallINT(), "required2"); 
+	    lv_required2_2=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestRequired().ele10TerminalRuleCallINT(), "required2"); 
 	}
  
 	    {
@@ -180,8 +191,6 @@ ruleTestRequired returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -208,8 +217,9 @@ ruleTestOptional returns [EObject current=null]
     }
 (	
 	
-	    lv_opt1_1=RULE_INT	{
-		createLeafNode(grammarAccess.prTestOptional().ele010ParserRuleCallINT(), "opt1"); 
+	    lv_opt1_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestOptional().ele010TerminalRuleCallINT(), "opt1"); 
 	}
  
 	    {
@@ -231,8 +241,9 @@ ruleTestOptional returns [EObject current=null]
     }
 (	
 	
-	    lv_opt2_3=RULE_INT	{
-		createLeafNode(grammarAccess.prTestOptional().ele110ParserRuleCallINT(), "opt2"); 
+	    lv_opt2_3=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestOptional().ele110TerminalRuleCallINT(), "opt2"); 
 	}
  
 	    {
@@ -249,8 +260,6 @@ ruleTestOptional returns [EObject current=null]
 	    }
 	
 ))?);
-
-
 
 
 
@@ -277,8 +286,9 @@ ruleTestList returns [EObject current=null]
     }
 (	
 	
-	    lv_item_1=RULE_INT	{
-		createLeafNode(grammarAccess.prTestList().ele10ParserRuleCallINT(), "item"); 
+	    lv_item_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTestList().ele10TerminalRuleCallINT(), "item"); 
 	}
  
 	    {
@@ -299,59 +309,18 @@ ruleTestList returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

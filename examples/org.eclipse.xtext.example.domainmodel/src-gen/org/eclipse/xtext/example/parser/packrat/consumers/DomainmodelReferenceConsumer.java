@@ -223,7 +223,7 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordRef());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0001AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010ParserRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010TerminalRuleCallID());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele001KeywordColon());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele01AssignmentType());
 		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010ParserRuleCallTypeRef());

@@ -315,7 +315,7 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele0000010ParserRuleCallTypeRef());
 		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele00001KeywordFullStop());
 		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele0001AssignmentFeature());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele00010ParserRuleCallID());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele00010TerminalRuleCallID());
 		assignment$17$Consumer = new Assignment$17$Consumer(rule.ele001AssignmentOperator());
 		alternatives$18$Consumer = new Alternatives$18$Consumer(rule.ele0010Alternatives());
 		keyword$19$Consumer = new Keyword$19$Consumer(rule.ele00100KeywordEqualsSign());

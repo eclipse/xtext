@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
 
 
 
-
 // Entry rule entryRuleSpielplatz
 entryRuleSpielplatz returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prSpielplatz().getRule(), currentNode); }
@@ -87,8 +86,9 @@ ruleSpielplatz returns [EObject current=null]
     }
 (	
 	
-	    lv_groesse_1=RULE_INT	{
-		createLeafNode(grammarAccess.prSpielplatz().ele000010ParserRuleCallINT(), "groesse"); 
+	    lv_groesse_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prSpielplatz().ele000010TerminalRuleCallINT(), "groesse"); 
 	}
  
 	    {
@@ -106,8 +106,9 @@ ruleSpielplatz returns [EObject current=null]
 	
 ))(	
 	
-	    lv_beschreibung_2=RULE_STRING	{
-		createLeafNode(grammarAccess.prSpielplatz().ele00010ParserRuleCallSTRING(), "beschreibung"); 
+	    lv_beschreibung_2=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prSpielplatz().ele00010TerminalRuleCallSTRING(), "beschreibung"); 
 	}
  
 	    {
@@ -226,8 +227,6 @@ ruleSpielplatz returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleKind
 entryRuleKind returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prKind().getRule(), currentNode); }
@@ -253,8 +252,9 @@ ruleKind returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prKind().ele0010ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prKind().ele0010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -272,8 +272,9 @@ ruleKind returns [EObject current=null]
 	
 ))(	
 	
-	    lv_age_3=RULE_INT	{
-		createLeafNode(grammarAccess.prKind().ele010ParserRuleCallINT(), "age"); 
+	    lv_age_3=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prKind().ele010TerminalRuleCallINT(), "age"); 
 	}
  
 	    {
@@ -294,8 +295,6 @@ ruleKind returns [EObject current=null]
         createLeafNode(grammarAccess.prKind().ele1KeywordRightParenthesis(), null); 
     }
 );
-
-
 
 
 
@@ -326,8 +325,9 @@ ruleErwachsener returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prErwachsener().ele0010ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prErwachsener().ele0010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -345,8 +345,9 @@ ruleErwachsener returns [EObject current=null]
 	
 ))(	
 	
-	    lv_age_3=RULE_INT	{
-		createLeafNode(grammarAccess.prErwachsener().ele010ParserRuleCallINT(), "age"); 
+	    lv_age_3=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prErwachsener().ele010TerminalRuleCallINT(), "age"); 
 	}
  
 	    {
@@ -367,8 +368,6 @@ ruleErwachsener returns [EObject current=null]
         createLeafNode(grammarAccess.prErwachsener().ele1KeywordRightParenthesis(), null); 
     }
 );
-
-
 
 
 
@@ -399,8 +398,9 @@ ruleSpielzeug returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prSpielzeug().ele0010ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSpielzeug().ele0010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -447,8 +447,6 @@ ruleSpielzeug returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleFarbe
 entryRuleFarbe returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prFarbe().getRule(), currentNode); }
@@ -489,8 +487,6 @@ ruleFarbe returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleFamilie
 entryRuleFamilie returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prFamilie().getRule(), currentNode); }
@@ -524,13 +520,13 @@ ruleFamilie returns [EObject current=null]
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prFamilie().ele000001001ParserRuleCallSTRING(), "name"); 
+		createLeafNode(grammarAccess.prFamilie().ele000001001TerminalRuleCallSTRING(), "name"); 
 	}
 )
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele00000101ParserRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prFamilie().ele00000101TerminalRuleCallID(), "name"); 
 	}
 )
  
@@ -624,69 +620,18 @@ ruleFamilie returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

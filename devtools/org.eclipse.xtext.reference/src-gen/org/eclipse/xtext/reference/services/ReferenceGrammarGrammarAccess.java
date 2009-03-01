@@ -26,9 +26,9 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Group c0000Group = (Group)c000Group.eContents().get(0);
 		private final Keyword c00000KeywordSpielplatz = (Keyword)c0000Group.eContents().get(0);
 		private final Assignment c00001AssignmentGroesse = (Assignment)c0000Group.eContents().get(1);
-		private final RuleCall c000010ParserRuleCallINT = (RuleCall)c00001AssignmentGroesse.eContents().get(0);
+		private final RuleCall c000010TerminalRuleCallINT = (RuleCall)c00001AssignmentGroesse.eContents().get(0);
 		private final Assignment c0001AssignmentBeschreibung = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010ParserRuleCallSTRING = (RuleCall)c0001AssignmentBeschreibung.eContents().get(0);
+		private final RuleCall c00010TerminalRuleCallSTRING = (RuleCall)c0001AssignmentBeschreibung.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Alternatives c01Alternatives = (Alternatives)c0Group.eContents().get(1);
 		private final Alternatives c010Alternatives = (Alternatives)c01Alternatives.eContents().get(0);
@@ -71,13 +71,13 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele00001AssignmentGroesse() { return c00001AssignmentGroesse; }
 
 		// not supported
-		public RuleCall ele000010ParserRuleCallINT() { return c000010ParserRuleCallINT; }
+		public RuleCall ele000010TerminalRuleCallINT() { return c000010TerminalRuleCallINT; }
 
 		// not supported
 		public Assignment ele0001AssignmentBeschreibung() { return c0001AssignmentBeschreibung; }
 
 		// not supported
-		public RuleCall ele00010ParserRuleCallSTRING() { return c00010ParserRuleCallSTRING; }
+		public RuleCall ele00010TerminalRuleCallSTRING() { return c00010TerminalRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
@@ -156,9 +156,9 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Keyword c0000KeywordKind = (Keyword)c000Group.eContents().get(0);
 		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Assignment c01AssignmentAge = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallINT = (RuleCall)c01AssignmentAge.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentAge.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -186,13 +186,13 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
+		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele01AssignmentAge() { return c01AssignmentAge; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallINT() { return c010ParserRuleCallINT; }
+		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
 
 		// not supported
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
@@ -207,9 +207,9 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Keyword c0000KeywordErwachsener = (Keyword)c000Group.eContents().get(0);
 		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Assignment c01AssignmentAge = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallINT = (RuleCall)c01AssignmentAge.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentAge.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -237,13 +237,13 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
+		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele01AssignmentAge() { return c01AssignmentAge; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallINT() { return c010ParserRuleCallINT; }
+		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
 
 		// not supported
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
@@ -258,7 +258,7 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Keyword c0000KeywordSpielzeug = (Keyword)c000Group.eContents().get(0);
 		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Assignment c01AssignmentFarbe = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallFarbe = (RuleCall)c01AssignmentFarbe.eContents().get(0);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
@@ -288,7 +288,7 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
+		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele01AssignmentFarbe() { return c01AssignmentFarbe; }
@@ -315,8 +315,8 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Alternatives c0000010Alternatives = (Alternatives)c000001AssignmentName.eContents().get(0);
 		private final Alternatives c00000100Alternatives = (Alternatives)c0000010Alternatives.eContents().get(0);
 		private final Keyword c000001000KeywordKeyword = (Keyword)c00000100Alternatives.eContents().get(0);
-		private final RuleCall c000001001ParserRuleCallSTRING = (RuleCall)c00000100Alternatives.eContents().get(1);
-		private final RuleCall c00000101ParserRuleCallID = (RuleCall)c0000010Alternatives.eContents().get(1);
+		private final RuleCall c000001001TerminalRuleCallSTRING = (RuleCall)c00000100Alternatives.eContents().get(1);
+		private final RuleCall c00000101TerminalRuleCallID = (RuleCall)c0000010Alternatives.eContents().get(1);
 		private final Assignment c00001AssignmentMutter = (Assignment)c0000Group.eContents().get(1);
 		private final CrossReference c000010CrossReferenceEStringErwachsener = (CrossReference)c00001AssignmentMutter.eContents().get(0);
 		private final Assignment c0001AssignmentVater = (Assignment)c000Group.eContents().get(1);
@@ -372,10 +372,10 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Keyword ele000001000KeywordKeyword() { return c000001000KeywordKeyword; }
 
 		// not supported
-		public RuleCall ele000001001ParserRuleCallSTRING() { return c000001001ParserRuleCallSTRING; }
+		public RuleCall ele000001001TerminalRuleCallSTRING() { return c000001001TerminalRuleCallSTRING; }
 
 		// not supported
-		public RuleCall ele00000101ParserRuleCallID() { return c00000101ParserRuleCallID; }
+		public RuleCall ele00000101TerminalRuleCallID() { return c00000101TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele00001AssignmentMutter() { return c00001AssignmentMutter; }
@@ -455,7 +455,7 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordType = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -470,7 +470,7 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public RuleCall ele10ParserRuleCallID() { return c10ParserRuleCallID; }
+		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
 	}
 	
 	private SpielplatzElements pSpielplatz;
@@ -543,37 +543,37 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
-		return superGrammarAccess.prSTRING();
+	public TerminalRule trSTRING() {
+		return superGrammarAccess.trSTRING();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

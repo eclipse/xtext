@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
 
 
 
-
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
@@ -108,8 +107,6 @@ ruleModel returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleGreeting
 entryRuleGreeting returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prGreeting().getRule(), currentNode); }
@@ -131,8 +128,9 @@ ruleGreeting returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prGreeting().ele10ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prGreeting().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -153,55 +151,18 @@ ruleGreeting returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

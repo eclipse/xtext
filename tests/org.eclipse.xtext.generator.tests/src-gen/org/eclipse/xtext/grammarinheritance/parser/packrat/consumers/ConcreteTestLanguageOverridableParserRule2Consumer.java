@@ -160,10 +160,10 @@ public final class ConcreteTestLanguageOverridableParserRule2Consumer extends No
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordOverriddenOtherElement());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010TerminalRuleCallID());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordHyphenMinus());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele1AssignmentAge());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele10ParserRuleCallINT());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele10TerminalRuleCallINT());
 	}
 	
 	@Override

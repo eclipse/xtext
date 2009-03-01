@@ -179,9 +179,9 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordKind());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele0001KeywordLeftParenthesis());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele001AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0010ParserRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0010TerminalRuleCallID());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele01AssignmentAge());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010ParserRuleCallINT());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010TerminalRuleCallINT());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele1KeywordRightParenthesis());
 	}
 	

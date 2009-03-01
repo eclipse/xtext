@@ -161,13 +161,22 @@ public interface XtextPackage extends EPackage
   int ABSTRACT_RULE__TYPE = 1;
 
   /**
+   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_RULE__ALTERNATIVES = 2;
+
+  /**
    * The number of structural features of the '<em>Abstract Rule</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_RULE_FEATURE_COUNT = 2;
+  int ABSTRACT_RULE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl <em>Abstract Metamodel Declaration</em>}' class.
@@ -290,52 +299,6 @@ public interface XtextPackage extends EPackage
   int REFERENCED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.impl.LexerRuleImpl <em>Lexer Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.impl.LexerRuleImpl
-   * @see org.eclipse.xtext.impl.XtextPackageImpl#getLexerRule()
-   * @generated
-   */
-  int LEXER_RULE = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LEXER_RULE__TYPE = ABSTRACT_RULE__TYPE;
-
-  /**
-   * The feature id for the '<em><b>Body</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LEXER_RULE__BODY = ABSTRACT_RULE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Lexer Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LEXER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.ParserRuleImpl <em>Parser Rule</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -343,7 +306,7 @@ public interface XtextPackage extends EPackage
    * @see org.eclipse.xtext.impl.XtextPackageImpl#getParserRule()
    * @generated
    */
-  int PARSER_RULE = 6;
+  int PARSER_RULE = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -364,6 +327,15 @@ public interface XtextPackage extends EPackage
   int PARSER_RULE__TYPE = ABSTRACT_RULE__TYPE;
 
   /**
+   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARSER_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
+
+  /**
    * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -382,31 +354,59 @@ public interface XtextPackage extends EPackage
   int PARSER_RULE__HIDDEN_TOKENS = ABSTRACT_RULE_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARSER_RULE__ALTERNATIVES = ABSTRACT_RULE_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Terminal</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARSER_RULE__TERMINAL = ABSTRACT_RULE_FEATURE_COUNT + 3;
-
-  /**
    * The number of structural features of the '<em>Parser Rule</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 4;
+  int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.impl.TerminalRuleImpl
+   * @see org.eclipse.xtext.impl.XtextPackageImpl#getTerminalRule()
+   * @generated
+   */
+  int TERMINAL_RULE = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__NAME = ABSTRACT_RULE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
+
+  /**
+   * The number of structural features of the '<em>Terminal Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.TypeRefImpl <em>Type Ref</em>}' class.
@@ -1081,6 +1081,17 @@ public interface XtextPackage extends EPackage
   EReference getAbstractRule_Type();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.AbstractRule#getAlternatives <em>Alternatives</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Alternatives</em>'.
+   * @see org.eclipse.xtext.AbstractRule#getAlternatives()
+   * @see #getAbstractRule()
+   * @generated
+   */
+  EReference getAbstractRule_Alternatives();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.AbstractMetamodelDeclaration <em>Abstract Metamodel Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1144,27 +1155,6 @@ public interface XtextPackage extends EPackage
   EClass getReferencedMetamodel();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.LexerRule <em>Lexer Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Lexer Rule</em>'.
-   * @see org.eclipse.xtext.LexerRule
-   * @generated
-   */
-  EClass getLexerRule();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.LexerRule#getBody <em>Body</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Body</em>'.
-   * @see org.eclipse.xtext.LexerRule#getBody()
-   * @see #getLexerRule()
-   * @generated
-   */
-  EAttribute getLexerRule_Body();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ParserRule <em>Parser Rule</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1197,26 +1187,14 @@ public interface XtextPackage extends EPackage
   EReference getParserRule_HiddenTokens();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.TerminalRule <em>Terminal Rule</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Alternatives</em>'.
-   * @see org.eclipse.xtext.ParserRule#getAlternatives()
-   * @see #getParserRule()
+   * @return the meta object for class '<em>Terminal Rule</em>'.
+   * @see org.eclipse.xtext.TerminalRule
    * @generated
    */
-  EReference getParserRule_Alternatives();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ParserRule#isTerminal <em>Terminal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Terminal</em>'.
-   * @see org.eclipse.xtext.ParserRule#isTerminal()
-   * @see #getParserRule()
-   * @generated
-   */
-  EAttribute getParserRule_Terminal();
+  EClass getTerminalRule();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.TypeRef <em>Type Ref</em>}'.
@@ -1675,6 +1653,14 @@ public interface XtextPackage extends EPackage
     EReference ABSTRACT_RULE__TYPE = eINSTANCE.getAbstractRule_Type();
 
     /**
+     * The meta object literal for the '<em><b>Alternatives</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ABSTRACT_RULE__ALTERNATIVES = eINSTANCE.getAbstractRule_Alternatives();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl <em>Abstract Metamodel Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1729,24 +1715,6 @@ public interface XtextPackage extends EPackage
     EClass REFERENCED_METAMODEL = eINSTANCE.getReferencedMetamodel();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.impl.LexerRuleImpl <em>Lexer Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.impl.LexerRuleImpl
-     * @see org.eclipse.xtext.impl.XtextPackageImpl#getLexerRule()
-     * @generated
-     */
-    EClass LEXER_RULE = eINSTANCE.getLexerRule();
-
-    /**
-     * The meta object literal for the '<em><b>Body</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute LEXER_RULE__BODY = eINSTANCE.getLexerRule_Body();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.ParserRuleImpl <em>Parser Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1773,20 +1741,14 @@ public interface XtextPackage extends EPackage
     EReference PARSER_RULE__HIDDEN_TOKENS = eINSTANCE.getParserRule_HiddenTokens();
 
     /**
-     * The meta object literal for the '<em><b>Alternatives</b></em>' containment reference feature.
+     * The meta object literal for the '{@link org.eclipse.xtext.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.impl.TerminalRuleImpl
+     * @see org.eclipse.xtext.impl.XtextPackageImpl#getTerminalRule()
      * @generated
      */
-    EReference PARSER_RULE__ALTERNATIVES = eINSTANCE.getParserRule_Alternatives();
-
-    /**
-     * The meta object literal for the '<em><b>Terminal</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PARSER_RULE__TERMINAL = eINSTANCE.getParserRule_Terminal();
+    EClass TERMINAL_RULE = eINSTANCE.getTerminalRule();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.TypeRefImpl <em>Type Ref</em>}' class.

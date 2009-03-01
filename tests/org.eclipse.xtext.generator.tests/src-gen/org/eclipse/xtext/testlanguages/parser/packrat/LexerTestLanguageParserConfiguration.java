@@ -60,13 +60,13 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getElementConsumer().setRule(grammarAccess.prElement());
-		getStringConsumer().setRule(grammarAccess.lrSTRING());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getModelConsumer().setElementConsumer(getElementConsumer());

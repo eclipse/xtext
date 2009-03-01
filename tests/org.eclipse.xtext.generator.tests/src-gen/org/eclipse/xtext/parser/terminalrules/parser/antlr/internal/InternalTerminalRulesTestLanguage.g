@@ -65,7 +65,6 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
 
 
 
-
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
@@ -83,8 +82,9 @@ ruleModel returns [EObject current=null]
     }:
 (((((((	
 	
-	    lv_idValue_0=RULE_ID	{
-		createLeafNode(grammarAccess.prModel().ele0000000ParserRuleCallID(), "idValue"); 
+	    lv_idValue_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prModel().ele0000000TerminalRuleCallID(), "idValue"); 
 	}
  
 	    {
@@ -103,8 +103,9 @@ ruleModel returns [EObject current=null]
 )
     |(	
 	
-	    lv_intValue_1=RULE_INT	{
-		createLeafNode(grammarAccess.prModel().ele0000010ParserRuleCallINT(), "intValue"); 
+	    lv_intValue_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prModel().ele0000010TerminalRuleCallINT(), "intValue"); 
 	}
  
 	    {
@@ -123,8 +124,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_stringValue_2=RULE_STRING	{
-		createLeafNode(grammarAccess.prModel().ele000010ParserRuleCallSTRING(), "stringValue"); 
+	    lv_stringValue_2=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prModel().ele000010TerminalRuleCallSTRING(), "stringValue"); 
 	}
  
 	    {
@@ -143,8 +145,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_mlCommentValue_3=RULE_ML_COMMENT	{
-		createLeafNode(grammarAccess.prModel().ele00010ParserRuleCallML_COMMENT(), "mlCommentValue"); 
+	    lv_mlCommentValue_3=	RULE_ML_COMMENT
+	{
+		createLeafNode(grammarAccess.prModel().ele00010TerminalRuleCallML_COMMENT(), "mlCommentValue"); 
 	}
  
 	    {
@@ -163,8 +166,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_slCommentValue_4=RULE_SL_COMMENT	{
-		createLeafNode(grammarAccess.prModel().ele0010ParserRuleCallSL_COMMENT(), "slCommentValue"); 
+	    lv_slCommentValue_4=	RULE_SL_COMMENT
+	{
+		createLeafNode(grammarAccess.prModel().ele0010TerminalRuleCallSL_COMMENT(), "slCommentValue"); 
 	}
  
 	    {
@@ -183,8 +187,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_wsValue_5=RULE_WS	{
-		createLeafNode(grammarAccess.prModel().ele010ParserRuleCallWS(), "wsValue"); 
+	    lv_wsValue_5=	RULE_WS
+	{
+		createLeafNode(grammarAccess.prModel().ele010TerminalRuleCallWS(), "wsValue"); 
 	}
  
 	    {
@@ -203,8 +208,9 @@ ruleModel returns [EObject current=null]
 ))
     |(	
 	
-	    lv_anyValue_6=RULE_ANY_OTHER	{
-		createLeafNode(grammarAccess.prModel().ele10ParserRuleCallANY_OTHER(), "anyValue"); 
+	    lv_anyValue_6=	RULE_ANY_OTHER
+	{
+		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallANY_OTHER(), "anyValue"); 
 	}
  
 	    {
@@ -225,65 +231,18 @@ ruleModel returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

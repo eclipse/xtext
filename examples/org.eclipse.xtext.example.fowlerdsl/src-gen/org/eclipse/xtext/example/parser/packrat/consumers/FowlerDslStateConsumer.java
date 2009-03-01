@@ -259,7 +259,7 @@ public final class FowlerDslStateConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordState());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0001AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010ParserRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010TerminalRuleCallID());
 		group$8$Consumer = new Group$8$Consumer(rule.ele001Group());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele001000KeywordActions());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele001001KeywordLeftCurlyBracket());

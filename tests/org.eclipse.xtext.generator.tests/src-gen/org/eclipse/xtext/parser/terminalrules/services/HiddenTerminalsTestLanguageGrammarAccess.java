@@ -67,10 +67,10 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Keyword c0000KeywordWithout = (Keyword)c000Group.eContents().get(0);
 		private final Assignment c0001AssignmentSpaces = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010ParserRuleCallWS = (RuleCall)c0001AssignmentSpaces.eContents().get(0);
+		private final RuleCall c00010TerminalRuleCallWS = (RuleCall)c0001AssignmentSpaces.eContents().get(0);
 		private final Keyword c001KeywordHiddens = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentSpaces = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallWS = (RuleCall)c01AssignmentSpaces.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentSpaces.eContents().get(0);
 		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
 		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
 		
@@ -96,7 +96,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Assignment ele0001AssignmentSpaces() { return c0001AssignmentSpaces; }
 
 		// not supported
-		public RuleCall ele00010ParserRuleCallWS() { return c00010ParserRuleCallWS; }
+		public RuleCall ele00010TerminalRuleCallWS() { return c00010TerminalRuleCallWS; }
 
 		// not supported
 		public Keyword ele001KeywordHiddens() { return c001KeywordHiddens; }
@@ -105,7 +105,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Assignment ele01AssignmentSpaces() { return c01AssignmentSpaces; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallWS() { return c010ParserRuleCallWS; }
+		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
 
 		// not supported
 		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
@@ -210,7 +210,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordCall = (Keyword)c0Group.eContents().get(0);
 		private final Assignment c01AssignmentSpaces = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallWS = (RuleCall)c01AssignmentSpaces.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentSpaces.eContents().get(0);
 		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
 		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
 		
@@ -230,7 +230,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Assignment ele01AssignmentSpaces() { return c01AssignmentSpaces; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallWS() { return c010ParserRuleCallWS; }
+		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
 
 		// not supported
 		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
@@ -358,7 +358,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordHiding = (Keyword)c0Group.eContents().get(0);
 		private final Assignment c01AssignmentSpace = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallWS = (RuleCall)c01AssignmentSpace.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentSpace.eContents().get(0);
 		private final Assignment c1AssignmentCalled = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallInheritingHiddensCall = (RuleCall)c1AssignmentCalled.eContents().get(0);
 		
@@ -378,7 +378,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Assignment ele01AssignmentSpace() { return c01AssignmentSpace; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallWS() { return c010ParserRuleCallWS; }
+		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
 
 		// not supported
 		public Assignment ele1AssignmentCalled() { return c1AssignmentCalled; }
@@ -409,122 +409,6 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		// not supported
 		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
 	}
-
-	public class ML_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordSolidusAsterisk = (Keyword)cGroup.eContents().get(0);
-		private final UpToToken c1UpToToken = (UpToToken)cGroup.eContents().get(1);
-		private final Keyword c10KeywordAsteriskSolidus = (Keyword)c1UpToToken.eContents().get(0);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public Group eleGroup() { return cGroup; }
-
-		// not supported
-		public Keyword ele0KeywordSolidusAsterisk() { return c0KeywordSolidusAsterisk; }
-
-		// not supported
-		public UpToToken ele1UpToToken() { return c1UpToToken; }
-
-		// not supported
-		public Keyword ele10KeywordAsteriskSolidus() { return c10KeywordAsteriskSolidus; }
-	}
-
-	public class SL_COMMENTElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordSolidusSolidus = (Keyword)c0Group.eContents().get(0);
-		private final NegatedToken c01NegatedToken = (NegatedToken)c0Group.eContents().get(1);
-		private final Alternatives c010Alternatives = (Alternatives)c01NegatedToken.eContents().get(0);
-		private final Keyword c0100Keyword = (Keyword)c010Alternatives.eContents().get(0);
-		private final Keyword c0101Keyword = (Keyword)c010Alternatives.eContents().get(1);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10Keyword = (Keyword)c1Group.eContents().get(0);
-		private final Keyword c11Keyword = (Keyword)c1Group.eContents().get(1);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public Group eleGroup() { return cGroup; }
-
-		// not supported
-		public Group ele0Group() { return c0Group; }
-
-		// not supported
-		public Keyword ele00KeywordSolidusSolidus() { return c00KeywordSolidusSolidus; }
-
-		// not supported
-		public NegatedToken ele01NegatedToken() { return c01NegatedToken; }
-
-		// not supported
-		public Alternatives ele010Alternatives() { return c010Alternatives; }
-
-		// not supported
-		public Keyword ele0100Keyword() { return c0100Keyword; }
-
-		// not supported
-		public Keyword ele0101Keyword() { return c0101Keyword; }
-
-		// not supported
-		public Group ele1Group() { return c1Group; }
-
-		// not supported
-		public Keyword ele10Keyword() { return c10Keyword; }
-
-		// not supported
-		public Keyword ele11Keyword() { return c11Keyword; }
-	}
-
-	public class WSElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
-		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final Keyword c000KeywordSpace = (Keyword)c00Alternatives.eContents().get(0);
-		private final Keyword c001Keyword = (Keyword)c00Alternatives.eContents().get(1);
-		private final Keyword c01Keyword = (Keyword)c0Alternatives.eContents().get(1);
-		private final Keyword c1Keyword = (Keyword)cAlternatives.eContents().get(1);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
-
-		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
-
-		// not supported
-		public Alternatives ele00Alternatives() { return c00Alternatives; }
-
-		// not supported
-		public Keyword ele000KeywordSpace() { return c000KeywordSpace; }
-
-		// not supported
-		public Keyword ele001Keyword() { return c001Keyword; }
-
-		// not supported
-		public Keyword ele01Keyword() { return c01Keyword; }
-
-		// not supported
-		public Keyword ele1Keyword() { return c1Keyword; }
-	}
-
-	public class ANY_OTHERElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
-		private final Wildcard cWildcard = (Wildcard)rule.eContents().get(1);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public Wildcard eleWildcard() { return cWildcard; }
-	}
 	
 	private ModelElements pModel;
 	private WithoutHiddensElements pWithoutHiddens;
@@ -536,10 +420,10 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	private DatatypeRuleElements pDatatypeRule;
 	private HidingHiddensElements pHidingHiddens;
 	private InheritingHiddensCallElements pInheritingHiddensCall;
-	private ML_COMMENTElements pML_COMMENT;
-	private SL_COMMENTElements pSL_COMMENT;
-	private WSElements pWS;
-	private ANY_OTHERElements pANY_OTHER;
+	private TerminalRule tML_COMMENT;
+	private TerminalRule tSL_COMMENT;
+	private TerminalRule tWS;
+	private TerminalRule tANY_OTHER;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -605,22 +489,22 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	} 
 
 	// not supported
-	public ML_COMMENTElements prML_COMMENT() {
-		return (pML_COMMENT != null) ? pML_COMMENT : (pML_COMMENT = new ML_COMMENTElements());
+	public TerminalRule trML_COMMENT() {
+		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
 	// not supported
-	public SL_COMMENTElements prSL_COMMENT() {
-		return (pSL_COMMENT != null) ? pSL_COMMENT : (pSL_COMMENT = new SL_COMMENTElements());
+	public TerminalRule trSL_COMMENT() {
+		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
 	// not supported
-	public WSElements prWS() {
-		return (pWS != null) ? pWS : (pWS = new WSElements());
+	public TerminalRule trWS() {
+		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
 	// not supported
-	public ANY_OTHERElements prANY_OTHER() {
-		return (pANY_OTHER != null) ? pANY_OTHER : (pANY_OTHER = new ANY_OTHERElements());
+	public TerminalRule trANY_OTHER() {
+		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

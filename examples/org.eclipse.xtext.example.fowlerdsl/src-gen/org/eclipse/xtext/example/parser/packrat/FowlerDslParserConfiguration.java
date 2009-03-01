@@ -76,13 +76,13 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 		getCommandConsumer().setRule(grammarAccess.prCommand());
 		getStateConsumer().setRule(grammarAccess.prState());
 		getTransitionConsumer().setRule(grammarAccess.prTransition());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getStatemachineConsumer().setCommandConsumer(getCommandConsumer());

@@ -71,7 +71,7 @@ public final class Bug250313Child2Consumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentName());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSTRING());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
 	}
 	
 	@Override

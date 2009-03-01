@@ -73,7 +73,7 @@
         </abstractTokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="REAL" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="REAL">
       <type metamodel="/0/@metamodelDeclarations.1">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       </type>
@@ -85,7 +85,7 @@
         <abstractTokens xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ID" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="ID">
       <type metamodel="/0/@metamodelDeclarations.1">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
@@ -141,7 +141,7 @@
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
       <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="ID" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="ID">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
@@ -183,7 +183,7 @@
         </abstractTokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="INT" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="INT">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </type>
@@ -192,7 +192,7 @@
         <right value="9"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="STRING" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="STRING">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
@@ -277,7 +277,7 @@
         </groups>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ML_COMMENT" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
@@ -288,7 +288,7 @@
         </abstractTokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="SL_COMMENT" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
@@ -308,7 +308,7 @@
         </abstractTokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="WS" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="WS">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
@@ -323,7 +323,7 @@
         <groups xsi:type="xtext:Keyword" value="&#xA;"/>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ANY_OTHER" terminal="true">
+    <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>

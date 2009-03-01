@@ -65,7 +65,6 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
 
 
 
-
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
@@ -91,6 +90,10 @@ ruleModel returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prModel().ele0000ParserRuleCallWithoutHiddens(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prModel().ele0001ParserRuleCallWithHiddens(), currentNode); 
@@ -99,6 +102,10 @@ ruleModel returns [EObject current=null]
     { 
         $current = $this_WithHiddens_1.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prModel().ele0001ParserRuleCallWithHiddens(), null); 
     }
 )
     |
@@ -110,6 +117,10 @@ ruleModel returns [EObject current=null]
         $current = $this_OverridingHiddens_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prModel().ele001ParserRuleCallOverridingHiddens(), null); 
+    }
 )
     |
     { 
@@ -119,6 +130,10 @@ ruleModel returns [EObject current=null]
     { 
         $current = $this_InheritingHiddens_3.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prModel().ele01ParserRuleCallInheritingHiddens(), null); 
     }
 )
     |
@@ -130,9 +145,11 @@ ruleModel returns [EObject current=null]
         $current = $this_DatatypeHiddens_4.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prModel().ele1ParserRuleCallDatatypeHiddens(), null); 
+    }
 );
-
-
 
 
 
@@ -159,8 +176,9 @@ ruleWithoutHiddens returns [EObject current=null]
     }
 (	
 	
-	    lv_spaces_1=RULE_WS	{
-		createLeafNode(grammarAccess.prWithoutHiddens().ele00010ParserRuleCallWS(), "spaces"); 
+	    lv_spaces_1=	RULE_WS
+	{
+		createLeafNode(grammarAccess.prWithoutHiddens().ele00010TerminalRuleCallWS(), "spaces"); 
 	}
  
 	    {
@@ -182,8 +200,9 @@ ruleWithoutHiddens returns [EObject current=null]
     }
 )(	
 	
-	    lv_spaces_3=RULE_WS	{
-		createLeafNode(grammarAccess.prWithoutHiddens().ele010ParserRuleCallWS(), "spaces"); 
+	    lv_spaces_3=	RULE_WS
+	{
+		createLeafNode(grammarAccess.prWithoutHiddens().ele010TerminalRuleCallWS(), "spaces"); 
 	}
  
 	    {
@@ -221,8 +240,6 @@ ruleWithoutHiddens returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -275,8 +292,6 @@ ruleWithHiddens returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -363,8 +378,6 @@ ruleOverridingHiddens returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleOverridingHiddensCall
 entryRuleOverridingHiddensCall returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prOverridingHiddensCall().getRule(), currentNode); }
@@ -388,8 +401,9 @@ ruleOverridingHiddensCall returns [EObject current=null]
     }
 (	
 	
-	    lv_spaces_1=RULE_WS	{
-		createLeafNode(grammarAccess.prOverridingHiddensCall().ele010ParserRuleCallWS(), "spaces"); 
+	    lv_spaces_1=	RULE_WS
+	{
+		createLeafNode(grammarAccess.prOverridingHiddensCall().ele010TerminalRuleCallWS(), "spaces"); 
 	}
  
 	    {
@@ -427,8 +441,6 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -537,8 +549,6 @@ ruleInheritingHiddens returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleDatatypeHiddens
 entryRuleDatatypeHiddens returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prDatatypeHiddens().getRule(), currentNode); }
@@ -585,8 +595,6 @@ ruleDatatypeHiddens returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleDatatypeRule
 entryRuleDatatypeRule returns [String current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prDatatypeRule().getRule(), currentNode); } 
@@ -624,8 +632,6 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 
 
 
-
-
 // Entry rule entryRuleHidingHiddens
 entryRuleHidingHiddens returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prHidingHiddens().getRule(), currentNode); }
@@ -649,8 +655,9 @@ ruleHidingHiddens returns [EObject current=null]
     }
 (	
 	
-	    lv_space_1=RULE_WS	{
-		createLeafNode(grammarAccess.prHidingHiddens().ele010ParserRuleCallWS(), "space"); 
+	    lv_space_1=	RULE_WS
+	{
+		createLeafNode(grammarAccess.prHidingHiddens().ele010TerminalRuleCallWS(), "space"); 
 	}
  
 	    {
@@ -688,8 +695,6 @@ ruleHidingHiddens returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -740,53 +745,12 @@ ruleInheritingHiddensCall returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
-
-
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-
-
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

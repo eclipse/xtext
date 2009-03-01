@@ -89,7 +89,7 @@ public final class EcoreDslSTRING_OR_QIDConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSTRING());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallQID());
 	}
 	

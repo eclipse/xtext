@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 
 
 
-
 // Entry rule entryRuleSomeContainer
 entryRuleSomeContainer returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prSomeContainer().getRule(), currentNode); }
@@ -87,8 +86,9 @@ ruleSomeContainer returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prSomeContainer().ele00010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSomeContainer().ele00010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -161,8 +161,6 @@ ruleSomeContainer returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleNested
 entryRuleNested returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prNested().getRule(), currentNode); }
@@ -217,8 +215,6 @@ ruleNested returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleContent
 entryRuleContent returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prContent().getRule(), currentNode); }
@@ -244,6 +240,10 @@ ruleContent returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prContent().ele0ParserRuleCallChildren(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prContent().ele1ParserRuleCallAbstractChildren(), currentNode); 
@@ -253,9 +253,11 @@ ruleContent returns [EObject current=null]
         $current = $this_AbstractChildren_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prContent().ele1ParserRuleCallAbstractChildren(), null); 
+    }
 );
-
-
 
 
 
@@ -340,8 +342,6 @@ ruleChildren returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleChild
 entryRuleChild returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prChild().getRule(), currentNode); }
@@ -395,8 +395,6 @@ ruleChild returns [EObject current=null]
         createLeafNode(grammarAccess.prChild().ele1KeywordRightParenthesis(), null); 
     }
 );
-
-
 
 
 
@@ -456,8 +454,6 @@ ruleAbstractChildren returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleAbstractChild
 entryRuleAbstractChild returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prAbstractChild().getRule(), currentNode); }
@@ -483,6 +479,10 @@ ruleAbstractChild returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prAbstractChild().ele0ParserRuleCallFirstConcrete(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prAbstractChild().ele1ParserRuleCallSecondConcrete(), currentNode); 
@@ -492,9 +492,11 @@ ruleAbstractChild returns [EObject current=null]
         $current = $this_SecondConcrete_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prAbstractChild().ele1ParserRuleCallSecondConcrete(), null); 
+    }
 );
-
-
 
 
 
@@ -569,8 +571,6 @@ ruleFirstConcrete returns [EObject current=null]
         createLeafNode(grammarAccess.prFirstConcrete().ele1KeywordRightParenthesis(), null); 
     }
 );
-
-
 
 
 
@@ -654,8 +654,6 @@ ruleSecondConcrete returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleNamed
 entryRuleNamed returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prNamed().getRule(), currentNode); }
@@ -673,8 +671,9 @@ ruleNamed returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prNamed().ele0ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prNamed().ele0TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -695,71 +694,18 @@ ruleNamed returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

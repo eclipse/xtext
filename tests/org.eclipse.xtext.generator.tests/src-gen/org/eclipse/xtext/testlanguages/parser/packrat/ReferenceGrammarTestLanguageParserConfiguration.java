@@ -88,13 +88,13 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 		getSpielzeugConsumer().setRule(grammarAccess.prSpielzeug());
 		getFarbeConsumer().setRule(grammarAccess.prFarbe());
 		getFamilieConsumer().setRule(grammarAccess.prFamilie());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getSpielplatzConsumer().setErwachsenerConsumer(getErwachsenerConsumer());

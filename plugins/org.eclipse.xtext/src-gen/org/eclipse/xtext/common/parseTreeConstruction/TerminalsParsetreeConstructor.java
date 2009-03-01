@@ -25,11 +25,4 @@ public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor 
 		return null;
 	}
 	
-
-
-
-
-
-
-
 }

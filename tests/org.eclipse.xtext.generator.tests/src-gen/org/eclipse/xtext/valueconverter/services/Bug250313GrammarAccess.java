@@ -35,10 +35,10 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		private final Alternatives c000000001000Alternatives = (Alternatives)c00000000100Alternatives.eContents().get(0);
 		private final Alternatives c0000000010000Alternatives = (Alternatives)c000000001000Alternatives.eContents().get(0);
 		private final Keyword c00000000100000KeywordMykeyword1 = (Keyword)c0000000010000Alternatives.eContents().get(0);
-		private final RuleCall c00000000100001ParserRuleCallSTRING = (RuleCall)c0000000010000Alternatives.eContents().get(1);
+		private final RuleCall c00000000100001TerminalRuleCallSTRING = (RuleCall)c0000000010000Alternatives.eContents().get(1);
 		private final RuleCall c0000000010001ParserRuleCallNestedDatatype = (RuleCall)c000000001000Alternatives.eContents().get(1);
 		private final RuleCall c000000001001ParserRuleCallDatatype = (RuleCall)c00000000100Alternatives.eContents().get(1);
-		private final RuleCall c00000000101ParserRuleCallID = (RuleCall)c0000000010Alternatives.eContents().get(1);
+		private final RuleCall c00000000101TerminalRuleCallID = (RuleCall)c0000000010Alternatives.eContents().get(1);
 		private final Group c00000001Group = (Group)c0000000Alternatives.eContents().get(1);
 		private final Keyword c000000010KeywordDigitOnePlusSign = (Keyword)c00000001Group.eContents().get(0);
 		private final Assignment c000000011AssignmentMultiValue = (Assignment)c00000001Group.eContents().get(1);
@@ -47,18 +47,18 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		private final Alternatives c000000011000Alternatives = (Alternatives)c00000001100Alternatives.eContents().get(0);
 		private final Alternatives c0000000110000Alternatives = (Alternatives)c000000011000Alternatives.eContents().get(0);
 		private final Keyword c00000001100000KeywordMykeyword1 = (Keyword)c0000000110000Alternatives.eContents().get(0);
-		private final RuleCall c00000001100001ParserRuleCallSTRING = (RuleCall)c0000000110000Alternatives.eContents().get(1);
+		private final RuleCall c00000001100001TerminalRuleCallSTRING = (RuleCall)c0000000110000Alternatives.eContents().get(1);
 		private final RuleCall c0000000110001ParserRuleCallNestedDatatype = (RuleCall)c000000011000Alternatives.eContents().get(1);
 		private final RuleCall c000000011001ParserRuleCallDatatype = (RuleCall)c00000001100Alternatives.eContents().get(1);
-		private final RuleCall c00000001101ParserRuleCallID = (RuleCall)c0000000110Alternatives.eContents().get(1);
+		private final RuleCall c00000001101TerminalRuleCallID = (RuleCall)c0000000110Alternatives.eContents().get(1);
 		private final Group c0000001Group = (Group)c000000Alternatives.eContents().get(1);
 		private final Keyword c00000010KeywordDigitTwo = (Keyword)c0000001Group.eContents().get(0);
 		private final Assignment c00000011AssignmentValue = (Assignment)c0000001Group.eContents().get(1);
-		private final RuleCall c000000110ParserRuleCallSTRING = (RuleCall)c00000011AssignmentValue.eContents().get(0);
+		private final RuleCall c000000110TerminalRuleCallSTRING = (RuleCall)c00000011AssignmentValue.eContents().get(0);
 		private final Group c000001Group = (Group)c00000Alternatives.eContents().get(1);
 		private final Keyword c0000010KeywordDigitTwoPlusSign = (Keyword)c000001Group.eContents().get(0);
 		private final Assignment c0000011AssignmentMultiValue = (Assignment)c000001Group.eContents().get(1);
-		private final RuleCall c00000110ParserRuleCallSTRING = (RuleCall)c0000011AssignmentMultiValue.eContents().get(0);
+		private final RuleCall c00000110TerminalRuleCallSTRING = (RuleCall)c0000011AssignmentMultiValue.eContents().get(0);
 		private final Group c00001Group = (Group)c0000Alternatives.eContents().get(1);
 		private final Keyword c000010KeywordDigitThree = (Keyword)c00001Group.eContents().get(0);
 		private final Assignment c000011AssignmentValue = (Assignment)c00001Group.eContents().get(1);
@@ -139,7 +139,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Keyword ele00000000100000KeywordMykeyword1() { return c00000000100000KeywordMykeyword1; }
 
 		// not supported
-		public RuleCall ele00000000100001ParserRuleCallSTRING() { return c00000000100001ParserRuleCallSTRING; }
+		public RuleCall ele00000000100001TerminalRuleCallSTRING() { return c00000000100001TerminalRuleCallSTRING; }
 
 		// not supported
 		public RuleCall ele0000000010001ParserRuleCallNestedDatatype() { return c0000000010001ParserRuleCallNestedDatatype; }
@@ -148,7 +148,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public RuleCall ele000000001001ParserRuleCallDatatype() { return c000000001001ParserRuleCallDatatype; }
 
 		// not supported
-		public RuleCall ele00000000101ParserRuleCallID() { return c00000000101ParserRuleCallID; }
+		public RuleCall ele00000000101TerminalRuleCallID() { return c00000000101TerminalRuleCallID; }
 
 		// not supported
 		public Group ele00000001Group() { return c00000001Group; }
@@ -175,7 +175,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Keyword ele00000001100000KeywordMykeyword1() { return c00000001100000KeywordMykeyword1; }
 
 		// not supported
-		public RuleCall ele00000001100001ParserRuleCallSTRING() { return c00000001100001ParserRuleCallSTRING; }
+		public RuleCall ele00000001100001TerminalRuleCallSTRING() { return c00000001100001TerminalRuleCallSTRING; }
 
 		// not supported
 		public RuleCall ele0000000110001ParserRuleCallNestedDatatype() { return c0000000110001ParserRuleCallNestedDatatype; }
@@ -184,7 +184,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public RuleCall ele000000011001ParserRuleCallDatatype() { return c000000011001ParserRuleCallDatatype; }
 
 		// not supported
-		public RuleCall ele00000001101ParserRuleCallID() { return c00000001101ParserRuleCallID; }
+		public RuleCall ele00000001101TerminalRuleCallID() { return c00000001101TerminalRuleCallID; }
 
 		// not supported
 		public Group ele0000001Group() { return c0000001Group; }
@@ -196,7 +196,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Assignment ele00000011AssignmentValue() { return c00000011AssignmentValue; }
 
 		// not supported
-		public RuleCall ele000000110ParserRuleCallSTRING() { return c000000110ParserRuleCallSTRING; }
+		public RuleCall ele000000110TerminalRuleCallSTRING() { return c000000110TerminalRuleCallSTRING; }
 
 		// not supported
 		public Group ele000001Group() { return c000001Group; }
@@ -208,7 +208,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Assignment ele0000011AssignmentMultiValue() { return c0000011AssignmentMultiValue; }
 
 		// not supported
-		public RuleCall ele00000110ParserRuleCallSTRING() { return c00000110ParserRuleCallSTRING; }
+		public RuleCall ele00000110TerminalRuleCallSTRING() { return c00000110TerminalRuleCallSTRING; }
 
 		// not supported
 		public Group ele00001Group() { return c00001Group; }
@@ -296,9 +296,9 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallID = (RuleCall)c0Group.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0Group.eContents().get(0);
 		private final Keyword c01KeywordHyphenMinus = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1ParserRuleCallID = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c1TerminalRuleCallID = (RuleCall)cGroup.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -310,20 +310,20 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Group ele0Group() { return c0Group; }
 
 		// not supported
-		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordHyphenMinus() { return c01KeywordHyphenMinus; }
 
 		// not supported
-		public RuleCall ele1ParserRuleCallID() { return c1ParserRuleCallID; }
+		public RuleCall ele1TerminalRuleCallID() { return c1TerminalRuleCallID; }
 	}
 
 	public class NestedDatatypeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedDatatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallID = (RuleCall)c0Group.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0Group.eContents().get(0);
 		private final Keyword c01KeywordPlusSign = (Keyword)c0Group.eContents().get(1);
 		private final RuleCall c1ParserRuleCallDatatype = (RuleCall)cGroup.eContents().get(1);
 		
@@ -337,7 +337,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Group ele0Group() { return c0Group; }
 
 		// not supported
-		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordPlusSign() { return c01KeywordPlusSign; }
@@ -368,7 +368,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	public class Child1Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child1");
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
+		private final RuleCall c0TerminalRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -377,13 +377,13 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// not supported
-		public RuleCall ele0ParserRuleCallID() { return c0ParserRuleCallID; }
+		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
 	}
 
 	public class Child2Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child2");
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallSTRING = (RuleCall)cAssignmentName.eContents().get(0);
+		private final RuleCall c0TerminalRuleCallSTRING = (RuleCall)cAssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -392,7 +392,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// not supported
-		public RuleCall ele0ParserRuleCallSTRING() { return c0ParserRuleCallSTRING; }
+		public RuleCall ele0TerminalRuleCallSTRING() { return c0TerminalRuleCallSTRING; }
 	}
 	
 	private ModelElements pModel;
@@ -453,37 +453,37 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
-		return superGrammarAccess.prSTRING();
+	public TerminalRule trSTRING() {
+		return superGrammarAccess.trSTRING();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

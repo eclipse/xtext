@@ -16,7 +16,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess.AlternativesElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CrossReferenceElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.GrammarElements;
-import org.eclipse.xtext.services.XtextGrammarAccess.LexerRuleElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.TerminalRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedElementElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
 
@@ -50,11 +50,11 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 		cfg.setNoSpace().before(pr.ele1KeywordSemicolon());
 
 		// LexerRule
-		LexerRuleElements lr = g.prLexerRule();
-		cfg.setLinewrap().after(lr.ele001KeywordColon());
-		cfg.setIndentation(lr.ele001KeywordColon(), lr.ele1KeywordSemicolon());
-		cfg.setNoSpace().before(lr.ele001KeywordColon());
-		cfg.setNoSpace().before(lr.ele1KeywordSemicolon());
+		TerminalRuleElements tr = g.prTerminalRule();
+		cfg.setLinewrap().after(tr.ele001KeywordColon());
+		cfg.setIndentation(tr.ele001KeywordColon(), tr.ele1KeywordSemicolon());
+		cfg.setNoSpace().before(tr.ele001KeywordColon());
+		cfg.setNoSpace().before(tr.ele1KeywordSemicolon());
 
 		// Assignment
 		AssignmentElements as = g.prAssignment();

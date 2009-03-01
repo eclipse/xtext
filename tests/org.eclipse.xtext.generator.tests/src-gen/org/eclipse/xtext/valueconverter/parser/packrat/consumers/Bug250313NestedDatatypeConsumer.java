@@ -109,7 +109,7 @@ public final class Bug250313NestedDatatypeConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallID());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordPlusSign());
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1ParserRuleCallDatatype());
 	}

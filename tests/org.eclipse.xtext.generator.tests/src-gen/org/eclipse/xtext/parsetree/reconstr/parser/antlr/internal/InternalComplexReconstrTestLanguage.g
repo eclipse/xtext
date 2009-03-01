@@ -65,7 +65,6 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 
 
 
-
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
@@ -91,6 +90,10 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prRoot().ele0ParserRuleCallOp(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele1ParserRuleCallTrickyG(), currentNode); 
@@ -100,9 +103,11 @@ ruleRoot returns [EObject current=null]
         $current = $this_TrickyG_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prRoot().ele1ParserRuleCallTrickyG(), null); 
+    }
 );
-
-
 
 
 
@@ -131,6 +136,10 @@ ruleOp returns [EObject current=null]
     { 
         $current = $this_Term_0.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prOp().ele0ParserRuleCallTerm(), null); 
     }
 ((((
     { 
@@ -221,8 +230,6 @@ ruleOp returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prTerm().getRule(), currentNode); }
@@ -248,6 +255,10 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prTerm().ele0ParserRuleCallAtom(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), currentNode); 
@@ -257,9 +268,11 @@ ruleTerm returns [EObject current=null]
         $current = $this_Parens_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), null); 
+    }
 );
-
-
 
 
 
@@ -282,8 +295,9 @@ ruleAtom returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prAtom().ele0ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prAtom().ele0TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -300,8 +314,6 @@ ruleAtom returns [EObject current=null]
 	    }
 	
 );
-
-
 
 
 
@@ -334,6 +346,10 @@ ruleParens returns [EObject current=null]
     { 
         $current = $this_Op_1.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prParens().ele001ParserRuleCallOp(), null); 
     }
 )')' 
     {
@@ -368,8 +384,6 @@ ruleParens returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTrickyA1
 entryRuleTrickyA1 returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prTrickyA1().getRule(), currentNode); }
@@ -387,8 +401,9 @@ ruleTrickyA1 returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prTrickyA1().ele0ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prTrickyA1().ele0TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -405,8 +420,6 @@ ruleTrickyA1 returns [EObject current=null]
 	    }
 	
 );
-
-
 
 
 
@@ -463,8 +476,6 @@ ruleTrickyG returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -545,8 +556,6 @@ ruleTrickyG1 returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTrickyG2
 entryRuleTrickyG2 returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prTrickyG2().getRule(), currentNode); }
@@ -572,10 +581,15 @@ ruleTrickyG2 returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prTrickyG2().ele0ParserRuleCallTrickyG1(), null); 
+    }
+
     |(	
 	
-	    lv_val_1=RULE_INT	{
-		createLeafNode(grammarAccess.prTrickyG2().ele10ParserRuleCallINT(), "val"); 
+	    lv_val_1=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prTrickyG2().ele10TerminalRuleCallINT(), "val"); 
 	}
  
 	    {
@@ -596,85 +610,18 @@ ruleTrickyG2 returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

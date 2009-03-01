@@ -72,8 +72,8 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
       case XtextTerminalsTestLanguagePackage.ABSTRACT_METAMODEL_DECLARATION: return createAbstractMetamodelDeclaration();
       case XtextTerminalsTestLanguagePackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
       case XtextTerminalsTestLanguagePackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
-      case XtextTerminalsTestLanguagePackage.LEXER_RULE: return createLexerRule();
       case XtextTerminalsTestLanguagePackage.PARSER_RULE: return createParserRule();
+      case XtextTerminalsTestLanguagePackage.TERMINAL_RULE: return createTerminalRule();
       case XtextTerminalsTestLanguagePackage.TYPE_REF: return createTypeRef();
       case XtextTerminalsTestLanguagePackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case XtextTerminalsTestLanguagePackage.ASSIGNMENT: return createAssignment();
@@ -153,10 +153,10 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public LexerRule createLexerRule()
+  public ParserRule createParserRule()
   {
-    LexerRuleImpl lexerRule = new LexerRuleImpl();
-    return lexerRule;
+    ParserRuleImpl parserRule = new ParserRuleImpl();
+    return parserRule;
   }
 
   /**
@@ -164,10 +164,10 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParserRule createParserRule()
+  public TerminalRule createTerminalRule()
   {
-    ParserRuleImpl parserRule = new ParserRuleImpl();
-    return parserRule;
+    TerminalRuleImpl terminalRule = new TerminalRuleImpl();
+    return terminalRule;
   }
 
   /**

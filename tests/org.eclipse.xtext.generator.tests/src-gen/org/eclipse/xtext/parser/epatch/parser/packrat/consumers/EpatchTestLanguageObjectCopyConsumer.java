@@ -145,7 +145,7 @@ public final class EpatchTestLanguageObjectCopyConsumer extends NonTerminalConsu
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentResource());
 		crossReference$5$Consumer = new CrossReference$5$Consumer(rule.ele010CrossReferenceEStringNamedResource());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele1AssignmentFragment());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele10LexerRuleCallFRAGMENT());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele10TerminalRuleCallFRAGMENT());
 	}
 	
 	@Override

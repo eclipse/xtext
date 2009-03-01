@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
 
 
-
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
@@ -108,8 +107,6 @@ ruleModel returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleElement
 entryRuleElement returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prElement().getRule(), currentNode); }
@@ -133,6 +130,10 @@ ruleElement returns [EObject current=null]
     { 
         $current = $this_Item_0.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prElement().ele0ParserRuleCallItem(), null); 
     }
 ((
     { 
@@ -177,8 +178,6 @@ ruleElement returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleItem
 entryRuleItem returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prItem().getRule(), currentNode); }
@@ -212,8 +211,9 @@ ruleItem returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prItem().ele10ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prItem().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -234,57 +234,18 @@ ruleItem returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

@@ -69,10 +69,10 @@ public class «getParserClassName().toSimpleName()» extends AbstractPackratParser
 package «getParserConfigurationClassName().toJavaPackage()»;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-«IF definesHiddenTokens || superGrammar != null || rules.typeSelect(ParserRule).exists(e|!e.terminal && e.definesHiddenTokens)-»
+«IF definesHiddenTokens || superGrammar != null || rules.typeSelect(ParserRule).exists(e|e.definesHiddenTokens)-»
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 «ENDIF-»
-«IF !allParserRules().exists(e|!e.terminal)-»
+«IF allParserRules().isEmpty-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 «ENDIF-»
 
@@ -112,8 +112,8 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 «ENDLET-»
 	}
 
-«IF allParserRules().exists(e|!e.terminal)-»
-	public «allParserRules().selectFirst(e|!e.terminal).consumerClassName()» getRootConsumer() {
+«IF !allParserRules().isEmpty-»
+	public «allParserRules().first().consumerClassName()» getRootConsumer() {
 		return «allParserRules().first().consumerFieldName()»;
 «ELSE-»
 	public INonTerminalConsumer getRootConsumer() {
@@ -127,7 +127,7 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createNonTerminalConsumers();
 «ENDIF-»
 «ENDLET-»
-«FOREACH rules.typeSelect(ParserRule).select(e|!e.terminal) AS rule-»
+«FOREACH rules.typeSelect(ParserRule) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
 «IF rule.definesHiddenTokens-»
     		this, new ITerminalConsumer[]{ «FOREACH rule.hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» }
@@ -144,10 +144,7 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createTerminalConsumers();
 «ENDIF-»
 «ENDLET-»
-«FOREACH rules.typeSelect(ParserRule).select(e|e.terminal) AS rule-»
-		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
-«ENDFOREACH-»
-«FOREACH rules.typeSelect(LexerRule) AS rule-»
+«FOREACH rules.typeSelect(TerminalRule) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
 «ENDFOREACH-»
 	}
@@ -181,7 +178,7 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 «ENDIF-»
 «ENDLET-»
 «ENDFOREACH-»
-«EXPAND setDelimiters(this) FOREACH allParserRules().select(e|!e.terminal)-»
+«EXPAND setDelimiters(this) FOREACH allParserRules()-»
 	}
 	
 «LET getSuperGrammar() AS superGrammar-»
@@ -254,12 +251,12 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 */
 package «getDelimiterClassName().toJavaPackage()»;
 
-«IF allParserRules().select(e|!e.terminal).allDelimited().exists(e|e.metaType==Keyword)-»
+«IF allParserRules().allDelimited().exists(e|e.metaType==Keyword)-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 «ENDIF-»
-«IF allParserRules().select(e|!e.terminal).allDelimited().exists(e|e.metaType==RuleCall || e.metaType == CrossReference)-»
+«IF allParserRules().allDelimited().exists(e|e.metaType==RuleCall || e.metaType == CrossReference)-»
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-«IF !allParserRules().select(e|!e.terminal).allDelimited().select(e|e.metaType==RuleCall || e.metaType == CrossReference).conflictingKeywords(this).isEmpty-»
+«IF !allParserRules().allDelimited().select(e|e.metaType==RuleCall || e.metaType == CrossReference).conflictingKeywords(this).isEmpty-»
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 «ENDIF-»
 «ENDIF-»
@@ -270,7 +267,7 @@ public final class «getDelimiterClassName().toSimpleName()» {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	«EXPAND createDelimiters(this) FOREACH allParserRules().select(e|!e.terminal).allDelimited()-»
+	«EXPAND createDelimiters(this) FOREACH allParserRules().allDelimited()-»
 }
 «ENDFILE»
 «ENDDEFINE»
@@ -285,7 +282,7 @@ public final class «getDelimiterClassName().toSimpleName()» {
 «LET conflictingKeywords(grammar) AS conflicting-»
 «IF !conflicting.isEmpty-»
 	public static final ISequenceMatcher «globalDelimiterFieldName()» = new SetBasedKeywordMatcher(
-		«FOREACH conflicting AS c SEPARATOR ", "»"«c»"«ENDFOREACH»);
+		«FOREACH conflicting AS c SEPARATOR ", "»"«toJavaString(c)»"«ENDFOREACH»);
 «ELSE-»
 	public static final ISequenceMatcher «globalDelimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
 «ENDIF-»

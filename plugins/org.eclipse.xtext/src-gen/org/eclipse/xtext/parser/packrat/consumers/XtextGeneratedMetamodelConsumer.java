@@ -207,13 +207,13 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordGenerate());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010TerminalRuleCallID());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele01AssignmentEPackage());
 		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele010CrossReferenceEStringEPackage());
 		group$10$Consumer = new Group$10$Consumer(rule.ele1Group());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele10KeywordAs());
 		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele11AssignmentAlias());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele110ParserRuleCallID());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele110TerminalRuleCallID());
 	}
 	
 	@Override

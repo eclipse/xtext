@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 «DEFINE root FOR Grammar»
-«EXPAND nonTerminalConsumer FOREACH rules.typeSelect(ParserRule).select(e|!e.terminal)»
+«EXPAND nonTerminalConsumer FOREACH rules.typeSelect(ParserRule)»
 «ENDDEFINE»
 
 «DEFINE nonTerminalConsumer FOR ParserRule»
@@ -35,7 +35,7 @@ import org.eclipse.xtext.«getTypeName(name)»;
 «ENDFOREACH-»
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
-«IF eAllContents.typeSelect(RuleCall).exists(e|e.rule.metaType != LexerRule && !((ParserRule)e.rule).terminal)-»
+«IF eAllContents.typeSelect(RuleCall).exists(e|e.rule.metaType != TerminalRule)-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 «ENDIF-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
@@ -454,16 +454,12 @@ GroupConsumer«ENDDEFINE»
 «ERROR "doConsumeBody for " + metaType.name-» 
 «ENDDEFINE»
 
-«DEFINE doConsumeBody(RuleCall call) FOR LexerRule-»
+«DEFINE doConsumeBody(RuleCall call) FOR TerminalRule-»
 			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(RuleCall call) FOR ParserRule-»
-«IF !terminal-»
 			return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getElement(), optional);
-«ELSE-»
-			return consumeTerminal(«consumerFieldName()», null, false, false, getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
-«ENDIF-»
 «ENDDEFINE»
 
 «REM»
@@ -518,16 +514,12 @@ GroupConsumer«ENDDEFINE»
 «ERROR "doConsumeBody for " + metaType.name-» 
 «ENDDEFINE»
 
-«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR LexerRule-»
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR TerminalRule-»
 			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR ParserRule-»
-«IF !terminal-»
 			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
-«ELSE-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
-«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment) FOR CrossReference-»
@@ -538,16 +530,12 @@ GroupConsumer«ENDDEFINE»
 «ERROR "doConsumeBody(Assignment, CrossReference) for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR LexerRule-»
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR TerminalRule-»
 			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
-«IF !terminal-»
 			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
-«ELSE-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»(), optional);
-«ENDIF-»
 «ENDDEFINE»
 
 «REM»

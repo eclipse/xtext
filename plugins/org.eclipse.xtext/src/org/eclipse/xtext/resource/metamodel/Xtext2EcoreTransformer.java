@@ -42,10 +42,10 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -383,7 +383,7 @@ public class Xtext2EcoreTransformer {
 	EClassifier getClassifierFor(AbstractRule rule) {
 		if (rule.getType() != null && rule.getType().getType() != null)
 			return rule.getType().getType();
-		if (rule instanceof LexerRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule) || ((ParserRule)rule).isTerminal()) {
+		if (rule instanceof TerminalRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
 			Grammar checkMe = grammar;
 			while(checkMe != null) { // assume EString as default if it is visible
 				for(AbstractMetamodelDeclaration decl: checkMe.getMetamodelDeclarations()) {

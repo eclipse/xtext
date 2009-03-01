@@ -21,19 +21,15 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 
 	private AbstractRuleElements rule;	
 
-	private INonTerminalConsumer lexerRuleConsumer;
-
 	private INonTerminalConsumer parserRuleConsumer;
 
 	private INonTerminalConsumer terminalRuleConsumer;
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
 	private IElementConsumer ruleCall$3$Consumer;
-
-	private IElementConsumer ruleCall$4$Consumer;
-
-	private IElementConsumer ruleCall$5$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -43,27 +39,14 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
-			acceptor.accept(ruleCall$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
 		}
 	}
 
-	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(lexerRuleConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -73,9 +56,9 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 		}
 	}
 
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -102,9 +85,8 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallLexerRule());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallParserRule());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1ParserRuleCallTerminalRule());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallParserRule());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTerminalRule());
 	}
 	
 	@Override
@@ -115,10 +97,6 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getType();
-	}
-	
-	public void setLexerRuleConsumer(INonTerminalConsumer lexerRuleConsumer) {
-		this.lexerRuleConsumer = lexerRuleConsumer;
 	}
 	
 	public void setParserRuleConsumer(INonTerminalConsumer parserRuleConsumer) {

@@ -119,9 +119,9 @@ public final class FowlerDslCommandConsumer extends NonTerminalConsumer {
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallID());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentCode());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10ParserRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallID());
 	}
 	
 	@Override

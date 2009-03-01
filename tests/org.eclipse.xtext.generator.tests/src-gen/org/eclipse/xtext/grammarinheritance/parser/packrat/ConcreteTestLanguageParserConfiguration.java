@@ -113,14 +113,14 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		getInheritedParserRuleConsumer().setRule(grammarAccess.prInheritedParserRule());
 		getAbstractCallOverridenParserRuleConsumer().setRule(grammarAccess.prAbstractCallOverridenParserRule());
 		getAbstractCallExtendedParserRuleConsumer().setRule(grammarAccess.prAbstractCallExtendedParserRule());
-		getRealConsumer().setRule(grammarAccess.prREAL());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getRealConsumer().setRule(grammarAccess.trREAL());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getRootRuleConsumer().setCallExtendedParserRuleConsumer(getCallExtendedParserRuleConsumer());
@@ -157,8 +157,6 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		getAbstractCallOverridenParserRuleConsumer().setOverridableParserRuleConsumer(getOverridableParserRuleConsumer());
 
 		getAbstractCallExtendedParserRuleConsumer().setExtendableParserRuleConsumer(getExtendableParserRuleConsumer());
-
-		getRealConsumer().setIntConsumer(getIntConsumer());
 
 		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
 		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$19$Delimiter);

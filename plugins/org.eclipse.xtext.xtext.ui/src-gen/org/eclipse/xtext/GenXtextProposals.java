@@ -130,33 +130,6 @@ public class GenXtextProposals extends AbstractJavaProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment, "ReferencedMetamodel_Alias", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeLexerRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeLexerRule_Name feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "LexerRule_Name", contentAssistContext));
-	}
-			
-	public List<? extends ICompletionProposal> completeLexerRule_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeLexerRule_Type feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeLexerRule_Body(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeLexerRule_Body feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"LexerRule_Body\"", contentAssistContext));		
-	}
-			
 	public List<? extends ICompletionProposal> completeParserRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeParserRule_Name feature '" + assignment.getFeature() + "' terminal '"
@@ -197,15 +170,6 @@ public class GenXtextProposals extends AbstractJavaProposalProvider {
 	public List<? extends ICompletionProposal> completeParserRule_Alternatives(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeParserRule_Alternatives feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeTerminalRule_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalRule_Terminal feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -475,21 +439,6 @@ public class GenXtextProposals extends AbstractJavaProposalProvider {
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-	public List<? extends ICompletionProposal> completeEcore_EInt(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeEcore_EInt '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
-		}
-		return Collections.emptyList();
-	}
 			
 			
 			

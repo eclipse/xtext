@@ -16,9 +16,9 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.util.XtextSwitch;
 
@@ -31,27 +31,23 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		DatatypeRuleFinder finder = new DatatypeRuleFinder();
 		return finder.doSwitch(rule) && finder.indicatorFound;
 	}
-	
+
 	static boolean isValidDatatypeRule(ParserRule rule) {
 		return new DatatypeRuleChecker().doSwitch(rule);
 	}
-	
+
 	static class DatatypeRuleFinder extends DatatypeRuleUtil {
-		
+
 		private boolean indicatorFound;
-		
+
 		@Override
-		public Boolean caseLexerRule(LexerRule object) {
+		public Boolean caseTerminalRule(TerminalRule object) {
 			indicatorFound = true;
-			return super.caseLexerRule(object);
+			return super.caseTerminalRule(object);
 		}
-		
+
 		@Override
 		public Boolean caseParserRule(ParserRule object) {
-			if (object.isTerminal()) {
-				indicatorFound = true;
-				return true;
-			}
 			final TypeRef typeRef = object.getType();
 			if (typeRef != null) {
 				if (typeRef.getType() != null) {
@@ -71,17 +67,13 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 			}
 			return !visitedRules.add(object) || (object.getAlternatives() != null && doSwitch(object.getAlternatives()));
 		}
-		
+
 	}
-	
+
 	static class DatatypeRuleChecker extends DatatypeRuleFinder {
-		
+
 		@Override
 		public Boolean caseParserRule(ParserRule object) {
-			if (object.isTerminal()) {
-				visitedRules.add(object);
-				return Boolean.TRUE;
-			}
 			if (visitedRules.isEmpty()) {
 				visitedRules.add(object);
 				return object.getAlternatives() != null && doSwitch(object.getAlternatives());
@@ -92,11 +84,11 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 			}
 			return !visitedRules.add(object) || GrammarUtil.isDatatypeRule(object);
 		}
-		
+
 	}
 
 	protected final HashSet<AbstractRule> visitedRules;
-	
+
 	protected DatatypeRuleUtil() {
 		this.visitedRules = new HashSet<AbstractRule>();
 	}
@@ -130,7 +122,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 	}
 
 	@Override
-	public Boolean caseLexerRule(LexerRule object) {
+	public Boolean caseTerminalRule(TerminalRule object) {
 		return Boolean.TRUE;
 	}
 
@@ -138,6 +130,6 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 	public Boolean caseRuleCall(RuleCall object) {
 		return object.getRule() != null && doSwitch(object.getRule());
 	}
-	
-	
+
+
 }

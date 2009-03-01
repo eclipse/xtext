@@ -140,7 +140,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensCallConsumer exte
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordCall());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentSpaces());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010ParserRuleCallWS());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010TerminalRuleCallWS());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentValid());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele10KeywordSemicolon());
 	}

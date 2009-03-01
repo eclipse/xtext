@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
 
 
-
 // Entry rule entryRuleEntryRule
 entryRuleEntryRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEntryRule().getRule(), currentNode); }
@@ -108,8 +107,6 @@ ruleEntryRule returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prAbstractRule().getRule(), currentNode); }
@@ -135,6 +132,10 @@ ruleAbstractRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prAbstractRule().ele0ParserRuleCallChoiceRule(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele1ParserRuleCallReducibleRule(), currentNode); 
@@ -144,9 +145,11 @@ ruleAbstractRule returns [EObject current=null]
         $current = $this_ReducibleRule_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prAbstractRule().ele1ParserRuleCallReducibleRule(), null); 
+    }
 );
-
-
 
 
 
@@ -194,8 +197,9 @@ ruleChoiceRule returns [EObject current=null]
 	
 )?)(	
 	
-	    lv_name_2=RULE_ID	{
-		createLeafNode(grammarAccess.prChoiceRule().ele10ParserRuleCallID(), "name"); 
+	    lv_name_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prChoiceRule().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -212,8 +216,6 @@ ruleChoiceRule returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -246,6 +248,10 @@ ruleReducibleRule returns [EObject current=null]
     { 
         $current = $this_TerminalRule_1.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule(), null); 
     }
 )((
     { 
@@ -290,8 +296,6 @@ ruleReducibleRule returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTerminalRule
 entryRuleTerminalRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prTerminalRule().getRule(), currentNode); }
@@ -309,8 +313,9 @@ ruleTerminalRule returns [EObject current=null]
     }:
 (	
 	
-	    lv_stringFeature_0=RULE_STRING	{
-		createLeafNode(grammarAccess.prTerminalRule().ele0ParserRuleCallSTRING(), "stringFeature"); 
+	    lv_stringFeature_0=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prTerminalRule().ele0TerminalRuleCallSTRING(), "stringFeature"); 
 	}
  
 	    {
@@ -331,63 +336,18 @@ ruleTerminalRule returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

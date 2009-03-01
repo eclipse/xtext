@@ -268,7 +268,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele00000AssignmentFeature());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000ParserRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000TerminalRuleCallID());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele00001KeywordEqualsSign());
 		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele0001KeywordLeftSquareBracket());
 		group$10$Consumer = new Group$10$Consumer(rule.ele001Group());

@@ -65,7 +65,6 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 
 
-
 // Entry rule entryRuleStatemachine
 entryRuleStatemachine returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prStatemachine().getRule(), currentNode); }
@@ -166,8 +165,6 @@ ruleStatemachine returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEvent
 entryRuleEvent returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEvent().getRule(), currentNode); }
@@ -206,8 +203,9 @@ ruleEvent returns [EObject current=null]
 	
 )?(	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prEvent().ele010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEvent().ele010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -225,8 +223,9 @@ ruleEvent returns [EObject current=null]
 	
 ))(	
 	
-	    lv_code_2=RULE_ID	{
-		createLeafNode(grammarAccess.prEvent().ele10ParserRuleCallID(), "code"); 
+	    lv_code_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prEvent().ele10TerminalRuleCallID(), "code"); 
 	}
  
 	    {
@@ -243,8 +242,6 @@ ruleEvent returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -267,8 +264,9 @@ ruleCommand returns [EObject current=null]
     }:
 ((	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prCommand().ele00ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prCommand().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -286,8 +284,9 @@ ruleCommand returns [EObject current=null]
 	
 )(	
 	
-	    lv_code_1=RULE_ID	{
-		createLeafNode(grammarAccess.prCommand().ele10ParserRuleCallID(), "code"); 
+	    lv_code_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prCommand().ele10TerminalRuleCallID(), "code"); 
 	}
  
 	    {
@@ -304,8 +303,6 @@ ruleCommand returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -332,8 +329,9 @@ ruleState returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prState().ele00010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prState().ele00010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -408,8 +406,6 @@ ruleState returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTransition
 entryRuleTransition returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prTransition().getRule(), currentNode); }
@@ -466,61 +462,18 @@ ruleTransition returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

@@ -14,10 +14,10 @@ import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.NegatedToken;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UpToToken;
 import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
@@ -37,29 +37,29 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	public TerminalRuleInterpreter(Keyword keyword) {
 		this(keyword.getValue());
 	}
-	
+
 	public TerminalRuleInterpreter(String input) {
 		this(new StringWithOffset(input));
 	}
-	
+
 	public TerminalRuleInterpreter(StringWithOffset input) {
 		this(input, input);
 	}
-	
-	public boolean matches(ParserRule rule) {
+
+	public boolean matches(TerminalRule rule) {
 		return doSwitch(rule) && eof();
 	}
-	
+
 	private boolean eof() {
 		return input.getOffset() >= input.length();
 	}
-	
+
 	public TerminalRuleInterpreter(ICharSequenceWithOffset input, IMarkerFactory markerFactory) {
 		super();
 		this.input = input;
 		this.markerFactory = markerFactory;
 	}
-	
+
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		boolean result = false;
@@ -95,7 +95,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
-	
+
 	@Override
 	public Boolean defaultCase(EObject object) {
 		throw new IllegalArgumentException(object.eClass().getName() + " is not a valid argument.");
@@ -134,7 +134,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
-	
+
 	@Override
 	public Boolean caseWildcard(Wildcard object) {
 		boolean result = false;
@@ -149,15 +149,13 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	}
 
 	@Override
-	public Boolean caseLexerRule(LexerRule object) {
-		throw new IllegalStateException("Cannot interpret native lexer rules!");
+	public Boolean caseTerminalRule(TerminalRule object) {
+		return doSwitch(object.getAlternatives());
 	}
 
 	@Override
 	public Boolean caseParserRule(ParserRule object) {
-		if (!object.isTerminal())
-			throw new IllegalStateException("Cannot call parser rules that are not terminal rules.");
-		return doSwitch(object.getAlternatives());
+		throw new IllegalStateException("Cannot call parser rules that are not terminal rules.");
 	}
 
 	@Override
@@ -172,7 +170,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
-	
+
 	@Override
 	public Boolean caseUpToToken(UpToToken object) {
 		if (GrammarUtil.isOptionalCardinality(object) || GrammarUtil.isMultipleCardinality(object))
@@ -193,7 +191,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		boolean result = false;
 		OUTER: do {
 			if (eof())
-				break OUTER;			
+				break OUTER;
 			IMarker marker = markerFactory.mark();
 			if (!doSwitch(object.getTerminal())) {
 				result = true;
@@ -205,4 +203,5 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}
+
 }

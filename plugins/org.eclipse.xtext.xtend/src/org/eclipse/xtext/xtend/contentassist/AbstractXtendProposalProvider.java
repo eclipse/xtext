@@ -21,9 +21,9 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -39,23 +39,23 @@ import org.eclipse.xtext.xtend.NoSuchExtensionException;
 /**
  * Super class for <code>IProposalProvider</code> implementations that call
  * Xtend extensions.
- * 
+ *
  * Delegates calls to {@link #completeRuleCall(RuleCall, IContentAssistContext)}
  * and {@link #completeAssignment(Assignment, IContentAssistContext)} to grammar
  * specific extensions. The signature of such funcions invoked reflectively
  * follows the following pattern:
- * 
+ *
  * List[ICompletionProposal] complete[Typename][featureName](Assignment ele,
  * EObject model, String prefix)
- * 
+ *
  * <b>Example</b> Given the following grammar : <code>
  *  RuleA returns MyType :
  *  	"myType" name=ID;
  *  </code>
- * 
+ *
  * @author Jan K&ouml;hnlein
  * @author Michael Clay
- * 
+ *
  * @see IProposalProvider
  * @see AbstractJavaProposalProvider
  */
@@ -87,8 +87,8 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 					+ contentAssistContext.getMatchString().trim().trim() + "'");
 		}
 		AbstractRule calledRule = ruleCall.getRule();
-		if (calledRule instanceof LexerRule) {
-			return completeLexerRuleRuleCall((LexerRule) calledRule, ruleCall, contentAssistContext);
+		if (calledRule instanceof TerminalRule) {
+			return completeTerminalRuleRuleCall((TerminalRule) calledRule, ruleCall, contentAssistContext);
 		}
 		else if (calledRule.getType() != null) {
 			TypeRef typeRef = calledRule.getType();
@@ -144,7 +144,7 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 		return new Template[] {};
 	}
 
-	protected List<? extends ICompletionProposal> completeLexerRuleRuleCall(LexerRule lexerRule, RuleCall ruleCall,
+	protected List<? extends ICompletionProposal> completeTerminalRuleRuleCall(TerminalRule lexerRule, RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
 		return invokeExtension("complete" + lexerRule.getName(), Arrays.asList(ruleCall, contentAssistContext));
 	}
@@ -160,7 +160,7 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	 * root of the containing plug-in; the path must be legal The image would
 	 * typically be shown to the left of the <code>ICompletionProposal</code>
 	 * display string.
-	 * 
+	 *
 	 * @return the image file path of the default image to be shown or
 	 *         <code>null</code> if no image is desired
 	 * @see #getPluginId()
@@ -168,16 +168,16 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";
 	}
-	
+
 	/**
 	 * Concrete subclasses can override this for custom sort and filter
 	 * behavior. Called right after all completion proposals have been
 	 * collected.
-	 * 
+	 *
 	 * The default behavior of this implementation is to filter duplicates and
 	 * to trim matching <code>ICompletionProposal#displayString</code> with
 	 * matching prefix values.
-	 * 
+	 *
 	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode,
 	 *      LeafNode)
 	 */

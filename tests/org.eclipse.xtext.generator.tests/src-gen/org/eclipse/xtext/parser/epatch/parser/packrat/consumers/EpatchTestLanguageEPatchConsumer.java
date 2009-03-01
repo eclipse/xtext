@@ -238,7 +238,7 @@ public final class EpatchTestLanguageEPatchConsumer extends NonTerminalConsumer 
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele000000KeywordEpatch());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele000001AssignmentName());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000010ParserRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000010TerminalRuleCallID());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele00001KeywordLeftCurlyBracket());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele0001AssignmentImports());
 		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele00010ParserRuleCallImport());

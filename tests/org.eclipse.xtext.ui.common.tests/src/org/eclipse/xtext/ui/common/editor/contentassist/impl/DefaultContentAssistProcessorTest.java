@@ -221,7 +221,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
                     .appendNl("grammar foo")
                     .appendNl("generate foo \"foo\"")
                     .appendNl("MyRule : 'foo' name=ID; ").assertText(
-                                    "ParserRule_Name", "lexer", "native", "terminal"
+                                    "ParserRule_Name", "terminal"
                     );
 
     }

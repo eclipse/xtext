@@ -89,24 +89,6 @@ List[ICompletionProposal] completeReferencedMetamodel_Alias(Assignment assignmen
 					+ contentAssistContext.matchString.trim() + "'") ->
     { newProposal(assignment, "ReferencedMetamodel_Alias", contentAssistContext) };
 	 
-List[ICompletionProposal] completeLexerRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeLexerRule_Name feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "LexerRule_Name", contentAssistContext) };
-	 
-List[ICompletionProposal] completeLexerRule_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeLexerRule_Type feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
-List[ICompletionProposal] completeLexerRule_Body(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeLexerRule_Body feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{ newProposal(assignment, "\"LexerRule_Body\"", contentAssistContext) };
-	 
 List[ICompletionProposal] completeParserRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeParserRule_Name feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
@@ -134,12 +116,6 @@ List[ICompletionProposal] completeParserRule_HiddenTokens(Assignment assignment,
 	 
 List[ICompletionProposal] completeParserRule_Alternatives(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeParserRule_Alternatives feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
-List[ICompletionProposal] completeTerminalRule_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalRule_Terminal feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
@@ -298,9 +274,6 @@ List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext cont
 	{};
 	 	  
 List[ICompletionProposal] completeEcore_EString(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
-	{};
-	 	  
-List[ICompletionProposal] completeEcore_EInt(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*

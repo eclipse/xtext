@@ -37,7 +37,7 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentName = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000ParserRuleCallID = (RuleCall)c00AssignmentName.eContents().get(0);
+		private final RuleCall c000TerminalRuleCallID = (RuleCall)c00AssignmentName.eContents().get(0);
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
 		private final Keyword c010KeywordRefersTo = (Keyword)c01Group.eContents().get(0);
 		private final Assignment c011AssignmentReferred = (Assignment)c01Group.eContents().get(1);
@@ -57,7 +57,7 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00AssignmentName() { return c00AssignmentName; }
 
 		// not supported
-		public RuleCall ele000ParserRuleCallID() { return c000ParserRuleCallID; }
+		public RuleCall ele000TerminalRuleCallID() { return c000TerminalRuleCallID; }
 
 		// not supported
 		public Group ele01Group() { return c01Group; }
@@ -109,37 +109,37 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
-		return superGrammarAccess.prSTRING();
+	public TerminalRule trSTRING() {
+		return superGrammarAccess.trSTRING();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

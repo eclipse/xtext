@@ -140,7 +140,7 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordHiding());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentSpace());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010ParserRuleCallWS());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010TerminalRuleCallWS());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentCalled());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallInheritingHiddensCall());
 	}

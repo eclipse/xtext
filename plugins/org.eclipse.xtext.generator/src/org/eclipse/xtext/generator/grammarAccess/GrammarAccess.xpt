@@ -106,8 +106,8 @@ public class «gaSimpleName()» implements IGrammarAccess {
 	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
-«DEFINE cache FOR LexerRule-»
-	private LexerRule «gaRuleAccessorLocalVarName()»;
+«DEFINE cache FOR TerminalRule-»
+	private TerminalRule «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
 
@@ -126,11 +126,11 @@ public class «gaSimpleName()» implements IGrammarAccess {
 	} 
 «ENDDEFINE»
 
-«DEFINE getter(Grammar original) FOR LexerRule»
+«DEFINE getter(Grammar original) FOR TerminalRule»
 	// «grammarFragmentToStr()»
-	public LexerRule «gaRuleAccessMethodName()»() {
+	public TerminalRule «gaRuleAccessMethodName()»() {
 «IF containingGrammar() == original-»
-		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
 «ELSE-»
 		return superGrammarAccess.«gaRuleAccessMethodName()»();
 «ENDIF-»

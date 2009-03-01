@@ -144,7 +144,7 @@ public final class EpatchTestLanguageJavaExecutableConsumer extends NonTerminalC
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordJava());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentMethod());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010TerminalRuleCallID());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordLeftParenthesis());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele1KeywordRightParenthesis());
 	}

@@ -17,6 +17,7 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMetamodelDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage">
@@ -32,21 +33,13 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferencedMetamodel" eSuperTypes="//AbstractMetamodelDeclaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParserRule" eSuperTypes="//AbstractRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="definesHiddenTokens">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hiddenTokens" unique="false" upperBound="-1" eType="//AbstractRule"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="terminal">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TerminalRule" eSuperTypes="//AbstractRule"/>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" eType="//AbstractMetamodelDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type">

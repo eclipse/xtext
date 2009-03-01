@@ -241,20 +241,6 @@ public class GenDomainmodelProposals extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
-			
-	public List<? extends ICompletionProposal> completeEcore_EInt(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeEcore_EInt '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-			
-			
-			
-			
     
     @Override
 	protected String getDefaultImageFilePath() {

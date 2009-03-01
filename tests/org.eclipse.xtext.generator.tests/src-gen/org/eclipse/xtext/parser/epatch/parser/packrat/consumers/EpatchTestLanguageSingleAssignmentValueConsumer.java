@@ -433,18 +433,18 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele0000AssignmentKeyword());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele00000KeywordNull());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele0001AssignmentValue());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele00010ParserRuleCallSTRING());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele00010TerminalRuleCallSTRING());
 		group$9$Consumer = new Group$9$Consumer(rule.ele001Group());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele0010AssignmentRefObject());
 		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.ele00100CrossReferenceEStringNamedObject());
 		group$13$Consumer = new Group$13$Consumer(rule.ele0011Group());
 		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele001100KeywordFullStop());
 		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele001101AssignmentRefFeature());
-		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele0011010ParserRuleCallID());
+		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele0011010TerminalRuleCallID());
 		group$18$Consumer = new Group$18$Consumer(rule.ele00111Group());
 		keyword$20$Consumer = new Keyword$20$Consumer(rule.ele0011100KeywordLeftSquareBracket());
 		assignment$21$Consumer = new Assignment$21$Consumer(rule.ele0011101AssignmentRefIndex());
-		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.ele00111010ParserRuleCallINT());
+		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.ele00111010TerminalRuleCallINT());
 		keyword$23$Consumer = new Keyword$23$Consumer(rule.ele001111KeywordRightSquareBracket());
 		assignment$24$Consumer = new Assignment$24$Consumer(rule.ele01AssignmentNewObject());
 		ruleCall$25$Consumer = new RuleCall$25$Consumer(rule.ele010ParserRuleCallCreatedObject());
@@ -452,7 +452,7 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		assignment$27$Consumer = new Assignment$27$Consumer(rule.ele10AssignmentImport());
 		crossReference$28$Consumer = new CrossReference$28$Consumer(rule.ele100CrossReferenceEStringImport());
 		assignment$30$Consumer = new Assignment$30$Consumer(rule.ele11AssignmentImpFrag());
-		ruleCall$31$Consumer = new RuleCall$31$Consumer(rule.ele110LexerRuleCallFRAGMENT());
+		ruleCall$31$Consumer = new RuleCall$31$Consumer(rule.ele110TerminalRuleCallFRAGMENT());
 	}
 	
 	@Override

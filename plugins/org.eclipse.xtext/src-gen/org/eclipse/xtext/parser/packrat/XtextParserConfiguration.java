@@ -16,7 +16,6 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractMetamodelDeclarationConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGeneratedMetamodelConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextReferencedMetamodelConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextLexerRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextParserRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
@@ -58,7 +57,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     private XtextAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer;
     private XtextGeneratedMetamodelConsumer generatedMetamodelConsumer;
     private XtextReferencedMetamodelConsumer referencedMetamodelConsumer;
-    private XtextLexerRuleConsumer lexerRuleConsumer;
     private XtextParserRuleConsumer parserRuleConsumer;
     private XtextTerminalRuleConsumer terminalRuleConsumer;
     private XtextTypeRefConsumer typeRefConsumer;
@@ -113,9 +111,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     		this, null
     	);
 		referencedMetamodelConsumer = new XtextReferencedMetamodelConsumer(
-    		this, null
-    	);
-		lexerRuleConsumer = new XtextLexerRuleConsumer(
     		this, null
     	);
 		parserRuleConsumer = new XtextParserRuleConsumer(
@@ -202,7 +197,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getAbstractMetamodelDeclarationConsumer().setRule(grammarAccess.prAbstractMetamodelDeclaration());
 		getGeneratedMetamodelConsumer().setRule(grammarAccess.prGeneratedMetamodel());
 		getReferencedMetamodelConsumer().setRule(grammarAccess.prReferencedMetamodel());
-		getLexerRuleConsumer().setRule(grammarAccess.prLexerRule());
 		getParserRuleConsumer().setRule(grammarAccess.prParserRule());
 		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
 		getTypeRefConsumer().setRule(grammarAccess.prTypeRef());
@@ -226,13 +220,13 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getParenthesizedTerminalElementConsumer().setRule(grammarAccess.prParenthesizedTerminalElement());
 		getKeywordConsumer().setRule(grammarAccess.prKeyword());
 		getRuleCallConsumer().setRule(grammarAccess.prRuleCall());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
@@ -242,7 +236,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
 		getGrammarIdConsumer().setIdConsumer(getIdConsumer());
 
-		getAbstractRuleConsumer().setLexerRuleConsumer(getLexerRuleConsumer());
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setTerminalRuleConsumer(getTerminalRuleConsumer());
 
@@ -254,10 +247,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
 		getReferencedMetamodelConsumer().setIdConsumer(getIdConsumer());
 		getReferencedMetamodelConsumer().setStringConsumer(getStringConsumer());
-
-		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
-		getLexerRuleConsumer().setStringConsumer(getStringConsumer());
-		getLexerRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getParserRuleConsumer().setAlternativesConsumer(getAlternativesConsumer());
 		getParserRuleConsumer().setIdConsumer(getIdConsumer());
@@ -331,37 +320,30 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getGrammarIdConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getGrammarIdConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getGrammarIdConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
-		getGeneratedMetamodelConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$65$Delimiter);
+		getGeneratedMetamodelConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$63$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
-		getReferencedMetamodelConsumer().setCrossReference$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$65$Delimiter);
+		getReferencedMetamodelConsumer().setCrossReference$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$63$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
 		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
-		getLexerRuleConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
-		getLexerRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getLexerRuleConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getLexerRuleConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getLexerRuleConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
-		getLexerRuleConsumer().setRuleCall$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$65$Delimiter);
-		getLexerRuleConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getParserRuleConsumer().setCrossReference$20$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getParserRuleConsumer().setCrossReference$25$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
-		getParserRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getParserRuleConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getParserRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$28$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$31$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
+		getParserRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
+		getParserRuleConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
+		getParserRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
-		getTerminalRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getTerminalRuleConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
-		getTerminalRuleConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
-		getTerminalRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
-		getTerminalRuleConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
+		getTerminalRuleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
+		getTerminalRuleConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$9$Delimiter);
+		getTerminalRuleConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
+		getTerminalRuleConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
+		getTerminalRuleConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getTypeRefConsumer().setCrossReference$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getTypeRefConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 		getTypeRefConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
@@ -398,7 +380,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getParenthesizedElementConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParenthesizedTerminalElementConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
 		getParenthesizedTerminalElementConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$22$Delimiter);
-		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$65$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$63$Delimiter);
 		getRuleCallConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$25$Delimiter);
 	}
 	
@@ -429,10 +411,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
     public XtextReferencedMetamodelConsumer getReferencedMetamodelConsumer() {
     	return referencedMetamodelConsumer;
-    }
-
-    public XtextLexerRuleConsumer getLexerRuleConsumer() {
-    	return lexerRuleConsumer;
     }
 
     public XtextParserRuleConsumer getParserRuleConsumer() {

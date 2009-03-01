@@ -299,7 +299,7 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallObjectNew());
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele001ParserRuleCallObjectCopy());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele01AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele010ParserRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele010TerminalRuleCallID());
 		group$8$Consumer = new Group$8$Consumer(rule.ele1Group());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele1000KeywordLeftCurlyBracket());
 		alternatives$12$Consumer = new Alternatives$12$Consumer(rule.ele1001Alternatives());

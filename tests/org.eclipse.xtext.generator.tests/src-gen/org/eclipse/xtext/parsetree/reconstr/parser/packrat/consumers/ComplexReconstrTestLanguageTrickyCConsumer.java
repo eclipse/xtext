@@ -253,7 +253,7 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordTC());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0001AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010ParserRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010TerminalRuleCallID());
 		group$8$Consumer = new Group$8$Consumer(rule.ele001Group());
 		action$9$Consumer = new Action$9$Consumer(rule.ele0010ActionC1x());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele0011KeywordX());

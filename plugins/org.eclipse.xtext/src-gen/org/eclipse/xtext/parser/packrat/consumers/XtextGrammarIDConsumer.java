@@ -123,10 +123,10 @@ public final class XtextGrammarIDConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallID());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
 		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele10KeywordFullStop());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele11ParserRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele11TerminalRuleCallID());
 	}
 	
 	@Override

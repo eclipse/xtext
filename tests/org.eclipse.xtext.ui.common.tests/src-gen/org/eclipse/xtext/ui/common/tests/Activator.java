@@ -18,36 +18,36 @@ import java.util.HashMap;
  */
 public class Activator extends AbstractUIPlugin {
 
-	private Map<String,Injector> injectors = new HashMap<String,Injector>();
+	private final Map<String,Injector> injectors = new HashMap<String,Injector>();
 	private static Activator INSTANCE;
 
 	public Injector getInjector(String languageName) {
 		return injectors.get(languageName);
 	}
-	
+
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		
+
 		injectors.put("org.eclipse.xtext.XtextGrammarTestLanguage",Guice.createInjector(new org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule(), new org.eclipse.xtext.XtextGrammarTestLanguageUiModule()));
-		
+
 		injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage",Guice.createInjector(new org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageRuntimeModule(), new org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageUiModule()));
-		
-		injectors.put("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage",Guice.createInjector(new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageRuntimeModule(), new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageUiModule()));
-		
+
+//		injectors.put("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage",Guice.createInjector(new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageRuntimeModule(), new org.eclipse.xtext.grammarinheritance.AbstractTestLanguageUiModule()));
+
 		injectors.put("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage",Guice.createInjector(new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule(), new org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule()));
-		
+
 		injectors.put("org.eclipse.xtext.testlanguages.ContentAssistTestLanguage",Guice.createInjector(new org.eclipse.xtext.testlanguages.ContentAssistTestLanguageRuntimeModule(), new org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule()));
-		
+
 		injectors.put("org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage",Guice.createInjector(new org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule(), new org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule()));
-		
+
 		injectors.put("org.eclipse.xtext.testlanguages.TreeTestLanguage",Guice.createInjector(new org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeModule(), new org.eclipse.xtext.testlanguages.TreeTestLanguageUiModule()));
-		
+
 	}
-	
+
 	public static Activator getInstance() {
 		return INSTANCE;
 	}
-	
+
 }

@@ -18,7 +18,7 @@
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
-			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
+			<fragment file="org/eclipse/xtext/generator/RuntimeFragmentsWithoutResource.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>

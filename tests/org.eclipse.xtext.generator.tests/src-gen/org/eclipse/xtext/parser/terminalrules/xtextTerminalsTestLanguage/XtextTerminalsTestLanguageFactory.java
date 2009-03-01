@@ -71,15 +71,6 @@ public interface XtextTerminalsTestLanguageFactory extends EFactory
   ReferencedMetamodel createReferencedMetamodel();
 
   /**
-   * Returns a new object of class '<em>Lexer Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Lexer Rule</em>'.
-   * @generated
-   */
-  LexerRule createLexerRule();
-
-  /**
    * Returns a new object of class '<em>Parser Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -87,6 +78,15 @@ public interface XtextTerminalsTestLanguageFactory extends EFactory
    * @generated
    */
   ParserRule createParserRule();
+
+  /**
+   * Returns a new object of class '<em>Terminal Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Terminal Rule</em>'.
+   * @generated
+   */
+  TerminalRule createTerminalRule();
 
   /**
    * Returns a new object of class '<em>Type Ref</em>'.

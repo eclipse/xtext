@@ -65,7 +65,6 @@ import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLangua
 
 
 
-
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prStart().getRule(), currentNode); }
@@ -83,8 +82,9 @@ ruleStart returns [EObject current=null]
     }:
 (	
 	
-	    lv_featureA_0=RULE_ID	{
-		createLeafNode(grammarAccess.prStart().ele0ParserRuleCallID(), "featureA"); 
+	    lv_featureA_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prStart().ele0TerminalRuleCallID(), "featureA"); 
 	}
  
 	    {
@@ -105,53 +105,18 @@ ruleStart returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

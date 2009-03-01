@@ -65,7 +65,6 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 
 
 
-
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
@@ -95,6 +94,10 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), currentNode); 
@@ -104,9 +107,11 @@ ruleRoot returns [EObject current=null]
         $current = $this_TestIndentation_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), null); 
+    }
 ));
-
-
 
 
 
@@ -129,8 +134,9 @@ ruleLine returns [EObject current=null]
     }:
 (((	
 	
-	    lv_type_0=RULE_ID	{
-		createLeafNode(grammarAccess.prLine().ele000ParserRuleCallID(), "type"); 
+	    lv_type_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prLine().ele000TerminalRuleCallID(), "type"); 
 	}
  
 	    {
@@ -148,8 +154,9 @@ ruleLine returns [EObject current=null]
 	
 )(	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prLine().ele010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prLine().ele010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -170,8 +177,6 @@ ruleLine returns [EObject current=null]
         createLeafNode(grammarAccess.prLine().ele1KeywordSemicolon(), null); 
     }
 );
-
-
 
 
 
@@ -218,8 +223,6 @@ ruleTestLinewrap returns [EObject current=null]
 	    }
 	
 )*);
-
-
 
 
 
@@ -300,59 +303,18 @@ ruleTestIndentation returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

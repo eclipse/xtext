@@ -65,7 +65,6 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
 
 
 
-
 // Entry rule entryRuleRootRule
 entryRuleRootRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prRootRule().getRule(), currentNode); }
@@ -91,6 +90,10 @@ ruleRootRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prRootRule().ele000ParserRuleCallConcreteParserRule(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prRootRule().ele001ParserRuleCallCallOverridenParserRule(), currentNode); 
@@ -99,6 +102,10 @@ ruleRootRule returns [EObject current=null]
     { 
         $current = $this_CallOverridenParserRule_1.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prRootRule().ele001ParserRuleCallCallOverridenParserRule(), null); 
     }
 )
     |
@@ -110,6 +117,10 @@ ruleRootRule returns [EObject current=null]
         $current = $this_CallExtendedParserRule_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prRootRule().ele01ParserRuleCallCallExtendedParserRule(), null); 
+    }
 )
     |
     { 
@@ -120,9 +131,11 @@ ruleRootRule returns [EObject current=null]
         $current = $this_OverridableParserRule2_3.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prRootRule().ele1ParserRuleCallOverridableParserRule2(), null); 
+    }
 );
-
-
 
 
 
@@ -149,8 +162,9 @@ ruleConcreteParserRule returns [EObject current=null]
     }
 (	
 	
-	    lv_magicNumber_1=RULE_REAL	{
-		createLeafNode(grammarAccess.prConcreteParserRule().ele0010ParserRuleCallREAL(), "magicNumber"); 
+	    lv_magicNumber_1=	RULE_REAL
+	{
+		createLeafNode(grammarAccess.prConcreteParserRule().ele0010TerminalRuleCallREAL(), "magicNumber"); 
 	}
  
 	    {
@@ -197,8 +211,6 @@ ruleConcreteParserRule returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleOverridableParserRule
 entryRuleOverridableParserRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prOverridableParserRule().getRule(), currentNode); }
@@ -220,8 +232,9 @@ ruleOverridableParserRule returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prOverridableParserRule().ele10ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prOverridableParserRule().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -238,8 +251,6 @@ ruleOverridableParserRule returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -287,8 +298,6 @@ ruleCallOverridenParserRule returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleOverridableParserRule2
 entryRuleOverridableParserRule2 returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prOverridableParserRule2().getRule(), currentNode); }
@@ -310,8 +319,9 @@ ruleOverridableParserRule2 returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prOverridableParserRule2().ele0010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prOverridableParserRule2().ele0010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -333,8 +343,9 @@ ruleOverridableParserRule2 returns [EObject current=null]
     }
 )(	
 	
-	    lv_age_3=RULE_INT	{
-		createLeafNode(grammarAccess.prOverridableParserRule2().ele10ParserRuleCallINT(), "age"); 
+	    lv_age_3=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prOverridableParserRule2().ele10TerminalRuleCallINT(), "age"); 
 	}
  
 	    {
@@ -351,8 +362,6 @@ ruleOverridableParserRule2 returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -383,6 +392,10 @@ ruleExtendableParserRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prExtendableParserRule().ele00ParserRuleCallSubrule1(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prExtendableParserRule().ele01ParserRuleCallSubrule2(), currentNode); 
@@ -391,6 +404,10 @@ ruleExtendableParserRule returns [EObject current=null]
     { 
         $current = $this_Subrule2_1.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prExtendableParserRule().ele01ParserRuleCallSubrule2(), null); 
     }
 )
     |
@@ -402,9 +419,11 @@ ruleExtendableParserRule returns [EObject current=null]
         $current = $this_Subrule3_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prExtendableParserRule().ele1ParserRuleCallSubrule3(), null); 
+    }
 );
-
-
 
 
 
@@ -431,8 +450,9 @@ ruleSubrule1 returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prSubrule1().ele010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSubrule1().ele010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -450,8 +470,9 @@ ruleSubrule1 returns [EObject current=null]
 	
 ))(	
 	
-	    lv_sub1_2=RULE_ID	{
-		createLeafNode(grammarAccess.prSubrule1().ele10ParserRuleCallID(), "sub1"); 
+	    lv_sub1_2=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSubrule1().ele10TerminalRuleCallID(), "sub1"); 
 	}
  
 	    {
@@ -468,8 +489,6 @@ ruleSubrule1 returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -496,8 +515,9 @@ ruleSubrule2 returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prSubrule2().ele010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSubrule2().ele010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -515,8 +535,9 @@ ruleSubrule2 returns [EObject current=null]
 	
 ))(	
 	
-	    lv_sub2_2=RULE_STRING	{
-		createLeafNode(grammarAccess.prSubrule2().ele10ParserRuleCallSTRING(), "sub2"); 
+	    lv_sub2_2=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prSubrule2().ele10TerminalRuleCallSTRING(), "sub2"); 
 	}
  
 	    {
@@ -533,8 +554,6 @@ ruleSubrule2 returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -561,8 +580,9 @@ ruleSubrule3 returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prSubrule3().ele010ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prSubrule3().ele010TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -580,8 +600,9 @@ ruleSubrule3 returns [EObject current=null]
 	
 ))(	
 	
-	    lv_sub1_2=RULE_INT	{
-		createLeafNode(grammarAccess.prSubrule3().ele10ParserRuleCallINT(), "sub1"); 
+	    lv_sub1_2=	RULE_INT
+	{
+		createLeafNode(grammarAccess.prSubrule3().ele10TerminalRuleCallINT(), "sub1"); 
 	}
  
 	    {
@@ -598,8 +619,6 @@ ruleSubrule3 returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -647,8 +666,6 @@ ruleCallExtendedParserRule returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleInheritedParserRule
 entryRuleInheritedParserRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prInheritedParserRule().getRule(), currentNode); }
@@ -670,8 +687,9 @@ ruleInheritedParserRule returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=RULE_ID	{
-		createLeafNode(grammarAccess.prInheritedParserRule().ele10ParserRuleCallID(), "name"); 
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prInheritedParserRule().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -688,8 +706,6 @@ ruleInheritedParserRule returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -741,8 +757,6 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleAbstractCallExtendedParserRule
 entryRuleAbstractCallExtendedParserRule returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prAbstractCallExtendedParserRule().getRule(), currentNode); }
@@ -788,89 +802,20 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_REAL : RULE_INT '.' RULE_INT;
-
-
 
 RULE_ID : '^'? ((((('a'..'z'|'A'..'Z')|'\u00F6')|'\u00E4')|'\u00FC')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
 
-
-
 RULE_INT : ('0'..'9')+;
-
-
 
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
-
-
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
-
-
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-
-
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

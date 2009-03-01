@@ -142,7 +142,7 @@ public final class TestLanguageChoiceRuleConsumer extends NonTerminalConsumer {
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentOptionalKeyword());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele010KeywordOptional());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10TerminalRuleCallID());
 	}
 	
 	@Override

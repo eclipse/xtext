@@ -1,10 +1,10 @@
 /*******************************************************************************
- * __  ___            _   
+ * __  ___            _
  * \ \/ / |_ _____  __ |_
  *  \  /| __/ _ \ \/ / __|
  *  /  \| |_  __/>  <| |_
  * /_/\_\\__\___/_/\_\\__|
- * 
+ *
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -40,17 +40,17 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * Represents a builder for <code>IContentAssistProcessor</code> tests.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  */
 public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 
-	private IContentAssistProcessor contentAssistProcessor;
-	private ITextViewer textViewerMock;
+	private final IContentAssistProcessor contentAssistProcessor;
+	private final ITextViewer textViewerMock;
 	private String model;
 	private int cursorPosition;
-	private ISetup setupClazz;
+	private final ISetup setupClazz;
 
 	public ContentAssistProcessorTestBuilder(ISetup setupClazz) throws Exception {
 		this.setupClazz = setupClazz;
@@ -58,7 +58,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 		this.contentAssistProcessor = get(IContentAssistProcessor.class);
 		this.textViewerMock = EasyMock.createMock(ITextViewer.class);
 	}
-	
+
 	public ContentAssistProcessorTestBuilder reset() throws Exception {
 		return clone("",0);
 	}
@@ -112,7 +112,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
 
-		assertEquals("expect only " + expectedText.length + " CompletionProposal item for model '"
+		assertEquals("expect " + expectedText.length + " CompletionProposal item for model '"
 				+ currentModelToParse + "': expectation was:\n" + Strings.concat(", ", Arrays.asList(expectedText))
 				+ "\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
 				expectedText.length, computeCompletionProposals.length);
@@ -125,7 +125,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 
 		return this;
 	}
-	
+
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 
@@ -142,7 +142,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 				return createContext;
 			}
 		}.createContext(xtextResource, resetTextViewerMock(currentModelToParse, xtextDocument),cursorPosition);
-			
+
 
 		assertEquals(matchString, contentAssistContext.getMatchString());
 
@@ -177,9 +177,9 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
-		
+
 		final XtextResource xtextResource = getResource(new StringInputStream(currentModelToParse));
-		
+
 		final IXtextDocument xtextDocument = getDocument(xtextResource);
 
 		return this.contentAssistProcessor.computeCompletionProposals(resetTextViewerMock(currentModelToParse, xtextDocument), cursorPosition);
@@ -207,7 +207,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 				});
 		return xtextDocument;
 	}
-	
+
 	private ITextViewer resetTextViewerMock(final String currentModelToParse, final IXtextDocument xtextDocument) {
 		EasyMock.reset(textViewerMock);
 		expect(textViewerMock.getDocument()).andReturn(xtextDocument);
@@ -215,14 +215,14 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 		replay(textViewerMock);
 		return textViewerMock;
 	}
-	
+
 	private ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
 		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(setupClazz);
 		builder.model = model;
 		builder.cursorPosition = offset;
 		return builder;
 	}
-	
+
 	private StyledText newStyledTextWidgetMock(final String testDslModel) {
 		return new StyledText(new Shell(), SWT.NONE) {
 			@Override

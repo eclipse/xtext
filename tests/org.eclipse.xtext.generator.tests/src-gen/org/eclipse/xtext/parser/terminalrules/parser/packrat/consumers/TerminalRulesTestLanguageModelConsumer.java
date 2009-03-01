@@ -291,19 +291,19 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele000000AssignmentIdValue());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000ParserRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000TerminalRuleCallID());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele000001AssignmentIntValue());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0000010ParserRuleCallINT());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0000010TerminalRuleCallINT());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele00001AssignmentStringValue());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele000010ParserRuleCallSTRING());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele000010TerminalRuleCallSTRING());
 		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele0001AssignmentMlCommentValue());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele00010ParserRuleCallML_COMMENT());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele00010TerminalRuleCallML_COMMENT());
 		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele001AssignmentSlCommentValue());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele0010ParserRuleCallSL_COMMENT());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele0010TerminalRuleCallSL_COMMENT());
 		assignment$17$Consumer = new Assignment$17$Consumer(rule.ele01AssignmentWsValue());
-		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.ele010ParserRuleCallWS());
+		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.ele010TerminalRuleCallWS());
 		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele1AssignmentAnyValue());
-		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele10ParserRuleCallANY_OTHER());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele10TerminalRuleCallANY_OTHER());
 	}
 	
 	@Override

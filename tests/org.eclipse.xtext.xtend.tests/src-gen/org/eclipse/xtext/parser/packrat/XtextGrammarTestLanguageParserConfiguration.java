@@ -16,7 +16,6 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstra
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGeneratedMetamodelConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageReferencedMetamodelConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageLexerRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParserRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
@@ -58,7 +57,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     private XtextGrammarTestLanguageAbstractMetamodelDeclarationConsumer abstractMetamodelDeclarationConsumer;
     private XtextGrammarTestLanguageGeneratedMetamodelConsumer generatedMetamodelConsumer;
     private XtextGrammarTestLanguageReferencedMetamodelConsumer referencedMetamodelConsumer;
-    private XtextGrammarTestLanguageLexerRuleConsumer lexerRuleConsumer;
     private XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer;
     private XtextGrammarTestLanguageTerminalRuleConsumer terminalRuleConsumer;
     private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
@@ -113,9 +111,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     		this, null
     	);
 		referencedMetamodelConsumer = new XtextGrammarTestLanguageReferencedMetamodelConsumer(
-    		this, null
-    	);
-		lexerRuleConsumer = new XtextGrammarTestLanguageLexerRuleConsumer(
     		this, null
     	);
 		parserRuleConsumer = new XtextGrammarTestLanguageParserRuleConsumer(
@@ -202,7 +197,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getAbstractMetamodelDeclarationConsumer().setRule(grammarAccess.prAbstractMetamodelDeclaration());
 		getGeneratedMetamodelConsumer().setRule(grammarAccess.prGeneratedMetamodel());
 		getReferencedMetamodelConsumer().setRule(grammarAccess.prReferencedMetamodel());
-		getLexerRuleConsumer().setRule(grammarAccess.prLexerRule());
 		getParserRuleConsumer().setRule(grammarAccess.prParserRule());
 		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
 		getTypeRefConsumer().setRule(grammarAccess.prTypeRef());
@@ -226,13 +220,13 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getParenthesizedTerminalElementConsumer().setRule(grammarAccess.prParenthesizedTerminalElement());
 		getKeywordConsumer().setRule(grammarAccess.prKeyword());
 		getRuleCallConsumer().setRule(grammarAccess.prRuleCall());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getGrammarConsumer().setAbstractMetamodelDeclarationConsumer(getAbstractMetamodelDeclarationConsumer());
@@ -242,7 +236,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getGrammarIdConsumer().setIdConsumer(getIdConsumer());
 
-		getAbstractRuleConsumer().setLexerRuleConsumer(getLexerRuleConsumer());
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setTerminalRuleConsumer(getTerminalRuleConsumer());
 
@@ -254,10 +247,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getReferencedMetamodelConsumer().setIdConsumer(getIdConsumer());
 		getReferencedMetamodelConsumer().setStringConsumer(getStringConsumer());
-
-		getLexerRuleConsumer().setIdConsumer(getIdConsumer());
-		getLexerRuleConsumer().setStringConsumer(getStringConsumer());
-		getLexerRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getParserRuleConsumer().setAlternativesConsumer(getAlternativesConsumer());
 		getParserRuleConsumer().setIdConsumer(getIdConsumer());
@@ -331,37 +320,30 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getGrammarIdConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getGrammarIdConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getGrammarIdConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
-		getGeneratedMetamodelConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$65$Delimiter);
+		getGeneratedMetamodelConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$63$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
-		getReferencedMetamodelConsumer().setCrossReference$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$65$Delimiter);
+		getReferencedMetamodelConsumer().setCrossReference$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$63$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
-		getLexerRuleConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
-		getLexerRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getLexerRuleConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getLexerRuleConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getLexerRuleConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
-		getLexerRuleConsumer().setRuleCall$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$65$Delimiter);
-		getLexerRuleConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getParserRuleConsumer().setCrossReference$20$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getParserRuleConsumer().setCrossReference$25$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
-		getParserRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getParserRuleConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getParserRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$28$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setKeyword$31$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
+		getParserRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
+		getParserRuleConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
+		getParserRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParserRuleConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
-		getTerminalRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getTerminalRuleConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getTerminalRuleConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
-		getTerminalRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
-		getTerminalRuleConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
+		getTerminalRuleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
+		getTerminalRuleConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$9$Delimiter);
+		getTerminalRuleConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
+		getTerminalRuleConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
+		getTerminalRuleConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getTypeRefConsumer().setCrossReference$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getTypeRefConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 		getTypeRefConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
@@ -398,7 +380,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getParenthesizedElementConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParenthesizedTerminalElementConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
 		getParenthesizedTerminalElementConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$22$Delimiter);
-		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$65$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$63$Delimiter);
 		getRuleCallConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$25$Delimiter);
 	}
 	
@@ -429,10 +411,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
     public XtextGrammarTestLanguageReferencedMetamodelConsumer getReferencedMetamodelConsumer() {
     	return referencedMetamodelConsumer;
-    }
-
-    public XtextGrammarTestLanguageLexerRuleConsumer getLexerRuleConsumer() {
-    	return lexerRuleConsumer;
     }
 
     public XtextGrammarTestLanguageParserRuleConsumer getParserRuleConsumer() {

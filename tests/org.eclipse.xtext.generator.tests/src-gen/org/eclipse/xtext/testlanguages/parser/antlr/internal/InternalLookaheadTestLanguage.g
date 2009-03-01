@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 
 
 
-
 // Entry rule entryRuleEntry
 entryRuleEntry returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prEntry().getRule(), currentNode); }
@@ -108,8 +107,6 @@ ruleEntry returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleAlts
 entryRuleAlts returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prAlts().getRule(), currentNode); }
@@ -135,6 +132,10 @@ ruleAlts returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prAlts().ele00ParserRuleCallLookAhead0(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prAlts().ele01ParserRuleCallLookAhead1(), currentNode); 
@@ -143,6 +144,10 @@ ruleAlts returns [EObject current=null]
     { 
         $current = $this_LookAhead1_1.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prAlts().ele01ParserRuleCallLookAhead1(), null); 
     }
 )
     |
@@ -154,9 +159,11 @@ ruleAlts returns [EObject current=null]
         $current = $this_LookAhead3_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead3(), null); 
+    }
 );
-
-
 
 
 
@@ -203,8 +210,6 @@ ruleLookAhead0 returns [EObject current=null]
 	    }
 	
 ));
-
-
 
 
 
@@ -298,8 +303,6 @@ ruleLookAhead1 returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleLookAhead2
 entryRuleLookAhead2 returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prLookAhead2().getRule(), currentNode); }
@@ -363,8 +366,6 @@ ruleLookAhead2 returns [EObject current=null]
         createLeafNode(grammarAccess.prLookAhead2().ele1KeywordC(), null); 
     }
 );
-
-
 
 
 
@@ -441,8 +442,6 @@ ruleLookAhead3 returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleLookAhead4
 entryRuleLookAhead4 returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prLookAhead4().getRule(), currentNode); }
@@ -506,63 +505,18 @@ ruleLookAhead4 returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 
