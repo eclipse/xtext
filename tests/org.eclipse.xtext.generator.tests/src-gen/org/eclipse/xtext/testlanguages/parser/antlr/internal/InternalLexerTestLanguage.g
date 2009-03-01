@@ -127,9 +127,8 @@ ruleElement returns [EObject current=null]
     }:
 ((	
 	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prElement().ele00LexerRuleCallID(), "name"); 
+	    lv_name_0=RULE_ID	{
+		createLeafNode(grammarAccess.prElement().ele00ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -177,18 +176,44 @@ ruleElement returns [EObject current=null]
 
 
 
-RULE_STRING :  '#' ('B')+ ;
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+
+
+
+
+
+
+
+
+
+
+
+
+RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+
+
 
 RULE_INT : ('0'..'9')+;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+
+
+
+RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+
+
+RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+
+
 
 RULE_ANY_OTHER : .;
+
+
+
+RULE_STRING :  '#' ('B')+ ;
 
 

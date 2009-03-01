@@ -123,9 +123,9 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.g:90:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel138); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel137); 
 
-            		createLeafNode(grammarAccess.prModel().ele10LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prModel().ele10ParserRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -169,6 +169,6 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel82 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleModel116 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel138 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel137 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -154,7 +154,7 @@ public final class EcoreDslEParameterDeclConsumer extends NonTerminalConsumer {
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentEGenericType());
 		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010ParserRuleCallEGenericTypeReferenceDecl());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele1AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele10LexerRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele10ParserRuleCallID());
 	}
 	
 	@Override

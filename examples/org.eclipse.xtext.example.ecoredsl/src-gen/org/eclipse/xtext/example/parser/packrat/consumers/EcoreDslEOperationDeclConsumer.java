@@ -717,7 +717,7 @@ public final class EcoreDslEOperationDeclConsumer extends NonTerminalConsumer {
 		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.ele0000000100ParserRuleCallEGenericTypeReferenceDecl());
 		keyword$22$Consumer = new Keyword$22$Consumer(rule.ele000000011KeywordVoid());
 		assignment$23$Consumer = new Assignment$23$Consumer(rule.ele0000001AssignmentName());
-		ruleCall$24$Consumer = new RuleCall$24$Consumer(rule.ele00000010LexerRuleCallID());
+		ruleCall$24$Consumer = new RuleCall$24$Consumer(rule.ele00000010ParserRuleCallID());
 		group$25$Consumer = new Group$25$Consumer(rule.ele000001Group());
 		keyword$28$Consumer = new Keyword$28$Consumer(rule.ele000001000KeywordLessThanSign());
 		assignment$29$Consumer = new Assignment$29$Consumer(rule.ele000001001AssignmentETypeParameters());

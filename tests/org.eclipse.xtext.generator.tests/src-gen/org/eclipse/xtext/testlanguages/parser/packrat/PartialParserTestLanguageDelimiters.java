@@ -24,6 +24,6 @@ public final class PartialParserTestLanguageDelimiters {
 	);
 
 	public static final ISequenceMatcher ruleCall$9$Delimiter = new SetBasedKeywordMatcher(
-		"container", "nested", "children", "C", "abstract children", "F", "S");
+		"container", "nested", "children", "C", "F", "S");
 
 }

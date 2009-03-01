@@ -300,7 +300,7 @@ public final class DomainmodelOperationConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele000000KeywordOp());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele000001AssignmentName());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000010LexerRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000010ParserRuleCallID());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele00001KeywordLeftParenthesis());
 		group$11$Consumer = new Group$11$Consumer(rule.ele0001Group());
 		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele00010AssignmentParams());

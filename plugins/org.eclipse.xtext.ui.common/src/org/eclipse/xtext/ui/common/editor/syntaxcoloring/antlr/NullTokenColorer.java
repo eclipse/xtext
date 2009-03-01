@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.BuiltinTokenStyles;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.CommonTokenStyles;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 
 /**
@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 public class NullTokenColorer implements ITokenColorer {
 
 	public ITokenStyle getTokenStyle(String antlrTokenType) {
-		return BuiltinTokenStyles.DEFAULT;
+		return CommonTokenStyles.DEFAULT;
 	}
 
 }

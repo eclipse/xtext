@@ -24,6 +24,6 @@ public final class ContentAssistTestLanguageDelimiters {
 	public static final ICharacterClass keyword$22$Delimiter = ICharacterClass.Factory.nullClass();
 
 	public static final ISequenceMatcher ruleCall$21$Delimiter = new SetBasedKeywordMatcher(
-		"abstract rules", "end", "rule");
+		"end", "rule");
 
 }

@@ -109,9 +109,9 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00LexerRuleCallID());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallID());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordFullStop());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1LexerRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1ParserRuleCallID());
 	}
 	
 	@Override

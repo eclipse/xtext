@@ -88,7 +88,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		rootNode = reparse.getRootNode();
 		checkGrammarAssigned(rootNode);
 	}
-	
+
 	public void testParseIsPartial() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
@@ -97,7 +97,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(model.indexOf("k 1"), 3, "l 2");
 		assertSame(rootNode, resource.getParseResult().getRootNode());
 	}
-	
+
 	public void testParseIsPartialTwice() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
@@ -107,11 +107,11 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(model.indexOf("k 1"), 3, "m 3");
 		assertSame(rootNode, resource.getParseResult().getRootNode());
 	}
-	
+
 	private AbstractNode findLeafNodeByText(CompositeNode root, String model, String text) {
 		return NodeUtil.findLeafNodeAtOffset(root, model.indexOf(text) + 1);
 	}
-	
+
 	public void testPartialParseConcreteRuleInnermostToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
@@ -128,7 +128,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertSame(root, resource.getParseResult().getRootNode());
 		assertNotSame(children, findLeafNodeByText(root, model, "children"));
 	}
-	
+
 	public void testPartialParseConcreteRuleInnerToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
@@ -145,7 +145,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertSame(root, resource.getParseResult().getRootNode());
 		assertNotSame(children, findLeafNodeByText(root, model, "children"));
 	}
-	
+
 	public void testPartialParseConcreteRuleFirstInnerToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
@@ -162,7 +162,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertSame(root, resource.getParseResult().getRootNode());
 		assertNotSame(children, findLeafNodeByText(root, model, "children"));
 	}
-	
+
 	public void testPartialParseConcreteRuleFirstToken() throws Exception {
 		with(PartialParserTestLanguageStandaloneSetup.class);
 		String model = "container c1 {\n" +
@@ -194,10 +194,12 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			AbstractNode node = iter.next();
 			assertNotNull(node.getGrammarElement());
 			EObject grammarElement = node.getGrammarElement();
-			assertEquals(node.getParent() == null, grammarElement instanceof ParserRule);
+			assertEquals(node.getParent() == null ||
+					((node instanceof LeafNode) && ((LeafNode) node).isHidden()),
+				grammarElement instanceof ParserRule);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testNodeState() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
@@ -239,5 +241,5 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		comparator.assertSameStructure(parsingPointers.findASTReplaceElement(), parseResult.getRootASTElement());
 		assertEquals(parsingPointers.getDefaultReplaceRootNode().serialize(), parseResult.getRootNode().serialize());
 	}
-	
+
 }

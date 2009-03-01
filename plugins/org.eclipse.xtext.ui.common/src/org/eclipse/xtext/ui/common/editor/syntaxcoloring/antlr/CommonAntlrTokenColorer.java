@@ -9,14 +9,14 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.BuiltinTokenStyles;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.CommonTokenStyles;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyle;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AbstractAntlrTokenColorer;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class BuiltinAntlrTokenColorer extends AbstractAntlrTokenColorer {
+public class CommonAntlrTokenColorer extends AbstractAntlrTokenColorer {
 
 	private static final Pattern QUOTED = Pattern.compile("(?:^'([^']*)'$)|(?:^\"([^\"]*)\")$", Pattern.MULTILINE);
 	
@@ -25,21 +25,21 @@ public class BuiltinAntlrTokenColorer extends AbstractAntlrTokenColorer {
 	@Override
 	protected ITokenStyle deriveTokenStyle(String antlrTokenId) {
 		if(PUNCTUATION.matcher(antlrTokenId).matches()) {
-			return BuiltinTokenStyles.PUNCTUATION;
+			return CommonTokenStyles.PUNCTUATION;
 		} 
 		if(QUOTED.matcher(antlrTokenId).matches()) {
-			return BuiltinTokenStyles.KEYWORD;
+			return CommonTokenStyles.KEYWORD;
 		}
 		if("RULE_STRING".equals(antlrTokenId)) {
-			return BuiltinTokenStyles.STRING;
+			return CommonTokenStyles.STRING;
 		} 
 		if("RULE_INT".equals(antlrTokenId)) {
-			return BuiltinTokenStyles.NUMBER;
+			return CommonTokenStyles.NUMBER;
 		}
 		if("RULE_ML_COMMENT".equals(antlrTokenId) | "RULE_SL_COMMENT".equals(antlrTokenId)) {
-			return BuiltinTokenStyles.COMMENT;
+			return CommonTokenStyles.COMMENT;
 		}
-		return BuiltinTokenStyles.DEFAULT;
+		return CommonTokenStyles.DEFAULT;
 	}
 
 }

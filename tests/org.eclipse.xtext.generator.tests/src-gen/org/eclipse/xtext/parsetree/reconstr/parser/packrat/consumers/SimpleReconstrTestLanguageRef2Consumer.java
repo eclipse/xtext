@@ -161,10 +161,10 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentRef2());
 		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele10Alternatives());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele1000KeywordMykeyword1());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele1001LexerRuleCallSTRING());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele1001ParserRuleCallSTRING());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele101KeywordMykeyword2());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele1000KeywordMykeyword1());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele1001LexerRuleCallSTRING());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele1001ParserRuleCallSTRING());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele101KeywordMykeyword2());
 	}
 	

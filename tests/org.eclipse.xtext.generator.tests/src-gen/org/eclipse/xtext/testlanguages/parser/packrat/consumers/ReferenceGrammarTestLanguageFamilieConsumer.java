@@ -361,11 +361,11 @@ public final class ReferenceGrammarTestLanguageFamilieConsumer extends NonTermin
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele000001AssignmentName());
 		alternatives$11$Consumer = new Alternatives$11$Consumer(rule.ele0000010Alternatives());
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele000001000KeywordKeyword());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele000001001LexerRuleCallSTRING());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele00000101LexerRuleCallID());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele000001001ParserRuleCallSTRING());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele00000101ParserRuleCallID());
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele000001000KeywordKeyword());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele000001001LexerRuleCallSTRING());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele00000101LexerRuleCallID());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele000001001ParserRuleCallSTRING());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele00000101ParserRuleCallID());
 		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele00001AssignmentMutter());
 		crossReference$17$Consumer = new CrossReference$17$Consumer(rule.ele000010CrossReferenceEStringErwachsener());
 		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele0001AssignmentVater());

@@ -105,7 +105,7 @@ public final class ActionTestLanguageItemConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		action$2$Consumer = new Action$2$Consumer(rule.ele0ActionThingcontent());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10LexerRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10ParserRuleCallID());
 	}
 	
 	@Override

@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.valueconverter;
 
-import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
@@ -27,7 +27,7 @@ public class Bug250313RuntimeModule extends AbstractBug250313RuntimeModule {
 		return Converters.class;
 	}
 
-	public static class Converters extends XtextBuiltInConverters {
+	public static class Converters extends DefaultTerminalConverters {
 
 		@ValueConverter(rule = "Datatype")
 		public IValueConverter<String> Datatype() {

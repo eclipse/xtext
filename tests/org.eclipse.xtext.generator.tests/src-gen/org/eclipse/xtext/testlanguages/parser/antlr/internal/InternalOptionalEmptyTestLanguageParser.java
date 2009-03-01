@@ -228,9 +228,9 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:134:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting245); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting244); 
 
-            		createLeafNode(grammarAccess.prGreeting().ele10LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prGreeting().ele10ParserRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -277,6 +277,6 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
     public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting179 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleGreeting189 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleGreeting223 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting244 = new BitSet(new long[]{0x0000000000000002L});
 
 }

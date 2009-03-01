@@ -26,6 +26,6 @@ public final class ConcreteTestLanguageDelimiters {
 	public static final ISequenceMatcher ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 	public static final ISequenceMatcher ruleCall$27$Delimiter = new SetBasedKeywordMatcher(
-		"model", "overriddenelement", "overridden other element", "subrule1", "subrule3");
+		"model", "overriddenelement", "subrule1", "subrule3");
 
 }

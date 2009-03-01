@@ -92,7 +92,7 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHyphenMinus());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1LexerRuleCallINT());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallINT());
 	}
 	
 	@Override

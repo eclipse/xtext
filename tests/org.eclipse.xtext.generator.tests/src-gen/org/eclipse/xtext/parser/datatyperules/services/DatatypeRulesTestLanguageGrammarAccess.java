@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
@@ -119,9 +119,9 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00LexerRuleCallID = (RuleCall)c0Group.eContents().get(0);
+		private final RuleCall c00ParserRuleCallID = (RuleCall)c0Group.eContents().get(0);
 		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1LexerRuleCallID = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c1ParserRuleCallID = (RuleCall)cGroup.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -133,13 +133,13 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group ele0Group() { return c0Group; }
 
 		// not supported
-		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
+		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordFullStop() { return c01KeywordFullStop; }
 
 		// not supported
-		public RuleCall ele1LexerRuleCallID() { return c1LexerRuleCallID; }
+		public RuleCall ele1ParserRuleCallID() { return c1ParserRuleCallID; }
 	}
 
 	public class NestedModelIdElements implements IParserRuleAccess {
@@ -172,10 +172,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	public class FractionElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Fraction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0LexerRuleCallINT = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall c0ParserRuleCallINT = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordSolidus = (Keyword)c1Group.eContents().get(0);
-		private final RuleCall c11LexerRuleCallINT = (RuleCall)c1Group.eContents().get(1);
+		private final RuleCall c11ParserRuleCallINT = (RuleCall)c1Group.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -184,7 +184,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public RuleCall ele0LexerRuleCallINT() { return c0LexerRuleCallINT; }
+		public RuleCall ele0ParserRuleCallINT() { return c0ParserRuleCallINT; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -193,7 +193,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword ele10KeywordSolidus() { return c10KeywordSolidus; }
 
 		// not supported
-		public RuleCall ele11LexerRuleCallINT() { return c11LexerRuleCallINT; }
+		public RuleCall ele11ParserRuleCallINT() { return c11ParserRuleCallINT; }
 	}
 
 	public class VectorElements implements IParserRuleAccess {
@@ -202,8 +202,8 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordLeftParenthesis = (Keyword)c00Group.eContents().get(0);
-		private final RuleCall c001LexerRuleCallINT = (RuleCall)c00Group.eContents().get(1);
-		private final RuleCall c01LexerRuleCallINT = (RuleCall)c0Group.eContents().get(1);
+		private final RuleCall c001ParserRuleCallINT = (RuleCall)c00Group.eContents().get(1);
+		private final RuleCall c01ParserRuleCallINT = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -222,10 +222,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword ele000KeywordLeftParenthesis() { return c000KeywordLeftParenthesis; }
 
 		// not supported
-		public RuleCall ele001LexerRuleCallINT() { return c001LexerRuleCallINT; }
+		public RuleCall ele001ParserRuleCallINT() { return c001ParserRuleCallINT; }
 
 		// not supported
-		public RuleCall ele01LexerRuleCallINT() { return c01LexerRuleCallINT; }
+		public RuleCall ele01ParserRuleCallINT() { return c01ParserRuleCallINT; }
 
 		// not supported
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
@@ -268,10 +268,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public DatatypeRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public DatatypeRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -281,7 +281,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -322,37 +322,37 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

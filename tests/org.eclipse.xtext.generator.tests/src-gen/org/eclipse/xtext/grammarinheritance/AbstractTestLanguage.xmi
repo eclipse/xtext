@@ -73,55 +73,261 @@
         </abstractTokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="REAL" body="RULE_INT '.' RULE_INT">
+    <rules xsi:type="xtext:ParserRule" name="REAL" terminal="true">
       <type metamodel="/0/@metamodelDeclarations.1">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          <abstractTokens xsi:type="xtext:Keyword" value="."/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'&#xf6;'|'&#xe4;'|'&#xfc;'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+    <rules xsi:type="xtext:ParserRule" name="ID" terminal="true">
       <type metamodel="/0/@metamodelDeclarations.1">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+          <abstractTokens xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Alternatives">
+                    <groups xsi:type="xtext:CharacterRange">
+                      <left value="a"/>
+                      <right value="z"/>
+                    </groups>
+                    <groups xsi:type="xtext:CharacterRange">
+                      <left value="A"/>
+                      <right value="Z"/>
+                    </groups>
+                  </groups>
+                  <groups xsi:type="xtext:Keyword" value="&#xf6;"/>
+                </groups>
+                <groups xsi:type="xtext:Keyword" value="&#xe4;"/>
+              </groups>
+              <groups xsi:type="xtext:Keyword" value="&#xfc;"/>
+            </groups>
+            <groups xsi:type="xtext:Keyword" value="_"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:CharacterRange">
+                <left value="a"/>
+                <right value="z"/>
+              </groups>
+              <groups xsi:type="xtext:CharacterRange">
+                <left value="A"/>
+                <right value="Z"/>
+              </groups>
+            </groups>
+            <groups xsi:type="xtext:Keyword" value="_"/>
+          </groups>
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="0"/>
+            <right value="9"/>
+          </groups>
+        </abstractTokens>
+      </alternatives>
     </rules>
   </xtext:Grammar>
-  <xtext:Grammar name="org.eclipse.xtext.builtin.XtextBuiltin" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+  <xtext:Grammar name="org.eclipse.xtext.common.Terminals" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
       <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+    <rules xsi:type="xtext:ParserRule" name="ID" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+          <abstractTokens xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:CharacterRange">
+                <left value="a"/>
+                <right value="z"/>
+              </groups>
+              <groups xsi:type="xtext:CharacterRange">
+                <left value="A"/>
+                <right value="Z"/>
+              </groups>
+            </groups>
+            <groups xsi:type="xtext:Keyword" value="_"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:CharacterRange">
+                <left value="a"/>
+                <right value="z"/>
+              </groups>
+              <groups xsi:type="xtext:CharacterRange">
+                <left value="A"/>
+                <right value="Z"/>
+              </groups>
+            </groups>
+            <groups xsi:type="xtext:Keyword" value="_"/>
+          </groups>
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="0"/>
+            <right value="9"/>
+          </groups>
+        </abstractTokens>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+">
+    <rules xsi:type="xtext:ParserRule" name="INT" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </type>
+      <alternatives xsi:type="xtext:CharacterRange" cardinality="+">
+        <left value="0"/>
+        <right value="9"/>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="STRING" body="&#xA;&#x9;&#x9;&#x9;  '&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | &#xA;              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''&#xA;              ">
+    <rules xsi:type="xtext:ParserRule" name="STRING" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="&quot;"/>
+            <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+              <groups xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="\"/>
+                <abstractTokens xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Alternatives">
+                    <groups xsi:type="xtext:Alternatives">
+                      <groups xsi:type="xtext:Alternatives">
+                        <groups xsi:type="xtext:Alternatives">
+                          <groups xsi:type="xtext:Alternatives">
+                            <groups xsi:type="xtext:Alternatives">
+                              <groups xsi:type="xtext:Keyword" value="b"/>
+                              <groups xsi:type="xtext:Keyword" value="t"/>
+                            </groups>
+                            <groups xsi:type="xtext:Keyword" value="n"/>
+                          </groups>
+                          <groups xsi:type="xtext:Keyword" value="f"/>
+                        </groups>
+                        <groups xsi:type="xtext:Keyword" value="r"/>
+                      </groups>
+                      <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                    </groups>
+                    <groups xsi:type="xtext:Keyword" value="'"/>
+                  </groups>
+                  <groups xsi:type="xtext:Keyword" value="\"/>
+                </abstractTokens>
+              </groups>
+              <groups xsi:type="xtext:NegatedToken">
+                <terminal xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Keyword" value="\"/>
+                  <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                </terminal>
+              </groups>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="&quot;"/>
+        </groups>
+        <groups xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="'"/>
+            <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+              <groups xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="\"/>
+                <abstractTokens xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Alternatives">
+                    <groups xsi:type="xtext:Alternatives">
+                      <groups xsi:type="xtext:Alternatives">
+                        <groups xsi:type="xtext:Alternatives">
+                          <groups xsi:type="xtext:Alternatives">
+                            <groups xsi:type="xtext:Alternatives">
+                              <groups xsi:type="xtext:Keyword" value="b"/>
+                              <groups xsi:type="xtext:Keyword" value="t"/>
+                            </groups>
+                            <groups xsi:type="xtext:Keyword" value="n"/>
+                          </groups>
+                          <groups xsi:type="xtext:Keyword" value="f"/>
+                        </groups>
+                        <groups xsi:type="xtext:Keyword" value="r"/>
+                      </groups>
+                      <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                    </groups>
+                    <groups xsi:type="xtext:Keyword" value="'"/>
+                  </groups>
+                  <groups xsi:type="xtext:Keyword" value="\"/>
+                </abstractTokens>
+              </groups>
+              <groups xsi:type="xtext:NegatedToken">
+                <terminal xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Keyword" value="\"/>
+                  <groups xsi:type="xtext:Keyword" value="'"/>
+                </terminal>
+              </groups>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="'"/>
+        </groups>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/'">
+    <rules xsi:type="xtext:ParserRule" name="ML_COMMENT" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="/*"/>
+        <abstractTokens xsi:type="xtext:UpToToken">
+          <terminal xsi:type="xtext:Keyword" value="*/"/>
+        </abstractTokens>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')?">
+    <rules xsi:type="xtext:ParserRule" name="SL_COMMENT" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="//"/>
+          <abstractTokens xsi:type="xtext:NegatedToken" cardinality="*">
+            <terminal xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+              <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Group" cardinality="?">
+          <abstractTokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+          <abstractTokens xsi:type="xtext:Keyword" value="&#xA;"/>
+        </abstractTokens>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="WS" body="(' '|'\t'|'\r'|'\n')+">
+    <rules xsi:type="xtext:ParserRule" name="WS" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Alternatives" cardinality="+">
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Keyword" value=" "/>
+            <groups xsi:type="xtext:Keyword" value="&#x9;"/>
+          </groups>
+          <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+        </groups>
+        <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+      </alternatives>
     </rules>
-    <rules xsi:type="xtext:LexerRule" name="ANY_OTHER" body=".">
+    <rules xsi:type="xtext:ParserRule" name="ANY_OTHER" terminal="true">
       <type metamodel="/1/@metamodelDeclarations.0">
         <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
+      <alternatives xsi:type="xtext:Wildcard" isWildcard="true"/>
     </rules>
   </xtext:Grammar>
 </xmi:XMI>

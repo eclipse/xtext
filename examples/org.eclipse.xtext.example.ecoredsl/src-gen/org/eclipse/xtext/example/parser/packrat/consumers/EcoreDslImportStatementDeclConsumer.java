@@ -193,10 +193,10 @@ public final class EcoreDslImportStatementDeclConsumer extends NonTerminalConsum
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordImport());
 		group$5$Consumer = new Group$5$Consumer(rule.ele001Group());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0010AssignmentAlias());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00100LexerRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00100ParserRuleCallID());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele0011KeywordEqualsSign());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele01AssignmentImportURI());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010LexerRuleCallSTRING());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010ParserRuleCallSTRING());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

@@ -155,9 +155,9 @@ public final class FowlerDslTestLanguageEventConsumer extends NonTerminalConsume
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentResetting());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordResetting());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010ParserRuleCallID());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele1AssignmentCode());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele10LexerRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele10ParserRuleCallID());
 	}
 	
 	@Override

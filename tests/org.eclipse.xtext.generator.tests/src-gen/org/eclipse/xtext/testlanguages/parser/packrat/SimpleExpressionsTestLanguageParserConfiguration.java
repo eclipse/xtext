@@ -8,7 +8,7 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
-import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
+import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageSequenceConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageAdditionConsumer;
@@ -16,17 +16,17 @@ import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpression
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageTermConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageAtomConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageParensConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinML_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsML_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSL_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsWSConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsumer;
 
 public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
-	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final TerminalsParserConfiguration terminalsConfiguration; 
 
     private SimpleExpressionsTestLanguageSequenceConsumer sequenceConsumer;
     private SimpleExpressionsTestLanguageAdditionConsumer additionConsumer;
@@ -40,7 +40,7 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	public SimpleExpressionsTestLanguageParserConfiguration(IInternalParserConfiguration configuration, SimpleExpressionsTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
 		this.grammarAccess = grammarAccess;
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
+		this.terminalsConfiguration = new TerminalsParserConfiguration(configuration, null);
 	}
 
 	public SimpleExpressionsTestLanguageSequenceConsumer getRootConsumer() {
@@ -48,7 +48,7 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	} 
 
 	public void createNonTerminalConsumers() {
-		getXtextBuiltinConfiguration().createNonTerminalConsumers();
+		getTerminalsConfiguration().createNonTerminalConsumers();
 		sequenceConsumer = new SimpleExpressionsTestLanguageSequenceConsumer(
     		this, null
     	);
@@ -70,7 +70,7 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	}
 	
 	public void createTerminalConsumers() {
-		getXtextBuiltinConfiguration().createTerminalConsumers();
+		getTerminalsConfiguration().createTerminalConsumers();
 	}
 	
 	public void configureConsumers() {
@@ -82,13 +82,13 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 		getTermConsumer().setRule(grammarAccess.prTerm());
 		getAtomConsumer().setRule(grammarAccess.prAtom());
 		getParensConsumer().setRule(grammarAccess.prParens());
-		getIdConsumer().setRule(grammarAccess.lrID());
-		getIntConsumer().setRule(grammarAccess.lrINT());
-		getStringConsumer().setRule(grammarAccess.lrSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.lrWS());
-		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.prID());
+		getIntConsumer().setRule(grammarAccess.prINT());
+		getStringConsumer().setRule(grammarAccess.prSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
 
 
 		getSequenceConsumer().setAdditionConsumer(getAdditionConsumer());
@@ -114,8 +114,8 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	}
 	
 	// TODO collect superGrammars transitive
-	public XtextBuiltinParserConfiguration getXtextBuiltinConfiguration() {
-		return xtextBuiltinConfiguration;
+	public TerminalsParserConfiguration getTerminalsConfiguration() {
+		return terminalsConfiguration;
 	} 
 	
     public SimpleExpressionsTestLanguageSequenceConsumer getSequenceConsumer() {
@@ -142,38 +142,38 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
     	return parensConsumer;
     }
 
-    public XtextBuiltinIDConsumer getIdConsumer() {
-    	return getXtextBuiltinConfiguration().getIdConsumer();
+    public TerminalsIDConsumer getIdConsumer() {
+    	return getTerminalsConfiguration().getIdConsumer();
     }
 
-    public XtextBuiltinINTConsumer getIntConsumer() {
-    	return getXtextBuiltinConfiguration().getIntConsumer();
+    public TerminalsINTConsumer getIntConsumer() {
+    	return getTerminalsConfiguration().getIntConsumer();
     }
 
-    public XtextBuiltinSTRINGConsumer getStringConsumer() {
-    	return getXtextBuiltinConfiguration().getStringConsumer();
+    public TerminalsSTRINGConsumer getStringConsumer() {
+    	return getTerminalsConfiguration().getStringConsumer();
     }
 
-    public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
-    	return getXtextBuiltinConfiguration().getMlCommentConsumer();
+    public TerminalsML_COMMENTConsumer getMlCommentConsumer() {
+    	return getTerminalsConfiguration().getMlCommentConsumer();
     }
 
-    public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
-    	return getXtextBuiltinConfiguration().getSlCommentConsumer();
+    public TerminalsSL_COMMENTConsumer getSlCommentConsumer() {
+    	return getTerminalsConfiguration().getSlCommentConsumer();
     }
 
-    public XtextBuiltinWSConsumer getWsConsumer() {
-    	return getXtextBuiltinConfiguration().getWsConsumer();
+    public TerminalsWSConsumer getWsConsumer() {
+    	return getTerminalsConfiguration().getWsConsumer();
     }
 
-    public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
-    	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
+    public TerminalsANY_OTHERConsumer getAnyOtherConsumer() {
+    	return getTerminalsConfiguration().getAnyOtherConsumer();
     }
 
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
-		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+		return getTerminalsConfiguration().getInitialHiddenTerminals();
 	}
 	
 }

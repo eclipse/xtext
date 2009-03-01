@@ -392,9 +392,9 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:215:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem385); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem384); 
 
-            		createLeafNode(grammarAccess.prItem().ele10LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prItem().ele10ParserRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -444,6 +444,6 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
     public static final BitSet FOLLOW_ruleItem_in_ruleElement279 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleItem_in_entryRuleItem319 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleItem329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleItem385 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleItem384 = new BitSet(new long[]{0x0000000000000002L});
 
 }

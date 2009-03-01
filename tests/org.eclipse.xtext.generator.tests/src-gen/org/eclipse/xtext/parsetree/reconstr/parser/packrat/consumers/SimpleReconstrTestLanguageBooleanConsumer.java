@@ -161,7 +161,7 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele0010KeywordMyoption());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordKw());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele1AssignmentValue());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele10LexerRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele10ParserRuleCallID());
 	}
 	
 	@Override

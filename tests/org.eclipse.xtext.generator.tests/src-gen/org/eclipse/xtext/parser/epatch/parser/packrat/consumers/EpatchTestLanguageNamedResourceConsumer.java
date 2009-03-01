@@ -436,14 +436,14 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele000000000KeywordResource());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele000000001AssignmentName());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele0000000010LexerRuleCallID());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele0000000010ParserRuleCallID());
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele00000001KeywordLeftCurlyBracket());
 		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele0000001KeywordLeft());
 		alternatives$15$Consumer = new Alternatives$15$Consumer(rule.ele000001Alternatives());
 		group$16$Consumer = new Group$16$Consumer(rule.ele0000010Group());
 		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele00000100KeywordUri());
 		assignment$18$Consumer = new Assignment$18$Consumer(rule.ele00000101AssignmentLeftUri());
-		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.ele000001010LexerRuleCallSTRING());
+		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.ele000001010ParserRuleCallSTRING());
 		assignment$20$Consumer = new Assignment$20$Consumer(rule.ele0000011AssignmentLeftRoot());
 		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.ele00000110ParserRuleCallCreatedObject());
 		keyword$22$Consumer = new Keyword$22$Consumer(rule.ele00001KeywordSemicolon());
@@ -452,7 +452,7 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 		group$25$Consumer = new Group$25$Consumer(rule.ele0010Group());
 		keyword$26$Consumer = new Keyword$26$Consumer(rule.ele00100KeywordUri());
 		assignment$27$Consumer = new Assignment$27$Consumer(rule.ele00101AssignmentRightUri());
-		ruleCall$28$Consumer = new RuleCall$28$Consumer(rule.ele001010LexerRuleCallSTRING());
+		ruleCall$28$Consumer = new RuleCall$28$Consumer(rule.ele001010ParserRuleCallSTRING());
 		assignment$29$Consumer = new Assignment$29$Consumer(rule.ele0011AssignmentRightRoot());
 		ruleCall$30$Consumer = new RuleCall$30$Consumer(rule.ele00110ParserRuleCallCreatedObject());
 		keyword$31$Consumer = new Keyword$31$Consumer(rule.ele01KeywordSemicolon());

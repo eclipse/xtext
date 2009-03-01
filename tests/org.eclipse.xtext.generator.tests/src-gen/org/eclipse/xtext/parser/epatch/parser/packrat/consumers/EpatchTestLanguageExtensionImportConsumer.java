@@ -191,11 +191,11 @@ public final class EpatchTestLanguageExtensionImportConsumer extends NonTerminal
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordImport());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele001KeywordExtension());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele01AssignmentPath());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele010LexerRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele010ParserRuleCallID());
 		group$8$Consumer = new Group$8$Consumer(rule.ele1Group());
 		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele10KeywordColonColon());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele11AssignmentPath());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele110LexerRuleCallID());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele110ParserRuleCallID());
 	}
 	
 	@Override

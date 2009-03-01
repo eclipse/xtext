@@ -50,15 +50,24 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("featureA",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("featureA");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.prStart().ele0LexerRuleCallID();
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = grammarAccess.prStart().ele0ParserRuleCallID();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
 
 /************ end Rule Start ****************/
+
+
+
+
+
+
+
 
 }

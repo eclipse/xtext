@@ -175,7 +175,7 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele0000AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele00000LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele00000ParserRuleCallID());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele0001KeywordLeftParenthesis());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele001AssignmentElements());
 		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0010ParserRuleCallAbstractRule());

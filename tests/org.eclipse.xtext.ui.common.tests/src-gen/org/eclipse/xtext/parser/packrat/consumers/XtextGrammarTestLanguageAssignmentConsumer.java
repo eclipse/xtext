@@ -204,7 +204,7 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentFeature());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000LexerRuleCallID());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallID());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentOperator());
 		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.ele010Alternatives());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele01000KeywordPlusSignEqualsSign());

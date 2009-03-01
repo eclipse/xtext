@@ -172,11 +172,11 @@ public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalCo
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordNumberSignDigitThree());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentId());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010LexerRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010ParserRuleCallID());
 		group$6$Consumer = new Group$6$Consumer(rule.ele1Group());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele10KeywordFullStop());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele11AssignmentId());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele110LexerRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele110ParserRuleCallID());
 	}
 	
 	@Override

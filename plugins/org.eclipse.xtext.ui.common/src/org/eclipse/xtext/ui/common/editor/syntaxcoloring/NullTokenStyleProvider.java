@@ -13,7 +13,7 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 public class NullTokenStyleProvider implements ITokenStyleProvider {
 
 	public ITokenStyle[] getTokenStyles() {
-		return new ITokenStyle[] { BuiltinTokenStyles.DEFAULT };
+		return new ITokenStyle[] { CommonTokenStyles.DEFAULT };
 	}
 
 }

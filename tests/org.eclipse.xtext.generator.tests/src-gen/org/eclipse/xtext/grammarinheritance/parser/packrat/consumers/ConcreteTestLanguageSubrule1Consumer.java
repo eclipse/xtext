@@ -140,9 +140,9 @@ public final class ConcreteTestLanguageSubrule1Consumer extends NonTerminalConsu
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordSubrule1());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010LexerRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010ParserRuleCallID());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentSub1());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10LexerRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallID());
 	}
 	
 	@Override

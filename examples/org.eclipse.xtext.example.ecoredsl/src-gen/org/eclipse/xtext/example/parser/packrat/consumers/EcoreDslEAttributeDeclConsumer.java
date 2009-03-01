@@ -696,18 +696,18 @@ public final class EcoreDslEAttributeDeclConsumer extends NonTerminalConsumer {
 		group$36$Consumer = new Group$36$Consumer(rule.ele0001Group());
 		keyword$39$Consumer = new Keyword$39$Consumer(rule.ele0001000KeywordLeftSquareBracket());
 		assignment$40$Consumer = new Assignment$40$Consumer(rule.ele0001001AssignmentLowerBound());
-		ruleCall$41$Consumer = new RuleCall$41$Consumer(rule.ele00010010LexerRuleCallINT());
+		ruleCall$41$Consumer = new RuleCall$41$Consumer(rule.ele00010010ParserRuleCallINT());
 		group$42$Consumer = new Group$42$Consumer(rule.ele000101Group());
 		keyword$43$Consumer = new Keyword$43$Consumer(rule.ele0001010KeywordFullStopFullStop());
 		assignment$44$Consumer = new Assignment$44$Consumer(rule.ele0001011AssignmentUpperBound());
 		ruleCall$45$Consumer = new RuleCall$45$Consumer(rule.ele00010110ParserRuleCallSINT());
 		keyword$46$Consumer = new Keyword$46$Consumer(rule.ele00011KeywordRightSquareBracket());
 		assignment$47$Consumer = new Assignment$47$Consumer(rule.ele001AssignmentName());
-		ruleCall$48$Consumer = new RuleCall$48$Consumer(rule.ele0010LexerRuleCallID());
+		ruleCall$48$Consumer = new RuleCall$48$Consumer(rule.ele0010ParserRuleCallID());
 		group$49$Consumer = new Group$49$Consumer(rule.ele01Group());
 		keyword$50$Consumer = new Keyword$50$Consumer(rule.ele010KeywordEqualsSign());
 		assignment$51$Consumer = new Assignment$51$Consumer(rule.ele011AssignmentDefaultValueLiteral());
-		ruleCall$52$Consumer = new RuleCall$52$Consumer(rule.ele0110LexerRuleCallSTRING());
+		ruleCall$52$Consumer = new RuleCall$52$Consumer(rule.ele0110ParserRuleCallSTRING());
 		keyword$53$Consumer = new Keyword$53$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

@@ -25,12 +25,12 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTes
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallExtendedParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageREALConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageIDConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinML_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsML_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSL_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsWSConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsumer;
 
 public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
@@ -113,14 +113,14 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		getInheritedParserRuleConsumer().setRule(grammarAccess.prInheritedParserRule());
 		getAbstractCallOverridenParserRuleConsumer().setRule(grammarAccess.prAbstractCallOverridenParserRule());
 		getAbstractCallExtendedParserRuleConsumer().setRule(grammarAccess.prAbstractCallExtendedParserRule());
-		getRealConsumer().setRule(grammarAccess.lrREAL());
-		getIdConsumer().setRule(grammarAccess.lrID());
-		getIntConsumer().setRule(grammarAccess.lrINT());
-		getStringConsumer().setRule(grammarAccess.lrSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.lrWS());
-		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+		getRealConsumer().setRule(grammarAccess.prREAL());
+		getIdConsumer().setRule(grammarAccess.prID());
+		getIntConsumer().setRule(grammarAccess.prINT());
+		getStringConsumer().setRule(grammarAccess.prSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
 
 
 		getRootRuleConsumer().setCallExtendedParserRuleConsumer(getCallExtendedParserRuleConsumer());
@@ -157,6 +157,8 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		getAbstractCallOverridenParserRuleConsumer().setOverridableParserRuleConsumer(getOverridableParserRuleConsumer());
 
 		getAbstractCallExtendedParserRuleConsumer().setExtendableParserRuleConsumer(getExtendableParserRuleConsumer());
+
+		getRealConsumer().setIntConsumer(getIntConsumer());
 
 		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
 		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$19$Delimiter);
@@ -247,27 +249,27 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
     	return getAbstractTestLanguageConfiguration().getIdConsumer();
     }
 
-    public XtextBuiltinINTConsumer getIntConsumer() {
+    public TerminalsINTConsumer getIntConsumer() {
     	return getAbstractTestLanguageConfiguration().getIntConsumer();
     }
 
-    public XtextBuiltinSTRINGConsumer getStringConsumer() {
+    public TerminalsSTRINGConsumer getStringConsumer() {
     	return getAbstractTestLanguageConfiguration().getStringConsumer();
     }
 
-    public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
+    public TerminalsML_COMMENTConsumer getMlCommentConsumer() {
     	return getAbstractTestLanguageConfiguration().getMlCommentConsumer();
     }
 
-    public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
+    public TerminalsSL_COMMENTConsumer getSlCommentConsumer() {
     	return getAbstractTestLanguageConfiguration().getSlCommentConsumer();
     }
 
-    public XtextBuiltinWSConsumer getWsConsumer() {
+    public TerminalsWSConsumer getWsConsumer() {
     	return getAbstractTestLanguageConfiguration().getWsConsumer();
     }
 
-    public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
+    public TerminalsANY_OTHERConsumer getAnyOtherConsumer() {
     	return getAbstractTestLanguageConfiguration().getAnyOtherConsumer();
     }
 

@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class BuiltinTokenStyles {
+public abstract class CommonTokenStyles {
 
 	public static final String KEYWORD_ID = "keyword";
 	public static final String PUNCTUATION_ID = "punctuation";
