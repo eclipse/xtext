@@ -71,7 +71,7 @@ public final class XtextTerminalsTestLanguageKeywordConsumer extends NonTerminal
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentValue());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSTRING());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
 	}
 	
 	@Override

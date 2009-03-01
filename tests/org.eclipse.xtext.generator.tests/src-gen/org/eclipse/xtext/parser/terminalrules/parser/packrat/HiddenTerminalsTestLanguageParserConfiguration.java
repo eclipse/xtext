@@ -104,10 +104,10 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 		getDatatypeRuleConsumer().setRule(grammarAccess.prDatatypeRule());
 		getHidingHiddensConsumer().setRule(grammarAccess.prHidingHiddens());
 		getInheritingHiddensCallConsumer().setRule(grammarAccess.prInheritingHiddensCall());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getModelConsumer().setDatatypeHiddensConsumer(getDatatypeHiddensConsumer());

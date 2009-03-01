@@ -88,13 +88,13 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 		getLookAhead2Consumer().setRule(grammarAccess.prLookAhead2());
 		getLookAhead3Consumer().setRule(grammarAccess.prLookAhead3());
 		getLookAhead4Consumer().setRule(grammarAccess.prLookAhead4());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getEntryConsumer().setAltsConsumer(getAltsConsumer());

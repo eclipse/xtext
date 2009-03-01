@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.xtextTest.AbstractElement;
 import org.eclipse.xtext.xtextTest.AbstractRule;
 import org.eclipse.xtext.xtextTest.TypeRef;
 import org.eclipse.xtext.xtextTest.XtextTestPackage;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getAlternatives <em>Alternatives</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +65,16 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * @ordered
    */
   protected TypeRef type;
+
+  /**
+   * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAlternatives()
+   * @generated
+   * @ordered
+   */
+  protected AbstractElement alternatives;
 
   /**
    * <!-- begin-user-doc -->
@@ -161,6 +173,54 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
+  public AbstractElement getAlternatives()
+  {
+    return alternatives;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAlternatives(AbstractElement newAlternatives, NotificationChain msgs)
+  {
+    AbstractElement oldAlternatives = alternatives;
+    alternatives = newAlternatives;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES, oldAlternatives, newAlternatives);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setAlternatives(AbstractElement newAlternatives)
+  {
+    if (newAlternatives != alternatives)
+    {
+      NotificationChain msgs = null;
+      if (alternatives != null)
+        msgs = ((InternalEObject)alternatives).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES, null, msgs);
+      if (newAlternatives != null)
+        msgs = ((InternalEObject)newAlternatives).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES, null, msgs);
+      msgs = basicSetAlternatives(newAlternatives, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES, newAlternatives, newAlternatives));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -168,6 +228,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
     {
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         return basicSetType(null, msgs);
+      case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
+        return basicSetAlternatives(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -186,6 +248,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
         return getName();
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         return getType();
+      case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
+        return getAlternatives();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -205,6 +269,9 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
         return;
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         setType((TypeRef)newValue);
+        return;
+      case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
+        setAlternatives((AbstractElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,6 +293,9 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         setType((TypeRef)null);
         return;
+      case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
+        setAlternatives((AbstractElement)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -244,6 +314,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         return type != null;
+      case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
+        return alternatives != null;
     }
     return super.eIsSet(featureID);
   }

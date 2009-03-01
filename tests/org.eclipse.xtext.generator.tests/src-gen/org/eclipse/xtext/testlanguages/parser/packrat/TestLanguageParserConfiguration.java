@@ -76,13 +76,13 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 		getChoiceRuleConsumer().setRule(grammarAccess.prChoiceRule());
 		getReducibleRuleConsumer().setRule(grammarAccess.prReducibleRule());
 		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getEntryRuleConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());

@@ -391,7 +391,7 @@ public final class EcoreDslEPackageDeclConsumer extends NonTerminalConsumer {
 		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele000000001KeywordNsURI());
 		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele00000001KeywordEqualsSign());
 		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele0000001AssignmentNsURI());
-		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele00000010ParserRuleCallSTRING());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele00000010TerminalRuleCallSTRING());
 		keyword$21$Consumer = new Keyword$21$Consumer(rule.ele000001KeywordNsPrefix());
 		keyword$22$Consumer = new Keyword$22$Consumer(rule.ele00001KeywordEqualsSign());
 		assignment$23$Consumer = new Assignment$23$Consumer(rule.ele0001AssignmentNsPrefix());

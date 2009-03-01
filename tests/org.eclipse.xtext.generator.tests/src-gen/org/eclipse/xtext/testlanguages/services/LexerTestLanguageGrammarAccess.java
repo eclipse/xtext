@@ -36,9 +36,9 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
 		private final Assignment c1AssignmentH = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentH.eContents().get(0);
+		private final RuleCall c10TerminalRuleCallSTRING = (RuleCall)c1AssignmentH.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -50,18 +50,18 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// not supported
-		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele1AssignmentH() { return c1AssignmentH; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
+		public RuleCall ele10TerminalRuleCallSTRING() { return c10TerminalRuleCallSTRING; }
 	}
 	
 	private ModelElements pModel;
 	private ElementElements pElement;
-	private LexerRule lSTRING;
+	private TerminalRule tSTRING;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -94,37 +94,37 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	public TerminalRule trSTRING() {
+		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

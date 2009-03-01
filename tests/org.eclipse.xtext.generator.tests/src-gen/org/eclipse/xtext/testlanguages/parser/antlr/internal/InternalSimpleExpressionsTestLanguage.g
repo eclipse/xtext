@@ -65,7 +65,6 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
 
 
 
-
 // Entry rule entryRuleSequence
 entryRuleSequence returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prSequence().getRule(), currentNode); }
@@ -89,6 +88,10 @@ ruleSequence returns [EObject current=null]
     { 
         $current = $this_Addition_0.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prSequence().ele0ParserRuleCallAddition(), null); 
     }
 ((
     { 
@@ -133,8 +136,6 @@ ruleSequence returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleAddition
 entryRuleAddition returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prAddition().getRule(), currentNode); }
@@ -158,6 +159,10 @@ ruleAddition returns [EObject current=null]
     { 
         $current = $this_Multiplication_0.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prAddition().ele0ParserRuleCallMultiplication(), null); 
     }
 (((
     { 
@@ -230,8 +235,6 @@ ruleAddition returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleMultiplication
 entryRuleMultiplication returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prMultiplication().getRule(), currentNode); }
@@ -255,6 +258,10 @@ ruleMultiplication returns [EObject current=null]
     { 
         $current = $this_Term_0.current; 
         currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.prMultiplication().ele0ParserRuleCallTerm(), null); 
     }
 (((
     { 
@@ -327,8 +334,6 @@ ruleMultiplication returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prTerm().getRule(), currentNode); }
@@ -354,6 +359,10 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    { 
+    createLeafNode(grammarAccess.prTerm().ele0ParserRuleCallAtom(), null); 
+    }
+
     |
     { 
         currentNode=createCompositeNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), currentNode); 
@@ -363,9 +372,11 @@ ruleTerm returns [EObject current=null]
         $current = $this_Parens_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), null); 
+    }
 );
-
-
 
 
 
@@ -388,8 +399,9 @@ ruleAtom returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prAtom().ele0ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prAtom().ele0TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -406,8 +418,6 @@ ruleAtom returns [EObject current=null]
 	    }
 	
 );
-
-
 
 
 
@@ -441,6 +451,10 @@ ruleParens returns [EObject current=null]
         $current = $this_Addition_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    { 
+    createLeafNode(grammarAccess.prParens().ele01ParserRuleCallAddition(), null); 
+    }
 )')' 
     {
         createLeafNode(grammarAccess.prParens().ele1KeywordRightParenthesis(), null); 
@@ -450,63 +464,18 @@ ruleParens returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

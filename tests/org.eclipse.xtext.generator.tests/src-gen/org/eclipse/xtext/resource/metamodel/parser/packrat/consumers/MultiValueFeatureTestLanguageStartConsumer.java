@@ -71,7 +71,7 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentFeatureA());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallID());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
 	}
 	
 	@Override

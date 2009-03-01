@@ -108,7 +108,7 @@ public final class TransientValuesTestTestListConsumer extends NonTerminalConsum
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordList());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentItem());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallINT());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallINT());
 	}
 	
 	@Override

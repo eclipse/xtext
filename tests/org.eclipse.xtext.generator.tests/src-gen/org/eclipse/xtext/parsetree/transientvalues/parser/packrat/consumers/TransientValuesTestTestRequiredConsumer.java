@@ -140,9 +140,9 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordRequired());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentRequired1());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010ParserRuleCallINT());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010TerminalRuleCallINT());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentRequired2());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallINT());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10TerminalRuleCallINT());
 	}
 	
 	@Override

@@ -132,19 +132,19 @@ public class XtextTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XtextTestPackage.LEXER_RULE:
-      {
-        LexerRule lexerRule = (LexerRule)theEObject;
-        T result = caseLexerRule(lexerRule);
-        if (result == null) result = caseAbstractRule(lexerRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XtextTestPackage.PARSER_RULE:
       {
         ParserRule parserRule = (ParserRule)theEObject;
         T result = caseParserRule(parserRule);
         if (result == null) result = caseAbstractRule(parserRule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextTestPackage.TERMINAL_RULE:
+      {
+        TerminalRule terminalRule = (TerminalRule)theEObject;
+        T result = caseTerminalRule(terminalRule);
+        if (result == null) result = caseAbstractRule(terminalRule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -345,22 +345,6 @@ public class XtextTestSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLexerRule(LexerRule object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Parser Rule</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -372,6 +356,22 @@ public class XtextTestSwitch<T>
    * @generated
    */
   public T caseParserRule(ParserRule object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Terminal Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Terminal Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTerminalRule(TerminalRule object)
   {
     return null;
   }

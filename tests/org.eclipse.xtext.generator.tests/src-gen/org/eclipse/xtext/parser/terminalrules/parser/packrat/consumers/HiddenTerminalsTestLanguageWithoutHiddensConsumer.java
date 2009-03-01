@@ -190,10 +190,10 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordWithout());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0001AssignmentSpaces());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010ParserRuleCallWS());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010TerminalRuleCallWS());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele001KeywordHiddens());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele01AssignmentSpaces());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010ParserRuleCallWS());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010TerminalRuleCallWS());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele1AssignmentValid());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele10KeywordSemicolon());
 	}

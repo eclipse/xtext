@@ -72,8 +72,8 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
       case XtextTestPackage.ABSTRACT_METAMODEL_DECLARATION: return createAbstractMetamodelDeclaration();
       case XtextTestPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
       case XtextTestPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
-      case XtextTestPackage.LEXER_RULE: return createLexerRule();
       case XtextTestPackage.PARSER_RULE: return createParserRule();
+      case XtextTestPackage.TERMINAL_RULE: return createTerminalRule();
       case XtextTestPackage.TYPE_REF: return createTypeRef();
       case XtextTestPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case XtextTestPackage.ASSIGNMENT: return createAssignment();
@@ -153,10 +153,10 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public LexerRule createLexerRule()
+  public ParserRule createParserRule()
   {
-    LexerRuleImpl lexerRule = new LexerRuleImpl();
-    return lexerRule;
+    ParserRuleImpl parserRule = new ParserRuleImpl();
+    return parserRule;
   }
 
   /**
@@ -164,10 +164,10 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParserRule createParserRule()
+  public TerminalRule createTerminalRule()
   {
-    ParserRuleImpl parserRule = new ParserRuleImpl();
-    return parserRule;
+    TerminalRuleImpl terminalRule = new TerminalRuleImpl();
+    return terminalRule;
   }
 
   /**

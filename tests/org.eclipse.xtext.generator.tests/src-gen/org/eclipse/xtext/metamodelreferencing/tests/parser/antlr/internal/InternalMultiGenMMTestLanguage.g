@@ -65,7 +65,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 
 
 
-
 // Entry rule entryRuleFoo
 entryRuleFoo returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prFoo().getRule(), currentNode); }
@@ -83,8 +82,9 @@ ruleFoo returns [EObject current=null]
     }:
 ((	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prFoo().ele00ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prFoo().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -127,8 +127,6 @@ ruleFoo returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleNameRef
 entryRuleNameRef returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prNameRef().getRule(), currentNode); }
@@ -146,8 +144,9 @@ ruleNameRef returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=RULE_STRING	{
-		createLeafNode(grammarAccess.prNameRef().ele0ParserRuleCallSTRING(), "name"); 
+	    lv_name_0=	RULE_STRING
+	{
+		createLeafNode(grammarAccess.prNameRef().ele0TerminalRuleCallSTRING(), "name"); 
 	}
  
 	    {
@@ -168,57 +167,18 @@ ruleNameRef returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

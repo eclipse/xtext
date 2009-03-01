@@ -58,9 +58,9 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordRequired = (Keyword)c0Group.eContents().get(0);
 		private final Assignment c01AssignmentRequired1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallINT = (RuleCall)c01AssignmentRequired1.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentRequired1.eContents().get(0);
 		private final Assignment c1AssignmentRequired2 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallINT = (RuleCall)c1AssignmentRequired2.eContents().get(0);
+		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentRequired2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -78,13 +78,13 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentRequired1() { return c01AssignmentRequired1; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallINT() { return c010ParserRuleCallINT; }
+		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
 
 		// not supported
 		public Assignment ele1AssignmentRequired2() { return c1AssignmentRequired2; }
 
 		// not supported
-		public RuleCall ele10ParserRuleCallINT() { return c10ParserRuleCallINT; }
+		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
 	}
 
 	public class TestOptionalElements implements IParserRuleAccess {
@@ -93,11 +93,11 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordOptional = (Keyword)c0Group.eContents().get(0);
 		private final Assignment c01AssignmentOpt1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallINT = (RuleCall)c01AssignmentOpt1.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentOpt1.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordColon = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentOpt2 = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallINT = (RuleCall)c11AssignmentOpt2.eContents().get(0);
+		private final RuleCall c110TerminalRuleCallINT = (RuleCall)c11AssignmentOpt2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -115,7 +115,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentOpt1() { return c01AssignmentOpt1; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallINT() { return c010ParserRuleCallINT; }
+		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -127,7 +127,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentOpt2() { return c11AssignmentOpt2; }
 
 		// not supported
-		public RuleCall ele110ParserRuleCallINT() { return c110ParserRuleCallINT; }
+		public RuleCall ele110TerminalRuleCallINT() { return c110TerminalRuleCallINT; }
 	}
 
 	public class TestListElements implements IParserRuleAccess {
@@ -135,7 +135,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordList = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentItem = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallINT = (RuleCall)c1AssignmentItem.eContents().get(0);
+		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentItem.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -150,7 +150,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentItem() { return c1AssignmentItem; }
 
 		// not supported
-		public RuleCall ele10ParserRuleCallINT() { return c10ParserRuleCallINT; }
+		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
 	}
 	
 	private RootElements pRoot;
@@ -199,37 +199,37 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
-		return superGrammarAccess.prSTRING();
+	public TerminalRule trSTRING() {
+		return superGrammarAccess.trSTRING();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

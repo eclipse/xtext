@@ -65,7 +65,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:69:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -73,16 +73,16 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:70:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:71:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:69:47: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:70:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel72);
+            pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel82); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleModel81); 
 
             }
 
@@ -100,7 +100,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:78:1: ruleModel returns [EObject current=null] : ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:77:1: ruleModel returns [EObject current=null] : ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,10 +122,10 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:6: ( ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:1: ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:82:6: ( ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:1: ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:1: ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:1: ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -137,15 +137,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("84:1: ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) )", 19, 0, input);
+                    new NoViableAltException("83:1: ( ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) ) | ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? ) )", 19, 0, input);
 
                 throw nvae;
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:2: ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:2: ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:2: ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:2: ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) )
                     int alt16=2;
                     int LA16_0 = input.LA(1);
 
@@ -157,15 +157,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("84:2: ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) )", 16, 0, input);
+                            new NoViableAltException("83:2: ( ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) ) | ( '4+' (lv_multiValue_15= ruleNestedDatatype ) ) )", 16, 0, input);
 
                         throw nvae;
                     }
                     switch (alt16) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:3: ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:3: ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) )
                             {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:3: ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:3: ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) )
                             int alt15=2;
                             int LA15_0 = input.LA(1);
 
@@ -177,15 +177,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("84:3: ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) )", 15, 0, input);
+                                    new NoViableAltException("83:3: ( ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) ) | ( '4' (lv_value_13= ruleNestedDatatype ) ) )", 15, 0, input);
 
                                 throw nvae;
                             }
                             switch (alt15) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:4: ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:4: ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) )
                                     {
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:4: ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:4: ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) )
                                     int alt14=2;
                                     int LA14_0 = input.LA(1);
 
@@ -197,15 +197,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                     }
                                     else {
                                         NoViableAltException nvae =
-                                            new NoViableAltException("84:4: ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) )", 14, 0, input);
+                                            new NoViableAltException("83:4: ( ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) ) | ( '3+' (lv_multiValue_11= ruleDatatype ) ) )", 14, 0, input);
 
                                         throw nvae;
                                     }
                                     switch (alt14) {
                                         case 1 :
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:5: ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:5: ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) )
                                             {
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:5: ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:5: ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) )
                                             int alt13=2;
                                             int LA13_0 = input.LA(1);
 
@@ -217,15 +217,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                             }
                                             else {
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("84:5: ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) )", 13, 0, input);
+                                                    new NoViableAltException("83:5: ( ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) ) | ( '3' (lv_value_9= ruleDatatype ) ) )", 13, 0, input);
 
                                                 throw nvae;
                                             }
                                             switch (alt13) {
                                                 case 1 :
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:6: ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:6: ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) )
                                                     {
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:6: ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:6: ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) )
                                                     int alt12=2;
                                                     int LA12_0 = input.LA(1);
 
@@ -237,15 +237,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                     }
                                                     else {
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("84:6: ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) )", 12, 0, input);
+                                                            new NoViableAltException("83:6: ( ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) ) | ( '2+' (lv_multiValue_7= RULE_STRING ) ) )", 12, 0, input);
 
                                                         throw nvae;
                                                     }
                                                     switch (alt12) {
                                                         case 1 :
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:7: ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) )
+                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:7: ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) )
                                                             {
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:7: ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) )
+                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:7: ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) )
                                                             int alt11=2;
                                                             int LA11_0 = input.LA(1);
 
@@ -257,15 +257,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                             }
                                                             else {
                                                                 NoViableAltException nvae =
-                                                                    new NoViableAltException("84:7: ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) )", 11, 0, input);
+                                                                    new NoViableAltException("83:7: ( ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) ) | ( '2' (lv_value_5= RULE_STRING ) ) )", 11, 0, input);
 
                                                                 throw nvae;
                                                             }
                                                             switch (alt11) {
                                                                 case 1 :
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:8: ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) )
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:8: ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) )
                                                                     {
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:8: ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) )
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:8: ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) )
                                                                     int alt10=2;
                                                                     int LA10_0 = input.LA(1);
 
@@ -277,18 +277,18 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                     }
                                                                     else {
                                                                         NoViableAltException nvae =
-                                                                            new NoViableAltException("84:8: ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) )", 10, 0, input);
+                                                                            new NoViableAltException("83:8: ( ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) | ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) ) )", 10, 0, input);
 
                                                                         throw nvae;
                                                                     }
                                                                     switch (alt10) {
                                                                         case 1 :
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:9: ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:9: ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
                                                                             {
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:9: ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:10: ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:9: ( ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:10: ( '1' )? (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
                                                                             {
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:10: ( '1' )?
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:10: ( '1' )?
                                                                             int alt1=2;
                                                                             int LA1_0 = input.LA(1);
 
@@ -297,9 +297,9 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                             }
                                                                             switch (alt1) {
                                                                                 case 1 :
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:84:11: '1'
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:83:11: '1'
                                                                                     {
-                                                                                    match(input,11,FOLLOW_11_in_ruleModel125); 
+                                                                                    match(input,11,FOLLOW_11_in_ruleModel124); 
 
                                                                                             createLeafNode(grammarAccess.prModel().ele000000000KeywordDigitOne(), null); 
                                                                                         
@@ -309,10 +309,10 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
                                                                             }
 
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:88:3: (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:6: lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:87:3: (lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:6: lv_value_1= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
                                                                             {
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:17: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:17: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
                                                                             int alt5=2;
                                                                             int LA5_0 = input.LA(1);
 
@@ -330,22 +330,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                 }
                                                                                 else {
                                                                                     NoViableAltException nvae =
-                                                                                        new NoViableAltException("90:17: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 5, 2, input);
+                                                                                        new NoViableAltException("89:17: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 5, 2, input);
 
                                                                                     throw nvae;
                                                                                 }
                                                                             }
                                                                             else {
                                                                                 NoViableAltException nvae =
-                                                                                    new NoViableAltException("90:17: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 5, 0, input);
+                                                                                    new NoViableAltException("89:17: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 5, 0, input);
 
                                                                                 throw nvae;
                                                                             }
                                                                             switch (alt5) {
                                                                                 case 1 :
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
                                                                                     {
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
                                                                                     int alt4=2;
                                                                                     int LA4_0 = input.LA(1);
 
@@ -363,22 +363,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                         }
                                                                                         else {
                                                                                             NoViableAltException nvae =
-                                                                                                new NoViableAltException("90:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 4, 2, input);
+                                                                                                new NoViableAltException("89:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 4, 2, input);
 
                                                                                             throw nvae;
                                                                                         }
                                                                                     }
                                                                                     else {
                                                                                         NoViableAltException nvae =
-                                                                                            new NoViableAltException("90:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 4, 0, input);
+                                                                                            new NoViableAltException("89:18: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 4, 0, input);
 
                                                                                         throw nvae;
                                                                                     }
                                                                                     switch (alt4) {
                                                                                         case 1 :
-                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:19: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
+                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:19: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
                                                                                             {
-                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:19: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
+                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:19: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
                                                                                             int alt3=2;
                                                                                             int LA3_0 = input.LA(1);
 
@@ -390,15 +390,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                             }
                                                                                             else {
                                                                                                 NoViableAltException nvae =
-                                                                                                    new NoViableAltException("90:19: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )", 3, 0, input);
+                                                                                                    new NoViableAltException("89:19: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )", 3, 0, input);
 
                                                                                                 throw nvae;
                                                                                             }
                                                                                             switch (alt3) {
                                                                                                 case 1 :
-                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:20: ( 'mykeyword1' | RULE_STRING )
+                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:20: ( 'mykeyword1' | RULE_STRING )
                                                                                                     {
-                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:20: ( 'mykeyword1' | RULE_STRING )
+                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:20: ( 'mykeyword1' | RULE_STRING )
                                                                                                     int alt2=2;
                                                                                                     int LA2_0 = input.LA(1);
 
@@ -410,15 +410,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                                     }
                                                                                                     else {
                                                                                                         NoViableAltException nvae =
-                                                                                                            new NoViableAltException("90:20: ( 'mykeyword1' | RULE_STRING )", 2, 0, input);
+                                                                                                            new NoViableAltException("89:20: ( 'mykeyword1' | RULE_STRING )", 2, 0, input);
 
                                                                                                         throw nvae;
                                                                                                     }
                                                                                                     switch (alt2) {
                                                                                                         case 1 :
-                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:90:21: 'mykeyword1'
+                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:89:21: 'mykeyword1'
                                                                                                             {
-                                                                                                            match(input,12,FOLLOW_12_in_ruleModel152); 
+                                                                                                            match(input,12,FOLLOW_12_in_ruleModel151); 
 
                                                                                                                     createLeafNode(grammarAccess.prModel().ele00000000100000KeywordMykeyword1(), "value"); 
                                                                                                                 
@@ -426,11 +426,11 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                                             }
                                                                                                             break;
                                                                                                         case 2 :
-                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:96:7: RULE_STRING
+                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:95:7: RULE_STRING
                                                                                                             {
-                                                                                                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel169); 
+                                                                                                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel168); 
 
-                                                                                                            		createLeafNode(grammarAccess.prModel().ele00000000100001ParserRuleCallSTRING(), "value"); 
+                                                                                                            		createLeafNode(grammarAccess.prModel().ele00000000100001TerminalRuleCallSTRING(), "value"); 
                                                                                                             	
 
                                                                                                             }
@@ -442,18 +442,18 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                                     }
                                                                                                     break;
                                                                                                 case 2 :
-                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:102:8: ruleNestedDatatype
+                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:101:7: ruleNestedDatatype
                                                                                                     {
                                                                                                      
-                                                                                                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000000010001ParserRuleCallNestedDatatype(), currentNode); 
-                                                                                                    	    
-                                                                                                    pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel188);
+                                                                                                            currentNode=createCompositeNode(grammarAccess.prModel().ele0000000010001ParserRuleCallNestedDatatype(), currentNode); 
+                                                                                                        
+                                                                                                    pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel185);
                                                                                                     ruleNestedDatatype();
                                                                                                     _fsp--;
 
                                                                                                      
-                                                                                                    	        currentNode = currentNode.getParent();
-                                                                                                    	    
+                                                                                                            currentNode = currentNode.getParent();
+                                                                                                        
 
                                                                                                     }
                                                                                                     break;
@@ -464,18 +464,18 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                             }
                                                                                             break;
                                                                                         case 2 :
-                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:110:8: ruleDatatype
+                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:109:7: ruleDatatype
                                                                                             {
                                                                                              
-                                                                                            	        currentNode=createCompositeNode(grammarAccess.prModel().ele000000001001ParserRuleCallDatatype(), currentNode); 
-                                                                                            	    
-                                                                                            pushFollow(FOLLOW_ruleDatatype_in_ruleModel207);
+                                                                                                    currentNode=createCompositeNode(grammarAccess.prModel().ele000000001001ParserRuleCallDatatype(), currentNode); 
+                                                                                                
+                                                                                            pushFollow(FOLLOW_ruleDatatype_in_ruleModel201);
                                                                                             ruleDatatype();
                                                                                             _fsp--;
 
                                                                                              
-                                                                                            	        currentNode = currentNode.getParent();
-                                                                                            	    
+                                                                                                    currentNode = currentNode.getParent();
+                                                                                                
 
                                                                                             }
                                                                                             break;
@@ -486,11 +486,11 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                     }
                                                                                     break;
                                                                                 case 2 :
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:118:7: RULE_ID
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:117:7: RULE_ID
                                                                                     {
-                                                                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel221); 
+                                                                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel214); 
 
-                                                                                    		createLeafNode(grammarAccess.prModel().ele00000000101ParserRuleCallID(), "value"); 
+                                                                                    		createLeafNode(grammarAccess.prModel().ele00000000101TerminalRuleCallID(), "value"); 
                                                                                     	
 
                                                                                     }
@@ -520,19 +520,19 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                             }
                                                                             break;
                                                                         case 2 :
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:138:6: ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:137:6: ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
                                                                             {
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:138:6: ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:138:7: '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:137:6: ( '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:137:7: '1+' (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
                                                                             {
-                                                                            match(input,13,FOLLOW_13_in_ruleModel248); 
+                                                                            match(input,13,FOLLOW_13_in_ruleModel241); 
 
                                                                                     createLeafNode(grammarAccess.prModel().ele000000010KeywordDigitOnePlusSign(), null); 
                                                                                 
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:142:1: (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:6: lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:141:1: (lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID ) )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:6: lv_multiValue_3= ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
                                                                             {
-                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:22: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
+                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:22: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )
                                                                             int alt9=2;
                                                                             int LA9_0 = input.LA(1);
 
@@ -550,22 +550,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                 }
                                                                                 else {
                                                                                     NoViableAltException nvae =
-                                                                                        new NoViableAltException("144:22: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 9, 2, input);
+                                                                                        new NoViableAltException("143:22: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 9, 2, input);
 
                                                                                     throw nvae;
                                                                                 }
                                                                             }
                                                                             else {
                                                                                 NoViableAltException nvae =
-                                                                                    new NoViableAltException("144:22: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 9, 0, input);
+                                                                                    new NoViableAltException("143:22: ( ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype ) | RULE_ID )", 9, 0, input);
 
                                                                                 throw nvae;
                                                                             }
                                                                             switch (alt9) {
                                                                                 case 1 :
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
                                                                                     {
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )
                                                                                     int alt8=2;
                                                                                     int LA8_0 = input.LA(1);
 
@@ -583,22 +583,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                         }
                                                                                         else {
                                                                                             NoViableAltException nvae =
-                                                                                                new NoViableAltException("144:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 8, 2, input);
+                                                                                                new NoViableAltException("143:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 8, 2, input);
 
                                                                                             throw nvae;
                                                                                         }
                                                                                     }
                                                                                     else {
                                                                                         NoViableAltException nvae =
-                                                                                            new NoViableAltException("144:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 8, 0, input);
+                                                                                            new NoViableAltException("143:23: ( ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype ) | ruleDatatype )", 8, 0, input);
 
                                                                                         throw nvae;
                                                                                     }
                                                                                     switch (alt8) {
                                                                                         case 1 :
-                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:24: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
+                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:24: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
                                                                                             {
-                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:24: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
+                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:24: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )
                                                                                             int alt7=2;
                                                                                             int LA7_0 = input.LA(1);
 
@@ -610,15 +610,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                             }
                                                                                             else {
                                                                                                 NoViableAltException nvae =
-                                                                                                    new NoViableAltException("144:24: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )", 7, 0, input);
+                                                                                                    new NoViableAltException("143:24: ( ( 'mykeyword1' | RULE_STRING ) | ruleNestedDatatype )", 7, 0, input);
 
                                                                                                 throw nvae;
                                                                                             }
                                                                                             switch (alt7) {
                                                                                                 case 1 :
-                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:25: ( 'mykeyword1' | RULE_STRING )
+                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:25: ( 'mykeyword1' | RULE_STRING )
                                                                                                     {
-                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:25: ( 'mykeyword1' | RULE_STRING )
+                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:25: ( 'mykeyword1' | RULE_STRING )
                                                                                                     int alt6=2;
                                                                                                     int LA6_0 = input.LA(1);
 
@@ -630,15 +630,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                                     }
                                                                                                     else {
                                                                                                         NoViableAltException nvae =
-                                                                                                            new NoViableAltException("144:25: ( 'mykeyword1' | RULE_STRING )", 6, 0, input);
+                                                                                                            new NoViableAltException("143:25: ( 'mykeyword1' | RULE_STRING )", 6, 0, input);
 
                                                                                                         throw nvae;
                                                                                                     }
                                                                                                     switch (alt6) {
                                                                                                         case 1 :
-                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:144:26: 'mykeyword1'
+                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:143:26: 'mykeyword1'
                                                                                                             {
-                                                                                                            match(input,12,FOLLOW_12_in_ruleModel273); 
+                                                                                                            match(input,12,FOLLOW_12_in_ruleModel266); 
 
                                                                                                                     createLeafNode(grammarAccess.prModel().ele00000001100000KeywordMykeyword1(), "multiValue"); 
                                                                                                                 
@@ -646,11 +646,11 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                                             }
                                                                                                             break;
                                                                                                         case 2 :
-                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:150:7: RULE_STRING
+                                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:149:7: RULE_STRING
                                                                                                             {
-                                                                                                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel290); 
+                                                                                                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel283); 
 
-                                                                                                            		createLeafNode(grammarAccess.prModel().ele00000001100001ParserRuleCallSTRING(), "multiValue"); 
+                                                                                                            		createLeafNode(grammarAccess.prModel().ele00000001100001TerminalRuleCallSTRING(), "multiValue"); 
                                                                                                             	
 
                                                                                                             }
@@ -662,18 +662,18 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                                     }
                                                                                                     break;
                                                                                                 case 2 :
-                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:156:8: ruleNestedDatatype
+                                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:155:7: ruleNestedDatatype
                                                                                                     {
                                                                                                      
-                                                                                                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000000110001ParserRuleCallNestedDatatype(), currentNode); 
-                                                                                                    	    
-                                                                                                    pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel309);
+                                                                                                            currentNode=createCompositeNode(grammarAccess.prModel().ele0000000110001ParserRuleCallNestedDatatype(), currentNode); 
+                                                                                                        
+                                                                                                    pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel300);
                                                                                                     ruleNestedDatatype();
                                                                                                     _fsp--;
 
                                                                                                      
-                                                                                                    	        currentNode = currentNode.getParent();
-                                                                                                    	    
+                                                                                                            currentNode = currentNode.getParent();
+                                                                                                        
 
                                                                                                     }
                                                                                                     break;
@@ -684,18 +684,18 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                             }
                                                                                             break;
                                                                                         case 2 :
-                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:164:8: ruleDatatype
+                                                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:163:7: ruleDatatype
                                                                                             {
                                                                                              
-                                                                                            	        currentNode=createCompositeNode(grammarAccess.prModel().ele000000011001ParserRuleCallDatatype(), currentNode); 
-                                                                                            	    
-                                                                                            pushFollow(FOLLOW_ruleDatatype_in_ruleModel328);
+                                                                                                    currentNode=createCompositeNode(grammarAccess.prModel().ele000000011001ParserRuleCallDatatype(), currentNode); 
+                                                                                                
+                                                                                            pushFollow(FOLLOW_ruleDatatype_in_ruleModel316);
                                                                                             ruleDatatype();
                                                                                             _fsp--;
 
                                                                                              
-                                                                                            	        currentNode = currentNode.getParent();
-                                                                                            	    
+                                                                                                    currentNode = currentNode.getParent();
+                                                                                                
 
                                                                                             }
                                                                                             break;
@@ -706,11 +706,11 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                                     }
                                                                                     break;
                                                                                 case 2 :
-                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:172:7: RULE_ID
+                                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:171:7: RULE_ID
                                                                                     {
-                                                                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel342); 
+                                                                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel329); 
 
-                                                                                    		createLeafNode(grammarAccess.prModel().ele00000001101ParserRuleCallID(), "multiValue"); 
+                                                                                    		createLeafNode(grammarAccess.prModel().ele00000001101TerminalRuleCallID(), "multiValue"); 
                                                                                     	
 
                                                                                     }
@@ -746,22 +746,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                                     }
                                                                     break;
                                                                 case 2 :
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:192:6: ( '2' (lv_value_5= RULE_STRING ) )
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:191:6: ( '2' (lv_value_5= RULE_STRING ) )
                                                                     {
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:192:6: ( '2' (lv_value_5= RULE_STRING ) )
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:192:7: '2' (lv_value_5= RULE_STRING )
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:191:6: ( '2' (lv_value_5= RULE_STRING ) )
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:191:7: '2' (lv_value_5= RULE_STRING )
                                                                     {
-                                                                    match(input,14,FOLLOW_14_in_ruleModel370); 
+                                                                    match(input,14,FOLLOW_14_in_ruleModel357); 
 
                                                                             createLeafNode(grammarAccess.prModel().ele00000010KeywordDigitTwo(), null); 
                                                                         
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:196:1: (lv_value_5= RULE_STRING )
-                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:198:6: lv_value_5= RULE_STRING
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:195:1: (lv_value_5= RULE_STRING )
+                                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:197:6: lv_value_5= RULE_STRING
                                                                     {
                                                                     lv_value_5=(Token)input.LT(1);
-                                                                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel391); 
+                                                                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel379); 
 
-                                                                    		createLeafNode(grammarAccess.prModel().ele000000110ParserRuleCallSTRING(), "value"); 
+                                                                    		createLeafNode(grammarAccess.prModel().ele000000110TerminalRuleCallSTRING(), "value"); 
                                                                     	
 
                                                                     	        if (current==null) {
@@ -796,7 +796,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:216:6: ( '2+' (lv_multiValue_7= RULE_STRING ) )
                                                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:216:7: '2+' (lv_multiValue_7= RULE_STRING )
                                                             {
-                                                            match(input,15,FOLLOW_15_in_ruleModel416); 
+                                                            match(input,15,FOLLOW_15_in_ruleModel405); 
 
                                                                     createLeafNode(grammarAccess.prModel().ele0000010KeywordDigitTwoPlusSign(), null); 
                                                                 
@@ -804,9 +804,9 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:222:6: lv_multiValue_7= RULE_STRING
                                                             {
                                                             lv_multiValue_7=(Token)input.LT(1);
-                                                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel437); 
+                                                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel427); 
 
-                                                            		createLeafNode(grammarAccess.prModel().ele00000110ParserRuleCallSTRING(), "multiValue"); 
+                                                            		createLeafNode(grammarAccess.prModel().ele00000110TerminalRuleCallSTRING(), "multiValue"); 
                                                             	
 
                                                             	        if (current==null) {
@@ -836,22 +836,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                                     }
                                                     break;
                                                 case 2 :
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:240:6: ( '3' (lv_value_9= ruleDatatype ) )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:241:6: ( '3' (lv_value_9= ruleDatatype ) )
                                                     {
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:240:6: ( '3' (lv_value_9= ruleDatatype ) )
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:240:7: '3' (lv_value_9= ruleDatatype )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:241:6: ( '3' (lv_value_9= ruleDatatype ) )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:241:7: '3' (lv_value_9= ruleDatatype )
                                                     {
-                                                    match(input,16,FOLLOW_16_in_ruleModel462); 
+                                                    match(input,16,FOLLOW_16_in_ruleModel453); 
 
                                                             createLeafNode(grammarAccess.prModel().ele000010KeywordDigitThree(), null); 
                                                         
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:244:1: (lv_value_9= ruleDatatype )
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:247:6: lv_value_9= ruleDatatype
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:245:1: (lv_value_9= ruleDatatype )
+                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:248:6: lv_value_9= ruleDatatype
                                                     {
                                                      
                                                     	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000110ParserRuleCallDatatype(), currentNode); 
                                                     	    
-                                                    pushFollow(FOLLOW_ruleDatatype_in_ruleModel496);
+                                                    pushFollow(FOLLOW_ruleDatatype_in_ruleModel487);
                                                     lv_value_9=ruleDatatype();
                                                     _fsp--;
 
@@ -884,22 +884,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                             }
                                             break;
                                         case 2 :
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:266:6: ( '3+' (lv_multiValue_11= ruleDatatype ) )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:267:6: ( '3+' (lv_multiValue_11= ruleDatatype ) )
                                             {
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:266:6: ( '3+' (lv_multiValue_11= ruleDatatype ) )
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:266:7: '3+' (lv_multiValue_11= ruleDatatype )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:267:6: ( '3+' (lv_multiValue_11= ruleDatatype ) )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:267:7: '3+' (lv_multiValue_11= ruleDatatype )
                                             {
-                                            match(input,17,FOLLOW_17_in_ruleModel518); 
+                                            match(input,17,FOLLOW_17_in_ruleModel509); 
 
                                                     createLeafNode(grammarAccess.prModel().ele00010KeywordDigitThreePlusSign(), null); 
                                                 
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:270:1: (lv_multiValue_11= ruleDatatype )
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:273:6: lv_multiValue_11= ruleDatatype
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:271:1: (lv_multiValue_11= ruleDatatype )
+                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:274:6: lv_multiValue_11= ruleDatatype
                                             {
                                              
                                             	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallDatatype(), currentNode); 
                                             	    
-                                            pushFollow(FOLLOW_ruleDatatype_in_ruleModel552);
+                                            pushFollow(FOLLOW_ruleDatatype_in_ruleModel543);
                                             lv_multiValue_11=ruleDatatype();
                                             _fsp--;
 
@@ -932,22 +932,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:292:6: ( '4' (lv_value_13= ruleNestedDatatype ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:293:6: ( '4' (lv_value_13= ruleNestedDatatype ) )
                                     {
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:292:6: ( '4' (lv_value_13= ruleNestedDatatype ) )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:292:7: '4' (lv_value_13= ruleNestedDatatype )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:293:6: ( '4' (lv_value_13= ruleNestedDatatype ) )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:293:7: '4' (lv_value_13= ruleNestedDatatype )
                                     {
-                                    match(input,18,FOLLOW_18_in_ruleModel574); 
+                                    match(input,18,FOLLOW_18_in_ruleModel565); 
 
                                             createLeafNode(grammarAccess.prModel().ele0010KeywordDigitFour(), null); 
                                         
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:296:1: (lv_value_13= ruleNestedDatatype )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:299:6: lv_value_13= ruleNestedDatatype
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:297:1: (lv_value_13= ruleNestedDatatype )
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:300:6: lv_value_13= ruleNestedDatatype
                                     {
                                      
                                     	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallNestedDatatype(), currentNode); 
                                     	    
-                                    pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel608);
+                                    pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel599);
                                     lv_value_13=ruleNestedDatatype();
                                     _fsp--;
 
@@ -980,22 +980,22 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:318:6: ( '4+' (lv_multiValue_15= ruleNestedDatatype ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:319:6: ( '4+' (lv_multiValue_15= ruleNestedDatatype ) )
                             {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:318:6: ( '4+' (lv_multiValue_15= ruleNestedDatatype ) )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:318:7: '4+' (lv_multiValue_15= ruleNestedDatatype )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:319:6: ( '4+' (lv_multiValue_15= ruleNestedDatatype ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:319:7: '4+' (lv_multiValue_15= ruleNestedDatatype )
                             {
-                            match(input,19,FOLLOW_19_in_ruleModel630); 
+                            match(input,19,FOLLOW_19_in_ruleModel621); 
 
                                     createLeafNode(grammarAccess.prModel().ele010KeywordDigitFourPlusSign(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:322:1: (lv_multiValue_15= ruleNestedDatatype )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:325:6: lv_multiValue_15= ruleNestedDatatype
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:323:1: (lv_multiValue_15= ruleNestedDatatype )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:326:6: lv_multiValue_15= ruleNestedDatatype
                             {
                              
                             	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallNestedDatatype(), currentNode); 
                             	    
-                            pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel664);
+                            pushFollow(FOLLOW_ruleNestedDatatype_in_ruleModel655);
                             lv_multiValue_15=ruleNestedDatatype();
                             _fsp--;
 
@@ -1028,25 +1028,25 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:344:6: ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:345:6: ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:344:6: ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:344:7: ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:345:6: ( ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:345:7: ( 'content' (lv_children_17= ruleChild ) ) ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )?
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:344:7: ( 'content' (lv_children_17= ruleChild ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:344:8: 'content' (lv_children_17= ruleChild )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:345:7: ( 'content' (lv_children_17= ruleChild ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:345:8: 'content' (lv_children_17= ruleChild )
                     {
-                    match(input,20,FOLLOW_20_in_ruleModel687); 
+                    match(input,20,FOLLOW_20_in_ruleModel678); 
 
                             createLeafNode(grammarAccess.prModel().ele100KeywordContent(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:348:1: (lv_children_17= ruleChild )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:351:6: lv_children_17= ruleChild
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:349:1: (lv_children_17= ruleChild )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:352:6: lv_children_17= ruleChild
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.prModel().ele1010ParserRuleCallChild(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleChild_in_ruleModel721);
+                    pushFollow(FOLLOW_ruleChild_in_ruleModel712);
                     lv_children_17=ruleChild();
                     _fsp--;
 
@@ -1069,7 +1069,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:369:3: ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:370:3: ( 'ref' ( ( RULE_STRING | RULE_ID ) ) )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -1078,14 +1078,14 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:369:4: 'ref' ( ( RULE_STRING | RULE_ID ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:370:4: 'ref' ( ( RULE_STRING | RULE_ID ) )
                             {
-                            match(input,21,FOLLOW_21_in_ruleModel736); 
+                            match(input,21,FOLLOW_21_in_ruleModel727); 
 
                                     createLeafNode(grammarAccess.prModel().ele110KeywordRef(), null); 
                                 
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:373:1: ( ( RULE_STRING | RULE_ID ) )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:376:3: ( RULE_STRING | RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:374:1: ( ( RULE_STRING | RULE_ID ) )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:377:3: ( RULE_STRING | RULE_ID )
                             {
 
                             			if (current==null) {
@@ -1093,7 +1093,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                                     
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:382:1: ( RULE_STRING | RULE_ID )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:383:1: ( RULE_STRING | RULE_ID )
                             int alt17=2;
                             int LA17_0 = input.LA(1);
 
@@ -1105,15 +1105,15 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("382:1: ( RULE_STRING | RULE_ID )", 17, 0, input);
+                                    new NoViableAltException("383:1: ( RULE_STRING | RULE_ID )", 17, 0, input);
 
                                 throw nvae;
                             }
                             switch (alt17) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:382:3: RULE_STRING
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:383:3: RULE_STRING
                                     {
-                                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel759); 
+                                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel750); 
 
                                     		createLeafNode(grammarAccess.prModel().ele11100CrossReferenceEStringChild1(), "ref"); 
                                     	
@@ -1121,9 +1121,9 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:387:7: RULE_ID
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:388:7: RULE_ID
                                     {
-                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel771); 
+                                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel762); 
 
                                     		createLeafNode(grammarAccess.prModel().ele11101CrossReferenceEStringChild2(), "ref"); 
                                     	
@@ -1171,7 +1171,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleDatatype
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:404:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:403:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
     public final String entryRuleDatatype() throws RecognitionException {
         String current = null;
 
@@ -1179,16 +1179,16 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:404:49: (iv_ruleDatatype= ruleDatatype EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:405:2: iv_ruleDatatype= ruleDatatype EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:403:49: (iv_ruleDatatype= ruleDatatype EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:404:2: iv_ruleDatatype= ruleDatatype EOF
             {
              currentNode = createCompositeNode(grammarAccess.prDatatype().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleDatatype_in_entryRuleDatatype815);
+            pushFollow(FOLLOW_ruleDatatype_in_entryRuleDatatype804);
             iv_ruleDatatype=ruleDatatype();
             _fsp--;
 
              current =iv_ruleDatatype.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDatatype826); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDatatype815); 
 
             }
 
@@ -1206,7 +1206,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleDatatype
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:412:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:411:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1217,25 +1217,25 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:418:6: ( ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:419:1: ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:417:6: ( ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:418:1: ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:419:1: ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:419:2: (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:418:1: ( (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:418:2: (this_ID_0= RULE_ID kw= '-' ) this_ID_2= RULE_ID
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:419:2: (this_ID_0= RULE_ID kw= '-' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:419:7: this_ID_0= RULE_ID kw= '-'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:418:2: (this_ID_0= RULE_ID kw= '-' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:418:7: this_ID_0= RULE_ID kw= '-'
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDatatype867); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDatatype856); 
 
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prDatatype().ele00ParserRuleCallID(), null); 
+                createLeafNode(grammarAccess.prDatatype().ele00TerminalRuleCallID(), null); 
                 
             kw=(Token)input.LT(1);
-            match(input,22,FOLLOW_22_in_ruleDatatype885); 
+            match(input,22,FOLLOW_22_in_ruleDatatype874); 
 
                     current.merge(kw);
                     createLeafNode(grammarAccess.prDatatype().ele01KeywordHyphenMinus(), null); 
@@ -1244,12 +1244,12 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
 
             this_ID_2=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDatatype901); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDatatype890); 
 
             		current.merge(this_ID_2);
                 
              
-                createLeafNode(grammarAccess.prDatatype().ele1ParserRuleCallID(), null); 
+                createLeafNode(grammarAccess.prDatatype().ele1TerminalRuleCallID(), null); 
                 
 
             }
@@ -1275,7 +1275,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleNestedDatatype
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:449:1: entryRuleNestedDatatype returns [String current=null] : iv_ruleNestedDatatype= ruleNestedDatatype EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:446:1: entryRuleNestedDatatype returns [String current=null] : iv_ruleNestedDatatype= ruleNestedDatatype EOF ;
     public final String entryRuleNestedDatatype() throws RecognitionException {
         String current = null;
 
@@ -1283,16 +1283,16 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:449:55: (iv_ruleNestedDatatype= ruleNestedDatatype EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:450:2: iv_ruleNestedDatatype= ruleNestedDatatype EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:446:55: (iv_ruleNestedDatatype= ruleNestedDatatype EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:447:2: iv_ruleNestedDatatype= ruleNestedDatatype EOF
             {
              currentNode = createCompositeNode(grammarAccess.prNestedDatatype().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNestedDatatype_in_entryRuleNestedDatatype947);
+            pushFollow(FOLLOW_ruleNestedDatatype_in_entryRuleNestedDatatype934);
             iv_ruleNestedDatatype=ruleNestedDatatype();
             _fsp--;
 
              current =iv_ruleNestedDatatype.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNestedDatatype958); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNestedDatatype945); 
 
             }
 
@@ -1310,7 +1310,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNestedDatatype
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:457:1: ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:454:1: ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? ) ;
     public final AntlrDatatypeRuleToken ruleNestedDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1322,25 +1322,25 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:463:6: ( ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:464:1: ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:460:6: ( ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:461:1: ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:464:1: ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:464:2: (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:461:1: ( (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:461:2: (this_ID_0= RULE_ID kw= '+' ) (this_Datatype_2= ruleDatatype )?
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:464:2: (this_ID_0= RULE_ID kw= '+' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:464:7: this_ID_0= RULE_ID kw= '+'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:461:2: (this_ID_0= RULE_ID kw= '+' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:461:7: this_ID_0= RULE_ID kw= '+'
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNestedDatatype999); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNestedDatatype986); 
 
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prNestedDatatype().ele00ParserRuleCallID(), null); 
+                createLeafNode(grammarAccess.prNestedDatatype().ele00TerminalRuleCallID(), null); 
                 
             kw=(Token)input.LT(1);
-            match(input,23,FOLLOW_23_in_ruleNestedDatatype1017); 
+            match(input,23,FOLLOW_23_in_ruleNestedDatatype1004); 
 
                     current.merge(kw);
                     createLeafNode(grammarAccess.prNestedDatatype().ele01KeywordPlusSign(), null); 
@@ -1348,7 +1348,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:477:2: (this_Datatype_2= ruleDatatype )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:474:2: (this_Datatype_2= ruleDatatype )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1357,12 +1357,12 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:478:5: this_Datatype_2= ruleDatatype
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:475:5: this_Datatype_2= ruleDatatype
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prNestedDatatype().ele1ParserRuleCallDatatype(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleDatatype_in_ruleNestedDatatype1041);
+                    pushFollow(FOLLOW_ruleDatatype_in_ruleNestedDatatype1028);
                     this_Datatype_2=ruleDatatype();
                     _fsp--;
 
@@ -1402,7 +1402,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleChild
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:498:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:493:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
     public final EObject entryRuleChild() throws RecognitionException {
         EObject current = null;
 
@@ -1410,16 +1410,16 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:498:47: (iv_ruleChild= ruleChild EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:499:2: iv_ruleChild= ruleChild EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:493:47: (iv_ruleChild= ruleChild EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:494:2: iv_ruleChild= ruleChild EOF
             {
              currentNode = createCompositeNode(grammarAccess.prChild().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleChild_in_entryRuleChild1088);
+            pushFollow(FOLLOW_ruleChild_in_entryRuleChild1073);
             iv_ruleChild=ruleChild();
             _fsp--;
 
              current =iv_ruleChild; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChild1098); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChild1083); 
 
             }
 
@@ -1437,7 +1437,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleChild
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:506:1: ruleChild returns [EObject current=null] : (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:501:1: ruleChild returns [EObject current=null] : (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) ;
     public final EObject ruleChild() throws RecognitionException {
         EObject current = null;
 
@@ -1449,10 +1449,10 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:511:6: ( (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:512:1: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:506:6: ( (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:507:1: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:512:1: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:507:1: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -1464,18 +1464,18 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("512:1: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )", 21, 0, input);
+                    new NoViableAltException("507:1: (this_Child1_0= ruleChild1 | this_Child2_1= ruleChild2 )", 21, 0, input);
 
                 throw nvae;
             }
             switch (alt21) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:513:5: this_Child1_0= ruleChild1
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:508:5: this_Child1_0= ruleChild1
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prChild().ele0ParserRuleCallChild1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleChild1_in_ruleChild1145);
+                    pushFollow(FOLLOW_ruleChild1_in_ruleChild1130);
                     this_Child1_0=ruleChild1();
                     _fsp--;
 
@@ -1483,22 +1483,28 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                             current = this_Child1_0; 
                             currentNode = currentNode.getParent();
                         
+                     
+                        createLeafNode(grammarAccess.prChild().ele0ParserRuleCallChild1(), null); 
+                        
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:523:5: this_Child2_1= ruleChild2
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:522:5: this_Child2_1= ruleChild2
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prChild().ele1ParserRuleCallChild2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleChild2_in_ruleChild1172);
+                    pushFollow(FOLLOW_ruleChild2_in_ruleChild1164);
                     this_Child2_1=ruleChild2();
                     _fsp--;
 
                      
                             current = this_Child2_1; 
                             currentNode = currentNode.getParent();
+                        
+                     
+                        createLeafNode(grammarAccess.prChild().ele1ParserRuleCallChild2(), null); 
                         
 
                     }
@@ -1526,7 +1532,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleChild1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:540:1: entryRuleChild1 returns [EObject current=null] : iv_ruleChild1= ruleChild1 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:541:1: entryRuleChild1 returns [EObject current=null] : iv_ruleChild1= ruleChild1 EOF ;
     public final EObject entryRuleChild1() throws RecognitionException {
         EObject current = null;
 
@@ -1534,16 +1540,16 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:540:48: (iv_ruleChild1= ruleChild1 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:541:2: iv_ruleChild1= ruleChild1 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:541:48: (iv_ruleChild1= ruleChild1 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:542:2: iv_ruleChild1= ruleChild1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.prChild1().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleChild1_in_entryRuleChild11206);
+            pushFollow(FOLLOW_ruleChild1_in_entryRuleChild11203);
             iv_ruleChild1=ruleChild1();
             _fsp--;
 
              current =iv_ruleChild1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChild11216); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChild11213); 
 
             }
 
@@ -1561,7 +1567,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleChild1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:548:1: ruleChild1 returns [EObject current=null] : (lv_name_0= RULE_ID ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:549:1: ruleChild1 returns [EObject current=null] : (lv_name_0= RULE_ID ) ;
     public final EObject ruleChild1() throws RecognitionException {
         EObject current = null;
 
@@ -1570,16 +1576,16 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:553:6: ( (lv_name_0= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:554:1: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:554:6: ( (lv_name_0= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:555:1: (lv_name_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:554:1: (lv_name_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:556:6: lv_name_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:555:1: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:557:6: lv_name_0= RULE_ID
             {
             lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild11261); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild11259); 
 
-            		createLeafNode(grammarAccess.prChild1().ele0ParserRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prChild1().ele0TerminalRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -1628,12 +1634,12 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:583:2: iv_ruleChild2= ruleChild2 EOF
             {
              currentNode = createCompositeNode(grammarAccess.prChild2().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleChild2_in_entryRuleChild21302);
+            pushFollow(FOLLOW_ruleChild2_in_entryRuleChild21299);
             iv_ruleChild2=ruleChild2();
             _fsp--;
 
              current =iv_ruleChild2; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChild21312); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChild21309); 
 
             }
 
@@ -1667,9 +1673,9 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalBug250313.g:598:6: lv_name_0= RULE_STRING
             {
             lv_name_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleChild21357); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleChild21355); 
 
-            		createLeafNode(grammarAccess.prChild2().ele0ParserRuleCallSTRING(), "name"); 
+            		createLeafNode(grammarAccess.prChild2().ele0TerminalRuleCallSTRING(), "name"); 
             	
 
             	        if (current==null) {
@@ -1707,56 +1713,56 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleModel125 = new BitSet(new long[]{0x0000000000001030L});
-    public static final BitSet FOLLOW_12_in_ruleModel152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleModel248 = new BitSet(new long[]{0x0000000000001030L});
-    public static final BitSet FOLLOW_12_in_ruleModel273 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel309 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleModel370 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleModel416 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleModel462 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel496 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleModel518 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleModel574 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel608 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleModel630 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleModel687 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleChild_in_ruleModel721 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_21_in_ruleModel736 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel771 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDatatype_in_entryRuleDatatype815 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDatatype826 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleDatatype867 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleDatatype885 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleDatatype901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNestedDatatype_in_entryRuleNestedDatatype947 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNestedDatatype958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleNestedDatatype999 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_ruleNestedDatatype1017 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleDatatype_in_ruleNestedDatatype1041 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild_in_entryRuleChild1088 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChild1098 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild1_in_ruleChild1145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild2_in_ruleChild1172 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild1_in_entryRuleChild11206 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChild11216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChild11261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild2_in_entryRuleChild21302 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChild21312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleChild21357 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel71 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleModel81 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleModel124 = new BitSet(new long[]{0x0000000000001030L});
+    public static final BitSet FOLLOW_12_in_ruleModel151 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel168 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel185 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleModel241 = new BitSet(new long[]{0x0000000000001030L});
+    public static final BitSet FOLLOW_12_in_ruleModel266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel300 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel316 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleModel357 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleModel405 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel427 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleModel453 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel487 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleModel509 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleDatatype_in_ruleModel543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleModel565 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleModel621 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleNestedDatatype_in_ruleModel655 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleModel678 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_ruleChild_in_ruleModel712 = new BitSet(new long[]{0x0000000000200002L});
+    public static final BitSet FOLLOW_21_in_ruleModel727 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel750 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDatatype_in_entryRuleDatatype804 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDatatype815 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleDatatype856 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleDatatype874 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleDatatype890 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNestedDatatype_in_entryRuleNestedDatatype934 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNestedDatatype945 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleNestedDatatype986 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_23_in_ruleNestedDatatype1004 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ruleDatatype_in_ruleNestedDatatype1028 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChild_in_entryRuleChild1073 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChild1083 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChild1_in_ruleChild1130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChild2_in_ruleChild1164 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChild1_in_entryRuleChild11203 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChild11213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChild11259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChild2_in_entryRuleChild21299 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChild21309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleChild21355 = new BitSet(new long[]{0x0000000000000002L});
 
 }

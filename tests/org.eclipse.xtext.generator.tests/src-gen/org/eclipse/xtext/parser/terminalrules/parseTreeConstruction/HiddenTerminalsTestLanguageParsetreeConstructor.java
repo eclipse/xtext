@@ -396,13 +396,11 @@ protected class WithoutHiddens_0_0_0_1_Assignment_spaces extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prWithoutHiddens().ele00010ParserRuleCallWS();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prWithoutHiddens().ele00010TerminalRuleCallWS();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -437,13 +435,11 @@ protected class WithoutHiddens_0_1_Assignment_spaces extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prWithoutHiddens().ele010ParserRuleCallWS();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prWithoutHiddens().ele010TerminalRuleCallWS();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -971,13 +967,11 @@ protected class OverridingHiddensCall_0_1_Assignment_spaces extends AssignmentTo
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prOverridingHiddensCall().ele010ParserRuleCallWS();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prOverridingHiddensCall().ele010TerminalRuleCallWS();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1520,13 +1514,11 @@ protected class HidingHiddens_0_1_Assignment_space extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("space",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("space");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prHidingHiddens().ele010ParserRuleCallWS();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prHidingHiddens().ele010TerminalRuleCallWS();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1647,9 +1639,5 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 
 
 /************ end Rule InheritingHiddensCall ****************/
-
-
-
-
 
 }

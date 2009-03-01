@@ -989,13 +989,6 @@ public class GenEcoreDslProposals extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
-			
-			
-			
-			
-			
-			
     
     @Override
 	protected String getDefaultImageFilePath() {

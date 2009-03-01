@@ -119,9 +119,9 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallID = (RuleCall)c0Group.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0Group.eContents().get(0);
 		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1ParserRuleCallID = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c1TerminalRuleCallID = (RuleCall)cGroup.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -133,13 +133,13 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group ele0Group() { return c0Group; }
 
 		// not supported
-		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordFullStop() { return c01KeywordFullStop; }
 
 		// not supported
-		public RuleCall ele1ParserRuleCallID() { return c1ParserRuleCallID; }
+		public RuleCall ele1TerminalRuleCallID() { return c1TerminalRuleCallID; }
 	}
 
 	public class NestedModelIdElements implements IParserRuleAccess {
@@ -172,10 +172,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	public class FractionElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Fraction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallINT = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall c0TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordSolidus = (Keyword)c1Group.eContents().get(0);
-		private final RuleCall c11ParserRuleCallINT = (RuleCall)c1Group.eContents().get(1);
+		private final RuleCall c11TerminalRuleCallINT = (RuleCall)c1Group.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -184,7 +184,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public RuleCall ele0ParserRuleCallINT() { return c0ParserRuleCallINT; }
+		public RuleCall ele0TerminalRuleCallINT() { return c0TerminalRuleCallINT; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -193,7 +193,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword ele10KeywordSolidus() { return c10KeywordSolidus; }
 
 		// not supported
-		public RuleCall ele11ParserRuleCallINT() { return c11ParserRuleCallINT; }
+		public RuleCall ele11TerminalRuleCallINT() { return c11TerminalRuleCallINT; }
 	}
 
 	public class VectorElements implements IParserRuleAccess {
@@ -202,8 +202,8 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordLeftParenthesis = (Keyword)c00Group.eContents().get(0);
-		private final RuleCall c001ParserRuleCallINT = (RuleCall)c00Group.eContents().get(1);
-		private final RuleCall c01ParserRuleCallINT = (RuleCall)c0Group.eContents().get(1);
+		private final RuleCall c001TerminalRuleCallINT = (RuleCall)c00Group.eContents().get(1);
+		private final RuleCall c01TerminalRuleCallINT = (RuleCall)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -222,10 +222,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword ele000KeywordLeftParenthesis() { return c000KeywordLeftParenthesis; }
 
 		// not supported
-		public RuleCall ele001ParserRuleCallINT() { return c001ParserRuleCallINT; }
+		public RuleCall ele001TerminalRuleCallINT() { return c001TerminalRuleCallINT; }
 
 		// not supported
-		public RuleCall ele01ParserRuleCallINT() { return c01ParserRuleCallINT; }
+		public RuleCall ele01TerminalRuleCallINT() { return c01TerminalRuleCallINT; }
 
 		// not supported
 		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
@@ -322,37 +322,37 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
-		return superGrammarAccess.prSTRING();
+	public TerminalRule trSTRING() {
+		return superGrammarAccess.trSTRING();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

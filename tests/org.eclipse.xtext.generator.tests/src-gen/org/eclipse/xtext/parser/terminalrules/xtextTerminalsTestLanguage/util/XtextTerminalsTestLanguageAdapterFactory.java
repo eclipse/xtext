@@ -103,14 +103,14 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
         return createReferencedMetamodelAdapter();
       }
       @Override
-      public Adapter caseLexerRule(LexerRule object)
-      {
-        return createLexerRuleAdapter();
-      }
-      @Override
       public Adapter caseParserRule(ParserRule object)
       {
         return createParserRuleAdapter();
+      }
+      @Override
+      public Adapter caseTerminalRule(TerminalRule object)
+      {
+        return createTerminalRuleAdapter();
       }
       @Override
       public Adapter caseTypeRef(TypeRef object)
@@ -280,21 +280,6 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.LexerRule <em>Lexer Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.LexerRule
-   * @generated
-   */
-  public Adapter createLexerRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.ParserRule <em>Parser Rule</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -305,6 +290,21 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createParserRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TerminalRule <em>Terminal Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TerminalRule
+   * @generated
+   */
+  public Adapter createTerminalRuleAdapter()
   {
     return null;
   }

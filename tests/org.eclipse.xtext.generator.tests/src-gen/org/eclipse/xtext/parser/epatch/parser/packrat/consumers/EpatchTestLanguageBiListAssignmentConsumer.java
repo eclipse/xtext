@@ -390,7 +390,7 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele0000000AssignmentFeature());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele00000000ParserRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele00000000TerminalRuleCallID());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele0000001KeywordEqualsSign());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele000001KeywordLeftSquareBracket());
 		group$12$Consumer = new Group$12$Consumer(rule.ele00001Group());

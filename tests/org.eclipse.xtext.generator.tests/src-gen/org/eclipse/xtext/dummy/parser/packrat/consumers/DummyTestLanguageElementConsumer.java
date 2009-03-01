@@ -194,9 +194,9 @@ public final class DummyTestLanguageElementConsumer extends NonTerminalConsumer 
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele00000KeywordOptional());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele0001KeywordElement());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele001AssignmentName());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0010ParserRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0010TerminalRuleCallID());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele01AssignmentDescriptions());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele010ParserRuleCallSTRING());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele010TerminalRuleCallSTRING());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

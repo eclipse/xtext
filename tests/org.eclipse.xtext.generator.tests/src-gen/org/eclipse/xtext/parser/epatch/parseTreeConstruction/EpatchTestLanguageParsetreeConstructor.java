@@ -266,13 +266,11 @@ protected class EPatch_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prEPatch().ele0000010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEPatch().ele0000010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -726,13 +724,11 @@ protected class ResourceImport_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prResourceImport().ele0010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prResourceImport().ele0010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -767,13 +763,11 @@ protected class ResourceImport_1_Assignment_uri extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("uri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uri");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prResourceImport().ele10ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prResourceImport().ele10TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -907,13 +901,11 @@ protected class EPackageImport_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prEPackageImport().ele0010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEPackageImport().ele0010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -948,13 +940,11 @@ protected class EPackageImport_1_Assignment_nsURI extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nsURI",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsURI");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prEPackageImport().ele10ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEPackageImport().ele10TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1101,13 +1091,11 @@ protected class JavaImport_0_1_Assignment_path extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prJavaImport().ele010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prJavaImport().ele010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1171,13 +1159,11 @@ protected class JavaImport_1_1_Assignment_path extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prJavaImport().ele110ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prJavaImport().ele110TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1325,13 +1311,11 @@ protected class ExtensionImport_0_1_Assignment_path extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prExtensionImport().ele010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prExtensionImport().ele010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1395,13 +1379,11 @@ protected class ExtensionImport_1_1_Assignment_path extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("path",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("path");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prExtensionImport().ele110ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prExtensionImport().ele110TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1716,13 +1698,11 @@ protected class NamedResource_0_0_0_0_0_0_0_0_1_Assignment_name extends Assignme
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prNamedResource().ele0000000010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prNamedResource().ele0000000010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1835,13 +1815,11 @@ protected class NamedResource_0_0_0_0_0_1_0_1_Assignment_leftUri extends Assignm
 	protected Solution createSolution() {
 		if((value = current.getConsumable("leftUri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("leftUri");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prNamedResource().ele000001010ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prNamedResource().ele000001010TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1989,13 +1967,11 @@ protected class NamedResource_0_0_1_0_1_Assignment_rightUri extends AssignmentTo
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rightUri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rightUri");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prNamedResource().ele001010ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prNamedResource().ele001010TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -2264,13 +2240,11 @@ protected class ObjectRef_0_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prObjectRef().ele0010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prObjectRef().ele0010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -2375,7 +2349,7 @@ protected class ObjectRef_0_1_0_1_Assignment_leftFrag extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("leftFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prObjectRef().ele01010LexerRuleCallFRAGMENT();
+			element = grammarAccess.prObjectRef().ele01010TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2592,7 +2566,7 @@ protected class ObjectRef_0_1_1_0_0_0_1_Assignment_leftFrag extends AssignmentTo
 		IInstanceDescription obj = current.cloneAndConsume("leftFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prObjectRef().ele01100010LexerRuleCallFRAGMENT();
+			element = grammarAccess.prObjectRef().ele01100010TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2660,7 +2634,7 @@ protected class ObjectRef_0_1_1_1_Assignment_rightFrag extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("rightFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prObjectRef().ele01110LexerRuleCallFRAGMENT();
+			element = grammarAccess.prObjectRef().ele01110TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -3399,13 +3373,11 @@ protected class BiSingleAssignment_0_0_0_0_0_Assignment_feature extends Assignme
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prBiSingleAssignment().ele000000ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prBiSingleAssignment().ele000000TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -3753,13 +3725,11 @@ protected class BiListAssignment_0_0_0_0_0_0_0_Assignment_feature extends Assign
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prBiListAssignment().ele00000000ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prBiListAssignment().ele00000000TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -4227,13 +4197,11 @@ protected class MonoSingleAssignment_0_0_0_Assignment_feature extends Assignment
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prMonoSingleAssignment().ele0000ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prMonoSingleAssignment().ele0000TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -4474,13 +4442,11 @@ protected class MonoListAssignment_0_0_0_0_0_Assignment_feature extends Assignme
 	protected Solution createSolution() {
 		if((value = current.getConsumable("feature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("feature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prMonoListAssignment().ele000000ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prMonoListAssignment().ele000000TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -4773,13 +4739,11 @@ protected class AssignmentValue_0_0_0_Assignment_value extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prAssignmentValue().ele0000ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prAssignmentValue().ele0000TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -4930,13 +4894,11 @@ protected class AssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends Assign
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prAssignmentValue().ele0011010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prAssignmentValue().ele0011010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5030,13 +4992,11 @@ protected class AssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends Assign
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prAssignmentValue().ele00111010ParserRuleCallINT();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prAssignmentValue().ele00111010TerminalRuleCallINT();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5168,7 +5128,7 @@ protected class AssignmentValue_1_1_Assignment_impFrag extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prAssignmentValue().ele110LexerRuleCallFRAGMENT();
+			element = grammarAccess.prAssignmentValue().ele110TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -5263,13 +5223,11 @@ protected class ListAssignmentValue_0_0_Assignment_index extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("index",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("index");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prListAssignmentValue().ele000ParserRuleCallINT();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prListAssignmentValue().ele000TerminalRuleCallINT();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5467,13 +5425,11 @@ protected class ListAssignmentValue_1_0_0_0_0_0_1_Assignment_refIndex extends As
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prListAssignmentValue().ele10000010ParserRuleCallINT();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prListAssignmentValue().ele10000010TerminalRuleCallINT();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5508,13 +5464,11 @@ protected class ListAssignmentValue_1_0_0_0_1_Assignment_value extends Assignmen
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prListAssignmentValue().ele100010ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prListAssignmentValue().ele100010TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5666,13 +5620,11 @@ protected class ListAssignmentValue_1_0_0_1_1_0_1_Assignment_refFeature extends 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prListAssignmentValue().ele10011010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prListAssignmentValue().ele10011010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5766,13 +5718,11 @@ protected class ListAssignmentValue_1_0_0_1_1_1_0_1_Assignment_refIndex extends 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prListAssignmentValue().ele100111010ParserRuleCallINT();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prListAssignmentValue().ele100111010TerminalRuleCallINT();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -5904,7 +5854,7 @@ protected class ListAssignmentValue_1_1_1_Assignment_impFrag extends AssignmentT
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prListAssignmentValue().ele1110LexerRuleCallFRAGMENT();
+			element = grammarAccess.prListAssignmentValue().ele1110TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -6059,13 +6009,11 @@ protected class SingleAssignmentValue_0_0_0_1_Assignment_value extends Assignmen
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prSingleAssignmentValue().ele00010ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prSingleAssignmentValue().ele00010TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -6217,13 +6165,11 @@ protected class SingleAssignmentValue_0_0_1_1_0_1_Assignment_refFeature extends 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refFeature");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prSingleAssignmentValue().ele0011010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prSingleAssignmentValue().ele0011010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -6317,13 +6263,11 @@ protected class SingleAssignmentValue_0_0_1_1_1_0_1_Assignment_refIndex extends 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("refIndex",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("refIndex");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prSingleAssignmentValue().ele00111010ParserRuleCallINT();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prSingleAssignmentValue().ele00111010TerminalRuleCallINT();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -6455,7 +6399,7 @@ protected class SingleAssignmentValue_1_1_Assignment_impFrag extends AssignmentT
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prSingleAssignmentValue().ele110LexerRuleCallFRAGMENT();
+			element = grammarAccess.prSingleAssignmentValue().ele110TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -6614,13 +6558,11 @@ protected class CreatedObject_0_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prCreatedObject().ele010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prCreatedObject().ele010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -6996,7 +6938,7 @@ protected class ObjectNew_1_Assignment_impFrag extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("impFrag");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prObjectNew().ele10LexerRuleCallFRAGMENT();
+			element = grammarAccess.prObjectNew().ele10TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -7133,7 +7075,7 @@ protected class ObjectCopy_1_Assignment_fragment extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("fragment");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prObjectCopy().ele10LexerRuleCallFRAGMENT();
+			element = grammarAccess.prObjectCopy().ele10TerminalRuleCallFRAGMENT();
 			return new Solution(obj);
 		}
 		return null;
@@ -7679,13 +7621,11 @@ protected class JavaExecutable_0_0_1_Assignment_method extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("method",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("method");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prJavaExecutable().ele0010ParserRuleCallID();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prJavaExecutable().ele0010TerminalRuleCallID();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -7743,24 +7683,15 @@ protected class ExpressionExecutable_Assignment_exprstr extends AssignmentToken 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("exprstr",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("exprstr");
-
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
-			type = AssignmentType.PRC;
-			element = grammarAccess.prExpressionExecutable().ele0ParserRuleCallSTRING();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prExpressionExecutable().ele0TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
 
 /************ end Rule ExpressionExecutable ****************/
-
-
-
-
-
-
-
 
 }

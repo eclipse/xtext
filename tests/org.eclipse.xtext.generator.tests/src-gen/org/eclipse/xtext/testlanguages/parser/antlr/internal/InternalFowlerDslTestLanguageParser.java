@@ -65,7 +65,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleStatemachine
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:70:1: entryRuleStatemachine returns [EObject current=null] : iv_ruleStatemachine= ruleStatemachine EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:69:1: entryRuleStatemachine returns [EObject current=null] : iv_ruleStatemachine= ruleStatemachine EOF ;
     public final EObject entryRuleStatemachine() throws RecognitionException {
         EObject current = null;
 
@@ -73,16 +73,16 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:70:54: (iv_ruleStatemachine= ruleStatemachine EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:71:2: iv_ruleStatemachine= ruleStatemachine EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:69:54: (iv_ruleStatemachine= ruleStatemachine EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:70:2: iv_ruleStatemachine= ruleStatemachine EOF
             {
              currentNode = createCompositeNode(grammarAccess.prStatemachine().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleStatemachine_in_entryRuleStatemachine72);
+            pushFollow(FOLLOW_ruleStatemachine_in_entryRuleStatemachine71);
             iv_ruleStatemachine=ruleStatemachine();
             _fsp--;
 
              current =iv_ruleStatemachine; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStatemachine82); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStatemachine81); 
 
             }
 
@@ -100,7 +100,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleStatemachine
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:78:1: ruleStatemachine returns [EObject current=null] : ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:77:1: ruleStatemachine returns [EObject current=null] : ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* ) ;
     public final EObject ruleStatemachine() throws RecognitionException {
         EObject current = null;
 
@@ -114,32 +114,32 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:6: ( ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:1: ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:82:6: ( ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:1: ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:1: ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:2: ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:1: ( ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:2: ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' ) (lv_states_6= ruleState )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:2: ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:3: ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:2: ( ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:3: ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* ) 'end'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:3: ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:4: ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:3: ( ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:4: ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' ) (lv_commands_4= ruleCommand )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:4: ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:5: ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:4: ( ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:5: ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' ) 'commands'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:5: ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:6: ( 'events' (lv_events_1= ruleEvent )* ) 'end'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:5: ( ( 'events' (lv_events_1= ruleEvent )* ) 'end' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:6: ( 'events' (lv_events_1= ruleEvent )* ) 'end'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:6: ( 'events' (lv_events_1= ruleEvent )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:84:7: 'events' (lv_events_1= ruleEvent )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:6: ( 'events' (lv_events_1= ruleEvent )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:83:7: 'events' (lv_events_1= ruleEvent )*
             {
-            match(input,11,FOLLOW_11_in_ruleStatemachine121); 
+            match(input,11,FOLLOW_11_in_ruleStatemachine120); 
 
                     createLeafNode(grammarAccess.prStatemachine().ele000000KeywordEvents(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:88:1: (lv_events_1= ruleEvent )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:87:1: (lv_events_1= ruleEvent )*
             loop1:
             do {
                 int alt1=2;
@@ -152,12 +152,12 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:91:6: lv_events_1= ruleEvent
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:90:6: lv_events_1= ruleEvent
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0000010ParserRuleCallEvent(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleEvent_in_ruleStatemachine155);
+            	    pushFollow(FOLLOW_ruleEvent_in_ruleStatemachine154);
             	    lv_events_1=ruleEvent();
             	    _fsp--;
 
@@ -186,21 +186,21 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleStatemachine170); 
+            match(input,12,FOLLOW_12_in_ruleStatemachine169); 
 
                     createLeafNode(grammarAccess.prStatemachine().ele00001KeywordEnd(), null); 
                 
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleStatemachine180); 
+            match(input,13,FOLLOW_13_in_ruleStatemachine179); 
 
                     createLeafNode(grammarAccess.prStatemachine().ele0001KeywordCommands(), null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:117:2: (lv_commands_4= ruleCommand )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:116:2: (lv_commands_4= ruleCommand )*
             loop2:
             do {
                 int alt2=2;
@@ -213,12 +213,12 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:120:6: lv_commands_4= ruleCommand
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:119:6: lv_commands_4= ruleCommand
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0010ParserRuleCallCommand(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleCommand_in_ruleStatemachine215);
+            	    pushFollow(FOLLOW_ruleCommand_in_ruleStatemachine214);
             	    lv_commands_4=ruleCommand();
             	    _fsp--;
 
@@ -247,14 +247,14 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleStatemachine230); 
+            match(input,12,FOLLOW_12_in_ruleStatemachine229); 
 
                     createLeafNode(grammarAccess.prStatemachine().ele01KeywordEnd(), null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:142:2: (lv_states_6= ruleState )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:141:2: (lv_states_6= ruleState )*
             loop3:
             do {
                 int alt3=2;
@@ -267,12 +267,12 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:145:6: lv_states_6= ruleState
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:144:6: lv_states_6= ruleState
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele10ParserRuleCallState(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleState_in_ruleStatemachine265);
+            	    pushFollow(FOLLOW_ruleState_in_ruleStatemachine264);
             	    lv_states_6=ruleState();
             	    _fsp--;
 
@@ -321,7 +321,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleEvent
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:172:1: entryRuleEvent returns [EObject current=null] : iv_ruleEvent= ruleEvent EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:169:1: entryRuleEvent returns [EObject current=null] : iv_ruleEvent= ruleEvent EOF ;
     public final EObject entryRuleEvent() throws RecognitionException {
         EObject current = null;
 
@@ -329,16 +329,16 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:172:47: (iv_ruleEvent= ruleEvent EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:173:2: iv_ruleEvent= ruleEvent EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:169:47: (iv_ruleEvent= ruleEvent EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:170:2: iv_ruleEvent= ruleEvent EOF
             {
              currentNode = createCompositeNode(grammarAccess.prEvent().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent305);
+            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent302);
             iv_ruleEvent=ruleEvent();
             _fsp--;
 
              current =iv_ruleEvent; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent315); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent312); 
 
             }
 
@@ -356,7 +356,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleEvent
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:180:1: ruleEvent returns [EObject current=null] : ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:177:1: ruleEvent returns [EObject current=null] : ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) ) ;
     public final EObject ruleEvent() throws RecognitionException {
         EObject current = null;
 
@@ -367,16 +367,16 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:185:6: ( ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:186:1: ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:182:6: ( ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:183:1: ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:186:1: ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:186:2: ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:183:1: ( ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:183:2: ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) ) (lv_code_2= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:186:2: ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:186:3: (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:183:2: ( (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:183:3: (lv_resetting_0= 'resetting' )? (lv_name_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:186:3: (lv_resetting_0= 'resetting' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:183:3: (lv_resetting_0= 'resetting' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -385,10 +385,10 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:188:6: lv_resetting_0= 'resetting'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:185:6: lv_resetting_0= 'resetting'
                     {
                     lv_resetting_0=(Token)input.LT(1);
-                    match(input,14,FOLLOW_14_in_ruleEvent362); 
+                    match(input,14,FOLLOW_14_in_ruleEvent359); 
 
                             createLeafNode(grammarAccess.prEvent().ele000KeywordResetting(), "resetting"); 
                         
@@ -410,13 +410,13 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:207:3: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:209:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:204:3: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:206:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent397); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent395); 
 
-            		createLeafNode(grammarAccess.prEvent().ele010ParserRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prEvent().ele010TerminalRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -436,13 +436,13 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:226:3: (lv_code_2= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:228:6: lv_code_2= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:224:3: (lv_code_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:226:6: lv_code_2= RULE_ID
             {
             lv_code_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEvent426); 
 
-            		createLeafNode(grammarAccess.prEvent().ele10ParserRuleCallID(), "code"); 
+            		createLeafNode(grammarAccess.prEvent().ele10TerminalRuleCallID(), "code"); 
             	
 
             	        if (current==null) {
@@ -482,7 +482,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleCommand
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:254:1: entryRuleCommand returns [EObject current=null] : iv_ruleCommand= ruleCommand EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:251:1: entryRuleCommand returns [EObject current=null] : iv_ruleCommand= ruleCommand EOF ;
     public final EObject entryRuleCommand() throws RecognitionException {
         EObject current = null;
 
@@ -490,16 +490,16 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:254:49: (iv_ruleCommand= ruleCommand EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:255:2: iv_ruleCommand= ruleCommand EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:251:49: (iv_ruleCommand= ruleCommand EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:252:2: iv_ruleCommand= ruleCommand EOF
             {
              currentNode = createCompositeNode(grammarAccess.prCommand().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand468);
+            pushFollow(FOLLOW_ruleCommand_in_entryRuleCommand467);
             iv_ruleCommand=ruleCommand();
             _fsp--;
 
              current =iv_ruleCommand; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand478); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCommand477); 
 
             }
 
@@ -517,7 +517,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleCommand
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:262:1: ruleCommand returns [EObject current=null] : ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:259:1: ruleCommand returns [EObject current=null] : ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) ) ;
     public final EObject ruleCommand() throws RecognitionException {
         EObject current = null;
 
@@ -527,19 +527,19 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:267:6: ( ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:268:1: ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:264:6: ( ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:265:1: ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:268:1: ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:268:2: (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:265:1: ( (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:265:2: (lv_name_0= RULE_ID ) (lv_code_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:268:2: (lv_name_0= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:270:6: lv_name_0= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:265:2: (lv_name_0= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:267:6: lv_name_0= RULE_ID
             {
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand524); 
 
-            		createLeafNode(grammarAccess.prCommand().ele00ParserRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prCommand().ele00TerminalRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -556,13 +556,13 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:287:2: (lv_code_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:289:6: lv_code_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:285:2: (lv_code_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:287:6: lv_code_1= RULE_ID
             {
             lv_code_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand552); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCommand554); 
 
-            		createLeafNode(grammarAccess.prCommand().ele10ParserRuleCallID(), "code"); 
+            		createLeafNode(grammarAccess.prCommand().ele10TerminalRuleCallID(), "code"); 
             	
 
             	        if (current==null) {
@@ -602,7 +602,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleState
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:315:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:312:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
     public final EObject entryRuleState() throws RecognitionException {
         EObject current = null;
 
@@ -610,16 +610,16 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:315:47: (iv_ruleState= ruleState EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:316:2: iv_ruleState= ruleState EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:312:47: (iv_ruleState= ruleState EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:313:2: iv_ruleState= ruleState EOF
             {
              currentNode = createCompositeNode(grammarAccess.prState().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState594);
+            pushFollow(FOLLOW_ruleState_in_entryRuleState595);
             iv_ruleState=ruleState();
             _fsp--;
 
              current =iv_ruleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState604); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleState605); 
 
             }
 
@@ -637,7 +637,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleState
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:323:1: ruleState returns [EObject current=null] : ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:320:1: ruleState returns [EObject current=null] : ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' ) ;
     public final EObject ruleState() throws RecognitionException {
         EObject current = null;
 
@@ -648,32 +648,32 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:328:6: ( ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:1: ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:325:6: ( ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:1: ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:1: ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:2: ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:1: ( ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:2: ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* ) 'end'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:2: ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:3: ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:2: ( ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:3: ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? ) (lv_transitions_6= ruleTransition )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:3: ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:4: ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:3: ( ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:4: ( 'state' (lv_name_1= RULE_ID ) ) ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )?
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:4: ( 'state' (lv_name_1= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:329:5: 'state' (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:4: ( 'state' (lv_name_1= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:326:5: 'state' (lv_name_1= RULE_ID )
             {
-            match(input,15,FOLLOW_15_in_ruleState641); 
+            match(input,15,FOLLOW_15_in_ruleState642); 
 
                     createLeafNode(grammarAccess.prState().ele0000KeywordState(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:333:1: (lv_name_1= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:335:6: lv_name_1= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:330:1: (lv_name_1= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:332:6: lv_name_1= RULE_ID
             {
             lv_name_1=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState662); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState664); 
 
-            		createLeafNode(grammarAccess.prState().ele00010ParserRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prState().ele00010TerminalRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -693,7 +693,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:352:3: ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:350:3: ( ( ( 'actions' '{' ) ( RULE_ID )+ ) '}' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -702,26 +702,26 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:352:4: ( ( 'actions' '{' ) ( RULE_ID )+ ) '}'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:350:4: ( ( 'actions' '{' ) ( RULE_ID )+ ) '}'
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:352:4: ( ( 'actions' '{' ) ( RULE_ID )+ )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:352:5: ( 'actions' '{' ) ( RULE_ID )+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:350:4: ( ( 'actions' '{' ) ( RULE_ID )+ )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:350:5: ( 'actions' '{' ) ( RULE_ID )+
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:352:5: ( 'actions' '{' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:352:6: 'actions' '{'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:350:5: ( 'actions' '{' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:350:6: 'actions' '{'
                     {
-                    match(input,16,FOLLOW_16_in_ruleState682); 
+                    match(input,16,FOLLOW_16_in_ruleState685); 
 
                             createLeafNode(grammarAccess.prState().ele001000KeywordActions(), null); 
                         
-                    match(input,17,FOLLOW_17_in_ruleState691); 
+                    match(input,17,FOLLOW_17_in_ruleState694); 
 
                             createLeafNode(grammarAccess.prState().ele001001KeywordLeftCurlyBracket(), null); 
                         
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:360:2: ( RULE_ID )+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:358:2: ( RULE_ID )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -735,7 +735,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:363:3: RULE_ID
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:361:3: RULE_ID
                     	    {
 
                     	    			if (current==null) {
@@ -743,7 +743,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                     	    	            associateNodeWithAstElement(currentNode, current);
                     	    	        }
                     	            
-                    	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState714); 
+                    	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleState717); 
 
                     	    		createLeafNode(grammarAccess.prState().ele001010CrossReferenceEStringCommand(), "actions"); 
                     	    	
@@ -763,7 +763,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    match(input,18,FOLLOW_18_in_ruleState728); 
+                    match(input,18,FOLLOW_18_in_ruleState731); 
 
                             createLeafNode(grammarAccess.prState().ele0011KeywordRightCurlyBracket(), null); 
                         
@@ -776,7 +776,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:380:4: (lv_transitions_6= ruleTransition )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:378:4: (lv_transitions_6= ruleTransition )*
             loop7:
             do {
                 int alt7=2;
@@ -789,12 +789,12 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:383:6: lv_transitions_6= ruleTransition
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:381:6: lv_transitions_6= ruleTransition
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prState().ele010ParserRuleCallTransition(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTransition_in_ruleState765);
+            	    pushFollow(FOLLOW_ruleTransition_in_ruleState768);
             	    lv_transitions_6=ruleTransition();
             	    _fsp--;
 
@@ -823,7 +823,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleState780); 
+            match(input,12,FOLLOW_12_in_ruleState783); 
 
                     createLeafNode(grammarAccess.prState().ele1KeywordEnd(), null); 
                 
@@ -850,7 +850,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleTransition
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:414:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:410:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
     public final EObject entryRuleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -858,16 +858,16 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:414:52: (iv_ruleTransition= ruleTransition EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:415:2: iv_ruleTransition= ruleTransition EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:410:52: (iv_ruleTransition= ruleTransition EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:411:2: iv_ruleTransition= ruleTransition EOF
             {
              currentNode = createCompositeNode(grammarAccess.prTransition().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition815);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition816);
             iv_ruleTransition=ruleTransition();
             _fsp--;
 
              current =iv_ruleTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition825); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition826); 
 
             }
 
@@ -885,24 +885,24 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleTransition
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:422:1: ruleTransition returns [EObject current=null] : ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:418:1: ruleTransition returns [EObject current=null] : ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) ) ;
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:427:6: ( ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:428:1: ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:423:6: ( ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:424:1: ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:428:1: ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:428:2: ( ( RULE_ID ) '=>' ) ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:424:1: ( ( ( RULE_ID ) '=>' ) ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:424:2: ( ( RULE_ID ) '=>' ) ( RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:428:2: ( ( RULE_ID ) '=>' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:428:3: ( RULE_ID ) '=>'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:424:2: ( ( RULE_ID ) '=>' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:424:3: ( RULE_ID ) '=>'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:428:3: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:431:3: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:424:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:427:3: RULE_ID
             {
 
             			if (current==null) {
@@ -910,22 +910,22 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition873); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition874); 
 
             		createLeafNode(grammarAccess.prTransition().ele000CrossReferenceEStringEvent(), "event"); 
             	
 
             }
 
-            match(input,19,FOLLOW_19_in_ruleTransition885); 
+            match(input,19,FOLLOW_19_in_ruleTransition886); 
 
                     createLeafNode(grammarAccess.prTransition().ele01KeywordEqualsSignGreaterThanSign(), null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:448:2: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:451:3: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:444:2: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalFowlerDslTestLanguage.g:447:3: RULE_ID
             {
 
             			if (current==null) {
@@ -933,7 +933,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition908); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransition909); 
 
             		createLeafNode(grammarAccess.prTransition().ele10CrossReferenceEStringState(), "state"); 
             	
@@ -964,38 +964,38 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
 
  
 
-    public static final BitSet FOLLOW_ruleStatemachine_in_entryRuleStatemachine72 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStatemachine82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleStatemachine121 = new BitSet(new long[]{0x0000000000005010L});
-    public static final BitSet FOLLOW_ruleEvent_in_ruleStatemachine155 = new BitSet(new long[]{0x0000000000005010L});
-    public static final BitSet FOLLOW_12_in_ruleStatemachine170 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleStatemachine180 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_ruleCommand_in_ruleStatemachine215 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_12_in_ruleStatemachine230 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStatemachine265 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent305 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEvent315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleEvent362 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent397 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleStatemachine_in_entryRuleStatemachine71 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStatemachine81 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleStatemachine120 = new BitSet(new long[]{0x0000000000005010L});
+    public static final BitSet FOLLOW_ruleEvent_in_ruleStatemachine154 = new BitSet(new long[]{0x0000000000005010L});
+    public static final BitSet FOLLOW_12_in_ruleStatemachine169 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleStatemachine179 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_ruleCommand_in_ruleStatemachine214 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_12_in_ruleStatemachine229 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_ruleState_in_ruleStatemachine264 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent302 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEvent312 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleEvent359 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEvent395 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleEvent426 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand468 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCommand478 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCommand_in_entryRuleCommand467 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCommand477 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleCommand524 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState594 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleState641 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState662 = new BitSet(new long[]{0x0000000000011010L});
-    public static final BitSet FOLLOW_16_in_ruleState682 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleState691 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleState714 = new BitSet(new long[]{0x0000000000040010L});
-    public static final BitSet FOLLOW_18_in_ruleState728 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_ruleTransition_in_ruleState765 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_12_in_ruleState780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition815 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition873 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleTransition885 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition908 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCommand554 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_entryRuleState595 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleState605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleState642 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleState664 = new BitSet(new long[]{0x0000000000011010L});
+    public static final BitSet FOLLOW_16_in_ruleState685 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleState694 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleState717 = new BitSet(new long[]{0x0000000000040010L});
+    public static final BitSet FOLLOW_18_in_ruleState731 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_ruleTransition_in_ruleState768 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_12_in_ruleState783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition816 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition826 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition874 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleTransition886 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransition909 = new BitSet(new long[]{0x0000000000000002L});
 
 }

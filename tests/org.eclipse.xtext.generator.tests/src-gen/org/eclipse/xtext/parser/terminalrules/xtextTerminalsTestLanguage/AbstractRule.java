@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule#getAlternatives <em>Alternatives</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,31 @@ public interface AbstractRule extends EObject
    * @generated
    */
   void setType(TypeRef value);
+
+  /**
+   * Returns the value of the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Alternatives</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Alternatives</em>' containment reference.
+   * @see #setAlternatives(AbstractElement)
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getAbstractRule_Alternatives()
+   * @model containment="true"
+   * @generated
+   */
+  AbstractElement getAlternatives();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule#getAlternatives <em>Alternatives</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Alternatives</em>' containment reference.
+   * @see #getAlternatives()
+   * @generated
+   */
+  void setAlternatives(AbstractElement value);
 
 } // AbstractRule

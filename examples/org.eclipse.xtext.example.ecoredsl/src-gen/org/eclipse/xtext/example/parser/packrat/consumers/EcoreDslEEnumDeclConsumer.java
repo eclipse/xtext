@@ -209,7 +209,7 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000ParserRuleCallEAnnotationDecl());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele00001KeywordEnum());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele0001AssignmentName());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010ParserRuleCallID());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010TerminalRuleCallID());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele001KeywordLeftCurlyBracket());
 		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele01AssignmentELiterals());
 		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele010ParserRuleCallEEnumLiteralDecl());

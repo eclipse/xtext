@@ -65,7 +65,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
 
 
 
-
 // Entry rule entryRuleFoo
 entryRuleFoo returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prFoo().getRule(), currentNode); }
@@ -83,8 +82,9 @@ ruleFoo returns [EObject current=null]
     }:
 ((	
 	
-	    lv_name_0=RULE_ID	{
-		createLeafNode(grammarAccess.prFoo().ele00ParserRuleCallID(), "name"); 
+	    lv_name_0=	RULE_ID
+	{
+		createLeafNode(grammarAccess.prFoo().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -122,8 +122,6 @@ ruleFoo returns [EObject current=null]
 	    }
 	
 )*);
-
-
 
 
 
@@ -167,57 +165,18 @@ ruleNameRef returns [EObject current=null]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

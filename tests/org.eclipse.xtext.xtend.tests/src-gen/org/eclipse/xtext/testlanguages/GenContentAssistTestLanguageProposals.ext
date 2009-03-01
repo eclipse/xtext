@@ -59,12 +59,6 @@ List[ICompletionProposal] completeAbstractRuleCall_Rule(Assignment assignment, I
 	 	  
 List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
-	 	  
-List[ICompletionProposal] completeEcore_EString(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
-	{};
-	 	  
-List[ICompletionProposal] completeEcore_EInt(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
-	{};
 
 /*
 	// TODO 

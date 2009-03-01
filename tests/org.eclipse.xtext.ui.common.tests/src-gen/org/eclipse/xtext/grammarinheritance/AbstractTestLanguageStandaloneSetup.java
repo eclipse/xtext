@@ -32,10 +32,6 @@ public class AbstractTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("abstracttestlanguage", resourceFactory);
-		
 	//TODO registration of EValidators should be added here, too
 
 	}

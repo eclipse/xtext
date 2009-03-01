@@ -10,7 +10,7 @@ package org.eclipse.xtext.reference;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -28,8 +28,7 @@ public class CommentOnEofBug_234135_Test extends AbstractGeneratorTest {
         assertEquals(1, leafNodes.size());
         EObject grammarElement = leafNodes.get(0).getGrammarElement();
         assertNotNull(grammarElement);
-        assertTrue(grammarElement instanceof ParserRule);
-        assertTrue(((ParserRule) grammarElement).isTerminal());
+        assertTrue(grammarElement instanceof TerminalRule);
     }
 
 }

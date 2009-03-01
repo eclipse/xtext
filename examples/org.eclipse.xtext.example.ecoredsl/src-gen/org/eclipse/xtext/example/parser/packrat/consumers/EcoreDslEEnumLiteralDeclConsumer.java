@@ -241,13 +241,13 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele0000AssignmentEAnnotations());
 		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele00000ParserRuleCallEAnnotationDecl());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele0001AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele00010ParserRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele00010TerminalRuleCallID());
 		group$9$Consumer = new Group$9$Consumer(rule.ele001Group());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele0010KeywordEqualsSign());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele0011AssignmentValue());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele00110ParserRuleCallINT());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele00110TerminalRuleCallINT());
 		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele01AssignmentLiteral());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele010ParserRuleCallSTRING());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele010TerminalRuleCallSTRING());
 		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

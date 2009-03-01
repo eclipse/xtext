@@ -14,7 +14,7 @@ public final class XtextTerminalsTestLanguageDelimiters {
 	}
 	
 	public static final ISequenceMatcher crossReference$25$Delimiter = new SetBasedKeywordMatcher(
-		"grammar", "extends", "hidden", "generate", "as", "import", "native", "lexer", "returns", "terminal", "current");
+		"grammar", "extends", "hidden", "generate", "as", "import", "returns", "terminal", "current");
 
 	public static final ICharacterClass keyword$22$Delimiter = ICharacterClass.Factory.nullClass();
 
@@ -26,6 +26,6 @@ public final class XtextTerminalsTestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher crossReference$65$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher crossReference$63$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

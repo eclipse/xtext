@@ -157,7 +157,7 @@ public final class EpatchTestLanguageMonoSingleAssignmentConsumer extends NonTer
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele000AssignmentFeature());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele0000ParserRuleCallID());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele0000TerminalRuleCallID());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele001KeywordEqualsSign());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele01AssignmentLeftValue());
 		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele010ParserRuleCallSingleAssignmentValue());

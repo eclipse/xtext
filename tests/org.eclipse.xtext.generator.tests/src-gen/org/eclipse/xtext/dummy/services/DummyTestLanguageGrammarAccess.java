@@ -42,9 +42,9 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c00000KeywordOptional = (Keyword)c0000AssignmentOptional.eContents().get(0);
 		private final Keyword c0001KeywordElement = (Keyword)c000Group.eContents().get(1);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Assignment c01AssignmentDescriptions = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -75,13 +75,13 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
+		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele01AssignmentDescriptions() { return c01AssignmentDescriptions; }
 
 		// not supported
-		public RuleCall ele010ParserRuleCallSTRING() { return c010ParserRuleCallSTRING; }
+		public RuleCall ele010TerminalRuleCallSTRING() { return c010TerminalRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -121,37 +121,37 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
-		return superGrammarAccess.prID();
+	public TerminalRule trID() {
+		return superGrammarAccess.trID();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
-		return superGrammarAccess.prINT();
+	public TerminalRule trINT() {
+		return superGrammarAccess.trINT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
-		return superGrammarAccess.prSTRING();
+	public TerminalRule trSTRING() {
+		return superGrammarAccess.trSTRING();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
-		return superGrammarAccess.prML_COMMENT();
+	public TerminalRule trML_COMMENT() {
+		return superGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
-		return superGrammarAccess.prSL_COMMENT();
+	public TerminalRule trSL_COMMENT() {
+		return superGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
-		return superGrammarAccess.prWS();
+	public TerminalRule trWS() {
+		return superGrammarAccess.trWS();
 	} 
 
 	// not supported
-	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
-		return superGrammarAccess.prANY_OTHER();
+	public TerminalRule trANY_OTHER() {
+		return superGrammarAccess.trANY_OTHER();
 	} 
 }

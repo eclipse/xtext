@@ -10,39 +10,25 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 T11 : 'refersTo' ;
 T12 : ';' ;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 199
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 174
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
 
-
-
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 203
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 176
 RULE_INT : ('0'..'9')+;
 
-
-
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 207
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 178
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
-
-
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 211
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 180
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 215
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 182
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-
-
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 219
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 184
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 223
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g" 186
 RULE_ANY_OTHER : .;
-
-
 
 

@@ -179,7 +179,7 @@ public final class XtextTerminalsTestLanguageReferencedMetamodelConsumer extends
 		group$7$Consumer = new Group$7$Consumer(rule.ele1Group());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele10KeywordAs());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele11AssignmentAlias());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele110ParserRuleCallID());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele110TerminalRuleCallID());
 	}
 	
 	@Override

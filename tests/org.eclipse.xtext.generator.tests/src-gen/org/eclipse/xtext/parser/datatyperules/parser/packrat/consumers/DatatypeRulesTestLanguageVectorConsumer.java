@@ -128,8 +128,8 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordLeftParenthesis());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele001ParserRuleCallINT());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele01ParserRuleCallINT());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele001TerminalRuleCallINT());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele01TerminalRuleCallINT());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele1KeywordRightParenthesis());
 	}
 	

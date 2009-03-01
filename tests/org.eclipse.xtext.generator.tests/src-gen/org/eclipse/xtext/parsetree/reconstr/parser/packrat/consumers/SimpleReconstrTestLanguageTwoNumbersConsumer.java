@@ -185,13 +185,13 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentNum1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallINT());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000TerminalRuleCallINT());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentNum2());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010ParserRuleCallINT());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010TerminalRuleCallINT());
 		group$7$Consumer = new Group$7$Consumer(rule.ele1Group());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele10KeywordNumberSign());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele11AssignmentNum3());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele110ParserRuleCallINT());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele110TerminalRuleCallINT());
 	}
 	
 	@Override

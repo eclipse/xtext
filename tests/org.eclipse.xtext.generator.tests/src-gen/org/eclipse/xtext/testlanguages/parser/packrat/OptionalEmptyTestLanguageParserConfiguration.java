@@ -58,13 +58,13 @@ public class OptionalEmptyTestLanguageParserConfiguration extends AbstractParser
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getGreetingConsumer().setRule(grammarAccess.prGreeting());
-		getIdConsumer().setRule(grammarAccess.prID());
-		getIntConsumer().setRule(grammarAccess.prINT());
-		getStringConsumer().setRule(grammarAccess.prSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.prWS());
-		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.trID());
+		getIntConsumer().setRule(grammarAccess.trINT());
+		getStringConsumer().setRule(grammarAccess.trSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.trWS());
+		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
 		getModelConsumer().setGreetingConsumer(getGreetingConsumer());

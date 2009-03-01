@@ -65,7 +65,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleRoot
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:70:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:69:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -73,16 +73,16 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:70:46: (iv_ruleRoot= ruleRoot EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:71:2: iv_ruleRoot= ruleRoot EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:69:46: (iv_ruleRoot= ruleRoot EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
              currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot72);
+            pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot71);
             iv_ruleRoot=ruleRoot();
             _fsp--;
 
              current =iv_ruleRoot; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRoot82); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRoot81); 
 
             }
 
@@ -100,7 +100,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleRoot
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:78:1: ruleRoot returns [EObject current=null] : ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:77:1: ruleRoot returns [EObject current=null] : ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -114,17 +114,17 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:83:6: ( ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:84:1: ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:82:6: ( ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:83:1: ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:84:1: ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:84:2: 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:83:1: ( 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:83:2: 'test' ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList )
             {
-            match(input,11,FOLLOW_11_in_ruleRoot116); 
+            match(input,11,FOLLOW_11_in_ruleRoot115); 
 
                     createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:88:1: ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:87:1: ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -136,15 +136,15 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("88:1: ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList )", 2, 0, input);
+                    new NoViableAltException("87:1: ( (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional ) | this_TestList_3= ruleTestList )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:88:2: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:87:2: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:88:2: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:87:2: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional )
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -156,18 +156,18 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("88:2: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional )", 1, 0, input);
+                            new NoViableAltException("87:2: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional )", 1, 0, input);
 
                         throw nvae;
                     }
                     switch (alt1) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:89:5: this_TestRequired_1= ruleTestRequired
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:88:5: this_TestRequired_1= ruleTestRequired
                             {
                              
                                     currentNode=createCompositeNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), currentNode); 
                                 
-                            pushFollow(FOLLOW_ruleTestRequired_in_ruleRoot140);
+                            pushFollow(FOLLOW_ruleTestRequired_in_ruleRoot139);
                             this_TestRequired_1=ruleTestRequired();
                             _fsp--;
 
@@ -175,22 +175,28 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                                     current = this_TestRequired_1; 
                                     currentNode = currentNode.getParent();
                                 
+                             
+                                createLeafNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), null); 
+                                
 
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:99:5: this_TestOptional_2= ruleTestOptional
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:102:5: this_TestOptional_2= ruleTestOptional
                             {
                              
                                     currentNode=createCompositeNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), currentNode); 
                                 
-                            pushFollow(FOLLOW_ruleTestOptional_in_ruleRoot167);
+                            pushFollow(FOLLOW_ruleTestOptional_in_ruleRoot173);
                             this_TestOptional_2=ruleTestOptional();
                             _fsp--;
 
                              
                                     current = this_TestOptional_2; 
                                     currentNode = currentNode.getParent();
+                                
+                             
+                                createLeafNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), null); 
                                 
 
                             }
@@ -202,18 +208,21 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:109:5: this_TestList_3= ruleTestList
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:116:5: this_TestList_3= ruleTestList
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTestList_in_ruleRoot195);
+                    pushFollow(FOLLOW_ruleTestList_in_ruleRoot208);
                     this_TestList_3=ruleTestList();
                     _fsp--;
 
                      
                             current = this_TestList_3; 
                             currentNode = currentNode.getParent();
+                        
+                     
+                        createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), null); 
                         
 
                     }
@@ -244,7 +253,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleTestRequired
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:126:1: entryRuleTestRequired returns [EObject current=null] : iv_ruleTestRequired= ruleTestRequired EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:135:1: entryRuleTestRequired returns [EObject current=null] : iv_ruleTestRequired= ruleTestRequired EOF ;
     public final EObject entryRuleTestRequired() throws RecognitionException {
         EObject current = null;
 
@@ -252,16 +261,16 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:126:54: (iv_ruleTestRequired= ruleTestRequired EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:127:2: iv_ruleTestRequired= ruleTestRequired EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:135:54: (iv_ruleTestRequired= ruleTestRequired EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:136:2: iv_ruleTestRequired= ruleTestRequired EOF
             {
              currentNode = createCompositeNode(grammarAccess.prTestRequired().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTestRequired_in_entryRuleTestRequired230);
+            pushFollow(FOLLOW_ruleTestRequired_in_entryRuleTestRequired248);
             iv_ruleTestRequired=ruleTestRequired();
             _fsp--;
 
              current =iv_ruleTestRequired; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTestRequired240); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTestRequired258); 
 
             }
 
@@ -279,7 +288,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleTestRequired
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:134:1: ruleTestRequired returns [EObject current=null] : ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:143:1: ruleTestRequired returns [EObject current=null] : ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) ) ;
     public final EObject ruleTestRequired() throws RecognitionException {
         EObject current = null;
 
@@ -289,26 +298,26 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:139:6: ( ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:140:1: ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:148:6: ( ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:149:1: ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:140:1: ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:140:2: ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:149:1: ( ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:149:2: ( 'required' (lv_required1_1= RULE_INT ) ) (lv_required2_2= RULE_INT )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:140:2: ( 'required' (lv_required1_1= RULE_INT ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:140:3: 'required' (lv_required1_1= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:149:2: ( 'required' (lv_required1_1= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:149:3: 'required' (lv_required1_1= RULE_INT )
             {
-            match(input,12,FOLLOW_12_in_ruleTestRequired275); 
+            match(input,12,FOLLOW_12_in_ruleTestRequired293); 
 
                     createLeafNode(grammarAccess.prTestRequired().ele00KeywordRequired(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:144:1: (lv_required1_1= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:146:6: lv_required1_1= RULE_INT
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:153:1: (lv_required1_1= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:155:6: lv_required1_1= RULE_INT
             {
             lv_required1_1=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired296); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired315); 
 
-            		createLeafNode(grammarAccess.prTestRequired().ele010ParserRuleCallINT(), "required1"); 
+            		createLeafNode(grammarAccess.prTestRequired().ele010TerminalRuleCallINT(), "required1"); 
             	
 
             	        if (current==null) {
@@ -328,13 +337,13 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:163:3: (lv_required2_2= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:165:6: lv_required2_2= RULE_INT
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:173:3: (lv_required2_2= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:175:6: lv_required2_2= RULE_INT
             {
             lv_required2_2=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired325); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired346); 
 
-            		createLeafNode(grammarAccess.prTestRequired().ele10ParserRuleCallINT(), "required2"); 
+            		createLeafNode(grammarAccess.prTestRequired().ele10TerminalRuleCallINT(), "required2"); 
             	
 
             	        if (current==null) {
@@ -374,7 +383,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleTestOptional
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:191:1: entryRuleTestOptional returns [EObject current=null] : iv_ruleTestOptional= ruleTestOptional EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:200:1: entryRuleTestOptional returns [EObject current=null] : iv_ruleTestOptional= ruleTestOptional EOF ;
     public final EObject entryRuleTestOptional() throws RecognitionException {
         EObject current = null;
 
@@ -382,16 +391,16 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:191:54: (iv_ruleTestOptional= ruleTestOptional EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:192:2: iv_ruleTestOptional= ruleTestOptional EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:200:54: (iv_ruleTestOptional= ruleTestOptional EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:201:2: iv_ruleTestOptional= ruleTestOptional EOF
             {
              currentNode = createCompositeNode(grammarAccess.prTestOptional().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTestOptional_in_entryRuleTestOptional367);
+            pushFollow(FOLLOW_ruleTestOptional_in_entryRuleTestOptional387);
             iv_ruleTestOptional=ruleTestOptional();
             _fsp--;
 
              current =iv_ruleTestOptional; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTestOptional377); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTestOptional397); 
 
             }
 
@@ -409,7 +418,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleTestOptional
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:199:1: ruleTestOptional returns [EObject current=null] : ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:208:1: ruleTestOptional returns [EObject current=null] : ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? ) ;
     public final EObject ruleTestOptional() throws RecognitionException {
         EObject current = null;
 
@@ -419,20 +428,20 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:204:6: ( ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:205:1: ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:213:6: ( ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:214:1: ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:205:1: ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:205:2: ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:214:1: ( ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:214:2: ( 'optional' (lv_opt1_1= RULE_INT )? ) ( ':' (lv_opt2_3= RULE_INT ) )?
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:205:2: ( 'optional' (lv_opt1_1= RULE_INT )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:205:3: 'optional' (lv_opt1_1= RULE_INT )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:214:2: ( 'optional' (lv_opt1_1= RULE_INT )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:214:3: 'optional' (lv_opt1_1= RULE_INT )?
             {
-            match(input,13,FOLLOW_13_in_ruleTestOptional412); 
+            match(input,13,FOLLOW_13_in_ruleTestOptional432); 
 
                     createLeafNode(grammarAccess.prTestOptional().ele00KeywordOptional(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:209:1: (lv_opt1_1= RULE_INT )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:218:1: (lv_opt1_1= RULE_INT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -441,12 +450,12 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:211:6: lv_opt1_1= RULE_INT
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:220:6: lv_opt1_1= RULE_INT
                     {
                     lv_opt1_1=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional433); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional454); 
 
-                    		createLeafNode(grammarAccess.prTestOptional().ele010ParserRuleCallINT(), "opt1"); 
+                    		createLeafNode(grammarAccess.prTestOptional().ele010TerminalRuleCallINT(), "opt1"); 
                     	
 
                     	        if (current==null) {
@@ -469,7 +478,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:228:4: ( ':' (lv_opt2_3= RULE_INT ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:238:4: ( ':' (lv_opt2_3= RULE_INT ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -478,19 +487,19 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:228:5: ':' (lv_opt2_3= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:238:5: ':' (lv_opt2_3= RULE_INT )
                     {
-                    match(input,14,FOLLOW_14_in_ruleTestOptional452); 
+                    match(input,14,FOLLOW_14_in_ruleTestOptional474); 
 
                             createLeafNode(grammarAccess.prTestOptional().ele10KeywordColon(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:232:1: (lv_opt2_3= RULE_INT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:234:6: lv_opt2_3= RULE_INT
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:242:1: (lv_opt2_3= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:244:6: lv_opt2_3= RULE_INT
                     {
                     lv_opt2_3=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional473); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional496); 
 
-                    		createLeafNode(grammarAccess.prTestOptional().ele110ParserRuleCallINT(), "opt2"); 
+                    		createLeafNode(grammarAccess.prTestOptional().ele110TerminalRuleCallINT(), "opt2"); 
                     	
 
                     	        if (current==null) {
@@ -536,7 +545,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleTestList
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:260:1: entryRuleTestList returns [EObject current=null] : iv_ruleTestList= ruleTestList EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:269:1: entryRuleTestList returns [EObject current=null] : iv_ruleTestList= ruleTestList EOF ;
     public final EObject entryRuleTestList() throws RecognitionException {
         EObject current = null;
 
@@ -544,16 +553,16 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:260:50: (iv_ruleTestList= ruleTestList EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:261:2: iv_ruleTestList= ruleTestList EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:269:50: (iv_ruleTestList= ruleTestList EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:270:2: iv_ruleTestList= ruleTestList EOF
             {
              currentNode = createCompositeNode(grammarAccess.prTestList().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTestList_in_entryRuleTestList517);
+            pushFollow(FOLLOW_ruleTestList_in_entryRuleTestList539);
             iv_ruleTestList=ruleTestList();
             _fsp--;
 
              current =iv_ruleTestList; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTestList527); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTestList549); 
 
             }
 
@@ -571,7 +580,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleTestList
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:268:1: ruleTestList returns [EObject current=null] : ( 'list' (lv_item_1= RULE_INT )* ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:277:1: ruleTestList returns [EObject current=null] : ( 'list' (lv_item_1= RULE_INT )* ) ;
     public final EObject ruleTestList() throws RecognitionException {
         EObject current = null;
 
@@ -580,17 +589,17 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:273:6: ( ( 'list' (lv_item_1= RULE_INT )* ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:274:1: ( 'list' (lv_item_1= RULE_INT )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:282:6: ( ( 'list' (lv_item_1= RULE_INT )* ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:283:1: ( 'list' (lv_item_1= RULE_INT )* )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:274:1: ( 'list' (lv_item_1= RULE_INT )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:274:2: 'list' (lv_item_1= RULE_INT )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:283:1: ( 'list' (lv_item_1= RULE_INT )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:283:2: 'list' (lv_item_1= RULE_INT )*
             {
-            match(input,15,FOLLOW_15_in_ruleTestList561); 
+            match(input,15,FOLLOW_15_in_ruleTestList583); 
 
                     createLeafNode(grammarAccess.prTestList().ele0KeywordList(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:278:1: (lv_item_1= RULE_INT )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:287:1: (lv_item_1= RULE_INT )*
             loop5:
             do {
                 int alt5=2;
@@ -603,12 +612,12 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:280:6: lv_item_1= RULE_INT
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:289:6: lv_item_1= RULE_INT
             	    {
             	    lv_item_1=(Token)input.LT(1);
-            	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestList582); 
+            	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestList605); 
 
-            	    		createLeafNode(grammarAccess.prTestList().ele10ParserRuleCallINT(), "item"); 
+            	    		createLeafNode(grammarAccess.prTestList().ele10TerminalRuleCallINT(), "item"); 
             	    	
 
             	    	        if (current==null) {
@@ -655,26 +664,26 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
 
  
 
-    public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot72 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRoot82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleRoot116 = new BitSet(new long[]{0x000000000000B000L});
-    public static final BitSet FOLLOW_ruleTestRequired_in_ruleRoot140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestOptional_in_ruleRoot167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestList_in_ruleRoot195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestRequired_in_entryRuleTestRequired230 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTestRequired240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleTestRequired275 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTestRequired296 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTestRequired325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestOptional_in_entryRuleTestOptional367 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTestOptional377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleTestOptional412 = new BitSet(new long[]{0x0000000000004012L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTestOptional433 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleTestOptional452 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTestOptional473 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTestList_in_entryRuleTestList517 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTestList527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleTestList561 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTestList582 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot71 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRoot81 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleRoot115 = new BitSet(new long[]{0x000000000000B000L});
+    public static final BitSet FOLLOW_ruleTestRequired_in_ruleRoot139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTestOptional_in_ruleRoot173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTestList_in_ruleRoot208 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTestRequired_in_entryRuleTestRequired248 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTestRequired258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleTestRequired293 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTestRequired315 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTestRequired346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTestOptional_in_entryRuleTestOptional387 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTestOptional397 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleTestOptional432 = new BitSet(new long[]{0x0000000000004012L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTestOptional454 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_ruleTestOptional474 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTestOptional496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTestList_in_entryRuleTestList539 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTestList549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleTestList583 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTestList605 = new BitSet(new long[]{0x0000000000000012L});
 
 }

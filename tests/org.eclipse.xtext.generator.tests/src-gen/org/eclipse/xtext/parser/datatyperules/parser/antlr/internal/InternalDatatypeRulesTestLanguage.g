@@ -65,7 +65,6 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
 
 
 
-
 // Entry rule entryRuleCompositeModel
 entryRuleCompositeModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prCompositeModel().getRule(), currentNode); }
@@ -103,8 +102,6 @@ ruleCompositeModel returns [EObject current=null]
 	    }
 	
 )+;
-
-
 
 
 
@@ -231,8 +228,6 @@ ruleModel returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleModelId
 entryRuleModelId returns [String current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prModelId().getRule(), currentNode); } 
@@ -254,7 +249,7 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 
     { 
-    createLeafNode(grammarAccess.prModelId().ele00ParserRuleCallID(), null); 
+    createLeafNode(grammarAccess.prModelId().ele00TerminalRuleCallID(), null); 
     }
 
 	kw='.' 
@@ -267,12 +262,10 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 
     { 
-    createLeafNode(grammarAccess.prModelId().ele1ParserRuleCallID(), null); 
+    createLeafNode(grammarAccess.prModelId().ele1TerminalRuleCallID(), null); 
     }
 )
     ;
-
-
 
 
 
@@ -329,8 +322,6 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 
 
-
-
 // Entry rule entryRuleFraction
 entryRuleFraction returns [String current=null] :
 	{ currentNode = createCompositeNode(grammarAccess.prFraction().getRule(), currentNode); } 
@@ -352,7 +343,7 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.prFraction().ele0ParserRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prFraction().ele0TerminalRuleCallINT(), null); 
     }
 (
 	kw='/' 
@@ -365,12 +356,10 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.prFraction().ele11ParserRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prFraction().ele11TerminalRuleCallINT(), null); 
     }
 )?)
     ;
-
-
 
 
 
@@ -403,14 +392,14 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.prVector().ele001ParserRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prVector().ele001TerminalRuleCallINT(), null); 
     }
 )    this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.prVector().ele01ParserRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prVector().ele01TerminalRuleCallINT(), null); 
     }
 )
 	kw=')' 
@@ -420,8 +409,6 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 )
     ;
-
-
 
 
 
@@ -468,67 +455,18 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
-
-
 
 RULE_INT : ('0'..'9')+;
 
-
-
 RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
-
-
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-
-
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-
 
 RULE_WS : (((' '|'\t')|'\r')|'\n')+;
 
-
-
 RULE_ANY_OTHER : .;
-
-
 
 

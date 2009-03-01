@@ -273,7 +273,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordTA());
 		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0001ParserRuleCallTrickyA1());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele001AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0010ParserRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0010TerminalRuleCallID());
 		alternatives$9$Consumer = new Alternatives$9$Consumer(rule.ele01Alternatives());
 		group$10$Consumer = new Group$10$Consumer(rule.ele010Group());
 		action$11$Consumer = new Action$11$Consumer(rule.ele0100ActionTypeBx());
@@ -282,7 +282,7 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		action$15$Consumer = new Action$15$Consumer(rule.ele0110ActionTypeCx());
 		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele0111KeywordY());
 		assignment$18$Consumer = new Assignment$18$Consumer(rule.ele1AssignmentName());
-		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.ele10ParserRuleCallSTRING());
+		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.ele10TerminalRuleCallSTRING());
 	}
 	
 	@Override

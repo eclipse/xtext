@@ -108,7 +108,7 @@ public final class DomainmodelDataTypeConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordDatatype());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallID());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
 	}
 	
 	@Override

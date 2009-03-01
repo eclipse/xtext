@@ -26,9 +26,9 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
@@ -101,8 +101,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 
 		AbstractRule calledRule = ruleCall.getRule();
 
-		if (calledRule instanceof LexerRule) {
-			return completeLexerRuleRuleCall((LexerRule) calledRule, ruleCall,
+		if (calledRule instanceof TerminalRule) {
+			return completeTerminalRuleRuleCall((TerminalRule) calledRule, ruleCall,
 					contentAssistContext);
 		} else if (calledRule.getType() != null) {
 
@@ -194,9 +194,9 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 * Concrete subclasses can override this to provide a more meaningful and
 	 * sophisticated behavior whenever a list of ICompletionProposal's should be
 	 * computed for simple <code>LexerRule</code> call's.
-	 * 
+	 *
 	 * This implementation returns an empty list by default.
-	 * 
+	 *
 	 * @param lexerRule
 	 *            the 'called' LexerRule instance
 	 * @param ruleCall
@@ -207,8 +207,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 * @return a computed list of <code>ICompletionProposal</code> for the given
 	 *         <code>LexerRule</code>
 	 */
-	protected List<? extends ICompletionProposal> completeLexerRuleRuleCall(
-			LexerRule lexerRule, RuleCall ruleCall,
+	protected List<? extends ICompletionProposal> completeTerminalRuleRuleCall(
+			TerminalRule terminalRule, RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
 		return Collections.emptyList();
 	}
@@ -224,7 +224,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 * root of the containing plug-in; the path must be legal The image would
 	 * typically be shown to the left of the <code>ICompletionProposal</code>
 	 * display string.
-	 * 
+	 *
 	 * @return the image file path of the default image to be shown or
 	 *         <code>null</code> if no image is desired
 	 * @see #getPluginId()
@@ -235,11 +235,11 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 * Concrete subclasses can override this for custom sort and filter
 	 * behavior. Called right after all completion proposals have been
 	 * collected.
-	 * 
+	 *
 	 * The default behavior of this implementation is to filter duplicates and
 	 * to trim matching <code>ICompletionProposal#displayString</code> with
 	 * matching prefix values.
-	 * 
+	 *
 	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode,
 	 *      LeafNode)
 	 */
@@ -254,7 +254,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 * Concrete subclasses can override this to provide custom lookup behavior
 	 * for <code>CrossReference</code>. This implementation delegates to the
 	 * injected LinkingService
-	 * 
+	 *
 	 * @return a list of <code>ICompletionProposal</code> matching the given
 	 *         assignment
 	 */

@@ -241,7 +241,7 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele00000KeywordEntity());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele00001AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele000010ParserRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele000010TerminalRuleCallID());
 		group$9$Consumer = new Group$9$Consumer(rule.ele0001Group());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele00010KeywordExtends());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele00011AssignmentSuperType());

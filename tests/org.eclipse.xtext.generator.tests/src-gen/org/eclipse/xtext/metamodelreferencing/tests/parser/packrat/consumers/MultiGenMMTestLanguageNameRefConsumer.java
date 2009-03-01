@@ -71,7 +71,7 @@ public final class MultiGenMMTestLanguageNameRefConsumer extends NonTerminalCons
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentName());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSTRING());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
 	}
 	
 	@Override

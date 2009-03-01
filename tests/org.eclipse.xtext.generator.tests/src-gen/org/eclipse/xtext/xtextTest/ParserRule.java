@@ -17,8 +17,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.ParserRule#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.ParserRule#getHiddenTokens <em>Hidden Tokens</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtextTest.ParserRule#getAlternatives <em>Alternatives</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtextTest.ParserRule#isTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,57 +67,5 @@ public interface ParserRule extends AbstractRule
    * @generated
    */
   EList<AbstractRule> getHiddenTokens();
-
-  /**
-   * Returns the value of the '<em><b>Alternatives</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Alternatives</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Alternatives</em>' containment reference.
-   * @see #setAlternatives(AbstractElement)
-   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getParserRule_Alternatives()
-   * @model containment="true"
-   * @generated
-   */
-  AbstractElement getAlternatives();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.xtextTest.ParserRule#getAlternatives <em>Alternatives</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Alternatives</em>' containment reference.
-   * @see #getAlternatives()
-   * @generated
-   */
-  void setAlternatives(AbstractElement value);
-
-  /**
-   * Returns the value of the '<em><b>Terminal</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Terminal</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Terminal</em>' attribute.
-   * @see #setTerminal(boolean)
-   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getParserRule_Terminal()
-   * @model
-   * @generated
-   */
-  boolean isTerminal();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.xtextTest.ParserRule#isTerminal <em>Terminal</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Terminal</em>' attribute.
-   * @see #isTerminal()
-   * @generated
-   */
-  void setTerminal(boolean value);
 
 } // ParserRule

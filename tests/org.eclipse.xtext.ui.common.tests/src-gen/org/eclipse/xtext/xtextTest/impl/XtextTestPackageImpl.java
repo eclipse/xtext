@@ -25,11 +25,11 @@ import org.eclipse.xtext.xtextTest.GeneratedMetamodel;
 import org.eclipse.xtext.xtextTest.Grammar;
 import org.eclipse.xtext.xtextTest.Group;
 import org.eclipse.xtext.xtextTest.Keyword;
-import org.eclipse.xtext.xtextTest.LexerRule;
 import org.eclipse.xtext.xtextTest.NegatedToken;
 import org.eclipse.xtext.xtextTest.ParserRule;
 import org.eclipse.xtext.xtextTest.ReferencedMetamodel;
 import org.eclipse.xtext.xtextTest.RuleCall;
+import org.eclipse.xtext.xtextTest.TerminalRule;
 import org.eclipse.xtext.xtextTest.TypeRef;
 import org.eclipse.xtext.xtextTest.UpToToken;
 import org.eclipse.xtext.xtextTest.Wildcard;
@@ -84,14 +84,14 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass lexerRuleEClass = null;
+  private EClass parserRuleEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass parserRuleEClass = null;
+  private EClass terminalRuleEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -366,6 +366,16 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getAbstractRule_Alternatives()
+  {
+    return (EReference)abstractRuleEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAbstractMetamodelDeclaration()
   {
     return abstractMetamodelDeclarationEClass;
@@ -426,26 +436,6 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getLexerRule()
-  {
-    return lexerRuleEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getLexerRule_Body()
-  {
-    return (EAttribute)lexerRuleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getParserRule()
   {
     return parserRuleEClass;
@@ -476,19 +466,9 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParserRule_Alternatives()
+  public EClass getTerminalRule()
   {
-    return (EReference)parserRuleEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getParserRule_Terminal()
-  {
-    return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(3);
+    return terminalRuleEClass;
   }
 
   /**
@@ -862,6 +842,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     abstractRuleEClass = createEClass(ABSTRACT_RULE);
     createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
     createEReference(abstractRuleEClass, ABSTRACT_RULE__TYPE);
+    createEReference(abstractRuleEClass, ABSTRACT_RULE__ALTERNATIVES);
 
     abstractMetamodelDeclarationEClass = createEClass(ABSTRACT_METAMODEL_DECLARATION);
     createEReference(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
@@ -872,14 +853,11 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     referencedMetamodelEClass = createEClass(REFERENCED_METAMODEL);
 
-    lexerRuleEClass = createEClass(LEXER_RULE);
-    createEAttribute(lexerRuleEClass, LEXER_RULE__BODY);
-
     parserRuleEClass = createEClass(PARSER_RULE);
     createEAttribute(parserRuleEClass, PARSER_RULE__DEFINES_HIDDEN_TOKENS);
     createEReference(parserRuleEClass, PARSER_RULE__HIDDEN_TOKENS);
-    createEReference(parserRuleEClass, PARSER_RULE__ALTERNATIVES);
-    createEAttribute(parserRuleEClass, PARSER_RULE__TERMINAL);
+
+    terminalRuleEClass = createEClass(TERMINAL_RULE);
 
     typeRefEClass = createEClass(TYPE_REF);
     createEReference(typeRefEClass, TYPE_REF__METAMODEL);
@@ -960,8 +938,8 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     // Add supertypes to classes
     generatedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodelDeclaration());
     referencedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodelDeclaration());
-    lexerRuleEClass.getESuperTypes().add(this.getAbstractRule());
     parserRuleEClass.getESuperTypes().add(this.getAbstractRule());
+    terminalRuleEClass.getESuperTypes().add(this.getAbstractRule());
     assignmentEClass.getESuperTypes().add(this.getAbstractElement());
     actionEClass.getESuperTypes().add(this.getAbstractElement());
     abstractNegatedTokenEClass.getESuperTypes().add(this.getAbstractElement());
@@ -987,6 +965,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     initEClass(abstractRuleEClass, AbstractRule.class, "AbstractRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAbstractRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractRule_Alternatives(), this.getAbstractElement(), null, "alternatives", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractMetamodelDeclarationEClass, AbstractMetamodelDeclaration.class, "AbstractMetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAbstractMetamodelDeclaration_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -997,14 +976,11 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     initEClass(referencedMetamodelEClass, ReferencedMetamodel.class, "ReferencedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(lexerRuleEClass, LexerRule.class, "LexerRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLexerRule_Body(), ecorePackage.getEString(), "body", null, 0, 1, LexerRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(parserRuleEClass, ParserRule.class, "ParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParserRule_DefinesHiddenTokens(), ecorePackage.getEBoolean(), "definesHiddenTokens", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getParserRule_HiddenTokens(), this.getAbstractRule(), null, "hiddenTokens", null, 0, -1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getParserRule_Alternatives(), this.getAbstractElement(), null, "alternatives", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getParserRule_Terminal(), ecorePackage.getEBoolean(), "terminal", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(terminalRuleEClass, TerminalRule.class, "TerminalRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeRef_Metamodel(), this.getAbstractMetamodelDeclaration(), null, "metamodel", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
