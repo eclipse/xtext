@@ -41,11 +41,14 @@ cached String getDelimiterClassName(Grammar this) :
 	name.toJavaPackage()+".parser.packrat."+name.toSimpleName()+"Delimiters";
 
 cached String consumerInterfaceName(AbstractRule this):
-	"ITerminalConsumer";
+	"UNSUPPORTED_RULETYPE_" + metaType.name;
 
 cached String consumerInterfaceName(ParserRule this):
-	if (terminal) then "ITerminalConsumer" else "INonTerminalConsumer";
-			
+	"INonTerminalConsumer";
+
+cached String consumerInterfaceName(TerminalRule this):
+	"ITerminalConsumer";
+				
 cached String consumerFieldName(AbstractRule this):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getConsumerFieldName(org.eclipse.xtext.AbstractRule);
 
@@ -70,7 +73,7 @@ String toJavaString(String this):
 /* boolean canBeFollowedByIdentifier(Keyword this):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.canBeFollowedByIdentifier(org.eclipse.xtext.Keyword); */
 
-cached List[Keyword] conflictingKeywords(AbstractElement this, Grammar grammar):
+cached List[String] conflictingKeywords(AbstractElement this, Grammar grammar):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getConflictingKeywords(org.eclipse.xtext.AbstractElement, org.eclipse.xtext.Grammar);
 
 cached List[AbstractRule] conflictingLexerRules(Keyword this, Grammar grammar):
@@ -110,9 +113,9 @@ List[AbstractElement] flattendAlternativesElements(AbstractElement this):
 	{this};
 	
 cached List[AbstractElement] allDelimited(AbstractRule this):
-	containedRuleCalls().select(e|e.rule.metaType==LexerRule || (e.rule.metaType == ParserRule && ((ParserRule)e.rule).terminal)).
+	containedRuleCalls().select(e|e.rule.metaType==TerminalRule).
 		union(eAllContents.typeSelect(Keyword)).
-		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==LexerRule || (e.rule.metaType == ParserRule && ((ParserRule)e.rule).terminal)))
+		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==TerminalRule))
 	.toSet().sortBy(e|e.globalDelimiterFieldName());
 	
 cached List[AbstractRule] allCalledRules(AbstractRule this):

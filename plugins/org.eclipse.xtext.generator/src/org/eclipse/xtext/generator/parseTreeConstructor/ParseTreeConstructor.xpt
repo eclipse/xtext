@@ -46,7 +46,7 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 «FOREACH allParserRules() AS pr-»
-«IF !pr.isDatatypeRule() && !pr.terminal-»
+«IF !pr.isDatatypeRule()-»
 		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getRule().getType().getType()) && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 «ENDIF-»
 «ENDFOREACH-»		
@@ -59,7 +59,7 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule-»
-«IF !isDatatypeRule() && !terminal»
+«IF !isDatatypeRule()»
 /************ begin Rule «name» ****************
  *
  * «grammarFragmentToStr()»
@@ -203,7 +203,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 
 «DEFINE assignmentCreate FOR RuleCall-»
 «IF calledParserRule()!=null-»
-«IF !isDatatypeRule(calledParserRule()) && !calledParserRule().terminal»
+«IF !isDatatypeRule(calledParserRule())»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getType())) {

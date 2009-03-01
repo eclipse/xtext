@@ -28,7 +28,7 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 	}
 
 	public void testParse_01() throws Exception {
-		String model = "/* comment */ grammar a.bc.def extends c.ef.ghi lexer a: 'b';";
+		String model = "/* comment */ grammar a.bc.def extends c.ef.ghi terminal a: 'b';";
 		parseAndCompareToAntlr(model);
 	}
 
@@ -51,28 +51,28 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 //	}
 
 	public void testParse_02() throws Exception {
-		String model = "/* comment */ grammar a native c returns d: \"xy\";";
+		String model = "/* comment */ grammar a terminal c returns d: \"xy\";";
 		parseAndCompareToAntlr(model);
 	}
 
 	public void testParse_03() throws Exception {
-		String model = "grammar test generate test 'test' as test lexer a: 'b'; lexer c: 'd';";
+		String model = "grammar test generate test 'test' as test terminal a: 'b'; terminal c: 'd';";
 		parseAndCompareToAntlr(model);
 	}
 
 	public void testParse_04() throws Exception {
 		String model = "grammar test generate test 'test' as test generate test2 'test2' " +
-				"lexer asdbdferdsfae00011 returns asdfaefadfaefdasefasdfasf: 'asdfkja akljsdfl kajlsjdf lajsdlfjlakjdfkl ';";
+				"terminal asdbdferdsfae00011 returns asdfaefadfaefdasefasdfasf: 'asdfkja akljsdfl kajlsjdf lajsdlfjlakjdfkl ';";
 		parseAndCompareToAntlr(model);
 	}
 
 	public void testParse_05() throws Exception {
-		String model = "grammar a1 lexer a1: 'b1';";
+		String model = "grammar a1 terminal a1: 'b1';";
 		parseAndCompareToAntlr(model);
 	}
 
 	public void testParse_06() throws Exception {
-		String model = "grammar a lexer a: 'b';";
+		String model = "grammar a terminal a: 'b';";
 		parseAndCompareToAntlr(model);
 	}
 

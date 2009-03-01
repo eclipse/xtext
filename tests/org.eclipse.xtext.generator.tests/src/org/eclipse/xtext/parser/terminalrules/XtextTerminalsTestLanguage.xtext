@@ -20,7 +20,7 @@ Grammar:
 GrammarID returns EString:
   ID ('.' ID)*;
   
-AbstractRule : LexerRule | ParserRule | TerminalRule;
+AbstractRule : ParserRule | TerminalRule;
 
 AbstractMetamodelDeclaration :
 	GeneratedMetamodel | ReferencedMetamodel;
@@ -35,19 +35,14 @@ GeneratedMetamodel :
 ReferencedMetamodel :
 	'import' ePackage=[ecore::EPackage|STRING] ('as' alias=ID)?;
 
-LexerRule :
-	('native'|'lexer') name=ID ('returns' type=TypeRef)? ':' 
-		body=STRING ';'
-;
-
 ParserRule :
     name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?':' 
     	alternatives=Alternatives   
     ';'
 ;
 
-TerminalRule returns ParserRule:
-	^terminal?='terminal' name=ID ('returns' type=TypeRef)? ':'
+TerminalRule :
+	'terminal' name=ID ('returns' type=TypeRef)? ':'
 		alternatives=TerminalAlternatives
 	';'
 ;
