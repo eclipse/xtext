@@ -24,7 +24,7 @@ import com.google.inject.Inject;
  */
 public class TerminalRuleTestLanguageConverters extends AbstractAnnotationBasedValueConverterService {
 
-	// copied from XtextBuiltIn but without rule for int
+	// copied from Common.Terminals but without rule for int
 	private Grammar g;
 
 	@Inject
