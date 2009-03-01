@@ -36,24 +36,24 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
- * 
+ *
  * Represents a class wich provides various static helper functions used to
  * support the work with object models containing
  * {@link org.eclipse.xtext.AbstractElement} and
  * {@link org.eclipse.xtext.parsetree.AbstractNode} composite structure models.
- * 
- * 
+ *
+ *
  * @author Michael Clay - Initial contribution and API
  * @author Heiko Behrens
- * 
+ *
  * @see org.eclipse.xtext.AbstractElement
  * @see org.eclipse.xtext.parsetree.AbstractNode
  */
 public final class ParseTreeUtil {
 
 	private static final Logger logger = Logger.getLogger(ParseTreeUtil.class);
-	
-	
+
+
 	/**
 	 * @param rootNode	the root node of the tree
 	 * @param offset	the text position within the the current sentence
@@ -102,7 +102,7 @@ public final class ParseTreeUtil {
 	}
 	/**
 	 * Dump the composite structure (parsetree) of the given node.
-	 * 
+	 *
 	 * @param abstractNode		the node to dump
 	 */
 	public static final void dumpNode(AbstractNode abstractNode) {
@@ -124,7 +124,7 @@ public final class ParseTreeUtil {
 		assertParameterNotNull(contextNode, "contextNode");
 
 		AbstractNode abstractNode = contextNode.eContainer()==null ? contextNode : null;
-		
+
 		if (contextNode.getTotalOffset() < offsetPosition
 				|| (0 == offsetPosition && offsetPosition == contextNode.getTotalOffset())) {
 
@@ -137,7 +137,7 @@ public final class ParseTreeUtil {
 			}
 			if (abstractNode == null && contextNode.getTotalOffset() + contextNode.getTotalLength() <= offsetPosition) {
 				EObject grammarElement = contextNode.getGrammarElement();
-				if (grammarElement instanceof AbstractElement || grammarElement instanceof ParserRule) {
+				if (grammarElement instanceof AbstractElement || (grammarElement instanceof ParserRule && !((ParserRule) grammarElement).isTerminal())) {
 					abstractNode = contextNode;
 				}
 			}
@@ -147,55 +147,55 @@ public final class ParseTreeUtil {
 	/**
 	 * @param contextNode		the node representing the 'scope' of the current lookup
 	 * @param offsetPosition	the text position within the the current sentence
-	 * 
+	 *
 	 * @return the node element that starts at or spans across the provided position
 	 */
 	public static final AbstractNode getCurrentOrFollowingNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 		assertParameterNotNull(contextNode, "contextNode");
-		
+
 		AbstractNode result = contextNode;
 		TreeIterator<EObject> allContentsTreeIterator = EcoreUtil.getRootContainer(contextNode).eAllContents();
 
 		while (allContentsTreeIterator.hasNext()) {
-			EObject eObject = allContentsTreeIterator.next(); 
+			EObject eObject = allContentsTreeIterator.next();
 			if (eObject instanceof AbstractNode) {
 				AbstractNode abstractNode = (AbstractNode) eObject;
 				if ((abstractNode.getTotalOffset() + abstractNode.getTotalLength())<offsetPosition ) {
 					allContentsTreeIterator.prune();
-				} else if (abstractNode.getTotalOffset() <= offsetPosition && 
+				} else if (abstractNode.getTotalOffset() <= offsetPosition &&
 						           		  offsetPosition <= abstractNode.getTotalOffset() + abstractNode.getTotalLength()) {
-					if (abstractNode.getTotalLength() > 0 
+					if (abstractNode.getTotalLength() > 0
 							|| (result==null || result.getTotalLength()==0)) {
-						
-						if (!(abstractNode instanceof LeafNode && 
+
+						if (!(abstractNode instanceof LeafNode &&
 								abstractNode.getTotalOffset()==offsetPosition && ((LeafNode)abstractNode).isHidden())) {
 							result = abstractNode;
 						}
 					}
 				} else if (abstractNode.getTotalOffset() > offsetPosition ) {
 					break;
-				} 
+				}
 			}
 		}
-		
+
 		return null==result ? contextNode : result;
 	}
 	/**
 	 * @param contextNode		the node representing the 'scope' of the current lookup
 	 * @param offsetPosition	the text position within the the current sentence
-	 * 
+	 *
 	 * @return the node element that starts at or spans across the provided position
 	 */
 	public static final AbstractNode getCurrentOrPrecedingNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 		assertParameterNotNull(contextNode, "contextNode");
-		
+
 		if (contextNode.getTotalOffset() > offsetPosition || contextNode.getTotalOffset() + contextNode.getTotalLength() < offsetPosition)
-			throw new IllegalArgumentException("contextNode does not cover offsetPosition: " + contextNode + "/" + offsetPosition); 
-		
+			throw new IllegalArgumentException("contextNode does not cover offsetPosition: " + contextNode + "/" + offsetPosition);
+
 		int offset = contextNode.getOffset();
 		if (offset > offsetPosition || offset + contextNode.getLength() < offsetPosition)
 			return contextNode;
-		
+
 		if (contextNode instanceof CompositeNode) {
 			final List<AbstractNode> children = ((CompositeNode) contextNode).getChildren();
 			for(int i = 0; i < children.size(); i++) {
@@ -216,11 +216,11 @@ public final class ParseTreeUtil {
 		return contextNode;
 	}
 	/**
-	 * 
+	 *
 	 * This method returns the parent grammar of the given eObject by recursive
 	 * 'upwards' invocations, passing the eContainer property as parameter until
 	 * some Grammar level object is reached.
-	 * 
+	 *
 	 * @param eObject		the object contained or referenced within some 'root' grammar
 	 * @return the {@link org.eclipse.xtext.Grammar} of the given object.
 	 */
@@ -234,7 +234,7 @@ public final class ParseTreeUtil {
 	}
 	/**
 	 * asserts if the given parameter object isnt null
-	 * 
+	 *
 	 * @param parameter		the reference to assert
 	 * @param parameterName	the name of the parameter
 	 */
@@ -243,9 +243,9 @@ public final class ParseTreeUtil {
 			throw new IllegalArgumentException("parameter '" + parameterName + "' must not be null.");
 	}
 	/**
-	 * 
+	 *
 	 * @param abstractNode	the node of the asociated grammar element
-	 * 
+	 *
 	 * @return the grammar element of the given node or null if its neither a
 	 *         abstractElement or a parserRule
 	 */
@@ -367,12 +367,12 @@ public final class ParseTreeUtil {
 		}
 		return stringBuilder.toString();
 	}
-	
+
 	private static boolean isDefaultRule(ParserRule parserRule) {
 		return ((Grammar)parserRule.eContainer()).getRules().indexOf(parserRule)==0;
 	}
-	
-	
+
+
 	private static Set<AbstractElement> backtrackAlternativeAssignments(AbstractNode lastCompleteNode,
 			AbstractElement grammarElement) {
 		Set<AbstractElement> abstractElementSet = new HashSet<AbstractElement>();
@@ -391,7 +391,7 @@ public final class ParseTreeUtil {
 		return abstractElementSet;
 	}
 
-	
+
 	private static Alternatives getOutermostAlternativesElement(final AbstractNode node) {
 		Alternatives alternatives = null;
 		AbstractNode baseNode = node;
@@ -405,10 +405,10 @@ public final class ParseTreeUtil {
 		}
 		return alternatives;
 	}
-	
+
 	private static class AlternativesTypeFilter extends XtextSwitch<List<AbstractElement>> {
 
-		private Assignment assignment;
+		private final Assignment assignment;
 
 		public AlternativesTypeFilter(Assignment assignment) {
 			this.assignment = assignment;
@@ -508,7 +508,7 @@ public final class ParseTreeUtil {
 			}
 			else if (terminal instanceof RuleCall) {
 				rule = ((RuleCall) terminal).getRule();
-			} 
+			}
 			return rule;
 		}
 	}

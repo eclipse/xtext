@@ -27,10 +27,7 @@ boolean isRuleAssignment(Assignment a) :
 
 boolean isParserRuleAssignment(Assignment a) :
 	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null && !((RuleCall) a.terminal).calledParserRule().terminal;
-	
-List[LexerRule] allLexerRules(Grammar this) :
-	JAVA org.eclipse.xtext.GrammarUtil.allLexerRules(org.eclipse.xtext.Grammar);
-	
+
 Boolean isBoolean(Assignment a) :
 	a.operator == "?="
 ;

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
-import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
@@ -75,7 +75,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
-		return XtextBuiltInConverters.class;
+		return DefaultTerminalConverters.class;
 	}
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builtin.conversion;
+package org.eclipse.xtext.common.services;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 /**
  * Simple converters for Strings, Integers and IDs.
  */
-public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverterService {
+public class DefaultTerminalConverters extends AbstractAnnotationBasedValueConverterService {
 
 	private Grammar grammar;
 	

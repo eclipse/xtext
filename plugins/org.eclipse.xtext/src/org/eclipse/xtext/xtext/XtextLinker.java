@@ -35,7 +35,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.builtin.IXtextBuiltin;
+import org.eclipse.xtext.common.Terminals;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
@@ -114,14 +114,14 @@ public class XtextLinker extends Linker {
 			}
 		} else if (XtextPackage.eINSTANCE.getGrammar_SuperGrammar() == ref) {
 			final Grammar grammar = (Grammar) obj;
-			if (!IXtextBuiltin.ID.equals(grammar.getName())) {
+			if (!Terminals.ID.equals(grammar.getName())) {
 				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 				try {
 					final Resource resource = resourceSet.getResource(URI.createURI(
-							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + IXtextBuiltin.ID.replace('.', '/') + ".xtext"), true);
+							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + Terminals.ID.replace('.', '/') + ".xtext"), true);
 					grammar.setSuperGrammar((Grammar) resource.getContents().get(0));
 				} catch(ClasspathUriResolutionException ex) {
-					producer.addDiagnostic("Cannot find default super grammar '" + IXtextBuiltin.ID + "'. " +
+					producer.addDiagnostic("Cannot find default super grammar '" + Terminals.ID + "'. " +
 							"Maybe you are stumbling accross a pde bug. Reopening the editor might help.");
 				}
 			}

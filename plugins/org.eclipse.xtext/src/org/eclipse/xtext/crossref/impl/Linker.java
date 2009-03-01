@@ -29,6 +29,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -36,7 +38,7 @@ public class Linker extends AbstractLinker {
 
 	private static Logger log = Logger.getLogger(Linker.class);
 
-	@com.google.inject.Inject
+	@Inject
 	private ILinkingService linkingService;
 
 	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {

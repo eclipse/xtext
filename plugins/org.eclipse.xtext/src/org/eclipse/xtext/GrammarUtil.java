@@ -12,6 +12,8 @@ import static org.eclipse.xtext.EcoreUtil2.eAllContentsAsList;
 import static org.eclipse.xtext.EcoreUtil2.getAllContentsOfType;
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
 import static org.eclipse.xtext.EcoreUtil2.typeSelect;
+import static org.eclipse.xtext.util.CollectionUtils.filter;
+import static org.eclipse.xtext.util.CollectionUtils.list;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
@@ -188,6 +191,14 @@ public class GrammarUtil {
 		return typeSelect(allRules(_this), LexerRule.class);
 	}
 
+	public static List<ParserRule> allTerminalRules(Grammar _this) {
+		return list(filter(allParserRules(_this), new Filter<ParserRule>() {
+			public boolean matches(ParserRule param) {
+				return param.isTerminal();
+			}
+		}));
+	}
+
 	public static List<AbstractMetamodelDeclaration> allMetamodelDeclarations(Grammar _this) {
 		final List<AbstractMetamodelDeclaration> result = new ArrayList<AbstractMetamodelDeclaration>();
 		final Set<Pair<String, String>> pairs = new HashSet<Pair<String, String>>();
@@ -239,9 +250,11 @@ public class GrammarUtil {
 		Set<String> kws = new HashSet<String>();
 		List<ParserRule> rules = allParserRules(g);
 		for (ParserRule parserRule : rules) {
-			List<Keyword> list = typeSelect(eAllContentsAsList(parserRule), Keyword.class);
-			for (Keyword keyword : list) {
-				kws.add(keyword.getValue());
+			if (!parserRule.isTerminal()) {
+				List<Keyword> list = typeSelect(eAllContentsAsList(parserRule), Keyword.class);
+				for (Keyword keyword : list) {
+					kws.add(keyword.getValue());
+				}
 			}
 		}
 		return kws;

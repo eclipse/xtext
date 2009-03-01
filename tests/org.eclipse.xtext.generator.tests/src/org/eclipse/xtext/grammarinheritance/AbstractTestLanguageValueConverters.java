@@ -8,13 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammarinheritance;
 
-import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
-public final class AbstractTestLanguageValueConverters extends XtextBuiltInConverters {
+public final class AbstractTestLanguageValueConverters extends DefaultTerminalConverters {
 	@ValueConverter(rule = "REAL")
 	public IValueConverter<Double> REAL() {
 		return new AbstractToStringConverter<Double>(){
