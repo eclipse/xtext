@@ -189,11 +189,11 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordTB());
 		group$4$Consumer = new Group$4$Consumer(rule.ele01Group());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele010AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0100LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0100ParserRuleCallID());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele011AssignmentType());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0110LexerRuleCallINT());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0110ParserRuleCallINT());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele1AssignmentType());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele10LexerRuleCallINT());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele10ParserRuleCallINT());
 	}
 	
 	@Override

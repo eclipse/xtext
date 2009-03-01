@@ -172,7 +172,7 @@ public final class TwoContextsTestLanguageAnElementConsumer extends NonTerminalC
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000LexerRuleCallID());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallID());
 		group$5$Consumer = new Group$5$Consumer(rule.ele01Group());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele010KeywordRefersTo());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele011AssignmentReferred());

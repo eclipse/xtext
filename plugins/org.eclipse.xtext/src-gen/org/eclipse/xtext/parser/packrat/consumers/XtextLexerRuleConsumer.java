@@ -277,14 +277,14 @@ public final class XtextLexerRuleConsumer extends NonTerminalConsumer {
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele000000KeywordNative());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele000001KeywordLexer());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele00001AssignmentName());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele000010LexerRuleCallID());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele000010ParserRuleCallID());
 		group$11$Consumer = new Group$11$Consumer(rule.ele0001Group());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele00010KeywordReturns());
 		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele00011AssignmentType());
 		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele000110ParserRuleCallTypeRef());
 		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele001KeywordColon());
 		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele01AssignmentBody());
-		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele010LexerRuleCallSTRING());
+		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele010ParserRuleCallSTRING());
 		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

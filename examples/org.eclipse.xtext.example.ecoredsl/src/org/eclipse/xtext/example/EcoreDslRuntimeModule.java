@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -54,7 +54,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		return EcoreDslRuntimeModule.EcoreDslConverters.class;
 	}
 	
-	public static class EcoreDslConverters extends XtextBuiltInConverters {
+	public static class EcoreDslConverters extends DefaultTerminalConverters {
 
 		@ValueConverter(rule = "SINT")
 		public IValueConverter<Integer> SINT() {

@@ -12,13 +12,13 @@ import org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLa
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTestLanguageModelConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTestLanguageElementConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinML_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsML_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSL_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsWSConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsumer;
 
 public class InheritanceTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
@@ -58,13 +58,13 @@ public class InheritanceTestLanguageParserConfiguration extends AbstractParserCo
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getElementConsumer().setRule(grammarAccess.prElement());
-		getIdConsumer().setRule(grammarAccess.lrID());
-		getIntConsumer().setRule(grammarAccess.lrINT());
-		getStringConsumer().setRule(grammarAccess.lrSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.lrWS());
-		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.prID());
+		getIntConsumer().setRule(grammarAccess.prINT());
+		getStringConsumer().setRule(grammarAccess.prSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
 
 
 		getModelConsumer().setElementConsumer(getElementConsumer());
@@ -93,31 +93,31 @@ public class InheritanceTestLanguageParserConfiguration extends AbstractParserCo
     	return elementConsumer;
     }
 
-    public XtextBuiltinIDConsumer getIdConsumer() {
+    public TerminalsIDConsumer getIdConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getIdConsumer();
     }
 
-    public XtextBuiltinINTConsumer getIntConsumer() {
+    public TerminalsINTConsumer getIntConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getIntConsumer();
     }
 
-    public XtextBuiltinSTRINGConsumer getStringConsumer() {
+    public TerminalsSTRINGConsumer getStringConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getStringConsumer();
     }
 
-    public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
+    public TerminalsML_COMMENTConsumer getMlCommentConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getMlCommentConsumer();
     }
 
-    public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
+    public TerminalsSL_COMMENTConsumer getSlCommentConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getSlCommentConsumer();
     }
 
-    public XtextBuiltinWSConsumer getWsConsumer() {
+    public TerminalsWSConsumer getWsConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getWsConsumer();
     }
 
-    public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
+    public TerminalsANY_OTHERConsumer getAnyOtherConsumer() {
     	return getBaseInheritanceTestLanguageConfiguration().getAnyOtherConsumer();
     }
 

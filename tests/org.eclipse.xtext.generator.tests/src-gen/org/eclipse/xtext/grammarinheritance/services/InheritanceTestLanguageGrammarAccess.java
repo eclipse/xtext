@@ -25,7 +25,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Keyword c0000KeywordModel = (Keyword)c000Group.eContents().get(0);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentElements = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallElement = (RuleCall)c01AssignmentElements.eContents().get(0);
@@ -53,7 +53,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		public RuleCall ele00010ParserRuleCallID() { return c00010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
@@ -73,7 +73,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordElement = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final RuleCall c10ParserRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -88,7 +88,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+		public RuleCall ele10ParserRuleCallID() { return c10ParserRuleCallID; }
 	}
 	
 	private ModelElements pModel;
@@ -125,37 +125,37 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

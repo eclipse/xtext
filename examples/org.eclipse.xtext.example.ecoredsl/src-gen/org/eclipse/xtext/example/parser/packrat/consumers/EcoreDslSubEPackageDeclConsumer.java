@@ -255,7 +255,7 @@ public final class EcoreDslSubEPackageDeclConsumer extends NonTerminalConsumer {
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000ParserRuleCallEAnnotationDecl());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele00001KeywordPackage());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele0001AssignmentName());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010LexerRuleCallID());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010ParserRuleCallID());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele001KeywordLeftCurlyBracket());
 		alternatives$12$Consumer = new Alternatives$12$Consumer(rule.ele01Alternatives());
 		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele010AssignmentESubpackages());

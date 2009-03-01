@@ -204,7 +204,7 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele00000AssignmentFeature());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000LexerRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000ParserRuleCallID());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele00001KeywordEqualsSign());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele0001AssignmentLeftValue());
 		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010ParserRuleCallSingleAssignmentValue());

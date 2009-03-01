@@ -71,7 +71,7 @@ public final class EpatchTestLanguageExpressionExecutableConsumer extends NonTer
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentExprstr());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0LexerRuleCallSTRING());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSTRING());
 	}
 	
 	@Override

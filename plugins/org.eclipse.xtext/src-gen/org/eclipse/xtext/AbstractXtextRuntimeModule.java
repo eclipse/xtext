@@ -30,6 +30,10 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.parser.packrat.XtextPackratParser.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parseTreeConstruction.XtextParsetreeConstructor.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer.class;
 	}
@@ -48,9 +52,5 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parseTreeConstruction.XtextParsetreeConstructor.class;
 	}
 }

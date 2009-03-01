@@ -141,10 +141,10 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentDetailKey());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000LexerRuleCallID());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallID());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele01KeywordEqualsSign());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentDetailValue());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10LexerRuleCallSTRING());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallSTRING());
 	}
 	
 	@Override

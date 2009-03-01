@@ -399,18 +399,18 @@ public final class EpatchTestLanguageAssignmentValueConsumer extends NonTerminal
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele000AssignmentValue());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele0000LexerRuleCallSTRING());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele0000ParserRuleCallSTRING());
 		group$6$Consumer = new Group$6$Consumer(rule.ele001Group());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele0010AssignmentRefObject());
 		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele00100CrossReferenceEStringNamedObject());
 		group$10$Consumer = new Group$10$Consumer(rule.ele0011Group());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele001100KeywordFullStop());
 		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele001101AssignmentRefFeature());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele0011010LexerRuleCallID());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele0011010ParserRuleCallID());
 		group$15$Consumer = new Group$15$Consumer(rule.ele00111Group());
 		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele0011100KeywordLeftSquareBracket());
 		assignment$18$Consumer = new Assignment$18$Consumer(rule.ele0011101AssignmentRefIndex());
-		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.ele00111010LexerRuleCallINT());
+		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.ele00111010ParserRuleCallINT());
 		keyword$20$Consumer = new Keyword$20$Consumer(rule.ele001111KeywordRightSquareBracket());
 		assignment$21$Consumer = new Assignment$21$Consumer(rule.ele01AssignmentNewObject());
 		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.ele010ParserRuleCallCreatedObject());

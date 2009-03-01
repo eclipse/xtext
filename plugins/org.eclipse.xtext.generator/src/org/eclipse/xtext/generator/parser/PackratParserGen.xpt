@@ -72,7 +72,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 «IF definesHiddenTokens || superGrammar != null || rules.typeSelect(ParserRule).exists(e|!e.terminal && e.definesHiddenTokens)-»
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 «ENDIF-»
-«IF allParserRules().isEmpty-»
+«IF !allParserRules().exists(e|!e.terminal)-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 «ENDIF-»
 
@@ -112,8 +112,8 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 «ENDLET-»
 	}
 
-«IF !allParserRules().isEmpty-»
-	public «allParserRules().first().consumerClassName()» getRootConsumer() {
+«IF allParserRules().exists(e|!e.terminal)-»
+	public «allParserRules().selectFirst(e|!e.terminal).consumerClassName()» getRootConsumer() {
 		return «allParserRules().first().consumerFieldName()»;
 «ELSE-»
 	public INonTerminalConsumer getRootConsumer() {

@@ -25,7 +25,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
@@ -225,7 +225,7 @@ public final class PackratParserGenUtil {
 				if (rule instanceof LexerRule) {
 					if (rule.getName().equals("ID")) {
 						final StringWithOffset input = new StringWithOffset(param.getValue());
-						return new XtextBuiltinIDConsumer(new MyTerminalConsumerConfiguration(input)).consume() == ConsumeResult.SUCCESS;
+						return new TerminalsIDConsumer(new MyTerminalConsumerConfiguration(input)).consume() == ConsumeResult.SUCCESS;
 					}
 				} else {
 					ParserRule parserRule = (ParserRule) rule;
@@ -245,7 +245,7 @@ public final class PackratParserGenUtil {
 		if (rule != null) {
 			// TODO SZ: use interpreter
 			final StringWithOffset input = new StringWithOffset(keyword.getValue());
-			if (new XtextBuiltinIDConsumer(new MyTerminalConsumerConfiguration(input)).consume() == ConsumeResult.SUCCESS) {
+			if (new TerminalsIDConsumer(new MyTerminalConsumerConfiguration(input)).consume() == ConsumeResult.SUCCESS) {
 				return Collections.singletonList(rule);
 			}
 		}

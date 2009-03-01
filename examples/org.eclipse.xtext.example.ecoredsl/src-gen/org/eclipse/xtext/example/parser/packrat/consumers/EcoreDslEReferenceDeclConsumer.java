@@ -744,7 +744,7 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		group$39$Consumer = new Group$39$Consumer(rule.ele0001Group());
 		keyword$42$Consumer = new Keyword$42$Consumer(rule.ele0001000KeywordLeftSquareBracket());
 		assignment$43$Consumer = new Assignment$43$Consumer(rule.ele0001001AssignmentLowerBound());
-		ruleCall$44$Consumer = new RuleCall$44$Consumer(rule.ele00010010LexerRuleCallINT());
+		ruleCall$44$Consumer = new RuleCall$44$Consumer(rule.ele00010010ParserRuleCallINT());
 		group$45$Consumer = new Group$45$Consumer(rule.ele000101Group());
 		keyword$46$Consumer = new Keyword$46$Consumer(rule.ele0001010KeywordFullStopFullStop());
 		assignment$47$Consumer = new Assignment$47$Consumer(rule.ele0001011AssignmentUpperBound());
@@ -755,7 +755,7 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		assignment$52$Consumer = new Assignment$52$Consumer(rule.ele0011AssignmentEOpposite());
 		crossReference$53$Consumer = new CrossReference$53$Consumer(rule.ele00110CrossReferenceEStringEReference());
 		assignment$55$Consumer = new Assignment$55$Consumer(rule.ele01AssignmentName());
-		ruleCall$56$Consumer = new RuleCall$56$Consumer(rule.ele010LexerRuleCallID());
+		ruleCall$56$Consumer = new RuleCall$56$Consumer(rule.ele010ParserRuleCallID());
 		keyword$57$Consumer = new Keyword$57$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

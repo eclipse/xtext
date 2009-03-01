@@ -20,7 +20,7 @@ public class GenerateXtextGrammars {
 	public static void main(String... args) {
 
 		try {
-			logger.info("Generating Xtext and Xtext built-in languages.");
+			logger.info("Generating Xtext and default languages.");
 			new WorkflowFacade("org/eclipse/xtext/boostrap/generateXtext.mwe").run();
 			logger.info("DONE.");
 		}

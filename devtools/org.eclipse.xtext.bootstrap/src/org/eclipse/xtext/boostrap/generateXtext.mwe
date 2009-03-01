@@ -20,7 +20,7 @@
 				<basePackage value="org.eclipse"/>
 			</fragments>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xtext">
+		<language uri="classpath:/org/eclipse/xtext/common/Terminals.xtext">
 			<fragments file="org/eclipse/xtext/generator/RuntimeFragmentsWithoutResource.mwe"/>
 		</language>
 	</component>

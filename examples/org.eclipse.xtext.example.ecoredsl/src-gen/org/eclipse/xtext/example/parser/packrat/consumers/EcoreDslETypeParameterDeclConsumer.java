@@ -153,7 +153,7 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00LexerRuleCallID());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallID());
 		group$4$Consumer = new Group$4$Consumer(rule.ele1Group());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordExtends());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentEBounds());

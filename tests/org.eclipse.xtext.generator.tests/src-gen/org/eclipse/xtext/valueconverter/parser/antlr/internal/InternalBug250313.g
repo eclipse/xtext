@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00000000100001LexerRuleCallSTRING(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele00000000100001ParserRuleCallSTRING(), "value"); 
 	}
 )
 
@@ -117,7 +117,7 @@ ruleModel returns [EObject current=null]
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele00000000101LexerRuleCallID(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele00000000101ParserRuleCallID(), "value"); 
 	}
 )
  
@@ -149,7 +149,7 @@ ruleModel returns [EObject current=null]
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00000001100001LexerRuleCallSTRING(), "multiValue"); 
+		createLeafNode(grammarAccess.prModel().ele00000001100001ParserRuleCallSTRING(), "multiValue"); 
 	}
 )
 
@@ -171,7 +171,7 @@ ruleModel returns [EObject current=null]
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele00000001101LexerRuleCallID(), "multiValue"); 
+		createLeafNode(grammarAccess.prModel().ele00000001101ParserRuleCallID(), "multiValue"); 
 	}
 )
  
@@ -195,9 +195,8 @@ ruleModel returns [EObject current=null]
     }
 (	
 	
-	    lv_value_5=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prModel().ele000000110LexerRuleCallSTRING(), "value"); 
+	    lv_value_5=RULE_STRING	{
+		createLeafNode(grammarAccess.prModel().ele000000110ParserRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -220,9 +219,8 @@ ruleModel returns [EObject current=null]
     }
 (	
 	
-	    lv_multiValue_7=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prModel().ele00000110LexerRuleCallSTRING(), "multiValue"); 
+	    lv_multiValue_7=RULE_STRING	{
+		createLeafNode(grammarAccess.prModel().ele00000110ParserRuleCallSTRING(), "multiValue"); 
 	}
  
 	    {
@@ -423,7 +421,7 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.prDatatype().ele00LexerRuleCallID(), null); 
+    createLeafNode(grammarAccess.prDatatype().ele00ParserRuleCallID(), null); 
     }
 
 	kw='-' 
@@ -436,7 +434,7 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.prDatatype().ele1LexerRuleCallID(), null); 
+    createLeafNode(grammarAccess.prDatatype().ele1ParserRuleCallID(), null); 
     }
 )
     ;
@@ -468,7 +466,7 @@ ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
     }
 
     { 
-    createLeafNode(grammarAccess.prNestedDatatype().ele00LexerRuleCallID(), null); 
+    createLeafNode(grammarAccess.prNestedDatatype().ele00ParserRuleCallID(), null); 
     }
 
 	kw='+' 
@@ -555,9 +553,8 @@ ruleChild1 returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prChild1().ele0LexerRuleCallID(), "name"); 
+	    lv_name_0=RULE_ID	{
+		createLeafNode(grammarAccess.prChild1().ele0ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -598,9 +595,8 @@ ruleChild2 returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prChild2().ele0LexerRuleCallSTRING(), "name"); 
+	    lv_name_0=RULE_STRING	{
+		createLeafNode(grammarAccess.prChild2().ele0ParserRuleCallSTRING(), "name"); 
 	}
  
 	    {
@@ -636,21 +632,50 @@ ruleChild2 returns [EObject current=null]
 
 
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+
+
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : 
-			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
-              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
-              ;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
+RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+
+
+
+RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+
+
+RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+
+
 
 RULE_ANY_OTHER : .;
+
+
 
 

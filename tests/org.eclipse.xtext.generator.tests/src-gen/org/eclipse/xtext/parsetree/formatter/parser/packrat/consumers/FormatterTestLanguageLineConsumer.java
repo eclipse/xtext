@@ -139,9 +139,9 @@ public final class FormatterTestLanguageLineConsumer extends NonTerminalConsumer
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentType());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000LexerRuleCallID());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallID());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010ParserRuleCallID());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele1KeywordSemicolon());
 	}
 	

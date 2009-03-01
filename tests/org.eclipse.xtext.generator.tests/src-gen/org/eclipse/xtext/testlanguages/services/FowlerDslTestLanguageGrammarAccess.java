@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
@@ -95,9 +95,9 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c00AssignmentResetting = (Assignment)c0Group.eContents().get(0);
 		private final Keyword c000KeywordResetting = (Keyword)c00AssignmentResetting.eContents().get(0);
 		private final Assignment c01AssignmentName = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
+		private final RuleCall c010ParserRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
 		private final Assignment c1AssignmentCode = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
+		private final RuleCall c10ParserRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -118,22 +118,22 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentName() { return c01AssignmentName; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
+		public RuleCall ele010ParserRuleCallID() { return c010ParserRuleCallID; }
 
 		// not supported
 		public Assignment ele1AssignmentCode() { return c1AssignmentCode; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+		public RuleCall ele10ParserRuleCallID() { return c10ParserRuleCallID; }
 	}
 
 	public class CommandElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Command");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00LexerRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final RuleCall c00ParserRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
 		private final Assignment c1AssignmentCode = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
+		private final RuleCall c10ParserRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -145,13 +145,13 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// not supported
-		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
+		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
 
 		// not supported
 		public Assignment ele1AssignmentCode() { return c1AssignmentCode; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+		public RuleCall ele10ParserRuleCallID() { return c10ParserRuleCallID; }
 	}
 
 	public class StateElements implements IParserRuleAccess {
@@ -162,7 +162,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Keyword c0000KeywordState = (Keyword)c000Group.eContents().get(0);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
 		private final Group c0010Group = (Group)c001Group.eContents().get(0);
 		private final Group c00100Group = (Group)c0010Group.eContents().get(0);
@@ -197,7 +197,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		public RuleCall ele00010ParserRuleCallID() { return c00010ParserRuleCallID; }
 
 		// not supported
 		public Group ele001Group() { return c001Group; }
@@ -276,10 +276,10 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public FowlerDslTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public FowlerDslTestLanguageGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -289,7 +289,7 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -320,37 +320,37 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

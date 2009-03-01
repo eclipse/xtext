@@ -236,14 +236,14 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordTF());
 		group$4$Consumer = new Group$4$Consumer(rule.ele01Group());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele010AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0100LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0100ParserRuleCallID());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele011AssignmentType());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0110LexerRuleCallINT());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0110ParserRuleCallINT());
 		alternatives$9$Consumer = new Alternatives$9$Consumer(rule.ele1Alternatives());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele10AssignmentName());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele100LexerRuleCallID());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele100ParserRuleCallID());
 		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele11AssignmentType());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele110LexerRuleCallINT());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele110ParserRuleCallINT());
 	}
 	
 	@Override

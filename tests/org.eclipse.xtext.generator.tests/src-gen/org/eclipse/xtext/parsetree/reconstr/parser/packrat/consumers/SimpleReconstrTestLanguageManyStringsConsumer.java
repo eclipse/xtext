@@ -140,9 +140,9 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordEqualsSign());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentStr1());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010LexerRuleCallSTRING());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010ParserRuleCallSTRING());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentStr2());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10LexerRuleCallSTRING());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallSTRING());
 	}
 	
 	@Override

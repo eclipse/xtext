@@ -121,9 +121,9 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:86:6: lv_name_0= RULE_ID
             {
             lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo129); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo128); 
 
-            		createLeafNode(grammarAccess.prFoo().ele00LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prFoo().ele00ParserRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -140,7 +140,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:104:2: (lv_nameRefs_1= ruleNameRef )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:103:2: (lv_nameRefs_1= ruleNameRef )*
             loop1:
             do {
                 int alt1=2;
@@ -153,12 +153,12 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:107:6: lv_nameRefs_1= ruleNameRef
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:106:6: lv_nameRefs_1= ruleNameRef
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.prFoo().ele10ParserRuleCallNameRef(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo171);
+            	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo169);
             	    lv_nameRefs_1=ruleNameRef();
             	    _fsp--;
 
@@ -207,7 +207,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start entryRuleNameRef
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:134:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:133:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
     public final EObject entryRuleNameRef() throws RecognitionException {
         EObject current = null;
 
@@ -215,16 +215,16 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:134:49: (iv_ruleNameRef= ruleNameRef EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:135:2: iv_ruleNameRef= ruleNameRef EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:133:49: (iv_ruleNameRef= ruleNameRef EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:134:2: iv_ruleNameRef= ruleNameRef EOF
             {
              currentNode = createCompositeNode(grammarAccess.prNameRef().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef211);
+            pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef209);
             iv_ruleNameRef=ruleNameRef();
             _fsp--;
 
              current =iv_ruleNameRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNameRef221); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNameRef219); 
 
             }
 
@@ -242,18 +242,18 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start ruleNameRef
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:142:1: ruleNameRef returns [EObject current=null] : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:141:1: ruleNameRef returns [EObject current=null] : ( RULE_ID ) ;
     public final EObject ruleNameRef() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:147:6: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:148:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:146:6: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:147:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:148:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:151:3: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:147:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:150:3: RULE_ID
             {
 
             			if (current==null) {
@@ -261,7 +261,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNameRef267); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNameRef265); 
 
             		createLeafNode(grammarAccess.prNameRef().ele0CrossReferenceEStringParserRule(), "rule"); 
             	
@@ -291,10 +291,10 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
     public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFoo82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo129 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo171 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef211 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNameRef221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleNameRef267 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo128 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo169 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef209 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNameRef219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleNameRef265 = new BitSet(new long[]{0x0000000000000002L});
 
 }

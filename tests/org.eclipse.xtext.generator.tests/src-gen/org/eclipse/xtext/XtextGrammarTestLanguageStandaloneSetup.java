@@ -1,4 +1,3 @@
-
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -21,7 +20,7 @@ public class XtextGrammarTestLanguageStandaloneSetup implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
 		
-		org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

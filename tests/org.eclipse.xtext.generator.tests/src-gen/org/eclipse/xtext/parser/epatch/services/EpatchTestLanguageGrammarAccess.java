@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
@@ -27,7 +27,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
 		private final Keyword c000000KeywordEpatch = (Keyword)c00000Group.eContents().get(0);
 		private final Assignment c000001AssignmentName = (Assignment)c00000Group.eContents().get(1);
-		private final RuleCall c0000010LexerRuleCallID = (RuleCall)c000001AssignmentName.eContents().get(0);
+		private final RuleCall c0000010ParserRuleCallID = (RuleCall)c000001AssignmentName.eContents().get(0);
 		private final Keyword c00001KeywordLeftCurlyBracket = (Keyword)c0000Group.eContents().get(1);
 		private final Assignment c0001AssignmentImports = (Assignment)c000Group.eContents().get(1);
 		private final RuleCall c00010ParserRuleCallImport = (RuleCall)c0001AssignmentImports.eContents().get(0);
@@ -65,7 +65,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele000001AssignmentName() { return c000001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0000010LexerRuleCallID() { return c0000010LexerRuleCallID; }
+		public RuleCall ele0000010ParserRuleCallID() { return c0000010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele00001KeywordLeftCurlyBracket() { return c00001KeywordLeftCurlyBracket; }
@@ -145,10 +145,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordImport = (Keyword)c00Group.eContents().get(0);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Keyword c01KeywordUri = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentUri = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentUri.eContents().get(0);
+		private final RuleCall c10ParserRuleCallSTRING = (RuleCall)c1AssignmentUri.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -169,7 +169,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordUri() { return c01KeywordUri; }
@@ -178,7 +178,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentUri() { return c1AssignmentUri; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
+		public RuleCall ele10ParserRuleCallSTRING() { return c10ParserRuleCallSTRING; }
 	}
 
 	public class EPackageImportElements implements IParserRuleAccess {
@@ -188,10 +188,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordImport = (Keyword)c00Group.eContents().get(0);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Keyword c01KeywordNs = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentNsURI = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentNsURI.eContents().get(0);
+		private final RuleCall c10ParserRuleCallSTRING = (RuleCall)c1AssignmentNsURI.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -212,7 +212,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordNs() { return c01KeywordNs; }
@@ -221,7 +221,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentNsURI() { return c1AssignmentNsURI; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
+		public RuleCall ele10ParserRuleCallSTRING() { return c10ParserRuleCallSTRING; }
 	}
 
 	public class JavaImportElements implements IParserRuleAccess {
@@ -232,11 +232,11 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c000KeywordImport = (Keyword)c00Group.eContents().get(0);
 		private final Keyword c001KeywordJava = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentPath = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallID = (RuleCall)c01AssignmentPath.eContents().get(0);
+		private final RuleCall c010ParserRuleCallID = (RuleCall)c01AssignmentPath.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentPath = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentPath.eContents().get(0);
+		private final RuleCall c110ParserRuleCallID = (RuleCall)c11AssignmentPath.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -260,7 +260,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentPath() { return c01AssignmentPath; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
+		public RuleCall ele010ParserRuleCallID() { return c010ParserRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -272,7 +272,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentPath() { return c11AssignmentPath; }
 
 		// not supported
-		public RuleCall ele110LexerRuleCallID() { return c110LexerRuleCallID; }
+		public RuleCall ele110ParserRuleCallID() { return c110ParserRuleCallID; }
 	}
 
 	public class ExtensionImportElements implements IParserRuleAccess {
@@ -283,11 +283,11 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c000KeywordImport = (Keyword)c00Group.eContents().get(0);
 		private final Keyword c001KeywordExtension = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentPath = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallID = (RuleCall)c01AssignmentPath.eContents().get(0);
+		private final RuleCall c010ParserRuleCallID = (RuleCall)c01AssignmentPath.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordColonColon = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentPath = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110LexerRuleCallID = (RuleCall)c11AssignmentPath.eContents().get(0);
+		private final RuleCall c110ParserRuleCallID = (RuleCall)c11AssignmentPath.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -311,7 +311,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentPath() { return c01AssignmentPath; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
+		public RuleCall ele010ParserRuleCallID() { return c010ParserRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -323,7 +323,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentPath() { return c11AssignmentPath; }
 
 		// not supported
-		public RuleCall ele110LexerRuleCallID() { return c110LexerRuleCallID; }
+		public RuleCall ele110ParserRuleCallID() { return c110ParserRuleCallID; }
 	}
 
 	public class NamedResourceElements implements IParserRuleAccess {
@@ -339,14 +339,14 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00000000Group = (Group)c0000000Group.eContents().get(0);
 		private final Keyword c000000000KeywordResource = (Keyword)c00000000Group.eContents().get(0);
 		private final Assignment c000000001AssignmentName = (Assignment)c00000000Group.eContents().get(1);
-		private final RuleCall c0000000010LexerRuleCallID = (RuleCall)c000000001AssignmentName.eContents().get(0);
+		private final RuleCall c0000000010ParserRuleCallID = (RuleCall)c000000001AssignmentName.eContents().get(0);
 		private final Keyword c00000001KeywordLeftCurlyBracket = (Keyword)c0000000Group.eContents().get(1);
 		private final Keyword c0000001KeywordLeft = (Keyword)c000000Group.eContents().get(1);
 		private final Alternatives c000001Alternatives = (Alternatives)c00000Group.eContents().get(1);
 		private final Group c0000010Group = (Group)c000001Alternatives.eContents().get(0);
 		private final Keyword c00000100KeywordUri = (Keyword)c0000010Group.eContents().get(0);
 		private final Assignment c00000101AssignmentLeftUri = (Assignment)c0000010Group.eContents().get(1);
-		private final RuleCall c000001010LexerRuleCallSTRING = (RuleCall)c00000101AssignmentLeftUri.eContents().get(0);
+		private final RuleCall c000001010ParserRuleCallSTRING = (RuleCall)c00000101AssignmentLeftUri.eContents().get(0);
 		private final Assignment c0000011AssignmentLeftRoot = (Assignment)c000001Alternatives.eContents().get(1);
 		private final RuleCall c00000110ParserRuleCallCreatedObject = (RuleCall)c0000011AssignmentLeftRoot.eContents().get(0);
 		private final Keyword c00001KeywordSemicolon = (Keyword)c0000Group.eContents().get(1);
@@ -355,7 +355,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c0010Group = (Group)c001Alternatives.eContents().get(0);
 		private final Keyword c00100KeywordUri = (Keyword)c0010Group.eContents().get(0);
 		private final Assignment c00101AssignmentRightUri = (Assignment)c0010Group.eContents().get(1);
-		private final RuleCall c001010LexerRuleCallSTRING = (RuleCall)c00101AssignmentRightUri.eContents().get(0);
+		private final RuleCall c001010ParserRuleCallSTRING = (RuleCall)c00101AssignmentRightUri.eContents().get(0);
 		private final Assignment c0011AssignmentRightRoot = (Assignment)c001Alternatives.eContents().get(1);
 		private final RuleCall c00110ParserRuleCallCreatedObject = (RuleCall)c0011AssignmentRightRoot.eContents().get(0);
 		private final Keyword c01KeywordSemicolon = (Keyword)c0Group.eContents().get(1);
@@ -398,7 +398,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele000000001AssignmentName() { return c000000001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0000000010LexerRuleCallID() { return c0000000010LexerRuleCallID; }
+		public RuleCall ele0000000010ParserRuleCallID() { return c0000000010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele00000001KeywordLeftCurlyBracket() { return c00000001KeywordLeftCurlyBracket; }
@@ -419,7 +419,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00000101AssignmentLeftUri() { return c00000101AssignmentLeftUri; }
 
 		// not supported
-		public RuleCall ele000001010LexerRuleCallSTRING() { return c000001010LexerRuleCallSTRING; }
+		public RuleCall ele000001010ParserRuleCallSTRING() { return c000001010ParserRuleCallSTRING; }
 
 		// not supported
 		public Assignment ele0000011AssignmentLeftRoot() { return c0000011AssignmentLeftRoot; }
@@ -446,7 +446,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00101AssignmentRightUri() { return c00101AssignmentRightUri; }
 
 		// not supported
-		public RuleCall ele001010LexerRuleCallSTRING() { return c001010LexerRuleCallSTRING; }
+		public RuleCall ele001010ParserRuleCallSTRING() { return c001010ParserRuleCallSTRING; }
 
 		// not supported
 		public Assignment ele0011AssignmentRightRoot() { return c0011AssignmentRightRoot; }
@@ -487,7 +487,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordObject = (Keyword)c00Group.eContents().get(0);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Alternatives c01Alternatives = (Alternatives)c0Group.eContents().get(1);
 		private final Group c010Group = (Group)c01Alternatives.eContents().get(0);
 		private final Assignment c0100AssignmentLeftRes = (Assignment)c010Group.eContents().get(0);
@@ -548,7 +548,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Alternatives ele01Alternatives() { return c01Alternatives; }
@@ -714,7 +714,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Group c0000Group = (Group)c000Group.eContents().get(0);
 		private final Assignment c00000AssignmentFeature = (Assignment)c0000Group.eContents().get(0);
-		private final RuleCall c000000LexerRuleCallID = (RuleCall)c00000AssignmentFeature.eContents().get(0);
+		private final RuleCall c000000ParserRuleCallID = (RuleCall)c00000AssignmentFeature.eContents().get(0);
 		private final Keyword c00001KeywordEqualsSign = (Keyword)c0000Group.eContents().get(1);
 		private final Assignment c0001AssignmentLeftValue = (Assignment)c000Group.eContents().get(1);
 		private final RuleCall c00010ParserRuleCallSingleAssignmentValue = (RuleCall)c0001AssignmentLeftValue.eContents().get(0);
@@ -745,7 +745,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00000AssignmentFeature() { return c00000AssignmentFeature; }
 
 		// not supported
-		public RuleCall ele000000LexerRuleCallID() { return c000000LexerRuleCallID; }
+		public RuleCall ele000000ParserRuleCallID() { return c000000ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele00001KeywordEqualsSign() { return c00001KeywordEqualsSign; }
@@ -779,7 +779,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
 		private final Group c000000Group = (Group)c00000Group.eContents().get(0);
 		private final Assignment c0000000AssignmentFeature = (Assignment)c000000Group.eContents().get(0);
-		private final RuleCall c00000000LexerRuleCallID = (RuleCall)c0000000AssignmentFeature.eContents().get(0);
+		private final RuleCall c00000000ParserRuleCallID = (RuleCall)c0000000AssignmentFeature.eContents().get(0);
 		private final Keyword c0000001KeywordEqualsSign = (Keyword)c000000Group.eContents().get(1);
 		private final Keyword c000001KeywordLeftSquareBracket = (Keyword)c00000Group.eContents().get(1);
 		private final Group c00001Group = (Group)c0000Group.eContents().get(1);
@@ -828,7 +828,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0000000AssignmentFeature() { return c0000000AssignmentFeature; }
 
 		// not supported
-		public RuleCall ele00000000LexerRuleCallID() { return c00000000LexerRuleCallID; }
+		public RuleCall ele00000000ParserRuleCallID() { return c00000000ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele0000001KeywordEqualsSign() { return c0000001KeywordEqualsSign; }
@@ -894,7 +894,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Assignment c000AssignmentFeature = (Assignment)c00Group.eContents().get(0);
-		private final RuleCall c0000LexerRuleCallID = (RuleCall)c000AssignmentFeature.eContents().get(0);
+		private final RuleCall c0000ParserRuleCallID = (RuleCall)c000AssignmentFeature.eContents().get(0);
 		private final Keyword c001KeywordEqualsSign = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentLeftValue = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallSingleAssignmentValue = (RuleCall)c01AssignmentLeftValue.eContents().get(0);
@@ -916,7 +916,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele000AssignmentFeature() { return c000AssignmentFeature; }
 
 		// not supported
-		public RuleCall ele0000LexerRuleCallID() { return c0000LexerRuleCallID; }
+		public RuleCall ele0000ParserRuleCallID() { return c0000ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele001KeywordEqualsSign() { return c001KeywordEqualsSign; }
@@ -939,7 +939,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Group c0000Group = (Group)c000Group.eContents().get(0);
 		private final Assignment c00000AssignmentFeature = (Assignment)c0000Group.eContents().get(0);
-		private final RuleCall c000000LexerRuleCallID = (RuleCall)c00000AssignmentFeature.eContents().get(0);
+		private final RuleCall c000000ParserRuleCallID = (RuleCall)c00000AssignmentFeature.eContents().get(0);
 		private final Keyword c00001KeywordEqualsSign = (Keyword)c0000Group.eContents().get(1);
 		private final Keyword c0001KeywordLeftSquareBracket = (Keyword)c000Group.eContents().get(1);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
@@ -974,7 +974,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00000AssignmentFeature() { return c00000AssignmentFeature; }
 
 		// not supported
-		public RuleCall ele000000LexerRuleCallID() { return c000000LexerRuleCallID; }
+		public RuleCall ele000000ParserRuleCallID() { return c000000ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele00001KeywordEqualsSign() { return c00001KeywordEqualsSign; }
@@ -1016,7 +1016,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
 		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
 		private final Assignment c000AssignmentValue = (Assignment)c00Alternatives.eContents().get(0);
-		private final RuleCall c0000LexerRuleCallSTRING = (RuleCall)c000AssignmentValue.eContents().get(0);
+		private final RuleCall c0000ParserRuleCallSTRING = (RuleCall)c000AssignmentValue.eContents().get(0);
 		private final Group c001Group = (Group)c00Alternatives.eContents().get(1);
 		private final Assignment c0010AssignmentRefObject = (Assignment)c001Group.eContents().get(0);
 		private final CrossReference c00100CrossReferenceEStringNamedObject = (CrossReference)c0010AssignmentRefObject.eContents().get(0);
@@ -1024,12 +1024,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00110Group = (Group)c0011Group.eContents().get(0);
 		private final Keyword c001100KeywordFullStop = (Keyword)c00110Group.eContents().get(0);
 		private final Assignment c001101AssignmentRefFeature = (Assignment)c00110Group.eContents().get(1);
-		private final RuleCall c0011010LexerRuleCallID = (RuleCall)c001101AssignmentRefFeature.eContents().get(0);
+		private final RuleCall c0011010ParserRuleCallID = (RuleCall)c001101AssignmentRefFeature.eContents().get(0);
 		private final Group c00111Group = (Group)c0011Group.eContents().get(1);
 		private final Group c001110Group = (Group)c00111Group.eContents().get(0);
 		private final Keyword c0011100KeywordLeftSquareBracket = (Keyword)c001110Group.eContents().get(0);
 		private final Assignment c0011101AssignmentRefIndex = (Assignment)c001110Group.eContents().get(1);
-		private final RuleCall c00111010LexerRuleCallINT = (RuleCall)c0011101AssignmentRefIndex.eContents().get(0);
+		private final RuleCall c00111010ParserRuleCallINT = (RuleCall)c0011101AssignmentRefIndex.eContents().get(0);
 		private final Keyword c001111KeywordRightSquareBracket = (Keyword)c00111Group.eContents().get(1);
 		private final Assignment c01AssignmentNewObject = (Assignment)c0Alternatives.eContents().get(1);
 		private final RuleCall c010ParserRuleCallCreatedObject = (RuleCall)c01AssignmentNewObject.eContents().get(0);
@@ -1055,7 +1055,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele000AssignmentValue() { return c000AssignmentValue; }
 
 		// not supported
-		public RuleCall ele0000LexerRuleCallSTRING() { return c0000LexerRuleCallSTRING; }
+		public RuleCall ele0000ParserRuleCallSTRING() { return c0000ParserRuleCallSTRING; }
 
 		// not supported
 		public Group ele001Group() { return c001Group; }
@@ -1079,7 +1079,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001101AssignmentRefFeature() { return c001101AssignmentRefFeature; }
 
 		// not supported
-		public RuleCall ele0011010LexerRuleCallID() { return c0011010LexerRuleCallID; }
+		public RuleCall ele0011010ParserRuleCallID() { return c0011010ParserRuleCallID; }
 
 		// not supported
 		public Group ele00111Group() { return c00111Group; }
@@ -1094,7 +1094,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0011101AssignmentRefIndex() { return c0011101AssignmentRefIndex; }
 
 		// not supported
-		public RuleCall ele00111010LexerRuleCallINT() { return c00111010LexerRuleCallINT; }
+		public RuleCall ele00111010ParserRuleCallINT() { return c00111010ParserRuleCallINT; }
 
 		// not supported
 		public Keyword ele001111KeywordRightSquareBracket() { return c001111KeywordRightSquareBracket; }
@@ -1126,7 +1126,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentIndex = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000LexerRuleCallINT = (RuleCall)c00AssignmentIndex.eContents().get(0);
+		private final RuleCall c000ParserRuleCallINT = (RuleCall)c00AssignmentIndex.eContents().get(0);
 		private final Keyword c01KeywordColon = (Keyword)c0Group.eContents().get(1);
 		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
 		private final Alternatives c10Alternatives = (Alternatives)c1Alternatives.eContents().get(0);
@@ -1136,10 +1136,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c100000Group = (Group)c10000Group.eContents().get(0);
 		private final Keyword c1000000KeywordLeftSquareBracket = (Keyword)c100000Group.eContents().get(0);
 		private final Assignment c1000001AssignmentRefIndex = (Assignment)c100000Group.eContents().get(1);
-		private final RuleCall c10000010LexerRuleCallINT = (RuleCall)c1000001AssignmentRefIndex.eContents().get(0);
+		private final RuleCall c10000010ParserRuleCallINT = (RuleCall)c1000001AssignmentRefIndex.eContents().get(0);
 		private final Keyword c100001KeywordRightSquareBracket = (Keyword)c10000Group.eContents().get(1);
 		private final Assignment c10001AssignmentValue = (Assignment)c1000Alternatives.eContents().get(1);
-		private final RuleCall c100010LexerRuleCallSTRING = (RuleCall)c10001AssignmentValue.eContents().get(0);
+		private final RuleCall c100010ParserRuleCallSTRING = (RuleCall)c10001AssignmentValue.eContents().get(0);
 		private final Group c1001Group = (Group)c100Alternatives.eContents().get(1);
 		private final Assignment c10010AssignmentRefObject = (Assignment)c1001Group.eContents().get(0);
 		private final CrossReference c100100CrossReferenceEStringNamedObject = (CrossReference)c10010AssignmentRefObject.eContents().get(0);
@@ -1147,12 +1147,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c100110Group = (Group)c10011Group.eContents().get(0);
 		private final Keyword c1001100KeywordFullStop = (Keyword)c100110Group.eContents().get(0);
 		private final Assignment c1001101AssignmentRefFeature = (Assignment)c100110Group.eContents().get(1);
-		private final RuleCall c10011010LexerRuleCallID = (RuleCall)c1001101AssignmentRefFeature.eContents().get(0);
+		private final RuleCall c10011010ParserRuleCallID = (RuleCall)c1001101AssignmentRefFeature.eContents().get(0);
 		private final Group c100111Group = (Group)c10011Group.eContents().get(1);
 		private final Group c1001110Group = (Group)c100111Group.eContents().get(0);
 		private final Keyword c10011100KeywordLeftSquareBracket = (Keyword)c1001110Group.eContents().get(0);
 		private final Assignment c10011101AssignmentRefIndex = (Assignment)c1001110Group.eContents().get(1);
-		private final RuleCall c100111010LexerRuleCallINT = (RuleCall)c10011101AssignmentRefIndex.eContents().get(0);
+		private final RuleCall c100111010ParserRuleCallINT = (RuleCall)c10011101AssignmentRefIndex.eContents().get(0);
 		private final Keyword c1001111KeywordRightSquareBracket = (Keyword)c100111Group.eContents().get(1);
 		private final Assignment c101AssignmentNewObject = (Assignment)c10Alternatives.eContents().get(1);
 		private final RuleCall c1010ParserRuleCallCreatedObject = (RuleCall)c101AssignmentNewObject.eContents().get(0);
@@ -1175,7 +1175,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00AssignmentIndex() { return c00AssignmentIndex; }
 
 		// not supported
-		public RuleCall ele000LexerRuleCallINT() { return c000LexerRuleCallINT; }
+		public RuleCall ele000ParserRuleCallINT() { return c000ParserRuleCallINT; }
 
 		// not supported
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
@@ -1205,7 +1205,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1000001AssignmentRefIndex() { return c1000001AssignmentRefIndex; }
 
 		// not supported
-		public RuleCall ele10000010LexerRuleCallINT() { return c10000010LexerRuleCallINT; }
+		public RuleCall ele10000010ParserRuleCallINT() { return c10000010ParserRuleCallINT; }
 
 		// not supported
 		public Keyword ele100001KeywordRightSquareBracket() { return c100001KeywordRightSquareBracket; }
@@ -1214,7 +1214,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele10001AssignmentValue() { return c10001AssignmentValue; }
 
 		// not supported
-		public RuleCall ele100010LexerRuleCallSTRING() { return c100010LexerRuleCallSTRING; }
+		public RuleCall ele100010ParserRuleCallSTRING() { return c100010ParserRuleCallSTRING; }
 
 		// not supported
 		public Group ele1001Group() { return c1001Group; }
@@ -1238,7 +1238,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1001101AssignmentRefFeature() { return c1001101AssignmentRefFeature; }
 
 		// not supported
-		public RuleCall ele10011010LexerRuleCallID() { return c10011010LexerRuleCallID; }
+		public RuleCall ele10011010ParserRuleCallID() { return c10011010ParserRuleCallID; }
 
 		// not supported
 		public Group ele100111Group() { return c100111Group; }
@@ -1253,7 +1253,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele10011101AssignmentRefIndex() { return c10011101AssignmentRefIndex; }
 
 		// not supported
-		public RuleCall ele100111010LexerRuleCallINT() { return c100111010LexerRuleCallINT; }
+		public RuleCall ele100111010ParserRuleCallINT() { return c100111010ParserRuleCallINT; }
 
 		// not supported
 		public Keyword ele1001111KeywordRightSquareBracket() { return c1001111KeywordRightSquareBracket; }
@@ -1289,7 +1289,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c0000AssignmentKeyword = (Assignment)c000Alternatives.eContents().get(0);
 		private final Keyword c00000KeywordNull = (Keyword)c0000AssignmentKeyword.eContents().get(0);
 		private final Assignment c0001AssignmentValue = (Assignment)c000Alternatives.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallSTRING = (RuleCall)c0001AssignmentValue.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallSTRING = (RuleCall)c0001AssignmentValue.eContents().get(0);
 		private final Group c001Group = (Group)c00Alternatives.eContents().get(1);
 		private final Assignment c0010AssignmentRefObject = (Assignment)c001Group.eContents().get(0);
 		private final CrossReference c00100CrossReferenceEStringNamedObject = (CrossReference)c0010AssignmentRefObject.eContents().get(0);
@@ -1297,12 +1297,12 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00110Group = (Group)c0011Group.eContents().get(0);
 		private final Keyword c001100KeywordFullStop = (Keyword)c00110Group.eContents().get(0);
 		private final Assignment c001101AssignmentRefFeature = (Assignment)c00110Group.eContents().get(1);
-		private final RuleCall c0011010LexerRuleCallID = (RuleCall)c001101AssignmentRefFeature.eContents().get(0);
+		private final RuleCall c0011010ParserRuleCallID = (RuleCall)c001101AssignmentRefFeature.eContents().get(0);
 		private final Group c00111Group = (Group)c0011Group.eContents().get(1);
 		private final Group c001110Group = (Group)c00111Group.eContents().get(0);
 		private final Keyword c0011100KeywordLeftSquareBracket = (Keyword)c001110Group.eContents().get(0);
 		private final Assignment c0011101AssignmentRefIndex = (Assignment)c001110Group.eContents().get(1);
-		private final RuleCall c00111010LexerRuleCallINT = (RuleCall)c0011101AssignmentRefIndex.eContents().get(0);
+		private final RuleCall c00111010ParserRuleCallINT = (RuleCall)c0011101AssignmentRefIndex.eContents().get(0);
 		private final Keyword c001111KeywordRightSquareBracket = (Keyword)c00111Group.eContents().get(1);
 		private final Assignment c01AssignmentNewObject = (Assignment)c0Alternatives.eContents().get(1);
 		private final RuleCall c010ParserRuleCallCreatedObject = (RuleCall)c01AssignmentNewObject.eContents().get(0);
@@ -1337,7 +1337,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentValue() { return c0001AssignmentValue; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallSTRING() { return c00010LexerRuleCallSTRING; }
+		public RuleCall ele00010ParserRuleCallSTRING() { return c00010ParserRuleCallSTRING; }
 
 		// not supported
 		public Group ele001Group() { return c001Group; }
@@ -1361,7 +1361,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001101AssignmentRefFeature() { return c001101AssignmentRefFeature; }
 
 		// not supported
-		public RuleCall ele0011010LexerRuleCallID() { return c0011010LexerRuleCallID; }
+		public RuleCall ele0011010ParserRuleCallID() { return c0011010ParserRuleCallID; }
 
 		// not supported
 		public Group ele00111Group() { return c00111Group; }
@@ -1376,7 +1376,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0011101AssignmentRefIndex() { return c0011101AssignmentRefIndex; }
 
 		// not supported
-		public RuleCall ele00111010LexerRuleCallINT() { return c00111010LexerRuleCallINT; }
+		public RuleCall ele00111010ParserRuleCallINT() { return c00111010ParserRuleCallINT; }
 
 		// not supported
 		public Keyword ele001111KeywordRightSquareBracket() { return c001111KeywordRightSquareBracket; }
@@ -1411,7 +1411,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c000ParserRuleCallObjectNew = (RuleCall)c00Alternatives.eContents().get(0);
 		private final RuleCall c001ParserRuleCallObjectCopy = (RuleCall)c00Alternatives.eContents().get(1);
 		private final Assignment c01AssignmentName = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
+		private final RuleCall c010ParserRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Group c10Group = (Group)c1Group.eContents().get(0);
 		private final Group c100Group = (Group)c10Group.eContents().get(0);
@@ -1447,7 +1447,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentName() { return c01AssignmentName; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
+		public RuleCall ele010ParserRuleCallID() { return c010ParserRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -1653,7 +1653,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordJava = (Keyword)c00Group.eContents().get(0);
 		private final Assignment c001AssignmentMethod = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentMethod.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentMethod.eContents().get(0);
 		private final Keyword c01KeywordLeftParenthesis = (Keyword)c0Group.eContents().get(1);
 		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
@@ -1676,7 +1676,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentMethod() { return c001AssignmentMethod; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordLeftParenthesis() { return c01KeywordLeftParenthesis; }
@@ -1688,7 +1688,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ExpressionExecutableElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionExecutable");
 		private final Assignment cAssignmentExprstr = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentExprstr.eContents().get(0);
+		private final RuleCall c0ParserRuleCallSTRING = (RuleCall)cAssignmentExprstr.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1697,7 +1697,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment eleAssignmentExprstr() { return cAssignmentExprstr; }
 
 		// not supported
-		public RuleCall ele0LexerRuleCallSTRING() { return c0LexerRuleCallSTRING; }
+		public RuleCall ele0ParserRuleCallSTRING() { return c0ParserRuleCallSTRING; }
 	}
 	
 	private EPatchElements pEPatch;
@@ -1729,10 +1729,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public EpatchTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public EpatchTestLanguageGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -1742,7 +1742,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -1878,37 +1878,37 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

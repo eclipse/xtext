@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -19,7 +19,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextValueConverters extends XtextBuiltInConverters {
+public class XtextValueConverters extends DefaultTerminalConverters {
 
 	@ValueConverter(rule = "GrammarID")
 	public IValueConverter<String> GrammarID() {

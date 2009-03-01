@@ -159,7 +159,7 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordType());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallID());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordExtends());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele1AssignmentExtends());
 		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele10CrossReferenceEStringType());

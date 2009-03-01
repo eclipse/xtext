@@ -116,9 +116,9 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalLowerCaseNamedTestLanguage.g:86:6: lv_name_0= RULE_ID
             {
             lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel128); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel127); 
 
-            		createLeafNode(grammarAccess.prModel().ele0LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prModel().ele0ParserRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -158,6 +158,6 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel127 = new BitSet(new long[]{0x0000000000000002L});
 
 }

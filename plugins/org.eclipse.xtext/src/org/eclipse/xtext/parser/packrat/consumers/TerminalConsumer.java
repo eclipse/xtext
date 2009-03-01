@@ -27,6 +27,8 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 
 	private boolean hidden;
 
+	protected int SUCCESS = ConsumeResult.SUCCESS;
+
 	protected TerminalConsumer(ITerminalConsumerConfiguration configuration) {
 		super(configuration.getInput(), configuration.getTokenAcceptor());
 	}
@@ -37,7 +39,7 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 		final int result = doConsume();
 		if (prevMarker == getOffset())
 			return ConsumeResult.EMPTY_MATCH;
-		if (result != ConsumeResult.SUCCESS || notMatching.matches(getInput(), prevMarker, getInput().getOffset()- prevMarker)) {
+		if (result != SUCCESS || notMatching.matches(getInput(), prevMarker, getInput().getOffset()- prevMarker)) {
 			getTokenAcceptor().accept(new ErrorToken(prevMarker, getInput().getOffset() - prevMarker, element, "Another token expected. Error message by : " + this));
 			return getInput().getOffset();
 		}
@@ -79,11 +81,11 @@ public abstract class TerminalConsumer extends AbstractConsumer implements ITerm
 	public final int consume(ISequenceMatcher notMatching) {
 		int prevOffset = getInput().getOffset();
 		final int result = doConsume();
-		if (result == ConsumeResult.SUCCESS && notMatching.matches(getInput(), prevOffset, getInput().getOffset() - prevOffset)) {
+		if (result == SUCCESS && notMatching.matches(getInput(), prevOffset, getInput().getOffset() - prevOffset)) {
 			getInput().setOffset(prevOffset);
 			return ConsumeResult.EMPTY_MATCH;
 		}
-		if (result != ConsumeResult.SUCCESS) {
+		if (result != SUCCESS) {
 			getInput().setOffset(prevOffset);
 		}
 		return result;

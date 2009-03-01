@@ -512,7 +512,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prModelId().ele00LexerRuleCallID(), null); 
+                createLeafNode(grammarAccess.prModelId().ele00ParserRuleCallID(), null); 
                 
             kw=(Token)input.LT(1);
             match(input,15,FOLLOW_15_in_ruleModelId523); 
@@ -529,7 +529,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_ID_2);
                 
              
-                createLeafNode(grammarAccess.prModelId().ele1LexerRuleCallID(), null); 
+                createLeafNode(grammarAccess.prModelId().ele1ParserRuleCallID(), null); 
                 
 
             }
@@ -729,7 +729,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT_0);
                 
              
-                createLeafNode(grammarAccess.prFraction().ele0LexerRuleCallINT(), null); 
+                createLeafNode(grammarAccess.prFraction().ele0ParserRuleCallINT(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:357:1: (kw= '/' this_INT_2= RULE_INT )?
             int alt5=2;
@@ -754,7 +754,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     		current.merge(this_INT_2);
                         
                      
-                        createLeafNode(grammarAccess.prFraction().ele11LexerRuleCallINT(), null); 
+                        createLeafNode(grammarAccess.prFraction().ele11ParserRuleCallINT(), null); 
                         
 
                     }
@@ -856,7 +856,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT_1);
                 
              
-                createLeafNode(grammarAccess.prVector().ele001LexerRuleCallINT(), null); 
+                createLeafNode(grammarAccess.prVector().ele001ParserRuleCallINT(), null); 
                 
 
             }
@@ -867,7 +867,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT_2);
                 
              
-                createLeafNode(grammarAccess.prVector().ele01LexerRuleCallINT(), null); 
+                createLeafNode(grammarAccess.prVector().ele01ParserRuleCallINT(), null); 
                 
 
             }

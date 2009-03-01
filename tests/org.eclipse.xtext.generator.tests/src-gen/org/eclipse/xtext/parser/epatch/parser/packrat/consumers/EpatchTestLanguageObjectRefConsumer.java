@@ -633,7 +633,7 @@ public final class EpatchTestLanguageObjectRefConsumer extends NonTerminalConsum
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordObject());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010LexerRuleCallID());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallID());
 		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.ele01Alternatives());
 		group$8$Consumer = new Group$8$Consumer(rule.ele010Group());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele0100AssignmentLeftRes());

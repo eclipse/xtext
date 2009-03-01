@@ -136,16 +136,25 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.prGreeting().ele10LexerRuleCallID();
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = grammarAccess.prGreeting().ele10ParserRuleCallID();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule Greeting ****************/
+
+
+
+
+
+
+
 
 }

@@ -71,7 +71,7 @@ public final class XtextKeywordConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentValue());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0LexerRuleCallSTRING());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSTRING());
 	}
 	
 	@Override

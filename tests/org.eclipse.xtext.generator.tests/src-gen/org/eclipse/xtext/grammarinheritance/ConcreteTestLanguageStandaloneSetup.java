@@ -1,4 +1,3 @@
-
 package org.eclipse.xtext.grammarinheritance;
 
 import org.eclipse.emf.ecore.EPackage;

@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
@@ -41,10 +41,10 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c0000Group = (Group)c000Group.eContents().get(0);
 		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
 		private final Assignment c000000AssignmentName = (Assignment)c00000Group.eContents().get(0);
-		private final RuleCall c0000000LexerRuleCallID = (RuleCall)c000000AssignmentName.eContents().get(0);
+		private final RuleCall c0000000ParserRuleCallID = (RuleCall)c000000AssignmentName.eContents().get(0);
 		private final Keyword c000001KeywordLeftParenthesis = (Keyword)c00000Group.eContents().get(1);
 		private final Assignment c00001AssignmentAttrib = (Assignment)c0000Group.eContents().get(1);
-		private final RuleCall c000010LexerRuleCallSTRING = (RuleCall)c00001AssignmentAttrib.eContents().get(0);
+		private final RuleCall c000010ParserRuleCallSTRING = (RuleCall)c00001AssignmentAttrib.eContents().get(0);
 		private final Keyword c0001KeywordRightParenthesis = (Keyword)c000Group.eContents().get(1);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentChildren = (Assignment)c0Group.eContents().get(1);
@@ -76,7 +76,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele000000AssignmentName() { return c000000AssignmentName; }
 
 		// not supported
-		public RuleCall ele0000000LexerRuleCallID() { return c0000000LexerRuleCallID; }
+		public RuleCall ele0000000ParserRuleCallID() { return c0000000ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele000001KeywordLeftParenthesis() { return c000001KeywordLeftParenthesis; }
@@ -85,7 +85,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele00001AssignmentAttrib() { return c00001AssignmentAttrib; }
 
 		// not supported
-		public RuleCall ele000010LexerRuleCallSTRING() { return c000010LexerRuleCallSTRING; }
+		public RuleCall ele000010ParserRuleCallSTRING() { return c000010ParserRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele0001KeywordRightParenthesis() { return c0001KeywordRightParenthesis; }
@@ -108,10 +108,10 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public TreeTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public TreeTestLanguageGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -121,7 +121,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -137,37 +137,37 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

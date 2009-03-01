@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class TransientValuesTestGrammarAccess implements IGrammarAccess {
@@ -58,9 +58,9 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordRequired = (Keyword)c0Group.eContents().get(0);
 		private final Assignment c01AssignmentRequired1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallINT = (RuleCall)c01AssignmentRequired1.eContents().get(0);
+		private final RuleCall c010ParserRuleCallINT = (RuleCall)c01AssignmentRequired1.eContents().get(0);
 		private final Assignment c1AssignmentRequired2 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallINT = (RuleCall)c1AssignmentRequired2.eContents().get(0);
+		private final RuleCall c10ParserRuleCallINT = (RuleCall)c1AssignmentRequired2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -78,13 +78,13 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentRequired1() { return c01AssignmentRequired1; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallINT() { return c010LexerRuleCallINT; }
+		public RuleCall ele010ParserRuleCallINT() { return c010ParserRuleCallINT; }
 
 		// not supported
 		public Assignment ele1AssignmentRequired2() { return c1AssignmentRequired2; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallINT() { return c10LexerRuleCallINT; }
+		public RuleCall ele10ParserRuleCallINT() { return c10ParserRuleCallINT; }
 	}
 
 	public class TestOptionalElements implements IParserRuleAccess {
@@ -93,11 +93,11 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Keyword c00KeywordOptional = (Keyword)c0Group.eContents().get(0);
 		private final Assignment c01AssignmentOpt1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallINT = (RuleCall)c01AssignmentOpt1.eContents().get(0);
+		private final RuleCall c010ParserRuleCallINT = (RuleCall)c01AssignmentOpt1.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordColon = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentOpt2 = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110LexerRuleCallINT = (RuleCall)c11AssignmentOpt2.eContents().get(0);
+		private final RuleCall c110ParserRuleCallINT = (RuleCall)c11AssignmentOpt2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -115,7 +115,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentOpt1() { return c01AssignmentOpt1; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallINT() { return c010LexerRuleCallINT; }
+		public RuleCall ele010ParserRuleCallINT() { return c010ParserRuleCallINT; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -127,7 +127,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentOpt2() { return c11AssignmentOpt2; }
 
 		// not supported
-		public RuleCall ele110LexerRuleCallINT() { return c110LexerRuleCallINT; }
+		public RuleCall ele110ParserRuleCallINT() { return c110ParserRuleCallINT; }
 	}
 
 	public class TestListElements implements IParserRuleAccess {
@@ -135,7 +135,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordList = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentItem = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallINT = (RuleCall)c1AssignmentItem.eContents().get(0);
+		private final RuleCall c10ParserRuleCallINT = (RuleCall)c1AssignmentItem.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -150,7 +150,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentItem() { return c1AssignmentItem; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallINT() { return c10LexerRuleCallINT; }
+		public RuleCall ele10ParserRuleCallINT() { return c10ParserRuleCallINT; }
 	}
 	
 	private RootElements pRoot;
@@ -160,10 +160,10 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public TransientValuesTestGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public TransientValuesTestGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -173,7 +173,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -199,37 +199,37 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

@@ -1,4 +1,3 @@
-
 package org.eclipse.xtext.parser.terminalrules;
 
 import org.eclipse.emf.ecore.EPackage;

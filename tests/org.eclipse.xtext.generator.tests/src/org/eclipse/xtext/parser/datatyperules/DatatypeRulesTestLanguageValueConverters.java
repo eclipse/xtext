@@ -9,7 +9,7 @@ package org.eclipse.xtext.parser.datatyperules;
 
 import java.math.BigDecimal;
 
-import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DatatypeRulesTestLanguageValueConverters extends XtextBuiltInConverters {
+public class DatatypeRulesTestLanguageValueConverters extends DefaultTerminalConverters {
 
 	@ValueConverter(rule = "Fraction")
 	public IValueConverter<BigDecimal> Fraction() {

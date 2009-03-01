@@ -227,10 +227,10 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele000000AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000LexerRuleCallID());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000ParserRuleCallID());
 		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele000001KeywordLeftParenthesis());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele00001AssignmentAttrib());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele000010LexerRuleCallSTRING());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele000010ParserRuleCallSTRING());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele0001KeywordRightParenthesis());
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele001KeywordLeftCurlyBracket());
 		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele01AssignmentChildren());

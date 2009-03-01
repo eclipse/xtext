@@ -349,9 +349,9 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele00000KeywordSpielplatz());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele00001AssignmentGroesse());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele000010LexerRuleCallINT());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele000010ParserRuleCallINT());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele0001AssignmentBeschreibung());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010LexerRuleCallSTRING());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele00010ParserRuleCallSTRING());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele001KeywordLeftCurlyBracket());
 		alternatives$12$Consumer = new Alternatives$12$Consumer(rule.ele01Alternatives());
 		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele010000AssignmentKinder());

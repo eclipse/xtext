@@ -87,9 +87,8 @@ ruleEPatch returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prEPatch().ele0000010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prEPatch().ele0000010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -299,9 +298,8 @@ ruleResourceImport returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prResourceImport().ele0010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prResourceImport().ele0010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -323,9 +321,8 @@ ruleResourceImport returns [EObject current=null]
     }
 )(	
 	
-	    lv_uri_3=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prResourceImport().ele10LexerRuleCallSTRING(), "uri"); 
+	    lv_uri_3=RULE_STRING	{
+		createLeafNode(grammarAccess.prResourceImport().ele10ParserRuleCallSTRING(), "uri"); 
 	}
  
 	    {
@@ -370,9 +367,8 @@ ruleEPackageImport returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prEPackageImport().ele0010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prEPackageImport().ele0010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -394,9 +390,8 @@ ruleEPackageImport returns [EObject current=null]
     }
 )(	
 	
-	    lv_nsURI_3=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prEPackageImport().ele10LexerRuleCallSTRING(), "nsURI"); 
+	    lv_nsURI_3=RULE_STRING	{
+		createLeafNode(grammarAccess.prEPackageImport().ele10ParserRuleCallSTRING(), "nsURI"); 
 	}
  
 	    {
@@ -445,9 +440,8 @@ ruleJavaImport returns [EObject current=null]
     }
 )(	
 	
-	    lv_path_2=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prJavaImport().ele010LexerRuleCallID(), "path"); 
+	    lv_path_2=RULE_ID	{
+		createLeafNode(grammarAccess.prJavaImport().ele010ParserRuleCallID(), "path"); 
 	}
  
 	    {
@@ -469,9 +463,8 @@ ruleJavaImport returns [EObject current=null]
     }
 (	
 	
-	    lv_path_4=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prJavaImport().ele110LexerRuleCallID(), "path"); 
+	    lv_path_4=RULE_ID	{
+		createLeafNode(grammarAccess.prJavaImport().ele110ParserRuleCallID(), "path"); 
 	}
  
 	    {
@@ -520,9 +513,8 @@ ruleExtensionImport returns [EObject current=null]
     }
 )(	
 	
-	    lv_path_2=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prExtensionImport().ele010LexerRuleCallID(), "path"); 
+	    lv_path_2=RULE_ID	{
+		createLeafNode(grammarAccess.prExtensionImport().ele010ParserRuleCallID(), "path"); 
 	}
  
 	    {
@@ -544,9 +536,8 @@ ruleExtensionImport returns [EObject current=null]
     }
 (	
 	
-	    lv_path_4=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prExtensionImport().ele110LexerRuleCallID(), "path"); 
+	    lv_path_4=RULE_ID	{
+		createLeafNode(grammarAccess.prExtensionImport().ele110ParserRuleCallID(), "path"); 
 	}
  
 	    {
@@ -591,9 +582,8 @@ ruleNamedResource returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prNamedResource().ele0000000010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prNamedResource().ele0000000010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -623,9 +613,8 @@ ruleNamedResource returns [EObject current=null]
     }
 (	
 	
-	    lv_leftUri_5=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prNamedResource().ele000001010LexerRuleCallSTRING(), "leftUri"); 
+	    lv_leftUri_5=RULE_STRING	{
+		createLeafNode(grammarAccess.prNamedResource().ele000001010ParserRuleCallSTRING(), "leftUri"); 
 	}
  
 	    {
@@ -677,9 +666,8 @@ ruleNamedResource returns [EObject current=null]
     }
 (	
 	
-	    lv_rightUri_10=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prNamedResource().ele001010LexerRuleCallSTRING(), "rightUri"); 
+	    lv_rightUri_10=RULE_STRING	{
+		createLeafNode(grammarAccess.prNamedResource().ele001010ParserRuleCallSTRING(), "rightUri"); 
 	}
  
 	    {
@@ -756,9 +744,8 @@ ruleObjectRef returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prObjectRef().ele0010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prObjectRef().ele0010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1019,9 +1006,8 @@ ruleBiSingleAssignment returns [EObject current=null]
     }:
 ((((((	
 	
-	    lv_feature_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prBiSingleAssignment().ele000000LexerRuleCallID(), "feature"); 
+	    lv_feature_0=RULE_ID	{
+		createLeafNode(grammarAccess.prBiSingleAssignment().ele000000ParserRuleCallID(), "feature"); 
 	}
  
 	    {
@@ -1116,9 +1102,8 @@ ruleBiListAssignment returns [EObject current=null]
     }:
 ((((((((	
 	
-	    lv_feature_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prBiListAssignment().ele00000000LexerRuleCallID(), "feature"); 
+	    lv_feature_0=RULE_ID	{
+		createLeafNode(grammarAccess.prBiListAssignment().ele00000000ParserRuleCallID(), "feature"); 
 	}
  
 	    {
@@ -1271,9 +1256,8 @@ ruleMonoSingleAssignment returns [EObject current=null]
     }:
 ((((	
 	
-	    lv_feature_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prMonoSingleAssignment().ele0000LexerRuleCallID(), "feature"); 
+	    lv_feature_0=RULE_ID	{
+		createLeafNode(grammarAccess.prMonoSingleAssignment().ele0000ParserRuleCallID(), "feature"); 
 	}
  
 	    {
@@ -1343,9 +1327,8 @@ ruleMonoListAssignment returns [EObject current=null]
     }:
 ((((((	
 	
-	    lv_feature_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prMonoListAssignment().ele000000LexerRuleCallID(), "feature"); 
+	    lv_feature_0=RULE_ID	{
+		createLeafNode(grammarAccess.prMonoListAssignment().ele000000ParserRuleCallID(), "feature"); 
 	}
  
 	    {
@@ -1448,9 +1431,8 @@ ruleAssignmentValue returns [EObject current=null]
     }:
 ((((	
 	
-	    lv_value_0=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prAssignmentValue().ele0000LexerRuleCallSTRING(), "value"); 
+	    lv_value_0=RULE_STRING	{
+		createLeafNode(grammarAccess.prAssignmentValue().ele0000ParserRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -1489,9 +1471,8 @@ ruleAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refFeature_3=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prAssignmentValue().ele0011010LexerRuleCallID(), "refFeature"); 
+	    lv_refFeature_3=RULE_ID	{
+		createLeafNode(grammarAccess.prAssignmentValue().ele0011010ParserRuleCallID(), "refFeature"); 
 	}
  
 	    {
@@ -1513,9 +1494,8 @@ ruleAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refIndex_5=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prAssignmentValue().ele00111010LexerRuleCallINT(), "refIndex"); 
+	    lv_refIndex_5=RULE_INT	{
+		createLeafNode(grammarAccess.prAssignmentValue().ele00111010ParserRuleCallINT(), "refIndex"); 
 	}
  
 	    {
@@ -1619,9 +1599,8 @@ ruleListAssignmentValue returns [EObject current=null]
     }:
 (((	
 	
-	    lv_index_0=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prListAssignmentValue().ele000LexerRuleCallINT(), "index"); 
+	    lv_index_0=RULE_INT	{
+		createLeafNode(grammarAccess.prListAssignmentValue().ele000ParserRuleCallINT(), "index"); 
 	}
  
 	    {
@@ -1647,9 +1626,8 @@ ruleListAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refIndex_3=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prListAssignmentValue().ele10000010LexerRuleCallINT(), "refIndex"); 
+	    lv_refIndex_3=RULE_INT	{
+		createLeafNode(grammarAccess.prListAssignmentValue().ele10000010ParserRuleCallINT(), "refIndex"); 
 	}
  
 	    {
@@ -1672,9 +1650,8 @@ ruleListAssignmentValue returns [EObject current=null]
 )
     |(	
 	
-	    lv_value_5=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prListAssignmentValue().ele100010LexerRuleCallSTRING(), "value"); 
+	    lv_value_5=RULE_STRING	{
+		createLeafNode(grammarAccess.prListAssignmentValue().ele100010ParserRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -1713,9 +1690,8 @@ ruleListAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refFeature_8=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prListAssignmentValue().ele10011010LexerRuleCallID(), "refFeature"); 
+	    lv_refFeature_8=RULE_ID	{
+		createLeafNode(grammarAccess.prListAssignmentValue().ele10011010ParserRuleCallID(), "refFeature"); 
 	}
  
 	    {
@@ -1737,9 +1713,8 @@ ruleListAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refIndex_10=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prListAssignmentValue().ele100111010LexerRuleCallINT(), "refIndex"); 
+	    lv_refIndex_10=RULE_INT	{
+		createLeafNode(grammarAccess.prListAssignmentValue().ele100111010ParserRuleCallINT(), "refIndex"); 
 	}
  
 	    {
@@ -1865,9 +1840,8 @@ ruleSingleAssignmentValue returns [EObject current=null]
 )
     |(	
 	
-	    lv_value_1=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00010LexerRuleCallSTRING(), "value"); 
+	    lv_value_1=RULE_STRING	{
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00010ParserRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -1906,9 +1880,8 @@ ruleSingleAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refFeature_4=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0011010LexerRuleCallID(), "refFeature"); 
+	    lv_refFeature_4=RULE_ID	{
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele0011010ParserRuleCallID(), "refFeature"); 
 	}
  
 	    {
@@ -1930,9 +1903,8 @@ ruleSingleAssignmentValue returns [EObject current=null]
     }
 (	
 	
-	    lv_refIndex_6=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00111010LexerRuleCallINT(), "refIndex"); 
+	    lv_refIndex_6=RULE_INT	{
+		createLeafNode(grammarAccess.prSingleAssignmentValue().ele00111010ParserRuleCallINT(), "refIndex"); 
 	}
  
 	    {
@@ -2055,9 +2027,8 @@ ruleCreatedObject returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prCreatedObject().ele010LexerRuleCallID(), "name"); 
+	    lv_name_2=RULE_ID	{
+		createLeafNode(grammarAccess.prCreatedObject().ele010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -2445,9 +2416,8 @@ ruleJavaExecutable returns [EObject current=null]
     }
 (	
 	
-	    lv_method_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prJavaExecutable().ele0010LexerRuleCallID(), "method"); 
+	    lv_method_1=RULE_ID	{
+		createLeafNode(grammarAccess.prJavaExecutable().ele0010ParserRuleCallID(), "method"); 
 	}
  
 	    {
@@ -2496,9 +2466,8 @@ ruleExpressionExecutable returns [EObject current=null]
     }:
 (	
 	
-	    lv_exprstr_0=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prExpressionExecutable().ele0LexerRuleCallSTRING(), "exprstr"); 
+	    lv_exprstr_0=RULE_STRING	{
+		createLeafNode(grammarAccess.prExpressionExecutable().ele0ParserRuleCallSTRING(), "exprstr"); 
 	}
  
 	    {
@@ -2572,23 +2541,54 @@ ruleExpressionExecutable returns [EObject current=null]
 
 
 
-RULE_FRAGMENT : '#' ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'/'|'['|']'|'{'|'}'|'.'|'@')+;
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+
+
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : 
-			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
-              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
-              ;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
+RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+
+
+
+RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+
+
+RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+
+
 
 RULE_ANY_OTHER : .;
+
+
+
+RULE_FRAGMENT : '#' ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'/'|'['|']'|'{'|'}'|'.'|'@')+;
 
 

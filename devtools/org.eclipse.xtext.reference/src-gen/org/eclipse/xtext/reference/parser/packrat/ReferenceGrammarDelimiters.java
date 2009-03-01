@@ -26,6 +26,6 @@ public final class ReferenceGrammarDelimiters {
 	public static final ISequenceMatcher ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 	public static final ISequenceMatcher ruleCall$44$Delimiter = new SetBasedKeywordMatcher(
-		"spielplatz", "kind", "erwachsener", "spielzeug", "familie", "keyword", "ROT", "BLAU", "GELB", "GRÜN", "type");
+		"spielplatz", "kind", "erwachsener", "spielzeug", "familie", "keyword", "ROT", "BLAU", "GELB", "type");
 
 }

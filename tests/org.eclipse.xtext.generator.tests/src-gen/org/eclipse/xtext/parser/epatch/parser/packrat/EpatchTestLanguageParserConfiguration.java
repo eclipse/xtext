@@ -8,7 +8,7 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 
 import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
 
-import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
+import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 
 import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLanguageEPatchConsumer;
 import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLanguageImportConsumer;
@@ -36,17 +36,17 @@ import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLangua
 import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLanguageExecutableConsumer;
 import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLanguageJavaExecutableConsumer;
 import org.eclipse.xtext.parser.epatch.parser.packrat.consumers.EpatchTestLanguageExpressionExecutableConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinML_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsML_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSL_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsWSConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsumer;
 
 public class EpatchTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
-	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final TerminalsParserConfiguration terminalsConfiguration; 
 
     private EpatchTestLanguageEPatchConsumer ePatchConsumer;
     private EpatchTestLanguageImportConsumer importConsumer;
@@ -80,7 +80,7 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	public EpatchTestLanguageParserConfiguration(IInternalParserConfiguration configuration, EpatchTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
 		this.grammarAccess = grammarAccess;
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
+		this.terminalsConfiguration = new TerminalsParserConfiguration(configuration, null);
 	}
 
 	public EpatchTestLanguageEPatchConsumer getRootConsumer() {
@@ -88,7 +88,7 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	} 
 
 	public void createNonTerminalConsumers() {
-		getXtextBuiltinConfiguration().createNonTerminalConsumers();
+		getTerminalsConfiguration().createNonTerminalConsumers();
 		ePatchConsumer = new EpatchTestLanguageEPatchConsumer(
     		this, null
     	);
@@ -167,7 +167,7 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	}
 	
 	public void createTerminalConsumers() {
-		getXtextBuiltinConfiguration().createTerminalConsumers();
+		getTerminalsConfiguration().createTerminalConsumers();
 		fragmentConsumer = new EpatchTestLanguageFRAGMENTConsumer(this);
 	}
 	
@@ -200,13 +200,13 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 		getExecutableConsumer().setRule(grammarAccess.prExecutable());
 		getJavaExecutableConsumer().setRule(grammarAccess.prJavaExecutable());
 		getExpressionExecutableConsumer().setRule(grammarAccess.prExpressionExecutable());
-		getIdConsumer().setRule(grammarAccess.lrID());
-		getIntConsumer().setRule(grammarAccess.lrINT());
-		getStringConsumer().setRule(grammarAccess.lrSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.lrWS());
-		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.prID());
+		getIntConsumer().setRule(grammarAccess.prINT());
+		getStringConsumer().setRule(grammarAccess.prSTRING());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
 
 
 		getEPatchConsumer().setIdConsumer(getIdConsumer());
@@ -424,8 +424,8 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
 	}
 	
 	// TODO collect superGrammars transitive
-	public XtextBuiltinParserConfiguration getXtextBuiltinConfiguration() {
-		return xtextBuiltinConfiguration;
+	public TerminalsParserConfiguration getTerminalsConfiguration() {
+		return terminalsConfiguration;
 	} 
 	
     public EpatchTestLanguageEPatchConsumer getEPatchConsumer() {
@@ -532,38 +532,38 @@ public class EpatchTestLanguageParserConfiguration extends AbstractParserConfigu
     	return expressionExecutableConsumer;
     }
 
-    public XtextBuiltinIDConsumer getIdConsumer() {
-    	return getXtextBuiltinConfiguration().getIdConsumer();
+    public TerminalsIDConsumer getIdConsumer() {
+    	return getTerminalsConfiguration().getIdConsumer();
     }
 
-    public XtextBuiltinINTConsumer getIntConsumer() {
-    	return getXtextBuiltinConfiguration().getIntConsumer();
+    public TerminalsINTConsumer getIntConsumer() {
+    	return getTerminalsConfiguration().getIntConsumer();
     }
 
-    public XtextBuiltinSTRINGConsumer getStringConsumer() {
-    	return getXtextBuiltinConfiguration().getStringConsumer();
+    public TerminalsSTRINGConsumer getStringConsumer() {
+    	return getTerminalsConfiguration().getStringConsumer();
     }
 
-    public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
-    	return getXtextBuiltinConfiguration().getMlCommentConsumer();
+    public TerminalsML_COMMENTConsumer getMlCommentConsumer() {
+    	return getTerminalsConfiguration().getMlCommentConsumer();
     }
 
-    public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
-    	return getXtextBuiltinConfiguration().getSlCommentConsumer();
+    public TerminalsSL_COMMENTConsumer getSlCommentConsumer() {
+    	return getTerminalsConfiguration().getSlCommentConsumer();
     }
 
-    public XtextBuiltinWSConsumer getWsConsumer() {
-    	return getXtextBuiltinConfiguration().getWsConsumer();
+    public TerminalsWSConsumer getWsConsumer() {
+    	return getTerminalsConfiguration().getWsConsumer();
     }
 
-    public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
-    	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
+    public TerminalsANY_OTHERConsumer getAnyOtherConsumer() {
+    	return getTerminalsConfiguration().getAnyOtherConsumer();
     }
 
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
-		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+		return getTerminalsConfiguration().getInitialHiddenTerminals();
 	}
 	
 }

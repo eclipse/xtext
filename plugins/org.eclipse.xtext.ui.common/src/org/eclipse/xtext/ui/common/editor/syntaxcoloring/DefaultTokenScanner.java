@@ -43,7 +43,7 @@ public class DefaultTokenScanner extends AbstractTokenScanner {
 	public IToken nextToken() {
 		if (!tokenReturned) {
 			tokenReturned = true;
-			return new Token(createTextAttribute(BuiltinTokenStyles.DEFAULT));
+			return new Token(createTextAttribute(CommonTokenStyles.DEFAULT));
 		}
 		return Token.EOF;
 	}

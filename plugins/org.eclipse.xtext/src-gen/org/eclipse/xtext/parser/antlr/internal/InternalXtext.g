@@ -264,7 +264,7 @@ ruleGrammarID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-    createLeafNode(grammarAccess.prGrammarID().ele0LexerRuleCallID(), null); 
+    createLeafNode(grammarAccess.prGrammarID().ele0ParserRuleCallID(), null); 
     }
 (
 	kw='.' 
@@ -277,7 +277,7 @@ ruleGrammarID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-    createLeafNode(grammarAccess.prGrammarID().ele11LexerRuleCallID(), null); 
+    createLeafNode(grammarAccess.prGrammarID().ele11ParserRuleCallID(), null); 
     }
 )*)
     ;
@@ -403,9 +403,8 @@ ruleGeneratedMetamodel returns [EObject current=null]
     }
 (	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prGeneratedMetamodel().ele0010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prGeneratedMetamodel().ele0010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -443,9 +442,8 @@ ruleGeneratedMetamodel returns [EObject current=null]
     }
 (	
 	
-	    lv_alias_4=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prGeneratedMetamodel().ele110LexerRuleCallID(), "alias"); 
+	    lv_alias_4=RULE_ID	{
+		createLeafNode(grammarAccess.prGeneratedMetamodel().ele110ParserRuleCallID(), "alias"); 
 	}
  
 	    {
@@ -510,9 +508,8 @@ ruleReferencedMetamodel returns [EObject current=null]
     }
 (	
 	
-	    lv_alias_3=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prReferencedMetamodel().ele110LexerRuleCallID(), "alias"); 
+	    lv_alias_3=RULE_ID	{
+		createLeafNode(grammarAccess.prReferencedMetamodel().ele110ParserRuleCallID(), "alias"); 
 	}
  
 	    {
@@ -562,9 +559,8 @@ ruleLexerRule returns [EObject current=null]
     }
 )(	
 	
-	    lv_name_2=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prLexerRule().ele000010LexerRuleCallID(), "name"); 
+	    lv_name_2=RULE_ID	{
+		createLeafNode(grammarAccess.prLexerRule().ele000010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -611,9 +607,8 @@ ruleLexerRule returns [EObject current=null]
     }
 )(	
 	
-	    lv_body_6=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prLexerRule().ele010LexerRuleCallSTRING(), "body"); 
+	    lv_body_6=RULE_STRING	{
+		createLeafNode(grammarAccess.prLexerRule().ele010ParserRuleCallSTRING(), "body"); 
 	}
  
 	    {
@@ -658,9 +653,8 @@ ruleParserRule returns [EObject current=null]
     }:
 ((((((	
 	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prParserRule().ele000000LexerRuleCallID(), "name"); 
+	    lv_name_0=RULE_ID	{
+		createLeafNode(grammarAccess.prParserRule().ele000000ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -841,9 +835,8 @@ ruleTerminalRule returns [EObject current=null]
 	
 )(	
 	
-	    lv_name_1=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prTerminalRule().ele000010LexerRuleCallID(), "name"); 
+	    lv_name_1=RULE_ID	{
+		createLeafNode(grammarAccess.prTerminalRule().ele000010ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -1435,9 +1428,8 @@ ruleAssignment returns [EObject current=null]
     }:
 (((	
 	
-	    lv_feature_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prAssignment().ele000LexerRuleCallID(), "feature"); 
+	    lv_feature_0=RULE_ID	{
+		createLeafNode(grammarAccess.prAssignment().ele000ParserRuleCallID(), "feature"); 
 	}
  
 	    {
@@ -1571,9 +1563,8 @@ ruleAction returns [EObject current=null]
     }
 )(	
 	
-	    lv_feature_5=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prAction().ele00010LexerRuleCallID(), "feature"); 
+	    lv_feature_5=RULE_ID	{
+		createLeafNode(grammarAccess.prAction().ele00010ParserRuleCallID(), "feature"); 
 	}
  
 	    {
@@ -2191,9 +2182,8 @@ ruleKeyword returns [EObject current=null]
     }:
 (	
 	
-	    lv_value_0=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.prKeyword().ele0LexerRuleCallSTRING(), "value"); 
+	    lv_value_0=RULE_STRING	{
+		createLeafNode(grammarAccess.prKeyword().ele0ParserRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -2316,21 +2306,50 @@ ruleRuleCall returns [EObject current=null]
 
 
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+
+
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : 
-			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
-              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
-              ;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
+RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+
+
+
+RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+
+
+RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+
+
 
 RULE_ANY_OTHER : .;
+
+
 
 

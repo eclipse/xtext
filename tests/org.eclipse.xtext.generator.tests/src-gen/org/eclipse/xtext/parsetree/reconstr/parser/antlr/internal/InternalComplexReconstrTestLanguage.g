@@ -282,9 +282,8 @@ ruleAtom returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prAtom().ele0LexerRuleCallID(), "name"); 
+	    lv_name_0=RULE_ID	{
+		createLeafNode(grammarAccess.prAtom().ele0ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -388,9 +387,8 @@ ruleTrickyA1 returns [EObject current=null]
     }:
 (	
 	
-	    lv_name_0=	RULE_ID
-	{
-		createLeafNode(grammarAccess.prTrickyA1().ele0LexerRuleCallID(), "name"); 
+	    lv_name_0=RULE_ID	{
+		createLeafNode(grammarAccess.prTrickyA1().ele0ParserRuleCallID(), "name"); 
 	}
  
 	    {
@@ -576,9 +574,8 @@ ruleTrickyG2 returns [EObject current=null]
 
     |(	
 	
-	    lv_val_1=	RULE_INT
-	{
-		createLeafNode(grammarAccess.prTrickyG2().ele10LexerRuleCallINT(), "val"); 
+	    lv_val_1=RULE_INT	{
+		createLeafNode(grammarAccess.prTrickyG2().ele10ParserRuleCallINT(), "val"); 
 	}
  
 	    {
@@ -632,21 +629,52 @@ ruleTrickyG2 returns [EObject current=null]
 
 
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+
+
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : 
-			  '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | 
-              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\''
-              ;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')?;
+RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
+
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+
+
+
+RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+
+
+
+RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+
+
 
 RULE_ANY_OTHER : .;
+
+
 
 

@@ -17,8 +17,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.builtin.IXtextBuiltin;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 /**
  * @author Moritz Eysholdt
@@ -94,15 +92,11 @@ public class GrammarAccessUtil {
 	}
 
 	public static String getGrammarAccessFQName(Grammar grammar) {
-		if (IXtextBuiltin.ID.equals(GrammarUtil.getLanguageId(grammar)))
-			return XtextBuiltinGrammarAccess.class.getName();
 		return GrammarUtil.getNamespace(grammar) + ".services."
 				+ getGrammarAccessSimpleName(grammar);
 	}
 
 	public static String getGrammarAccessSimpleName(Grammar grammar) {
-		if (IXtextBuiltin.ID.equals(GrammarUtil.getLanguageId(grammar)))
-			return XtextBuiltinGrammarAccess.class.getSimpleName();
 		return GrammarUtil.getName(grammar) + "GrammarAccess";
 	}
 

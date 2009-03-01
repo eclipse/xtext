@@ -8,21 +8,21 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 
 import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 
-import org.eclipse.xtext.builtin.parser.packrat.XtextBuiltinParserConfiguration; 
+import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguageModelConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguageElementConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LexerTestLanguageSTRINGConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinIDConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinINTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinML_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinSL_COMMENTConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinWSConsumer;
-import org.eclipse.xtext.builtin.parser.packrat.consumers.XtextBuiltinANY_OTHERConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsML_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSL_COMMENTConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsWSConsumer;
+import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsumer;
 
 public class LexerTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
-	private final XtextBuiltinParserConfiguration xtextBuiltinConfiguration; 
+	private final TerminalsParserConfiguration terminalsConfiguration; 
 
     private LexerTestLanguageModelConsumer modelConsumer;
     private LexerTestLanguageElementConsumer elementConsumer;
@@ -33,7 +33,7 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	public LexerTestLanguageParserConfiguration(IInternalParserConfiguration configuration, LexerTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
 		this.grammarAccess = grammarAccess;
-		this.xtextBuiltinConfiguration = new XtextBuiltinParserConfiguration(configuration, null);
+		this.terminalsConfiguration = new TerminalsParserConfiguration(configuration, null);
 	}
 
 	public LexerTestLanguageModelConsumer getRootConsumer() {
@@ -41,7 +41,7 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	} 
 
 	public void createNonTerminalConsumers() {
-		getXtextBuiltinConfiguration().createNonTerminalConsumers();
+		getTerminalsConfiguration().createNonTerminalConsumers();
 		modelConsumer = new LexerTestLanguageModelConsumer(
     		this, null
     	);
@@ -51,7 +51,7 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	}
 	
 	public void createTerminalConsumers() {
-		getXtextBuiltinConfiguration().createTerminalConsumers();
+		getTerminalsConfiguration().createTerminalConsumers();
 		stringConsumer = new LexerTestLanguageSTRINGConsumer(this);
 	}
 	
@@ -61,12 +61,12 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 		getModelConsumer().setRule(grammarAccess.prModel());
 		getElementConsumer().setRule(grammarAccess.prElement());
 		getStringConsumer().setRule(grammarAccess.lrSTRING());
-		getIdConsumer().setRule(grammarAccess.lrID());
-		getIntConsumer().setRule(grammarAccess.lrINT());
-		getMlCommentConsumer().setRule(grammarAccess.lrML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.lrSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.lrWS());
-		getAnyOtherConsumer().setRule(grammarAccess.lrANY_OTHER());
+		getIdConsumer().setRule(grammarAccess.prID());
+		getIntConsumer().setRule(grammarAccess.prINT());
+		getMlCommentConsumer().setRule(grammarAccess.prML_COMMENT());
+		getSlCommentConsumer().setRule(grammarAccess.prSL_COMMENT());
+		getWsConsumer().setRule(grammarAccess.prWS());
+		getAnyOtherConsumer().setRule(grammarAccess.prANY_OTHER());
 
 
 		getModelConsumer().setElementConsumer(getElementConsumer());
@@ -79,8 +79,8 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
 	}
 	
 	// TODO collect superGrammars transitive
-	public XtextBuiltinParserConfiguration getXtextBuiltinConfiguration() {
-		return xtextBuiltinConfiguration;
+	public TerminalsParserConfiguration getTerminalsConfiguration() {
+		return terminalsConfiguration;
 	} 
 	
     public LexerTestLanguageModelConsumer getModelConsumer() {
@@ -95,34 +95,34 @@ public class LexerTestLanguageParserConfiguration extends AbstractParserConfigur
     	return stringConsumer;
     }
 
-    public XtextBuiltinIDConsumer getIdConsumer() {
-    	return getXtextBuiltinConfiguration().getIdConsumer();
+    public TerminalsIDConsumer getIdConsumer() {
+    	return getTerminalsConfiguration().getIdConsumer();
     }
 
-    public XtextBuiltinINTConsumer getIntConsumer() {
-    	return getXtextBuiltinConfiguration().getIntConsumer();
+    public TerminalsINTConsumer getIntConsumer() {
+    	return getTerminalsConfiguration().getIntConsumer();
     }
 
-    public XtextBuiltinML_COMMENTConsumer getMlCommentConsumer() {
-    	return getXtextBuiltinConfiguration().getMlCommentConsumer();
+    public TerminalsML_COMMENTConsumer getMlCommentConsumer() {
+    	return getTerminalsConfiguration().getMlCommentConsumer();
     }
 
-    public XtextBuiltinSL_COMMENTConsumer getSlCommentConsumer() {
-    	return getXtextBuiltinConfiguration().getSlCommentConsumer();
+    public TerminalsSL_COMMENTConsumer getSlCommentConsumer() {
+    	return getTerminalsConfiguration().getSlCommentConsumer();
     }
 
-    public XtextBuiltinWSConsumer getWsConsumer() {
-    	return getXtextBuiltinConfiguration().getWsConsumer();
+    public TerminalsWSConsumer getWsConsumer() {
+    	return getTerminalsConfiguration().getWsConsumer();
     }
 
-    public XtextBuiltinANY_OTHERConsumer getAnyOtherConsumer() {
-    	return getXtextBuiltinConfiguration().getAnyOtherConsumer();
+    public TerminalsANY_OTHERConsumer getAnyOtherConsumer() {
+    	return getTerminalsConfiguration().getAnyOtherConsumer();
     }
 
 
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
-		return getXtextBuiltinConfiguration().getInitialHiddenTerminals();
+		return getTerminalsConfiguration().getInitialHiddenTerminals();
 	}
 	
 }

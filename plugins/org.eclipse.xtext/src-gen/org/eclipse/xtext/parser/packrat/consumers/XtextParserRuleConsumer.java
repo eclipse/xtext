@@ -413,7 +413,7 @@ public final class XtextParserRuleConsumer extends NonTerminalConsumer {
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele00000AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000LexerRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele000000ParserRuleCallID());
 		group$8$Consumer = new Group$8$Consumer(rule.ele00001Group());
 		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele000010KeywordReturns());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele000011AssignmentType());

@@ -176,7 +176,7 @@ public final class InheritanceTestLanguageModelConsumer extends NonTerminalConsu
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordModel());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0001AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010LexerRuleCallID());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010ParserRuleCallID());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele001KeywordLeftCurlyBracket());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele01AssignmentElements());
 		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010ParserRuleCallElement());

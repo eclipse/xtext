@@ -25,7 +25,7 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.builtin.IXtextBuiltin;
+import org.eclipse.xtext.common.Terminals;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.util.Strings;
 
@@ -52,7 +52,7 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			final AbstractRule rule = (AbstractRule) owner;
 			if (rule instanceof ParserRule) {
 				final TypeRef returnType = rule.getType();
-				if(returnType.getType() == null) 
+				if(returnType.getType() == null)
 					return true;
 				else if (rule.getName().equals(returnType.getType().getName())) {
 					return isTransient(returnType, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), -1);
@@ -70,11 +70,11 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 		}
 		else if (feature == XtextPackage.eINSTANCE.getGrammar_SuperGrammar()) {
 			final Grammar grammar = (Grammar) owner;
-			return grammar.getSuperGrammar() != null && IXtextBuiltin.ID.equals(grammar.getSuperGrammar().getName());
+			return grammar.getSuperGrammar() != null && Terminals.ID.equals(grammar.getSuperGrammar().getName());
 		}
 		return super.isTransient(owner, feature, index);
 	}
-	
+
 	private boolean isUniqueEClassifierName(Grammar grammar, String shortTypeName) {
 		final List<AbstractMetamodelDeclaration> declarations = GrammarUtil.allMetamodelDeclarations(grammar);
 		AbstractMetamodelDeclaration resultMetaModel = null;

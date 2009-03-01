@@ -272,7 +272,7 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele000000KeywordCommercialAt());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele000001AssignmentSource());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000010LexerRuleCallSTRING());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000010ParserRuleCallSTRING());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele00001AssignmentEModelElement());
 		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.ele000010CrossReferenceEStringEModelElement());
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele0001KeywordLeftParenthesis());

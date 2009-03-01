@@ -8,10 +8,10 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
- org.eclipse.xtext.builtin,
- org.eclipse.xtext.builtin.conversion,
- org.eclipse.xtext.builtin.parser.packrat,
- org.eclipse.xtext.builtin.parser.packrat.consumers,
+ org.eclipse.xtext.common,
+ org.eclipse.xtext.common.parser.packrat,
+ org.eclipse.xtext.common.parser.packrat.consumers,
+ org.eclipse.xtext.common.services,
  org.eclipse.xtext.conversion,
  org.eclipse.xtext.conversion.impl,
  org.eclipse.xtext.crossref,

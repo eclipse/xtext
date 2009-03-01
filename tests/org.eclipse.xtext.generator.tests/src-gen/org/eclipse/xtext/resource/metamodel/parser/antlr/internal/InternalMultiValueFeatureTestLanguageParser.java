@@ -129,9 +129,9 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:86:6: lv_featureA_0= RULE_ID
             	    {
             	    lv_featureA_0=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart128); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart127); 
 
-            	    		createLeafNode(grammarAccess.prStart().ele0LexerRuleCallID(), "featureA"); 
+            	    		createLeafNode(grammarAccess.prStart().ele0ParserRuleCallID(), "featureA"); 
             	    	
 
             	    	        if (current==null) {
@@ -181,6 +181,6 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
     public static final BitSet FOLLOW_ruleStart_in_entryRuleStart72 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStart82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStart128 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStart127 = new BitSet(new long[]{0x0000000000000012L});
 
 }

@@ -254,7 +254,7 @@ public final class XtextTerminalRuleConsumer extends NonTerminalConsumer {
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele00000AssignmentTerminal());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele000000KeywordTerminal());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele00001AssignmentName());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele000010LexerRuleCallID());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele000010ParserRuleCallID());
 		group$10$Consumer = new Group$10$Consumer(rule.ele0001Group());
 		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele00010KeywordReturns());
 		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele00011AssignmentType());

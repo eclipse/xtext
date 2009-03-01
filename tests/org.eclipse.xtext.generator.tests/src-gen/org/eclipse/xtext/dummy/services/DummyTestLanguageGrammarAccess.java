@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
@@ -42,9 +42,9 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c00000KeywordOptional = (Keyword)c0000AssignmentOptional.eContents().get(0);
 		private final Keyword c0001KeywordElement = (Keyword)c000Group.eContents().get(1);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Assignment c01AssignmentDescriptions = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
+		private final RuleCall c010ParserRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -75,13 +75,13 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Assignment ele01AssignmentDescriptions() { return c01AssignmentDescriptions; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallSTRING() { return c010LexerRuleCallSTRING; }
+		public RuleCall ele010ParserRuleCallSTRING() { return c010ParserRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -92,10 +92,10 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public DummyTestLanguageGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public DummyTestLanguageGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -105,7 +105,7 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -121,37 +121,37 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

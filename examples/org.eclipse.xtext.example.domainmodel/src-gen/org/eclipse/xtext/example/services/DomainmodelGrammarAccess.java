@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class DomainmodelGrammarAccess implements IGrammarAccess {
@@ -49,7 +49,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordImport = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentImportURI.eContents().get(0);
+		private final RuleCall c10ParserRuleCallSTRING = (RuleCall)c1AssignmentImportURI.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -64,7 +64,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentImportURI() { return c1AssignmentImportURI; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
+		public RuleCall ele10ParserRuleCallSTRING() { return c10ParserRuleCallSTRING; }
 	}
 
 	public class NamedElementElements implements IParserRuleAccess {
@@ -161,7 +161,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordDatatype = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final RuleCall c10ParserRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -176,7 +176,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+		public RuleCall ele10ParserRuleCallID() { return c10ParserRuleCallID; }
 	}
 
 	public class EntityElements implements IParserRuleAccess {
@@ -188,7 +188,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group c0000Group = (Group)c000Group.eContents().get(0);
 		private final Keyword c00000KeywordEntity = (Keyword)c0000Group.eContents().get(0);
 		private final Assignment c00001AssignmentName = (Assignment)c0000Group.eContents().get(1);
-		private final RuleCall c000010LexerRuleCallID = (RuleCall)c00001AssignmentName.eContents().get(0);
+		private final RuleCall c000010ParserRuleCallID = (RuleCall)c00001AssignmentName.eContents().get(0);
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
 		private final Keyword c00010KeywordExtends = (Keyword)c0001Group.eContents().get(0);
 		private final Assignment c00011AssignmentSuperType = (Assignment)c0001Group.eContents().get(1);
@@ -223,7 +223,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele00001AssignmentName() { return c00001AssignmentName; }
 
 		// not supported
-		public RuleCall ele000010LexerRuleCallID() { return c000010LexerRuleCallID; }
+		public RuleCall ele000010ParserRuleCallID() { return c000010ParserRuleCallID; }
 
 		// not supported
 		public Group ele0001Group() { return c0001Group; }
@@ -295,7 +295,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group c00Group = (Group)c0Group.eContents().get(0);
 		private final Keyword c000KeywordAttr = (Keyword)c00Group.eContents().get(0);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Keyword c01KeywordColon = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallTypeRef = (RuleCall)c1AssignmentType.eContents().get(0);
@@ -319,7 +319,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordColon() { return c01KeywordColon; }
@@ -339,7 +339,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group c000Group = (Group)c00Group.eContents().get(0);
 		private final Keyword c0000KeywordRef = (Keyword)c000Group.eContents().get(0);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Keyword c001KeywordColon = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentType = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallTypeRef = (RuleCall)c01AssignmentType.eContents().get(0);
@@ -370,7 +370,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		public RuleCall ele00010ParserRuleCallID() { return c00010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele001KeywordColon() { return c001KeywordColon; }
@@ -404,7 +404,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
 		private final Keyword c000000KeywordOp = (Keyword)c00000Group.eContents().get(0);
 		private final Assignment c000001AssignmentName = (Assignment)c00000Group.eContents().get(1);
-		private final RuleCall c0000010LexerRuleCallID = (RuleCall)c000001AssignmentName.eContents().get(0);
+		private final RuleCall c0000010ParserRuleCallID = (RuleCall)c000001AssignmentName.eContents().get(0);
 		private final Keyword c00001KeywordLeftParenthesis = (Keyword)c0000Group.eContents().get(1);
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
 		private final Assignment c00010AssignmentParams = (Assignment)c0001Group.eContents().get(0);
@@ -446,7 +446,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele000001AssignmentName() { return c000001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0000010LexerRuleCallID() { return c0000010LexerRuleCallID; }
+		public RuleCall ele0000010ParserRuleCallID() { return c0000010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele00001KeywordLeftParenthesis() { return c00001KeywordLeftParenthesis; }
@@ -489,7 +489,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00LexerRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final RuleCall c00ParserRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10ParserRuleCallTypeRef = (RuleCall)c1AssignmentType.eContents().get(0);
 		
@@ -503,7 +503,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// not supported
-		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
+		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
 
 		// not supported
 		public Assignment ele1AssignmentType() { return c1AssignmentType; }
@@ -549,10 +549,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	public class QualifiedNameElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0LexerRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall c0ParserRuleCallID = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
-		private final RuleCall c11LexerRuleCallID = (RuleCall)c1Group.eContents().get(1);
+		private final RuleCall c11ParserRuleCallID = (RuleCall)c1Group.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -561,7 +561,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
+		public RuleCall ele0ParserRuleCallID() { return c0ParserRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -570,7 +570,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
 
 		// not supported
-		public RuleCall ele11LexerRuleCallID() { return c11LexerRuleCallID; }
+		public RuleCall ele11ParserRuleCallID() { return c11ParserRuleCallID; }
 	}
 	
 	private FileElements pFile;
@@ -592,10 +592,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public DomainmodelGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public DomainmodelGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -605,7 +605,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -691,37 +691,37 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

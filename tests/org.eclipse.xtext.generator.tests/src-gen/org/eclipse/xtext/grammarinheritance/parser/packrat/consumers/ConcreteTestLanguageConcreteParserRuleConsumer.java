@@ -158,7 +158,7 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordModel());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentMagicNumber());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010LexerRuleCallREAL());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallREAL());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordColon());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele1AssignmentElements());
 		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele10ParserRuleCallInheritedParserRule());

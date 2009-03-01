@@ -11,7 +11,7 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class EcoreDslGrammarAccess implements IGrammarAccess {
@@ -52,10 +52,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword c000KeywordImport = (Keyword)c00Group.eContents().get(0);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
 		private final Assignment c0010AssignmentAlias = (Assignment)c001Group.eContents().get(0);
-		private final RuleCall c00100LexerRuleCallID = (RuleCall)c0010AssignmentAlias.eContents().get(0);
+		private final RuleCall c00100ParserRuleCallID = (RuleCall)c0010AssignmentAlias.eContents().get(0);
 		private final Keyword c0011KeywordEqualsSign = (Keyword)c001Group.eContents().get(1);
 		private final Assignment c01AssignmentImportURI = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentImportURI.eContents().get(0);
+		private final RuleCall c010ParserRuleCallSTRING = (RuleCall)c01AssignmentImportURI.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -80,7 +80,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0010AssignmentAlias() { return c0010AssignmentAlias; }
 
 		// not supported
-		public RuleCall ele00100LexerRuleCallID() { return c00100LexerRuleCallID; }
+		public RuleCall ele00100ParserRuleCallID() { return c00100ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele0011KeywordEqualsSign() { return c0011KeywordEqualsSign; }
@@ -89,7 +89,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentImportURI() { return c01AssignmentImportURI; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallSTRING() { return c010LexerRuleCallSTRING; }
+		public RuleCall ele010ParserRuleCallSTRING() { return c010ParserRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -116,7 +116,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword c000000001KeywordNsURI = (Keyword)c00000000Group.eContents().get(1);
 		private final Keyword c00000001KeywordEqualsSign = (Keyword)c0000000Group.eContents().get(1);
 		private final Assignment c0000001AssignmentNsURI = (Assignment)c000000Group.eContents().get(1);
-		private final RuleCall c00000010LexerRuleCallSTRING = (RuleCall)c0000001AssignmentNsURI.eContents().get(0);
+		private final RuleCall c00000010ParserRuleCallSTRING = (RuleCall)c0000001AssignmentNsURI.eContents().get(0);
 		private final Keyword c000001KeywordNsPrefix = (Keyword)c00000Group.eContents().get(1);
 		private final Keyword c00001KeywordEqualsSign = (Keyword)c0000Group.eContents().get(1);
 		private final Assignment c0001AssignmentNsPrefix = (Assignment)c000Group.eContents().get(1);
@@ -190,7 +190,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0000001AssignmentNsURI() { return c0000001AssignmentNsURI; }
 
 		// not supported
-		public RuleCall ele00000010LexerRuleCallSTRING() { return c00000010LexerRuleCallSTRING; }
+		public RuleCall ele00000010ParserRuleCallSTRING() { return c00000010ParserRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele000001KeywordNsPrefix() { return c000001KeywordNsPrefix; }
@@ -237,7 +237,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall c000000ParserRuleCallEAnnotationDecl = (RuleCall)c00000AssignmentEAnnotations.eContents().get(0);
 		private final Keyword c00001KeywordPackage = (Keyword)c0000Group.eContents().get(1);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Alternatives c01Alternatives = (Alternatives)c0Group.eContents().get(1);
 		private final Assignment c010AssignmentESubpackages = (Assignment)c01Alternatives.eContents().get(0);
@@ -277,7 +277,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		public RuleCall ele00010ParserRuleCallID() { return c00010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
@@ -335,7 +335,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c01000Group = (Group)c0100Group.eContents().get(0);
 		private final Keyword c010000KeywordDatatype = (Keyword)c01000Group.eContents().get(0);
 		private final Assignment c010001AssignmentName = (Assignment)c01000Group.eContents().get(1);
-		private final RuleCall c0100010LexerRuleCallID = (RuleCall)c010001AssignmentName.eContents().get(0);
+		private final RuleCall c0100010ParserRuleCallID = (RuleCall)c010001AssignmentName.eContents().get(0);
 		private final Keyword c01001KeywordColon = (Keyword)c0100Group.eContents().get(1);
 		private final Assignment c0101AssignmentInstanceClassName = (Assignment)c010Group.eContents().get(1);
 		private final RuleCall c01010ParserRuleCallSTRING_OR_QID = (RuleCall)c0101AssignmentInstanceClassName.eContents().get(0);
@@ -385,7 +385,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele010001AssignmentName() { return c010001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0100010LexerRuleCallID() { return c0100010LexerRuleCallID; }
+		public RuleCall ele0100010ParserRuleCallID() { return c0100010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01001KeywordColon() { return c01001KeywordColon; }
@@ -413,7 +413,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
 		private final Keyword c000000KeywordCommercialAt = (Keyword)c00000Group.eContents().get(0);
 		private final Assignment c000001AssignmentSource = (Assignment)c00000Group.eContents().get(1);
-		private final RuleCall c0000010LexerRuleCallSTRING = (RuleCall)c000001AssignmentSource.eContents().get(0);
+		private final RuleCall c0000010ParserRuleCallSTRING = (RuleCall)c000001AssignmentSource.eContents().get(0);
 		private final Assignment c00001AssignmentEModelElement = (Assignment)c0000Group.eContents().get(1);
 		private final CrossReference c000010CrossReferenceEStringEModelElement = (CrossReference)c00001AssignmentEModelElement.eContents().get(0);
 		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
@@ -453,7 +453,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele000001AssignmentSource() { return c000001AssignmentSource; }
 
 		// not supported
-		public RuleCall ele0000010LexerRuleCallSTRING() { return c0000010LexerRuleCallSTRING; }
+		public RuleCall ele0000010ParserRuleCallSTRING() { return c0000010ParserRuleCallSTRING; }
 
 		// not supported
 		public Assignment ele00001AssignmentEModelElement() { return c00001AssignmentEModelElement; }
@@ -506,7 +506,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Keyword c0000000100KeywordInterface = (Keyword)c000000010AssignmentInterface.eContents().get(0);
 		private final Keyword c000000011KeywordClass = (Keyword)c00000001Alternatives.eContents().get(1);
 		private final Assignment c0000001AssignmentName = (Assignment)c000000Group.eContents().get(1);
-		private final RuleCall c00000010LexerRuleCallID = (RuleCall)c0000001AssignmentName.eContents().get(0);
+		private final RuleCall c00000010ParserRuleCallID = (RuleCall)c0000001AssignmentName.eContents().get(0);
 		private final Group c000001Group = (Group)c00000Group.eContents().get(1);
 		private final Group c0000010Group = (Group)c000001Group.eContents().get(0);
 		private final Group c00000100Group = (Group)c0000010Group.eContents().get(0);
@@ -597,7 +597,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0000001AssignmentName() { return c0000001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00000010LexerRuleCallID() { return c00000010LexerRuleCallID; }
+		public RuleCall ele00000010ParserRuleCallID() { return c00000010ParserRuleCallID; }
 
 		// not supported
 		public Group ele000001Group() { return c000001Group; }
@@ -754,18 +754,18 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c000100Group = (Group)c00010Group.eContents().get(0);
 		private final Keyword c0001000KeywordLeftSquareBracket = (Keyword)c000100Group.eContents().get(0);
 		private final Assignment c0001001AssignmentLowerBound = (Assignment)c000100Group.eContents().get(1);
-		private final RuleCall c00010010LexerRuleCallINT = (RuleCall)c0001001AssignmentLowerBound.eContents().get(0);
+		private final RuleCall c00010010ParserRuleCallINT = (RuleCall)c0001001AssignmentLowerBound.eContents().get(0);
 		private final Group c000101Group = (Group)c00010Group.eContents().get(1);
 		private final Keyword c0001010KeywordFullStopFullStop = (Keyword)c000101Group.eContents().get(0);
 		private final Assignment c0001011AssignmentUpperBound = (Assignment)c000101Group.eContents().get(1);
 		private final RuleCall c00010110ParserRuleCallSINT = (RuleCall)c0001011AssignmentUpperBound.eContents().get(0);
 		private final Keyword c00011KeywordRightSquareBracket = (Keyword)c0001Group.eContents().get(1);
 		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final RuleCall c0010ParserRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
 		private final Keyword c010KeywordEqualsSign = (Keyword)c01Group.eContents().get(0);
 		private final Assignment c011AssignmentDefaultValueLiteral = (Assignment)c01Group.eContents().get(1);
-		private final RuleCall c0110LexerRuleCallSTRING = (RuleCall)c011AssignmentDefaultValueLiteral.eContents().get(0);
+		private final RuleCall c0110ParserRuleCallSTRING = (RuleCall)c011AssignmentDefaultValueLiteral.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -892,7 +892,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001001AssignmentLowerBound() { return c0001001AssignmentLowerBound; }
 
 		// not supported
-		public RuleCall ele00010010LexerRuleCallINT() { return c00010010LexerRuleCallINT; }
+		public RuleCall ele00010010ParserRuleCallINT() { return c00010010ParserRuleCallINT; }
 
 		// not supported
 		public Group ele000101Group() { return c000101Group; }
@@ -913,7 +913,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// not supported
-		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
+		public RuleCall ele0010ParserRuleCallID() { return c0010ParserRuleCallID; }
 
 		// not supported
 		public Group ele01Group() { return c01Group; }
@@ -925,7 +925,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele011AssignmentDefaultValueLiteral() { return c011AssignmentDefaultValueLiteral; }
 
 		// not supported
-		public RuleCall ele0110LexerRuleCallSTRING() { return c0110LexerRuleCallSTRING; }
+		public RuleCall ele0110ParserRuleCallSTRING() { return c0110ParserRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -976,7 +976,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c000100Group = (Group)c00010Group.eContents().get(0);
 		private final Keyword c0001000KeywordLeftSquareBracket = (Keyword)c000100Group.eContents().get(0);
 		private final Assignment c0001001AssignmentLowerBound = (Assignment)c000100Group.eContents().get(1);
-		private final RuleCall c00010010LexerRuleCallINT = (RuleCall)c0001001AssignmentLowerBound.eContents().get(0);
+		private final RuleCall c00010010ParserRuleCallINT = (RuleCall)c0001001AssignmentLowerBound.eContents().get(0);
 		private final Group c000101Group = (Group)c00010Group.eContents().get(1);
 		private final Keyword c0001010KeywordFullStopFullStop = (Keyword)c000101Group.eContents().get(0);
 		private final Assignment c0001011AssignmentUpperBound = (Assignment)c000101Group.eContents().get(1);
@@ -987,7 +987,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Assignment c0011AssignmentEOpposite = (Assignment)c001Group.eContents().get(1);
 		private final CrossReference c00110CrossReferenceEStringEReference = (CrossReference)c0011AssignmentEOpposite.eContents().get(0);
 		private final Assignment c01AssignmentName = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
+		private final RuleCall c010ParserRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -1123,7 +1123,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001001AssignmentLowerBound() { return c0001001AssignmentLowerBound; }
 
 		// not supported
-		public RuleCall ele00010010LexerRuleCallINT() { return c00010010LexerRuleCallINT; }
+		public RuleCall ele00010010ParserRuleCallINT() { return c00010010ParserRuleCallINT; }
 
 		// not supported
 		public Group ele000101Group() { return c000101Group; }
@@ -1156,7 +1156,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentName() { return c01AssignmentName; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallID() { return c010LexerRuleCallID; }
+		public RuleCall ele010ParserRuleCallID() { return c010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -1173,7 +1173,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall c000000ParserRuleCallEAnnotationDecl = (RuleCall)c00000AssignmentEAnnotations.eContents().get(0);
 		private final Keyword c00001KeywordEnum = (Keyword)c0000Group.eContents().get(1);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
 		private final Assignment c01AssignmentELiterals = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallEEnumLiteralDecl = (RuleCall)c01AssignmentELiterals.eContents().get(0);
@@ -1210,7 +1210,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		public RuleCall ele00010ParserRuleCallID() { return c00010ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
@@ -1234,13 +1234,13 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Assignment c0000AssignmentEAnnotations = (Assignment)c000Group.eContents().get(0);
 		private final RuleCall c00000ParserRuleCallEAnnotationDecl = (RuleCall)c0000AssignmentEAnnotations.eContents().get(0);
 		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010LexerRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
+		private final RuleCall c00010ParserRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
 		private final Keyword c0010KeywordEqualsSign = (Keyword)c001Group.eContents().get(0);
 		private final Assignment c0011AssignmentValue = (Assignment)c001Group.eContents().get(1);
-		private final RuleCall c00110LexerRuleCallINT = (RuleCall)c0011AssignmentValue.eContents().get(0);
+		private final RuleCall c00110ParserRuleCallINT = (RuleCall)c0011AssignmentValue.eContents().get(0);
 		private final Assignment c01AssignmentLiteral = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010LexerRuleCallSTRING = (RuleCall)c01AssignmentLiteral.eContents().get(0);
+		private final RuleCall c010ParserRuleCallSTRING = (RuleCall)c01AssignmentLiteral.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// not supported
@@ -1268,7 +1268,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00010LexerRuleCallID() { return c00010LexerRuleCallID; }
+		public RuleCall ele00010ParserRuleCallID() { return c00010ParserRuleCallID; }
 
 		// not supported
 		public Group ele001Group() { return c001Group; }
@@ -1280,13 +1280,13 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0011AssignmentValue() { return c0011AssignmentValue; }
 
 		// not supported
-		public RuleCall ele00110LexerRuleCallINT() { return c00110LexerRuleCallINT; }
+		public RuleCall ele00110ParserRuleCallINT() { return c00110ParserRuleCallINT; }
 
 		// not supported
 		public Assignment ele01AssignmentLiteral() { return c01AssignmentLiteral; }
 
 		// not supported
-		public RuleCall ele010LexerRuleCallSTRING() { return c010LexerRuleCallSTRING; }
+		public RuleCall ele010ParserRuleCallSTRING() { return c010ParserRuleCallSTRING; }
 
 		// not supported
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -1296,7 +1296,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ETypeParameterDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00LexerRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final RuleCall c00ParserRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordExtends = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentEBounds = (Assignment)c1Group.eContents().get(1);
@@ -1312,7 +1312,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// not supported
-		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
+		public RuleCall ele00ParserRuleCallID() { return c00ParserRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -1566,7 +1566,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall c0000000100ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c000000010AssignmentEGenericType.eContents().get(0);
 		private final Keyword c000000011KeywordVoid = (Keyword)c00000001Alternatives.eContents().get(1);
 		private final Assignment c0000001AssignmentName = (Assignment)c000000Group.eContents().get(1);
-		private final RuleCall c00000010LexerRuleCallID = (RuleCall)c0000001AssignmentName.eContents().get(0);
+		private final RuleCall c00000010ParserRuleCallID = (RuleCall)c0000001AssignmentName.eContents().get(0);
 		private final Group c000001Group = (Group)c00000Group.eContents().get(1);
 		private final Group c0000010Group = (Group)c000001Group.eContents().get(0);
 		private final Group c00000100Group = (Group)c0000010Group.eContents().get(0);
@@ -1671,7 +1671,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele0000001AssignmentName() { return c0000001AssignmentName; }
 
 		// not supported
-		public RuleCall ele00000010LexerRuleCallID() { return c00000010LexerRuleCallID; }
+		public RuleCall ele00000010ParserRuleCallID() { return c00000010ParserRuleCallID; }
 
 		// not supported
 		public Group ele000001Group() { return c000001Group; }
@@ -1773,7 +1773,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Assignment c01AssignmentEGenericType = (Assignment)c0Group.eContents().get(1);
 		private final RuleCall c010ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c01AssignmentEGenericType.eContents().get(0);
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final RuleCall c10ParserRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1800,7 +1800,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+		public RuleCall ele10ParserRuleCallID() { return c10ParserRuleCallID; }
 	}
 
 	public class MapEntrySuperElements implements IParserRuleAccess {
@@ -1819,10 +1819,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
 		private final Assignment c00AssignmentDetailKey = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000LexerRuleCallID = (RuleCall)c00AssignmentDetailKey.eContents().get(0);
+		private final RuleCall c000ParserRuleCallID = (RuleCall)c00AssignmentDetailKey.eContents().get(0);
 		private final Keyword c01KeywordEqualsSign = (Keyword)c0Group.eContents().get(1);
 		private final Assignment c1AssignmentDetailValue = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentDetailValue.eContents().get(0);
+		private final RuleCall c10ParserRuleCallSTRING = (RuleCall)c1AssignmentDetailValue.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1837,7 +1837,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele00AssignmentDetailKey() { return c00AssignmentDetailKey; }
 
 		// not supported
-		public RuleCall ele000LexerRuleCallID() { return c000LexerRuleCallID; }
+		public RuleCall ele000ParserRuleCallID() { return c000ParserRuleCallID; }
 
 		// not supported
 		public Keyword ele01KeywordEqualsSign() { return c01KeywordEqualsSign; }
@@ -1846,7 +1846,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentDetailValue() { return c1AssignmentDetailValue; }
 
 		// not supported
-		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
+		public RuleCall ele10ParserRuleCallSTRING() { return c10ParserRuleCallSTRING; }
 	}
 
 	public class MultiplicityExprElements implements IParserRuleAccess {
@@ -1879,12 +1879,12 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	public class QIDElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0LexerRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall c0ParserRuleCallID = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Alternatives c10Alternatives = (Alternatives)c1Group.eContents().get(0);
 		private final Keyword c100KeywordFullStop = (Keyword)c10Alternatives.eContents().get(0);
 		private final Keyword c101Keyword$ = (Keyword)c10Alternatives.eContents().get(1);
-		private final RuleCall c11LexerRuleCallID = (RuleCall)c1Group.eContents().get(1);
+		private final RuleCall c11ParserRuleCallID = (RuleCall)c1Group.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1893,7 +1893,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
+		public RuleCall ele0ParserRuleCallID() { return c0ParserRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
@@ -1908,13 +1908,13 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword ele101Keyword$() { return c101Keyword$; }
 
 		// not supported
-		public RuleCall ele11LexerRuleCallID() { return c11LexerRuleCallID; }
+		public RuleCall ele11ParserRuleCallID() { return c11ParserRuleCallID; }
 	}
 
 	public class STRING_OR_QIDElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "STRING_OR_QID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall c0ParserRuleCallSTRING = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c1ParserRuleCallQID = (RuleCall)cAlternatives.eContents().get(1);
 		
 		// not supported
@@ -1924,7 +1924,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// not supported
-		public RuleCall ele0LexerRuleCallSTRING() { return c0LexerRuleCallSTRING; }
+		public RuleCall ele0ParserRuleCallSTRING() { return c0ParserRuleCallSTRING; }
 
 		// not supported
 		public RuleCall ele1ParserRuleCallQID() { return c1ParserRuleCallQID; }
@@ -1934,7 +1934,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SINT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordHyphenMinus = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall c1LexerRuleCallINT = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c1ParserRuleCallINT = (RuleCall)cGroup.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1946,7 +1946,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword ele0KeywordHyphenMinus() { return c0KeywordHyphenMinus; }
 
 		// not supported
-		public RuleCall ele1LexerRuleCallINT() { return c1LexerRuleCallINT; }
+		public RuleCall ele1ParserRuleCallINT() { return c1ParserRuleCallINT; }
 	}
 	
 	private EcoreDslElements pEcoreDsl;
@@ -1976,10 +1976,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private XtextBuiltinGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess superGrammarAccess;
 
 	@Inject
-	public EcoreDslGrammarAccess(GrammarProvider grammarProvider, XtextBuiltinGrammarAccess superGrammarAccess) {
+	public EcoreDslGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
 		this.grammarProvider = grammarProvider;
 		this.superGrammarAccess = superGrammarAccess;
 	}
@@ -1989,7 +1989,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public XtextBuiltinGrammarAccess getSuperGrammarAccess() {
+	public TerminalsGrammarAccess getSuperGrammarAccess() {
 		return superGrammarAccess;
 	}
 
@@ -2115,37 +2115,37 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public LexerRule lrID() {
-		return superGrammarAccess.lrID();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.IDElements prID() {
+		return superGrammarAccess.prID();
 	} 
 
 	// not supported
-	public LexerRule lrINT() {
-		return superGrammarAccess.lrINT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.INTElements prINT() {
+		return superGrammarAccess.prINT();
 	} 
 
 	// not supported
-	public LexerRule lrSTRING() {
-		return superGrammarAccess.lrSTRING();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.STRINGElements prSTRING() {
+		return superGrammarAccess.prSTRING();
 	} 
 
 	// not supported
-	public LexerRule lrML_COMMENT() {
-		return superGrammarAccess.lrML_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ML_COMMENTElements prML_COMMENT() {
+		return superGrammarAccess.prML_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrSL_COMMENT() {
-		return superGrammarAccess.lrSL_COMMENT();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.SL_COMMENTElements prSL_COMMENT() {
+		return superGrammarAccess.prSL_COMMENT();
 	} 
 
 	// not supported
-	public LexerRule lrWS() {
-		return superGrammarAccess.lrWS();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.WSElements prWS() {
+		return superGrammarAccess.prWS();
 	} 
 
 	// not supported
-	public LexerRule lrANY_OTHER() {
-		return superGrammarAccess.lrANY_OTHER();
+	public org.eclipse.xtext.common.services.TerminalsGrammarAccess.ANY_OTHERElements prANY_OTHER() {
+		return superGrammarAccess.prANY_OTHER();
 	} 
 }

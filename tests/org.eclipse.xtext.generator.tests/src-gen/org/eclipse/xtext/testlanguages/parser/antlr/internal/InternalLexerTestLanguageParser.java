@@ -232,9 +232,9 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.g:130:6: lv_name_0= RULE_ID
             {
             lv_name_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement236); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement235); 
 
-            		createLeafNode(grammarAccess.prElement().ele00LexerRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.prElement().ele00ParserRuleCallID(), "name"); 
             	
 
             	        if (current==null) {
@@ -251,11 +251,11 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.g:148:2: (lv_h_1= RULE_STRING )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.g:150:6: lv_h_1= RULE_STRING
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.g:147:2: (lv_h_1= RULE_STRING )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.g:149:6: lv_h_1= RULE_STRING
             {
             lv_h_1=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement266); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement264); 
 
             		createLeafNode(grammarAccess.prElement().ele10LexerRuleCallSTRING(), "h"); 
             	
@@ -303,7 +303,7 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
     public static final BitSet FOLLOW_ruleElement_in_ruleModel140 = new BitSet(new long[]{0x0000000000000012L});
     public static final BitSet FOLLOW_ruleElement_in_entryRuleElement179 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleElement189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleElement236 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleElement266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleElement235 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleElement264 = new BitSet(new long[]{0x0000000000000002L});
 
 }
