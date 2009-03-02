@@ -44,4 +44,12 @@ public interface EPackageDescriptor {
 	String getName();
 	
 	long getIndexingDate();
+	
+	/**
+	 * Convenience method to access the EPackage. The ePackage itself should must
+	 * not be stored in the index.
+	 * 
+	 * @return the ePackage
+	 */
+	EPackage getEPackage();
 }

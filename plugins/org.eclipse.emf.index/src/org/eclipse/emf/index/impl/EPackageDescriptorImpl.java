@@ -20,8 +20,11 @@ public class EPackageDescriptorImpl implements EPackageDescriptor {
 	private String nsURI;
 
 	private String name;
+	
+	private EPackage instance;
 
 	protected EPackageDescriptorImpl(EPackage ePackage, long indexingDate) {
+		this.instance = ePackage;
 		this.indexingDate = indexingDate;
 		this.nsURI = ePackage.getNsURI();
 		this.name = ePackage.getName();
@@ -36,6 +39,15 @@ public class EPackageDescriptorImpl implements EPackageDescriptor {
 	}
 
 	public String getNsURI() {
+		return nsURI;
+	}
+
+	public EPackage getEPackage() {
+		return instance;
+	}
+	
+	@Override
+	public String toString() {
 		return nsURI;
 	}
 

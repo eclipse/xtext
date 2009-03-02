@@ -114,7 +114,7 @@ public class DefaultQueryTool {
 
 	public static IGenericQuery<EObjectDescriptor> createQueryEObjectByURI(EObjectDescriptor.DAO dao, URI fragmentUri) {
 		EObjectDescriptor.Query eObjectQuery = dao.createQuery();
-		eObjectQuery.fragment(fragmentUri.fragment()).eClass().ePackage().nsURI(fragmentUri.trimFragment().toString());
+		eObjectQuery.fragment(fragmentUri.fragment()).resource().uri(fragmentUri.trimFragment().toString());
 		return eObjectQuery;
 	}
 

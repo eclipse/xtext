@@ -65,7 +65,7 @@ public abstract class BasicEObjectDescriptorImpl implements EObjectDescriptor {
 	public EClassDescriptor getEClassDescriptor() {
 		return typeDescriptor;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof EObjectDescriptor) {

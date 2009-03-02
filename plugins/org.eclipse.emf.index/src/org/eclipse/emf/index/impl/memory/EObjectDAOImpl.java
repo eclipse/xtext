@@ -106,7 +106,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			if (resourceDescriptor != null) {
 				throw new IllegalArgumentException("ReourceQuery already configured");
 			}
-			ResourceDescriptor.Query resourceQuery = indexStore.resourceDAO().createQuery();
+			resourceQuery = indexStore.resourceDAO().createQuery();
 			return resourceQuery;
 		}
 

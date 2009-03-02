@@ -8,6 +8,7 @@
 package org.eclipse.emf.index.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.EPackageDescriptor;
 
@@ -20,9 +21,21 @@ public class EClassTypeDescriptorImpl implements EClassDescriptor {
 
 	private String name;
 
-	public EClassTypeDescriptorImpl(EClass eClass, EPackageDescriptor ePackageDescriptor) {
+	private EClassDescriptor[] superClassDescriptors;
+	
+	private EClass instance;
+
+	public EClassTypeDescriptorImpl(EClass eClass, EPackageDescriptor ePackageDescriptor,
+			EClassDescriptor[] superClassDescriptors) {
+		this(eClass.getName(), ePackageDescriptor, superClassDescriptors);
+		instance = eClass;
+	}
+
+	public EClassTypeDescriptorImpl(String name, EPackageDescriptor ePackageDescriptor,
+			EClassDescriptor[] superClassDescriptors) {
 		this.ePackageDescriptor = ePackageDescriptor;
-		name = eClass.getName();
+		this.superClassDescriptors = superClassDescriptors;
+		this.name = name;
 	}
 
 	public String getDisplayName() {
@@ -36,6 +49,17 @@ public class EClassTypeDescriptorImpl implements EClassDescriptor {
 	public EPackageDescriptor getEPackageDescriptor() {
 		return ePackageDescriptor;
 	}
+
+	public EClassDescriptor[] getSuperClasses() {
+		return superClassDescriptors;
+	}
+
+	public EClass getEClass() {
+		if(instance != null) 
+			return instance;
+		EPackage ePackage = ePackageDescriptor.getEPackage();
+		return (EClass) ePackage.getEClassifier(name);
+	}
 	
 	@Override
 	public String toString() {
@@ -44,8 +68,14 @@ public class EClassTypeDescriptorImpl implements EClassDescriptor {
 
 	public static class Factory implements EClassDescriptor.Factory {
 
-		public EClassDescriptor createDescriptor(EClass eClass, EPackageDescriptor ePackageDescriptor) {
-			return new EClassTypeDescriptorImpl(eClass, ePackageDescriptor);
+		public EClassDescriptor createDescriptor(EClass eClass, EPackageDescriptor ePackageDescriptor,
+				EClassDescriptor[] superClassDescriptors) {
+			return new EClassTypeDescriptorImpl(eClass, ePackageDescriptor, superClassDescriptors);
+		}
+
+		public EClassDescriptor createDescriptor(String eClassName, EPackageDescriptor ePackageDescriptor,
+				EClassDescriptor[] superClassDescriptors) {
+			return new EClassTypeDescriptorImpl(eClassName, ePackageDescriptor, superClassDescriptors);
 		}
 
 	}

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -20,6 +22,9 @@ public interface EObjectDescriptor {
 	public interface Factory {
 		EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
 				EClassDescriptor typeDescriptor);
+
+		EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
+				EClassDescriptor typeDescriptor, Map<String, String> userData);
 
 		boolean isFactoryFor(EClass eClass);
 	}
@@ -68,4 +73,6 @@ public interface EObjectDescriptor {
 	URI getFragmentURI();
 
 	String getUserData(String key);
+	
+	Map<String, String> getUserData();
 }

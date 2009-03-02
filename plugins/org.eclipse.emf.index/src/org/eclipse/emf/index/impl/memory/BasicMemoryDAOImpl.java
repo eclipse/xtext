@@ -87,7 +87,7 @@ public abstract class BasicMemoryDAOImpl<T> {
 			List<T> result = null;
 			Collection<T> queryScope = scope();
 			if (queryScope != null) {
-				for (T candidate : scope()) {
+				for (T candidate : queryScope) {
 					if (matches(candidate)) {
 						if (result == null) {
 							result = new ArrayList<T>();
@@ -109,7 +109,7 @@ public abstract class BasicMemoryDAOImpl<T> {
 			if (isNotEmpty(scope0)) {
 				if (isNotEmpty(scope1)) {
 					List<T> mergedScope = new ArrayList<T>(scope0);
-					mergedScope.removeAll(scope1);
+					mergedScope.retainAll(scope1);
 					return mergedScope;
 				}
 				return scope0;

@@ -7,7 +7,12 @@
  *******************************************************************************/
 package org.eclipse.emf.index.mocks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
@@ -35,6 +40,34 @@ public interface MockDescriptors {
 		public long getIndexingDate() {
 			return System.currentTimeMillis();
 		}
+		
+		public EPackage getEPackage() {
+			return null;
+		};
+	};
+
+	public static final String SUPER_ECLASS_NAME = "SuperTestEClass";
+
+	public static final EClassDescriptor superClassDescriptor = new EClassDescriptor() {
+		public String getDisplayName() {
+			return SUPER_ECLASS_NAME;
+		}
+
+		public EPackageDescriptor getEPackageDescriptor() {
+			return ePackageDescriptor;
+		}
+
+		public String getName() {
+			return SUPER_ECLASS_NAME;
+		}
+
+		public EClassDescriptor[] getSuperClasses() {
+			return null;
+		}
+
+		public EClass getEClass() {
+			return null;
+		}
 	};
 
 	public static final String ECLASS_NAME = "TestEClass";
@@ -50,6 +83,14 @@ public interface MockDescriptors {
 
 		public String getName() {
 			return ECLASS_NAME;
+		}
+
+		public EClassDescriptor[] getSuperClasses() {
+			return new EClassDescriptor[] { superClassDescriptor };
+		}
+
+		public EClass getEClass() {
+			return null;
 		}
 	};
 
@@ -104,6 +145,12 @@ public interface MockDescriptors {
 			if (USER_DATA_KEY.equals(key))
 				return USER_DATA_VALUE;
 			return null;
+		}
+
+		public Map<String, String> getUserData() {
+			Map<String,String> userData = new HashMap<String,String>();
+			userData.put(USER_DATA_KEY, USER_DATA_VALUE);
+			return userData;
 		}
 
 	};

@@ -16,8 +16,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.ecore.EPackageRegistryIndexFeeder;
 import org.eclipse.emf.index.ui.internal.EmfIndexUIPlugin;
 import org.eclipse.ui.IStartup;
 
@@ -27,13 +25,6 @@ import org.eclipse.ui.IStartup;
 public class IndexBuildTrigger implements IStartup {
 
 	public void earlyStartup() {
-		new Job("EMF index: Indexing EPackages in EPackage registry") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(IIndexStore.eINSTANCE);
-				return Status.OK_STATUS;
-			}
-		}.schedule();
 		for (final IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
 			try {
 				if (project.isAccessible()) {

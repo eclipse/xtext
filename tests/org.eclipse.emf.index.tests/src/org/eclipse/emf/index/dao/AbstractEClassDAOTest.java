@@ -26,7 +26,7 @@ public abstract class AbstractEClassDAOTest extends AbstractDAOTest {
 	 * To test a specific implementation, override this method.
 	 */
 	@Override
-	protected abstract org.eclipse.emf.index.EClassDescriptor.DAO createEClassDAO();
+	protected abstract EClassDescriptor.DAO createEClassDAO();
 	
 	
 	@Override

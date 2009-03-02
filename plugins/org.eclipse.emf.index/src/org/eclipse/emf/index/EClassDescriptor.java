@@ -16,30 +16,46 @@ import org.eclipse.emf.ecore.EClass;
  */
 public interface EClassDescriptor {
 	public interface Factory {
-		EClassDescriptor createDescriptor(EClass eClass, EPackageDescriptor ePackageDescriptor);
+		EClassDescriptor createDescriptor(EClass eClass, EPackageDescriptor ePackageDescriptor,
+				EClassDescriptor[] superClassDescriptors);
+
+		EClassDescriptor createDescriptor(String eClassName, EPackageDescriptor ePackageDescriptor,
+				EClassDescriptor[] superClassDescriptors);
 	}
 
-	public interface DAO extends IDAO<EClassDescriptor>{
+	public interface DAO extends IDAO<EClassDescriptor> {
 		Query createQuery();
-		
+
 		IGenericQuery<EClassDescriptor> createQueryEClass(EClass eClass);
 
 		IGenericQuery<EClassDescriptor> createQueryEClassesInPackage(EPackageDescriptor ePackageDescriptor);
 	}
 
-	public interface Query extends IGenericQuery<EClassDescriptor>{
+	public interface Query extends IGenericQuery<EClassDescriptor> {
 		Query ePackage(EPackageDescriptor ePackageDescriptor);
-		
+
 		EPackageDescriptor.Query ePackage();
-		
+
 		Query name(String pattern);
+
+		EClassDescriptor.Query superClass();
+
+		Query superClass(EClassDescriptor eClassDescriptor);
 	}
 
 	EPackageDescriptor getEPackageDescriptor();
-	
+
 	String getName();
 
 	String getDisplayName();
-	
-	// TODO supertypes
+
+	EClassDescriptor[] getSuperClasses();
+
+	/**
+	 * Convenience method to access the EClass. The eClass itself should must
+	 * not be stored in the index.
+	 * 
+	 * @return the eClass
+	 */
+	EClass getEClass();
 }
