@@ -80,7 +80,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
       case XtextPackage.ACTION: return createAction();
       case XtextPackage.ABSTRACT_NEGATED_TOKEN: return createAbstractNegatedToken();
       case XtextPackage.NEGATED_TOKEN: return createNegatedToken();
-      case XtextPackage.UP_TO_TOKEN: return createUpToToken();
+      case XtextPackage.UNTIL_TOKEN: return createUntilToken();
       case XtextPackage.WILDCARD: return createWildcard();
       case XtextPackage.CROSS_REFERENCE: return createCrossReference();
       case XtextPackage.KEYWORD: return createKeyword();
@@ -241,10 +241,10 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public UpToToken createUpToToken()
+  public UntilToken createUntilToken()
   {
-    UpToTokenImpl upToToken = new UpToTokenImpl();
-    return upToToken;
+    UntilTokenImpl untilToken = new UntilTokenImpl();
+    return untilToken;
   }
 
   /**

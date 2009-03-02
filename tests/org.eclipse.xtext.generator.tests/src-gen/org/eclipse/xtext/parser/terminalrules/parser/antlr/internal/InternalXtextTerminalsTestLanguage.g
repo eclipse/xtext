@@ -1733,16 +1733,16 @@ ruleAbstractNegatedToken returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUpToToken(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUntilToken(), currentNode); 
     }
-    this_UpToToken_1=ruleUpToToken
+    this_UntilToken_1=ruleUntilToken
     { 
-        $current = $this_UpToToken_1.current; 
+        $current = $this_UntilToken_1.current; 
         currentNode = currentNode.getParent();
     }
 
     { 
-    createLeafNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUpToToken(), null); 
+    createLeafNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUntilToken(), null); 
     }
 );
 
@@ -1796,16 +1796,16 @@ ruleNegatedToken returns [EObject current=null]
 
 
 
-// Entry rule entryRuleUpToToken
-entryRuleUpToToken returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prUpToToken().getRule(), currentNode); }
-	 iv_ruleUpToToken=ruleUpToToken 
-	 { $current=$iv_ruleUpToToken.current; } 
+// Entry rule entryRuleUntilToken
+entryRuleUntilToken returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.prUntilToken().getRule(), currentNode); }
+	 iv_ruleUntilToken=ruleUntilToken 
+	 { $current=$iv_ruleUntilToken.current; } 
 	 EOF 
 ;
 
-// Rule UpToToken
-ruleUpToToken returns [EObject current=null] 
+// Rule UntilToken
+ruleUntilToken returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -1813,18 +1813,18 @@ ruleUpToToken returns [EObject current=null]
     }:
 ('->' 
     {
-        createLeafNode(grammarAccess.prUpToToken().ele0KeywordHyphenMinusGreaterThanSign(), null); 
+        createLeafNode(grammarAccess.prUntilToken().ele0KeywordHyphenMinusGreaterThanSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prUpToToken().ele10ParserRuleCallTerminalTokenElement(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prUntilToken().ele10ParserRuleCallTerminalTokenElement(), currentNode); 
 	    }
 	    lv_terminal_1=ruleTerminalTokenElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prUpToToken().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prUntilToken().getRule().getType().getType());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        

@@ -30,7 +30,7 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalTokenElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractNegatedTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextNegatedTokenConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextUpToTokenConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextUntilTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextWildcardConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCharacterRangeConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCrossReferenceConsumer;
@@ -70,7 +70,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     private XtextTerminalTokenElementConsumer terminalTokenElementConsumer;
     private XtextAbstractNegatedTokenConsumer abstractNegatedTokenConsumer;
     private XtextNegatedTokenConsumer negatedTokenConsumer;
-    private XtextUpToTokenConsumer upToTokenConsumer;
+    private XtextUntilTokenConsumer untilTokenConsumer;
     private XtextWildcardConsumer wildcardConsumer;
     private XtextCharacterRangeConsumer characterRangeConsumer;
     private XtextCrossReferenceConsumer crossReferenceConsumer;
@@ -156,7 +156,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		negatedTokenConsumer = new XtextNegatedTokenConsumer(
     		this, null
     	);
-		upToTokenConsumer = new XtextUpToTokenConsumer(
+		untilTokenConsumer = new XtextUntilTokenConsumer(
     		this, null
     	);
 		wildcardConsumer = new XtextWildcardConsumer(
@@ -210,7 +210,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getTerminalTokenElementConsumer().setRule(grammarAccess.prTerminalTokenElement());
 		getAbstractNegatedTokenConsumer().setRule(grammarAccess.prAbstractNegatedToken());
 		getNegatedTokenConsumer().setRule(grammarAccess.prNegatedToken());
-		getUpToTokenConsumer().setRule(grammarAccess.prUpToToken());
+		getUntilTokenConsumer().setRule(grammarAccess.prUntilToken());
 		getWildcardConsumer().setRule(grammarAccess.prWildcard());
 		getCharacterRangeConsumer().setRule(grammarAccess.prCharacterRange());
 		getCrossReferenceConsumer().setRule(grammarAccess.prCrossReference());
@@ -288,11 +288,11 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getTerminalTokenElementConsumer().setWildcardConsumer(getWildcardConsumer());
 
 		getAbstractNegatedTokenConsumer().setNegatedTokenConsumer(getNegatedTokenConsumer());
-		getAbstractNegatedTokenConsumer().setUpToTokenConsumer(getUpToTokenConsumer());
+		getAbstractNegatedTokenConsumer().setUntilTokenConsumer(getUntilTokenConsumer());
 
 		getNegatedTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
-		getUpToTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
+		getUntilTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
@@ -368,7 +368,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getActionConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$19$Delimiter);
 		getActionConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$31$Delimiter);
 		getNegatedTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$19$Delimiter);
-		getUpToTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$19$Delimiter);
+		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$19$Delimiter);
 		getWildcardConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$19$Delimiter);
 		getCharacterRangeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$19$Delimiter);
 		getCrossReferenceConsumer().setCrossReference$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.crossReference$31$Delimiter);
@@ -471,8 +471,8 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     	return negatedTokenConsumer;
     }
 
-    public XtextUpToTokenConsumer getUpToTokenConsumer() {
-    	return upToTokenConsumer;
+    public XtextUntilTokenConsumer getUntilTokenConsumer() {
+    	return untilTokenConsumer;
     }
 
     public XtextWildcardConsumer getWildcardConsumer() {

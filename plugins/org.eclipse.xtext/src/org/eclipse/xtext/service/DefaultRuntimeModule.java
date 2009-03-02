@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
@@ -36,28 +37,32 @@ import com.google.inject.Binder;
  * @author Sven Efftinge
  */
 public abstract class DefaultRuntimeModule extends AbstractGenericModule {
-	
+
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 	}
-	
+
+	public EValidator.Registry bindEValidatorRegistry() {
+		return EValidator.Registry.INSTANCE;
+	}
+
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
 		return DefaultFragmentProvider.class;
 	}
-	
+
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return DefaultTransientValueService.class;
 	}
-	
+
 	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
 		return DefaultCrossReferenceSerializer.class;
 	}
-	
+
 	public Class<? extends ITokenSerializer> bindITokenSerializer() {
 		return WhitespacePreservingTokenSerializer.class;
 	}
-	
+
 	public Class<? extends IResourceFactory> bindIResourceFactory() {
 		return XtextResourceFactory.class;
 	}
@@ -89,7 +94,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public Class<? extends org.eclipse.xtext.parser.ISwitchingParser> bindISwitchingParser() {
 		return SwitchingParser.class;
 	}
-	
+
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return NullTokenDefProvider.class;
 	}

@@ -31,7 +31,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.UpToToken;
+import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
@@ -140,7 +140,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass upToTokenEClass = null;
+  private EClass untilTokenEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -636,9 +636,9 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getUpToToken()
+  public EClass getUntilToken()
   {
-    return upToTokenEClass;
+    return untilTokenEClass;
   }
 
   /**
@@ -881,7 +881,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
     negatedTokenEClass = createEClass(NEGATED_TOKEN);
 
-    upToTokenEClass = createEClass(UP_TO_TOKEN);
+    untilTokenEClass = createEClass(UNTIL_TOKEN);
 
     wildcardEClass = createEClass(WILDCARD);
     createEAttribute(wildcardEClass, WILDCARD__IS_WILDCARD);
@@ -944,7 +944,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     actionEClass.getESuperTypes().add(this.getAbstractElement());
     abstractNegatedTokenEClass.getESuperTypes().add(this.getAbstractElement());
     negatedTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
-    upToTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
+    untilTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
     wildcardEClass.getESuperTypes().add(this.getAbstractElement());
     crossReferenceEClass.getESuperTypes().add(this.getAbstractElement());
     keywordEClass.getESuperTypes().add(this.getAbstractElement());
@@ -1004,7 +1004,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
     initEClass(negatedTokenEClass, NegatedToken.class, "NegatedToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(upToTokenEClass, UpToToken.class, "UpToToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(untilTokenEClass, UntilToken.class, "UntilToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getWildcard_IsWildcard(), ecorePackage.getEBoolean(), "isWildcard", null, 0, 1, Wildcard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

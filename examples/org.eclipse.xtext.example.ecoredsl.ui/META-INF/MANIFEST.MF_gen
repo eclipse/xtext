@@ -4,6 +4,7 @@ Bundle-Name: org.eclipse.xtext.example.ecoredsl.ui
 Bundle-SymbolicName: org.eclipse.xtext.example.ecoredsl.ui
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
 
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,

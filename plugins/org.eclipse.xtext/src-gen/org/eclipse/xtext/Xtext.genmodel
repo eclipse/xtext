@@ -114,7 +114,7 @@
       <ecoreClass href="Xtext.ecore#//NegatedToken"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="Xtext.ecore#//UpToToken"/>
+      <ecoreClass href="Xtext.ecore#//UntilToken"/>
     </genClasses>
     <genClasses>
       <ecoreClass href="Xtext.ecore#//Wildcard"/>

@@ -25,7 +25,7 @@ public final class TerminalsML_COMMENTConsumer extends AbstractRuleAwareTerminal
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeUpToToken$3()) {
+		if (!consumeUntilToken$3()) {
 			rollbackTo(marker);
 			return false;
 		}
@@ -36,7 +36,7 @@ public final class TerminalsML_COMMENTConsumer extends AbstractRuleAwareTerminal
 		return readString("/*");
 	}
 
-	protected boolean consumeUpToToken$3() {
+	protected boolean consumeUntilToken$3() {
 		final int marker = mark();
 		while(!eof()) {
 			if(consumeKeyword$4())

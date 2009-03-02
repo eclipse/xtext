@@ -4097,22 +4097,22 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleAbstractNegatedToken
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1714:1: ruleAbstractNegatedToken returns [EObject current=null] : (this_NegatedToken_0= ruleNegatedToken | this_UpToToken_1= ruleUpToToken ) ;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1714:1: ruleAbstractNegatedToken returns [EObject current=null] : (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) ;
     public final EObject ruleAbstractNegatedToken() throws RecognitionException {
         EObject current = null;
 
         EObject this_NegatedToken_0 = null;
 
-        EObject this_UpToToken_1 = null;
+        EObject this_UntilToken_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1719:6: ( (this_NegatedToken_0= ruleNegatedToken | this_UpToToken_1= ruleUpToToken ) )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1720:1: (this_NegatedToken_0= ruleNegatedToken | this_UpToToken_1= ruleUpToToken )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1719:6: ( (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1720:1: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
             {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1720:1: (this_NegatedToken_0= ruleNegatedToken | this_UpToToken_1= ruleUpToToken )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1720:1: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -4124,7 +4124,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1720:1: (this_NegatedToken_0= ruleNegatedToken | this_UpToToken_1= ruleUpToToken )", 42, 0, input);
+                    new NoViableAltException("1720:1: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )", 42, 0, input);
 
                 throw nvae;
             }
@@ -4150,21 +4150,21 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1735:5: this_UpToToken_1= ruleUpToToken
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1735:5: this_UntilToken_1= ruleUntilToken
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUpToToken(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUntilToken(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleUpToToken_in_ruleAbstractNegatedToken3899);
-                    this_UpToToken_1=ruleUpToToken();
+                    pushFollow(FOLLOW_ruleUntilToken_in_ruleAbstractNegatedToken3899);
+                    this_UntilToken_1=ruleUntilToken();
                     _fsp--;
 
                      
-                            current = this_UpToToken_1; 
+                            current = this_UntilToken_1; 
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUpToToken(), null); 
+                        createLeafNode(grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUntilToken(), null); 
                         
 
                     }
@@ -4295,25 +4295,25 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleNegatedToken
 
 
-    // $ANTLR start entryRuleUpToToken
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1800:1: entryRuleUpToToken returns [EObject current=null] : iv_ruleUpToToken= ruleUpToToken EOF ;
-    public final EObject entryRuleUpToToken() throws RecognitionException {
+    // $ANTLR start entryRuleUntilToken
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1800:1: entryRuleUntilToken returns [EObject current=null] : iv_ruleUntilToken= ruleUntilToken EOF ;
+    public final EObject entryRuleUntilToken() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleUpToToken = null;
+        EObject iv_ruleUntilToken = null;
 
 
         try {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1800:51: (iv_ruleUpToToken= ruleUpToToken EOF )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1801:2: iv_ruleUpToToken= ruleUpToToken EOF
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1800:52: (iv_ruleUntilToken= ruleUntilToken EOF )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1801:2: iv_ruleUntilToken= ruleUntilToken EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prUpToToken().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleUpToToken_in_entryRuleUpToToken4053);
-            iv_ruleUpToToken=ruleUpToToken();
+             currentNode = createCompositeNode(grammarAccess.prUntilToken().getRule(), currentNode); 
+            pushFollow(FOLLOW_ruleUntilToken_in_entryRuleUntilToken4053);
+            iv_ruleUntilToken=ruleUntilToken();
             _fsp--;
 
-             current =iv_ruleUpToToken; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleUpToToken4063); 
+             current =iv_ruleUntilToken; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleUntilToken4063); 
 
             }
 
@@ -4327,12 +4327,12 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleUpToToken
+    // $ANTLR end entryRuleUntilToken
 
 
-    // $ANTLR start ruleUpToToken
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1808:1: ruleUpToToken returns [EObject current=null] : ( '->' (lv_terminal_1= ruleTerminalTokenElement ) ) ;
-    public final EObject ruleUpToToken() throws RecognitionException {
+    // $ANTLR start ruleUntilToken
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1808:1: ruleUntilToken returns [EObject current=null] : ( '->' (lv_terminal_1= ruleTerminalTokenElement ) ) ;
+    public final EObject ruleUntilToken() throws RecognitionException {
         EObject current = null;
 
         EObject lv_terminal_1 = null;
@@ -4347,23 +4347,23 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1814:1: ( '->' (lv_terminal_1= ruleTerminalTokenElement ) )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1814:2: '->' (lv_terminal_1= ruleTerminalTokenElement )
             {
-            match(input,37,FOLLOW_37_in_ruleUpToToken4097); 
+            match(input,37,FOLLOW_37_in_ruleUntilToken4097); 
 
-                    createLeafNode(grammarAccess.prUpToToken().ele0KeywordHyphenMinusGreaterThanSign(), null); 
+                    createLeafNode(grammarAccess.prUntilToken().ele0KeywordHyphenMinusGreaterThanSign(), null); 
                 
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1818:1: (lv_terminal_1= ruleTerminalTokenElement )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1821:6: lv_terminal_1= ruleTerminalTokenElement
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prUpToToken().ele10ParserRuleCallTerminalTokenElement(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.prUntilToken().ele10ParserRuleCallTerminalTokenElement(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTerminalTokenElement_in_ruleUpToToken4131);
+            pushFollow(FOLLOW_ruleTerminalTokenElement_in_ruleUntilToken4131);
             lv_terminal_1=ruleTerminalTokenElement();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prUpToToken().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prUntilToken().getRule().getType().getType());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -4396,7 +4396,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleUpToToken
+    // $ANTLR end ruleUntilToken
 
 
     // $ANTLR start entryRuleWildcard
@@ -5324,15 +5324,15 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken3808 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAbstractNegatedToken3818 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNegatedToken_in_ruleAbstractNegatedToken3865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUpToToken_in_ruleAbstractNegatedToken3899 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUntilToken_in_ruleAbstractNegatedToken3899 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken3938 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNegatedToken3948 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_36_in_ruleNegatedToken3982 = new BitSet(new long[]{0x0000003000028030L});
     public static final BitSet FOLLOW_ruleTerminalTokenElement_in_ruleNegatedToken4016 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUpToToken_in_entryRuleUpToToken4053 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleUpToToken4063 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_ruleUpToToken4097 = new BitSet(new long[]{0x0000003000028030L});
-    public static final BitSet FOLLOW_ruleTerminalTokenElement_in_ruleUpToToken4131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUntilToken_in_entryRuleUntilToken4053 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleUntilToken4063 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_ruleUntilToken4097 = new BitSet(new long[]{0x0000003000028030L});
+    public static final BitSet FOLLOW_ruleTerminalTokenElement_in_ruleUntilToken4131 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleWildcard_in_entryRuleWildcard4168 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleWildcard4178 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_17_in_ruleWildcard4223 = new BitSet(new long[]{0x0000000000000002L});

@@ -114,7 +114,7 @@
       <ecoreClass href="XtextTerminalsTestLanguage.ecore#//NegatedToken"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="XtextTerminalsTestLanguage.ecore#//UpToToken"/>
+      <ecoreClass href="XtextTerminalsTestLanguage.ecore#//UntilToken"/>
     </genClasses>
     <genClasses>
       <ecoreClass href="XtextTerminalsTestLanguage.ecore#//Wildcard"/>

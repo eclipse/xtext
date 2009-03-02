@@ -143,9 +143,9 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
         return createNegatedTokenAdapter();
       }
       @Override
-      public Adapter caseUpToToken(UpToToken object)
+      public Adapter caseUntilToken(UntilToken object)
       {
-        return createUpToTokenAdapter();
+        return createUntilTokenAdapter();
       }
       @Override
       public Adapter caseWildcard(Wildcard object)
@@ -400,16 +400,16 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.UpToToken <em>Up To Token</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.UntilToken <em>Until Token</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.UpToToken
+   * @see org.eclipse.xtext.UntilToken
    * @generated
    */
-  public Adapter createUpToTokenAdapter()
+  public Adapter createUntilTokenAdapter()
   {
     return null;
   }

@@ -7,26 +7,26 @@ package org.eclipse.xtext.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.xtext.UpToToken;
+import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.XtextPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Up To Token</b></em>'.
+ * An implementation of the model object '<em><b>Until Token</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class UpToTokenImpl extends AbstractNegatedTokenImpl implements UpToToken
+public class UntilTokenImpl extends AbstractNegatedTokenImpl implements UntilToken
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected UpToTokenImpl()
+  protected UntilTokenImpl()
   {
     super();
   }
@@ -39,7 +39,7 @@ public class UpToTokenImpl extends AbstractNegatedTokenImpl implements UpToToken
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.UP_TO_TOKEN;
+    return XtextPackage.Literals.UNTIL_TOKEN;
   }
 
-} //UpToTokenImpl
+} //UntilTokenImpl

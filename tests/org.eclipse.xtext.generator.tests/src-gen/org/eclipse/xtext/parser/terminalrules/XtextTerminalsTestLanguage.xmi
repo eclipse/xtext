@@ -511,9 +511,9 @@
       </abstractTokens>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="UpToToken">
+  <rules xsi:type="xtext:ParserRule" name="UntilToken">
     <type metamodel="//@metamodelDeclarations.0">
-      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//UpToToken"/>
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//UntilToken"/>
     </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="->"/>
@@ -763,7 +763,7 @@
     </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="/*"/>
-      <abstractTokens xsi:type="xtext:UpToToken">
+      <abstractTokens xsi:type="xtext:UntilToken">
         <terminal xsi:type="xtext:Keyword" value="*/"/>
       </abstractTokens>
     </alternatives>

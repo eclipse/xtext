@@ -1022,7 +1022,7 @@ public class XtextGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractNegatedToken");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallNegatedToken = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallUpToToken = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall c1ParserRuleCallUntilToken = (RuleCall)cAlternatives.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1034,7 +1034,7 @@ public class XtextGrammarAccess implements IGrammarAccess {
 		public RuleCall ele0ParserRuleCallNegatedToken() { return c0ParserRuleCallNegatedToken; }
 
 		// not supported
-		public RuleCall ele1ParserRuleCallUpToToken() { return c1ParserRuleCallUpToToken; }
+		public RuleCall ele1ParserRuleCallUntilToken() { return c1ParserRuleCallUntilToken; }
 	}
 
 	public class NegatedTokenElements implements IParserRuleAccess {
@@ -1060,8 +1060,8 @@ public class XtextGrammarAccess implements IGrammarAccess {
 		public RuleCall ele10ParserRuleCallTerminalTokenElement() { return c10ParserRuleCallTerminalTokenElement; }
 	}
 
-	public class UpToTokenElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UpToToken");
+	public class UntilTokenElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UntilToken");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordHyphenMinusGreaterThanSign = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentTerminal = (Assignment)cGroup.eContents().get(1);
@@ -1293,7 +1293,7 @@ public class XtextGrammarAccess implements IGrammarAccess {
 	private TerminalTokenElementElements pTerminalTokenElement;
 	private AbstractNegatedTokenElements pAbstractNegatedToken;
 	private NegatedTokenElements pNegatedToken;
-	private UpToTokenElements pUpToToken;
+	private UntilTokenElements pUntilToken;
 	private WildcardElements pWildcard;
 	private CharacterRangeElements pCharacterRange;
 	private CrossReferenceElements pCrossReference;
@@ -1429,8 +1429,8 @@ public class XtextGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public UpToTokenElements prUpToToken() {
-		return (pUpToToken != null) ? pUpToToken : (pUpToToken = new UpToTokenElements());
+	public UntilTokenElements prUntilToken() {
+		return (pUntilToken != null) ? pUntilToken : (pUntilToken = new UntilTokenElements());
 	} 
 
 	// not supported

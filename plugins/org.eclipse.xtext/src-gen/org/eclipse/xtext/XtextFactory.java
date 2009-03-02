@@ -143,13 +143,13 @@ public interface XtextFactory extends EFactory
   NegatedToken createNegatedToken();
 
   /**
-   * Returns a new object of class '<em>Up To Token</em>'.
+   * Returns a new object of class '<em>Until Token</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Up To Token</em>'.
+   * @return a new object of class '<em>Until Token</em>'.
    * @generated
    */
-  UpToToken createUpToToken();
+  UntilToken createUntilToken();
 
   /**
    * Returns a new object of class '<em>Wildcard</em>'.

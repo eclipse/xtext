@@ -18,11 +18,11 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
-import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.UpToTokenElements;
+import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.UntilTokenElements;
 
-public final class XtextGrammarTestLanguageUpToTokenConsumer extends NonTerminalConsumer {
+public final class XtextGrammarTestLanguageUntilTokenConsumer extends NonTerminalConsumer {
 
-	private UpToTokenElements rule;	
+	private UntilTokenElements rule;	
 
 	private INonTerminalConsumer terminalTokenElementConsumer;
 
@@ -85,7 +85,7 @@ public final class XtextGrammarTestLanguageUpToTokenConsumer extends NonTerminal
 		}
 	}
 
-	public XtextGrammarTestLanguageUpToTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
+	public XtextGrammarTestLanguageUntilTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
@@ -95,11 +95,11 @@ public final class XtextGrammarTestLanguageUpToTokenConsumer extends NonTerminal
 		return group$1$Consumer.consume();
 	}
 
-	public UpToTokenElements getRule() {
+	public UntilTokenElements getRule() {
 		return rule;
 	}
 	
-	public void setRule(UpToTokenElements rule) {
+	public void setRule(UntilTokenElements rule) {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());

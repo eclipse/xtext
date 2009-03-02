@@ -339,9 +339,9 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeUpToToken_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeUntilToken_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeUpToToken_Terminal feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeUntilToken_Terminal feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}

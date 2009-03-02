@@ -212,7 +212,7 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="/*"/>
-        <abstractTokens xsi:type="xtext:UpToToken">
+        <abstractTokens xsi:type="xtext:UntilToken">
           <terminal xsi:type="xtext:Keyword" value="*/"/>
         </abstractTokens>
       </alternatives>

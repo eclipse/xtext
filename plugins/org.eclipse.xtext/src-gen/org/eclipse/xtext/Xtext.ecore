@@ -73,7 +73,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NegatedToken" eSuperTypes="//AbstractNegatedToken"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UpToToken" eSuperTypes="//AbstractNegatedToken"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UntilToken" eSuperTypes="//AbstractNegatedToken"/>
   <eClassifiers xsi:type="ecore:EClass" name="Wildcard" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isWildcard">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

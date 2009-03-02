@@ -14,13 +14,16 @@ import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
 import org.eclipse.xtext.validator.CheckType;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
 
-	public XtextValidator() {
-		EValidator.Registry.INSTANCE.put(XtextPackage.eINSTANCE, this);
+	@Inject
+	public XtextValidator(EValidator.Registry registry) {
+		registry.put(XtextPackage.eINSTANCE, this);
 	}
 
 	@Check(CheckType.NORMAL)

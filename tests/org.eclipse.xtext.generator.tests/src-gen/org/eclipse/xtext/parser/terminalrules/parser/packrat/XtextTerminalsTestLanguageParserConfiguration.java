@@ -29,7 +29,7 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageTerminalTokenElementConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageAbstractNegatedTokenConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageNegatedTokenConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageUpToTokenConsumer;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageUntilTokenConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageWildcardConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageCharacterRangeConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageCrossReferenceConsumer;
@@ -68,7 +68,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     private XtextTerminalsTestLanguageTerminalTokenElementConsumer terminalTokenElementConsumer;
     private XtextTerminalsTestLanguageAbstractNegatedTokenConsumer abstractNegatedTokenConsumer;
     private XtextTerminalsTestLanguageNegatedTokenConsumer negatedTokenConsumer;
-    private XtextTerminalsTestLanguageUpToTokenConsumer upToTokenConsumer;
+    private XtextTerminalsTestLanguageUntilTokenConsumer untilTokenConsumer;
     private XtextTerminalsTestLanguageWildcardConsumer wildcardConsumer;
     private XtextTerminalsTestLanguageCharacterRangeConsumer characterRangeConsumer;
     private XtextTerminalsTestLanguageCrossReferenceConsumer crossReferenceConsumer;
@@ -159,7 +159,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		negatedTokenConsumer = new XtextTerminalsTestLanguageNegatedTokenConsumer(
     		this, null
     	);
-		upToTokenConsumer = new XtextTerminalsTestLanguageUpToTokenConsumer(
+		untilTokenConsumer = new XtextTerminalsTestLanguageUntilTokenConsumer(
     		this, null
     	);
 		wildcardConsumer = new XtextTerminalsTestLanguageWildcardConsumer(
@@ -219,7 +219,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getTerminalTokenElementConsumer().setRule(grammarAccess.prTerminalTokenElement());
 		getAbstractNegatedTokenConsumer().setRule(grammarAccess.prAbstractNegatedToken());
 		getNegatedTokenConsumer().setRule(grammarAccess.prNegatedToken());
-		getUpToTokenConsumer().setRule(grammarAccess.prUpToToken());
+		getUntilTokenConsumer().setRule(grammarAccess.prUntilToken());
 		getWildcardConsumer().setRule(grammarAccess.prWildcard());
 		getCharacterRangeConsumer().setRule(grammarAccess.prCharacterRange());
 		getCrossReferenceConsumer().setRule(grammarAccess.prCrossReference());
@@ -297,11 +297,11 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getTerminalTokenElementConsumer().setWildcardConsumer(getWildcardConsumer());
 
 		getAbstractNegatedTokenConsumer().setNegatedTokenConsumer(getNegatedTokenConsumer());
-		getAbstractNegatedTokenConsumer().setUpToTokenConsumer(getUpToTokenConsumer());
+		getAbstractNegatedTokenConsumer().setUntilTokenConsumer(getUntilTokenConsumer());
 
 		getNegatedTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
-		getUpToTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
+		getUntilTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
@@ -377,7 +377,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getActionConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
 		getActionConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.crossReference$31$Delimiter);
 		getNegatedTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
-		getUpToTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
+		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
 		getWildcardConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
 		getCharacterRangeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$19$Delimiter);
 		getCrossReferenceConsumer().setCrossReference$10$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.crossReference$31$Delimiter);
@@ -476,8 +476,8 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     	return negatedTokenConsumer;
     }
 
-    public XtextTerminalsTestLanguageUpToTokenConsumer getUpToTokenConsumer() {
-    	return upToTokenConsumer;
+    public XtextTerminalsTestLanguageUntilTokenConsumer getUntilTokenConsumer() {
+    	return untilTokenConsumer;
     }
 
     public XtextTerminalsTestLanguageWildcardConsumer getWildcardConsumer() {

@@ -107,7 +107,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «EXPAND defineConsume(this) FOR terminal-»
 «ENDDEFINE»
 
-«DEFINE defineConsume FOR UpToToken-»
+«DEFINE defineConsume FOR UntilToken-»
 «EXPAND defineConsumeDeclaration FOR this-»
 «EXPAND defineConsume FOR terminal-»
 «ENDDEFINE»
@@ -189,7 +189,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE defineConsumeBody FOR UpToToken-»
+«DEFINE defineConsumeBody FOR UntilToken-»
 		final int marker = mark();
 		while(!eof()) {
 			if(«terminal.consumeMethodName()»())

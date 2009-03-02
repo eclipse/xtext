@@ -80,7 +80,7 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
       case XtextTerminalsTestLanguagePackage.ACTION: return createAction();
       case XtextTerminalsTestLanguagePackage.ABSTRACT_NEGATED_TOKEN: return createAbstractNegatedToken();
       case XtextTerminalsTestLanguagePackage.NEGATED_TOKEN: return createNegatedToken();
-      case XtextTerminalsTestLanguagePackage.UP_TO_TOKEN: return createUpToToken();
+      case XtextTerminalsTestLanguagePackage.UNTIL_TOKEN: return createUntilToken();
       case XtextTerminalsTestLanguagePackage.WILDCARD: return createWildcard();
       case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE: return createCrossReference();
       case XtextTerminalsTestLanguagePackage.KEYWORD: return createKeyword();
@@ -241,10 +241,10 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public UpToToken createUpToToken()
+  public UntilToken createUntilToken()
   {
-    UpToTokenImpl upToToken = new UpToTokenImpl();
-    return upToToken;
+    UntilTokenImpl untilToken = new UntilTokenImpl();
+    return untilToken;
   }
 
   /**

@@ -10,5 +10,5 @@ import org.eclipse.xtext.ui.common.service.DefaultUIModule;
  * Manual modifications go to {org.eclipse.xtext.grammarinheritance.AbstractTestLanguageUiModule}
  */
 public abstract class AbstractAbstractTestLanguageUiModule extends DefaultUIModule {
-
+	
 }

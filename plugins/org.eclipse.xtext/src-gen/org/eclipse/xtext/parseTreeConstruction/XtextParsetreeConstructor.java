@@ -42,7 +42,7 @@ public class XtextParsetreeConstructor extends AbstractParseTreeConstructor {
 		if(inst.isInstanceOf(grammarAccess.prTerminalTokenElement().getRule().getType().getType()) && (s = new TerminalTokenElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prAbstractNegatedToken().getRule().getType().getType()) && (s = new AbstractNegatedToken_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prNegatedToken().getRule().getType().getType()) && (s = new NegatedToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prUpToToken().getRule().getType().getType()) && (s = new UpToToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prUntilToken().getRule().getType().getType()) && (s = new UntilToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prWildcard().getRule().getType().getType()) && (s = new Wildcard_Assignment_isWildcard(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prCharacterRange().getRule().getType().getType()) && (s = new CharacterRange_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prCrossReference().getRule().getType().getType()) && (s = new CrossReference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
@@ -4356,7 +4356,7 @@ protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 
 	@Override	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractNegatedToken_1_RuleCall_UpToToken(current, this) : new AbstractNegatedToken_0_RuleCall_NegatedToken(current, this);
+		AbstractToken t = (first) ? new AbstractNegatedToken_1_RuleCall_UntilToken(current, this) : new AbstractNegatedToken_0_RuleCall_NegatedToken(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -4386,22 +4386,22 @@ protected class AbstractNegatedToken_0_RuleCall_NegatedToken extends RuleCallTok
 }
 
 // not supported
-protected class AbstractNegatedToken_1_RuleCall_UpToToken extends RuleCallToken {
+protected class AbstractNegatedToken_1_RuleCall_UntilToken extends RuleCallToken {
 	
-	public AbstractNegatedToken_1_RuleCall_UpToToken(IInstanceDescription curr, AbstractToken pred) {
+	public AbstractNegatedToken_1_RuleCall_UntilToken(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUpToToken();
+		return grammarAccess.prAbstractNegatedToken().ele1ParserRuleCallUntilToken();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(checkForRecursion(UpToToken_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prUpToToken().getRule().getType().getType())) return null;
-		return new UpToToken_Group(current, this).firstSolution();
+		if(checkForRecursion(UntilToken_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.prUntilToken().getRule().getType().getType())) return null;
+		return new UntilToken_Group(current, this).firstSolution();
 	}
 }
 
@@ -4495,7 +4495,7 @@ protected class NegatedToken_1_Assignment_terminal extends AssignmentToken  {
 /************ end Rule NegatedToken ****************/
 
 
-/************ begin Rule UpToToken ****************
+/************ begin Rule UntilToken ****************
  *
  * not supported
  *
@@ -4503,22 +4503,22 @@ protected class NegatedToken_1_Assignment_terminal extends AssignmentToken  {
 
 
 // not supported
-protected class UpToToken_Group extends GroupToken {
+protected class UntilToken_Group extends GroupToken {
 	
-	public UpToToken_Group(IInstanceDescription curr, AbstractToken pred) {
+	public UntilToken_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prUpToToken().eleGroup();
+		return grammarAccess.prUntilToken().eleGroup();
 	}
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new UpToToken_1_Assignment_terminal(current, this).firstSolution();
+		Solution s1 = new UntilToken_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new UpToToken_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new UntilToken_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -4533,27 +4533,27 @@ protected class UpToToken_Group extends GroupToken {
 }
 
 // not supported
-protected class UpToToken_0_Keyword extends KeywordToken  {
+protected class UntilToken_0_Keyword extends KeywordToken  {
 	
-	public UpToToken_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public UntilToken_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prUpToToken().ele0KeywordHyphenMinusGreaterThanSign();
+		return grammarAccess.prUntilToken().ele0KeywordHyphenMinusGreaterThanSign();
 	}	
 }
 
 // not supported
-protected class UpToToken_1_Assignment_terminal extends AssignmentToken  {
+protected class UntilToken_1_Assignment_terminal extends AssignmentToken  {
 	
-	public UpToToken_1_Assignment_terminal(IInstanceDescription curr, AbstractToken pred) {
+	public UntilToken_1_Assignment_terminal(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prUpToToken().ele1AssignmentTerminal();
+		return grammarAccess.prUntilToken().ele1AssignmentTerminal();
 	}
 	
 	@Override
@@ -4578,7 +4578,7 @@ protected class UpToToken_1_Assignment_terminal extends AssignmentToken  {
 }
 
 
-/************ end Rule UpToToken ****************/
+/************ end Rule UntilToken ****************/
 
 
 /************ begin Rule Wildcard ****************
