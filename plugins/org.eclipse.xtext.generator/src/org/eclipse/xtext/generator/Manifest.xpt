@@ -17,10 +17,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: «this»
 Bundle-SymbolicName: «symbolicName»
 Bundle-Version: «version»
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-«IF !exportedPackages.isEmpty»Export-Package: «exportedPackages.toString(",\n ")»«ENDIF»
-«IF !requiredBundles.isEmpty»Require-Bundle: «requiredBundles.toString(",\n ")»«ENDIF»
+«IF !exportedPackages.isEmpty»Export-Package: «exportedPackages.toString(",\n ")»
+«ENDIF-»
+«IF !requiredBundles.isEmpty»Require-Bundle: «requiredBundles.toString(",\n ")»
+«ENDIF-»
 «IF activator!=null-»
 Bundle-Activator: «activator-»
 «ENDIF»
