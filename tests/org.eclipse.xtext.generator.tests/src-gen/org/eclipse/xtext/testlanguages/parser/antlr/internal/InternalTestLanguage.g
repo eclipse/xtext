@@ -170,15 +170,15 @@ ruleChoiceRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('choice' 
+('choice' 
     {
-        createLeafNode(grammarAccess.prChoiceRule().ele00KeywordChoice(), null); 
+        createLeafNode(grammarAccess.prChoiceRule().ele0KeywordChoice(), null); 
     }
 (	
 	
 	    lv_optionalKeyword_1='optional' 
     {
-        createLeafNode(grammarAccess.prChoiceRule().ele010KeywordOptional(), "optionalKeyword"); 
+        createLeafNode(grammarAccess.prChoiceRule().ele10KeywordOptional(), "optionalKeyword"); 
     }
 
  
@@ -195,11 +195,11 @@ ruleChoiceRule returns [EObject current=null]
 	        }
 	    }
 	
-)?)(	
+)?(	
 	
 	    lv_name_2=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prChoiceRule().ele10TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prChoiceRule().ele20TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -236,13 +236,13 @@ ruleReducibleRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('reducible' 
+('reducible' 
     {
-        createLeafNode(grammarAccess.prReducibleRule().ele00KeywordReducible(), null); 
+        createLeafNode(grammarAccess.prReducibleRule().ele0KeywordReducible(), null); 
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prReducibleRule().ele1ParserRuleCallTerminalRule(), currentNode); 
     }
     this_TerminalRule_1=ruleTerminalRule
     { 
@@ -251,11 +251,11 @@ ruleReducibleRule returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule(), null); 
+    createLeafNode(grammarAccess.prReducibleRule().ele1ParserRuleCallTerminalRule(), null); 
     }
-)((
+((
     { 
-        temp=factory.create(grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature().getTypeName().getType());
+        temp=factory.create(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature().getTypeName().getType());
         try {
         	factory.add(temp, "actionFeature", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -263,7 +263,7 @@ ruleReducibleRule returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -273,7 +273,7 @@ ruleReducibleRule returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prReducibleRule().ele110ParserRuleCallTerminalRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prReducibleRule().ele210ParserRuleCallTerminalRule(), currentNode); 
 	    }
 	    lv_actionFeature_3=ruleTerminalRule 
 	    {
@@ -336,17 +336,17 @@ ruleTerminalRule returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

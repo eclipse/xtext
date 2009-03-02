@@ -14,18 +14,18 @@ public final class ConcreteTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ICharacterClass keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-	public static final ISequenceMatcher ruleCall$27$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$23$Delimiter = new SetBasedKeywordMatcher(
 		"model", "overriddenelement", "subrule1", "subrule3");
 
 }

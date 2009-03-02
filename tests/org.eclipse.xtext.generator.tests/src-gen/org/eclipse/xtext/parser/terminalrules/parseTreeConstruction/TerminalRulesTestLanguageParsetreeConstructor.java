@@ -46,142 +46,30 @@ protected class Model_Alternatives extends AlternativesToken {
 		return grammarAccess.prModel().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_1_Assignment_anyValue(current, this) : new Model_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new Model_0_Assignment_idValue(current, this);
+			case 1: return new Model_1_Assignment_intValue(current, this);
+			case 2: return new Model_2_Assignment_stringValue(current, this);
+			case 3: return new Model_3_Assignment_mlCommentValue(current, this);
+			case 4: return new Model_4_Assignment_slCommentValue(current, this);
+			case 5: return new Model_5_Assignment_wsValue(current, this);
+			case 6: return new Model_6_Assignment_anyValue(current, this);
+			default: return null;
+		}
 	}
 }
 
 // not supported
-protected class Model_0_Alternatives extends AlternativesToken {
-
-	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
+protected class Model_0_Assignment_idValue extends AssignmentToken  {
 	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele0Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_1_Assignment_wsValue(current, this) : new Model_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_Alternatives extends AlternativesToken {
-
-	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele00Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_1_Assignment_slCommentValue(current, this) : new Model_0_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_0_Alternatives extends AlternativesToken {
-
-	public Model_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele000Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_0_1_Assignment_mlCommentValue(current, this) : new Model_0_0_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_0_0_Alternatives extends AlternativesToken {
-
-	public Model_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele0000Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_0_0_1_Assignment_stringValue(current, this) : new Model_0_0_0_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_0_0_0_Alternatives extends AlternativesToken {
-
-	public Model_0_0_0_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele00000Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_0_0_0_1_Assignment_intValue(current, this) : new Model_0_0_0_0_0_0_Assignment_idValue(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
-	
-	public Model_0_0_0_0_0_0_Assignment_idValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_Assignment_idValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele000000AssignmentIdValue();
+		return grammarAccess.prModel().ele0AssignmentIdValue();
 	}
 	
 	@Override
@@ -190,7 +78,7 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele0000000TerminalRuleCallID();
+			element = grammarAccess.prModel().ele00TerminalRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -198,15 +86,15 @@ protected class Model_0_0_0_0_0_0_Assignment_idValue extends AssignmentToken  {
 }
 
 // not supported
-protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
+protected class Model_1_Assignment_intValue extends AssignmentToken  {
 	
-	public Model_0_0_0_0_0_1_Assignment_intValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_1_Assignment_intValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele000001AssignmentIntValue();
+		return grammarAccess.prModel().ele1AssignmentIntValue();
 	}
 	
 	@Override
@@ -215,24 +103,23 @@ protected class Model_0_0_0_0_0_1_Assignment_intValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele0000010TerminalRuleCallINT();
+			element = grammarAccess.prModel().ele10TerminalRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-
 // not supported
-protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  {
+protected class Model_2_Assignment_stringValue extends AssignmentToken  {
 	
-	public Model_0_0_0_0_1_Assignment_stringValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_2_Assignment_stringValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele00001AssignmentStringValue();
+		return grammarAccess.prModel().ele2AssignmentStringValue();
 	}
 	
 	@Override
@@ -241,24 +128,23 @@ protected class Model_0_0_0_0_1_Assignment_stringValue extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele000010TerminalRuleCallSTRING();
+			element = grammarAccess.prModel().ele20TerminalRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-
 // not supported
-protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken  {
+protected class Model_3_Assignment_mlCommentValue extends AssignmentToken  {
 	
-	public Model_0_0_0_1_Assignment_mlCommentValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_3_Assignment_mlCommentValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele0001AssignmentMlCommentValue();
+		return grammarAccess.prModel().ele3AssignmentMlCommentValue();
 	}
 	
 	@Override
@@ -267,24 +153,23 @@ protected class Model_0_0_0_1_Assignment_mlCommentValue extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele00010TerminalRuleCallML_COMMENT();
+			element = grammarAccess.prModel().ele30TerminalRuleCallML_COMMENT();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-
 // not supported
-protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
+protected class Model_4_Assignment_slCommentValue extends AssignmentToken  {
 	
-	public Model_0_0_1_Assignment_slCommentValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_4_Assignment_slCommentValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele001AssignmentSlCommentValue();
+		return grammarAccess.prModel().ele4AssignmentSlCommentValue();
 	}
 	
 	@Override
@@ -293,24 +178,23 @@ protected class Model_0_0_1_Assignment_slCommentValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele0010TerminalRuleCallSL_COMMENT();
+			element = grammarAccess.prModel().ele40TerminalRuleCallSL_COMMENT();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-
 // not supported
-protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
+protected class Model_5_Assignment_wsValue extends AssignmentToken  {
 	
-	public Model_0_1_Assignment_wsValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_5_Assignment_wsValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele01AssignmentWsValue();
+		return grammarAccess.prModel().ele5AssignmentWsValue();
 	}
 	
 	@Override
@@ -319,24 +203,23 @@ protected class Model_0_1_Assignment_wsValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele010TerminalRuleCallWS();
+			element = grammarAccess.prModel().ele50TerminalRuleCallWS();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-
 // not supported
-protected class Model_1_Assignment_anyValue extends AssignmentToken  {
+protected class Model_6_Assignment_anyValue extends AssignmentToken  {
 	
-	public Model_1_Assignment_anyValue(IInstanceDescription curr, AbstractToken pred) {
+	public Model_6_Assignment_anyValue(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele1AssignmentAnyValue();
+		return grammarAccess.prModel().ele6AssignmentAnyValue();
 	}
 	
 	@Override
@@ -345,7 +228,7 @@ protected class Model_1_Assignment_anyValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele10TerminalRuleCallANY_OTHER();
+			element = grammarAccess.prModel().ele60TerminalRuleCallANY_OTHER();
 			return new Solution(obj);
 		}
 		return null;

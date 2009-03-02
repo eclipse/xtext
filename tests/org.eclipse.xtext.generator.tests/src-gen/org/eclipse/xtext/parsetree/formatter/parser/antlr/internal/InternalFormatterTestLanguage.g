@@ -132,11 +132,11 @@ ruleLine returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((	
+((	
 	
 	    lv_type_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prLine().ele000TerminalRuleCallID(), "type"); 
+		createLeafNode(grammarAccess.prLine().ele00TerminalRuleCallID(), "type"); 
 	}
  
 	    {
@@ -156,7 +156,7 @@ ruleLine returns [EObject current=null]
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prLine().ele010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prLine().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -172,9 +172,9 @@ ruleLine returns [EObject current=null]
 	        }
 	    }
 	
-))';' 
+)';' 
     {
-        createLeafNode(grammarAccess.prLine().ele1KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.prLine().ele2KeywordSemicolon(), null); 
     }
 );
 
@@ -243,19 +243,19 @@ ruleTestIndentation returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('indentation' 
+('indentation' 
     {
-        createLeafNode(grammarAccess.prTestIndentation().ele000KeywordIndentation(), null); 
+        createLeafNode(grammarAccess.prTestIndentation().ele0KeywordIndentation(), null); 
     }
 '{' 
     {
-        createLeafNode(grammarAccess.prTestIndentation().ele001KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prTestIndentation().ele1KeywordLeftCurlyBracket(), null); 
     }
-)((	
+((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0100ParserRuleCallTestIndentation(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele200ParserRuleCallTestIndentation(), currentNode); 
 	    }
 	    lv_sub_2=ruleTestIndentation 
 	    {
@@ -277,7 +277,7 @@ ruleTestIndentation returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele0110ParserRuleCallLine(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele210ParserRuleCallLine(), currentNode); 
 	    }
 	    lv_items_3=ruleLine 
 	    {
@@ -294,26 +294,26 @@ ruleTestIndentation returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))*)'}' 
+))*'}' 
     {
-        createLeafNode(grammarAccess.prTestIndentation().ele1KeywordRightCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prTestIndentation().ele3KeywordRightCurlyBracket(), null); 
     }
 );
 
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

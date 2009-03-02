@@ -71,12 +71,12 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 		getNodeConsumer().setNodeConsumer(getNodeConsumer());
 		getNodeConsumer().setStringConsumer(getStringConsumer());
 
-		getNodeConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		getNodeConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		getNodeConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		getNodeConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$15$Delimiter);
-		getNodeConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
-		getNodeConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getNodeConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$10$Delimiter);
+		getNodeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$10$Delimiter);
+		getNodeConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$10$Delimiter);
+		getNodeConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.keyword$10$Delimiter);
+		getNodeConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.ruleCall$9$Delimiter);
+		getNodeConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.ruleCall$9$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

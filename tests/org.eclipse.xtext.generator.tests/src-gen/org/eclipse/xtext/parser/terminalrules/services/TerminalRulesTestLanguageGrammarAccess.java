@@ -19,25 +19,20 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
-		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final Alternatives c000Alternatives = (Alternatives)c00Alternatives.eContents().get(0);
-		private final Alternatives c0000Alternatives = (Alternatives)c000Alternatives.eContents().get(0);
-		private final Alternatives c00000Alternatives = (Alternatives)c0000Alternatives.eContents().get(0);
-		private final Assignment c000000AssignmentIdValue = (Assignment)c00000Alternatives.eContents().get(0);
-		private final RuleCall c0000000TerminalRuleCallID = (RuleCall)c000000AssignmentIdValue.eContents().get(0);
-		private final Assignment c000001AssignmentIntValue = (Assignment)c00000Alternatives.eContents().get(1);
-		private final RuleCall c0000010TerminalRuleCallINT = (RuleCall)c000001AssignmentIntValue.eContents().get(0);
-		private final Assignment c00001AssignmentStringValue = (Assignment)c0000Alternatives.eContents().get(1);
-		private final RuleCall c000010TerminalRuleCallSTRING = (RuleCall)c00001AssignmentStringValue.eContents().get(0);
-		private final Assignment c0001AssignmentMlCommentValue = (Assignment)c000Alternatives.eContents().get(1);
-		private final RuleCall c00010TerminalRuleCallML_COMMENT = (RuleCall)c0001AssignmentMlCommentValue.eContents().get(0);
-		private final Assignment c001AssignmentSlCommentValue = (Assignment)c00Alternatives.eContents().get(1);
-		private final RuleCall c0010TerminalRuleCallSL_COMMENT = (RuleCall)c001AssignmentSlCommentValue.eContents().get(0);
-		private final Assignment c01AssignmentWsValue = (Assignment)c0Alternatives.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentWsValue.eContents().get(0);
-		private final Assignment c1AssignmentAnyValue = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallANY_OTHER = (RuleCall)c1AssignmentAnyValue.eContents().get(0);
+		private final Assignment c0AssignmentIdValue = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentIdValue.eContents().get(0);
+		private final Assignment c1AssignmentIntValue = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentIntValue.eContents().get(0);
+		private final Assignment c2AssignmentStringValue = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentStringValue.eContents().get(0);
+		private final Assignment c3AssignmentMlCommentValue = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall c30TerminalRuleCallML_COMMENT = (RuleCall)c3AssignmentMlCommentValue.eContents().get(0);
+		private final Assignment c4AssignmentSlCommentValue = (Assignment)cAlternatives.eContents().get(4);
+		private final RuleCall c40TerminalRuleCallSL_COMMENT = (RuleCall)c4AssignmentSlCommentValue.eContents().get(0);
+		private final Assignment c5AssignmentWsValue = (Assignment)cAlternatives.eContents().get(5);
+		private final RuleCall c50TerminalRuleCallWS = (RuleCall)c5AssignmentWsValue.eContents().get(0);
+		private final Assignment c6AssignmentAnyValue = (Assignment)cAlternatives.eContents().get(6);
+		private final RuleCall c60TerminalRuleCallANY_OTHER = (RuleCall)c6AssignmentAnyValue.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -46,61 +41,46 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
+		public Assignment ele0AssignmentIdValue() { return c0AssignmentIdValue; }
 
 		// not supported
-		public Alternatives ele00Alternatives() { return c00Alternatives; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
-		public Alternatives ele000Alternatives() { return c000Alternatives; }
+		public Assignment ele1AssignmentIntValue() { return c1AssignmentIntValue; }
 
 		// not supported
-		public Alternatives ele0000Alternatives() { return c0000Alternatives; }
+		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
 
 		// not supported
-		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
+		public Assignment ele2AssignmentStringValue() { return c2AssignmentStringValue; }
 
 		// not supported
-		public Assignment ele000000AssignmentIdValue() { return c000000AssignmentIdValue; }
+		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
 
 		// not supported
-		public RuleCall ele0000000TerminalRuleCallID() { return c0000000TerminalRuleCallID; }
+		public Assignment ele3AssignmentMlCommentValue() { return c3AssignmentMlCommentValue; }
 
 		// not supported
-		public Assignment ele000001AssignmentIntValue() { return c000001AssignmentIntValue; }
+		public RuleCall ele30TerminalRuleCallML_COMMENT() { return c30TerminalRuleCallML_COMMENT; }
 
 		// not supported
-		public RuleCall ele0000010TerminalRuleCallINT() { return c0000010TerminalRuleCallINT; }
+		public Assignment ele4AssignmentSlCommentValue() { return c4AssignmentSlCommentValue; }
 
 		// not supported
-		public Assignment ele00001AssignmentStringValue() { return c00001AssignmentStringValue; }
+		public RuleCall ele40TerminalRuleCallSL_COMMENT() { return c40TerminalRuleCallSL_COMMENT; }
 
 		// not supported
-		public RuleCall ele000010TerminalRuleCallSTRING() { return c000010TerminalRuleCallSTRING; }
+		public Assignment ele5AssignmentWsValue() { return c5AssignmentWsValue; }
 
 		// not supported
-		public Assignment ele0001AssignmentMlCommentValue() { return c0001AssignmentMlCommentValue; }
+		public RuleCall ele50TerminalRuleCallWS() { return c50TerminalRuleCallWS; }
 
 		// not supported
-		public RuleCall ele00010TerminalRuleCallML_COMMENT() { return c00010TerminalRuleCallML_COMMENT; }
+		public Assignment ele6AssignmentAnyValue() { return c6AssignmentAnyValue; }
 
 		// not supported
-		public Assignment ele001AssignmentSlCommentValue() { return c001AssignmentSlCommentValue; }
-
-		// not supported
-		public RuleCall ele0010TerminalRuleCallSL_COMMENT() { return c0010TerminalRuleCallSL_COMMENT; }
-
-		// not supported
-		public Assignment ele01AssignmentWsValue() { return c01AssignmentWsValue; }
-
-		// not supported
-		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
-
-		// not supported
-		public Assignment ele1AssignmentAnyValue() { return c1AssignmentAnyValue; }
-
-		// not supported
-		public RuleCall ele10TerminalRuleCallANY_OTHER() { return c10TerminalRuleCallANY_OTHER; }
+		public RuleCall ele60TerminalRuleCallANY_OTHER() { return c60TerminalRuleCallANY_OTHER; }
 	}
 	
 	private ModelElements pModel;

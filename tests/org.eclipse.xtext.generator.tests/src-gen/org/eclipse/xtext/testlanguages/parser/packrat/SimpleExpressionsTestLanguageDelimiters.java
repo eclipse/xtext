@@ -12,8 +12,8 @@ public final class SimpleExpressionsTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$44$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

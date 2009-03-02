@@ -93,14 +93,12 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractRule().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractRule_1_RuleCall_ReducibleRule(current, this) : new AbstractRule_0_RuleCall_ChoiceRule(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractRule_0_RuleCall_ChoiceRule(current, this);
+			case 1: return new AbstractRule_1_RuleCall_ReducibleRule(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -166,77 +164,51 @@ protected class ChoiceRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prChoiceRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new ChoiceRule_1_Assignment_name(current, this).firstSolution();
+		Solution s1 = new ChoiceRule_2_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ChoiceRule_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
+			Solution s2 = new ChoiceRule_1_Assignment_optionalKeyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s2 != null) {
+			Solution s3 = new ChoiceRule_0_Keyword_choice(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+			if(s3 != null) {
+				last = s3.getPredecessor();
+				return s3;
 			} else {
-				last = s2.getPredecessor();
-				return s2;
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
 		}
+			s1 = s1.getPredecessor().nextSolution(this,s1);
+		}
 		return null;
-		
 	}
 }
 
 // not supported
-protected class ChoiceRule_0_Group extends GroupToken {
+protected class ChoiceRule_0_Keyword_choice extends KeywordToken  {
 	
-	public ChoiceRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prChoiceRule().ele0Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new ChoiceRule_0_1_Assignment_optionalKeyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new ChoiceRule_0_0_Keyword_choice(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
-	
-	public ChoiceRule_0_0_Keyword_choice(IInstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_0_Keyword_choice(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prChoiceRule().ele00KeywordChoice();
+		return grammarAccess.prChoiceRule().ele0KeywordChoice();
 	}	
 }
 
 // not supported
-protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToken  {
+protected class ChoiceRule_1_Assignment_optionalKeyword extends AssignmentToken  {
 	
-	public ChoiceRule_0_1_Assignment_optionalKeyword(IInstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_1_Assignment_optionalKeyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prChoiceRule().ele01AssignmentOptionalKeyword();
+		return grammarAccess.prChoiceRule().ele1AssignmentOptionalKeyword();
 	}
 	
 	@Override
@@ -246,7 +218,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prChoiceRule().ele010KeywordOptional();
+			element = grammarAccess.prChoiceRule().ele10KeywordOptional();
 			return new Solution(obj);
 		}
 
@@ -254,17 +226,16 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 	}
 }
 
-
 // not supported
-protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
+protected class ChoiceRule_2_Assignment_name extends AssignmentToken  {
 	
-	public ChoiceRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prChoiceRule().ele1AssignmentName();
+		return grammarAccess.prChoiceRule().ele2AssignmentName();
 	}
 	
 	@Override
@@ -273,7 +244,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prChoiceRule().ele10TerminalRuleCallID();
+			element = grammarAccess.prChoiceRule().ele20TerminalRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -302,77 +273,51 @@ protected class ReducibleRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prReducibleRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new ReducibleRule_1_Group(current, this).firstSolution();
+		Solution s1 = new ReducibleRule_2_Group(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ReducibleRule_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
+			Solution s2 = new ReducibleRule_1_RuleCall_TerminalRule(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s2 != null) {
+			Solution s3 = new ReducibleRule_0_Keyword_reducible(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+			if(s3 != null) {
+				last = s3.getPredecessor();
+				return s3;
 			} else {
-				last = s2.getPredecessor();
-				return s2;
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
 		}
+			s1 = s1.getPredecessor().nextSolution(this,s1);
+		}
 		return null;
-		
 	}
 }
 
 // not supported
-protected class ReducibleRule_0_Group extends GroupToken {
+protected class ReducibleRule_0_Keyword_reducible extends KeywordToken  {
 	
-	public ReducibleRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prReducibleRule().ele0Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new ReducibleRule_0_1_RuleCall_TerminalRule(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new ReducibleRule_0_0_Keyword_reducible(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
-	
-	public ReducibleRule_0_0_Keyword_reducible(IInstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_0_Keyword_reducible(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prReducibleRule().ele00KeywordReducible();
+		return grammarAccess.prReducibleRule().ele0KeywordReducible();
 	}	
 }
 
 // not supported
-protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
+protected class ReducibleRule_1_RuleCall_TerminalRule extends RuleCallToken {
 	
-	public ReducibleRule_0_1_RuleCall_TerminalRule(IInstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_1_RuleCall_TerminalRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prReducibleRule().ele01ParserRuleCallTerminalRule();
+		return grammarAccess.prReducibleRule().ele1ParserRuleCallTerminalRule();
 	}
 	
 	@Override
@@ -383,52 +328,51 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 	}
 }
 
-
 // not supported
-protected class ReducibleRule_1_Group extends GroupToken {
+protected class ReducibleRule_2_Group extends GroupToken {
 	
-	public ReducibleRule_1_Group(IInstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_2_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prReducibleRule().ele1Group();
+		return grammarAccess.prReducibleRule().ele2Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new ReducibleRule_1_1_Assignment_actionFeature(current, this).firstSolution();
+		Solution s1 = new ReducibleRule_2_1_Assignment_actionFeature(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			Solution s2 = new ReducibleRule_2_0_Action_ReducibleComposite_actionFeature(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
 // not supported
-protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extends ActionToken  {
+protected class ReducibleRule_2_0_Action_ReducibleComposite_actionFeature extends ActionToken  {
 
-	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(IInstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_2_0_Action_ReducibleComposite_actionFeature(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature();
+		return grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prReducibleRule().ele10ActionReducibleCompositeactionFeature().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature().getTypeName().getType())) return null;
 		Object val = current.getConsumable("actionFeature", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("actionFeature")) return null;
@@ -437,15 +381,15 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 }
 
 // not supported
-protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentToken  {
+protected class ReducibleRule_2_1_Assignment_actionFeature extends AssignmentToken  {
 	
-	public ReducibleRule_1_1_Assignment_actionFeature(IInstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_2_1_Assignment_actionFeature(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prReducibleRule().ele11AssignmentActionFeature();
+		return grammarAccess.prReducibleRule().ele21AssignmentActionFeature();
 	}
 	
 	@Override

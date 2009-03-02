@@ -28,31 +28,31 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer keyword$5$Consumer;
+	private IElementConsumer keyword$2$Consumer;
 
-	private IElementConsumer keyword$6$Consumer;
+	private IElementConsumer keyword$3$Consumer;
 
-	private IElementConsumer assignment$7$Consumer;
+	private IElementConsumer assignment$4$Consumer;
 
-	private IElementConsumer ruleCall$8$Consumer;
+	private IElementConsumer ruleCall$5$Consumer;
 
-	private IElementConsumer group$9$Consumer;
+	private IElementConsumer group$6$Consumer;
+
+	private IElementConsumer keyword$7$Consumer;
+
+	private IElementConsumer assignment$8$Consumer;
+
+	private IElementConsumer ruleCall$9$Consumer;
 
 	private IElementConsumer keyword$10$Consumer;
 
-	private IElementConsumer assignment$11$Consumer;
+	private ICharacterClass keyword$2$Delimiter;
 
-	private IElementConsumer ruleCall$12$Consumer;
+	private ICharacterClass keyword$3$Delimiter;
 
-	private IElementConsumer keyword$13$Consumer;
-
-	private ICharacterClass keyword$5$Delimiter;
-
-	private ICharacterClass keyword$6$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 
 	private ICharacterClass keyword$10$Delimiter;
-
-	private ICharacterClass keyword$13$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -62,53 +62,53 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$5$Consumer);
-			acceptor.accept(keyword$6$Consumer);
-			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(group$9$Consumer);
-			acceptor.accept(keyword$13$Consumer);
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(keyword$3$Consumer);
+			acceptor.accept(assignment$4$Consumer);
+			acceptor.accept(group$6$Consumer);
+			acceptor.accept(keyword$10$Consumer);
 		}
 	}
 
-	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$5$Consumer(final Keyword keyword) {
+		protected Keyword$2$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
-	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$6$Consumer(final Keyword keyword) {
+		protected Keyword$3$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$7$Consumer extends AssignmentConsumer {
+	protected class Assignment$4$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$7$Consumer(final Assignment assignment) {
+		protected Assignment$4$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$8$Consumer;
+			return ruleCall$5$Consumer;
 		}
 	}
 
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -118,16 +118,52 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 		}
 	}
 
-	protected class Group$9$Consumer extends LoopGroupConsumer {
+	protected class Group$6$Consumer extends LoopGroupConsumer {
 		
-		protected Group$9$Consumer(final Group group) {
+		protected Group$6$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$10$Consumer);
-			acceptor.accept(assignment$11$Consumer);
+			acceptor.accept(keyword$7$Consumer);
+			acceptor.accept(assignment$8$Consumer);
+		}
+	}
+
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$7$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$8$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$9$Consumer;
+		}
+	}
+
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(childConsumer, "children", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -143,48 +179,12 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 		}
 	}
 
-	protected class Assignment$11$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$11$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$12$Consumer;
-		}
-	}
-
-	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(childConsumer, "children", true, false, false, getElement(), optional);
-		}
-	}
-
-	protected class Keyword$13$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$13$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
-		}
-	}
-
 	public PartialParserTestLanguageChildrenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -200,15 +200,15 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordChildren());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele0001KeywordLeftCurlyBracket());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele001AssignmentChildren());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0010ParserRuleCallChild());
-		group$9$Consumer = new Group$9$Consumer(rule.ele01Group());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele010KeywordComma());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele011AssignmentChildren());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele0110ParserRuleCallChild());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele1KeywordRightCurlyBracket());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordChildren());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftCurlyBracket());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentChildren());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20ParserRuleCallChild());
+		group$6$Consumer = new Group$6$Consumer(rule.ele3Group());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele30KeywordComma());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele31AssignmentChildren());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele310ParserRuleCallChild());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele4KeywordRightCurlyBracket());
 	}
 	
 	@Override
@@ -225,20 +225,28 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 		this.childConsumer = childConsumer;
 	}
 	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
 	}
 	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
 	}
 	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$10$Delimiter() {
@@ -247,14 +255,6 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 	
 	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$13$Delimiter() {
-		return keyword$13$Delimiter;
-	}
-	
-	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
-		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

@@ -70,11 +70,11 @@ public class DummyTestLanguageParserConfiguration extends AbstractParserConfigur
 		getElementConsumer().setIdConsumer(getIdConsumer());
 		getElementConsumer().setStringConsumer(getStringConsumer());
 
-		getElementConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.keyword$12$Delimiter);
-		getElementConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.keyword$12$Delimiter);
-		getElementConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.keyword$18$Delimiter);
-		getElementConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.ruleCall$15$Delimiter);
-		getElementConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.ruleCall$17$Delimiter);
+		getElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.keyword$9$Delimiter);
+		getElementConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.keyword$15$Delimiter);
+		getElementConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.keyword$9$Delimiter);
+		getElementConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.ruleCall$12$Delimiter);
+		getElementConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.dummy.parser.packrat.DummyTestLanguageDelimiters.ruleCall$14$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

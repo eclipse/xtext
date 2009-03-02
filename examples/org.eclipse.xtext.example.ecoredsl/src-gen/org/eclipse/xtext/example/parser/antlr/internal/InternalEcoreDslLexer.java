@@ -932,8 +932,8 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:9: ( ( '^' )? ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:11: ( '^' )? ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:11: ( '^' )?
             int alt1=2;
@@ -963,7 +963,7 @@ public class InternalEcoreDslLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:42: ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2989:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1058,10 +1058,10 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:13: ( ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:15: ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:13: ( ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:15: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:15: ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:15: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1073,16 +1073,16 @@ public class InternalEcoreDslLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2993:15: ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("2993:15: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:16: '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"'
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:16: '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:21: ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:21: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1098,7 +1098,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:22: '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:22: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1115,7 +1115,7 @@ public class InternalEcoreDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:76: ~ ( ( '\\\\' | '\\\"' ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:64: ~ ( ( '\\\\' | '\\\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1141,10 +1141,10 @@ public class InternalEcoreDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:98: '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:103: ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1160,7 +1160,7 @@ public class InternalEcoreDslLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:104: '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1177,7 +1177,7 @@ public class InternalEcoreDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:158: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2993:134: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1366,10 +1366,10 @@ public class InternalEcoreDslLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2999:9: ( ( ( ( ' ' | '\\t' ) | '\\r' ) | '\\n' )+ )
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2999:11: ( ( ( ' ' | '\\t' ) | '\\r' ) | '\\n' )+
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2999:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2999:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2999:11: ( ( ( ' ' | '\\t' ) | '\\r' ) | '\\n' )+
+            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2999:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1591,20 +1591,43 @@ public class InternalEcoreDslLexer extends Lexer {
 
             if ( (LA12_5=='s') ) {
                 switch ( input.LA(3) ) {
-                case 'P':
+                case 'U':
                     {
                     int LA12_96 = input.LA(4);
 
-                    if ( (LA12_96=='r') ) {
+                    if ( (LA12_96=='R') ) {
                         int LA12_122 = input.LA(5);
 
-                        if ( (LA12_122=='e') ) {
+                        if ( (LA12_122=='I') ) {
                             int LA12_146 = input.LA(6);
 
-                            if ( (LA12_146=='f') ) {
-                                int LA12_167 = input.LA(7);
+                            if ( ((LA12_146>='0' && LA12_146<='9')||(LA12_146>='A' && LA12_146<='Z')||LA12_146=='_'||(LA12_146>='a' && LA12_146<='z')) ) {
+                                alt12=47;
+                            }
+                            else {
+                                alt12=5;}
+                        }
+                        else {
+                            alt12=47;}
+                    }
+                    else {
+                        alt12=47;}
+                    }
+                    break;
+                case 'P':
+                    {
+                    int LA12_97 = input.LA(4);
 
-                                if ( (LA12_167=='i') ) {
+                    if ( (LA12_97=='r') ) {
+                        int LA12_123 = input.LA(5);
+
+                        if ( (LA12_123=='e') ) {
+                            int LA12_147 = input.LA(6);
+
+                            if ( (LA12_147=='f') ) {
+                                int LA12_168 = input.LA(7);
+
+                                if ( (LA12_168=='i') ) {
                                     int LA12_185 = input.LA(8);
 
                                     if ( (LA12_185=='x') ) {
@@ -1624,29 +1647,6 @@ public class InternalEcoreDslLexer extends Lexer {
                             }
                             else {
                                 alt12=47;}
-                        }
-                        else {
-                            alt12=47;}
-                    }
-                    else {
-                        alt12=47;}
-                    }
-                    break;
-                case 'U':
-                    {
-                    int LA12_97 = input.LA(4);
-
-                    if ( (LA12_97=='R') ) {
-                        int LA12_123 = input.LA(5);
-
-                        if ( (LA12_123=='I') ) {
-                            int LA12_147 = input.LA(6);
-
-                            if ( ((LA12_147>='0' && LA12_147<='9')||(LA12_147>='A' && LA12_147<='Z')||LA12_147=='_'||(LA12_147>='a' && LA12_147<='z')) ) {
-                                alt12=47;
-                            }
-                            else {
-                                alt12=5;}
                         }
                         else {
                             alt12=47;}
@@ -1788,43 +1788,20 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='a') ) {
             switch ( input.LA(2) ) {
-            case 't':
+            case 'b':
                 {
                 int LA12_61 = input.LA(3);
 
-                if ( (LA12_61=='t') ) {
+                if ( (LA12_61=='s') ) {
                     int LA12_100 = input.LA(4);
 
-                    if ( (LA12_100=='r') ) {
+                    if ( (LA12_100=='t') ) {
                         int LA12_126 = input.LA(5);
 
-                        if ( ((LA12_126>='0' && LA12_126<='9')||(LA12_126>='A' && LA12_126<='Z')||LA12_126=='_'||(LA12_126>='a' && LA12_126<='z')) ) {
-                            alt12=47;
-                        }
-                        else {
-                            alt12=30;}
-                    }
-                    else {
-                        alt12=47;}
-                }
-                else {
-                    alt12=47;}
-                }
-                break;
-            case 'b':
-                {
-                int LA12_62 = input.LA(3);
+                        if ( (LA12_126=='r') ) {
+                            int LA12_150 = input.LA(6);
 
-                if ( (LA12_62=='s') ) {
-                    int LA12_101 = input.LA(4);
-
-                    if ( (LA12_101=='t') ) {
-                        int LA12_127 = input.LA(5);
-
-                        if ( (LA12_127=='r') ) {
-                            int LA12_151 = input.LA(6);
-
-                            if ( (LA12_151=='a') ) {
+                            if ( (LA12_150=='a') ) {
                                 int LA12_171 = input.LA(7);
 
                                 if ( (LA12_171=='c') ) {
@@ -1850,6 +1827,29 @@ public class InternalEcoreDslLexer extends Lexer {
                         }
                         else {
                             alt12=47;}
+                    }
+                    else {
+                        alt12=47;}
+                }
+                else {
+                    alt12=47;}
+                }
+                break;
+            case 't':
+                {
+                int LA12_62 = input.LA(3);
+
+                if ( (LA12_62=='t') ) {
+                    int LA12_101 = input.LA(4);
+
+                    if ( (LA12_101=='r') ) {
+                        int LA12_127 = input.LA(5);
+
+                        if ( ((LA12_127>='0' && LA12_127<='9')||(LA12_127>='A' && LA12_127<='Z')||LA12_127=='_'||(LA12_127>='a' && LA12_127<='z')) ) {
+                            alt12=47;
+                        }
+                        else {
+                            alt12=30;}
                     }
                     else {
                         alt12=47;}
@@ -1903,20 +1903,43 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='e') ) {
             switch ( input.LA(2) ) {
-            case 'x':
+            case 'n':
                 {
                 int LA12_66 = input.LA(3);
 
-                if ( (LA12_66=='t') ) {
+                if ( (LA12_66=='u') ) {
                     int LA12_103 = input.LA(4);
 
-                    if ( (LA12_103=='e') ) {
+                    if ( (LA12_103=='m') ) {
                         int LA12_129 = input.LA(5);
 
-                        if ( (LA12_129=='n') ) {
-                            int LA12_153 = input.LA(6);
+                        if ( ((LA12_129>='0' && LA12_129<='9')||(LA12_129>='A' && LA12_129<='Z')||LA12_129=='_'||(LA12_129>='a' && LA12_129<='z')) ) {
+                            alt12=47;
+                        }
+                        else {
+                            alt12=38;}
+                    }
+                    else {
+                        alt12=47;}
+                }
+                else {
+                    alt12=47;}
+                }
+                break;
+            case 'x':
+                {
+                int LA12_67 = input.LA(3);
 
-                            if ( (LA12_153=='d') ) {
+                if ( (LA12_67=='t') ) {
+                    int LA12_104 = input.LA(4);
+
+                    if ( (LA12_104=='e') ) {
+                        int LA12_130 = input.LA(5);
+
+                        if ( (LA12_130=='n') ) {
+                            int LA12_154 = input.LA(6);
+
+                            if ( (LA12_154=='d') ) {
                                 int LA12_173 = input.LA(7);
 
                                 if ( (LA12_173=='s') ) {
@@ -1936,29 +1959,6 @@ public class InternalEcoreDslLexer extends Lexer {
                         }
                         else {
                             alt12=47;}
-                    }
-                    else {
-                        alt12=47;}
-                }
-                else {
-                    alt12=47;}
-                }
-                break;
-            case 'n':
-                {
-                int LA12_67 = input.LA(3);
-
-                if ( (LA12_67=='u') ) {
-                    int LA12_104 = input.LA(4);
-
-                    if ( (LA12_104=='m') ) {
-                        int LA12_130 = input.LA(5);
-
-                        if ( ((LA12_130>='0' && LA12_130<='9')||(LA12_130>='A' && LA12_130<='Z')||LA12_130=='_'||(LA12_130>='a' && LA12_130<='z')) ) {
-                            alt12=47;
-                        }
-                        else {
-                            alt12=38;}
                     }
                     else {
                         alt12=47;}
@@ -2012,25 +2012,14 @@ public class InternalEcoreDslLexer extends Lexer {
             case 'e':
                 {
                 switch ( input.LA(3) ) {
-                case 'f':
+                case 'a':
                     {
                     int LA12_107 = input.LA(4);
 
-                    if ( ((LA12_107>='0' && LA12_107<='9')||(LA12_107>='A' && LA12_107<='Z')||LA12_107=='_'||(LA12_107>='a' && LA12_107<='z')) ) {
-                        alt12=47;
-                    }
-                    else {
-                        alt12=36;}
-                    }
-                    break;
-                case 'a':
-                    {
-                    int LA12_108 = input.LA(4);
+                    if ( (LA12_107=='d') ) {
+                        int LA12_132 = input.LA(5);
 
-                    if ( (LA12_108=='d') ) {
-                        int LA12_133 = input.LA(5);
-
-                        if ( (LA12_133=='o') ) {
+                        if ( (LA12_132=='o') ) {
                             int LA12_155 = input.LA(6);
 
                             if ( (LA12_155=='n') ) {
@@ -2062,6 +2051,17 @@ public class InternalEcoreDslLexer extends Lexer {
                     }
                     else {
                         alt12=47;}
+                    }
+                    break;
+                case 'f':
+                    {
+                    int LA12_108 = input.LA(4);
+
+                    if ( ((LA12_108>='0' && LA12_108<='9')||(LA12_108>='A' && LA12_108<='Z')||LA12_108=='_'||(LA12_108>='a' && LA12_108<='z')) ) {
+                        alt12=47;
+                    }
+                    else {
+                        alt12=36;}
                     }
                     break;
                 default:
@@ -2110,17 +2110,34 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='v') ) {
             switch ( input.LA(2) ) {
+            case 'a':
+                {
+                int LA12_72 = input.LA(3);
+
+                if ( (LA12_72=='l') ) {
+                    int LA12_110 = input.LA(4);
+
+                    if ( ((LA12_110>='0' && LA12_110<='9')||(LA12_110>='A' && LA12_110<='Z')||LA12_110=='_'||(LA12_110>='a' && LA12_110<='z')) ) {
+                        alt12=47;
+                    }
+                    else {
+                        alt12=35;}
+                }
+                else {
+                    alt12=47;}
+                }
+                break;
             case 'o':
                 {
                 switch ( input.LA(3) ) {
                 case 'i':
                     {
-                    int LA12_110 = input.LA(4);
+                    int LA12_111 = input.LA(4);
 
-                    if ( (LA12_110=='d') ) {
-                        int LA12_135 = input.LA(5);
+                    if ( (LA12_111=='d') ) {
+                        int LA12_136 = input.LA(5);
 
-                        if ( ((LA12_135>='0' && LA12_135<='9')||(LA12_135>='A' && LA12_135<='Z')||LA12_135=='_'||(LA12_135>='a' && LA12_135<='z')) ) {
+                        if ( ((LA12_136>='0' && LA12_136<='9')||(LA12_136>='A' && LA12_136<='Z')||LA12_136=='_'||(LA12_136>='a' && LA12_136<='z')) ) {
                             alt12=47;
                         }
                         else {
@@ -2132,12 +2149,12 @@ public class InternalEcoreDslLexer extends Lexer {
                     break;
                 case 'l':
                     {
-                    int LA12_111 = input.LA(4);
+                    int LA12_112 = input.LA(4);
 
-                    if ( (LA12_111=='a') ) {
-                        int LA12_136 = input.LA(5);
+                    if ( (LA12_112=='a') ) {
+                        int LA12_137 = input.LA(5);
 
-                        if ( (LA12_136=='t') ) {
+                        if ( (LA12_137=='t') ) {
                             int LA12_158 = input.LA(6);
 
                             if ( (LA12_158=='i') ) {
@@ -2174,23 +2191,6 @@ public class InternalEcoreDslLexer extends Lexer {
                 default:
                     alt12=47;}
 
-                }
-                break;
-            case 'a':
-                {
-                int LA12_73 = input.LA(3);
-
-                if ( (LA12_73=='l') ) {
-                    int LA12_112 = input.LA(4);
-
-                    if ( ((LA12_112>='0' && LA12_112<='9')||(LA12_112>='A' && LA12_112<='Z')||LA12_112=='_'||(LA12_112>='a' && LA12_112<='z')) ) {
-                        alt12=47;
-                    }
-                    else {
-                        alt12=35;}
-                }
-                else {
-                    alt12=47;}
                 }
                 break;
             default:
@@ -2497,14 +2497,14 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '*':
-                {
-                alt12=50;
-                }
-                break;
             case '/':
                 {
                 alt12=51;
+                }
+                break;
+            case '*':
+                {
+                alt12=50;
                 }
                 break;
             default:

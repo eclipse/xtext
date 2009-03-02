@@ -20,16 +20,14 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
-		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final Assignment c000AssignmentFirst = (Assignment)c00Alternatives.eContents().get(0);
-		private final Keyword c0000KeywordFooBar = (Keyword)c000AssignmentFirst.eContents().get(0);
-		private final Assignment c001AssignmentSecond = (Assignment)c00Alternatives.eContents().get(1);
-		private final Keyword c0010KeywordFoo = (Keyword)c001AssignmentSecond.eContents().get(0);
-		private final Assignment c01AssignmentThird = (Assignment)c0Alternatives.eContents().get(1);
-		private final Keyword c010KeywordBar = (Keyword)c01AssignmentThird.eContents().get(0);
-		private final Assignment c1AssignmentForth = (Assignment)cAlternatives.eContents().get(1);
-		private final Keyword c10KeywordReverseSolidus = (Keyword)c1AssignmentForth.eContents().get(0);
+		private final Assignment c0AssignmentFirst = (Assignment)cAlternatives.eContents().get(0);
+		private final Keyword c00KeywordFooBar = (Keyword)c0AssignmentFirst.eContents().get(0);
+		private final Assignment c1AssignmentSecond = (Assignment)cAlternatives.eContents().get(1);
+		private final Keyword c10KeywordFoo = (Keyword)c1AssignmentSecond.eContents().get(0);
+		private final Assignment c2AssignmentThird = (Assignment)cAlternatives.eContents().get(2);
+		private final Keyword c20KeywordBar = (Keyword)c2AssignmentThird.eContents().get(0);
+		private final Assignment c3AssignmentForth = (Assignment)cAlternatives.eContents().get(3);
+		private final Keyword c30KeywordReverseSolidus = (Keyword)c3AssignmentForth.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -38,34 +36,28 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
+		public Assignment ele0AssignmentFirst() { return c0AssignmentFirst; }
 
 		// not supported
-		public Alternatives ele00Alternatives() { return c00Alternatives; }
+		public Keyword ele00KeywordFooBar() { return c00KeywordFooBar; }
 
 		// not supported
-		public Assignment ele000AssignmentFirst() { return c000AssignmentFirst; }
+		public Assignment ele1AssignmentSecond() { return c1AssignmentSecond; }
 
 		// not supported
-		public Keyword ele0000KeywordFooBar() { return c0000KeywordFooBar; }
+		public Keyword ele10KeywordFoo() { return c10KeywordFoo; }
 
 		// not supported
-		public Assignment ele001AssignmentSecond() { return c001AssignmentSecond; }
+		public Assignment ele2AssignmentThird() { return c2AssignmentThird; }
 
 		// not supported
-		public Keyword ele0010KeywordFoo() { return c0010KeywordFoo; }
+		public Keyword ele20KeywordBar() { return c20KeywordBar; }
 
 		// not supported
-		public Assignment ele01AssignmentThird() { return c01AssignmentThird; }
+		public Assignment ele3AssignmentForth() { return c3AssignmentForth; }
 
 		// not supported
-		public Keyword ele010KeywordBar() { return c010KeywordBar; }
-
-		// not supported
-		public Assignment ele1AssignmentForth() { return c1AssignmentForth; }
-
-		// not supported
-		public Keyword ele10KeywordReverseSolidus() { return c10KeywordReverseSolidus; }
+		public Keyword ele30KeywordReverseSolidus() { return c30KeywordReverseSolidus; }
 	}
 	
 	private ModelElements pModel;

@@ -80,43 +80,40 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((((((((('1' 
+((('1' 
     {
-        createLeafNode(grammarAccess.prModel().ele000000000KeywordDigitOne(), null); 
+        createLeafNode(grammarAccess.prModel().ele00KeywordDigitOne(), null); 
     }
 )?(	
 	
-	    lv_value_1=(((('mykeyword1' 
+	    lv_value_1=('mykeyword1' 
     {
-        createLeafNode(grammarAccess.prModel().ele00000000100000KeywordMykeyword1(), "value"); 
+        createLeafNode(grammarAccess.prModel().ele0100KeywordMykeyword1(), "value"); 
     }
 
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00000000100001TerminalRuleCallSTRING(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele0101TerminalRuleCallSTRING(), "value"); 
 	}
-)
 
     |	{ 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele0000000010001ParserRuleCallNestedDatatype(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele0102ParserRuleCallNestedDatatype(), currentNode); 
     }
 	ruleNestedDatatype	{ 
         currentNode = currentNode.getParent();
     }
-)
 
     |	{ 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele000000001001ParserRuleCallDatatype(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele0103ParserRuleCallDatatype(), currentNode); 
     }
 	ruleDatatype	{ 
         currentNode = currentNode.getParent();
     }
-)
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele00000000101TerminalRuleCallID(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele0104TerminalRuleCallID(), "value"); 
 	}
 )
  
@@ -136,41 +133,38 @@ ruleModel returns [EObject current=null]
 ))
     |('1+' 
     {
-        createLeafNode(grammarAccess.prModel().ele000000010KeywordDigitOnePlusSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele10KeywordDigitOnePlusSign(), null); 
     }
 (	
 	
-	    lv_multiValue_3=(((('mykeyword1' 
+	    lv_multiValue_3=('mykeyword1' 
     {
-        createLeafNode(grammarAccess.prModel().ele00000001100000KeywordMykeyword1(), "multiValue"); 
+        createLeafNode(grammarAccess.prModel().ele1100KeywordMykeyword1(), "multiValue"); 
     }
 
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00000001100001TerminalRuleCallSTRING(), "multiValue"); 
+		createLeafNode(grammarAccess.prModel().ele1101TerminalRuleCallSTRING(), "multiValue"); 
 	}
-)
 
     |	{ 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele0000000110001ParserRuleCallNestedDatatype(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele1102ParserRuleCallNestedDatatype(), currentNode); 
     }
 	ruleNestedDatatype	{ 
         currentNode = currentNode.getParent();
     }
-)
 
     |	{ 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele000000011001ParserRuleCallDatatype(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prModel().ele1103ParserRuleCallDatatype(), currentNode); 
     }
 	ruleDatatype	{ 
         currentNode = currentNode.getParent();
     }
-)
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele00000001101TerminalRuleCallID(), "multiValue"); 
+		createLeafNode(grammarAccess.prModel().ele1104TerminalRuleCallID(), "multiValue"); 
 	}
 )
  
@@ -187,16 +181,16 @@ ruleModel returns [EObject current=null]
 	        }
 	    }
 	
-)))
+))
     |('2' 
     {
-        createLeafNode(grammarAccess.prModel().ele00000010KeywordDigitTwo(), null); 
+        createLeafNode(grammarAccess.prModel().ele20KeywordDigitTwo(), null); 
     }
 (	
 	
 	    lv_value_5=	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele000000110TerminalRuleCallSTRING(), "value"); 
+		createLeafNode(grammarAccess.prModel().ele210TerminalRuleCallSTRING(), "value"); 
 	}
  
 	    {
@@ -212,16 +206,16 @@ ruleModel returns [EObject current=null]
 	        }
 	    }
 	
-)))
+))
     |('2+' 
     {
-        createLeafNode(grammarAccess.prModel().ele0000010KeywordDigitTwoPlusSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele30KeywordDigitTwoPlusSign(), null); 
     }
 (	
 	
 	    lv_multiValue_7=	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele00000110TerminalRuleCallSTRING(), "multiValue"); 
+		createLeafNode(grammarAccess.prModel().ele310TerminalRuleCallSTRING(), "multiValue"); 
 	}
  
 	    {
@@ -237,16 +231,16 @@ ruleModel returns [EObject current=null]
 	        }
 	    }
 	
-)))
+))
     |('3' 
     {
-        createLeafNode(grammarAccess.prModel().ele000010KeywordDigitThree(), null); 
+        createLeafNode(grammarAccess.prModel().ele40KeywordDigitThree(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0000110ParserRuleCallDatatype(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele410ParserRuleCallDatatype(), currentNode); 
 	    }
 	    lv_value_9=ruleDatatype 
 	    {
@@ -263,16 +257,16 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)))
+))
     |('3+' 
     {
-        createLeafNode(grammarAccess.prModel().ele00010KeywordDigitThreePlusSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele50KeywordDigitThreePlusSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallDatatype(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele510ParserRuleCallDatatype(), currentNode); 
 	    }
 	    lv_multiValue_11=ruleDatatype 
 	    {
@@ -289,16 +283,16 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)))
+))
     |('4' 
     {
-        createLeafNode(grammarAccess.prModel().ele0010KeywordDigitFour(), null); 
+        createLeafNode(grammarAccess.prModel().ele60KeywordDigitFour(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallNestedDatatype(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele610ParserRuleCallNestedDatatype(), currentNode); 
 	    }
 	    lv_value_13=ruleNestedDatatype 
 	    {
@@ -315,16 +309,16 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)))
+))
     |('4+' 
     {
-        createLeafNode(grammarAccess.prModel().ele010KeywordDigitFourPlusSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele70KeywordDigitFourPlusSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallNestedDatatype(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele710ParserRuleCallNestedDatatype(), currentNode); 
 	    }
 	    lv_multiValue_15=ruleNestedDatatype 
 	    {
@@ -341,16 +335,16 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)))
+))
     |(('content' 
     {
-        createLeafNode(grammarAccess.prModel().ele100KeywordContent(), null); 
+        createLeafNode(grammarAccess.prModel().ele800KeywordContent(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele1010ParserRuleCallChild(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele8010ParserRuleCallChild(), currentNode); 
 	    }
 	    lv_children_17=ruleChild 
 	    {
@@ -369,7 +363,7 @@ ruleModel returns [EObject current=null]
 	
 ))('ref' 
     {
-        createLeafNode(grammarAccess.prModel().ele110KeywordRef(), null); 
+        createLeafNode(grammarAccess.prModel().ele810KeywordRef(), null); 
     }
 (	
 	
@@ -382,12 +376,12 @@ ruleModel returns [EObject current=null]
         }
 (	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele11100CrossReferenceEStringChild1(), "ref"); 
+		createLeafNode(grammarAccess.prModel().ele81100CrossReferenceEStringChild1(), "ref"); 
 	}
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele11101CrossReferenceEStringChild2(), "ref"); 
+		createLeafNode(grammarAccess.prModel().ele81101CrossReferenceEStringChild2(), "ref"); 
 	}
 )
 
@@ -415,25 +409,25 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-((    this_ID_0=RULE_ID    {
+(    this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);
     }
 
     { 
-    createLeafNode(grammarAccess.prDatatype().ele00TerminalRuleCallID(), null); 
+    createLeafNode(grammarAccess.prDatatype().ele0TerminalRuleCallID(), null); 
     }
 
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prDatatype().ele01KeywordHyphenMinus(), null); 
+        createLeafNode(grammarAccess.prDatatype().ele1KeywordHyphenMinus(), null); 
     }
-)    this_ID_2=RULE_ID    {
+    this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.prDatatype().ele1TerminalRuleCallID(), null); 
+    createLeafNode(grammarAccess.prDatatype().ele2TerminalRuleCallID(), null); 
     }
 )
     ;
@@ -458,22 +452,22 @@ ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-((    this_ID_0=RULE_ID    {
+(    this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);
     }
 
     { 
-    createLeafNode(grammarAccess.prNestedDatatype().ele00TerminalRuleCallID(), null); 
+    createLeafNode(grammarAccess.prNestedDatatype().ele0TerminalRuleCallID(), null); 
     }
 
 	kw='+' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prNestedDatatype().ele01KeywordPlusSign(), null); 
+        createLeafNode(grammarAccess.prNestedDatatype().ele1KeywordPlusSign(), null); 
     }
-)(
+(
     { 
-        currentNode=createCompositeNode(grammarAccess.prNestedDatatype().ele1ParserRuleCallDatatype(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prNestedDatatype().ele2ParserRuleCallDatatype(), currentNode); 
     }
     this_Datatype_2=ruleDatatype    {
 		$current.merge(this_Datatype_2);
@@ -618,17 +612,17 @@ ruleChild2 returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

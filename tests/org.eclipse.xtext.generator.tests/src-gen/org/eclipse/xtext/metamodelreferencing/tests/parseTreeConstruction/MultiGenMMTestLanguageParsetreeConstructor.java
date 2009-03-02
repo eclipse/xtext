@@ -46,22 +46,22 @@ protected class Foo_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prFoo().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Foo_1_Assignment_nameRefs(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Foo_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 

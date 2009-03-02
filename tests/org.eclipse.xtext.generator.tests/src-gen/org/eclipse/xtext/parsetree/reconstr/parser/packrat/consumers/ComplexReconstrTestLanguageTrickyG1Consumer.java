@@ -28,29 +28,29 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer keyword$3$Consumer;
+	private IElementConsumer keyword$2$Consumer;
 
-	private IElementConsumer group$4$Consumer;
+	private IElementConsumer group$3$Consumer;
 
-	private IElementConsumer assignment$5$Consumer;
+	private IElementConsumer assignment$4$Consumer;
 
-	private IElementConsumer ruleCall$6$Consumer;
+	private IElementConsumer ruleCall$5$Consumer;
 
-	private IElementConsumer group$7$Consumer;
+	private IElementConsumer group$6$Consumer;
 
-	private IElementConsumer keyword$8$Consumer;
+	private IElementConsumer keyword$7$Consumer;
 
-	private IElementConsumer assignment$9$Consumer;
+	private IElementConsumer assignment$8$Consumer;
 
-	private IElementConsumer ruleCall$10$Consumer;
+	private IElementConsumer ruleCall$9$Consumer;
 
-	private IElementConsumer keyword$11$Consumer;
+	private IElementConsumer keyword$10$Consumer;
 
-	private ICharacterClass keyword$3$Delimiter;
+	private ICharacterClass keyword$2$Delimiter;
 
-	private ICharacterClass keyword$8$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 
-	private ICharacterClass keyword$11$Delimiter;
+	private ICharacterClass keyword$10$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -60,52 +60,52 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$3$Consumer);
-			acceptor.accept(group$4$Consumer);
-			acceptor.accept(keyword$11$Consumer);
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(group$3$Consumer);
+			acceptor.accept(keyword$10$Consumer);
 		}
 	}
 
-	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$3$Consumer(final Keyword keyword) {
+		protected Keyword$2$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
-	protected class Group$4$Consumer extends OptionalGroupConsumer {
+	protected class Group$3$Consumer extends OptionalGroupConsumer {
 		
-		protected Group$4$Consumer(final Group group) {
+		protected Group$3$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$5$Consumer);
-			acceptor.accept(group$7$Consumer);
+			acceptor.accept(assignment$4$Consumer);
+			acceptor.accept(group$6$Consumer);
 		}
 	}
 
-	protected class Assignment$5$Consumer extends AssignmentConsumer {
+	protected class Assignment$4$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$5$Consumer(final Assignment assignment) {
+		protected Assignment$4$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$6$Consumer;
+			return ruleCall$5$Consumer;
 		}
 	}
 
-	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -115,46 +115,46 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		}
 	}
 
-	protected class Group$7$Consumer extends LoopGroupConsumer {
+	protected class Group$6$Consumer extends LoopGroupConsumer {
 		
-		protected Group$7$Consumer(final Group group) {
+		protected Group$6$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$8$Consumer);
-			acceptor.accept(assignment$9$Consumer);
+			acceptor.accept(keyword$7$Consumer);
+			acceptor.accept(assignment$8$Consumer);
 		}
 	}
 
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$8$Consumer(final Keyword keyword) {
+		protected Keyword$7$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$9$Consumer extends AssignmentConsumer {
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$9$Consumer(final Assignment assignment) {
+		protected Assignment$8$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$10$Consumer;
+			return ruleCall$9$Consumer;
 		}
 	}
 
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -164,23 +164,23 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		}
 	}
 
-	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$11$Consumer(final Keyword keyword) {
+		protected Keyword$10$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
 	public ComplexReconstrTestLanguageTrickyG1Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -196,15 +196,15 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordLeftSquareBracket());
-		group$4$Consumer = new Group$4$Consumer(rule.ele01Group());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele010AssignmentVals());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0100ParserRuleCallTrickyG2());
-		group$7$Consumer = new Group$7$Consumer(rule.ele011Group());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele0110KeywordComma());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele0111AssignmentVals());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele01110ParserRuleCallTrickyG2());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele1KeywordRightSquareBracket());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftSquareBracket());
+		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele10AssignmentVals());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele100ParserRuleCallTrickyG2());
+		group$6$Consumer = new Group$6$Consumer(rule.ele11Group());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele110KeywordComma());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele111AssignmentVals());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1110ParserRuleCallTrickyG2());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele2KeywordRightSquareBracket());
 	}
 	
 	@Override
@@ -221,28 +221,28 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 		this.trickyG2Consumer = trickyG2Consumer;
 	}
 	
-	public ICharacterClass getKeyword$3$Delimiter() {
-		return keyword$3$Delimiter;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
 	}
 	
-	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
-		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
+	public ICharacterClass getKeyword$10$Delimiter() {
+		return keyword$10$Delimiter;
 	}
 	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
+		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

@@ -23,7 +23,7 @@ public final class ImportUriTestLanguageDelimiters {
 
 	public static final ISequenceMatcher ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-	public static final ISequenceMatcher ruleCall$21$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$19$Delimiter = new SetBasedKeywordMatcher(
 		"import", "type", "extends");
 
 }

@@ -105,19 +105,19 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 
 		getLookAhead3Consumer().setLookAhead4Consumer(getLookAhead4Consumer());
 
-		getLookAhead0Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead0Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead1Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead1Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead1Consumer().setKeyword$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead2Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead3Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead3Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead3Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead4Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
-		getLookAhead4Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
+		getLookAhead0Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead0Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead1Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead2Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead3Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead3Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead4Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
+		getLookAhead4Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$14$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

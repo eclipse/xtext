@@ -52,19 +52,19 @@ TypeRef :
 ;
 
 Alternatives returns AbstractElement:
-    Group ({Alternatives.groups+=current} '|' groups+=Group)*
+    Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
 ;
 
 TerminalAlternatives returns AbstractElement:
-	TerminalGroup ({Alternatives.groups+=current} '|' groups+=TerminalGroup)*
+	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
 ;
 
 Group returns AbstractElement:
-    AbstractToken ( {current=Group.abstractTokens+=current} abstractTokens+=AbstractToken)*
+    AbstractToken ({Group.abstractTokens+=current} (abstractTokens+=AbstractToken)+)?
 ;
 
 TerminalGroup returns AbstractElement:
-	TerminalToken ( {current=Group.abstractTokens+=current} abstractTokens+=TerminalToken)*
+	TerminalToken ({Group.abstractTokens+=current} (abstractTokens+=TerminalToken)+)?
 ;
 
 AbstractToken returns AbstractElement:
@@ -81,7 +81,7 @@ Assignment returns Assignment:
    feature=ID operator=('+='|'='|'?=') ^terminal=AbstractTerminal;
 
 Action returns Action:
-	'{' ('current' '=')? typeName=TypeRef '.' feature=ID operator=('='|'+=') 'current' '}';//TODO make assignment optional
+	'{' typeName=TypeRef ('.' feature=ID operator=('='|'+=') 'current')? '}';
 
 AbstractTerminal returns AbstractElement: 
    Keyword | RuleCall | ParenthesizedElement | CrossReference
@@ -104,11 +104,11 @@ UntilToken:
 ;
 
 Wildcard:
-	isWildcard?='.'
+	{Wildcard} '.'
 ;
 
 CharacterRange returns AbstractElement:
-	Keyword ( {current=CharacterRange.left=current} '..' right=Keyword)?
+	Keyword ( {CharacterRange.left=current} '..' right=Keyword)?
 ;
 
 CrossReference :

@@ -23,9 +23,9 @@ public final class DomainmodelDelimiters {
 
 	public static final ISequenceMatcher ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-	public static final ICharacterClass keyword$29$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$26$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$43$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$40$Delimiter = new SetBasedKeywordMatcher(
 		"import", "package", "datatype", "entity", "extends", "attr", "ref", "opposite", "op");
 
 }

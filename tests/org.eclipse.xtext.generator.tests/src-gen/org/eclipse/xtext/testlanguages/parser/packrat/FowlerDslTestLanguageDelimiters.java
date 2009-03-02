@@ -14,16 +14,16 @@ public final class FowlerDslTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$9$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$4$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$26$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$20$Delimiter = new SetBasedKeywordMatcher(
 		"events", "end", "commands", "resetting", "state", "actions");
 
-	public static final ICharacterClass keyword$49$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$38$Delimiter = ICharacterClass.Factory.nullClass();
 
 }

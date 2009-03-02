@@ -70,12 +70,12 @@ public class InheritanceTestLanguageParserConfiguration extends AbstractParserCo
 
 		getElementConsumer().setIdConsumer(getIdConsumer());
 
-		getModelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$10$Delimiter);
-		getModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$10$Delimiter);
+		getModelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$7$Delimiter);
+		getModelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$4$Delimiter);
 		getModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.ruleCall$9$Delimiter);
-		getElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$7$Delimiter);
-		getElementConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.keyword$4$Delimiter);
+		getElementConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
 	public BaseInheritanceTestLanguageParserConfiguration getBaseInheritanceTestLanguageConfiguration() {

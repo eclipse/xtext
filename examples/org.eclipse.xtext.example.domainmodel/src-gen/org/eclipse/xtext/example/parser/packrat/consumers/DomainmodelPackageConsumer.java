@@ -30,6 +30,12 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer group$1$Consumer;
 
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer assignment$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private IElementConsumer keyword$5$Consumer;
 
 	private IElementConsumer assignment$6$Consumer;
@@ -38,17 +44,11 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer keyword$8$Consumer;
 
-	private IElementConsumer assignment$9$Consumer;
-
-	private IElementConsumer ruleCall$10$Consumer;
-
-	private IElementConsumer keyword$11$Consumer;
+	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
 
 	private ICharacterClass keyword$8$Delimiter;
-
-	private ICharacterClass keyword$11$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -58,11 +58,47 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(assignment$3$Consumer);
 			acceptor.accept(keyword$5$Consumer);
 			acceptor.accept(assignment$6$Consumer);
 			acceptor.accept(keyword$8$Consumer);
-			acceptor.accept(assignment$9$Consumer);
-			acceptor.accept(keyword$11$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$3$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$3$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$4$Consumer;
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(qualifiedNameConsumer, "name", false, true, false, getElement(), optional);
 		}
 	}
 
@@ -78,7 +114,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Assignment$6$Consumer extends AssignmentConsumer {
+	protected class Assignment$6$Consumer extends LoopAssignmentConsumer {
 		
 		protected Assignment$6$Consumer(final Assignment assignment) {
 			super(assignment);
@@ -98,7 +134,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(qualifiedNameConsumer, "name", false, true, false, getElement(), optional);
+			return consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -114,47 +150,11 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Assignment$9$Consumer extends LoopAssignmentConsumer {
-		
-		protected Assignment$9$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$10$Consumer;
-		}
-	}
-
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(namedElementConsumer, "namedElements", true, false, false, getElement(), optional);
-		}
-	}
-
-	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$11$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
-		}
-	}
-
 	public DomainmodelPackageConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -170,13 +170,13 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordPackage());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele0001AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele00010ParserRuleCallQualifiedName());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele001KeywordLeftCurlyBracket());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele01AssignmentNamedElements());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele010ParserRuleCallNamedElement());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele1KeywordRightCurlyBracket());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordPackage());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallQualifiedName());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftCurlyBracket());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentNamedElements());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallNamedElement());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele4KeywordRightCurlyBracket());
 	}
 	
 	@Override
@@ -197,6 +197,14 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 		this.qualifiedNameConsumer = qualifiedNameConsumer;
 	}
 	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$5$Delimiter() {
 		return keyword$5$Delimiter;
 	}
@@ -211,14 +219,6 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
-	}
-	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

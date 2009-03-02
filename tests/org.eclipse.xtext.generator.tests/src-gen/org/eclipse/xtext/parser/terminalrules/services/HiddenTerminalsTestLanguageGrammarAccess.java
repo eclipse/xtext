@@ -19,14 +19,11 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
-		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final Alternatives c000Alternatives = (Alternatives)c00Alternatives.eContents().get(0);
-		private final RuleCall c0000ParserRuleCallWithoutHiddens = (RuleCall)c000Alternatives.eContents().get(0);
-		private final RuleCall c0001ParserRuleCallWithHiddens = (RuleCall)c000Alternatives.eContents().get(1);
-		private final RuleCall c001ParserRuleCallOverridingHiddens = (RuleCall)c00Alternatives.eContents().get(1);
-		private final RuleCall c01ParserRuleCallInheritingHiddens = (RuleCall)c0Alternatives.eContents().get(1);
-		private final RuleCall c1ParserRuleCallDatatypeHiddens = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall c0ParserRuleCallWithoutHiddens = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall c1ParserRuleCallWithHiddens = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall c2ParserRuleCallOverridingHiddens = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall c3ParserRuleCallInheritingHiddens = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall c4ParserRuleCallDatatypeHiddens = (RuleCall)cAlternatives.eContents().get(4);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -35,44 +32,32 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
+		public RuleCall ele0ParserRuleCallWithoutHiddens() { return c0ParserRuleCallWithoutHiddens; }
 
 		// not supported
-		public Alternatives ele00Alternatives() { return c00Alternatives; }
+		public RuleCall ele1ParserRuleCallWithHiddens() { return c1ParserRuleCallWithHiddens; }
 
 		// not supported
-		public Alternatives ele000Alternatives() { return c000Alternatives; }
+		public RuleCall ele2ParserRuleCallOverridingHiddens() { return c2ParserRuleCallOverridingHiddens; }
 
 		// not supported
-		public RuleCall ele0000ParserRuleCallWithoutHiddens() { return c0000ParserRuleCallWithoutHiddens; }
+		public RuleCall ele3ParserRuleCallInheritingHiddens() { return c3ParserRuleCallInheritingHiddens; }
 
 		// not supported
-		public RuleCall ele0001ParserRuleCallWithHiddens() { return c0001ParserRuleCallWithHiddens; }
-
-		// not supported
-		public RuleCall ele001ParserRuleCallOverridingHiddens() { return c001ParserRuleCallOverridingHiddens; }
-
-		// not supported
-		public RuleCall ele01ParserRuleCallInheritingHiddens() { return c01ParserRuleCallInheritingHiddens; }
-
-		// not supported
-		public RuleCall ele1ParserRuleCallDatatypeHiddens() { return c1ParserRuleCallDatatypeHiddens; }
+		public RuleCall ele4ParserRuleCallDatatypeHiddens() { return c4ParserRuleCallDatatypeHiddens; }
 	}
 
 	public class WithoutHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithoutHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Keyword c0000KeywordWithout = (Keyword)c000Group.eContents().get(0);
-		private final Assignment c0001AssignmentSpaces = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010TerminalRuleCallWS = (RuleCall)c0001AssignmentSpaces.eContents().get(0);
-		private final Keyword c001KeywordHiddens = (Keyword)c00Group.eContents().get(1);
-		private final Assignment c01AssignmentSpaces = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentSpaces.eContents().get(0);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
+		private final Keyword c0KeywordWithout = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentSpaces = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallWS = (RuleCall)c1AssignmentSpaces.eContents().get(0);
+		private final Keyword c2KeywordHiddens = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentSpaces = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall c30TerminalRuleCallWS = (RuleCall)c3AssignmentSpaces.eContents().get(0);
+		private final Assignment c4AssignmentValid = (Assignment)cGroup.eContents().get(4);
+		private final Keyword c40KeywordSemicolon = (Keyword)c4AssignmentValid.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -81,47 +66,37 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordWithout() { return c0KeywordWithout; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentSpaces() { return c1AssignmentSpaces; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public RuleCall ele10TerminalRuleCallWS() { return c10TerminalRuleCallWS; }
 
 		// not supported
-		public Keyword ele0000KeywordWithout() { return c0000KeywordWithout; }
+		public Keyword ele2KeywordHiddens() { return c2KeywordHiddens; }
 
 		// not supported
-		public Assignment ele0001AssignmentSpaces() { return c0001AssignmentSpaces; }
+		public Assignment ele3AssignmentSpaces() { return c3AssignmentSpaces; }
 
 		// not supported
-		public RuleCall ele00010TerminalRuleCallWS() { return c00010TerminalRuleCallWS; }
+		public RuleCall ele30TerminalRuleCallWS() { return c30TerminalRuleCallWS; }
 
 		// not supported
-		public Keyword ele001KeywordHiddens() { return c001KeywordHiddens; }
+		public Assignment ele4AssignmentValid() { return c4AssignmentValid; }
 
 		// not supported
-		public Assignment ele01AssignmentSpaces() { return c01AssignmentSpaces; }
-
-		// not supported
-		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
-
-		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
-
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		public Keyword ele40KeywordSemicolon() { return c40KeywordSemicolon; }
 	}
 
 	public class WithHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordWith = (Keyword)c0Group.eContents().get(0);
-		private final Keyword c01KeywordHiddens = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
+		private final Keyword c0KeywordWith = (Keyword)cGroup.eContents().get(0);
+		private final Keyword c1KeywordHiddens = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c2AssignmentValid = (Assignment)cGroup.eContents().get(2);
+		private final Keyword c20KeywordSemicolon = (Keyword)c2AssignmentValid.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -130,36 +105,29 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordWith() { return c0KeywordWith; }
 
 		// not supported
-		public Keyword ele00KeywordWith() { return c00KeywordWith; }
+		public Keyword ele1KeywordHiddens() { return c1KeywordHiddens; }
 
 		// not supported
-		public Keyword ele01KeywordHiddens() { return c01KeywordHiddens; }
+		public Assignment ele2AssignmentValid() { return c2AssignmentValid; }
 
 		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
-
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		public Keyword ele20KeywordSemicolon() { return c20KeywordSemicolon; }
 	}
 
 	public class OverridingHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Group c0000Group = (Group)c000Group.eContents().get(0);
-		private final Keyword c00000KeywordOverriding = (Keyword)c0000Group.eContents().get(0);
-		private final Keyword c00001KeywordHiddens = (Keyword)c0000Group.eContents().get(1);
-		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
-		private final Assignment c001AssignmentCalled = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010ParserRuleCallOverridingHiddensCall = (RuleCall)c001AssignmentCalled.eContents().get(0);
-		private final Keyword c01KeywordRightParenthesis = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
+		private final Keyword c0KeywordOverriding = (Keyword)cGroup.eContents().get(0);
+		private final Keyword c1KeywordHiddens = (Keyword)cGroup.eContents().get(1);
+		private final Keyword c2KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentCalled = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall c30ParserRuleCallOverridingHiddensCall = (RuleCall)c3AssignmentCalled.eContents().get(0);
+		private final Keyword c4KeywordRightParenthesis = (Keyword)cGroup.eContents().get(4);
+		private final Assignment c5AssignmentValid = (Assignment)cGroup.eContents().get(5);
+		private final Keyword c50KeywordSemicolon = (Keyword)c5AssignmentValid.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -168,51 +136,38 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordOverriding() { return c0KeywordOverriding; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Keyword ele1KeywordHiddens() { return c1KeywordHiddens; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public Keyword ele2KeywordLeftParenthesis() { return c2KeywordLeftParenthesis; }
 
 		// not supported
-		public Group ele0000Group() { return c0000Group; }
+		public Assignment ele3AssignmentCalled() { return c3AssignmentCalled; }
 
 		// not supported
-		public Keyword ele00000KeywordOverriding() { return c00000KeywordOverriding; }
+		public RuleCall ele30ParserRuleCallOverridingHiddensCall() { return c30ParserRuleCallOverridingHiddensCall; }
 
 		// not supported
-		public Keyword ele00001KeywordHiddens() { return c00001KeywordHiddens; }
+		public Keyword ele4KeywordRightParenthesis() { return c4KeywordRightParenthesis; }
 
 		// not supported
-		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
+		public Assignment ele5AssignmentValid() { return c5AssignmentValid; }
 
 		// not supported
-		public Assignment ele001AssignmentCalled() { return c001AssignmentCalled; }
-
-		// not supported
-		public RuleCall ele0010ParserRuleCallOverridingHiddensCall() { return c0010ParserRuleCallOverridingHiddensCall; }
-
-		// not supported
-		public Keyword ele01KeywordRightParenthesis() { return c01KeywordRightParenthesis; }
-
-		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
-
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		public Keyword ele50KeywordSemicolon() { return c50KeywordSemicolon; }
 	}
 
 	public class OverridingHiddensCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordCall = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentSpaces = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentSpaces.eContents().get(0);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
+		private final Keyword c0KeywordCall = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentSpaces = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallWS = (RuleCall)c1AssignmentSpaces.eContents().get(0);
+		private final Assignment c2AssignmentValid = (Assignment)cGroup.eContents().get(2);
+		private final Keyword c20KeywordSemicolon = (Keyword)c2AssignmentValid.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -221,42 +176,35 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordCall() { return c0KeywordCall; }
 
 		// not supported
-		public Keyword ele00KeywordCall() { return c00KeywordCall; }
+		public Assignment ele1AssignmentSpaces() { return c1AssignmentSpaces; }
 
 		// not supported
-		public Assignment ele01AssignmentSpaces() { return c01AssignmentSpaces; }
+		public RuleCall ele10TerminalRuleCallWS() { return c10TerminalRuleCallWS; }
 
 		// not supported
-		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
+		public Assignment ele2AssignmentValid() { return c2AssignmentValid; }
 
 		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
-
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		public Keyword ele20KeywordSemicolon() { return c20KeywordSemicolon; }
 	}
 
 	public class InheritingHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Group c0000Group = (Group)c000Group.eContents().get(0);
-		private final Keyword c00000KeywordInheriting = (Keyword)c0000Group.eContents().get(0);
-		private final Keyword c00001KeywordHiddens = (Keyword)c0000Group.eContents().get(1);
-		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
-		private final Alternatives c001Alternatives = (Alternatives)c00Group.eContents().get(1);
-		private final Assignment c0010AssignmentCalled = (Assignment)c001Alternatives.eContents().get(0);
-		private final RuleCall c00100ParserRuleCallInheritingHiddensCall = (RuleCall)c0010AssignmentCalled.eContents().get(0);
-		private final Assignment c0011AssignmentHidingCalled = (Assignment)c001Alternatives.eContents().get(1);
-		private final RuleCall c00110ParserRuleCallHidingHiddens = (RuleCall)c0011AssignmentHidingCalled.eContents().get(0);
-		private final Keyword c01KeywordRightParenthesis = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
+		private final Keyword c0KeywordInheriting = (Keyword)cGroup.eContents().get(0);
+		private final Keyword c1KeywordHiddens = (Keyword)cGroup.eContents().get(1);
+		private final Keyword c2KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(2);
+		private final Alternatives c3Alternatives = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment c30AssignmentCalled = (Assignment)c3Alternatives.eContents().get(0);
+		private final RuleCall c300ParserRuleCallInheritingHiddensCall = (RuleCall)c30AssignmentCalled.eContents().get(0);
+		private final Assignment c31AssignmentHidingCalled = (Assignment)c3Alternatives.eContents().get(1);
+		private final RuleCall c310ParserRuleCallHidingHiddens = (RuleCall)c31AssignmentHidingCalled.eContents().get(0);
+		private final Keyword c4KeywordRightParenthesis = (Keyword)cGroup.eContents().get(4);
+		private final Assignment c5AssignmentValid = (Assignment)cGroup.eContents().get(5);
+		private final Keyword c50KeywordSemicolon = (Keyword)c5AssignmentValid.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -265,49 +213,37 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordInheriting() { return c0KeywordInheriting; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Keyword ele1KeywordHiddens() { return c1KeywordHiddens; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public Keyword ele2KeywordLeftParenthesis() { return c2KeywordLeftParenthesis; }
 
 		// not supported
-		public Group ele0000Group() { return c0000Group; }
+		public Alternatives ele3Alternatives() { return c3Alternatives; }
 
 		// not supported
-		public Keyword ele00000KeywordInheriting() { return c00000KeywordInheriting; }
+		public Assignment ele30AssignmentCalled() { return c30AssignmentCalled; }
 
 		// not supported
-		public Keyword ele00001KeywordHiddens() { return c00001KeywordHiddens; }
+		public RuleCall ele300ParserRuleCallInheritingHiddensCall() { return c300ParserRuleCallInheritingHiddensCall; }
 
 		// not supported
-		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
+		public Assignment ele31AssignmentHidingCalled() { return c31AssignmentHidingCalled; }
 
 		// not supported
-		public Alternatives ele001Alternatives() { return c001Alternatives; }
+		public RuleCall ele310ParserRuleCallHidingHiddens() { return c310ParserRuleCallHidingHiddens; }
 
 		// not supported
-		public Assignment ele0010AssignmentCalled() { return c0010AssignmentCalled; }
+		public Keyword ele4KeywordRightParenthesis() { return c4KeywordRightParenthesis; }
 
 		// not supported
-		public RuleCall ele00100ParserRuleCallInheritingHiddensCall() { return c00100ParserRuleCallInheritingHiddensCall; }
+		public Assignment ele5AssignmentValid() { return c5AssignmentValid; }
 
 		// not supported
-		public Assignment ele0011AssignmentHidingCalled() { return c0011AssignmentHidingCalled; }
-
-		// not supported
-		public RuleCall ele00110ParserRuleCallHidingHiddens() { return c00110ParserRuleCallHidingHiddens; }
-
-		// not supported
-		public Keyword ele01KeywordRightParenthesis() { return c01KeywordRightParenthesis; }
-
-		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
-
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		public Keyword ele50KeywordSemicolon() { return c50KeywordSemicolon; }
 	}
 
 	public class DatatypeHiddensElements implements IParserRuleAccess {
@@ -355,12 +291,11 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	public class HidingHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HidingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordHiding = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentSpace = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallWS = (RuleCall)c01AssignmentSpace.eContents().get(0);
-		private final Assignment c1AssignmentCalled = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallInheritingHiddensCall = (RuleCall)c1AssignmentCalled.eContents().get(0);
+		private final Keyword c0KeywordHiding = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentSpace = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallWS = (RuleCall)c1AssignmentSpace.eContents().get(0);
+		private final Assignment c2AssignmentCalled = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20ParserRuleCallInheritingHiddensCall = (RuleCall)c2AssignmentCalled.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -369,22 +304,19 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordHiding() { return c0KeywordHiding; }
 
 		// not supported
-		public Keyword ele00KeywordHiding() { return c00KeywordHiding; }
+		public Assignment ele1AssignmentSpace() { return c1AssignmentSpace; }
 
 		// not supported
-		public Assignment ele01AssignmentSpace() { return c01AssignmentSpace; }
+		public RuleCall ele10TerminalRuleCallWS() { return c10TerminalRuleCallWS; }
 
 		// not supported
-		public RuleCall ele010TerminalRuleCallWS() { return c010TerminalRuleCallWS; }
+		public Assignment ele2AssignmentCalled() { return c2AssignmentCalled; }
 
 		// not supported
-		public Assignment ele1AssignmentCalled() { return c1AssignmentCalled; }
-
-		// not supported
-		public RuleCall ele10ParserRuleCallInheritingHiddensCall() { return c10ParserRuleCallInheritingHiddensCall; }
+		public RuleCall ele20ParserRuleCallInheritingHiddensCall() { return c20ParserRuleCallInheritingHiddensCall; }
 	}
 
 	public class InheritingHiddensCallElements implements IParserRuleAccess {

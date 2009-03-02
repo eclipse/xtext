@@ -96,17 +96,17 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 
 		getAbstractRuleCallConsumer().setIdConsumer(getIdConsumer());
 
-		getStartConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
-		getStartConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
-		getFirstAbstractRuleChildConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
-		getFirstAbstractRuleChildConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
-		getFirstAbstractRuleChildConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
-		getFirstAbstractRuleChildConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getSecondAbstractRuleChildConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$5$Delimiter);
-		getSecondAbstractRuleChildConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
-		getSecondAbstractRuleChildConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$22$Delimiter);
-		getSecondAbstractRuleChildConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getAbstractRuleCallConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getStartConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$4$Delimiter);
+		getStartConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$4$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
+		getFirstAbstractRuleChildConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
+		getFirstAbstractRuleChildConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$17$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$4$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
+		getSecondAbstractRuleChildConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
+		getSecondAbstractRuleChildConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$17$Delimiter);
+		getAbstractRuleCallConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$17$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

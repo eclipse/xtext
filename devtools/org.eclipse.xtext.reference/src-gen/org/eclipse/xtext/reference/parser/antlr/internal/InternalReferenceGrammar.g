@@ -80,15 +80,15 @@ ruleSpielplatz returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((((('spielplatz' 
+('spielplatz' 
     {
-        createLeafNode(grammarAccess.prSpielplatz().ele00000KeywordSpielplatz(), null); 
+        createLeafNode(grammarAccess.prSpielplatz().ele0KeywordSpielplatz(), null); 
     }
 (	
 	
 	    lv_groesse_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prSpielplatz().ele000010TerminalRuleCallINT(), "groesse"); 
+		createLeafNode(grammarAccess.prSpielplatz().ele10TerminalRuleCallINT(), "groesse"); 
 	}
  
 	    {
@@ -104,11 +104,11 @@ ruleSpielplatz returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    lv_beschreibung_2=	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prSpielplatz().ele00010TerminalRuleCallSTRING(), "beschreibung"); 
+		createLeafNode(grammarAccess.prSpielplatz().ele20TerminalRuleCallSTRING(), "beschreibung"); 
 	}
  
 	    {
@@ -124,15 +124,15 @@ ruleSpielplatz returns [EObject current=null]
 	        }
 	    }
 	
-)?)'{' 
+)?'{' 
     {
-        createLeafNode(grammarAccess.prSpielplatz().ele001KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prSpielplatz().ele3KeywordLeftCurlyBracket(), null); 
     }
-)(((((	
+((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele0100000ParserRuleCallKind(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele400ParserRuleCallKind(), currentNode); 
 	    }
 	    lv_kinder_4=ruleKind 
 	    {
@@ -154,7 +154,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele0100010ParserRuleCallErwachsener(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele410ParserRuleCallErwachsener(), currentNode); 
 	    }
 	    lv_erzieher_5=ruleErwachsener 
 	    {
@@ -171,12 +171,12 @@ ruleSpielplatz returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))
+)
     |(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele010010ParserRuleCallSpielzeug(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele420ParserRuleCallSpielzeug(), currentNode); 
 	    }
 	    lv_spielzeuge_6=ruleSpielzeug 
 	    {
@@ -193,12 +193,12 @@ ruleSpielplatz returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))
+)
     |(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele01010ParserRuleCallFamilie(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele430ParserRuleCallFamilie(), currentNode); 
 	    }
 	    lv_familie_7=ruleFamilie 
 	    {
@@ -215,12 +215,12 @@ ruleSpielplatz returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))
+)
     |(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele0110ParserRuleCallCustomTypeParserRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele440ParserRuleCallCustomTypeParserRule(), currentNode); 
 	    }
 	    lv_types_8=ruleCustomTypeParserRule 
 	    {
@@ -237,9 +237,9 @@ ruleSpielplatz returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))*)'}' 
+))*'}' 
     {
-        createLeafNode(grammarAccess.prSpielplatz().ele1KeywordRightCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prSpielplatz().ele5KeywordRightCurlyBracket(), null); 
     }
 )?;
 
@@ -264,19 +264,19 @@ ruleKind returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((('kind' 
+('kind' 
     {
-        createLeafNode(grammarAccess.prKind().ele0000KeywordKind(), null); 
+        createLeafNode(grammarAccess.prKind().ele0KeywordKind(), null); 
     }
 '(' 
     {
-        createLeafNode(grammarAccess.prKind().ele0001KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prKind().ele1KeywordLeftParenthesis(), null); 
     }
-)(	
+(	
 	
 	    lv_name_2=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prKind().ele0010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prKind().ele20TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -292,11 +292,11 @@ ruleKind returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    lv_age_3=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prKind().ele010TerminalRuleCallINT(), "age"); 
+		createLeafNode(grammarAccess.prKind().ele30TerminalRuleCallINT(), "age"); 
 	}
  
 	    {
@@ -312,9 +312,9 @@ ruleKind returns [EObject current=null]
 	        }
 	    }
 	
-))')' 
+)')' 
     {
-        createLeafNode(grammarAccess.prKind().ele1KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prKind().ele4KeywordRightParenthesis(), null); 
     }
 );
 
@@ -337,19 +337,19 @@ ruleErwachsener returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((('erwachsener' 
+('erwachsener' 
     {
-        createLeafNode(grammarAccess.prErwachsener().ele0000KeywordErwachsener(), null); 
+        createLeafNode(grammarAccess.prErwachsener().ele0KeywordErwachsener(), null); 
     }
 '(' 
     {
-        createLeafNode(grammarAccess.prErwachsener().ele0001KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prErwachsener().ele1KeywordLeftParenthesis(), null); 
     }
-)(	
+(	
 	
 	    lv_name_2=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prErwachsener().ele0010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prErwachsener().ele20TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -365,11 +365,11 @@ ruleErwachsener returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    lv_age_3=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prErwachsener().ele010TerminalRuleCallINT(), "age"); 
+		createLeafNode(grammarAccess.prErwachsener().ele30TerminalRuleCallINT(), "age"); 
 	}
  
 	    {
@@ -385,9 +385,9 @@ ruleErwachsener returns [EObject current=null]
 	        }
 	    }
 	
-))')' 
+)')' 
     {
-        createLeafNode(grammarAccess.prErwachsener().ele1KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prErwachsener().ele4KeywordRightParenthesis(), null); 
     }
 );
 
@@ -410,19 +410,19 @@ ruleSpielzeug returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((('spielzeug' 
+('spielzeug' 
     {
-        createLeafNode(grammarAccess.prSpielzeug().ele0000KeywordSpielzeug(), null); 
+        createLeafNode(grammarAccess.prSpielzeug().ele0KeywordSpielzeug(), null); 
     }
 '(' 
     {
-        createLeafNode(grammarAccess.prSpielzeug().ele0001KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prSpielzeug().ele1KeywordLeftParenthesis(), null); 
     }
-)(	
+(	
 	
 	    lv_name_2=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prSpielzeug().ele0010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prSpielzeug().ele20TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -438,11 +438,11 @@ ruleSpielzeug returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSpielzeug().ele010ParserRuleCallFarbe(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSpielzeug().ele30ParserRuleCallFarbe(), currentNode); 
 	    }
 	    lv_farbe_3=ruleFarbe 
 	    {
@@ -459,9 +459,9 @@ ruleSpielzeug returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))')' 
+)')' 
     {
-        createLeafNode(grammarAccess.prSpielzeug().ele1KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prSpielzeug().ele4KeywordRightParenthesis(), null); 
     }
 );
 
@@ -484,31 +484,30 @@ ruleFamilie returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((((((('familie' 
+('familie' 
     {
-        createLeafNode(grammarAccess.prFamilie().ele0000000KeywordFamilie(), null); 
+        createLeafNode(grammarAccess.prFamilie().ele0KeywordFamilie(), null); 
     }
 '(' 
     {
-        createLeafNode(grammarAccess.prFamilie().ele0000001KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prFamilie().ele1KeywordLeftParenthesis(), null); 
     }
-)(	
+(	
 	
-	    lv_name_2=(('keyword' 
+	    lv_name_2=('keyword' 
     {
-        createLeafNode(grammarAccess.prFamilie().ele000001000KeywordKeyword(), "name"); 
+        createLeafNode(grammarAccess.prFamilie().ele200KeywordKeyword(), "name"); 
     }
 
 
     |	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prFamilie().ele000001001TerminalRuleCallSTRING(), "name"); 
+		createLeafNode(grammarAccess.prFamilie().ele201TerminalRuleCallSTRING(), "name"); 
 	}
-)
 
     |	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele00000101TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prFamilie().ele202TerminalRuleCallID(), "name"); 
 	}
 )
  
@@ -525,7 +524,7 @@ ruleFamilie returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 		
 		{
@@ -536,12 +535,12 @@ ruleFamilie returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele000010CrossReferenceEStringErwachsener(), "mutter"); 
+		createLeafNode(grammarAccess.prFamilie().ele30CrossReferenceEStringErwachsener(), "mutter"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-))(	
+)(	
 	
 		
 		{
@@ -552,12 +551,12 @@ ruleFamilie returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele00010CrossReferenceEStringErwachsener(), "vater"); 
+		createLeafNode(grammarAccess.prFamilie().ele40CrossReferenceEStringErwachsener(), "vater"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-))(	
+)(	
 	
 		
 		{
@@ -568,14 +567,14 @@ ruleFamilie returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele0010CrossReferenceEStringKind(), "kinder"); 
+		createLeafNode(grammarAccess.prFamilie().ele50CrossReferenceEStringKind(), "kinder"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-))(',' 
+)(',' 
     {
-        createLeafNode(grammarAccess.prFamilie().ele010KeywordComma(), null); 
+        createLeafNode(grammarAccess.prFamilie().ele60KeywordComma(), null); 
     }
 (	
 	
@@ -588,14 +587,14 @@ ruleFamilie returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele0110CrossReferenceEStringKind(), "kinder"); 
+		createLeafNode(grammarAccess.prFamilie().ele610CrossReferenceEStringKind(), "kinder"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-))*)')' 
+))*')' 
     {
-        createLeafNode(grammarAccess.prFamilie().ele1KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prFamilie().ele7KeywordRightParenthesis(), null); 
     }
 );
 
@@ -620,29 +619,27 @@ ruleFarbe returns [EObject current=null]
     }:
 (	
 	
-	    lv_wert_0=((('ROT' 
+	    lv_wert_0=('ROT' 
     {
-        createLeafNode(grammarAccess.prFarbe().ele0000KeywordROT(), "wert"); 
+        createLeafNode(grammarAccess.prFarbe().ele00KeywordROT(), "wert"); 
     }
 
 
     |'BLAU' 
     {
-        createLeafNode(grammarAccess.prFarbe().ele0001KeywordBLAU(), "wert"); 
+        createLeafNode(grammarAccess.prFarbe().ele01KeywordBLAU(), "wert"); 
     }
 
-)
 
     |'GELB' 
     {
-        createLeafNode(grammarAccess.prFarbe().ele001KeywordGELB(), "wert"); 
+        createLeafNode(grammarAccess.prFarbe().ele02KeywordGELB(), "wert"); 
     }
 
-)
 
     |'GR\u00DCN' 
     {
-        createLeafNode(grammarAccess.prFarbe().ele01KeywordGRÜN(), "wert"); 
+        createLeafNode(grammarAccess.prFarbe().ele03KeywordGRÜN(), "wert"); 
     }
 
 )
@@ -710,17 +707,17 @@ ruleCustomTypeParserRule returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

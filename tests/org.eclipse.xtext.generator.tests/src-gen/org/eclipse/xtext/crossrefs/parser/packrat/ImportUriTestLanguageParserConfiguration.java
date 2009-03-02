@@ -80,10 +80,10 @@ public class ImportUriTestLanguageParserConfiguration extends AbstractParserConf
 
 		getImportConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
 		getImportConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getTypeConsumer().setCrossReference$9$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
-		getTypeConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
-		getTypeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
-		getTypeConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getTypeConsumer().setCrossReference$7$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.ruleCall$19$Delimiter);
+		getTypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.ImportUriTestLanguageDelimiters.ruleCall$19$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

@@ -29,11 +29,11 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
 	private IElementConsumer ruleCall$3$Consumer;
 
 	private IElementConsumer ruleCall$4$Consumer;
-
-	private IElementConsumer ruleCall$5$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -43,9 +43,21 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(lookAhead0Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -57,25 +69,13 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(lookAhead0Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(lookAhead1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(lookAhead1Consumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -102,9 +102,9 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallLookAhead0());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallLookAhead1());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1ParserRuleCallLookAhead3());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallLookAhead0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallLookAhead1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallLookAhead3());
 	}
 	
 	@Override

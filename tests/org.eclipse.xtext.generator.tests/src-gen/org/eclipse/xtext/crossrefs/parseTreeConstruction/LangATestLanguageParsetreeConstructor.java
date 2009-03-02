@@ -47,22 +47,22 @@ protected class Main_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prMain().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Main_1_Assignment_types(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Main_0_Assignment_imports(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -154,22 +154,22 @@ protected class Import_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prImport().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Import_1_Assignment_uri(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Import_0_Keyword_import(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -232,107 +232,55 @@ protected class Type_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prType().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Type_1_Assignment_extends(current, this).firstSolution();
+		Solution s1 = new Type_3_Assignment_extends(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Type_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
+			Solution s2 = new Type_2_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s2 != null) {
+			Solution s3 = new Type_1_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+		while(s3 != null) {
+			Solution s4 = new Type_0_Keyword_type(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+			if(s4 != null) {
+				last = s4.getPredecessor();
+				return s4;
 			} else {
-				last = s2.getPredecessor();
-				return s2;
+				s3 = s3.getPredecessor().nextSolution(this,s3);
 			}
 		}
+			s2 = s2.getPredecessor().nextSolution(this,s2);
+		}
+			s1 = s1.getPredecessor().nextSolution(this,s1);
+		}
 		return null;
-		
 	}
 }
 
 // not supported
-protected class Type_0_Group extends GroupToken {
+protected class Type_0_Keyword_type extends KeywordToken  {
 	
-	public Type_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prType().ele0Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Type_0_1_Keyword_extends(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Type_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class Type_0_0_Group extends GroupToken {
-	
-	public Type_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.prType().ele00Group();
-	}
-		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Type_0_0_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Type_0_0_0_Keyword_type(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-		
-	}
-}
-
-// not supported
-protected class Type_0_0_0_Keyword_type extends KeywordToken  {
-	
-	public Type_0_0_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
+	public Type_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prType().ele000KeywordType();
+		return grammarAccess.prType().ele0KeywordType();
 	}	
 }
 
 // not supported
-protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
+protected class Type_1_Assignment_name extends AssignmentToken  {
 	
-	public Type_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+	public Type_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prType().ele001AssignmentName();
+		return grammarAccess.prType().ele1AssignmentName();
 	}
 	
 	@Override
@@ -341,37 +289,35 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prType().ele0010TerminalRuleCallID();
+			element = grammarAccess.prType().ele10TerminalRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-
 // not supported
-protected class Type_0_1_Keyword_extends extends KeywordToken  {
+protected class Type_2_Keyword_extends extends KeywordToken  {
 	
-	public Type_0_1_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
+	public Type_2_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prType().ele01KeywordExtends();
+		return grammarAccess.prType().ele2KeywordExtends();
 	}	
 }
 
-
 // not supported
-protected class Type_1_Assignment_extends extends AssignmentToken  {
+protected class Type_3_Assignment_extends extends AssignmentToken  {
 	
-	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {
+	public Type_3_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prType().ele1AssignmentExtends();
+		return grammarAccess.prType().ele3AssignmentExtends();
 	}
 	
 	@Override
@@ -380,9 +326,9 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prType().ele10CrossReferenceEStringType().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prType().ele30CrossReferenceEStringType().getType().getType())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prType().ele10CrossReferenceEStringType(); 
+				element = grammarAccess.prType().ele30CrossReferenceEStringType(); 
 				return new Solution(obj);
 			}
 		}

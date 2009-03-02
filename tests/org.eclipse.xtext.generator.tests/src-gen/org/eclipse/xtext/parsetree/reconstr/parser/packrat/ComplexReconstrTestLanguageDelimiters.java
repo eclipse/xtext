@@ -13,19 +13,19 @@ public final class ComplexReconstrTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$33$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$31$Delimiter = new SetBasedKeywordMatcher(
 		"TA", "x", "y", "TB", "TC", "z", "TD", "TE", "TF", "TG");
 
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$50$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$43$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$64$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$57$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

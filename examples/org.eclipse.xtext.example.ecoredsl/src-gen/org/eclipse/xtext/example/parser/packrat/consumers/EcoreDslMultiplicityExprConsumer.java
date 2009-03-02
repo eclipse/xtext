@@ -23,17 +23,17 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer keyword$2$Consumer;
+
 	private IElementConsumer keyword$3$Consumer;
 
 	private IElementConsumer keyword$4$Consumer;
 
-	private IElementConsumer keyword$5$Consumer;
+	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$3$Delimiter;
 
 	private ICharacterClass keyword$4$Delimiter;
-
-	private ICharacterClass keyword$5$Delimiter;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -43,9 +43,21 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(keyword$3$Consumer);
 			acceptor.accept(keyword$4$Consumer);
-			acceptor.accept(keyword$5$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
@@ -73,23 +85,11 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 		}
 	}
 
-	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$5$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
-		}
-	}
-
 	public EcoreDslMultiplicityExprConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -105,9 +105,9 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordPlusSign());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordQuestionMark());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele1KeywordAsterisk());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordPlusSign());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordQuestionMark());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordAsterisk());
 	}
 	
 	@Override
@@ -118,6 +118,14 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getType();
+	}
+	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$3$Delimiter() {
@@ -134,14 +142,6 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
-	}
-	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

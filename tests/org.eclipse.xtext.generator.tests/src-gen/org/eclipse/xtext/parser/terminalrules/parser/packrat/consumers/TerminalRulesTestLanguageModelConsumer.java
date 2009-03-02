@@ -38,47 +38,47 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 
 	private IElementConsumer alternatives$1$Consumer;
 
-	private IElementConsumer assignment$7$Consumer;
+	private IElementConsumer assignment$2$Consumer;
 
-	private IElementConsumer ruleCall$8$Consumer;
+	private IElementConsumer ruleCall$3$Consumer;
 
-	private IElementConsumer assignment$9$Consumer;
+	private IElementConsumer assignment$4$Consumer;
 
-	private IElementConsumer ruleCall$10$Consumer;
+	private IElementConsumer ruleCall$5$Consumer;
 
-	private IElementConsumer assignment$11$Consumer;
+	private IElementConsumer assignment$6$Consumer;
 
-	private IElementConsumer ruleCall$12$Consumer;
+	private IElementConsumer ruleCall$7$Consumer;
 
-	private IElementConsumer assignment$13$Consumer;
+	private IElementConsumer assignment$8$Consumer;
 
-	private IElementConsumer ruleCall$14$Consumer;
+	private IElementConsumer ruleCall$9$Consumer;
 
-	private IElementConsumer assignment$15$Consumer;
+	private IElementConsumer assignment$10$Consumer;
 
-	private IElementConsumer ruleCall$16$Consumer;
+	private IElementConsumer ruleCall$11$Consumer;
 
-	private IElementConsumer assignment$17$Consumer;
+	private IElementConsumer assignment$12$Consumer;
 
-	private IElementConsumer ruleCall$18$Consumer;
+	private IElementConsumer ruleCall$13$Consumer;
 
-	private IElementConsumer assignment$19$Consumer;
+	private IElementConsumer assignment$14$Consumer;
 
-	private IElementConsumer ruleCall$20$Consumer;
+	private IElementConsumer ruleCall$15$Consumer;
 
-	private ISequenceMatcher ruleCall$8$Delimiter;
+	private ISequenceMatcher ruleCall$7$Delimiter;
 
-	private ISequenceMatcher ruleCall$10$Delimiter;
+	private ISequenceMatcher ruleCall$9$Delimiter;
 
-	private ISequenceMatcher ruleCall$12$Delimiter;
+	private ISequenceMatcher ruleCall$11$Delimiter;
 
-	private ISequenceMatcher ruleCall$14$Delimiter;
+	private ISequenceMatcher ruleCall$13$Delimiter;
 
-	private ISequenceMatcher ruleCall$16$Delimiter;
+	private ISequenceMatcher ruleCall$15$Delimiter;
 
-	private ISequenceMatcher ruleCall$18$Delimiter;
+	private ISequenceMatcher ruleCall$3$Delimiter;
 
-	private ISequenceMatcher ruleCall$20$Delimiter;
+	private ISequenceMatcher ruleCall$5$Delimiter;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -88,193 +88,193 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(assignment$9$Consumer);
-			acceptor.accept(assignment$11$Consumer);
-			acceptor.accept(assignment$13$Consumer);
-			acceptor.accept(assignment$15$Consumer);
-			acceptor.accept(assignment$17$Consumer);
-			acceptor.accept(assignment$19$Consumer);
+			acceptor.accept(assignment$2$Consumer);
+			acceptor.accept(assignment$4$Consumer);
+			acceptor.accept(assignment$6$Consumer);
+			acceptor.accept(assignment$8$Consumer);
+			acceptor.accept(assignment$10$Consumer);
+			acceptor.accept(assignment$12$Consumer);
+			acceptor.accept(assignment$14$Consumer);
 		}
 	}
 
-	protected class Assignment$7$Consumer extends AssignmentConsumer {
+	protected class Assignment$2$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$7$Consumer(final Assignment assignment) {
+		protected Assignment$2$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$8$Consumer;
+			return ruleCall$3$Consumer;
 		}
 	}
 
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "idValue", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "idValue", false, false, getElement(), getRuleCall$3$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$9$Consumer extends AssignmentConsumer {
+	protected class Assignment$4$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$9$Consumer(final Assignment assignment) {
+		protected Assignment$4$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$10$Consumer;
+			return ruleCall$5$Consumer;
 		}
 	}
 
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(intConsumer, "intValue", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
+			return consumeTerminal(intConsumer, "intValue", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$11$Consumer extends AssignmentConsumer {
+	protected class Assignment$6$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$11$Consumer(final Assignment assignment) {
+		protected Assignment$6$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$12$Consumer;
+			return ruleCall$7$Consumer;
 		}
 	}
 
-	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "stringValue", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "stringValue", false, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$13$Consumer extends AssignmentConsumer {
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$13$Consumer(final Assignment assignment) {
+		protected Assignment$8$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$14$Consumer;
+			return ruleCall$9$Consumer;
 		}
 	}
 
-	protected class RuleCall$14$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$14$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getElement(), getRuleCall$14$Delimiter(), optional);
+			return consumeTerminal(mlCommentConsumer, "mlCommentValue", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$15$Consumer extends AssignmentConsumer {
+	protected class Assignment$10$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$15$Consumer(final Assignment assignment) {
+		protected Assignment$10$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$16$Consumer;
+			return ruleCall$11$Consumer;
 		}
 	}
 
-	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getElement(), getRuleCall$16$Delimiter(), optional);
+			return consumeTerminal(slCommentConsumer, "slCommentValue", false, false, getElement(), getRuleCall$11$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$17$Consumer extends AssignmentConsumer {
+	protected class Assignment$12$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$17$Consumer(final Assignment assignment) {
+		protected Assignment$12$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$18$Consumer;
+			return ruleCall$13$Consumer;
 		}
 	}
 
-	protected class RuleCall$18$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$18$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(wsConsumer, "wsValue", false, false, getElement(), getRuleCall$18$Delimiter(), optional);
+			return consumeTerminal(wsConsumer, "wsValue", false, false, getElement(), getRuleCall$13$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$19$Consumer extends AssignmentConsumer {
+	protected class Assignment$14$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$19$Consumer(final Assignment assignment) {
+		protected Assignment$14$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$20$Consumer;
+			return ruleCall$15$Consumer;
 		}
 	}
 
-	protected class RuleCall$20$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$20$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getElement(), getRuleCall$20$Delimiter(), optional);
+			return consumeTerminal(anyOtherConsumer, "anyValue", false, false, getElement(), getRuleCall$15$Delimiter(), optional);
 		}
 	}
 
 	public TerminalRulesTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$15$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -290,20 +290,20 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele000000AssignmentIdValue());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000TerminalRuleCallID());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele000001AssignmentIntValue());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0000010TerminalRuleCallINT());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele00001AssignmentStringValue());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele000010TerminalRuleCallSTRING());
-		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele0001AssignmentMlCommentValue());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele00010TerminalRuleCallML_COMMENT());
-		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele001AssignmentSlCommentValue());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele0010TerminalRuleCallSL_COMMENT());
-		assignment$17$Consumer = new Assignment$17$Consumer(rule.ele01AssignmentWsValue());
-		ruleCall$18$Consumer = new RuleCall$18$Consumer(rule.ele010TerminalRuleCallWS());
-		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele1AssignmentAnyValue());
-		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele10TerminalRuleCallANY_OTHER());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentIdValue());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentIntValue());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallINT());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele2AssignmentStringValue());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele20TerminalRuleCallSTRING());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele3AssignmentMlCommentValue());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele30TerminalRuleCallML_COMMENT());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele4AssignmentSlCommentValue());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele40TerminalRuleCallSL_COMMENT());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele5AssignmentWsValue());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele50TerminalRuleCallWS());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele6AssignmentAnyValue());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele60TerminalRuleCallANY_OTHER());
 	}
 	
 	@Override
@@ -344,60 +344,60 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 		this.wsConsumer = wsConsumer;
 	}
 	
-	public ISequenceMatcher getRuleCall$8$Delimiter() {
-		return ruleCall$8$Delimiter;
+	public ISequenceMatcher getRuleCall$7$Delimiter() {
+		return ruleCall$7$Delimiter;
 	}
 	
-	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$10$Delimiter() {
-		return ruleCall$10$Delimiter;
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
 	}
 	
-	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$12$Delimiter() {
-		return ruleCall$12$Delimiter;
+	public ISequenceMatcher getRuleCall$11$Delimiter() {
+		return ruleCall$11$Delimiter;
 	}
 	
-	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$11$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$14$Delimiter() {
-		return ruleCall$14$Delimiter;
+	public ISequenceMatcher getRuleCall$13$Delimiter() {
+		return ruleCall$13$Delimiter;
 	}
 	
-	public void setRuleCall$14$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$13$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$13$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$16$Delimiter() {
-		return ruleCall$16$Delimiter;
+	public ISequenceMatcher getRuleCall$15$Delimiter() {
+		return ruleCall$15$Delimiter;
 	}
 	
-	public void setRuleCall$16$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$16$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$15$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$15$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$18$Delimiter() {
-		return ruleCall$18$Delimiter;
+	public ISequenceMatcher getRuleCall$3$Delimiter() {
+		return ruleCall$3$Delimiter;
 	}
 	
-	public void setRuleCall$18$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$18$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$20$Delimiter() {
-		return ruleCall$20$Delimiter;
+	public ISequenceMatcher getRuleCall$5$Delimiter() {
+		return ruleCall$5$Delimiter;
 	}
 	
-	public void setRuleCall$20$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

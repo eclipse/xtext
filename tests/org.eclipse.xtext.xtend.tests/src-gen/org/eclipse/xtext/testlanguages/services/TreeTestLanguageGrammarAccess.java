@@ -35,21 +35,16 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	public class NodeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Node");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Group c0000Group = (Group)c000Group.eContents().get(0);
-		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
-		private final Assignment c000000AssignmentName = (Assignment)c00000Group.eContents().get(0);
-		private final RuleCall c0000000TerminalRuleCallID = (RuleCall)c000000AssignmentName.eContents().get(0);
-		private final Keyword c000001KeywordLeftParenthesis = (Keyword)c00000Group.eContents().get(1);
-		private final Assignment c00001AssignmentAttrib = (Assignment)c0000Group.eContents().get(1);
-		private final RuleCall c000010TerminalRuleCallSTRING = (RuleCall)c00001AssignmentAttrib.eContents().get(0);
-		private final Keyword c0001KeywordRightParenthesis = (Keyword)c000Group.eContents().get(1);
-		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
-		private final Assignment c01AssignmentChildren = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallNode = (RuleCall)c01AssignmentChildren.eContents().get(0);
-		private final Keyword c1KeywordRightCurlyBracketSemicolon = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final Keyword c1KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c2AssignmentAttrib = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentAttrib.eContents().get(0);
+		private final Keyword c3KeywordRightParenthesis = (Keyword)cGroup.eContents().get(3);
+		private final Keyword c4KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(4);
+		private final Assignment c5AssignmentChildren = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall c50ParserRuleCallNode = (RuleCall)c5AssignmentChildren.eContents().get(0);
+		private final Keyword c6KeywordRightCurlyBracketSemicolon = (Keyword)cGroup.eContents().get(6);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -58,49 +53,34 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public Keyword ele1KeywordLeftParenthesis() { return c1KeywordLeftParenthesis; }
 
 		// not supported
-		public Group ele0000Group() { return c0000Group; }
+		public Assignment ele2AssignmentAttrib() { return c2AssignmentAttrib; }
 
 		// not supported
-		public Group ele00000Group() { return c00000Group; }
+		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
 
 		// not supported
-		public Assignment ele000000AssignmentName() { return c000000AssignmentName; }
+		public Keyword ele3KeywordRightParenthesis() { return c3KeywordRightParenthesis; }
 
 		// not supported
-		public RuleCall ele0000000TerminalRuleCallID() { return c0000000TerminalRuleCallID; }
+		public Keyword ele4KeywordLeftCurlyBracket() { return c4KeywordLeftCurlyBracket; }
 
 		// not supported
-		public Keyword ele000001KeywordLeftParenthesis() { return c000001KeywordLeftParenthesis; }
+		public Assignment ele5AssignmentChildren() { return c5AssignmentChildren; }
 
 		// not supported
-		public Assignment ele00001AssignmentAttrib() { return c00001AssignmentAttrib; }
+		public RuleCall ele50ParserRuleCallNode() { return c50ParserRuleCallNode; }
 
 		// not supported
-		public RuleCall ele000010TerminalRuleCallSTRING() { return c000010TerminalRuleCallSTRING; }
-
-		// not supported
-		public Keyword ele0001KeywordRightParenthesis() { return c0001KeywordRightParenthesis; }
-
-		// not supported
-		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
-
-		// not supported
-		public Assignment ele01AssignmentChildren() { return c01AssignmentChildren; }
-
-		// not supported
-		public RuleCall ele010ParserRuleCallNode() { return c010ParserRuleCallNode; }
-
-		// not supported
-		public Keyword ele1KeywordRightCurlyBracketSemicolon() { return c1KeywordRightCurlyBracketSemicolon; }
+		public Keyword ele6KeywordRightCurlyBracketSemicolon() { return c6KeywordRightCurlyBracketSemicolon; }
 	}
 	
 	private ModelElements pModel;

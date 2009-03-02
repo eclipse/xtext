@@ -29,19 +29,19 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer keyword$3$Consumer;
+	private IElementConsumer keyword$2$Consumer;
 
-	private IElementConsumer ruleCall$4$Consumer;
+	private IElementConsumer ruleCall$3$Consumer;
 
-	private IElementConsumer group$5$Consumer;
+	private IElementConsumer group$4$Consumer;
 
-	private IElementConsumer action$6$Consumer;
+	private IElementConsumer action$5$Consumer;
 
-	private IElementConsumer assignment$8$Consumer;
+	private IElementConsumer assignment$7$Consumer;
 
-	private IElementConsumer ruleCall$9$Consumer;
+	private IElementConsumer ruleCall$8$Consumer;
 
-	private ICharacterClass keyword$3$Delimiter;
+	private ICharacterClass keyword$2$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -51,27 +51,27 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$3$Consumer);
-			acceptor.accept(ruleCall$4$Consumer);
-			acceptor.accept(group$5$Consumer);
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(group$4$Consumer);
 		}
 	}
 
-	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$3$Consumer(final Keyword keyword) {
+		protected Keyword$2$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
-	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -81,22 +81,22 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		}
 	}
 
-	protected class Group$5$Consumer extends OptionalGroupConsumer {
+	protected class Group$4$Consumer extends OptionalGroupConsumer {
 		
-		protected Group$5$Consumer(final Group group) {
+		protected Group$4$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(action$6$Consumer);
-			acceptor.accept(assignment$8$Consumer);
+			acceptor.accept(action$5$Consumer);
+			acceptor.accept(assignment$7$Consumer);
 		}
 	}
 
-	protected class Action$6$Consumer extends ElementConsumer<Action> {
+	protected class Action$5$Consumer extends ElementConsumer<Action> {
 		
-		protected Action$6$Consumer(final Action action) {
+		protected Action$5$Consumer(final Action action) {
 			super(action);
 		}
 		
@@ -107,21 +107,21 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		}
 	}
 
-	protected class Assignment$8$Consumer extends AssignmentConsumer {
+	protected class Assignment$7$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$8$Consumer(final Assignment assignment) {
+		protected Assignment$7$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$9$Consumer;
+			return ruleCall$8$Consumer;
 		}
 	}
 
-	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -133,7 +133,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 
 	public TestLanguageReducibleRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -149,12 +149,12 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordReducible());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallTerminalRule());
-		group$5$Consumer = new Group$5$Consumer(rule.ele1Group());
-		action$6$Consumer = new Action$6$Consumer(rule.ele10ActionReducibleCompositeactionFeature());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele11AssignmentActionFeature());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele110ParserRuleCallTerminalRule());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordReducible());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTerminalRule());
+		group$4$Consumer = new Group$4$Consumer(rule.ele2Group());
+		action$5$Consumer = new Action$5$Consumer(rule.ele20ActionReducibleCompositeactionFeature());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentActionFeature());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallTerminalRule());
 	}
 	
 	@Override
@@ -171,12 +171,12 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 		this.terminalRuleConsumer = terminalRuleConsumer;
 	}
 	
-	public ICharacterClass getKeyword$3$Delimiter() {
-		return keyword$3$Delimiter;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
 	}
 	
-	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
-		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

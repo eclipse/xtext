@@ -20,21 +20,16 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 	public class StatemachineElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statemachine");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Group c0000Group = (Group)c000Group.eContents().get(0);
-		private final Group c00000Group = (Group)c0000Group.eContents().get(0);
-		private final Keyword c000000KeywordEvents = (Keyword)c00000Group.eContents().get(0);
-		private final Assignment c000001AssignmentEvents = (Assignment)c00000Group.eContents().get(1);
-		private final RuleCall c0000010ParserRuleCallEvent = (RuleCall)c000001AssignmentEvents.eContents().get(0);
-		private final Keyword c00001KeywordEnd = (Keyword)c0000Group.eContents().get(1);
-		private final Keyword c0001KeywordCommands = (Keyword)c000Group.eContents().get(1);
-		private final Assignment c001AssignmentCommands = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010ParserRuleCallCommand = (RuleCall)c001AssignmentCommands.eContents().get(0);
-		private final Keyword c01KeywordEnd = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentStates = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallState = (RuleCall)c1AssignmentStates.eContents().get(0);
+		private final Keyword c0KeywordEvents = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentEvents = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10ParserRuleCallEvent = (RuleCall)c1AssignmentEvents.eContents().get(0);
+		private final Keyword c2KeywordEnd = (Keyword)cGroup.eContents().get(2);
+		private final Keyword c3KeywordCommands = (Keyword)cGroup.eContents().get(3);
+		private final Assignment c4AssignmentCommands = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall c40ParserRuleCallCommand = (RuleCall)c4AssignmentCommands.eContents().get(0);
+		private final Keyword c5KeywordEnd = (Keyword)cGroup.eContents().get(5);
+		private final Assignment c6AssignmentStates = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall c60ParserRuleCallState = (RuleCall)c6AssignmentStates.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -43,61 +38,45 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordEvents() { return c0KeywordEvents; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentEvents() { return c1AssignmentEvents; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public RuleCall ele10ParserRuleCallEvent() { return c10ParserRuleCallEvent; }
 
 		// not supported
-		public Group ele0000Group() { return c0000Group; }
+		public Keyword ele2KeywordEnd() { return c2KeywordEnd; }
 
 		// not supported
-		public Group ele00000Group() { return c00000Group; }
+		public Keyword ele3KeywordCommands() { return c3KeywordCommands; }
 
 		// not supported
-		public Keyword ele000000KeywordEvents() { return c000000KeywordEvents; }
+		public Assignment ele4AssignmentCommands() { return c4AssignmentCommands; }
 
 		// not supported
-		public Assignment ele000001AssignmentEvents() { return c000001AssignmentEvents; }
+		public RuleCall ele40ParserRuleCallCommand() { return c40ParserRuleCallCommand; }
 
 		// not supported
-		public RuleCall ele0000010ParserRuleCallEvent() { return c0000010ParserRuleCallEvent; }
+		public Keyword ele5KeywordEnd() { return c5KeywordEnd; }
 
 		// not supported
-		public Keyword ele00001KeywordEnd() { return c00001KeywordEnd; }
+		public Assignment ele6AssignmentStates() { return c6AssignmentStates; }
 
 		// not supported
-		public Keyword ele0001KeywordCommands() { return c0001KeywordCommands; }
-
-		// not supported
-		public Assignment ele001AssignmentCommands() { return c001AssignmentCommands; }
-
-		// not supported
-		public RuleCall ele0010ParserRuleCallCommand() { return c0010ParserRuleCallCommand; }
-
-		// not supported
-		public Keyword ele01KeywordEnd() { return c01KeywordEnd; }
-
-		// not supported
-		public Assignment ele1AssignmentStates() { return c1AssignmentStates; }
-
-		// not supported
-		public RuleCall ele10ParserRuleCallState() { return c10ParserRuleCallState; }
+		public RuleCall ele60ParserRuleCallState() { return c60ParserRuleCallState; }
 	}
 
 	public class EventElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Event");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Assignment c00AssignmentResetting = (Assignment)c0Group.eContents().get(0);
-		private final Keyword c000KeywordResetting = (Keyword)c00AssignmentResetting.eContents().get(0);
-		private final Assignment c01AssignmentName = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallID = (RuleCall)c01AssignmentName.eContents().get(0);
-		private final Assignment c1AssignmentCode = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentCode.eContents().get(0);
+		private final Assignment c0AssignmentResetting = (Assignment)cGroup.eContents().get(0);
+		private final Keyword c00KeywordResetting = (Keyword)c0AssignmentResetting.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Assignment c2AssignmentCode = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentCode.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -106,25 +85,22 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentResetting() { return c0AssignmentResetting; }
 
 		// not supported
-		public Assignment ele00AssignmentResetting() { return c00AssignmentResetting; }
+		public Keyword ele00KeywordResetting() { return c00KeywordResetting; }
 
 		// not supported
-		public Keyword ele000KeywordResetting() { return c000KeywordResetting; }
-
-		// not supported
-		public Assignment ele01AssignmentName() { return c01AssignmentName; }
-
-		// not supported
-		public RuleCall ele010TerminalRuleCallID() { return c010TerminalRuleCallID; }
-
-		// not supported
-		public Assignment ele1AssignmentCode() { return c1AssignmentCode; }
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
 		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+
+		// not supported
+		public Assignment ele2AssignmentCode() { return c2AssignmentCode; }
+
+		// not supported
+		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
 	}
 
 	public class CommandElements implements IParserRuleAccess {
@@ -157,23 +133,18 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 	public class StateElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Keyword c0000KeywordState = (Keyword)c000Group.eContents().get(0);
-		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010TerminalRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
-		private final Group c001Group = (Group)c00Group.eContents().get(1);
-		private final Group c0010Group = (Group)c001Group.eContents().get(0);
-		private final Group c00100Group = (Group)c0010Group.eContents().get(0);
-		private final Keyword c001000KeywordActions = (Keyword)c00100Group.eContents().get(0);
-		private final Keyword c001001KeywordLeftCurlyBracket = (Keyword)c00100Group.eContents().get(1);
-		private final Assignment c00101AssignmentActions = (Assignment)c0010Group.eContents().get(1);
-		private final CrossReference c001010CrossReferenceEStringCommand = (CrossReference)c00101AssignmentActions.eContents().get(0);
-		private final Keyword c0011KeywordRightCurlyBracket = (Keyword)c001Group.eContents().get(1);
-		private final Assignment c01AssignmentTransitions = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallTransition = (RuleCall)c01AssignmentTransitions.eContents().get(0);
-		private final Keyword c1KeywordEnd = (Keyword)cGroup.eContents().get(1);
+		private final Keyword c0KeywordState = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Keyword c20KeywordActions = (Keyword)c2Group.eContents().get(0);
+		private final Keyword c21KeywordLeftCurlyBracket = (Keyword)c2Group.eContents().get(1);
+		private final Assignment c22AssignmentActions = (Assignment)c2Group.eContents().get(2);
+		private final CrossReference c220CrossReferenceEStringCommand = (CrossReference)c22AssignmentActions.eContents().get(0);
+		private final Keyword c23KeywordRightCurlyBracket = (Keyword)c2Group.eContents().get(3);
+		private final Assignment c3AssignmentTransitions = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall c30ParserRuleCallTransition = (RuleCall)c3AssignmentTransitions.eContents().get(0);
+		private final Keyword c4KeywordEnd = (Keyword)cGroup.eContents().get(4);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -182,66 +153,50 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordState() { return c0KeywordState; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
 
 		// not supported
-		public Keyword ele0000KeywordState() { return c0000KeywordState; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
+		public Keyword ele20KeywordActions() { return c20KeywordActions; }
 
 		// not supported
-		public RuleCall ele00010TerminalRuleCallID() { return c00010TerminalRuleCallID; }
+		public Keyword ele21KeywordLeftCurlyBracket() { return c21KeywordLeftCurlyBracket; }
 
 		// not supported
-		public Group ele001Group() { return c001Group; }
+		public Assignment ele22AssignmentActions() { return c22AssignmentActions; }
 
 		// not supported
-		public Group ele0010Group() { return c0010Group; }
+		public CrossReference ele220CrossReferenceEStringCommand() { return c220CrossReferenceEStringCommand; }
 
 		// not supported
-		public Group ele00100Group() { return c00100Group; }
+		public Keyword ele23KeywordRightCurlyBracket() { return c23KeywordRightCurlyBracket; }
 
 		// not supported
-		public Keyword ele001000KeywordActions() { return c001000KeywordActions; }
+		public Assignment ele3AssignmentTransitions() { return c3AssignmentTransitions; }
 
 		// not supported
-		public Keyword ele001001KeywordLeftCurlyBracket() { return c001001KeywordLeftCurlyBracket; }
+		public RuleCall ele30ParserRuleCallTransition() { return c30ParserRuleCallTransition; }
 
 		// not supported
-		public Assignment ele00101AssignmentActions() { return c00101AssignmentActions; }
-
-		// not supported
-		public CrossReference ele001010CrossReferenceEStringCommand() { return c001010CrossReferenceEStringCommand; }
-
-		// not supported
-		public Keyword ele0011KeywordRightCurlyBracket() { return c0011KeywordRightCurlyBracket; }
-
-		// not supported
-		public Assignment ele01AssignmentTransitions() { return c01AssignmentTransitions; }
-
-		// not supported
-		public RuleCall ele010ParserRuleCallTransition() { return c010ParserRuleCallTransition; }
-
-		// not supported
-		public Keyword ele1KeywordEnd() { return c1KeywordEnd; }
+		public Keyword ele4KeywordEnd() { return c4KeywordEnd; }
 	}
 
 	public class TransitionElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Assignment c00AssignmentEvent = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceEStringEvent = (CrossReference)c00AssignmentEvent.eContents().get(0);
-		private final Keyword c01KeywordEqualsSignGreaterThanSign = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentState = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceEStringState = (CrossReference)c1AssignmentState.eContents().get(0);
+		private final Assignment c0AssignmentEvent = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference c00CrossReferenceEStringEvent = (CrossReference)c0AssignmentEvent.eContents().get(0);
+		private final Keyword c1KeywordEqualsSignGreaterThanSign = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c2AssignmentState = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference c20CrossReferenceEStringState = (CrossReference)c2AssignmentState.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -250,22 +205,19 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentEvent() { return c0AssignmentEvent; }
 
 		// not supported
-		public Assignment ele00AssignmentEvent() { return c00AssignmentEvent; }
+		public CrossReference ele00CrossReferenceEStringEvent() { return c00CrossReferenceEStringEvent; }
 
 		// not supported
-		public CrossReference ele000CrossReferenceEStringEvent() { return c000CrossReferenceEStringEvent; }
+		public Keyword ele1KeywordEqualsSignGreaterThanSign() { return c1KeywordEqualsSignGreaterThanSign; }
 
 		// not supported
-		public Keyword ele01KeywordEqualsSignGreaterThanSign() { return c01KeywordEqualsSignGreaterThanSign; }
+		public Assignment ele2AssignmentState() { return c2AssignmentState; }
 
 		// not supported
-		public Assignment ele1AssignmentState() { return c1AssignmentState; }
-
-		// not supported
-		public CrossReference ele10CrossReferenceEStringState() { return c10CrossReferenceEStringState; }
+		public CrossReference ele20CrossReferenceEStringState() { return c20CrossReferenceEStringState; }
 	}
 	
 	private StatemachineElements pStatemachine;

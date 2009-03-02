@@ -80,15 +80,15 @@ ruleStatemachine returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((((('events' 
+('events' 
     {
-        createLeafNode(grammarAccess.prStatemachine().ele000000KeywordEvents(), null); 
+        createLeafNode(grammarAccess.prStatemachine().ele0KeywordEvents(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0000010ParserRuleCallEvent(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele10ParserRuleCallEvent(), currentNode); 
 	    }
 	    lv_events_1=ruleEvent 
 	    {
@@ -105,19 +105,19 @@ ruleStatemachine returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)*)'end' 
+)*'end' 
     {
-        createLeafNode(grammarAccess.prStatemachine().ele00001KeywordEnd(), null); 
+        createLeafNode(grammarAccess.prStatemachine().ele2KeywordEnd(), null); 
     }
-)'commands' 
+'commands' 
     {
-        createLeafNode(grammarAccess.prStatemachine().ele0001KeywordCommands(), null); 
+        createLeafNode(grammarAccess.prStatemachine().ele3KeywordCommands(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele0010ParserRuleCallCommand(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele40ParserRuleCallCommand(), currentNode); 
 	    }
 	    lv_commands_4=ruleCommand 
 	    {
@@ -134,15 +134,15 @@ ruleStatemachine returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)*)'end' 
+)*'end' 
     {
-        createLeafNode(grammarAccess.prStatemachine().ele01KeywordEnd(), null); 
+        createLeafNode(grammarAccess.prStatemachine().ele5KeywordEnd(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele10ParserRuleCallState(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStatemachine().ele60ParserRuleCallState(), currentNode); 
 	    }
 	    lv_states_6=ruleState 
 	    {
@@ -180,11 +180,11 @@ ruleEvent returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((	
+((	
 	
 	    lv_resetting_0='resetting' 
     {
-        createLeafNode(grammarAccess.prEvent().ele000KeywordResetting(), "resetting"); 
+        createLeafNode(grammarAccess.prEvent().ele00KeywordResetting(), "resetting"); 
     }
 
  
@@ -205,7 +205,7 @@ ruleEvent returns [EObject current=null]
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prEvent().ele010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prEvent().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -221,11 +221,11 @@ ruleEvent returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    lv_code_2=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prEvent().ele10TerminalRuleCallID(), "code"); 
+		createLeafNode(grammarAccess.prEvent().ele20TerminalRuleCallID(), "code"); 
 	}
  
 	    {
@@ -323,15 +323,15 @@ ruleState returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((('state' 
+('state' 
     {
-        createLeafNode(grammarAccess.prState().ele0000KeywordState(), null); 
+        createLeafNode(grammarAccess.prState().ele0KeywordState(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prState().ele00010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prState().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -347,15 +347,15 @@ ruleState returns [EObject current=null]
 	        }
 	    }
 	
-))((('actions' 
+)('actions' 
     {
-        createLeafNode(grammarAccess.prState().ele001000KeywordActions(), null); 
+        createLeafNode(grammarAccess.prState().ele20KeywordActions(), null); 
     }
 '{' 
     {
-        createLeafNode(grammarAccess.prState().ele001001KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prState().ele21KeywordLeftCurlyBracket(), null); 
     }
-)(	
+(	
 	
 		
 		{
@@ -366,20 +366,20 @@ ruleState returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prState().ele001010CrossReferenceEStringCommand(), "actions"); 
+		createLeafNode(grammarAccess.prState().ele220CrossReferenceEStringCommand(), "actions"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-)+)'}' 
+)+'}' 
     {
-        createLeafNode(grammarAccess.prState().ele0011KeywordRightCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prState().ele23KeywordRightCurlyBracket(), null); 
     }
-)?)(	
+)?(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prState().ele010ParserRuleCallTransition(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prState().ele30ParserRuleCallTransition(), currentNode); 
 	    }
 	    lv_transitions_6=ruleTransition 
 	    {
@@ -396,9 +396,9 @@ ruleState returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)*)'end' 
+)*'end' 
     {
-        createLeafNode(grammarAccess.prState().ele1KeywordEnd(), null); 
+        createLeafNode(grammarAccess.prState().ele4KeywordEnd(), null); 
     }
 );
 
@@ -421,7 +421,7 @@ ruleTransition returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((	
+((	
 	
 		
 		{
@@ -432,16 +432,16 @@ ruleTransition returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prTransition().ele000CrossReferenceEStringEvent(), "event"); 
+		createLeafNode(grammarAccess.prTransition().ele00CrossReferenceEStringEvent(), "event"); 
 	}
 
 		// TODO assign feature to currentNode
 	
 )'=>' 
     {
-        createLeafNode(grammarAccess.prTransition().ele01KeywordEqualsSignGreaterThanSign(), null); 
+        createLeafNode(grammarAccess.prTransition().ele1KeywordEqualsSignGreaterThanSign(), null); 
     }
-)(	
+(	
 	
 		
 		{
@@ -452,7 +452,7 @@ ruleTransition returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prTransition().ele10CrossReferenceEStringState(), "state"); 
+		createLeafNode(grammarAccess.prTransition().ele20CrossReferenceEStringState(), "state"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -462,17 +462,17 @@ ruleTransition returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

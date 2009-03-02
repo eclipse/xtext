@@ -122,9 +122,9 @@ ruleAlts returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((
+(
     { 
-        currentNode=createCompositeNode(grammarAccess.prAlts().ele00ParserRuleCallLookAhead0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAlts().ele0ParserRuleCallLookAhead0(), currentNode); 
     }
     this_LookAhead0_0=ruleLookAhead0
     { 
@@ -133,12 +133,12 @@ ruleAlts returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAlts().ele00ParserRuleCallLookAhead0(), null); 
+    createLeafNode(grammarAccess.prAlts().ele0ParserRuleCallLookAhead0(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prAlts().ele01ParserRuleCallLookAhead1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead1(), currentNode); 
     }
     this_LookAhead1_1=ruleLookAhead1
     { 
@@ -147,12 +147,12 @@ ruleAlts returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAlts().ele01ParserRuleCallLookAhead1(), null); 
+    createLeafNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead1(), null); 
     }
-)
+
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prAlts().ele2ParserRuleCallLookAhead3(), currentNode); 
     }
     this_LookAhead3_2=ruleLookAhead3
     { 
@@ -161,7 +161,7 @@ ruleAlts returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead3(), null); 
+    createLeafNode(grammarAccess.prAlts().ele2ParserRuleCallLookAhead3(), null); 
     }
 );
 
@@ -230,15 +230,15 @@ ruleLookAhead1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('foo' 
+('foo' 
     {
-        createLeafNode(grammarAccess.prLookAhead1().ele000KeywordFoo(), null); 
+        createLeafNode(grammarAccess.prLookAhead1().ele0KeywordFoo(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prLookAhead1().ele0010ParserRuleCallLookAhead2(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prLookAhead1().ele10ParserRuleCallLookAhead2(), currentNode); 
 	    }
 	    lv_y_1=ruleLookAhead2 
 	    {
@@ -255,11 +255,11 @@ ruleLookAhead1 returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))(	
+)(	
 	
 	    lv_x_2='b' 
     {
-        createLeafNode(grammarAccess.prLookAhead1().ele010KeywordB(), "x"); 
+        createLeafNode(grammarAccess.prLookAhead1().ele20KeywordB(), "x"); 
     }
 
  
@@ -276,11 +276,11 @@ ruleLookAhead1 returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    lv_x_3='d' 
     {
-        createLeafNode(grammarAccess.prLookAhead1().ele10KeywordD(), "x"); 
+        createLeafNode(grammarAccess.prLookAhead1().ele30KeywordD(), "x"); 
     }
 
  
@@ -386,19 +386,19 @@ ruleLookAhead3 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('foo' 
+('foo' 
     {
-        createLeafNode(grammarAccess.prLookAhead3().ele000KeywordFoo(), null); 
+        createLeafNode(grammarAccess.prLookAhead3().ele0KeywordFoo(), null); 
     }
 'bar' 
     {
-        createLeafNode(grammarAccess.prLookAhead3().ele001KeywordBar(), null); 
+        createLeafNode(grammarAccess.prLookAhead3().ele1KeywordBar(), null); 
     }
-)(	
+(	
 	
 	    lv_x_2='b' 
     {
-        createLeafNode(grammarAccess.prLookAhead3().ele010KeywordB(), "x"); 
+        createLeafNode(grammarAccess.prLookAhead3().ele20KeywordB(), "x"); 
     }
 
  
@@ -415,11 +415,11 @@ ruleLookAhead3 returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prLookAhead3().ele10ParserRuleCallLookAhead4(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prLookAhead3().ele30ParserRuleCallLookAhead4(), currentNode); 
 	    }
 	    lv_z_3=ruleLookAhead4 
 	    {
@@ -505,17 +505,17 @@ ruleLookAhead4 returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

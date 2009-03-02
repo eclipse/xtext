@@ -46,73 +46,27 @@ protected class Model_Alternatives extends AlternativesToken {
 		return grammarAccess.prModel().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_1_Assignment_forth(current, this) : new Model_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new Model_0_Assignment_first(current, this);
+			case 1: return new Model_1_Assignment_second(current, this);
+			case 2: return new Model_2_Assignment_third(current, this);
+			case 3: return new Model_3_Assignment_forth(current, this);
+			default: return null;
+		}
 	}
 }
 
 // not supported
-protected class Model_0_Alternatives extends AlternativesToken {
-
-	public Model_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
+protected class Model_0_Assignment_first extends AssignmentToken  {
 	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele0Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_1_Assignment_third(current, this) : new Model_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_Alternatives extends AlternativesToken {
-
-	public Model_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().ele00Alternatives();
-	}
-
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Model_0_0_1_Assignment_second(current, this) : new Model_0_0_0_Assignment_first(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
-	}
-}
-
-// not supported
-protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
-	
-	public Model_0_0_0_Assignment_first(IInstanceDescription curr, AbstractToken pred) {
+	public Model_0_Assignment_first(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele000AssignmentFirst();
+		return grammarAccess.prModel().ele0AssignmentFirst();
 	}
 	
 	@Override
@@ -122,7 +76,7 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele0000KeywordFooBar();
+			element = grammarAccess.prModel().ele00KeywordFooBar();
 			return new Solution(obj);
 		}
 
@@ -131,15 +85,15 @@ protected class Model_0_0_0_Assignment_first extends AssignmentToken  {
 }
 
 // not supported
-protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
+protected class Model_1_Assignment_second extends AssignmentToken  {
 	
-	public Model_0_0_1_Assignment_second(IInstanceDescription curr, AbstractToken pred) {
+	public Model_1_Assignment_second(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele001AssignmentSecond();
+		return grammarAccess.prModel().ele1AssignmentSecond();
 	}
 	
 	@Override
@@ -149,7 +103,7 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele0010KeywordFoo();
+			element = grammarAccess.prModel().ele10KeywordFoo();
 			return new Solution(obj);
 		}
 
@@ -157,17 +111,16 @@ protected class Model_0_0_1_Assignment_second extends AssignmentToken  {
 	}
 }
 
-
 // not supported
-protected class Model_0_1_Assignment_third extends AssignmentToken  {
+protected class Model_2_Assignment_third extends AssignmentToken  {
 	
-	public Model_0_1_Assignment_third(IInstanceDescription curr, AbstractToken pred) {
+	public Model_2_Assignment_third(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele01AssignmentThird();
+		return grammarAccess.prModel().ele2AssignmentThird();
 	}
 	
 	@Override
@@ -177,7 +130,7 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele010KeywordBar();
+			element = grammarAccess.prModel().ele20KeywordBar();
 			return new Solution(obj);
 		}
 
@@ -185,17 +138,16 @@ protected class Model_0_1_Assignment_third extends AssignmentToken  {
 	}
 }
 
-
 // not supported
-protected class Model_1_Assignment_forth extends AssignmentToken  {
+protected class Model_3_Assignment_forth extends AssignmentToken  {
 	
-	public Model_1_Assignment_forth(IInstanceDescription curr, AbstractToken pred) {
+	public Model_3_Assignment_forth(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele1AssignmentForth();
+		return grammarAccess.prModel().ele3AssignmentForth();
 	}
 	
 	@Override
@@ -205,7 +157,7 @@ protected class Model_1_Assignment_forth extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele10KeywordReverseSolidus();
+			element = grammarAccess.prModel().ele30KeywordReverseSolidus();
 			return new Solution(obj);
 		}
 

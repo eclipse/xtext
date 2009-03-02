@@ -75,13 +75,13 @@ public class TerminalRulesTestLanguageParserConfiguration extends AbstractParser
 		getModelConsumer().setStringConsumer(getStringConsumer());
 		getModelConsumer().setWsConsumer(getWsConsumer());
 
-		getModelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$14$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$18$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
-		getModelConsumer().setRuleCall$20$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$11$Delimiter);
+		getModelConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getModelConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getModelConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getModelConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getModelConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getModelConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getModelConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.TerminalRulesTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
     public TerminalRulesTestLanguageModelConsumer getModelConsumer() {

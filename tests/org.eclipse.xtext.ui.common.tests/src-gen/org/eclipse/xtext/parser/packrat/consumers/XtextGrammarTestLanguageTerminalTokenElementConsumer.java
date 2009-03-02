@@ -33,15 +33,15 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private IElementConsumer ruleCall$5$Consumer;
 
 	private IElementConsumer ruleCall$6$Consumer;
-
-	private IElementConsumer ruleCall$7$Consumer;
-
-	private IElementConsumer ruleCall$8$Consumer;
-
-	private IElementConsumer ruleCall$9$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -51,11 +51,47 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
 			acceptor.accept(ruleCall$6$Consumer);
-			acceptor.accept(ruleCall$7$Consumer);
-			acceptor.accept(ruleCall$8$Consumer);
-			acceptor.accept(ruleCall$9$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(characterRangeConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parenthesizedTerminalElementConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -67,49 +103,13 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(characterRangeConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(abstractNegatedTokenConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(parenthesizedTerminalElementConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(abstractNegatedTokenConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -136,11 +136,11 @@ public final class XtextGrammarTestLanguageTerminalTokenElementConsumer extends 
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele0000ParserRuleCallCharacterRange());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0001ParserRuleCallRuleCall());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele001ParserRuleCallParenthesizedTerminalElement());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele01ParserRuleCallAbstractNegatedToken());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1ParserRuleCallWildcard());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallCharacterRange());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallRuleCall());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallParenthesizedTerminalElement());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallAbstractNegatedToken());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele4ParserRuleCallWildcard());
 	}
 	
 	@Override

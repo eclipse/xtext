@@ -156,28 +156,28 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 
 		getAbstractCallExtendedParserRuleConsumer().setExtendableParserRuleConsumer(getExtendableParserRuleConsumer());
 
-		getConcreteParserRuleConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getConcreteParserRuleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$19$Delimiter);
-		getConcreteParserRuleConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$18$Delimiter);
-		getOverridableParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getOverridableParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getOverridableParserRule2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getOverridableParserRule2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$19$Delimiter);
-		getOverridableParserRule2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getOverridableParserRule2Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$18$Delimiter);
-		getSubrule1Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getSubrule1Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getSubrule1Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getSubrule2Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getSubrule2Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getSubrule2Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$18$Delimiter);
-		getSubrule3Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getSubrule3Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getSubrule3Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$18$Delimiter);
-		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getAbstractCallOverridenParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
-		getAbstractCallExtendedParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
+		getConcreteParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getConcreteParserRuleConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$15$Delimiter);
+		getConcreteParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getOverridableParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getOverridableParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getOverridableParserRule2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getOverridableParserRule2Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$15$Delimiter);
+		getOverridableParserRule2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getOverridableParserRule2Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getSubrule1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getSubrule1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getSubrule1Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getSubrule2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getSubrule2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getSubrule2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getSubrule3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getSubrule3Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getSubrule3Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$14$Delimiter);
+		getInheritedParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getInheritedParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.ruleCall$23$Delimiter);
+		getAbstractCallOverridenParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
+		getAbstractCallExtendedParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$12$Delimiter);
 	}
 	
 	public AbstractTestLanguageParserConfiguration getAbstractTestLanguageConfiguration() {

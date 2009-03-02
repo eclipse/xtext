@@ -70,14 +70,12 @@ public class ImportUriTestLanguageGrammarAccess implements IGrammarAccess {
 	public class TypeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Keyword c000KeywordType = (Keyword)c00Group.eContents().get(0);
-		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
-		private final Keyword c01KeywordExtends = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceEStringType = (CrossReference)c1AssignmentExtends.eContents().get(0);
+		private final Keyword c0KeywordType = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Keyword c2KeywordExtends = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentExtends = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference c30CrossReferenceEStringType = (CrossReference)c3AssignmentExtends.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -86,28 +84,22 @@ public class ImportUriTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordType() { return c0KeywordType; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public Keyword ele000KeywordType() { return c000KeywordType; }
+		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
 
 		// not supported
-		public Assignment ele001AssignmentName() { return c001AssignmentName; }
+		public Keyword ele2KeywordExtends() { return c2KeywordExtends; }
 
 		// not supported
-		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
+		public Assignment ele3AssignmentExtends() { return c3AssignmentExtends; }
 
 		// not supported
-		public Keyword ele01KeywordExtends() { return c01KeywordExtends; }
-
-		// not supported
-		public Assignment ele1AssignmentExtends() { return c1AssignmentExtends; }
-
-		// not supported
-		public CrossReference ele10CrossReferenceEStringType() { return c10CrossReferenceEStringType; }
+		public CrossReference ele30CrossReferenceEStringType() { return c30CrossReferenceEStringType; }
 	}
 	
 	private MainElements pMain;

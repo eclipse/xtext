@@ -118,9 +118,6 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="XtextTerminalsTestLanguage.ecore#//Wildcard"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextTerminalsTestLanguage.ecore#//Wildcard/isWildcard"/>
-      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="XtextTerminalsTestLanguage.ecore#//CrossReference"/>

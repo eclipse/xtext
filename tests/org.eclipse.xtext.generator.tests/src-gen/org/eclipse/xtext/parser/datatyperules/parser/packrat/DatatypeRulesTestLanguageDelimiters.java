@@ -12,8 +12,8 @@ public final class DatatypeRulesTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$31$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$27$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

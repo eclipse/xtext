@@ -102,13 +102,13 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 
 		getParensConsumer().setAdditionConsumer(getAdditionConsumer());
 
-		getAdditionConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
-		getAdditionConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
-		getMultiplicationConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
-		getMultiplicationConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
-		getAtomConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.ruleCall$46$Delimiter);
-		getParensConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
-		getParensConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
+		getAdditionConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$19$Delimiter);
+		getAdditionConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$19$Delimiter);
+		getMultiplicationConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$19$Delimiter);
+		getMultiplicationConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$19$Delimiter);
+		getAtomConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.ruleCall$44$Delimiter);
+		getParensConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$19$Delimiter);
+		getParensConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$19$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

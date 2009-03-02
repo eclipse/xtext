@@ -28,30 +28,30 @@ public final class HiddenTerminalsTestLanguageWSConsumer extends AbstractRuleAwa
 	}
 
 	protected boolean doConsumeAlternatives$1() {
+		if (consumeKeyword$2())
+			return true;
+		if (consumeKeyword$3())
+			return true;
 		if (consumeKeyword$4())
 			return true;
 		if (consumeKeyword$5())
 			return true;
-		if (consumeKeyword$6())
-			return true;
-		if (consumeKeyword$7())
-			return true;
 		return false;
 	}
 
-	protected boolean consumeKeyword$4() {
+	protected boolean consumeKeyword$2() {
 		return readChar(' ');
 	}
 
-	protected boolean consumeKeyword$5() {
+	protected boolean consumeKeyword$3() {
 		return readChar('\t');
 	}
 
-	protected boolean consumeKeyword$6() {
+	protected boolean consumeKeyword$4() {
 		return readChar('\r');
 	}
 
-	protected boolean consumeKeyword$7() {
+	protected boolean consumeKeyword$5() {
 		return readChar('\n');
 	}
 	

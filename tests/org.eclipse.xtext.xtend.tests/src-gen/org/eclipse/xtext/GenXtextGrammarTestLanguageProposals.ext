@@ -235,12 +235,6 @@ List[ICompletionProposal] completeUntilToken_Terminal(Assignment assignment, ICo
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeWildcard_IsWildcard(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeWildcard_IsWildcard feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
 List[ICompletionProposal] completeCharacterRange_Right(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeCharacterRange_Right feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"

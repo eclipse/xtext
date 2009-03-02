@@ -12,7 +12,7 @@ public final class LookaheadTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),

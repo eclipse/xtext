@@ -188,15 +188,15 @@ ruleType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('type' 
+('type' 
     {
-        createLeafNode(grammarAccess.prType().ele000KeywordType(), null); 
+        createLeafNode(grammarAccess.prType().ele0KeywordType(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prType().ele0010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prType().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -212,11 +212,11 @@ ruleType returns [EObject current=null]
 	        }
 	    }
 	
-))'extends' 
+)'extends' 
     {
-        createLeafNode(grammarAccess.prType().ele01KeywordExtends(), null); 
+        createLeafNode(grammarAccess.prType().ele2KeywordExtends(), null); 
     }
-)(	
+(	
 	
 		
 		{
@@ -227,7 +227,7 @@ ruleType returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prType().ele10CrossReferenceEStringType(), "extends"); 
+		createLeafNode(grammarAccess.prType().ele30CrossReferenceEStringType(), "extends"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -237,17 +237,17 @@ ruleType returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

@@ -20,72 +20,59 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
-		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final Alternatives c000Alternatives = (Alternatives)c00Alternatives.eContents().get(0);
-		private final Alternatives c0000Alternatives = (Alternatives)c000Alternatives.eContents().get(0);
-		private final Alternatives c00000Alternatives = (Alternatives)c0000Alternatives.eContents().get(0);
-		private final Alternatives c000000Alternatives = (Alternatives)c00000Alternatives.eContents().get(0);
-		private final Alternatives c0000000Alternatives = (Alternatives)c000000Alternatives.eContents().get(0);
-		private final Group c00000000Group = (Group)c0000000Alternatives.eContents().get(0);
-		private final Keyword c000000000KeywordDigitOne = (Keyword)c00000000Group.eContents().get(0);
-		private final Assignment c000000001AssignmentValue = (Assignment)c00000000Group.eContents().get(1);
-		private final Alternatives c0000000010Alternatives = (Alternatives)c000000001AssignmentValue.eContents().get(0);
-		private final Alternatives c00000000100Alternatives = (Alternatives)c0000000010Alternatives.eContents().get(0);
-		private final Alternatives c000000001000Alternatives = (Alternatives)c00000000100Alternatives.eContents().get(0);
-		private final Alternatives c0000000010000Alternatives = (Alternatives)c000000001000Alternatives.eContents().get(0);
-		private final Keyword c00000000100000KeywordMykeyword1 = (Keyword)c0000000010000Alternatives.eContents().get(0);
-		private final RuleCall c00000000100001TerminalRuleCallSTRING = (RuleCall)c0000000010000Alternatives.eContents().get(1);
-		private final RuleCall c0000000010001ParserRuleCallNestedDatatype = (RuleCall)c000000001000Alternatives.eContents().get(1);
-		private final RuleCall c000000001001ParserRuleCallDatatype = (RuleCall)c00000000100Alternatives.eContents().get(1);
-		private final RuleCall c00000000101TerminalRuleCallID = (RuleCall)c0000000010Alternatives.eContents().get(1);
-		private final Group c00000001Group = (Group)c0000000Alternatives.eContents().get(1);
-		private final Keyword c000000010KeywordDigitOnePlusSign = (Keyword)c00000001Group.eContents().get(0);
-		private final Assignment c000000011AssignmentMultiValue = (Assignment)c00000001Group.eContents().get(1);
-		private final Alternatives c0000000110Alternatives = (Alternatives)c000000011AssignmentMultiValue.eContents().get(0);
-		private final Alternatives c00000001100Alternatives = (Alternatives)c0000000110Alternatives.eContents().get(0);
-		private final Alternatives c000000011000Alternatives = (Alternatives)c00000001100Alternatives.eContents().get(0);
-		private final Alternatives c0000000110000Alternatives = (Alternatives)c000000011000Alternatives.eContents().get(0);
-		private final Keyword c00000001100000KeywordMykeyword1 = (Keyword)c0000000110000Alternatives.eContents().get(0);
-		private final RuleCall c00000001100001TerminalRuleCallSTRING = (RuleCall)c0000000110000Alternatives.eContents().get(1);
-		private final RuleCall c0000000110001ParserRuleCallNestedDatatype = (RuleCall)c000000011000Alternatives.eContents().get(1);
-		private final RuleCall c000000011001ParserRuleCallDatatype = (RuleCall)c00000001100Alternatives.eContents().get(1);
-		private final RuleCall c00000001101TerminalRuleCallID = (RuleCall)c0000000110Alternatives.eContents().get(1);
-		private final Group c0000001Group = (Group)c000000Alternatives.eContents().get(1);
-		private final Keyword c00000010KeywordDigitTwo = (Keyword)c0000001Group.eContents().get(0);
-		private final Assignment c00000011AssignmentValue = (Assignment)c0000001Group.eContents().get(1);
-		private final RuleCall c000000110TerminalRuleCallSTRING = (RuleCall)c00000011AssignmentValue.eContents().get(0);
-		private final Group c000001Group = (Group)c00000Alternatives.eContents().get(1);
-		private final Keyword c0000010KeywordDigitTwoPlusSign = (Keyword)c000001Group.eContents().get(0);
-		private final Assignment c0000011AssignmentMultiValue = (Assignment)c000001Group.eContents().get(1);
-		private final RuleCall c00000110TerminalRuleCallSTRING = (RuleCall)c0000011AssignmentMultiValue.eContents().get(0);
-		private final Group c00001Group = (Group)c0000Alternatives.eContents().get(1);
-		private final Keyword c000010KeywordDigitThree = (Keyword)c00001Group.eContents().get(0);
-		private final Assignment c000011AssignmentValue = (Assignment)c00001Group.eContents().get(1);
-		private final RuleCall c0000110ParserRuleCallDatatype = (RuleCall)c000011AssignmentValue.eContents().get(0);
-		private final Group c0001Group = (Group)c000Alternatives.eContents().get(1);
-		private final Keyword c00010KeywordDigitThreePlusSign = (Keyword)c0001Group.eContents().get(0);
-		private final Assignment c00011AssignmentMultiValue = (Assignment)c0001Group.eContents().get(1);
-		private final RuleCall c000110ParserRuleCallDatatype = (RuleCall)c00011AssignmentMultiValue.eContents().get(0);
-		private final Group c001Group = (Group)c00Alternatives.eContents().get(1);
-		private final Keyword c0010KeywordDigitFour = (Keyword)c001Group.eContents().get(0);
-		private final Assignment c0011AssignmentValue = (Assignment)c001Group.eContents().get(1);
-		private final RuleCall c00110ParserRuleCallNestedDatatype = (RuleCall)c0011AssignmentValue.eContents().get(0);
-		private final Group c01Group = (Group)c0Alternatives.eContents().get(1);
-		private final Keyword c010KeywordDigitFourPlusSign = (Keyword)c01Group.eContents().get(0);
-		private final Assignment c011AssignmentMultiValue = (Assignment)c01Group.eContents().get(1);
-		private final RuleCall c0110ParserRuleCallNestedDatatype = (RuleCall)c011AssignmentMultiValue.eContents().get(0);
+		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
+		private final Keyword c00KeywordDigitOne = (Keyword)c0Group.eContents().get(0);
+		private final Assignment c01AssignmentValue = (Assignment)c0Group.eContents().get(1);
+		private final Alternatives c010Alternatives = (Alternatives)c01AssignmentValue.eContents().get(0);
+		private final Keyword c0100KeywordMykeyword1 = (Keyword)c010Alternatives.eContents().get(0);
+		private final RuleCall c0101TerminalRuleCallSTRING = (RuleCall)c010Alternatives.eContents().get(1);
+		private final RuleCall c0102ParserRuleCallNestedDatatype = (RuleCall)c010Alternatives.eContents().get(2);
+		private final RuleCall c0103ParserRuleCallDatatype = (RuleCall)c010Alternatives.eContents().get(3);
+		private final RuleCall c0104TerminalRuleCallID = (RuleCall)c010Alternatives.eContents().get(4);
 		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
-		private final Group c10Group = (Group)c1Group.eContents().get(0);
-		private final Keyword c100KeywordContent = (Keyword)c10Group.eContents().get(0);
-		private final Assignment c101AssignmentChildren = (Assignment)c10Group.eContents().get(1);
-		private final RuleCall c1010ParserRuleCallChild = (RuleCall)c101AssignmentChildren.eContents().get(0);
-		private final Group c11Group = (Group)c1Group.eContents().get(1);
-		private final Keyword c110KeywordRef = (Keyword)c11Group.eContents().get(0);
-		private final Assignment c111AssignmentRef = (Assignment)c11Group.eContents().get(1);
-		private final Alternatives c1110Alternatives = (Alternatives)c111AssignmentRef.eContents().get(0);
-		private final CrossReference c11100CrossReferenceEStringChild1 = (CrossReference)c1110Alternatives.eContents().get(0);
-		private final CrossReference c11101CrossReferenceEStringChild2 = (CrossReference)c1110Alternatives.eContents().get(1);
+		private final Keyword c10KeywordDigitOnePlusSign = (Keyword)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentMultiValue = (Assignment)c1Group.eContents().get(1);
+		private final Alternatives c110Alternatives = (Alternatives)c11AssignmentMultiValue.eContents().get(0);
+		private final Keyword c1100KeywordMykeyword1 = (Keyword)c110Alternatives.eContents().get(0);
+		private final RuleCall c1101TerminalRuleCallSTRING = (RuleCall)c110Alternatives.eContents().get(1);
+		private final RuleCall c1102ParserRuleCallNestedDatatype = (RuleCall)c110Alternatives.eContents().get(2);
+		private final RuleCall c1103ParserRuleCallDatatype = (RuleCall)c110Alternatives.eContents().get(3);
+		private final RuleCall c1104TerminalRuleCallID = (RuleCall)c110Alternatives.eContents().get(4);
+		private final Group c2Group = (Group)cAlternatives.eContents().get(2);
+		private final Keyword c20KeywordDigitTwo = (Keyword)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentValue = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210TerminalRuleCallSTRING = (RuleCall)c21AssignmentValue.eContents().get(0);
+		private final Group c3Group = (Group)cAlternatives.eContents().get(3);
+		private final Keyword c30KeywordDigitTwoPlusSign = (Keyword)c3Group.eContents().get(0);
+		private final Assignment c31AssignmentMultiValue = (Assignment)c3Group.eContents().get(1);
+		private final RuleCall c310TerminalRuleCallSTRING = (RuleCall)c31AssignmentMultiValue.eContents().get(0);
+		private final Group c4Group = (Group)cAlternatives.eContents().get(4);
+		private final Keyword c40KeywordDigitThree = (Keyword)c4Group.eContents().get(0);
+		private final Assignment c41AssignmentValue = (Assignment)c4Group.eContents().get(1);
+		private final RuleCall c410ParserRuleCallDatatype = (RuleCall)c41AssignmentValue.eContents().get(0);
+		private final Group c5Group = (Group)cAlternatives.eContents().get(5);
+		private final Keyword c50KeywordDigitThreePlusSign = (Keyword)c5Group.eContents().get(0);
+		private final Assignment c51AssignmentMultiValue = (Assignment)c5Group.eContents().get(1);
+		private final RuleCall c510ParserRuleCallDatatype = (RuleCall)c51AssignmentMultiValue.eContents().get(0);
+		private final Group c6Group = (Group)cAlternatives.eContents().get(6);
+		private final Keyword c60KeywordDigitFour = (Keyword)c6Group.eContents().get(0);
+		private final Assignment c61AssignmentValue = (Assignment)c6Group.eContents().get(1);
+		private final RuleCall c610ParserRuleCallNestedDatatype = (RuleCall)c61AssignmentValue.eContents().get(0);
+		private final Group c7Group = (Group)cAlternatives.eContents().get(7);
+		private final Keyword c70KeywordDigitFourPlusSign = (Keyword)c7Group.eContents().get(0);
+		private final Assignment c71AssignmentMultiValue = (Assignment)c7Group.eContents().get(1);
+		private final RuleCall c710ParserRuleCallNestedDatatype = (RuleCall)c71AssignmentMultiValue.eContents().get(0);
+		private final Group c8Group = (Group)cAlternatives.eContents().get(8);
+		private final Group c80Group = (Group)c8Group.eContents().get(0);
+		private final Keyword c800KeywordContent = (Keyword)c80Group.eContents().get(0);
+		private final Assignment c801AssignmentChildren = (Assignment)c80Group.eContents().get(1);
+		private final RuleCall c8010ParserRuleCallChild = (RuleCall)c801AssignmentChildren.eContents().get(0);
+		private final Group c81Group = (Group)c8Group.eContents().get(1);
+		private final Keyword c810KeywordRef = (Keyword)c81Group.eContents().get(0);
+		private final Assignment c811AssignmentRef = (Assignment)c81Group.eContents().get(1);
+		private final Alternatives c8110Alternatives = (Alternatives)c811AssignmentRef.eContents().get(0);
+		private final CrossReference c81100CrossReferenceEStringChild1 = (CrossReference)c8110Alternatives.eContents().get(0);
+		private final CrossReference c81101CrossReferenceEStringChild2 = (CrossReference)c8110Alternatives.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -94,211 +81,171 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
+		public Group ele0Group() { return c0Group; }
 
 		// not supported
-		public Alternatives ele00Alternatives() { return c00Alternatives; }
+		public Keyword ele00KeywordDigitOne() { return c00KeywordDigitOne; }
 
 		// not supported
-		public Alternatives ele000Alternatives() { return c000Alternatives; }
+		public Assignment ele01AssignmentValue() { return c01AssignmentValue; }
 
 		// not supported
-		public Alternatives ele0000Alternatives() { return c0000Alternatives; }
+		public Alternatives ele010Alternatives() { return c010Alternatives; }
 
 		// not supported
-		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
+		public Keyword ele0100KeywordMykeyword1() { return c0100KeywordMykeyword1; }
 
 		// not supported
-		public Alternatives ele000000Alternatives() { return c000000Alternatives; }
+		public RuleCall ele0101TerminalRuleCallSTRING() { return c0101TerminalRuleCallSTRING; }
 
 		// not supported
-		public Alternatives ele0000000Alternatives() { return c0000000Alternatives; }
+		public RuleCall ele0102ParserRuleCallNestedDatatype() { return c0102ParserRuleCallNestedDatatype; }
 
 		// not supported
-		public Group ele00000000Group() { return c00000000Group; }
+		public RuleCall ele0103ParserRuleCallDatatype() { return c0103ParserRuleCallDatatype; }
 
 		// not supported
-		public Keyword ele000000000KeywordDigitOne() { return c000000000KeywordDigitOne; }
-
-		// not supported
-		public Assignment ele000000001AssignmentValue() { return c000000001AssignmentValue; }
-
-		// not supported
-		public Alternatives ele0000000010Alternatives() { return c0000000010Alternatives; }
-
-		// not supported
-		public Alternatives ele00000000100Alternatives() { return c00000000100Alternatives; }
-
-		// not supported
-		public Alternatives ele000000001000Alternatives() { return c000000001000Alternatives; }
-
-		// not supported
-		public Alternatives ele0000000010000Alternatives() { return c0000000010000Alternatives; }
-
-		// not supported
-		public Keyword ele00000000100000KeywordMykeyword1() { return c00000000100000KeywordMykeyword1; }
-
-		// not supported
-		public RuleCall ele00000000100001TerminalRuleCallSTRING() { return c00000000100001TerminalRuleCallSTRING; }
-
-		// not supported
-		public RuleCall ele0000000010001ParserRuleCallNestedDatatype() { return c0000000010001ParserRuleCallNestedDatatype; }
-
-		// not supported
-		public RuleCall ele000000001001ParserRuleCallDatatype() { return c000000001001ParserRuleCallDatatype; }
-
-		// not supported
-		public RuleCall ele00000000101TerminalRuleCallID() { return c00000000101TerminalRuleCallID; }
-
-		// not supported
-		public Group ele00000001Group() { return c00000001Group; }
-
-		// not supported
-		public Keyword ele000000010KeywordDigitOnePlusSign() { return c000000010KeywordDigitOnePlusSign; }
-
-		// not supported
-		public Assignment ele000000011AssignmentMultiValue() { return c000000011AssignmentMultiValue; }
-
-		// not supported
-		public Alternatives ele0000000110Alternatives() { return c0000000110Alternatives; }
-
-		// not supported
-		public Alternatives ele00000001100Alternatives() { return c00000001100Alternatives; }
-
-		// not supported
-		public Alternatives ele000000011000Alternatives() { return c000000011000Alternatives; }
-
-		// not supported
-		public Alternatives ele0000000110000Alternatives() { return c0000000110000Alternatives; }
-
-		// not supported
-		public Keyword ele00000001100000KeywordMykeyword1() { return c00000001100000KeywordMykeyword1; }
-
-		// not supported
-		public RuleCall ele00000001100001TerminalRuleCallSTRING() { return c00000001100001TerminalRuleCallSTRING; }
-
-		// not supported
-		public RuleCall ele0000000110001ParserRuleCallNestedDatatype() { return c0000000110001ParserRuleCallNestedDatatype; }
-
-		// not supported
-		public RuleCall ele000000011001ParserRuleCallDatatype() { return c000000011001ParserRuleCallDatatype; }
-
-		// not supported
-		public RuleCall ele00000001101TerminalRuleCallID() { return c00000001101TerminalRuleCallID; }
-
-		// not supported
-		public Group ele0000001Group() { return c0000001Group; }
-
-		// not supported
-		public Keyword ele00000010KeywordDigitTwo() { return c00000010KeywordDigitTwo; }
-
-		// not supported
-		public Assignment ele00000011AssignmentValue() { return c00000011AssignmentValue; }
-
-		// not supported
-		public RuleCall ele000000110TerminalRuleCallSTRING() { return c000000110TerminalRuleCallSTRING; }
-
-		// not supported
-		public Group ele000001Group() { return c000001Group; }
-
-		// not supported
-		public Keyword ele0000010KeywordDigitTwoPlusSign() { return c0000010KeywordDigitTwoPlusSign; }
-
-		// not supported
-		public Assignment ele0000011AssignmentMultiValue() { return c0000011AssignmentMultiValue; }
-
-		// not supported
-		public RuleCall ele00000110TerminalRuleCallSTRING() { return c00000110TerminalRuleCallSTRING; }
-
-		// not supported
-		public Group ele00001Group() { return c00001Group; }
-
-		// not supported
-		public Keyword ele000010KeywordDigitThree() { return c000010KeywordDigitThree; }
-
-		// not supported
-		public Assignment ele000011AssignmentValue() { return c000011AssignmentValue; }
-
-		// not supported
-		public RuleCall ele0000110ParserRuleCallDatatype() { return c0000110ParserRuleCallDatatype; }
-
-		// not supported
-		public Group ele0001Group() { return c0001Group; }
-
-		// not supported
-		public Keyword ele00010KeywordDigitThreePlusSign() { return c00010KeywordDigitThreePlusSign; }
-
-		// not supported
-		public Assignment ele00011AssignmentMultiValue() { return c00011AssignmentMultiValue; }
-
-		// not supported
-		public RuleCall ele000110ParserRuleCallDatatype() { return c000110ParserRuleCallDatatype; }
-
-		// not supported
-		public Group ele001Group() { return c001Group; }
-
-		// not supported
-		public Keyword ele0010KeywordDigitFour() { return c0010KeywordDigitFour; }
-
-		// not supported
-		public Assignment ele0011AssignmentValue() { return c0011AssignmentValue; }
-
-		// not supported
-		public RuleCall ele00110ParserRuleCallNestedDatatype() { return c00110ParserRuleCallNestedDatatype; }
-
-		// not supported
-		public Group ele01Group() { return c01Group; }
-
-		// not supported
-		public Keyword ele010KeywordDigitFourPlusSign() { return c010KeywordDigitFourPlusSign; }
-
-		// not supported
-		public Assignment ele011AssignmentMultiValue() { return c011AssignmentMultiValue; }
-
-		// not supported
-		public RuleCall ele0110ParserRuleCallNestedDatatype() { return c0110ParserRuleCallNestedDatatype; }
+		public RuleCall ele0104TerminalRuleCallID() { return c0104TerminalRuleCallID; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
 
 		// not supported
-		public Group ele10Group() { return c10Group; }
+		public Keyword ele10KeywordDigitOnePlusSign() { return c10KeywordDigitOnePlusSign; }
 
 		// not supported
-		public Keyword ele100KeywordContent() { return c100KeywordContent; }
+		public Assignment ele11AssignmentMultiValue() { return c11AssignmentMultiValue; }
 
 		// not supported
-		public Assignment ele101AssignmentChildren() { return c101AssignmentChildren; }
+		public Alternatives ele110Alternatives() { return c110Alternatives; }
 
 		// not supported
-		public RuleCall ele1010ParserRuleCallChild() { return c1010ParserRuleCallChild; }
+		public Keyword ele1100KeywordMykeyword1() { return c1100KeywordMykeyword1; }
 
 		// not supported
-		public Group ele11Group() { return c11Group; }
+		public RuleCall ele1101TerminalRuleCallSTRING() { return c1101TerminalRuleCallSTRING; }
 
 		// not supported
-		public Keyword ele110KeywordRef() { return c110KeywordRef; }
+		public RuleCall ele1102ParserRuleCallNestedDatatype() { return c1102ParserRuleCallNestedDatatype; }
 
 		// not supported
-		public Assignment ele111AssignmentRef() { return c111AssignmentRef; }
+		public RuleCall ele1103ParserRuleCallDatatype() { return c1103ParserRuleCallDatatype; }
 
 		// not supported
-		public Alternatives ele1110Alternatives() { return c1110Alternatives; }
+		public RuleCall ele1104TerminalRuleCallID() { return c1104TerminalRuleCallID; }
 
 		// not supported
-		public CrossReference ele11100CrossReferenceEStringChild1() { return c11100CrossReferenceEStringChild1; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public CrossReference ele11101CrossReferenceEStringChild2() { return c11101CrossReferenceEStringChild2; }
+		public Keyword ele20KeywordDigitTwo() { return c20KeywordDigitTwo; }
+
+		// not supported
+		public Assignment ele21AssignmentValue() { return c21AssignmentValue; }
+
+		// not supported
+		public RuleCall ele210TerminalRuleCallSTRING() { return c210TerminalRuleCallSTRING; }
+
+		// not supported
+		public Group ele3Group() { return c3Group; }
+
+		// not supported
+		public Keyword ele30KeywordDigitTwoPlusSign() { return c30KeywordDigitTwoPlusSign; }
+
+		// not supported
+		public Assignment ele31AssignmentMultiValue() { return c31AssignmentMultiValue; }
+
+		// not supported
+		public RuleCall ele310TerminalRuleCallSTRING() { return c310TerminalRuleCallSTRING; }
+
+		// not supported
+		public Group ele4Group() { return c4Group; }
+
+		// not supported
+		public Keyword ele40KeywordDigitThree() { return c40KeywordDigitThree; }
+
+		// not supported
+		public Assignment ele41AssignmentValue() { return c41AssignmentValue; }
+
+		// not supported
+		public RuleCall ele410ParserRuleCallDatatype() { return c410ParserRuleCallDatatype; }
+
+		// not supported
+		public Group ele5Group() { return c5Group; }
+
+		// not supported
+		public Keyword ele50KeywordDigitThreePlusSign() { return c50KeywordDigitThreePlusSign; }
+
+		// not supported
+		public Assignment ele51AssignmentMultiValue() { return c51AssignmentMultiValue; }
+
+		// not supported
+		public RuleCall ele510ParserRuleCallDatatype() { return c510ParserRuleCallDatatype; }
+
+		// not supported
+		public Group ele6Group() { return c6Group; }
+
+		// not supported
+		public Keyword ele60KeywordDigitFour() { return c60KeywordDigitFour; }
+
+		// not supported
+		public Assignment ele61AssignmentValue() { return c61AssignmentValue; }
+
+		// not supported
+		public RuleCall ele610ParserRuleCallNestedDatatype() { return c610ParserRuleCallNestedDatatype; }
+
+		// not supported
+		public Group ele7Group() { return c7Group; }
+
+		// not supported
+		public Keyword ele70KeywordDigitFourPlusSign() { return c70KeywordDigitFourPlusSign; }
+
+		// not supported
+		public Assignment ele71AssignmentMultiValue() { return c71AssignmentMultiValue; }
+
+		// not supported
+		public RuleCall ele710ParserRuleCallNestedDatatype() { return c710ParserRuleCallNestedDatatype; }
+
+		// not supported
+		public Group ele8Group() { return c8Group; }
+
+		// not supported
+		public Group ele80Group() { return c80Group; }
+
+		// not supported
+		public Keyword ele800KeywordContent() { return c800KeywordContent; }
+
+		// not supported
+		public Assignment ele801AssignmentChildren() { return c801AssignmentChildren; }
+
+		// not supported
+		public RuleCall ele8010ParserRuleCallChild() { return c8010ParserRuleCallChild; }
+
+		// not supported
+		public Group ele81Group() { return c81Group; }
+
+		// not supported
+		public Keyword ele810KeywordRef() { return c810KeywordRef; }
+
+		// not supported
+		public Assignment ele811AssignmentRef() { return c811AssignmentRef; }
+
+		// not supported
+		public Alternatives ele8110Alternatives() { return c8110Alternatives; }
+
+		// not supported
+		public CrossReference ele81100CrossReferenceEStringChild1() { return c81100CrossReferenceEStringChild1; }
+
+		// not supported
+		public CrossReference ele81101CrossReferenceEStringChild2() { return c81101CrossReferenceEStringChild2; }
 	}
 
 	public class DatatypeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0Group.eContents().get(0);
-		private final Keyword c01KeywordHyphenMinus = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1TerminalRuleCallID = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c0TerminalRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword c1KeywordHyphenMinus = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall c2TerminalRuleCallID = (RuleCall)cGroup.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -307,25 +254,21 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
 
 		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		public Keyword ele1KeywordHyphenMinus() { return c1KeywordHyphenMinus; }
 
 		// not supported
-		public Keyword ele01KeywordHyphenMinus() { return c01KeywordHyphenMinus; }
-
-		// not supported
-		public RuleCall ele1TerminalRuleCallID() { return c1TerminalRuleCallID; }
+		public RuleCall ele2TerminalRuleCallID() { return c2TerminalRuleCallID; }
 	}
 
 	public class NestedDatatypeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedDatatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0Group.eContents().get(0);
-		private final Keyword c01KeywordPlusSign = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1ParserRuleCallDatatype = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c0TerminalRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword c1KeywordPlusSign = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall c2ParserRuleCallDatatype = (RuleCall)cGroup.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -334,16 +277,13 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
 
 		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		public Keyword ele1KeywordPlusSign() { return c1KeywordPlusSign; }
 
 		// not supported
-		public Keyword ele01KeywordPlusSign() { return c01KeywordPlusSign; }
-
-		// not supported
-		public RuleCall ele1ParserRuleCallDatatype() { return c1ParserRuleCallDatatype; }
+		public RuleCall ele2ParserRuleCallDatatype() { return c2ParserRuleCallDatatype; }
 	}
 
 	public class ChildElements implements IParserRuleAccess {

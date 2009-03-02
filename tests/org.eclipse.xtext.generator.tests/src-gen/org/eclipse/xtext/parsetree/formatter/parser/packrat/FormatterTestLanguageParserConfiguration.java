@@ -88,13 +88,13 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		getTestIndentationConsumer().setTestIndentationConsumer(getTestIndentationConsumer());
 
 		getRootConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getLineConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
-		getLineConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$13$Delimiter);
-		getLineConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$13$Delimiter);
+		getLineConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
+		getLineConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$12$Delimiter);
+		getLineConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.ruleCall$12$Delimiter);
 		getTestLinewrapConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getTestIndentationConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
-		getTestIndentationConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
-		getTestIndentationConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
+		getTestIndentationConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$4$Delimiter);
+		getTestIndentationConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
+		getTestIndentationConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$15$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

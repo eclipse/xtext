@@ -54,12 +54,11 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 	public class ChoiceRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ChoiceRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordChoice = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentOptionalKeyword = (Assignment)c0Group.eContents().get(1);
-		private final Keyword c010KeywordOptional = (Keyword)c01AssignmentOptionalKeyword.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Keyword c0KeywordChoice = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentOptionalKeyword = (Assignment)cGroup.eContents().get(1);
+		private final Keyword c10KeywordOptional = (Keyword)c1AssignmentOptionalKeyword.eContents().get(0);
+		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -68,34 +67,30 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordChoice() { return c0KeywordChoice; }
 
 		// not supported
-		public Keyword ele00KeywordChoice() { return c00KeywordChoice; }
+		public Assignment ele1AssignmentOptionalKeyword() { return c1AssignmentOptionalKeyword; }
 
 		// not supported
-		public Assignment ele01AssignmentOptionalKeyword() { return c01AssignmentOptionalKeyword; }
+		public Keyword ele10KeywordOptional() { return c10KeywordOptional; }
 
 		// not supported
-		public Keyword ele010KeywordOptional() { return c010KeywordOptional; }
+		public Assignment ele2AssignmentName() { return c2AssignmentName; }
 
 		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
-
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
 	}
 
 	public class ReducibleRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReducibleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordReducible = (Keyword)c0Group.eContents().get(0);
-		private final RuleCall c01ParserRuleCallTerminalRule = (RuleCall)c0Group.eContents().get(1);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Action c10ActionReducibleCompositeactionFeature = (Action)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentActionFeature = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallTerminalRule = (RuleCall)c11AssignmentActionFeature.eContents().get(0);
+		private final Keyword c0KeywordReducible = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall c1ParserRuleCallTerminalRule = (RuleCall)cGroup.eContents().get(1);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Action c20ActionReducibleCompositeactionFeature = (Action)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentActionFeature = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210ParserRuleCallTerminalRule = (RuleCall)c21AssignmentActionFeature.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -104,25 +99,22 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordReducible() { return c0KeywordReducible; }
 
 		// not supported
-		public Keyword ele00KeywordReducible() { return c00KeywordReducible; }
+		public RuleCall ele1ParserRuleCallTerminalRule() { return c1ParserRuleCallTerminalRule; }
 
 		// not supported
-		public RuleCall ele01ParserRuleCallTerminalRule() { return c01ParserRuleCallTerminalRule; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public Group ele1Group() { return c1Group; }
+		public Action ele20ActionReducibleCompositeactionFeature() { return c20ActionReducibleCompositeactionFeature; }
 
 		// not supported
-		public Action ele10ActionReducibleCompositeactionFeature() { return c10ActionReducibleCompositeactionFeature; }
+		public Assignment ele21AssignmentActionFeature() { return c21AssignmentActionFeature; }
 
 		// not supported
-		public Assignment ele11AssignmentActionFeature() { return c11AssignmentActionFeature; }
-
-		// not supported
-		public RuleCall ele110ParserRuleCallTerminalRule() { return c110ParserRuleCallTerminalRule; }
+		public RuleCall ele210ParserRuleCallTerminalRule() { return c210ParserRuleCallTerminalRule; }
 	}
 
 	public class TerminalRuleElements implements IParserRuleAccess {

@@ -21,33 +21,33 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 
 	protected boolean consumeGroup$1() {
 		final int marker = mark();
-		if (!consumeKeyword$3()) {
+		if (!consumeKeyword$2()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeNegatedToken$4()) {
+		if (!consumeNegatedToken$3()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeGroup$8()) {
+		if (!consumeGroup$7()) {
 			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$3() {
+	protected boolean consumeKeyword$2() {
 		return readString("//");
 	}
 
-	protected boolean consumeNegatedToken$4() {
-		while(doConsumeNegatedToken$4()) {}
+	protected boolean consumeNegatedToken$3() {
+		while(doConsumeNegatedToken$3()) {}
 		return true;
 	}
 
-	protected boolean doConsumeNegatedToken$4() {
+	protected boolean doConsumeNegatedToken$3() {
 		final int marker = mark();
-		if (!eof() && !consumeAlternatives$5()) {
+		if (!eof() && !consumeAlternatives$4()) {
 			incOffset();
 			return true;
 		}
@@ -55,50 +55,50 @@ public final class XtextTerminalsTestLanguageSL_COMMENTConsumer extends Abstract
 		return false;
 	}
 
-	protected boolean consumeAlternatives$5() {
-		if (consumeKeyword$6())
+	protected boolean consumeAlternatives$4() {
+		if (consumeKeyword$5())
 			return true;
-		if (consumeKeyword$7())
+		if (consumeKeyword$6())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeKeyword$6() {
+	protected boolean consumeKeyword$5() {
 		return readChar('\n');
 	}
 
-	protected boolean consumeKeyword$7() {
+	protected boolean consumeKeyword$6() {
 		return readChar('\r');
 	}
 
-	protected boolean consumeGroup$8() {
-		doConsumeGroup$8();
+	protected boolean consumeGroup$7() {
+		doConsumeGroup$7();
 		return true;
 	}
 
-	protected boolean doConsumeGroup$8() {
+	protected boolean doConsumeGroup$7() {
 		final int marker = mark();
+		if (!consumeKeyword$8()) {
+			rollbackTo(marker);
+			return false;
+		}
 		if (!consumeKeyword$9()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeKeyword$10()) {
-			rollbackTo(marker);
-			return false;
-		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$9() {
-		doConsumeKeyword$9();
+	protected boolean consumeKeyword$8() {
+		doConsumeKeyword$8();
 		return true;
 	}
 
-	protected boolean doConsumeKeyword$9() {
+	protected boolean doConsumeKeyword$8() {
 		return readChar('\r');
 	}
 
-	protected boolean consumeKeyword$10() {
+	protected boolean consumeKeyword$9() {
 		return readChar('\n');
 	}
 	
