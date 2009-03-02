@@ -207,7 +207,8 @@ public abstract class AbstractParseTreeConstructor implements
 			if (t1 == null)
 				return required ? null : new Solution(current, predecessor);
 
-			otherSolution = required ? null : new Solution(current,	predecessor);
+			otherSolution = required ? null
+					: new Solution(current, predecessor);
 			if (many) {
 				AbstractToken t = newInstance(t1.getCurrent(), t1
 						.getPredecessor());
@@ -318,13 +319,16 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class AlternativesToken extends AbstractToken implements
 			IAlternativeesToken {
-		
+
 		@Override
 		public abstract Alternatives getGrammarElement();
 
-		protected boolean first = true;
+		protected int alt = getGrammarElement().getGroups().size() - 1;
 
 		protected AbstractToken last;
+
+		// TODO: remove this variable
+		protected boolean first = true;
 
 		public AlternativesToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -333,11 +337,23 @@ public abstract class AbstractParseTreeConstructor implements
 
 		@Override
 		protected boolean activateNextSolution() {
-			if (first) {
-				first = false;
-				return true;
-			}
-			return false;
+			return --alt > -1;
+		}
+
+		protected Solution createSolution() {
+			do {
+				Solution s = createChild(alt).firstSolution();
+				if (s != null) {
+					last = s.getPredecessor();
+					return s;
+				}
+			} while (activateNextSolution());
+			return null;
+		}
+
+		// TODO: make this method abstract
+		protected AbstractToken createChild(int id) {
+			return null;
 		}
 
 		public IAbstractToken getLast() {
@@ -404,7 +420,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class GroupToken extends AbstractToken implements
 			IGroupToken {
-		
+
 		@Override
 		public abstract Group getGrammarElement();
 
@@ -423,7 +439,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class KeywordToken extends AbstractToken implements
 			IKeywordToken {
-		
+
 		@Override
 		public abstract Keyword getGrammarElement();
 
@@ -440,7 +456,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class RuleCallToken extends AbstractToken implements
 			IRuleCallToken {
-		
+
 		@Override
 		public abstract RuleCall getGrammarElement();
 
@@ -453,7 +469,8 @@ public abstract class AbstractParseTreeConstructor implements
 
 	protected List<AbstractSerializationDiagnostic> diagnostic = new ArrayList<AbstractSerializationDiagnostic>();
 
-	private final Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
+	private final Logger log = Logger
+			.getLogger(AbstractParseTreeConstructor.class);
 
 	private EObject rootObject;
 
@@ -516,10 +533,9 @@ public abstract class AbstractParseTreeConstructor implements
 					"The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if (t == null)
-			throw new XtextSerializationException(
-					getDescr(object),
-					"Serialization of " + object.eClass().getName() + " failed.",
-					diagnostic);
+			throw new XtextSerializationException(getDescr(object),
+					"Serialization of " + object.eClass().getName()
+							+ " failed.", diagnostic);
 		return t.getPredecessor();
 	}
 
