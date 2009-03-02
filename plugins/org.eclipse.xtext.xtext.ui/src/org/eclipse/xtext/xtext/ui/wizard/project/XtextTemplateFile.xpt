@@ -15,7 +15,11 @@ grammar «this.languageName» with org.eclipse.xtext.common.Terminals
 generate «this.languageNameAbbreviation» "«this.nsURI»"
 
 Model :
-	(elements+=Element+);
+	(imports+=Import)*
+	(elements+=Element)*;
+	
+Import :
+	'import' importURI=STRING;
 	
 Element :
 	Foo | Bar;
@@ -24,7 +28,7 @@ Foo :
 	"foo" name=ID;
 	
 Bar :
-	"bar" name=ID;
+	"bar" name=ID (references=[Foo])?;
 «ENDFILE»
 «ENDDEFINE»
 

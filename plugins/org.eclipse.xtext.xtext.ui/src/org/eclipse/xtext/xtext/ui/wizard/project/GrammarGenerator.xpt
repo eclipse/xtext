@@ -18,7 +18,6 @@
 package «this.basePackage»;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.eclipse.emf.mwe.core.WorkflowFacade;
 
@@ -28,14 +27,7 @@ import org.eclipse.emf.mwe.core.WorkflowFacade;
 public class GenerateGrammar {
 
 	public static void main(String... args) throws IOException {
-		new WorkflowFacade("«this.basePackagePath»/runGenerator.mwe", Collections.singletonMap("runtimeProject",
-				getProject(args))).run();
-	}
-
-	private static String getProject(String[] args) {
-		if (args != null && args.length == 1)
-			return args[0];
-		return ".";
+		new WorkflowFacade("«this.basePackagePath»/generate«languageNameAbbreviation».mwe").run();
 	}
 
 }
@@ -43,7 +35,7 @@ public class GenerateGrammar {
 «ENDDEFINE»
 
 «DEFINE WorkflowFile FOR XtextProjectInfo»
-«FILE "runGenerator.mwe" GRAMMAR_GENERATOR_OUTLET -»
+«FILE "generate"+languageNameAbbreviation+".mwe" GRAMMAR_GENERATOR_OUTLET -»
 <workflow>
 	<property name="grammarURI" value="classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext"/>
 	<property name="file.extensions" value="«this.firstFileExtension»"/>

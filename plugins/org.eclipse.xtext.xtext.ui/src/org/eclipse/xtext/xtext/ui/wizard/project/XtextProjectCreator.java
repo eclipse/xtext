@@ -39,7 +39,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	private static final String SRC_GEN_ROOT = "src-gen";
 	private static final String SRC_ROOT = "src";
 	private final List<String> SRC_FOLDER_LIST = Collections.unmodifiableList(Arrays.asList(SRC_ROOT, SRC_GEN_ROOT));
-	
+
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
 	}
@@ -52,27 +52,20 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		String basePackage = getXtextProjectInfo().getBasePackage();
 		// DSL Project
 		List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".services");
-		final IProject dslProject = EclipseResourceUtil.createProject(getXtextProjectInfo().getProjectName(),
-				SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
-						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", 
-						"org.eclipse.xtext",
-						"org.eclipse.xtext.generator",
-						"org.eclipse.xtext.ui.generator",
-						"org.eclipse.xtext.ui.common",
-						"org.eclipse.xtend",
-						"org.eclipse.xtend.typesystem.emf", 
-						"org.eclipse.xpand",
-						"org.apache.commons.logging",
+		final IProject dslProject = EclipseResourceUtil
+				.createProject(getXtextProjectInfo().getProjectName(), SRC_FOLDER_LIST, Collections
+						.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
+						"org.eclipse.xtext.generator;resolution:=optional",
+						"org.eclipse.xtext.ui.generator;resolution:=optional",
 						"de.itemis.xtext.antlr;resolution:=optional",
+						"org.apache.commons.logging;resolution:=optional",
 						"org.eclipse.emf.codegen.ecore;resolution:=optional",
-						"org.eclipse.xtend.util.stdlib",
-						"org.eclipse.emf.mwe.utils")), exportedPackages,
-						null, null, monitor,
-				null);
+						"org.eclipse.xtext.log4j;resolution:=optional",
+						"org.eclipse.emf.mwe.utils;resolution:=optional")), exportedPackages, null, null, monitor, null);
 
 		if (dslProject == null) {
 			return;
-		} 
+		}
 
 		EclipseResourceUtil.createPackagesWithDummyClasses(dslProject, "src-gen", exportedPackages);
 		monitor.worked(1);
@@ -84,24 +77,21 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 						"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
 						"org.eclipse.ui.editors;bundle-version=\"3.4.0\"",
-						"org.eclipse.ui.ide;bundle-version=\"3.4.0\"")), null, null, 
-						getXtextProjectInfo().getBasePackage() + ".internal." + getXtextProjectInfo().getLanguageNameAbbreviation() + "Activator", monitor,
-				null);
+						"org.eclipse.ui.ide;bundle-version=\"3.4.0\"")), null, null, null, monitor, null);
 
 		if (dslUIProject == null) {
 			return;
-		} 
+		}
 		monitor.worked(1);
 
 		// Generator Project
 		IProject dslGeneratorProject = null;
 		if (getXtextProjectInfo().isCreateGeneratorProject()) {
-			dslGeneratorProject = EclipseResourceUtil.createProject(
-					getXtextProjectInfo().getGeneratorProjectName(), SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(
-					Arrays.asList(getXtextProjectInfo().getProjectName().toLowerCase(), "org.eclipse.xtext",
-							"org.eclipse.xtext.generator", "org.eclipse.xpand", "org.eclipse.xtend",
-							"org.eclipse.xtend.typesystem.emf")), Collections.<String> emptyList(), null, null, monitor,
-					null);
+			dslGeneratorProject = EclipseResourceUtil.createProject(getXtextProjectInfo().getGeneratorProjectName(),
+					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
+							getXtextProjectInfo().getProjectName().toLowerCase(), "org.eclipse.xpand",
+							"org.eclipse.xtend", "org.eclipse.xtend.typesystem.emf")),
+					Collections.<String> emptyList(), null, null, monitor, null);
 
 			if (dslGeneratorProject == null) {
 				return;
@@ -109,12 +99,13 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		}
 		monitor.worked(1);
 
-		IFolder basePackageFolder = createSubPackages(basePackage, dslProject, (IFolder) dslProject.findMember(SRC_ROOT), monitor);
+		IFolder basePackageFolder = createSubPackages(basePackage, dslProject, (IFolder) dslProject
+				.findMember(SRC_ROOT), monitor);
 
 		OutputImpl output = new OutputImpl();
 		String defaultEncoding = System.getProperty("file.encoding");
-		output.addOutlet(new Outlet(false, defaultEncoding, "GRAMMAR_GENERATOR_OUTLET", true, 
-				basePackageFolder.getLocation().makeAbsolute().toOSString()));
+		output.addOutlet(new Outlet(false, defaultEncoding, "GRAMMAR_GENERATOR_OUTLET", true, basePackageFolder
+				.getLocation().makeAbsolute().toOSString()));
 		if (dslGeneratorProject != null) {
 			output.addOutlet(new Outlet(false, defaultEncoding, "GENERATOR_OUTLET", true, createSubPackages(
 					basePackage, dslGeneratorProject, (IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor)
@@ -123,47 +114,65 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 					"model", dslGeneratorProject, (IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor),
 					"//Your model\n" + "foo test\n bar test2", monitor);
 			EclipseResourceUtil.createFile("Template.xpt", createSubPackages("templates", dslGeneratorProject,
-					(IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor),
-					"«DEFINE root FOR MyDsl::Model»\n" + "«FILE \"output.txt\"»\n"
-							+ "«FOREACH this.elements AS e»\n" + "«e.name» («e.metaType»)\n" + "«ENDFOREACH»\n"
-							+ "«ENDFILE»\n" + "«ENDDEFINE»\n", monitor);
+					(IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor), "«DEFINE root FOR myDsl::Model»\n"
+					+ "«FILE \"output.txt\"»\n" + "«FOREACH this.elements AS e»\n" + "«e.name» («e.metaType»)\n"
+					+ "«ENDFOREACH»\n" + "«ENDFILE»\n" + "«ENDDEFINE»\n", monitor);
 		}
-		output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true, 
-				dslUIProject.getFolder(
-						SRC_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "ui"
-				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_GEN_OUTLET", true, 
-				dslUIProject.getFolder(
-						SRC_GEN_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "ui" + IPath.SEPARATOR + "internal"
-				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_OUTLET", true, 
-				dslProject.getFolder(
-						SRC_GEN_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath()
-				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_UI_OUTLET", true, 
-				dslUIProject.getFolder(
-						SRC_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath()
-				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "WIZARD_UI_OUTLET", true, 
-				dslUIProject.getFolder(
-						SRC_ROOT + IPath.SEPARATOR + getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "wizard"
-				).getLocation().makeAbsolute().toOSString()));
-		output.addOutlet(new Outlet(false, defaultEncoding, "PLUGIN_XMI_UI_OUTLET", true, 
-				dslUIProject.getLocation().makeAbsolute().toOSString()));
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, Collections.singletonMap(
-				"xtextProjectInfo", new Variable("xtextProjectInfo", getXtextProjectInfo())), null, null);
+		// output.addOutlet(new Outlet(false, defaultEncoding,
+		// "ACTIVATOR_OUTLET", true,
+		// dslUIProject.getFolder(
+		// SRC_ROOT + IPath.SEPARATOR +
+		// getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "ui"
+		// ).getLocation().makeAbsolute().toOSString()));
+		// output.addOutlet(new Outlet(false, defaultEncoding,
+		// "ACTIVATOR_GEN_OUTLET", true,
+		// dslUIProject.getFolder(
+		// SRC_GEN_ROOT + IPath.SEPARATOR +
+		// getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR + "ui" +
+		// IPath.SEPARATOR + "internal"
+		// ).getLocation().makeAbsolute().toOSString()));
+		// output.addOutlet(new Outlet(false, defaultEncoding, "SETUP_OUTLET",
+		// true,
+		// dslProject.getFolder(
+		// SRC_GEN_ROOT + IPath.SEPARATOR +
+		// getXtextProjectInfo().getBasePackagePath()
+		// ).getLocation().makeAbsolute().toOSString()));
+		// output.addOutlet(new Outlet(false, defaultEncoding,
+		// "SETUP_UI_OUTLET", true,
+		// dslUIProject.getFolder(
+		// SRC_ROOT + IPath.SEPARATOR +
+		// getXtextProjectInfo().getBasePackagePath()
+		// ).getLocation().makeAbsolute().toOSString()));
+		// output.addOutlet(new Outlet(false, defaultEncoding,
+		// "WIZARD_UI_OUTLET", true,
+		// dslUIProject.getFolder(
+		// SRC_ROOT + IPath.SEPARATOR +
+		// getXtextProjectInfo().getBasePackagePath() + IPath.SEPARATOR +
+		// "wizard"
+		// ).getLocation().makeAbsolute().toOSString()));
+		// output.addOutlet(new Outlet(false, defaultEncoding,
+		// "PLUGIN_XMI_UI_OUTLET", true,
+		// dslUIProject.getLocation().makeAbsolute().toOSString()));
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
 		execCtx.registerMetaModel(new JavaMetaModel());
 
 		// generate generator and activator for dsl and dsl.ui project
 		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::XtextTemplateFile::root",	getXtextProjectInfo());
-		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::GrammarGenerator::root",	getXtextProjectInfo());
-		if (dslGeneratorProject != null)
-			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Generator::root", getXtextProjectInfo());
-		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Activator::root", getXtextProjectInfo());
-		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Setup::root", getXtextProjectInfo());
-		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Wizard::root", getXtextProjectInfo());
-		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::UIPlugin::root", getXtextProjectInfo());
+		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::XtextTemplateFile::root",
+				getXtextProjectInfo());
+		facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::GrammarGenerator::root",
+				getXtextProjectInfo());
+		// if (dslGeneratorProject != null)
+		// facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Generator::root",
+		// getXtextProjectInfo());
+		// facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Activator::root",
+		// getXtextProjectInfo());
+		// facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Setup::root",
+		// getXtextProjectInfo());
+		// facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Wizard::root",
+		// getXtextProjectInfo());
+		// facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::UIPlugin::root",
+		// getXtextProjectInfo());
 
 		monitor.worked(1);
 
@@ -180,7 +189,6 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		IFile dslGrammarFile = getDslGrammarFile(basePackageFolder);
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
-
 	}
 
 	private IFile getDslGrammarFile(IFolder folder) throws CoreException {
