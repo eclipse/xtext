@@ -27,7 +27,7 @@
 		<language uri="classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/generator/LowerCaseNamedTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
