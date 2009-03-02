@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -113,13 +114,16 @@ public class IndexFeederImpl implements IIndexFeeder {
 			boolean isSuperClassesAdded = false;
 			List<EClassDescriptor> superClassDescriptors = new ArrayList<EClassDescriptor>();
 			EClassDescriptor subClassDescriptor = danglingSuperClassEntry.getKey();
-			superClassDescriptors.addAll(Arrays.asList(subClassDescriptor.getSuperClasses()));
+			EClassDescriptor[] existingSuperClasses = subClassDescriptor.getSuperClasses();
+			if (existingSuperClasses != null)
+				superClassDescriptors.addAll(Arrays.asList(existingSuperClasses));
 			for (EClass danglingSuperClass : danglingSuperClassEntry.getValue()) {
 				EClassDescriptor superClassDescriptor = internalIndexSingleEClass(danglingSuperClass);
 				if (superClassDescriptor != null) {
 					isSuperClassesAdded = true;
 					superClassDescriptors.add(superClassDescriptor);
-				} else {
+				}
+				else {
 					error("Cannot index superclass " + danglingSuperClass.getName());
 				}
 			}
@@ -127,6 +131,7 @@ public class IndexFeederImpl implements IIndexFeeder {
 				index.eClassDAO().delete(subClassDescriptor);
 				subClassDescriptor = typeFactory.createDescriptor(subClassDescriptor.getName(), ePackageDescriptor,
 						superClassDescriptors.toArray(new EClassDescriptor[superClassDescriptors.size()]));
+				index.eClassDAO().store(subClassDescriptor);
 			}
 		}
 		if (oldEClassDescriptors != null)
@@ -139,13 +144,13 @@ public class IndexFeederImpl implements IIndexFeeder {
 	protected EClassDescriptor internalIndexEClass(EClass eClass, EPackageDescriptor ePackageDescriptor,
 			Collection<EClassDescriptor> oldEClassDescriptors, MultiMap<EClassDescriptor, EClass> forwardSuperClassMap) {
 		List<EClassDescriptor> indexedSuperClasses = null;
-		List<EClass> forwardSuperClasses = null;
+		Set<EClass> forwardSuperClasses = null;
 		for (EClass superType : eClass.getEAllSuperTypes()) {
 			EClassDescriptor superClassDescriptor = index.eClassDAO().createQueryEClass(superType)
 					.executeSingleResult();
 			if (superClassDescriptor == null) {
 				if (forwardSuperClasses == null)
-					forwardSuperClasses = new ArrayList<EClass>();
+					forwardSuperClasses = new HashSet<EClass>();
 				forwardSuperClasses.add(superType);
 			}
 			else {
@@ -160,6 +165,8 @@ public class IndexFeederImpl implements IIndexFeeder {
 				superClassDescriptors);
 		if (oldEClassDescriptors == null || !oldEClassDescriptors.remove(typeDescriptor))
 			index.eClassDAO().store(typeDescriptor);
+		if (forwardSuperClasses != null)
+			forwardSuperClassMap.put(typeDescriptor, forwardSuperClasses);
 		return typeDescriptor;
 	}
 
@@ -171,14 +178,15 @@ public class IndexFeederImpl implements IIndexFeeder {
 	 */
 	protected EClassDescriptor internalIndexSingleEClass(EClass eClass) {
 		EClassDescriptor existingEClassDescriptor = index.eClassDAO().createQueryEClass(eClass).executeSingleResult();
-		if(existingEClassDescriptor != null) {
+		if (existingEClassDescriptor != null) {
 			return existingEClassDescriptor;
 		}
 		EPackage ePackage = eClass.getEPackage();
 		if (ePackage == null) {
 			error("EClass does not have a package");
 			return null;
-		} else {
+		}
+		else {
 			EPackageDescriptor ePackageDescriptor = internalIndexEPackage(ePackage);
 			// don't store superclasses
 			EClassDescriptor typeDescriptor = typeFactory.createDescriptor(eClass, ePackageDescriptor, null);

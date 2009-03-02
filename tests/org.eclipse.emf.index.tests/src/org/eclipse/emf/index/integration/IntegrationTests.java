@@ -56,7 +56,6 @@ public class IntegrationTests extends TestCase {
 
 	public void testIntegration() throws Exception {
 		feeder.index(EcorePackage.eINSTANCE, true);
-		feeder.registerCrossReferenceDescriptorFactory(new CrossReferenceDescriptorImpl.CachingFactory());
 		indexExampleResource();
 		Collection<EObjectDescriptor> elementResult = index.eObjectDAO().createQuery().name("Entity")
 				.executeListResult();
@@ -76,6 +75,11 @@ public class IntegrationTests extends TestCase {
 		assertEquals(1, typeResult.size());
 		EClassDescriptor typeDescriptor0 = typeResult.iterator().next();
 		assertEquals(typeDescriptor, typeDescriptor0);
+		EClassDescriptor[] superClasses = typeDescriptor0.getSuperClasses();
+		assertNotNull(superClasses);
+		// four super classes: EClassifier, ENamedElement, EModelElement and EObject
+		assertEquals(4, superClasses.length);
+		
 
 		Query crossRefQuery = index.eCrossReferenceDAO().createQuery();
 		crossRefQuery.target().name("Feature");

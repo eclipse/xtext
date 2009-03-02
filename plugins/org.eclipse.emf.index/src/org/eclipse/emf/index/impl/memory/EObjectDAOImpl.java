@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -29,30 +33,35 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 
 	protected InverseReferenceCache<ResourceDescriptor, EObjectDescriptor> resourceScope;
 	protected InverseReferenceCache<EClassDescriptor, EObjectDescriptor> eClassScope;
-	
+
 	public EObjectDAOImpl(IIndexStore indexStore) {
 		super(indexStore);
 		resourceScope = new InverseReferenceCache<ResourceDescriptor, EObjectDescriptor>() {
 			@Override
-			protected ResourceDescriptor target(EObjectDescriptor source) {
-				return source.getResourceDescriptor();
+			protected List<ResourceDescriptor> targets(EObjectDescriptor source) {
+				return Collections.singletonList(source.getResourceDescriptor());
 			}
 		};
-		eClassScope = new InverseReferenceCache<EClassDescriptor, EObjectDescriptor>(){
+		eClassScope = new InverseReferenceCache<EClassDescriptor, EObjectDescriptor>() {
 			@Override
-			protected EClassDescriptor target(EObjectDescriptor source) {
-				return source.getEClassDescriptor();
+			protected List<EClassDescriptor> targets(EObjectDescriptor source) {
+				List<EClassDescriptor> classes = new ArrayList<EClassDescriptor>();
+				classes.add(source.getEClassDescriptor());
+				EClassDescriptor[] superClasses = source.getEClassDescriptor().getSuperClasses();
+				if (superClasses != null)
+					classes.addAll(Arrays.asList(superClasses));
+				return classes;
 			}
 		};
 	}
-	
+
 	@Override
 	public void store(EObjectDescriptor element) {
 		super.store(element);
 		resourceScope.put(element);
 		eClassScope.put(element);
 	}
-	
+
 	@Override
 	public void delete(EObjectDescriptor element) {
 		super.delete(element);
@@ -129,7 +138,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 			this.typeQuery = indexStore.eClassDAO().createQuery();
 			return typeQuery;
 		}
-		
+
 		public ElementQuery userData(String key, String pattern) {
 			if (userDataPatterns == null) {
 				userDataPatterns = new HashMap<String, String>();
@@ -144,7 +153,8 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 					&& (typeDescriptor == null || typeDescriptor.equals(elementDescriptor.getEClassDescriptor()))) {
 				if (userDataPatterns != null) {
 					for (Entry<String, String> userDataEntry : userDataPatterns.entrySet()) {
-						if (!matchesGlobbing(elementDescriptor.getUserData(userDataEntry.getKey()), userDataEntry.getValue())) {
+						if (!matchesGlobbing(elementDescriptor.getUserData(userDataEntry.getKey()), userDataEntry
+								.getValue())) {
 							return false;
 						}
 					}
