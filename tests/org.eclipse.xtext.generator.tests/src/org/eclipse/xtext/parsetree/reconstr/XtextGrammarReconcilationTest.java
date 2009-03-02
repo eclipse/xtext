@@ -20,7 +20,7 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 
 	public void testSimple() throws Exception {
 		// this fails see bug #252181
-		String model = "grammar foo Honolulu : name=ID;";
+		String model = "grammar foo with org.eclipse.xtext.common.Terminals Honolulu : name=ID;";
 
 		// load grammar model
 		XtextResourceSet rs = get(XtextResourceSet.class);
@@ -38,7 +38,7 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 
 		// check
 		assertFalse(model.equals(result));
-		String expectedModel = "grammar foo\n\nHONOLULU:\n  name=ID;";
+		String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\nHONOLULU:\n  name=ID;";
 		assertEquals(expectedModel, result);
 	}
 }

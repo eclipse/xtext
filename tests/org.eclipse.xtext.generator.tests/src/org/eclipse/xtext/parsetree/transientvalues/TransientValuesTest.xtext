@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest
+grammar org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest with org.eclipse.xtext.common.Terminals
 
 generate transientvaluestest "http://simple/transientvaluestest"
 
