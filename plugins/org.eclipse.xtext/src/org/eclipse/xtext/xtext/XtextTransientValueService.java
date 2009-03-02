@@ -25,7 +25,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.common.Terminals;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.util.Strings;
 

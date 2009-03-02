@@ -18,6 +18,7 @@ import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
+import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
 
 import com.google.inject.Binder;
@@ -30,19 +31,19 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		
+		binder.bind(XtextValidator.class).asEagerSingleton();
 	}
 
 	@Override
 	public Class<? extends ILinkingService> bindILinkingService() {
 		return XtextLinkingService.class;
 	}
-	
+
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return XtextScopeProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends ILinker> bindILinker() {
 		return org.eclipse.xtext.xtext.XtextLinker.class;
@@ -52,7 +53,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return XtextTransientValueService.class;
 	}
-	
+
 	@Override
 	public Class<? extends ITokenSerializer> bindITokenSerializer() {
 		return XtextFormattingTokenSerializer.class;
