@@ -99,7 +99,8 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
-		
+
+	«REM»		
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new «abstractTokens.get(1).elementMethodName()»(current, this).firstSolution();
@@ -114,11 +115,37 @@ protected class «elementMethodName()» extends GroupToken {
 			}
 		}
 		return null;
-		
+	}
+	«ENDREM»
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new «abstractTokens.last().elementMethodName()»(current, this).firstSolution();
+«EXPAND groupItem(1) FOR abstractTokens.withoutLast().reverse().toList()-»
+		return null;
 	}
 }
 «EXPAND element FOREACH abstractTokens»
 «ENDDEFINE»
+
+«DEFINE groupItem(int i) FOR List[AbstractElement]-»
+		while(s«i» != null) {
+			Solution s«i+1» = new «first().elementMethodName()»(s«i».getCurrent(), s«i».getPredecessor()).firstSolution();
+«IF size == 1-»
+			if(s«i+1» != null) {
+				last = s«i+1».getPredecessor();
+				return s«i+1»;
+			} else {
+				s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
+			}
+«ELSE-»
+«EXPAND groupItem(i+1) FOR this.withoutFirst()-»
+			s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
+«ENDIF-»
+		}
+«ENDDEFINE»
+
+
 
 
 
