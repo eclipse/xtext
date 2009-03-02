@@ -18,6 +18,7 @@ Bundle-Name: «this»
 Bundle-SymbolicName: «symbolicName»
 Bundle-Version: «version»
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
 «IF !exportedPackages.isEmpty»Export-Package: «exportedPackages.toString(",\n ")»«ENDIF»
 «IF !requiredBundles.isEmpty»Require-Bundle: «requiredBundles.toString(",\n ")»«ENDIF»
 «IF activator!=null-»
