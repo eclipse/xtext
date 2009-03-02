@@ -9,19 +9,18 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtextgen»
+«IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::Extensions»
-«EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::ui::UIProperties»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation + "ProjectInfo.java" WIZARD_UI_OUTLET-»
-package «this.basePackage».wizard;
+«DEFINE root FOR Grammar»
+«FILE projectInfoClassName().asPath()+".java" UI_SRC_GEN-»
+package «projectInfoClassName().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.core.wizard.DefaultProjectInfo;
 
-public class «this.languageNameAbbreviation»ProjectInfo extends DefaultProjectInfo {
+public class «projectInfoClassName().toSimpleName()» extends DefaultProjectInfo {
 	
 }
 «ENDFILE»

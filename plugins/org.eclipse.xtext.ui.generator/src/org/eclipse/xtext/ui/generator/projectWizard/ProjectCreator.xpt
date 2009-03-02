@@ -9,15 +9,15 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtextgen»
+«IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::Extensions»
-«EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::ui::UIProperties»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation + "ProjectCreator.java" WIZARD_UI_OUTLET-»
-package «this.basePackage».wizard;
+«DEFINE root(String generatorProjectName) FOR Grammar»
+«FILE projectCreatorClassName().asPath()+".java" UI_SRC_GEN-»
+package «projectCreatorClassName().toJavaPackage()».wizard;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -34,17 +34,17 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
 import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
 
-public class «this.languageNameAbbreviation»ProjectCreator extends DefaultProjectCreator {
+public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCreator {
 	
-	private static final String DSL_GENERATOR_PROJECT_NAME = "«this.generatorProjectName»";
+	private static final String DSL_GENERATOR_PROJECT_NAME = "«generatorProjectName»";
 
 	private static final String SRC_GEN_ROOT = "src-gen";
 	private static final String SRC_ROOT = "src";
 	private final List<String> SRC_FOLDER_LIST = Collections
 			.unmodifiableList(Arrays.asList(SRC_ROOT, SRC_GEN_ROOT));
 
-	protected «this.languageNameAbbreviation»ProjectInfo get«this.languageNameAbbreviation»ProjectInfo() {
-		return («this.languageNameAbbreviation»ProjectInfo) getProjectInfo();
+	protected «projectInfoClassName()» getProjectInfo() {
+		return («projectCreatorClassName()») getProjectInfo();
 	}
 
 	@Override

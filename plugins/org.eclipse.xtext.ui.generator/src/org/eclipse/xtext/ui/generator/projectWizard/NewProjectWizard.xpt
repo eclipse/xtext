@@ -9,21 +9,21 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtextgen»
+«IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::Extensions»
-«EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::ui::UIProperties»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
 
-«DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation + "NewProjectWizard.java" WIZARD_UI_OUTLET-»
-package «this.basePackage».wizard;
+«DEFINE root FOR Grammar»
+«FILE projectWizardClassName().asPath()+".java" UI_SRC_GEN-»
+package «projectWizardClassName().toJavaPackage()»;
 
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard;
 
-public class «this.languageNameAbbreviation»NewProjectWizard extends XtextNewProjectWizard {
+public class «projectWizardClassName().toSimpleName()» extends XtextNewProjectWizard {
 
 	private WizardNewProjectCreationPage mainPage;
 
@@ -33,8 +33,8 @@ public class «this.languageNameAbbreviation»NewProjectWizard extends XtextNewPro
 	 */
 	public void addPages() {
 		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");
-		mainPage.setTitle("«this.languageNameAbbreviation» Project");
-		mainPage.setDescription("Create a new «this.languageNameAbbreviation» project.");
+		mainPage.setTitle("«getName()» Project");
+		mainPage.setDescription("Create a new «getName()» project.");
 		addPage(mainPage);
 	}
 
@@ -43,7 +43,7 @@ public class «this.languageNameAbbreviation»NewProjectWizard extends XtextNewPro
 	 */
 	@Override
 	protected IProjectInfo getProjectInfo() {
-		«this.languageNameAbbreviation»ProjectInfo projectInfo = new «this.languageNameAbbreviation»ProjectInfo();
+		«projectInfoClassName()» projectInfo = new «projectInfoClassName()»();
 		projectInfo.setProjectName(mainPage.getProjectName());
 		return projectInfo;
 	}
