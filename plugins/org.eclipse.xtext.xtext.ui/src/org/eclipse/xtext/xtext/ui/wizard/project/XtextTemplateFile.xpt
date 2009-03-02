@@ -10,7 +10,7 @@
 «ENDREM»
 «DEFINE root FOR XtextProjectInfo»
 «FILE this.languageNameAbbreviation+".xtext" GRAMMAR_GENERATOR_OUTLET -»
-grammar «this.languageName»
+grammar «this.languageName» with org.eclipse.xtext.common.Terminals
 
 generate «this.languageNameAbbreviation» "«this.nsURI»"
 
