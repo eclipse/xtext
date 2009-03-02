@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.Grammar#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammar <em>Super Grammar</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getUsedGrammars <em>Used Grammars</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
@@ -59,30 +59,20 @@ public interface Grammar extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Grammar</b></em>' reference.
+   * Returns the value of the '<em><b>Used Grammars</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.xtext.Grammar}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Super Grammar</em>' reference isn't clear,
+   * If the meaning of the '<em>Used Grammars</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Grammar</em>' reference.
-   * @see #setSuperGrammar(Grammar)
-   * @see org.eclipse.xtext.XtextPackage#getGrammar_SuperGrammar()
+   * @return the value of the '<em>Used Grammars</em>' reference list.
+   * @see org.eclipse.xtext.XtextPackage#getGrammar_UsedGrammars()
    * @model
    * @generated
    */
-  Grammar getSuperGrammar();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.Grammar#getSuperGrammar <em>Super Grammar</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Grammar</em>' reference.
-   * @see #getSuperGrammar()
-   * @generated
-   */
-  void setSuperGrammar(Grammar value);
+  EList<Grammar> getUsedGrammars();
 
   /**
    * Returns the value of the '<em><b>Defines Hidden Tokens</b></em>' attribute.

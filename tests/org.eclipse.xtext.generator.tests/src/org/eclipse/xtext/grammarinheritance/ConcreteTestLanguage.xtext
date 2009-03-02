@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage extends org.eclipse.xtext.grammarinheritance.AbstractTestLanguage
+grammar org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage with org.eclipse.xtext.grammarinheritance.AbstractTestLanguage
 
 generate foo "http://holla"
 

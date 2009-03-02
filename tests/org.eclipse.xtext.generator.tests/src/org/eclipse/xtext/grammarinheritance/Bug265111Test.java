@@ -24,7 +24,7 @@ public class Bug265111Test extends AbstractXtextTests {
 	}
 
 	public void testParseGrammar() throws Exception {
-		String grammar = "grammar test extends org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage\n" +
+		String grammar = "grammar test with org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage\n" +
 				"generate test 'http://test'\n" +
 				"Root: A | Model;" +
 				"A: 'A' name=ID;";

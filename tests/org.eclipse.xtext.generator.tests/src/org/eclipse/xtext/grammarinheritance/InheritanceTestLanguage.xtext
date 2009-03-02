@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 grammar org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage
-	extends org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage
+	with org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage
  	
 generate inheritanceTest "http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage"
 

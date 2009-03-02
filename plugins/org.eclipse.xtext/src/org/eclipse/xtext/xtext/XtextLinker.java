@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -35,19 +35,14 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.common.Terminals;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.ClasspathUriResolutionException;
-import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.metamodel.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 
@@ -112,35 +107,9 @@ public class XtextLinker extends Linker {
 			} catch(IllegalArgumentException ex) {
 				producer.addDiagnostic("Cannot resolve implicit reference to rule 'ID'");
 			}
-		} else if (XtextPackage.eINSTANCE.getGrammar_SuperGrammar() == ref) {
-			final Grammar grammar = (Grammar) obj;
-			if (!Terminals.ID.equals(grammar.getName())) {
-				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-				try {
-					final Resource resource = resourceSet.getResource(URI.createURI(
-							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + Terminals.ID.replace('.', '/') + ".xtext"), true);
-					grammar.setSuperGrammar((Grammar) resource.getContents().get(0));
-				} catch(ClasspathUriResolutionException ex) {
-					producer.addDiagnostic("Cannot find default super grammar '" + Terminals.ID + "'. " +
-							"Maybe you are stumbling accross a pde bug. Reopening the editor might help.");
-				}
-			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
 		}
-	}
-
-	@Override
-	protected boolean isNullValidResult(EObject obj, EReference eRef, AbstractNode node) {
-		if (XtextPackage.eINSTANCE.getGrammar_SuperGrammar() == eRef) {
-			final StringBuilder builder = new StringBuilder(node.getLength());
-			for (LeafNode leaf: node.getLeafNodes()) {
-				if (!leaf.isHidden())
-					builder.append(leaf.getText());
-			}
-			return "NULL".equals(builder.toString());
-		}
-		return super.isNullValidResult(obj, eRef, node);
 	}
 
 	@Override
@@ -262,15 +231,23 @@ public class XtextLinker extends Linker {
 	}
 
 	protected void updateOverriddenRules(Grammar grammar) {
-		if (grammar.getSuperGrammar() == null)
+		if (grammar.getUsedGrammars().isEmpty())
 			return;
 		Map<String, AbstractRule> rulePerName = new HashMap<String, AbstractRule>(grammar.getRules().size());
 		for (AbstractRule rule: grammar.getRules())
 			rulePerName.put(rule.getName(), rule);
-		Grammar superGrammar = grammar.getSuperGrammar();
-		while(superGrammar != null) {
-			updateOverriddenRules(superGrammar, rulePerName);
-			superGrammar = superGrammar.getSuperGrammar();
+		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			updateOverriddenRules(usedGrammar, rulePerName, visitedGrammars);
+		}
+	}
+
+	protected void updateOverriddenRules(Grammar grammar, Map<String, AbstractRule> rulePerName, Set<Grammar> visitedGrammars) {
+		if (!visitedGrammars.add(grammar))
+			return;
+		updateOverriddenRules(grammar, rulePerName);
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			updateOverriddenRules(usedGrammar, rulePerName, visitedGrammars);
 		}
 	}
 

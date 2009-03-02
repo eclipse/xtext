@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -39,8 +38,6 @@ import org.eclipse.xtext.util.Tuples;
  * @author Sebastian Zarnekow
  */
 public class GrammarUtil {
-
-	private static final Logger log = Logger.getLogger(GrammarUtil.class);
 
 	public static String getClasspathRelativePathToXmi(Grammar grammar) {
 		return getLanguageId(grammar).replace('.', '/') + ".xmi";
@@ -129,16 +126,6 @@ public class GrammarUtil {
 		return false;
 	}
 
-	public static Grammar getSuperGrammar(Grammar grammar) {
-		return grammar.getSuperGrammar();
-	}
-
-	public static String getSuperGrammarId(Grammar grammar) {
-		if (grammar.getSuperGrammar() == null)
-			return null;
-		return grammar.getSuperGrammar().getName();
-	}
-
 	public static AbstractRule findRuleForName(Grammar grammar, String ruleName) {
 		if (ruleName == null)
 			return null;
@@ -152,24 +139,27 @@ public class GrammarUtil {
 	}
 
 	public static List<AbstractRule> allRules(Grammar grammar) {
-		List<AbstractRule> result = new ArrayList<AbstractRule>();
-		Set<String> names = new HashSet<String>();
+		final List<AbstractRule> result = new ArrayList<AbstractRule>();
+		final Set<String> names = new HashSet<String>();
+		final Set<Grammar> grammars = new HashSet<Grammar>();
+		collectAllRules(grammar, result, grammars, names);
+		return result;
+	}
+
+	private static void collectAllRules(Grammar grammar, List<AbstractRule> result,
+			Set<Grammar> visitedGrammars, Set<String> knownRulenames) {
+		if (!visitedGrammars.add(grammar))
+			return;
+
 		for (AbstractRule rule : grammar.getRules()) {
-			if (names.add(rule.getName())) {
+			if (knownRulenames.add(rule.getName())) {
 				result.add(rule);
 			}
 		}
 
-		Grammar superGrammar = getSuperGrammar(grammar);
-		if (superGrammar != null) {
-			List<AbstractRule> superParserRules = allRules(superGrammar);
-			for (AbstractRule r : superParserRules) {
-				if (names.add(r.getName())) {
-					result.add(r);
-				}
-			}
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			collectAllRules(usedGrammar, result, visitedGrammars, knownRulenames);
 		}
-		return result;
 	}
 
 	public static List<ParserRule> allParserRules(Grammar _this) {
@@ -180,27 +170,28 @@ public class GrammarUtil {
 		return typeSelect(allRules(_this), TerminalRule.class);
 	}
 
-	public static List<AbstractMetamodelDeclaration> allMetamodelDeclarations(Grammar _this) {
+	public static List<AbstractMetamodelDeclaration> allMetamodelDeclarations(Grammar grammar) {
 		final List<AbstractMetamodelDeclaration> result = new ArrayList<AbstractMetamodelDeclaration>();
 		final Set<Pair<String, String>> pairs = new HashSet<Pair<String, String>>();
-		Grammar g = _this;
-		while (g != null) {
-			for (AbstractMetamodelDeclaration decl : g.getMetamodelDeclarations()) {
-				if (decl.getEPackage() == null)
-					result.add(decl);
-				else if (pairs.add(getURIAliasPair(decl))) {
-					result.add(decl);
-				}
-			}
-			try {
-				g = getSuperGrammar(g);
-			}
-			catch (Exception e) {
-				log.debug(e);
-				g = null;
+		final Set<Grammar> grammars = new HashSet<Grammar>();
+		collectAllMetamodelDeclarations(grammar, result, pairs, grammars);
+		return result;
+	}
+
+	private static void collectAllMetamodelDeclarations(Grammar grammar, List<AbstractMetamodelDeclaration> result,
+			Set<Pair<String, String>> knownAliases, Set<Grammar> visitedGrammars) {
+		if (!visitedGrammars.add(grammar))
+			return;
+
+		for (AbstractMetamodelDeclaration decl : grammar.getMetamodelDeclarations()) {
+			if (decl.getEPackage() == null)
+				result.add(decl);
+			else if (knownAliases.add(getURIAliasPair(decl))) {
+				result.add(decl);
 			}
 		}
-		return result;
+		for(Grammar usedGrammar: grammar.getUsedGrammars())
+			collectAllMetamodelDeclarations(usedGrammar, result, knownAliases, visitedGrammars);
 	}
 
 	private static Pair<String, String> getURIAliasPair(AbstractMetamodelDeclaration decl) {

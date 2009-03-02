@@ -112,18 +112,6 @@ String gaElementAccessMethodeName(AbstractElement element):
 String gaRuleAccesorClassName(AbstractRule rule):
 	rule.gaRuleIdentifyer() + "Elements";
 	
-/** 
- * Returns a list which contains the grammar itself and all it's super grammars.
- * This is handy to determine all GrammarAccess implementation that have to be 
- * imported by a Java file.
- * @param g a grammar
- * @return all super grammars of g
- */
-List[Grammar] includedGrammars(Grammar g):
-	if(g.getSuperGrammar() == null) then { g }
-	else includedGrammars(g.getSuperGrammar()).add(g);
-	
-	
 /**
  * Returns the invokation of the rule accessor method as Java statement.
  * Example: prStatemachine() 

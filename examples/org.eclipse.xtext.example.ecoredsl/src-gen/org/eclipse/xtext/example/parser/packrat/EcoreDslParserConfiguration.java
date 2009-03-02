@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEcoreDslConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslImportStatementDeclConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEPackageDeclConsumer;
@@ -45,7 +44,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private EcoreDslEcoreDslConsumer ecoreDslConsumer;
     private EcoreDslImportStatementDeclConsumer importStatementDeclConsumer;
     private EcoreDslEPackageDeclConsumer ePackageDeclConsumer;
@@ -423,7 +421,6 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getSintConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

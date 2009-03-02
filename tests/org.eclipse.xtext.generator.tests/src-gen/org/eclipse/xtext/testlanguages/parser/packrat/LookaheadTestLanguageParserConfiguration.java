@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageEntryConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageAltsConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.LookaheadTestLanguageLookAhead0Consumer;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class LookaheadTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private LookaheadTestLanguageEntryConsumer entryConsumer;
     private LookaheadTestLanguageAltsConsumer altsConsumer;
     private LookaheadTestLanguageLookAhead0Consumer lookAhead0Consumer;
@@ -122,7 +120,6 @@ public class LookaheadTestLanguageParserConfiguration extends AbstractParserConf
 		getLookAhead4Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.LookaheadTestLanguageDelimiters.keyword$15$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

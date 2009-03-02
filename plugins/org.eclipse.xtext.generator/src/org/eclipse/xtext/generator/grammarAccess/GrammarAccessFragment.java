@@ -10,7 +10,9 @@ package org.eclipse.xtext.generator.grammarAccess;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -42,20 +44,25 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(grammar);
 		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
 				+ xmiPath));
-		Grammar grammarToUse = grammar;
-		while(grammarToUse != null) {
-			resource.getContents().add(grammarToUse);
-			for(AbstractMetamodelDeclaration metamodelDecl: grammarToUse.getMetamodelDeclarations()) {
-				EPackage generatedPackage = metamodelDecl.getEPackage();
-				Resource packResource = generatedPackage.eResource();
-				packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
-			}
-			grammarToUse = grammarToUse.getSuperGrammar();
-		}
+		addAllGrammarsToResource(resource, grammar, new HashSet<Grammar>());
 		try {
 			resource.save(null);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
+		}
+	}
+
+	private void addAllGrammarsToResource(Resource resource, Grammar grammar, Set<Grammar> visitedGrammars) {
+		if (!visitedGrammars.add(grammar))
+			return;
+		resource.getContents().add(grammar);
+		for(AbstractMetamodelDeclaration metamodelDecl: grammar.getMetamodelDeclarations()) {
+			EPackage generatedPackage = metamodelDecl.getEPackage();
+			Resource packResource = generatedPackage.eResource();
+			packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
+		}
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			addAllGrammarsToResource(resource, usedGrammar, visitedGrammars);
 		}
 	}
 }

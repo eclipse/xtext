@@ -84,9 +84,6 @@ List[AbstractMetamodelDeclaration] allMetamodelDeclarations(Grammar this) :
 
 List[AbstractRule] allRules(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allRules(org.eclipse.xtext.Grammar);
-
-Grammar getSuperGrammar(Grammar this) :
-	JAVA org.eclipse.xtext.GrammarUtil.getSuperGrammar(org.eclipse.xtext.Grammar);
 	
 ecore::EReference eReference(CrossReference this) :
 	JAVA org.eclipse.xtext.GrammarUtil.getReference(org.eclipse.xtext.CrossReference);

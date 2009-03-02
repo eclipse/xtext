@@ -38,16 +38,21 @@ import org.eclipse.xtext.util.Tuples;
  */
 public class EClassifierInfos {
 
-	private final Map<Pair<String, String>, EClassifierInfo> infoMap = new LinkedHashMap<Pair<String, String>, EClassifierInfo>();
+	private final Map<Pair<String, String>, EClassifierInfo> infoMap;
 
-	private EClassifierInfos parent;
+	private final List<EClassifierInfos> parents;
 
-	public EClassifierInfos getParent() {
-		return parent;
+	public List<EClassifierInfos> getParents() {
+		return parents;
 	}
 
-	public void setParent(EClassifierInfos parent) {
-		this.parent = parent;
+	public EClassifierInfos() {
+		infoMap = new LinkedHashMap<Pair<String, String>, EClassifierInfo>();
+		parents = new ArrayList<EClassifierInfos>();
+	}
+
+	public void addParent(EClassifierInfos parent) {
+		this.parents.add(parent);
 	}
 
 	public boolean addInfo(TypeRef typeRef, EClassifierInfo metatypeInfo) {
@@ -76,7 +81,12 @@ public class EClassifierInfos {
 		EClassifierInfo result = getInfo(typeRef);
 		if (result != null)
 			return result;
-		return parent == null ? null : parent.getInfoOrNull(typeRef);
+		for(EClassifierInfos parent: parents) {
+			result = parent.getInfoOrNull(typeRef);
+			if (result != null)
+				return result;
+		}
+		return null;
 	}
 
 	public EClassifierInfo getInfo(AbstractMetamodelDeclaration alias, String name) {
@@ -99,7 +109,12 @@ public class EClassifierInfos {
 			if (info.getEClassifier().equals(eClassifier))
 				return info;
 		}
-		return parent == null ? null : parent.getInfoOrNull(eClassifier);
+		for(EClassifierInfos parent: parents) {
+			EClassifierInfo result = parent.getInfoOrNull(eClassifier);
+			if (result != null)
+				return result;
+		}
+		return null;
 	}
 
 	private EClassifierInfo getCompatibleType(EClassifierInfo infoA, EClassifierInfo infoB) {

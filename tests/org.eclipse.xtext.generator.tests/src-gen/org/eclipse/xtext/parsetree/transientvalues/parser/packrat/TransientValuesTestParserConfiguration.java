@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestRootConsumer;
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestRequiredConsumer;
 import org.eclipse.xtext.parsetree.transientvalues.parser.packrat.consumers.TransientValuesTestTestOptionalConsumer;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class TransientValuesTestParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private TransientValuesTestRootConsumer rootConsumer;
     private TransientValuesTestTestRequiredConsumer testRequiredConsumer;
     private TransientValuesTestTestOptionalConsumer testOptionalConsumer;
@@ -101,7 +99,6 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 		getTestListConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$16$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

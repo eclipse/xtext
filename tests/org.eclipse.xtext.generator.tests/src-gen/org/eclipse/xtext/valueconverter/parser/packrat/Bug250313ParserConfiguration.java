@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313ModelConsumer;
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313DatatypeConsumer;
 import org.eclipse.xtext.valueconverter.parser.packrat.consumers.Bug250313NestedDatatypeConsumer;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private Bug250313ModelConsumer modelConsumer;
     private Bug250313DatatypeConsumer datatypeConsumer;
     private Bug250313NestedDatatypeConsumer nestedDatatypeConsumer;
@@ -138,7 +136,6 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 		getChild2Consumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

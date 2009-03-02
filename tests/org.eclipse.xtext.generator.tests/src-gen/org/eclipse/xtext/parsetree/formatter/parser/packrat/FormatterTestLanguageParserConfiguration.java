@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageRootConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageLineConsumer;
 import org.eclipse.xtext.parsetree.formatter.parser.packrat.consumers.FormatterTestLanguageTestLinewrapConsumer;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class FormatterTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private FormatterTestLanguageRootConsumer rootConsumer;
     private FormatterTestLanguageLineConsumer lineConsumer;
     private FormatterTestLanguageTestLinewrapConsumer testLinewrapConsumer;
@@ -99,7 +97,6 @@ public class FormatterTestLanguageParserConfiguration extends AbstractParserConf
 		getTestIndentationConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parsetree.formatter.parser.packrat.FormatterTestLanguageDelimiters.keyword$16$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

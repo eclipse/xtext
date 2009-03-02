@@ -96,12 +96,13 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private BaseInheritanceTestLanguageGrammarAccess superGrammarAccess;
+	private BaseInheritanceTestLanguageGrammarAccess baseInheritanceTestLanguageGrammarAccess;
 
 	@Inject
-	public InheritanceTestLanguageGrammarAccess(GrammarProvider grammarProvider, BaseInheritanceTestLanguageGrammarAccess superGrammarAccess) {
+	public InheritanceTestLanguageGrammarAccess(GrammarProvider grammarProvider,
+		BaseInheritanceTestLanguageGrammarAccess baseInheritanceTestLanguageGrammarAccess) {
 		this.grammarProvider = grammarProvider;
-		this.superGrammarAccess = superGrammarAccess;
+		this.baseInheritanceTestLanguageGrammarAccess = baseInheritanceTestLanguageGrammarAccess;
 	}
 	
 	public Grammar getGrammar() {	
@@ -109,8 +110,8 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public BaseInheritanceTestLanguageGrammarAccess getSuperGrammarAccess() {
-		return superGrammarAccess;
+	public BaseInheritanceTestLanguageGrammarAccess getBaseInheritanceTestLanguageGrammarAccess() {
+		return baseInheritanceTestLanguageGrammarAccess;
 	}
 
 	
@@ -126,36 +127,36 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 
 	// not supported
 	public TerminalRule trID() {
-		return superGrammarAccess.trID();
+		return baseInheritanceTestLanguageGrammarAccess.trID();
 	} 
 
 	// not supported
 	public TerminalRule trINT() {
-		return superGrammarAccess.trINT();
+		return baseInheritanceTestLanguageGrammarAccess.trINT();
 	} 
 
 	// not supported
 	public TerminalRule trSTRING() {
-		return superGrammarAccess.trSTRING();
+		return baseInheritanceTestLanguageGrammarAccess.trSTRING();
 	} 
 
 	// not supported
 	public TerminalRule trML_COMMENT() {
-		return superGrammarAccess.trML_COMMENT();
+		return baseInheritanceTestLanguageGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
 	public TerminalRule trSL_COMMENT() {
-		return superGrammarAccess.trSL_COMMENT();
+		return baseInheritanceTestLanguageGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
 	public TerminalRule trWS() {
-		return superGrammarAccess.trWS();
+		return baseInheritanceTestLanguageGrammarAccess.trWS();
 	} 
 
 	// not supported
 	public TerminalRule trANY_OTHER() {
-		return superGrammarAccess.trANY_OTHER();
+		return baseInheritanceTestLanguageGrammarAccess.trANY_OTHER();
 	} 
 }

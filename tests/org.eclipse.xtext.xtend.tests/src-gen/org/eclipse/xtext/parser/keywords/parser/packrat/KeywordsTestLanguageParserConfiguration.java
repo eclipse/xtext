@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.parser.keywords.parser.packrat.consumers.KeywordsTestLanguageModelConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private KeywordsTestLanguageModelConsumer modelConsumer;
 
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
@@ -67,7 +65,6 @@ public class KeywordsTestLanguageParserConfiguration extends AbstractParserConfi
 		getModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.keywords.parser.packrat.KeywordsTestLanguageDelimiters.keyword$7$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

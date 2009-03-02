@@ -27,9 +27,14 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c00001AssignmentName = (Assignment)c0000Group.eContents().get(1);
 		private final RuleCall c000010ParserRuleCallGrammarID = (RuleCall)c00001AssignmentName.eContents().get(0);
 		private final Group c0001Group = (Group)c000Group.eContents().get(1);
-		private final Keyword c00010KeywordExtends = (Keyword)c0001Group.eContents().get(0);
-		private final Assignment c00011AssignmentSuperGrammar = (Assignment)c0001Group.eContents().get(1);
-		private final CrossReference c000110CrossReferenceEStringGrammar = (CrossReference)c00011AssignmentSuperGrammar.eContents().get(0);
+		private final Group c00010Group = (Group)c0001Group.eContents().get(0);
+		private final Keyword c000100KeywordWith = (Keyword)c00010Group.eContents().get(0);
+		private final Assignment c000101AssignmentUsedGrammars = (Assignment)c00010Group.eContents().get(1);
+		private final CrossReference c0001010CrossReferenceEStringGrammar = (CrossReference)c000101AssignmentUsedGrammars.eContents().get(0);
+		private final Group c00011Group = (Group)c0001Group.eContents().get(1);
+		private final Keyword c000110KeywordComma = (Keyword)c00011Group.eContents().get(0);
+		private final Assignment c000111AssignmentUsedGrammars = (Assignment)c00011Group.eContents().get(1);
+		private final CrossReference c0001110CrossReferenceEStringGrammar = (CrossReference)c000111AssignmentUsedGrammars.eContents().get(0);
 		private final Group c001Group = (Group)c00Group.eContents().get(1);
 		private final Group c0010Group = (Group)c001Group.eContents().get(0);
 		private final Group c00100Group = (Group)c0010Group.eContents().get(0);
@@ -80,13 +85,28 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group ele0001Group() { return c0001Group; }
 
 		// not supported
-		public Keyword ele00010KeywordExtends() { return c00010KeywordExtends; }
+		public Group ele00010Group() { return c00010Group; }
 
 		// not supported
-		public Assignment ele00011AssignmentSuperGrammar() { return c00011AssignmentSuperGrammar; }
+		public Keyword ele000100KeywordWith() { return c000100KeywordWith; }
 
 		// not supported
-		public CrossReference ele000110CrossReferenceEStringGrammar() { return c000110CrossReferenceEStringGrammar; }
+		public Assignment ele000101AssignmentUsedGrammars() { return c000101AssignmentUsedGrammars; }
+
+		// not supported
+		public CrossReference ele0001010CrossReferenceEStringGrammar() { return c0001010CrossReferenceEStringGrammar; }
+
+		// not supported
+		public Group ele00011Group() { return c00011Group; }
+
+		// not supported
+		public Keyword ele000110KeywordComma() { return c000110KeywordComma; }
+
+		// not supported
+		public Assignment ele000111AssignmentUsedGrammars() { return c000111AssignmentUsedGrammars; }
+
+		// not supported
+		public CrossReference ele0001110CrossReferenceEStringGrammar() { return c0001110CrossReferenceEStringGrammar; }
 
 		// not supported
 		public Group ele001Group() { return c001Group; }

@@ -68,10 +68,6 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			if (ref.getRule() != null && "ID".equals(ref.getRule().getName()))
 				return true;
 		}
-		else if (feature == XtextPackage.eINSTANCE.getGrammar_SuperGrammar()) {
-			final Grammar grammar = (Grammar) owner;
-			return grammar.getSuperGrammar() != null && Terminals.ID.equals(grammar.getSuperGrammar().getName());
-		}
 		return super.isTransient(owner, feature, index);
 	}
 

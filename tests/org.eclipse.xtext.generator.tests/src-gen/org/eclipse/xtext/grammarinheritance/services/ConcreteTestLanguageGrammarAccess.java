@@ -336,12 +336,13 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private AbstractTestLanguageGrammarAccess superGrammarAccess;
+	private AbstractTestLanguageGrammarAccess abstractTestLanguageGrammarAccess;
 
 	@Inject
-	public ConcreteTestLanguageGrammarAccess(GrammarProvider grammarProvider, AbstractTestLanguageGrammarAccess superGrammarAccess) {
+	public ConcreteTestLanguageGrammarAccess(GrammarProvider grammarProvider,
+		AbstractTestLanguageGrammarAccess abstractTestLanguageGrammarAccess) {
 		this.grammarProvider = grammarProvider;
-		this.superGrammarAccess = superGrammarAccess;
+		this.abstractTestLanguageGrammarAccess = abstractTestLanguageGrammarAccess;
 	}
 	
 	public Grammar getGrammar() {	
@@ -349,8 +350,8 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public AbstractTestLanguageGrammarAccess getSuperGrammarAccess() {
-		return superGrammarAccess;
+	public AbstractTestLanguageGrammarAccess getAbstractTestLanguageGrammarAccess() {
+		return abstractTestLanguageGrammarAccess;
 	}
 
 	
@@ -406,56 +407,56 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 
 	// not supported
 	public org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.InheritedParserRuleElements prInheritedParserRule() {
-		return superGrammarAccess.prInheritedParserRule();
+		return abstractTestLanguageGrammarAccess.prInheritedParserRule();
 	} 
 
 	// not supported
 	public org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements prAbstractCallOverridenParserRule() {
-		return superGrammarAccess.prAbstractCallOverridenParserRule();
+		return abstractTestLanguageGrammarAccess.prAbstractCallOverridenParserRule();
 	} 
 
 	// not supported
 	public org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements prAbstractCallExtendedParserRule() {
-		return superGrammarAccess.prAbstractCallExtendedParserRule();
+		return abstractTestLanguageGrammarAccess.prAbstractCallExtendedParserRule();
 	} 
 
 	// not supported
 	public TerminalRule trREAL() {
-		return superGrammarAccess.trREAL();
+		return abstractTestLanguageGrammarAccess.trREAL();
 	} 
 
 	// not supported
 	public TerminalRule trID() {
-		return superGrammarAccess.trID();
+		return abstractTestLanguageGrammarAccess.trID();
 	} 
 
 	// not supported
 	public TerminalRule trINT() {
-		return superGrammarAccess.trINT();
+		return abstractTestLanguageGrammarAccess.trINT();
 	} 
 
 	// not supported
 	public TerminalRule trSTRING() {
-		return superGrammarAccess.trSTRING();
+		return abstractTestLanguageGrammarAccess.trSTRING();
 	} 
 
 	// not supported
 	public TerminalRule trML_COMMENT() {
-		return superGrammarAccess.trML_COMMENT();
+		return abstractTestLanguageGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
 	public TerminalRule trSL_COMMENT() {
-		return superGrammarAccess.trSL_COMMENT();
+		return abstractTestLanguageGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
 	public TerminalRule trWS() {
-		return superGrammarAccess.trWS();
+		return abstractTestLanguageGrammarAccess.trWS();
 	} 
 
 	// not supported
 	public TerminalRule trANY_OTHER() {
-		return superGrammarAccess.trANY_OTHER();
+		return abstractTestLanguageGrammarAccess.trANY_OTHER();
 	} 
 }

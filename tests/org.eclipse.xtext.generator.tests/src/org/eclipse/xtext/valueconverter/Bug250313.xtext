@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.valueconverter.Bug250313
+grammar org.eclipse.xtext.valueconverter.Bug250313 with org.eclipse.xtext.common.Terminals
 
 generate bug250313 "http://org.eclipse.xtext.valueconverter.Bug250313"
 

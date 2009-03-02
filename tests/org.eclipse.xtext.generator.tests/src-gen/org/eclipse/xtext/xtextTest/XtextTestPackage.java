@@ -79,13 +79,13 @@ public interface XtextTestPackage extends EPackage
   int GRAMMAR__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Super Grammar</b></em>' reference.
+   * The feature id for the '<em><b>Used Grammars</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GRAMMAR__SUPER_GRAMMAR = 1;
+  int GRAMMAR__USED_GRAMMARS = 1;
 
   /**
    * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
@@ -994,15 +994,15 @@ public interface XtextTestPackage extends EPackage
   EAttribute getGrammar_Name();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.Grammar#getSuperGrammar <em>Super Grammar</em>}'.
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtextTest.Grammar#getUsedGrammars <em>Used Grammars</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Grammar</em>'.
-   * @see org.eclipse.xtext.xtextTest.Grammar#getSuperGrammar()
+   * @return the meta object for the reference list '<em>Used Grammars</em>'.
+   * @see org.eclipse.xtext.xtextTest.Grammar#getUsedGrammars()
    * @see #getGrammar()
    * @generated
    */
-  EReference getGrammar_SuperGrammar();
+  EReference getGrammar_UsedGrammars();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Grammar#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}'.
@@ -1587,12 +1587,12 @@ public interface XtextTestPackage extends EPackage
     EAttribute GRAMMAR__NAME = eINSTANCE.getGrammar_Name();
 
     /**
-     * The meta object literal for the '<em><b>Super Grammar</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Used Grammars</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference GRAMMAR__SUPER_GRAMMAR = eINSTANCE.getGrammar_SuperGrammar();
+    EReference GRAMMAR__USED_GRAMMARS = eINSTANCE.getGrammar_UsedGrammars();
 
     /**
      * The meta object literal for the '<em><b>Defines Hidden Tokens</b></em>' attribute feature.

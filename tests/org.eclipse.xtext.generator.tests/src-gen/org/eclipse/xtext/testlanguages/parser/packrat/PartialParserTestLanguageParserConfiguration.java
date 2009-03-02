@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageSomeContainerConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageNestedConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.PartialParserTestLanguageContentConsumer;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class PartialParserTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private PartialParserTestLanguageSomeContainerConsumer someContainerConsumer;
     private PartialParserTestLanguageNestedConsumer nestedConsumer;
     private PartialParserTestLanguageContentConsumer contentConsumer;
@@ -173,7 +171,6 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 		getNamedConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$9$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.testlanguages.FowlerDslTestLanguage
+grammar org.eclipse.xtext.testlanguages.FowlerDslTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate fowlerdsl "http://example.xtext.org/FowlerDslTestLanguage"
 

@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.resource.metamodel.parser.packrat.consumers.MultiValueFeatureTestLanguageStartConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private MultiValueFeatureTestLanguageStartConsumer startConsumer;
 
 	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
@@ -66,7 +64,6 @@ public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractPa
 		getStartConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.resource.metamodel.parser.packrat.MultiValueFeatureTestLanguageDelimiters.ruleCall$4$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

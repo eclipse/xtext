@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.BaseInheritanceTestLanguageModelConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class BaseInheritanceTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private BaseInheritanceTestLanguageModelConsumer modelConsumer;
 
 	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
@@ -67,7 +65,6 @@ public class BaseInheritanceTestLanguageParserConfiguration extends AbstractPars
 		getModelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

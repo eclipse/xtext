@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MetamodelRefTestLanguageFooConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MetamodelRefTestLanguageNameRefConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MetamodelRefTestLanguageMyRuleConsumer;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private MetamodelRefTestLanguageFooConsumer fooConsumer;
     private MetamodelRefTestLanguageNameRefConsumer nameRefConsumer;
     private MetamodelRefTestLanguageMyRuleConsumer myRuleConsumer;
@@ -85,7 +83,6 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 		getMyRuleConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

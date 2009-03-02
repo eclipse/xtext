@@ -25,7 +25,8 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 
 	public void testAllMetamodelDeclarations_01() throws Exception {
 		with(XtextStandaloneSetup.class);
-		String model = "grammar foo import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
+				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				"generate g 'http://3' as ecore startrule: name=ID;";
 		Resource r = getResourceFromString(model);
 		assertTrue(r.getErrors().isEmpty());
@@ -48,7 +49,8 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 
 	public void testAllMetamodelDeclarations_02() throws Exception {
 		with(XtextStandaloneSetup.class);
-		String model = "grammar foo import 'http://www.eclipse.org/emf/2002/Ecore' as bar " +
+		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
+				"import 'http://www.eclipse.org/emf/2002/Ecore' as bar " +
 				"generate g 'http://3' as bar startrule: name=ID;";
 		Resource r = getResourceFromString(model);
 		assertTrue(r.getErrors().isEmpty());

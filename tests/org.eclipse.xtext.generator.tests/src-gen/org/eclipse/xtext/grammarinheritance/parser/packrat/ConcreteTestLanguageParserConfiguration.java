@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguageParserConfiguration; 
-
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageRootRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageConcreteParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.ConcreteTestLanguageOverridableParserRuleConsumer;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final AbstractTestLanguageParserConfiguration abstractTestLanguageConfiguration; 
-
     private ConcreteTestLanguageRootRuleConsumer rootRuleConsumer;
     private ConcreteTestLanguageConcreteParserRuleConsumer concreteParserRuleConsumer;
     private ConcreteTestLanguageOverridableParserRuleConsumer overridableParserRuleConsumer;
@@ -182,7 +180,6 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 		getAbstractCallExtendedParserRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.ConcreteTestLanguageDelimiters.keyword$16$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public AbstractTestLanguageParserConfiguration getAbstractTestLanguageConfiguration() {
 		return abstractTestLanguageConfiguration;
 	} 

@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageInheritedParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageAbstractCallOverridenParserRuleConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.AbstractTestLanguageOverridableParserRuleConsumer;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class AbstractTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private AbstractTestLanguageInheritedParserRuleConsumer inheritedParserRuleConsumer;
     private AbstractTestLanguageAbstractCallOverridenParserRuleConsumer abstractCallOverridenParserRuleConsumer;
     private AbstractTestLanguageOverridableParserRuleConsumer overridableParserRuleConsumer;
@@ -121,7 +119,6 @@ public class AbstractTestLanguageParserConfiguration extends AbstractParserConfi
 		getExtendableParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.AbstractTestLanguageDelimiters.ruleCall$7$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

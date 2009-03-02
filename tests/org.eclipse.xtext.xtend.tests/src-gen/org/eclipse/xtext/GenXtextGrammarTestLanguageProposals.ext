@@ -28,11 +28,12 @@ List[ICompletionProposal] completeGrammar_Name(Assignment assignment, IContentAs
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeGrammar_SuperGrammar(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeGrammar_SuperGrammar feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeGrammar_UsedGrammars(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeGrammar_UsedGrammars feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+
 	 
 List[ICompletionProposal] completeGrammar_DefinesHiddenTokens(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeGrammar_DefinesHiddenTokens feature '" + assignment.feature + "' terminal '"
