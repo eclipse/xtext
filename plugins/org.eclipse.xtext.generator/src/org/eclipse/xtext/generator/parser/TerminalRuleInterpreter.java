@@ -18,7 +18,7 @@ import org.eclipse.xtext.NegatedToken;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.UpToToken;
+import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
@@ -172,7 +172,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	}
 
 	@Override
-	public Boolean caseUpToToken(UpToToken object) {
+	public Boolean caseUntilToken(UntilToken object) {
 		if (GrammarUtil.isOptionalCardinality(object) || GrammarUtil.isMultipleCardinality(object))
 			throw new IllegalStateException("cardinality has to be default for until tokens");
 		IMarker marker = markerFactory.mark();
