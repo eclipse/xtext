@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.resource.metamodel.MultiValueFeatureTestLanguage
+grammar org.eclipse.xtext.resource.metamodel.MultiValueFeatureTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate multiValueFeatureTestLanguage "http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage"
 

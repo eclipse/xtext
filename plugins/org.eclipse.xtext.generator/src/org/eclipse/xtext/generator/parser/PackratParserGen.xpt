@@ -69,7 +69,7 @@ public class «getParserClassName().toSimpleName()» extends AbstractPackratParser
 package «getParserConfigurationClassName().toJavaPackage()»;
 
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
-«IF definesHiddenTokens || superGrammar != null || rules.typeSelect(ParserRule).exists(e|e.definesHiddenTokens)-»
+«IF definesHiddenTokens || usedGrammars.size == 1 || rules.typeSelect(ParserRule).exists(e|e.definesHiddenTokens)-»
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 «ENDIF-»
 «IF allParserRules().isEmpty-»
@@ -78,24 +78,18 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 
 import «gaFQName()»;
 
-«LET getSuperGrammar() AS superGrammar-»
-«IF superGrammar != null-»
-import «superGrammar.getNamespace()».parser.packrat.«superGrammar.getName().toFirstUpper().replaceAll("\\s","_")»ParserConfiguration; 
-
-«ENDIF-»
-«ENDLET-»
+«FOREACH usedGrammars AS usedGrammar-»
+import «usedGrammar.getNamespace()».parser.packrat.«usedGrammar.getName().toFirstUpper().replaceAll("\\s","_")»ParserConfiguration; 
+«ENDFOREACH-»
 «FOREACH allRules() AS rule-»
 import «rule.containingGrammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
 «ENDFOREACH-»
 
 public class «getParserConfigurationClassName().toSimpleName()» extends AbstractParserConfiguration {
 
-«LET getSuperGrammar() AS superGrammar-»
-«IF superGrammar != null-»
-	private final «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
-
-«ENDIF-»
-«ENDLET-»
+«FOREACH usedGrammars AS usedGrammar-»
+	private final «usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «usedGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
+«ENDFOREACH-»
 «FOREACH rules AS rule-»
     private «rule.consumerClassName()» «rule.consumerFieldName()»;
 «ENDFOREACH-»
@@ -105,11 +99,9 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 	public «getParserConfigurationClassName().toSimpleName()»(IInternalParserConfiguration configuration, «gaSimpleName()» grammarAccess) {
 		super(configuration);
 		this.grammarAccess = grammarAccess;
-«LET getSuperGrammar() AS superGrammar-»
-«IF superGrammar != null-»
-		this.«superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(configuration, null);
-«ENDIF-»
-«ENDLET-»
+«FOREACH usedGrammars AS usedGrammar-»
+		this.«usedGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration = new «usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration(configuration, null);
+«ENDFOREACH-»
 	}
 
 «IF !allParserRules().isEmpty-»
@@ -122,11 +114,9 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 	} 
 
 	public void createNonTerminalConsumers() {
-«LET getSuperGrammar() AS superGrammar-»
-«IF superGrammar != null-»
-		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createNonTerminalConsumers();
-«ENDIF-»
-«ENDLET-»
+«FOREACH usedGrammars AS usedGrammar-»
+		get«usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createNonTerminalConsumers();
+«ENDFOREACH-»
 «FOREACH rules.typeSelect(ParserRule) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(
 «IF rule.definesHiddenTokens-»
@@ -139,11 +129,9 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 	}
 	
 	public void createTerminalConsumers() {
-«LET getSuperGrammar() AS superGrammar-»
-«IF superGrammar != null-»
-		get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createTerminalConsumers();
-«ENDIF-»
-«ENDLET-»
+«FOREACH usedGrammars AS usedGrammar-»
+		get«usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().createTerminalConsumers();
+«ENDFOREACH-»
 «FOREACH rules.typeSelect(TerminalRule) AS rule-»
 		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this);
 «ENDFOREACH-»
@@ -181,14 +169,12 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 «EXPAND setDelimiters(this) FOREACH allParserRules()-»
 	}
 	
-«LET getSuperGrammar() AS superGrammar-»
-«IF superGrammar != null-»
-	// TODO collect superGrammars transitive
-	public «superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration() {
-		return «superGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration;
+«FOREACH usedGrammars AS usedGrammar-»
+	public «usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration get«usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration() {
+		return «usedGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration;
 	} 
 	
-«ENDIF-»
+«ENDFOREACH-»
 «FOREACH allRules() AS rule-»
 «IF rule.containingGrammar() == this-»
 «IF rule.consumerGetterName() != "getRootConsumer"-»
@@ -203,20 +189,18 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 «ELSE-»
 «IF rule.consumerGetterName() != "getRootConsumer"-»
     public «rule.consumerClassName()» «rule.consumerGetterName()»() {
-    	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().«rule.consumerGetterName()»();
+    	return get«usedGrammars.selectFirst(g|g.allRules().contains(rule)).getName().replaceAll("\\s","_").toFirstUpper()»Configuration().«rule.consumerGetterName()»();
     }
 «ELSE-»
 	public «rule.consumerClassName()» getRootConsumer$() {
-    	return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getRootConsumer$();
+    	return get«usedGrammars.selectFirst(g|g.allRules().contains(rule)).getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getRootConsumer$();
     }
 «ENDIF-»
 «ENDIF-»
 
 «ENDFOREACH-»
-«ENDLET-»
 
-«LET getSuperGrammar() AS superGrammar-»
-«IF definesHiddenTokens || superGrammar != null-»
+«IF definesHiddenTokens || usedGrammars.size == 1-»
 	@Override
 	public ITerminalConsumer[] getInitialHiddenTerminals() {
 «IF definesHiddenTokens-»
@@ -226,12 +210,11 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 		return new ITerminalConsumer[]{ «FOREACH hiddenTokens AS hidden SEPARATOR ", "»«hidden.consumerGetterName()»()«ENDFOREACH-» };
 «ENDIF-»
 «ELSE-»
-		return get«superGrammar.getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getInitialHiddenTerminals();
+		return get«usedGrammars.first().getName().replaceAll("\\s","_").toFirstUpper()»Configuration().getInitialHiddenTerminals();
 «ENDIF-»
 	}
 	
 «ENDIF-»
-«ENDLET-»
 }
 «ENDFILE»
 «ENDDEFINE»

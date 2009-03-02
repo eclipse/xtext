@@ -37,9 +37,9 @@ import org.eclipse.xtext.*;
 
 import org.eclipse.xtext.service.GrammarProvider;
 
-«IF getSuperGrammar() != null-»
-import «getSuperGrammar().gaFQName()»;
-«ENDIF-»
+«FOREACH usedGrammars AS usedGrammar-»
+import «usedGrammar.gaFQName()»;
+«ENDFOREACH-»
 
 @Singleton
 public class «gaSimpleName()» implements IGrammarAccess {
@@ -49,29 +49,30 @@ public class «gaSimpleName()» implements IGrammarAccess {
 	«EXPAND cache FOREACH rules-»
 	
 	private final GrammarProvider grammarProvider;
-«IF getSuperGrammar() != null-»
+«FOREACH usedGrammars AS usedGrammar-»
 
-	private «getSuperGrammar().gaSimpleName()» superGrammarAccess;
-«ENDIF-»
+	private «usedGrammar.gaSimpleName()» «usedGrammar.gaSimpleName().toFirstLower()»;
+«ENDFOREACH-»
 
 	@Inject
-	public «gaSimpleName()»(GrammarProvider grammarProvider«IF getSuperGrammar() != null», «getSuperGrammar().gaSimpleName()» superGrammarAccess«ENDIF») {
+	public «gaSimpleName()»(GrammarProvider grammarProvider«FOREACH usedGrammars AS usedGrammar-»,
+		«usedGrammar.gaSimpleName()» «usedGrammar.gaSimpleName().toFirstLower()»«ENDFOREACH») {
 		this.grammarProvider = grammarProvider;
-«IF getSuperGrammar() != null-»
-		this.superGrammarAccess = superGrammarAccess;
-«ENDIF-»
+«FOREACH usedGrammars AS usedGrammar-»
+		this.«usedGrammar.gaSimpleName().toFirstLower()» = «usedGrammar.gaSimpleName().toFirstLower()»;
+«ENDFOREACH-»
 	}
 	
 	public Grammar getGrammar() {	
 		return grammarProvider.getGrammar(this);
 	}
 	
-«IF getSuperGrammar() != null-»
+«FOREACH usedGrammars AS usedGrammar-»
 
-	public «getSuperGrammar().gaSimpleName()» getSuperGrammarAccess() {
-		return superGrammarAccess;
+	public «usedGrammar.gaSimpleName()» get«usedGrammar.gaSimpleName()»() {
+		return «usedGrammar.gaSimpleName().toFirstLower()»;
 	}
-«ENDIF-»
+«ENDFOREACH-»
 
 	«EXPAND getter(this) FOREACH allRules()-»
 }
@@ -117,11 +118,11 @@ public class «gaSimpleName()» implements IGrammarAccess {
 
 «DEFINE getter(Grammar original) FOR ParserRule»
 	// «grammarFragmentToStr()»
-	public «IF containingGrammar() != original»«containingGrammar().gaFQName()».«ENDIF»«gaRuleAccesorClassName()» «gaRuleAccessMethodName()»() {
+	public «IF containingGrammar() != original»«original.usedGrammars.selectFirst(g|g.allRules().contains(this)).gaFQName()».«ENDIF»«gaRuleAccesorClassName()» «gaRuleAccessMethodName()»() {
 «IF containingGrammar() == original-»
 		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
 «ELSE-»
-		return superGrammarAccess.«gaRuleAccessMethodName()»();
+		return «original.usedGrammars.selectFirst(g|g.allRules().contains(this)).gaSimpleName().toFirstLower()».«gaRuleAccessMethodName()»();
 «ENDIF-»
 	} 
 «ENDDEFINE»
@@ -132,7 +133,7 @@ public class «gaSimpleName()» implements IGrammarAccess {
 «IF containingGrammar() == original-»
 		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "«name»"));
 «ELSE-»
-		return superGrammarAccess.«gaRuleAccessMethodName()»();
+		return «original.usedGrammars.selectFirst(g|g.allRules().contains(this)).gaSimpleName().toFirstLower()».«gaRuleAccessMethodName()»();
 «ENDIF-»
 	} 
 «ENDDEFINE»

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage
+grammar org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate formattertestlanguage "http://simple/formattertestlanguage"
 
