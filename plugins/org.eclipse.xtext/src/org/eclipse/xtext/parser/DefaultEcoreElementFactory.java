@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -47,6 +48,8 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		EClass clazz = (EClass) classifier;
 		if (clazz.isAbstract() || clazz.isInterface())
 			throw new IllegalArgumentException("Cannot create instance of abstract class '" + clazz.getName() + "'");
+		if (classifier.eIsProxy())
+			throw new IllegalStateException("Unresolved proxy "+((InternalEObject)classifier).eProxyURI()+". Make sure the EPackage has been registered.");
 		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
