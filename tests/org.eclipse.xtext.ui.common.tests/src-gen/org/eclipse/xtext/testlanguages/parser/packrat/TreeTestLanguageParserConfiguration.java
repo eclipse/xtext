@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguageModelConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.TreeTestLanguageNodeConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class TreeTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private TreeTestLanguageModelConsumer modelConsumer;
     private TreeTestLanguageNodeConsumer nodeConsumer;
 
@@ -81,7 +79,6 @@ public class TreeTestLanguageParserConfiguration extends AbstractParserConfigura
 		getNodeConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TreeTestLanguageDelimiters.ruleCall$14$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

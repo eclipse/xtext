@@ -276,12 +276,13 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess superGrammarAccess;
+	private TerminalsGrammarAccess terminalsGrammarAccess;
 
 	@Inject
-	public FowlerDslGrammarAccess(GrammarProvider grammarProvider, TerminalsGrammarAccess superGrammarAccess) {
+	public FowlerDslGrammarAccess(GrammarProvider grammarProvider,
+		TerminalsGrammarAccess terminalsGrammarAccess) {
 		this.grammarProvider = grammarProvider;
-		this.superGrammarAccess = superGrammarAccess;
+		this.terminalsGrammarAccess = terminalsGrammarAccess;
 	}
 	
 	public Grammar getGrammar() {	
@@ -289,8 +290,8 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 	}
 	
 
-	public TerminalsGrammarAccess getSuperGrammarAccess() {
-		return superGrammarAccess;
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return terminalsGrammarAccess;
 	}
 
 	
@@ -321,36 +322,36 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 
 	// not supported
 	public TerminalRule trID() {
-		return superGrammarAccess.trID();
+		return terminalsGrammarAccess.trID();
 	} 
 
 	// not supported
 	public TerminalRule trINT() {
-		return superGrammarAccess.trINT();
+		return terminalsGrammarAccess.trINT();
 	} 
 
 	// not supported
 	public TerminalRule trSTRING() {
-		return superGrammarAccess.trSTRING();
+		return terminalsGrammarAccess.trSTRING();
 	} 
 
 	// not supported
 	public TerminalRule trML_COMMENT() {
-		return superGrammarAccess.trML_COMMENT();
+		return terminalsGrammarAccess.trML_COMMENT();
 	} 
 
 	// not supported
 	public TerminalRule trSL_COMMENT() {
-		return superGrammarAccess.trSL_COMMENT();
+		return terminalsGrammarAccess.trSL_COMMENT();
 	} 
 
 	// not supported
 	public TerminalRule trWS() {
-		return superGrammarAccess.trWS();
+		return terminalsGrammarAccess.trWS();
 	} 
 
 	// not supported
 	public TerminalRule trANY_OTHER() {
-		return superGrammarAccess.trANY_OTHER();
+		return terminalsGrammarAccess.trANY_OTHER();
 	} 
 }

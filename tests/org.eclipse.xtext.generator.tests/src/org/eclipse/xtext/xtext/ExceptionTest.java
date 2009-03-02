@@ -26,7 +26,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 	}
 
 	public void testNoStackOverflow() throws Exception {
-		String model = "grammar test\n" +
+		String model = "grammar test with org.eclipse.xtext.common.Terminals\n" +
 			"import 'http://www.eclipse.org/2008/Xtext'	as xtext\n" +
 			"generate test 'http://eclipse.org/xtext/tests/SimpleTest'\n" +
 			"Foo : name=ID (nameRefs+=NameRef)*;\n" +
@@ -40,7 +40,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 
 	public void testGeneratedMetamodelWithoutURI() throws Exception {
 		String model =
-			"grammar test\n" +
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
 	        "generate test \n" +
 	        "import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" +
 	        "Keyword : \n" +
@@ -54,7 +54,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 
 	public void testFirstAssignmentWithoutLeftSide() throws Exception {
 		String model =
-			"grammar test\n" +
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
             "generate test \"test\"\n" +
             "Numbers: =INT n2=INT ;";
 		Resource r = getResourceFromString(model);

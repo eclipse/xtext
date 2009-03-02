@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MultiGenMMTestLanguageFooConsumer;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.consumers.MultiGenMMTestLanguageNameRefConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private MultiGenMMTestLanguageFooConsumer fooConsumer;
     private MultiGenMMTestLanguageNameRefConsumer nameRefConsumer;
 
@@ -76,7 +74,6 @@ public class MultiGenMMTestLanguageParserConfiguration extends AbstractParserCon
 		getNameRefConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MultiGenMMTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

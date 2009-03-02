@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage
+grammar org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate simplerewritetest "http://simple/rewrite/test"
 

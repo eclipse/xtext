@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage
+grammar org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
 

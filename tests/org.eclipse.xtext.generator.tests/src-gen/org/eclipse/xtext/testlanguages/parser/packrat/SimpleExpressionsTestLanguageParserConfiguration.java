@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageSequenceConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageAdditionConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.SimpleExpressionsTestLanguageMultiplicationConsumer;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private SimpleExpressionsTestLanguageSequenceConsumer sequenceConsumer;
     private SimpleExpressionsTestLanguageAdditionConsumer additionConsumer;
     private SimpleExpressionsTestLanguageMultiplicationConsumer multiplicationConsumer;
@@ -113,7 +111,6 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 		getParensConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.SimpleExpressionsTestLanguageDelimiters.keyword$20$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

@@ -19,7 +19,6 @@ public class InheritanceTestLanguageStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		
 		org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();

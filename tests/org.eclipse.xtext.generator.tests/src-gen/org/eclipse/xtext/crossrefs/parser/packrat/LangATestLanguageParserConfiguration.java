@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageMainConsumer;
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageImportConsumer;
 import org.eclipse.xtext.crossrefs.parser.packrat.consumers.LangATestLanguageTypeConsumer;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class LangATestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private LangATestLanguageMainConsumer mainConsumer;
     private LangATestLanguageImportConsumer importConsumer;
     private LangATestLanguageTypeConsumer typeConsumer;
@@ -88,7 +86,6 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 		getTypeConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.ruleCall$21$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

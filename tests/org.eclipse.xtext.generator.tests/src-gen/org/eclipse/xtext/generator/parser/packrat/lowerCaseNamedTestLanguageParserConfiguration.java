@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.generator.services.LowerCaseNamedTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.generator.parser.packrat.consumers.LowerCaseNamedTestLanguageModelConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class lowerCaseNamedTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private LowerCaseNamedTestLanguageModelConsumer modelConsumer;
 
 	private LowerCaseNamedTestLanguageGrammarAccess grammarAccess;
@@ -66,7 +64,6 @@ public class lowerCaseNamedTestLanguageParserConfiguration extends AbstractParse
 		getModelConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.generator.parser.packrat.lowerCaseNamedTestLanguageDelimiters.ruleCall$4$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

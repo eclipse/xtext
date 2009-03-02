@@ -105,9 +105,9 @@ ruleGrammar returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))('extends' 
+))(('with' 
     {
-        createLeafNode(grammarAccess.prGrammar().ele00010KeywordExtends(), null); 
+        createLeafNode(grammarAccess.prGrammar().ele000100KeywordWith(), null); 
     }
 (	
 	
@@ -119,7 +119,7 @@ ruleGrammar returns [EObject current=null]
 	        }
         }
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele000110CrossReferenceEStringGrammar(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele0001010CrossReferenceEStringGrammar(), currentNode); 
 	    }
 		ruleGrammarID		{ 
 	        currentNode = currentNode.getParent();
@@ -127,9 +127,31 @@ ruleGrammar returns [EObject current=null]
 
 		// TODO assign feature to currentNode
 	
-))?)((((	
+))(',' 
+    {
+        createLeafNode(grammarAccess.prGrammar().ele000110KeywordComma(), null); 
+    }
+(	
 	
-	    lv_definesHiddenTokens_4='hidden' 
+		
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele0001110CrossReferenceEStringGrammar(), currentNode); 
+	    }
+		ruleGrammarID		{ 
+	        currentNode = currentNode.getParent();
+	    }
+
+		// TODO assign feature to currentNode
+	
+))*)?)((((	
+	
+	    lv_definesHiddenTokens_6='hidden' 
     {
         createLeafNode(grammarAccess.prGrammar().ele0010000KeywordHidden(), "definesHiddenTokens"); 
     }
@@ -198,7 +220,7 @@ ruleGrammar returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele010ParserRuleCallAbstractMetamodelDeclaration(), currentNode); 
 	    }
-	    lv_metamodelDeclarations_10=ruleAbstractMetamodelDeclaration 
+	    lv_metamodelDeclarations_12=ruleAbstractMetamodelDeclaration 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
@@ -206,7 +228,7 @@ ruleGrammar returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		add($current, "metamodelDeclarations", lv_metamodelDeclarations_10, "AbstractMetamodelDeclaration", currentNode);
+	       		add($current, "metamodelDeclarations", lv_metamodelDeclarations_12, "AbstractMetamodelDeclaration", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -219,7 +241,7 @@ ruleGrammar returns [EObject current=null]
 	    { 
 	        currentNode=createCompositeNode(grammarAccess.prGrammar().ele10ParserRuleCallAbstractRule(), currentNode); 
 	    }
-	    lv_rules_11=ruleAbstractRule 
+	    lv_rules_13=ruleAbstractRule 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.prGrammar().getRule().getType().getType());
@@ -227,7 +249,7 @@ ruleGrammar returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		add($current, "rules", lv_rules_11, "AbstractRule", currentNode);
+	       		add($current, "rules", lv_rules_13, "AbstractRule", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

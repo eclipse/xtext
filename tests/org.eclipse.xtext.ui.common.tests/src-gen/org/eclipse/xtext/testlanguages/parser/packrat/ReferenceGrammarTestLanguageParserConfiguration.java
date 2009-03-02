@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageSpielplatzConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguagePersonConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ReferenceGrammarTestLanguageKindConsumer;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private ReferenceGrammarTestLanguageSpielplatzConsumer spielplatzConsumer;
     private ReferenceGrammarTestLanguagePersonConsumer personConsumer;
     private ReferenceGrammarTestLanguageKindConsumer kindConsumer;
@@ -155,7 +153,6 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 		getFamilieConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$40$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

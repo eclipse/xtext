@@ -35,7 +35,7 @@ import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTe
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GrammarImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GrammarImpl#getSuperGrammar <em>Super Grammar</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GrammarImpl#getUsedGrammars <em>Used Grammars</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GrammarImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GrammarImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
@@ -68,14 +68,14 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' reference.
+   * The cached value of the '{@link #getUsedGrammars() <em>Used Grammars</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperGrammar()
+   * @see #getUsedGrammars()
    * @generated
    * @ordered
    */
-  protected Grammar superGrammar;
+  protected EList<Grammar> usedGrammars;
 
   /**
    * The default value of the '{@link #isDefinesHiddenTokens() <em>Defines Hidden Tokens</em>}' attribute.
@@ -176,42 +176,13 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
    * <!-- end-user-doc -->
    * @generated
    */
-  public Grammar getSuperGrammar()
+  public EList<Grammar> getUsedGrammars()
   {
-    if (superGrammar != null && superGrammar.eIsProxy())
+    if (usedGrammars == null)
     {
-      InternalEObject oldSuperGrammar = (InternalEObject)superGrammar;
-      superGrammar = (Grammar)eResolveProxy(oldSuperGrammar);
-      if (superGrammar != oldSuperGrammar)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
-      }
+      usedGrammars = new EObjectResolvingEList<Grammar>(Grammar.class, this, XtextTerminalsTestLanguagePackage.GRAMMAR__USED_GRAMMARS);
     }
-    return superGrammar;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Grammar basicGetSuperGrammar()
-  {
-    return superGrammar;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setSuperGrammar(Grammar newSuperGrammar)
-  {
-    Grammar oldSuperGrammar = superGrammar;
-    superGrammar = newSuperGrammar;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
+    return usedGrammars;
   }
 
   /**
@@ -309,9 +280,8 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
     {
       case XtextTerminalsTestLanguagePackage.GRAMMAR__NAME:
         return getName();
-      case XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR:
-        if (resolve) return getSuperGrammar();
-        return basicGetSuperGrammar();
+      case XtextTerminalsTestLanguagePackage.GRAMMAR__USED_GRAMMARS:
+        return getUsedGrammars();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
         return isDefinesHiddenTokens();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__HIDDEN_TOKENS:
@@ -338,8 +308,9 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
       case XtextTerminalsTestLanguagePackage.GRAMMAR__NAME:
         setName((String)newValue);
         return;
-      case XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR:
-        setSuperGrammar((Grammar)newValue);
+      case XtextTerminalsTestLanguagePackage.GRAMMAR__USED_GRAMMARS:
+        getUsedGrammars().clear();
+        getUsedGrammars().addAll((Collection<? extends Grammar>)newValue);
         return;
       case XtextTerminalsTestLanguagePackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
         setDefinesHiddenTokens((Boolean)newValue);
@@ -373,8 +344,8 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
       case XtextTerminalsTestLanguagePackage.GRAMMAR__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR:
-        setSuperGrammar((Grammar)null);
+      case XtextTerminalsTestLanguagePackage.GRAMMAR__USED_GRAMMARS:
+        getUsedGrammars().clear();
         return;
       case XtextTerminalsTestLanguagePackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
         setDefinesHiddenTokens(DEFINES_HIDDEN_TOKENS_EDEFAULT);
@@ -404,8 +375,8 @@ public class GrammarImpl extends MinimalEObjectImpl.Container implements Grammar
     {
       case XtextTerminalsTestLanguagePackage.GRAMMAR__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case XtextTerminalsTestLanguagePackage.GRAMMAR__SUPER_GRAMMAR:
-        return superGrammar != null;
+      case XtextTerminalsTestLanguagePackage.GRAMMAR__USED_GRAMMARS:
+        return usedGrammars != null && !usedGrammars.isEmpty();
       case XtextTerminalsTestLanguagePackage.GRAMMAR__DEFINES_HIDDEN_TOKENS:
         return definesHiddenTokens != DEFINES_HIDDEN_TOKENS_EDEFAULT;
       case XtextTerminalsTestLanguagePackage.GRAMMAR__HIDDEN_TOKENS:

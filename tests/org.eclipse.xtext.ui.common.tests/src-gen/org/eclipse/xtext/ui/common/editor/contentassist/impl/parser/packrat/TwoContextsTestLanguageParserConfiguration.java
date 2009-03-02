@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.services.TwoContextsTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.consumers.TwoContextsTestLanguageMainModelConsumer;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.consumers.TwoContextsTestLanguageAnElementConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class TwoContextsTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private TwoContextsTestLanguageMainModelConsumer mainModelConsumer;
     private TwoContextsTestLanguageAnElementConsumer anElementConsumer;
 
@@ -77,7 +75,6 @@ public class TwoContextsTestLanguageParserConfiguration extends AbstractParserCo
 		getAnElementConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.ruleCall$10$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

@@ -8,7 +8,7 @@
         <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Grammar/name"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Grammar/superGrammar"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Grammar/usedGrammars"/>
       </genFeatures>
       <genFeatures createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Grammar/definesHiddenTokens"/>

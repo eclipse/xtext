@@ -265,9 +265,9 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 		
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Grammar_0_0_0_1_1_Assignment_superGrammar(current, this).firstSolution();
+		Solution s1 = new Grammar_0_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Grammar_0_0_0_1_0_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Grammar_0_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this,s1);
 				if(s1 == null) return null;
@@ -282,44 +282,146 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 }
 
 // not supported
-protected class Grammar_0_0_0_1_0_Keyword_extends extends KeywordToken  {
+protected class Grammar_0_0_0_1_0_Group extends GroupToken {
 	
-	public Grammar_0_0_0_1_0_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.prGrammar().ele00010Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_1_0_1_Assignment_usedGrammars(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_1_0_0_Keyword_with(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// not supported
+protected class Grammar_0_0_0_1_0_0_Keyword_with extends KeywordToken  {
+	
+	public Grammar_0_0_0_1_0_0_Keyword_with(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prGrammar().ele00010KeywordExtends();
+		return grammarAccess.prGrammar().ele000100KeywordWith();
 	}	
 }
 
 // not supported
-protected class Grammar_0_0_0_1_1_Assignment_superGrammar extends AssignmentToken  {
+protected class Grammar_0_0_0_1_0_1_Assignment_usedGrammars extends AssignmentToken  {
 	
-	public Grammar_0_0_0_1_1_Assignment_superGrammar(IInstanceDescription curr, AbstractToken pred) {
+	public Grammar_0_0_0_1_0_1_Assignment_usedGrammars(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prGrammar().ele00011AssignmentSuperGrammar();
+		return grammarAccess.prGrammar().ele000101AssignmentUsedGrammars();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("superGrammar",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("superGrammar");
+		if((value = current.getConsumable("usedGrammars",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("usedGrammars");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prGrammar().ele000110CrossReferenceEStringGrammar().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prGrammar().ele0001010CrossReferenceEStringGrammar().getType().getType())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prGrammar().ele000110CrossReferenceEStringGrammar(); 
+				element = grammarAccess.prGrammar().ele0001010CrossReferenceEStringGrammar(); 
 				return new Solution(obj);
 			}
 		}
 		return null;
 	}
 }
+
+
+// not supported
+protected class Grammar_0_0_0_1_1_Group extends GroupToken {
+	
+	public Grammar_0_0_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.prGrammar().ele00011Group();
+	}
+		
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new Grammar_0_0_0_1_1_1_Assignment_usedGrammars(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Grammar_0_0_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// not supported
+protected class Grammar_0_0_0_1_1_0_Keyword extends KeywordToken  {
+	
+	public Grammar_0_0_0_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.prGrammar().ele000110KeywordComma();
+	}	
+}
+
+// not supported
+protected class Grammar_0_0_0_1_1_1_Assignment_usedGrammars extends AssignmentToken  {
+	
+	public Grammar_0_0_0_1_1_1_Assignment_usedGrammars(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.prGrammar().ele000111AssignmentUsedGrammars();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("usedGrammars",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("usedGrammars");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.prGrammar().ele0001110CrossReferenceEStringGrammar().getType().getType())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.prGrammar().ele0001110CrossReferenceEStringGrammar(); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
 
 
 

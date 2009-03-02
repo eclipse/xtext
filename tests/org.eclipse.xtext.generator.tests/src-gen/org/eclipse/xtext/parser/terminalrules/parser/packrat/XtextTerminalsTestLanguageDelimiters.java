@@ -13,10 +13,10 @@ public final class XtextTerminalsTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ISequenceMatcher crossReference$25$Delimiter = new SetBasedKeywordMatcher(
-		"grammar", "extends", "hidden", "generate", "as", "import", "returns", "terminal", "current");
+	public static final ISequenceMatcher crossReference$31$Delimiter = new SetBasedKeywordMatcher(
+		"grammar", "with", "hidden", "generate", "as", "import", "returns", "terminal", "current");
 
-	public static final ICharacterClass keyword$22$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
 
     // TODO: remove hardcoded character class from template
 	public static final ICharacterClass keyword$9$Delimiter = ICharacterClass.Factory.join(
@@ -26,6 +26,6 @@ public final class XtextTerminalsTestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher crossReference$63$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher crossReference$69$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

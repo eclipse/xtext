@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelFileConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelImportConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.DomainmodelNamedElementConsumer;
@@ -37,7 +36,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class DomainmodelParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private DomainmodelFileConsumer fileConsumer;
     private DomainmodelImportConsumer importConsumer;
     private DomainmodelNamedElementConsumer namedElementConsumer;
@@ -230,7 +228,6 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 		getQualifiedNameConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.example.parser.packrat.DomainmodelDelimiters.ruleCall$43$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

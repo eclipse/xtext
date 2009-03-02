@@ -21,13 +21,25 @@
               </abstractTokens>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
-              <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
-              <abstractTokens xsi:type="xtext:Assignment" feature="superGrammar" operator="=">
-                <terminal xsi:type="xtext:CrossReference" rule="//@rules.1">
-                  <type metamodel="//@metamodelDeclarations.0">
-                    <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//Grammar"/>
-                  </type>
-                </terminal>
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="with"/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="usedGrammars" operator="+=">
+                  <terminal xsi:type="xtext:CrossReference" rule="//@rules.1">
+                    <type metamodel="//@metamodelDeclarations.0">
+                      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//Grammar"/>
+                    </type>
+                  </terminal>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Group" cardinality="*">
+                <abstractTokens xsi:type="xtext:Keyword" value=","/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="usedGrammars" operator="+=">
+                  <terminal xsi:type="xtext:CrossReference" rule="//@rules.1">
+                    <type metamodel="//@metamodelDeclarations.0">
+                      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage#//Grammar"/>
+                    </type>
+                  </terminal>
+                </abstractTokens>
               </abstractTokens>
             </abstractTokens>
           </abstractTokens>

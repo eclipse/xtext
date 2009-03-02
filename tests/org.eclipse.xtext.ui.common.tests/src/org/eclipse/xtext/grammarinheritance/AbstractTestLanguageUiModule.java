@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.grammarinheritance;
 
+import com.google.inject.Binder;
+import com.google.inject.Module;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class AbstractTestLanguageUiModule extends org.eclipse.xtext.grammarinheritance.AbstractAbstractTestLanguageUiModule {
+public class AbstractTestLanguageUiModule implements Module {
+
+	public void configure(Binder binder) {
+	}
 
 }

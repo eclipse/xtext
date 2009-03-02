@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.grammarinheritance.parser.packrat.BaseInheritanceTestLanguageParserConfiguration; 
-
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTestLanguageModelConsumer;
 import org.eclipse.xtext.grammarinheritance.parser.packrat.consumers.InheritanceTestLanguageElementConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class InheritanceTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final BaseInheritanceTestLanguageParserConfiguration baseInheritanceTestLanguageConfiguration; 
-
     private InheritanceTestLanguageModelConsumer modelConsumer;
     private InheritanceTestLanguageElementConsumer elementConsumer;
 
@@ -80,7 +78,6 @@ public class InheritanceTestLanguageParserConfiguration extends AbstractParserCo
 		getElementConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTestLanguageDelimiters.ruleCall$9$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public BaseInheritanceTestLanguageParserConfiguration getBaseInheritanceTestLanguageConfiguration() {
 		return baseInheritanceTestLanguageConfiguration;
 	} 

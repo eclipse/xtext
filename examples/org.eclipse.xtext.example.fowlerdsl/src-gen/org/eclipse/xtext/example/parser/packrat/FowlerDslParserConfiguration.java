@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslStatemachineConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslEventConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.FowlerDslCommandConsumer;
@@ -26,7 +25,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private FowlerDslStatemachineConsumer statemachineConsumer;
     private FowlerDslEventConsumer eventConsumer;
     private FowlerDslCommandConsumer commandConsumer;
@@ -119,7 +117,6 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 		getTransitionConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$49$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

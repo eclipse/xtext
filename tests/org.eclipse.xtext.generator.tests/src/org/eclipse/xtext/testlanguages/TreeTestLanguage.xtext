@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.testlanguages.TreeTestLanguage
+grammar org.eclipse.xtext.testlanguages.TreeTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate treeTestLanguage "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
  

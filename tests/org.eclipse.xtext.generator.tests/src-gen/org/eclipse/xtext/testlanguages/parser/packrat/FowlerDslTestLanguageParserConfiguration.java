@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageStatemachineConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageEventConsumer;
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.FowlerDslTestLanguageCommandConsumer;
@@ -26,7 +25,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class FowlerDslTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private FowlerDslTestLanguageStatemachineConsumer statemachineConsumer;
     private FowlerDslTestLanguageEventConsumer eventConsumer;
     private FowlerDslTestLanguageCommandConsumer commandConsumer;
@@ -119,7 +117,6 @@ public class FowlerDslTestLanguageParserConfiguration extends AbstractParserConf
 		getTransitionConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

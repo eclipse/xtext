@@ -286,7 +286,7 @@ public class XtextTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGrammar_SuperGrammar()
+  public EReference getGrammar_UsedGrammars()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(1);
   }
@@ -833,7 +833,7 @@ public class XtextTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
     // Create classes and their features
     grammarEClass = createEClass(GRAMMAR);
     createEAttribute(grammarEClass, GRAMMAR__NAME);
-    createEReference(grammarEClass, GRAMMAR__SUPER_GRAMMAR);
+    createEReference(grammarEClass, GRAMMAR__USED_GRAMMARS);
     createEAttribute(grammarEClass, GRAMMAR__DEFINES_HIDDEN_TOKENS);
     createEReference(grammarEClass, GRAMMAR__HIDDEN_TOKENS);
     createEReference(grammarEClass, GRAMMAR__METAMODEL_DECLARATIONS);
@@ -956,7 +956,7 @@ public class XtextTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
     // Initialize classes and features; add operations and parameters
     initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getGrammar_Name(), ecorePackage.getEString(), "name", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getGrammar_SuperGrammar(), this.getGrammar(), null, "superGrammar", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGrammar_UsedGrammars(), this.getGrammar(), null, "usedGrammars", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGrammar_DefinesHiddenTokens(), ecorePackage.getEBoolean(), "definesHiddenTokens", null, 0, 1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGrammar_HiddenTokens(), this.getAbstractRule(), null, "hiddenTokens", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGrammar_MetamodelDeclarations(), this.getAbstractMetamodelDeclaration(), null, "metamodelDeclarations", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

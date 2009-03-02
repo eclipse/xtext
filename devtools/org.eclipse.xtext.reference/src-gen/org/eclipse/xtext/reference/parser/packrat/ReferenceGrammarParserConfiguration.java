@@ -9,7 +9,6 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarSpielplatzConsumer;
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarPersonConsumer;
 import org.eclipse.xtext.reference.parser.packrat.consumers.ReferenceGrammarKindConsumer;
@@ -29,7 +28,6 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class ReferenceGrammarParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-
     private ReferenceGrammarSpielplatzConsumer spielplatzConsumer;
     private ReferenceGrammarPersonConsumer personConsumer;
     private ReferenceGrammarKindConsumer kindConsumer;
@@ -166,7 +164,6 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 		getCustomTypeParserRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarDelimiters.ruleCall$44$Delimiter);
 	}
 	
-	// TODO collect superGrammars transitive
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 

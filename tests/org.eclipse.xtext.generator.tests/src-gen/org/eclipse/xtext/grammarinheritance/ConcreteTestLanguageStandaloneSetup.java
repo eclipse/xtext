@@ -19,7 +19,6 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
-		
 		org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
