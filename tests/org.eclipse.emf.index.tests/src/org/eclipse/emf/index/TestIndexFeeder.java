@@ -15,7 +15,6 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.emf.index.impl.CrossReferenceDescriptorImpl;
 import org.eclipse.emf.index.mocks.MockIndexStore;
 
 /**
@@ -52,24 +51,8 @@ public class TestIndexFeeder extends TestCase {
 		indexExampleResource();
 		assertEquals(1, index.addedEPackageDescriptors.size());
 		assertTrue(index.addedEClassDescriptors.size() > 0);
-		assertEquals(1, index.addedResourceDescriptors.size());
-		// four EObjects: an EPackage, an ECLass, an EReference and a genericType
-		assertEquals(4, index.addedEObjectDescriptors.size());
-		assertEquals(0, index.addedCrossRefDescriptors.size());
-		assertEquals(0, index.removedEPackageDescriptors.size());
-		assertEquals(0, index.removedEClassDescriptors.size());
-		assertEquals(0, index.removedResourceDescriptors.size());
-		assertEquals(0, index.removedEObjectDescriptors.size());
-		assertEquals(0, index.removedCrossRefDescriptors.size());
-	}
-
-	public void testIndexCrossRefs() throws Exception {
-		feeder.registerCrossReferenceDescriptorFactory(new CrossReferenceDescriptorImpl.CachingFactory());
-		indexExampleResource();
-		assertEquals(1, index.addedEPackageDescriptors.size());
-		assertTrue(index.addedEClassDescriptors.size() > 0);
 		// three resources: one for the resource and one for the target of each crossref
-		assertEquals(3, index.addedResourceDescriptors.size());
+		assertEquals(1, index.addedResourceDescriptors.size());
 		// six EObjects: an EPackage, an EClass, an EReference and a genericType
 		// and one for each crossref's target
 		assertEquals(6, index.addedEObjectDescriptors.size());

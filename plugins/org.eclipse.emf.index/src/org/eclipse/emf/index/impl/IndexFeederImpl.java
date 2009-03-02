@@ -8,10 +8,13 @@
 package org.eclipse.emf.index.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -29,6 +32,7 @@ import org.eclipse.emf.index.IIndexFeeder;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.IndexingException;
 import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.util.MultiMap;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -45,8 +49,9 @@ public class IndexFeederImpl implements IIndexFeeder {
 	protected IIndexStore index;
 
 	public IndexFeederImpl(IIndexStore index) {
-		elementFactories.add(new ElementDescriptorImpl.Factory());
+		elementFactories.add(new EObjectDescriptorImpl.Factory());
 		resourceFactories.add(new ResourceDescriptorImpl.Factory());
+		crossRefFactories.add(new CrossReferenceDescriptorImpl.Factory());
 		setIndex(index);
 	}
 
@@ -95,27 +100,91 @@ public class IndexFeederImpl implements IIndexFeeder {
 
 	protected List<EClassDescriptor> internalIndexEPackageContents(EPackage ePackage,
 			EPackageDescriptor ePackageDescriptor) {
-		Collection<EClassDescriptor> existingClassDescriptors = index.eClassDAO().createQueryEClassesInPackage(
+		Collection<EClassDescriptor> oldEClassDescriptors = index.eClassDAO().createQueryEClassesInPackage(
 				ePackageDescriptor).executeListResult();
-		List<EClassDescriptor> typeDescriptors = new ArrayList<EClassDescriptor>();
+		List<EClassDescriptor> newEClassDescriptors = new ArrayList<EClassDescriptor>();
+		MultiMap<EClassDescriptor, EClass> forwardSuperClassMap = new MultiMap<EClassDescriptor, EClass>();
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass)
-				typeDescriptors.add(internalIndexEClass((EClass) eClassifier, ePackageDescriptor,
-						existingClassDescriptors));
+				newEClassDescriptors.add(internalIndexEClass((EClass) eClassifier, ePackageDescriptor,
+						oldEClassDescriptors, forwardSuperClassMap));
 		}
-		if (existingClassDescriptors != null)
-			for (EClassDescriptor staleClassDescriptor : existingClassDescriptors) {
+		for (Entry<EClassDescriptor, Set<EClass>> danglingSuperClassEntry : forwardSuperClassMap.entrySet()) {
+			boolean isSuperClassesAdded = false;
+			List<EClassDescriptor> superClassDescriptors = new ArrayList<EClassDescriptor>();
+			EClassDescriptor subClassDescriptor = danglingSuperClassEntry.getKey();
+			superClassDescriptors.addAll(Arrays.asList(subClassDescriptor.getSuperClasses()));
+			for (EClass danglingSuperClass : danglingSuperClassEntry.getValue()) {
+				EClassDescriptor superClassDescriptor = internalIndexSingleEClass(danglingSuperClass);
+				if (superClassDescriptor != null) {
+					isSuperClassesAdded = true;
+					superClassDescriptors.add(superClassDescriptor);
+				} else {
+					error("Cannot index superclass " + danglingSuperClass.getName());
+				}
+			}
+			if (isSuperClassesAdded) {
+				index.eClassDAO().delete(subClassDescriptor);
+				subClassDescriptor = typeFactory.createDescriptor(subClassDescriptor.getName(), ePackageDescriptor,
+						superClassDescriptors.toArray(new EClassDescriptor[superClassDescriptors.size()]));
+			}
+		}
+		if (oldEClassDescriptors != null)
+			for (EClassDescriptor staleClassDescriptor : oldEClassDescriptors) {
 				index.eClassDAO().delete(staleClassDescriptor);
 			}
-		return typeDescriptors;
+		return newEClassDescriptors;
 	}
 
 	protected EClassDescriptor internalIndexEClass(EClass eClass, EPackageDescriptor ePackageDescriptor,
-			Collection<EClassDescriptor> existingClassDescriptors) {
-		EClassDescriptor typeDescriptor = typeFactory.createDescriptor(eClass, ePackageDescriptor);
-		if (existingClassDescriptors == null || !existingClassDescriptors.remove(typeDescriptor))
+			Collection<EClassDescriptor> oldEClassDescriptors, MultiMap<EClassDescriptor, EClass> forwardSuperClassMap) {
+		List<EClassDescriptor> indexedSuperClasses = null;
+		List<EClass> forwardSuperClasses = null;
+		for (EClass superType : eClass.getEAllSuperTypes()) {
+			EClassDescriptor superClassDescriptor = index.eClassDAO().createQueryEClass(superType)
+					.executeSingleResult();
+			if (superClassDescriptor == null) {
+				if (forwardSuperClasses == null)
+					forwardSuperClasses = new ArrayList<EClass>();
+				forwardSuperClasses.add(superType);
+			}
+			else {
+				if (indexedSuperClasses == null)
+					indexedSuperClasses = new ArrayList<EClassDescriptor>();
+				indexedSuperClasses.add(superClassDescriptor);
+			}
+		}
+		EClassDescriptor[] superClassDescriptors = (indexedSuperClasses == null) ? null : indexedSuperClasses
+				.toArray(new EClassDescriptor[indexedSuperClasses.size()]);
+		EClassDescriptor typeDescriptor = typeFactory.createDescriptor(eClass, ePackageDescriptor,
+				superClassDescriptors);
+		if (oldEClassDescriptors == null || !oldEClassDescriptors.remove(typeDescriptor))
 			index.eClassDAO().store(typeDescriptor);
 		return typeDescriptor;
+	}
+
+	/**
+	 * Only for superclasses whose package has not been indexed.
+	 * 
+	 * @param eClass
+	 * @return
+	 */
+	protected EClassDescriptor internalIndexSingleEClass(EClass eClass) {
+		EClassDescriptor existingEClassDescriptor = index.eClassDAO().createQueryEClass(eClass).executeSingleResult();
+		if(existingEClassDescriptor != null) {
+			return existingEClassDescriptor;
+		}
+		EPackage ePackage = eClass.getEPackage();
+		if (ePackage == null) {
+			error("EClass does not have a package");
+			return null;
+		} else {
+			EPackageDescriptor ePackageDescriptor = internalIndexEPackage(ePackage);
+			// don't store superclasses
+			EClassDescriptor typeDescriptor = typeFactory.createDescriptor(eClass, ePackageDescriptor, null);
+			index.eClassDAO().store(typeDescriptor);
+			return typeDescriptor;
+		}
 	}
 
 	protected ResourceDescriptor internalIndexResource(Resource resource) {
@@ -234,5 +303,9 @@ public class IndexFeederImpl implements IIndexFeeder {
 				}
 			}
 		}
+	}
+
+	private void error(String string) {
+		// TODO implement platform independent logging strategy
 	}
 }

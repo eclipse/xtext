@@ -62,6 +62,8 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		private String namePattern;
 		private EPackageDescriptor ePackageDescriptor;
 		private EPackageDescriptor.Query ePackageQuery;
+		private EClassDescriptor superClassDescriptor;
+		private EClassDescriptor.Query superClassQuery;
 
 		public EClassDescriptor.Query name(String pattern) {
 			this.namePattern = pattern;
@@ -84,6 +86,22 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 			return ePackageQuery;
 		}
 
+		public EClassDescriptor.Query superClass() {
+			if(superClassDescriptor != null) {
+				throw new IllegalStateException("ESuperClassScope already configured");
+			}
+			superClassQuery = indexStore.eClassDAO().createQuery(); 
+			return superClassQuery;
+		}
+		
+		public EClassDescriptor.Query superClass(EClassDescriptor eClassDescriptor) {
+			if(superClassQuery != null) {
+				throw new IllegalStateException("ESuperClassScope already configured");
+			}
+			superClassDescriptor = eClassDescriptor; 
+			return this;
+		}
+
 		@Override
 		protected boolean matches(EClassDescriptor typeDescriptor) {
 			return matchesGlobbing(typeDescriptor.getName(), namePattern);
@@ -97,5 +115,6 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 			}
 			return eClassesByEPackage;
 		}
+
 	}
 }

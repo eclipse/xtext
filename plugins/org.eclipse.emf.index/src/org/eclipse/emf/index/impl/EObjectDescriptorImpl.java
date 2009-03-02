@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -22,15 +24,24 @@ import org.eclipse.emf.index.EClassDescriptor;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class ElementDescriptorImpl extends BasicEObjectDescriptorImpl {
+public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 
-	private ElementDescriptorImpl(ResourceDescriptor resourceDescriptor, String fragment, String name, String displayName,
-			EClassDescriptor typeDescriptor) {
+	private Map<String, String> userData;
+
+	private EObjectDescriptorImpl(ResourceDescriptor resourceDescriptor, String fragment, String name,
+			String displayName, EClassDescriptor typeDescriptor, Map<String, String> userData) {
 		super(resourceDescriptor, fragment, name, displayName, typeDescriptor);
+		this.userData = userData;
 	}
 
 	public String getUserData(String key) {
+		if (userData != null)
+			return userData.get(key);
 		return null;
+	}
+
+	public Map<String, String> getUserData() {
+		return Collections.unmodifiableMap(userData);
 	}
 
 	@Override
@@ -40,10 +51,18 @@ public class ElementDescriptorImpl extends BasicEObjectDescriptorImpl {
 
 	public static class Factory implements EObjectDescriptor.Factory {
 
-		public EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor, EClassDescriptor typeDescriptor) {
+		public EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
+				EClassDescriptor typeDescriptor, Map<String, String> userData) {
 			Resource resource = eObject.eResource();
-			return new ElementDescriptorImpl(resourceDescriptor, resource.getURIFragment(eObject),
-					nameAttributeValue(eObject), defaultDisplayName(eObject), typeDescriptor);
+			return new EObjectDescriptorImpl(resourceDescriptor, resource.getURIFragment(eObject),
+					nameAttributeValue(eObject), defaultDisplayName(eObject), typeDescriptor, userData);
+		}
+		
+		public EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
+				EClassDescriptor typeDescriptor) {
+			Resource resource = eObject.eResource();
+			return new EObjectDescriptorImpl(resourceDescriptor, resource.getURIFragment(eObject),
+					nameAttributeValue(eObject), defaultDisplayName(eObject), typeDescriptor, null);
 		}
 
 		public boolean isFactoryFor(EClass eClass) {

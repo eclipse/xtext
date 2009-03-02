@@ -23,6 +23,7 @@ public class MockQuery<T> implements IGenericQuery<T> {
 	}
 
 	public MockQuery(T result) {
+		this.result = result;
 	}
 	
 	public List<T> executeListResult() {

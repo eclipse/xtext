@@ -32,6 +32,11 @@ public class ResourceDescriptorImpl implements ResourceDescriptor {
 	}
 
 	@Override
+	public String toString() {
+		return uri;
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof ResourceDescriptor) {
 			ResourceDescriptor resourceDescriptor = (ResourceDescriptor) obj;

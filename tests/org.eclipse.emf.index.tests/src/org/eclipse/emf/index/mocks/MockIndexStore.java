@@ -155,6 +155,10 @@ public class MockIndexStore implements IIndexStore {
 			}
 
 			public IGenericQuery<ResourceDescriptor> createQueryResource(final Resource resource) {
+				for (ResourceDescriptor desc : addedResourceDescriptors) {
+					if (desc.getURI().equals(resource.getURI().toString()))
+						return new MockQuery<ResourceDescriptor>(desc);
+				}
 				return new MockQuery<ResourceDescriptor>();
 			}
 
