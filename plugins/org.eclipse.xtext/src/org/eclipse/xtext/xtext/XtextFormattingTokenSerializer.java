@@ -38,27 +38,27 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 
 		// Grammar
 		GrammarElements gr = g.prGrammar();
-		cfg.setLinewrap(2).after(gr.ele00Group());
-		cfg.setLinewrap(2).after(gr.ele01AssignmentMetamodelDeclarations());
-		cfg.setLinewrap(2).after(gr.ele1AssignmentRules());
+		cfg.setLinewrap(2).after(gr.ele2Group());
+		cfg.setLinewrap(2).after(gr.ele4AssignmentMetamodelDeclarations());
+		cfg.setLinewrap(2).after(gr.ele5AssignmentRules());
 
 		// ParserRule
 		ParserRuleElements pr = g.prParserRule();
-		cfg.setLinewrap().after(pr.ele001KeywordColon());
-		cfg.setIndentation(pr.ele001KeywordColon(), pr.ele1KeywordSemicolon());
-		cfg.setNoSpace().before(pr.ele001KeywordColon());
-		cfg.setNoSpace().before(pr.ele1KeywordSemicolon());
+		cfg.setLinewrap().after(pr.ele3KeywordColon());
+		cfg.setIndentation(pr.ele3KeywordColon(), pr.ele5KeywordSemicolon());
+		cfg.setNoSpace().before(pr.ele3KeywordColon());
+		cfg.setNoSpace().before(pr.ele5KeywordSemicolon());
 
-		// LexerRule
+		// TerminalRule
 		TerminalRuleElements tr = g.prTerminalRule();
-		cfg.setLinewrap().after(tr.ele001KeywordColon());
-		cfg.setIndentation(tr.ele001KeywordColon(), tr.ele1KeywordSemicolon());
-		cfg.setNoSpace().before(tr.ele001KeywordColon());
-		cfg.setNoSpace().before(tr.ele1KeywordSemicolon());
+		cfg.setLinewrap().after(tr.ele3KeywordColon());
+		cfg.setIndentation(tr.ele3KeywordColon(), tr.ele5KeywordSemicolon());
+		cfg.setNoSpace().before(tr.ele3KeywordColon());
+		cfg.setNoSpace().before(tr.ele5KeywordSemicolon());
 
 		// Assignment
 		AssignmentElements as = g.prAssignment();
-		cfg.setNoSpace().around(as.ele01AssignmentOperator());
+		cfg.setNoSpace().around(as.ele1AssignmentOperator());
 
 		// AbstractToken
 		AbstractTokenElements at = g.prAbstractToken();
@@ -66,26 +66,27 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 
 		// ParenthesizedElement
 		ParenthesizedElementElements pe = g.prParenthesizedElement();
-		cfg.setNoSpace().after(pe.ele00KeywordLeftParenthesis());
-		cfg.setNoSpace().before(pe.ele1KeywordRightParenthesis());
+		cfg.setNoSpace().after(pe.ele0KeywordLeftParenthesis());
+		cfg.setNoSpace().before(pe.ele2KeywordRightParenthesis());
 
 		// CrossReference
 		CrossReferenceElements cr = g.prCrossReference();
-		cfg.setNoSpace().after(cr.ele000KeywordLeftSquareBracket());
-		cfg.setNoSpace().before(cr.ele1KeywordRightSquareBracket());
-		cfg.setNoSpace().around(cr.ele010KeywordVerticalLine());
+		cfg.setNoSpace().after(cr.ele0KeywordLeftSquareBracket());
+		cfg.setNoSpace().before(cr.ele3KeywordRightSquareBracket());
+		cfg.setNoSpace().around(cr.ele20KeywordVerticalLine());
 
 		// Alternatives
 		AlternativesElements al = g.prAlternatives();
-		cfg.setNoSpace().around(al.ele101KeywordVerticalLine());
+		cfg.setNoSpace().around(al.ele110KeywordVerticalLine());
 
 		// Action
 		ActionElements ac = g.prAction();
-		cfg.setNoSpace().around(ac.ele001AssignmentOperator());
-		cfg.setNoSpace().around(ac.ele00001KeywordFullStop());
-		cfg.setNoSpace().after(ac.ele0000000KeywordLeftCurlyBracket());
-		cfg.setNoSpace().before(ac.ele1KeywordRightCurlyBracket());
-		cfg.setNoSpace().around(ac.ele00000011KeywordEqualsSign());
+		cfg.setNoSpace().around(ac.ele22AssignmentOperator());
+		cfg.setNoSpace().around(ac.ele20KeywordFullStop());
+		cfg.setNoSpace().after(ac.ele0KeywordLeftCurlyBracket());
+		cfg.setNoSpace().before(ac.ele3KeywordRightCurlyBracket());
+		cfg.setNoSpace().around(ac.ele2200KeywordEqualsSign());
+		cfg.setNoSpace().around(ac.ele2201KeywordPlusSignEqualsSign());
 	}
 
 }

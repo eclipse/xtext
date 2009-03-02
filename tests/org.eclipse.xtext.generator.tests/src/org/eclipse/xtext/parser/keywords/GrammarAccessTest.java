@@ -26,9 +26,9 @@ public class GrammarAccessTest extends AbstractXtextTests {
 	}
 
 	public void testKeywordValues() {
-		assertEquals("foo\\bar", modelElements.ele0000KeywordFooBar().getValue());
-		assertEquals("foo\\", modelElements.ele0010KeywordFoo().getValue());
-		assertEquals("\\bar", modelElements.ele010KeywordBar().getValue());
-		assertEquals("\\", modelElements.ele10KeywordReverseSolidus().getValue());
+		assertEquals("foo\\bar", modelElements.ele00KeywordFooBar().getValue());
+		assertEquals("foo\\", modelElements.ele10KeywordFoo().getValue());
+		assertEquals("\\bar", modelElements.ele20KeywordBar().getValue());
+		assertEquals("\\", modelElements.ele30KeywordReverseSolidus().getValue());
 	}
 }

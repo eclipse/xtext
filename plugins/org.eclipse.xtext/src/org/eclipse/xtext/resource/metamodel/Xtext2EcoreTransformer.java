@@ -301,14 +301,13 @@ public class Xtext2EcoreTransformer {
 			@Override
 			public Xtext2ECoreInterpretationContext caseAction(Action object) {
 				try {
-					if (object.getFeature() == null)
-						throw new TransformationException(TransformationErrorCode.InvalidFeature, "Name of the feature is not assigned.", object);
 					TypeRef actionTypeRef = object.getTypeName();
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 					Xtext2ECoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
-					ctx.addFeature(object.getFeature(), currentCompatibleType,
-							GrammarUtil.isMultipleAssignment(object), true, object);
+					if (object.getFeature() != null)
+						ctx.addFeature(object.getFeature(), currentCompatibleType,
+								GrammarUtil.isMultipleAssignment(object), true, object);
 					return ctx;
 				}
 				catch (TransformationException e) {
