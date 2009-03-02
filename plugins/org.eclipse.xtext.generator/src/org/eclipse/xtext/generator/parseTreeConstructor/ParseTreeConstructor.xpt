@@ -157,14 +157,13 @@ protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new «groups.get(1).elementMethodName()»(current, this) : new «groups.get(0).elementMethodName()»(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+«FOREACH groups AS g ITERATOR i-»
+			case «i.counter0»: return new «g.elementMethodName()»(current, this);
+«ENDFOREACH-»
+			default: return null;
+		}
 	}
 }
 «EXPAND element FOREACH groups»

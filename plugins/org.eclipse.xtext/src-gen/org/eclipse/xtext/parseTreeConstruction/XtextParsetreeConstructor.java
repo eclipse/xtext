@@ -72,22 +72,22 @@ protected class Grammar_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_1_Assignment_rules(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -102,22 +102,22 @@ protected class Grammar_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_1_Assignment_metamodelDeclarations(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -132,22 +132,22 @@ protected class Grammar_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele00Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -162,22 +162,22 @@ protected class Grammar_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -192,22 +192,22 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele0000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_0_0_Keyword_grammar(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -262,22 +262,22 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele0001Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -292,22 +292,22 @@ protected class Grammar_0_0_0_1_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele00010Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_1_0_1_Assignment_usedGrammars(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_1_0_0_Keyword_with(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -363,22 +363,22 @@ protected class Grammar_0_0_0_1_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele00011Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_0_1_1_1_Assignment_usedGrammars(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -436,22 +436,22 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele001Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -466,22 +466,22 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele0010Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -496,22 +496,22 @@ protected class Grammar_0_0_1_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele00100Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_0_0_Assignment_definesHiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -566,22 +566,22 @@ protected class Grammar_0_0_1_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele00101Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_1_0_Assignment_hiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -624,22 +624,22 @@ protected class Grammar_0_0_1_0_1_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGrammar().ele001011Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Grammar_0_0_1_0_1_1_1_Assignment_hiddenTokens(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Grammar_0_0_1_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -791,14 +791,12 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractRule().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractRule_1_RuleCall_TerminalRule(current, this) : new AbstractRule_0_RuleCall_ParserRule(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractRule_0_RuleCall_ParserRule(current, this);
+			case 1: return new AbstractRule_1_RuleCall_TerminalRule(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -865,14 +863,12 @@ protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesTo
 		return grammarAccess.prAbstractMetamodelDeclaration().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel(current, this) : new AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel(current, this);
+			case 1: return new AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -938,22 +934,22 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGeneratedMetamodel().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new GeneratedMetamodel_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -968,22 +964,22 @@ protected class GeneratedMetamodel_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGeneratedMetamodel().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_0_1_Assignment_ePackage(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new GeneratedMetamodel_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -998,22 +994,22 @@ protected class GeneratedMetamodel_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGeneratedMetamodel().ele00Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new GeneratedMetamodel_0_0_0_Keyword_generate(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1095,22 +1091,22 @@ protected class GeneratedMetamodel_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGeneratedMetamodel().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new GeneratedMetamodel_1_1_Assignment_alias(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new GeneratedMetamodel_1_0_Keyword_as(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1174,22 +1170,22 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prReferencedMetamodel().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReferencedMetamodel_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ReferencedMetamodel_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1204,22 +1200,22 @@ protected class ReferencedMetamodel_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prReferencedMetamodel().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReferencedMetamodel_0_1_Assignment_ePackage(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ReferencedMetamodel_0_0_Keyword_import(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1275,22 +1271,22 @@ protected class ReferencedMetamodel_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prReferencedMetamodel().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ReferencedMetamodel_1_1_Assignment_alias(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ReferencedMetamodel_1_0_Keyword_as(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1354,22 +1350,22 @@ protected class ParserRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1384,22 +1380,22 @@ protected class ParserRule_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_1_Assignment_alternatives(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1414,22 +1410,22 @@ protected class ParserRule_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele00Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1444,22 +1440,22 @@ protected class ParserRule_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1474,22 +1470,22 @@ protected class ParserRule_0_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele0000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1529,22 +1525,22 @@ protected class ParserRule_0_0_0_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele00001Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_0_1_0_Keyword_returns(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1606,22 +1602,22 @@ protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele0001Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1636,22 +1632,22 @@ protected class ParserRule_0_0_0_1_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele00010Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1666,22 +1662,22 @@ protected class ParserRule_0_0_0_1_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele000100Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_1_0_0_0_Assignment_definesHiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1736,22 +1732,22 @@ protected class ParserRule_0_0_0_1_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele000101Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_1_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_1_0_1_0_Assignment_hiddenTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1794,22 +1790,22 @@ protected class ParserRule_0_0_0_1_0_1_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParserRule().ele0001011Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParserRule_0_0_0_1_0_1_1_1_Assignment_hiddenTokens(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParserRule_0_0_0_1_0_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1951,22 +1947,22 @@ protected class TerminalRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalRule_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -1981,22 +1977,22 @@ protected class TerminalRule_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalRule().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_1_Assignment_alternatives(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalRule_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2011,22 +2007,22 @@ protected class TerminalRule_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalRule().ele00Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalRule_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2041,22 +2037,22 @@ protected class TerminalRule_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalRule().ele000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalRule_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2071,22 +2067,22 @@ protected class TerminalRule_0_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalRule().ele0000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_0_0_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalRule_0_0_0_0_0_Keyword_terminal(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2139,22 +2135,22 @@ protected class TerminalRule_0_0_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalRule().ele0001Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalRule_0_0_0_1_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalRule_0_0_0_1_0_Keyword_returns(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2286,22 +2282,22 @@ protected class TypeRef_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTypeRef().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TypeRef_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TypeRef_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2316,22 +2312,22 @@ protected class TypeRef_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTypeRef().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TypeRef_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TypeRef_0_0_Assignment_metamodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2426,22 +2422,22 @@ protected class Alternatives_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAlternatives().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Alternatives_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Alternatives_0_RuleCall_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2476,22 +2472,22 @@ protected class Alternatives_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAlternatives().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Alternatives_1_1_Assignment_groups(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Alternatives_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2506,22 +2502,22 @@ protected class Alternatives_1_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAlternatives().ele10Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Alternatives_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Alternatives_1_0_0_Action_Alternatives_groups(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2616,22 +2612,22 @@ protected class TerminalAlternatives_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalAlternatives().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalAlternatives_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalAlternatives_0_RuleCall_TerminalGroup(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2666,22 +2662,22 @@ protected class TerminalAlternatives_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalAlternatives().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalAlternatives_1_1_Assignment_groups(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalAlternatives_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2696,22 +2692,22 @@ protected class TerminalAlternatives_1_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalAlternatives().ele10Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalAlternatives_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalAlternatives_1_0_0_Action_Alternatives_groups(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2806,22 +2802,22 @@ protected class Group_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGroup().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Group_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Group_0_RuleCall_AbstractToken(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2856,22 +2852,22 @@ protected class Group_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prGroup().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Group_1_1_Assignment_abstractTokens(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Group_1_0_Action_Group_abstractTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -2953,22 +2949,22 @@ protected class TerminalGroup_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalGroup().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalGroup_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalGroup_0_RuleCall_TerminalToken(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3003,22 +2999,22 @@ protected class TerminalGroup_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalGroup().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalGroup_1_1_Assignment_abstractTokens(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalGroup_1_0_Action_Group_abstractTokens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3100,22 +3096,22 @@ protected class AbstractToken_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAbstractToken().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractToken_1_Assignment_cardinality(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new AbstractToken_0_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3131,14 +3127,12 @@ protected class AbstractToken_0_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractToken().ele0Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractToken_0_1_RuleCall_AbstractTerminal(current, this) : new AbstractToken_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractToken_0_0_Alternatives(current, this);
+			case 1: return new AbstractToken_0_1_RuleCall_AbstractTerminal(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -3154,14 +3148,12 @@ protected class AbstractToken_0_0_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractToken().ele00Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractToken_0_0_1_RuleCall_Action(current, this) : new AbstractToken_0_0_0_RuleCall_Assignment(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractToken_0_0_0_RuleCall_Assignment(current, this);
+			case 1: return new AbstractToken_0_0_1_RuleCall_Action(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -3290,22 +3282,22 @@ protected class TerminalToken_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prTerminalToken().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TerminalToken_1_Assignment_cardinality(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TerminalToken_0_RuleCall_TerminalTokenElement(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3392,22 +3384,22 @@ protected class Assignment_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAssignment().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Assignment_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Assignment_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3422,22 +3414,22 @@ protected class Assignment_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAssignment().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Assignment_0_1_Assignment_operator(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Assignment_0_0_Assignment_feature(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3563,22 +3555,22 @@ protected class Action_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3593,22 +3585,22 @@ protected class Action_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_1_Keyword_current(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3623,22 +3615,22 @@ protected class Action_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele00Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_1_Assignment_operator(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3653,22 +3645,22 @@ protected class Action_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_1_Assignment_feature(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3683,22 +3675,22 @@ protected class Action_0_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele0000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3713,22 +3705,22 @@ protected class Action_0_0_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele00000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_0_1_Assignment_typeName(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3743,22 +3735,22 @@ protected class Action_0_0_0_0_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele000000Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_0_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_0_0_0_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3785,22 +3777,22 @@ protected class Action_0_0_0_0_0_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAction().ele0000001Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Action_0_0_0_0_0_0_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Action_0_0_0_0_0_0_1_0_Keyword_current(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -3986,14 +3978,12 @@ protected class AbstractTerminal_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractTerminal().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractTerminal_1_RuleCall_CrossReference(current, this) : new AbstractTerminal_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractTerminal_0_Alternatives(current, this);
+			case 1: return new AbstractTerminal_1_RuleCall_CrossReference(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4009,14 +3999,12 @@ protected class AbstractTerminal_0_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractTerminal().ele0Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractTerminal_0_1_RuleCall_ParenthesizedElement(current, this) : new AbstractTerminal_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractTerminal_0_0_Alternatives(current, this);
+			case 1: return new AbstractTerminal_0_1_RuleCall_ParenthesizedElement(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4032,14 +4020,12 @@ protected class AbstractTerminal_0_0_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractTerminal().ele00Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractTerminal_0_0_1_RuleCall_RuleCall(current, this) : new AbstractTerminal_0_0_0_RuleCall_Keyword(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractTerminal_0_0_0_RuleCall_Keyword(current, this);
+			case 1: return new AbstractTerminal_0_0_1_RuleCall_RuleCall(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4148,14 +4134,12 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 		return grammarAccess.prTerminalTokenElement().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new TerminalTokenElement_1_RuleCall_Wildcard(current, this) : new TerminalTokenElement_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new TerminalTokenElement_0_Alternatives(current, this);
+			case 1: return new TerminalTokenElement_1_RuleCall_Wildcard(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4171,14 +4155,12 @@ protected class TerminalTokenElement_0_Alternatives extends AlternativesToken {
 		return grammarAccess.prTerminalTokenElement().ele0Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new TerminalTokenElement_0_1_RuleCall_AbstractNegatedToken(current, this) : new TerminalTokenElement_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new TerminalTokenElement_0_0_Alternatives(current, this);
+			case 1: return new TerminalTokenElement_0_1_RuleCall_AbstractNegatedToken(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4194,14 +4176,12 @@ protected class TerminalTokenElement_0_0_Alternatives extends AlternativesToken 
 		return grammarAccess.prTerminalTokenElement().ele00Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new TerminalTokenElement_0_0_1_RuleCall_ParenthesizedTerminalElement(current, this) : new TerminalTokenElement_0_0_0_Alternatives(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new TerminalTokenElement_0_0_0_Alternatives(current, this);
+			case 1: return new TerminalTokenElement_0_0_1_RuleCall_ParenthesizedTerminalElement(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4217,14 +4197,12 @@ protected class TerminalTokenElement_0_0_0_Alternatives extends AlternativesToke
 		return grammarAccess.prTerminalTokenElement().ele000Alternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new TerminalTokenElement_0_0_0_1_RuleCall_RuleCall(current, this) : new TerminalTokenElement_0_0_0_0_RuleCall_CharacterRange(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new TerminalTokenElement_0_0_0_0_RuleCall_CharacterRange(current, this);
+			case 1: return new TerminalTokenElement_0_0_0_1_RuleCall_RuleCall(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4354,14 +4332,12 @@ protected class AbstractNegatedToken_Alternatives extends AlternativesToken {
 		return grammarAccess.prAbstractNegatedToken().eleAlternatives();
 	}
 
-	@Override	
-	protected Solution createSolution() {
-		AbstractToken t = (first) ? new AbstractNegatedToken_1_RuleCall_UntilToken(current, this) : new AbstractNegatedToken_0_RuleCall_NegatedToken(current, this);
-		Solution s = t.firstSolution();
-		if(s == null && activateNextSolution()) s = createSolution();
-		if(s == null) return null;
-		last = s.getPredecessor();
-		return s; 
+	protected AbstractToken createChild(int id) {
+		switch(id) {
+			case 0: return new AbstractNegatedToken_0_RuleCall_NegatedToken(current, this);
+			case 1: return new AbstractNegatedToken_1_RuleCall_UntilToken(current, this);
+			default: return null;
+		}
 	}
 }
 
@@ -4427,22 +4403,22 @@ protected class NegatedToken_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prNegatedToken().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new NegatedToken_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new NegatedToken_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4513,22 +4489,22 @@ protected class UntilToken_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prUntilToken().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new UntilToken_1_Assignment_terminal(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new UntilToken_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4636,22 +4612,22 @@ protected class CharacterRange_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCharacterRange().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CharacterRange_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CharacterRange_0_RuleCall_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4686,22 +4662,22 @@ protected class CharacterRange_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCharacterRange().ele1Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CharacterRange_1_1_Assignment_right(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CharacterRange_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4716,22 +4692,22 @@ protected class CharacterRange_1_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCharacterRange().ele10Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CharacterRange_1_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CharacterRange_1_0_0_Action_CharacterRange_left(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4826,22 +4802,22 @@ protected class CrossReference_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCrossReference().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CrossReference_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4856,22 +4832,22 @@ protected class CrossReference_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCrossReference().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_0_1_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CrossReference_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4886,22 +4862,22 @@ protected class CrossReference_0_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCrossReference().ele00Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_0_0_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CrossReference_0_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -4962,22 +4938,22 @@ protected class CrossReference_0_1_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prCrossReference().ele01Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new CrossReference_0_1_1_Assignment_rule(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new CrossReference_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -5057,22 +5033,22 @@ protected class ParenthesizedElement_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParenthesizedElement().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedElement_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParenthesizedElement_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -5087,22 +5063,22 @@ protected class ParenthesizedElement_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParenthesizedElement().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedElement_0_1_RuleCall_Alternatives(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParenthesizedElement_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -5173,22 +5149,22 @@ protected class ParenthesizedTerminalElement_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParenthesizedTerminalElement().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedTerminalElement_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParenthesizedTerminalElement_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -5203,22 +5179,22 @@ protected class ParenthesizedTerminalElement_0_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prParenthesizedTerminalElement().ele0Group();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ParenthesizedTerminalElement_0_1_RuleCall_TerminalAlternatives(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ParenthesizedTerminalElement_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
