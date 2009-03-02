@@ -29,7 +29,6 @@ import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IIndexFeeder;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ECrossReferenceDescriptor.Query;
-import org.eclipse.emf.index.impl.CrossReferenceDescriptorImpl;
 import org.eclipse.emf.index.impl.IndexFeederImpl;
 import org.eclipse.emf.index.impl.memory.InMemoryIndex;
 

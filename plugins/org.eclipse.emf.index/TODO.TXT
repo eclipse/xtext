@@ -14,7 +14,7 @@ IndexFeeder
 Locking 
 
 CrossRefDesc
-- index
+- list index
 
 ResourceDescriptor
 - user data 
