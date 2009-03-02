@@ -658,14 +658,14 @@ public interface XtextTestPackage extends EPackage
   int NEGATED_TOKEN_FEATURE_COUNT = ABSTRACT_NEGATED_TOKEN_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.UpToTokenImpl <em>Up To Token</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.UntilTokenImpl <em>Until Token</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.UpToTokenImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUpToToken()
+   * @see org.eclipse.xtext.xtextTest.impl.UntilTokenImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUntilToken()
    * @generated
    */
-  int UP_TO_TOKEN = 13;
+  int UNTIL_TOKEN = 13;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -674,7 +674,7 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UP_TO_TOKEN__CARDINALITY = ABSTRACT_NEGATED_TOKEN__CARDINALITY;
+  int UNTIL_TOKEN__CARDINALITY = ABSTRACT_NEGATED_TOKEN__CARDINALITY;
 
   /**
    * The feature id for the '<em><b>Terminal</b></em>' containment reference.
@@ -683,16 +683,16 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UP_TO_TOKEN__TERMINAL = ABSTRACT_NEGATED_TOKEN__TERMINAL;
+  int UNTIL_TOKEN__TERMINAL = ABSTRACT_NEGATED_TOKEN__TERMINAL;
 
   /**
-   * The number of structural features of the '<em>Up To Token</em>' class.
+   * The number of structural features of the '<em>Until Token</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int UP_TO_TOKEN_FEATURE_COUNT = ABSTRACT_NEGATED_TOKEN_FEATURE_COUNT + 0;
+  int UNTIL_TOKEN_FEATURE_COUNT = ABSTRACT_NEGATED_TOKEN_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.WildcardImpl <em>Wildcard</em>}' class.
@@ -1367,14 +1367,14 @@ public interface XtextTestPackage extends EPackage
   EClass getNegatedToken();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.UpToToken <em>Up To Token</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.UntilToken <em>Until Token</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Up To Token</em>'.
-   * @see org.eclipse.xtext.xtextTest.UpToToken
+   * @return the meta object for class '<em>Until Token</em>'.
+   * @see org.eclipse.xtext.xtextTest.UntilToken
    * @generated
    */
-  EClass getUpToToken();
+  EClass getUntilToken();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Wildcard <em>Wildcard</em>}'.
@@ -1891,14 +1891,14 @@ public interface XtextTestPackage extends EPackage
     EClass NEGATED_TOKEN = eINSTANCE.getNegatedToken();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.UpToTokenImpl <em>Up To Token</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.UntilTokenImpl <em>Until Token</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.UpToTokenImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUpToToken()
+     * @see org.eclipse.xtext.xtextTest.impl.UntilTokenImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUntilToken()
      * @generated
      */
-    EClass UP_TO_TOKEN = eINSTANCE.getUpToToken();
+    EClass UNTIL_TOKEN = eINSTANCE.getUntilToken();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.WildcardImpl <em>Wildcard</em>}' class.

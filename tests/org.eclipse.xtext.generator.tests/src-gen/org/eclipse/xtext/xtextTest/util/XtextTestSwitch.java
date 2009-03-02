@@ -195,12 +195,12 @@ public class XtextTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XtextTestPackage.UP_TO_TOKEN:
+      case XtextTestPackage.UNTIL_TOKEN:
       {
-        UpToToken upToToken = (UpToToken)theEObject;
-        T result = caseUpToToken(upToToken);
-        if (result == null) result = caseAbstractNegatedToken(upToToken);
-        if (result == null) result = caseAbstractElement(upToToken);
+        UntilToken untilToken = (UntilToken)theEObject;
+        T result = caseUntilToken(untilToken);
+        if (result == null) result = caseAbstractNegatedToken(untilToken);
+        if (result == null) result = caseAbstractElement(untilToken);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -473,17 +473,17 @@ public class XtextTestSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Up To Token</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Until Token</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Up To Token</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Until Token</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseUpToToken(UpToToken object)
+  public T caseUntilToken(UntilToken object)
   {
     return null;
   }

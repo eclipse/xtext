@@ -23,7 +23,7 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 
 	private INonTerminalConsumer negatedTokenConsumer;
 
-	private INonTerminalConsumer upToTokenConsumer;
+	private INonTerminalConsumer untilTokenConsumer;
 
 	private IElementConsumer alternatives$1$Consumer;
 
@@ -64,7 +64,7 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(upToTokenConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(untilTokenConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -86,7 +86,7 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallNegatedToken());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallUpToToken());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallUntilToken());
 	}
 	
 	@Override
@@ -103,8 +103,8 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 		this.negatedTokenConsumer = negatedTokenConsumer;
 	}
 	
-	public void setUpToTokenConsumer(INonTerminalConsumer upToTokenConsumer) {
-		this.upToTokenConsumer = upToTokenConsumer;
+	public void setUntilTokenConsumer(INonTerminalConsumer untilTokenConsumer) {
+		this.untilTokenConsumer = untilTokenConsumer;
 	}
 	
 }

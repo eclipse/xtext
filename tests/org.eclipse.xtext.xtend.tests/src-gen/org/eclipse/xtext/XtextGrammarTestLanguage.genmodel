@@ -114,7 +114,7 @@
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//NegatedToken"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="XtextGrammarTestLanguage.ecore#//UpToToken"/>
+      <ecoreClass href="XtextGrammarTestLanguage.ecore#//UntilToken"/>
     </genClasses>
     <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//Wildcard"/>

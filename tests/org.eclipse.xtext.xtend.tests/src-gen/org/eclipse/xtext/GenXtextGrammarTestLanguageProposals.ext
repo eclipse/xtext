@@ -229,8 +229,8 @@ List[ICompletionProposal] completeNegatedToken_Terminal(Assignment assignment, I
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeUpToToken_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeUpToToken_Terminal feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeUntilToken_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeUntilToken_Terminal feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};

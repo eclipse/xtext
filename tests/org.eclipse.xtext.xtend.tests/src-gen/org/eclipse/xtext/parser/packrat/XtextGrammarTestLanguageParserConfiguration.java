@@ -30,7 +30,7 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstra
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalTokenElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractNegatedTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageNegatedTokenConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageUpToTokenConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageUntilTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageWildcardConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCharacterRangeConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceConsumer;
@@ -70,7 +70,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     private XtextGrammarTestLanguageTerminalTokenElementConsumer terminalTokenElementConsumer;
     private XtextGrammarTestLanguageAbstractNegatedTokenConsumer abstractNegatedTokenConsumer;
     private XtextGrammarTestLanguageNegatedTokenConsumer negatedTokenConsumer;
-    private XtextGrammarTestLanguageUpToTokenConsumer upToTokenConsumer;
+    private XtextGrammarTestLanguageUntilTokenConsumer untilTokenConsumer;
     private XtextGrammarTestLanguageWildcardConsumer wildcardConsumer;
     private XtextGrammarTestLanguageCharacterRangeConsumer characterRangeConsumer;
     private XtextGrammarTestLanguageCrossReferenceConsumer crossReferenceConsumer;
@@ -156,7 +156,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		negatedTokenConsumer = new XtextGrammarTestLanguageNegatedTokenConsumer(
     		this, null
     	);
-		upToTokenConsumer = new XtextGrammarTestLanguageUpToTokenConsumer(
+		untilTokenConsumer = new XtextGrammarTestLanguageUntilTokenConsumer(
     		this, null
     	);
 		wildcardConsumer = new XtextGrammarTestLanguageWildcardConsumer(
@@ -210,7 +210,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getTerminalTokenElementConsumer().setRule(grammarAccess.prTerminalTokenElement());
 		getAbstractNegatedTokenConsumer().setRule(grammarAccess.prAbstractNegatedToken());
 		getNegatedTokenConsumer().setRule(grammarAccess.prNegatedToken());
-		getUpToTokenConsumer().setRule(grammarAccess.prUpToToken());
+		getUntilTokenConsumer().setRule(grammarAccess.prUntilToken());
 		getWildcardConsumer().setRule(grammarAccess.prWildcard());
 		getCharacterRangeConsumer().setRule(grammarAccess.prCharacterRange());
 		getCrossReferenceConsumer().setRule(grammarAccess.prCrossReference());
@@ -288,11 +288,11 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getTerminalTokenElementConsumer().setWildcardConsumer(getWildcardConsumer());
 
 		getAbstractNegatedTokenConsumer().setNegatedTokenConsumer(getNegatedTokenConsumer());
-		getAbstractNegatedTokenConsumer().setUpToTokenConsumer(getUpToTokenConsumer());
+		getAbstractNegatedTokenConsumer().setUntilTokenConsumer(getUntilTokenConsumer());
 
 		getNegatedTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
-		getUpToTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
+		getUntilTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
@@ -368,7 +368,7 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getActionConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$19$Delimiter);
 		getActionConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$31$Delimiter);
 		getNegatedTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$19$Delimiter);
-		getUpToTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$19$Delimiter);
+		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$19$Delimiter);
 		getWildcardConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$19$Delimiter);
 		getCharacterRangeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$19$Delimiter);
 		getCrossReferenceConsumer().setCrossReference$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$31$Delimiter);
@@ -471,8 +471,8 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     	return negatedTokenConsumer;
     }
 
-    public XtextGrammarTestLanguageUpToTokenConsumer getUpToTokenConsumer() {
-    	return upToTokenConsumer;
+    public XtextGrammarTestLanguageUntilTokenConsumer getUntilTokenConsumer() {
+    	return untilTokenConsumer;
     }
 
     public XtextGrammarTestLanguageWildcardConsumer getWildcardConsumer() {
