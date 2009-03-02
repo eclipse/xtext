@@ -291,6 +291,8 @@ public final class PackratParserGenUtil {
 		final List<AbstractRule> conflicting = getConflictingLexerRules(element, grammar);
 		Keyword result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Filter<Keyword>() {
 			public boolean matches(Keyword param) {
+				if (GrammarUtil.containingParserRule(param) == null)
+					return false;
 				final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
 				return otherConflicting != null && otherConflicting.equals(conflicting);
 			}
