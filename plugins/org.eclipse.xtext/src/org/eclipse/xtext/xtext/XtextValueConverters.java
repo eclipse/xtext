@@ -26,7 +26,7 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
 			protected String internalToValue(String string, AbstractNode node) throws ValueConverterException {
-				StringBuilder result = new StringBuilder(); 
+				StringBuilder result = new StringBuilder();
 				for(LeafNode leaf: node.getLeafNodes()) {
 					if (!leaf.isHidden()) {
 						if (leaf.getGrammarElement() instanceof Keyword)
@@ -42,11 +42,14 @@ public class XtextValueConverters extends DefaultTerminalConverters {
 			protected String internalToString(String value) {
 				String[] splitted = value.split("\\.");
 				StringBuilder result = new StringBuilder(value.length());
-				for (String s: splitted)
-					result.append(ID().toString(s));
+				for(int i = 0; i < splitted.length; i++) {
+					if (i != 0)
+						result.append('.');
+					result.append(ID().toString(splitted[i]));
+				}
 				return result.toString();
 			}
 		};
 	}
-	
+
 }

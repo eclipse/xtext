@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.crossrefs.ImportUriTestLanguage
+grammar org.eclipse.xtext.crossrefs.ImportUriTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate importedURI "http://eclipse.org/xtext/importUriTestLanguage"
 

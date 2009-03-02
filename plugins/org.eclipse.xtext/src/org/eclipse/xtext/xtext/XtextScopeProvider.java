@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -117,8 +119,15 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 				}
 			};
 		}
-		final Grammar superGrammar = grammar.getSuperGrammar();
-		final IScope parent = superGrammar != null ? createScope(superGrammar, type): IScope.NULLSCOPE;
+		final List<Grammar> allGrammars = getAllGrammars(grammar);
+		IScope current = IScope.NULLSCOPE;
+		for (int i = allGrammars.size() - 1; i >= 0; i--) {
+			current = createScope(allGrammars.get(i), type, current);
+		}
+		return current;
+	}
+
+	protected IScope createScope(final Grammar grammar, EClass type, IScope parent) {
 		return new SimpleCachingScope(parent, grammar.eResource(), type) {
 			@Override
 			protected Iterator<EObject> getRelevantContent(Resource resource) {
@@ -127,10 +136,21 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		};
 	}
 
-	private IScope createEPackageScope(final Grammar grammar) {
-		final Grammar superGrammar = grammar.getSuperGrammar();
-		final IScope parent = superGrammar != null ? createEPackageScope(superGrammar):
-			new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
+	private List<Grammar> getAllGrammars(Grammar grammar) {
+		Collection<Grammar> visitedGrammars = new LinkedHashSet<Grammar>();
+		collectAllUsedGrammars(grammar, visitedGrammars);
+		return new ArrayList<Grammar>(visitedGrammars);
+	}
+
+	private void collectAllUsedGrammars(Grammar grammar, Collection<Grammar> visited) {
+		if (!visited.add(grammar))
+			return;
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			collectAllUsedGrammars(usedGrammar, visited);
+		}
+	}
+
+	private IScope createEPackageScope(final Grammar grammar, IScope parent) {
 		return new SimpleCachingScope(parent, grammar.eResource(), EcorePackage.Literals.EPACKAGE) {
 			@Override
 			protected Iterator<EPackage> getRelevantContent(Resource resource) {
@@ -148,6 +168,15 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			}
 
 		};
+	}
+
+	private IScope createEPackageScope(final Grammar grammar) {
+		final List<Grammar> allGrammars = getAllGrammars(grammar);
+		IScope current = new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
+		for (int i = allGrammars.size() - 1; i >= 0; i--) {
+			current = createEPackageScope(allGrammars.get(i), current);
+		}
+		return current;
 	}
 
 }

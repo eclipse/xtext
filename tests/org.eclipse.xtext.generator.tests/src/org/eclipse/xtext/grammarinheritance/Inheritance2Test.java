@@ -40,7 +40,7 @@ public class Inheritance2Test extends AbstractXtextTests {
 		assertEquals("Model", superClassifier.getName());
 		EPackage superPack = superClassifier.getEPackage();
 		assertNotNull(superPack);
-		assertEquals(grammarAccess.getGrammar().getSuperGrammar().getMetamodelDeclarations().get(0).getEPackage(), superPack);
+		assertEquals(grammarAccess.getGrammar().getUsedGrammars().get(0).getMetamodelDeclarations().get(0).getEPackage(), superPack);
 	}
 
 	public void testReturnTypes_02() {

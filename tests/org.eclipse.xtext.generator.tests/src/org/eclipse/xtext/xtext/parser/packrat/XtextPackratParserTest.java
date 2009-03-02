@@ -28,7 +28,7 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 	}
 
 	public void testParse_01() throws Exception {
-		String model = "/* comment */ grammar a.bc.def extends c.ef.ghi terminal a: 'b';";
+		String model = "/* comment */ grammar a.bc.def with c.ef.ghi terminal a: 'b';";
 		parseAndCompareToAntlr(model);
 	}
 

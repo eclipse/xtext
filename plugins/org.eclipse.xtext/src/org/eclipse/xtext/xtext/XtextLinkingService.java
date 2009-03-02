@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xtext;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -60,8 +62,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	@Override
 	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
-		if (ref == XtextPackage.eINSTANCE.getGrammar_SuperGrammar())
-			return getSuperGrammar((Grammar) context, node);
+		if (ref == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
+			return getUsedGrammar((Grammar) context, node);
 		if (ref == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
 			return getLinkedMetaModel((TypeRef)context, ref, (LeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof GeneratedMetamodel)
@@ -71,11 +73,9 @@ public class XtextLinkingService extends DefaultLinkingService {
 		return super.getLinkedObjects(context, ref, node);
 	}
 
-	private List<EObject> getSuperGrammar(Grammar grammar, AbstractNode node) {
+	private List<EObject> getUsedGrammar(Grammar grammar, AbstractNode node) {
 		try {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
-			if ("NULL".equals(grammarName))
-				return Collections.emptyList();
 			final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 			final Resource resource = resourceSet.getResource(URI.createURI(
 					ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
@@ -92,19 +92,33 @@ public class XtextLinkingService extends DefaultLinkingService {
 		String nsUri = getMetamodelNsURI(text);
 		if (nsUri == null)
 			return Collections.emptyList();
-		Grammar grammar = GrammarUtil.getGrammar(context).getSuperGrammar();
-		while(grammar != null) {
-			for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
-				EPackage pack = declaration.getEPackage();
-				if (pack != null && nsUri.equals(pack.getNsURI()))
-					return Collections.<EObject>singletonList(pack);
-			}
-			grammar = grammar.getSuperGrammar();
+		Grammar grammar = GrammarUtil.getGrammar(context);
+		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+			List<EObject> result = getPackage(nsUri, usedGrammar, visitedGrammars);
+			if (result != null)
+				return result;
 		}
 		EPackage pack = loadEPackage(nsUri, context.eResource().getResourceSet());
 		if (pack != null)
 			return Collections.<EObject>singletonList(pack);
 		return Collections.emptyList();
+	}
+
+	private List<EObject> getPackage(String nsUri, Grammar grammar, Set<Grammar> visitedGrammars) {
+		if (!visitedGrammars.add(grammar))
+			return null;
+		for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
+			EPackage pack = declaration.getEPackage();
+			if (pack != null && nsUri.equals(pack.getNsURI()))
+				return Collections.<EObject>singletonList(pack);
+		}
+		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+			List<EObject> result = getPackage(nsUri, usedGrammar, visitedGrammars);
+			if (result != null)
+				return result;
+		}
+		return null;
 	}
 
 	private String getMetamodelNsURI(LeafNode text) {
@@ -139,7 +153,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 	private List<EObject> createPackage(GeneratedMetamodel generatedMetamodel, LeafNode text) {
 		final String nsURI = getMetamodelNsURI(text);
 		final URI uri = URI.createURI(nsURI);
-		if (uri == null || isReferencedBySupergrammar(generatedMetamodel, nsURI))
+		if (uri == null || isReferencedByUsedGrammar(generatedMetamodel, nsURI))
 			return Collections.emptyList();
 		final EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		generatedEPackage.setName(generatedMetamodel.getName());
@@ -151,21 +165,26 @@ public class XtextLinkingService extends DefaultLinkingService {
 		return Collections.<EObject>singletonList(generatedEPackage);
 	}
 
-	private boolean isReferencedBySupergrammar(GeneratedMetamodel generatedMetamodel, String nsURI) {
-		final Grammar g = GrammarUtil.getGrammar(generatedMetamodel);
-		try {
-			Grammar superGrammar = GrammarUtil.getSuperGrammar(g);
-			while(superGrammar != null) {
-				for(AbstractMetamodelDeclaration decl: superGrammar.getMetamodelDeclarations()) {
-					EPackage pack = decl.getEPackage();
-					if (pack != null && nsURI.equals(pack.getNsURI())) {
-						return true;
-					}
-				}
-				superGrammar = GrammarUtil.getSuperGrammar(superGrammar);
+	private boolean isReferencedByUsedGrammar(GeneratedMetamodel generatedMetamodel, String nsURI) {
+		final Grammar grammar = GrammarUtil.getGrammar(generatedMetamodel);
+		final Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+			if (isReferencedByUsedGrammar(usedGrammar, nsURI, visitedGrammars))
+				return true;
+		}
+		return false;
+	}
+
+	private boolean isReferencedByUsedGrammar(Grammar grammar, String nsURI, Set<Grammar> visitedGrammars) {
+		for(AbstractMetamodelDeclaration decl: grammar.getMetamodelDeclarations()) {
+			EPackage pack = decl.getEPackage();
+			if (pack != null && nsURI.equals(pack.getNsURI())) {
+				return true;
 			}
-		} catch(IllegalArgumentException ex) {
-			log.trace(ex.getMessage(), ex);
+		}
+		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+			if (isReferencedByUsedGrammar(usedGrammar, nsURI, visitedGrammars))
+				return true;
 		}
 		return false;
 	}
@@ -189,11 +208,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	@Override
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
-		if (reference == XtextPackage.eINSTANCE.getGrammar_SuperGrammar()) {
-			if (object == null)
-				return "NULL";
+		if (reference == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
 			return ((Grammar) object).getName();
-		}
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
 			return aliasResolver.getValue(object);
 		if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage())

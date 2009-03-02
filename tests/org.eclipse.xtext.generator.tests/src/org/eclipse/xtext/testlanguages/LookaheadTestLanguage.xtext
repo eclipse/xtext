@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.testlanguages.LookaheadTestLanguage
+grammar org.eclipse.xtext.testlanguages.LookaheadTestLanguage with org.eclipse.xtext.common.Terminals
 
 generate lookaheadLang "http://www.eclipse.org/2008/xtext/LookaheadLang"
 

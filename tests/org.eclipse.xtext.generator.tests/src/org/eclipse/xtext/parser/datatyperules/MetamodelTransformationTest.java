@@ -27,7 +27,7 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
-		model = "grammar datatypetests\n" +
+		model = "grammar datatypetests with org.eclipse.xtext.common.Terminals\n" +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore\n" +
 				"generate metamodel 'http://fooo'\n" +
 				"Start:\n" +

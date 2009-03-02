@@ -21,7 +21,7 @@ public class DynamicChannelTest extends AbstractGeneratorTest {
 
 	private final String grammar = "grammar";
 	private final String a = "a";
-	private final String ext = "extends";
+	private final String ext = "with";
 	private final String b = "b";
 	private final String dot = ".";
 	private final String c = "c";
@@ -36,7 +36,7 @@ public class DynamicChannelTest extends AbstractGeneratorTest {
 	private final String id = "ID";
 	private final String sc = ";";
 	private final String colon = ":";
-	private final String model = "grammar a extends b. c\n/* comment \n*/rulename  returns \nd: name=ID;";
+	private final String model = "grammar a with b. c\n/* comment \n*/rulename  returns \nd: name=ID;";
 
 	@Override
 	protected void setUp() throws Exception {

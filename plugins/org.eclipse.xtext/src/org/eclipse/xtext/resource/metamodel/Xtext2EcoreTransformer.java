@@ -16,10 +16,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -66,7 +68,6 @@ public class Xtext2EcoreTransformer {
 
 	private final Grammar grammar;
 	private Map<String, EPackage> generatedEPackages;
-	private Grammar superGrammar;
 	private EClassifierInfos eClassifierInfos;
 	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
 
@@ -115,13 +116,10 @@ public class Xtext2EcoreTransformer {
 	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have matching metamodel declarations
 	 */
 	public void transform() {
-		superGrammar = grammar.getSuperGrammar();
-
 		eClassifierInfos = new EClassifierInfos();
 		generatedEPackages = new HashMap<String, EPackage>();
 
-		if (superGrammar != null)
-			collectEClassInfosOfSuperGrammar();
+		collectEClassInfosOfUsedGrammars();
 		collectEPackages();
 
 		if (!deriveTypes())
@@ -193,8 +191,8 @@ public class Xtext2EcoreTransformer {
 
 	private void checkSupertypeOfOverriddenTerminalRule(AbstractRule rule) throws TransformationException {
 		EDataType datatype = (EDataType) rule.getType().getType();
-		if (superGrammar != null) {
-			AbstractRule parentRule = GrammarUtil.findRuleForName(superGrammar, rule.getName());
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			AbstractRule parentRule = GrammarUtil.findRuleForName(usedGrammar, rule.getName());
 			if (parentRule != null) {
 				if (parentRule.getType() == null || parentRule.getType().getType() == null)
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
@@ -202,7 +200,7 @@ public class Xtext2EcoreTransformer {
 				if (!datatype.equals(parentRule.getType().getType()))
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot inherit from datatype rule and return another type.", rule.getType());
-
+				return;
 			}
 		}
 	}
@@ -384,16 +382,24 @@ public class Xtext2EcoreTransformer {
 		if (rule.getType() != null && rule.getType().getType() != null)
 			return rule.getType().getType();
 		if (rule instanceof TerminalRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
-			Grammar checkMe = grammar;
-			while(checkMe != null) { // assume EString as default if it is visible
-				for(AbstractMetamodelDeclaration decl: checkMe.getMetamodelDeclarations()) {
-					if (EcorePackage.eINSTANCE.equals(decl.getEPackage()))
-						return EcorePackage.Literals.ESTRING;
-				}
-				checkMe = checkMe.getSuperGrammar();
-			}
+			if (isEcorePackageUsed(grammar, new HashSet<Grammar>()))
+				return EcorePackage.Literals.ESTRING;
 		}
 		return null;
+	}
+
+	private static boolean isEcorePackageUsed(Grammar grammar, Set<Grammar> checkedGrammars) {
+		if (!checkedGrammars.add(grammar))
+			return false;
+		for (AbstractMetamodelDeclaration decl: grammar.getMetamodelDeclarations()) {
+			if (EcorePackage.eINSTANCE.equals(decl.getEPackage()))
+				return true;
+		}
+		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+			if (isEcorePackageUsed(usedGrammar, checkedGrammars))
+				return true;
+		}
+		return false;
 	}
 
 	TypeRef getTypeRef(EClassifier classifier) {
@@ -526,21 +532,32 @@ public class Xtext2EcoreTransformer {
 			}
 
 		}.doSwitch(element);
-		if (superGrammar != null) {
-			AbstractRule parentRule = GrammarUtil.findRuleForName(superGrammar, rule.getName());
-			if (parentRule != null) {
-				if (parentRule.getType().getType() instanceof EDataType)
-					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
-							"Cannot inherit from datatype rule and return another type.", rule.getType());
-				EClassifierInfo parentTypeInfo = eClassifierInfos.getInfoOrNull(parentRule.getType());
-				if (parentTypeInfo == null)
-					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
-							"Cannot determine return type of overridden rule.", rule.getType());
-				addSuperType(rule, rule.getType(), parentTypeInfo);
-			}
-		}
 		if (ex != null)
 			throw ex;
+		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+			if (deriveTypeHierarchyFromOverridden(rule, usedGrammar, visitedGrammars))
+				return;
+		}
+
+	}
+
+	private boolean deriveTypeHierarchyFromOverridden(ParserRule rule, Grammar grammar, Set<Grammar> visitedGrammars) throws TransformationException {
+		if (!visitedGrammars.add(grammar))
+			return false;
+		AbstractRule parentRule = GrammarUtil.findRuleForName(grammar, rule.getName());
+		if (parentRule != null) {
+			if (parentRule.getType().getType() instanceof EDataType)
+				throw new TransformationException(TransformationErrorCode.InvalidSupertype,
+						"Cannot inherit from datatype rule and return another type.", rule.getType());
+			EClassifierInfo parentTypeInfo = eClassifierInfos.getInfoOrNull(parentRule.getType());
+			if (parentTypeInfo == null)
+				throw new TransformationException(TransformationErrorCode.InvalidSupertype,
+						"Cannot determine return type of overridden rule.", rule.getType());
+			addSuperType(rule, rule.getType(), parentTypeInfo);
+			return true;
+		}
+		return false;
 	}
 
 	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superTypeInfo) throws TransformationException {
@@ -617,21 +634,32 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	private void collectEClassInfosOfSuperGrammar() {
-		this.getEClassifierInfos().setParent(createClassifierInfosFor(grammar.getSuperGrammar()));
+	private void collectEClassInfosOfUsedGrammars() {
+		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
+		Set<String> knownPackages = new HashSet<String>();
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars, knownPackages);
+			if (parent != null)
+				this.getEClassifierInfos().addParent(parent);
+		}
+
 	}
 
-	private EClassifierInfos createClassifierInfosFor(Grammar grammar) {
-		if (grammar == null)
+	private EClassifierInfos createClassifierInfosFor(Grammar grammar, Set<Grammar> visitedGrammars, Set<String> knownPackages) {
+		if (!visitedGrammars.add(grammar))
 			return null;
-		EClassifierInfos result = new EClassifierInfos();
+		final EClassifierInfos result = new EClassifierInfos();
 		for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
-			EPackage referencedEPackage = declaration.getEPackage();
-			if (referencedEPackage != null) {
+			final EPackage referencedEPackage = declaration.getEPackage();
+			if (referencedEPackage != null && knownPackages.add(referencedEPackage.getNsURI())) {
 				collectClassInfosOf(result, referencedEPackage, declaration, false);
 			}
 		}
-		result.setParent(createClassifierInfosFor(grammar.getSuperGrammar()));
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			EClassifierInfos parent = createClassifierInfosFor(usedGrammar, visitedGrammars, knownPackages);
+			if (parent != null)
+				result.addParent(parent);
+		}
 		return result;
 	}
 
