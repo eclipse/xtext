@@ -92,14 +92,14 @@ TerminalTokenElement returns AbstractElement:
 ;
 
 AbstractNegatedToken:
-   NegatedToken | UpToToken
+   NegatedToken | UntilToken
 ;
 
 NegatedToken:
 	'!' ^terminal=TerminalTokenElement
 ;
 
-UpToToken:
+UntilToken:
 	'->' ^terminal=TerminalTokenElement
 ;
 
