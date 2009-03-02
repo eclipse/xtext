@@ -1,0 +1,12 @@
+import xtext;
+
+extension org::eclipse::xtext::GrammarUtil;
+
+projectInfoClassName(Grammar this) :
+	getNamespace()+".ui.wizard."+getName()+"ProjectInfo";
+
+projectCreatorClassName(Grammar this) :
+	getNamespace()+".ui.wizard."+getName()+"ProjectCreator";
+	
+projectWizardClassName(Grammar this) :
+	getNamespace()+".ui.wizard."+getName()+"NewProjectWizard";

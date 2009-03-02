@@ -1,0 +1,101 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE root(String generatorProjectName) FOR Grammar»
+«FILE projectCreatorClassName().asPath()+".java" UI_SRC_GEN-»
+package «projectCreatorClassName().toJavaPackage()».wizard;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
+import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
+
+public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCreator {
+	
+	private static final String DSL_GENERATOR_PROJECT_NAME = "«generatorProjectName»";
+
+	private static final String SRC_GEN_ROOT = "src-gen";
+	private static final String SRC_ROOT = "src";
+	private final List<String> SRC_FOLDER_LIST = Collections
+			.unmodifiableList(Arrays.asList(SRC_ROOT, SRC_GEN_ROOT));
+
+	protected «projectInfoClassName()» getProjectInfo() {
+		return («projectCreatorClassName()») getProjectInfo();
+	}
+
+	@Override
+	protected void execute(final IProgressMonitor monitor)
+			throws CoreException, InvocationTargetException,
+			InterruptedException {
+		monitor.beginTask("Creating model project " + getProjectInfo().getProjectName(), 3);
+
+		final IProject dslProject = EclipseResourceUtil.createProject(
+				getProjectInfo().getProjectName(), SRC_FOLDER_LIST, Collections
+						.<IProject> emptyList(),
+				new LinkedHashSet<String>(Arrays.asList(
+						"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
+						"org.eclipse.xtext", 
+						"org.eclipse.xtext.generator",
+						"org.eclipse.xtend",
+						"org.eclipse.xtend.typesystem.emf",
+						"org.eclipse.xpand", 
+						"org.apache.commons.logging",
+						"de.itemis.xtext.antlr;resolution:=optional",
+						"org.eclipse.emf.codegen.ecore;resolution:=optional",
+						"org.eclipse.xtend.util.stdlib",
+						DSL_GENERATOR_PROJECT_NAME)), null, null, null,
+				monitor, null);
+
+		if (dslProject == null) {
+			return;
+		}
+
+		monitor.worked(1);
+
+		// refresh folder and select file to edit
+		if (dslProject != null) {
+			dslProject.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+		}
+		// IFile dslGrammarFile = getModelFile(basePackageFolder);
+		// BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI
+		// .getWorkbench().getActiveWorkbenchWindow());
+		// this.result = dslGrammarFile;
+
+	}
+
+	private IFile getModelFile(IFolder folder) throws CoreException {
+		for (IResource resource : folder.members()) {
+			if (!"java".equals(resource.getFileExtension())) {
+				return (IFile) resource;
+			}
+		}
+		throw new IllegalStateException("No xtext file was found in folder '"
+				+ folder.toString() + "'!");
+	}
+
+}«ENDFILE»
+«ENDDEFINE»
