@@ -36,27 +36,27 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 
 	private IElementConsumer group$4$Consumer;
 
-	private IElementConsumer action$6$Consumer;
+	private IElementConsumer action$5$Consumer;
 
-	private IElementConsumer keyword$8$Consumer;
+	private IElementConsumer keyword$7$Consumer;
 
-	private IElementConsumer assignment$9$Consumer;
+	private IElementConsumer assignment$8$Consumer;
 
-	private IElementConsumer ruleCall$10$Consumer;
+	private IElementConsumer ruleCall$9$Consumer;
 
-	private IElementConsumer group$11$Consumer;
+	private IElementConsumer group$10$Consumer;
 
-	private IElementConsumer action$13$Consumer;
+	private IElementConsumer action$11$Consumer;
 
-	private IElementConsumer keyword$15$Consumer;
+	private IElementConsumer keyword$13$Consumer;
 
-	private IElementConsumer assignment$16$Consumer;
+	private IElementConsumer assignment$14$Consumer;
 
-	private IElementConsumer ruleCall$17$Consumer;
+	private IElementConsumer ruleCall$15$Consumer;
 
-	private ICharacterClass keyword$8$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 
-	private ICharacterClass keyword$15$Delimiter;
+	private ICharacterClass keyword$13$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -92,7 +92,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(group$4$Consumer);
-			acceptor.accept(group$11$Consumer);
+			acceptor.accept(group$10$Consumer);
 		}
 	}
 
@@ -104,15 +104,15 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(action$6$Consumer);
-			acceptor.accept(keyword$8$Consumer);
-			acceptor.accept(assignment$9$Consumer);
+			acceptor.accept(action$5$Consumer);
+			acceptor.accept(keyword$7$Consumer);
+			acceptor.accept(assignment$8$Consumer);
 		}
 	}
 
-	protected class Action$6$Consumer extends ElementConsumer<Action> {
+	protected class Action$5$Consumer extends ElementConsumer<Action> {
 		
-		protected Action$6$Consumer(final Action action) {
+		protected Action$5$Consumer(final Action action) {
 			super(action);
 		}
 		
@@ -123,33 +123,33 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		}
 	}
 
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$8$Consumer(final Keyword keyword) {
+		protected Keyword$7$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$9$Consumer extends AssignmentConsumer {
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$9$Consumer(final Assignment assignment) {
+		protected Assignment$8$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$10$Consumer;
+			return ruleCall$9$Consumer;
 		}
 	}
 
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -159,23 +159,23 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		}
 	}
 
-	protected class Group$11$Consumer extends GroupConsumer {
+	protected class Group$10$Consumer extends GroupConsumer {
 		
-		protected Group$11$Consumer(final Group group) {
+		protected Group$10$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(action$13$Consumer);
-			acceptor.accept(keyword$15$Consumer);
-			acceptor.accept(assignment$16$Consumer);
+			acceptor.accept(action$11$Consumer);
+			acceptor.accept(keyword$13$Consumer);
+			acceptor.accept(assignment$14$Consumer);
 		}
 	}
 
-	protected class Action$13$Consumer extends ElementConsumer<Action> {
+	protected class Action$11$Consumer extends ElementConsumer<Action> {
 		
-		protected Action$13$Consumer(final Action action) {
+		protected Action$11$Consumer(final Action action) {
 			super(action);
 		}
 		
@@ -186,33 +186,33 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		}
 	}
 
-	protected class Keyword$15$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$13$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$15$Consumer(final Keyword keyword) {
+		protected Keyword$13$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$15$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$16$Consumer extends AssignmentConsumer {
+	protected class Assignment$14$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$16$Consumer(final Assignment assignment) {
+		protected Assignment$14$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$17$Consumer;
+			return ruleCall$15$Consumer;
 		}
 	}
 
-	protected class RuleCall$17$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$17$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -224,8 +224,8 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 
 	public ComplexReconstrTestLanguageOpConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -244,15 +244,15 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerm());
 		alternatives$3$Consumer = new Alternatives$3$Consumer(rule.ele1Alternatives());
 		group$4$Consumer = new Group$4$Consumer(rule.ele10Group());
-		action$6$Consumer = new Action$6$Consumer(rule.ele1000ActionAddaddOperands());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele1001KeywordPlusSign());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele101AssignmentAddOperands());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele1010ParserRuleCallTerm());
-		group$11$Consumer = new Group$11$Consumer(rule.ele11Group());
-		action$13$Consumer = new Action$13$Consumer(rule.ele1100ActionMinusminusOperands());
-		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele1101KeywordHyphenMinus());
-		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele111AssignmentMinusOperands());
-		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele1110ParserRuleCallTerm());
+		action$5$Consumer = new Action$5$Consumer(rule.ele100ActionAddaddOperands());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele101KeywordPlusSign());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele102AssignmentAddOperands());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1020ParserRuleCallTerm());
+		group$10$Consumer = new Group$10$Consumer(rule.ele11Group());
+		action$11$Consumer = new Action$11$Consumer(rule.ele110ActionMinusminusOperands());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele111KeywordHyphenMinus());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele112AssignmentMinusOperands());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele1120ParserRuleCallTerm());
 	}
 	
 	@Override
@@ -269,20 +269,20 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		this.termConsumer = termConsumer;
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$15$Delimiter() {
-		return keyword$15$Delimiter;
+	public ICharacterClass getKeyword$13$Delimiter() {
+		return keyword$13$Delimiter;
 	}
 	
-	public void setKeyword$15$Delimiter(ICharacterClass characterClass) {
-		keyword$15$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
+		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

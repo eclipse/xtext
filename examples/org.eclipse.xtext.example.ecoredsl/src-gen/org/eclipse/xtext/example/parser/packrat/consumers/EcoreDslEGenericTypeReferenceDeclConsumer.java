@@ -41,41 +41,41 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 
 	private IElementConsumer group$6$Consumer;
 
-	private IElementConsumer keyword$9$Consumer;
+	private IElementConsumer keyword$7$Consumer;
 
-	private IElementConsumer assignment$10$Consumer;
+	private IElementConsumer assignment$8$Consumer;
 
-	private IElementConsumer ruleCall$11$Consumer;
+	private IElementConsumer ruleCall$9$Consumer;
 
-	private IElementConsumer group$12$Consumer;
+	private IElementConsumer group$10$Consumer;
 
-	private IElementConsumer keyword$13$Consumer;
+	private IElementConsumer keyword$11$Consumer;
 
-	private IElementConsumer assignment$14$Consumer;
+	private IElementConsumer assignment$12$Consumer;
 
-	private IElementConsumer ruleCall$15$Consumer;
+	private IElementConsumer ruleCall$13$Consumer;
+
+	private IElementConsumer keyword$14$Consumer;
+
+	private IElementConsumer group$15$Consumer;
 
 	private IElementConsumer keyword$16$Consumer;
 
-	private IElementConsumer group$17$Consumer;
+	private IElementConsumer assignment$17$Consumer;
 
-	private IElementConsumer keyword$18$Consumer;
-
-	private IElementConsumer assignment$19$Consumer;
-
-	private IElementConsumer crossReference$20$Consumer;
+	private IElementConsumer crossReference$18$Consumer;
 
 	private ISequenceMatcher crossReference$4$Delimiter;
 
-	private ISequenceMatcher crossReference$20$Delimiter;
+	private ISequenceMatcher crossReference$18$Delimiter;
 
-	private ICharacterClass keyword$9$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 
-	private ICharacterClass keyword$13$Delimiter;
+	private ICharacterClass keyword$11$Delimiter;
+
+	private ICharacterClass keyword$14$Delimiter;
 
 	private ICharacterClass keyword$16$Delimiter;
-
-	private ICharacterClass keyword$18$Delimiter;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -86,7 +86,7 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(group$2$Consumer);
-			acceptor.accept(group$17$Consumer);
+			acceptor.accept(group$15$Consumer);
 		}
 	}
 
@@ -135,40 +135,40 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$9$Consumer);
-			acceptor.accept(assignment$10$Consumer);
-			acceptor.accept(group$12$Consumer);
-			acceptor.accept(keyword$16$Consumer);
+			acceptor.accept(keyword$7$Consumer);
+			acceptor.accept(assignment$8$Consumer);
+			acceptor.accept(group$10$Consumer);
+			acceptor.accept(keyword$14$Consumer);
 		}
 	}
 
-	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$9$Consumer(final Keyword keyword) {
+		protected Keyword$7$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$10$Consumer extends AssignmentConsumer {
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$10$Consumer(final Assignment assignment) {
+		protected Assignment$8$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$11$Consumer;
+			return ruleCall$9$Consumer;
 		}
 	}
 
-	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -178,52 +178,77 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		}
 	}
 
-	protected class Group$12$Consumer extends LoopGroupConsumer {
+	protected class Group$10$Consumer extends LoopGroupConsumer {
 		
-		protected Group$12$Consumer(final Group group) {
+		protected Group$10$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$13$Consumer);
-			acceptor.accept(assignment$14$Consumer);
+			acceptor.accept(keyword$11$Consumer);
+			acceptor.accept(assignment$12$Consumer);
 		}
 	}
 
-	protected class Keyword$13$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$13$Consumer(final Keyword keyword) {
+		protected Keyword$11$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$14$Consumer extends AssignmentConsumer {
+	protected class Assignment$12$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$14$Consumer(final Assignment assignment) {
+		protected Assignment$12$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$15$Consumer;
+			return ruleCall$13$Consumer;
 		}
 	}
 
-	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
 			return consumeNonTerminal(eGenericTypeDeclConsumer, "eTypeArguments", true, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Keyword$14$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$14$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
+		}
+	}
+
+	protected class Group$15$Consumer extends GroupConsumer {
+		
+		protected Group$15$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$16$Consumer);
+			acceptor.accept(assignment$17$Consumer);
 		}
 	}
 
@@ -239,63 +264,38 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		}
 	}
 
-	protected class Group$17$Consumer extends GroupConsumer {
+	protected class Assignment$17$Consumer extends AssignmentConsumer {
 		
-		protected Group$17$Consumer(final Group group) {
-			super(group);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$18$Consumer);
-			acceptor.accept(assignment$19$Consumer);
-		}
-	}
-
-	protected class Keyword$18$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$18$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter(), optional);
-		}
-	}
-
-	protected class Assignment$19$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$19$Consumer(final Assignment assignment) {
+		protected Assignment$17$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return crossReference$20$Consumer;
+			return crossReference$18$Consumer;
 		}
 	}
 
-	protected class CrossReference$20$Consumer extends ElementConsumer<CrossReference> {
+	protected class CrossReference$18$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected CrossReference$20$Consumer(final CrossReference crossReference) {
+		protected CrossReference$18$Consumer(final CrossReference crossReference) {
 			super(crossReference);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "eTypeParameter", false, false, getElement(), getCrossReference$20$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "eTypeParameter", false, false, getElement(), getCrossReference$18$Delimiter(), optional);
 		}
 	}
 
 	public EcoreDslEGenericTypeReferenceDeclConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		crossReference$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		crossReference$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
+		crossReference$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -315,18 +315,18 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentEClassifier());
 		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele000CrossReferenceEStringEClassifier());
 		group$6$Consumer = new Group$6$Consumer(rule.ele01Group());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele01000KeywordLessThanSign());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele01001AssignmentETypeArguments());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele010010ParserRuleCallEGenericTypeDecl());
-		group$12$Consumer = new Group$12$Consumer(rule.ele0101Group());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele01010KeywordComma());
-		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele01011AssignmentETypeArguments());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele010110ParserRuleCallEGenericTypeDecl());
-		keyword$16$Consumer = new Keyword$16$Consumer(rule.ele011KeywordGreaterThanSign());
-		group$17$Consumer = new Group$17$Consumer(rule.ele1Group());
-		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele10KeywordNumberSign());
-		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele11AssignmentETypeParameter());
-		crossReference$20$Consumer = new CrossReference$20$Consumer(rule.ele110CrossReferenceEStringETypeParameter());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele010KeywordLessThanSign());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele011AssignmentETypeArguments());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0110ParserRuleCallEGenericTypeDecl());
+		group$10$Consumer = new Group$10$Consumer(rule.ele012Group());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele0120KeywordComma());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele0121AssignmentETypeArguments());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele01210ParserRuleCallEGenericTypeDecl());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele013KeywordGreaterThanSign());
+		group$15$Consumer = new Group$15$Consumer(rule.ele1Group());
+		keyword$16$Consumer = new Keyword$16$Consumer(rule.ele10KeywordNumberSign());
+		assignment$17$Consumer = new Assignment$17$Consumer(rule.ele11AssignmentETypeParameter());
+		crossReference$18$Consumer = new CrossReference$18$Consumer(rule.ele110CrossReferenceEStringETypeParameter());
 	}
 	
 	@Override
@@ -355,28 +355,36 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 		crossReference$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getCrossReference$20$Delimiter() {
-		return crossReference$20$Delimiter;
+	public ISequenceMatcher getCrossReference$18$Delimiter() {
+		return crossReference$18$Delimiter;
 	}
 	
-	public void setCrossReference$20$Delimiter(ISequenceMatcher matcher) {
-		crossReference$20$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$18$Delimiter(ISequenceMatcher matcher) {
+		crossReference$18$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$13$Delimiter() {
-		return keyword$13$Delimiter;
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
 	}
 	
-	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
-		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$14$Delimiter() {
+		return keyword$14$Delimiter;
+	}
+	
+	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
+		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$16$Delimiter() {
@@ -385,14 +393,6 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 	
 	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
 		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$18$Delimiter() {
-		return keyword$18$Delimiter;
-	}
-	
-	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
-		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

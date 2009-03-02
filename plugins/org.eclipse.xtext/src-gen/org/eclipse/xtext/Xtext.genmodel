@@ -118,9 +118,6 @@
     </genClasses>
     <genClasses>
       <ecoreClass href="Xtext.ecore#//Wildcard"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="Xtext.ecore#//Wildcard/isWildcard"/>
-      </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="Xtext.ecore#//CrossReference"/>

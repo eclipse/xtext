@@ -80,11 +80,11 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((((	
+((	
 	
 	    lv_first_0='foo\\bar' 
     {
-        createLeafNode(grammarAccess.prModel().ele0000KeywordFooBar(), "first"); 
+        createLeafNode(grammarAccess.prModel().ele00KeywordFooBar(), "first"); 
     }
 
  
@@ -106,7 +106,7 @@ ruleModel returns [EObject current=null]
 	
 	    lv_second_1='foo\\' 
     {
-        createLeafNode(grammarAccess.prModel().ele0010KeywordFoo(), "second"); 
+        createLeafNode(grammarAccess.prModel().ele10KeywordFoo(), "second"); 
     }
 
  
@@ -123,12 +123,12 @@ ruleModel returns [EObject current=null]
 	        }
 	    }
 	
-))
+)
     |(	
 	
 	    lv_third_2='\\bar' 
     {
-        createLeafNode(grammarAccess.prModel().ele010KeywordBar(), "third"); 
+        createLeafNode(grammarAccess.prModel().ele20KeywordBar(), "third"); 
     }
 
  
@@ -145,12 +145,12 @@ ruleModel returns [EObject current=null]
 	        }
 	    }
 	
-))
+)
     |(	
 	
 	    lv_forth_3='\\' 
     {
-        createLeafNode(grammarAccess.prModel().ele10KeywordReverseSolidus(), "forth"); 
+        createLeafNode(grammarAccess.prModel().ele30KeywordReverseSolidus(), "forth"); 
     }
 
  
@@ -172,17 +172,17 @@ ruleModel returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

@@ -249,8 +249,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:9: ( ( '^' )? ( ( ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '\\u00F6' ) | '\\u00E4' ) | '\\u00FC' ) | '_' ) ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) | '0' .. '9' )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:11: ( '^' )? ( ( ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '\\u00F6' ) | '\\u00E4' ) | '\\u00FC' ) | '_' ) ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) | '0' .. '9' )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:11: ( '^' )?
             int alt1=2;
@@ -280,7 +280,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:75: ( ( ( 'a' .. 'z' | 'A' .. 'Z' ) | '_' ) | '0' .. '9' )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:807:67: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -375,10 +375,10 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:13: ( ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:15: ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:13: ( ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:15: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:15: ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:15: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -390,16 +390,16 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("811:15: ( '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("811:15: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:16: '\\\"' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:16: '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )* '\\\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:21: ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:21: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -415,7 +415,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:22: '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:22: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -432,7 +432,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:76: ~ ( ( '\\\\' | '\\\"' ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:64: ~ ( ( '\\\\' | '\\\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -458,10 +458,10 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:98: '\\'' ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:103: ( '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -477,7 +477,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:104: '\\\\' ( ( ( ( ( ( ( 'b' | 't' ) | 'n' ) | 'f' ) | 'r' ) | '\\\"' ) | '\\'' ) | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -494,7 +494,7 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:158: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:811:134: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -683,10 +683,10 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:817:9: ( ( ( ( ' ' | '\\t' ) | '\\r' ) | '\\n' )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:817:11: ( ( ( ' ' | '\\t' ) | '\\r' ) | '\\n' )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:817:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:817:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:817:11: ( ( ( ' ' | '\\t' ) | '\\r' ) | '\\n' )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.g:817:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -893,32 +893,35 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
         "\1\uffff\1\20\1\uffff\1\20\1\uffff\2\20\1\27\1\16\1\uffff\3\16\2"+
-        "\uffff\1\20\2\uffff\1\20\1\uffff\3\20\2\uffff\1\27\4\uffff\12\20"+
-        "\1\55\4\20\1\uffff\7\20\1\73\2\20\1\76\1\77\1\20\1\uffff\2\20\2"+
-        "\uffff\4\20\1\uffff\7\20\1\117\1\120\1\20\2\uffff\2\20\1\124\1\uffff";
+        "\uffff\1\20\2\uffff\1\20\1\uffff\3\20\1\uffff\1\27\5\uffff\12\20"+
+        "\1\55\4\20\1\uffff\6\20\1\72\3\20\1\76\1\77\1\uffff\3\20\2\uffff"+
+        "\5\20\1\uffff\5\20\1\116\1\20\1\120\1\uffff\1\20\1\uffff\2\20\1"+
+        "\124\1\uffff";
     static final String DFA12_eofS =
         "\125\uffff";
     static final String DFA12_minS =
         "\1\0\1\157\1\uffff\1\166\1\uffff\1\165\1\154\1\56\1\101\1\uffff"+
-        "\2\0\1\52\2\uffff\1\144\2\uffff\1\145\1\uffff\1\142\1\164\1\145"+
-        "\2\uffff\1\56\4\uffff\1\145\2\162\1\145\1\155\1\154\1\162\1\165"+
-        "\1\156\1\145\1\60\1\151\1\154\1\144\1\156\1\uffff\1\144\2\145\1"+
-        "\164\1\144\1\61\1\144\1\60\1\145\1\155\2\60\1\155\1\uffff\1\156"+
-        "\1\157\2\uffff\1\157\1\40\2\144\1\uffff\1\154\3\145\2\154\1\155"+
-        "\2\60\1\145\2\uffff\1\156\1\164\1\60\1\uffff";
+        "\2\0\1\52\2\uffff\1\144\2\uffff\1\145\1\uffff\1\142\1\145\1\164"+
+        "\1\uffff\1\56\5\uffff\1\145\2\162\1\155\1\145\1\154\1\162\1\165"+
+        "\1\145\1\156\1\60\1\151\1\154\1\156\1\144\1\uffff\1\144\1\145\1"+
+        "\164\1\145\1\144\1\61\1\60\1\144\1\155\1\145\2\60\1\uffff\1\155"+
+        "\1\157\1\156\2\uffff\1\157\1\144\1\40\1\144\1\145\1\uffff\1\154"+
+        "\1\145\1\154\1\145\1\154\1\60\1\155\1\60\1\uffff\1\145\1\uffff\1"+
+        "\156\1\164\1\60\1\uffff";
     static final String DFA12_maxS =
         "\1\ufffe\1\157\1\uffff\1\166\1\uffff\1\165\1\170\1\71\1\u00fc\1"+
         "\uffff\2\ufffe\1\57\2\uffff\1\144\2\uffff\1\145\1\uffff\1\142\1"+
-        "\164\1\145\2\uffff\1\71\4\uffff\1\145\2\162\1\145\1\155\1\154\1"+
-        "\162\1\165\1\156\1\145\1\172\1\151\1\154\1\144\1\156\1\uffff\1\144"+
-        "\2\145\1\164\1\145\1\63\1\144\1\172\1\145\1\155\2\172\1\155\1\uffff"+
-        "\1\156\1\157\2\uffff\1\157\1\145\2\144\1\uffff\1\154\3\145\2\154"+
-        "\1\155\2\172\1\145\2\uffff\1\156\1\164\1\172\1\uffff";
+        "\145\1\164\1\uffff\1\71\5\uffff\1\145\2\162\1\155\1\145\1\154\1"+
+        "\162\1\165\1\145\1\156\1\172\1\151\1\154\1\156\1\144\1\uffff\1\144"+
+        "\1\145\1\164\2\145\1\63\1\172\1\144\1\155\1\145\2\172\1\uffff\1"+
+        "\155\1\157\1\156\2\uffff\1\157\1\144\1\145\1\144\1\145\1\uffff\1"+
+        "\154\1\145\1\154\1\145\1\154\1\172\1\155\1\172\1\uffff\1\145\1\uffff"+
+        "\1\156\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
         "\2\uffff\1\2\1\uffff\1\5\4\uffff\1\14\3\uffff\1\21\1\22\1\uffff"+
-        "\1\14\1\2\1\uffff\1\5\3\uffff\1\15\1\13\1\uffff\1\16\1\17\1\20\1"+
-        "\21\17\uffff\1\1\15\uffff\1\10\2\uffff\1\6\1\7\4\uffff\1\4\12\uffff"+
-        "\1\11\1\12\3\uffff\1\3";
+        "\1\14\1\2\1\uffff\1\5\3\uffff\1\15\1\uffff\1\13\1\16\1\17\1\20\1"+
+        "\21\17\uffff\1\1\14\uffff\1\10\3\uffff\1\7\1\6\5\uffff\1\4\10\uffff"+
+        "\1\11\1\uffff\1\12\3\uffff\1\3";
     static final String DFA12_specialS =
         "\125\uffff}>";
     static final String[] DFA12_transitionS = {
@@ -931,8 +934,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             "\1\22",
             "",
             "\1\24",
-            "\1\26\13\uffff\1\25",
-            "\1\30\1\uffff\12\31",
+            "\1\25\13\uffff\1\26",
+            "\1\31\1\uffff\12\30",
             "\32\20\4\uffff\1\20\1\uffff\32\20\151\uffff\1\20\21\uffff\1"+
             "\20\5\uffff\1\20",
             "",
@@ -950,8 +953,8 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             "\1\41",
             "\1\42",
             "",
+            "\1\31\1\uffff\12\30",
             "",
-            "\1\30\1\uffff\12\31",
             "",
             "",
             "",
@@ -976,36 +979,36 @@ public class InternalConcreteTestLanguageLexer extends Lexer {
             "\1\63",
             "\1\64",
             "\1\65",
-            "\1\66\1\67",
-            "\1\70\1\uffff\1\71",
-            "\1\72",
+            "\1\67\1\66",
+            "\1\71\1\uffff\1\70",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+            "\1\73",
             "\1\74",
             "\1\75",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\1\100",
             "",
+            "\1\100",
             "\1\101",
             "\1\102",
             "",
             "",
             "\1\103",
-            "\1\104\104\uffff\1\105",
-            "\1\106",
+            "\1\104",
+            "\1\105\104\uffff\1\106",
             "\1\107",
-            "",
             "\1\110",
+            "",
             "\1\111",
             "\1\112",
             "\1\113",
             "\1\114",
             "\1\115",
-            "\1\116",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
+            "\1\117",
             "\12\20\7\uffff\32\20\4\uffff\1\20\1\uffff\32\20",
-            "\1\121",
             "",
+            "\1\121",
             "",
             "\1\122",
             "\1\123",

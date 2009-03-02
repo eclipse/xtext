@@ -32,39 +32,39 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer group$1$Consumer;
 
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer assignment$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
+	private IElementConsumer group$5$Consumer;
+
 	private IElementConsumer keyword$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
-	private IElementConsumer ruleCall$8$Consumer;
-
-	private IElementConsumer group$9$Consumer;
+	private IElementConsumer crossReference$8$Consumer;
 
 	private IElementConsumer keyword$10$Consumer;
 
 	private IElementConsumer assignment$11$Consumer;
 
-	private IElementConsumer crossReference$12$Consumer;
+	private IElementConsumer ruleCall$12$Consumer;
 
-	private IElementConsumer keyword$14$Consumer;
+	private IElementConsumer keyword$13$Consumer;
 
-	private IElementConsumer assignment$15$Consumer;
+	private ISequenceMatcher crossReference$8$Delimiter;
 
-	private IElementConsumer ruleCall$16$Consumer;
-
-	private IElementConsumer keyword$17$Consumer;
-
-	private ISequenceMatcher crossReference$12$Delimiter;
+	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$6$Delimiter;
 
 	private ICharacterClass keyword$10$Delimiter;
 
-	private ICharacterClass keyword$14$Delimiter;
+	private ICharacterClass keyword$13$Delimiter;
 
-	private ICharacterClass keyword$17$Delimiter;
-
-	private ISequenceMatcher ruleCall$8$Delimiter;
+	private ISequenceMatcher ruleCall$4$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -74,12 +74,61 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(assignment$3$Consumer);
+			acceptor.accept(group$5$Consumer);
+			acceptor.accept(keyword$10$Consumer);
+			acceptor.accept(assignment$11$Consumer);
+			acceptor.accept(keyword$13$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$3$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$3$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$4$Consumer;
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
+		}
+	}
+
+	protected class Group$5$Consumer extends OptionalGroupConsumer {
+		
+		protected Group$5$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(keyword$6$Consumer);
 			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(group$9$Consumer);
-			acceptor.accept(keyword$14$Consumer);
-			acceptor.accept(assignment$15$Consumer);
-			acceptor.accept(keyword$17$Consumer);
 		}
 	}
 
@@ -103,32 +152,19 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$8$Consumer;
+			return crossReference$8$Consumer;
 		}
 	}
 
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+	protected class CrossReference$8$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
+		protected CrossReference$8$Consumer(final CrossReference crossReference) {
+			super(crossReference);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
-		}
-	}
-
-	protected class Group$9$Consumer extends OptionalGroupConsumer {
-		
-		protected Group$9$Consumer(final Group group) {
-			super(group);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$10$Consumer);
-			acceptor.accept(assignment$11$Consumer);
+			return consumeTerminal(idConsumer, "superType", false, false, getElement(), getCrossReference$8$Delimiter(), optional);
 		}
 	}
 
@@ -144,7 +180,7 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Assignment$11$Consumer extends AssignmentConsumer {
+	protected class Assignment$11$Consumer extends LoopAssignmentConsumer {
 		
 		protected Assignment$11$Consumer(final Assignment assignment) {
 			super(assignment);
@@ -152,49 +188,13 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return crossReference$12$Consumer;
+			return ruleCall$12$Consumer;
 		}
 	}
 
-	protected class CrossReference$12$Consumer extends ElementConsumer<CrossReference> {
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected CrossReference$12$Consumer(final CrossReference crossReference) {
-			super(crossReference);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "superType", false, false, getElement(), getCrossReference$12$Delimiter(), optional);
-		}
-	}
-
-	protected class Keyword$14$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$14$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
-		}
-	}
-
-	protected class Assignment$15$Consumer extends LoopAssignmentConsumer {
-		
-		protected Assignment$15$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$16$Consumer;
-		}
-	}
-
-	protected class RuleCall$16$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$16$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -204,26 +204,26 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Keyword$17$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$13$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$17$Consumer(final Keyword keyword) {
+		protected Keyword$13$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$13$Delimiter(), optional);
 		}
 	}
 
 	public DomainmodelEntityConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -239,17 +239,17 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele00000KeywordEntity());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele00001AssignmentName());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele000010TerminalRuleCallID());
-		group$9$Consumer = new Group$9$Consumer(rule.ele0001Group());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele00010KeywordExtends());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele00011AssignmentSuperType());
-		crossReference$12$Consumer = new CrossReference$12$Consumer(rule.ele000110CrossReferenceEStringEntity());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele001KeywordLeftCurlyBracket());
-		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele01AssignmentFeatures());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele010ParserRuleCallFeature());
-		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele1KeywordRightCurlyBracket());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordEntity());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
+		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordExtends());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentSuperType());
+		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele210CrossReferenceEStringEntity());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele3KeywordLeftCurlyBracket());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele4AssignmentFeatures());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele40ParserRuleCallFeature());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele5KeywordRightCurlyBracket());
 	}
 	
 	@Override
@@ -270,12 +270,20 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$12$Delimiter() {
-		return crossReference$12$Delimiter;
+	public ISequenceMatcher getCrossReference$8$Delimiter() {
+		return crossReference$8$Delimiter;
 	}
 	
-	public void setCrossReference$12$Delimiter(ISequenceMatcher matcher) {
-		crossReference$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
+		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$6$Delimiter() {
@@ -294,28 +302,20 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$14$Delimiter() {
-		return keyword$14$Delimiter;
+	public ICharacterClass getKeyword$13$Delimiter() {
+		return keyword$13$Delimiter;
 	}
 	
-	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
-		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
+		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$17$Delimiter() {
-		return keyword$17$Delimiter;
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
 	}
 	
-	public void setKeyword$17$Delimiter(ICharacterClass characterClass) {
-		keyword$17$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getRuleCall$8$Delimiter() {
-		return ruleCall$8$Delimiter;
-	}
-	
-	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

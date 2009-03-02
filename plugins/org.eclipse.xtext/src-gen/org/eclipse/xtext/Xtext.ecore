@@ -74,11 +74,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NegatedToken" eSuperTypes="//AbstractNegatedToken"/>
   <eClassifiers xsi:type="ecore:EClass" name="UntilToken" eSuperTypes="//AbstractNegatedToken"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Wildcard" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isWildcard">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wildcard" eSuperTypes="//AbstractElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="CrossReference" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//AbstractRule"/>

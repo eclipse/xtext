@@ -323,15 +323,20 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		EObject prevCurrent = currentStack.removeLast();
 		currentStack.add(newCurrent);
 
-		try {
-			if (token.isMany())
-				factory.add(newCurrent, token.getFeature(), prevCurrent, null, null);
-			else
-				factory.set(newCurrent, token.getFeature(), prevCurrent, null, null);
-		} catch(ValueConverterException ex) {
-			handleValueConverterException(ex);
-		} catch(Exception ex) {
-			throw new RuntimeException(ex);
+		if (token.getFeature() != null) {
+			try {
+				if (token.isMany())
+					factory.add(newCurrent, token.getFeature(), prevCurrent, null, null);
+				else
+					factory.set(newCurrent, token.getFeature(), prevCurrent, null, null);
+			} catch(ValueConverterException ex) {
+				handleValueConverterException(ex);
+			} catch(Exception ex) {
+				throw new RuntimeException(ex);
+			}
+		} else {
+			if (prevCurrent != null)
+				throw new IllegalStateException("Cannot throw away created current.");
 		}
 
 		CompositeNode prevCurrentNode = currentNode;

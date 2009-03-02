@@ -28,21 +28,21 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 
 	private IElementConsumer group$1$Consumer;
 
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
 	private IElementConsumer keyword$4$Consumer;
 
-	private IElementConsumer ruleCall$5$Consumer;
+	private IElementConsumer assignment$5$Consumer;
 
 	private IElementConsumer keyword$6$Consumer;
 
-	private IElementConsumer assignment$7$Consumer;
-
-	private IElementConsumer keyword$8$Consumer;
+	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$4$Delimiter;
 
 	private ICharacterClass keyword$6$Delimiter;
-
-	private ICharacterClass keyword$8$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -52,10 +52,34 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(keyword$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
-			acceptor.accept(keyword$6$Consumer);
-			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(assignment$5$Consumer);
+		}
+	}
+
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$2$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(opConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -71,15 +95,15 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		}
 	}
 
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+	protected class Assignment$5$Consumer extends OptionalAssignmentConsumer {
 		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
+		protected Assignment$5$Consumer(final Assignment assignment) {
+			super(assignment);
 		}
 		
 		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(opConsumer, null, false, false, false, getElement(), optional);
+		protected IElementConsumer getConsumer() {
+			return keyword$6$Consumer;
 		}
 	}
 
@@ -91,39 +115,15 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
-		}
-	}
-
-	protected class Assignment$7$Consumer extends OptionalAssignmentConsumer {
-		
-		protected Assignment$7$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return keyword$8$Consumer;
-		}
-	}
-
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$8$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "em", false, false, getKeyword$8$Delimiter(), optional);
+			return consumeKeyword(getElement(), "em", false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
 	public SimpleReconstrTestLanguageParensConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -139,11 +139,11 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordLeftParenthesis());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele001ParserRuleCallOp());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele01KeywordRightParenthesis());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele1AssignmentEm());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele10KeywordExclamationMark());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftParenthesis());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallOp());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordRightParenthesis());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele3AssignmentEm());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele30KeywordExclamationMark());
 	}
 	
 	@Override
@@ -160,6 +160,14 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 		this.opConsumer = opConsumer;
 	}
 	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$4$Delimiter() {
 		return keyword$4$Delimiter;
 	}
@@ -174,14 +182,6 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 	
 	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
 		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

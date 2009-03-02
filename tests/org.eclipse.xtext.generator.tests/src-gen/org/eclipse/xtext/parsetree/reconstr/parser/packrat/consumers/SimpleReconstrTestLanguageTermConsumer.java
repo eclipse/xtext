@@ -39,21 +39,21 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
+	private IElementConsumer ruleCall$5$Consumer;
+
+	private IElementConsumer ruleCall$6$Consumer;
+
+	private IElementConsumer ruleCall$7$Consumer;
+
 	private IElementConsumer ruleCall$8$Consumer;
 
 	private IElementConsumer ruleCall$9$Consumer;
-
-	private IElementConsumer ruleCall$10$Consumer;
-
-	private IElementConsumer ruleCall$11$Consumer;
-
-	private IElementConsumer ruleCall$12$Consumer;
-
-	private IElementConsumer ruleCall$13$Consumer;
-
-	private IElementConsumer ruleCall$14$Consumer;
-
-	private IElementConsumer ruleCall$15$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -63,14 +63,86 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
+			acceptor.accept(ruleCall$5$Consumer);
+			acceptor.accept(ruleCall$6$Consumer);
+			acceptor.accept(ruleCall$7$Consumer);
 			acceptor.accept(ruleCall$8$Consumer);
 			acceptor.accept(ruleCall$9$Consumer);
-			acceptor.accept(ruleCall$10$Consumer);
-			acceptor.accept(ruleCall$11$Consumer);
-			acceptor.accept(ruleCall$12$Consumer);
-			acceptor.accept(ruleCall$13$Consumer);
-			acceptor.accept(ruleCall$14$Consumer);
-			acceptor.accept(ruleCall$15$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(atomConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -82,85 +154,13 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(atomConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(twoNumbersConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(manyStringsConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(parensConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(typeConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(ref2Consumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$14$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$14$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(spareConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$15$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$15$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -187,14 +187,14 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0000000ParserRuleCallAtom());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele0000001ParserRuleCallTwoNumbers());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele000001ParserRuleCallManyStrings());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele00001ParserRuleCallParens());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele0001ParserRuleCallType());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele001ParserRuleCallRef2());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele01ParserRuleCallSpare());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele1ParserRuleCallBoolean());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAtom());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTwoNumbers());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallManyStrings());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallParens());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele4ParserRuleCallType());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele5ParserRuleCallRef2());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele6ParserRuleCallSpare());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele7ParserRuleCallBoolean());
 	}
 	
 	@Override

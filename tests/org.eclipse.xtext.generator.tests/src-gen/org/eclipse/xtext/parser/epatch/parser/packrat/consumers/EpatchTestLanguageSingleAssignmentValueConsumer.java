@@ -39,21 +39,29 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 
 	private IElementConsumer alternatives$1$Consumer;
 
-	private IElementConsumer assignment$5$Consumer;
+	private IElementConsumer assignment$2$Consumer;
 
-	private IElementConsumer keyword$6$Consumer;
+	private IElementConsumer keyword$3$Consumer;
+
+	private IElementConsumer assignment$4$Consumer;
+
+	private IElementConsumer ruleCall$5$Consumer;
+
+	private IElementConsumer group$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
-	private IElementConsumer ruleCall$8$Consumer;
+	private IElementConsumer crossReference$8$Consumer;
 
-	private IElementConsumer group$9$Consumer;
+	private IElementConsumer group$10$Consumer;
 
-	private IElementConsumer assignment$10$Consumer;
+	private IElementConsumer keyword$11$Consumer;
 
-	private IElementConsumer crossReference$11$Consumer;
+	private IElementConsumer assignment$12$Consumer;
 
-	private IElementConsumer group$13$Consumer;
+	private IElementConsumer ruleCall$13$Consumer;
+
+	private IElementConsumer group$14$Consumer;
 
 	private IElementConsumer keyword$15$Consumer;
 
@@ -61,49 +69,41 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 
 	private IElementConsumer ruleCall$17$Consumer;
 
-	private IElementConsumer group$18$Consumer;
+	private IElementConsumer keyword$18$Consumer;
 
-	private IElementConsumer keyword$20$Consumer;
+	private IElementConsumer assignment$19$Consumer;
 
-	private IElementConsumer assignment$21$Consumer;
+	private IElementConsumer ruleCall$20$Consumer;
 
-	private IElementConsumer ruleCall$22$Consumer;
+	private IElementConsumer group$21$Consumer;
 
-	private IElementConsumer keyword$23$Consumer;
+	private IElementConsumer assignment$22$Consumer;
 
-	private IElementConsumer assignment$24$Consumer;
+	private IElementConsumer crossReference$23$Consumer;
 
-	private IElementConsumer ruleCall$25$Consumer;
+	private IElementConsumer assignment$25$Consumer;
 
-	private IElementConsumer group$26$Consumer;
+	private IElementConsumer ruleCall$26$Consumer;
 
-	private IElementConsumer assignment$27$Consumer;
+	private ISequenceMatcher crossReference$8$Delimiter;
 
-	private IElementConsumer crossReference$28$Consumer;
+	private ISequenceMatcher crossReference$23$Delimiter;
 
-	private IElementConsumer assignment$30$Consumer;
+	private ICharacterClass keyword$3$Delimiter;
 
-	private IElementConsumer ruleCall$31$Consumer;
-
-	private ISequenceMatcher crossReference$11$Delimiter;
-
-	private ISequenceMatcher crossReference$28$Delimiter;
-
-	private ICharacterClass keyword$6$Delimiter;
+	private ICharacterClass keyword$11$Delimiter;
 
 	private ICharacterClass keyword$15$Delimiter;
 
-	private ICharacterClass keyword$20$Delimiter;
+	private ICharacterClass keyword$18$Delimiter;
 
-	private ICharacterClass keyword$23$Delimiter;
+	private ISequenceMatcher ruleCall$5$Delimiter;
 
-	private ISequenceMatcher ruleCall$8$Delimiter;
+	private ISequenceMatcher ruleCall$13$Delimiter;
 
 	private ISequenceMatcher ruleCall$17$Delimiter;
 
-	private ISequenceMatcher ruleCall$22$Delimiter;
-
-	private ISequenceMatcher ruleCall$31$Delimiter;
+	private ISequenceMatcher ruleCall$26$Delimiter;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -113,35 +113,72 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$5$Consumer);
-			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(group$9$Consumer);
-			acceptor.accept(assignment$24$Consumer);
-			acceptor.accept(group$26$Consumer);
+			acceptor.accept(assignment$2$Consumer);
+			acceptor.accept(assignment$4$Consumer);
+			acceptor.accept(group$6$Consumer);
+			acceptor.accept(assignment$19$Consumer);
+			acceptor.accept(group$21$Consumer);
 		}
 	}
 
-	protected class Assignment$5$Consumer extends AssignmentConsumer {
+	protected class Assignment$2$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$5$Consumer(final Assignment assignment) {
+		protected Assignment$2$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$6$Consumer;
+			return keyword$3$Consumer;
 		}
 	}
 
-	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$6$Consumer(final Keyword keyword) {
+		protected Keyword$3$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "keyword", false, false, getKeyword$6$Delimiter(), optional);
+			return consumeKeyword(getElement(), "keyword", false, false, getKeyword$3$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$4$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$4$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$5$Consumer;
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+		}
+	}
+
+	protected class Group$6$Consumer extends GroupConsumer {
+		
+		protected Group$6$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(group$10$Consumer);
 		}
 	}
 
@@ -153,62 +190,75 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$8$Consumer;
+			return crossReference$8$Consumer;
 		}
 	}
 
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
+	protected class CrossReference$8$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
-		}
-	}
-
-	protected class Group$9$Consumer extends GroupConsumer {
-		
-		protected Group$9$Consumer(final Group group) {
-			super(group);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$10$Consumer);
-			acceptor.accept(group$13$Consumer);
-		}
-	}
-
-	protected class Assignment$10$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$10$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return crossReference$11$Consumer;
-		}
-	}
-
-	protected class CrossReference$11$Consumer extends ElementConsumer<CrossReference> {
-		
-		protected CrossReference$11$Consumer(final CrossReference crossReference) {
+		protected CrossReference$8$Consumer(final CrossReference crossReference) {
 			super(crossReference);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "refObject", false, false, getElement(), getCrossReference$11$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "refObject", false, false, getElement(), getCrossReference$8$Delimiter(), optional);
 		}
 	}
 
-	protected class Group$13$Consumer extends OptionalGroupConsumer {
+	protected class Group$10$Consumer extends OptionalGroupConsumer {
 		
-		protected Group$13$Consumer(final Group group) {
+		protected Group$10$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$11$Consumer);
+			acceptor.accept(assignment$12$Consumer);
+			acceptor.accept(group$14$Consumer);
+		}
+	}
+
+	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$11$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$12$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$12$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$13$Consumer;
+		}
+	}
+
+	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeTerminal(idConsumer, "refFeature", false, false, getElement(), getRuleCall$13$Delimiter(), optional);
+		}
+	}
+
+	protected class Group$14$Consumer extends OptionalGroupConsumer {
+		
+		protected Group$14$Consumer(final Group group) {
 			super(group);
 		}
 		
@@ -216,7 +266,7 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(keyword$15$Consumer);
 			acceptor.accept(assignment$16$Consumer);
-			acceptor.accept(group$18$Consumer);
+			acceptor.accept(keyword$18$Consumer);
 		}
 	}
 
@@ -252,87 +302,37 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "refFeature", false, false, getElement(), getRuleCall$17$Delimiter(), optional);
+			return consumeTerminal(intConsumer, "refIndex", false, false, getElement(), getRuleCall$17$Delimiter(), optional);
 		}
 	}
 
-	protected class Group$18$Consumer extends OptionalGroupConsumer {
+	protected class Keyword$18$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Group$18$Consumer(final Group group) {
-			super(group);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$20$Consumer);
-			acceptor.accept(assignment$21$Consumer);
-			acceptor.accept(keyword$23$Consumer);
-		}
-	}
-
-	protected class Keyword$20$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$20$Consumer(final Keyword keyword) {
+		protected Keyword$18$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$20$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$21$Consumer extends AssignmentConsumer {
+	protected class Assignment$19$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$21$Consumer(final Assignment assignment) {
+		protected Assignment$19$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$22$Consumer;
+			return ruleCall$20$Consumer;
 		}
 	}
 
-	protected class RuleCall$22$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$20$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$22$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(intConsumer, "refIndex", false, false, getElement(), getRuleCall$22$Delimiter(), optional);
-		}
-	}
-
-	protected class Keyword$23$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$23$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$23$Delimiter(), optional);
-		}
-	}
-
-	protected class Assignment$24$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$24$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$25$Consumer;
-		}
-	}
-
-	protected class RuleCall$25$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$25$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$20$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -342,79 +342,79 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		}
 	}
 
-	protected class Group$26$Consumer extends GroupConsumer {
+	protected class Group$21$Consumer extends GroupConsumer {
 		
-		protected Group$26$Consumer(final Group group) {
+		protected Group$21$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(assignment$27$Consumer);
-			acceptor.accept(assignment$30$Consumer);
+			acceptor.accept(assignment$22$Consumer);
+			acceptor.accept(assignment$25$Consumer);
 		}
 	}
 
-	protected class Assignment$27$Consumer extends AssignmentConsumer {
+	protected class Assignment$22$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$27$Consumer(final Assignment assignment) {
+		protected Assignment$22$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return crossReference$28$Consumer;
+			return crossReference$23$Consumer;
 		}
 	}
 
-	protected class CrossReference$28$Consumer extends ElementConsumer<CrossReference> {
+	protected class CrossReference$23$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected CrossReference$28$Consumer(final CrossReference crossReference) {
+		protected CrossReference$23$Consumer(final CrossReference crossReference) {
 			super(crossReference);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "import", false, false, getElement(), getCrossReference$28$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "import", false, false, getElement(), getCrossReference$23$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$30$Consumer extends AssignmentConsumer {
+	protected class Assignment$25$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$30$Consumer(final Assignment assignment) {
+		protected Assignment$25$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$31$Consumer;
+			return ruleCall$26$Consumer;
 		}
 	}
 
-	protected class RuleCall$31$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$26$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$31$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$26$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(fragmentConsumer, "impFrag", false, false, getElement(), getRuleCall$31$Delimiter(), optional);
+			return consumeTerminal(fragmentConsumer, "impFrag", false, false, getElement(), getRuleCall$26$Delimiter(), optional);
 		}
 	}
 
 	public EpatchTestLanguageSingleAssignmentValueConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		crossReference$28$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		crossReference$23$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$23$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$17$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$22$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$31$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$26$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -430,29 +430,29 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele0000AssignmentKeyword());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele00000KeywordNull());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele0001AssignmentValue());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele00010TerminalRuleCallSTRING());
-		group$9$Consumer = new Group$9$Consumer(rule.ele001Group());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele0010AssignmentRefObject());
-		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.ele00100CrossReferenceEStringNamedObject());
-		group$13$Consumer = new Group$13$Consumer(rule.ele0011Group());
-		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele001100KeywordFullStop());
-		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele001101AssignmentRefFeature());
-		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele0011010TerminalRuleCallID());
-		group$18$Consumer = new Group$18$Consumer(rule.ele00111Group());
-		keyword$20$Consumer = new Keyword$20$Consumer(rule.ele0011100KeywordLeftSquareBracket());
-		assignment$21$Consumer = new Assignment$21$Consumer(rule.ele0011101AssignmentRefIndex());
-		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.ele00111010TerminalRuleCallINT());
-		keyword$23$Consumer = new Keyword$23$Consumer(rule.ele001111KeywordRightSquareBracket());
-		assignment$24$Consumer = new Assignment$24$Consumer(rule.ele01AssignmentNewObject());
-		ruleCall$25$Consumer = new RuleCall$25$Consumer(rule.ele010ParserRuleCallCreatedObject());
-		group$26$Consumer = new Group$26$Consumer(rule.ele1Group());
-		assignment$27$Consumer = new Assignment$27$Consumer(rule.ele10AssignmentImport());
-		crossReference$28$Consumer = new CrossReference$28$Consumer(rule.ele100CrossReferenceEStringImport());
-		assignment$30$Consumer = new Assignment$30$Consumer(rule.ele11AssignmentImpFrag());
-		ruleCall$31$Consumer = new RuleCall$31$Consumer(rule.ele110TerminalRuleCallFRAGMENT());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentKeyword());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordNull());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentValue());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallSTRING());
+		group$6$Consumer = new Group$6$Consumer(rule.ele2Group());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele20AssignmentRefObject());
+		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele200CrossReferenceEStringNamedObject());
+		group$10$Consumer = new Group$10$Consumer(rule.ele21Group());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele210KeywordFullStop());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele211AssignmentRefFeature());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele2110TerminalRuleCallID());
+		group$14$Consumer = new Group$14$Consumer(rule.ele212Group());
+		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele2120KeywordLeftSquareBracket());
+		assignment$16$Consumer = new Assignment$16$Consumer(rule.ele2121AssignmentRefIndex());
+		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.ele21210TerminalRuleCallINT());
+		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele2122KeywordRightSquareBracket());
+		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele3AssignmentNewObject());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele30ParserRuleCallCreatedObject());
+		group$21$Consumer = new Group$21$Consumer(rule.ele4Group());
+		assignment$22$Consumer = new Assignment$22$Consumer(rule.ele40AssignmentImport());
+		crossReference$23$Consumer = new CrossReference$23$Consumer(rule.ele400CrossReferenceEStringImport());
+		assignment$25$Consumer = new Assignment$25$Consumer(rule.ele41AssignmentImpFrag());
+		ruleCall$26$Consumer = new RuleCall$26$Consumer(rule.ele410TerminalRuleCallFRAGMENT());
 	}
 	
 	@Override
@@ -485,28 +485,36 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$11$Delimiter() {
-		return crossReference$11$Delimiter;
+	public ISequenceMatcher getCrossReference$8$Delimiter() {
+		return crossReference$8$Delimiter;
 	}
 	
-	public void setCrossReference$11$Delimiter(ISequenceMatcher matcher) {
-		crossReference$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
+		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getCrossReference$28$Delimiter() {
-		return crossReference$28$Delimiter;
+	public ISequenceMatcher getCrossReference$23$Delimiter() {
+		return crossReference$23$Delimiter;
 	}
 	
-	public void setCrossReference$28$Delimiter(ISequenceMatcher matcher) {
-		crossReference$28$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setCrossReference$23$Delimiter(ISequenceMatcher matcher) {
+		crossReference$23$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
 	}
 	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$11$Delimiter() {
+		return keyword$11$Delimiter;
+	}
+	
+	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
+		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$15$Delimiter() {
@@ -517,28 +525,28 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		keyword$15$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$20$Delimiter() {
-		return keyword$20$Delimiter;
+	public ICharacterClass getKeyword$18$Delimiter() {
+		return keyword$18$Delimiter;
 	}
 	
-	public void setKeyword$20$Delimiter(ICharacterClass characterClass) {
-		keyword$20$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
+		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$23$Delimiter() {
-		return keyword$23$Delimiter;
+	public ISequenceMatcher getRuleCall$5$Delimiter() {
+		return ruleCall$5$Delimiter;
 	}
 	
-	public void setKeyword$23$Delimiter(ICharacterClass characterClass) {
-		keyword$23$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$8$Delimiter() {
-		return ruleCall$8$Delimiter;
+	public ISequenceMatcher getRuleCall$13$Delimiter() {
+		return ruleCall$13$Delimiter;
 	}
 	
-	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$13$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$13$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$17$Delimiter() {
@@ -549,20 +557,12 @@ public final class EpatchTestLanguageSingleAssignmentValueConsumer extends NonTe
 		ruleCall$17$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$22$Delimiter() {
-		return ruleCall$22$Delimiter;
+	public ISequenceMatcher getRuleCall$26$Delimiter() {
+		return ruleCall$26$Delimiter;
 	}
 	
-	public void setRuleCall$22$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$22$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$31$Delimiter() {
-		return ruleCall$31$Delimiter;
-	}
-	
-	public void setRuleCall$31$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$31$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$26$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$26$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

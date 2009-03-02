@@ -714,22 +714,13 @@ public interface XtextTerminalsTestLanguagePackage extends EPackage
   int WILDCARD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Is Wildcard</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int WILDCARD__IS_WILDCARD = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>Wildcard</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WILDCARD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int WILDCARD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.
@@ -1387,17 +1378,6 @@ public interface XtextTerminalsTestLanguagePackage extends EPackage
   EClass getWildcard();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Wildcard#isIsWildcard <em>Is Wildcard</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Is Wildcard</em>'.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Wildcard#isIsWildcard()
-   * @see #getWildcard()
-   * @generated
-   */
-  EAttribute getWildcard_IsWildcard();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.CrossReference <em>Cross Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1909,14 +1889,6 @@ public interface XtextTerminalsTestLanguagePackage extends EPackage
      * @generated
      */
     EClass WILDCARD = eINSTANCE.getWildcard();
-
-    /**
-     * The meta object literal for the '<em><b>Is Wildcard</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute WILDCARD__IS_WILDCARD = eINSTANCE.getWildcard_IsWildcard();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.

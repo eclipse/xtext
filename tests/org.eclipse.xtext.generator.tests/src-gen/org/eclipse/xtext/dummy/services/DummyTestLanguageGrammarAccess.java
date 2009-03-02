@@ -35,17 +35,14 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ElementElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Assignment c0000AssignmentOptional = (Assignment)c000Group.eContents().get(0);
-		private final Keyword c00000KeywordOptional = (Keyword)c0000AssignmentOptional.eContents().get(0);
-		private final Keyword c0001KeywordElement = (Keyword)c000Group.eContents().get(1);
-		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
-		private final Assignment c01AssignmentDescriptions = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallSTRING = (RuleCall)c01AssignmentDescriptions.eContents().get(0);
-		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c0AssignmentOptional = (Assignment)cGroup.eContents().get(0);
+		private final Keyword c00KeywordOptional = (Keyword)c0AssignmentOptional.eContents().get(0);
+		private final Keyword c1KeywordElement = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
+		private final Assignment c3AssignmentDescriptions = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall c30TerminalRuleCallSTRING = (RuleCall)c3AssignmentDescriptions.eContents().get(0);
+		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -54,37 +51,28 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentOptional() { return c0AssignmentOptional; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Keyword ele00KeywordOptional() { return c00KeywordOptional; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public Keyword ele1KeywordElement() { return c1KeywordElement; }
 
 		// not supported
-		public Assignment ele0000AssignmentOptional() { return c0000AssignmentOptional; }
+		public Assignment ele2AssignmentName() { return c2AssignmentName; }
 
 		// not supported
-		public Keyword ele00000KeywordOptional() { return c00000KeywordOptional; }
+		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
 
 		// not supported
-		public Keyword ele0001KeywordElement() { return c0001KeywordElement; }
+		public Assignment ele3AssignmentDescriptions() { return c3AssignmentDescriptions; }
 
 		// not supported
-		public Assignment ele001AssignmentName() { return c001AssignmentName; }
+		public RuleCall ele30TerminalRuleCallSTRING() { return c30TerminalRuleCallSTRING; }
 
 		// not supported
-		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
-
-		// not supported
-		public Assignment ele01AssignmentDescriptions() { return c01AssignmentDescriptions; }
-
-		// not supported
-		public RuleCall ele010TerminalRuleCallSTRING() { return c010TerminalRuleCallSTRING; }
-
-		// not supported
-		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
+		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
 	}
 	
 	private ModelElements pModel;

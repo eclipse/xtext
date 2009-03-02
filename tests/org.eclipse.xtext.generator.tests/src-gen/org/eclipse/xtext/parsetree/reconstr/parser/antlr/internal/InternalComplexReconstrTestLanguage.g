@@ -141,9 +141,9 @@ ruleOp returns [EObject current=null]
     { 
     createLeafNode(grammarAccess.prOp().ele0ParserRuleCallTerm(), null); 
     }
-((((
+(((
     { 
-        temp=factory.create(grammarAccess.prOp().ele1000ActionAddaddOperands().getTypeName().getType());
+        temp=factory.create(grammarAccess.prOp().ele100ActionAddaddOperands().getTypeName().getType());
         try {
         	factory.add(temp, "addOperands", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -151,7 +151,7 @@ ruleOp returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.prOp().ele1000ActionAddaddOperands(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.prOp().ele100ActionAddaddOperands(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -159,13 +159,13 @@ ruleOp returns [EObject current=null]
     }
 )'+' 
     {
-        createLeafNode(grammarAccess.prOp().ele1001KeywordPlusSign(), null); 
+        createLeafNode(grammarAccess.prOp().ele101KeywordPlusSign(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prOp().ele1010ParserRuleCallTerm(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prOp().ele1020ParserRuleCallTerm(), currentNode); 
 	    }
 	    lv_addOperands_3=ruleTerm 
 	    {
@@ -183,9 +183,9 @@ ruleOp returns [EObject current=null]
 	    }
 	
 ))
-    |(((
+    |((
     { 
-        temp=factory.create(grammarAccess.prOp().ele1100ActionMinusminusOperands().getTypeName().getType());
+        temp=factory.create(grammarAccess.prOp().ele110ActionMinusminusOperands().getTypeName().getType());
         try {
         	factory.add(temp, "minusOperands", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -193,7 +193,7 @@ ruleOp returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.prOp().ele1100ActionMinusminusOperands(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.prOp().ele110ActionMinusminusOperands(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -201,13 +201,13 @@ ruleOp returns [EObject current=null]
     }
 )'-' 
     {
-        createLeafNode(grammarAccess.prOp().ele1101KeywordHyphenMinus(), null); 
+        createLeafNode(grammarAccess.prOp().ele111KeywordHyphenMinus(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prOp().ele1110ParserRuleCallTerm(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prOp().ele1120ParserRuleCallTerm(), currentNode); 
 	    }
 	    lv_minusOperands_6=ruleTerm 
 	    {
@@ -334,13 +334,13 @@ ruleParens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((('(' 
+('(' 
     {
-        createLeafNode(grammarAccess.prParens().ele000KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prParens().ele0KeywordLeftParenthesis(), null); 
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.prParens().ele001ParserRuleCallOp(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prParens().ele1ParserRuleCallOp(), currentNode); 
     }
     this_Op_1=ruleOp
     { 
@@ -349,17 +349,17 @@ ruleParens returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prParens().ele001ParserRuleCallOp(), null); 
+    createLeafNode(grammarAccess.prParens().ele1ParserRuleCallOp(), null); 
     }
-)')' 
+')' 
     {
-        createLeafNode(grammarAccess.prParens().ele01KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prParens().ele2KeywordRightParenthesis(), null); 
     }
-)(	
+(	
 	
 	    lv_em_3='!' 
     {
-        createLeafNode(grammarAccess.prParens().ele10KeywordExclamationMark(), "em"); 
+        createLeafNode(grammarAccess.prParens().ele30KeywordExclamationMark(), "em"); 
     }
 
  
@@ -496,15 +496,15 @@ ruleTrickyG1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('[' 
+('[' 
     {
-        createLeafNode(grammarAccess.prTrickyG1().ele00KeywordLeftSquareBracket(), null); 
+        createLeafNode(grammarAccess.prTrickyG1().ele0KeywordLeftSquareBracket(), null); 
     }
 ((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTrickyG1().ele0100ParserRuleCallTrickyG2(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTrickyG1().ele100ParserRuleCallTrickyG2(), currentNode); 
 	    }
 	    lv_vals_1=ruleTrickyG2 
 	    {
@@ -523,13 +523,13 @@ ruleTrickyG1 returns [EObject current=null]
 	
 )(',' 
     {
-        createLeafNode(grammarAccess.prTrickyG1().ele0110KeywordComma(), null); 
+        createLeafNode(grammarAccess.prTrickyG1().ele110KeywordComma(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTrickyG1().ele01110ParserRuleCallTrickyG2(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prTrickyG1().ele1110ParserRuleCallTrickyG2(), currentNode); 
 	    }
 	    lv_vals_3=ruleTrickyG2 
 	    {
@@ -546,9 +546,9 @@ ruleTrickyG1 returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))*)?)']' 
+))*)?']' 
     {
-        createLeafNode(grammarAccess.prTrickyG1().ele1KeywordRightSquareBracket(), null); 
+        createLeafNode(grammarAccess.prTrickyG1().ele2KeywordRightSquareBracket(), null); 
     }
 );
 
@@ -610,17 +610,17 @@ ruleTrickyG2 returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

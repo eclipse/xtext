@@ -21,82 +21,82 @@ public final class TerminalsIDConsumer extends AbstractRuleAwareTerminalConsumer
 
 	protected boolean consumeGroup$1() {
 		final int marker = mark();
-		if (!consumeKeyword$3()) {
+		if (!consumeKeyword$2()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeAlternatives$4()) {
+		if (!consumeAlternatives$3()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeAlternatives$13()) {
+		if (!consumeAlternatives$11()) {
 			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$3() {
-		doConsumeKeyword$3();
+	protected boolean consumeKeyword$2() {
+		doConsumeKeyword$2();
 		return true;
 	}
 
-	protected boolean doConsumeKeyword$3() {
+	protected boolean doConsumeKeyword$2() {
 		return readChar('^');
 	}
 
-	protected boolean consumeAlternatives$4() {
-		if (consumeCharacterRange$6())
+	protected boolean consumeAlternatives$3() {
+		if (consumeCharacterRange$4())
 			return true;
-		if (consumeCharacterRange$9())
+		if (consumeCharacterRange$7())
 			return true;
-		if (consumeKeyword$12())
+		if (consumeKeyword$10())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeCharacterRange$6() {
+	protected boolean consumeCharacterRange$4() {
 		return readCharBetween('a', 'z');
 	}
 
-	protected boolean consumeCharacterRange$9() {
+	protected boolean consumeCharacterRange$7() {
 		return readCharBetween('A', 'Z');
 	}
 
-	protected boolean consumeKeyword$12() {
+	protected boolean consumeKeyword$10() {
 		return readChar('_');
 	}
 
-	protected boolean consumeAlternatives$13() {
-		while(doConsumeAlternatives$13()) {}
+	protected boolean consumeAlternatives$11() {
+		while(doConsumeAlternatives$11()) {}
 		return true;
 	}
 
-	protected boolean doConsumeAlternatives$13() {
-		if (consumeCharacterRange$16())
+	protected boolean doConsumeAlternatives$11() {
+		if (consumeCharacterRange$12())
+			return true;
+		if (consumeCharacterRange$15())
+			return true;
+		if (consumeKeyword$18())
 			return true;
 		if (consumeCharacterRange$19())
-			return true;
-		if (consumeKeyword$22())
-			return true;
-		if (consumeCharacterRange$23())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeCharacterRange$16() {
+	protected boolean consumeCharacterRange$12() {
 		return readCharBetween('a', 'z');
 	}
 
-	protected boolean consumeCharacterRange$19() {
+	protected boolean consumeCharacterRange$15() {
 		return readCharBetween('A', 'Z');
 	}
 
-	protected boolean consumeKeyword$22() {
+	protected boolean consumeKeyword$18() {
 		return readChar('_');
 	}
 
-	protected boolean consumeCharacterRange$23() {
+	protected boolean consumeCharacterRange$19() {
 		return readCharBetween('0', '9');
 	}
 	

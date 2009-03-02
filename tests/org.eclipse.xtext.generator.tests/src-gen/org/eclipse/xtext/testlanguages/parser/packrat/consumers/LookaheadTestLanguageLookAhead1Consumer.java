@@ -28,25 +28,25 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer keyword$4$Consumer;
+	private IElementConsumer keyword$2$Consumer;
+
+	private IElementConsumer assignment$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
 
 	private IElementConsumer assignment$5$Consumer;
 
-	private IElementConsumer ruleCall$6$Consumer;
+	private IElementConsumer keyword$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
 	private IElementConsumer keyword$8$Consumer;
 
-	private IElementConsumer assignment$9$Consumer;
+	private ICharacterClass keyword$2$Delimiter;
 
-	private IElementConsumer keyword$10$Consumer;
-
-	private ICharacterClass keyword$4$Delimiter;
+	private ICharacterClass keyword$6$Delimiter;
 
 	private ICharacterClass keyword$8$Delimiter;
-
-	private ICharacterClass keyword$10$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -56,22 +56,46 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$4$Consumer);
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(assignment$3$Consumer);
 			acceptor.accept(assignment$5$Consumer);
 			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(assignment$9$Consumer);
 		}
 	}
 
-	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$4$Consumer(final Keyword keyword) {
+		protected Keyword$2$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$3$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$3$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$4$Consumer;
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(lookAhead2Consumer, "y", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -83,19 +107,19 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$6$Consumer;
+			return keyword$6$Consumer;
 		}
 	}
 
-	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
 		
-		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
+		protected Keyword$6$Consumer(final Keyword keyword) {
+			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(lookAhead2Consumer, "y", false, false, false, getElement(), optional);
+			return consumeKeyword(getElement(), "x", false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
@@ -123,35 +147,11 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		}
 	}
 
-	protected class Assignment$9$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$9$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return keyword$10$Consumer;
-		}
-	}
-
-	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$10$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "x", false, false, getKeyword$10$Delimiter(), optional);
-		}
-	}
-
 	public LookaheadTestLanguageLookAhead1Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -167,13 +167,13 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordFoo());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele001AssignmentY());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0010ParserRuleCallLookAhead2());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele01AssignmentX());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele010KeywordB());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele1AssignmentX());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele10KeywordD());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordFoo());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentY());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallLookAhead2());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentX());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordB());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele3AssignmentX());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele30KeywordD());
 	}
 	
 	@Override
@@ -190,12 +190,20 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 		this.lookAhead2Consumer = lookAhead2Consumer;
 	}
 	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
 	}
 	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$8$Delimiter() {
@@ -204,14 +212,6 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 	
 	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
 		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$10$Delimiter() {
-		return keyword$10$Delimiter;
-	}
-	
-	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
-		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

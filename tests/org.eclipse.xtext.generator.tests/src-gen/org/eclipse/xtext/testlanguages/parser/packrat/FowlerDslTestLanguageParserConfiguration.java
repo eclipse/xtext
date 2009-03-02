@@ -96,25 +96,25 @@ public class FowlerDslTestLanguageParserConfiguration extends AbstractParserConf
 
 		getTransitionConsumer().setIdConsumer(getIdConsumer());
 
-		getStatemachineConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStatemachineConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStatemachineConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStatemachineConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getEventConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getEventConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getEventConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getCommandConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getCommandConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getStateConsumer().setCrossReference$14$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getStateConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStateConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStateConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
-		getStateConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
-		getStateConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$9$Delimiter);
-		getStateConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getTransitionConsumer().setCrossReference$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getTransitionConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$26$Delimiter);
-		getTransitionConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$49$Delimiter);
+		getStatemachineConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getStatemachineConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getStatemachineConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getStatemachineConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getEventConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getEventConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getEventConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getCommandConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getCommandConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getStateConsumer().setCrossReference$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getStateConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getStateConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getStateConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$38$Delimiter);
+		getStateConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$38$Delimiter);
+		getStateConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$4$Delimiter);
+		getStateConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getTransitionConsumer().setCrossReference$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getTransitionConsumer().setCrossReference$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getTransitionConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguageDelimiters.keyword$38$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

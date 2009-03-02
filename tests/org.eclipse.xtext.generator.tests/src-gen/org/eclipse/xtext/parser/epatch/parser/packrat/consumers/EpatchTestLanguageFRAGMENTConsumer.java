@@ -45,72 +45,72 @@ public final class EpatchTestLanguageFRAGMENTConsumer extends AbstractRuleAwareT
 	}
 
 	protected boolean doConsumeAlternatives$3() {
-		if (consumeCharacterRange$13())
+		if (consumeCharacterRange$4())
 			return true;
-		if (consumeCharacterRange$16())
+		if (consumeCharacterRange$7())
 			return true;
-		if (consumeCharacterRange$19())
+		if (consumeCharacterRange$10())
 			return true;
-		if (consumeKeyword$22())
+		if (consumeKeyword$13())
 			return true;
-		if (consumeKeyword$23())
+		if (consumeKeyword$14())
 			return true;
-		if (consumeKeyword$24())
+		if (consumeKeyword$15())
 			return true;
-		if (consumeKeyword$25())
+		if (consumeKeyword$16())
 			return true;
-		if (consumeKeyword$26())
+		if (consumeKeyword$17())
 			return true;
-		if (consumeKeyword$27())
+		if (consumeKeyword$18())
 			return true;
-		if (consumeKeyword$28())
+		if (consumeKeyword$19())
 			return true;
-		if (consumeKeyword$29())
+		if (consumeKeyword$20())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeCharacterRange$13() {
+	protected boolean consumeCharacterRange$4() {
 		return readCharBetween('a', 'z');
 	}
 
-	protected boolean consumeCharacterRange$16() {
+	protected boolean consumeCharacterRange$7() {
 		return readCharBetween('A', 'Z');
 	}
 
-	protected boolean consumeCharacterRange$19() {
+	protected boolean consumeCharacterRange$10() {
 		return readCharBetween('0', '9');
 	}
 
-	protected boolean consumeKeyword$22() {
+	protected boolean consumeKeyword$13() {
 		return readChar('_');
 	}
 
-	protected boolean consumeKeyword$23() {
+	protected boolean consumeKeyword$14() {
 		return readChar('/');
 	}
 
-	protected boolean consumeKeyword$24() {
+	protected boolean consumeKeyword$15() {
 		return readChar('[');
 	}
 
-	protected boolean consumeKeyword$25() {
+	protected boolean consumeKeyword$16() {
 		return readChar(']');
 	}
 
-	protected boolean consumeKeyword$26() {
+	protected boolean consumeKeyword$17() {
 		return readChar('{');
 	}
 
-	protected boolean consumeKeyword$27() {
+	protected boolean consumeKeyword$18() {
 		return readChar('}');
 	}
 
-	protected boolean consumeKeyword$28() {
+	protected boolean consumeKeyword$19() {
 		return readChar('.');
 	}
 
-	protected boolean consumeKeyword$29() {
+	protected boolean consumeKeyword$20() {
 		return readChar('@');
 	}
 	

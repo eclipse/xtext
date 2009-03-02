@@ -84,9 +84,9 @@ ruleRoot returns [EObject current=null]
     {
         createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
     }
-((
+(
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestRequired(), currentNode); 
     }
     this_TestRequired_1=ruleTestRequired
     { 
@@ -95,12 +95,12 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele100ParserRuleCallTestRequired(), null); 
+    createLeafNode(grammarAccess.prRoot().ele10ParserRuleCallTestRequired(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestOptional(), currentNode); 
     }
     this_TestOptional_2=ruleTestOptional
     { 
@@ -109,12 +109,12 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele101ParserRuleCallTestOptional(), null); 
+    createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestOptional(), null); 
     }
-)
+
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prRoot().ele12ParserRuleCallTestList(), currentNode); 
     }
     this_TestList_3=ruleTestList
     { 
@@ -123,7 +123,7 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestList(), null); 
+    createLeafNode(grammarAccess.prRoot().ele12ParserRuleCallTestList(), null); 
     }
 ));
 
@@ -146,15 +146,15 @@ ruleTestRequired returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('required' 
+('required' 
     {
-        createLeafNode(grammarAccess.prTestRequired().ele00KeywordRequired(), null); 
+        createLeafNode(grammarAccess.prTestRequired().ele0KeywordRequired(), null); 
     }
 (	
 	
 	    lv_required1_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestRequired().ele010TerminalRuleCallINT(), "required1"); 
+		createLeafNode(grammarAccess.prTestRequired().ele10TerminalRuleCallINT(), "required1"); 
 	}
  
 	    {
@@ -170,11 +170,11 @@ ruleTestRequired returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    lv_required2_2=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestRequired().ele10TerminalRuleCallINT(), "required2"); 
+		createLeafNode(grammarAccess.prTestRequired().ele20TerminalRuleCallINT(), "required2"); 
 	}
  
 	    {
@@ -211,15 +211,15 @@ ruleTestOptional returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('optional' 
+('optional' 
     {
-        createLeafNode(grammarAccess.prTestOptional().ele00KeywordOptional(), null); 
+        createLeafNode(grammarAccess.prTestOptional().ele0KeywordOptional(), null); 
     }
 (	
 	
 	    lv_opt1_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestOptional().ele010TerminalRuleCallINT(), "opt1"); 
+		createLeafNode(grammarAccess.prTestOptional().ele10TerminalRuleCallINT(), "opt1"); 
 	}
  
 	    {
@@ -235,15 +235,15 @@ ruleTestOptional returns [EObject current=null]
 	        }
 	    }
 	
-)?)(':' 
+)?(':' 
     {
-        createLeafNode(grammarAccess.prTestOptional().ele10KeywordColon(), null); 
+        createLeafNode(grammarAccess.prTestOptional().ele20KeywordColon(), null); 
     }
 (	
 	
 	    lv_opt2_3=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestOptional().ele110TerminalRuleCallINT(), "opt2"); 
+		createLeafNode(grammarAccess.prTestOptional().ele210TerminalRuleCallINT(), "opt2"); 
 	}
  
 	    {
@@ -309,17 +309,17 @@ ruleTestList returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

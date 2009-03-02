@@ -26,21 +26,21 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer alternatives$2$Consumer;
 
+	private IElementConsumer keyword$3$Consumer;
+
+	private IElementConsumer keyword$4$Consumer;
+
 	private IElementConsumer keyword$5$Consumer;
 
 	private IElementConsumer keyword$6$Consumer;
 
-	private IElementConsumer keyword$7$Consumer;
+	private ICharacterClass keyword$3$Delimiter;
 
-	private IElementConsumer keyword$8$Consumer;
+	private ICharacterClass keyword$4$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
 
 	private ICharacterClass keyword$6$Delimiter;
-
-	private ICharacterClass keyword$7$Delimiter;
-
-	private ICharacterClass keyword$8$Delimiter;
 
 	protected class Assignment$1$Consumer extends AssignmentConsumer {
 		
@@ -62,10 +62,34 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$3$Consumer);
+			acceptor.accept(keyword$4$Consumer);
 			acceptor.accept(keyword$5$Consumer);
 			acceptor.accept(keyword$6$Consumer);
-			acceptor.accept(keyword$7$Consumer);
-			acceptor.accept(keyword$8$Consumer);
+		}
+	}
+
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$3$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$3$Delimiter(), optional);
+		}
+	}
+
+	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$4$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "wert", false, false, getKeyword$4$Delimiter(), optional);
 		}
 	}
 
@@ -93,36 +117,12 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$7$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "wert", false, false, getKeyword$7$Delimiter(), optional);
-		}
-	}
-
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$8$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "wert", false, false, getKeyword$8$Delimiter(), optional);
-		}
-	}
-
 	public ReferenceGrammarFarbeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -139,14 +139,14 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentWert());
 		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.ele0Alternatives());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordROT());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele0001KeywordBLAU());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele001KeywordGELB());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele01KeywordGRÜN());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele0000KeywordROT());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele0001KeywordBLAU());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele001KeywordGELB());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele01KeywordGRÜN());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordROT());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordBLAU());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele02KeywordGELB());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele03KeywordGRÜN());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordROT());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordBLAU());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele02KeywordGELB());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele03KeywordGRÜN());
 	}
 	
 	@Override
@@ -157,6 +157,22 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getType();
+	}
+	
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
+	}
+	
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$4$Delimiter() {
+		return keyword$4$Delimiter;
+	}
+	
+	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
+		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$5$Delimiter() {
@@ -173,22 +189,6 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
 		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

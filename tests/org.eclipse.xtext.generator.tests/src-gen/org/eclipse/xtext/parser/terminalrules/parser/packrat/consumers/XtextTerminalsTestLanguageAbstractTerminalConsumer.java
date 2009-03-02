@@ -31,13 +31,13 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
 	private IElementConsumer ruleCall$4$Consumer;
 
 	private IElementConsumer ruleCall$5$Consumer;
-
-	private IElementConsumer ruleCall$6$Consumer;
-
-	private IElementConsumer ruleCall$7$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -47,10 +47,34 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
-			acceptor.accept(ruleCall$6$Consumer);
-			acceptor.accept(ruleCall$7$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(keywordConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -62,37 +86,13 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(keywordConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(ruleCallConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(parenthesizedElementConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -119,10 +119,10 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallKeyword());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele001ParserRuleCallRuleCall());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele01ParserRuleCallParenthesizedElement());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele1ParserRuleCallCrossReference());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallKeyword());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallRuleCall());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallParenthesizedElement());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallCrossReference());
 	}
 	
 	@Override

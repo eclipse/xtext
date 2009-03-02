@@ -33,7 +33,9 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer group$3$Consumer;
 
-	private IElementConsumer action$5$Consumer;
+	private IElementConsumer action$4$Consumer;
+
+	private IElementConsumer group$6$Consumer;
 
 	private IElementConsumer keyword$7$Consumer;
 
@@ -68,7 +70,7 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Group$3$Consumer extends LoopGroupConsumer {
+	protected class Group$3$Consumer extends OptionalGroupConsumer {
 		
 		protected Group$3$Consumer(final Group group) {
 			super(group);
@@ -76,15 +78,14 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(action$5$Consumer);
-			acceptor.accept(keyword$7$Consumer);
-			acceptor.accept(assignment$8$Consumer);
+			acceptor.accept(action$4$Consumer);
+			acceptor.accept(group$6$Consumer);
 		}
 	}
 
-	protected class Action$5$Consumer extends ElementConsumer<Action> {
+	protected class Action$4$Consumer extends ElementConsumer<Action> {
 		
-		protected Action$5$Consumer(final Action action) {
+		protected Action$4$Consumer(final Action action) {
 			super(action);
 		}
 		
@@ -92,6 +93,19 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 		protected int doConsume(boolean optional) throws Exception {
 			consumeAction(getElement(), true);
 			return SUCCESS;
+		}
+	}
+
+	protected class Group$6$Consumer extends MandatoryLoopGroupConsumer {
+		
+		protected Group$6$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$7$Consumer);
+			acceptor.accept(assignment$8$Consumer);
 		}
 	}
 
@@ -151,10 +165,11 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallGroup());
 		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$5$Consumer = new Action$5$Consumer(rule.ele100ActionAlternativesgroups());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele101KeywordVerticalLine());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele11AssignmentGroups());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele110ParserRuleCallGroup());
+		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionAlternativesgroups());
+		group$6$Consumer = new Group$6$Consumer(rule.ele11Group());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele110KeywordVerticalLine());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele111AssignmentGroups());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1110ParserRuleCallGroup());
 	}
 	
 	@Override

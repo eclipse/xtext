@@ -27,17 +27,17 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer ruleCall$3$Consumer;
+	private IElementConsumer ruleCall$2$Consumer;
 
-	private IElementConsumer keyword$4$Consumer;
+	private IElementConsumer keyword$3$Consumer;
 
-	private IElementConsumer ruleCall$5$Consumer;
+	private IElementConsumer ruleCall$4$Consumer;
 
-	private ICharacterClass keyword$4$Delimiter;
+	private ICharacterClass keyword$3$Delimiter;
 
-	private ISequenceMatcher ruleCall$3$Delimiter;
+	private ISequenceMatcher ruleCall$2$Delimiter;
 
-	private ISequenceMatcher ruleCall$5$Delimiter;
+	private ISequenceMatcher ruleCall$4$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -47,53 +47,53 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(ruleCall$3$Consumer);
-			acceptor.accept(keyword$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(keyword$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
 		}
 	}
 
-	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$3$Delimiter(), optional);
+			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$2$Delimiter(), optional);
 		}
 	}
 
-	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$4$Consumer(final Keyword keyword) {
+		protected Keyword$3$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+			return consumeTerminal(idConsumer, null, false, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 
 	public DatatypeRulesTestLanguageModelIdConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$3$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -109,9 +109,9 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordFullStop());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1TerminalRuleCallID());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordFullStop());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2TerminalRuleCallID());
 	}
 	
 	@Override
@@ -128,28 +128,28 @@ public final class DatatypeRulesTestLanguageModelIdConsumer extends NonTerminalC
 		this.idConsumer = idConsumer;
 	}
 	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
 	}
 	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$3$Delimiter() {
-		return ruleCall$3$Delimiter;
+	public ISequenceMatcher getRuleCall$2$Delimiter() {
+		return ruleCall$2$Delimiter;
 	}
 	
-	public void setRuleCall$3$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$3$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$2$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$5$Delimiter() {
-		return ruleCall$5$Delimiter;
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
 	}
 	
-	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

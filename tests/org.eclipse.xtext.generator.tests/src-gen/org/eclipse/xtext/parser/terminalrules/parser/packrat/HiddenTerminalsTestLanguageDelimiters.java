@@ -12,8 +12,8 @@ public final class HiddenTerminalsTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$21$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$15$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

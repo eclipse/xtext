@@ -51,20 +51,14 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	public class TermElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cAlternatives.eContents().get(0);
-		private final Alternatives c00Alternatives = (Alternatives)c0Alternatives.eContents().get(0);
-		private final Alternatives c000Alternatives = (Alternatives)c00Alternatives.eContents().get(0);
-		private final Alternatives c0000Alternatives = (Alternatives)c000Alternatives.eContents().get(0);
-		private final Alternatives c00000Alternatives = (Alternatives)c0000Alternatives.eContents().get(0);
-		private final Alternatives c000000Alternatives = (Alternatives)c00000Alternatives.eContents().get(0);
-		private final RuleCall c0000000ParserRuleCallAtom = (RuleCall)c000000Alternatives.eContents().get(0);
-		private final RuleCall c0000001ParserRuleCallTwoNumbers = (RuleCall)c000000Alternatives.eContents().get(1);
-		private final RuleCall c000001ParserRuleCallManyStrings = (RuleCall)c00000Alternatives.eContents().get(1);
-		private final RuleCall c00001ParserRuleCallParens = (RuleCall)c0000Alternatives.eContents().get(1);
-		private final RuleCall c0001ParserRuleCallType = (RuleCall)c000Alternatives.eContents().get(1);
-		private final RuleCall c001ParserRuleCallRef2 = (RuleCall)c00Alternatives.eContents().get(1);
-		private final RuleCall c01ParserRuleCallSpare = (RuleCall)c0Alternatives.eContents().get(1);
-		private final RuleCall c1ParserRuleCallBoolean = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall c0ParserRuleCallAtom = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall c1ParserRuleCallTwoNumbers = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall c2ParserRuleCallManyStrings = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall c3ParserRuleCallParens = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall c4ParserRuleCallType = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall c5ParserRuleCallRef2 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall c6ParserRuleCallSpare = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall c7ParserRuleCallBoolean = (RuleCall)cAlternatives.eContents().get(7);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -73,46 +67,28 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
+		public RuleCall ele0ParserRuleCallAtom() { return c0ParserRuleCallAtom; }
 
 		// not supported
-		public Alternatives ele00Alternatives() { return c00Alternatives; }
+		public RuleCall ele1ParserRuleCallTwoNumbers() { return c1ParserRuleCallTwoNumbers; }
 
 		// not supported
-		public Alternatives ele000Alternatives() { return c000Alternatives; }
+		public RuleCall ele2ParserRuleCallManyStrings() { return c2ParserRuleCallManyStrings; }
 
 		// not supported
-		public Alternatives ele0000Alternatives() { return c0000Alternatives; }
+		public RuleCall ele3ParserRuleCallParens() { return c3ParserRuleCallParens; }
 
 		// not supported
-		public Alternatives ele00000Alternatives() { return c00000Alternatives; }
+		public RuleCall ele4ParserRuleCallType() { return c4ParserRuleCallType; }
 
 		// not supported
-		public Alternatives ele000000Alternatives() { return c000000Alternatives; }
+		public RuleCall ele5ParserRuleCallRef2() { return c5ParserRuleCallRef2; }
 
 		// not supported
-		public RuleCall ele0000000ParserRuleCallAtom() { return c0000000ParserRuleCallAtom; }
+		public RuleCall ele6ParserRuleCallSpare() { return c6ParserRuleCallSpare; }
 
 		// not supported
-		public RuleCall ele0000001ParserRuleCallTwoNumbers() { return c0000001ParserRuleCallTwoNumbers; }
-
-		// not supported
-		public RuleCall ele000001ParserRuleCallManyStrings() { return c000001ParserRuleCallManyStrings; }
-
-		// not supported
-		public RuleCall ele00001ParserRuleCallParens() { return c00001ParserRuleCallParens; }
-
-		// not supported
-		public RuleCall ele0001ParserRuleCallType() { return c0001ParserRuleCallType; }
-
-		// not supported
-		public RuleCall ele001ParserRuleCallRef2() { return c001ParserRuleCallRef2; }
-
-		// not supported
-		public RuleCall ele01ParserRuleCallSpare() { return c01ParserRuleCallSpare; }
-
-		// not supported
-		public RuleCall ele1ParserRuleCallBoolean() { return c1ParserRuleCallBoolean; }
+		public RuleCall ele7ParserRuleCallBoolean() { return c7ParserRuleCallBoolean; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -133,13 +109,11 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ParensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Keyword c000KeywordLeftParenthesis = (Keyword)c00Group.eContents().get(0);
-		private final RuleCall c001ParserRuleCallOp = (RuleCall)c00Group.eContents().get(1);
-		private final Keyword c01KeywordRightParenthesis = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentEm = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordExclamationMark = (Keyword)c1AssignmentEm.eContents().get(0);
+		private final Keyword c0KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall c1ParserRuleCallOp = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword c2KeywordRightParenthesis = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentEm = (Assignment)cGroup.eContents().get(3);
+		private final Keyword c30KeywordExclamationMark = (Keyword)c3AssignmentEm.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -148,39 +122,32 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordLeftParenthesis() { return c0KeywordLeftParenthesis; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public RuleCall ele1ParserRuleCallOp() { return c1ParserRuleCallOp; }
 
 		// not supported
-		public Keyword ele000KeywordLeftParenthesis() { return c000KeywordLeftParenthesis; }
+		public Keyword ele2KeywordRightParenthesis() { return c2KeywordRightParenthesis; }
 
 		// not supported
-		public RuleCall ele001ParserRuleCallOp() { return c001ParserRuleCallOp; }
+		public Assignment ele3AssignmentEm() { return c3AssignmentEm; }
 
 		// not supported
-		public Keyword ele01KeywordRightParenthesis() { return c01KeywordRightParenthesis; }
-
-		// not supported
-		public Assignment ele1AssignmentEm() { return c1AssignmentEm; }
-
-		// not supported
-		public Keyword ele10KeywordExclamationMark() { return c10KeywordExclamationMark; }
+		public Keyword ele30KeywordExclamationMark() { return c30KeywordExclamationMark; }
 	}
 
 	public class TwoNumbersElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoNumbers");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Assignment c00AssignmentNum1 = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000TerminalRuleCallINT = (RuleCall)c00AssignmentNum1.eContents().get(0);
-		private final Assignment c01AssignmentNum2 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentNum2.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordNumberSign = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentNum3 = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110TerminalRuleCallINT = (RuleCall)c11AssignmentNum3.eContents().get(0);
+		private final Assignment c0AssignmentNum1 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallINT = (RuleCall)c0AssignmentNum1.eContents().get(0);
+		private final Assignment c1AssignmentNum2 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentNum2.eContents().get(0);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Keyword c20KeywordNumberSign = (Keyword)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentNum3 = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210TerminalRuleCallINT = (RuleCall)c21AssignmentNum3.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -189,42 +156,38 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentNum1() { return c0AssignmentNum1; }
 
 		// not supported
-		public Assignment ele00AssignmentNum1() { return c00AssignmentNum1; }
+		public RuleCall ele00TerminalRuleCallINT() { return c00TerminalRuleCallINT; }
 
 		// not supported
-		public RuleCall ele000TerminalRuleCallINT() { return c000TerminalRuleCallINT; }
+		public Assignment ele1AssignmentNum2() { return c1AssignmentNum2; }
 
 		// not supported
-		public Assignment ele01AssignmentNum2() { return c01AssignmentNum2; }
+		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
 
 		// not supported
-		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public Group ele1Group() { return c1Group; }
+		public Keyword ele20KeywordNumberSign() { return c20KeywordNumberSign; }
 
 		// not supported
-		public Keyword ele10KeywordNumberSign() { return c10KeywordNumberSign; }
+		public Assignment ele21AssignmentNum3() { return c21AssignmentNum3; }
 
 		// not supported
-		public Assignment ele11AssignmentNum3() { return c11AssignmentNum3; }
-
-		// not supported
-		public RuleCall ele110TerminalRuleCallINT() { return c110TerminalRuleCallINT; }
+		public RuleCall ele210TerminalRuleCallINT() { return c210TerminalRuleCallINT; }
 	}
 
 	public class ManyStringsElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ManyStrings");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordEqualsSign = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentStr1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallSTRING = (RuleCall)c01AssignmentStr1.eContents().get(0);
-		private final Assignment c1AssignmentStr2 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallSTRING = (RuleCall)c1AssignmentStr2.eContents().get(0);
+		private final Keyword c0KeywordEqualsSign = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentStr1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallSTRING = (RuleCall)c1AssignmentStr1.eContents().get(0);
+		private final Assignment c2AssignmentStr2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentStr2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -233,35 +196,30 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordEqualsSign() { return c0KeywordEqualsSign; }
 
 		// not supported
-		public Keyword ele00KeywordEqualsSign() { return c00KeywordEqualsSign; }
-
-		// not supported
-		public Assignment ele01AssignmentStr1() { return c01AssignmentStr1; }
-
-		// not supported
-		public RuleCall ele010TerminalRuleCallSTRING() { return c010TerminalRuleCallSTRING; }
-
-		// not supported
-		public Assignment ele1AssignmentStr2() { return c1AssignmentStr2; }
+		public Assignment ele1AssignmentStr1() { return c1AssignmentStr1; }
 
 		// not supported
 		public RuleCall ele10TerminalRuleCallSTRING() { return c10TerminalRuleCallSTRING; }
+
+		// not supported
+		public Assignment ele2AssignmentStr2() { return c2AssignmentStr2; }
+
+		// not supported
+		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
 	}
 
 	public class TypeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Keyword c000KeywordType = (Keyword)c00Group.eContents().get(0);
-		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
-		private final RuleCall c0010TerminalRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
-		private final Keyword c01KeywordExtends = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceEStringType = (CrossReference)c1AssignmentExtends.eContents().get(0);
+		private final Keyword c0KeywordType = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Keyword c2KeywordExtends = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentExtends = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference c30CrossReferenceEStringType = (CrossReference)c3AssignmentExtends.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -270,28 +228,22 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordType() { return c0KeywordType; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public Keyword ele000KeywordType() { return c000KeywordType; }
+		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
 
 		// not supported
-		public Assignment ele001AssignmentName() { return c001AssignmentName; }
+		public Keyword ele2KeywordExtends() { return c2KeywordExtends; }
 
 		// not supported
-		public RuleCall ele0010TerminalRuleCallID() { return c0010TerminalRuleCallID; }
+		public Assignment ele3AssignmentExtends() { return c3AssignmentExtends; }
 
 		// not supported
-		public Keyword ele01KeywordExtends() { return c01KeywordExtends; }
-
-		// not supported
-		public Assignment ele1AssignmentExtends() { return c1AssignmentExtends; }
-
-		// not supported
-		public CrossReference ele10CrossReferenceEStringType() { return c10CrossReferenceEStringType; }
+		public CrossReference ele30CrossReferenceEStringType() { return c30CrossReferenceEStringType; }
 	}
 
 	public class Ref2Elements implements IParserRuleAccess {
@@ -300,10 +252,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c0KeywordNumberSignDigitTwo = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentRef2 = (Assignment)cGroup.eContents().get(1);
 		private final Alternatives c10Alternatives = (Alternatives)c1AssignmentRef2.eContents().get(0);
-		private final Alternatives c100Alternatives = (Alternatives)c10Alternatives.eContents().get(0);
-		private final Keyword c1000KeywordMykeyword1 = (Keyword)c100Alternatives.eContents().get(0);
-		private final RuleCall c1001TerminalRuleCallSTRING = (RuleCall)c100Alternatives.eContents().get(1);
-		private final Keyword c101KeywordMykeyword2 = (Keyword)c10Alternatives.eContents().get(1);
+		private final Keyword c100KeywordMykeyword1 = (Keyword)c10Alternatives.eContents().get(0);
+		private final RuleCall c101TerminalRuleCallSTRING = (RuleCall)c10Alternatives.eContents().get(1);
+		private final Keyword c102KeywordMykeyword2 = (Keyword)c10Alternatives.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -321,29 +272,25 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Alternatives ele10Alternatives() { return c10Alternatives; }
 
 		// not supported
-		public Alternatives ele100Alternatives() { return c100Alternatives; }
+		public Keyword ele100KeywordMykeyword1() { return c100KeywordMykeyword1; }
 
 		// not supported
-		public Keyword ele1000KeywordMykeyword1() { return c1000KeywordMykeyword1; }
+		public RuleCall ele101TerminalRuleCallSTRING() { return c101TerminalRuleCallSTRING; }
 
 		// not supported
-		public RuleCall ele1001TerminalRuleCallSTRING() { return c1001TerminalRuleCallSTRING; }
-
-		// not supported
-		public Keyword ele101KeywordMykeyword2() { return c101KeywordMykeyword2; }
+		public Keyword ele102KeywordMykeyword2() { return c102KeywordMykeyword2; }
 	}
 
 	public class SpareElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Spare");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordNumberSignDigitThree = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentId = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallID = (RuleCall)c01AssignmentId.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordFullStop = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentId = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110TerminalRuleCallID = (RuleCall)c11AssignmentId.eContents().get(0);
+		private final Keyword c0KeywordNumberSignDigitThree = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentId = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentId.eContents().get(0);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Keyword c20KeywordFullStop = (Keyword)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentId = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210TerminalRuleCallID = (RuleCall)c21AssignmentId.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -352,41 +299,36 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordNumberSignDigitThree() { return c0KeywordNumberSignDigitThree; }
 
 		// not supported
-		public Keyword ele00KeywordNumberSignDigitThree() { return c00KeywordNumberSignDigitThree; }
+		public Assignment ele1AssignmentId() { return c1AssignmentId; }
 
 		// not supported
-		public Assignment ele01AssignmentId() { return c01AssignmentId; }
+		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
 
 		// not supported
-		public RuleCall ele010TerminalRuleCallID() { return c010TerminalRuleCallID; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public Group ele1Group() { return c1Group; }
+		public Keyword ele20KeywordFullStop() { return c20KeywordFullStop; }
 
 		// not supported
-		public Keyword ele10KeywordFullStop() { return c10KeywordFullStop; }
+		public Assignment ele21AssignmentId() { return c21AssignmentId; }
 
 		// not supported
-		public Assignment ele11AssignmentId() { return c11AssignmentId; }
-
-		// not supported
-		public RuleCall ele110TerminalRuleCallID() { return c110TerminalRuleCallID; }
+		public RuleCall ele210TerminalRuleCallID() { return c210TerminalRuleCallID; }
 	}
 
 	public class BooleanElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Boolean");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Keyword c000KeywordNumberSignDigitFour = (Keyword)c00Group.eContents().get(0);
-		private final Assignment c001AssignmentBool = (Assignment)c00Group.eContents().get(1);
-		private final Keyword c0010KeywordMyoption = (Keyword)c001AssignmentBool.eContents().get(0);
-		private final Keyword c01KeywordKw = (Keyword)c0Group.eContents().get(1);
-		private final Assignment c1AssignmentValue = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentValue.eContents().get(0);
+		private final Keyword c0KeywordNumberSignDigitFour = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentBool = (Assignment)cGroup.eContents().get(1);
+		private final Keyword c10KeywordMyoption = (Keyword)c1AssignmentBool.eContents().get(0);
+		private final Keyword c2KeywordKw = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentValue = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall c30TerminalRuleCallID = (RuleCall)c3AssignmentValue.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -395,28 +337,22 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordNumberSignDigitFour() { return c0KeywordNumberSignDigitFour; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentBool() { return c1AssignmentBool; }
 
 		// not supported
-		public Keyword ele000KeywordNumberSignDigitFour() { return c000KeywordNumberSignDigitFour; }
+		public Keyword ele10KeywordMyoption() { return c10KeywordMyoption; }
 
 		// not supported
-		public Assignment ele001AssignmentBool() { return c001AssignmentBool; }
+		public Keyword ele2KeywordKw() { return c2KeywordKw; }
 
 		// not supported
-		public Keyword ele0010KeywordMyoption() { return c0010KeywordMyoption; }
+		public Assignment ele3AssignmentValue() { return c3AssignmentValue; }
 
 		// not supported
-		public Keyword ele01KeywordKw() { return c01KeywordKw; }
-
-		// not supported
-		public Assignment ele1AssignmentValue() { return c1AssignmentValue; }
-
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		public RuleCall ele30TerminalRuleCallID() { return c30TerminalRuleCallID; }
 	}
 	
 	private OpElements pOp;

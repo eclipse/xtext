@@ -14,16 +14,16 @@ public final class TestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$13$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$18$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$17$Delimiter = new SetBasedKeywordMatcher(
 		"choice", "optional", "reducible");
 
-	public static final ISequenceMatcher ruleCall$33$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$31$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

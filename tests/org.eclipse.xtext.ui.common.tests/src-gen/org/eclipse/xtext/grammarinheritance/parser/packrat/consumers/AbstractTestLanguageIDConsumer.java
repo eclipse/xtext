@@ -21,100 +21,100 @@ public final class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTermi
 
 	protected boolean consumeGroup$1() {
 		final int marker = mark();
-		if (!consumeKeyword$3()) {
+		if (!consumeKeyword$2()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeAlternatives$4()) {
+		if (!consumeAlternatives$3()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeAlternatives$19()) {
+		if (!consumeAlternatives$14()) {
 			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$3() {
-		doConsumeKeyword$3();
+	protected boolean consumeKeyword$2() {
+		doConsumeKeyword$2();
 		return true;
 	}
 
-	protected boolean doConsumeKeyword$3() {
+	protected boolean doConsumeKeyword$2() {
 		return readChar('^');
 	}
 
-	protected boolean consumeAlternatives$4() {
-		if (consumeCharacterRange$9())
+	protected boolean consumeAlternatives$3() {
+		if (consumeCharacterRange$4())
 			return true;
-		if (consumeCharacterRange$12())
+		if (consumeCharacterRange$7())
 			return true;
-		if (consumeKeyword$15())
+		if (consumeKeyword$10())
 			return true;
-		if (consumeKeyword$16())
+		if (consumeKeyword$11())
 			return true;
-		if (consumeKeyword$17())
+		if (consumeKeyword$12())
 			return true;
-		if (consumeKeyword$18())
+		if (consumeKeyword$13())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeCharacterRange$9() {
+	protected boolean consumeCharacterRange$4() {
 		return readCharBetween('a', 'z');
 	}
 
-	protected boolean consumeCharacterRange$12() {
+	protected boolean consumeCharacterRange$7() {
 		return readCharBetween('A', 'Z');
 	}
 
-	protected boolean consumeKeyword$15() {
+	protected boolean consumeKeyword$10() {
 		return readChar('\u00F6');
 	}
 
-	protected boolean consumeKeyword$16() {
+	protected boolean consumeKeyword$11() {
 		return readChar('\u00E4');
 	}
 
-	protected boolean consumeKeyword$17() {
+	protected boolean consumeKeyword$12() {
 		return readChar('\u00FC');
 	}
 
-	protected boolean consumeKeyword$18() {
+	protected boolean consumeKeyword$13() {
 		return readChar('_');
 	}
 
-	protected boolean consumeAlternatives$19() {
-		while(doConsumeAlternatives$19()) {}
+	protected boolean consumeAlternatives$14() {
+		while(doConsumeAlternatives$14()) {}
 		return true;
 	}
 
-	protected boolean doConsumeAlternatives$19() {
+	protected boolean doConsumeAlternatives$14() {
+		if (consumeCharacterRange$15())
+			return true;
+		if (consumeCharacterRange$18())
+			return true;
+		if (consumeKeyword$21())
+			return true;
 		if (consumeCharacterRange$22())
-			return true;
-		if (consumeCharacterRange$25())
-			return true;
-		if (consumeKeyword$28())
-			return true;
-		if (consumeCharacterRange$29())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeCharacterRange$22() {
+	protected boolean consumeCharacterRange$15() {
 		return readCharBetween('a', 'z');
 	}
 
-	protected boolean consumeCharacterRange$25() {
+	protected boolean consumeCharacterRange$18() {
 		return readCharBetween('A', 'Z');
 	}
 
-	protected boolean consumeKeyword$28() {
+	protected boolean consumeKeyword$21() {
 		return readChar('_');
 	}
 
-	protected boolean consumeCharacterRange$29() {
+	protected boolean consumeCharacterRange$22() {
 		return readCharBetween('0', '9');
 	}
 	

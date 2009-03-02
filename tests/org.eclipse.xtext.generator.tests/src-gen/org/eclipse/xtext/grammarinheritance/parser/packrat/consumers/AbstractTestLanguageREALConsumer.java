@@ -24,30 +24,30 @@ public final class AbstractTestLanguageREALConsumer extends AbstractRuleAwareTer
 
 	protected boolean consumeGroup$1() {
 		final int marker = mark();
-		if (!consumeRuleCall$3()) {
+		if (!consumeRuleCall$2()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeKeyword$4()) {
+		if (!consumeKeyword$3()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeRuleCall$5()) {
+		if (!consumeRuleCall$4()) {
 			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeRuleCall$3() {
+	protected boolean consumeRuleCall$2() {
 		return intConsumer.consume() == SUCCESS;
 	}
 
-	protected boolean consumeKeyword$4() {
+	protected boolean consumeKeyword$3() {
 		return readChar('.');
 	}
 
-	protected boolean consumeRuleCall$5() {
+	protected boolean consumeRuleCall$4() {
 		return intConsumer.consume() == SUCCESS;
 	}
 	

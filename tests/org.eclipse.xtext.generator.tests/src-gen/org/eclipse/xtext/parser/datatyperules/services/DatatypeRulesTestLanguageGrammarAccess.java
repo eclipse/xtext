@@ -35,24 +35,21 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Assignment c0000AssignmentId = (Assignment)c000Group.eContents().get(0);
-		private final RuleCall c00000ParserRuleCallNestedModelId = (RuleCall)c0000AssignmentId.eContents().get(0);
-		private final Group c0001Group = (Group)c000Group.eContents().get(1);
-		private final Keyword c00010KeywordColon = (Keyword)c0001Group.eContents().get(0);
-		private final Assignment c00011AssignmentValue = (Assignment)c0001Group.eContents().get(1);
-		private final RuleCall c000110ParserRuleCallFraction = (RuleCall)c00011AssignmentValue.eContents().get(0);
-		private final Group c001Group = (Group)c00Group.eContents().get(1);
-		private final Keyword c0010KeywordNumberSign = (Keyword)c001Group.eContents().get(0);
-		private final Assignment c0011AssignmentVector = (Assignment)c001Group.eContents().get(1);
-		private final RuleCall c00110ParserRuleCallVector = (RuleCall)c0011AssignmentVector.eContents().get(0);
-		private final Group c01Group = (Group)c0Group.eContents().get(1);
-		private final Keyword c010KeywordPlusSign = (Keyword)c01Group.eContents().get(0);
-		private final Assignment c011AssignmentDots = (Assignment)c01Group.eContents().get(1);
-		private final RuleCall c0110ParserRuleCallDots = (RuleCall)c011AssignmentDots.eContents().get(0);
-		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c0AssignmentId = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00ParserRuleCallNestedModelId = (RuleCall)c0AssignmentId.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Keyword c10KeywordColon = (Keyword)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentValue = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallFraction = (RuleCall)c11AssignmentValue.eContents().get(0);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Keyword c20KeywordNumberSign = (Keyword)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentVector = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210ParserRuleCallVector = (RuleCall)c21AssignmentVector.eContents().get(0);
+		private final Group c3Group = (Group)cGroup.eContents().get(3);
+		private final Keyword c30KeywordPlusSign = (Keyword)c3Group.eContents().get(0);
+		private final Assignment c31AssignmentDots = (Assignment)c3Group.eContents().get(1);
+		private final RuleCall c310ParserRuleCallDots = (RuleCall)c31AssignmentDots.eContents().get(0);
+		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -61,67 +58,57 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentId() { return c0AssignmentId; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public RuleCall ele00ParserRuleCallNestedModelId() { return c00ParserRuleCallNestedModelId; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public Group ele1Group() { return c1Group; }
 
 		// not supported
-		public Assignment ele0000AssignmentId() { return c0000AssignmentId; }
+		public Keyword ele10KeywordColon() { return c10KeywordColon; }
 
 		// not supported
-		public RuleCall ele00000ParserRuleCallNestedModelId() { return c00000ParserRuleCallNestedModelId; }
+		public Assignment ele11AssignmentValue() { return c11AssignmentValue; }
 
 		// not supported
-		public Group ele0001Group() { return c0001Group; }
+		public RuleCall ele110ParserRuleCallFraction() { return c110ParserRuleCallFraction; }
 
 		// not supported
-		public Keyword ele00010KeywordColon() { return c00010KeywordColon; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public Assignment ele00011AssignmentValue() { return c00011AssignmentValue; }
+		public Keyword ele20KeywordNumberSign() { return c20KeywordNumberSign; }
 
 		// not supported
-		public RuleCall ele000110ParserRuleCallFraction() { return c000110ParserRuleCallFraction; }
+		public Assignment ele21AssignmentVector() { return c21AssignmentVector; }
 
 		// not supported
-		public Group ele001Group() { return c001Group; }
+		public RuleCall ele210ParserRuleCallVector() { return c210ParserRuleCallVector; }
 
 		// not supported
-		public Keyword ele0010KeywordNumberSign() { return c0010KeywordNumberSign; }
+		public Group ele3Group() { return c3Group; }
 
 		// not supported
-		public Assignment ele0011AssignmentVector() { return c0011AssignmentVector; }
+		public Keyword ele30KeywordPlusSign() { return c30KeywordPlusSign; }
 
 		// not supported
-		public RuleCall ele00110ParserRuleCallVector() { return c00110ParserRuleCallVector; }
+		public Assignment ele31AssignmentDots() { return c31AssignmentDots; }
 
 		// not supported
-		public Group ele01Group() { return c01Group; }
+		public RuleCall ele310ParserRuleCallDots() { return c310ParserRuleCallDots; }
 
 		// not supported
-		public Keyword ele010KeywordPlusSign() { return c010KeywordPlusSign; }
-
-		// not supported
-		public Assignment ele011AssignmentDots() { return c011AssignmentDots; }
-
-		// not supported
-		public RuleCall ele0110ParserRuleCallDots() { return c0110ParserRuleCallDots; }
-
-		// not supported
-		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
+		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
 	}
 
 	public class ModelIdElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0Group.eContents().get(0);
-		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1TerminalRuleCallID = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c0TerminalRuleCallID = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword c1KeywordFullStop = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall c2TerminalRuleCallID = (RuleCall)cGroup.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -130,25 +117,21 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
 
 		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		public Keyword ele1KeywordFullStop() { return c1KeywordFullStop; }
 
 		// not supported
-		public Keyword ele01KeywordFullStop() { return c01KeywordFullStop; }
-
-		// not supported
-		public RuleCall ele1TerminalRuleCallID() { return c1TerminalRuleCallID; }
+		public RuleCall ele2TerminalRuleCallID() { return c2TerminalRuleCallID; }
 	}
 
 	public class NestedModelIdElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallModelId = (RuleCall)c0Group.eContents().get(0);
-		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
-		private final RuleCall c1ParserRuleCallModelId = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c0ParserRuleCallModelId = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword c1KeywordFullStop = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall c2ParserRuleCallModelId = (RuleCall)cGroup.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -157,16 +140,13 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public RuleCall ele0ParserRuleCallModelId() { return c0ParserRuleCallModelId; }
 
 		// not supported
-		public RuleCall ele00ParserRuleCallModelId() { return c00ParserRuleCallModelId; }
+		public Keyword ele1KeywordFullStop() { return c1KeywordFullStop; }
 
 		// not supported
-		public Keyword ele01KeywordFullStop() { return c01KeywordFullStop; }
-
-		// not supported
-		public RuleCall ele1ParserRuleCallModelId() { return c1ParserRuleCallModelId; }
+		public RuleCall ele2ParserRuleCallModelId() { return c2ParserRuleCallModelId; }
 	}
 
 	public class FractionElements implements IParserRuleAccess {
@@ -199,12 +179,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	public class VectorElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Vector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Keyword c000KeywordLeftParenthesis = (Keyword)c00Group.eContents().get(0);
-		private final RuleCall c001TerminalRuleCallINT = (RuleCall)c00Group.eContents().get(1);
-		private final RuleCall c01TerminalRuleCallINT = (RuleCall)c0Group.eContents().get(1);
-		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
+		private final Keyword c0KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall c1TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall c2TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(2);
+		private final Keyword c3KeywordRightParenthesis = (Keyword)cGroup.eContents().get(3);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -213,22 +191,16 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordLeftParenthesis() { return c0KeywordLeftParenthesis; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public RuleCall ele1TerminalRuleCallINT() { return c1TerminalRuleCallINT; }
 
 		// not supported
-		public Keyword ele000KeywordLeftParenthesis() { return c000KeywordLeftParenthesis; }
+		public RuleCall ele2TerminalRuleCallINT() { return c2TerminalRuleCallINT; }
 
 		// not supported
-		public RuleCall ele001TerminalRuleCallINT() { return c001TerminalRuleCallINT; }
-
-		// not supported
-		public RuleCall ele01TerminalRuleCallINT() { return c01TerminalRuleCallINT; }
-
-		// not supported
-		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
+		public Keyword ele3KeywordRightParenthesis() { return c3KeywordRightParenthesis; }
 	}
 
 	public class DotsElements implements IParserRuleAccess {

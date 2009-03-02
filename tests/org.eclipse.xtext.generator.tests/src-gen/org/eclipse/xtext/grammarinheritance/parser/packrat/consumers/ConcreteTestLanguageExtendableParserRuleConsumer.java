@@ -29,11 +29,11 @@ public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonT
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
 	private IElementConsumer ruleCall$3$Consumer;
 
 	private IElementConsumer ruleCall$4$Consumer;
-
-	private IElementConsumer ruleCall$5$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -43,9 +43,21 @@ public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonT
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(subrule1Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -57,25 +69,13 @@ public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonT
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(subrule1Consumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(subrule2Consumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(subrule2Consumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -102,9 +102,9 @@ public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonT
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallSubrule1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallSubrule2());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele1ParserRuleCallSubrule3());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSubrule1());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallSubrule2());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallSubrule3());
 	}
 	
 	@Override

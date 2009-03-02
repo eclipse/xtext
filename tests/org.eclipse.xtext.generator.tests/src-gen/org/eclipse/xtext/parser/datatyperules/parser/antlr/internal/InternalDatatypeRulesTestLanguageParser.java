@@ -217,7 +217,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:119:1: ruleModel returns [EObject current=null] : ( ( ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )? ) ';' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:119:1: ruleModel returns [EObject current=null] : ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ( '#' (lv_vector_4= ruleVector ) )? ( '+' (lv_dots_6= ruleDots ) )? ';' ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -233,28 +233,19 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:124:6: ( ( ( ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )? ) ';' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:1: ( ( ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )? ) ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:124:6: ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ( '#' (lv_vector_4= ruleVector ) )? ( '+' (lv_dots_6= ruleDots ) )? ';' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:1: ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ( '#' (lv_vector_4= ruleVector ) )? ( '+' (lv_dots_6= ruleDots ) )? ';' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:1: ( ( ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )? ) ';' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:2: ( ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )? ) ';'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:1: ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ( '#' (lv_vector_4= ruleVector ) )? ( '+' (lv_dots_6= ruleDots ) )? ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:2: (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ( '#' (lv_vector_4= ruleVector ) )? ( '+' (lv_dots_6= ruleDots ) )? ';'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:2: ( ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:3: ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? ) ( '+' (lv_dots_6= ruleDots ) )?
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:3: ( ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:4: ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? ) ( '#' (lv_vector_4= ruleVector ) )?
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:4: ( (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:5: (lv_id_0= ruleNestedModelId ) ( ':' (lv_value_2= ruleFraction ) )?
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:5: (lv_id_0= ruleNestedModelId )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:125:2: (lv_id_0= ruleNestedModelId )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:128:6: lv_id_0= ruleNestedModelId
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prModel().ele00000ParserRuleCallNestedModelId(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.prModel().ele00ParserRuleCallNestedModelId(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleNestedModelId_in_ruleModel248);
+            pushFollow(FOLLOW_ruleNestedModelId_in_ruleModel245);
             lv_id_0=ruleNestedModelId();
             _fsp--;
 
@@ -285,17 +276,17 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                 case 1 :
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:146:3: ':' (lv_value_2= ruleFraction )
                     {
-                    match(input,11,FOLLOW_11_in_ruleModel262); 
+                    match(input,11,FOLLOW_11_in_ruleModel259); 
 
-                            createLeafNode(grammarAccess.prModel().ele00010KeywordColon(), null); 
+                            createLeafNode(grammarAccess.prModel().ele10KeywordColon(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:150:1: (lv_value_2= ruleFraction )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:153:6: lv_value_2= ruleFraction
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallFraction(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele110ParserRuleCallFraction(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleFraction_in_ruleModel296);
+                    pushFollow(FOLLOW_ruleFraction_in_ruleModel293);
                     lv_value_2=ruleFraction();
                     _fsp--;
 
@@ -321,10 +312,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-
-            }
-
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:171:5: ( '#' (lv_vector_4= ruleVector ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:171:4: ( '#' (lv_vector_4= ruleVector ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -333,19 +321,19 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:171:6: '#' (lv_vector_4= ruleVector )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:171:5: '#' (lv_vector_4= ruleVector )
                     {
-                    match(input,12,FOLLOW_12_in_ruleModel313); 
+                    match(input,12,FOLLOW_12_in_ruleModel309); 
 
-                            createLeafNode(grammarAccess.prModel().ele0010KeywordNumberSign(), null); 
+                            createLeafNode(grammarAccess.prModel().ele20KeywordNumberSign(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:175:1: (lv_vector_4= ruleVector )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:178:6: lv_vector_4= ruleVector
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallVector(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele210ParserRuleCallVector(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleVector_in_ruleModel347);
+                    pushFollow(FOLLOW_ruleVector_in_ruleModel343);
                     lv_vector_4=ruleVector();
                     _fsp--;
 
@@ -371,10 +359,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-
-            }
-
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:196:5: ( '+' (lv_dots_6= ruleDots ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:196:4: ( '+' (lv_dots_6= ruleDots ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -383,19 +368,19 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:196:6: '+' (lv_dots_6= ruleDots )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:196:5: '+' (lv_dots_6= ruleDots )
                     {
-                    match(input,13,FOLLOW_13_in_ruleModel364); 
+                    match(input,13,FOLLOW_13_in_ruleModel359); 
 
-                            createLeafNode(grammarAccess.prModel().ele010KeywordPlusSign(), null); 
+                            createLeafNode(grammarAccess.prModel().ele30KeywordPlusSign(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:200:1: (lv_dots_6= ruleDots )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:203:6: lv_dots_6= ruleDots
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallDots(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele310ParserRuleCallDots(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleDots_in_ruleModel398);
+                    pushFollow(FOLLOW_ruleDots_in_ruleModel393);
                     lv_dots_6=ruleDots();
                     _fsp--;
 
@@ -421,12 +406,9 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
+            match(input,14,FOLLOW_14_in_ruleModel408); 
 
-            }
-
-            match(input,14,FOLLOW_14_in_ruleModel414); 
-
-                    createLeafNode(grammarAccess.prModel().ele1KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.prModel().ele4KeywordSemicolon(), null); 
                 
 
             }
@@ -463,12 +445,12 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:233:2: iv_ruleModelId= ruleModelId EOF
             {
              currentNode = createCompositeNode(grammarAccess.prModelId().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModelId_in_entryRuleModelId448);
+            pushFollow(FOLLOW_ruleModelId_in_entryRuleModelId442);
             iv_ruleModelId=ruleModelId();
             _fsp--;
 
              current =iv_ruleModelId.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModelId459); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleModelId453); 
 
             }
 
@@ -486,7 +468,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleModelId
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:240:1: ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ID_0= RULE_ID kw= '.' ) this_ID_2= RULE_ID ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:240:1: ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleModelId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -497,39 +479,33 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:246:6: ( ( (this_ID_0= RULE_ID kw= '.' ) this_ID_2= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:1: ( (this_ID_0= RULE_ID kw= '.' ) this_ID_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:246:6: ( (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:1: (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:1: ( (this_ID_0= RULE_ID kw= '.' ) this_ID_2= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:2: (this_ID_0= RULE_ID kw= '.' ) this_ID_2= RULE_ID
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:2: (this_ID_0= RULE_ID kw= '.' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:7: this_ID_0= RULE_ID kw= '.'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:1: (this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:247:6: this_ID_0= RULE_ID kw= '.' this_ID_2= RULE_ID
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModelId500); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModelId493); 
 
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prModelId().ele00TerminalRuleCallID(), null); 
+                createLeafNode(grammarAccess.prModelId().ele0TerminalRuleCallID(), null); 
                 
             kw=(Token)input.LT(1);
-            match(input,15,FOLLOW_15_in_ruleModelId518); 
+            match(input,15,FOLLOW_15_in_ruleModelId511); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prModelId().ele01KeywordFullStop(), null); 
+                    createLeafNode(grammarAccess.prModelId().ele1KeywordFullStop(), null); 
                 
-
-            }
-
             this_ID_2=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModelId534); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModelId526); 
 
             		current.merge(this_ID_2);
                 
              
-                createLeafNode(grammarAccess.prModelId().ele1TerminalRuleCallID(), null); 
+                createLeafNode(grammarAccess.prModelId().ele2TerminalRuleCallID(), null); 
                 
 
             }
@@ -567,12 +543,12 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:276:2: iv_ruleNestedModelId= ruleNestedModelId EOF
             {
              currentNode = createCompositeNode(grammarAccess.prNestedModelId().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNestedModelId_in_entryRuleNestedModelId578);
+            pushFollow(FOLLOW_ruleNestedModelId_in_entryRuleNestedModelId570);
             iv_ruleNestedModelId=ruleNestedModelId();
             _fsp--;
 
              current =iv_ruleNestedModelId.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNestedModelId589); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNestedModelId581); 
 
             }
 
@@ -590,7 +566,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleNestedModelId
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:283:1: ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_ModelId_0= ruleModelId kw= '.' ) this_ModelId_2= ruleModelId ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:283:1: ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId ) ;
     public final AntlrDatatypeRuleToken ruleNestedModelId() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -603,19 +579,16 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:289:6: ( ( (this_ModelId_0= ruleModelId kw= '.' ) this_ModelId_2= ruleModelId ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:1: ( (this_ModelId_0= ruleModelId kw= '.' ) this_ModelId_2= ruleModelId )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:289:6: ( (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:1: (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:1: ( (this_ModelId_0= ruleModelId kw= '.' ) this_ModelId_2= ruleModelId )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:2: (this_ModelId_0= ruleModelId kw= '.' ) this_ModelId_2= ruleModelId
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:2: (this_ModelId_0= ruleModelId kw= '.' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:291:5: this_ModelId_0= ruleModelId kw= '.'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:290:1: (this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:291:5: this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId
             {
              
-                    currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele00ParserRuleCallModelId(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele0ParserRuleCallModelId(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId637);
+            pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId628);
             this_ModelId_0=ruleModelId();
             _fsp--;
 
@@ -626,18 +599,15 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     currentNode = currentNode.getParent();
                 
             kw=(Token)input.LT(1);
-            match(input,15,FOLLOW_15_in_ruleNestedModelId655); 
+            match(input,15,FOLLOW_15_in_ruleNestedModelId646); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prNestedModelId().ele01KeywordFullStop(), null); 
+                    createLeafNode(grammarAccess.prNestedModelId().ele1KeywordFullStop(), null); 
                 
-
-            }
-
              
-                    currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele1ParserRuleCallModelId(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele2ParserRuleCallModelId(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId678);
+            pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId668);
             this_ModelId_2=ruleModelId();
             _fsp--;
 
@@ -683,12 +653,12 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:327:2: iv_ruleFraction= ruleFraction EOF
             {
              currentNode = createCompositeNode(grammarAccess.prFraction().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFraction_in_entryRuleFraction722);
+            pushFollow(FOLLOW_ruleFraction_in_entryRuleFraction712);
             iv_ruleFraction=ruleFraction();
             _fsp--;
 
              current =iv_ruleFraction.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFraction733); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFraction723); 
 
             }
 
@@ -724,7 +694,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:341:6: this_INT_0= RULE_INT (kw= '/' this_INT_2= RULE_INT )?
             {
             this_INT_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFraction773); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFraction763); 
 
             		current.merge(this_INT_0);
                 
@@ -743,13 +713,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:349:2: kw= '/' this_INT_2= RULE_INT
                     {
                     kw=(Token)input.LT(1);
-                    match(input,16,FOLLOW_16_in_ruleFraction792); 
+                    match(input,16,FOLLOW_16_in_ruleFraction782); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.prFraction().ele10KeywordSolidus(), null); 
                         
                     this_INT_2=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFraction807); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFraction797); 
 
                     		current.merge(this_INT_2);
                         
@@ -798,12 +768,12 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:370:2: iv_ruleVector= ruleVector EOF
             {
              currentNode = createCompositeNode(grammarAccess.prVector().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleVector_in_entryRuleVector853);
+            pushFollow(FOLLOW_ruleVector_in_entryRuleVector843);
             iv_ruleVector=ruleVector();
             _fsp--;
 
              current =iv_ruleVector.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVector864); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVector854); 
 
             }
 
@@ -821,7 +791,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleVector
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:377:1: ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ( (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT ) kw= ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:377:1: ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' ) ;
     public final AntlrDatatypeRuleToken ruleVector() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -832,51 +802,39 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:383:6: ( ( ( (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT ) kw= ')' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:1: ( ( (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT ) kw= ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:383:6: ( (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:1: (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:1: ( ( (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT ) kw= ')' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:2: ( (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT ) kw= ')'
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:2: ( (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:3: (kw= '(' this_INT_1= RULE_INT ) this_INT_2= RULE_INT
-            {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:3: (kw= '(' this_INT_1= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:385:2: kw= '(' this_INT_1= RULE_INT
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:384:1: (kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:385:2: kw= '(' this_INT_1= RULE_INT this_INT_2= RULE_INT kw= ')'
             {
             kw=(Token)input.LT(1);
-            match(input,17,FOLLOW_17_in_ruleVector904); 
+            match(input,17,FOLLOW_17_in_ruleVector892); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prVector().ele000KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.prVector().ele0KeywordLeftParenthesis(), null); 
                 
             this_INT_1=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector919); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector907); 
 
             		current.merge(this_INT_1);
                 
              
-                createLeafNode(grammarAccess.prVector().ele001TerminalRuleCallINT(), null); 
+                createLeafNode(grammarAccess.prVector().ele1TerminalRuleCallINT(), null); 
                 
-
-            }
-
             this_INT_2=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector940); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector927); 
 
             		current.merge(this_INT_2);
                 
              
-                createLeafNode(grammarAccess.prVector().ele01TerminalRuleCallINT(), null); 
+                createLeafNode(grammarAccess.prVector().ele2TerminalRuleCallINT(), null); 
                 
-
-            }
-
             kw=(Token)input.LT(1);
-            match(input,18,FOLLOW_18_in_ruleVector959); 
+            match(input,18,FOLLOW_18_in_ruleVector945); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prVector().ele1KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.prVector().ele3KeywordRightParenthesis(), null); 
                 
 
             }
@@ -914,12 +872,12 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:419:2: iv_ruleDots= ruleDots EOF
             {
              currentNode = createCompositeNode(grammarAccess.prDots().getRule(), currentNode); 
-            pushFollow(FOLLOW_ruleDots_in_entryRuleDots998);
+            pushFollow(FOLLOW_ruleDots_in_entryRuleDots984);
             iv_ruleDots=ruleDots();
             _fsp--;
 
              current =iv_ruleDots.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDots1009); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDots995); 
 
             }
 
@@ -973,13 +931,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:434:2: kw= '.' kw= '.'
                     {
                     kw=(Token)input.LT(1);
-                    match(input,15,FOLLOW_15_in_ruleDots1048); 
+                    match(input,15,FOLLOW_15_in_ruleDots1034); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.prDots().ele00KeywordFullStop(), null); 
                         
                     kw=(Token)input.LT(1);
-                    match(input,15,FOLLOW_15_in_ruleDots1061); 
+                    match(input,15,FOLLOW_15_in_ruleDots1047); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.prDots().ele01KeywordFullStop(), null); 
@@ -994,7 +952,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:447:2: kw= '..'
                     {
                     kw=(Token)input.LT(1);
-                    match(input,19,FOLLOW_19_in_ruleDots1081); 
+                    match(input,19,FOLLOW_19_in_ruleDots1067); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.prDots().ele1KeywordFullStopFullStop(), null); 
@@ -1032,39 +990,39 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
     public static final BitSet FOLLOW_ruleModel_in_ruleCompositeModel139 = new BitSet(new long[]{0x0000000000000012L});
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel176 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNestedModelId_in_ruleModel248 = new BitSet(new long[]{0x0000000000007800L});
-    public static final BitSet FOLLOW_11_in_ruleModel262 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleFraction_in_ruleModel296 = new BitSet(new long[]{0x0000000000007000L});
-    public static final BitSet FOLLOW_12_in_ruleModel313 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ruleVector_in_ruleModel347 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_13_in_ruleModel364 = new BitSet(new long[]{0x0000000000088000L});
-    public static final BitSet FOLLOW_ruleDots_in_ruleModel398 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleModel414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleModelId_in_entryRuleModelId448 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModelId459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModelId500 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleModelId518 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModelId534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNestedModelId_in_entryRuleNestedModelId578 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNestedModelId589 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleModelId_in_ruleNestedModelId637 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleNestedModelId655 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleModelId_in_ruleNestedModelId678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFraction_in_entryRuleFraction722 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFraction733 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleFraction773 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleFraction792 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleFraction807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVector_in_entryRuleVector853 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVector864 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleVector904 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVector919 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVector940 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleVector959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDots_in_entryRuleDots998 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDots1009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleDots1048 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleDots1061 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleDots1081 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNestedModelId_in_ruleModel245 = new BitSet(new long[]{0x0000000000007800L});
+    public static final BitSet FOLLOW_11_in_ruleModel259 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleFraction_in_ruleModel293 = new BitSet(new long[]{0x0000000000007000L});
+    public static final BitSet FOLLOW_12_in_ruleModel309 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_ruleVector_in_ruleModel343 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_13_in_ruleModel359 = new BitSet(new long[]{0x0000000000088000L});
+    public static final BitSet FOLLOW_ruleDots_in_ruleModel393 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleModel408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModelId_in_entryRuleModelId442 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleModelId453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModelId493 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleModelId511 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModelId526 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNestedModelId_in_entryRuleNestedModelId570 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNestedModelId581 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModelId_in_ruleNestedModelId628 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleNestedModelId646 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleModelId_in_ruleNestedModelId668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFraction_in_entryRuleFraction712 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFraction723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleFraction763 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_ruleFraction782 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleFraction797 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVector_in_entryRuleVector843 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVector854 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleVector892 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVector907 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVector927 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleVector945 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDots_in_entryRuleDots984 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDots995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleDots1034 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleDots1047 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleDots1067 = new BitSet(new long[]{0x0000000000000002L});
 
 }

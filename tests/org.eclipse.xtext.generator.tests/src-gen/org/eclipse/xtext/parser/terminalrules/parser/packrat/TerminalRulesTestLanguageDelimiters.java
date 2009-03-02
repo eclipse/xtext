@@ -11,6 +11,6 @@ public final class TerminalRulesTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ISequenceMatcher ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

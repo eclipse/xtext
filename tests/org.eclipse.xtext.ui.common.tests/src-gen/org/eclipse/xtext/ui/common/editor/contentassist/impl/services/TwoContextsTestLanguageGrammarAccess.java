@@ -35,14 +35,13 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 	public class AnElementElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Assignment c00AssignmentName = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000TerminalRuleCallID = (RuleCall)c00AssignmentName.eContents().get(0);
-		private final Group c01Group = (Group)c0Group.eContents().get(1);
-		private final Keyword c010KeywordRefersTo = (Keyword)c01Group.eContents().get(0);
-		private final Assignment c011AssignmentReferred = (Assignment)c01Group.eContents().get(1);
-		private final CrossReference c0110CrossReferenceEStringAnElement = (CrossReference)c011AssignmentReferred.eContents().get(0);
-		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
+		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Keyword c10KeywordRefersTo = (Keyword)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentReferred = (Assignment)c1Group.eContents().get(1);
+		private final CrossReference c110CrossReferenceEStringAnElement = (CrossReference)c11AssignmentReferred.eContents().get(0);
+		private final Keyword c2KeywordSemicolon = (Keyword)cGroup.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -51,28 +50,25 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// not supported
-		public Assignment ele00AssignmentName() { return c00AssignmentName; }
+		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
 
 		// not supported
-		public RuleCall ele000TerminalRuleCallID() { return c000TerminalRuleCallID; }
+		public Group ele1Group() { return c1Group; }
 
 		// not supported
-		public Group ele01Group() { return c01Group; }
+		public Keyword ele10KeywordRefersTo() { return c10KeywordRefersTo; }
 
 		// not supported
-		public Keyword ele010KeywordRefersTo() { return c010KeywordRefersTo; }
+		public Assignment ele11AssignmentReferred() { return c11AssignmentReferred; }
 
 		// not supported
-		public Assignment ele011AssignmentReferred() { return c011AssignmentReferred; }
+		public CrossReference ele110CrossReferenceEStringAnElement() { return c110CrossReferenceEStringAnElement; }
 
 		// not supported
-		public CrossReference ele0110CrossReferenceEStringAnElement() { return c0110CrossReferenceEStringAnElement; }
-
-		// not supported
-		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
+		public Keyword ele2KeywordSemicolon() { return c2KeywordSemicolon; }
 	}
 	
 	private MainModelElements pMainModel;

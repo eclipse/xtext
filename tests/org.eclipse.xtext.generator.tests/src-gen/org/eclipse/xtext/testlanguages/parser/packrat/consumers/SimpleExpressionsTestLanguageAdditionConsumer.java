@@ -34,23 +34,23 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 
 	private IElementConsumer group$3$Consumer;
 
-	private IElementConsumer action$5$Consumer;
+	private IElementConsumer action$4$Consumer;
 
-	private IElementConsumer assignment$7$Consumer;
+	private IElementConsumer assignment$6$Consumer;
 
-	private IElementConsumer alternatives$8$Consumer;
+	private IElementConsumer alternatives$7$Consumer;
+
+	private IElementConsumer keyword$8$Consumer;
 
 	private IElementConsumer keyword$9$Consumer;
 
-	private IElementConsumer keyword$10$Consumer;
+	private IElementConsumer assignment$10$Consumer;
 
-	private IElementConsumer assignment$11$Consumer;
+	private IElementConsumer ruleCall$11$Consumer;
 
-	private IElementConsumer ruleCall$12$Consumer;
+	private ICharacterClass keyword$8$Delimiter;
 
 	private ICharacterClass keyword$9$Delimiter;
-
-	private ICharacterClass keyword$10$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -85,15 +85,15 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(action$5$Consumer);
-			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(assignment$11$Consumer);
+			acceptor.accept(action$4$Consumer);
+			acceptor.accept(assignment$6$Consumer);
+			acceptor.accept(assignment$10$Consumer);
 		}
 	}
 
-	protected class Action$5$Consumer extends ElementConsumer<Action> {
+	protected class Action$4$Consumer extends ElementConsumer<Action> {
 		
-		protected Action$5$Consumer(final Action action) {
+		protected Action$4$Consumer(final Action action) {
 			super(action);
 		}
 		
@@ -104,28 +104,40 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 	}
 
-	protected class Assignment$7$Consumer extends AssignmentConsumer {
+	protected class Assignment$6$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$7$Consumer(final Assignment assignment) {
+		protected Assignment$6$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return alternatives$8$Consumer;
+			return alternatives$7$Consumer;
 		}
 	}
 
-	protected class Alternatives$8$Consumer extends AlternativesConsumer {
+	protected class Alternatives$7$Consumer extends AlternativesConsumer {
 		
-		protected Alternatives$8$Consumer(final Alternatives alternatives) {
+		protected Alternatives$7$Consumer(final Alternatives alternatives) {
 			super(alternatives);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$8$Consumer);
 			acceptor.accept(keyword$9$Consumer);
-			acceptor.accept(keyword$10$Consumer);
+		}
+	}
+
+	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$8$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "operator", false, false, getKeyword$8$Delimiter(), optional);
 		}
 	}
 
@@ -141,33 +153,21 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		}
 	}
 
-	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
+	protected class Assignment$10$Consumer extends AssignmentConsumer {
 		
-		protected Keyword$10$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "operator", false, false, getKeyword$10$Delimiter(), optional);
-		}
-	}
-
-	protected class Assignment$11$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$11$Consumer(final Assignment assignment) {
+		protected Assignment$10$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$12$Consumer;
+			return ruleCall$11$Consumer;
 		}
 	}
 
-	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -179,8 +179,8 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 
 	public SimpleExpressionsTestLanguageAdditionConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -198,15 +198,15 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallMultiplication());
 		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$5$Consumer = new Action$5$Consumer(rule.ele100ActionOpvalues());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele101AssignmentOperator());
-		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.ele1010Alternatives());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele10100KeywordPlusSign());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele10101KeywordHyphenMinus());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele10100KeywordPlusSign());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele10101KeywordHyphenMinus());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele11AssignmentValues());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele110ParserRuleCallMultiplication());
+		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionOpvalues());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentOperator());
+		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.ele110Alternatives());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele1100KeywordPlusSign());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele1101KeywordHyphenMinus());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele1100KeywordPlusSign());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele1101KeywordHyphenMinus());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele12AssignmentValues());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele120ParserRuleCallMultiplication());
 	}
 	
 	@Override
@@ -223,20 +223,20 @@ public final class SimpleExpressionsTestLanguageAdditionConsumer extends NonTerm
 		this.multiplicationConsumer = multiplicationConsumer;
 	}
 	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$9$Delimiter() {
 		return keyword$9$Delimiter;
 	}
 	
 	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
 		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$10$Delimiter() {
-		return keyword$10$Delimiter;
-	}
-	
-	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
-		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

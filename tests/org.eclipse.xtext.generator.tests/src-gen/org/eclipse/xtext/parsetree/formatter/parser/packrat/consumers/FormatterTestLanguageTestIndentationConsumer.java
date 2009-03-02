@@ -31,27 +31,27 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer keyword$4$Consumer;
+	private IElementConsumer keyword$2$Consumer;
 
-	private IElementConsumer keyword$5$Consumer;
+	private IElementConsumer keyword$3$Consumer;
 
-	private IElementConsumer alternatives$6$Consumer;
+	private IElementConsumer alternatives$4$Consumer;
+
+	private IElementConsumer assignment$5$Consumer;
+
+	private IElementConsumer ruleCall$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
 	private IElementConsumer ruleCall$8$Consumer;
 
-	private IElementConsumer assignment$9$Consumer;
+	private IElementConsumer keyword$9$Consumer;
 
-	private IElementConsumer ruleCall$10$Consumer;
+	private ICharacterClass keyword$2$Delimiter;
 
-	private IElementConsumer keyword$11$Consumer;
+	private ICharacterClass keyword$3$Delimiter;
 
-	private ICharacterClass keyword$4$Delimiter;
-
-	private ICharacterClass keyword$5$Delimiter;
-
-	private ICharacterClass keyword$11$Delimiter;
+	private ICharacterClass keyword$9$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -61,47 +61,71 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$4$Consumer);
-			acceptor.accept(keyword$5$Consumer);
-			acceptor.accept(alternatives$6$Consumer);
-			acceptor.accept(keyword$11$Consumer);
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(keyword$3$Consumer);
+			acceptor.accept(alternatives$4$Consumer);
+			acceptor.accept(keyword$9$Consumer);
 		}
 	}
 
-	protected class Keyword$4$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$4$Consumer(final Keyword keyword) {
+		protected Keyword$2$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$4$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
-	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$5$Consumer(final Keyword keyword) {
+		protected Keyword$3$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
 		}
 	}
 
-	protected class Alternatives$6$Consumer extends LoopAlternativesConsumer {
+	protected class Alternatives$4$Consumer extends LoopAlternativesConsumer {
 		
-		protected Alternatives$6$Consumer(final Alternatives alternatives) {
+		protected Alternatives$4$Consumer(final Alternatives alternatives) {
 			super(alternatives);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(assignment$5$Consumer);
 			acceptor.accept(assignment$7$Consumer);
-			acceptor.accept(assignment$9$Consumer);
+		}
+	}
+
+	protected class Assignment$5$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$5$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$6$Consumer;
+		}
+	}
+
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testIndentationConsumer, "sub", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -125,51 +149,27 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(testIndentationConsumer, "sub", true, false, false, getElement(), optional);
-		}
-	}
-
-	protected class Assignment$9$Consumer extends AssignmentConsumer {
-		
-		protected Assignment$9$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$10$Consumer;
-		}
-	}
-
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
 			return consumeNonTerminal(lineConsumer, "items", true, false, false, getElement(), optional);
 		}
 	}
 
-	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$11$Consumer(final Keyword keyword) {
+		protected Keyword$9$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
 		}
 	}
 
 	public FormatterTestLanguageTestIndentationConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -185,14 +185,14 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordIndentation());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele001KeywordLeftCurlyBracket());
-		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.ele01Alternatives());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele010AssignmentSub());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele0100ParserRuleCallTestIndentation());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele011AssignmentItems());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0110ParserRuleCallLine());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele1KeywordRightCurlyBracket());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordIndentation());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftCurlyBracket());
+		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele2Alternatives());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele20AssignmentSub());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele200ParserRuleCallTestIndentation());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentItems());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallLine());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele3KeywordRightCurlyBracket());
 	}
 	
 	@Override
@@ -213,28 +213,28 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 		this.testIndentationConsumer = testIndentationConsumer;
 	}
 	
-	public ICharacterClass getKeyword$4$Delimiter() {
-		return keyword$4$Delimiter;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
 	}
 	
-	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
-		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
+	public ICharacterClass getKeyword$3$Delimiter() {
+		return keyword$3$Delimiter;
 	}
 	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
+		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
 	}
 	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

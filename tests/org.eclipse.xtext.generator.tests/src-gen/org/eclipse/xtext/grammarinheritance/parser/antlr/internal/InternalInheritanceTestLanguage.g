@@ -80,15 +80,15 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((('model' 
+('model' 
     {
-        createLeafNode(grammarAccess.prModel().ele0000KeywordModel(), null); 
+        createLeafNode(grammarAccess.prModel().ele0KeywordModel(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele00010TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -104,15 +104,15 @@ ruleModel returns [EObject current=null]
 	        }
 	    }
 	
-))'{' 
+)'{' 
     {
-        createLeafNode(grammarAccess.prModel().ele001KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prModel().ele2KeywordLeftCurlyBracket(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele010ParserRuleCallElement(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele30ParserRuleCallElement(), currentNode); 
 	    }
 	    lv_elements_3=ruleElement 
 	    {
@@ -129,9 +129,9 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)*)'}' 
+)*'}' 
     {
-        createLeafNode(grammarAccess.prModel().ele1KeywordRightCurlyBracket(), null); 
+        createLeafNode(grammarAccess.prModel().ele4KeywordRightCurlyBracket(), null); 
     }
 );
 
@@ -183,17 +183,17 @@ ruleElement returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

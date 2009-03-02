@@ -36,11 +36,11 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer alternatives$3$Consumer;
 
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private IElementConsumer ruleCall$5$Consumer;
 
 	private IElementConsumer ruleCall$6$Consumer;
-
-	private IElementConsumer ruleCall$7$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
@@ -77,9 +77,21 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
 			acceptor.accept(ruleCall$6$Consumer);
-			acceptor.accept(ruleCall$7$Consumer);
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(testRequiredConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -91,25 +103,13 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(testRequiredConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(testOptionalConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(testOptionalConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -139,9 +139,9 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTest());
 		alternatives$3$Consumer = new Alternatives$3$Consumer(rule.ele1Alternatives());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele100ParserRuleCallTestRequired());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele101ParserRuleCallTestOptional());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele11ParserRuleCallTestList());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTestRequired());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele11ParserRuleCallTestOptional());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele12ParserRuleCallTestList());
 	}
 	
 	@Override

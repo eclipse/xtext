@@ -22,10 +22,9 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordTest = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
-		private final Alternatives c10Alternatives = (Alternatives)c1Alternatives.eContents().get(0);
-		private final RuleCall c100ParserRuleCallTestRequired = (RuleCall)c10Alternatives.eContents().get(0);
-		private final RuleCall c101ParserRuleCallTestOptional = (RuleCall)c10Alternatives.eContents().get(1);
-		private final RuleCall c11ParserRuleCallTestList = (RuleCall)c1Alternatives.eContents().get(1);
+		private final RuleCall c10ParserRuleCallTestRequired = (RuleCall)c1Alternatives.eContents().get(0);
+		private final RuleCall c11ParserRuleCallTestOptional = (RuleCall)c1Alternatives.eContents().get(1);
+		private final RuleCall c12ParserRuleCallTestList = (RuleCall)c1Alternatives.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -40,27 +39,23 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Alternatives ele1Alternatives() { return c1Alternatives; }
 
 		// not supported
-		public Alternatives ele10Alternatives() { return c10Alternatives; }
+		public RuleCall ele10ParserRuleCallTestRequired() { return c10ParserRuleCallTestRequired; }
 
 		// not supported
-		public RuleCall ele100ParserRuleCallTestRequired() { return c100ParserRuleCallTestRequired; }
+		public RuleCall ele11ParserRuleCallTestOptional() { return c11ParserRuleCallTestOptional; }
 
 		// not supported
-		public RuleCall ele101ParserRuleCallTestOptional() { return c101ParserRuleCallTestOptional; }
-
-		// not supported
-		public RuleCall ele11ParserRuleCallTestList() { return c11ParserRuleCallTestList; }
+		public RuleCall ele12ParserRuleCallTestList() { return c12ParserRuleCallTestList; }
 	}
 
 	public class TestRequiredElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordRequired = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentRequired1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentRequired1.eContents().get(0);
-		private final Assignment c1AssignmentRequired2 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentRequired2.eContents().get(0);
+		private final Keyword c0KeywordRequired = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentRequired1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentRequired1.eContents().get(0);
+		private final Assignment c2AssignmentRequired2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallINT = (RuleCall)c2AssignmentRequired2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -69,35 +64,31 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordRequired() { return c0KeywordRequired; }
 
 		// not supported
-		public Keyword ele00KeywordRequired() { return c00KeywordRequired; }
-
-		// not supported
-		public Assignment ele01AssignmentRequired1() { return c01AssignmentRequired1; }
-
-		// not supported
-		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
-
-		// not supported
-		public Assignment ele1AssignmentRequired2() { return c1AssignmentRequired2; }
+		public Assignment ele1AssignmentRequired1() { return c1AssignmentRequired1; }
 
 		// not supported
 		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
+
+		// not supported
+		public Assignment ele2AssignmentRequired2() { return c2AssignmentRequired2; }
+
+		// not supported
+		public RuleCall ele20TerminalRuleCallINT() { return c20TerminalRuleCallINT; }
 	}
 
 	public class TestOptionalElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestOptional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordOptional = (Keyword)c0Group.eContents().get(0);
-		private final Assignment c01AssignmentOpt1 = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallINT = (RuleCall)c01AssignmentOpt1.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordColon = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentOpt2 = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110TerminalRuleCallINT = (RuleCall)c11AssignmentOpt2.eContents().get(0);
+		private final Keyword c0KeywordOptional = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentOpt1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentOpt1.eContents().get(0);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Keyword c20KeywordColon = (Keyword)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentOpt2 = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210TerminalRuleCallINT = (RuleCall)c21AssignmentOpt2.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -106,28 +97,25 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordOptional() { return c0KeywordOptional; }
 
 		// not supported
-		public Keyword ele00KeywordOptional() { return c00KeywordOptional; }
+		public Assignment ele1AssignmentOpt1() { return c1AssignmentOpt1; }
 
 		// not supported
-		public Assignment ele01AssignmentOpt1() { return c01AssignmentOpt1; }
+		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
 
 		// not supported
-		public RuleCall ele010TerminalRuleCallINT() { return c010TerminalRuleCallINT; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public Group ele1Group() { return c1Group; }
+		public Keyword ele20KeywordColon() { return c20KeywordColon; }
 
 		// not supported
-		public Keyword ele10KeywordColon() { return c10KeywordColon; }
+		public Assignment ele21AssignmentOpt2() { return c21AssignmentOpt2; }
 
 		// not supported
-		public Assignment ele11AssignmentOpt2() { return c11AssignmentOpt2; }
-
-		// not supported
-		public RuleCall ele110TerminalRuleCallINT() { return c110TerminalRuleCallINT; }
+		public RuleCall ele210TerminalRuleCallINT() { return c210TerminalRuleCallINT; }
 	}
 
 	public class TestListElements implements IParserRuleAccess {

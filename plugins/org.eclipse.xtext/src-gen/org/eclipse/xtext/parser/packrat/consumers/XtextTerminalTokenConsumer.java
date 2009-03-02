@@ -35,17 +35,17 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer alternatives$4$Consumer;
 
+	private IElementConsumer keyword$5$Consumer;
+
 	private IElementConsumer keyword$6$Consumer;
 
 	private IElementConsumer keyword$7$Consumer;
 
-	private IElementConsumer keyword$8$Consumer;
+	private ICharacterClass keyword$5$Delimiter;
 
 	private ICharacterClass keyword$6$Delimiter;
 
 	private ICharacterClass keyword$7$Delimiter;
-
-	private ICharacterClass keyword$8$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -92,9 +92,21 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$5$Consumer);
 			acceptor.accept(keyword$6$Consumer);
 			acceptor.accept(keyword$7$Consumer);
-			acceptor.accept(keyword$8$Consumer);
+		}
+	}
+
+	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$5$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$5$Delimiter(), optional);
 		}
 	}
 
@@ -122,23 +134,11 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$8$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$8$Delimiter(), optional);
-		}
-	}
-
 	public XtextTerminalTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -157,12 +157,12 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerminalTokenElement());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentCardinality());
 		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele10Alternatives());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele1000KeywordQuestionMark());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele1001KeywordAsterisk());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele101KeywordPlusSign());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele1000KeywordQuestionMark());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele1001KeywordAsterisk());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele101KeywordPlusSign());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordQuestionMark());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele101KeywordAsterisk());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele102KeywordPlusSign());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordQuestionMark());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele101KeywordAsterisk());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele102KeywordPlusSign());
 	}
 	
 	@Override
@@ -179,6 +179,14 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 		this.terminalTokenElementConsumer = terminalTokenElementConsumer;
 	}
 	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$6$Delimiter() {
 		return keyword$6$Delimiter;
 	}
@@ -193,14 +201,6 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
 		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

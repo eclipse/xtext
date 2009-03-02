@@ -107,33 +107,33 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
 		getChild2Consumer().setStringConsumer(getStringConsumer());
 
-		getModelConsumer().setCrossReference$66$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
-		getModelConsumer().setCrossReference$68$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getModelConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$18$Delimiter);
-		getModelConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$28$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$18$Delimiter);
-		getModelConsumer().setKeyword$34$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$38$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$42$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$46$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$50$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$54$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$59$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$18$Delimiter);
-		getModelConsumer().setKeyword$63$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$18$Delimiter);
-		getModelConsumer().setRuleCall$17$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
-		getModelConsumer().setRuleCall$20$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getModelConsumer().setRuleCall$29$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
-		getModelConsumer().setRuleCall$32$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getModelConsumer().setRuleCall$36$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
-		getModelConsumer().setRuleCall$40$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
-		getDatatypeConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getDatatypeConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getDatatypeConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getNestedDatatypeConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$12$Delimiter);
-		getNestedDatatypeConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getChild1Consumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$22$Delimiter);
-		getChild2Consumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$19$Delimiter);
+		getModelConsumer().setCrossReference$53$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setCrossReference$55$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getModelConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$8$Delimiter);
+		getModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$25$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$29$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$33$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$37$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$41$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$46$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$8$Delimiter);
+		getModelConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$50$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$8$Delimiter);
+		getModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$8$Delimiter);
+		getModelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getModelConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getModelConsumer().setRuleCall$23$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setRuleCall$27$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getDatatypeConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getDatatypeConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getDatatypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getNestedDatatypeConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
+		getNestedDatatypeConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getChild1Consumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
+		getChild2Consumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

@@ -22,250 +22,250 @@ public final class TerminalsSTRINGConsumer extends AbstractRuleAwareTerminalCons
 	protected boolean consumeAlternatives$1() {
 		if (consumeGroup$2())
 			return true;
-		if (consumeGroup$28())
+		if (consumeGroup$21())
 			return true;
 		return false;
 	}
 
 	protected boolean consumeGroup$2() {
 		final int marker = mark();
-		if (!consumeKeyword$4()) {
+		if (!consumeKeyword$3()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeAlternatives$5()) {
+		if (!consumeAlternatives$4()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeKeyword$27()) {
+		if (!consumeKeyword$20()) {
 			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$4() {
+	protected boolean consumeKeyword$3() {
 		return readChar('\"');
 	}
 
-	protected boolean consumeAlternatives$5() {
-		while(doConsumeAlternatives$5()) {}
+	protected boolean consumeAlternatives$4() {
+		while(doConsumeAlternatives$4()) {}
 		return true;
 	}
 
-	protected boolean doConsumeAlternatives$5() {
-		if (consumeGroup$6())
+	protected boolean doConsumeAlternatives$4() {
+		if (consumeGroup$5())
 			return true;
-		if (consumeNegatedToken$23())
+		if (consumeNegatedToken$16())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeGroup$6() {
+	protected boolean consumeGroup$5() {
 		final int marker = mark();
-		if (!consumeKeyword$7()) {
+		if (!consumeKeyword$6()) {
 			rollbackTo(marker);
 			return false;
 		}
-		if (!consumeAlternatives$8()) {
+		if (!consumeAlternatives$7()) {
 			rollbackTo(marker);
 			return false;
 		}
 		return true;
 	}
 
-	protected boolean consumeKeyword$7() {
+	protected boolean consumeKeyword$6() {
 		return readChar('\\');
 	}
 
-	protected boolean consumeAlternatives$8() {
+	protected boolean consumeAlternatives$7() {
+		if (consumeKeyword$8())
+			return true;
+		if (consumeKeyword$9())
+			return true;
+		if (consumeKeyword$10())
+			return true;
+		if (consumeKeyword$11())
+			return true;
+		if (consumeKeyword$12())
+			return true;
+		if (consumeKeyword$13())
+			return true;
+		if (consumeKeyword$14())
+			return true;
 		if (consumeKeyword$15())
 			return true;
-		if (consumeKeyword$16())
+		return false;
+	}
+
+	protected boolean consumeKeyword$8() {
+		return readChar('b');
+	}
+
+	protected boolean consumeKeyword$9() {
+		return readChar('t');
+	}
+
+	protected boolean consumeKeyword$10() {
+		return readChar('n');
+	}
+
+	protected boolean consumeKeyword$11() {
+		return readChar('f');
+	}
+
+	protected boolean consumeKeyword$12() {
+		return readChar('r');
+	}
+
+	protected boolean consumeKeyword$13() {
+		return readChar('\"');
+	}
+
+	protected boolean consumeKeyword$14() {
+		return readChar('\'');
+	}
+
+	protected boolean consumeKeyword$15() {
+		return readChar('\\');
+	}
+
+	protected boolean consumeNegatedToken$16() {
+		final int marker = mark();
+		if (!eof() && !consumeAlternatives$17()) {
+			incOffset();
 			return true;
-		if (consumeKeyword$17())
-			return true;
+		}
+		rollbackTo(marker);
+		return false;
+	}
+
+	protected boolean consumeAlternatives$17() {
 		if (consumeKeyword$18())
 			return true;
 		if (consumeKeyword$19())
 			return true;
-		if (consumeKeyword$20())
-			return true;
-		if (consumeKeyword$21())
-			return true;
-		if (consumeKeyword$22())
-			return true;
 		return false;
 	}
 
-	protected boolean consumeKeyword$15() {
-		return readChar('b');
-	}
-
-	protected boolean consumeKeyword$16() {
-		return readChar('t');
-	}
-
-	protected boolean consumeKeyword$17() {
-		return readChar('n');
-	}
-
 	protected boolean consumeKeyword$18() {
-		return readChar('f');
+		return readChar('\\');
 	}
 
 	protected boolean consumeKeyword$19() {
-		return readChar('r');
+		return readChar('\"');
 	}
 
 	protected boolean consumeKeyword$20() {
 		return readChar('\"');
 	}
 
-	protected boolean consumeKeyword$21() {
-		return readChar('\'');
+	protected boolean consumeGroup$21() {
+		final int marker = mark();
+		if (!consumeKeyword$22()) {
+			rollbackTo(marker);
+			return false;
+		}
+		if (!consumeAlternatives$23()) {
+			rollbackTo(marker);
+			return false;
+		}
+		if (!consumeKeyword$39()) {
+			rollbackTo(marker);
+			return false;
+		}
+		return true;
 	}
 
 	protected boolean consumeKeyword$22() {
-		return readChar('\\');
+		return readChar('\'');
 	}
 
-	protected boolean consumeNegatedToken$23() {
+	protected boolean consumeAlternatives$23() {
+		while(doConsumeAlternatives$23()) {}
+		return true;
+	}
+
+	protected boolean doConsumeAlternatives$23() {
+		if (consumeGroup$24())
+			return true;
+		if (consumeNegatedToken$35())
+			return true;
+		return false;
+	}
+
+	protected boolean consumeGroup$24() {
 		final int marker = mark();
-		if (!eof() && !consumeAlternatives$24()) {
-			incOffset();
-			return true;
+		if (!consumeKeyword$25()) {
+			rollbackTo(marker);
+			return false;
 		}
-		rollbackTo(marker);
-		return false;
-	}
-
-	protected boolean consumeAlternatives$24() {
-		if (consumeKeyword$25())
-			return true;
-		if (consumeKeyword$26())
-			return true;
-		return false;
+		if (!consumeAlternatives$26()) {
+			rollbackTo(marker);
+			return false;
+		}
+		return true;
 	}
 
 	protected boolean consumeKeyword$25() {
 		return readChar('\\');
 	}
 
-	protected boolean consumeKeyword$26() {
-		return readChar('\"');
+	protected boolean consumeAlternatives$26() {
+		if (consumeKeyword$27())
+			return true;
+		if (consumeKeyword$28())
+			return true;
+		if (consumeKeyword$29())
+			return true;
+		if (consumeKeyword$30())
+			return true;
+		if (consumeKeyword$31())
+			return true;
+		if (consumeKeyword$32())
+			return true;
+		if (consumeKeyword$33())
+			return true;
+		if (consumeKeyword$34())
+			return true;
+		return false;
 	}
 
 	protected boolean consumeKeyword$27() {
-		return readChar('\"');
-	}
-
-	protected boolean consumeGroup$28() {
-		final int marker = mark();
-		if (!consumeKeyword$30()) {
-			rollbackTo(marker);
-			return false;
-		}
-		if (!consumeAlternatives$31()) {
-			rollbackTo(marker);
-			return false;
-		}
-		if (!consumeKeyword$53()) {
-			rollbackTo(marker);
-			return false;
-		}
-		return true;
-	}
-
-	protected boolean consumeKeyword$30() {
-		return readChar('\'');
-	}
-
-	protected boolean consumeAlternatives$31() {
-		while(doConsumeAlternatives$31()) {}
-		return true;
-	}
-
-	protected boolean doConsumeAlternatives$31() {
-		if (consumeGroup$32())
-			return true;
-		if (consumeNegatedToken$49())
-			return true;
-		return false;
-	}
-
-	protected boolean consumeGroup$32() {
-		final int marker = mark();
-		if (!consumeKeyword$33()) {
-			rollbackTo(marker);
-			return false;
-		}
-		if (!consumeAlternatives$34()) {
-			rollbackTo(marker);
-			return false;
-		}
-		return true;
-	}
-
-	protected boolean consumeKeyword$33() {
-		return readChar('\\');
-	}
-
-	protected boolean consumeAlternatives$34() {
-		if (consumeKeyword$41())
-			return true;
-		if (consumeKeyword$42())
-			return true;
-		if (consumeKeyword$43())
-			return true;
-		if (consumeKeyword$44())
-			return true;
-		if (consumeKeyword$45())
-			return true;
-		if (consumeKeyword$46())
-			return true;
-		if (consumeKeyword$47())
-			return true;
-		if (consumeKeyword$48())
-			return true;
-		return false;
-	}
-
-	protected boolean consumeKeyword$41() {
 		return readChar('b');
 	}
 
-	protected boolean consumeKeyword$42() {
+	protected boolean consumeKeyword$28() {
 		return readChar('t');
 	}
 
-	protected boolean consumeKeyword$43() {
+	protected boolean consumeKeyword$29() {
 		return readChar('n');
 	}
 
-	protected boolean consumeKeyword$44() {
+	protected boolean consumeKeyword$30() {
 		return readChar('f');
 	}
 
-	protected boolean consumeKeyword$45() {
+	protected boolean consumeKeyword$31() {
 		return readChar('r');
 	}
 
-	protected boolean consumeKeyword$46() {
+	protected boolean consumeKeyword$32() {
 		return readChar('\"');
 	}
 
-	protected boolean consumeKeyword$47() {
+	protected boolean consumeKeyword$33() {
 		return readChar('\'');
 	}
 
-	protected boolean consumeKeyword$48() {
+	protected boolean consumeKeyword$34() {
 		return readChar('\\');
 	}
 
-	protected boolean consumeNegatedToken$49() {
+	protected boolean consumeNegatedToken$35() {
 		final int marker = mark();
-		if (!eof() && !consumeAlternatives$50()) {
+		if (!eof() && !consumeAlternatives$36()) {
 			incOffset();
 			return true;
 		}
@@ -273,23 +273,23 @@ public final class TerminalsSTRINGConsumer extends AbstractRuleAwareTerminalCons
 		return false;
 	}
 
-	protected boolean consumeAlternatives$50() {
-		if (consumeKeyword$51())
+	protected boolean consumeAlternatives$36() {
+		if (consumeKeyword$37())
 			return true;
-		if (consumeKeyword$52())
+		if (consumeKeyword$38())
 			return true;
 		return false;
 	}
 
-	protected boolean consumeKeyword$51() {
+	protected boolean consumeKeyword$37() {
 		return readChar('\\');
 	}
 
-	protected boolean consumeKeyword$52() {
+	protected boolean consumeKeyword$38() {
 		return readChar('\'');
 	}
 
-	protected boolean consumeKeyword$53() {
+	protected boolean consumeKeyword$39() {
 		return readChar('\'');
 	}
 	

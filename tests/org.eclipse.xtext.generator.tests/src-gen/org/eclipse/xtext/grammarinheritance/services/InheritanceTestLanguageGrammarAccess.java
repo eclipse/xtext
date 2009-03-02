@@ -20,16 +20,13 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Group c00Group = (Group)c0Group.eContents().get(0);
-		private final Group c000Group = (Group)c00Group.eContents().get(0);
-		private final Keyword c0000KeywordModel = (Keyword)c000Group.eContents().get(0);
-		private final Assignment c0001AssignmentName = (Assignment)c000Group.eContents().get(1);
-		private final RuleCall c00010TerminalRuleCallID = (RuleCall)c0001AssignmentName.eContents().get(0);
-		private final Keyword c001KeywordLeftCurlyBracket = (Keyword)c00Group.eContents().get(1);
-		private final Assignment c01AssignmentElements = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010ParserRuleCallElement = (RuleCall)c01AssignmentElements.eContents().get(0);
-		private final Keyword c1KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(1);
+		private final Keyword c0KeywordModel = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Keyword c2KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(2);
+		private final Assignment c3AssignmentElements = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall c30ParserRuleCallElement = (RuleCall)c3AssignmentElements.eContents().get(0);
+		private final Keyword c4KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(4);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -38,34 +35,25 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordModel() { return c0KeywordModel; }
 
 		// not supported
-		public Group ele00Group() { return c00Group; }
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// not supported
-		public Group ele000Group() { return c000Group; }
+		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
 
 		// not supported
-		public Keyword ele0000KeywordModel() { return c0000KeywordModel; }
+		public Keyword ele2KeywordLeftCurlyBracket() { return c2KeywordLeftCurlyBracket; }
 
 		// not supported
-		public Assignment ele0001AssignmentName() { return c0001AssignmentName; }
+		public Assignment ele3AssignmentElements() { return c3AssignmentElements; }
 
 		// not supported
-		public RuleCall ele00010TerminalRuleCallID() { return c00010TerminalRuleCallID; }
+		public RuleCall ele30ParserRuleCallElement() { return c30ParserRuleCallElement; }
 
 		// not supported
-		public Keyword ele001KeywordLeftCurlyBracket() { return c001KeywordLeftCurlyBracket; }
-
-		// not supported
-		public Assignment ele01AssignmentElements() { return c01AssignmentElements; }
-
-		// not supported
-		public RuleCall ele010ParserRuleCallElement() { return c010ParserRuleCallElement; }
-
-		// not supported
-		public Keyword ele1KeywordRightCurlyBracket() { return c1KeywordRightCurlyBracket; }
+		public Keyword ele4KeywordRightCurlyBracket() { return c4KeywordRightCurlyBracket; }
 	}
 
 	public class ElementElements implements IParserRuleAccess {

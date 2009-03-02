@@ -3,9 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.xtext.ui
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui
 Bundle-Version: 0.0.1
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
  org.eclipse.ui.editors,

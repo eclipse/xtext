@@ -80,15 +80,15 @@ ruleStart returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('abstract rules' 
+('abstract rules' 
     {
-        createLeafNode(grammarAccess.prStart().ele00KeywordAbstractRules(), null); 
+        createLeafNode(grammarAccess.prStart().ele0KeywordAbstractRules(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prStart().ele010ParserRuleCallAbstractRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prStart().ele10ParserRuleCallAbstractRule(), currentNode); 
 	    }
 	    lv_rules_1=ruleAbstractRule 
 	    {
@@ -105,9 +105,9 @@ ruleStart returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)+)'end' 
+)+'end' 
     {
-        createLeafNode(grammarAccess.prStart().ele1KeywordEnd(), null); 
+        createLeafNode(grammarAccess.prStart().ele2KeywordEnd(), null); 
     }
 );
 
@@ -178,11 +178,11 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((((	
+((	
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele00000TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -200,13 +200,13 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 )'(' 
     {
-        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele0001KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele1KeywordLeftParenthesis(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prFirstAbstractRuleChild().ele0010ParserRuleCallAbstractRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prFirstAbstractRuleChild().ele20ParserRuleCallAbstractRule(), currentNode); 
 	    }
 	    lv_elements_2=ruleAbstractRule 
 	    {
@@ -223,13 +223,13 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-)+)')' 
+)+')' 
     {
-        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele01KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele3KeywordRightParenthesis(), null); 
     }
-)';' 
+';' 
     {
-        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele1KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele4KeywordSemicolon(), null); 
     }
 );
 
@@ -252,11 +252,11 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((((	
+((	
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele00000TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -274,17 +274,17 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 )'rule' 
     {
-        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele0001KeywordRule(), null); 
+        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele1KeywordRule(), null); 
     }
-)':' 
+':' 
     {
-        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele001KeywordColon(), null); 
+        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele2KeywordColon(), null); 
     }
-)(	
+(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSecondAbstractRuleChild().ele010ParserRuleCallAbstractRuleCall(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prSecondAbstractRuleChild().ele30ParserRuleCallAbstractRuleCall(), currentNode); 
 	    }
 	    lv_rule_3=ruleAbstractRuleCall 
 	    {
@@ -301,9 +301,9 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))';' 
+)';' 
     {
-        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele1KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele4KeywordSemicolon(), null); 
     }
 );
 
@@ -347,17 +347,17 @@ ruleAbstractRuleCall returns [EObject current=null]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

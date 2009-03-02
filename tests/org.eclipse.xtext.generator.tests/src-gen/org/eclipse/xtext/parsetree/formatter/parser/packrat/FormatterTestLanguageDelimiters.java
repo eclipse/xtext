@@ -21,9 +21,9 @@ public final class FormatterTestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$13$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$12$Delimiter = new SetBasedKeywordMatcher(
 		"test", "linewrap", "indentation");
 
 }

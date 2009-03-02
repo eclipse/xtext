@@ -122,11 +122,11 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((((	
+((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele00000ParserRuleCallNestedModelId(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele00ParserRuleCallNestedModelId(), currentNode); 
 	    }
 	    lv_id_0=ruleNestedModelId 
 	    {
@@ -145,13 +145,13 @@ ruleModel returns [EObject current=null]
 	
 )(':' 
     {
-        createLeafNode(grammarAccess.prModel().ele00010KeywordColon(), null); 
+        createLeafNode(grammarAccess.prModel().ele10KeywordColon(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele000110ParserRuleCallFraction(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele110ParserRuleCallFraction(), currentNode); 
 	    }
 	    lv_value_2=ruleFraction 
 	    {
@@ -168,15 +168,15 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))?)('#' 
+))?('#' 
     {
-        createLeafNode(grammarAccess.prModel().ele0010KeywordNumberSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele20KeywordNumberSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele00110ParserRuleCallVector(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele210ParserRuleCallVector(), currentNode); 
 	    }
 	    lv_vector_4=ruleVector 
 	    {
@@ -193,15 +193,15 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))?)('+' 
+))?('+' 
     {
-        createLeafNode(grammarAccess.prModel().ele010KeywordPlusSign(), null); 
+        createLeafNode(grammarAccess.prModel().ele30KeywordPlusSign(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0110ParserRuleCallDots(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prModel().ele310ParserRuleCallDots(), currentNode); 
 	    }
 	    lv_dots_6=ruleDots 
 	    {
@@ -218,9 +218,9 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))?)';' 
+))?';' 
     {
-        createLeafNode(grammarAccess.prModel().ele1KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.prModel().ele4KeywordSemicolon(), null); 
     }
 );
 
@@ -244,25 +244,25 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-((    this_ID_0=RULE_ID    {
+(    this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);
     }
 
     { 
-    createLeafNode(grammarAccess.prModelId().ele00TerminalRuleCallID(), null); 
+    createLeafNode(grammarAccess.prModelId().ele0TerminalRuleCallID(), null); 
     }
 
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prModelId().ele01KeywordFullStop(), null); 
+        createLeafNode(grammarAccess.prModelId().ele1KeywordFullStop(), null); 
     }
-)    this_ID_2=RULE_ID    {
+    this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.prModelId().ele1TerminalRuleCallID(), null); 
+    createLeafNode(grammarAccess.prModelId().ele2TerminalRuleCallID(), null); 
     }
 )
     ;
@@ -287,9 +287,9 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-((
+(
     { 
-        currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele00ParserRuleCallModelId(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele0ParserRuleCallModelId(), currentNode); 
     }
     this_ModelId_0=ruleModelId    {
 		$current.merge(this_ModelId_0);
@@ -302,11 +302,11 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prNestedModelId().ele01KeywordFullStop(), null); 
+        createLeafNode(grammarAccess.prNestedModelId().ele1KeywordFullStop(), null); 
     }
-)
+
     { 
-        currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele1ParserRuleCallModelId(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele2ParserRuleCallModelId(), currentNode); 
     }
     this_ModelId_2=ruleModelId    {
 		$current.merge(this_ModelId_2);
@@ -381,31 +381,31 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-(((
+(
 	kw='(' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prVector().ele000KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prVector().ele0KeywordLeftParenthesis(), null); 
     }
     this_INT_1=RULE_INT    {
 		$current.merge(this_INT_1);
     }
 
     { 
-    createLeafNode(grammarAccess.prVector().ele001TerminalRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prVector().ele1TerminalRuleCallINT(), null); 
     }
-)    this_INT_2=RULE_INT    {
+    this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.prVector().ele01TerminalRuleCallINT(), null); 
+    createLeafNode(grammarAccess.prVector().ele2TerminalRuleCallINT(), null); 
     }
-)
+
 	kw=')' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prVector().ele1KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prVector().ele3KeywordRightParenthesis(), null); 
     }
 )
     ;
@@ -455,17 +455,17 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

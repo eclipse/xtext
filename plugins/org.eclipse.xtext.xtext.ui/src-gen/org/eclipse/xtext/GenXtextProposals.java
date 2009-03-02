@@ -348,15 +348,6 @@ public class GenXtextProposals extends AbstractJavaProposalProvider {
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeWildcard_IsWildcard(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeWildcard_IsWildcard feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
 	public List<? extends ICompletionProposal> completeCharacterRange_Right(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeCharacterRange_Right feature '" + assignment.getFeature() + "' terminal '"

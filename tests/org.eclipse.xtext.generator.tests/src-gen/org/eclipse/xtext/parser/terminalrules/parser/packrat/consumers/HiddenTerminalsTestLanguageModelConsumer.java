@@ -33,15 +33,15 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
 	private IElementConsumer ruleCall$5$Consumer;
 
 	private IElementConsumer ruleCall$6$Consumer;
-
-	private IElementConsumer ruleCall$7$Consumer;
-
-	private IElementConsumer ruleCall$8$Consumer;
-
-	private IElementConsumer ruleCall$9$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -51,11 +51,47 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
 			acceptor.accept(ruleCall$6$Consumer);
-			acceptor.accept(ruleCall$7$Consumer);
-			acceptor.accept(ruleCall$8$Consumer);
-			acceptor.accept(ruleCall$9$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(withoutHiddensConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(withHiddensConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(overridingHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -67,49 +103,13 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(withoutHiddensConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(inheritingHiddensConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(withHiddensConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(overridingHiddensConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(inheritingHiddensConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -136,11 +136,11 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele0000ParserRuleCallWithoutHiddens());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele0001ParserRuleCallWithHiddens());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele001ParserRuleCallOverridingHiddens());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele01ParserRuleCallInheritingHiddens());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1ParserRuleCallDatatypeHiddens());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallWithoutHiddens());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallWithHiddens());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallOverridingHiddens());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallInheritingHiddens());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele4ParserRuleCallDatatypeHiddens());
 	}
 	
 	@Override

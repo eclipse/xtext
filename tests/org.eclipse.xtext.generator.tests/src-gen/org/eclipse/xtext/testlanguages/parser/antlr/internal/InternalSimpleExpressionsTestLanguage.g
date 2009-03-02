@@ -164,9 +164,9 @@ ruleAddition returns [EObject current=null]
     { 
     createLeafNode(grammarAccess.prAddition().ele0ParserRuleCallMultiplication(), null); 
     }
-(((
+((
     { 
-        temp=factory.create(grammarAccess.prAddition().ele100ActionOpvalues().getTypeName().getType());
+        temp=factory.create(grammarAccess.prAddition().ele10ActionOpvalues().getTypeName().getType());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -174,7 +174,7 @@ ruleAddition returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.prAddition().ele100ActionOpvalues(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.prAddition().ele10ActionOpvalues(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -184,13 +184,13 @@ ruleAddition returns [EObject current=null]
 	
 	    lv_operator_2=('+' 
     {
-        createLeafNode(grammarAccess.prAddition().ele10100KeywordPlusSign(), "operator"); 
+        createLeafNode(grammarAccess.prAddition().ele1100KeywordPlusSign(), "operator"); 
     }
 
 
     |'-' 
     {
-        createLeafNode(grammarAccess.prAddition().ele10101KeywordHyphenMinus(), "operator"); 
+        createLeafNode(grammarAccess.prAddition().ele1101KeywordHyphenMinus(), "operator"); 
     }
 
 )
@@ -208,11 +208,11 @@ ruleAddition returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prAddition().ele110ParserRuleCallMultiplication(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prAddition().ele120ParserRuleCallMultiplication(), currentNode); 
 	    }
 	    lv_values_3=ruleMultiplication 
 	    {
@@ -263,9 +263,9 @@ ruleMultiplication returns [EObject current=null]
     { 
     createLeafNode(grammarAccess.prMultiplication().ele0ParserRuleCallTerm(), null); 
     }
-(((
+((
     { 
-        temp=factory.create(grammarAccess.prMultiplication().ele100ActionOpvalues().getTypeName().getType());
+        temp=factory.create(grammarAccess.prMultiplication().ele10ActionOpvalues().getTypeName().getType());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -273,7 +273,7 @@ ruleMultiplication returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.prMultiplication().ele100ActionOpvalues(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.prMultiplication().ele10ActionOpvalues(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -283,13 +283,13 @@ ruleMultiplication returns [EObject current=null]
 	
 	    lv_operator_2=('*' 
     {
-        createLeafNode(grammarAccess.prMultiplication().ele10100KeywordAsterisk(), "operator"); 
+        createLeafNode(grammarAccess.prMultiplication().ele1100KeywordAsterisk(), "operator"); 
     }
 
 
     |'/' 
     {
-        createLeafNode(grammarAccess.prMultiplication().ele10101KeywordSolidus(), "operator"); 
+        createLeafNode(grammarAccess.prMultiplication().ele1101KeywordSolidus(), "operator"); 
     }
 
 )
@@ -307,11 +307,11 @@ ruleMultiplication returns [EObject current=null]
 	        }
 	    }
 	
-))(	
+)(	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prMultiplication().ele110ParserRuleCallTerm(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.prMultiplication().ele120ParserRuleCallTerm(), currentNode); 
 	    }
 	    lv_values_3=ruleTerm 
 	    {
@@ -438,13 +438,13 @@ ruleParens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(('(' 
+('(' 
     {
-        createLeafNode(grammarAccess.prParens().ele00KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.prParens().ele0KeywordLeftParenthesis(), null); 
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.prParens().ele01ParserRuleCallAddition(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.prParens().ele1ParserRuleCallAddition(), currentNode); 
     }
     this_Addition_1=ruleAddition
     { 
@@ -453,28 +453,28 @@ ruleParens returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prParens().ele01ParserRuleCallAddition(), null); 
+    createLeafNode(grammarAccess.prParens().ele1ParserRuleCallAddition(), null); 
     }
-)')' 
+')' 
     {
-        createLeafNode(grammarAccess.prParens().ele1KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.prParens().ele2KeywordRightParenthesis(), null); 
     }
 );
 
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

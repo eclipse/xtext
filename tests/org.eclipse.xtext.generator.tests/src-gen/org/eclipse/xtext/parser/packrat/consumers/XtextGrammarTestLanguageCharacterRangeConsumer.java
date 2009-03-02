@@ -33,15 +33,15 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 
 	private IElementConsumer group$3$Consumer;
 
-	private IElementConsumer action$5$Consumer;
+	private IElementConsumer action$4$Consumer;
 
-	private IElementConsumer keyword$7$Consumer;
+	private IElementConsumer keyword$6$Consumer;
 
-	private IElementConsumer assignment$8$Consumer;
+	private IElementConsumer assignment$7$Consumer;
 
-	private IElementConsumer ruleCall$9$Consumer;
+	private IElementConsumer ruleCall$8$Consumer;
 
-	private ICharacterClass keyword$7$Delimiter;
+	private ICharacterClass keyword$6$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -76,15 +76,15 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(action$5$Consumer);
-			acceptor.accept(keyword$7$Consumer);
-			acceptor.accept(assignment$8$Consumer);
+			acceptor.accept(action$4$Consumer);
+			acceptor.accept(keyword$6$Consumer);
+			acceptor.accept(assignment$7$Consumer);
 		}
 	}
 
-	protected class Action$5$Consumer extends ElementConsumer<Action> {
+	protected class Action$4$Consumer extends ElementConsumer<Action> {
 		
-		protected Action$5$Consumer(final Action action) {
+		protected Action$4$Consumer(final Action action) {
 			super(action);
 		}
 		
@@ -95,33 +95,33 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		}
 	}
 
-	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$7$Consumer(final Keyword keyword) {
+		protected Keyword$6$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$8$Consumer extends AssignmentConsumer {
+	protected class Assignment$7$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$8$Consumer(final Assignment assignment) {
+		protected Assignment$7$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$9$Consumer;
+			return ruleCall$8$Consumer;
 		}
 	}
 
-	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -133,7 +133,7 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 
 	public XtextGrammarTestLanguageCharacterRangeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -151,10 +151,10 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallKeyword());
 		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$5$Consumer = new Action$5$Consumer(rule.ele100ActionCharacterRangeleft());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele101KeywordFullStopFullStop());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele11AssignmentRight());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele110ParserRuleCallKeyword());
+		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionCharacterRangeleft());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele11KeywordFullStopFullStop());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele12AssignmentRight());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele120ParserRuleCallKeyword());
 	}
 	
 	@Override
@@ -171,12 +171,12 @@ public final class XtextGrammarTestLanguageCharacterRangeConsumer extends NonTer
 		this.keywordConsumer = keywordConsumer;
 	}
 	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
 	}
 	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

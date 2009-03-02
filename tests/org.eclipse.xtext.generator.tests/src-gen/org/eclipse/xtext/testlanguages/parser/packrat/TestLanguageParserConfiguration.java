@@ -94,11 +94,11 @@ public class TestLanguageParserConfiguration extends AbstractParserConfiguration
 
 		getTerminalRuleConsumer().setStringConsumer(getStringConsumer());
 
-		getChoiceRuleConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.keyword$14$Delimiter);
-		getChoiceRuleConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.keyword$14$Delimiter);
-		getChoiceRuleConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.ruleCall$18$Delimiter);
-		getReducibleRuleConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalRuleConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.ruleCall$33$Delimiter);
+		getChoiceRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.keyword$13$Delimiter);
+		getChoiceRuleConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.keyword$13$Delimiter);
+		getChoiceRuleConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.ruleCall$17$Delimiter);
+		getReducibleRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.keyword$13$Delimiter);
+		getTerminalRuleConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.TestLanguageDelimiters.ruleCall$31$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

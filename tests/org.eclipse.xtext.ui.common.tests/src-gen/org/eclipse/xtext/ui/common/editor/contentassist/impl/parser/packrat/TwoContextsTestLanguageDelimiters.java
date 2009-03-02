@@ -14,16 +14,16 @@ public final class TwoContextsTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$10$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$9$Delimiter = new SetBasedKeywordMatcher(
 		"refersTo");
 
 }

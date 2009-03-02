@@ -122,11 +122,11 @@ ruleAnElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(((	
+((	
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAnElement().ele000TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.prAnElement().ele00TerminalRuleCallID(), "name"); 
 	}
  
 	    {
@@ -144,7 +144,7 @@ ruleAnElement returns [EObject current=null]
 	
 )('refersTo' 
     {
-        createLeafNode(grammarAccess.prAnElement().ele010KeywordRefersTo(), null); 
+        createLeafNode(grammarAccess.prAnElement().ele10KeywordRefersTo(), null); 
     }
 (	
 	
@@ -157,31 +157,31 @@ ruleAnElement returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAnElement().ele0110CrossReferenceEStringAnElement(), "referred"); 
+		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceEStringAnElement(), "referred"); 
 	}
 
 		// TODO assign feature to currentNode
 	
-))?)';' 
+))?';' 
     {
-        createLeafNode(grammarAccess.prAnElement().ele1KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.prAnElement().ele2KeywordSemicolon(), null); 
     }
 );
 
 
 
 
-RULE_ID : '^'? (('a'..'z'|'A'..'Z')|'_') ((('a'..'z'|'A'..'Z')|'_')|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : ('\"' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ((((((('b'|'t')|'n')|'f')|'r')|'\"')|'\'')|'\\')|~(('\\'|'\'')))* '\'');
+RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-RULE_WS : (((' '|'\t')|'\r')|'\n')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
 

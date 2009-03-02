@@ -88,15 +88,15 @@ public class TransientValuesTestParserConfiguration extends AbstractParserConfig
 		getTestListConsumer().setIntConsumer(getIntConsumer());
 
 		getRootConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestRequiredConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestRequiredConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		getTestRequiredConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		getTestOptionalConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestOptionalConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$27$Delimiter);
-		getTestOptionalConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$16$Delimiter);
-		getTestOptionalConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$16$Delimiter);
+		getTestRequiredConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$4$Delimiter);
+		getTestRequiredConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$14$Delimiter);
+		getTestRequiredConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$14$Delimiter);
+		getTestOptionalConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$4$Delimiter);
+		getTestOptionalConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$24$Delimiter);
+		getTestOptionalConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$14$Delimiter);
+		getTestOptionalConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$14$Delimiter);
 		getTestListConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.keyword$4$Delimiter);
-		getTestListConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$16$Delimiter);
+		getTestListConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.transientvalues.parser.packrat.TransientValuesTestDelimiters.ruleCall$14$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

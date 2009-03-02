@@ -656,16 +656,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWildcard_IsWildcard()
-  {
-    return (EAttribute)wildcardEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getCrossReference()
   {
     return crossReferenceEClass;
@@ -884,7 +874,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     untilTokenEClass = createEClass(UNTIL_TOKEN);
 
     wildcardEClass = createEClass(WILDCARD);
-    createEAttribute(wildcardEClass, WILDCARD__IS_WILDCARD);
 
     crossReferenceEClass = createEClass(CROSS_REFERENCE);
     createEReference(crossReferenceEClass, CROSS_REFERENCE__TYPE);
@@ -1007,7 +996,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     initEClass(untilTokenEClass, UntilToken.class, "UntilToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getWildcard_IsWildcard(), ecorePackage.getEBoolean(), "isWildcard", null, 0, 1, Wildcard.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(crossReferenceEClass, CrossReference.class, "CrossReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCrossReference_Type(), this.getTypeRef(), null, "type", null, 0, 1, CrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

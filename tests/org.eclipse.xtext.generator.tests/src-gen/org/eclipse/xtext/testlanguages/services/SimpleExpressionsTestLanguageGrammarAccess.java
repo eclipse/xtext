@@ -53,14 +53,13 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallMultiplication = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Group c10Group = (Group)c1Group.eContents().get(0);
-		private final Action c100ActionOpvalues = (Action)c10Group.eContents().get(0);
-		private final Assignment c101AssignmentOperator = (Assignment)c10Group.eContents().get(1);
-		private final Alternatives c1010Alternatives = (Alternatives)c101AssignmentOperator.eContents().get(0);
-		private final Keyword c10100KeywordPlusSign = (Keyword)c1010Alternatives.eContents().get(0);
-		private final Keyword c10101KeywordHyphenMinus = (Keyword)c1010Alternatives.eContents().get(1);
-		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallMultiplication = (RuleCall)c11AssignmentValues.eContents().get(0);
+		private final Action c10ActionOpvalues = (Action)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentOperator = (Assignment)c1Group.eContents().get(1);
+		private final Alternatives c110Alternatives = (Alternatives)c11AssignmentOperator.eContents().get(0);
+		private final Keyword c1100KeywordPlusSign = (Keyword)c110Alternatives.eContents().get(0);
+		private final Keyword c1101KeywordHyphenMinus = (Keyword)c110Alternatives.eContents().get(1);
+		private final Assignment c12AssignmentValues = (Assignment)c1Group.eContents().get(2);
+		private final RuleCall c120ParserRuleCallMultiplication = (RuleCall)c12AssignmentValues.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -75,28 +74,25 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Group ele1Group() { return c1Group; }
 
 		// not supported
-		public Group ele10Group() { return c10Group; }
+		public Action ele10ActionOpvalues() { return c10ActionOpvalues; }
 
 		// not supported
-		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
+		public Assignment ele11AssignmentOperator() { return c11AssignmentOperator; }
 
 		// not supported
-		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
+		public Alternatives ele110Alternatives() { return c110Alternatives; }
 
 		// not supported
-		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
+		public Keyword ele1100KeywordPlusSign() { return c1100KeywordPlusSign; }
 
 		// not supported
-		public Keyword ele10100KeywordPlusSign() { return c10100KeywordPlusSign; }
+		public Keyword ele1101KeywordHyphenMinus() { return c1101KeywordHyphenMinus; }
 
 		// not supported
-		public Keyword ele10101KeywordHyphenMinus() { return c10101KeywordHyphenMinus; }
+		public Assignment ele12AssignmentValues() { return c12AssignmentValues; }
 
 		// not supported
-		public Assignment ele11AssignmentValues() { return c11AssignmentValues; }
-
-		// not supported
-		public RuleCall ele110ParserRuleCallMultiplication() { return c110ParserRuleCallMultiplication; }
+		public RuleCall ele120ParserRuleCallMultiplication() { return c120ParserRuleCallMultiplication; }
 	}
 
 	public class MultiplicationElements implements IParserRuleAccess {
@@ -104,14 +100,13 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall c0ParserRuleCallTerm = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Group c10Group = (Group)c1Group.eContents().get(0);
-		private final Action c100ActionOpvalues = (Action)c10Group.eContents().get(0);
-		private final Assignment c101AssignmentOperator = (Assignment)c10Group.eContents().get(1);
-		private final Alternatives c1010Alternatives = (Alternatives)c101AssignmentOperator.eContents().get(0);
-		private final Keyword c10100KeywordAsterisk = (Keyword)c1010Alternatives.eContents().get(0);
-		private final Keyword c10101KeywordSolidus = (Keyword)c1010Alternatives.eContents().get(1);
-		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallTerm = (RuleCall)c11AssignmentValues.eContents().get(0);
+		private final Action c10ActionOpvalues = (Action)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentOperator = (Assignment)c1Group.eContents().get(1);
+		private final Alternatives c110Alternatives = (Alternatives)c11AssignmentOperator.eContents().get(0);
+		private final Keyword c1100KeywordAsterisk = (Keyword)c110Alternatives.eContents().get(0);
+		private final Keyword c1101KeywordSolidus = (Keyword)c110Alternatives.eContents().get(1);
+		private final Assignment c12AssignmentValues = (Assignment)c1Group.eContents().get(2);
+		private final RuleCall c120ParserRuleCallTerm = (RuleCall)c12AssignmentValues.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -126,28 +121,25 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Group ele1Group() { return c1Group; }
 
 		// not supported
-		public Group ele10Group() { return c10Group; }
+		public Action ele10ActionOpvalues() { return c10ActionOpvalues; }
 
 		// not supported
-		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
+		public Assignment ele11AssignmentOperator() { return c11AssignmentOperator; }
 
 		// not supported
-		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
+		public Alternatives ele110Alternatives() { return c110Alternatives; }
 
 		// not supported
-		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
+		public Keyword ele1100KeywordAsterisk() { return c1100KeywordAsterisk; }
 
 		// not supported
-		public Keyword ele10100KeywordAsterisk() { return c10100KeywordAsterisk; }
+		public Keyword ele1101KeywordSolidus() { return c1101KeywordSolidus; }
 
 		// not supported
-		public Keyword ele10101KeywordSolidus() { return c10101KeywordSolidus; }
+		public Assignment ele12AssignmentValues() { return c12AssignmentValues; }
 
 		// not supported
-		public Assignment ele11AssignmentValues() { return c11AssignmentValues; }
-
-		// not supported
-		public RuleCall ele110ParserRuleCallTerm() { return c110ParserRuleCallTerm; }
+		public RuleCall ele120ParserRuleCallTerm() { return c120ParserRuleCallTerm; }
 	}
 
 	public class TermElements implements IParserRuleAccess {
@@ -187,10 +179,9 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 	public class ParensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Keyword c00KeywordLeftParenthesis = (Keyword)c0Group.eContents().get(0);
-		private final RuleCall c01ParserRuleCallAddition = (RuleCall)c0Group.eContents().get(1);
-		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
+		private final Keyword c0KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall c1ParserRuleCallAddition = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword c2KeywordRightParenthesis = (Keyword)cGroup.eContents().get(2);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -199,16 +190,13 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Group ele0Group() { return c0Group; }
+		public Keyword ele0KeywordLeftParenthesis() { return c0KeywordLeftParenthesis; }
 
 		// not supported
-		public Keyword ele00KeywordLeftParenthesis() { return c00KeywordLeftParenthesis; }
+		public RuleCall ele1ParserRuleCallAddition() { return c1ParserRuleCallAddition; }
 
 		// not supported
-		public RuleCall ele01ParserRuleCallAddition() { return c01ParserRuleCallAddition; }
-
-		// not supported
-		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
+		public Keyword ele2KeywordRightParenthesis() { return c2KeywordRightParenthesis; }
 	}
 	
 	private SequenceElements pSequence;

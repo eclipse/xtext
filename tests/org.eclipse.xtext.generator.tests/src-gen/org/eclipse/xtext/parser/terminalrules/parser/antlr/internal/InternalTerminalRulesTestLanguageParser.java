@@ -100,7 +100,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) ) | (lv_anyValue_6= RULE_ANY_OTHER ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) | (lv_stringValue_2= RULE_STRING ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) | (lv_wsValue_5= RULE_WS ) | (lv_anyValue_6= RULE_ANY_OTHER ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -115,324 +115,78 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:82:6: ( ( ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) ) | (lv_anyValue_6= RULE_ANY_OTHER ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:1: ( ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) ) | (lv_anyValue_6= RULE_ANY_OTHER ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:82:6: ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) | (lv_stringValue_2= RULE_STRING ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) | (lv_wsValue_5= RULE_WS ) | (lv_anyValue_6= RULE_ANY_OTHER ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:1: ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) | (lv_stringValue_2= RULE_STRING ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) | (lv_wsValue_5= RULE_WS ) | (lv_anyValue_6= RULE_ANY_OTHER ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:1: ( ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) ) | (lv_anyValue_6= RULE_ANY_OTHER ) )
-            int alt6=2;
-            int LA6_0 = input.LA(1);
-
-            if ( ((LA6_0>=RULE_ID && LA6_0<=RULE_WS)) ) {
-                alt6=1;
-            }
-            else if ( (LA6_0==RULE_ANY_OTHER) ) {
-                alt6=2;
-            }
-            else {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:1: ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) | (lv_stringValue_2= RULE_STRING ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) | (lv_wsValue_5= RULE_WS ) | (lv_anyValue_6= RULE_ANY_OTHER ) )
+            int alt1=7;
+            switch ( input.LA(1) ) {
+            case RULE_ID:
+                {
+                alt1=1;
+                }
+                break;
+            case RULE_INT:
+                {
+                alt1=2;
+                }
+                break;
+            case RULE_STRING:
+                {
+                alt1=3;
+                }
+                break;
+            case RULE_ML_COMMENT:
+                {
+                alt1=4;
+                }
+                break;
+            case RULE_SL_COMMENT:
+                {
+                alt1=5;
+                }
+                break;
+            case RULE_WS:
+                {
+                alt1=6;
+                }
+                break;
+            case RULE_ANY_OTHER:
+                {
+                alt1=7;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
-                    new NoViableAltException("83:1: ( ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) ) | (lv_anyValue_6= RULE_ANY_OTHER ) )", 6, 0, input);
+                    new NoViableAltException("83:1: ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) | (lv_stringValue_2= RULE_STRING ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) | (lv_wsValue_5= RULE_WS ) | (lv_anyValue_6= RULE_ANY_OTHER ) )", 1, 0, input);
 
                 throw nvae;
             }
-            switch (alt6) {
+
+            switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:2: ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:2: (lv_idValue_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:2: ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) )
-                    int alt5=2;
-                    int LA5_0 = input.LA(1);
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:2: (lv_idValue_0= RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:85:6: lv_idValue_0= RULE_ID
+                    {
+                    lv_idValue_0=(Token)input.LT(1);
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel128); 
 
-                    if ( ((LA5_0>=RULE_ID && LA5_0<=RULE_SL_COMMENT)) ) {
-                        alt5=1;
-                    }
-                    else if ( (LA5_0==RULE_WS) ) {
-                        alt5=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("83:2: ( ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) ) | (lv_wsValue_5= RULE_WS ) )", 5, 0, input);
+                    		createLeafNode(grammarAccess.prModel().ele00TerminalRuleCallID(), "idValue"); 
+                    	
 
-                        throw nvae;
-                    }
-                    switch (alt5) {
-                        case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:3: ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) )
-                            {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:3: ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) )
-                            int alt4=2;
-                            int LA4_0 = input.LA(1);
-
-                            if ( ((LA4_0>=RULE_ID && LA4_0<=RULE_ML_COMMENT)) ) {
-                                alt4=1;
-                            }
-                            else if ( (LA4_0==RULE_SL_COMMENT) ) {
-                                alt4=2;
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("83:3: ( ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) ) | (lv_slCommentValue_4= RULE_SL_COMMENT ) )", 4, 0, input);
-
-                                throw nvae;
-                            }
-                            switch (alt4) {
-                                case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:4: ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) )
-                                    {
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:4: ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) )
-                                    int alt3=2;
-                                    int LA3_0 = input.LA(1);
-
-                                    if ( ((LA3_0>=RULE_ID && LA3_0<=RULE_STRING)) ) {
-                                        alt3=1;
-                                    }
-                                    else if ( (LA3_0==RULE_ML_COMMENT) ) {
-                                        alt3=2;
-                                    }
-                                    else {
-                                        NoViableAltException nvae =
-                                            new NoViableAltException("83:4: ( ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) ) | (lv_mlCommentValue_3= RULE_ML_COMMENT ) )", 3, 0, input);
-
-                                        throw nvae;
-                                    }
-                                    switch (alt3) {
-                                        case 1 :
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:5: ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) )
-                                            {
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:5: ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) )
-                                            int alt2=2;
-                                            int LA2_0 = input.LA(1);
-
-                                            if ( ((LA2_0>=RULE_ID && LA2_0<=RULE_INT)) ) {
-                                                alt2=1;
-                                            }
-                                            else if ( (LA2_0==RULE_STRING) ) {
-                                                alt2=2;
-                                            }
-                                            else {
-                                                NoViableAltException nvae =
-                                                    new NoViableAltException("83:5: ( ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) ) | (lv_stringValue_2= RULE_STRING ) )", 2, 0, input);
-
-                                                throw nvae;
-                                            }
-                                            switch (alt2) {
-                                                case 1 :
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:6: ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) )
-                                                    {
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:6: ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) )
-                                                    int alt1=2;
-                                                    int LA1_0 = input.LA(1);
-
-                                                    if ( (LA1_0==RULE_ID) ) {
-                                                        alt1=1;
-                                                    }
-                                                    else if ( (LA1_0==RULE_INT) ) {
-                                                        alt1=2;
-                                                    }
-                                                    else {
-                                                        NoViableAltException nvae =
-                                                            new NoViableAltException("83:6: ( (lv_idValue_0= RULE_ID ) | (lv_intValue_1= RULE_INT ) )", 1, 0, input);
-
-                                                        throw nvae;
-                                                    }
-                                                    switch (alt1) {
-                                                        case 1 :
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:7: (lv_idValue_0= RULE_ID )
-                                                            {
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:83:7: (lv_idValue_0= RULE_ID )
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:85:6: lv_idValue_0= RULE_ID
-                                                            {
-                                                            lv_idValue_0=(Token)input.LT(1);
-                                                            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel133); 
-
-                                                            		createLeafNode(grammarAccess.prModel().ele0000000TerminalRuleCallID(), "idValue"); 
-                                                            	
-
-                                                            	        if (current==null) {
-                                                            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
-                                                            	            associateNodeWithAstElement(currentNode, current);
-                                                            	        }
-                                                            	        
-                                                            	        try {
-                                                            	       		set(current, "idValue", lv_idValue_0, "ID", lastConsumedNode);
-                                                            	        } catch (ValueConverterException vce) {
-                                                            				handleValueConverterException(vce);
-                                                            	        }
-                                                            	    
-
-                                                            }
-
-
-                                                            }
-                                                            break;
-                                                        case 2 :
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:104:6: (lv_intValue_1= RULE_INT )
-                                                            {
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:104:6: (lv_intValue_1= RULE_INT )
-                                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:106:6: lv_intValue_1= RULE_INT
-                                                            {
-                                                            lv_intValue_1=(Token)input.LT(1);
-                                                            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel169); 
-
-                                                            		createLeafNode(grammarAccess.prModel().ele0000010TerminalRuleCallINT(), "intValue"); 
-                                                            	
-
-                                                            	        if (current==null) {
-                                                            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
-                                                            	            associateNodeWithAstElement(currentNode, current);
-                                                            	        }
-                                                            	        
-                                                            	        try {
-                                                            	       		set(current, "intValue", lv_intValue_1, "INT", lastConsumedNode);
-                                                            	        } catch (ValueConverterException vce) {
-                                                            				handleValueConverterException(vce);
-                                                            	        }
-                                                            	    
-
-                                                            }
-
-
-                                                            }
-                                                            break;
-
-                                                    }
-
-
-                                                    }
-                                                    break;
-                                                case 2 :
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: (lv_stringValue_2= RULE_STRING )
-                                                    {
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: (lv_stringValue_2= RULE_STRING )
-                                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:127:6: lv_stringValue_2= RULE_STRING
-                                                    {
-                                                    lv_stringValue_2=(Token)input.LT(1);
-                                                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel206); 
-
-                                                    		createLeafNode(grammarAccess.prModel().ele000010TerminalRuleCallSTRING(), "stringValue"); 
-                                                    	
-
-                                                    	        if (current==null) {
-                                                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
-                                                    	            associateNodeWithAstElement(currentNode, current);
-                                                    	        }
-                                                    	        
-                                                    	        try {
-                                                    	       		set(current, "stringValue", lv_stringValue_2, "STRING", lastConsumedNode);
-                                                    	        } catch (ValueConverterException vce) {
-                                                    				handleValueConverterException(vce);
-                                                    	        }
-                                                    	    
-
-                                                    }
-
-
-                                                    }
-                                                    break;
-
-                                            }
-
-
-                                            }
-                                            break;
-                                        case 2 :
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:146:6: (lv_mlCommentValue_3= RULE_ML_COMMENT )
-                                            {
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:146:6: (lv_mlCommentValue_3= RULE_ML_COMMENT )
-                                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:148:6: lv_mlCommentValue_3= RULE_ML_COMMENT
-                                            {
-                                            lv_mlCommentValue_3=(Token)input.LT(1);
-                                            match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleModel243); 
-
-                                            		createLeafNode(grammarAccess.prModel().ele00010TerminalRuleCallML_COMMENT(), "mlCommentValue"); 
-                                            	
-
-                                            	        if (current==null) {
-                                            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
-                                            	            associateNodeWithAstElement(currentNode, current);
-                                            	        }
-                                            	        
-                                            	        try {
-                                            	       		set(current, "mlCommentValue", lv_mlCommentValue_3, "ML_COMMENT", lastConsumedNode);
-                                            	        } catch (ValueConverterException vce) {
-                                            				handleValueConverterException(vce);
-                                            	        }
-                                            	    
-
-                                            }
-
-
-                                            }
-                                            break;
-
-                                    }
-
-
-                                    }
-                                    break;
-                                case 2 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:167:6: (lv_slCommentValue_4= RULE_SL_COMMENT )
-                                    {
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:167:6: (lv_slCommentValue_4= RULE_SL_COMMENT )
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:169:6: lv_slCommentValue_4= RULE_SL_COMMENT
-                                    {
-                                    lv_slCommentValue_4=(Token)input.LT(1);
-                                    match(input,RULE_SL_COMMENT,FOLLOW_RULE_SL_COMMENT_in_ruleModel280); 
-
-                                    		createLeafNode(grammarAccess.prModel().ele0010TerminalRuleCallSL_COMMENT(), "slCommentValue"); 
-                                    	
-
-                                    	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
-                                    	            associateNodeWithAstElement(currentNode, current);
-                                    	        }
-                                    	        
-                                    	        try {
-                                    	       		set(current, "slCommentValue", lv_slCommentValue_4, "SL_COMMENT", lastConsumedNode);
-                                    	        } catch (ValueConverterException vce) {
-                                    				handleValueConverterException(vce);
-                                    	        }
-                                    	    
-
-                                    }
-
-
-                                    }
-                                    break;
-
-                            }
-
-
-                            }
-                            break;
-                        case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: (lv_wsValue_5= RULE_WS )
-                            {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: (lv_wsValue_5= RULE_WS )
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:190:6: lv_wsValue_5= RULE_WS
-                            {
-                            lv_wsValue_5=(Token)input.LT(1);
-                            match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleModel317); 
-
-                            		createLeafNode(grammarAccess.prModel().ele010TerminalRuleCallWS(), "wsValue"); 
-                            	
-
-                            	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
-                            	            associateNodeWithAstElement(currentNode, current);
-                            	        }
-                            	        
-                            	        try {
-                            	       		set(current, "wsValue", lv_wsValue_5, "WS", lastConsumedNode);
-                            	        } catch (ValueConverterException vce) {
-                            				handleValueConverterException(vce);
-                            	        }
-                            	    
-
-                            }
-
-
-                            }
-                            break;
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "idValue", lv_idValue_0, "ID", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
 
                     }
 
@@ -440,15 +194,160 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:104:6: (lv_intValue_1= RULE_INT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:104:6: (lv_intValue_1= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:106:6: lv_intValue_1= RULE_INT
+                    {
+                    lv_intValue_1=(Token)input.LT(1);
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel164); 
+
+                    		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallINT(), "intValue"); 
+                    	
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "intValue", lv_intValue_1, "INT", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: (lv_stringValue_2= RULE_STRING )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:125:6: (lv_stringValue_2= RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:127:6: lv_stringValue_2= RULE_STRING
+                    {
+                    lv_stringValue_2=(Token)input.LT(1);
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel200); 
+
+                    		createLeafNode(grammarAccess.prModel().ele20TerminalRuleCallSTRING(), "stringValue"); 
+                    	
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "stringValue", lv_stringValue_2, "STRING", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:146:6: (lv_mlCommentValue_3= RULE_ML_COMMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:146:6: (lv_mlCommentValue_3= RULE_ML_COMMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:148:6: lv_mlCommentValue_3= RULE_ML_COMMENT
+                    {
+                    lv_mlCommentValue_3=(Token)input.LT(1);
+                    match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleModel236); 
+
+                    		createLeafNode(grammarAccess.prModel().ele30TerminalRuleCallML_COMMENT(), "mlCommentValue"); 
+                    	
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "mlCommentValue", lv_mlCommentValue_3, "ML_COMMENT", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
+
+                    }
+
+
+                    }
+                    break;
+                case 5 :
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:167:6: (lv_slCommentValue_4= RULE_SL_COMMENT )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:167:6: (lv_slCommentValue_4= RULE_SL_COMMENT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:169:6: lv_slCommentValue_4= RULE_SL_COMMENT
+                    {
+                    lv_slCommentValue_4=(Token)input.LT(1);
+                    match(input,RULE_SL_COMMENT,FOLLOW_RULE_SL_COMMENT_in_ruleModel272); 
+
+                    		createLeafNode(grammarAccess.prModel().ele40TerminalRuleCallSL_COMMENT(), "slCommentValue"); 
+                    	
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "slCommentValue", lv_slCommentValue_4, "SL_COMMENT", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: (lv_wsValue_5= RULE_WS )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:6: (lv_wsValue_5= RULE_WS )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:190:6: lv_wsValue_5= RULE_WS
+                    {
+                    lv_wsValue_5=(Token)input.LT(1);
+                    match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleModel308); 
+
+                    		createLeafNode(grammarAccess.prModel().ele50TerminalRuleCallWS(), "wsValue"); 
+                    	
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "wsValue", lv_wsValue_5, "WS", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
+
+                    }
+
+
+                    }
+                    break;
+                case 7 :
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:209:6: (lv_anyValue_6= RULE_ANY_OTHER )
                     {
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:209:6: (lv_anyValue_6= RULE_ANY_OTHER )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:211:6: lv_anyValue_6= RULE_ANY_OTHER
                     {
                     lv_anyValue_6=(Token)input.LT(1);
-                    match(input,RULE_ANY_OTHER,FOLLOW_RULE_ANY_OTHER_in_ruleModel354); 
+                    match(input,RULE_ANY_OTHER,FOLLOW_RULE_ANY_OTHER_in_ruleModel344); 
 
-                    		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallANY_OTHER(), "anyValue"); 
+                    		createLeafNode(grammarAccess.prModel().ele60TerminalRuleCallANY_OTHER(), "anyValue"); 
                     	
 
                     	        if (current==null) {
@@ -494,12 +393,12 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel81 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleModel169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel206 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleModel243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_SL_COMMENT_in_ruleModel280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_ruleModel317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleModel354 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleModel128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleModel164 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleModel236 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_SL_COMMENT_in_ruleModel272 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_WS_in_ruleModel308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleModel344 = new BitSet(new long[]{0x0000000000000002L});
 
 }

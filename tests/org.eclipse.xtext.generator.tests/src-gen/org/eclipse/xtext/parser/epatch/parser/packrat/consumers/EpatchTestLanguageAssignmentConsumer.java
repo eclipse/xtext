@@ -31,13 +31,13 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 
 	private IElementConsumer alternatives$1$Consumer;
 
+	private IElementConsumer ruleCall$2$Consumer;
+
+	private IElementConsumer ruleCall$3$Consumer;
+
 	private IElementConsumer ruleCall$4$Consumer;
 
 	private IElementConsumer ruleCall$5$Consumer;
-
-	private IElementConsumer ruleCall$6$Consumer;
-
-	private IElementConsumer ruleCall$7$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -47,10 +47,34 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
-			acceptor.accept(ruleCall$6$Consumer);
-			acceptor.accept(ruleCall$7$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(biSingleAssignmentConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$3$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$3$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(biListAssignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -62,37 +86,13 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(biSingleAssignmentConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(monoSingleAssignmentConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
 	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
 		
 		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(biListAssignmentConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(monoSingleAssignmentConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -119,10 +119,10 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 		this.rule = rule;
 		
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallBiSingleAssignment());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele001ParserRuleCallBiListAssignment());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele01ParserRuleCallMonoSingleAssignment());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele1ParserRuleCallMonoListAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallBiSingleAssignment());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallBiListAssignment());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallMonoSingleAssignment());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallMonoListAssignment());
 	}
 	
 	@Override

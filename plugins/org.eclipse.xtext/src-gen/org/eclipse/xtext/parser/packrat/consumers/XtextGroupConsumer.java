@@ -62,7 +62,7 @@ public final class XtextGroupConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Group$3$Consumer extends LoopGroupConsumer {
+	protected class Group$3$Consumer extends OptionalGroupConsumer {
 		
 		protected Group$3$Consumer(final Group group) {
 			super(group);
@@ -88,7 +88,7 @@ public final class XtextGroupConsumer extends NonTerminalConsumer {
 		}
 	}
 
-	protected class Assignment$6$Consumer extends AssignmentConsumer {
+	protected class Assignment$6$Consumer extends MandatoryLoopAssignmentConsumer {
 		
 		protected Assignment$6$Consumer(final Assignment assignment) {
 			super(assignment);

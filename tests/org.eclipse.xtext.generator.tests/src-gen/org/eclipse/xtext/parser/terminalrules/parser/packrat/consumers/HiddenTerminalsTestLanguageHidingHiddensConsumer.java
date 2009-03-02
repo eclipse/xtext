@@ -31,19 +31,19 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 
 	private IElementConsumer group$1$Consumer;
 
-	private IElementConsumer keyword$3$Consumer;
+	private IElementConsumer keyword$2$Consumer;
 
-	private IElementConsumer assignment$4$Consumer;
+	private IElementConsumer assignment$3$Consumer;
 
-	private IElementConsumer ruleCall$5$Consumer;
+	private IElementConsumer ruleCall$4$Consumer;
 
-	private IElementConsumer assignment$6$Consumer;
+	private IElementConsumer assignment$5$Consumer;
 
-	private IElementConsumer ruleCall$7$Consumer;
+	private IElementConsumer ruleCall$6$Consumer;
 
-	private ICharacterClass keyword$3$Delimiter;
+	private ICharacterClass keyword$2$Delimiter;
 
-	private ISequenceMatcher ruleCall$5$Delimiter;
+	private ISequenceMatcher ruleCall$4$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -53,63 +53,63 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$3$Consumer);
-			acceptor.accept(assignment$4$Consumer);
-			acceptor.accept(assignment$6$Consumer);
+			acceptor.accept(keyword$2$Consumer);
+			acceptor.accept(assignment$3$Consumer);
+			acceptor.accept(assignment$5$Consumer);
 		}
 	}
 
-	protected class Keyword$3$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$2$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$3$Consumer(final Keyword keyword) {
+		protected Keyword$2$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$3$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$2$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$4$Consumer extends AssignmentConsumer {
+	protected class Assignment$3$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$4$Consumer(final Assignment assignment) {
+		protected Assignment$3$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$5$Consumer;
+			return ruleCall$4$Consumer;
 		}
 	}
 
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(wsConsumer, "space", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+			return consumeTerminal(wsConsumer, "space", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$6$Consumer extends AssignmentConsumer {
+	protected class Assignment$5$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$6$Consumer(final Assignment assignment) {
+		protected Assignment$5$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$7$Consumer;
+			return ruleCall$6$Consumer;
 		}
 	}
 
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -121,8 +121,8 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 
 	public HiddenTerminalsTestLanguageHidingHiddensConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -138,11 +138,11 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordHiding());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele01AssignmentSpace());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele010TerminalRuleCallWS());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentCalled());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele10ParserRuleCallInheritingHiddensCall());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHiding());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentSpace());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallWS());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentCalled());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20ParserRuleCallInheritingHiddensCall());
 	}
 	
 	@Override
@@ -163,20 +163,20 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 		this.wsConsumer = wsConsumer;
 	}
 	
-	public ICharacterClass getKeyword$3$Delimiter() {
-		return keyword$3$Delimiter;
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
 	}
 	
-	public void setKeyword$3$Delimiter(ICharacterClass characterClass) {
-		keyword$3$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getRuleCall$5$Delimiter() {
-		return ruleCall$5$Delimiter;
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
 	}
 	
-	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

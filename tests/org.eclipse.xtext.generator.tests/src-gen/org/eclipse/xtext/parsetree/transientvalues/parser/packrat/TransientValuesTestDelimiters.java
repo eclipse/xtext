@@ -20,8 +20,8 @@ public final class TransientValuesTestDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-	public static final ICharacterClass keyword$27$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$24$Delimiter = ICharacterClass.Factory.nullClass();
 
 }

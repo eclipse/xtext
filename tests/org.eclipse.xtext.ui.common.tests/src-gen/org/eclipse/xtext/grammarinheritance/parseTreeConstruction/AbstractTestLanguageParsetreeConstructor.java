@@ -50,22 +50,22 @@ protected class InheritedParserRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prInheritedParserRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritedParserRule_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new InheritedParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -128,22 +128,22 @@ protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAbstractCallOverridenParserRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractCallOverridenParserRule_1_Assignment_elements(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new AbstractCallOverridenParserRule_0_Keyword_overridemodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -214,22 +214,22 @@ protected class OverridableParserRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridableParserRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridableParserRule_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new OverridableParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -292,22 +292,22 @@ protected class OverridableParserRule2_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prOverridableParserRule2().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridableParserRule2_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new OverridableParserRule2_0_Keyword_otherelement(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -370,22 +370,22 @@ protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prAbstractCallExtendedParserRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new AbstractCallExtendedParserRule_1_Assignment_elements(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new AbstractCallExtendedParserRule_0_Keyword_extendedmodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
@@ -456,22 +456,22 @@ protected class ExtendableParserRule_Group extends GroupToken {
 	public Group getGrammarElement() {
 		return grammarAccess.prExtendableParserRule().eleGroup();
 	}
-		
+
+	
+
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new ExtendableParserRule_1_Assignment_name(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new ExtendableParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
+			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
 			}
 		}
 		return null;
-		
 	}
 }
 
