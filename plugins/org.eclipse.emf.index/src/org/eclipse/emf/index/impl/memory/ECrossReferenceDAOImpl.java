@@ -8,6 +8,8 @@
 package org.eclipse.emf.index.impl.memory;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,14 +32,14 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 		super(indexStore);
 		sourceScope = new InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor>() {
 			@Override
-			protected EObjectDescriptor target(ECrossReferenceDescriptor source) {
-				return source.getSource();
+			protected List<EObjectDescriptor> targets(ECrossReferenceDescriptor source) {
+				return Collections.singletonList(source.getSource());
 			}
 		};
 		targetScope = new InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor>() {
 			@Override
-			protected EObjectDescriptor target(ECrossReferenceDescriptor source) {
-				return source.getTarget();
+			protected List<EObjectDescriptor> targets(ECrossReferenceDescriptor source) {
+				return Collections.singletonList(source.getTarget());
 			}
 		};
 	}

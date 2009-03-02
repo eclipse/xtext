@@ -8,6 +8,8 @@
 package org.eclipse.emf.index.impl.memory;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.index.EClassDescriptor;
@@ -27,8 +29,8 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		super(indexStore);
 		ePackageScope = new InverseReferenceCache<EPackageDescriptor, EClassDescriptor>(){
 			@Override
-			protected EPackageDescriptor target(EClassDescriptor source) {
-				return source.getEPackageDescriptor();
+			protected List<EPackageDescriptor> targets(EClassDescriptor source) {
+				return Collections.singletonList(source.getEPackageDescriptor());
 			}
 		};
 	}
