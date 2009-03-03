@@ -175,6 +175,7 @@ public class Linker extends AbstractLinker {
 	}
 
 	private void clearAllReferences(EObject model) {
+		clearReferences(model);
 		final Iterator<EObject> iter = model.eAllContents();
 		while (iter.hasNext())
 			clearReferences(iter.next());
