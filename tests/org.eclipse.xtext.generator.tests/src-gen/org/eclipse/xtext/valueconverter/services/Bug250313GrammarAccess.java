@@ -71,8 +71,10 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		private final Keyword c810KeywordRef = (Keyword)c81Group.eContents().get(0);
 		private final Assignment c811AssignmentRef = (Assignment)c81Group.eContents().get(1);
 		private final Alternatives c8110Alternatives = (Alternatives)c811AssignmentRef.eContents().get(0);
-		private final CrossReference c81100CrossReferenceEStringChild1 = (CrossReference)c8110Alternatives.eContents().get(0);
-		private final CrossReference c81101CrossReferenceEStringChild2 = (CrossReference)c8110Alternatives.eContents().get(1);
+		private final CrossReference c81100CrossReferenceSTRINGChild1 = (CrossReference)c8110Alternatives.eContents().get(0);
+		private final RuleCall c811001TerminalRuleCallSTRING = (RuleCall)c81100CrossReferenceSTRINGChild1.eContents().get(1);
+		private final CrossReference c81101CrossReferenceIDChild2 = (CrossReference)c8110Alternatives.eContents().get(1);
+		private final RuleCall c811011TerminalRuleCallID = (RuleCall)c81101CrossReferenceIDChild2.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -234,10 +236,16 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public Alternatives ele8110Alternatives() { return c8110Alternatives; }
 
 		// not supported
-		public CrossReference ele81100CrossReferenceEStringChild1() { return c81100CrossReferenceEStringChild1; }
+		public CrossReference ele81100CrossReferenceSTRINGChild1() { return c81100CrossReferenceSTRINGChild1; }
 
 		// not supported
-		public CrossReference ele81101CrossReferenceEStringChild2() { return c81101CrossReferenceEStringChild2; }
+		public RuleCall ele811001TerminalRuleCallSTRING() { return c811001TerminalRuleCallSTRING; }
+
+		// not supported
+		public CrossReference ele81101CrossReferenceIDChild2() { return c81101CrossReferenceIDChild2; }
+
+		// not supported
+		public RuleCall ele811011TerminalRuleCallID() { return c811011TerminalRuleCallID; }
 	}
 
 	public class DatatypeElements implements IParserRuleAccess {

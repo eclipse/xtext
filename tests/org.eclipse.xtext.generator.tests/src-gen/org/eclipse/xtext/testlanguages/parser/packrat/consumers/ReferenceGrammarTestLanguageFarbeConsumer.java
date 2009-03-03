@@ -136,7 +136,7 @@ public final class ReferenceGrammarTestLanguageFarbeConsumer extends NonTerminal
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

@@ -22,8 +22,8 @@ public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Assignment_child(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prGreeting().getRule().getType().getType()) && (s = new Greeting_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_child(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prGreeting().getRule().getType().getClassifier()) && (s = new Greeting_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -54,7 +54,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prGreeting().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prGreeting().getRule().getType().getClassifier())) {
 				Solution s = new Greeting_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

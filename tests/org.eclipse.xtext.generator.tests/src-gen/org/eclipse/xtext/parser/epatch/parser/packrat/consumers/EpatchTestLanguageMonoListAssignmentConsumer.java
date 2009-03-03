@@ -289,7 +289,7 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAssignmentValueConsumer(INonTerminalConsumer assignmentValueConsumer) {

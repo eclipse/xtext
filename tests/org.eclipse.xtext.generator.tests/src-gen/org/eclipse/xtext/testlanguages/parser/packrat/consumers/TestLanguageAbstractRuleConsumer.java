@@ -96,7 +96,7 @@ public final class TestLanguageAbstractRuleConsumer extends NonTerminalConsumer 
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setChoiceRuleConsumer(INonTerminalConsumer choiceRuleConsumer) {

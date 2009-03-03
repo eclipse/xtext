@@ -142,7 +142,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEcoreDsl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEcoreDsl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -174,7 +174,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEcoreDsl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEcoreDsl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -287,7 +287,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prImportStatementDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prImportStatementDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -320,7 +320,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prImportStatementDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prImportStatementDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -444,7 +444,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -480,7 +480,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -512,7 +512,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -545,7 +545,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -584,7 +584,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -616,7 +616,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -746,7 +746,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -780,7 +780,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -818,7 +818,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -850,7 +850,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1105,7 +1105,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1143,7 +1143,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                                 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -1176,7 +1176,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1205,7 +1205,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1343,7 +1343,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1369,13 +1369,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEAnnotationDecl1485); 
 
-                    		createLeafNode(grammarAccess.prEAnnotationDecl().ele20CrossReferenceEStringEModelElement(), "eModelElement"); 
+                    		createLeafNode(grammarAccess.prEAnnotationDecl().ele20CrossReferenceIDEModelElement(), "eModelElement"); 
                     	
 
                     }
@@ -1399,7 +1399,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1444,7 +1444,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1586,7 +1586,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1624,7 +1624,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1670,7 +1670,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1709,7 +1709,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1749,7 +1749,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1794,7 +1794,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1854,7 +1854,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1899,7 +1899,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1955,7 +1955,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2000,7 +2000,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2032,7 +2032,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2289,7 +2289,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2371,7 +2371,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2400,7 +2400,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2429,7 +2429,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2458,7 +2458,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2487,7 +2487,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2516,7 +2516,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2545,7 +2545,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2574,7 +2574,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2612,7 +2612,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2651,7 +2651,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2691,7 +2691,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -2731,7 +2731,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2769,7 +2769,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2905,7 +2905,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2987,7 +2987,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3016,7 +3016,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3045,7 +3045,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3074,7 +3074,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3103,7 +3103,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3132,7 +3132,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3161,7 +3161,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3190,7 +3190,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3242,7 +3242,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3283,7 +3283,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -3322,7 +3322,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3362,7 +3362,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -3412,13 +3412,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl3609); 
 
-                    		createLeafNode(grammarAccess.prEReferenceDecl().ele510CrossReferenceEStringEReference(), "eOpposite"); 
+                    		createLeafNode(grammarAccess.prEReferenceDecl().ele510CrossReferenceIDEReference(), "eOpposite"); 
                     	
 
                     }
@@ -3439,7 +3439,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3557,7 +3557,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -3591,7 +3591,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3633,7 +3633,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -3762,7 +3762,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -3792,7 +3792,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3830,7 +3830,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3867,7 +3867,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3972,7 +3972,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prETypeParameterDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -4012,7 +4012,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prETypeParameterDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4133,13 +4133,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl4314); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceEStringEClassifier(), "eClassifier"); 
+                    		createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceIDEClassifier(), "eClassifier"); 
                     	
 
                     }
@@ -4171,7 +4171,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4216,7 +4216,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType());
+                            	    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
                             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	    	        }
                             	    	        
@@ -4270,13 +4270,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl4465); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceEStringETypeParameter(), "eTypeParameter"); 
+                    		createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceIDETypeParameter(), "eTypeParameter"); 
                     	
 
                     }
@@ -4401,13 +4401,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl4560); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeDecl().ele000CrossReferenceEStringEClassifier(), "eClassifier"); 
+                    		createLeafNode(grammarAccess.prEGenericTypeDecl().ele000CrossReferenceIDEClassifier(), "eClassifier"); 
                     	
 
                     }
@@ -4439,7 +4439,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4484,7 +4484,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getType());
+                            	    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
                             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	    	        }
                             	    	        
@@ -4538,13 +4538,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl4711); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeDecl().ele110CrossReferenceEStringETypeParameter(), "eTypeParameter"); 
+                    		createLeafNode(grammarAccess.prEGenericTypeDecl().ele110CrossReferenceIDETypeParameter(), "eTypeParameter"); 
                     	
 
                     }
@@ -4604,7 +4604,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4646,7 +4646,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4790,7 +4790,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -4838,7 +4838,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -4867,7 +4867,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -4925,7 +4925,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4965,7 +4965,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5005,7 +5005,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5050,7 +5050,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -5110,7 +5110,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5155,7 +5155,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -5215,7 +5215,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5260,7 +5260,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -5394,7 +5394,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -5426,7 +5426,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -5450,7 +5450,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5629,7 +5629,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMapEntry().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prMapEntry().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5656,7 +5656,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMapEntry().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prMapEntry().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

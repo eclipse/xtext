@@ -22,10 +22,10 @@ public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getType()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLine().getRule().getType().getType()) && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getType()) && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getType()) && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getClassifier()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLine().getRule().getType().getClassifier()) && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getClassifier()) && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getClassifier()) && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -115,7 +115,7 @@ protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestLinewrap_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getClassifier())) return null;
 		return new TestLinewrap_Group(current, this).firstSolution();
 	}
 }
@@ -135,7 +135,7 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestIndentation_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getClassifier())) return null;
 		return new TestIndentation_Group(current, this).firstSolution();
 	}
 }
@@ -320,7 +320,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getClassifier())) {
 				Solution s = new Line_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -447,7 +447,7 @@ protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getClassifier())) {
 				Solution s = new TestIndentation_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -480,7 +480,7 @@ protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getClassifier())) {
 				Solution s = new Line_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

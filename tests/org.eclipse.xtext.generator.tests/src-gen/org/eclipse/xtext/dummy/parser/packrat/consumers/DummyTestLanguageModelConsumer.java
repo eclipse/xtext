@@ -78,7 +78,7 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setElementConsumer(INonTerminalConsumer elementConsumer) {

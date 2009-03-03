@@ -131,7 +131,7 @@ public final class MetamodelRefTestLanguageFooConsumer extends NonTerminalConsum
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

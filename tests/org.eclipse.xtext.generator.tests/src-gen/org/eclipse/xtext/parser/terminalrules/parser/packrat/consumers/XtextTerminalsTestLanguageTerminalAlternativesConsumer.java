@@ -179,7 +179,7 @@ public final class XtextTerminalsTestLanguageTerminalAlternativesConsumer extend
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTerminalGroupConsumer(INonTerminalConsumer terminalGroupConsumer) {

@@ -138,7 +138,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prCompositeModel().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prCompositeModel().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -251,7 +251,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -292,7 +292,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -339,7 +339,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -386,7 +386,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        

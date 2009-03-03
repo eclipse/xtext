@@ -190,7 +190,7 @@ public final class ReferenceGrammarTestLanguageSpielzeugConsumer extends NonTerm
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setFarbeConsumer(INonTerminalConsumer farbeConsumer) {

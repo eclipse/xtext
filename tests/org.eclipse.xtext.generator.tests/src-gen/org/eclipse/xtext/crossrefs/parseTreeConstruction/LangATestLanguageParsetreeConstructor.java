@@ -22,9 +22,9 @@ public class LangATestLanguageParsetreeConstructor extends AbstractParseTreeCons
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prMain().getRule().getType().getType()) && (s = new Main_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prImport().getRule().getType().getType()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getType()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMain().getRule().getType().getClassifier()) && (s = new Main_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prImport().getRule().getType().getClassifier()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -85,7 +85,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prImport().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prImport().getRule().getType().getClassifier())) {
 				Solution s = new Import_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -118,7 +118,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prType().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier())) {
 				Solution s = new Type_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -326,9 +326,9 @@ protected class Type_3_Assignment_extends extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prType().ele30CrossReferenceEStringType().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prType().ele30CrossReferenceIDType().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prType().ele30CrossReferenceEStringType(); 
+				element = grammarAccess.prType().ele30CrossReferenceIDType(); 
 				return new Solution(obj);
 			}
 		}

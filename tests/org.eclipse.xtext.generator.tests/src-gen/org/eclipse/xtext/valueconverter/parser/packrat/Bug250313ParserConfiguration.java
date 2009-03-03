@@ -107,8 +107,6 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 
 		getChild2Consumer().setStringConsumer(getStringConsumer());
 
-		getModelConsumer().setCrossReference$53$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
-		getModelConsumer().setCrossReference$55$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
 		getModelConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
 		getModelConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$8$Delimiter);
 		getModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
@@ -126,6 +124,8 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 		getModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
 		getModelConsumer().setRuleCall$23$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
 		getModelConsumer().setRuleCall$27$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setRuleCall$55$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
+		getModelConsumer().setRuleCall$58$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);
 		getModelConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$9$Delimiter);
 		getDatatypeConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.keyword$5$Delimiter);
 		getDatatypeConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.valueconverter.parser.packrat.Bug250313Delimiters.ruleCall$12$Delimiter);

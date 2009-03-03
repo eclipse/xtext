@@ -106,7 +106,7 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 		getSecondAbstractRuleChildConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
 		getSecondAbstractRuleChildConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.keyword$18$Delimiter);
 		getSecondAbstractRuleChildConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$17$Delimiter);
-		getAbstractRuleCallConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$17$Delimiter);
+		getAbstractRuleCallConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ContentAssistTestLanguageDelimiters.ruleCall$17$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

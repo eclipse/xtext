@@ -118,7 +118,7 @@ public final class XtextGrammarTestLanguageParenthesizedElementConsumer extends 
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAlternativesConsumer(INonTerminalConsumer alternativesConsumer) {

@@ -69,9 +69,9 @@ public class TwoContextsTestLanguageParserConfiguration extends AbstractParserCo
 
 		getAnElementConsumer().setIdConsumer(getIdConsumer());
 
-		getAnElementConsumer().setCrossReference$7$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.ruleCall$9$Delimiter);
 		getAnElementConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.keyword$11$Delimiter);
-		getAnElementConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.keyword$15$Delimiter);
+		getAnElementConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.keyword$16$Delimiter);
+		getAnElementConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.ruleCall$9$Delimiter);
 		getAnElementConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguageDelimiters.ruleCall$9$Delimiter);
 	}
 	

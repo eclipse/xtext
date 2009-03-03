@@ -89,7 +89,7 @@ ruleMainModel returns [EObject current=null]
 	    lv_elements_0=ruleAnElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prMainModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prMainModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -131,7 +131,7 @@ ruleAnElement returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAnElement().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -151,13 +151,13 @@ ruleAnElement returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prAnElement().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceEStringAnElement(), "referred"); 
+		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceIDAnElement(), "referred"); 
 	}
 
 		// TODO assign feature to currentNode

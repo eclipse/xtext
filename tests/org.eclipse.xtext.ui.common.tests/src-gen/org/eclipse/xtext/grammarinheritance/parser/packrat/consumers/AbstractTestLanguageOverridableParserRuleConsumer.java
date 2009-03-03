@@ -118,7 +118,7 @@ public final class AbstractTestLanguageOverridableParserRuleConsumer extends Non
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

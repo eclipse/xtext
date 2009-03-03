@@ -78,7 +78,7 @@ public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends No
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAbstractCallExtendedParserRuleConsumer(INonTerminalConsumer abstractCallExtendedParserRuleConsumer) {

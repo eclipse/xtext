@@ -112,7 +112,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 					"complete"
 							+ Strings.toFirstUpper(typeRef.getMetamodel()
 									.getAlias()) + "_"
-							+ Strings.toFirstUpper(typeRef.getType().getName()),
+							+ Strings.toFirstUpper(typeRef.getClassifier().getName()),
 					Arrays
 							.<Class<?>> asList(
 									RuleCall.class,
@@ -268,8 +268,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			ParserRule containingParserRule = GrammarUtil
 					.containingParserRule(crossReference);
 			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
-				final EClass eClass = (EClass) containingParserRule.getType()
-						.getType();
+				final EClass eClass = (EClass) containingParserRule.getType().getClassifier();
 				final EReference ref = GrammarUtil.getReference(crossReference,
 						eClass);
 				final String trimmedPrefix = contentAssistContext

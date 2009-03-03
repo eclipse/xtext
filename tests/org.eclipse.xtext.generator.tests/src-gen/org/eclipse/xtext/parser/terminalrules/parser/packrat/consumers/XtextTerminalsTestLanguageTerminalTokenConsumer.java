@@ -172,7 +172,7 @@ public final class XtextTerminalsTestLanguageTerminalTokenConsumer extends NonTe
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTerminalTokenElementConsumer(INonTerminalConsumer terminalTokenElementConsumer) {

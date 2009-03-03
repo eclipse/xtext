@@ -96,7 +96,7 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setParserRuleConsumer(INonTerminalConsumer parserRuleConsumer) {

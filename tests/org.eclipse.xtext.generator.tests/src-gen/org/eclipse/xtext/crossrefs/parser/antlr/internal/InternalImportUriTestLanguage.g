@@ -89,7 +89,7 @@ ruleMain returns [EObject current=null]
 	    lv_imports_0=ruleImport 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prMain().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prMain().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -110,7 +110,7 @@ ruleMain returns [EObject current=null]
 	    lv_types_1=ruleType 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prMain().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prMain().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -156,7 +156,7 @@ ruleImport returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prImport().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prImport().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -201,7 +201,7 @@ ruleType returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prType().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prType().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -221,13 +221,13 @@ ruleType returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prType().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prType().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prType().ele30CrossReferenceEStringType(), "extends"); 
+		createLeafNode(grammarAccess.prType().ele30CrossReferenceIDType(), "extends"); 
 	}
 
 		// TODO assign feature to currentNode

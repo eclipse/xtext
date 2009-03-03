@@ -21,8 +21,6 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 
 	private AbstractTerminalElements rule;	
 
-	private INonTerminalConsumer crossReferenceConsumer;
-
 	private INonTerminalConsumer keywordConsumer;
 
 	private INonTerminalConsumer parenthesizedElementConsumer;
@@ -37,8 +35,6 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 
 	private IElementConsumer ruleCall$4$Consumer;
 
-	private IElementConsumer ruleCall$5$Consumer;
-
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -50,7 +46,6 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
 			acceptor.accept(ruleCall$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
 		}
 	}
 
@@ -90,18 +85,6 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		}
 	}
 
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(crossReferenceConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
 	public XtextTerminalsTestLanguageAbstractTerminalConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -122,7 +105,6 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallKeyword());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallRuleCall());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallParenthesizedElement());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallCrossReference());
 	}
 	
 	@Override
@@ -132,11 +114,7 @@ public final class XtextTerminalsTestLanguageAbstractTerminalConsumer extends No
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
-	}
-	
-	public void setCrossReferenceConsumer(INonTerminalConsumer crossReferenceConsumer) {
-		this.crossReferenceConsumer = crossReferenceConsumer;
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setKeywordConsumer(INonTerminalConsumer keywordConsumer) {

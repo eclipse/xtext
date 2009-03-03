@@ -320,7 +320,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -361,7 +361,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -468,7 +468,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridableParserRule().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -564,7 +564,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prCallOverridenParserRule().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prCallOverridenParserRule().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -663,7 +663,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -690,7 +690,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -966,7 +966,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubrule1().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubrule1().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -989,7 +989,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubrule1().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubrule1().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1090,7 +1090,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubrule2().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubrule2().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1113,7 +1113,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubrule2().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubrule2().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1214,7 +1214,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubrule3().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubrule3().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1237,7 +1237,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubrule3().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSubrule3().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1333,7 +1333,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prCallExtendedParserRule().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prCallExtendedParserRule().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1431,7 +1431,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prInheritedParserRule().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prInheritedParserRule().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1546,7 +1546,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1668,7 +1668,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        

@@ -186,7 +186,7 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setNamedElementConsumer(INonTerminalConsumer namedElementConsumer) {

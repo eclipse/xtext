@@ -164,7 +164,7 @@ public final class XtextTerminalsTestLanguageCharacterRangeConsumer extends NonT
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setKeywordConsumer(INonTerminalConsumer keywordConsumer) {

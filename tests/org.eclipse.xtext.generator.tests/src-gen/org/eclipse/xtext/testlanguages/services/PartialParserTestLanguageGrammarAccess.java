@@ -259,7 +259,8 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c3AssignmentValue = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall c30ParserRuleCallNamed = (RuleCall)c3AssignmentValue.eContents().get(0);
 		private final Assignment c4AssignmentReferencedContainer = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference c40CrossReferenceEStringSomeContainer = (CrossReference)c4AssignmentReferencedContainer.eContents().get(0);
+		private final CrossReference c40CrossReferenceIDSomeContainer = (CrossReference)c4AssignmentReferencedContainer.eContents().get(0);
+		private final RuleCall c401TerminalRuleCallID = (RuleCall)c40CrossReferenceIDSomeContainer.eContents().get(1);
 		private final Keyword c5KeywordRightParenthesis = (Keyword)cGroup.eContents().get(5);
 		
 		// not supported
@@ -287,7 +288,10 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele4AssignmentReferencedContainer() { return c4AssignmentReferencedContainer; }
 
 		// not supported
-		public CrossReference ele40CrossReferenceEStringSomeContainer() { return c40CrossReferenceEStringSomeContainer; }
+		public CrossReference ele40CrossReferenceIDSomeContainer() { return c40CrossReferenceIDSomeContainer; }
+
+		// not supported
+		public RuleCall ele401TerminalRuleCallID() { return c401TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele5KeywordRightParenthesis() { return c5KeywordRightParenthesis; }
@@ -303,7 +307,8 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Assignment c4AssignmentValue = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall c40ParserRuleCallNamed = (RuleCall)c4AssignmentValue.eContents().get(0);
 		private final Assignment c5AssignmentReferencedChildren = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference c50CrossReferenceEStringChild = (CrossReference)c5AssignmentReferencedChildren.eContents().get(0);
+		private final CrossReference c50CrossReferenceIDChild = (CrossReference)c5AssignmentReferencedChildren.eContents().get(0);
+		private final RuleCall c501TerminalRuleCallID = (RuleCall)c50CrossReferenceIDChild.eContents().get(1);
 		private final Keyword c6KeywordRightParenthesis = (Keyword)cGroup.eContents().get(6);
 		
 		// not supported
@@ -334,7 +339,10 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele5AssignmentReferencedChildren() { return c5AssignmentReferencedChildren; }
 
 		// not supported
-		public CrossReference ele50CrossReferenceEStringChild() { return c50CrossReferenceEStringChild; }
+		public CrossReference ele50CrossReferenceIDChild() { return c50CrossReferenceIDChild; }
+
+		// not supported
+		public RuleCall ele501TerminalRuleCallID() { return c501TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele6KeywordRightParenthesis() { return c6KeywordRightParenthesis; }

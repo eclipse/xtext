@@ -201,7 +201,7 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIntConsumer(ITerminalConsumer intConsumer) {

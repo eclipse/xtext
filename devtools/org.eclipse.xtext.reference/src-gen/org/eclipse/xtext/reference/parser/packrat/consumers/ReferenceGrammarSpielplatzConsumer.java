@@ -374,7 +374,7 @@ public final class ReferenceGrammarSpielplatzConsumer extends NonTerminalConsume
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setCustomTypeParserRuleConsumer(INonTerminalConsumer customTypeParserRuleConsumer) {

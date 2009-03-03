@@ -131,7 +131,7 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -172,7 +172,7 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -283,7 +283,7 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prElement().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

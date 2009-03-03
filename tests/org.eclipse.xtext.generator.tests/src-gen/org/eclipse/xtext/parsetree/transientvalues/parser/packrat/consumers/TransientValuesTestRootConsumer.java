@@ -151,7 +151,7 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTestListConsumer(INonTerminalConsumer testListConsumer) {

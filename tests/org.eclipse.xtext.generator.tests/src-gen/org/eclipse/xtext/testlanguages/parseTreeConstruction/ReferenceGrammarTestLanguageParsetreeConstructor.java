@@ -22,13 +22,13 @@ public class ReferenceGrammarTestLanguageParsetreeConstructor extends AbstractPa
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prSpielplatz().getRule().getType().getType()) && (s = new Spielplatz_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prPerson().getRule().getType().getType()) && (s = new Person_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prKind().getRule().getType().getType()) && (s = new Kind_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getType()) && (s = new Erwachsener_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSpielzeug().getRule().getType().getType()) && (s = new Spielzeug_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prFarbe().getRule().getType().getType()) && (s = new Farbe_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prFamilie().getRule().getType().getType()) && (s = new Familie_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSpielplatz().getRule().getType().getClassifier()) && (s = new Spielplatz_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prPerson().getRule().getType().getClassifier()) && (s = new Person_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prKind().getRule().getType().getClassifier()) && (s = new Kind_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getClassifier()) && (s = new Erwachsener_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSpielzeug().getRule().getType().getClassifier()) && (s = new Spielzeug_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFarbe().getRule().getType().getClassifier()) && (s = new Farbe_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFamilie().getRule().getType().getClassifier()) && (s = new Familie_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -202,7 +202,7 @@ protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prKind().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prKind().getRule().getType().getClassifier())) {
 				Solution s = new Kind_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -235,7 +235,7 @@ protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getClassifier())) {
 				Solution s = new Erwachsener_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -268,7 +268,7 @@ protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prSpielzeug().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prSpielzeug().getRule().getType().getClassifier())) {
 				Solution s = new Spielzeug_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -301,7 +301,7 @@ protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFamilie().getRule().getType().getClassifier())) {
 				Solution s = new Familie_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -375,7 +375,7 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Kind_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prKind().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prKind().getRule().getType().getClassifier())) return null;
 		return new Kind_Group(current, this).firstSolution();
 	}
 }
@@ -395,7 +395,7 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Erwachsener_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getClassifier())) return null;
 		return new Erwachsener_Group(current, this).firstSolution();
 	}
 }
@@ -799,7 +799,7 @@ protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFarbe().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFarbe().getRule().getType().getClassifier())) {
 				Solution s = new Farbe_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1051,9 +1051,9 @@ protected class Familie_3_Assignment_mutter extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("mutter");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele30CrossReferenceEStringErwachsener().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele30CrossReferenceEStringErwachsener(); 
+				element = grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1079,9 +1079,9 @@ protected class Familie_4_Assignment_vater extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("vater");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele40CrossReferenceEStringErwachsener().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele40CrossReferenceEStringErwachsener(); 
+				element = grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1107,9 +1107,9 @@ protected class Familie_5_Assignment_kinder extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele50CrossReferenceEStringKind().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFamilie().ele50CrossReferenceIDKind().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele50CrossReferenceEStringKind(); 
+				element = grammarAccess.prFamilie().ele50CrossReferenceIDKind(); 
 				return new Solution(obj);
 			}
 		}
@@ -1177,9 +1177,9 @@ protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele610CrossReferenceEStringKind().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFamilie().ele610CrossReferenceIDKind().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele610CrossReferenceEStringKind(); 
+				element = grammarAccess.prFamilie().ele610CrossReferenceIDKind(); 
 				return new Solution(obj);
 			}
 		}

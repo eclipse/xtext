@@ -93,7 +93,7 @@ ruleSpielplatz returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -113,7 +113,7 @@ ruleSpielplatz returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -137,7 +137,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_kinder_4=ruleKind 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -159,7 +159,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_erzieher_5=ruleErwachsener 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -181,7 +181,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_spielzeuge_6=ruleSpielzeug 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -203,7 +203,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_familie_7=ruleFamilie 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -225,7 +225,7 @@ ruleSpielplatz returns [EObject current=null]
 	    lv_types_8=ruleCustomTypeParserRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -281,7 +281,7 @@ ruleKind returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prKind().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prKind().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -301,7 +301,7 @@ ruleKind returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prKind().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prKind().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -354,7 +354,7 @@ ruleErwachsener returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prErwachsener().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -374,7 +374,7 @@ ruleErwachsener returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prErwachsener().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prErwachsener().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -427,7 +427,7 @@ ruleSpielzeug returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -447,7 +447,7 @@ ruleSpielzeug returns [EObject current=null]
 	    lv_farbe_3=ruleFarbe 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -513,7 +513,7 @@ ruleFamilie returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -529,13 +529,13 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele30CrossReferenceEStringErwachsener(), "mutter"); 
+		createLeafNode(grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener(), "mutter"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -545,13 +545,13 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele40CrossReferenceEStringErwachsener(), "vater"); 
+		createLeafNode(grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener(), "vater"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -561,13 +561,13 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele50CrossReferenceEStringKind(), "kinder"); 
+		createLeafNode(grammarAccess.prFamilie().ele50CrossReferenceIDKind(), "kinder"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -581,13 +581,13 @@ ruleFamilie returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFamilie().ele610CrossReferenceEStringKind(), "kinder"); 
+		createLeafNode(grammarAccess.prFamilie().ele610CrossReferenceIDKind(), "kinder"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -646,7 +646,7 @@ ruleFarbe returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFarbe().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFarbe().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -691,7 +691,7 @@ ruleCustomTypeParserRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prCustomTypeParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prCustomTypeParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

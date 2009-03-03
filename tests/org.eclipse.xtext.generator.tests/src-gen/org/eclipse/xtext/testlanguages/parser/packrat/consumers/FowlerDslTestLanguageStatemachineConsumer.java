@@ -238,7 +238,7 @@ public final class FowlerDslTestLanguageStatemachineConsumer extends NonTerminal
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setCommandConsumer(INonTerminalConsumer commandConsumer) {

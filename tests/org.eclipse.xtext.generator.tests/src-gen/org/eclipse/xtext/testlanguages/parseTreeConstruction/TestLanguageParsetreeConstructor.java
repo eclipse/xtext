@@ -22,11 +22,11 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prEntryRule().getRule().getType().getType()) && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prChoiceRule().getRule().getType().getType()) && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prReducibleRule().getRule().getType().getType()) && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getType()) && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEntryRule().getRule().getType().getClassifier()) && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getClassifier()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prChoiceRule().getRule().getType().getClassifier()) && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prReducibleRule().getRule().getType().getClassifier()) && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getClassifier()) && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -57,7 +57,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getClassifier())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -117,7 +117,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ChoiceRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prChoiceRule().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prChoiceRule().getRule().getType().getClassifier())) return null;
 		return new ChoiceRule_Group(current, this).firstSolution();
 	}
 }
@@ -137,7 +137,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ReducibleRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prReducibleRule().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prReducibleRule().getRule().getType().getClassifier())) return null;
 		return new ReducibleRule_Group(current, this).firstSolution();
 	}
 }
@@ -323,7 +323,7 @@ protected class ReducibleRule_1_RuleCall_TerminalRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalRule_Assignment_stringFeature.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getClassifier())) return null;
 		return new TerminalRule_Assignment_stringFeature(current, this).firstSolution();
 	}
 }
@@ -372,7 +372,7 @@ protected class ReducibleRule_2_0_Action_ReducibleComposite_actionFeature extend
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature().getType().getClassifier())) return null;
 		Object val = current.getConsumable("actionFeature", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("actionFeature")) return null;
@@ -399,7 +399,7 @@ protected class ReducibleRule_2_1_Assignment_actionFeature extends AssignmentTok
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTerminalRule().getRule().getType().getClassifier())) {
 				Solution s = new TerminalRule_Assignment_stringFeature(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

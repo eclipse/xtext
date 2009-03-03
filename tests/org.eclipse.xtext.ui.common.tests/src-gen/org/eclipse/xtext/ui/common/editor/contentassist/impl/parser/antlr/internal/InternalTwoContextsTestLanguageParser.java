@@ -137,7 +137,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prMainModel().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prMainModel().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -237,7 +237,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prAnElement().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -270,13 +270,13 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prAnElement().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement273); 
 
-                    		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceEStringAnElement(), "referred"); 
+                    		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceIDAnElement(), "referred"); 
                     	
 
                     }

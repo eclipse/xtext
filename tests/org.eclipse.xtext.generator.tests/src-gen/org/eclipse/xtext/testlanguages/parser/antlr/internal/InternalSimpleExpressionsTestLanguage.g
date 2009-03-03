@@ -95,7 +95,7 @@ ruleSequence returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.prSequence().ele10ActionSequenceexpressions().getTypeName().getType());
+        temp=factory.create(grammarAccess.prSequence().ele10ActionSequenceexpressions().getType().getClassifier());
         try {
         	factory.add(temp, "expressions", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -118,7 +118,7 @@ ruleSequence returns [EObject current=null]
 	    lv_expressions_2=ruleAddition 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSequence().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSequence().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -166,7 +166,7 @@ ruleAddition returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.prAddition().ele10ActionOpvalues().getTypeName().getType());
+        temp=factory.create(grammarAccess.prAddition().ele10ActionOpvalues().getType().getClassifier());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -197,7 +197,7 @@ ruleAddition returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAddition().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAddition().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -217,7 +217,7 @@ ruleAddition returns [EObject current=null]
 	    lv_values_3=ruleMultiplication 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAddition().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAddition().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -265,7 +265,7 @@ ruleMultiplication returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.prMultiplication().ele10ActionOpvalues().getTypeName().getType());
+        temp=factory.create(grammarAccess.prMultiplication().ele10ActionOpvalues().getType().getClassifier());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -296,7 +296,7 @@ ruleMultiplication returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prMultiplication().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prMultiplication().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -316,7 +316,7 @@ ruleMultiplication returns [EObject current=null]
 	    lv_values_3=ruleTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prMultiplication().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prMultiplication().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -406,7 +406,7 @@ ruleAtom returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAtom().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAtom().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

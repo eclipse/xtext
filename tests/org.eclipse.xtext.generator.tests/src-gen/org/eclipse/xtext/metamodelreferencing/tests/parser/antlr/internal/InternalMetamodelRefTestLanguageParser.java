@@ -127,7 +127,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -164,7 +164,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -257,13 +257,13 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prNameRef().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prNameRef().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNameRef264); 
 
-            		createLeafNode(grammarAccess.prNameRef().ele0CrossReferenceEStringParserRule(), "rule"); 
+            		createLeafNode(grammarAccess.prNameRef().ele0CrossReferenceIDParserRule(), "rule"); 
             	
 
             }

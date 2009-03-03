@@ -115,7 +115,7 @@ public final class HiddenTerminalsTestLanguageDatatypeHiddensConsumer extends No
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setDatatypeRuleConsumer(INonTerminalConsumer datatypeRuleConsumer) {

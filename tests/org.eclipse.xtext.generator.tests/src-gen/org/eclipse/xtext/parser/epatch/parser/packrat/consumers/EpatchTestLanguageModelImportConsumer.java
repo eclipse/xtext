@@ -96,7 +96,7 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setEPackageImportConsumer(INonTerminalConsumer ePackageImportConsumer) {

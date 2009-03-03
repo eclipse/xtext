@@ -157,17 +157,17 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 		getAbstractChildrenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$4$Delimiter);
 		getAbstractChildrenConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
 		getAbstractChildrenConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
-		getFirstConcreteConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getFirstConcreteConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
 		getFirstConcreteConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$4$Delimiter);
 		getFirstConcreteConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
-		getFirstConcreteConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
-		getSecondConcreteConsumer().setCrossReference$9$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getFirstConcreteConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
+		getFirstConcreteConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getSecondConcreteConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
 		getSecondConcreteConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$4$Delimiter);
 		getSecondConcreteConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$4$Delimiter);
 		getSecondConcreteConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
-		getSecondConcreteConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
+		getSecondConcreteConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.keyword$7$Delimiter);
+		getSecondConcreteConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getNamedConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.PartialParserTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	

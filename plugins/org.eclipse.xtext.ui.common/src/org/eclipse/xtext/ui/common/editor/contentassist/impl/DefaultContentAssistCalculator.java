@@ -119,7 +119,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 	public List<AbstractElement> caseGroup(Group group) {
 		List<AbstractElement> elementList = new ArrayList<AbstractElement>();
 		boolean includeNext = true;
-		for (Iterator<AbstractElement> iterator = group.getAbstractTokens().iterator(); iterator.hasNext()
+		for (Iterator<AbstractElement> iterator = group.getTokens().iterator(); iterator.hasNext()
 				&& includeNext;) {
 			AbstractElement groupElement = iterator.next();
 			addWithNullCheck(elementList, doSwitch(groupElement));
@@ -199,8 +199,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 
 		if ((groupElement instanceof Group || groupElement instanceof Alternatives) && !GrammarUtil.isOptionalCardinality(groupElement)) {
 
-			EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement)
-					.getAbstractTokens() : ((Alternatives) groupElement).getGroups();
+			EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement).getTokens() : ((Alternatives) groupElement).getGroups();
 
 			for (Iterator<AbstractElement> iterator = abstractTokens.iterator(); isOptional && iterator.hasNext();) {
 				AbstractElement abstractElement = iterator.next();

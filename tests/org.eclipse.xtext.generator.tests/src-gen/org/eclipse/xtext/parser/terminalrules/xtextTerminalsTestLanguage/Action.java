@@ -14,7 +14,7 @@ package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action#getOperator <em>Operator</em>}</li>
  * </ul>
@@ -27,30 +27,30 @@ package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
 public interface Action extends AbstractElement
 {
   /**
-   * Returns the value of the '<em><b>Type Name</b></em>' containment reference.
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type Name</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Name</em>' containment reference.
-   * @see #setTypeName(TypeRef)
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getAction_TypeName()
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(TypeRef)
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getAction_Type()
    * @model containment="true"
    * @generated
    */
-  TypeRef getTypeName();
+  TypeRef getType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action#getTypeName <em>Type Name</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type Name</em>' containment reference.
-   * @see #getTypeName()
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
    * @generated
    */
-  void setTypeName(TypeRef value);
+  void setType(TypeRef value);
 
   /**
    * Returns the value of the '<em><b>Feature</b></em>' attribute.

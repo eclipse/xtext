@@ -133,7 +133,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -180,7 +180,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -212,7 +212,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prSomeContainer().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -346,7 +346,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prNested().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prNested().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -600,7 +600,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prChildren().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prChildren().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -645,7 +645,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prChildren().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prChildren().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -770,7 +770,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prChild().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prChild().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -895,7 +895,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prAbstractChildren().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prAbstractChildren().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1171,7 +1171,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFirstConcrete().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prFirstConcrete().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1198,13 +1198,13 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prFirstConcrete().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prFirstConcrete().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFirstConcrete1256); 
 
-                    		createLeafNode(grammarAccess.prFirstConcrete().ele40CrossReferenceEStringSomeContainer(), "referencedContainer"); 
+                    		createLeafNode(grammarAccess.prFirstConcrete().ele40CrossReferenceIDSomeContainer(), "referencedContainer"); 
                     	
 
                     }
@@ -1318,7 +1318,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSecondConcrete().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prSecondConcrete().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1345,13 +1345,13 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prSecondConcrete().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSecondConcrete().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSecondConcrete1433); 
 
-                    		createLeafNode(grammarAccess.prSecondConcrete().ele50CrossReferenceEStringChild(), "referencedChildren"); 
+                    		createLeafNode(grammarAccess.prSecondConcrete().ele50CrossReferenceIDChild(), "referencedChildren"); 
                     	
 
                     }
@@ -1443,7 +1443,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prNamed().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prNamed().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

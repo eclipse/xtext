@@ -52,8 +52,6 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$11$Consumer;
 
-	private ISequenceMatcher crossReference$11$Delimiter;
-
 	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
@@ -61,6 +59,8 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	private ICharacterClass keyword$9$Delimiter;
 
 	private ISequenceMatcher ruleCall$4$Delimiter;
+
+	private ISequenceMatcher ruleCall$13$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -195,17 +195,17 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "opposite", false, false, getElement(), getCrossReference$11$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "opposite", false, false, getElement(), getRuleCall$13$Delimiter(), optional);
 		}
 	}
 
 	public DomainmodelReferenceConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -230,7 +230,7 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 		group$8$Consumer = new Group$8$Consumer(rule.ele4Group());
 		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele40KeywordOpposite());
 		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele41AssignmentOpposite());
-		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.ele410CrossReferenceEStringReference());
+		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.ele410CrossReferenceIDReference());
 	}
 	
 	@Override
@@ -240,7 +240,7 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
@@ -249,14 +249,6 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	
 	public void setTypeRefConsumer(INonTerminalConsumer typeRefConsumer) {
 		this.typeRefConsumer = typeRefConsumer;
-	}
-	
-	public ISequenceMatcher getCrossReference$11$Delimiter() {
-		return crossReference$11$Delimiter;
-	}
-	
-	public void setCrossReference$11$Delimiter(ISequenceMatcher matcher) {
-		crossReference$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {
@@ -289,6 +281,14 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	
 	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$13$Delimiter() {
+		return ruleCall$13$Delimiter;
+	}
+	
+	public void setRuleCall$13$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$13$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

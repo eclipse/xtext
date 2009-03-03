@@ -22,7 +22,7 @@ public class LowerCaseNamedTestLanguageParsetreeConstructor extends AbstractPars
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	

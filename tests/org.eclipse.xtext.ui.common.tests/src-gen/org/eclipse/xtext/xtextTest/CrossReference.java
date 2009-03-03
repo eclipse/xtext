@@ -15,7 +15,7 @@ package org.eclipse.xtext.xtextTest;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.CrossReference#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtextTest.CrossReference#getRule <em>Rule</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.CrossReference#getTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,29 +52,29 @@ public interface CrossReference extends AbstractElement
   void setType(TypeRef value);
 
   /**
-   * Returns the value of the '<em><b>Rule</b></em>' reference.
+   * Returns the value of the '<em><b>Terminal</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Rule</em>' reference isn't clear,
+   * If the meaning of the '<em>Terminal</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Rule</em>' reference.
-   * @see #setRule(AbstractRule)
-   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getCrossReference_Rule()
-   * @model
+   * @return the value of the '<em>Terminal</em>' containment reference.
+   * @see #setTerminal(AbstractElement)
+   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getCrossReference_Terminal()
+   * @model containment="true"
    * @generated
    */
-  AbstractRule getRule();
+  AbstractElement getTerminal();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.xtextTest.CrossReference#getRule <em>Rule</em>}' reference.
+   * Sets the value of the '{@link org.eclipse.xtext.xtextTest.CrossReference#getTerminal <em>Terminal</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Rule</em>' reference.
-   * @see #getRule()
+   * @param value the new value of the '<em>Terminal</em>' containment reference.
+   * @see #getTerminal()
    * @generated
    */
-  void setRule(AbstractRule value);
+  void setTerminal(AbstractElement value);
 
 } // CrossReference

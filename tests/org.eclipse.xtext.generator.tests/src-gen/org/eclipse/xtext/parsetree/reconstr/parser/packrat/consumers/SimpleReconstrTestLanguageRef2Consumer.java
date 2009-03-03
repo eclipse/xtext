@@ -175,7 +175,7 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {

@@ -40,7 +40,8 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
 		private final Keyword c10KeywordRefersTo = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentReferred = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceEStringAnElement = (CrossReference)c11AssignmentReferred.eContents().get(0);
+		private final CrossReference c110CrossReferenceIDAnElement = (CrossReference)c11AssignmentReferred.eContents().get(0);
+		private final RuleCall c1101TerminalRuleCallID = (RuleCall)c110CrossReferenceIDAnElement.eContents().get(1);
 		private final Keyword c2KeywordSemicolon = (Keyword)cGroup.eContents().get(2);
 		
 		// not supported
@@ -65,7 +66,10 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentReferred() { return c11AssignmentReferred; }
 
 		// not supported
-		public CrossReference ele110CrossReferenceEStringAnElement() { return c110CrossReferenceEStringAnElement; }
+		public CrossReference ele110CrossReferenceIDAnElement() { return c110CrossReferenceIDAnElement; }
+
+		// not supported
+		public RuleCall ele1101TerminalRuleCallID() { return c1101TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele2KeywordSemicolon() { return c2KeywordSemicolon; }

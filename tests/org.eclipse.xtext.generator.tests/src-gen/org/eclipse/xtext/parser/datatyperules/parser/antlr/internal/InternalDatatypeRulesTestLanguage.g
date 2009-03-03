@@ -89,7 +89,7 @@ ruleCompositeModel returns [EObject current=null]
 	    lv_model_0=ruleModel 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prCompositeModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prCompositeModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -131,7 +131,7 @@ ruleModel returns [EObject current=null]
 	    lv_id_0=ruleNestedModelId 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -156,7 +156,7 @@ ruleModel returns [EObject current=null]
 	    lv_value_2=ruleFraction 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -181,7 +181,7 @@ ruleModel returns [EObject current=null]
 	    lv_vector_4=ruleVector 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -206,7 +206,7 @@ ruleModel returns [EObject current=null]
 	    lv_dots_6=ruleDots 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        

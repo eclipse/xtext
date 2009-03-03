@@ -78,7 +78,7 @@ public final class TwoContextsTestLanguageMainModelConsumer extends NonTerminalC
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAnElementConsumer(INonTerminalConsumer anElementConsumer) {

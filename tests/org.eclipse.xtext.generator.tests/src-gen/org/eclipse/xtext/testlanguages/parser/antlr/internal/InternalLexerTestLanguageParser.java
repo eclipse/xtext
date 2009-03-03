@@ -137,7 +137,7 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -238,7 +238,7 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prElement().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -261,7 +261,7 @@ public class InternalLexerTestLanguageParser extends AbstractInternalAntlrParser
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prElement().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

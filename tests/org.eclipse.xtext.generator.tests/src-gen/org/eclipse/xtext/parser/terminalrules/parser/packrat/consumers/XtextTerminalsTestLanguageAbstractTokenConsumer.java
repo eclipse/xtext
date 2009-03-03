@@ -7,9 +7,6 @@ import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
@@ -17,7 +14,6 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 
 import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguageGrammarAccess.AbstractTokenElements;
 
@@ -25,62 +21,38 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 
 	private AbstractTokenElements rule;	
 
-	private INonTerminalConsumer abstractTerminalConsumer;
+	private INonTerminalConsumer abstractTokenWithCardinalityConsumer;
 
 	private INonTerminalConsumer actionConsumer;
 
-	private INonTerminalConsumer assignmentConsumer;
+	private IElementConsumer alternatives$1$Consumer;
 
-	private IElementConsumer group$1$Consumer;
-
-	private IElementConsumer alternatives$2$Consumer;
+	private IElementConsumer ruleCall$2$Consumer;
 
 	private IElementConsumer ruleCall$3$Consumer;
 
-	private IElementConsumer ruleCall$4$Consumer;
-
-	private IElementConsumer ruleCall$5$Consumer;
-
-	private IElementConsumer assignment$6$Consumer;
-
-	private IElementConsumer alternatives$7$Consumer;
-
-	private IElementConsumer keyword$8$Consumer;
-
-	private IElementConsumer keyword$9$Consumer;
-
-	private IElementConsumer keyword$10$Consumer;
-
-	private ICharacterClass keyword$8$Delimiter;
-
-	private ICharacterClass keyword$9$Delimiter;
-
-	private ICharacterClass keyword$10$Delimiter;
-
-	protected class Group$1$Consumer extends GroupConsumer {
+	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
-		protected Group$1$Consumer(final Group group) {
-			super(group);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(alternatives$2$Consumer);
-			acceptor.accept(assignment$6$Consumer);
-		}
-	}
-
-	protected class Alternatives$2$Consumer extends AlternativesConsumer {
-		
-		protected Alternatives$2$Consumer(final Alternatives alternatives) {
+		protected Alternatives$1$Consumer(final Alternatives alternatives) {
 			super(alternatives);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
-			acceptor.accept(ruleCall$4$Consumer);
-			acceptor.accept(ruleCall$5$Consumer);
+		}
+	}
+
+	protected class RuleCall$2$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$2$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(abstractTokenWithCardinalityConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -92,106 +64,17 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(assignmentConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
 			return consumeNonTerminal(actionConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(abstractTerminalConsumer, null, false, false, false, getElement(), optional);
-		}
-	}
-
-	protected class Assignment$6$Consumer extends OptionalAssignmentConsumer {
-		
-		protected Assignment$6$Consumer(final Assignment assignment) {
-			super(assignment);
-		}
-		
-		@Override
-		protected IElementConsumer getConsumer() {
-			return alternatives$7$Consumer;
-		}
-	}
-
-	protected class Alternatives$7$Consumer extends AlternativesConsumer {
-		
-		protected Alternatives$7$Consumer(final Alternatives alternatives) {
-			super(alternatives);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$8$Consumer);
-			acceptor.accept(keyword$9$Consumer);
-			acceptor.accept(keyword$10$Consumer);
-		}
-	}
-
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$8$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$8$Delimiter(), optional);
-		}
-	}
-
-	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$9$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$9$Delimiter(), optional);
-		}
-	}
-
-	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
-		
-		protected Keyword$10$Consumer(final Keyword keyword) {
-			super(keyword);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "cardinality", false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
 	public XtextTerminalsTestLanguageAbstractTokenConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
 	protected int doConsume() throws Exception {
-		return group$1$Consumer.consume();
+		return alternatives$1$Consumer.consume();
 	}
 
 	public AbstractTokenElements getRule() {
@@ -201,19 +84,9 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 	public void setRule(AbstractTokenElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.ele0Alternatives());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallAssignment());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallAction());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele02ParserRuleCallAbstractTerminal());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele1AssignmentCardinality());
-		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.ele10Alternatives());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele100KeywordQuestionMark());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele101KeywordAsterisk());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele102KeywordPlusSign());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele100KeywordQuestionMark());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele101KeywordAsterisk());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele102KeywordPlusSign());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractTokenWithCardinality());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallAction());
 	}
 	
 	@Override
@@ -223,43 +96,15 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setAbstractTerminalConsumer(INonTerminalConsumer abstractTerminalConsumer) {
-		this.abstractTerminalConsumer = abstractTerminalConsumer;
+	public void setAbstractTokenWithCardinalityConsumer(INonTerminalConsumer abstractTokenWithCardinalityConsumer) {
+		this.abstractTokenWithCardinalityConsumer = abstractTokenWithCardinalityConsumer;
 	}
 	
 	public void setActionConsumer(INonTerminalConsumer actionConsumer) {
 		this.actionConsumer = actionConsumer;
-	}
-	
-	public void setAssignmentConsumer(INonTerminalConsumer assignmentConsumer) {
-		this.assignmentConsumer = assignmentConsumer;
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
-	}
-	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$10$Delimiter() {
-		return keyword$10$Delimiter;
-	}
-	
-	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
-		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

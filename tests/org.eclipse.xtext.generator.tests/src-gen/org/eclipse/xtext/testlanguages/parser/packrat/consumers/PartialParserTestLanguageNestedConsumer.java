@@ -153,7 +153,7 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setSomeContainerConsumer(INonTerminalConsumer someContainerConsumer) {

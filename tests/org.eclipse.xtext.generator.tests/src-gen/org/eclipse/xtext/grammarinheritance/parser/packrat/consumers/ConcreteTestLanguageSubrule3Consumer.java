@@ -154,7 +154,7 @@ public final class ConcreteTestLanguageSubrule3Consumer extends NonTerminalConsu
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

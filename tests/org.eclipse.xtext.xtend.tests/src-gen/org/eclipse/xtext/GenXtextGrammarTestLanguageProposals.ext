@@ -121,32 +121,14 @@ List[ICompletionProposal] completeParserRule_Alternatives(Assignment assignment,
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeTerminalRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalRule_Name feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "TerminalRule_Name", contentAssistContext) };
-	 
-List[ICompletionProposal] completeTerminalRule_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalRule_Type feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
-List[ICompletionProposal] completeTerminalRule_Alternatives(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalRule_Alternatives feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
 List[ICompletionProposal] completeTypeRef_Metamodel(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeTypeRef_Metamodel feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 
-List[ICompletionProposal] completeTypeRef_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTypeRef_Type feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeTypeRef_Classifier(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTypeRef_Classifier feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
@@ -157,35 +139,47 @@ List[ICompletionProposal] completeAlternatives_Groups(Assignment assignment, ICo
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeTerminalAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalAlternatives_Groups feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeGroup_Tokens(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeGroup_Tokens feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeGroup_AbstractTokens(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeGroup_AbstractTokens feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeAbstractTokenWithCardinality_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAbstractTokenWithCardinality_Cardinality feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeTerminalGroup_AbstractTokens(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalGroup_AbstractTokens feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeAction_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAction_Type feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeAbstractToken_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeAbstractToken_Cardinality feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeAction_Feature(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAction_Feature feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "Action_Feature", contentAssistContext) };
+	 
+List[ICompletionProposal] completeAction_Operator(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAction_Operator feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeTerminalToken_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeTerminalToken_Cardinality feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeKeyword_Value(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeKeyword_Value feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
+	{ newProposal(assignment, "\"Keyword_Value\"", contentAssistContext) };
+	 
+List[ICompletionProposal] completeRuleCall_Rule(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeRuleCall_Rule feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 
 List[ICompletionProposal] completeAssignment_Feature(Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeAssignment_Feature feature '" + assignment.feature + "' terminal '"
@@ -205,20 +199,62 @@ List[ICompletionProposal] completeAssignment_Terminal(Assignment assignment, ICo
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeAction_TypeName(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeAction_TypeName feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeAssignableAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeAssignableAlternatives_Groups feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 
-List[ICompletionProposal] completeAction_Feature(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeAction_Feature feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeCrossReference_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeCrossReference_Type feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
-    { newProposal(assignment, "Action_Feature", contentAssistContext) };
+	{};
 	 
-List[ICompletionProposal] completeAction_Operator(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeAction_Operator feature '" + assignment.feature + "' terminal '"
+List[ICompletionProposal] completeCrossReference_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeCrossReference_Terminal feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeCrossReferenceableAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeCrossReferenceableAlternatives_Groups feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTerminalRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTerminalRule_Name feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "TerminalRule_Name", contentAssistContext) };
+	 
+List[ICompletionProposal] completeTerminalRule_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTerminalRule_Type feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTerminalRule_Alternatives(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTerminalRule_Alternatives feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTerminalAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTerminalAlternatives_Groups feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTerminalGroup_Tokens(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTerminalGroup_Tokens feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeTerminalToken_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeTerminalToken_Cardinality feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
@@ -240,30 +276,6 @@ List[ICompletionProposal] completeCharacterRange_Right(Assignment assignment, IC
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
-	 
-List[ICompletionProposal] completeCrossReference_Type(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeCrossReference_Type feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{};
-	 
-List[ICompletionProposal] completeCrossReference_Rule(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeCrossReference_Rule feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
-	 
-List[ICompletionProposal] completeKeyword_Value(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeKeyword_Value feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	{ newProposal(assignment, "\"Keyword_Value\"", contentAssistContext) };
-	 
-List[ICompletionProposal] completeRuleCall_Rule(Assignment assignment, IContentAssistContext contentAssistContext) :
-	debug("completeRuleCall_Rule feature '" + assignment.feature + "' terminal '"
-					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
-					+ contentAssistContext.matchString.trim() + "'") ->
-	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 	  
 List[ICompletionProposal] complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};

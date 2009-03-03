@@ -79,7 +79,7 @@ public class MetamodelRefTestLanguageParserConfiguration extends AbstractParserC
 		getMyRuleConsumer().setIdConsumer(getIdConsumer());
 
 		getFooConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
-		getNameRefConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getNameRefConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getMyRuleConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.metamodelreferencing.tests.parser.packrat.MetamodelRefTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	

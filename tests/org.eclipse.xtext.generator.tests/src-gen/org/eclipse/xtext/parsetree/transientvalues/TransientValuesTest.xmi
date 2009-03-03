@@ -6,57 +6,57 @@
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Root">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//Root"/>
+        <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//Root"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="test"/>
-        <abstractTokens xsi:type="xtext:Alternatives">
+        <tokens xsi:type="xtext:Keyword" value="test"/>
+        <tokens xsi:type="xtext:Alternatives">
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
           <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-        </abstractTokens>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TestRequired">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
+        <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="required"/>
-        <abstractTokens xsi:type="xtext:Assignment" feature="required1" operator="=">
+        <tokens xsi:type="xtext:Keyword" value="required"/>
+        <tokens xsi:type="xtext:Assignment" feature="required1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="required2" operator="=">
+        </tokens>
+        <tokens xsi:type="xtext:Assignment" feature="required2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </abstractTokens>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TestOptional">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
+        <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="optional"/>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="opt1" operator="=">
+        <tokens xsi:type="xtext:Keyword" value="optional"/>
+        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="opt1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Group" cardinality="?">
-          <abstractTokens xsi:type="xtext:Keyword" value=":"/>
-          <abstractTokens xsi:type="xtext:Assignment" feature="opt2" operator="=">
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" value=":"/>
+          <tokens xsi:type="xtext:Assignment" feature="opt2" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-          </abstractTokens>
-        </abstractTokens>
+          </tokens>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TestList">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
+        <classifier xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="list"/>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">
+        <tokens xsi:type="xtext:Keyword" value="list"/>
+        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </abstractTokens>
+        </tokens>
       </alternatives>
     </rules>
   </xtext:Grammar>
@@ -66,11 +66,11 @@
     </metamodelDeclarations>
     <rules xsi:type="xtext:TerminalRule" name="ID">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
-        <abstractTokens xsi:type="xtext:Alternatives">
+        <tokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+        <tokens xsi:type="xtext:Alternatives">
           <groups xsi:type="xtext:CharacterRange">
             <left value="a"/>
             <right value="z"/>
@@ -80,8 +80,8 @@
             <right value="Z"/>
           </groups>
           <groups xsi:type="xtext:Keyword" value="_"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+        </tokens>
+        <tokens xsi:type="xtext:Alternatives" cardinality="*">
           <groups xsi:type="xtext:CharacterRange">
             <left value="a"/>
             <right value="z"/>
@@ -95,12 +95,12 @@
             <left value="0"/>
             <right value="9"/>
           </groups>
-        </abstractTokens>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="INT">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </type>
       <alternatives xsi:type="xtext:CharacterRange" cardinality="+">
         <left value="0"/>
@@ -109,15 +109,15 @@
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="STRING">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Keyword" value="&quot;"/>
-          <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
+          <tokens xsi:type="xtext:Alternatives" cardinality="*">
             <groups xsi:type="xtext:Group">
-              <abstractTokens xsi:type="xtext:Keyword" value="\"/>
-              <abstractTokens xsi:type="xtext:Alternatives">
+              <tokens xsi:type="xtext:Keyword" value="\"/>
+              <tokens xsi:type="xtext:Alternatives">
                 <groups xsi:type="xtext:Keyword" value="b"/>
                 <groups xsi:type="xtext:Keyword" value="t"/>
                 <groups xsi:type="xtext:Keyword" value="n"/>
@@ -126,7 +126,7 @@
                 <groups xsi:type="xtext:Keyword" value="&quot;"/>
                 <groups xsi:type="xtext:Keyword" value="'"/>
                 <groups xsi:type="xtext:Keyword" value="\"/>
-              </abstractTokens>
+              </tokens>
             </groups>
             <groups xsi:type="xtext:NegatedToken">
               <terminal xsi:type="xtext:Alternatives">
@@ -134,15 +134,15 @@
                 <groups xsi:type="xtext:Keyword" value="&quot;"/>
               </terminal>
             </groups>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Keyword" value="&quot;"/>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
         </groups>
         <groups xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Keyword" value="'"/>
-          <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+          <tokens xsi:type="xtext:Keyword" value="'"/>
+          <tokens xsi:type="xtext:Alternatives" cardinality="*">
             <groups xsi:type="xtext:Group">
-              <abstractTokens xsi:type="xtext:Keyword" value="\"/>
-              <abstractTokens xsi:type="xtext:Alternatives">
+              <tokens xsi:type="xtext:Keyword" value="\"/>
+              <tokens xsi:type="xtext:Alternatives">
                 <groups xsi:type="xtext:Keyword" value="b"/>
                 <groups xsi:type="xtext:Keyword" value="t"/>
                 <groups xsi:type="xtext:Keyword" value="n"/>
@@ -151,7 +151,7 @@
                 <groups xsi:type="xtext:Keyword" value="&quot;"/>
                 <groups xsi:type="xtext:Keyword" value="'"/>
                 <groups xsi:type="xtext:Keyword" value="\"/>
-              </abstractTokens>
+              </tokens>
             </groups>
             <groups xsi:type="xtext:NegatedToken">
               <terminal xsi:type="xtext:Alternatives">
@@ -159,43 +159,43 @@
                 <groups xsi:type="xtext:Keyword" value="'"/>
               </terminal>
             </groups>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Keyword" value="'"/>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="'"/>
         </groups>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="/*"/>
-        <abstractTokens xsi:type="xtext:UntilToken">
+        <tokens xsi:type="xtext:Keyword" value="/*"/>
+        <tokens xsi:type="xtext:UntilToken">
           <terminal xsi:type="xtext:Keyword" value="*/"/>
-        </abstractTokens>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="//"/>
-        <abstractTokens xsi:type="xtext:NegatedToken" cardinality="*">
+        <tokens xsi:type="xtext:Keyword" value="//"/>
+        <tokens xsi:type="xtext:NegatedToken" cardinality="*">
           <terminal xsi:type="xtext:Alternatives">
             <groups xsi:type="xtext:Keyword" value="&#xA;"/>
             <groups xsi:type="xtext:Keyword" value="&#xD;"/>
           </terminal>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Group" cardinality="?">
-          <abstractTokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
-          <abstractTokens xsi:type="xtext:Keyword" value="&#xA;"/>
-        </abstractTokens>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+          <tokens xsi:type="xtext:Keyword" value="&#xA;"/>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="WS">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives" cardinality="+">
         <groups xsi:type="xtext:Keyword" value=" "/>
@@ -206,7 +206,7 @@
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">
       <type metamodel="/1/@metamodelDeclarations.0">
-        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Wildcard"/>
     </rules>

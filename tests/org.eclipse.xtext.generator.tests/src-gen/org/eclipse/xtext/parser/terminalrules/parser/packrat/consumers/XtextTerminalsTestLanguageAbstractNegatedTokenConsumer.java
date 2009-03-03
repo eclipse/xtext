@@ -96,7 +96,7 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setNegatedTokenConsumer(INonTerminalConsumer negatedTokenConsumer) {

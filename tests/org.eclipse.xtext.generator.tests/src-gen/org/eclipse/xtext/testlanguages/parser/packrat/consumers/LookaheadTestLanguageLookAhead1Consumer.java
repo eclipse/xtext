@@ -183,7 +183,7 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setLookAhead2Consumer(INonTerminalConsumer lookAhead2Consumer) {

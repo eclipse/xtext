@@ -22,8 +22,8 @@ public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTr
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prMainModel().getRule().getType().getType()) && (s = new MainModel_Assignment_elements(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAnElement().getRule().getType().getType()) && (s = new AnElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMainModel().getRule().getType().getClassifier()) && (s = new MainModel_Assignment_elements(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAnElement().getRule().getType().getClassifier()) && (s = new AnElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -54,7 +54,7 @@ protected class MainModel_Assignment_elements extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAnElement().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAnElement().getRule().getType().getClassifier())) {
 				Solution s = new AnElement_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -197,9 +197,9 @@ protected class AnElement_1_1_Assignment_referred extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("referred");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAnElement().ele110CrossReferenceEStringAnElement().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAnElement().ele110CrossReferenceIDAnElement().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prAnElement().ele110CrossReferenceEStringAnElement(); 
+				element = grammarAccess.prAnElement().ele110CrossReferenceIDAnElement(); 
 				return new Solution(obj);
 			}
 		}

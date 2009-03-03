@@ -140,17 +140,17 @@ public class ReferenceGrammarTestLanguageParserConfiguration extends AbstractPar
 		getFarbeConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFarbeConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFarbeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
-		getFamilieConsumer().setCrossReference$10$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getFamilieConsumer().setCrossReference$13$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getFamilieConsumer().setCrossReference$16$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
-		getFamilieConsumer().setCrossReference$21$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getFamilieConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
 		getFamilieConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getFamilieConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$4$Delimiter);
-		getFamilieConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
-		getFamilieConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
+		getFamilieConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
+		getFamilieConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.keyword$9$Delimiter);
 		getFamilieConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$6$Delimiter);
 		getFamilieConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getFamilieConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getFamilieConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getFamilieConsumer().setRuleCall$20$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getFamilieConsumer().setRuleCall$26$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ReferenceGrammarTestLanguageDelimiters.ruleCall$31$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

@@ -24,7 +24,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.impl.ActionImpl#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.impl.ActionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.ActionImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.ActionImpl#getOperator <em>Operator</em>}</li>
  * </ul>
@@ -35,14 +35,14 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
 public class ActionImpl extends AbstractElementImpl implements Action
 {
   /**
-   * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypeName()
+   * @see #getType()
    * @generated
    * @ordered
    */
-  protected TypeRef typeName;
+  protected TypeRef type;
 
   /**
    * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
@@ -110,9 +110,9 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getTypeName()
+  public TypeRef getType()
   {
-    return typeName;
+    return type;
   }
 
   /**
@@ -120,13 +120,13 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTypeName(TypeRef newTypeName, NotificationChain msgs)
+  public NotificationChain basicSetType(TypeRef newType, NotificationChain msgs)
   {
-    TypeRef oldTypeName = typeName;
-    typeName = newTypeName;
+    TypeRef oldType = type;
+    type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextTestPackage.ACTION__TYPE_NAME, oldTypeName, newTypeName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextTestPackage.ACTION__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -137,20 +137,20 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTypeName(TypeRef newTypeName)
+  public void setType(TypeRef newType)
   {
-    if (newTypeName != typeName)
+    if (newType != type)
     {
       NotificationChain msgs = null;
-      if (typeName != null)
-        msgs = ((InternalEObject)typeName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextTestPackage.ACTION__TYPE_NAME, null, msgs);
-      if (newTypeName != null)
-        msgs = ((InternalEObject)newTypeName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextTestPackage.ACTION__TYPE_NAME, null, msgs);
-      msgs = basicSetTypeName(newTypeName, msgs);
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextTestPackage.ACTION__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextTestPackage.ACTION__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextTestPackage.ACTION__TYPE_NAME, newTypeName, newTypeName));
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextTestPackage.ACTION__TYPE, newType, newType));
   }
 
   /**
@@ -209,8 +209,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextTestPackage.ACTION__TYPE_NAME:
-        return basicSetTypeName(null, msgs);
+      case XtextTestPackage.ACTION__TYPE:
+        return basicSetType(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -225,8 +225,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextTestPackage.ACTION__TYPE_NAME:
-        return getTypeName();
+      case XtextTestPackage.ACTION__TYPE:
+        return getType();
       case XtextTestPackage.ACTION__FEATURE:
         return getFeature();
       case XtextTestPackage.ACTION__OPERATOR:
@@ -245,8 +245,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextTestPackage.ACTION__TYPE_NAME:
-        setTypeName((TypeRef)newValue);
+      case XtextTestPackage.ACTION__TYPE:
+        setType((TypeRef)newValue);
         return;
       case XtextTestPackage.ACTION__FEATURE:
         setFeature((String)newValue);
@@ -268,8 +268,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextTestPackage.ACTION__TYPE_NAME:
-        setTypeName((TypeRef)null);
+      case XtextTestPackage.ACTION__TYPE:
+        setType((TypeRef)null);
         return;
       case XtextTestPackage.ACTION__FEATURE:
         setFeature(FEATURE_EDEFAULT);
@@ -291,8 +291,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextTestPackage.ACTION__TYPE_NAME:
-        return typeName != null;
+      case XtextTestPackage.ACTION__TYPE:
+        return type != null;
       case XtextTestPackage.ACTION__FEATURE:
         return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
       case XtextTestPackage.ACTION__OPERATOR:

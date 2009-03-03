@@ -22,13 +22,13 @@ public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prEntry().getRule().getType().getType()) && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAlts().getRule().getType().getType()) && (s = new Alts_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead0().getRule().getType().getType()) && (s = new LookAhead0_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead1().getRule().getType().getType()) && (s = new LookAhead1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead2().getRule().getType().getType()) && (s = new LookAhead2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead3().getRule().getType().getType()) && (s = new LookAhead3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead4().getRule().getType().getType()) && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEntry().getRule().getType().getClassifier()) && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAlts().getRule().getType().getClassifier()) && (s = new Alts_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLookAhead0().getRule().getType().getClassifier()) && (s = new LookAhead0_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLookAhead1().getRule().getType().getClassifier()) && (s = new LookAhead1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLookAhead2().getRule().getType().getClassifier()) && (s = new LookAhead2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLookAhead3().getRule().getType().getClassifier()) && (s = new LookAhead3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prLookAhead4().getRule().getType().getClassifier()) && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -59,7 +59,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAlts().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAlts().getRule().getType().getClassifier())) {
 				Solution s = new Alts_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -120,7 +120,7 @@ protected class Alts_0_RuleCall_LookAhead0 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead0_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prLookAhead0().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prLookAhead0().getRule().getType().getClassifier())) return null;
 		return new LookAhead0_Group(current, this).firstSolution();
 	}
 }
@@ -140,7 +140,7 @@ protected class Alts_1_RuleCall_LookAhead1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead1_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prLookAhead1().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prLookAhead1().getRule().getType().getClassifier())) return null;
 		return new LookAhead1_Group(current, this).firstSolution();
 	}
 }
@@ -160,7 +160,7 @@ protected class Alts_2_RuleCall_LookAhead3 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead3_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prLookAhead3().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prLookAhead3().getRule().getType().getClassifier())) return null;
 		return new LookAhead3_Group(current, this).firstSolution();
 	}
 }
@@ -325,7 +325,7 @@ protected class LookAhead1_1_Assignment_y extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLookAhead2().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prLookAhead2().getRule().getType().getClassifier())) {
 				Solution s = new LookAhead2_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -641,7 +641,7 @@ protected class LookAhead3_3_Assignment_z extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLookAhead4().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prLookAhead4().getRule().getType().getClassifier())) {
 				Solution s = new LookAhead4_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

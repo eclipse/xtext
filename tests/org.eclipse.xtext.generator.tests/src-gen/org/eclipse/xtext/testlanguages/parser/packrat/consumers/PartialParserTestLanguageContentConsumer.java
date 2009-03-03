@@ -96,7 +96,7 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAbstractChildrenConsumer(INonTerminalConsumer abstractChildrenConsumer) {

@@ -177,33 +177,6 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeTerminalRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalRule_Name feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "TerminalRule_Name", contentAssistContext));
-	}
-			
-	public List<? extends ICompletionProposal> completeTerminalRule_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalRule_Type feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeTerminalRule_Alternatives(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalRule_Alternatives feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
 	public List<? extends ICompletionProposal> completeTypeRef_Metamodel(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeTypeRef_Metamodel feature '" + assignment.getFeature() + "' terminal '"
@@ -213,9 +186,9 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
-	public List<? extends ICompletionProposal> completeTypeRef_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeTypeRef_Classifier(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTypeRef_Type feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeTypeRef_Classifier feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -231,49 +204,67 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeTerminalAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeGroup_Tokens(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalAlternatives_Groups feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeGroup_Tokens feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeGroup_AbstractTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeAbstractTokenWithCardinality_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeGroup_AbstractTokens feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeAbstractTokenWithCardinality_Cardinality feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeTerminalGroup_AbstractTokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeAction_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalGroup_AbstractTokens feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeAction_Type feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeAbstractToken_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeAction_Feature(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAbstractToken_Cardinality feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeAction_Feature feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "Action_Feature", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeAction_Operator(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeAction_Operator feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeTerminalToken_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeKeyword_Value(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTerminalToken_Cardinality feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeKeyword_Value feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.emptyList();
+		return Collections.singletonList(createCompletionProposal(assignment, "\"Keyword_Value\"", contentAssistContext));		
+	}
+			
+	public List<? extends ICompletionProposal> completeRuleCall_Rule(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeRuleCall_Rule feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
 	public List<? extends ICompletionProposal> completeAssignment_Feature(Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -303,27 +294,90 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeAction_TypeName(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeAssignableAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAction_TypeName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeAssignableAlternatives_Groups feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeAction_Feature(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeCrossReference_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAction_Feature feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeCrossReference_Type feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "Action_Feature", contentAssistContext));
+		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeAction_Operator(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeCrossReference_Terminal(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeAction_Operator feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeCrossReference_Terminal feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeCrossReferenceableAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeCrossReferenceableAlternatives_Groups feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeTerminalRule_Name(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRule_Name feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "TerminalRule_Name", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeTerminalRule_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRule_Type feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeTerminalRule_Alternatives(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalRule_Alternatives feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeTerminalAlternatives_Groups(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalAlternatives_Groups feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeTerminalGroup_Tokens(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalGroup_Tokens feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeTerminalToken_Cardinality(Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTerminalToken_Cardinality feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -356,42 +410,6 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		}
 		return Collections.emptyList();
 	}
-			
-	public List<? extends ICompletionProposal> completeCrossReference_Type(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeCrossReference_Type feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.emptyList();
-	}
-			
-	public List<? extends ICompletionProposal> completeCrossReference_Rule(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeCrossReference_Rule feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
-	}
-			
-	public List<? extends ICompletionProposal> completeKeyword_Value(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeKeyword_Value feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"Keyword_Value\"", contentAssistContext));		
-	}
-			
-	public List<? extends ICompletionProposal> completeRuleCall_Rule(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeRuleCall_Rule feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
-	}
     
 			
 	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
@@ -409,6 +427,13 @@ public class GenXtextGrammarTestLanguageProposals extends AbstractJavaProposalPr
 		}
 		return Collections.emptyList();
 	}
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			

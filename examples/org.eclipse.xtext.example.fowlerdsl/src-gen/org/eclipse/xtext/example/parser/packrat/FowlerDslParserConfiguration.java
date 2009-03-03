@@ -105,16 +105,16 @@ public class FowlerDslParserConfiguration extends AbstractParserConfiguration {
 		getEventConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
 		getCommandConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
 		getCommandConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
-		getStateConsumer().setCrossReference$9$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
 		getStateConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$4$Delimiter);
 		getStateConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$4$Delimiter);
 		getStateConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$38$Delimiter);
-		getStateConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$38$Delimiter);
-		getStateConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$4$Delimiter);
+		getStateConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$38$Delimiter);
+		getStateConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$4$Delimiter);
 		getStateConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
-		getTransitionConsumer().setCrossReference$3$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
-		getTransitionConsumer().setCrossReference$7$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
-		getTransitionConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$38$Delimiter);
+		getStateConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
+		getTransitionConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.keyword$38$Delimiter);
+		getTransitionConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
+		getTransitionConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.FowlerDslDelimiters.ruleCall$20$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

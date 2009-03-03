@@ -48,15 +48,13 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 
 	private IElementConsumer crossReference$9$Consumer;
 
-	private IElementConsumer keyword$11$Consumer;
+	private IElementConsumer keyword$12$Consumer;
 
-	private IElementConsumer assignment$12$Consumer;
+	private IElementConsumer assignment$13$Consumer;
 
-	private IElementConsumer ruleCall$13$Consumer;
+	private IElementConsumer ruleCall$14$Consumer;
 
-	private IElementConsumer keyword$14$Consumer;
-
-	private ISequenceMatcher crossReference$9$Delimiter;
+	private IElementConsumer keyword$15$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
@@ -64,11 +62,13 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 
 	private ICharacterClass keyword$7$Delimiter;
 
-	private ICharacterClass keyword$11$Delimiter;
+	private ICharacterClass keyword$12$Delimiter;
 
-	private ICharacterClass keyword$14$Delimiter;
+	private ICharacterClass keyword$15$Delimiter;
 
 	private ISequenceMatcher ruleCall$4$Delimiter;
+
+	private ISequenceMatcher ruleCall$11$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -81,8 +81,8 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(assignment$3$Consumer);
 			acceptor.accept(group$5$Consumer);
-			acceptor.accept(assignment$12$Consumer);
-			acceptor.accept(keyword$14$Consumer);
+			acceptor.accept(assignment$13$Consumer);
+			acceptor.accept(keyword$15$Consumer);
 		}
 	}
 
@@ -133,7 +133,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 			acceptor.accept(keyword$6$Consumer);
 			acceptor.accept(keyword$7$Consumer);
 			acceptor.accept(assignment$8$Consumer);
-			acceptor.accept(keyword$11$Consumer);
+			acceptor.accept(keyword$12$Consumer);
 		}
 	}
 
@@ -181,37 +181,37 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "actions", true, false, getElement(), getCrossReference$9$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "actions", true, false, getElement(), getRuleCall$11$Delimiter(), optional);
 		}
 	}
 
-	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$12$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$11$Consumer(final Keyword keyword) {
+		protected Keyword$12$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$12$Consumer extends LoopAssignmentConsumer {
+	protected class Assignment$13$Consumer extends LoopAssignmentConsumer {
 		
-		protected Assignment$12$Consumer(final Assignment assignment) {
+		protected Assignment$13$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$13$Consumer;
+			return ruleCall$14$Consumer;
 		}
 	}
 
-	protected class RuleCall$13$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$14$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$13$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$14$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -221,27 +221,27 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		}
 	}
 
-	protected class Keyword$14$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$15$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$14$Consumer(final Keyword keyword) {
+		protected Keyword$15$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$14$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$15$Delimiter(), optional);
 		}
 	}
 
 	public FowlerDslTestLanguageStateConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -264,11 +264,11 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordActions());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele21KeywordLeftCurlyBracket());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele22AssignmentActions());
-		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele220CrossReferenceEStringCommand());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele23KeywordRightCurlyBracket());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele3AssignmentTransitions());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele30ParserRuleCallTransition());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele4KeywordEnd());
+		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele220CrossReferenceIDCommand());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele23KeywordRightCurlyBracket());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele3AssignmentTransitions());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele30ParserRuleCallTransition());
+		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele4KeywordEnd());
 	}
 	
 	@Override
@@ -278,7 +278,7 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
@@ -287,14 +287,6 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	
 	public void setTransitionConsumer(INonTerminalConsumer transitionConsumer) {
 		this.transitionConsumer = transitionConsumer;
-	}
-	
-	public ISequenceMatcher getCrossReference$9$Delimiter() {
-		return crossReference$9$Delimiter;
-	}
-	
-	public void setCrossReference$9$Delimiter(ISequenceMatcher matcher) {
-		crossReference$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {
@@ -321,20 +313,20 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
+	public ICharacterClass getKeyword$12$Delimiter() {
+		return keyword$12$Delimiter;
 	}
 	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
+		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$14$Delimiter() {
-		return keyword$14$Delimiter;
+	public ICharacterClass getKeyword$15$Delimiter() {
+		return keyword$15$Delimiter;
 	}
 	
-	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
-		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$15$Delimiter(ICharacterClass characterClass) {
+		keyword$15$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$4$Delimiter() {
@@ -343,6 +335,14 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	
 	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$11$Delimiter() {
+		return ruleCall$11$Delimiter;
+	}
+	
+	public void setRuleCall$11$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

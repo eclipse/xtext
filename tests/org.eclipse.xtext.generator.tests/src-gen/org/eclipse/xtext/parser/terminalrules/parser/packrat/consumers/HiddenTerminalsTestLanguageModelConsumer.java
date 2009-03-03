@@ -150,7 +150,7 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setDatatypeHiddensConsumer(INonTerminalConsumer datatypeHiddensConsumer) {

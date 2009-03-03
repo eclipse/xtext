@@ -343,7 +343,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -378,7 +378,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -404,7 +404,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -509,7 +509,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prWithHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prWithHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -623,7 +623,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -651,7 +651,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -762,7 +762,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -788,7 +788,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -924,7 +924,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -956,7 +956,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -990,7 +990,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1094,7 +1094,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prDatatypeHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1286,7 +1286,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1311,7 +1311,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1413,7 +1413,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prInheritingHiddensCall().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

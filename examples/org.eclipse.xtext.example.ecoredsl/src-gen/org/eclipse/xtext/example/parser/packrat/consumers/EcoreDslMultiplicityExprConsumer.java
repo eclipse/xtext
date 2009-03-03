@@ -117,7 +117,7 @@ public final class EcoreDslMultiplicityExprConsumer extends NonTerminalConsumer 
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

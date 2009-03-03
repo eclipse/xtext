@@ -10,6 +10,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
@@ -34,17 +35,17 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 
 	private IElementConsumer crossReference$4$Consumer;
 
-	private IElementConsumer keyword$6$Consumer;
+	private IElementConsumer keyword$7$Consumer;
 
-	private IElementConsumer assignment$7$Consumer;
+	private IElementConsumer assignment$8$Consumer;
 
-	private IElementConsumer crossReference$8$Consumer;
+	private IElementConsumer crossReference$9$Consumer;
 
-	private ISequenceMatcher crossReference$4$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 
-	private ISequenceMatcher crossReference$8$Delimiter;
+	private ISequenceMatcher ruleCall$6$Delimiter;
 
-	private ICharacterClass keyword$6$Delimiter;
+	private ISequenceMatcher ruleCall$11$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -55,7 +56,7 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(group$2$Consumer);
-			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(assignment$8$Consumer);
 		}
 	}
 
@@ -68,7 +69,7 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(assignment$3$Consumer);
-			acceptor.accept(keyword$6$Consumer);
+			acceptor.accept(keyword$7$Consumer);
 		}
 	}
 
@@ -92,51 +93,51 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "metamodel", false, false, getElement(), getCrossReference$4$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "metamodel", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
-	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$6$Consumer(final Keyword keyword) {
+		protected Keyword$7$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$7$Consumer extends AssignmentConsumer {
+	protected class Assignment$8$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$7$Consumer(final Assignment assignment) {
+		protected Assignment$8$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return crossReference$8$Consumer;
+			return crossReference$9$Consumer;
 		}
 	}
 
-	protected class CrossReference$8$Consumer extends ElementConsumer<CrossReference> {
+	protected class CrossReference$9$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected CrossReference$8$Consumer(final CrossReference crossReference) {
+		protected CrossReference$9$Consumer(final CrossReference crossReference) {
 			super(crossReference);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "type", false, false, getElement(), getCrossReference$8$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "classifier", false, false, getElement(), getRuleCall$11$Delimiter(), optional);
 		}
 	}
 
 	public XtextGrammarTestLanguageTypeRefConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		crossReference$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -154,10 +155,10 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		group$2$Consumer = new Group$2$Consumer(rule.ele0Group());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentMetamodel());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele000CrossReferenceEStringAbstractMetamodelDeclaration());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele01KeywordColonColon());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele1AssignmentType());
-		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele10CrossReferenceEStringEClassifier());
+		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele000CrossReferenceIDAbstractMetamodelDeclaration());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordColonColon());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele1AssignmentClassifier());
+		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele10CrossReferenceIDEClassifier());
 	}
 	
 	@Override
@@ -167,35 +168,35 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$4$Delimiter() {
-		return crossReference$4$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setCrossReference$4$Delimiter(ISequenceMatcher matcher) {
-		crossReference$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ISequenceMatcher getCrossReference$8$Delimiter() {
-		return crossReference$8$Delimiter;
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
 	}
 	
-	public void setCrossReference$8$Delimiter(ISequenceMatcher matcher) {
-		crossReference$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
+	public ISequenceMatcher getRuleCall$11$Delimiter() {
+		return ruleCall$11$Delimiter;
 	}
 	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$11$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

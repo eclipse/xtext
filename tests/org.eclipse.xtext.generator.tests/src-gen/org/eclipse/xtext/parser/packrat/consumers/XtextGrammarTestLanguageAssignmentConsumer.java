@@ -26,7 +26,7 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 
 	private AssignmentElements rule;	
 
-	private INonTerminalConsumer abstractTerminalConsumer;
+	private INonTerminalConsumer assignableTerminalConsumer;
 
 	private ITerminalConsumer idConsumer;
 
@@ -178,7 +178,7 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(abstractTerminalConsumer, "terminal", false, false, false, getElement(), optional);
+			return consumeNonTerminal(assignableTerminalConsumer, "terminal", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -214,7 +214,7 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele101KeywordEqualsSign());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele102KeywordQuestionMarkEqualsSign());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele2AssignmentTerminal());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele20ParserRuleCallAbstractTerminal());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele20ParserRuleCallAssignableTerminal());
 	}
 	
 	@Override
@@ -224,11 +224,11 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setAbstractTerminalConsumer(INonTerminalConsumer abstractTerminalConsumer) {
-		this.abstractTerminalConsumer = abstractTerminalConsumer;
+	public void setAssignableTerminalConsumer(INonTerminalConsumer assignableTerminalConsumer) {
+		this.assignableTerminalConsumer = assignableTerminalConsumer;
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

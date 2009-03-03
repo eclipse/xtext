@@ -133,7 +133,7 @@ public final class HiddenTerminalsTestLanguageWithHiddensConsumer extends NonTer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

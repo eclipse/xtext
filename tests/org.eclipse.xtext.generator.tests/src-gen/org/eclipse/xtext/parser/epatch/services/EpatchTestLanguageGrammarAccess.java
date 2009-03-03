@@ -401,18 +401,21 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Alternatives c2Alternatives = (Alternatives)cGroup.eContents().get(2);
 		private final Group c20Group = (Group)c2Alternatives.eContents().get(0);
 		private final Assignment c200AssignmentLeftRes = (Assignment)c20Group.eContents().get(0);
-		private final CrossReference c2000CrossReferenceEStringNamedResource = (CrossReference)c200AssignmentLeftRes.eContents().get(0);
+		private final CrossReference c2000CrossReferenceIDNamedResource = (CrossReference)c200AssignmentLeftRes.eContents().get(0);
+		private final RuleCall c20001TerminalRuleCallID = (RuleCall)c2000CrossReferenceIDNamedResource.eContents().get(1);
 		private final Assignment c201AssignmentLeftFrag = (Assignment)c20Group.eContents().get(1);
 		private final RuleCall c2010TerminalRuleCallFRAGMENT = (RuleCall)c201AssignmentLeftFrag.eContents().get(0);
 		private final Group c21Group = (Group)c2Alternatives.eContents().get(1);
 		private final Keyword c210KeywordLeft = (Keyword)c21Group.eContents().get(0);
 		private final Assignment c211AssignmentLeftRes = (Assignment)c21Group.eContents().get(1);
-		private final CrossReference c2110CrossReferenceEStringNamedResource = (CrossReference)c211AssignmentLeftRes.eContents().get(0);
+		private final CrossReference c2110CrossReferenceIDNamedResource = (CrossReference)c211AssignmentLeftRes.eContents().get(0);
+		private final RuleCall c21101TerminalRuleCallID = (RuleCall)c2110CrossReferenceIDNamedResource.eContents().get(1);
 		private final Assignment c212AssignmentLeftFrag = (Assignment)c21Group.eContents().get(2);
 		private final RuleCall c2120TerminalRuleCallFRAGMENT = (RuleCall)c212AssignmentLeftFrag.eContents().get(0);
 		private final Keyword c213KeywordRight = (Keyword)c21Group.eContents().get(3);
 		private final Assignment c214AssignmentRightRes = (Assignment)c21Group.eContents().get(4);
-		private final CrossReference c2140CrossReferenceEStringNamedResource = (CrossReference)c214AssignmentRightRes.eContents().get(0);
+		private final CrossReference c2140CrossReferenceIDNamedResource = (CrossReference)c214AssignmentRightRes.eContents().get(0);
+		private final RuleCall c21401TerminalRuleCallID = (RuleCall)c2140CrossReferenceIDNamedResource.eContents().get(1);
 		private final Assignment c215AssignmentRightFrag = (Assignment)c21Group.eContents().get(5);
 		private final RuleCall c2150TerminalRuleCallFRAGMENT = (RuleCall)c215AssignmentRightFrag.eContents().get(0);
 		private final Group c3Group = (Group)cGroup.eContents().get(3);
@@ -457,7 +460,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele200AssignmentLeftRes() { return c200AssignmentLeftRes; }
 
 		// not supported
-		public CrossReference ele2000CrossReferenceEStringNamedResource() { return c2000CrossReferenceEStringNamedResource; }
+		public CrossReference ele2000CrossReferenceIDNamedResource() { return c2000CrossReferenceIDNamedResource; }
+
+		// not supported
+		public RuleCall ele20001TerminalRuleCallID() { return c20001TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele201AssignmentLeftFrag() { return c201AssignmentLeftFrag; }
@@ -475,7 +481,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele211AssignmentLeftRes() { return c211AssignmentLeftRes; }
 
 		// not supported
-		public CrossReference ele2110CrossReferenceEStringNamedResource() { return c2110CrossReferenceEStringNamedResource; }
+		public CrossReference ele2110CrossReferenceIDNamedResource() { return c2110CrossReferenceIDNamedResource; }
+
+		// not supported
+		public RuleCall ele21101TerminalRuleCallID() { return c21101TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele212AssignmentLeftFrag() { return c212AssignmentLeftFrag; }
@@ -490,7 +499,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele214AssignmentRightRes() { return c214AssignmentRightRes; }
 
 		// not supported
-		public CrossReference ele2140CrossReferenceEStringNamedResource() { return c2140CrossReferenceEStringNamedResource; }
+		public CrossReference ele2140CrossReferenceIDNamedResource() { return c2140CrossReferenceIDNamedResource; }
+
+		// not supported
+		public RuleCall ele21401TerminalRuleCallID() { return c21401TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele215AssignmentRightFrag() { return c215AssignmentRightFrag; }
@@ -821,7 +833,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c00TerminalRuleCallSTRING = (RuleCall)c0AssignmentValue.eContents().get(0);
 		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
 		private final Assignment c10AssignmentRefObject = (Assignment)c1Group.eContents().get(0);
-		private final CrossReference c100CrossReferenceEStringNamedObject = (CrossReference)c10AssignmentRefObject.eContents().get(0);
+		private final CrossReference c100CrossReferenceIDNamedObject = (CrossReference)c10AssignmentRefObject.eContents().get(0);
+		private final RuleCall c1001TerminalRuleCallID = (RuleCall)c100CrossReferenceIDNamedObject.eContents().get(1);
 		private final Group c11Group = (Group)c1Group.eContents().get(1);
 		private final Keyword c110KeywordFullStop = (Keyword)c11Group.eContents().get(0);
 		private final Assignment c111AssignmentRefFeature = (Assignment)c11Group.eContents().get(1);
@@ -835,7 +848,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c20ParserRuleCallCreatedObject = (RuleCall)c2AssignmentNewObject.eContents().get(0);
 		private final Group c3Group = (Group)cAlternatives.eContents().get(3);
 		private final Assignment c30AssignmentImport = (Assignment)c3Group.eContents().get(0);
-		private final CrossReference c300CrossReferenceEStringImport = (CrossReference)c30AssignmentImport.eContents().get(0);
+		private final CrossReference c300CrossReferenceIDImport = (CrossReference)c30AssignmentImport.eContents().get(0);
+		private final RuleCall c3001TerminalRuleCallID = (RuleCall)c300CrossReferenceIDImport.eContents().get(1);
 		private final Assignment c31AssignmentImpFrag = (Assignment)c3Group.eContents().get(1);
 		private final RuleCall c310TerminalRuleCallFRAGMENT = (RuleCall)c31AssignmentImpFrag.eContents().get(0);
 		
@@ -858,7 +872,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele10AssignmentRefObject() { return c10AssignmentRefObject; }
 
 		// not supported
-		public CrossReference ele100CrossReferenceEStringNamedObject() { return c100CrossReferenceEStringNamedObject; }
+		public CrossReference ele100CrossReferenceIDNamedObject() { return c100CrossReferenceIDNamedObject; }
+
+		// not supported
+		public RuleCall ele1001TerminalRuleCallID() { return c1001TerminalRuleCallID; }
 
 		// not supported
 		public Group ele11Group() { return c11Group; }
@@ -900,7 +917,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele30AssignmentImport() { return c30AssignmentImport; }
 
 		// not supported
-		public CrossReference ele300CrossReferenceEStringImport() { return c300CrossReferenceEStringImport; }
+		public CrossReference ele300CrossReferenceIDImport() { return c300CrossReferenceIDImport; }
+
+		// not supported
+		public RuleCall ele3001TerminalRuleCallID() { return c3001TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele31AssignmentImpFrag() { return c31AssignmentImpFrag; }
@@ -925,7 +945,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c210TerminalRuleCallSTRING = (RuleCall)c21AssignmentValue.eContents().get(0);
 		private final Group c22Group = (Group)c2Alternatives.eContents().get(2);
 		private final Assignment c220AssignmentRefObject = (Assignment)c22Group.eContents().get(0);
-		private final CrossReference c2200CrossReferenceEStringNamedObject = (CrossReference)c220AssignmentRefObject.eContents().get(0);
+		private final CrossReference c2200CrossReferenceIDNamedObject = (CrossReference)c220AssignmentRefObject.eContents().get(0);
+		private final RuleCall c22001TerminalRuleCallID = (RuleCall)c2200CrossReferenceIDNamedObject.eContents().get(1);
 		private final Group c221Group = (Group)c22Group.eContents().get(1);
 		private final Keyword c2210KeywordFullStop = (Keyword)c221Group.eContents().get(0);
 		private final Assignment c2211AssignmentRefFeature = (Assignment)c221Group.eContents().get(1);
@@ -939,7 +960,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c230ParserRuleCallCreatedObject = (RuleCall)c23AssignmentNewObject.eContents().get(0);
 		private final Group c24Group = (Group)c2Alternatives.eContents().get(4);
 		private final Assignment c240AssignmentImport = (Assignment)c24Group.eContents().get(0);
-		private final CrossReference c2400CrossReferenceEStringImport = (CrossReference)c240AssignmentImport.eContents().get(0);
+		private final CrossReference c2400CrossReferenceIDImport = (CrossReference)c240AssignmentImport.eContents().get(0);
+		private final RuleCall c24001TerminalRuleCallID = (RuleCall)c2400CrossReferenceIDImport.eContents().get(1);
 		private final Assignment c241AssignmentImpFrag = (Assignment)c24Group.eContents().get(1);
 		private final RuleCall c2410TerminalRuleCallFRAGMENT = (RuleCall)c241AssignmentImpFrag.eContents().get(0);
 		
@@ -989,7 +1011,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele220AssignmentRefObject() { return c220AssignmentRefObject; }
 
 		// not supported
-		public CrossReference ele2200CrossReferenceEStringNamedObject() { return c2200CrossReferenceEStringNamedObject; }
+		public CrossReference ele2200CrossReferenceIDNamedObject() { return c2200CrossReferenceIDNamedObject; }
+
+		// not supported
+		public RuleCall ele22001TerminalRuleCallID() { return c22001TerminalRuleCallID; }
 
 		// not supported
 		public Group ele221Group() { return c221Group; }
@@ -1031,7 +1056,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele240AssignmentImport() { return c240AssignmentImport; }
 
 		// not supported
-		public CrossReference ele2400CrossReferenceEStringImport() { return c2400CrossReferenceEStringImport; }
+		public CrossReference ele2400CrossReferenceIDImport() { return c2400CrossReferenceIDImport; }
+
+		// not supported
+		public RuleCall ele24001TerminalRuleCallID() { return c24001TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele241AssignmentImpFrag() { return c241AssignmentImpFrag; }
@@ -1049,7 +1077,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c10TerminalRuleCallSTRING = (RuleCall)c1AssignmentValue.eContents().get(0);
 		private final Group c2Group = (Group)cAlternatives.eContents().get(2);
 		private final Assignment c20AssignmentRefObject = (Assignment)c2Group.eContents().get(0);
-		private final CrossReference c200CrossReferenceEStringNamedObject = (CrossReference)c20AssignmentRefObject.eContents().get(0);
+		private final CrossReference c200CrossReferenceIDNamedObject = (CrossReference)c20AssignmentRefObject.eContents().get(0);
+		private final RuleCall c2001TerminalRuleCallID = (RuleCall)c200CrossReferenceIDNamedObject.eContents().get(1);
 		private final Group c21Group = (Group)c2Group.eContents().get(1);
 		private final Keyword c210KeywordFullStop = (Keyword)c21Group.eContents().get(0);
 		private final Assignment c211AssignmentRefFeature = (Assignment)c21Group.eContents().get(1);
@@ -1063,7 +1092,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c30ParserRuleCallCreatedObject = (RuleCall)c3AssignmentNewObject.eContents().get(0);
 		private final Group c4Group = (Group)cAlternatives.eContents().get(4);
 		private final Assignment c40AssignmentImport = (Assignment)c4Group.eContents().get(0);
-		private final CrossReference c400CrossReferenceEStringImport = (CrossReference)c40AssignmentImport.eContents().get(0);
+		private final CrossReference c400CrossReferenceIDImport = (CrossReference)c40AssignmentImport.eContents().get(0);
+		private final RuleCall c4001TerminalRuleCallID = (RuleCall)c400CrossReferenceIDImport.eContents().get(1);
 		private final Assignment c41AssignmentImpFrag = (Assignment)c4Group.eContents().get(1);
 		private final RuleCall c410TerminalRuleCallFRAGMENT = (RuleCall)c41AssignmentImpFrag.eContents().get(0);
 		
@@ -1092,7 +1122,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele20AssignmentRefObject() { return c20AssignmentRefObject; }
 
 		// not supported
-		public CrossReference ele200CrossReferenceEStringNamedObject() { return c200CrossReferenceEStringNamedObject; }
+		public CrossReference ele200CrossReferenceIDNamedObject() { return c200CrossReferenceIDNamedObject; }
+
+		// not supported
+		public RuleCall ele2001TerminalRuleCallID() { return c2001TerminalRuleCallID; }
 
 		// not supported
 		public Group ele21Group() { return c21Group; }
@@ -1134,7 +1167,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele40AssignmentImport() { return c40AssignmentImport; }
 
 		// not supported
-		public CrossReference ele400CrossReferenceEStringImport() { return c400CrossReferenceEStringImport; }
+		public CrossReference ele400CrossReferenceIDImport() { return c400CrossReferenceIDImport; }
+
+		// not supported
+		public RuleCall ele4001TerminalRuleCallID() { return c4001TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele41AssignmentImpFrag() { return c41AssignmentImpFrag; }
@@ -1219,7 +1255,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordNew = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentImport = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceEStringImport = (CrossReference)c1AssignmentImport.eContents().get(0);
+		private final CrossReference c10CrossReferenceIDImport = (CrossReference)c1AssignmentImport.eContents().get(0);
+		private final RuleCall c101TerminalRuleCallID = (RuleCall)c10CrossReferenceIDImport.eContents().get(1);
 		private final Assignment c2AssignmentImpFrag = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall c20TerminalRuleCallFRAGMENT = (RuleCall)c2AssignmentImpFrag.eContents().get(0);
 		
@@ -1236,7 +1273,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentImport() { return c1AssignmentImport; }
 
 		// not supported
-		public CrossReference ele10CrossReferenceEStringImport() { return c10CrossReferenceEStringImport; }
+		public CrossReference ele10CrossReferenceIDImport() { return c10CrossReferenceIDImport; }
+
+		// not supported
+		public RuleCall ele101TerminalRuleCallID() { return c101TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele2AssignmentImpFrag() { return c2AssignmentImpFrag; }
@@ -1250,7 +1290,8 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordCopy = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentResource = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference c10CrossReferenceEStringNamedResource = (CrossReference)c1AssignmentResource.eContents().get(0);
+		private final CrossReference c10CrossReferenceIDNamedResource = (CrossReference)c1AssignmentResource.eContents().get(0);
+		private final RuleCall c101TerminalRuleCallID = (RuleCall)c10CrossReferenceIDNamedResource.eContents().get(1);
 		private final Assignment c2AssignmentFragment = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall c20TerminalRuleCallFRAGMENT = (RuleCall)c2AssignmentFragment.eContents().get(0);
 		
@@ -1267,7 +1308,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentResource() { return c1AssignmentResource; }
 
 		// not supported
-		public CrossReference ele10CrossReferenceEStringNamedResource() { return c10CrossReferenceEStringNamedResource; }
+		public CrossReference ele10CrossReferenceIDNamedResource() { return c10CrossReferenceIDNamedResource; }
+
+		// not supported
+		public RuleCall ele101TerminalRuleCallID() { return c101TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele2AssignmentFragment() { return c2AssignmentFragment; }

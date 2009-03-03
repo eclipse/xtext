@@ -127,7 +127,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -164,7 +164,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFoo().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -264,7 +264,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prNameRef().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prNameRef().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

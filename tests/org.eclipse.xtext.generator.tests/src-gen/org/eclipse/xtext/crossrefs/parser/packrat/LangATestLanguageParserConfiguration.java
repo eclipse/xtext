@@ -80,10 +80,10 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 
 		getImportConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.keyword$11$Delimiter);
 		getImportConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.ruleCall$13$Delimiter);
-		getTypeConsumer().setCrossReference$7$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
 		getTypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
+		getTypeConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.crossrefs.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

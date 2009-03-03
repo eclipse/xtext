@@ -247,15 +247,19 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final RuleCall c201TerminalRuleCallSTRING = (RuleCall)c20Alternatives.eContents().get(1);
 		private final RuleCall c202TerminalRuleCallID = (RuleCall)c20Alternatives.eContents().get(2);
 		private final Assignment c3AssignmentMutter = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference c30CrossReferenceEStringErwachsener = (CrossReference)c3AssignmentMutter.eContents().get(0);
+		private final CrossReference c30CrossReferenceIDErwachsener = (CrossReference)c3AssignmentMutter.eContents().get(0);
+		private final RuleCall c301TerminalRuleCallID = (RuleCall)c30CrossReferenceIDErwachsener.eContents().get(1);
 		private final Assignment c4AssignmentVater = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference c40CrossReferenceEStringErwachsener = (CrossReference)c4AssignmentVater.eContents().get(0);
+		private final CrossReference c40CrossReferenceIDErwachsener = (CrossReference)c4AssignmentVater.eContents().get(0);
+		private final RuleCall c401TerminalRuleCallID = (RuleCall)c40CrossReferenceIDErwachsener.eContents().get(1);
 		private final Assignment c5AssignmentKinder = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference c50CrossReferenceEStringKind = (CrossReference)c5AssignmentKinder.eContents().get(0);
+		private final CrossReference c50CrossReferenceIDKind = (CrossReference)c5AssignmentKinder.eContents().get(0);
+		private final RuleCall c501TerminalRuleCallID = (RuleCall)c50CrossReferenceIDKind.eContents().get(1);
 		private final Group c6Group = (Group)cGroup.eContents().get(6);
 		private final Keyword c60KeywordComma = (Keyword)c6Group.eContents().get(0);
 		private final Assignment c61AssignmentKinder = (Assignment)c6Group.eContents().get(1);
-		private final CrossReference c610CrossReferenceEStringKind = (CrossReference)c61AssignmentKinder.eContents().get(0);
+		private final CrossReference c610CrossReferenceIDKind = (CrossReference)c61AssignmentKinder.eContents().get(0);
+		private final RuleCall c6101TerminalRuleCallID = (RuleCall)c610CrossReferenceIDKind.eContents().get(1);
 		private final Keyword c7KeywordRightParenthesis = (Keyword)cGroup.eContents().get(7);
 		
 		// not supported
@@ -289,19 +293,28 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele3AssignmentMutter() { return c3AssignmentMutter; }
 
 		// not supported
-		public CrossReference ele30CrossReferenceEStringErwachsener() { return c30CrossReferenceEStringErwachsener; }
+		public CrossReference ele30CrossReferenceIDErwachsener() { return c30CrossReferenceIDErwachsener; }
+
+		// not supported
+		public RuleCall ele301TerminalRuleCallID() { return c301TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele4AssignmentVater() { return c4AssignmentVater; }
 
 		// not supported
-		public CrossReference ele40CrossReferenceEStringErwachsener() { return c40CrossReferenceEStringErwachsener; }
+		public CrossReference ele40CrossReferenceIDErwachsener() { return c40CrossReferenceIDErwachsener; }
+
+		// not supported
+		public RuleCall ele401TerminalRuleCallID() { return c401TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele5AssignmentKinder() { return c5AssignmentKinder; }
 
 		// not supported
-		public CrossReference ele50CrossReferenceEStringKind() { return c50CrossReferenceEStringKind; }
+		public CrossReference ele50CrossReferenceIDKind() { return c50CrossReferenceIDKind; }
+
+		// not supported
+		public RuleCall ele501TerminalRuleCallID() { return c501TerminalRuleCallID; }
 
 		// not supported
 		public Group ele6Group() { return c6Group; }
@@ -313,7 +326,10 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		public Assignment ele61AssignmentKinder() { return c61AssignmentKinder; }
 
 		// not supported
-		public CrossReference ele610CrossReferenceEStringKind() { return c610CrossReferenceEStringKind; }
+		public CrossReference ele610CrossReferenceIDKind() { return c610CrossReferenceIDKind; }
+
+		// not supported
+		public RuleCall ele6101TerminalRuleCallID() { return c6101TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele7KeywordRightParenthesis() { return c7KeywordRightParenthesis; }

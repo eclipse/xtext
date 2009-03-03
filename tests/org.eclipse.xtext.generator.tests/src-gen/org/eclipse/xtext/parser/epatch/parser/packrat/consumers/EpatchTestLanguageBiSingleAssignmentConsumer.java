@@ -221,7 +221,7 @@ public final class EpatchTestLanguageBiSingleAssignmentConsumer extends NonTermi
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

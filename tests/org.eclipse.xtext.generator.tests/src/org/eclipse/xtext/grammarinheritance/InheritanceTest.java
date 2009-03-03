@@ -47,7 +47,7 @@ public class InheritanceTest extends AbstractGeneratorTest {
 		assertNotNull("rule", rule);
 		TypeRef ref = rule.getType();
 		assertNotNull("ref", ref);
-		final EClass clazz = (EClass) ref.getType();
+		final EClass clazz = (EClass) ref.getClassifier();
 		assertNotNull("class", clazz);
 		assertEquals("AType2", clazz.getName());
 		assertEquals(2, clazz.getESuperTypes().size());

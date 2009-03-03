@@ -133,7 +133,7 @@ public final class FormatterTestLanguageRootConsumer extends NonTerminalConsumer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTestIndentationConsumer(INonTerminalConsumer testIndentationConsumer) {

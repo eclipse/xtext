@@ -81,7 +81,7 @@ public final class MultiGenMMTestLanguageNameRefConsumer extends NonTerminalCons
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {

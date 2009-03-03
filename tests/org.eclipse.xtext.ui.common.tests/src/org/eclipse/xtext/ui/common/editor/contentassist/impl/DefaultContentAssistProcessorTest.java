@@ -233,12 +233,11 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
      */
     public void testCompleteAssignmentWithBacktracking() throws Exception {
     	newBuilder(getXtextGrammarSetup())
-                    .appendNl("grammar foo")
+                    .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
                     .appendNl("generate foo \"foo\"")
                     .append("MyRule : 'foo' name").assertText(
                                     "*", "+", "+=", ";", "=", "?", "?="
                     );
-
     }
 
     public void testKeywordWithBackslashes() throws Exception {

@@ -31,7 +31,7 @@ public class Inheritance2Test extends AbstractXtextTests {
 
 	public void testReturnTypes_01() {
 		ParserRule rule = grammarAccess.prModel().getRule();
-		EClassifier classifier = rule.getType().getType();
+		EClassifier classifier = rule.getType().getClassifier();
 		assertEquals("Model", classifier.getName());
 		EPackage pack = classifier.getEPackage();
 		assertNotNull(pack);
@@ -45,7 +45,7 @@ public class Inheritance2Test extends AbstractXtextTests {
 
 	public void testReturnTypes_02() {
 		ParserRule rule = grammarAccess.prElement().getRule();
-		EClassifier classifier = rule.getType().getType();
+		EClassifier classifier = rule.getType().getClassifier();
 		assertEquals("Element", classifier.getName());
 		EPackage pack = classifier.getEPackage();
 		assertNotNull(pack);

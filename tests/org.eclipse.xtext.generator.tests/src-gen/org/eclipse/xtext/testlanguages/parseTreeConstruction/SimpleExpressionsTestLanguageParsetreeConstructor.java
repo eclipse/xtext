@@ -22,12 +22,12 @@ public class SimpleExpressionsTestLanguageParsetreeConstructor extends AbstractP
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prSequence().getRule().getType().getType()) && (s = new Sequence_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType()) && (s = new Addition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getType()) && (s = new Multiplication_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getType()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSequence().getRule().getType().getClassifier()) && (s = new Sequence_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAddition().getRule().getType().getClassifier()) && (s = new Addition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getClassifier()) && (s = new Multiplication_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getClassifier()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getClassifier()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -84,7 +84,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAddition().getRule().getType().getClassifier())) return null;
 		return new Addition_Group(current, this).firstSolution();
 	}
 }
@@ -133,7 +133,7 @@ protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prSequence().ele10ActionSequenceexpressions().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prSequence().ele10ActionSequenceexpressions().getType().getClassifier())) return null;
 		Object val = current.getConsumable("expressions", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("expressions")) return null;
@@ -160,7 +160,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAddition().getRule().getType().getClassifier())) {
 				Solution s = new Addition_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -231,7 +231,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Multiplication_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getClassifier())) return null;
 		return new Multiplication_Group(current, this).firstSolution();
 	}
 }
@@ -284,7 +284,7 @@ protected class Addition_1_0_Action_Op_values extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prAddition().ele10ActionOpvalues().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAddition().ele10ActionOpvalues().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -345,7 +345,7 @@ protected class Addition_1_2_Assignment_values extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prMultiplication().getRule().getType().getClassifier())) {
 				Solution s = new Multiplication_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -416,7 +416,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) return null;
 		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
@@ -469,7 +469,7 @@ protected class Multiplication_1_0_Action_Op_values extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prMultiplication().ele10ActionOpvalues().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prMultiplication().ele10ActionOpvalues().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -530,7 +530,7 @@ protected class Multiplication_1_2_Assignment_values extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -592,7 +592,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getClassifier())) return null;
 		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -612,7 +612,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getClassifier())) return null;
 		return new Parens_Group(current, this).firstSolution();
 	}
 }
@@ -724,7 +724,7 @@ protected class Parens_1_RuleCall_Addition extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Addition_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prAddition().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAddition().getRule().getType().getClassifier())) return null;
 		return new Addition_Group(current, this).firstSolution();
 	}
 }

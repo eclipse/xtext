@@ -75,7 +75,8 @@ public class LangATestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		private final Keyword c2KeywordExtends = (Keyword)cGroup.eContents().get(2);
 		private final Assignment c3AssignmentExtends = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference c30CrossReferenceEStringType = (CrossReference)c3AssignmentExtends.eContents().get(0);
+		private final CrossReference c30CrossReferenceIDType = (CrossReference)c3AssignmentExtends.eContents().get(0);
+		private final RuleCall c301TerminalRuleCallID = (RuleCall)c30CrossReferenceIDType.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -99,7 +100,10 @@ public class LangATestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele3AssignmentExtends() { return c3AssignmentExtends; }
 
 		// not supported
-		public CrossReference ele30CrossReferenceEStringType() { return c30CrossReferenceEStringType; }
+		public CrossReference ele30CrossReferenceIDType() { return c30CrossReferenceIDType; }
+
+		// not supported
+		public RuleCall ele301TerminalRuleCallID() { return c301TerminalRuleCallID; }
 	}
 	
 	private MainElements pMain;
