@@ -95,10 +95,10 @@ boolean isQuestionMark(AbstractElement this):
 	isOptionalCardinality() && !isMultipleCardinality();
 	
 int indexInGroup(AbstractElement element, Group parent):
-    parent.abstractTokens.flattendGroupElements().indexOf(element);
+    parent.tokens.flattendGroupElements().indexOf(element);
     
 cached List[AbstractElement] flattendGroupElements(Group this):
-	if(!isOptionalCardinality() && !isMultipleCardinality()) then abstractTokens.flattendGroupElements() else this;
+	if(!isOptionalCardinality() && !isMultipleCardinality()) then tokens.flattendGroupElements() else this;
 
 List[AbstractElement] flattendGroupElements(AbstractElement this):
 	this;
@@ -114,9 +114,8 @@ List[AbstractElement] flattendAlternativesElements(AbstractElement this):
 	
 cached List[AbstractElement] allDelimited(AbstractRule this):
 	containedRuleCalls().select(e|e.rule.metaType==TerminalRule).
-		union(eAllContents.typeSelect(Keyword)).
-		union(eAllContents.typeSelect(CrossReference).select(e|e.rule.metaType==TerminalRule))
+		union(eAllContents.typeSelect(Keyword))
 	.toSet().sortBy(e|e.globalDelimiterFieldName());
 	
 cached List[AbstractRule] allCalledRules(AbstractRule this):
-	containedRuleCalls().rule.union(eAllContents.typeSelect(CrossReference).rule).toSet().sortBy(e|e.consumerFieldName());
+	containedRuleCalls().rule.toSet().sortBy(e|e.consumerFieldName());

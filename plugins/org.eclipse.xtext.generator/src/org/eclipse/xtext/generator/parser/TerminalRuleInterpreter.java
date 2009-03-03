@@ -106,7 +106,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		boolean result = false;
 		OUTER: do {
 			IMarker marker = markerFactory.mark();
-			for(AbstractElement element: object.getAbstractTokens()) {
+			for(AbstractElement element: object.getTokens()) {
 				if (!doSwitch(element)) {
 					marker.rollback();
 					break OUTER;

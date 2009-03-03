@@ -87,7 +87,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 
 «DEFINE defineConsume FOR Group-»
 «EXPAND defineConsumeDeclaration FOR this-»
-«EXPAND defineConsume(this) FOREACH abstractTokens-»
+«EXPAND defineConsume(this) FOREACH tokens-»
 «ENDDEFINE»
 
 «DEFINE defineConsume(Group parent) FOR AbstractElement-»
@@ -98,7 +98,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsume FOR this-»
 «ELSE-»
-«EXPAND defineConsume(this) FOREACH abstractTokens-»
+«EXPAND defineConsume(this) FOREACH tokens-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -207,7 +207,7 @@ public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalC
 «ENDDEFINE»
 
 «DEFINE defineConsumeBodyInternal FOR Group-»
-«FOREACH abstractTokens AS token-»
+«FOREACH tokens AS token-»
 «IF token.metaType == Group && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
 «EXPAND defineConsumeBodyInternal FOR (Group)token-»
 «ELSE-»

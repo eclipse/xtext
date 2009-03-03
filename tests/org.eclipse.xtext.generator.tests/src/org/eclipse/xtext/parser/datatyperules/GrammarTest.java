@@ -42,8 +42,8 @@ public class GrammarTest extends AbstractXtextTests {
 		ParserRule parserRule = (ParserRule) rule;
 		assertFalse(GrammarUtil.isDatatypeRule(parserRule));
 		assertNotNull(rule.getType());
-		assertNotNull(rule.getType().getType());
-		assertEquals("CompositeModel", rule.getType().getType().getName());
+		assertNotNull(rule.getType().getClassifier());
+		assertEquals("CompositeModel", rule.getType().getClassifier().getName());
 	}
 
 	public void testRuleModel() {
@@ -52,8 +52,8 @@ public class GrammarTest extends AbstractXtextTests {
 		ParserRule parserRule = (ParserRule) rule;
 		assertFalse(GrammarUtil.isDatatypeRule(parserRule));
 		assertNotNull(rule.getType());
-		assertNotNull(rule.getType().getType());
-		assertEquals("Model", rule.getType().getType().getName());
+		assertNotNull(rule.getType().getClassifier());
+		assertEquals("Model", rule.getType().getClassifier().getName());
 	}
 
 	public void testRuleModelId() {
@@ -62,8 +62,8 @@ public class GrammarTest extends AbstractXtextTests {
 		ParserRule parserRule = (ParserRule) rule;
 		assertTrue(GrammarUtil.isDatatypeRule(parserRule));
 		assertNotNull(rule.getType());
-		assertNotNull(rule.getType().getType());
-		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getType());
+		assertNotNull(rule.getType().getClassifier());
+		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
 	public void testRuleNestedModelId() {
@@ -72,8 +72,8 @@ public class GrammarTest extends AbstractXtextTests {
 		ParserRule parserRule = (ParserRule) rule;
 		assertTrue(GrammarUtil.isDatatypeRule(parserRule));
 		assertNotNull(rule.getType());
-		assertNotNull(rule.getType().getType());
-		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getType());
+		assertNotNull(rule.getType().getClassifier());
+		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
 	public void testRuleFraction() {
@@ -82,8 +82,8 @@ public class GrammarTest extends AbstractXtextTests {
 		ParserRule parserRule = (ParserRule) rule;
 		assertTrue(GrammarUtil.isDatatypeRule(parserRule));
 		assertNotNull(rule.getType());
-		assertNotNull(rule.getType().getType());
-		assertEquals(EcorePackage.Literals.EBIG_DECIMAL, rule.getType().getType());
+		assertNotNull(rule.getType().getClassifier());
+		assertEquals(EcorePackage.Literals.EBIG_DECIMAL, rule.getType().getClassifier());
 	}
 
 }

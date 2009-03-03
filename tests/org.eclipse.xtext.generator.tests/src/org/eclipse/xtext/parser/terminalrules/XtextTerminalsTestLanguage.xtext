@@ -41,54 +41,104 @@ ParserRule :
     ';'
 ;
 
-TerminalRule :
-	'terminal' name=ID ('returns' type=TypeRef)? ':'
-		alternatives=TerminalAlternatives
-	';'
-;
-
 TypeRef :
-	(metamodel=[AbstractMetamodelDeclaration] '::')? type=[EClassifier]
+	(metamodel=[AbstractMetamodelDeclaration] '::')? classifier=[EClassifier]
 ;
 
 Alternatives returns AbstractElement:
     Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
 ;
 
+Group returns AbstractElement:
+    AbstractToken ({Group.tokens+=current} (tokens+=AbstractToken)+)?
+;
+
+AbstractToken returns AbstractElement:
+	AbstractTokenWithCardinality |
+	Action
+;
+
+AbstractTokenWithCardinality returns AbstractElement:
+	(Assignment | 
+	 AbstractTerminal) (cardinality=('?'|'*'|'+'))?
+;
+
+Action returns Action:
+	'{' type=TypeRef ('.' feature=ID operator=('='|'+=') 'current')? '}'
+;
+
+AbstractTerminal returns AbstractElement: 
+   Keyword | RuleCall | ParenthesizedElement
+;
+
+Keyword : 
+   value=STRING 
+;
+
+RuleCall :
+   rule=[AbstractRule]
+;
+
+Assignment returns Assignment:
+   feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+;
+
+AssignableTerminal returns AbstractElement:
+   Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
+;
+
+ParenthesizedAssignableElement returns AbstractElement:
+   '(' AssignableAlternatives ')'
+;
+
+AssignableAlternatives returns AbstractElement:
+    AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
+;
+
+CrossReference :
+	'[' type=TypeRef ('|' ^terminal=CrossReferenceableTerminal )? ']'
+;
+
+CrossReferenceableTerminal returns AbstractElement:
+   Keyword | RuleCall | ParenthesizedCrossReferenceableElement
+;
+
+ParenthesizedCrossReferenceableElement returns AbstractElement:
+   '(' CrossReferenceableAlternatives ')'
+;
+
+CrossReferenceableAlternatives returns AbstractElement:
+    CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?
+;
+
+ParenthesizedElement returns AbstractElement:
+   '(' Alternatives ')'
+;
+
+TerminalRule :
+	'terminal' name=ID ('returns' type=TypeRef)? ':'
+		alternatives=TerminalAlternatives
+	';'
+;
+
 TerminalAlternatives returns AbstractElement:
 	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
 ;
 
-Group returns AbstractElement:
-    AbstractToken ({Group.abstractTokens+=current} (abstractTokens+=AbstractToken)+)?
-;
-
 TerminalGroup returns AbstractElement:
-	TerminalToken ({Group.abstractTokens+=current} (abstractTokens+=TerminalToken)+)?
-;
-
-AbstractToken returns AbstractElement:
-	(Assignment | 
-	 Action |
-	 AbstractTerminal) (cardinality=('?'|'*'|'+'))?
+	TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?
 ;
 
 TerminalToken returns AbstractElement:
 	TerminalTokenElement (cardinality=('?'|'*'|'+'))?
 ;
 
-Assignment returns Assignment:
-   feature=ID operator=('+='|'='|'?=') ^terminal=AbstractTerminal;
-
-Action returns Action:
-	'{' typeName=TypeRef ('.' feature=ID operator=('='|'+=') 'current')? '}';
-
-AbstractTerminal returns AbstractElement: 
-   Keyword | RuleCall | ParenthesizedElement | CrossReference
-;
-
 TerminalTokenElement returns AbstractElement: 
    CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+;
+
+ParenthesizedTerminalElement returns AbstractElement:
+   '(' TerminalAlternatives ')'
 ;
 
 AbstractNegatedToken:
@@ -109,26 +159,6 @@ Wildcard:
 
 CharacterRange returns AbstractElement:
 	Keyword ( {CharacterRange.left=current} '..' right=Keyword)?
-;
-
-CrossReference :
-	'[' type=TypeRef ('|' rule=[AbstractRule])? ']'
-;
-
-ParenthesizedElement returns AbstractElement:
-   '(' Alternatives ')'
-;
-
-ParenthesizedTerminalElement returns AbstractElement:
-   '(' TerminalAlternatives ')'
-;
-
-Keyword : 
-   value=STRING 
-;
-
-RuleCall :
-   rule=[AbstractRule]
 ;
 
 terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
