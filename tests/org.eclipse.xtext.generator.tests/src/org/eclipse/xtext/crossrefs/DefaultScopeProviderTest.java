@@ -74,6 +74,25 @@ public class DefaultScopeProviderTest extends AbstractGeneratorTest {
 		assertWithXtend("true", "types.first().extends.extends == types.first()", resource.getContents().get(0));
 	}
 	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=261630
+	 */
+	public void testBug261630_duplicateImports() throws Exception {
+		TestURIConverter models = new TestURIConverter();
+		ResourceSetImpl rs = new ResourceSetImpl();
+		rs.setURIConverter(models);
+		
+		models.addModel("foo.importuritestlanguage", "import 'bar.importuritestlanguage' import 'bar.importuritestlanguage' import 'bar.importuritestlanguage' type foo extends bar type bar extends bar2");
+		models.addModel("bar.importuritestlanguage", "type bar type bar2 extends bar");
+		
+		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
+		
+		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
+		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
+		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
+		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+	}
+	
 	
 	class TestURIConverter extends ExtensibleURIConverterImpl {
 		private Map<URI, InputStream> models = new HashMap<URI, InputStream>();
