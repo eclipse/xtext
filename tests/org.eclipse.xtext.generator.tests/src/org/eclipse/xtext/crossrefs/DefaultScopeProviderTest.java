@@ -43,7 +43,41 @@ public class DefaultScopeProviderTest extends AbstractGeneratorTest {
 		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
 	}
 	
-	public void testScope() throws Exception {
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266879
+	public void testRelativeScope() throws Exception {
+		TestURIConverter models = new TestURIConverter();
+		ResourceSetImpl rs = new ResourceSetImpl();
+		rs.setURIConverter(models);
+		
+		models.addModel("testfile://my/folder/foo.importuritestlanguage", "import 'bar.importuritestlanguage' type foo extends bar type bar extends bar2");
+		models.addModel("testfile://my/folder/bar.importuritestlanguage", "type bar type bar2 extends bar");
+		
+		Resource resource = rs.getResource(URI.createURI("testfile://my/folder/foo.importuritestlanguage"), true);
+		
+		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
+		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
+		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
+		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266879
+	public void testRelativeScopeWithPath() throws Exception {
+		TestURIConverter models = new TestURIConverter();
+		ResourceSetImpl rs = new ResourceSetImpl();
+		rs.setURIConverter(models);
+		models.addModel("testfile://my/folder/foo.importuritestlanguage", "import './../folder/bar.importuritestlanguage' type foo extends bar type bar extends bar2");
+		
+		models.addModel("testfile://my/folder/bar.importuritestlanguage", "type bar type bar2 extends bar");
+		
+		Resource resource = rs.getResource(URI.createURI("testfile://my/folder/foo.importuritestlanguage"), true);
+		
+		assertWithXtend("'bar'", "types.first().extends.name", resource.getContents().get(0));
+		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
+		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
+		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+	}
+	
+	public void testScopeFileName() throws Exception {
 		TestURIConverter models = new TestURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
@@ -58,6 +92,20 @@ public class DefaultScopeProviderTest extends AbstractGeneratorTest {
 		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
 		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
 	}
+	
+	// TODO: report a meaningful error to the user when resolving of an import fails
+	
+	/*
+	public void testUnresolvableImport() throws Exception {
+		TestURIConverter models = new TestURIConverter();
+		ResourceSetImpl rs = new ResourceSetImpl();
+		rs.setURIConverter(models);
+		
+		models.addModel("testfile://my/folder/foo.importuritestlanguage", "import <unknownfile.importuritestlanguage> type foo extends bar type bar extends bar2");
+		
+		Resource resource = rs.getResource(URI.createURI("testfile://my/folder/foo.importuritestlanguage"), true);
+	}
+	*/
 	
 	public void testCircularImport() throws Exception {
 		TestURIConverter models = new TestURIConverter();
