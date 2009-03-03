@@ -5,10 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.impl;
+package org.eclipse.emf.index.ecore.impl;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.index.EPackageDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -65,15 +65,4 @@ public class EPackageDescriptorImpl implements EPackageDescriptor {
 		return nsURI.hashCode();
 	}
 
-	public static class Factory implements EPackageDescriptor.Factory {
-
-		public EPackageDescriptor createDescriptor(EPackage ePackage, long indexingDate) {
-			return new EPackageDescriptorImpl(ePackage, indexingDate);
-		}
-
-		public boolean isFactoryFor(EPackage ePackage) {
-			return true;
-		}
-
-	}
 }

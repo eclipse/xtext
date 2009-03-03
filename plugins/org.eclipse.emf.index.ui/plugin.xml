@@ -8,7 +8,7 @@
       <builder
             hasNature="true">
          <run
-               class="org.eclipse.emf.index.ui.builder.EmfIndexBuilder">
+               class="org.eclipse.emf.index.ui.builder.EmfIndexProjectBuilder">
          </run>
       </builder>
    </extension>

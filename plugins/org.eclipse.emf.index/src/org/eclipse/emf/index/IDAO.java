@@ -24,5 +24,7 @@ public interface IDAO<T> {
 	void store(T element);
 
 	void delete(T element);
+	
+	void modify(T element, T newValues);
 
 }

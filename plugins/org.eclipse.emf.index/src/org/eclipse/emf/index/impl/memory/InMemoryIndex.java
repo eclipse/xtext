@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
 
-import org.eclipse.emf.index.IIndexFeeder;
 import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.EPackageDescriptor.DAO;
-import org.eclipse.emf.index.impl.IndexFeederImpl;
+import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -22,7 +20,6 @@ public class InMemoryIndex implements IIndexStore {
 	private EObjectDAOImpl eObjectDAO;
 	private ECrossReferenceDAOImpl eCrossReferenceDAO;
 	private EPackageDAOImpl ePackageDAO;
-	private IIndexFeeder indexFeeder;
 
 	public InMemoryIndex() {
 		eObjectDAO = new EObjectDAOImpl(this);
@@ -30,7 +27,6 @@ public class InMemoryIndex implements IIndexStore {
 		eCrossReferenceDAO = new ECrossReferenceDAOImpl(this);
 		resourceDAO = new ResourceDAOImpl(this);
 		ePackageDAO = new EPackageDAOImpl(this);
-		indexFeeder = new IndexFeederImpl(this);
 	}
 
 	public EClassDAOImpl eClassDAO() {
@@ -53,8 +49,4 @@ public class InMemoryIndex implements IIndexStore {
 		return ePackageDAO;
 	}
 	
-	public IIndexFeeder indexFeeder() {
-		return indexFeeder;
-	}
-
 }

@@ -57,6 +57,11 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 		sourceScope.remove(element);
 		targetScope.remove(element);
 	}
+	
+	@Override
+	public void modify(ECrossReferenceDescriptor element, ECrossReferenceDescriptor newValues) {
+		throw new UnsupportedOperationException();
+	}
 
 	public ECrossReferenceDescriptor.Query createQuery() {
 		return new CrossRefQuery();

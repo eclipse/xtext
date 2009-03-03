@@ -8,7 +8,6 @@
 package org.eclipse.emf.index.integration;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,17 +19,21 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.emf.index.EClassDescriptor;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.IIndexFeeder;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ECrossReferenceDescriptor.Query;
-import org.eclipse.emf.index.impl.IndexFeederImpl;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
+import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.memory.InMemoryIndex;
+import org.eclipse.emf.index.resource.EmfResourceChangeListenerRegistry;
+import org.eclipse.emf.index.resource.impl.DefaultEmfResourceChangeListenerImpl;
+import org.eclipse.emf.index.resource.impl.IndexBuilderImpl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -41,44 +44,50 @@ public class IntegrationTests extends TestCase {
 
 	protected IIndexStore index;
 
-	protected IIndexFeeder feeder;
+	protected EcoreIndexFeeder ecoreFeeder;
 
 	protected ResourceSet resourceSet;
+
+	private IndexBuilderImpl indexBuilder;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		index = new InMemoryIndex();
-		feeder = new IndexFeederImpl(index);
+		ecoreFeeder = new EcoreIndexFeederImpl(index);
+		indexBuilder = new IndexBuilderImpl(index);
 		resourceSet = new ResourceSetImpl();
+		EmfResourceChangeListenerRegistry.INSTANCE
+				.registerListener("ecore", new DefaultEmfResourceChangeListenerImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
 	}
 
 	public void testIntegration() throws Exception {
-		feeder.index(EcorePackage.eINSTANCE, true);
+		ecoreFeeder.index(EcorePackage.eINSTANCE, true);
 		indexExampleResource();
 		Collection<EObjectDescriptor> elementResult = index.eObjectDAO().createQuery().name("Entity")
 				.executeListResult();
 		assertNotNull(elementResult);
 		assertEquals(1, elementResult.size());
 		EObjectDescriptor elementDescriptor = elementResult.iterator().next();
-		EObject entityClass = resourceSet.getEObject(elementDescriptor.getFragmentURI(), false);
+		EObject entityClass = resourceSet.getEObject(elementDescriptor.getFragmentURI(), true);
 		assertNotNull(entityClass);
 		assertTrue(entityClass instanceof EClass);
 		assertEquals("Entity", ((EClass) entityClass).getName());
 
 		EClassDescriptor typeDescriptor = elementDescriptor.getEClassDescriptor();
 		assertNotNull(typeDescriptor);
-		Collection<org.eclipse.emf.index.EClassDescriptor> typeResult = index.eClassDAO().createQuery().name("EClass")
-				.executeListResult();
+		Collection<org.eclipse.emf.index.ecore.EClassDescriptor> typeResult = index.eClassDAO().createQuery().name(
+				"EClass").executeListResult();
 		assertNotNull(typeResult);
 		assertEquals(1, typeResult.size());
 		EClassDescriptor typeDescriptor0 = typeResult.iterator().next();
 		assertEquals(typeDescriptor, typeDescriptor0);
 		EClassDescriptor[] superClasses = typeDescriptor0.getSuperClasses();
 		assertNotNull(superClasses);
-		// four super classes: EClassifier, ENamedElement, EModelElement and EObject
+		// four super classes: EClassifier, ENamedElement, EModelElement and
+		// EObject
 		assertEquals(4, superClasses.length);
-		
 
 		Query crossRefQuery = index.eCrossReferenceDAO().createQuery();
 		crossRefQuery.target().name("Feature");
@@ -103,13 +112,7 @@ public class IntegrationTests extends TestCase {
 	}
 
 	private void indexExampleResource() throws IOException {
-		URI uri = URI.createFileURI("/" + TEST_MODEL);
-		XMIResourceImpl resource = new XMIResourceImpl();
-		InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(
-				TEST_MODEL);
-		resource.load(resourceAsStream, null);
-		resource.setURI(uri);
-		resourceSet.getResources().add(resource);
-		feeder.index(resource, true);
+		URI uri = URI.createFileURI("src/" + TEST_MODEL);
+		indexBuilder.resourceChanged(uri);
 	}
 }

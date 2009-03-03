@@ -12,7 +12,9 @@ import java.util.Collection;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.index.ecore.EPackageRegistryIndexFeeder;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
+import org.eclipse.emf.index.ecore.impl.EPackageRegistryIndexFeeder;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -21,7 +23,7 @@ public class EPackageRegistryTest extends TestCase {
 
 	public void testRegistry() throws Exception {
 		EcorePackage.eINSTANCE.eClass();
-		IIndexStore indexStore = IIndexStore.eINSTANCE;
+		IIndexStore indexStore = IIndexStore.INSTANCE;
 		EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(indexStore);
 		Collection<EPackageDescriptor> ePackageDescriptors = indexStore.ePackageDAO().createQueryEPackage(EcorePackage.eINSTANCE).executeListResult();
 		assertNotNull(ePackageDescriptors);

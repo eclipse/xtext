@@ -9,8 +9,8 @@ package org.eclipse.emf.index.dao;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

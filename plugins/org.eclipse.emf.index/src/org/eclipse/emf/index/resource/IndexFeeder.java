@@ -5,20 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.dao.memory;
+package org.eclipse.emf.index.resource;
 
-import org.eclipse.emf.index.dao.AbstractEPackageDAOTest;
-import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
-import org.eclipse.emf.index.impl.memory.EPackageDAOImpl;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EPackageDAOTest extends AbstractEPackageDAOTest {
-
-	@Override
-	protected DAO createEPackageDAO() {
-		return new EPackageDAOImpl(indexStore);
-	}
+public interface IndexFeeder {
+	void createResourceDescriptor(Resource resource, Map<String,String> userData);
 	
+	void createEObjectDescriptor(EObject object, String name, String displayName, Map<String,String> userData);
+	
+	void createECrossReferenceDescriptor(EObject owner, EReference eReference);
 }

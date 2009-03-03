@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
-import org.eclipse.emf.ecore.resource.Resource;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.index.ResourceDescriptor;
 
 /**
@@ -17,12 +20,15 @@ public class ResourceDescriptorImpl implements ResourceDescriptor {
 
 	protected long indexingDate;
 	protected String uri;
+	protected Map<String, String> userData;
 
-	protected ResourceDescriptorImpl(String uri, long indexingDate) {
+	public ResourceDescriptorImpl(String uri, long indexingDate, Map<String, String> userData) {
 		this.uri = uri;
-		this.indexingDate= indexingDate;
+		this.indexingDate = indexingDate;
+		if (userData != null)
+			this.userData = Collections.unmodifiableMap(userData);
 	}
-	
+
 	public long getIndexingDate() {
 		return indexingDate;
 	}
@@ -31,11 +37,19 @@ public class ResourceDescriptorImpl implements ResourceDescriptor {
 		return uri;
 	}
 
+	public Map<String, String> getUserData() {
+		return userData;
+	}
+
+	public String getUserData(String key) {
+		return (userData == null) ? null : userData.get(key);
+	}
+
 	@Override
 	public String toString() {
 		return uri;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof ResourceDescriptor) {
@@ -44,22 +58,17 @@ public class ResourceDescriptorImpl implements ResourceDescriptor {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return uri.hashCode();
 	}
-	
-	public static class Factory implements ResourceDescriptor.Factory {
 
-		public ResourceDescriptor createDescriptor(Resource resource, long indexingDate) {
-			return new ResourceDescriptorImpl(resource.getURI().toString(), indexingDate);
-		}
-
-		public boolean isFactoryFor(Resource resource) {
-			return resource.getURI() != null;
-		}
-		
+	public void copyDetails(ResourceDescriptor resourceDesc) {
+		if(resourceDesc.getUserData() != null) 
+			userData = Collections.unmodifiableMap(new HashMap<String, String>(resourceDesc.getUserData()));
+		else
+			userData = null;
 	}
-	
+
 }

@@ -12,10 +12,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.index.EClassDescriptor;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
 
 /**
@@ -47,6 +47,11 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		ePackageScope.remove(element);
 	}
 
+	@Override
+	public void modify(EClassDescriptor element, EClassDescriptor newValues) {
+		throw new UnsupportedOperationException();
+	}
+	
 	public EClassDescriptor.Query createQuery() {
 		return new EClassQuery();
 	}

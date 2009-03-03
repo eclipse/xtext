@@ -23,30 +23,24 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.resource.impl.IndexBuilderImpl;
 import org.eclipse.emf.index.ui.internal.EmfIndexUIPlugin;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EmfIndexBuilder extends IncrementalProjectBuilder {
+public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 
 	public static final String BUILDER_ID = "org.eclipse.emf.index.ui.emfIndexBuilder";
 
 	private static final String MARKER_TYPE = "org.eclipse.emf.index.ui.emfIndexProblem";
 
-	private IIndexStore index = IIndexStore.eINSTANCE;
+	private IIndexStore index = IIndexStore.INSTANCE;
+
+	private IndexBuilderImpl indexBuilder = new IndexBuilderImpl(index);
 
 	@SuppressWarnings("unchecked")
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
@@ -69,7 +63,7 @@ public class EmfIndexBuilder extends IncrementalProjectBuilder {
 		try {
 			getProject().accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) {
-					tryIndexResource(resource);
+					tryIndexResource(resource, false);
 					return resource instanceof IContainer;
 				}
 			});
@@ -85,10 +79,10 @@ public class EmfIndexBuilder extends IncrementalProjectBuilder {
 				switch (delta.getKind()) {
 					case IResourceDelta.ADDED:
 					case IResourceDelta.CHANGED:
-						tryIndexResource(resource);
+						tryIndexResource(resource, false);
 						break;
 					case IResourceDelta.REMOVED:
-						// TODO implement
+						tryIndexResource(resource, true);
 						break;
 				}
 				return resource instanceof IContainer;
@@ -96,7 +90,7 @@ public class EmfIndexBuilder extends IncrementalProjectBuilder {
 		});
 	}
 
-	protected boolean tryIndexResource(IResource resource) {
+	protected boolean tryIndexResource(IResource resource, boolean isDeleted) {
 		if (resource instanceof IFile) {
 			IFile file = (IFile) resource;
 			try {
@@ -106,31 +100,10 @@ public class EmfIndexBuilder extends IncrementalProjectBuilder {
 					URI resourceURI = URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 					Resource.Factory emfResourceFactory = Resource.Factory.Registry.INSTANCE.getFactory(resourceURI);
 					if (emfResourceFactory != null) {
-						// TODO remove dependency to xtext
-						IJavaProject javaProject = getJavaProject();
-						ResourceSet resourceSet = null;
-						if(javaProject.exists()) {
-							resourceSet = new XtextResourceSet();
-							((XtextResourceSet) resourceSet).setClasspathUriResolver(new JdtClasspathUriResolver());
-							((XtextResourceSet) resourceSet).setClasspathURIContext(javaProject);
-						} else {
-							resourceSet = new ResourceSetImpl();
-						}
-						Resource emfResource = resourceSet.getResource(resourceURI, true);
-						EList<EObject> contents = emfResource.getContents();
-						boolean isIndexAsInstance = true;
-						if (!contents.isEmpty() && contents.get(0) instanceof EPackage) {
-							isIndexAsInstance = false;
-							for (EObject eObject : contents) {
-								if (eObject instanceof EPackage)
-									index.indexFeeder().index((EPackage) eObject, true);
-								else
-									isIndexAsInstance = true;
-							}
-						}
-						if (isIndexAsInstance) {
-							index.indexFeeder().index(emfResource, false);
-						}
+						if (isDeleted)
+							indexBuilder.resourceChanged(resourceURI);
+						else
+							indexBuilder.resourceDeleted(resourceURI);
 						return true;
 					}
 				}
@@ -143,10 +116,6 @@ public class EmfIndexBuilder extends IncrementalProjectBuilder {
 			}
 		}
 		return false;
-	}
-
-	private IJavaProject getJavaProject() {
-		return JavaCore.create(getProject());
 	}
 
 	private void addMarker(IFile file, String message, int lineNumber, int severity) {

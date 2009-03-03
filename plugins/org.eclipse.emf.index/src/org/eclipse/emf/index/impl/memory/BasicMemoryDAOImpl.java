@@ -15,13 +15,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.index.IDAO;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.IIndexStore;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class BasicMemoryDAOImpl<T> {
+public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
 
 	protected Set<T> store;
 
@@ -39,6 +40,8 @@ public abstract class BasicMemoryDAOImpl<T> {
 	public void delete(T element) {
 		store.remove(element);
 	}
+	
+	public abstract void modify(T element, T newValues);
 
 	protected abstract class Query implements IGenericQuery<T> {
 

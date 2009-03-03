@@ -19,12 +19,13 @@ import java.util.Map.Entry;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
+import org.eclipse.emf.index.impl.EObjectDescriptorImpl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -69,6 +70,11 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 		eClassScope.remove(element);
 	}
 
+	@Override
+	public void modify(EObjectDescriptor element, EObjectDescriptor newValues) {
+		((EObjectDescriptorImpl) element).copyDetails(newValues);
+	}
+	
 	public EObjectDescriptor.Query createQuery() {
 		return new ElementQuery();
 	}

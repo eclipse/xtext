@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
+import org.eclipse.emf.index.impl.ResourceDescriptorImpl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -21,6 +22,11 @@ public class ResourceDAOImpl extends BasicMemoryDAOImpl<ResourceDescriptor> impl
 
 	public ResourceDAOImpl(IIndexStore indexStore) {
 		super(indexStore);
+	}
+	
+	@Override
+	public void modify(ResourceDescriptor element, ResourceDescriptor newValues) {
+		((ResourceDescriptorImpl) element).copyDetails(newValues);
 	}
 
 	public ResourceDescriptor.Query createQuery() {

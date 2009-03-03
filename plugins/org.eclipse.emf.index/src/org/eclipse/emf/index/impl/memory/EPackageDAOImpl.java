@@ -10,9 +10,9 @@ package org.eclipse.emf.index.impl.memory;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
 
 public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> implements EPackageDescriptor.DAO {
@@ -21,6 +21,11 @@ public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> impl
 		super(indexStore);
 	}
 
+	@Override
+	public void modify(EPackageDescriptor element, EPackageDescriptor newValues) {
+		throw new UnsupportedOperationException();
+	}
+	
 	public EPackageDescriptor.Query createQuery() {
 		return new EPackageQuery();
 	}

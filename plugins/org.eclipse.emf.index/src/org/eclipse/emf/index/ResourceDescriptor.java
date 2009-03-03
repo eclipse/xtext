@@ -8,6 +8,7 @@
 package org.eclipse.emf.index;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -17,12 +18,9 @@ import org.eclipse.emf.ecore.resource.Resource;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface ResourceDescriptor {
-	public interface Factory {
-		ResourceDescriptor createDescriptor(Resource resource, long indexingDate);
 	
-		boolean isFactoryFor(Resource resource);
-	}
-
+	static final long NEVER = Long.MIN_VALUE;
+	
 	public interface DAO extends IDAO<ResourceDescriptor>{
 		Query createQuery();
 		
@@ -40,4 +38,8 @@ public interface ResourceDescriptor {
 	String getURI();
 	
 	long getIndexingDate();
+	
+	Map<String, String> getUserData();
+	
+	String getUserData(String key);
 }

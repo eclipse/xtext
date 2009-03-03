@@ -19,15 +19,14 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IDAO;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexFeeder;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.mocks.MockDescriptors;
 
 /**
@@ -82,10 +81,6 @@ public abstract class AbstractDAOTest extends TestCase implements MockDescriptor
 		return null;
 	}
 
-	protected IIndexFeeder createIndexFeeder() {
-		return null;
-	}
-
 	protected IIndexStore indexStore;
 
 	@Override
@@ -102,8 +97,6 @@ public abstract class AbstractDAOTest extends TestCase implements MockDescriptor
 			protected EObjectDescriptor.DAO eObjectDAO;
 
 			protected ECrossReferenceDescriptor.DAO eCrossReferenceDAO;
-
-			protected IIndexFeeder indexFeeder;
 
 			public EPackageDescriptor.DAO ePackageDAO() {
 				if (ePackageDAO == null) {
@@ -140,12 +133,6 @@ public abstract class AbstractDAOTest extends TestCase implements MockDescriptor
 				return eCrossReferenceDAO;
 			}
 
-			public IIndexFeeder indexFeeder() {
-				if (indexFeeder == null) {
-					indexFeeder = createIndexFeeder();
-				}
-				return indexFeeder;
-			}
 		};
 	}
 

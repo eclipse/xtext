@@ -5,14 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.ecore;
+package org.eclipse.emf.index.ecore.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
+import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -27,6 +28,7 @@ public class EPackageRegistryIndexFeeder {
 	 * @param indexStore
 	 */
 	public static void feedEPackagesFromRegistry(IIndexStore indexStore) {
+		EcoreIndexFeeder indexFeeder = new EcoreIndexFeederImpl(indexStore);
 		for (boolean hasChanged = true; hasChanged;) {
 			List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
 			for (String nsURI : nsURIs) {
@@ -36,7 +38,7 @@ public class EPackageRegistryIndexFeeder {
 				if (storedEPackages == null) {
 					hasChanged = true;
 					EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
-					indexStore.indexFeeder().index(ePackage, true);
+					indexFeeder.index(ePackage, true);
 				}
 			}
 		}

@@ -5,20 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.dao.memory;
-
-import org.eclipse.emf.index.dao.AbstractEPackageDAOTest;
-import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
-import org.eclipse.emf.index.impl.memory.EPackageDAOImpl;
+package org.eclipse.emf.index.impl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EPackageDAOTest extends AbstractEPackageDAOTest {
+public class Logger {
 
-	@Override
-	protected DAO createEPackageDAO() {
-		return new EPackageDAOImpl(indexStore);
+	public static final void logError(String message, Throwable t) {
+		// TODO: Activator
+		System.err.println(message);
+		t.printStackTrace();
 	}
-	
+
+	public static final void logError(String message) {
+		// TODO: Activator
+		System.err.println(message);
+	}
 }

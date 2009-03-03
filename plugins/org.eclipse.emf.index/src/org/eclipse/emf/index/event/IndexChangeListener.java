@@ -5,20 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.dao.memory;
-
-import org.eclipse.emf.index.dao.AbstractEPackageDAOTest;
-import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
-import org.eclipse.emf.index.impl.memory.EPackageDAOImpl;
+package org.eclipse.emf.index.event;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EPackageDAOTest extends AbstractEPackageDAOTest {
+public interface IndexChangeListener {
 
-	@Override
-	protected DAO createEPackageDAO() {
-		return new EPackageDAOImpl(indexStore);
-	}
-	
+	void indexChanged(IndexChangeEvent event);
 }
