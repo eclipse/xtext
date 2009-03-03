@@ -13,7 +13,7 @@ public class PluginTestSuite {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("org.eclipse.xtext.generator.tests");
-		suite.addTestSuite(org.eclipse.xtext.EcoreUtil2Tests.class);
+		suite.addTestSuite(org.eclipse.xtext.EcoreUtil2Test.class);
 		suite.addTestSuite(org.eclipse.xtext.GrammarUtilTest.class);
 		suite.addTestSuite(org.eclipse.xtext.XtextGrammarTest.class);
 		suite.addTestSuite(org.eclipse.xtext.crossrefs.CrossRefTest.class);
