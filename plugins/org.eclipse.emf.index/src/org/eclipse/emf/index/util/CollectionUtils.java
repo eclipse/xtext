@@ -9,6 +9,8 @@ package org.eclipse.emf.index.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -50,4 +52,17 @@ public class CollectionUtils {
 		return c == null || c.isEmpty();
 	}
 
+	public static <T,U> boolean equalsNullSafe(Map<T,U> one, Map<T,U> two) {
+		if(one == null && two == null) 
+			return true;
+		if(one==null || two==null) 
+			return false;
+		return one.equals(two);
+	}
+	
+	public static <T> T findEquivalent(List<T> list, T object) {
+		int index = list.indexOf(object);
+		return (index<0) ? null : list.get(index); 
+	}
+	
 }

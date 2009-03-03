@@ -8,9 +8,9 @@
 package org.eclipse.emf.index.impl;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -79,5 +79,10 @@ public abstract class BasicEObjectDescriptorImpl implements EObjectDescriptor {
 	@Override
 	public int hashCode() {
 		return fragment.hashCode() + 97 * resourceDescriptor.hashCode();
+	}
+	
+	public void copyDetails(EObjectDescriptor eObjectDesc) {
+		name = eObjectDesc.getName();
+		displayName = eObjectDesc.getDisplayName();
 	}
 }

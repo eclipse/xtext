@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.emf.index.dao.memory;
 
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.dao.AbstractECrossReferenceDAOTest;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.impl.memory.EClassDAOImpl;
 import org.eclipse.emf.index.impl.memory.ECrossReferenceDAOImpl;
 import org.eclipse.emf.index.impl.memory.EObjectDAOImpl;

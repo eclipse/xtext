@@ -5,9 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index;
+package org.eclipse.emf.index.ecore;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.index.IDAO;
+import org.eclipse.emf.index.IGenericQuery;
 
 /**
  * Primary key: (name, nsURI)
@@ -15,13 +17,6 @@ import org.eclipse.emf.ecore.EClass;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface EClassDescriptor {
-	public interface Factory {
-		EClassDescriptor createDescriptor(EClass eClass, EPackageDescriptor ePackageDescriptor,
-				EClassDescriptor[] superClassDescriptors);
-
-		EClassDescriptor createDescriptor(String eClassName, EPackageDescriptor ePackageDescriptor,
-				EClassDescriptor[] superClassDescriptors);
-	}
 
 	public interface DAO extends IDAO<EClassDescriptor> {
 		Query createQuery();

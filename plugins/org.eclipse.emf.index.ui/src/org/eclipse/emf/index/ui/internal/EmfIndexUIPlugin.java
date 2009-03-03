@@ -8,7 +8,7 @@
 package org.eclipse.emf.index.ui.internal;
 
 import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.ecore.EPackageRegistryIndexFeeder;
+import org.eclipse.emf.index.ecore.impl.EPackageRegistryIndexFeeder;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -27,7 +27,7 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(IIndexStore.eINSTANCE);
+		EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(IIndexStore.INSTANCE);
 	}
 
 	public void stop(BundleContext context) throws Exception {

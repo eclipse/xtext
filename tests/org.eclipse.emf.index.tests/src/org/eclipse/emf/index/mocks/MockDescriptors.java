@@ -13,11 +13,11 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -105,6 +105,14 @@ public interface MockDescriptors {
 		public String getURI() {
 			return RESOURCE_URI;
 		}
+
+		public Map<String, String> getUserData() {
+			return null;
+		}
+
+		public String getUserData(String key) {
+			return null;
+		}
 	};
 
 	public static final String EOBJECT_NAME = "TestEObject";
@@ -169,6 +177,10 @@ public interface MockDescriptors {
 
 		public EObjectDescriptor getTarget() {
 			return eObjectDescriptor;
+		}
+
+		public int getIndex() {
+			return 0;
 		}
 
 	};

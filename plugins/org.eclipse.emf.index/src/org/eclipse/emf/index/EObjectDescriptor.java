@@ -12,6 +12,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
 
 /**
  * Primary key: (fragment, resourceDescriptor.uri)
@@ -19,15 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface EObjectDescriptor {
-	public interface Factory {
-		EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
-				EClassDescriptor typeDescriptor);
-
-		EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
-				EClassDescriptor typeDescriptor, Map<String, String> userData);
-
-		boolean isFactoryFor(EClass eClass);
-	}
 
 	public interface DAO extends IDAO<EObjectDescriptor> {
 		Query createQuery();

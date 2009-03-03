@@ -1,6 +1,3 @@
-Feeder / Builder
-- (recursively) remove elements
-
 Performance Tests
 
 Persistence
@@ -13,12 +10,17 @@ IndexFeeder
 
 Locking 
 
-CrossRefDesc
-- list index
-
-ResourceDescriptor
-- user data 
-
 Resource URI conversion
  - no classpath URIs allowed
  - cannonical URIs
+ 
+ 
+ ==================
+ 
+ - Events in index store
+   - batching
+   
+- Index consistency:
+	- delete dangling elements
+	- fire events
+ 

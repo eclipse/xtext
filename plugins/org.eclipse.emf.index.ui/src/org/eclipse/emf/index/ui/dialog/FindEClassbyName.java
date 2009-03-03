@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -35,7 +35,7 @@ public class FindEClassbyName extends ListDialog {
 
 	protected Text searchControl;
 
-	protected IIndexStore index = IIndexStore.eINSTANCE;
+	protected IIndexStore index = IIndexStore.INSTANCE;
 
 	public FindEClassbyName(Shell parent) {
 		super(parent);

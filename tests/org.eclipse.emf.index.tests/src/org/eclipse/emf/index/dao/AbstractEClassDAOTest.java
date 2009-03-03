@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.emf.index.dao;
 
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.EPackageDescriptor.DAO;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

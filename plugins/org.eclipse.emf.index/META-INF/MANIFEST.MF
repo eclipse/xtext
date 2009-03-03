@@ -8,5 +8,11 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport
 Export-Package: org.eclipse.emf.index,
  org.eclipse.emf.index.ecore,
+ org.eclipse.emf.index.ecore.impl,
+ org.eclipse.emf.index.event,
+ org.eclipse.emf.index.event.impl,
  org.eclipse.emf.index.impl,
- org.eclipse.emf.index.impl.memory
+ org.eclipse.emf.index.impl.memory,
+ org.eclipse.emf.index.resource,
+ org.eclipse.emf.index.resource.impl,
+ org.eclipse.emf.index.util

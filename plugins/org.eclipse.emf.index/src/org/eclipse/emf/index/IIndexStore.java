@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.impl.IndexStoreFactory;
 
 
@@ -15,10 +17,8 @@ import org.eclipse.emf.index.impl.IndexStoreFactory;
  */
 public interface IIndexStore {
 	
-	static final IIndexStore eINSTANCE = IndexStoreFactory.createIndexStore();
+	static final IIndexStore INSTANCE = IndexStoreFactory.createIndexStore();
 
-	IIndexFeeder indexFeeder();
-	
 	EPackageDescriptor.DAO ePackageDAO();
 	
 	EClassDescriptor.DAO eClassDAO();

@@ -8,18 +8,12 @@
 package org.eclipse.emf.index.impl;
 
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.EClassDescriptor;
+import org.eclipse.emf.index.ResourceDescriptor;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -28,10 +22,19 @@ public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 
 	private Map<String, String> userData;
 
-	private EObjectDescriptorImpl(ResourceDescriptor resourceDescriptor, String fragment, String name,
+	public EObjectDescriptorImpl(ResourceDescriptor resourceDescriptor, String fragment, String name,
 			String displayName, EClassDescriptor typeDescriptor, Map<String, String> userData) {
 		super(resourceDescriptor, fragment, name, displayName, typeDescriptor);
-		this.userData = userData;
+		if (userData != null)
+			this.userData = Collections.unmodifiableMap(userData);
+	}
+
+	public void copyDetails(EObjectDescriptor eObjectDesc) {
+		super.copyDetails(eObjectDesc);
+		if (eObjectDesc.getUserData() != null)
+			userData = Collections.unmodifiableMap(new HashMap<String, String>(eObjectDesc.getUserData()));
+		else 
+			userData = null;
 	}
 
 	public String getUserData(String key) {
@@ -41,58 +44,11 @@ public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 	}
 
 	public Map<String, String> getUserData() {
-		return Collections.unmodifiableMap(userData);
+		return userData;
 	}
 
 	@Override
 	public String toString() {
 		return displayName;
 	}
-
-	public static class Factory implements EObjectDescriptor.Factory {
-
-		public EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
-				EClassDescriptor typeDescriptor, Map<String, String> userData) {
-			Resource resource = eObject.eResource();
-			return new EObjectDescriptorImpl(resourceDescriptor, resource.getURIFragment(eObject),
-					nameAttributeValue(eObject), defaultDisplayName(eObject), typeDescriptor, userData);
-		}
-		
-		public EObjectDescriptor createDescriptor(EObject eObject, ResourceDescriptor resourceDescriptor,
-				EClassDescriptor typeDescriptor) {
-			Resource resource = eObject.eResource();
-			return new EObjectDescriptorImpl(resourceDescriptor, resource.getURIFragment(eObject),
-					nameAttributeValue(eObject), defaultDisplayName(eObject), typeDescriptor, null);
-		}
-
-		public boolean isFactoryFor(EClass eClass) {
-			return true;
-		}
-
-		public String defaultDisplayName(EObject eObject) {
-			String displayName = nameAttributeValue(eObject);
-			if (displayName == null)
-				displayName = eObject.eResource().getURIFragment(eObject);
-			return displayName;
-		}
-
-		@SuppressWarnings("unchecked")
-		public String nameAttributeValue(EObject eObject) {
-			EStructuralFeature nameFeature = eObject.eClass().getEStructuralFeature("name");
-			if (nameFeature != null && nameFeature.getEType() instanceof EDataType) {
-				if (!nameFeature.isMany())
-					return eObject.eGet(nameFeature).toString();
-				else {
-					List names = (List) eObject.eGet(nameFeature);
-					StringBuilder b = new StringBuilder();
-					for (Iterator nameIter = names.iterator(); nameIter.hasNext();) {
-						b.append(nameIter.next().toString());
-					}
-					return b.toString();
-				}
-			}
-			return null;
-		}
-	}
-
 }

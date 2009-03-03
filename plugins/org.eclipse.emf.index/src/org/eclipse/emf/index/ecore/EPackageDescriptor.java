@@ -5,11 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index;
+package org.eclipse.emf.index.ecore;
 
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.index.IDAO;
+import org.eclipse.emf.index.IGenericQuery;
 
 /**
  * Primary key: (nsUri)
@@ -17,11 +19,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface EPackageDescriptor {
-	public interface Factory {
-		EPackageDescriptor createDescriptor(EPackage ePackage, long indexingDate);
 	
-		boolean isFactoryFor(EPackage ePackage);
-	}
+	static final long NEVER = Long.MIN_VALUE;
 
 	public interface DAO extends IDAO<EPackageDescriptor>{
 		Query createQuery();

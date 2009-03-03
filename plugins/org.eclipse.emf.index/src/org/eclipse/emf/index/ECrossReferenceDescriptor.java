@@ -8,9 +8,6 @@ t * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
 
 package org.eclipse.emf.index;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
@@ -19,20 +16,9 @@ import org.eclipse.emf.ecore.EReference;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface ECrossReferenceDescriptor {
-	public interface Factory {
-		ECrossReferenceDescriptor createCrossReferenceDescriptor(EObjectDescriptor source, String referenceName, EObjectDescriptor elementDescriptor);
-	
-		/**
-		 * Returned references must be crossrefs (container/containment = false).
-		 * 
-		 * @param eObject
-		 * @return
-		 */
-		List<EReference> crossReferencesForIndex(EClass eClass);
-	
-		boolean isFactoryFor(EClass eClass);
-	}
 
+	static final int NO_INDEX = -1;
+	
 	public interface DAO extends IDAO<ECrossReferenceDescriptor>{
 		Query createQuery();
 		
@@ -62,4 +48,6 @@ public interface ECrossReferenceDescriptor {
 	String getReferenceName();
 
 	EObjectDescriptor getTarget();
+	
+	int getIndex();
 }

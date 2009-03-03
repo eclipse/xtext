@@ -5,25 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index;
+package org.eclipse.emf.index.ecore;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface IIndexFeeder {
-	void registerResourceDescriptorFactory(ResourceDescriptor.Factory factory);
+public interface EcoreIndexFeeder {
 
-	void registerElementDescriptorFactory(EObjectDescriptor.Factory factory);
-	
-	void registerCrossReferenceDescriptorFactory(ECrossReferenceDescriptor.Factory factory);
-
-	List<EObjectDescriptor> index(Resource resource, boolean isResolveProxies) throws IndexingException;
-
-	List<EClassDescriptor> index(EPackage ePackage, boolean isRecurseSubpackages) throws IndexingException;
-
+	List<EClassDescriptor> index(EPackage ePackage, boolean isRecurseSubpackages);
 }

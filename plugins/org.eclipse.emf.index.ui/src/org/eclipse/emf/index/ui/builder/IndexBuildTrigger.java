@@ -34,7 +34,7 @@ public class IndexBuildTrigger implements IStartup {
 							@Override
 							protected IStatus run(IProgressMonitor monitor) {
 								try {
-									project.build(IncrementalProjectBuilder.CLEAN_BUILD, EmfIndexBuilder.BUILDER_ID,
+									project.build(IncrementalProjectBuilder.CLEAN_BUILD, EmfIndexProjectBuilder.BUILDER_ID,
 											null, monitor);
 								}
 								catch (CoreException e) {

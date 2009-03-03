@@ -16,23 +16,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.index.EClassDescriptor;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.EPackageDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexFeeder;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
-import org.eclipse.emf.index.EPackageDescriptor.DAO;
 import org.eclipse.emf.index.ResourceDescriptor.Query;
-import org.eclipse.emf.index.impl.IndexFeederImpl;
+import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor;
+import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class MockIndexStore implements IIndexStore {
-
 	public final List<ECrossReferenceDescriptor> addedCrossRefDescriptors = new ArrayList<ECrossReferenceDescriptor>();
 	public final List<ECrossReferenceDescriptor> removedCrossRefDescriptors = new ArrayList<ECrossReferenceDescriptor>();
 	public final List<EObjectDescriptor> addedEObjectDescriptors = new ArrayList<EObjectDescriptor>();
@@ -43,13 +40,10 @@ public class MockIndexStore implements IIndexStore {
 	public final List<EPackageDescriptor> removedEPackageDescriptors = new ArrayList<EPackageDescriptor>();
 	public final List<ResourceDescriptor> addedResourceDescriptors = new ArrayList<ResourceDescriptor>();
 	public final List<ResourceDescriptor> removedResourceDescriptors = new ArrayList<ResourceDescriptor>();
-	
-	protected IIndexFeeder indexFeeder;
-	
+
 	public MockIndexStore() {
-		 indexFeeder = new IndexFeederImpl(this);
 	}
-	
+
 	public ECrossReferenceDescriptor.DAO eCrossReferenceDAO() {
 		return new ECrossReferenceDescriptor.DAO() {
 
@@ -59,6 +53,9 @@ public class MockIndexStore implements IIndexStore {
 
 			public void store(ECrossReferenceDescriptor descriptor) {
 				addedCrossRefDescriptors.add(descriptor);
+			}
+
+			public void modify(ECrossReferenceDescriptor element, ECrossReferenceDescriptor newValues) {
 			}
 
 			public void delete(ECrossReferenceDescriptor descriptor) {
@@ -94,6 +91,9 @@ public class MockIndexStore implements IIndexStore {
 
 			public void store(EObjectDescriptor descriptor) {
 				addedEObjectDescriptors.add(descriptor);
+			}
+
+			public void modify(EObjectDescriptor element, EObjectDescriptor newValues) {
 			}
 
 			public void delete(EObjectDescriptor descriptor) {
@@ -138,6 +138,9 @@ public class MockIndexStore implements IIndexStore {
 				addedEClassDescriptors.add(descriptor);
 			}
 
+			public void modify(EClassDescriptor element, EClassDescriptor newValues) {
+			}
+
 			public void delete(EClassDescriptor descriptor) {
 				removedEClassDescriptors.add(descriptor);
 			}
@@ -165,6 +168,9 @@ public class MockIndexStore implements IIndexStore {
 			public void store(org.eclipse.emf.index.ResourceDescriptor resourceDescriptor) {
 				addedResourceDescriptors.add(resourceDescriptor);
 			}
+			
+			public void modify(ResourceDescriptor element, ResourceDescriptor newValues) {
+			}
 
 			public void delete(org.eclipse.emf.index.ResourceDescriptor resourceDescriptor) {
 				removedResourceDescriptors.remove(resourceDescriptor);
@@ -173,28 +179,28 @@ public class MockIndexStore implements IIndexStore {
 	}
 
 	public DAO ePackageDAO() {
-		
-		return new EPackageDescriptor.DAO(){
-		
-			public void delete(EPackageDescriptor element) {
-				removedEPackageDescriptors.add(element);
-			}
-		
+
+		return new EPackageDescriptor.DAO() {
+
 			public void store(EPackageDescriptor element) {
 				addedEPackageDescriptors.add(element);
 			}
-		
+
+			public void modify(EPackageDescriptor element, EPackageDescriptor newValues) {
+			}
+
+			public void delete(EPackageDescriptor element) {
+				removedEPackageDescriptors.add(element);
+			}
+
 			public IGenericQuery<EPackageDescriptor> createQueryEPackage(EPackage ePackage) {
 				return new MockQuery<EPackageDescriptor>();
 			}
-		
-			public org.eclipse.emf.index.EPackageDescriptor.Query createQuery() {
+
+			public org.eclipse.emf.index.ecore.EPackageDescriptor.Query createQuery() {
 				return null;
 			}
 		};
 	}
-	
-	public IIndexFeeder indexFeeder() {
-		return indexFeeder;
-	}
+
 }
