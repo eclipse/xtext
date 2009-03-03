@@ -17,4 +17,6 @@ public interface IGenericQuery<T> {
 	T executeSingleResult();
 	
 	Collection<T> executeListResult();
+	
+	Iterable<T> executeIterableResult();
 }

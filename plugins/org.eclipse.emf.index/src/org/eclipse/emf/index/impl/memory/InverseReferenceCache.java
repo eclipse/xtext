@@ -100,5 +100,9 @@ public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
 			}
 			return null;
 		}
+
+		public Iterable<SourceDesc> executeIterableResult() {
+			return executeListResult();
+		}
 	}
 }
