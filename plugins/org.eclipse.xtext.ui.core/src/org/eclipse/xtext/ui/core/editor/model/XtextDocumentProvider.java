@@ -78,7 +78,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 								ResourceSet set = arg.getResourceSet();
 								for(int i = 0; i < set.getResources().size(); ) {
 									final Resource emfResource = set.getResources().get(i);
-									if (emfResource.getURI().lastSegment().equals(string)) {
+									if (emfResource!=null && string.equals(emfResource.getURI().lastSegment())) {
 										switch (delta.getKind()) {
 										case IResourceDelta.REMOVED:
 											// UNLOAD
@@ -145,11 +145,17 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		}
 	}
 
-	private IResourceChangeListener resourceChangeListener = null;
+	private List<IResourceChangeListener> resourceChangeListener = new ArrayList<IResourceChangeListener>();
 
 	@Override
 	protected IDocument createEmptyDocument() {
-		return document.get();
+		XtextDocument xtextDocument = document.get();
+		ReferencedResourcesUpdater listener = new ReferencedResourcesUpdater(xtextDocument);
+		resourceChangeListener.add(listener);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(listener,
+				IResourceChangeEvent.POST_CHANGE);
+		
+		return xtextDocument;
 	}
 
 	@Override
@@ -159,21 +165,16 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			throw new IllegalArgumentException("Can only handle instances of " + IFileEditorInput.class.getSimpleName()
 					+ " as input.");
 		document.setInput((IFileEditorInput) element);
-
-		resourceChangeListener = new ReferencedResourcesUpdater(document);
-
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener,
-				IResourceChangeEvent.POST_CHANGE);
 		return document;
 	}
 
 	@Override
 	protected void disconnected() {
 		super.disconnected();
-		if (resourceChangeListener != null) {
-			ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
-			resourceChangeListener = null;
+		for (IResourceChangeListener listener : resourceChangeListener) {
+			ResourcesPlugin.getWorkspace().removeResourceChangeListener(listener);
 		}
+		resourceChangeListener.clear();
 	}
 
 }
