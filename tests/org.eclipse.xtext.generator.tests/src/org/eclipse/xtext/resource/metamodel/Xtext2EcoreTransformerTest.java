@@ -918,7 +918,8 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	 */
 	public void testBug266807() throws Exception {
 		with(new XtextStandaloneSetup());
-		XtextResourceSet rs = new XtextResourceSet();
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("classpath:/"+getClass().getPackage().getName().replace('.', '/')+"/Test.xtext"));
 		resource.load(null);
 		for(Diagnostic d: resource.getErrors()) {
