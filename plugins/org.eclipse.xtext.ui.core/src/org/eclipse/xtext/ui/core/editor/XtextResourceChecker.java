@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -70,26 +69,25 @@ public class XtextResourceChecker {
 					// normally act as a chain start and has any kind of
 					// impotent information if Severity is OK, so just
 					// ignore it
-					boolean semanticDiagFail = diagnostic.getSeverity() != Diagnostic.OK;
-					if (semanticDiagFail) {
-						if (!diagnostic.getChildren().isEmpty()) {
-							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-								markers.add(markerFromEValidatorDiagnostic(childDiagnostic));
-								if (markers.size()>MAX_ERRORS)
-									return markers;
-							}
-						}
-						else {
-							markers.add(markerFromEValidatorDiagnostic(diagnostic));
-							if (markers.size()>MAX_ERRORS)
+					// boolean semanticDiagFail = diagnostic.getSeverity() !=
+					// Diagnostic.OK;
+					// if (semanticDiagFail) {
+					if (!diagnostic.getChildren().isEmpty()) {
+						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+							markers.add(markerFromEValidatorDiagnostic(childDiagnostic));
+							if (markers.size() > MAX_ERRORS)
 								return markers;
 						}
+					} else {
+						markers.add(markerFromEValidatorDiagnostic(diagnostic));
+						if (markers.size() > MAX_ERRORS)
+							return markers;
 					}
-					logCheckStatus(resource, semanticDiagFail, "Semantic");
+					// }
+					// logCheckStatus(resource, semanticDiagFail, "Semantic");
 				}
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 		return markers;
@@ -122,13 +120,13 @@ public class XtextResourceChecker {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sever = IMarker.SEVERITY_ERROR;
 		switch (diagnostic.getSeverity()) {
-			case Diagnostic.WARNING:
-				sever = IMarker.SEVERITY_WARNING;
-				break;
-			case Diagnostic.OK:
-			case Diagnostic.INFO:
-				sever = IMarker.SEVERITY_INFO;
-				break;
+		case Diagnostic.WARNING:
+			sever = IMarker.SEVERITY_WARNING;
+			break;
+		case Diagnostic.OK:
+		case Diagnostic.INFO:
+			sever = IMarker.SEVERITY_INFO;
+			break;
 		}
 		map.put(IMarker.SEVERITY, sever);
 		Iterator<?> data = diagnostic.getData().iterator();
@@ -143,12 +141,9 @@ public class XtextResourceChecker {
 				Object feature = data.next();
 				EStructuralFeature structuralFeature = resolveStructuralFeature(ele, feature);
 				if (structuralFeature != null) {
-					for (LeafNode lNode : parserNode.getLeafNodes()) {
-						if (structuralFeature.getName().equals(lNode.getFeature())) {
-							parserNode = lNode;
-							break;
-						}
-					}
+					List<AbstractNode> nodes = NodeUtil.findNodesForFeature(ele, structuralFeature);
+					if (!nodes.isEmpty())
+						parserNode = nodes.iterator().next();
 				}
 				map.put(IMarker.LINE_NUMBER, Integer.valueOf(parserNode.getLine()));
 				int offset = parserNode.getOffset();
@@ -164,12 +159,10 @@ public class XtextResourceChecker {
 	private static EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
 		if (feature instanceof String) {
 			return ele.eClass().getEStructuralFeature((String) feature);
-		}
-		else if (feature instanceof EStructuralFeature) {
+		} else if (feature instanceof EStructuralFeature) {
 			return (EStructuralFeature) feature;
-		}
-		else if (feature instanceof Integer) {
-			ele.eClass().getEStructuralFeature((Integer)feature);
+		} else if (feature instanceof Integer) {
+			return ele.eClass().getEStructuralFeature((Integer) feature);
 		}
 		return null;
 	}
