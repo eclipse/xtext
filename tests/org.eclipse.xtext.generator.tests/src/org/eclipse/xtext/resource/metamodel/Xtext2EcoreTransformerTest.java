@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractRule;
@@ -911,5 +912,17 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				"EDataType returns ecore::EDataType: 'dt' name=ID;";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
+	}
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266807
+	 */
+	public void testBug266807() throws Exception {
+		with(new XtextStandaloneSetup());
+		XtextResourceSet rs = new XtextResourceSet();
+		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("classpath:/"+getClass().getPackage().getName().replace('.', '/')+"/Test.xtext"));
+		resource.load(null);
+		for(Diagnostic d: resource.getErrors()) {
+			fail(d.getMessage());
+		}
 	}
 }

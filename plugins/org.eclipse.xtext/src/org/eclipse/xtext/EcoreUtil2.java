@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -221,10 +222,10 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	public static boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
 		boolean result = f1.getName().equals(f1.getName());
-		result &= f1.getLowerBound() == f2.getLowerBound();
-		result &= f1.getUpperBound() == f2.getUpperBound();
-		if (f1 instanceof EReference && f2 instanceof EReference)
-			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
+		result &= f1.isMany() == f2.isMany();
+//TODO SE: I think the following requirement is too strict.
+//		if (f1 instanceof EReference && f2 instanceof EReference)
+//			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
 		return result;
 	}
 
@@ -251,6 +252,65 @@ public class EcoreUtil2 extends EcoreUtil {
 				return feature;
 
 		return null;
+	}
+	
+	
+	public static boolean containsCompatibleFeature(EClass clazz, String name, boolean isMulti, EClassifier type) {
+		EStructuralFeature existingFeature = clazz.getEStructuralFeature(name);
+		if (existingFeature!=null) {
+			boolean many = existingFeature.isMany();
+			if (many == isMulti) {
+				if (type instanceof EClass && existingFeature.getEType() instanceof EClass) {
+					EClass expected = (EClass) type;
+					EClass actual = (EClass) existingFeature.getEType();
+					return actual.equals(expected) || actual.isSuperTypeOf(expected);
+				} else if (type instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
+					EDataType expected = (EDataType) type;
+					EDataType actual = (EDataType) existingFeature.getEType();
+					return actual.equals(expected) || getObjectType(actual.getInstanceClass()).isAssignableFrom(getObjectType(expected.getInstanceClass()));
+				}
+			}
+		}
+		return false;
+	}
+	
+	private static Class<?> getObjectType(Class<?> clazzA) {
+		if (clazzA.isPrimitive())
+        {
+          if (clazzA == Boolean.TYPE)
+          {
+            return Boolean.class;
+          }
+          else if (clazzA == Integer.TYPE)
+          {
+            return Integer.class;
+          }
+          else if (clazzA == Float.TYPE)
+          {
+            return Float.class;
+          }
+          else if (clazzA == Byte.TYPE)
+          {
+            return Byte.class;
+          }
+          else if (clazzA == Character.TYPE)
+          {
+            return Character.class;
+          }
+          else if (clazzA == Double.TYPE)
+          {
+            return Double.class;
+          }
+          else if (clazzA == Short.TYPE)
+          {
+            return Short.class;
+          }
+          else if (clazzA == Long.TYPE)
+          {
+            return Long.class;
+          }
+        }
+		return clazzA;
 	}
 
 	public static FindResult containsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {

@@ -120,6 +120,12 @@ public abstract class EClassifierInfo {
 
 		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
+			if (!isGenerated()) {
+				if (!EcoreUtil2.containsCompatibleFeature(getEClass(), featureName, isMultivalue, featureClassifier)) {
+					throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot find compatible feature "+featureName+" in sealed EClass "+getEClass().getName()+" from imported package "+getEClass().getEPackage().getNsURI()+".", parserElement);
+				}
+				return true;
+			}
 			EStructuralFeature newFeature = createFeatureWith(featureName, featureClassifier, isMultivalue,
 					isContainment);
 			
@@ -133,8 +139,6 @@ public abstract class EClassifierInfo {
 					return false;
 			}
 
-			if (!isGenerated())
-				throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", parserElement);
 			// feature with same name exists, but have a different, potentially
 			// incompatible configuration
 			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(featureName);
