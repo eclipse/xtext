@@ -14,11 +14,13 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -44,7 +46,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 
 	@Inject
 	private IValueConverterService valueConverter;
-	
+
 	protected IScope getScope(EObject context, EReference reference) {
 		if (scopeProvider == null)
 			throw new IllegalStateException("scopeProvider must not be null.");
@@ -92,34 +94,39 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			convertMe = builder.toString();
 		}
 		try {
-			String ruleCall = getRuleCallFrom(node.getGrammarElement());
-			if (ruleCall == null)
-				return null;
-			Object result = valueConverter.toValue(convertMe, ruleCall, node); 
+			String ruleName = getRuleNameFrom(node.getGrammarElement());
+			if (ruleName == null)
+				return convertMe;
+			Object result = valueConverter.toValue(convertMe, ruleName, node);
 			return result != null ? result.toString() : null;
 		} catch(ValueConverterException ex) {
 			throw new IllegalNodeException(node, ex);
 		}
 	}
-	
-	private String getRuleCallFrom(EObject grammarElement) {
+
+	/**
+	 * @param grammarElement may be any crossreferencable element, i.e. a keyword or a rulecall
+	 */
+	protected String getRuleNameFrom(EObject grammarElement) {
+		if (!(grammarElement instanceof Keyword || grammarElement instanceof RuleCall || grammarElement instanceof CrossReference))
+			throw new IllegalArgumentException("grammarElement is of type: '" + grammarElement.eClass().getName() + "'");
 		AbstractRule rule = null;
 		if (grammarElement instanceof CrossReference)
-			rule = ((CrossReference) grammarElement).getRule();
-		else if (grammarElement instanceof RuleCall)
+			grammarElement = ((CrossReference) grammarElement).getTerminal();
+		if (grammarElement instanceof RuleCall)
 			rule = ((RuleCall) grammarElement).getRule();
-		return rule != null ? rule.getName() : null; 
+		return rule != null ? rule.getName() : null;
 	}
-	
+
 	/**
-	 * @return the name of the first {@link IScopedElement} returned from the 
+	 * @return the name of the first {@link IScopedElement} returned from the
 	 * injected {@link IScopeProvider} for the passed object {@link EObject}
 	 */
 	public String getLinkText(EObject object, EReference reference, EObject context) {
 		String unconverted = getUnconvertedLinkText(object, reference, context);
 		return getConvertedValue(unconverted, object, reference, context);
 	}
-	
+
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
 		IScope scope = scopeProvider.getScope(context, reference);
 		if (scope == null)
@@ -152,10 +159,12 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		if (rule != null) {
 			List<CrossReference> xreferences = EcoreUtil2.getAllContentsOfType(rule, CrossReference.class);
 			for(CrossReference xref: xreferences) {
-				if (((EClass)xref.getType().getType()).isSuperTypeOf(object.eClass())) {
+				if (((EClass)xref.getType().getClassifier()).isSuperTypeOf(object.eClass())) {
 					Assignment assignment = GrammarUtil.containingAssignment(xref);
 					if (assignment != null && assignment.getFeature().equals(reference.getName())) {
-						return xref.getRule().getName();
+						AbstractElement xrefTerminal = xref.getTerminal();
+						if (xrefTerminal instanceof RuleCall)
+							return ((RuleCall) xrefTerminal).getRule().getName();
 					}
 				}
 			}
@@ -178,5 +187,5 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
 	}
-	
+
 }

@@ -52,7 +52,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (reference == XtextPackage.eINSTANCE.getTypeRef_Type()) {
+		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
 			if (context instanceof TypeRef) {
 				final TypeRef typeRef = (TypeRef) context;
 				final AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();

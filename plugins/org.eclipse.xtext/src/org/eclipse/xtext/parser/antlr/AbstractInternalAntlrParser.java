@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
@@ -174,8 +173,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				return ((AbstractRule) grammarElement).getName();
 			} else if (grammarElement instanceof RuleCall) {
 				return ((RuleCall) grammarElement).getRule().getName();
-			} else if (grammarElement instanceof CrossReference) {
-				return ((CrossReference) grammarElement).getRule().getName();
 			}
 		}
 		return null;

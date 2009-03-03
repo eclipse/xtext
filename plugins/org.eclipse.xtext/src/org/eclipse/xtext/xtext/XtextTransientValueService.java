@@ -22,6 +22,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
@@ -41,9 +42,9 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			final AbstractMetamodelDeclaration m = typeRef.getMetamodel();
 			if (m == null || Strings.isEmpty(m.getAlias()))
 				return true;
-			if (typeRef.getType() != null) {
+			if (typeRef.getClassifier() != null) {
 				final Grammar g = GrammarUtil.getGrammar(typeRef);
-				if (isUniqueEClassifierName(g, typeRef.getType().getName()))
+				if (isUniqueEClassifierName(g, typeRef.getClassifier().getName()))
 					return true;
 			}
 		}
@@ -51,20 +52,20 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			final AbstractRule rule = (AbstractRule) owner;
 			if (rule instanceof ParserRule) {
 				final TypeRef returnType = rule.getType();
-				if(returnType.getType() == null)
+				if(returnType.getClassifier() == null)
 					return true;
-				else if (rule.getName().equals(returnType.getType().getName())) {
+				else if (rule.getName().equals(returnType.getClassifier().getName())) {
 					return isTransient(returnType, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), -1);
 				}
 			} else if (rule instanceof TerminalRule) {
 				final TypeRef returnType = rule.getType();
-				return returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getType());
+				return returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getClassifier());
 			}
 		}
-		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Rule()) {
+		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Terminal()) {
 			final CrossReference ref = (CrossReference) owner;
-			// TODO don't use literal but terminal rule
-			if (ref.getRule() != null && "ID".equals(ref.getRule().getName()))
+			if (ref.getTerminal() instanceof RuleCall && ((RuleCall) ref.getTerminal()).getRule() != null &&
+					"ID".equals(((RuleCall) ref.getTerminal()).getRule().getName()))
 				return true;
 		}
 		return super.isTransient(owner, feature, index);

@@ -284,7 +284,7 @@ public final class ParseTreeUtil {
 					AbstractElement grammarElement = (AbstractElement) grammarElementObject;
 
 					if (grammarElement.eContainer() instanceof Group) {
-						EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getAbstractTokens();
+						EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
 						int indexOf = contents.indexOf(grammarElement) + 1;
 						int size = contents.size();
 						if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
@@ -427,7 +427,7 @@ public final class ParseTreeUtil {
 		public List<AbstractElement> caseGroup(Group group) {
 			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
 			boolean includeNext = true;
-			for (Iterator<AbstractElement> iterator = group.getAbstractTokens().iterator(); iterator.hasNext()
+			for (Iterator<AbstractElement> iterator = group.getTokens().iterator(); iterator.hasNext()
 					&& includeNext;) {
 				AbstractElement groupElement = iterator.next();
 				addWithNullCheck(elementList, doSwitch(groupElement));
@@ -488,7 +488,7 @@ public final class ParseTreeUtil {
 			if ((groupElement instanceof Group || groupElement instanceof Alternatives)
 					&& !GrammarUtil.isOptionalCardinality(groupElement)) {
 				EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement)
-						.getAbstractTokens() : ((Alternatives) groupElement).getGroups();
+						.getTokens() : ((Alternatives) groupElement).getGroups();
 				for (Iterator<AbstractElement> iterator = abstractTokens.iterator(); isOptional && iterator.hasNext();) {
 					AbstractElement abstractElement = iterator.next();
 					isOptional = isOptional(abstractElement);
@@ -504,7 +504,7 @@ public final class ParseTreeUtil {
 			AbstractRule rule = null;
 			AbstractElement terminal = assignment.getTerminal();
 			if (terminal instanceof CrossReference) {
-				rule = ((CrossReference) terminal).getRule();
+				terminal = ((CrossReference) terminal).getTerminal();
 			}
 			else if (terminal instanceof RuleCall) {
 				rule = ((RuleCall) terminal).getRule();

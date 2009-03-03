@@ -188,14 +188,14 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void checkSupertypeOfOverriddenTerminalRule(AbstractRule rule) throws TransformationException {
-		EDataType datatype = (EDataType) rule.getType().getType();
+		EDataType datatype = (EDataType) rule.getType().getClassifier();
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			AbstractRule parentRule = GrammarUtil.findRuleForName(usedGrammar, rule.getName());
 			if (parentRule != null) {
-				if (parentRule.getType() == null || parentRule.getType().getType() == null)
+				if (parentRule.getType() == null || parentRule.getType().getClassifier() == null)
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot determine return type of overridden rule.", rule.getType());
-				if (!datatype.equals(parentRule.getType().getType()))
+				if (!datatype.equals(parentRule.getType().getClassifier()))
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot inherit from datatype rule and return another type.", rule.getType());
 				return;
@@ -276,7 +276,7 @@ public class Xtext2EcoreTransformer {
 
 			@Override
 			public Xtext2ECoreInterpretationContext caseGroup(Group object) {
-				return deriveFeatures(context.spawnContextForGroup(), object.getAbstractTokens());
+				return deriveFeatures(context.spawnContextForGroup(), object.getTokens());
 			}
 
 			@Override
@@ -299,7 +299,7 @@ public class Xtext2EcoreTransformer {
 			@Override
 			public Xtext2ECoreInterpretationContext caseAction(Action object) {
 				try {
-					TypeRef actionTypeRef = object.getTypeName();
+					TypeRef actionTypeRef = object.getType();
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 					Xtext2ECoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
@@ -376,8 +376,8 @@ public class Xtext2EcoreTransformer {
 	}
 
 	EClassifier getClassifierFor(AbstractRule rule) {
-		if (rule.getType() != null && rule.getType().getType() != null)
-			return rule.getType().getType();
+		if (rule.getType() != null && rule.getType().getClassifier() != null)
+			return rule.getType().getClassifier();
 		if (rule instanceof TerminalRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
 			if (isEcorePackageUsed(grammar, new HashSet<Grammar>()))
 				return EcorePackage.Literals.ESTRING;
@@ -401,7 +401,7 @@ public class Xtext2EcoreTransformer {
 
 	TypeRef getTypeRef(EClassifier classifier) {
 		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
-		result.setType(classifier);
+		result.setClassifier(classifier);
 		EPackage pack = classifier.getEPackage();
 		for(AbstractMetamodelDeclaration decl: GrammarUtil.allMetamodelDeclarations(grammar)) {
 			if (pack.equals(decl.getEPackage())) {
@@ -423,7 +423,7 @@ public class Xtext2EcoreTransformer {
 			result.setMetamodel(findDefaultMetamodel(grammar));
 		}
 		if (result.getMetamodel() instanceof ReferencedMetamodel && result.getMetamodel().getEPackage() != null) {
-			result.setType(result.getMetamodel().getEPackage().getEClassifier(name));
+			result.setClassifier(result.getMetamodel().getEPackage().getEClassifier(name));
 		}
 		return result;
 	}
@@ -470,7 +470,7 @@ public class Xtext2EcoreTransformer {
 		TransformationException ex = new XtextSwitch<TransformationException>() {
 			@Override
 			public TransformationException caseAction(Action action) {
-				final TypeRef actionTypeRef = action.getTypeName();
+				final TypeRef actionTypeRef = action.getType();
 				try {
 					addSuperType(rule, actionTypeRef, ruleReturnType);
 					return null;
@@ -517,7 +517,7 @@ public class Xtext2EcoreTransformer {
 
 			@Override
 			public TransformationException caseGroup(Group group) {
-				for (AbstractElement ele : group.getAbstractTokens()) {
+				for (AbstractElement ele : group.getTokens()) {
 					try {
 						deriveTypesAndHierarchy(rule, ruleReturnType, ele);
 					}
@@ -544,7 +544,7 @@ public class Xtext2EcoreTransformer {
 			return false;
 		AbstractRule parentRule = GrammarUtil.findRuleForName(grammar, rule.getName());
 		if (parentRule != null) {
-			if (parentRule.getType().getType() instanceof EDataType)
+			if (parentRule.getType().getClassifier() instanceof EDataType)
 				throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 						"Cannot inherit from datatype rule and return another type.", rule.getType());
 			EClassifierInfo parentTypeInfo = eClassifierInfos.getInfoOrNull(parentRule.getType());
@@ -558,7 +558,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superTypeInfo) throws TransformationException {
-		final EClassifier subType = subTypeRef.getType();
+		final EClassifier subType = subTypeRef.getClassifier();
 		final EClassifierInfo subTypeInfo = subType == null
 		        ? findOrCreateEClassifierInfo(subTypeRef, null, true)
 				: eClassifierInfos.getInfoOrNull(subType);
@@ -712,9 +712,9 @@ public class Xtext2EcoreTransformer {
 	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name, boolean createIfMissing) throws TransformationException {
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
-			// we assumend EString for lexer rules and datatype rules, so
+			// we assumend EString for terminal rules and datatype rules, so
 			// we have to do a look up in super grammar
-			if (typeRef.getType() == EcorePackage.Literals.ESTRING) {
+			if (typeRef.getClassifier() == EcorePackage.Literals.ESTRING) {
 				info = eClassifierInfos.getInfoOrNull(typeRef);
 				if (info != null)
 					return info;
@@ -728,7 +728,7 @@ public class Xtext2EcoreTransformer {
 	private EClassifierInfo createEClassifierInfo(TypeRef typeRef, String name) throws TransformationException {
 		if (eClassifierInfos.getInfo(typeRef) != null)
 			throw new IllegalArgumentException("Cannot create EClass for same type twice "
-					+ typeRef.getType().getName());
+					+ typeRef.getClassifier().getName());
 		//					+ GrammarUtil.getQualifiedName(typeRef));
 
 		String classifierName = null;
@@ -753,7 +753,7 @@ public class Xtext2EcoreTransformer {
 			classifier = EcoreFactory.eINSTANCE.createEClass();
 			classifier.setName(classifierName);
 			generatedEPackage.getEClassifiers().add(classifier);
-			typeRef.setType(classifier);
+			typeRef.setClassifier(classifier);
 
 			EClassifierInfo result;
 			// TODO: Enums?
@@ -766,7 +766,7 @@ public class Xtext2EcoreTransformer {
 				throw new IllegalStateException("cannot add type for typeRef twice: '" + classifierName + "'");
 			return result;
 		}
-		typeRef.setType(classifier);
+		typeRef.setClassifier(classifier);
 		return eClassifierInfos.getInfo(classifier);
 	}
 

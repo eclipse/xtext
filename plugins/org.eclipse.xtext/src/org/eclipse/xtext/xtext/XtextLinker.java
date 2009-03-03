@@ -34,6 +34,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.Linker;
@@ -81,13 +82,18 @@ public class XtextLinker extends Linker {
 			public void setTarget(EObject object, EStructuralFeature feature) {
 				super.setTarget(object, feature);
 				// we don't want to mark generated types as errors unless generation fails
-				filter = (feature == XtextPackage.eINSTANCE.getTypeRef_Type() &&
+				filter = (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() &&
 					((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel) ||
 					(feature == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() &&
 					(object instanceof GeneratedMetamodel));
 			}
 
 		};
+	}
+
+	@Override
+	protected boolean canSetDefaultValues(EReference ref) {
+		return super.canSetDefaultValues(ref) || ref == XtextPackage.Literals.CROSS_REFERENCE__TERMINAL;
 	}
 
 	@Override
@@ -101,11 +107,14 @@ public class XtextLinker extends Linker {
 				producer.addDiagnostic("Cannot find meta model for type '" + typeRefName + "'");
 			else
 				typeRef.setMetamodel((AbstractMetamodelDeclaration) metamodels.get(0));
-		} else if (XtextPackage.eINSTANCE.getCrossReference_Rule() == ref) {
-			try {
-				((CrossReference)obj).setRule(GrammarUtil.findRuleForName(GrammarUtil.getGrammar(obj), "ID"));
-			} catch(IllegalArgumentException ex) {
+		} else if (XtextPackage.eINSTANCE.getCrossReference_Terminal() == ref) {
+			AbstractRule rule = GrammarUtil.findRuleForName(GrammarUtil.getGrammar(obj), "ID");
+			if (rule == null)
 				producer.addDiagnostic("Cannot resolve implicit reference to rule 'ID'");
+			else {
+				RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
+				call.setRule(rule);
+				((CrossReference)obj).setTerminal(call);
 			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
@@ -114,7 +123,7 @@ public class XtextLinker extends Linker {
 
 	@Override
 	protected void beforeEnsureIsLinked(EObject obj, EReference ref, IDiagnosticProducer producer) {
-		if (XtextPackage.eINSTANCE.getTypeRef_Type() == ref) {
+		if (XtextPackage.eINSTANCE.getTypeRef_Classifier() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
 			if (typeRef.getMetamodel() == null)
 				setDefaultValue(obj, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), producer);
@@ -269,14 +278,6 @@ public class XtextLinker extends Linker {
 					call.setRule(rule);
 			}
 		}
-		final List<CrossReference> allCrossRefs = EcoreUtil2.getAllContentsOfType(grammar, CrossReference.class);
-		for (CrossReference ref: allCrossRefs) {
-			if (ref.getRule() != null) {
-				AbstractRule rule = rulePerName.get(ref.getRule().getName());
-				if (rule != null)
-					ref.setRule(rule);
-			}
-		}
 	}
 
 	private void updateHiddenTokens(List<AbstractRule> hiddenTokens, Map<String, AbstractRule> rulePerName) {
@@ -302,6 +303,11 @@ public class XtextLinker extends Linker {
 //		}
 		super.clearReference(obj, ref);
 		if (obj.eIsSet(ref) && ref.getEType().equals(XtextPackage.Literals.TYPE_REF)) {
+			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
+			if (adapter == null || adapter.getParserNode() == null)
+				obj.eUnset(ref);
+		}
+		if (obj.eIsSet(ref) && ref == XtextPackage.Literals.CROSS_REFERENCE__TERMINAL) {
 			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
 			if (adapter == null || adapter.getParserNode() == null)
 				obj.eUnset(ref);

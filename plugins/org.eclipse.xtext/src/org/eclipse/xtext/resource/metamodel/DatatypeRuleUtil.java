@@ -50,7 +50,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		public Boolean caseParserRule(ParserRule object) {
 			final TypeRef typeRef = object.getType();
 			if (typeRef != null) {
-				if (typeRef.getType() != null) {
+				if (typeRef.getClassifier() != null) {
 					boolean result = GrammarUtil.isDatatypeRule(object);
 					if (result)
 						indicatorFound = true;
@@ -58,7 +58,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 				}
 				if (visitedRules.add(object)) {
 					if (object.getAlternatives() != null && doSwitch(object.getAlternatives())) {
-						typeRef.setType(EcorePackage.Literals.ESTRING);
+						typeRef.setClassifier(EcorePackage.Literals.ESTRING);
 						return true;
 					}
 				} else {
@@ -79,7 +79,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 				return object.getAlternatives() != null && doSwitch(object.getAlternatives());
 			}
 			final TypeRef typeRef = object.getType();
-			if (typeRef == null || typeRef.getType() == null) {
+			if (typeRef == null || typeRef.getClassifier() == null) {
 				throw new IllegalStateException("checks are only allowed for linked grammars. Rule: " + object.getName());
 			}
 			return !visitedRules.add(object) || GrammarUtil.isDatatypeRule(object);
@@ -110,8 +110,8 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 	@Override
 	public Boolean caseGroup(Group object) {
 		boolean result = true;
-		for(int i = 0; i < object.getAbstractTokens().size() && result; i++) {
-			result &= doSwitch(object.getAbstractTokens().get(i));
+		for(int i = 0; i < object.getTokens().size() && result; i++) {
+			result &= doSwitch(object.getTokens().get(i));
 		}
 		return result;
 	}

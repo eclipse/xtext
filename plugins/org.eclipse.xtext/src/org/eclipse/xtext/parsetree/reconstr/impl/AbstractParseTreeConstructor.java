@@ -340,6 +340,7 @@ public abstract class AbstractParseTreeConstructor implements
 			return --alt > -1;
 		}
 
+		@Override
 		protected Solution createSolution() {
 			do {
 				Solution s = createChild(alt).firstSolution();

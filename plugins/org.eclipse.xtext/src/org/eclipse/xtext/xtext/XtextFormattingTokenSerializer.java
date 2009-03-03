@@ -10,15 +10,15 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.xtext.parsetree.reconstr.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.reconstr.impl.FormattingTokenSerializer;
 import org.eclipse.xtext.services.XtextGrammarAccess;
-import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.AbstractTokenWithCardinalityElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ActionElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AlternativesElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.AssignmentElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CrossReferenceElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.GrammarElements;
-import org.eclipse.xtext.services.XtextGrammarAccess.TerminalRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedElementElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.TerminalRuleElements;
 
 import com.google.inject.Inject;
 
@@ -61,7 +61,7 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 		cfg.setNoSpace().around(as.ele1AssignmentOperator());
 
 		// AbstractToken
-		AbstractTokenElements at = g.prAbstractToken();
+		AbstractTokenWithCardinalityElements at = g.prAbstractTokenWithCardinality();
 		cfg.setNoSpace().before(at.ele1AssignmentCardinality());
 
 		// ParenthesizedElement

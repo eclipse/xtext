@@ -50,28 +50,28 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 		ParserRule rule = (ParserRule) grammar.getRules().get(1);
 		assertNotNull(rule);
 		assertEquals("StartId", rule.getName());
-		assertEquals(EcorePackage.Literals.EINT, rule.getType().getType());
+		assertEquals(EcorePackage.Literals.EINT, rule.getType().getClassifier());
 	}
 
 	public void testRuleRecursiveId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(2);
 		assertNotNull(rule);
 		assertEquals("RecursiveId", rule.getName());
-		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getType());
+		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
 	public void testRuleCalledId() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(3);
 		assertNotNull(rule);
 		assertEquals("CalledId", rule.getName());
-		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getType());
+		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
 	}
 
 	public void testRuleValue() {
 		ParserRule rule = (ParserRule) grammar.getRules().get(4);
 		assertNotNull(rule);
 		assertEquals("Value", rule.getName());
-		assertEquals(pack.getEClassifier("Value"), rule.getType().getType());
+		assertEquals(pack.getEClassifier("Value"), rule.getType().getClassifier());
 	}
 
 }

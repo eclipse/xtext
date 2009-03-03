@@ -32,7 +32,7 @@ public class DebugConsumerUtility implements IConsumerUtility {
 
 	public void consumeAction(Action action, boolean isMany) {
 		if (log.isDebugEnabled()) {
-			log.debug("consumeAction(type = " + action.getTypeName().getType().getName() + ", feature = " + action.getFeature() + ", isMany = " + isMany + ")");
+			log.debug("consumeAction(type = " + action.getType().getClassifier().getName() + ", feature = " + action.getFeature() + ", isMany = " + isMany + ")");
 		}
 		delegate.consumeAction(action, isMany);
 	}
