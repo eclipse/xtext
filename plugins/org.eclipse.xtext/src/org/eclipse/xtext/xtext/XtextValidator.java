@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
@@ -27,11 +28,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check(CheckType.NORMAL)
-	public void grammarUsesMaxOneOther(Grammar grammar) {
-		assertTrue("You may not use more than two other grammars.", XtextPackage.GRAMMAR__USED_GRAMMARS,
+	public void checkGrammarUsesMaxOneOther(Grammar grammar) {
+		assertTrue("You may not use more than one other grammar.", XtextPackage.GRAMMAR__USED_GRAMMARS,
 				grammar.getUsedGrammars().size() <= 1);
 	}
-	
+
 	@Check
 	public void checkGrammarName(Grammar g) {
 		String[] split = g.getName().split("\\.");
@@ -45,6 +46,13 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		String ele = split[split.length-1];
 		if (!Character.isUpperCase(ele.charAt(0)))
 			warning("The last element should start with an upper case letter.", XtextPackage.GRAMMAR__NAME);
+	}
+
+	@Check
+	public void checkGeneratedMetamodel(GeneratedMetamodel metamodel) {
+		if (metamodel.getName() != null && metamodel.getName().length() != 0)
+			if (Character.isUpperCase(metamodel.getName().charAt(0)))
+				warning("Metamodel names should start with a lower case letter.", XtextPackage.GENERATED_METAMODEL__NAME);
 	}
 
 }
