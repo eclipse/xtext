@@ -35,7 +35,6 @@ public class LazyReferencedResourceScope extends AbstractCachingScope {
 		URI newURI = URI.createURI(uri);
 		if (contextURI.isHierarchical() && !contextURI.isRelative() && newURI.isRelative()) {
 			newURI = newURI.resolve(contextURI);
-			System.out.println(newURI);
 		}
 		final Resource resource = context.eResource().getResourceSet().getResource(newURI, true);
 		initElements(resolver, resource, producer);

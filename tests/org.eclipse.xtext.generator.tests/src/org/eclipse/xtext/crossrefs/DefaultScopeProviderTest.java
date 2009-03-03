@@ -13,13 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.crossrefs.importedURI.Main;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -115,23 +111,5 @@ public class DefaultScopeProviderTest extends AbstractGeneratorTest {
 			return models.get(uri);
 		}
 	}
-	
-	public void testRelativeURI() throws Exception {
-		XtextResourceSet rs = new XtextResourceSet();
-		Resource resource = rs.getResource(URI.createURI("classpath:/org/eclipse/xtext/crossrefs/ImportUriModelB.importuritestlanguage"), true);
-		Main m = (Main) resource.getContents().get(0);
-		assertNotNull(m.getTypes().get(0).getExtends());
-	}
-	
-	public void testURIResolution() throws Exception {
-		XtextResourceSet rs = new XtextResourceSet();
-		Resource resource = rs.getResource(URI.createURI("classpath:/org/eclipse/xtext/crossrefs/ImportUriModelA.importuritestlanguage"), true);
-		URI uri = resource.getURI();
-		URI createUri = URI.createURI("ImportUriModelB.importuritestlanguage");
-		System.out.println(uri);
-		System.out.println(createUri);
-	}
-	
-	
 	
 }
