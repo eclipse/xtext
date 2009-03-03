@@ -1,3 +1,0 @@
-import "ImportUriModelA.importuritestlanguage"
-
-type Bar extends Foo
