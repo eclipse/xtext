@@ -15,6 +15,7 @@ import org.eclipse.xtext.crossref.IScope;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class LazyReferencedResourceScope extends AbstractCachingScope {
 
@@ -32,7 +33,7 @@ public class LazyReferencedResourceScope extends AbstractCachingScope {
 	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
 		URI contextURI = context.eResource().getURI();
 		URI newURI = URI.createURI(uri);
-		if (!contextURI.isRelative() && newURI.isRelative()) {
+		if (contextURI.isHierarchical() && !contextURI.isRelative() && newURI.isRelative()) {
 			newURI = newURI.resolve(contextURI);
 			System.out.println(newURI);
 		}
