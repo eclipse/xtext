@@ -14,7 +14,7 @@ import org.eclipse.xtext.crossref.IScopedElement;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class ScopedElement implements IScopedElement{
+public class ScopedElement extends AbstractScopedElement {
 	
 	public static  IScopedElement create(String name, EObject element, Object additionalInformation) {
 		return new ScopedElement(name,element,additionalInformation);
