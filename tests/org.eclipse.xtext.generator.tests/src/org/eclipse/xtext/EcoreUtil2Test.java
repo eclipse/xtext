@@ -18,10 +18,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 
+import static org.eclipse.xtext.EcoreUtil2.*;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public class EcoreUtil2Tests extends TestCase {
+public class EcoreUtil2Test extends TestCase {
 	static private final EClass EOBJECT = EcorePackage.Literals.EOBJECT; 
 	
 	private EClass createEClass(String name) {
@@ -112,5 +113,26 @@ public class EcoreUtil2Tests extends TestCase {
 		res = EcoreUtil2.getAllReferencedObjects(objA, ref);
 		assertNotNull(res);
 		objA.eSet(ref, objB);
+	}
+	
+	public void testContainsCompatibleFeature() throws Exception {
+		EcorePackage pack = EcorePackage.eINSTANCE;
+		EClass eClass = pack.getEClass();
+		assertEquals(true,containsCompatibleFeature(eClass, "name", false, pack.getEString()));
+		assertEquals(false,containsCompatibleFeature(eClass, "name", true, pack.getEString()));
+		assertEquals(false,containsCompatibleFeature(eClass, "name", true, pack.getEAnnotation()));
+		assertEquals(false,containsCompatibleFeature(eClass, "name", true, pack.getEShort()));
+		assertEquals(false,containsCompatibleFeature(eClass, "names", false, pack.getEString()));
+		
+		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEAttribute()));
+		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEReference()));
+		assertEquals(true,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEStructuralFeature()));
+		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", false, pack.getEStructuralFeature()));
+		assertEquals(false,containsCompatibleFeature(eClass, "eStructuralFeatures", true, pack.getEAnnotation()));
+		
+		eClass = pack.getEAttribute();
+		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, pack.getEInt()));
+		assertEquals(true, containsCompatibleFeature(eClass, "lowerBound", false, pack.getEIntegerObject()));
+		assertEquals(false, containsCompatibleFeature(eClass, "lowerBound", false, pack.getELong()));
 	}
 }
