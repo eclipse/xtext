@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
-import static org.eclipse.xtext.util.CollectionUtils.addAll;
-import static org.eclipse.xtext.util.CollectionUtils.filter;
-import static org.eclipse.xtext.util.CollectionUtils.map;
+import static org.eclipse.xtext.util.CollectionUtils.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
