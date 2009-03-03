@@ -108,7 +108,7 @@ public final class XtextGrammarTestLanguageTerminalGroupConsumer extends NonTerm
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(terminalTokenConsumer, "abstractTokens", true, false, false, getElement(), optional);
+			return consumeNonTerminal(terminalTokenConsumer, "tokens", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -131,8 +131,8 @@ public final class XtextGrammarTestLanguageTerminalGroupConsumer extends NonTerm
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerminalToken());
 		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionGroupabstractTokens());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentAbstractTokens());
+		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionGrouptokens());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentTokens());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallTerminalToken());
 	}
 	
@@ -143,7 +143,7 @@ public final class XtextGrammarTestLanguageTerminalGroupConsumer extends NonTerm
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTerminalTokenConsumer(INonTerminalConsumer terminalTokenConsumer) {

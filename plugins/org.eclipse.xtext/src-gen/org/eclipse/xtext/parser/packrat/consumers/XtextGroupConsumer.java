@@ -108,7 +108,7 @@ public final class XtextGroupConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(abstractTokenConsumer, "abstractTokens", true, false, false, getElement(), optional);
+			return consumeNonTerminal(abstractTokenConsumer, "tokens", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -131,8 +131,8 @@ public final class XtextGroupConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractToken());
 		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionGroupabstractTokens());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentAbstractTokens());
+		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionGrouptokens());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentTokens());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallAbstractToken());
 	}
 	
@@ -143,7 +143,7 @@ public final class XtextGroupConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAbstractTokenConsumer(INonTerminalConsumer abstractTokenConsumer) {

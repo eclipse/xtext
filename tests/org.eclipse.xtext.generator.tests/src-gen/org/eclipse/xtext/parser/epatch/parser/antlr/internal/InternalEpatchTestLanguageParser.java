@@ -136,7 +136,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -177,7 +177,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -221,7 +221,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -265,7 +265,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -698,7 +698,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prResourceImport().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prResourceImport().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -725,7 +725,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prResourceImport().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prResourceImport().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -826,7 +826,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageImport().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEPackageImport().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -853,7 +853,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageImport().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prEPackageImport().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -958,7 +958,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prJavaImport().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prJavaImport().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1000,7 +1000,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prJavaImport().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prJavaImport().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -1114,7 +1114,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prExtensionImport().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prExtensionImport().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1156,7 +1156,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prExtensionImport().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prExtensionImport().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -1271,7 +1271,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1329,7 +1329,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1363,7 +1363,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1428,7 +1428,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1462,7 +1462,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1600,7 +1600,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1644,13 +1644,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1651); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2000CrossReferenceEStringNamedResource(), "leftRes"); 
+                    		createLeafNode(grammarAccess.prObjectRef().ele2000CrossReferenceIDNamedResource(), "leftRes"); 
                     	
 
                     }
@@ -1665,7 +1665,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1699,13 +1699,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1723); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2110CrossReferenceEStringNamedResource(), "leftRes"); 
+                    		createLeafNode(grammarAccess.prObjectRef().ele2110CrossReferenceIDNamedResource(), "leftRes"); 
                     	
 
                     }
@@ -1720,7 +1720,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1742,13 +1742,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1787); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2140CrossReferenceEStringNamedResource(), "rightRes"); 
+                    		createLeafNode(grammarAccess.prObjectRef().ele2140CrossReferenceIDNamedResource(), "rightRes"); 
                     	
 
                     }
@@ -1763,7 +1763,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1843,7 +1843,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1875,7 +1875,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1929,7 +1929,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -1976,7 +1976,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -2093,7 +2093,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2122,7 +2122,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2152,7 +2152,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2261,7 +2261,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2305,7 +2305,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2350,7 +2350,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -2406,7 +2406,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2451,7 +2451,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -2573,7 +2573,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMonoSingleAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prMonoSingleAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2602,7 +2602,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMonoSingleAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prMonoSingleAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2707,7 +2707,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2751,7 +2751,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2796,7 +2796,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -2961,7 +2961,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2988,13 +2988,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3062); 
 
-                    		createLeafNode(grammarAccess.prAssignmentValue().ele100CrossReferenceEStringNamedObject(), "refObject"); 
+                    		createLeafNode(grammarAccess.prAssignmentValue().ele100CrossReferenceIDNamedObject(), "refObject"); 
                     	
 
                     }
@@ -3024,7 +3024,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -3062,7 +3062,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     	
 
                                     	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
                                     	        
@@ -3112,7 +3112,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -3140,13 +3140,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3232); 
 
-                    		createLeafNode(grammarAccess.prAssignmentValue().ele300CrossReferenceEStringImport(), "import"); 
+                    		createLeafNode(grammarAccess.prAssignmentValue().ele300CrossReferenceIDImport(), "import"); 
                     	
 
                     }
@@ -3161,7 +3161,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3270,7 +3270,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3352,7 +3352,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3388,7 +3388,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3415,13 +3415,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3489); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2200CrossReferenceEStringNamedObject(), "refObject"); 
+                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2200CrossReferenceIDNamedObject(), "refObject"); 
                     	
 
                     }
@@ -3451,7 +3451,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -3489,7 +3489,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     	
 
                                     	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
                                     	        
@@ -3539,7 +3539,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -3567,13 +3567,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3659); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2400CrossReferenceEStringImport(), "import"); 
+                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2400CrossReferenceIDImport(), "import"); 
                     	
 
                     }
@@ -3588,7 +3588,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3744,7 +3744,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3773,7 +3773,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3800,13 +3800,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3861); 
 
-                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele200CrossReferenceEStringNamedObject(), "refObject"); 
+                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele200CrossReferenceIDNamedObject(), "refObject"); 
                     	
 
                     }
@@ -3836,7 +3836,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -3874,7 +3874,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     	
 
                                     	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
                                     	        
@@ -3924,7 +3924,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -3952,13 +3952,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4031); 
 
-                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele400CrossReferenceEStringImport(), "import"); 
+                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele400CrossReferenceIDImport(), "import"); 
                     	
 
                     }
@@ -3973,7 +3973,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -4153,7 +4153,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -4227,7 +4227,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -4259,7 +4259,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -4306,7 +4306,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getType());
+                            	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4415,13 +4415,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectNew().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prObjectNew().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectNew4472); 
 
-            		createLeafNode(grammarAccess.prObjectNew().ele10CrossReferenceEStringImport(), "import"); 
+            		createLeafNode(grammarAccess.prObjectNew().ele10CrossReferenceIDImport(), "import"); 
             	
 
             }
@@ -4436,7 +4436,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectNew().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prObjectNew().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -4531,13 +4531,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectCopy().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prObjectCopy().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectCopy4604); 
 
-            		createLeafNode(grammarAccess.prObjectCopy().ele10CrossReferenceEStringNamedResource(), "resource"); 
+            		createLeafNode(grammarAccess.prObjectCopy().ele10CrossReferenceIDNamedResource(), "resource"); 
             	
 
             }
@@ -4552,7 +4552,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectCopy().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prObjectCopy().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -4667,7 +4667,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4717,7 +4717,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4759,7 +4759,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5003,7 +5003,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prJavaExecutable().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prJavaExecutable().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5104,7 +5104,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prExpressionExecutable().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prExpressionExecutable().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

@@ -93,7 +93,7 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 		else if (calledRule.getType() != null) {
 			TypeRef typeRef = calledRule.getType();
 			return invokeExtension("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
-					+ Strings.toFirstUpper(typeRef.getType().getName()), Arrays.asList(ruleCall, contentAssistContext
+					+ Strings.toFirstUpper(typeRef.getClassifier().getName()), Arrays.asList(ruleCall, contentAssistContext
 					.getModel(), contentAssistContext));
 		}
 		return Collections.emptyList();

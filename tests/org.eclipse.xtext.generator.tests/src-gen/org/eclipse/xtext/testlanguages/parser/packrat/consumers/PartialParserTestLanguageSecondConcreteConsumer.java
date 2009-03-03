@@ -48,9 +48,7 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 
 	private IElementConsumer crossReference$9$Consumer;
 
-	private IElementConsumer keyword$11$Consumer;
-
-	private ISequenceMatcher crossReference$9$Delimiter;
+	private IElementConsumer keyword$12$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
@@ -60,7 +58,9 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 
 	private ICharacterClass keyword$5$Delimiter;
 
-	private ICharacterClass keyword$11$Delimiter;
+	private ICharacterClass keyword$12$Delimiter;
+
+	private ISequenceMatcher ruleCall$11$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -76,7 +76,7 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 			acceptor.accept(keyword$5$Consumer);
 			acceptor.accept(assignment$6$Consumer);
 			acceptor.accept(assignment$8$Consumer);
-			acceptor.accept(keyword$11$Consumer);
+			acceptor.accept(keyword$12$Consumer);
 		}
 	}
 
@@ -172,30 +172,30 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "referencedChildren", true, false, getElement(), getCrossReference$9$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "referencedChildren", true, false, getElement(), getRuleCall$11$Delimiter(), optional);
 		}
 	}
 
-	protected class Keyword$11$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$12$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$11$Consumer(final Keyword keyword) {
+		protected Keyword$12$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$11$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$12$Delimiter(), optional);
 		}
 	}
 
 	public PartialParserTestLanguageSecondConcreteConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -218,8 +218,8 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele4AssignmentValue());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele40ParserRuleCallNamed());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele5AssignmentReferencedChildren());
-		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele50CrossReferenceEStringChild());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele6KeywordRightParenthesis());
+		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele50CrossReferenceIDChild());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele6KeywordRightParenthesis());
 	}
 	
 	@Override
@@ -229,7 +229,7 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
@@ -238,14 +238,6 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 	
 	public void setNamedConsumer(INonTerminalConsumer namedConsumer) {
 		this.namedConsumer = namedConsumer;
-	}
-	
-	public ISequenceMatcher getCrossReference$9$Delimiter() {
-		return crossReference$9$Delimiter;
-	}
-	
-	public void setCrossReference$9$Delimiter(ISequenceMatcher matcher) {
-		crossReference$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {
@@ -280,12 +272,20 @@ public final class PartialParserTestLanguageSecondConcreteConsumer extends NonTe
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$11$Delimiter() {
-		return keyword$11$Delimiter;
+	public ICharacterClass getKeyword$12$Delimiter() {
+		return keyword$12$Delimiter;
 	}
 	
-	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
-		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
+		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$11$Delimiter() {
+		return ruleCall$11$Delimiter;
+	}
+	
+	public void setRuleCall$11$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

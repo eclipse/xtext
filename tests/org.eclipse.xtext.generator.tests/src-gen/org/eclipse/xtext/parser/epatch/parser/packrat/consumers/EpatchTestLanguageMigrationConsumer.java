@@ -280,7 +280,7 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setExecutableConsumer(INonTerminalConsumer executableConsumer) {

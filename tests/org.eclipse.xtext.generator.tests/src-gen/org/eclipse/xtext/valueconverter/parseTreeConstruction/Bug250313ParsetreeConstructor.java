@@ -22,10 +22,10 @@ public class Bug250313ParsetreeConstructor extends AbstractParseTreeConstructor 
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prChild().getRule().getType().getType()) && (s = new Child_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prChild1().getRule().getType().getType()) && (s = new Child1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prChild2().getRule().getType().getType()) && (s = new Child2_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prChild().getRule().getType().getClassifier()) && (s = new Child_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prChild1().getRule().getType().getClassifier()) && (s = new Child1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prChild2().getRule().getType().getClassifier()) && (s = new Child2_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -760,7 +760,7 @@ protected class Model_8_0_1_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prChild().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prChild().getRule().getType().getClassifier())) {
 				Solution s = new Child_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -833,19 +833,29 @@ protected class Model_8_1_1_Assignment_ref extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ref",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prModel().ele811001TerminalRuleCallSTRING();
+			return new Solution(obj);
+		}
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prModel().ele811011TerminalRuleCallID();
+			return new Solution(obj);
+		}
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prModel().ele81100CrossReferenceEStringChild1().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prModel().ele81100CrossReferenceSTRINGChild1().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prModel().ele81100CrossReferenceEStringChild1(); 
+				element = grammarAccess.prModel().ele81100CrossReferenceSTRINGChild1(); 
 				return new Solution(obj);
 			}
 		}
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prModel().ele81101CrossReferenceEStringChild2().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prModel().ele81101CrossReferenceIDChild2().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prModel().ele81101CrossReferenceEStringChild2(); 
+				element = grammarAccess.prModel().ele81101CrossReferenceIDChild2(); 
 				return new Solution(obj);
 			}
 		}
@@ -904,7 +914,7 @@ protected class Child_0_RuleCall_Child1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Child1_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prChild1().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prChild1().getRule().getType().getClassifier())) return null;
 		return new Child1_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -924,7 +934,7 @@ protected class Child_1_RuleCall_Child2 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Child2_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prChild2().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prChild2().getRule().getType().getClassifier())) return null;
 		return new Child2_Assignment_name(current, this).firstSolution();
 	}
 }

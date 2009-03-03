@@ -89,7 +89,7 @@ ruleFile returns [EObject current=null]
 	    lv_imports_0=ruleImport 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFile().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFile().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -110,7 +110,7 @@ ruleFile returns [EObject current=null]
 	    lv_namedElements_1=ruleNamedElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFile().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFile().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -156,7 +156,7 @@ ruleImport returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prImport().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prImport().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -249,7 +249,7 @@ rulePackage returns [EObject current=null]
 	    lv_name_1=ruleQualifiedName 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prPackage().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prPackage().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -274,7 +274,7 @@ rulePackage returns [EObject current=null]
 	    lv_namedElements_3=ruleNamedElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prPackage().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prPackage().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -372,7 +372,7 @@ ruleDataType returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prDataType().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prDataType().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -417,7 +417,7 @@ ruleEntity returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prEntity().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prEntity().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -437,13 +437,13 @@ ruleEntity returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prEntity().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prEntity().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prEntity().ele210CrossReferenceEStringEntity(), "superType"); 
+		createLeafNode(grammarAccess.prEntity().ele210CrossReferenceIDEntity(), "superType"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -461,7 +461,7 @@ ruleEntity returns [EObject current=null]
 	    lv_features_5=ruleFeature 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prEntity().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prEntity().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -607,7 +607,7 @@ ruleAttribute returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAttribute().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAttribute().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -631,7 +631,7 @@ ruleAttribute returns [EObject current=null]
 	    lv_type_3=ruleTypeRef 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAttribute().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAttribute().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -677,7 +677,7 @@ ruleReference returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prReference().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prReference().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -701,7 +701,7 @@ ruleReference returns [EObject current=null]
 	    lv_type_3=ruleTypeRef 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prReference().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prReference().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -722,13 +722,13 @@ ruleReference returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prReference().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prReference().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prReference().ele410CrossReferenceEStringReference(), "opposite"); 
+		createLeafNode(grammarAccess.prReference().ele410CrossReferenceIDReference(), "opposite"); 
 	}
 
 		// TODO assign feature to currentNode
@@ -767,7 +767,7 @@ ruleOperation returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -791,7 +791,7 @@ ruleOperation returns [EObject current=null]
 	    lv_params_3=ruleParameter 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -816,7 +816,7 @@ ruleOperation returns [EObject current=null]
 	    lv_params_5=ruleParameter 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -845,7 +845,7 @@ ruleOperation returns [EObject current=null]
 	    lv_type_8=ruleTypeRef 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -887,7 +887,7 @@ ruleParameter returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prParameter().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prParameter().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -907,7 +907,7 @@ ruleParameter returns [EObject current=null]
 	    lv_type_1=ruleTypeRef 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prParameter().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prParameter().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -947,13 +947,13 @@ ruleTypeRef returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prTypeRef().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTypeRef().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prTypeRef().ele0CrossReferenceEStringType(), "referenced"); 
+		createLeafNode(grammarAccess.prTypeRef().ele0CrossReferenceIDType(), "referenced"); 
 	}
 
 		// TODO assign feature to currentNode

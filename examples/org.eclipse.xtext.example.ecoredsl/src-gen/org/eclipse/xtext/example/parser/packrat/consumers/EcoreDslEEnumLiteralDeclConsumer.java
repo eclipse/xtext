@@ -258,7 +258,7 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setEAnnotationDeclConsumer(INonTerminalConsumer eAnnotationDeclConsumer) {

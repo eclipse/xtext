@@ -205,7 +205,7 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setWsConsumer(ITerminalConsumer wsConsumer) {

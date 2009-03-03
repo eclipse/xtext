@@ -96,7 +96,7 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setOperationConsumer(INonTerminalConsumer operationConsumer) {

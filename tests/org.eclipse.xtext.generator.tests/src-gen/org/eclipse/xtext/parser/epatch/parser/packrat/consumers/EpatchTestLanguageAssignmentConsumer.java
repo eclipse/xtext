@@ -132,7 +132,7 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setBiListAssignmentConsumer(INonTerminalConsumer biListAssignmentConsumer) {

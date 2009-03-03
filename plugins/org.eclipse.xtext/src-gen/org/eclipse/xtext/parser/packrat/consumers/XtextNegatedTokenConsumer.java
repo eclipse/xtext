@@ -115,7 +115,7 @@ public final class XtextNegatedTokenConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTerminalTokenElementConsumer(INonTerminalConsumer terminalTokenElementConsumer) {

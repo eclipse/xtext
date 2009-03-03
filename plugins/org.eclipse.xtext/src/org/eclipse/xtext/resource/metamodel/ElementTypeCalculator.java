@@ -47,7 +47,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	@Override
 	public EClassifier caseTypeRef(TypeRef object) {
-		if (object.getType() == null) {
+		if (object.getClassifier() == null) {
 			if (object.getMetamodel() == null || object.getMetamodel().getEPackage() == null)
 				return null;
 			String name = GrammarUtil.getTypeRefName(object);
@@ -55,9 +55,9 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 				return null;
 			EClassifierInfo info = classifierInfos.getInfo(object.getMetamodel(), name);
 			if (info != null)
-				object.setType(info.getEClassifier());
+				object.setClassifier(info.getEClassifier());
 		}
-		return object.getType();
+		return object.getClassifier();
 	}
 
 	@Override
@@ -69,10 +69,9 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	@Override
 	public EClassifier caseGroup(Group object) {
-		//TODO Too strict. What about : foo(Bar|Foo ';')
-		if (object.getAbstractTokens().size() != 1)
+		if (object.getTokens().size() != 1)
 			return null;
-		return doSwitch(object.getAbstractTokens().get(0));
+		return doSwitch(object.getTokens().get(0));
 	}
 
 	@Override

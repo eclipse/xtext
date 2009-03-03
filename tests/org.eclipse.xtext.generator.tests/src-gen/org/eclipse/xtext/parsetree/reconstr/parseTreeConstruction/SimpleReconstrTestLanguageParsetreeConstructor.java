@@ -22,16 +22,16 @@ public class SimpleReconstrTestLanguageParsetreeConstructor extends AbstractPars
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prOp().getRule().getType().getType()) && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getType()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTwoNumbers().getRule().getType().getType()) && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prManyStrings().getRule().getType().getType()) && (s = new ManyStrings_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getType()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prRef2().getRule().getType().getType()) && (s = new Ref2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSpare().getRule().getType().getType()) && (s = new Spare_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prBoolean().getRule().getType().getType()) && (s = new Boolean_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOp().getRule().getType().getClassifier()) && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getClassifier()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getClassifier()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTwoNumbers().getRule().getType().getClassifier()) && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prManyStrings().getRule().getType().getClassifier()) && (s = new ManyStrings_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRef2().getRule().getType().getClassifier()) && (s = new Ref2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSpare().getRule().getType().getClassifier()) && (s = new Spare_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prBoolean().getRule().getType().getClassifier()) && (s = new Boolean_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -88,7 +88,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) return null;
 		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
@@ -137,7 +137,7 @@ protected class Op_1_0_Action_Op_values extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prOp().ele10ActionOpvalues().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().ele10ActionOpvalues().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -164,7 +164,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -232,7 +232,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getClassifier())) return null;
 		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -252,7 +252,7 @@ protected class Term_1_RuleCall_TwoNumbers extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TwoNumbers_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTwoNumbers().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTwoNumbers().getRule().getType().getClassifier())) return null;
 		return new TwoNumbers_Group(current, this).firstSolution();
 	}
 }
@@ -272,7 +272,7 @@ protected class Term_2_RuleCall_ManyStrings extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ManyStrings_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prManyStrings().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prManyStrings().getRule().getType().getClassifier())) return null;
 		return new ManyStrings_Group(current, this).firstSolution();
 	}
 }
@@ -292,7 +292,7 @@ protected class Term_3_RuleCall_Parens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getClassifier())) return null;
 		return new Parens_Group(current, this).firstSolution();
 	}
 }
@@ -312,7 +312,7 @@ protected class Term_4_RuleCall_Type extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Type_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prType().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier())) return null;
 		return new Type_Group(current, this).firstSolution();
 	}
 }
@@ -332,7 +332,7 @@ protected class Term_5_RuleCall_Ref2 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Ref2_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prRef2().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prRef2().getRule().getType().getClassifier())) return null;
 		return new Ref2_Group(current, this).firstSolution();
 	}
 }
@@ -352,7 +352,7 @@ protected class Term_6_RuleCall_Spare extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Spare_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prSpare().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prSpare().getRule().getType().getClassifier())) return null;
 		return new Spare_Group(current, this).firstSolution();
 	}
 }
@@ -372,7 +372,7 @@ protected class Term_7_RuleCall_Boolean extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Boolean_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prBoolean().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prBoolean().getRule().getType().getClassifier())) return null;
 		return new Boolean_Group(current, this).firstSolution();
 	}
 }
@@ -488,7 +488,7 @@ protected class Parens_1_RuleCall_Op extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getClassifier())) return null;
 		return new Op_Group(current, this).firstSolution();
 	}
 }
@@ -918,9 +918,9 @@ protected class Type_3_Assignment_extends extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prType().ele30CrossReferenceEStringType().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prType().ele30CrossReferenceIDType().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prType().ele30CrossReferenceEStringType(); 
+				element = grammarAccess.prType().ele30CrossReferenceIDType(); 
 				return new Solution(obj);
 			}
 		}

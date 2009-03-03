@@ -192,7 +192,7 @@ public final class ReferenceGrammarTestLanguageKindConsumer extends NonTerminalC
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

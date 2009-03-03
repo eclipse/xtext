@@ -63,21 +63,42 @@
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="XtextGrammarTestLanguage.ecore#//TerminalRule"/>
-    </genClasses>
-    <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//TypeRef"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//TypeRef/metamodel"/>
       </genFeatures>
       <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//TypeRef/type"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//TypeRef/classifier"/>
       </genFeatures>
     </genClasses>
     <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//AbstractElement"/>
       <genFeatures createChild="false">
         <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//AbstractElement/cardinality"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="XtextGrammarTestLanguage.ecore#//Action"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Action/type"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Action/feature"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Action/operator"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="XtextGrammarTestLanguage.ecore#//Keyword"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Keyword/value"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="XtextGrammarTestLanguage.ecore#//RuleCall"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//RuleCall/rule"/>
       </genFeatures>
     </genClasses>
     <genClasses>
@@ -93,16 +114,16 @@
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="XtextGrammarTestLanguage.ecore#//Action"/>
+      <ecoreClass href="XtextGrammarTestLanguage.ecore#//CrossReference"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Action/typeName"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//CrossReference/type"/>
       </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Action/feature"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//CrossReference/terminal"/>
       </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Action/operator"/>
-      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="XtextGrammarTestLanguage.ecore#//TerminalRule"/>
     </genClasses>
     <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//AbstractNegatedToken"/>
@@ -120,27 +141,6 @@
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//Wildcard"/>
     </genClasses>
     <genClasses>
-      <ecoreClass href="XtextGrammarTestLanguage.ecore#//CrossReference"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//CrossReference/type"/>
-      </genFeatures>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//CrossReference/rule"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="XtextGrammarTestLanguage.ecore#//Keyword"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="XtextGrammarTestLanguage.ecore#//Keyword/value"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="XtextGrammarTestLanguage.ecore#//RuleCall"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//RuleCall/rule"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//Alternatives"/>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Alternatives/groups"/>
@@ -149,7 +149,7 @@
     <genClasses>
       <ecoreClass href="XtextGrammarTestLanguage.ecore#//Group"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Group/abstractTokens"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="XtextGrammarTestLanguage.ecore#//Group/tokens"/>
       </genFeatures>
     </genClasses>
     <genClasses>

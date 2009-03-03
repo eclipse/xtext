@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -124,7 +123,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 	private String getMetamodelNsURI(LeafNode text) {
 		try {
 			return (String) valueConverterService.toValue(text.getText(),
-					((CrossReference)text.getGrammarElement()).getRule().getName(), text);
+//					getRuleNameFrom(text.getGrammarElement()), text);
+					"STRING", text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
 			return null;

@@ -22,27 +22,27 @@ public class EcoreDslParsetreeConstructor extends AbstractParseTreeConstructor {
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prEcoreDsl().getRule().getType().getType()) && (s = new EcoreDsl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prImportStatementDecl().getRule().getType().getType()) && (s = new ImportStatementDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEPackageDecl().getRule().getType().getType()) && (s = new EPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSubEPackageDecl().getRule().getType().getType()) && (s = new SubEPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEClassifierDecl().getRule().getType().getType()) && (s = new EClassifierDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEDataTypeDecl().getRule().getType().getType()) && (s = new EDataTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType()) && (s = new EAnnotationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEClassDecl().getRule().getType().getType()) && (s = new EClassDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEStructuralFeatureDecl().getRule().getType().getType()) && (s = new EStructuralFeatureDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEAttributeDecl().getRule().getType().getType()) && (s = new EAttributeDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEReferenceDecl().getRule().getType().getType()) && (s = new EReferenceDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEEnumDecl().getRule().getType().getType()) && (s = new EEnumDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEEnumLiteralDecl().getRule().getType().getType()) && (s = new EEnumLiteralDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getType()) && (s = new ETypeParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType()) && (s = new EGenericTypeReferenceDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType()) && (s = new EGenericTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEOperationDecl().getRule().getType().getType()) && (s = new EOperationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getType()) && (s = new EParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getType()) && (s = new MapEntrySuper_RuleCall_MapEntry(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getType()) && (s = new MapEntry_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prMultiplicityExpr().getRule().getType().getType()) && (s = new MultiplicityExpr_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEcoreDsl().getRule().getType().getClassifier()) && (s = new EcoreDsl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prImportStatementDecl().getRule().getType().getClassifier()) && (s = new ImportStatementDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEPackageDecl().getRule().getType().getClassifier()) && (s = new EPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier()) && (s = new SubEPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEClassifierDecl().getRule().getType().getClassifier()) && (s = new EClassifierDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier()) && (s = new EDataTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier()) && (s = new EAnnotationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEClassDecl().getRule().getType().getClassifier()) && (s = new EClassDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEStructuralFeatureDecl().getRule().getType().getClassifier()) && (s = new EStructuralFeatureDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier()) && (s = new EAttributeDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier()) && (s = new EReferenceDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEEnumDecl().getRule().getType().getClassifier()) && (s = new EEnumDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier()) && (s = new EEnumLiteralDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier()) && (s = new ETypeParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier()) && (s = new EGenericTypeReferenceDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier()) && (s = new EGenericTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEOperationDecl().getRule().getType().getClassifier()) && (s = new EOperationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getClassifier()) && (s = new EParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getClassifier()) && (s = new MapEntrySuper_RuleCall_MapEntry(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getClassifier()) && (s = new MapEntry_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prMultiplicityExpr().getRule().getType().getClassifier()) && (s = new MultiplicityExpr_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -103,7 +103,7 @@ protected class EcoreDsl_0_Assignment_imports extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prImportStatementDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prImportStatementDecl().getRule().getType().getClassifier())) {
 				Solution s = new ImportStatementDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -136,7 +136,7 @@ protected class EcoreDsl_1_Assignment_package extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEPackageDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEPackageDecl().getRule().getType().getClassifier())) {
 				Solution s = new EPackageDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -416,7 +416,7 @@ protected class EPackageDecl_0_Assignment_eAnnotations extends AssignmentToken  
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -621,7 +621,7 @@ protected class EPackageDecl_10_0_Assignment_eSubpackages extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prSubEPackageDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier())) {
 				Solution s = new SubEPackageDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -654,7 +654,7 @@ protected class EPackageDecl_10_1_Assignment_eClassifiers extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEClassifierDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEClassifierDecl().getRule().getType().getClassifier())) {
 				Solution s = new EClassifierDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -757,7 +757,7 @@ protected class SubEPackageDecl_0_Assignment_eAnnotations extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -860,7 +860,7 @@ protected class SubEPackageDecl_4_0_Assignment_eSubpackages extends AssignmentTo
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prSubEPackageDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier())) {
 				Solution s = new SubEPackageDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -893,7 +893,7 @@ protected class SubEPackageDecl_4_1_Assignment_eClassifiers extends AssignmentTo
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEClassifierDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEClassifierDecl().getRule().getType().getClassifier())) {
 				Solution s = new EClassifierDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -967,7 +967,7 @@ protected class EClassifierDecl_0_RuleCall_EClassDecl extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EClassDecl_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prEClassDecl().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prEClassDecl().getRule().getType().getClassifier())) return null;
 		return new EClassDecl_Group(current, this).firstSolution();
 	}
 }
@@ -987,7 +987,7 @@ protected class EClassifierDecl_1_RuleCall_EDataTypeDecl extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EDataTypeDecl_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prEDataTypeDecl().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier())) return null;
 		return new EDataTypeDecl_Alternatives(current, this).firstSolution();
 	}
 }
@@ -1077,7 +1077,7 @@ protected class EDataTypeDecl_0_0_Assignment_eAnnotations extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1265,7 +1265,7 @@ protected class EDataTypeDecl_1_RuleCall_EEnumDecl extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EEnumDecl_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prEEnumDecl().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prEEnumDecl().getRule().getType().getClassifier())) return null;
 		return new EEnumDecl_Group(current, this).firstSolution();
 	}
 }
@@ -1386,9 +1386,9 @@ protected class EAnnotationDecl_2_Assignment_eModelElement extends AssignmentTok
 		IInstanceDescription obj = current.cloneAndConsume("eModelElement");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().ele20CrossReferenceEStringEModelElement().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().ele20CrossReferenceIDEModelElement().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEAnnotationDecl().ele20CrossReferenceEStringEModelElement(); 
+				element = grammarAccess.prEAnnotationDecl().ele20CrossReferenceIDEModelElement(); 
 				return new Solution(obj);
 			}
 		}
@@ -1427,7 +1427,7 @@ protected class EAnnotationDecl_4_Assignment_contents extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getClassifier())) {
 				Solution s = new MapEntrySuper_RuleCall_MapEntry(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1502,7 +1502,7 @@ protected class EAnnotationDecl_5_1_Assignment_contents extends AssignmentToken 
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getClassifier())) {
 				Solution s = new MapEntrySuper_RuleCall_MapEntry(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1621,7 +1621,7 @@ protected class EClassDecl_0_Assignment_eAnnotations extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1817,7 +1817,7 @@ protected class EClassDecl_4_1_Assignment_eTypeParameters extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier())) {
 				Solution s = new ETypeParameterDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1892,7 +1892,7 @@ protected class EClassDecl_4_2_1_Assignment_eTypeParameters extends AssignmentTo
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier())) {
 				Solution s = new ETypeParameterDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1985,7 +1985,7 @@ protected class EClassDecl_5_1_Assignment_eGenericSuperTypes extends AssignmentT
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2060,7 +2060,7 @@ protected class EClassDecl_5_2_1_Assignment_eGenericSuperTypes extends Assignmen
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2198,7 +2198,7 @@ protected class EClassDecl_8_0_Assignment_eStructuralFeatures extends Assignment
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEStructuralFeatureDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEStructuralFeatureDecl().getRule().getType().getClassifier())) {
 				Solution s = new EStructuralFeatureDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2231,7 +2231,7 @@ protected class EClassDecl_8_1_Assignment_eOperations extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEOperationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEOperationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EOperationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2305,7 +2305,7 @@ protected class EStructuralFeatureDecl_0_RuleCall_EAttributeDecl extends RuleCal
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EAttributeDecl_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prEAttributeDecl().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier())) return null;
 		return new EAttributeDecl_Group(current, this).firstSolution();
 	}
 }
@@ -2325,7 +2325,7 @@ protected class EStructuralFeatureDecl_1_RuleCall_EReferenceDecl extends RuleCal
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(EReferenceDecl_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prEReferenceDecl().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier())) return null;
 		return new EReferenceDecl_Group(current, this).firstSolution();
 	}
 }
@@ -2414,7 +2414,7 @@ protected class EAttributeDecl_0_Assignment_eAnnotations extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2703,7 +2703,7 @@ protected class EAttributeDecl_3_Assignment_eGenericType extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -3064,7 +3064,7 @@ protected class EReferenceDecl_0_Assignment_eAnnotations extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -3402,7 +3402,7 @@ protected class EReferenceDecl_3_Assignment_eGenericType extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -3634,9 +3634,9 @@ protected class EReferenceDecl_5_1_Assignment_eOpposite extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("eOpposite");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEReferenceDecl().ele510CrossReferenceEStringEReference().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEReferenceDecl().ele510CrossReferenceIDEReference().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEReferenceDecl().ele510CrossReferenceEStringEReference(); 
+				element = grammarAccess.prEReferenceDecl().ele510CrossReferenceIDEReference(); 
 				return new Solution(obj);
 			}
 		}
@@ -3758,7 +3758,7 @@ protected class EEnumDecl_0_Assignment_eAnnotations extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -3840,7 +3840,7 @@ protected class EEnumDecl_4_Assignment_eLiterals extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEEnumLiteralDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier())) {
 				Solution s = new EEnumLiteralDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -3938,7 +3938,7 @@ protected class EEnumLiteralDecl_0_Assignment_eAnnotations extends AssignmentTok
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -4209,7 +4209,7 @@ protected class ETypeParameterDecl_1_1_Assignment_eBounds extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -4304,9 +4304,9 @@ protected class EGenericTypeReferenceDecl_0_0_Assignment_eClassifier extends Ass
 		IInstanceDescription obj = current.cloneAndConsume("eClassifier");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceEStringEClassifier().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceIDEClassifier().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceEStringEClassifier(); 
+				element = grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceIDEClassifier(); 
 				return new Solution(obj);
 			}
 		}
@@ -4383,7 +4383,7 @@ protected class EGenericTypeReferenceDecl_0_1_1_Assignment_eTypeArguments extend
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -4458,7 +4458,7 @@ protected class EGenericTypeReferenceDecl_0_1_2_1_Assignment_eTypeArguments exte
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -4547,9 +4547,9 @@ protected class EGenericTypeReferenceDecl_1_1_Assignment_eTypeParameter extends 
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameter");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceEStringETypeParameter().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceIDETypeParameter().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceEStringETypeParameter(); 
+				element = grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceIDETypeParameter(); 
 				return new Solution(obj);
 			}
 		}
@@ -4639,9 +4639,9 @@ protected class EGenericTypeDecl_0_0_Assignment_eClassifier extends AssignmentTo
 		IInstanceDescription obj = current.cloneAndConsume("eClassifier");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().ele000CrossReferenceEStringEClassifier().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().ele000CrossReferenceIDEClassifier().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEGenericTypeDecl().ele000CrossReferenceEStringEClassifier(); 
+				element = grammarAccess.prEGenericTypeDecl().ele000CrossReferenceIDEClassifier(); 
 				return new Solution(obj);
 			}
 		}
@@ -4718,7 +4718,7 @@ protected class EGenericTypeDecl_0_1_1_Assignment_eTypeArguments extends Assignm
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -4793,7 +4793,7 @@ protected class EGenericTypeDecl_0_1_2_1_Assignment_eTypeArguments extends Assig
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -4882,9 +4882,9 @@ protected class EGenericTypeDecl_1_1_Assignment_eTypeParameter extends Assignmen
 		IInstanceDescription obj = current.cloneAndConsume("eTypeParameter");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().ele110CrossReferenceEStringETypeParameter().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().ele110CrossReferenceIDETypeParameter().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEGenericTypeDecl().ele110CrossReferenceEStringETypeParameter(); 
+				element = grammarAccess.prEGenericTypeDecl().ele110CrossReferenceIDETypeParameter(); 
 				return new Solution(obj);
 			}
 		}
@@ -5017,7 +5017,7 @@ protected class EGenericTypeDecl_2_1_0_1_Assignment_eUpperBound extends Assignme
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5093,7 +5093,7 @@ protected class EGenericTypeDecl_2_1_1_1_Assignment_eLowerBound extends Assignme
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5206,7 +5206,7 @@ protected class EOperationDecl_0_Assignment_eAnnotations extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5348,7 +5348,7 @@ protected class EOperationDecl_3_0_Assignment_eGenericType extends AssignmentTok
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5469,7 +5469,7 @@ protected class EOperationDecl_5_1_Assignment_eTypeParameters extends Assignment
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier())) {
 				Solution s = new ETypeParameterDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5544,7 +5544,7 @@ protected class EOperationDecl_5_2_1_Assignment_eTypeParameters extends Assignme
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier())) {
 				Solution s = new ETypeParameterDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5633,7 +5633,7 @@ protected class EOperationDecl_7_0_Assignment_eParameters extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getClassifier())) {
 				Solution s = new EParameterDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5708,7 +5708,7 @@ protected class EOperationDecl_7_1_1_Assignment_eParameters extends AssignmentTo
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getClassifier())) {
 				Solution s = new EParameterDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5801,7 +5801,7 @@ protected class EOperationDecl_9_1_Assignment_eGenericExceptions extends Assignm
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5876,7 +5876,7 @@ protected class EOperationDecl_9_2_1_Assignment_eGenericExceptions extends Assig
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -5968,7 +5968,7 @@ protected class EParameterDecl_0_Assignment_eAnnotations extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier())) {
 				Solution s = new EAnnotationDecl_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -6001,7 +6001,7 @@ protected class EParameterDecl_1_Assignment_eGenericType extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier())) {
 				Solution s = new EGenericTypeReferenceDecl_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -6066,7 +6066,7 @@ protected class MapEntrySuper_RuleCall_MapEntry extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(MapEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getClassifier())) return null;
 		return new MapEntry_Group(current, this).firstSolution();
 	}
 }

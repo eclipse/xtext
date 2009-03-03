@@ -153,7 +153,7 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAbstractChildConsumer(INonTerminalConsumer abstractChildConsumer) {

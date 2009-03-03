@@ -140,14 +140,6 @@ public class XtextTerminalsTestLanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XtextTerminalsTestLanguagePackage.TERMINAL_RULE:
-      {
-        TerminalRule terminalRule = (TerminalRule)theEObject;
-        T result = caseTerminalRule(terminalRule);
-        if (result == null) result = caseAbstractRule(terminalRule);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XtextTerminalsTestLanguagePackage.TYPE_REF:
       {
         TypeRef typeRef = (TypeRef)theEObject;
@@ -162,6 +154,30 @@ public class XtextTerminalsTestLanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XtextTerminalsTestLanguagePackage.ACTION:
+      {
+        Action action = (Action)theEObject;
+        T result = caseAction(action);
+        if (result == null) result = caseAbstractElement(action);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextTerminalsTestLanguagePackage.KEYWORD:
+      {
+        Keyword keyword = (Keyword)theEObject;
+        T result = caseKeyword(keyword);
+        if (result == null) result = caseAbstractElement(keyword);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextTerminalsTestLanguagePackage.RULE_CALL:
+      {
+        RuleCall ruleCall = (RuleCall)theEObject;
+        T result = caseRuleCall(ruleCall);
+        if (result == null) result = caseAbstractElement(ruleCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XtextTerminalsTestLanguagePackage.ASSIGNMENT:
       {
         Assignment assignment = (Assignment)theEObject;
@@ -170,11 +186,19 @@ public class XtextTerminalsTestLanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XtextTerminalsTestLanguagePackage.ACTION:
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE:
       {
-        Action action = (Action)theEObject;
-        T result = caseAction(action);
-        if (result == null) result = caseAbstractElement(action);
+        CrossReference crossReference = (CrossReference)theEObject;
+        T result = caseCrossReference(crossReference);
+        if (result == null) result = caseAbstractElement(crossReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextTerminalsTestLanguagePackage.TERMINAL_RULE:
+      {
+        TerminalRule terminalRule = (TerminalRule)theEObject;
+        T result = caseTerminalRule(terminalRule);
+        if (result == null) result = caseAbstractRule(terminalRule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -209,30 +233,6 @@ public class XtextTerminalsTestLanguageSwitch<T>
         Wildcard wildcard = (Wildcard)theEObject;
         T result = caseWildcard(wildcard);
         if (result == null) result = caseAbstractElement(wildcard);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE:
-      {
-        CrossReference crossReference = (CrossReference)theEObject;
-        T result = caseCrossReference(crossReference);
-        if (result == null) result = caseAbstractElement(crossReference);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XtextTerminalsTestLanguagePackage.KEYWORD:
-      {
-        Keyword keyword = (Keyword)theEObject;
-        T result = caseKeyword(keyword);
-        if (result == null) result = caseAbstractElement(keyword);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XtextTerminalsTestLanguagePackage.RULE_CALL:
-      {
-        RuleCall ruleCall = (RuleCall)theEObject;
-        T result = caseRuleCall(ruleCall);
-        if (result == null) result = caseAbstractElement(ruleCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -361,22 +361,6 @@ public class XtextTerminalsTestLanguageSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Terminal Rule</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Terminal Rule</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTerminalRule(TerminalRule object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Type Ref</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -409,6 +393,54 @@ public class XtextTerminalsTestLanguageSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAction(Action object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Keyword</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Keyword</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseKeyword(Keyword object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rule Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rule Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRuleCall(RuleCall object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -425,17 +457,33 @@ public class XtextTerminalsTestLanguageSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Cross Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Cross Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAction(Action object)
+  public T caseCrossReference(CrossReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Terminal Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Terminal Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTerminalRule(TerminalRule object)
   {
     return null;
   }
@@ -500,54 +548,6 @@ public class XtextTerminalsTestLanguageSwitch<T>
    * @generated
    */
   public T caseWildcard(Wildcard object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Cross Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Cross Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCrossReference(CrossReference object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Keyword</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Keyword</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseKeyword(Keyword object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Rule Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Rule Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRuleCall(RuleCall object)
   {
     return null;
   }

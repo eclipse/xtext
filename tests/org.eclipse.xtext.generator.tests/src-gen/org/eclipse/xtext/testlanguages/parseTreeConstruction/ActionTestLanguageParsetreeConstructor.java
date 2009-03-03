@@ -22,9 +22,9 @@ public class ActionTestLanguageParsetreeConstructor extends AbstractParseTreeCon
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prElement().getRule().getType().getType()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prItem().getRule().getType().getType()) && (s = new Item_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prElement().getRule().getType().getClassifier()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prItem().getRule().getType().getClassifier()) && (s = new Item_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -55,7 +55,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prElement().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prElement().getRule().getType().getClassifier())) {
 				Solution s = new Element_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -124,7 +124,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Item_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prItem().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prItem().getRule().getType().getClassifier())) return null;
 		return new Item_Group(current, this).firstSolution();
 	}
 }
@@ -173,7 +173,7 @@ protected class Element_1_0_Action_Item_items extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prElement().ele10ActionItemitems().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prElement().ele10ActionItemitems().getType().getClassifier())) return null;
 		Object val = current.getConsumable("items", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("items")) return null;
@@ -200,7 +200,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prItem().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prItem().getRule().getType().getClassifier())) {
 				Solution s = new Item_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -270,7 +270,7 @@ protected class Item_0_Action_Thing_content extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prItem().ele0ActionThingcontent().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prItem().ele0ActionThingcontent().getType().getClassifier())) return null;
 		Object val = current.getConsumable("content", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("content")) return null;

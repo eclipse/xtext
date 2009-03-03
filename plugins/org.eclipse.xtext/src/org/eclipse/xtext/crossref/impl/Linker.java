@@ -75,10 +75,14 @@ public class Linker extends AbstractLinker {
 
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for(EReference ref: obj.eClass().getEAllReferences())
-			if (!ref.isContainment() && !ref.isContainer() && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
+			if (canSetDefaultValues(ref) && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
 				producer.setTarget(obj, ref);
 				setDefaultValue(obj, ref, producer);
 			}
+	}
+
+	protected boolean canSetDefaultValues(EReference ref) {
+		return !ref.isContainment() && !ref.isContainer();
 	}
 
 	protected final void setDefaultValue(EObject obj, EReference ref, IDiagnosticProducer producer) {

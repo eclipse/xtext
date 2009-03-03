@@ -78,7 +78,7 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAltsConsumer(INonTerminalConsumer altsConsumer) {

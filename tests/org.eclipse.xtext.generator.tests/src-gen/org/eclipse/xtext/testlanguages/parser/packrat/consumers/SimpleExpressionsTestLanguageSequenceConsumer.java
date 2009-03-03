@@ -143,7 +143,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAdditionConsumer(INonTerminalConsumer additionConsumer) {

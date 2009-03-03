@@ -121,7 +121,7 @@ public final class Bug250313NestedDatatypeConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setDatatypeConsumer(INonTerminalConsumer datatypeConsumer) {

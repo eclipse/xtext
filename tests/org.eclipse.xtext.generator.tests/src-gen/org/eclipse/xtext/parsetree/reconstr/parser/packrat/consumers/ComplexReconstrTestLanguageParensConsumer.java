@@ -153,7 +153,7 @@ public final class ComplexReconstrTestLanguageParensConsumer extends NonTerminal
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setOpConsumer(INonTerminalConsumer opConsumer) {

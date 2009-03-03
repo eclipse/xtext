@@ -96,7 +96,7 @@ public final class ReferenceGrammarTestLanguagePersonConsumer extends NonTermina
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setErwachsenerConsumer(INonTerminalConsumer erwachsenerConsumer) {

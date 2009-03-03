@@ -204,7 +204,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAtomConsumer(INonTerminalConsumer atomConsumer) {

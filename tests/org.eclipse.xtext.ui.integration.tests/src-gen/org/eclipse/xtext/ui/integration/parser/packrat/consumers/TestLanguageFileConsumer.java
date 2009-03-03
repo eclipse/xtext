@@ -78,7 +78,7 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setStuffConsumer(INonTerminalConsumer stuffConsumer) {

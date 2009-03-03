@@ -133,7 +133,7 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$3$Delimiter() {

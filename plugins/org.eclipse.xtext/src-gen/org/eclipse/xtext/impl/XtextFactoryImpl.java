@@ -73,18 +73,18 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
       case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
       case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
       case XtextPackage.PARSER_RULE: return createParserRule();
-      case XtextPackage.TERMINAL_RULE: return createTerminalRule();
       case XtextPackage.TYPE_REF: return createTypeRef();
       case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-      case XtextPackage.ASSIGNMENT: return createAssignment();
       case XtextPackage.ACTION: return createAction();
+      case XtextPackage.KEYWORD: return createKeyword();
+      case XtextPackage.RULE_CALL: return createRuleCall();
+      case XtextPackage.ASSIGNMENT: return createAssignment();
+      case XtextPackage.CROSS_REFERENCE: return createCrossReference();
+      case XtextPackage.TERMINAL_RULE: return createTerminalRule();
       case XtextPackage.ABSTRACT_NEGATED_TOKEN: return createAbstractNegatedToken();
       case XtextPackage.NEGATED_TOKEN: return createNegatedToken();
       case XtextPackage.UNTIL_TOKEN: return createUntilToken();
       case XtextPackage.WILDCARD: return createWildcard();
-      case XtextPackage.CROSS_REFERENCE: return createCrossReference();
-      case XtextPackage.KEYWORD: return createKeyword();
-      case XtextPackage.RULE_CALL: return createRuleCall();
       case XtextPackage.ALTERNATIVES: return createAlternatives();
       case XtextPackage.GROUP: return createGroup();
       case XtextPackage.CHARACTER_RANGE: return createCharacterRange();
@@ -164,17 +164,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TerminalRule createTerminalRule()
-  {
-    TerminalRuleImpl terminalRule = new TerminalRuleImpl();
-    return terminalRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
@@ -197,6 +186,39 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public Action createAction()
+  {
+    ActionImpl action = new ActionImpl();
+    return action;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Keyword createKeyword()
+  {
+    KeywordImpl keyword = new KeywordImpl();
+    return keyword;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuleCall createRuleCall()
+  {
+    RuleCallImpl ruleCall = new RuleCallImpl();
+    return ruleCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
@@ -208,10 +230,21 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Action createAction()
+  public CrossReference createCrossReference()
   {
-    ActionImpl action = new ActionImpl();
-    return action;
+    CrossReferenceImpl crossReference = new CrossReferenceImpl();
+    return crossReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TerminalRule createTerminalRule()
+  {
+    TerminalRuleImpl terminalRule = new TerminalRuleImpl();
+    return terminalRule;
   }
 
   /**
@@ -256,39 +289,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CrossReference createCrossReference()
-  {
-    CrossReferenceImpl crossReference = new CrossReferenceImpl();
-    return crossReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Keyword createKeyword()
-  {
-    KeywordImpl keyword = new KeywordImpl();
-    return keyword;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RuleCall createRuleCall()
-  {
-    RuleCallImpl ruleCall = new RuleCallImpl();
-    return ruleCall;
   }
 
   /**

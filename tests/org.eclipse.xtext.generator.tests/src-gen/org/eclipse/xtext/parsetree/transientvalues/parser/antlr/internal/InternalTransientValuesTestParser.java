@@ -301,7 +301,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prTestRequired().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prTestRequired().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -324,7 +324,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prTestRequired().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prTestRequired().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -433,7 +433,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prTestOptional().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prTestOptional().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -474,7 +474,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prTestOptional().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prTestOptional().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -592,7 +592,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestList().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prTestList().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        

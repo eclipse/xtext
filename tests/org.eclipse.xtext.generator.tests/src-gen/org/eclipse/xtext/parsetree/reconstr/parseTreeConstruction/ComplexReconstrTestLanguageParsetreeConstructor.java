@@ -22,21 +22,21 @@ public class ComplexReconstrTestLanguageParsetreeConstructor extends AbstractPar
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getType()) && (s = new Root_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOp().getRule().getType().getType()) && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getType()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyA().getRule().getType().getType()) && (s = new TrickyA_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyA1().getRule().getType().getType()) && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyB().getRule().getType().getType()) && (s = new TrickyB_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyC().getRule().getType().getType()) && (s = new TrickyC_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyD().getRule().getType().getType()) && (s = new TrickyD_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyE().getRule().getType().getType()) && (s = new TrickyE_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyF().getRule().getType().getType()) && (s = new TrickyF_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyG().getRule().getType().getType()) && (s = new TrickyG_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getType()) && (s = new TrickyG1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getType()) && (s = new TrickyG2_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getClassifier()) && (s = new Root_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOp().getRule().getType().getClassifier()) && (s = new Op_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier()) && (s = new Term_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAtom().getRule().getType().getClassifier()) && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParens().getRule().getType().getClassifier()) && (s = new Parens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyA().getRule().getType().getClassifier()) && (s = new TrickyA_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyA1().getRule().getType().getClassifier()) && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyB().getRule().getType().getClassifier()) && (s = new TrickyB_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyC().getRule().getType().getClassifier()) && (s = new TrickyC_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyD().getRule().getType().getClassifier()) && (s = new TrickyD_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyE().getRule().getType().getClassifier()) && (s = new TrickyE_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyF().getRule().getType().getClassifier()) && (s = new TrickyF_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyG().getRule().getType().getClassifier()) && (s = new TrickyG_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getClassifier()) && (s = new TrickyG1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getClassifier()) && (s = new TrickyG2_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -84,7 +84,7 @@ protected class Root_0_RuleCall_Op extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getClassifier())) return null;
 		return new Op_Group(current, this).firstSolution();
 	}
 }
@@ -104,7 +104,7 @@ protected class Root_1_RuleCall_TrickyG extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyG_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTrickyG().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyG().getRule().getType().getClassifier())) return null;
 		return new TrickyG_Group(current, this).firstSolution();
 	}
 }
@@ -165,7 +165,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Term_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) return null;
 		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
@@ -239,7 +239,7 @@ protected class Op_1_0_0_Action_Add_addOperands extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prOp().ele100ActionAddaddOperands().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().ele100ActionAddaddOperands().getType().getClassifier())) return null;
 		Object val = current.getConsumable("addOperands", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("addOperands")) return null;
@@ -278,7 +278,7 @@ protected class Op_1_0_2_Assignment_addOperands extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -341,7 +341,7 @@ protected class Op_1_1_0_Action_Minus_minusOperands extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prOp().ele110ActionMinusminusOperands().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().ele110ActionMinusminusOperands().getType().getClassifier())) return null;
 		Object val = current.getConsumable("minusOperands", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("minusOperands")) return null;
@@ -380,7 +380,7 @@ protected class Op_1_1_2_Assignment_minusOperands extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTerm().getRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -443,7 +443,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAtom().getRule().getType().getClassifier())) return null;
 		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -463,7 +463,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prParens().getRule().getType().getClassifier())) return null;
 		return new Parens_Group(current, this).firstSolution();
 	}
 }
@@ -579,7 +579,7 @@ protected class Parens_1_RuleCall_Op extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Op_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOp().getRule().getType().getClassifier())) return null;
 		return new Op_Group(current, this).firstSolution();
 	}
 }
@@ -703,7 +703,7 @@ protected class TrickyA_1_RuleCall_TrickyA1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyA1_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTrickyA1().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyA1().getRule().getType().getClassifier())) return null;
 		return new TrickyA1_Assignment_name(current, this).firstSolution();
 	}
 }
@@ -798,7 +798,7 @@ protected class TrickyA_3_0_0_Action_TypeB_x extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prTrickyA().ele300ActionTypeBx().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyA().ele300ActionTypeBx().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -863,7 +863,7 @@ protected class TrickyA_3_1_0_Action_TypeC_x extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prTrickyA().ele310ActionTypeCx().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyA().ele310ActionTypeCx().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -1242,7 +1242,7 @@ protected class TrickyC_2_0_Action_C1_x extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele20ActionC1x().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele20ActionC1x().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -1307,7 +1307,7 @@ protected class TrickyC_3_0_Action_C2_y extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele30ActionC2y().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele30ActionC2y().getType().getClassifier())) return null;
 		Object val = current.getConsumable("y", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("y")) return null;
@@ -1372,7 +1372,7 @@ protected class TrickyC_4_0_Action_C3_z extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele40ActionC3z().getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyC().ele40ActionC3z().getType().getClassifier())) return null;
 		Object val = current.getConsumable("z", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("z")) return null;
@@ -2216,7 +2216,7 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getClassifier())) {
 				Solution s = new TrickyG1_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2336,7 +2336,7 @@ protected class TrickyG1_1_0_Assignment_vals extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getClassifier())) {
 				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2411,7 +2411,7 @@ protected class TrickyG1_1_1_1_Assignment_vals extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTrickyG2().getRule().getType().getClassifier())) {
 				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -2486,7 +2486,7 @@ protected class TrickyG2_0_RuleCall_TrickyG1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TrickyG1_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTrickyG1().getRule().getType().getClassifier())) return null;
 		return new TrickyG1_Group(current, this).firstSolution();
 	}
 }

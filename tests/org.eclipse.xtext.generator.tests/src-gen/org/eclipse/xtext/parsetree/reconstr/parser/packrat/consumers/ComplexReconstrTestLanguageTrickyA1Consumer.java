@@ -81,7 +81,7 @@ public final class ComplexReconstrTestLanguageTrickyA1Consumer extends NonTermin
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

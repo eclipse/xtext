@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractRule;
+import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.AbstractElement;
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.CrossReference;
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef;
 import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTe
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.CrossReferenceImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.CrossReferenceImpl#getRule <em>Rule</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.CrossReferenceImpl#getTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,14 +45,14 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
   protected TypeRef type;
 
   /**
-   * The cached value of the '{@link #getRule() <em>Rule</em>}' reference.
+   * The cached value of the '{@link #getTerminal() <em>Terminal</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRule()
+   * @see #getTerminal()
    * @generated
    * @ordered
    */
-  protected AbstractRule rule;
+  protected AbstractElement terminal;
 
   /**
    * <!-- begin-user-doc -->
@@ -128,19 +128,9 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRule getRule()
+  public AbstractElement getTerminal()
   {
-    if (rule != null && rule.eIsProxy())
-    {
-      InternalEObject oldRule = (InternalEObject)rule;
-      rule = (AbstractRule)eResolveProxy(oldRule);
-      if (rule != oldRule)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__RULE, oldRule, rule));
-      }
-    }
-    return rule;
+    return terminal;
   }
 
   /**
@@ -148,22 +138,37 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRule basicGetRule()
+  public NotificationChain basicSetTerminal(AbstractElement newTerminal, NotificationChain msgs)
   {
-    return rule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRule(AbstractRule newRule)
-  {
-    AbstractRule oldRule = rule;
-    rule = newRule;
+    AbstractElement oldTerminal = terminal;
+    terminal = newTerminal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__RULE, oldRule, rule));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL, oldTerminal, newTerminal);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTerminal(AbstractElement newTerminal)
+  {
+    if (newTerminal != terminal)
+    {
+      NotificationChain msgs = null;
+      if (terminal != null)
+        msgs = ((InternalEObject)terminal).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL, null, msgs);
+      if (newTerminal != null)
+        msgs = ((InternalEObject)newTerminal).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL, null, msgs);
+      msgs = basicSetTerminal(newTerminal, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL, newTerminal, newTerminal));
   }
 
   /**
@@ -178,6 +183,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
     {
       case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TYPE:
         return basicSetType(null, msgs);
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL:
+        return basicSetTerminal(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -194,9 +201,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
     {
       case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TYPE:
         return getType();
-      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__RULE:
-        if (resolve) return getRule();
-        return basicGetRule();
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL:
+        return getTerminal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -214,8 +220,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
       case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TYPE:
         setType((TypeRef)newValue);
         return;
-      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__RULE:
-        setRule((AbstractRule)newValue);
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL:
+        setTerminal((AbstractElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -234,8 +240,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
       case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TYPE:
         setType((TypeRef)null);
         return;
-      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__RULE:
-        setRule((AbstractRule)null);
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL:
+        setTerminal((AbstractElement)null);
         return;
     }
     super.eUnset(featureID);
@@ -253,8 +259,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
     {
       case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TYPE:
         return type != null;
-      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__RULE:
-        return rule != null;
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE__TERMINAL:
+        return terminal != null;
     }
     return super.eIsSet(featureID);
   }

@@ -164,7 +164,7 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTerminalRuleConsumer(INonTerminalConsumer terminalRuleConsumer) {

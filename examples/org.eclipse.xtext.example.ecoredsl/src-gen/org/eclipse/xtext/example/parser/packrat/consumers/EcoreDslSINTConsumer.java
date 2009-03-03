@@ -102,7 +102,7 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIntConsumer(ITerminalConsumer intConsumer) {

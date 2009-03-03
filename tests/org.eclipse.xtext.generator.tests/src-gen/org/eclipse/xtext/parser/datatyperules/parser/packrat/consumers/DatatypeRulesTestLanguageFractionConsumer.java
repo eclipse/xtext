@@ -136,7 +136,7 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIntConsumer(ITerminalConsumer intConsumer) {

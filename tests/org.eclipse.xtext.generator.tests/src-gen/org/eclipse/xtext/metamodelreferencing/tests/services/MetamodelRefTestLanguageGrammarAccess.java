@@ -47,7 +47,8 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 	public class NameRefElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameRef");
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceEStringParserRule = (CrossReference)cAssignmentRule.eContents().get(0);
+		private final CrossReference c0CrossReferenceIDParserRule = (CrossReference)cAssignmentRule.eContents().get(0);
+		private final RuleCall c01TerminalRuleCallID = (RuleCall)c0CrossReferenceIDParserRule.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -56,7 +57,10 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
 		// not supported
-		public CrossReference ele0CrossReferenceEStringParserRule() { return c0CrossReferenceEStringParserRule; }
+		public CrossReference ele0CrossReferenceIDParserRule() { return c0CrossReferenceIDParserRule; }
+
+		// not supported
+		public RuleCall ele01TerminalRuleCallID() { return c01TerminalRuleCallID; }
 	}
 
 	public class MyRuleElements implements IParserRuleAccess {

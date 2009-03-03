@@ -56,9 +56,9 @@ public class EClassifierInfos {
 	}
 
 	public boolean addInfo(TypeRef typeRef, EClassifierInfo metatypeInfo) {
-		if (typeRef.getMetamodel() == null || typeRef.getType() == null)
+		if (typeRef.getMetamodel() == null || typeRef.getClassifier() == null)
 			throw new NullPointerException();
-		return addInfo(typeRef.getMetamodel(), typeRef.getType().getName(), metatypeInfo);
+		return addInfo(typeRef.getMetamodel(), typeRef.getClassifier().getName(), metatypeInfo);
 	}
 
 	public boolean addInfo(AbstractMetamodelDeclaration alias, String name, EClassifierInfo metatypeInfo) {
@@ -72,9 +72,9 @@ public class EClassifierInfos {
 	}
 
 	public EClassifierInfo getInfo(TypeRef typeRef) {
-		if (typeRef.getType() == null)
+		if (typeRef.getClassifier() == null)
 			return null;
-		return getInfo(typeRef.getMetamodel(), typeRef.getType().getName());
+		return getInfo(typeRef.getMetamodel(), typeRef.getClassifier().getName());
 	}
 
 	public EClassifierInfo getInfoOrNull(TypeRef typeRef) {

@@ -96,7 +96,7 @@ public final class DomainmodelStructuralFeatureConsumer extends NonTerminalConsu
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAttributeConsumer(INonTerminalConsumer attributeConsumer) {

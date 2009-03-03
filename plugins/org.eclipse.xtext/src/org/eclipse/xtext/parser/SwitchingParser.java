@@ -23,27 +23,27 @@ public class SwitchingParser implements ISwitchingParser {
 
 	private static final Logger log = Logger.getLogger(SwitchingParser.class);
 	private static boolean usePackrat;
-	
+
 	static {
 		String param = System.getProperty("org.eclipse.xtext.parser");
 		usePackrat = param != null && param.equals("packrat");
 	}
-	
+
 	@Inject(optional=true)
 	private IAntlrParser antlrParser;
-	
+
 	@Inject
 	private IPackratParser packratParser;
-	
+
 	private boolean displayed = false;
-	
+
 	private void displayPackratInfo() {
 		if (!displayed && !usePackrat)
 			log.info("Using packrat parser.\n" +
 				"If this is not desired, regenerate your language and ensure project 'de.itemis.xtext.antlr' is on your classpath.");
 		displayed = true;
 	}
-	
+
 	public IParseResult parse(InputStream in) {
 		if (antlrParser != null && !usePackrat) {
 			return antlrParser.parse(in);
@@ -59,7 +59,7 @@ public class SwitchingParser implements ISwitchingParser {
 		displayPackratInfo();
 		return packratParser.reparse(originalRootNode, offset, length, change);
 	}
-	
+
 	public static boolean isUsePackrat() {
 		return usePackrat;
 	}

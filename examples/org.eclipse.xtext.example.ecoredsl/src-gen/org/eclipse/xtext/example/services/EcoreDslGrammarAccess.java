@@ -330,7 +330,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Assignment c1AssignmentSource = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10TerminalRuleCallSTRING = (RuleCall)c1AssignmentSource.eContents().get(0);
 		private final Assignment c2AssignmentEModelElement = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference c20CrossReferenceEStringEModelElement = (CrossReference)c2AssignmentEModelElement.eContents().get(0);
+		private final CrossReference c20CrossReferenceIDEModelElement = (CrossReference)c2AssignmentEModelElement.eContents().get(0);
+		private final RuleCall c201TerminalRuleCallID = (RuleCall)c20CrossReferenceIDEModelElement.eContents().get(1);
 		private final Keyword c3KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(3);
 		private final Assignment c4AssignmentContents = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall c40ParserRuleCallMapEntrySuper = (RuleCall)c4AssignmentContents.eContents().get(0);
@@ -359,7 +360,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele2AssignmentEModelElement() { return c2AssignmentEModelElement; }
 
 		// not supported
-		public CrossReference ele20CrossReferenceEStringEModelElement() { return c20CrossReferenceEStringEModelElement; }
+		public CrossReference ele20CrossReferenceIDEModelElement() { return c20CrossReferenceIDEModelElement; }
+
+		// not supported
+		public RuleCall ele201TerminalRuleCallID() { return c201TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele3KeywordLeftParenthesis() { return c3KeywordLeftParenthesis; }
@@ -771,7 +775,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c5Group = (Group)cGroup.eContents().get(5);
 		private final Keyword c50KeywordNumberSign = (Keyword)c5Group.eContents().get(0);
 		private final Assignment c51AssignmentEOpposite = (Assignment)c5Group.eContents().get(1);
-		private final CrossReference c510CrossReferenceEStringEReference = (CrossReference)c51AssignmentEOpposite.eContents().get(0);
+		private final CrossReference c510CrossReferenceIDEReference = (CrossReference)c51AssignmentEOpposite.eContents().get(0);
+		private final RuleCall c5101TerminalRuleCallID = (RuleCall)c510CrossReferenceIDEReference.eContents().get(1);
 		private final Assignment c6AssignmentName = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall c60TerminalRuleCallID = (RuleCall)c6AssignmentName.eContents().get(0);
 		private final Keyword c7KeywordSemicolon = (Keyword)cGroup.eContents().get(7);
@@ -894,7 +899,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele51AssignmentEOpposite() { return c51AssignmentEOpposite; }
 
 		// not supported
-		public CrossReference ele510CrossReferenceEStringEReference() { return c510CrossReferenceEStringEReference; }
+		public CrossReference ele510CrossReferenceIDEReference() { return c510CrossReferenceIDEReference; }
+
+		// not supported
+		public RuleCall ele5101TerminalRuleCallID() { return c5101TerminalRuleCallID; }
 
 		// not supported
 		public Assignment ele6AssignmentName() { return c6AssignmentName; }
@@ -1048,7 +1056,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
 		private final Assignment c00AssignmentEClassifier = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceEStringEClassifier = (CrossReference)c00AssignmentEClassifier.eContents().get(0);
+		private final CrossReference c000CrossReferenceIDEClassifier = (CrossReference)c00AssignmentEClassifier.eContents().get(0);
+		private final RuleCall c0001TerminalRuleCallID = (RuleCall)c000CrossReferenceIDEClassifier.eContents().get(1);
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
 		private final Keyword c010KeywordLessThanSign = (Keyword)c01Group.eContents().get(0);
 		private final Assignment c011AssignmentETypeArguments = (Assignment)c01Group.eContents().get(1);
@@ -1061,7 +1070,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
 		private final Keyword c10KeywordNumberSign = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentETypeParameter = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceEStringETypeParameter = (CrossReference)c11AssignmentETypeParameter.eContents().get(0);
+		private final CrossReference c110CrossReferenceIDETypeParameter = (CrossReference)c11AssignmentETypeParameter.eContents().get(0);
+		private final RuleCall c1101TerminalRuleCallID = (RuleCall)c110CrossReferenceIDETypeParameter.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1076,7 +1086,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele00AssignmentEClassifier() { return c00AssignmentEClassifier; }
 
 		// not supported
-		public CrossReference ele000CrossReferenceEStringEClassifier() { return c000CrossReferenceEStringEClassifier; }
+		public CrossReference ele000CrossReferenceIDEClassifier() { return c000CrossReferenceIDEClassifier; }
+
+		// not supported
+		public RuleCall ele0001TerminalRuleCallID() { return c0001TerminalRuleCallID; }
 
 		// not supported
 		public Group ele01Group() { return c01Group; }
@@ -1115,7 +1128,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentETypeParameter() { return c11AssignmentETypeParameter; }
 
 		// not supported
-		public CrossReference ele110CrossReferenceEStringETypeParameter() { return c110CrossReferenceEStringETypeParameter; }
+		public CrossReference ele110CrossReferenceIDETypeParameter() { return c110CrossReferenceIDETypeParameter; }
+
+		// not supported
+		public RuleCall ele1101TerminalRuleCallID() { return c1101TerminalRuleCallID; }
 	}
 
 	public class EGenericTypeDeclElements implements IParserRuleAccess {
@@ -1123,7 +1139,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
 		private final Assignment c00AssignmentEClassifier = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceEStringEClassifier = (CrossReference)c00AssignmentEClassifier.eContents().get(0);
+		private final CrossReference c000CrossReferenceIDEClassifier = (CrossReference)c00AssignmentEClassifier.eContents().get(0);
+		private final RuleCall c0001TerminalRuleCallID = (RuleCall)c000CrossReferenceIDEClassifier.eContents().get(1);
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
 		private final Keyword c010KeywordLessThanSign = (Keyword)c01Group.eContents().get(0);
 		private final Assignment c011AssignmentETypeArguments = (Assignment)c01Group.eContents().get(1);
@@ -1136,7 +1153,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
 		private final Keyword c10KeywordNumberSign = (Keyword)c1Group.eContents().get(0);
 		private final Assignment c11AssignmentETypeParameter = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceEStringETypeParameter = (CrossReference)c11AssignmentETypeParameter.eContents().get(0);
+		private final CrossReference c110CrossReferenceIDETypeParameter = (CrossReference)c11AssignmentETypeParameter.eContents().get(0);
+		private final RuleCall c1101TerminalRuleCallID = (RuleCall)c110CrossReferenceIDETypeParameter.eContents().get(1);
 		private final Group c2Group = (Group)cAlternatives.eContents().get(2);
 		private final Keyword c20KeywordQuestionMark = (Keyword)c2Group.eContents().get(0);
 		private final Alternatives c21Alternatives = (Alternatives)c2Group.eContents().get(1);
@@ -1162,7 +1180,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele00AssignmentEClassifier() { return c00AssignmentEClassifier; }
 
 		// not supported
-		public CrossReference ele000CrossReferenceEStringEClassifier() { return c000CrossReferenceEStringEClassifier; }
+		public CrossReference ele000CrossReferenceIDEClassifier() { return c000CrossReferenceIDEClassifier; }
+
+		// not supported
+		public RuleCall ele0001TerminalRuleCallID() { return c0001TerminalRuleCallID; }
 
 		// not supported
 		public Group ele01Group() { return c01Group; }
@@ -1201,7 +1222,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentETypeParameter() { return c11AssignmentETypeParameter; }
 
 		// not supported
-		public CrossReference ele110CrossReferenceEStringETypeParameter() { return c110CrossReferenceEStringETypeParameter; }
+		public CrossReference ele110CrossReferenceIDETypeParameter() { return c110CrossReferenceIDETypeParameter; }
+
+		// not supported
+		public RuleCall ele1101TerminalRuleCallID() { return c1101TerminalRuleCallID; }
 
 		// not supported
 		public Group ele2Group() { return c2Group; }

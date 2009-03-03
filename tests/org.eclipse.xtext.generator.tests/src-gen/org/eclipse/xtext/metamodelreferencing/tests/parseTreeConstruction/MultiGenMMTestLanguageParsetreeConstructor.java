@@ -22,8 +22,8 @@ public class MultiGenMMTestLanguageParsetreeConstructor extends AbstractParseTre
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prFoo().getRule().getType().getType()) && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getType()) && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFoo().getRule().getType().getClassifier()) && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getClassifier()) && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -109,7 +109,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getClassifier())) {
 				Solution s = new NameRef_Assignment_name(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

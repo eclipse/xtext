@@ -22,10 +22,10 @@ public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeCo
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getType()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getType()) && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getType()) && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestList().getRule().getType().getType()) && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getClassifier()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getClassifier()) && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getClassifier()) && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTestList().getRule().getType().getClassifier()) && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -116,7 +116,7 @@ protected class Root_1_0_RuleCall_TestRequired extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestRequired_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getClassifier())) return null;
 		return new TestRequired_Group(current, this).firstSolution();
 	}
 }
@@ -136,7 +136,7 @@ protected class Root_1_1_RuleCall_TestOptional extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestOptional_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getClassifier())) return null;
 		return new TestOptional_Group(current, this).firstSolution();
 	}
 }
@@ -156,7 +156,7 @@ protected class Root_1_2_RuleCall_TestList extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestList_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestList().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prTestList().getRule().getType().getClassifier())) return null;
 		return new TestList_Group(current, this).firstSolution();
 	}
 }

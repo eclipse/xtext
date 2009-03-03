@@ -96,7 +96,7 @@ public final class ContentAssistTestLanguageAbstractRuleConsumer extends NonTerm
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setFirstAbstractRuleChildConsumer(INonTerminalConsumer firstAbstractRuleChildConsumer) {

@@ -109,7 +109,7 @@ public class GrammarUtil {
 	public static List<AbstractElement> elementsBeforeThisInContainingGroup(AbstractElement _this) {
 		Group g = containingGroup(_this);
 		List<AbstractElement> result = new ArrayList<AbstractElement>();
-		for (AbstractElement ae : g.getAbstractTokens()) {
+		for (AbstractElement ae : g.getTokens()) {
 			if (ae == _this || eAllContentsAsList(ae).contains(_this)) {
 				return result;
 			}
@@ -199,8 +199,8 @@ public class GrammarUtil {
 	}
 
 	public static String getTypeRefName(TypeRef typeRef) {
-		if (typeRef.getType() != null)
-			return typeRef.getType().getName();
+		if (typeRef.getClassifier() != null)
+			return typeRef.getClassifier().getName();
 		final NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(typeRef);
 		if (nodeAdapter != null) {
 			final CompositeNode node = nodeAdapter.getParserNode();
@@ -263,13 +263,7 @@ public class GrammarUtil {
 	}
 
 	public static boolean isDatatypeRule(ParserRule parserRule) {
-		return parserRule.getType() != null && parserRule.getType().getType() instanceof EDataType;
-	}
-
-	public static AbstractRule getCalledRule(CrossReference ref) {
-		if (ref.getRule() != null)
-			return ref.getRule();
-		return findRuleForName(getGrammar(ref), "ID");
+		return parserRule.getType() != null && parserRule.getType().getClassifier() instanceof EDataType;
 	}
 
 	// TODO replace me by compiled grammar model
@@ -284,7 +278,7 @@ public class GrammarUtil {
 	}
 
 	public static EReference getReference(CrossReference crossRef) {
-		return getReference(crossRef, (EClass) containingParserRule(crossRef).getType().getType());
+		return getReference(crossRef, (EClass) containingParserRule(crossRef).getType().getClassifier());
 	}
 
 }

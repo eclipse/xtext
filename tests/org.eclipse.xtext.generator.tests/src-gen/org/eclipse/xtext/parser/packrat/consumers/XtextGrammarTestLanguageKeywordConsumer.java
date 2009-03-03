@@ -81,7 +81,7 @@ public final class XtextGrammarTestLanguageKeywordConsumer extends NonTerminalCo
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {

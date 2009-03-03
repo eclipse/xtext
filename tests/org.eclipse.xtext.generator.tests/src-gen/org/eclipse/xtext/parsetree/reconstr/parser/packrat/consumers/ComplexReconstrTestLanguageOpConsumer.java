@@ -262,7 +262,7 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTermConsumer(INonTerminalConsumer termConsumer) {

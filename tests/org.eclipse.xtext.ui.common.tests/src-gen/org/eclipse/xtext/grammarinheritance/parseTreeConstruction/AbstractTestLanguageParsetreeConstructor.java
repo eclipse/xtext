@@ -22,12 +22,12 @@ public class AbstractTestLanguageParsetreeConstructor extends AbstractParseTreeC
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getType()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getType()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getType()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getType()) && (s = new ExtendableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getClassifier()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getClassifier()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getClassifier()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getClassifier()) && (s = new ExtendableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -178,7 +178,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier())) {
 				Solution s = new OverridableParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -420,7 +420,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getClassifier())) {
 				Solution s = new ExtendableParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

@@ -128,7 +128,7 @@ public final class ActionTestLanguageElementConsumer extends NonTerminalConsumer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setItemConsumer(INonTerminalConsumer itemConsumer) {

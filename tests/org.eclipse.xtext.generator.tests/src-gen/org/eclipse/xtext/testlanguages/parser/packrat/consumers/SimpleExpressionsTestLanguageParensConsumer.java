@@ -118,7 +118,7 @@ public final class SimpleExpressionsTestLanguageParensConsumer extends NonTermin
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAdditionConsumer(INonTerminalConsumer additionConsumer) {

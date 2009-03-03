@@ -98,7 +98,7 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {

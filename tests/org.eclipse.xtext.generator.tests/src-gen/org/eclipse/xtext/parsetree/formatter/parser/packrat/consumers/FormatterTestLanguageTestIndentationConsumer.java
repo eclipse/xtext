@@ -202,7 +202,7 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setLineConsumer(INonTerminalConsumer lineConsumer) {

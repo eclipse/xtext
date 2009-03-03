@@ -96,7 +96,7 @@ public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setChild1Consumer(INonTerminalConsumer child1Consumer) {

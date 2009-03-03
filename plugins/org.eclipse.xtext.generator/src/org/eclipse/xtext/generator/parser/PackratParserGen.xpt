@@ -259,7 +259,7 @@ public final class «getDelimiterClassName().toSimpleName()» {
 «ERROR "createDelimiters for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE createDelimitersImpl(Grammar grammar, AbstractRule rule) FOR AbstractElement-»
+«DEFINE createDelimiters(Grammar grammar) FOR RuleCall-»
 «LET sameConflicts(grammar) AS first-»
 «IF first == this-»
 «LET conflictingKeywords(grammar) AS conflicting-»
@@ -273,14 +273,6 @@ public final class «getDelimiterClassName().toSimpleName()» {
 «ENDLET-»
 «ENDIF-»
 «ENDLET-»
-«ENDDEFINE»
-
-«DEFINE createDelimiters(Grammar grammar) FOR CrossReference-»
-«EXPAND createDelimitersImpl(grammar, rule) FOR this-»
-«ENDDEFINE»
-
-«DEFINE createDelimiters(Grammar grammar) FOR RuleCall-»
-«EXPAND createDelimitersImpl(grammar, rule) FOR this-»
 «ENDDEFINE»
 
 «DEFINE createDelimiters(Grammar grammar) FOR Keyword-»

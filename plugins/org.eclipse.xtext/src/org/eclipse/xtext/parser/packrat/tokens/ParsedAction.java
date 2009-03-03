@@ -34,7 +34,7 @@ public class ParsedAction extends ParsedToken {
 	}
 
 	public EClassifier getType() {
-		return getGrammarElement().getTypeName().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 
 	public String getFeature() {

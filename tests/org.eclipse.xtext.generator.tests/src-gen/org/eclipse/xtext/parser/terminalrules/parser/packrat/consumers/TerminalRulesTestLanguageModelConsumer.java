@@ -313,7 +313,7 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAnyOtherConsumer(ITerminalConsumer anyOtherConsumer) {

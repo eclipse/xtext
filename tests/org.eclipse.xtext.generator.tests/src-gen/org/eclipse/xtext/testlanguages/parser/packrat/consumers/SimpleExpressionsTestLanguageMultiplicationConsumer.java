@@ -216,7 +216,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setTermConsumer(INonTerminalConsumer termConsumer) {

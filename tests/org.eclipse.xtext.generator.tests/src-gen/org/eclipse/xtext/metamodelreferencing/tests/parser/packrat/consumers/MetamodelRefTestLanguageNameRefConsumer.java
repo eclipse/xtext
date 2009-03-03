@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
@@ -27,7 +28,7 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 
 	private IElementConsumer crossReference$2$Consumer;
 
-	private ISequenceMatcher crossReference$2$Delimiter;
+	private ISequenceMatcher ruleCall$4$Delimiter;
 
 	protected class Assignment$1$Consumer extends AssignmentConsumer {
 		
@@ -49,13 +50,13 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "rule", false, false, getElement(), getCrossReference$2$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "rule", false, false, getElement(), getRuleCall$4$Delimiter(), optional);
 		}
 	}
 
 	public MetamodelRefTestLanguageNameRefConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$2$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -71,7 +72,7 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 		this.rule = rule;
 		
 		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentRule());
-		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.ele0CrossReferenceEStringParserRule());
+		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.ele0CrossReferenceIDParserRule());
 	}
 	
 	@Override
@@ -81,19 +82,19 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$2$Delimiter() {
-		return crossReference$2$Delimiter;
+	public ISequenceMatcher getRuleCall$4$Delimiter() {
+		return ruleCall$4$Delimiter;
 	}
 	
-	public void setCrossReference$2$Delimiter(ISequenceMatcher matcher) {
-		crossReference$2$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

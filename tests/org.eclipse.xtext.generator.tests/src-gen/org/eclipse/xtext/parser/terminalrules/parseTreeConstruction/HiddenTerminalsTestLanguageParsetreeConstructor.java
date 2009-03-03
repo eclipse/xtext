@@ -22,15 +22,15 @@ public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractPar
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getType()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getType()) && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getType()) && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getType()) && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getType()) && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getType()) && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getType()) && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getType()) && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getType()) && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier()) && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getClassifier()) && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier()) && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier()) && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier()) && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier()) && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getClassifier()) && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier()) && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -81,7 +81,7 @@ protected class Model_0_RuleCall_WithoutHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithoutHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier())) return null;
 		return new WithoutHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -101,7 +101,7 @@ protected class Model_1_RuleCall_WithHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getClassifier())) return null;
 		return new WithHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -121,7 +121,7 @@ protected class Model_2_RuleCall_OverridingHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(OverridingHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier())) return null;
 		return new OverridingHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -141,7 +141,7 @@ protected class Model_3_RuleCall_InheritingHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(InheritingHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier())) return null;
 		return new InheritingHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -161,7 +161,7 @@ protected class Model_4_RuleCall_DatatypeHiddens extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DatatypeHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier())) return null;
 		return new DatatypeHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -528,7 +528,7 @@ protected class OverridingHiddens_3_Assignment_called extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier())) {
 				Solution s = new OverridingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -823,7 +823,7 @@ protected class InheritingHiddens_3_0_Assignment_called extends AssignmentToken 
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -856,7 +856,7 @@ protected class InheritingHiddens_3_1_Assignment_hidingCalled extends Assignment
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getClassifier())) {
 				Solution s = new HidingHiddens_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1092,7 +1092,7 @@ protected class HidingHiddens_2_Assignment_called extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

@@ -17,18 +17,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
- * simple composite generator fragment implementation. 
+ * simple composite generator fragment implementation.
  * delegating all callbacks to its contained fragments
  */
 public class CompositeGeneratorFragment implements IGeneratorFragment {
 
-	private List<IGeneratorFragment> fragments = new ArrayList<IGeneratorFragment>();
+	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
+
+	private final List<IGeneratorFragment> fragments = new ArrayList<IGeneratorFragment>();
 
 	public void addFragment(IGeneratorFragment fragment) {
 		this.fragments.add(fragment);
@@ -58,7 +61,11 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
-			fragment.generate(grammar, ctx);
+			try {
+				fragment.generate(grammar, ctx);
+			} catch(Exception e) {
+				LOG.error(e.getMessage(), e);
+			}
 		}
 	}
 

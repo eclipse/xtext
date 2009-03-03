@@ -36,13 +36,13 @@ public class GrammarAccessUtil {
 			return ((RuleCall) ele).getRule().getName();
 		if (ele instanceof Action) {
 			Action a = (Action) ele;
-			return (a.getTypeName() != null && a.getTypeName().getType() != null ? a.getTypeName().getType().getName() : "") + a.getFeature();
+			return (a.getType() != null && a.getType().getClassifier() != null ? a.getType().getClassifier().getName() : "") + a.getFeature();
 		}
 		if (ele instanceof CrossReference) {
 			CrossReference cr = (CrossReference) ele;
-			String rule = (cr.getRule() != null && cr.getRule().getType() != null && cr.getRule().getType().getType() != null) ? cr.getRule().getType().getType().getName() : "";
-			String type = (cr.getType() != null && cr.getType().getType() != null) ? cr.getType().getType().getName() : "";
-			return rule + type;
+			String terminal = getElementDescription(cr.getTerminal());
+			String type = (cr.getType() != null && cr.getType().getClassifier() != null) ? cr.getType().getClassifier().getName() : "";
+			return terminal + type;
 		}
 		return "";
 	}

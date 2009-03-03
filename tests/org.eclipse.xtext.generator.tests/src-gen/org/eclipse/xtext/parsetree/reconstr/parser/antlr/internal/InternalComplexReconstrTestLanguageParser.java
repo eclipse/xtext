@@ -289,7 +289,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:145:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.prOp().ele100ActionAddaddOperands().getTypeName().getType());
+            	            temp=factory.create(grammarAccess.prOp().ele100ActionAddaddOperands().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "addOperands", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -322,7 +322,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prOp().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prOp().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -352,7 +352,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:187:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.prOp().ele110ActionMinusminusOperands().getTypeName().getType());
+            	            temp=factory.create(grammarAccess.prOp().ele110ActionMinusminusOperands().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "minusOperands", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -385,7 +385,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prOp().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prOp().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -621,7 +621,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prAtom().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prAtom().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -746,7 +746,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prParens().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prParens().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -842,7 +842,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prTrickyA1().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prTrickyA1().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -942,7 +942,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prTrickyG().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prTrickyG().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1059,7 +1059,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1104,7 +1104,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getType());
+                    	    	            current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1259,7 +1259,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prTrickyG2().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prTrickyG2().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        

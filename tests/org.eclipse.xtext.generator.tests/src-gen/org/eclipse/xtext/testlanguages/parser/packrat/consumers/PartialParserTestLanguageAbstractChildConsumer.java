@@ -96,7 +96,7 @@ public final class PartialParserTestLanguageAbstractChildConsumer extends NonTer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setFirstConcreteConsumer(INonTerminalConsumer firstConcreteConsumer) {

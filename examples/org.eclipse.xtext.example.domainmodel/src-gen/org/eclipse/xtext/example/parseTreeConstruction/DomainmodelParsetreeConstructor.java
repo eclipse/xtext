@@ -22,21 +22,21 @@ public class DomainmodelParsetreeConstructor extends AbstractParseTreeConstructo
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prFile().getRule().getType().getType()) && (s = new File_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prImport().getRule().getType().getType()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getType()) && (s = new NamedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prPackage().getRule().getType().getType()) && (s = new Package_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getType()) && (s = new Type_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prDataType().getRule().getType().getType()) && (s = new DataType_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEntity().getRule().getType().getType()) && (s = new Entity_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prFeature().getRule().getType().getType()) && (s = new Feature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prStructuralFeature().getRule().getType().getType()) && (s = new StructuralFeature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAttribute().getRule().getType().getType()) && (s = new Attribute_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prReference().getRule().getType().getType()) && (s = new Reference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOperation().getRule().getType().getType()) && (s = new Operation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType()) && (s = new Parameter_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTypedElement().getRule().getType().getType()) && (s = new TypedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType()) && (s = new TypeRef_Assignment_referenced(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFile().getRule().getType().getClassifier()) && (s = new File_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prImport().getRule().getType().getClassifier()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getClassifier()) && (s = new NamedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prPackage().getRule().getType().getClassifier()) && (s = new Package_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier()) && (s = new Type_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prDataType().getRule().getType().getClassifier()) && (s = new DataType_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEntity().getRule().getType().getClassifier()) && (s = new Entity_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFeature().getRule().getType().getClassifier()) && (s = new Feature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStructuralFeature().getRule().getType().getClassifier()) && (s = new StructuralFeature_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAttribute().getRule().getType().getClassifier()) && (s = new Attribute_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prReference().getRule().getType().getClassifier()) && (s = new Reference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOperation().getRule().getType().getClassifier()) && (s = new Operation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prParameter().getRule().getType().getClassifier()) && (s = new Parameter_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTypedElement().getRule().getType().getClassifier()) && (s = new TypedElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getClassifier()) && (s = new TypeRef_Assignment_referenced(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -97,7 +97,7 @@ protected class File_0_Assignment_imports extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prImport().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prImport().getRule().getType().getClassifier())) {
 				Solution s = new Import_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -130,7 +130,7 @@ protected class File_1_Assignment_namedElements extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getClassifier())) {
 				Solution s = new NamedElement_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -269,7 +269,7 @@ protected class NamedElement_0_RuleCall_Package extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Package_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prPackage().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prPackage().getRule().getType().getClassifier())) return null;
 		return new Package_Group(current, this).firstSolution();
 	}
 }
@@ -289,7 +289,7 @@ protected class NamedElement_1_RuleCall_Type extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Type_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prType().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier())) return null;
 		return new Type_Alternatives(current, this).firstSolution();
 	}
 }
@@ -417,7 +417,7 @@ protected class Package_3_Assignment_namedElements extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prNamedElement().getRule().getType().getClassifier())) {
 				Solution s = new NamedElement_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -490,7 +490,7 @@ protected class Type_0_RuleCall_Entity extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Entity_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prEntity().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prEntity().getRule().getType().getClassifier())) return null;
 		return new Entity_Group(current, this).firstSolution();
 	}
 }
@@ -510,7 +510,7 @@ protected class Type_1_RuleCall_DataType extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DataType_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prDataType().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prDataType().getRule().getType().getClassifier())) return null;
 		return new DataType_Group(current, this).firstSolution();
 	}
 }
@@ -747,9 +747,9 @@ protected class Entity_2_1_Assignment_superType extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("superType");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEntity().ele210CrossReferenceEStringEntity().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEntity().ele210CrossReferenceIDEntity().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prEntity().ele210CrossReferenceEStringEntity(); 
+				element = grammarAccess.prEntity().ele210CrossReferenceIDEntity(); 
 				return new Solution(obj);
 			}
 		}
@@ -789,7 +789,7 @@ protected class Entity_4_Assignment_features extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFeature().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prFeature().getRule().getType().getClassifier())) {
 				Solution s = new Feature_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -862,7 +862,7 @@ protected class Feature_0_RuleCall_StructuralFeature extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(StructuralFeature_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prStructuralFeature().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prStructuralFeature().getRule().getType().getClassifier())) return null;
 		return new StructuralFeature_Alternatives(current, this).firstSolution();
 	}
 }
@@ -882,7 +882,7 @@ protected class Feature_1_RuleCall_Operation extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Operation_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOperation().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOperation().getRule().getType().getClassifier())) return null;
 		return new Operation_Group(current, this).firstSolution();
 	}
 }
@@ -934,7 +934,7 @@ protected class StructuralFeature_0_RuleCall_Attribute extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Attribute_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prAttribute().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prAttribute().getRule().getType().getClassifier())) return null;
 		return new Attribute_Group(current, this).firstSolution();
 	}
 }
@@ -954,7 +954,7 @@ protected class StructuralFeature_1_RuleCall_Reference extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Reference_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prReference().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prReference().getRule().getType().getClassifier())) return null;
 		return new Reference_Group(current, this).firstSolution();
 	}
 }
@@ -1076,7 +1076,7 @@ protected class Attribute_3_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getClassifier())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1211,7 +1211,7 @@ protected class Reference_3_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getClassifier())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1285,9 +1285,9 @@ protected class Reference_4_1_Assignment_opposite extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("opposite");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prReference().ele410CrossReferenceEStringReference().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prReference().ele410CrossReferenceIDReference().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prReference().ele410CrossReferenceEStringReference(); 
+				element = grammarAccess.prReference().ele410CrossReferenceIDReference(); 
 				return new Solution(obj);
 			}
 		}
@@ -1455,7 +1455,7 @@ protected class Operation_3_0_Assignment_params extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prParameter().getRule().getType().getClassifier())) {
 				Solution s = new Parameter_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1530,7 +1530,7 @@ protected class Operation_3_1_1_Assignment_params extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prParameter().getRule().getType().getClassifier())) {
 				Solution s = new Parameter_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1589,7 +1589,7 @@ protected class Operation_6_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getClassifier())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1688,7 +1688,7 @@ protected class Parameter_1_Assignment_type extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().getRule().getType().getClassifier())) {
 				Solution s = new TypeRef_Assignment_referenced(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1749,7 +1749,7 @@ protected class TypedElement_0_RuleCall_Feature extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Feature_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prFeature().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prFeature().getRule().getType().getClassifier())) return null;
 		return new Feature_Alternatives(current, this).firstSolution();
 	}
 }
@@ -1769,7 +1769,7 @@ protected class TypedElement_1_RuleCall_Parameter extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Parameter_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prParameter().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prParameter().getRule().getType().getClassifier())) return null;
 		return new Parameter_Group(current, this).firstSolution();
 	}
 }
@@ -1803,9 +1803,9 @@ protected class TypeRef_Assignment_referenced extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("referenced");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTypeRef().ele0CrossReferenceEStringType().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTypeRef().ele0CrossReferenceIDType().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prTypeRef().ele0CrossReferenceEStringType(); 
+				element = grammarAccess.prTypeRef().ele0CrossReferenceIDType(); 
 				return new Solution(obj);
 			}
 		}

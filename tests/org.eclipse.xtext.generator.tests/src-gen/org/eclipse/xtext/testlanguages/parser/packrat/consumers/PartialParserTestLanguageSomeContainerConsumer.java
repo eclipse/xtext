@@ -239,7 +239,7 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setContentConsumer(INonTerminalConsumer contentConsumer) {

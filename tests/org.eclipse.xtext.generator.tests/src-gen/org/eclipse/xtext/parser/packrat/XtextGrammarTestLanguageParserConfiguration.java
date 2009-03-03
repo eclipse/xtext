@@ -16,28 +16,35 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstra
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGeneratedMetamodelConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageReferencedMetamodelConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParserRuleConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTypeRefConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAlternativesConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalAlternativesConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageGroupConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalGroupConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTokenConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalTokenConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAssignmentConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTokenWithCardinalityConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageActionConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageKeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageRuleCallConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAssignmentConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAssignableTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedAssignableElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAssignableAlternativesConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceableTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedCrossReferenceableElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceableAlternativesConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalRuleConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalAlternativesConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalGroupConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageTerminalTokenElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedTerminalElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageAbstractNegatedTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageNegatedTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageUntilTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageWildcardConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCharacterRangeConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageCrossReferenceConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedElementConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageParenthesizedTerminalElementConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageKeywordConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextGrammarTestLanguageRuleCallConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -56,28 +63,35 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     private XtextGrammarTestLanguageGeneratedMetamodelConsumer generatedMetamodelConsumer;
     private XtextGrammarTestLanguageReferencedMetamodelConsumer referencedMetamodelConsumer;
     private XtextGrammarTestLanguageParserRuleConsumer parserRuleConsumer;
-    private XtextGrammarTestLanguageTerminalRuleConsumer terminalRuleConsumer;
     private XtextGrammarTestLanguageTypeRefConsumer typeRefConsumer;
     private XtextGrammarTestLanguageAlternativesConsumer alternativesConsumer;
-    private XtextGrammarTestLanguageTerminalAlternativesConsumer terminalAlternativesConsumer;
     private XtextGrammarTestLanguageGroupConsumer groupConsumer;
-    private XtextGrammarTestLanguageTerminalGroupConsumer terminalGroupConsumer;
     private XtextGrammarTestLanguageAbstractTokenConsumer abstractTokenConsumer;
-    private XtextGrammarTestLanguageTerminalTokenConsumer terminalTokenConsumer;
-    private XtextGrammarTestLanguageAssignmentConsumer assignmentConsumer;
+    private XtextGrammarTestLanguageAbstractTokenWithCardinalityConsumer abstractTokenWithCardinalityConsumer;
     private XtextGrammarTestLanguageActionConsumer actionConsumer;
     private XtextGrammarTestLanguageAbstractTerminalConsumer abstractTerminalConsumer;
+    private XtextGrammarTestLanguageKeywordConsumer keywordConsumer;
+    private XtextGrammarTestLanguageRuleCallConsumer ruleCallConsumer;
+    private XtextGrammarTestLanguageAssignmentConsumer assignmentConsumer;
+    private XtextGrammarTestLanguageAssignableTerminalConsumer assignableTerminalConsumer;
+    private XtextGrammarTestLanguageParenthesizedAssignableElementConsumer parenthesizedAssignableElementConsumer;
+    private XtextGrammarTestLanguageAssignableAlternativesConsumer assignableAlternativesConsumer;
+    private XtextGrammarTestLanguageCrossReferenceConsumer crossReferenceConsumer;
+    private XtextGrammarTestLanguageCrossReferenceableTerminalConsumer crossReferenceableTerminalConsumer;
+    private XtextGrammarTestLanguageParenthesizedCrossReferenceableElementConsumer parenthesizedCrossReferenceableElementConsumer;
+    private XtextGrammarTestLanguageCrossReferenceableAlternativesConsumer crossReferenceableAlternativesConsumer;
+    private XtextGrammarTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer;
+    private XtextGrammarTestLanguageTerminalRuleConsumer terminalRuleConsumer;
+    private XtextGrammarTestLanguageTerminalAlternativesConsumer terminalAlternativesConsumer;
+    private XtextGrammarTestLanguageTerminalGroupConsumer terminalGroupConsumer;
+    private XtextGrammarTestLanguageTerminalTokenConsumer terminalTokenConsumer;
     private XtextGrammarTestLanguageTerminalTokenElementConsumer terminalTokenElementConsumer;
+    private XtextGrammarTestLanguageParenthesizedTerminalElementConsumer parenthesizedTerminalElementConsumer;
     private XtextGrammarTestLanguageAbstractNegatedTokenConsumer abstractNegatedTokenConsumer;
     private XtextGrammarTestLanguageNegatedTokenConsumer negatedTokenConsumer;
     private XtextGrammarTestLanguageUntilTokenConsumer untilTokenConsumer;
     private XtextGrammarTestLanguageWildcardConsumer wildcardConsumer;
     private XtextGrammarTestLanguageCharacterRangeConsumer characterRangeConsumer;
-    private XtextGrammarTestLanguageCrossReferenceConsumer crossReferenceConsumer;
-    private XtextGrammarTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer;
-    private XtextGrammarTestLanguageParenthesizedTerminalElementConsumer parenthesizedTerminalElementConsumer;
-    private XtextGrammarTestLanguageKeywordConsumer keywordConsumer;
-    private XtextGrammarTestLanguageRuleCallConsumer ruleCallConsumer;
 
 	private XtextGrammarTestLanguageGrammarAccess grammarAccess;
 
@@ -114,31 +128,19 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		parserRuleConsumer = new XtextGrammarTestLanguageParserRuleConsumer(
     		this, null
     	);
-		terminalRuleConsumer = new XtextGrammarTestLanguageTerminalRuleConsumer(
-    		this, null
-    	);
 		typeRefConsumer = new XtextGrammarTestLanguageTypeRefConsumer(
     		this, null
     	);
 		alternativesConsumer = new XtextGrammarTestLanguageAlternativesConsumer(
     		this, null
     	);
-		terminalAlternativesConsumer = new XtextGrammarTestLanguageTerminalAlternativesConsumer(
-    		this, null
-    	);
 		groupConsumer = new XtextGrammarTestLanguageGroupConsumer(
-    		this, null
-    	);
-		terminalGroupConsumer = new XtextGrammarTestLanguageTerminalGroupConsumer(
     		this, null
     	);
 		abstractTokenConsumer = new XtextGrammarTestLanguageAbstractTokenConsumer(
     		this, null
     	);
-		terminalTokenConsumer = new XtextGrammarTestLanguageTerminalTokenConsumer(
-    		this, null
-    	);
-		assignmentConsumer = new XtextGrammarTestLanguageAssignmentConsumer(
+		abstractTokenWithCardinalityConsumer = new XtextGrammarTestLanguageAbstractTokenWithCardinalityConsumer(
     		this, null
     	);
 		actionConsumer = new XtextGrammarTestLanguageActionConsumer(
@@ -147,7 +149,55 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		abstractTerminalConsumer = new XtextGrammarTestLanguageAbstractTerminalConsumer(
     		this, null
     	);
+		keywordConsumer = new XtextGrammarTestLanguageKeywordConsumer(
+    		this, null
+    	);
+		ruleCallConsumer = new XtextGrammarTestLanguageRuleCallConsumer(
+    		this, null
+    	);
+		assignmentConsumer = new XtextGrammarTestLanguageAssignmentConsumer(
+    		this, null
+    	);
+		assignableTerminalConsumer = new XtextGrammarTestLanguageAssignableTerminalConsumer(
+    		this, null
+    	);
+		parenthesizedAssignableElementConsumer = new XtextGrammarTestLanguageParenthesizedAssignableElementConsumer(
+    		this, null
+    	);
+		assignableAlternativesConsumer = new XtextGrammarTestLanguageAssignableAlternativesConsumer(
+    		this, null
+    	);
+		crossReferenceConsumer = new XtextGrammarTestLanguageCrossReferenceConsumer(
+    		this, null
+    	);
+		crossReferenceableTerminalConsumer = new XtextGrammarTestLanguageCrossReferenceableTerminalConsumer(
+    		this, null
+    	);
+		parenthesizedCrossReferenceableElementConsumer = new XtextGrammarTestLanguageParenthesizedCrossReferenceableElementConsumer(
+    		this, null
+    	);
+		crossReferenceableAlternativesConsumer = new XtextGrammarTestLanguageCrossReferenceableAlternativesConsumer(
+    		this, null
+    	);
+		parenthesizedElementConsumer = new XtextGrammarTestLanguageParenthesizedElementConsumer(
+    		this, null
+    	);
+		terminalRuleConsumer = new XtextGrammarTestLanguageTerminalRuleConsumer(
+    		this, null
+    	);
+		terminalAlternativesConsumer = new XtextGrammarTestLanguageTerminalAlternativesConsumer(
+    		this, null
+    	);
+		terminalGroupConsumer = new XtextGrammarTestLanguageTerminalGroupConsumer(
+    		this, null
+    	);
+		terminalTokenConsumer = new XtextGrammarTestLanguageTerminalTokenConsumer(
+    		this, null
+    	);
 		terminalTokenElementConsumer = new XtextGrammarTestLanguageTerminalTokenElementConsumer(
+    		this, null
+    	);
+		parenthesizedTerminalElementConsumer = new XtextGrammarTestLanguageParenthesizedTerminalElementConsumer(
     		this, null
     	);
 		abstractNegatedTokenConsumer = new XtextGrammarTestLanguageAbstractNegatedTokenConsumer(
@@ -163,21 +213,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     		this, null
     	);
 		characterRangeConsumer = new XtextGrammarTestLanguageCharacterRangeConsumer(
-    		this, null
-    	);
-		crossReferenceConsumer = new XtextGrammarTestLanguageCrossReferenceConsumer(
-    		this, null
-    	);
-		parenthesizedElementConsumer = new XtextGrammarTestLanguageParenthesizedElementConsumer(
-    		this, null
-    	);
-		parenthesizedTerminalElementConsumer = new XtextGrammarTestLanguageParenthesizedTerminalElementConsumer(
-    		this, null
-    	);
-		keywordConsumer = new XtextGrammarTestLanguageKeywordConsumer(
-    		this, null
-    	);
-		ruleCallConsumer = new XtextGrammarTestLanguageRuleCallConsumer(
     		this, null
     	);
 	}
@@ -196,28 +231,35 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getGeneratedMetamodelConsumer().setRule(grammarAccess.prGeneratedMetamodel());
 		getReferencedMetamodelConsumer().setRule(grammarAccess.prReferencedMetamodel());
 		getParserRuleConsumer().setRule(grammarAccess.prParserRule());
-		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
 		getTypeRefConsumer().setRule(grammarAccess.prTypeRef());
 		getAlternativesConsumer().setRule(grammarAccess.prAlternatives());
-		getTerminalAlternativesConsumer().setRule(grammarAccess.prTerminalAlternatives());
 		getGroupConsumer().setRule(grammarAccess.prGroup());
-		getTerminalGroupConsumer().setRule(grammarAccess.prTerminalGroup());
 		getAbstractTokenConsumer().setRule(grammarAccess.prAbstractToken());
-		getTerminalTokenConsumer().setRule(grammarAccess.prTerminalToken());
-		getAssignmentConsumer().setRule(grammarAccess.prAssignment());
+		getAbstractTokenWithCardinalityConsumer().setRule(grammarAccess.prAbstractTokenWithCardinality());
 		getActionConsumer().setRule(grammarAccess.prAction());
 		getAbstractTerminalConsumer().setRule(grammarAccess.prAbstractTerminal());
+		getKeywordConsumer().setRule(grammarAccess.prKeyword());
+		getRuleCallConsumer().setRule(grammarAccess.prRuleCall());
+		getAssignmentConsumer().setRule(grammarAccess.prAssignment());
+		getAssignableTerminalConsumer().setRule(grammarAccess.prAssignableTerminal());
+		getParenthesizedAssignableElementConsumer().setRule(grammarAccess.prParenthesizedAssignableElement());
+		getAssignableAlternativesConsumer().setRule(grammarAccess.prAssignableAlternatives());
+		getCrossReferenceConsumer().setRule(grammarAccess.prCrossReference());
+		getCrossReferenceableTerminalConsumer().setRule(grammarAccess.prCrossReferenceableTerminal());
+		getParenthesizedCrossReferenceableElementConsumer().setRule(grammarAccess.prParenthesizedCrossReferenceableElement());
+		getCrossReferenceableAlternativesConsumer().setRule(grammarAccess.prCrossReferenceableAlternatives());
+		getParenthesizedElementConsumer().setRule(grammarAccess.prParenthesizedElement());
+		getTerminalRuleConsumer().setRule(grammarAccess.prTerminalRule());
+		getTerminalAlternativesConsumer().setRule(grammarAccess.prTerminalAlternatives());
+		getTerminalGroupConsumer().setRule(grammarAccess.prTerminalGroup());
+		getTerminalTokenConsumer().setRule(grammarAccess.prTerminalToken());
 		getTerminalTokenElementConsumer().setRule(grammarAccess.prTerminalTokenElement());
+		getParenthesizedTerminalElementConsumer().setRule(grammarAccess.prParenthesizedTerminalElement());
 		getAbstractNegatedTokenConsumer().setRule(grammarAccess.prAbstractNegatedToken());
 		getNegatedTokenConsumer().setRule(grammarAccess.prNegatedToken());
 		getUntilTokenConsumer().setRule(grammarAccess.prUntilToken());
 		getWildcardConsumer().setRule(grammarAccess.prWildcard());
 		getCharacterRangeConsumer().setRule(grammarAccess.prCharacterRange());
-		getCrossReferenceConsumer().setRule(grammarAccess.prCrossReference());
-		getParenthesizedElementConsumer().setRule(grammarAccess.prParenthesizedElement());
-		getParenthesizedTerminalElementConsumer().setRule(grammarAccess.prParenthesizedTerminalElement());
-		getKeywordConsumer().setRule(grammarAccess.prKeyword());
-		getRuleCallConsumer().setRule(grammarAccess.prRuleCall());
 		getIdConsumer().setRule(grammarAccess.trID());
 		getIntConsumer().setRule(grammarAccess.trINT());
 		getStringConsumer().setRule(grammarAccess.trSTRING());
@@ -250,42 +292,71 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 		getParserRuleConsumer().setIdConsumer(getIdConsumer());
 		getParserRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
-		getTerminalRuleConsumer().setIdConsumer(getIdConsumer());
-		getTerminalRuleConsumer().setTerminalAlternativesConsumer(getTerminalAlternativesConsumer());
-		getTerminalRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
-
 		getTypeRefConsumer().setIdConsumer(getIdConsumer());
 
 		getAlternativesConsumer().setGroupConsumer(getGroupConsumer());
 
-		getTerminalAlternativesConsumer().setTerminalGroupConsumer(getTerminalGroupConsumer());
-
 		getGroupConsumer().setAbstractTokenConsumer(getAbstractTokenConsumer());
 
-		getTerminalGroupConsumer().setTerminalTokenConsumer(getTerminalTokenConsumer());
-
-		getAbstractTokenConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
+		getAbstractTokenConsumer().setAbstractTokenWithCardinalityConsumer(getAbstractTokenWithCardinalityConsumer());
 		getAbstractTokenConsumer().setActionConsumer(getActionConsumer());
-		getAbstractTokenConsumer().setAssignmentConsumer(getAssignmentConsumer());
 
-		getTerminalTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
-
-		getAssignmentConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
-		getAssignmentConsumer().setIdConsumer(getIdConsumer());
+		getAbstractTokenWithCardinalityConsumer().setAbstractTerminalConsumer(getAbstractTerminalConsumer());
+		getAbstractTokenWithCardinalityConsumer().setAssignmentConsumer(getAssignmentConsumer());
 
 		getActionConsumer().setIdConsumer(getIdConsumer());
 		getActionConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
-		getAbstractTerminalConsumer().setCrossReferenceConsumer(getCrossReferenceConsumer());
 		getAbstractTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
 		getAbstractTerminalConsumer().setParenthesizedElementConsumer(getParenthesizedElementConsumer());
 		getAbstractTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
+
+		getKeywordConsumer().setStringConsumer(getStringConsumer());
+
+		getRuleCallConsumer().setIdConsumer(getIdConsumer());
+
+		getAssignmentConsumer().setAssignableTerminalConsumer(getAssignableTerminalConsumer());
+		getAssignmentConsumer().setIdConsumer(getIdConsumer());
+
+		getAssignableTerminalConsumer().setCrossReferenceConsumer(getCrossReferenceConsumer());
+		getAssignableTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
+		getAssignableTerminalConsumer().setParenthesizedAssignableElementConsumer(getParenthesizedAssignableElementConsumer());
+		getAssignableTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
+
+		getParenthesizedAssignableElementConsumer().setAssignableAlternativesConsumer(getAssignableAlternativesConsumer());
+
+		getAssignableAlternativesConsumer().setAssignableTerminalConsumer(getAssignableTerminalConsumer());
+
+		getCrossReferenceConsumer().setCrossReferenceableTerminalConsumer(getCrossReferenceableTerminalConsumer());
+		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
+
+		getCrossReferenceableTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
+		getCrossReferenceableTerminalConsumer().setParenthesizedCrossReferenceableElementConsumer(getParenthesizedCrossReferenceableElementConsumer());
+		getCrossReferenceableTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
+
+		getParenthesizedCrossReferenceableElementConsumer().setCrossReferenceableAlternativesConsumer(getCrossReferenceableAlternativesConsumer());
+
+		getCrossReferenceableAlternativesConsumer().setCrossReferenceableTerminalConsumer(getCrossReferenceableTerminalConsumer());
+
+		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
+
+		getTerminalRuleConsumer().setIdConsumer(getIdConsumer());
+		getTerminalRuleConsumer().setTerminalAlternativesConsumer(getTerminalAlternativesConsumer());
+		getTerminalRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
+
+		getTerminalAlternativesConsumer().setTerminalGroupConsumer(getTerminalGroupConsumer());
+
+		getTerminalGroupConsumer().setTerminalTokenConsumer(getTerminalTokenConsumer());
+
+		getTerminalTokenConsumer().setTerminalTokenElementConsumer(getTerminalTokenElementConsumer());
 
 		getTerminalTokenElementConsumer().setAbstractNegatedTokenConsumer(getAbstractNegatedTokenConsumer());
 		getTerminalTokenElementConsumer().setCharacterRangeConsumer(getCharacterRangeConsumer());
 		getTerminalTokenElementConsumer().setParenthesizedTerminalElementConsumer(getParenthesizedTerminalElementConsumer());
 		getTerminalTokenElementConsumer().setRuleCallConsumer(getRuleCallConsumer());
 		getTerminalTokenElementConsumer().setWildcardConsumer(getWildcardConsumer());
+
+		getParenthesizedTerminalElementConsumer().setTerminalAlternativesConsumer(getTerminalAlternativesConsumer());
 
 		getAbstractNegatedTokenConsumer().setNegatedTokenConsumer(getNegatedTokenConsumer());
 		getAbstractNegatedTokenConsumer().setUntilTokenConsumer(getUntilTokenConsumer());
@@ -296,89 +367,83 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
-		getCrossReferenceConsumer().setIdConsumer(getIdConsumer());
-		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
-
-		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
-
-		getParenthesizedTerminalElementConsumer().setTerminalAlternativesConsumer(getTerminalAlternativesConsumer());
-
-		getKeywordConsumer().setStringConsumer(getStringConsumer());
-
-		getRuleCallConsumer().setIdConsumer(getIdConsumer());
-
-		getGrammarConsumer().setCrossReference$21$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getGrammarConsumer().setCrossReference$26$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getGrammarConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getGrammarConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getGrammarConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getGrammarConsumer().setKeyword$24$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getGrammarConsumer().setKeyword$28$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
+		getGrammarConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getGrammarConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
+		getGrammarConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getGrammarConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getGrammarConsumer().setKeyword$32$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
 		getGrammarConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
 		getGrammarConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getGrammarIdConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getGrammarIdConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getGrammarIdConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getGeneratedMetamodelConsumer().setCrossReference$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$60$Delimiter);
+		getGrammarConsumer().setRuleCall$25$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getGrammarConsumer().setRuleCall$31$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getGrammarIdConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getGrammarIdConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getGrammarIdConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getGeneratedMetamodelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getGeneratedMetamodelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getGeneratedMetamodelConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getReferencedMetamodelConsumer().setCrossReference$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$60$Delimiter);
+		getGeneratedMetamodelConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$66$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getReferencedMetamodelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getReferencedMetamodelConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getParserRuleConsumer().setCrossReference$14$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getParserRuleConsumer().setCrossReference$19$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getParserRuleConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParserRuleConsumer().setKeyword$25$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$66$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getParserRuleConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParserRuleConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParserRuleConsumer().setKeyword$24$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParserRuleConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
 		getParserRuleConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
 		getParserRuleConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getParserRuleConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParserRuleConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParserRuleConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParserRuleConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
+		getParserRuleConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParserRuleConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getParserRuleConsumer().setRuleCall$22$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getParserRuleConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getTypeRefConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getTypeRefConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getTypeRefConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAbstractTokenWithCardinalityConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAbstractTokenWithCardinalityConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAbstractTokenWithCardinalityConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getActionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getActionConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getActionConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getActionConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getActionConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
+		getActionConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getActionConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$66$Delimiter);
+		getRuleCallConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getAssignmentConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAssignmentConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAssignmentConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAssignmentConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getParenthesizedAssignableElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedAssignableElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getAssignableAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getCrossReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getCrossReferenceConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getCrossReferenceConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedCrossReferenceableElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedCrossReferenceableElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getCrossReferenceableAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
 		getTerminalRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
 		getTerminalRuleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getTerminalRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalRuleConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getTypeRefConsumer().setCrossReference$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getTypeRefConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getTypeRefConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAbstractTokenConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAbstractTokenConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAbstractTokenConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalTokenConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalTokenConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getTerminalTokenConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAssignmentConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAssignmentConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAssignmentConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getAssignmentConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getActionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getActionConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getActionConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getActionConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getActionConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$5$Delimiter);
-		getActionConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getActionConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getNegatedTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getWildcardConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getCharacterRangeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getCrossReferenceConsumer().setCrossReference$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
-		getCrossReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getCrossReferenceConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getCrossReferenceConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParenthesizedElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParenthesizedElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParenthesizedTerminalElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getParenthesizedTerminalElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$14$Delimiter);
-		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$60$Delimiter);
-		getRuleCallConsumer().setCrossReference$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.crossReference$24$Delimiter);
+		getTerminalRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getTerminalRuleConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getTerminalRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getTerminalAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getTerminalTokenConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getTerminalTokenConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getTerminalTokenConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedTerminalElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getParenthesizedTerminalElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getNegatedTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getWildcardConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
+		getCharacterRangeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextGrammarTestLanguageDelimiters.keyword$15$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -413,10 +478,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     	return parserRuleConsumer;
     }
 
-    public XtextGrammarTestLanguageTerminalRuleConsumer getTerminalRuleConsumer() {
-    	return terminalRuleConsumer;
-    }
-
     public XtextGrammarTestLanguageTypeRefConsumer getTypeRefConsumer() {
     	return typeRefConsumer;
     }
@@ -425,28 +486,16 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     	return alternativesConsumer;
     }
 
-    public XtextGrammarTestLanguageTerminalAlternativesConsumer getTerminalAlternativesConsumer() {
-    	return terminalAlternativesConsumer;
-    }
-
     public XtextGrammarTestLanguageGroupConsumer getGroupConsumer() {
     	return groupConsumer;
-    }
-
-    public XtextGrammarTestLanguageTerminalGroupConsumer getTerminalGroupConsumer() {
-    	return terminalGroupConsumer;
     }
 
     public XtextGrammarTestLanguageAbstractTokenConsumer getAbstractTokenConsumer() {
     	return abstractTokenConsumer;
     }
 
-    public XtextGrammarTestLanguageTerminalTokenConsumer getTerminalTokenConsumer() {
-    	return terminalTokenConsumer;
-    }
-
-    public XtextGrammarTestLanguageAssignmentConsumer getAssignmentConsumer() {
-    	return assignmentConsumer;
+    public XtextGrammarTestLanguageAbstractTokenWithCardinalityConsumer getAbstractTokenWithCardinalityConsumer() {
+    	return abstractTokenWithCardinalityConsumer;
     }
 
     public XtextGrammarTestLanguageActionConsumer getActionConsumer() {
@@ -457,8 +506,72 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
     	return abstractTerminalConsumer;
     }
 
+    public XtextGrammarTestLanguageKeywordConsumer getKeywordConsumer() {
+    	return keywordConsumer;
+    }
+
+    public XtextGrammarTestLanguageRuleCallConsumer getRuleCallConsumer() {
+    	return ruleCallConsumer;
+    }
+
+    public XtextGrammarTestLanguageAssignmentConsumer getAssignmentConsumer() {
+    	return assignmentConsumer;
+    }
+
+    public XtextGrammarTestLanguageAssignableTerminalConsumer getAssignableTerminalConsumer() {
+    	return assignableTerminalConsumer;
+    }
+
+    public XtextGrammarTestLanguageParenthesizedAssignableElementConsumer getParenthesizedAssignableElementConsumer() {
+    	return parenthesizedAssignableElementConsumer;
+    }
+
+    public XtextGrammarTestLanguageAssignableAlternativesConsumer getAssignableAlternativesConsumer() {
+    	return assignableAlternativesConsumer;
+    }
+
+    public XtextGrammarTestLanguageCrossReferenceConsumer getCrossReferenceConsumer() {
+    	return crossReferenceConsumer;
+    }
+
+    public XtextGrammarTestLanguageCrossReferenceableTerminalConsumer getCrossReferenceableTerminalConsumer() {
+    	return crossReferenceableTerminalConsumer;
+    }
+
+    public XtextGrammarTestLanguageParenthesizedCrossReferenceableElementConsumer getParenthesizedCrossReferenceableElementConsumer() {
+    	return parenthesizedCrossReferenceableElementConsumer;
+    }
+
+    public XtextGrammarTestLanguageCrossReferenceableAlternativesConsumer getCrossReferenceableAlternativesConsumer() {
+    	return crossReferenceableAlternativesConsumer;
+    }
+
+    public XtextGrammarTestLanguageParenthesizedElementConsumer getParenthesizedElementConsumer() {
+    	return parenthesizedElementConsumer;
+    }
+
+    public XtextGrammarTestLanguageTerminalRuleConsumer getTerminalRuleConsumer() {
+    	return terminalRuleConsumer;
+    }
+
+    public XtextGrammarTestLanguageTerminalAlternativesConsumer getTerminalAlternativesConsumer() {
+    	return terminalAlternativesConsumer;
+    }
+
+    public XtextGrammarTestLanguageTerminalGroupConsumer getTerminalGroupConsumer() {
+    	return terminalGroupConsumer;
+    }
+
+    public XtextGrammarTestLanguageTerminalTokenConsumer getTerminalTokenConsumer() {
+    	return terminalTokenConsumer;
+    }
+
     public XtextGrammarTestLanguageTerminalTokenElementConsumer getTerminalTokenElementConsumer() {
     	return terminalTokenElementConsumer;
+    }
+
+    public XtextGrammarTestLanguageParenthesizedTerminalElementConsumer getParenthesizedTerminalElementConsumer() {
+    	return parenthesizedTerminalElementConsumer;
     }
 
     public XtextGrammarTestLanguageAbstractNegatedTokenConsumer getAbstractNegatedTokenConsumer() {
@@ -479,26 +592,6 @@ public class XtextGrammarTestLanguageParserConfiguration extends AbstractParserC
 
     public XtextGrammarTestLanguageCharacterRangeConsumer getCharacterRangeConsumer() {
     	return characterRangeConsumer;
-    }
-
-    public XtextGrammarTestLanguageCrossReferenceConsumer getCrossReferenceConsumer() {
-    	return crossReferenceConsumer;
-    }
-
-    public XtextGrammarTestLanguageParenthesizedElementConsumer getParenthesizedElementConsumer() {
-    	return parenthesizedElementConsumer;
-    }
-
-    public XtextGrammarTestLanguageParenthesizedTerminalElementConsumer getParenthesizedTerminalElementConsumer() {
-    	return parenthesizedTerminalElementConsumer;
-    }
-
-    public XtextGrammarTestLanguageKeywordConsumer getKeywordConsumer() {
-    	return keywordConsumer;
-    }
-
-    public XtextGrammarTestLanguageRuleCallConsumer getRuleCallConsumer() {
-    	return ruleCallConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

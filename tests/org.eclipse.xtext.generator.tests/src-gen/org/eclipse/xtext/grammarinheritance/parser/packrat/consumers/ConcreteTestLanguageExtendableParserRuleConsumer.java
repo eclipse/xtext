@@ -114,7 +114,7 @@ public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonT
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setSubrule1Consumer(INonTerminalConsumer subrule1Consumer) {

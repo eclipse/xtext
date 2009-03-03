@@ -115,7 +115,7 @@ public final class FormatterTestLanguageTestLinewrapConsumer extends NonTerminal
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setLineConsumer(INonTerminalConsumer lineConsumer) {

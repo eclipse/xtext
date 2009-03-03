@@ -135,7 +135,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prStart().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prStart().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        

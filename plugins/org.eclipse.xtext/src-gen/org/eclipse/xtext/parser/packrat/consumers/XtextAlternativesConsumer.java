@@ -179,7 +179,7 @@ public final class XtextAlternativesConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setGroupConsumer(INonTerminalConsumer groupConsumer) {

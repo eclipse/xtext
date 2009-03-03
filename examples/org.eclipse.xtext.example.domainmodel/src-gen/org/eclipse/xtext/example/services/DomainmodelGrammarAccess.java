@@ -176,7 +176,8 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group c2Group = (Group)cGroup.eContents().get(2);
 		private final Keyword c20KeywordExtends = (Keyword)c2Group.eContents().get(0);
 		private final Assignment c21AssignmentSuperType = (Assignment)c2Group.eContents().get(1);
-		private final CrossReference c210CrossReferenceEStringEntity = (CrossReference)c21AssignmentSuperType.eContents().get(0);
+		private final CrossReference c210CrossReferenceIDEntity = (CrossReference)c21AssignmentSuperType.eContents().get(0);
+		private final RuleCall c2101TerminalRuleCallID = (RuleCall)c210CrossReferenceIDEntity.eContents().get(1);
 		private final Keyword c3KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(3);
 		private final Assignment c4AssignmentFeatures = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall c40ParserRuleCallFeature = (RuleCall)c4AssignmentFeatures.eContents().get(0);
@@ -207,7 +208,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele21AssignmentSuperType() { return c21AssignmentSuperType; }
 
 		// not supported
-		public CrossReference ele210CrossReferenceEStringEntity() { return c210CrossReferenceEStringEntity; }
+		public CrossReference ele210CrossReferenceIDEntity() { return c210CrossReferenceIDEntity; }
+
+		// not supported
+		public RuleCall ele2101TerminalRuleCallID() { return c2101TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele3KeywordLeftCurlyBracket() { return c3KeywordLeftCurlyBracket; }
@@ -307,7 +311,8 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Group c4Group = (Group)cGroup.eContents().get(4);
 		private final Keyword c40KeywordOpposite = (Keyword)c4Group.eContents().get(0);
 		private final Assignment c41AssignmentOpposite = (Assignment)c4Group.eContents().get(1);
-		private final CrossReference c410CrossReferenceEStringReference = (CrossReference)c41AssignmentOpposite.eContents().get(0);
+		private final CrossReference c410CrossReferenceIDReference = (CrossReference)c41AssignmentOpposite.eContents().get(0);
+		private final RuleCall c4101TerminalRuleCallID = (RuleCall)c410CrossReferenceIDReference.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -343,7 +348,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment ele41AssignmentOpposite() { return c41AssignmentOpposite; }
 
 		// not supported
-		public CrossReference ele410CrossReferenceEStringReference() { return c410CrossReferenceEStringReference; }
+		public CrossReference ele410CrossReferenceIDReference() { return c410CrossReferenceIDReference; }
+
+		// not supported
+		public RuleCall ele4101TerminalRuleCallID() { return c4101TerminalRuleCallID; }
 	}
 
 	public class OperationElements implements IParserRuleAccess {
@@ -466,7 +474,8 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	public class TypeRefElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
 		private final Assignment cAssignmentReferenced = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceEStringType = (CrossReference)cAssignmentReferenced.eContents().get(0);
+		private final CrossReference c0CrossReferenceIDType = (CrossReference)cAssignmentReferenced.eContents().get(0);
+		private final RuleCall c01TerminalRuleCallID = (RuleCall)c0CrossReferenceIDType.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -475,7 +484,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public Assignment eleAssignmentReferenced() { return cAssignmentReferenced; }
 
 		// not supported
-		public CrossReference ele0CrossReferenceEStringType() { return c0CrossReferenceEStringType; }
+		public CrossReference ele0CrossReferenceIDType() { return c0CrossReferenceIDType; }
+
+		// not supported
+		public RuleCall ele01TerminalRuleCallID() { return c01TerminalRuleCallID; }
 	}
 
 	public class QualifiedNameElements implements IParserRuleAccess {

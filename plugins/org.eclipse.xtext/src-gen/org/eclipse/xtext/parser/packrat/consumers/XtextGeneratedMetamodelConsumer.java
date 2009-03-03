@@ -41,23 +41,23 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$6$Consumer;
 
-	private IElementConsumer group$8$Consumer;
+	private IElementConsumer group$9$Consumer;
 
-	private IElementConsumer keyword$9$Consumer;
+	private IElementConsumer keyword$10$Consumer;
 
-	private IElementConsumer assignment$10$Consumer;
+	private IElementConsumer assignment$11$Consumer;
 
-	private IElementConsumer ruleCall$11$Consumer;
-
-	private ISequenceMatcher crossReference$6$Delimiter;
+	private IElementConsumer ruleCall$12$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
-	private ICharacterClass keyword$9$Delimiter;
+	private ICharacterClass keyword$10$Delimiter;
 
 	private ISequenceMatcher ruleCall$4$Delimiter;
 
-	private ISequenceMatcher ruleCall$11$Delimiter;
+	private ISequenceMatcher ruleCall$8$Delimiter;
+
+	private ISequenceMatcher ruleCall$12$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -70,7 +70,7 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(assignment$3$Consumer);
 			acceptor.accept(assignment$5$Consumer);
-			acceptor.accept(group$8$Consumer);
+			acceptor.accept(group$9$Consumer);
 		}
 	}
 
@@ -130,66 +130,66 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "ePackage", false, false, getElement(), getCrossReference$6$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "ePackage", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
-	protected class Group$8$Consumer extends OptionalGroupConsumer {
+	protected class Group$9$Consumer extends OptionalGroupConsumer {
 		
-		protected Group$8$Consumer(final Group group) {
+		protected Group$9$Consumer(final Group group) {
 			super(group);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(keyword$9$Consumer);
-			acceptor.accept(assignment$10$Consumer);
+			acceptor.accept(keyword$10$Consumer);
+			acceptor.accept(assignment$11$Consumer);
 		}
 	}
 
-	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$9$Consumer(final Keyword keyword) {
+		protected Keyword$10$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$10$Delimiter(), optional);
 		}
 	}
 
-	protected class Assignment$10$Consumer extends AssignmentConsumer {
+	protected class Assignment$11$Consumer extends AssignmentConsumer {
 		
-		protected Assignment$10$Consumer(final Assignment assignment) {
+		protected Assignment$11$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return ruleCall$11$Consumer;
+			return ruleCall$12$Consumer;
 		}
 	}
 
-	protected class RuleCall$11$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$11$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "alias", false, false, getElement(), getRuleCall$11$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "alias", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
 		}
 	}
 
 	public XtextGeneratedMetamodelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$11$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -209,11 +209,11 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentEPackage());
-		crossReference$6$Consumer = new CrossReference$6$Consumer(rule.ele20CrossReferenceEStringEPackage());
-		group$8$Consumer = new Group$8$Consumer(rule.ele3Group());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele30KeywordAs());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele31AssignmentAlias());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele310TerminalRuleCallID());
+		crossReference$6$Consumer = new CrossReference$6$Consumer(rule.ele20CrossReferenceSTRINGEPackage());
+		group$9$Consumer = new Group$9$Consumer(rule.ele3Group());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele30KeywordAs());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele31AssignmentAlias());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele310TerminalRuleCallID());
 	}
 	
 	@Override
@@ -223,7 +223,7 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
@@ -234,14 +234,6 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		this.stringConsumer = stringConsumer;
 	}
 	
-	public ISequenceMatcher getCrossReference$6$Delimiter() {
-		return crossReference$6$Delimiter;
-	}
-	
-	public void setCrossReference$6$Delimiter(ISequenceMatcher matcher) {
-		crossReference$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
 	public ICharacterClass getKeyword$2$Delimiter() {
 		return keyword$2$Delimiter;
 	}
@@ -250,12 +242,12 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
+	public ICharacterClass getKeyword$10$Delimiter() {
+		return keyword$10$Delimiter;
 	}
 	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
+		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$4$Delimiter() {
@@ -266,12 +258,20 @@ public final class XtextGeneratedMetamodelConsumer extends NonTerminalConsumer {
 		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
-	public ISequenceMatcher getRuleCall$11$Delimiter() {
-		return ruleCall$11$Delimiter;
+	public ISequenceMatcher getRuleCall$8$Delimiter() {
+		return ruleCall$8$Delimiter;
 	}
 	
-	public void setRuleCall$11$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$11$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$12$Delimiter() {
+		return ruleCall$12$Delimiter;
+	}
+	
+	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

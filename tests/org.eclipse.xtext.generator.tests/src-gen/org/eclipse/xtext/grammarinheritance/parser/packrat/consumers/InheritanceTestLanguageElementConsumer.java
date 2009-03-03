@@ -118,7 +118,7 @@ public final class InheritanceTestLanguageElementConsumer extends NonTerminalCon
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

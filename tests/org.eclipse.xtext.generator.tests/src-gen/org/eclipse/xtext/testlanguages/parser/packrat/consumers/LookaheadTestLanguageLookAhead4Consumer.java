@@ -129,7 +129,7 @@ public final class LookaheadTestLanguageLookAhead4Consumer extends NonTerminalCo
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$3$Delimiter() {

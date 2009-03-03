@@ -127,7 +127,7 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setEPackageDeclConsumer(INonTerminalConsumer ePackageDeclConsumer) {

@@ -119,7 +119,7 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(typeRefConsumer, "typeName", false, false, false, getElement(), optional);
+			return consumeNonTerminal(typeRefConsumer, "type", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -272,7 +272,7 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftCurlyBracket());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentTypeName());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentType());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTypeRef());
 		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordFullStop());
@@ -295,7 +295,7 @@ public final class XtextTerminalsTestLanguageActionConsumer extends NonTerminalC
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {

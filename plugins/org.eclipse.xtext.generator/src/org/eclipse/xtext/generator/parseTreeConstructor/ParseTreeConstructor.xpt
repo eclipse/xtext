@@ -47,7 +47,7 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 		Solution s;
 «FOREACH allParserRules() AS pr-»
 «IF !pr.isDatatypeRule()-»
-		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getRule().getType().getType()) && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getRule().getType().getClassifier()) && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 «ENDIF-»
 «ENDFOREACH-»		
 		return null;
@@ -120,12 +120,12 @@ protected class «elementMethodName()» extends GroupToken {
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new «abstractTokens.last().elementMethodName()»(current, this).firstSolution();
-«EXPAND groupItem(1) FOR abstractTokens.withoutLast().reverse().toList()-»
+		Solution s1 = new «tokens.last().elementMethodName()»(current, this).firstSolution();
+«EXPAND groupItem(1) FOR tokens.withoutLast().reverse().toList()-»
 		return null;
 	}
 }
-«EXPAND element FOREACH abstractTokens»
+«EXPAND element FOREACH tokens»
 «ENDDEFINE»
 
 «DEFINE groupItem(int i) FOR List[AbstractElement]-»
@@ -183,7 +183,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 	protected Solution createSolution() {
 «IF calledParserRule() != null-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getClassifier())) return null;
 		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
 		// FIXME: lexer rule call
@@ -219,7 +219,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «DEFINE assignmentCreate FOR CrossReference-»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.«gaRuleElementAccessor()»; 
 				return new Solution(obj);
@@ -232,7 +232,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «IF !isDatatypeRule(calledParserRule())»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getClassifier())) {
 				Solution s = new «calledParserRule().alternatives.elementMethodName()»(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -286,7 +286,7 @@ protected class «elementMethodName()» extends ActionToken  {
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getTypeName().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		Object val = current.getConsumable("«feature»", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;

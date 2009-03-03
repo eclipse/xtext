@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -252,10 +251,6 @@ public final class PackratParserGenUtil {
 	public static List<String> getConflictingKeywords(final AbstractElement element, final Grammar grammar) {
 		if (element instanceof RuleCall) {
 			AbstractRule rule = ((RuleCall) element).getRule();
-			if (rule instanceof TerminalRule)
-				return getConflictingKeywordsImpl(grammar, (TerminalRule) rule);
-		} else if (element instanceof CrossReference) {
-			AbstractRule rule = ((CrossReference) element).getRule();
 			if (rule instanceof TerminalRule)
 				return getConflictingKeywordsImpl(grammar, (TerminalRule) rule);
 		}

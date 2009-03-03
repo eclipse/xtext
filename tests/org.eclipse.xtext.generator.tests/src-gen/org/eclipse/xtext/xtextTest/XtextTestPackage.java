@@ -363,52 +363,6 @@ public interface XtextTestPackage extends EPackage
   int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTerminalRule()
-   * @generated
-   */
-  int TERMINAL_RULE = 6;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TERMINAL_RULE__NAME = ABSTRACT_RULE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TERMINAL_RULE__TYPE = ABSTRACT_RULE__TYPE;
-
-  /**
-   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TERMINAL_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
-
-  /**
-   * The number of structural features of the '<em>Terminal Rule</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.TypeRefImpl <em>Type Ref</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -416,7 +370,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTypeRef()
    * @generated
    */
-  int TYPE_REF = 7;
+  int TYPE_REF = 6;
 
   /**
    * The feature id for the '<em><b>Metamodel</b></em>' reference.
@@ -428,13 +382,13 @@ public interface XtextTestPackage extends EPackage
   int TYPE_REF__METAMODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
+   * The feature id for the '<em><b>Classifier</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_REF__TYPE = 1;
+  int TYPE_REF__CLASSIFIER = 1;
 
   /**
    * The number of structural features of the '<em>Type Ref</em>' class.
@@ -453,7 +407,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAbstractElement()
    * @generated
    */
-  int ABSTRACT_ELEMENT = 8;
+  int ABSTRACT_ELEMENT = 7;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -474,6 +428,135 @@ public interface XtextTestPackage extends EPackage
   int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.ActionImpl <em>Action</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.ActionImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAction()
+   * @generated
+   */
+  int ACTION = 8;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Feature</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__FEATURE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__OPERATOR = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Action</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.KeywordImpl <em>Keyword</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.KeywordImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getKeyword()
+   * @generated
+   */
+  int KEYWORD = 9;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD__VALUE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Keyword</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.RuleCallImpl <em>Rule Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.RuleCallImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getRuleCall()
+   * @generated
+   */
+  int RULE_CALL = 10;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Rule</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Rule Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.AssignmentImpl <em>Assignment</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -481,7 +564,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 9;
+  int ASSIGNMENT = 11;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -529,14 +612,14 @@ public interface XtextTestPackage extends EPackage
   int ASSIGNMENT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.ActionImpl <em>Action</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.ActionImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAction()
+   * @see org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getCrossReference()
    * @generated
    */
-  int ACTION = 10;
+  int CROSS_REFERENCE = 12;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -545,43 +628,80 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int CROSS_REFERENCE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Type Name</b></em>' containment reference.
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION__TYPE_NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int CROSS_REFERENCE__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Feature</b></em>' attribute.
+   * The feature id for the '<em><b>Terminal</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION__FEATURE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int CROSS_REFERENCE__TERMINAL = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * The number of structural features of the '<em>Cross Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION__OPERATOR = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+  int CROSS_REFERENCE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>Action</em>' class.
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTerminalRule()
+   * @generated
+   */
+  int TERMINAL_RULE = 13;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+  int TERMINAL_RULE__NAME = ABSTRACT_RULE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
+
+  /**
+   * The number of structural features of the '<em>Terminal Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.AbstractNegatedTokenImpl <em>Abstract Negated Token</em>}' class.
@@ -591,7 +711,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAbstractNegatedToken()
    * @generated
    */
-  int ABSTRACT_NEGATED_TOKEN = 11;
+  int ABSTRACT_NEGATED_TOKEN = 14;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -628,7 +748,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getNegatedToken()
    * @generated
    */
-  int NEGATED_TOKEN = 12;
+  int NEGATED_TOKEN = 15;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -665,7 +785,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUntilToken()
    * @generated
    */
-  int UNTIL_TOKEN = 13;
+  int UNTIL_TOKEN = 16;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -702,7 +822,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getWildcard()
    * @generated
    */
-  int WILDCARD = 14;
+  int WILDCARD = 17;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -721,126 +841,6 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int WILDCARD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getCrossReference()
-   * @generated
-   */
-  int CROSS_REFERENCE = 15;
-
-  /**
-   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CROSS_REFERENCE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CROSS_REFERENCE__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Rule</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CROSS_REFERENCE__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Cross Reference</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CROSS_REFERENCE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.KeywordImpl <em>Keyword</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.KeywordImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getKeyword()
-   * @generated
-   */
-  int KEYWORD = 16;
-
-  /**
-   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEYWORD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEYWORD__VALUE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Keyword</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEYWORD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.RuleCallImpl <em>Rule Call</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.RuleCallImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getRuleCall()
-   * @generated
-   */
-  int RULE_CALL = 17;
-
-  /**
-   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_CALL__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
-
-  /**
-   * The feature id for the '<em><b>Rule</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_CALL__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Rule Call</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE_CALL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.AlternativesImpl <em>Alternatives</em>}' class.
@@ -899,13 +899,13 @@ public interface XtextTestPackage extends EPackage
   int GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Abstract Tokens</b></em>' containment reference list.
+   * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GROUP__ABSTRACT_TOKENS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int GROUP__TOKENS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Group</em>' class.
@@ -1178,16 +1178,6 @@ public interface XtextTestPackage extends EPackage
   EReference getParserRule_HiddenTokens();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.TerminalRule <em>Terminal Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Terminal Rule</em>'.
-   * @see org.eclipse.xtext.xtextTest.TerminalRule
-   * @generated
-   */
-  EClass getTerminalRule();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.TypeRef <em>Type Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1209,15 +1199,15 @@ public interface XtextTestPackage extends EPackage
   EReference getTypeRef_Metamodel();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.TypeRef#getType <em>Type</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.TypeRef#getClassifier <em>Classifier</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
-   * @see org.eclipse.xtext.xtextTest.TypeRef#getType()
+   * @return the meta object for the reference '<em>Classifier</em>'.
+   * @see org.eclipse.xtext.xtextTest.TypeRef#getClassifier()
    * @see #getTypeRef()
    * @generated
    */
-  EReference getTypeRef_Type();
+  EReference getTypeRef_Classifier();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.AbstractElement <em>Abstract Element</em>}'.
@@ -1239,6 +1229,91 @@ public interface XtextTestPackage extends EPackage
    * @generated
    */
   EAttribute getAbstractElement_Cardinality();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Action <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action</em>'.
+   * @see org.eclipse.xtext.xtextTest.Action
+   * @generated
+   */
+  EClass getAction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.Action#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.eclipse.xtext.xtextTest.Action#getType()
+   * @see #getAction()
+   * @generated
+   */
+  EReference getAction_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Action#getFeature <em>Feature</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Feature</em>'.
+   * @see org.eclipse.xtext.xtextTest.Action#getFeature()
+   * @see #getAction()
+   * @generated
+   */
+  EAttribute getAction_Feature();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Action#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see org.eclipse.xtext.xtextTest.Action#getOperator()
+   * @see #getAction()
+   * @generated
+   */
+  EAttribute getAction_Operator();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Keyword <em>Keyword</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Keyword</em>'.
+   * @see org.eclipse.xtext.xtextTest.Keyword
+   * @generated
+   */
+  EClass getKeyword();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Keyword#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.xtext.xtextTest.Keyword#getValue()
+   * @see #getKeyword()
+   * @generated
+   */
+  EAttribute getKeyword_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.RuleCall <em>Rule Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule Call</em>'.
+   * @see org.eclipse.xtext.xtextTest.RuleCall
+   * @generated
+   */
+  EClass getRuleCall();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.RuleCall#getRule <em>Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Rule</em>'.
+   * @see org.eclipse.xtext.xtextTest.RuleCall#getRule()
+   * @see #getRuleCall()
+   * @generated
+   */
+  EReference getRuleCall_Rule();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Assignment <em>Assignment</em>}'.
@@ -1284,47 +1359,46 @@ public interface XtextTestPackage extends EPackage
   EReference getAssignment_Terminal();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Action <em>Action</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.CrossReference <em>Cross Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Action</em>'.
-   * @see org.eclipse.xtext.xtextTest.Action
+   * @return the meta object for class '<em>Cross Reference</em>'.
+   * @see org.eclipse.xtext.xtextTest.CrossReference
    * @generated
    */
-  EClass getAction();
+  EClass getCrossReference();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.Action#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.CrossReference#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see org.eclipse.xtext.xtextTest.Action#getTypeName()
-   * @see #getAction()
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.eclipse.xtext.xtextTest.CrossReference#getType()
+   * @see #getCrossReference()
    * @generated
    */
-  EReference getAction_TypeName();
+  EReference getCrossReference_Type();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Action#getFeature <em>Feature</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.CrossReference#getTerminal <em>Terminal</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Feature</em>'.
-   * @see org.eclipse.xtext.xtextTest.Action#getFeature()
-   * @see #getAction()
+   * @return the meta object for the containment reference '<em>Terminal</em>'.
+   * @see org.eclipse.xtext.xtextTest.CrossReference#getTerminal()
+   * @see #getCrossReference()
    * @generated
    */
-  EAttribute getAction_Feature();
+  EReference getCrossReference_Terminal();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Action#getOperator <em>Operator</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.TerminalRule <em>Terminal Rule</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Operator</em>'.
-   * @see org.eclipse.xtext.xtextTest.Action#getOperator()
-   * @see #getAction()
+   * @return the meta object for class '<em>Terminal Rule</em>'.
+   * @see org.eclipse.xtext.xtextTest.TerminalRule
    * @generated
    */
-  EAttribute getAction_Operator();
+  EClass getTerminalRule();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.AbstractNegatedToken <em>Abstract Negated Token</em>}'.
@@ -1378,80 +1452,6 @@ public interface XtextTestPackage extends EPackage
   EClass getWildcard();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.CrossReference <em>Cross Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Cross Reference</em>'.
-   * @see org.eclipse.xtext.xtextTest.CrossReference
-   * @generated
-   */
-  EClass getCrossReference();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.CrossReference#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see org.eclipse.xtext.xtextTest.CrossReference#getType()
-   * @see #getCrossReference()
-   * @generated
-   */
-  EReference getCrossReference_Type();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.CrossReference#getRule <em>Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Rule</em>'.
-   * @see org.eclipse.xtext.xtextTest.CrossReference#getRule()
-   * @see #getCrossReference()
-   * @generated
-   */
-  EReference getCrossReference_Rule();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Keyword <em>Keyword</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Keyword</em>'.
-   * @see org.eclipse.xtext.xtextTest.Keyword
-   * @generated
-   */
-  EClass getKeyword();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Keyword#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see org.eclipse.xtext.xtextTest.Keyword#getValue()
-   * @see #getKeyword()
-   * @generated
-   */
-  EAttribute getKeyword_Value();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.RuleCall <em>Rule Call</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Rule Call</em>'.
-   * @see org.eclipse.xtext.xtextTest.RuleCall
-   * @generated
-   */
-  EClass getRuleCall();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.RuleCall#getRule <em>Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Rule</em>'.
-   * @see org.eclipse.xtext.xtextTest.RuleCall#getRule()
-   * @see #getRuleCall()
-   * @generated
-   */
-  EReference getRuleCall_Rule();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Alternatives <em>Alternatives</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1483,15 +1483,15 @@ public interface XtextTestPackage extends EPackage
   EClass getGroup();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.Group#getAbstractTokens <em>Abstract Tokens</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.Group#getTokens <em>Tokens</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Abstract Tokens</em>'.
-   * @see org.eclipse.xtext.xtextTest.Group#getAbstractTokens()
+   * @return the meta object for the containment reference list '<em>Tokens</em>'.
+   * @see org.eclipse.xtext.xtextTest.Group#getTokens()
    * @see #getGroup()
    * @generated
    */
-  EReference getGroup_AbstractTokens();
+  EReference getGroup_Tokens();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.CharacterRange <em>Character Range</em>}'.
@@ -1721,16 +1721,6 @@ public interface XtextTestPackage extends EPackage
     EReference PARSER_RULE__HIDDEN_TOKENS = eINSTANCE.getParserRule_HiddenTokens();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTerminalRule()
-     * @generated
-     */
-    EClass TERMINAL_RULE = eINSTANCE.getTerminalRule();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.TypeRefImpl <em>Type Ref</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1749,12 +1739,12 @@ public interface XtextTestPackage extends EPackage
     EReference TYPE_REF__METAMODEL = eINSTANCE.getTypeRef_Metamodel();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Classifier</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TYPE_REF__TYPE = eINSTANCE.getTypeRef_Type();
+    EReference TYPE_REF__CLASSIFIER = eINSTANCE.getTypeRef_Classifier();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
@@ -1773,6 +1763,76 @@ public interface XtextTestPackage extends EPackage
      * @generated
      */
     EAttribute ABSTRACT_ELEMENT__CARDINALITY = eINSTANCE.getAbstractElement_Cardinality();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.ActionImpl <em>Action</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.ActionImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAction()
+     * @generated
+     */
+    EClass ACTION = eINSTANCE.getAction();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTION__TYPE = eINSTANCE.getAction_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Feature</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION__FEATURE = eINSTANCE.getAction_Feature();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ACTION__OPERATOR = eINSTANCE.getAction_Operator();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.KeywordImpl <em>Keyword</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.KeywordImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getKeyword()
+     * @generated
+     */
+    EClass KEYWORD = eINSTANCE.getKeyword();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEYWORD__VALUE = eINSTANCE.getKeyword_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.RuleCallImpl <em>Rule Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.RuleCallImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getRuleCall()
+     * @generated
+     */
+    EClass RULE_CALL = eINSTANCE.getRuleCall();
+
+    /**
+     * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALL__RULE = eINSTANCE.getRuleCall_Rule();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -1809,38 +1869,40 @@ public interface XtextTestPackage extends EPackage
     EReference ASSIGNMENT__TERMINAL = eINSTANCE.getAssignment_Terminal();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.ActionImpl <em>Action</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.ActionImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAction()
+     * @see org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getCrossReference()
      * @generated
      */
-    EClass ACTION = eINSTANCE.getAction();
+    EClass CROSS_REFERENCE = eINSTANCE.getCrossReference();
 
     /**
-     * The meta object literal for the '<em><b>Type Name</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACTION__TYPE_NAME = eINSTANCE.getAction_TypeName();
+    EReference CROSS_REFERENCE__TYPE = eINSTANCE.getCrossReference_Type();
 
     /**
-     * The meta object literal for the '<em><b>Feature</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Terminal</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ACTION__FEATURE = eINSTANCE.getAction_Feature();
+    EReference CROSS_REFERENCE__TERMINAL = eINSTANCE.getCrossReference_Terminal();
 
     /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTerminalRule()
      * @generated
      */
-    EAttribute ACTION__OPERATOR = eINSTANCE.getAction_Operator();
+    EClass TERMINAL_RULE = eINSTANCE.getTerminalRule();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AbstractNegatedTokenImpl <em>Abstract Negated Token</em>}' class.
@@ -1891,68 +1953,6 @@ public interface XtextTestPackage extends EPackage
     EClass WILDCARD = eINSTANCE.getWildcard();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getCrossReference()
-     * @generated
-     */
-    EClass CROSS_REFERENCE = eINSTANCE.getCrossReference();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CROSS_REFERENCE__TYPE = eINSTANCE.getCrossReference_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CROSS_REFERENCE__RULE = eINSTANCE.getCrossReference_Rule();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.KeywordImpl <em>Keyword</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.KeywordImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getKeyword()
-     * @generated
-     */
-    EClass KEYWORD = eINSTANCE.getKeyword();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute KEYWORD__VALUE = eINSTANCE.getKeyword_Value();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.RuleCallImpl <em>Rule Call</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.RuleCallImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getRuleCall()
-     * @generated
-     */
-    EClass RULE_CALL = eINSTANCE.getRuleCall();
-
-    /**
-     * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RULE_CALL__RULE = eINSTANCE.getRuleCall_Rule();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AlternativesImpl <em>Alternatives</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1981,12 +1981,12 @@ public interface XtextTestPackage extends EPackage
     EClass GROUP = eINSTANCE.getGroup();
 
     /**
-     * The meta object literal for the '<em><b>Abstract Tokens</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Tokens</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference GROUP__ABSTRACT_TOKENS = eINSTANCE.getGroup_AbstractTokens();
+    EReference GROUP__TOKENS = eINSTANCE.getGroup_Tokens();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.CharacterRangeImpl <em>Character Range</em>}' class.

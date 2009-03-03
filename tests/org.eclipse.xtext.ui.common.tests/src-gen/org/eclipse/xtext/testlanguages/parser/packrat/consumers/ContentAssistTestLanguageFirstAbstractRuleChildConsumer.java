@@ -190,7 +190,7 @@ public final class ContentAssistTestLanguageFirstAbstractRuleChildConsumer exten
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setAbstractRuleConsumer(INonTerminalConsumer abstractRuleConsumer) {

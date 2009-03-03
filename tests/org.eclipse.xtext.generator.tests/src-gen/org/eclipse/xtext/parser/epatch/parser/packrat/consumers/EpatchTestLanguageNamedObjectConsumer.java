@@ -96,7 +96,7 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setCreatedObjectConsumer(INonTerminalConsumer createdObjectConsumer) {

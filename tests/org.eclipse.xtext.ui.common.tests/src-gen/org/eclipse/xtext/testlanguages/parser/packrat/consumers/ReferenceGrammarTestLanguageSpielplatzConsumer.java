@@ -341,7 +341,7 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setErwachsenerConsumer(INonTerminalConsumer erwachsenerConsumer) {

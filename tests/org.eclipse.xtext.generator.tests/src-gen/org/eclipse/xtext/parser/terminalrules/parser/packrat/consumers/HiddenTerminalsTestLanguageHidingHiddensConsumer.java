@@ -152,7 +152,7 @@ public final class HiddenTerminalsTestLanguageHidingHiddensConsumer extends NonT
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setInheritingHiddensCallConsumer(INonTerminalConsumer inheritingHiddensCallConsumer) {

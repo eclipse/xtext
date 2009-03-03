@@ -22,11 +22,11 @@ public class ContentAssistTestLanguageParsetreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prStart().getRule().getType().getType()) && (s = new Start_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType()) && (s = new FirstAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType()) && (s = new SecondAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractRuleCall().getRule().getType().getType()) && (s = new AbstractRuleCall_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStart().getRule().getType().getClassifier()) && (s = new Start_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getClassifier()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getClassifier()) && (s = new FirstAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getClassifier()) && (s = new SecondAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractRuleCall().getRule().getType().getClassifier()) && (s = new AbstractRuleCall_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -103,7 +103,7 @@ protected class Start_1_Assignment_rules extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getClassifier())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -176,7 +176,7 @@ protected class AbstractRule_0_RuleCall_FirstAbstractRuleChild extends RuleCallT
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(FirstAbstractRuleChild_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getClassifier())) return null;
 		return new FirstAbstractRuleChild_Group(current, this).firstSolution();
 	}
 }
@@ -196,7 +196,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(SecondAbstractRuleChild_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getClassifier())) return null;
 		return new SecondAbstractRuleChild_Group(current, this).firstSolution();
 	}
 }
@@ -310,7 +310,7 @@ protected class FirstAbstractRuleChild_2_Assignment_elements extends AssignmentT
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRule().getRule().getType().getClassifier())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -469,7 +469,7 @@ protected class SecondAbstractRuleChild_3_Assignment_rule extends AssignmentToke
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractRuleCall().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRuleCall().getRule().getType().getClassifier())) {
 				Solution s = new AbstractRuleCall_Assignment_rule(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -524,9 +524,9 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractRuleCall().ele0CrossReferenceIDAbstractRule().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(); 
+				element = grammarAccess.prAbstractRuleCall().ele0CrossReferenceIDAbstractRule(); 
 				return new Solution(obj);
 			}
 		}

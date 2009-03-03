@@ -22,11 +22,11 @@ public class FowlerDslParsetreeConstructor extends AbstractParseTreeConstructor 
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prStatemachine().getRule().getType().getType()) && (s = new Statemachine_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prEvent().getRule().getType().getType()) && (s = new Event_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prCommand().getRule().getType().getType()) && (s = new Command_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prState().getRule().getType().getType()) && (s = new State_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTransition().getRule().getType().getType()) && (s = new Transition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStatemachine().getRule().getType().getClassifier()) && (s = new Statemachine_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prEvent().getRule().getType().getClassifier()) && (s = new Event_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prCommand().getRule().getType().getClassifier()) && (s = new Command_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prState().getRule().getType().getClassifier()) && (s = new State_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prTransition().getRule().getType().getClassifier()) && (s = new Transition_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -119,7 +119,7 @@ protected class Statemachine_1_Assignment_events extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEvent().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prEvent().getRule().getType().getClassifier())) {
 				Solution s = new Event_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -176,7 +176,7 @@ protected class Statemachine_4_Assignment_commands extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prCommand().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prCommand().getRule().getType().getClassifier())) {
 				Solution s = new Command_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -221,7 +221,7 @@ protected class Statemachine_6_Assignment_states extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prState().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prState().getRule().getType().getClassifier())) {
 				Solution s = new State_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -618,9 +618,9 @@ protected class State_2_2_Assignment_actions extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("actions");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prState().ele220CrossReferenceEStringCommand().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prState().ele220CrossReferenceIDCommand().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prState().ele220CrossReferenceEStringCommand(); 
+				element = grammarAccess.prState().ele220CrossReferenceIDCommand(); 
 				return new Solution(obj);
 			}
 		}
@@ -660,7 +660,7 @@ protected class State_3_Assignment_transitions extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTransition().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTransition().getRule().getType().getClassifier())) {
 				Solution s = new Transition_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -749,9 +749,9 @@ protected class Transition_0_Assignment_event extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("event");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTransition().ele00CrossReferenceEStringEvent().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTransition().ele00CrossReferenceIDEvent().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prTransition().ele00CrossReferenceEStringEvent(); 
+				element = grammarAccess.prTransition().ele00CrossReferenceIDEvent(); 
 				return new Solution(obj);
 			}
 		}
@@ -789,9 +789,9 @@ protected class Transition_2_Assignment_state extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("state");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTransition().ele20CrossReferenceEStringState().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prTransition().ele20CrossReferenceIDState().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prTransition().ele20CrossReferenceEStringState(); 
+				element = grammarAccess.prTransition().ele20CrossReferenceIDState(); 
 				return new Solution(obj);
 			}
 		}

@@ -22,7 +22,7 @@ public class MultiValueFeatureTestLanguageParsetreeConstructor extends AbstractP
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prStart().getRule().getType().getType()) && (s = new Start_Assignment_featureA(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prStart().getRule().getType().getClassifier()) && (s = new Start_Assignment_featureA(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	

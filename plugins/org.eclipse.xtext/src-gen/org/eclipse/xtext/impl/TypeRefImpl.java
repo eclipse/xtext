@@ -26,7 +26,7 @@ import org.eclipse.xtext.XtextPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getMetamodel <em>Metamodel</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getClassifier <em>Classifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,14 +45,14 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
   protected AbstractMetamodelDeclaration metamodel;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getClassifier() <em>Classifier</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getClassifier()
    * @generated
    * @ordered
    */
-  protected EClassifier type;
+  protected EClassifier classifier;
 
   /**
    * <!-- begin-user-doc -->
@@ -123,19 +123,19 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClassifier getType()
+  public EClassifier getClassifier()
   {
-    if (type != null && type.eIsProxy())
+    if (classifier != null && classifier.eIsProxy())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (EClassifier)eResolveProxy(oldType);
-      if (type != oldType)
+      InternalEObject oldClassifier = (InternalEObject)classifier;
+      classifier = (EClassifier)eResolveProxy(oldClassifier);
+      if (classifier != oldClassifier)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.TYPE_REF__TYPE, oldType, type));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.TYPE_REF__CLASSIFIER, oldClassifier, classifier));
       }
     }
-    return type;
+    return classifier;
   }
 
   /**
@@ -143,9 +143,9 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClassifier basicGetType()
+  public EClassifier basicGetClassifier()
   {
-    return type;
+    return classifier;
   }
 
   /**
@@ -153,12 +153,12 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(EClassifier newType)
+  public void setClassifier(EClassifier newClassifier)
   {
-    EClassifier oldType = type;
-    type = newType;
+    EClassifier oldClassifier = classifier;
+    classifier = newClassifier;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__CLASSIFIER, oldClassifier, classifier));
   }
 
   /**
@@ -174,9 +174,9 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
       case XtextPackage.TYPE_REF__METAMODEL:
         if (resolve) return getMetamodel();
         return basicGetMetamodel();
-      case XtextPackage.TYPE_REF__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+      case XtextPackage.TYPE_REF__CLASSIFIER:
+        if (resolve) return getClassifier();
+        return basicGetClassifier();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -194,8 +194,8 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
       case XtextPackage.TYPE_REF__METAMODEL:
         setMetamodel((AbstractMetamodelDeclaration)newValue);
         return;
-      case XtextPackage.TYPE_REF__TYPE:
-        setType((EClassifier)newValue);
+      case XtextPackage.TYPE_REF__CLASSIFIER:
+        setClassifier((EClassifier)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -214,8 +214,8 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
       case XtextPackage.TYPE_REF__METAMODEL:
         setMetamodel((AbstractMetamodelDeclaration)null);
         return;
-      case XtextPackage.TYPE_REF__TYPE:
-        setType((EClassifier)null);
+      case XtextPackage.TYPE_REF__CLASSIFIER:
+        setClassifier((EClassifier)null);
         return;
     }
     super.eUnset(featureID);
@@ -233,8 +233,8 @@ public class TypeRefImpl extends MinimalEObjectImpl.Container implements TypeRef
     {
       case XtextPackage.TYPE_REF__METAMODEL:
         return metamodel != null;
-      case XtextPackage.TYPE_REF__TYPE:
-        return type != null;
+      case XtextPackage.TYPE_REF__CLASSIFIER:
+        return classifier != null;
     }
     return super.eIsSet(featureID);
   }

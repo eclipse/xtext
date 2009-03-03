@@ -97,7 +97,7 @@ public final class XtextTerminalsTestLanguageWildcardConsumer extends NonTermina
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public ICharacterClass getKeyword$4$Delimiter() {

@@ -17,10 +17,10 @@ extension org::eclipse::xtend::util::stdlib::io;
  */
 
 
-List[IScopedElement] scope_rule(RuleCall this):
+List[IScopedElement] scope_hiddenTokens(Grammar this):
 	allElements().typeSelect(AbstractRule).collect(x | createScopedElement(x.referenceName(), x));
 	
-List[IScopedElement] scope_rule(emf::EObject this) :
+List[IScopedElement] scope_hiddenTokens(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
 List[IScopedElement] scope_usedGrammars(Grammar this):
@@ -29,22 +29,22 @@ List[IScopedElement] scope_usedGrammars(Grammar this):
 List[IScopedElement] scope_usedGrammars(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
+List[IScopedElement] scope_metamodel(TypeRef this):
+	allElements().typeSelect(AbstractMetamodelDeclaration).collect(x | createScopedElement(x.referenceName(), x));
+	
+List[IScopedElement] scope_metamodel(emf::EObject this) :
+	allElements().collect(x | createScopedElement(x.referenceName(), x));
+
 List[IScopedElement] scope_ePackage(AbstractMetamodelDeclaration this):
 	allElements().typeSelect(ecore::EPackage).collect(x | createScopedElement(x.referenceName(), x));
 	
 List[IScopedElement] scope_ePackage(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
-List[IScopedElement] scope_rule(CrossReference this):
-	allElements().typeSelect(AbstractRule).collect(x | createScopedElement(x.referenceName(), x));
+List[IScopedElement] scope_classifier(TypeRef this):
+	allElements().typeSelect(ecore::EClassifier).collect(x | createScopedElement(x.referenceName(), x));
 	
-List[IScopedElement] scope_rule(emf::EObject this) :
-	allElements().collect(x | createScopedElement(x.referenceName(), x));
-
-List[IScopedElement] scope_metamodel(TypeRef this):
-	allElements().typeSelect(AbstractMetamodelDeclaration).collect(x | createScopedElement(x.referenceName(), x));
-	
-List[IScopedElement] scope_metamodel(emf::EObject this) :
+List[IScopedElement] scope_classifier(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
 List[IScopedElement] scope_hiddenTokens(ParserRule this):
@@ -53,15 +53,9 @@ List[IScopedElement] scope_hiddenTokens(ParserRule this):
 List[IScopedElement] scope_hiddenTokens(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
-List[IScopedElement] scope_hiddenTokens(Grammar this):
+List[IScopedElement] scope_rule(RuleCall this):
 	allElements().typeSelect(AbstractRule).collect(x | createScopedElement(x.referenceName(), x));
 	
-List[IScopedElement] scope_hiddenTokens(emf::EObject this) :
-	allElements().collect(x | createScopedElement(x.referenceName(), x));
-
-List[IScopedElement] scope_type(TypeRef this):
-	allElements().typeSelect(ecore::EClassifier).collect(x | createScopedElement(x.referenceName(), x));
-	
-List[IScopedElement] scope_type(emf::EObject this) :
+List[IScopedElement] scope_rule(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 

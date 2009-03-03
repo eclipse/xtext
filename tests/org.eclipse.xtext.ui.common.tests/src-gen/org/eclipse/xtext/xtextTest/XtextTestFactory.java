@@ -80,15 +80,6 @@ public interface XtextTestFactory extends EFactory
   ParserRule createParserRule();
 
   /**
-   * Returns a new object of class '<em>Terminal Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Terminal Rule</em>'.
-   * @generated
-   */
-  TerminalRule createTerminalRule();
-
-  /**
    * Returns a new object of class '<em>Type Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -107,6 +98,33 @@ public interface XtextTestFactory extends EFactory
   AbstractElement createAbstractElement();
 
   /**
+   * Returns a new object of class '<em>Action</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action</em>'.
+   * @generated
+   */
+  Action createAction();
+
+  /**
+   * Returns a new object of class '<em>Keyword</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Keyword</em>'.
+   * @generated
+   */
+  Keyword createKeyword();
+
+  /**
+   * Returns a new object of class '<em>Rule Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rule Call</em>'.
+   * @generated
+   */
+  RuleCall createRuleCall();
+
+  /**
    * Returns a new object of class '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -116,13 +134,22 @@ public interface XtextTestFactory extends EFactory
   Assignment createAssignment();
 
   /**
-   * Returns a new object of class '<em>Action</em>'.
+   * Returns a new object of class '<em>Cross Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Action</em>'.
+   * @return a new object of class '<em>Cross Reference</em>'.
    * @generated
    */
-  Action createAction();
+  CrossReference createCrossReference();
+
+  /**
+   * Returns a new object of class '<em>Terminal Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Terminal Rule</em>'.
+   * @generated
+   */
+  TerminalRule createTerminalRule();
 
   /**
    * Returns a new object of class '<em>Abstract Negated Token</em>'.
@@ -159,33 +186,6 @@ public interface XtextTestFactory extends EFactory
    * @generated
    */
   Wildcard createWildcard();
-
-  /**
-   * Returns a new object of class '<em>Cross Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Cross Reference</em>'.
-   * @generated
-   */
-  CrossReference createCrossReference();
-
-  /**
-   * Returns a new object of class '<em>Keyword</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Keyword</em>'.
-   * @generated
-   */
-  Keyword createKeyword();
-
-  /**
-   * Returns a new object of class '<em>Rule Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rule Call</em>'.
-   * @generated
-   */
-  RuleCall createRuleCall();
 
   /**
    * Returns a new object of class '<em>Alternatives</em>'.

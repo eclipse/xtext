@@ -93,7 +93,7 @@ ruleStart returns [EObject current=null]
 	    lv_rules_1=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prStart().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prStart().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -187,7 +187,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -211,7 +211,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	    lv_elements_2=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -261,7 +261,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -289,7 +289,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	    lv_rule_3=ruleAbstractRuleCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -331,13 +331,13 @@ ruleAbstractRuleCall returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prAbstractRuleCall().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAbstractRuleCall().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAbstractRuleCall().ele0CrossReferenceEStringAbstractRule(), "rule"); 
+		createLeafNode(grammarAccess.prAbstractRuleCall().ele0CrossReferenceIDAbstractRule(), "rule"); 
 	}
 
 		// TODO assign feature to currentNode

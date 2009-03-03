@@ -22,19 +22,19 @@ public class ConcreteTestLanguageParsetreeConstructor extends AbstractParseTreeC
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prRootRule().getRule().getType().getType()) && (s = new RootRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prConcreteParserRule().getRule().getType().getType()) && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getType()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prCallOverridenParserRule().getRule().getType().getType()) && (s = new CallOverridenParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getType()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getType()) && (s = new ExtendableParserRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSubrule1().getRule().getType().getType()) && (s = new Subrule1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSubrule2().getRule().getType().getType()) && (s = new Subrule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSubrule3().getRule().getType().getType()) && (s = new Subrule3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prCallExtendedParserRule().getRule().getType().getType()) && (s = new CallExtendedParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getType()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prRootRule().getRule().getType().getClassifier()) && (s = new RootRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prConcreteParserRule().getRule().getType().getClassifier()) && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prCallOverridenParserRule().getRule().getType().getClassifier()) && (s = new CallOverridenParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getClassifier()) && (s = new ExtendableParserRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubrule1().getRule().getType().getClassifier()) && (s = new Subrule1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubrule2().getRule().getType().getClassifier()) && (s = new Subrule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prSubrule3().getRule().getType().getClassifier()) && (s = new Subrule3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prCallExtendedParserRule().getRule().getType().getClassifier()) && (s = new CallExtendedParserRule_Assignment_call(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getClassifier()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getClassifier()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getClassifier()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -84,7 +84,7 @@ protected class RootRule_0_RuleCall_ConcreteParserRule extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(ConcreteParserRule_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prConcreteParserRule().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prConcreteParserRule().getRule().getType().getClassifier())) return null;
 		return new ConcreteParserRule_Group(current, this).firstSolution();
 	}
 }
@@ -104,7 +104,7 @@ protected class RootRule_1_RuleCall_CallOverridenParserRule extends RuleCallToke
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CallOverridenParserRule_Assignment_call.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prCallOverridenParserRule().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prCallOverridenParserRule().getRule().getType().getClassifier())) return null;
 		return new CallOverridenParserRule_Assignment_call(current, this).firstSolution();
 	}
 }
@@ -124,7 +124,7 @@ protected class RootRule_2_RuleCall_CallExtendedParserRule extends RuleCallToken
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(CallExtendedParserRule_Assignment_call.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prCallExtendedParserRule().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prCallExtendedParserRule().getRule().getType().getClassifier())) return null;
 		return new CallExtendedParserRule_Assignment_call(current, this).firstSolution();
 	}
 }
@@ -144,7 +144,7 @@ protected class RootRule_3_RuleCall_OverridableParserRule2 extends RuleCallToken
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(OverridableParserRule2_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier())) return null;
 		return new OverridableParserRule2_Group(current, this).firstSolution();
 	}
 }
@@ -266,7 +266,7 @@ protected class ConcreteParserRule_3_Assignment_elements extends AssignmentToken
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getClassifier())) {
 				Solution s = new InheritedParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -388,7 +388,7 @@ protected class CallOverridenParserRule_Assignment_call extends AssignmentToken 
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getClassifier())) {
 				Solution s = new AbstractCallOverridenParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -572,7 +572,7 @@ protected class ExtendableParserRule_0_RuleCall_Subrule1 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Subrule1_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prSubrule1().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prSubrule1().getRule().getType().getClassifier())) return null;
 		return new Subrule1_Group(current, this).firstSolution();
 	}
 }
@@ -592,7 +592,7 @@ protected class ExtendableParserRule_1_RuleCall_Subrule2 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Subrule2_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prSubrule2().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prSubrule2().getRule().getType().getClassifier())) return null;
 		return new Subrule2_Group(current, this).firstSolution();
 	}
 }
@@ -612,7 +612,7 @@ protected class ExtendableParserRule_2_RuleCall_Subrule3 extends RuleCallToken {
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Subrule3_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prSubrule3().getRule().getType().getType())) return null;
+		if(!current.isInstanceOf(grammarAccess.prSubrule3().getRule().getType().getClassifier())) return null;
 		return new Subrule3_Group(current, this).firstSolution();
 	}
 }
@@ -968,7 +968,7 @@ protected class CallExtendedParserRule_Assignment_call extends AssignmentToken  
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getClassifier())) {
 				Solution s = new AbstractCallExtendedParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1131,7 +1131,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier())) {
 				Solution s = new OverridableParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1217,7 +1217,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getType())) {
+			if(param.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getClassifier())) {
 				Solution s = new ExtendableParserRule_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {

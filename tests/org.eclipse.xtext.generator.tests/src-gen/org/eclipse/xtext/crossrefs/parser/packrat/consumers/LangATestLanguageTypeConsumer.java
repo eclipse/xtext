@@ -41,13 +41,13 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$7$Consumer;
 
-	private ISequenceMatcher crossReference$7$Delimiter;
-
 	private ICharacterClass keyword$2$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
 
 	private ISequenceMatcher ruleCall$4$Delimiter;
+
+	private ISequenceMatcher ruleCall$9$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -132,16 +132,16 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getCrossReference$7$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "extends", false, false, getElement(), getRuleCall$9$Delimiter(), optional);
 		}
 	}
 
 	public LangATestLanguageTypeConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$9$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -162,7 +162,7 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordExtends());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentExtends());
-		crossReference$7$Consumer = new CrossReference$7$Consumer(rule.ele30CrossReferenceEStringType());
+		crossReference$7$Consumer = new CrossReference$7$Consumer(rule.ele30CrossReferenceIDType());
 	}
 	
 	@Override
@@ -172,19 +172,11 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
-	}
-	
-	public ISequenceMatcher getCrossReference$7$Delimiter() {
-		return crossReference$7$Delimiter;
-	}
-	
-	public void setCrossReference$7$Delimiter(ISequenceMatcher matcher) {
-		crossReference$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$2$Delimiter() {
@@ -209,6 +201,14 @@ public final class LangATestLanguageTypeConsumer extends NonTerminalConsumer {
 	
 	public void setRuleCall$4$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$4$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$9$Delimiter() {
+		return ruleCall$9$Delimiter;
+	}
+	
+	public void setRuleCall$9$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$9$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

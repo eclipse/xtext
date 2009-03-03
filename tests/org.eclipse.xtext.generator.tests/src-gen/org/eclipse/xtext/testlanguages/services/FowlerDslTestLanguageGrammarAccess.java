@@ -140,7 +140,8 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword c20KeywordActions = (Keyword)c2Group.eContents().get(0);
 		private final Keyword c21KeywordLeftCurlyBracket = (Keyword)c2Group.eContents().get(1);
 		private final Assignment c22AssignmentActions = (Assignment)c2Group.eContents().get(2);
-		private final CrossReference c220CrossReferenceEStringCommand = (CrossReference)c22AssignmentActions.eContents().get(0);
+		private final CrossReference c220CrossReferenceIDCommand = (CrossReference)c22AssignmentActions.eContents().get(0);
+		private final RuleCall c2201TerminalRuleCallID = (RuleCall)c220CrossReferenceIDCommand.eContents().get(1);
 		private final Keyword c23KeywordRightCurlyBracket = (Keyword)c2Group.eContents().get(3);
 		private final Assignment c3AssignmentTransitions = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall c30ParserRuleCallTransition = (RuleCall)c3AssignmentTransitions.eContents().get(0);
@@ -174,7 +175,10 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele22AssignmentActions() { return c22AssignmentActions; }
 
 		// not supported
-		public CrossReference ele220CrossReferenceEStringCommand() { return c220CrossReferenceEStringCommand; }
+		public CrossReference ele220CrossReferenceIDCommand() { return c220CrossReferenceIDCommand; }
+
+		// not supported
+		public RuleCall ele2201TerminalRuleCallID() { return c2201TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele23KeywordRightCurlyBracket() { return c23KeywordRightCurlyBracket; }
@@ -193,10 +197,12 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment c0AssignmentEvent = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference c00CrossReferenceEStringEvent = (CrossReference)c0AssignmentEvent.eContents().get(0);
+		private final CrossReference c00CrossReferenceIDEvent = (CrossReference)c0AssignmentEvent.eContents().get(0);
+		private final RuleCall c001TerminalRuleCallID = (RuleCall)c00CrossReferenceIDEvent.eContents().get(1);
 		private final Keyword c1KeywordEqualsSignGreaterThanSign = (Keyword)cGroup.eContents().get(1);
 		private final Assignment c2AssignmentState = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference c20CrossReferenceEStringState = (CrossReference)c2AssignmentState.eContents().get(0);
+		private final CrossReference c20CrossReferenceIDState = (CrossReference)c2AssignmentState.eContents().get(0);
+		private final RuleCall c201TerminalRuleCallID = (RuleCall)c20CrossReferenceIDState.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -208,7 +214,10 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele0AssignmentEvent() { return c0AssignmentEvent; }
 
 		// not supported
-		public CrossReference ele00CrossReferenceEStringEvent() { return c00CrossReferenceEStringEvent; }
+		public CrossReference ele00CrossReferenceIDEvent() { return c00CrossReferenceIDEvent; }
+
+		// not supported
+		public RuleCall ele001TerminalRuleCallID() { return c001TerminalRuleCallID; }
 
 		// not supported
 		public Keyword ele1KeywordEqualsSignGreaterThanSign() { return c1KeywordEqualsSignGreaterThanSign; }
@@ -217,7 +226,10 @@ public class FowlerDslTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment ele2AssignmentState() { return c2AssignmentState; }
 
 		// not supported
-		public CrossReference ele20CrossReferenceEStringState() { return c20CrossReferenceEStringState; }
+		public CrossReference ele20CrossReferenceIDState() { return c20CrossReferenceIDState; }
+
+		// not supported
+		public RuleCall ele201TerminalRuleCallID() { return c201TerminalRuleCallID; }
 	}
 	
 	private StatemachineElements pStatemachine;

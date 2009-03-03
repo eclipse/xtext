@@ -148,8 +148,8 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 						CrossReference crossReference = (CrossReference) terminal;
 						TypeRef type = crossReference.getType();
 						String typeName = "<unknown>";
-						if (type != null && type.getType() != null) {
-							typeName = type.getType().getName();
+						if (type != null && type.getClassifier() != null) {
+							typeName = type.getClassifier().getName();
 						}
 						label.append("[").append(typeName).append("]");
 					}

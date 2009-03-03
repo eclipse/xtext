@@ -141,11 +141,7 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer crossReference$53$Consumer;
 
-	private IElementConsumer crossReference$55$Consumer;
-
-	private ISequenceMatcher crossReference$53$Delimiter;
-
-	private ISequenceMatcher crossReference$55$Delimiter;
+	private IElementConsumer crossReference$56$Consumer;
 
 	private ICharacterClass keyword$12$Delimiter;
 
@@ -180,6 +176,10 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	private ISequenceMatcher ruleCall$23$Delimiter;
 
 	private ISequenceMatcher ruleCall$27$Delimiter;
+
+	private ISequenceMatcher ruleCall$55$Delimiter;
+
+	private ISequenceMatcher ruleCall$58$Delimiter;
 
 	private ISequenceMatcher ruleCall$7$Delimiter;
 
@@ -819,7 +819,7 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(crossReference$53$Consumer);
-			acceptor.accept(crossReference$55$Consumer);
+			acceptor.accept(crossReference$56$Consumer);
 		}
 	}
 
@@ -831,26 +831,24 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "ref", false, false, getElement(), getCrossReference$53$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "ref", false, false, getElement(), getRuleCall$55$Delimiter(), optional);
 		}
 	}
 
-	protected class CrossReference$55$Consumer extends ElementConsumer<CrossReference> {
+	protected class CrossReference$56$Consumer extends ElementConsumer<CrossReference> {
 		
-		protected CrossReference$55$Consumer(final CrossReference crossReference) {
+		protected CrossReference$56$Consumer(final CrossReference crossReference) {
 			super(crossReference);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getCrossReference$55$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "ref", false, false, getElement(), getRuleCall$58$Delimiter(), optional);
 		}
 	}
 
 	public Bug250313ModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		crossReference$53$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		crossReference$55$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$21$Delimiter = ICharacterClass.Factory.nullClass();
@@ -868,6 +866,8 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		ruleCall$19$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$23$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$27$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$55$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$58$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -944,10 +944,10 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 		keyword$50$Consumer = new Keyword$50$Consumer(rule.ele810KeywordRef());
 		assignment$51$Consumer = new Assignment$51$Consumer(rule.ele811AssignmentRef());
 		alternatives$52$Consumer = new Alternatives$52$Consumer(rule.ele8110Alternatives());
-		crossReference$53$Consumer = new CrossReference$53$Consumer(rule.ele81100CrossReferenceEStringChild1());
-		crossReference$55$Consumer = new CrossReference$55$Consumer(rule.ele81101CrossReferenceEStringChild2());
-		crossReference$53$Consumer = new CrossReference$53$Consumer(rule.ele81100CrossReferenceEStringChild1());
-		crossReference$55$Consumer = new CrossReference$55$Consumer(rule.ele81101CrossReferenceEStringChild2());
+		crossReference$53$Consumer = new CrossReference$53$Consumer(rule.ele81100CrossReferenceSTRINGChild1());
+		crossReference$56$Consumer = new CrossReference$56$Consumer(rule.ele81101CrossReferenceIDChild2());
+		crossReference$53$Consumer = new CrossReference$53$Consumer(rule.ele81100CrossReferenceSTRINGChild1());
+		crossReference$56$Consumer = new CrossReference$56$Consumer(rule.ele81101CrossReferenceIDChild2());
 	}
 	
 	@Override
@@ -957,7 +957,7 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setChildConsumer(INonTerminalConsumer childConsumer) {
@@ -978,22 +978,6 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
-	}
-	
-	public ISequenceMatcher getCrossReference$53$Delimiter() {
-		return crossReference$53$Delimiter;
-	}
-	
-	public void setCrossReference$53$Delimiter(ISequenceMatcher matcher) {
-		crossReference$53$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getCrossReference$55$Delimiter() {
-		return crossReference$55$Delimiter;
-	}
-	
-	public void setCrossReference$55$Delimiter(ISequenceMatcher matcher) {
-		crossReference$55$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ICharacterClass getKeyword$12$Delimiter() {
@@ -1130,6 +1114,22 @@ public final class Bug250313ModelConsumer extends NonTerminalConsumer {
 	
 	public void setRuleCall$27$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$27$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$55$Delimiter() {
+		return ruleCall$55$Delimiter;
+	}
+	
+	public void setRuleCall$55$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$55$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$58$Delimiter() {
+		return ruleCall$58$Delimiter;
+	}
+	
+	public void setRuleCall$58$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$58$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$7$Delimiter() {

@@ -96,7 +96,7 @@ public final class XtextAbstractRuleConsumer extends NonTerminalConsumer {
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setParserRuleConsumer(INonTerminalConsumer parserRuleConsumer) {

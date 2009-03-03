@@ -206,7 +206,7 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setOverridingHiddensCallConsumer(INonTerminalConsumer overridingHiddensCallConsumer) {

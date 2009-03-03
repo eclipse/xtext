@@ -108,11 +108,6 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
         return createParserRuleAdapter();
       }
       @Override
-      public Adapter caseTerminalRule(TerminalRule object)
-      {
-        return createTerminalRuleAdapter();
-      }
-      @Override
       public Adapter caseTypeRef(TypeRef object)
       {
         return createTypeRefAdapter();
@@ -123,14 +118,34 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
         return createAbstractElementAdapter();
       }
       @Override
+      public Adapter caseAction(Action object)
+      {
+        return createActionAdapter();
+      }
+      @Override
+      public Adapter caseKeyword(Keyword object)
+      {
+        return createKeywordAdapter();
+      }
+      @Override
+      public Adapter caseRuleCall(RuleCall object)
+      {
+        return createRuleCallAdapter();
+      }
+      @Override
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
       }
       @Override
-      public Adapter caseAction(Action object)
+      public Adapter caseCrossReference(CrossReference object)
       {
-        return createActionAdapter();
+        return createCrossReferenceAdapter();
+      }
+      @Override
+      public Adapter caseTerminalRule(TerminalRule object)
+      {
+        return createTerminalRuleAdapter();
       }
       @Override
       public Adapter caseAbstractNegatedToken(AbstractNegatedToken object)
@@ -151,21 +166,6 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseWildcard(Wildcard object)
       {
         return createWildcardAdapter();
-      }
-      @Override
-      public Adapter caseCrossReference(CrossReference object)
-      {
-        return createCrossReferenceAdapter();
-      }
-      @Override
-      public Adapter caseKeyword(Keyword object)
-      {
-        return createKeywordAdapter();
-      }
-      @Override
-      public Adapter caseRuleCall(RuleCall object)
-      {
-        return createRuleCallAdapter();
       }
       @Override
       public Adapter caseAlternatives(Alternatives object)
@@ -295,21 +295,6 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TerminalRule <em>Terminal Rule</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TerminalRule
-   * @generated
-   */
-  public Adapter createTerminalRuleAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef <em>Type Ref</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -340,6 +325,51 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action
+   * @generated
+   */
+  public Adapter createActionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Keyword <em>Keyword</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Keyword
+   * @generated
+   */
+  public Adapter createKeywordAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.RuleCall <em>Rule Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.RuleCall
+   * @generated
+   */
+  public Adapter createRuleCallAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Assignment <em>Assignment</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -355,16 +385,31 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action <em>Action</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.CrossReference <em>Cross Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Action
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.CrossReference
    * @generated
    */
-  public Adapter createActionAdapter()
+  public Adapter createCrossReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TerminalRule <em>Terminal Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TerminalRule
+   * @generated
+   */
+  public Adapter createTerminalRuleAdapter()
   {
     return null;
   }
@@ -425,51 +470,6 @@ public class XtextTerminalsTestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createWildcardAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.CrossReference <em>Cross Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.CrossReference
-   * @generated
-   */
-  public Adapter createCrossReferenceAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Keyword <em>Keyword</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Keyword
-   * @generated
-   */
-  public Adapter createKeywordAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.RuleCall <em>Rule Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.RuleCall
-   * @generated
-   */
-  public Adapter createRuleCallAdapter()
   {
     return null;
   }

@@ -73,18 +73,18 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
       case XtextTerminalsTestLanguagePackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
       case XtextTerminalsTestLanguagePackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
       case XtextTerminalsTestLanguagePackage.PARSER_RULE: return createParserRule();
-      case XtextTerminalsTestLanguagePackage.TERMINAL_RULE: return createTerminalRule();
       case XtextTerminalsTestLanguagePackage.TYPE_REF: return createTypeRef();
       case XtextTerminalsTestLanguagePackage.ABSTRACT_ELEMENT: return createAbstractElement();
-      case XtextTerminalsTestLanguagePackage.ASSIGNMENT: return createAssignment();
       case XtextTerminalsTestLanguagePackage.ACTION: return createAction();
+      case XtextTerminalsTestLanguagePackage.KEYWORD: return createKeyword();
+      case XtextTerminalsTestLanguagePackage.RULE_CALL: return createRuleCall();
+      case XtextTerminalsTestLanguagePackage.ASSIGNMENT: return createAssignment();
+      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE: return createCrossReference();
+      case XtextTerminalsTestLanguagePackage.TERMINAL_RULE: return createTerminalRule();
       case XtextTerminalsTestLanguagePackage.ABSTRACT_NEGATED_TOKEN: return createAbstractNegatedToken();
       case XtextTerminalsTestLanguagePackage.NEGATED_TOKEN: return createNegatedToken();
       case XtextTerminalsTestLanguagePackage.UNTIL_TOKEN: return createUntilToken();
       case XtextTerminalsTestLanguagePackage.WILDCARD: return createWildcard();
-      case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE: return createCrossReference();
-      case XtextTerminalsTestLanguagePackage.KEYWORD: return createKeyword();
-      case XtextTerminalsTestLanguagePackage.RULE_CALL: return createRuleCall();
       case XtextTerminalsTestLanguagePackage.ALTERNATIVES: return createAlternatives();
       case XtextTerminalsTestLanguagePackage.GROUP: return createGroup();
       case XtextTerminalsTestLanguagePackage.CHARACTER_RANGE: return createCharacterRange();
@@ -164,17 +164,6 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public TerminalRule createTerminalRule()
-  {
-    TerminalRuleImpl terminalRule = new TerminalRuleImpl();
-    return terminalRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
@@ -197,6 +186,39 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  public Action createAction()
+  {
+    ActionImpl action = new ActionImpl();
+    return action;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Keyword createKeyword()
+  {
+    KeywordImpl keyword = new KeywordImpl();
+    return keyword;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuleCall createRuleCall()
+  {
+    RuleCallImpl ruleCall = new RuleCallImpl();
+    return ruleCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
@@ -208,10 +230,21 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public Action createAction()
+  public CrossReference createCrossReference()
   {
-    ActionImpl action = new ActionImpl();
-    return action;
+    CrossReferenceImpl crossReference = new CrossReferenceImpl();
+    return crossReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TerminalRule createTerminalRule()
+  {
+    TerminalRuleImpl terminalRule = new TerminalRuleImpl();
+    return terminalRule;
   }
 
   /**
@@ -256,39 +289,6 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CrossReference createCrossReference()
-  {
-    CrossReferenceImpl crossReference = new CrossReferenceImpl();
-    return crossReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Keyword createKeyword()
-  {
-    KeywordImpl keyword = new KeywordImpl();
-    return keyword;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RuleCall createRuleCall()
-  {
-    RuleCallImpl ruleCall = new RuleCallImpl();
-    return ruleCall;
   }
 
   /**

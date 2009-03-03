@@ -89,7 +89,7 @@ ruleModel returns [EObject current=null]
 	    lv_elements_0=ruleElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -132,7 +132,7 @@ ruleElement returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prElement().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -156,7 +156,7 @@ ruleElement returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prElement().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -176,7 +176,7 @@ ruleElement returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prElement().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

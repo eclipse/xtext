@@ -169,7 +169,7 @@ ruleConcreteParserRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -193,7 +193,7 @@ ruleConcreteParserRule returns [EObject current=null]
 	    lv_elements_3=ruleInheritedParserRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prConcreteParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -239,7 +239,7 @@ ruleOverridableParserRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridableParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -280,7 +280,7 @@ ruleCallOverridenParserRule returns [EObject current=null]
 	    lv_call_0=ruleAbstractCallOverridenParserRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prCallOverridenParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prCallOverridenParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -326,7 +326,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -350,7 +350,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -457,7 +457,7 @@ ruleSubrule1 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSubrule1().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSubrule1().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -477,7 +477,7 @@ ruleSubrule1 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSubrule1().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSubrule1().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -522,7 +522,7 @@ ruleSubrule2 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSubrule2().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSubrule2().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -542,7 +542,7 @@ ruleSubrule2 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSubrule2().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSubrule2().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -587,7 +587,7 @@ ruleSubrule3 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSubrule3().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSubrule3().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -607,7 +607,7 @@ ruleSubrule3 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSubrule3().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prSubrule3().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -648,7 +648,7 @@ ruleCallExtendedParserRule returns [EObject current=null]
 	    lv_call_0=ruleAbstractCallExtendedParserRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prCallExtendedParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prCallExtendedParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -694,7 +694,7 @@ ruleInheritedParserRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prInheritedParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prInheritedParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -739,7 +739,7 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
 	    lv_elements_1=ruleOverridableParserRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -785,7 +785,7 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
 	    lv_elements_1=ruleExtendableParserRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        

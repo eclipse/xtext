@@ -266,7 +266,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLine().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLine().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -289,7 +289,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLine().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLine().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -408,7 +408,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestLinewrap().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prTestLinewrap().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -542,7 +542,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -574,7 +574,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        

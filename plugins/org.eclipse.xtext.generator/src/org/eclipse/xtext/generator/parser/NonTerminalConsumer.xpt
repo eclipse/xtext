@@ -44,7 +44,7 @@ import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 «IF allDelimited().exists(e|e.metaType == Keyword)-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 «ENDIF-»
-«IF allDelimited().exists(e|e.metaType == RuleCall || e.metaType == CrossReference)-»
+«IF allDelimited().exists(e|e.metaType == RuleCall)-»
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 «ENDIF-»
 
@@ -88,7 +88,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 «FOREACH allCalledRules() AS calledRule-»
@@ -111,11 +111,6 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 	private ISequenceMatcher «delimiterFieldName()»;
 «ENDDEFINE»
 
-«DEFINE delimiterField FOR CrossReference-»
-
-	private ISequenceMatcher «delimiterFieldName()»;
-«ENDDEFINE»
-
 «DEFINE delimiterField FOR Keyword-»
 
 	private ICharacterClass «delimiterFieldName()»;
@@ -129,10 +124,6 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 		«delimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
 «ENDDEFINE»
 
-«DEFINE delimiterFieldInit FOR CrossReference-»
-		«delimiterFieldName()» = ISequenceMatcher.Factory.nullMatcher();
-«ENDDEFINE»
-
 «DEFINE delimiterFieldInit FOR Keyword-»
 		«delimiterFieldName()» = ICharacterClass.Factory.nullClass();
 «ENDDEFINE»
@@ -142,17 +133,6 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDDEFINE»
 
 «DEFINE delimiterFieldAccessors FOR RuleCall-»
-	public ISequenceMatcher get«delimiterFieldName().toFirstUpper()»() {
-		return «delimiterFieldName()»;
-	}
-	
-	public void set«delimiterFieldName().toFirstUpper()»(ISequenceMatcher matcher) {
-		«delimiterFieldName()» = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-«ENDDEFINE»
-
-«DEFINE delimiterFieldAccessors FOR CrossReference-»
 	public ISequenceMatcher get«delimiterFieldName().toFirstUpper()»() {
 		return «delimiterFieldName()»;
 	}
@@ -201,7 +181,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 
 «DEFINE defineConsumerField FOR Group-»
 «EXPAND defineConsumerFieldDeclaration FOR this-»
-«EXPAND defineConsumerField(this) FOREACH abstractTokens-»
+«EXPAND defineConsumerField(this) FOREACH tokens-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField(Group parent) FOR AbstractElement-»
@@ -212,7 +192,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsumerField FOR this-»
 «ELSE-»
-«EXPAND defineConsumerField(this) FOREACH abstractTokens-»
+«EXPAND defineConsumerField(this) FOREACH tokens-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -290,7 +270,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 
 «DEFINE defineConsumerClass FOR Group-»
 «EXPAND defineConsumerClassDeclaration FOR this-»
-«EXPAND defineConsumerClass(this) FOREACH abstractTokens-»
+«EXPAND defineConsumerClass(this) FOREACH tokens-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Group parent) FOR AbstractElement-»
@@ -301,7 +281,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsumerClass FOR this-»
 «ELSE-»
-«EXPAND defineConsumerClass(this) FOREACH abstractTokens-»
+«EXPAND defineConsumerClass(this) FOREACH tokens-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -523,18 +503,26 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment) FOR CrossReference-»
-«EXPAND doConsumeBody(assignment, this) FOR rule-»
+«EXPAND doConsumeBody(assignment, this) FOR terminal-»
 «ENDDEFINE»
 
-«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR AbstractRule-»
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR AbstractElement-»
 «ERROR "doConsumeBody(Assignment, CrossReference) for " + metaType.name»
 «ENDDEFINE»
 
-«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR TerminalRule-»
-			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«reference.delimiterFieldName().toFirstUpper()»(), optional);
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR RuleCall-»
+«EXPAND doConsumeBody(assignment, reference, this) FOR rule-»
 «ENDDEFINE»
 
-«DEFINE doConsumeBody(Assignment assignment, CrossReference reference) FOR ParserRule-»
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR AbstractRule-»
+«ERROR "doConsumeBody(Assignment, CrossReference) for " + metaType.name»
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR TerminalRule-»
+			return consumeTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «assignment.isBoolean()», getElement(), get«call.delimiterFieldName().toFirstUpper()»(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR ParserRule-»
 			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
 «ENDDEFINE»
 
@@ -561,7 +549,7 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE acceptConsumers(Group start) FOR Group-»
-«FOREACH abstractTokens AS token-»
+«FOREACH tokens AS token-»
 «IF token.metaType == Group && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
 «EXPAND acceptConsumers(start) FOR (Group)token-»
 «ELSE-»
@@ -597,7 +585,7 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE assignConsumerField FOR Group-»
 «EXPAND assignConsumerFieldImpl FOR this-»
-«EXPAND assignConsumerField(this) FOREACH abstractTokens-»
+«EXPAND assignConsumerField(this) FOREACH tokens-»
 «ENDDEFINE»
 
 «DEFINE assignConsumerField(Group parent) FOR AbstractElement-»
@@ -608,7 +596,7 @@ GroupConsumer«ENDDEFINE»
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND assignConsumerField FOR this-»
 «ELSE-»
-«EXPAND assignConsumerField(this) FOREACH abstractTokens-»
+«EXPAND assignConsumerField(this) FOREACH tokens-»
 «ENDIF-»
 «ENDDEFINE»
 

@@ -78,7 +78,7 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setGreetingConsumer(INonTerminalConsumer greetingConsumer) {

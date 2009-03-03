@@ -137,7 +137,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEntry().getRule().getType().getType());
+            	    	            current = factory.create(grammarAccess.prEntry().getRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -419,7 +419,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead0().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLookAhead0().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -524,7 +524,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -548,7 +548,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -571,7 +571,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -688,7 +688,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -717,7 +717,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -833,7 +833,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -858,7 +858,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getType());
+            	            current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -973,7 +973,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1002,7 +1002,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getType());
+                    	            current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        

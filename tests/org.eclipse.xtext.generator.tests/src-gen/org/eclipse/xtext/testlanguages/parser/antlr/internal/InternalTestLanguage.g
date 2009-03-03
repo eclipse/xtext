@@ -89,7 +89,7 @@ ruleEntryRule returns [EObject current=null]
 	    lv_multiFeature_0=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prEntryRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prEntryRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -184,7 +184,7 @@ ruleChoiceRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prChoiceRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prChoiceRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -204,7 +204,7 @@ ruleChoiceRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prChoiceRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prChoiceRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -255,7 +255,7 @@ ruleReducibleRule returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature().getTypeName().getType());
+        temp=factory.create(grammarAccess.prReducibleRule().ele20ActionReducibleCompositeactionFeature().getType().getClassifier());
         try {
         	factory.add(temp, "actionFeature", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -278,7 +278,7 @@ ruleReducibleRule returns [EObject current=null]
 	    lv_actionFeature_3=ruleTerminalRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prReducibleRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prReducibleRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -320,7 +320,7 @@ ruleTerminalRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTerminalRule().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTerminalRule().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

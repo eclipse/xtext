@@ -143,7 +143,7 @@ ruleOp returns [EObject current=null]
     }
 (((
     { 
-        temp=factory.create(grammarAccess.prOp().ele100ActionAddaddOperands().getTypeName().getType());
+        temp=factory.create(grammarAccess.prOp().ele100ActionAddaddOperands().getType().getClassifier());
         try {
         	factory.add(temp, "addOperands", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -170,7 +170,7 @@ ruleOp returns [EObject current=null]
 	    lv_addOperands_3=ruleTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOp().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOp().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -185,7 +185,7 @@ ruleOp returns [EObject current=null]
 ))
     |((
     { 
-        temp=factory.create(grammarAccess.prOp().ele110ActionMinusminusOperands().getTypeName().getType());
+        temp=factory.create(grammarAccess.prOp().ele110ActionMinusminusOperands().getType().getClassifier());
         try {
         	factory.add(temp, "minusOperands", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -212,7 +212,7 @@ ruleOp returns [EObject current=null]
 	    lv_minusOperands_6=ruleTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOp().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prOp().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -302,7 +302,7 @@ ruleAtom returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAtom().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prAtom().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -365,7 +365,7 @@ ruleParens returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prParens().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prParens().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -408,7 +408,7 @@ ruleTrickyA1 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTrickyA1().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTrickyA1().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -463,7 +463,7 @@ ruleTrickyG returns [EObject current=null]
 	    lv_tree_1=ruleTrickyG1 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTrickyG().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTrickyG().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -509,7 +509,7 @@ ruleTrickyG1 returns [EObject current=null]
 	    lv_vals_1=ruleTrickyG2 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -534,7 +534,7 @@ ruleTrickyG1 returns [EObject current=null]
 	    lv_vals_3=ruleTrickyG2 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTrickyG1().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -594,7 +594,7 @@ ruleTrickyG2 returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTrickyG2().getRule().getType().getType());
+	            $current = factory.create(grammarAccess.prTrickyG2().getRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

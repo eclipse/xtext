@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef#getMetamodel <em>Metamodel</em>}</li>
- *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef#getClassifier <em>Classifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,29 +54,29 @@ public interface TypeRef extends EObject
   void setMetamodel(AbstractMetamodelDeclaration value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Classifier</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * If the meaning of the '<em>Classifier</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(EClassifier)
-   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getTypeRef_Type()
+   * @return the value of the '<em>Classifier</em>' reference.
+   * @see #setClassifier(EClassifier)
+   * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getTypeRef_Classifier()
    * @model
    * @generated
    */
-  EClassifier getType();
+  EClassifier getClassifier();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.TypeRef#getClassifier <em>Classifier</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
+   * @param value the new value of the '<em>Classifier</em>' reference.
+   * @see #getClassifier()
    * @generated
    */
-  void setType(EClassifier value);
+  void setClassifier(EClassifier value);
 
 } // TypeRef

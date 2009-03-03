@@ -144,7 +144,8 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 	public class AbstractRuleCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRuleCall");
 		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceEStringAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
+		private final CrossReference c0CrossReferenceIDAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
+		private final RuleCall c01TerminalRuleCallID = (RuleCall)c0CrossReferenceIDAbstractRule.eContents().get(1);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -153,7 +154,10 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
 		// not supported
-		public CrossReference ele0CrossReferenceEStringAbstractRule() { return c0CrossReferenceEStringAbstractRule; }
+		public CrossReference ele0CrossReferenceIDAbstractRule() { return c0CrossReferenceIDAbstractRule; }
+
+		// not supported
+		public RuleCall ele01TerminalRuleCallID() { return c01TerminalRuleCallID; }
 	}
 	
 	private StartElements pStart;

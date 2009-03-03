@@ -127,7 +127,7 @@ public final class ImportUriTestLanguageMainConsumer extends NonTerminalConsumer
 
 	@Override
 	protected EClassifier getDefaultType() {
-		return getGrammarElement().getType().getType();
+		return getGrammarElement().getType().getClassifier();
 	}
 	
 	public void setImportConsumer(INonTerminalConsumer importConsumer) {
