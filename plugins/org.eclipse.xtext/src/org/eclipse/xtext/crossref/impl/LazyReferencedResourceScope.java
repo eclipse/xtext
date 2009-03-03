@@ -30,7 +30,13 @@ public class LazyReferencedResourceScope extends AbstractCachingScope {
 
 	@Override
 	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
-		final Resource resource = context.eResource().getResourceSet().getResource(URI.createURI(uri), true);
+		URI contextURI = context.eResource().getURI();
+		URI newURI = URI.createURI(uri);
+		if (!contextURI.isRelative() && newURI.isRelative()) {
+			newURI = newURI.resolve(contextURI);
+			System.out.println(newURI);
+		}
+		final Resource resource = context.eResource().getResourceSet().getResource(newURI, true);
 		initElements(resolver, resource, producer);
 	}
 }

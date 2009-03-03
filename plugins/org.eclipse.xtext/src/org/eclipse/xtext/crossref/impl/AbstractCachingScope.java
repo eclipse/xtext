@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
@@ -34,10 +35,14 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 
 	private final EClass type;
 
-	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EClass type) {
+	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EReference reference) {
+		this(parent,elements,(EClass) reference.getEType());
+	}
+	
+	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EClass clazz) {
 		super(parent, elements);
 		this.refuseDuplicates = true;
-		this.type = type;
+		this.type = clazz;
 	}
 
 	protected AbstractCachingScope(IScope parent, EClass type, boolean refuseDuplicates) {
