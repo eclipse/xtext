@@ -31,5 +31,20 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		assertTrue("You may not use more than two other grammars.", XtextPackage.GRAMMAR__USED_GRAMMARS,
 				grammar.getUsedGrammars().size() <= 1);
 	}
+	
+	@Check
+	public void checkGrammarName(Grammar g) {
+		String[] split = g.getName().split("\\.");
+		if (split.length==1)
+			warning("You should use a namespace.", XtextPackage.GRAMMAR__NAME);
+		for (int i=0;i<split.length-1;i++) {
+			String nsEle = split[i];
+			if (Character.isUpperCase(nsEle.charAt(0)))
+				warning("Namespace elements should start with a lower case letter.", XtextPackage.GRAMMAR__NAME);
+		}
+		String ele = split[split.length-1];
+		if (!Character.isUpperCase(ele.charAt(0)))
+			warning("The last element should start with an upper case letter.", XtextPackage.GRAMMAR__NAME);
+	}
 
 }

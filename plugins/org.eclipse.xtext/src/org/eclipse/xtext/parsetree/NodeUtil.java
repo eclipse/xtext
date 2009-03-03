@@ -9,13 +9,16 @@
 package org.eclipse.xtext.parsetree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -23,52 +26,52 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * 
  */
 public class NodeUtil {
-	
+
 	private static final Logger logger = Logger.getLogger(NodeUtil.class);
-	
-    public static NodeAdapter getNodeAdapter(EObject obj) {
-    	if (obj == null)
-    		return null;
-        return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
-    }
 
-    protected static boolean removeNodeAdapter(EObject obj) {
-        NodeAdapter adapter = getNodeAdapter(obj);
-        if (adapter == null)
-            return false;
-        while (adapter != null) {
-            adapter.getParserNode().setParent(null);
-            adapter = getNodeAdapter(obj);
-        }
-        return true;
-    }
+	public static NodeAdapter getNodeAdapter(EObject obj) {
+		if (obj == null)
+			return null;
+		return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
+	}
 
-    public static CompositeNode getRootNode(EObject obj) {
-        NodeAdapter adapter = getNodeAdapter(obj);
-        if (adapter == null)
-            return null;
-        CompositeNode parserNode = adapter.getParserNode();
-        if (parserNode == null)
-            return null;
-        return (CompositeNode) EcoreUtil.getRootContainer(parserNode);
-    }
+	protected static boolean removeNodeAdapter(EObject obj) {
+		NodeAdapter adapter = getNodeAdapter(obj);
+		if (adapter == null)
+			return false;
+		while (adapter != null) {
+			adapter.getParserNode().setParent(null);
+			adapter = getNodeAdapter(obj);
+		}
+		return true;
+	}
 
-    public static List<CompositeNode> getCompositeChildren(CompositeNode parent) {
-        List<CompositeNode> compositeChildren = new ArrayList<CompositeNode>();
-        for (AbstractNode node : parent.getChildren()) {
-            if (node instanceof CompositeNode) {
-                compositeChildren.add((CompositeNode) node);
-            }
-        }
-        return compositeChildren;
-    }
-    
-    public static EObject getASTElementForRootNode(CompositeNode compositeNode) {
-    	if(compositeNode.getElement() != null) {
-    		return compositeNode.getElement();
-    	}
-    	CompositeNode myCompositeNode = compositeNode;
-    	WHILE: while (!myCompositeNode.getChildren().isEmpty()) {
+	public static CompositeNode getRootNode(EObject obj) {
+		NodeAdapter adapter = getNodeAdapter(obj);
+		if (adapter == null)
+			return null;
+		CompositeNode parserNode = adapter.getParserNode();
+		if (parserNode == null)
+			return null;
+		return (CompositeNode) EcoreUtil.getRootContainer(parserNode);
+	}
+
+	public static List<CompositeNode> getCompositeChildren(CompositeNode parent) {
+		List<CompositeNode> compositeChildren = new ArrayList<CompositeNode>();
+		for (AbstractNode node : parent.getChildren()) {
+			if (node instanceof CompositeNode) {
+				compositeChildren.add((CompositeNode) node);
+			}
+		}
+		return compositeChildren;
+	}
+
+	public static EObject getASTElementForRootNode(CompositeNode compositeNode) {
+		if (compositeNode.getElement() != null) {
+			return compositeNode.getElement();
+		}
+		CompositeNode myCompositeNode = compositeNode;
+		WHILE: while (!myCompositeNode.getChildren().isEmpty()) {
 			boolean foundCompositeChild = false;
 			for (AbstractNode child : myCompositeNode.getChildren()) {
 				if (child instanceof CompositeNode) {
@@ -87,10 +90,10 @@ public class NodeUtil {
 			}
 			return null;
 		}
-    	return null;
-    }
-    
-    public static EObject findASTParentElement(CompositeNode replaceRootNode) {
+		return null;
+	}
+
+	public static EObject findASTParentElement(CompositeNode replaceRootNode) {
 		CompositeNode parent = replaceRootNode.getParent();
 		if (parent == null) {
 			return null;
@@ -101,26 +104,25 @@ public class NodeUtil {
 		return findASTParentElement(parent);
 	}
 
-    public static void dumpCompositeNodes(String indent, CompositeNode node) {
-    	if (logger.isTraceEnabled()) {
-	    	dumpCompositeNodeInfo(indent, node);
-	        for (AbstractNode childNode : node.getChildren()) {
-	            if (childNode instanceof CompositeNode) {
-	                CompositeNode compositeNode = (CompositeNode) childNode;
-	                dumpCompositeNodes(indent + "  ", compositeNode);
-	            }
-	        }
-    	}
-    }
-    
-    public static void dumpCompositeNodeInfo(String indent, CompositeNode node) {
-    	if (logger.isTraceEnabled()) {
+	public static void dumpCompositeNodes(String indent, CompositeNode node) {
+		if (logger.isTraceEnabled()) {
+			dumpCompositeNodeInfo(indent, node);
+			for (AbstractNode childNode : node.getChildren()) {
+				if (childNode instanceof CompositeNode) {
+					CompositeNode compositeNode = (CompositeNode) childNode;
+					dumpCompositeNodes(indent + "  ", compositeNode);
+				}
+			}
+		}
+	}
+
+	public static void dumpCompositeNodeInfo(String indent, CompositeNode node) {
+		if (logger.isTraceEnabled()) {
 			EObject grammarElement = node.getGrammarElement();
 			String name;
 			try {
 				name = grammarElement.getClass().getMethod("getName").invoke(grammarElement).toString();
-			}
-			catch (Exception exc) {
+			} catch (Exception exc) {
 				name = grammarElement.getClass().getSimpleName();
 			}
 			String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
@@ -130,8 +132,8 @@ public class NodeUtil {
 			}
 			logger.trace("}   (" + node.getTotalOffset() + ", " + node.getTotalLength() + ")");
 		}
-    }
-    
+	}
+
 	public static AbstractNode findLeafNodeAtOffset(CompositeNode parseTreeRootNode, int offset) {
 		for (AbstractNode node : parseTreeRootNode.getChildren()) {
 			if (node.getTotalOffset() + node.getTotalLength() >= offset) {
@@ -145,10 +147,10 @@ public class NodeUtil {
 		}
 		return null;
 	}
-	
+
 	public static CompositeNode findLastCompositeGrandChild(CompositeNode parentNode) {
 		EList<AbstractNode> children = parentNode.getChildren();
-		for(int i=children.size()-1; i>=0; --i) {
+		for (int i = children.size() - 1; i >= 0; --i) {
 			AbstractNode child = children.get(i);
 			if (child instanceof CompositeNode) {
 				return findLastCompositeGrandChild((CompositeNode) child);
@@ -156,19 +158,21 @@ public class NodeUtil {
 		}
 		return parentNode;
 	}
-	
+
 	public static void checkOffsetConsistency(final CompositeNode rootNode) {
 		int currentOffset = rootNode.getTotalOffset();
-		for(AbstractNode child:rootNode.getChildren()) {
-			if(child.getTotalOffset() != currentOffset) {
-				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is " + child.getTotalOffset() + "\n" + child.serialize());
+		for (AbstractNode child : rootNode.getChildren()) {
+			if (child.getTotalOffset() != currentOffset) {
+				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is "
+						+ child.getTotalOffset() + "\n" + child.serialize());
 			}
-			if(child instanceof CompositeNode) {
+			if (child instanceof CompositeNode) {
 				checkOffsetConsistency((CompositeNode) child);
 			}
 			int serializedLength = child.serialize().length();
-			if(child.getTotalLength() != serializedLength) {
-				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is " + child.getTotalLength() + "\n" + child.serialize());	
+			if (child.getTotalLength() != serializedLength) {
+				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is "
+						+ child.getTotalLength() + "\n" + child.serialize());
 			}
 			currentOffset += serializedLength;
 		}
@@ -176,29 +180,49 @@ public class NodeUtil {
 
 	public static EObject getNearestSemanticObject(final AbstractNode node) {
 		AbstractNode myNode = node;
-		while(myNode != null) {
-			if(myNode.getElement()!=null)
+		while (myNode != null) {
+			if (myNode.getElement() != null)
 				return myNode.getElement();
-			
+
 			myNode = (AbstractNode) myNode.eContainer();
-		}	
+		}
 
 		return null;
 	}
 
-	public static String findTextForFeature(EObject astElement, String featureName) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astElement);
-		CompositeNode parserNode = nodeAdapter.getParserNode();
-		for(TreeIterator<EObject> children = parserNode.eAllContents(); children.hasNext();) {
-			EObject child = children.next();
-			if(child instanceof LeafNode) {
-				LeafNode childLeaf = (LeafNode) child;
-				if(featureName.equals(childLeaf.getFeature())){
-					return childLeaf.serialize();
+	/**
+	 * @param ele
+	 * @param structuralFeature
+	 * @return
+	 */
+	public static List<AbstractNode> findNodesForFeature(EObject ele, EStructuralFeature structuralFeature) {
+		NodeAdapter adapter = getNodeAdapter(ele);
+		if (adapter != null && adapter.getParserNode() != null) {
+			return findNodesForFeature(ele, adapter.getParserNode(), structuralFeature);
+		}
+		return Collections.emptyList();
+	}
+
+	private static List<AbstractNode> findNodesForFeature(EObject ele, AbstractNode node,
+			EStructuralFeature structuralFeature) {
+		List<AbstractNode> result = new ArrayList<AbstractNode>();
+		EObject element = NodeUtil.getNearestSemanticObject(node);
+		if (ele.equals(element)) {
+			EObject grammarElement = node.getGrammarElement();
+			Assignment ass = GrammarUtil.containingAssignment(grammarElement);
+			if (ass != null && ass.getFeature().equals(structuralFeature.getName())) {
+				result.add(node);
+			} else {
+				if (node instanceof CompositeNode) {
+					CompositeNode cn = (CompositeNode) node;
+					// check whether it's the same element
+					for (AbstractNode abstractNode : cn.getChildren()) {
+						result.addAll(findNodesForFeature(ele, abstractNode, structuralFeature));
+					}
 				}
 			}
 		}
-		return null;
+		return result;
 	}
-	
+
 }

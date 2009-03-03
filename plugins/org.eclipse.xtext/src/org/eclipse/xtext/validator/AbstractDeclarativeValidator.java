@@ -18,12 +18,10 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.Function;
@@ -47,7 +45,7 @@ import org.eclipse.xtext.util.SimpleCache;
  * }
  * </pre>
  */
-public abstract class AbstractDeclarativeValidator implements EValidator {
+public abstract class AbstractDeclarativeValidator extends EObjectValidator implements EValidator {
 
 	class MethodWrapper {
 		public final Method method;
@@ -104,10 +102,6 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 				}
 			});
 
-	public final boolean validate(EObject object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate(object.eClass(), object, diagnostics, context);
-	}
-
 	private DiagnosticChain chain = null;
 	private EObject currentObject = null;
 	private Method currentMethod = null;
@@ -126,6 +120,7 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		this.hasErrors = false;
+		boolean isValid = super.validate(class1,object,diagnostics,context);
 		boolean skipExpensive = false;
 		if (context != null) {
 			Object object2 = context.get(CheckMode.KEY);
@@ -168,16 +163,12 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 					method.setAccessible(false);
 				}
 			}
-			return hasErrors;
+			return isValid && !hasErrors;
 		}
 		finally {
 			this.currentObject = null;
 			this.chain = null;
 		}
-	}
-
-	public boolean validate(EDataType dataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return false;
 	}
 
 	protected void warning(String string, int feature) {
@@ -250,12 +241,12 @@ public abstract class AbstractDeclarativeValidator implements EValidator {
 			super();
 			this.severity = severity;
 			this.message = message;
-			this.source = EcoreUtil.getURI(source);
+			this.source = source;
 			this.feature = feature;
 		}
 
 		private final String message;
-		private final URI source;
+		private final EObject source;
 		private final Integer feature;
 		private final int severity;
 
