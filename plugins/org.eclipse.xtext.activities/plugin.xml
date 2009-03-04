@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.activities">
+         
+         <!-- Category -->
+    <category
+         description="%activity.category.description"
+         id="org.eclipse.xtext.ui.category"
+         name="%activity.category">
+    </category>
+         
+         <!-- UI elements, defined using general pattern -->
+    <activity
+          description="%activity.ui.description"
+          id="org.eclipse.xtext.ui"
+          name="%activity.ui">
+    </activity>
+    <activityPatternBinding
+          activityId="org.eclipse.xtext.ui"
+          pattern="org\.eclipse\.xtext\.ui\..*/.*">
+    </activityPatternBinding>
+    <categoryActivityBinding
+        activityId="org.eclipse.xtext.ui"
+        categoryId="org.eclipse.xtext.ui.category">
+    </categoryActivityBinding>
+   <defaultEnablement
+       id="org.eclipse.xtext.ui">
+   </defaultEnablement>
+    </extension>         
+</plugin>
