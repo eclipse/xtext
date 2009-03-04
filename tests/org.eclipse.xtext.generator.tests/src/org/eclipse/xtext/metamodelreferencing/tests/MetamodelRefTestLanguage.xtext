@@ -15,7 +15,7 @@ Foo :
 	name=ID (nameRefs+=NameRef)*;
 
 NameRef returns xtext::RuleCall : 
-	rule=[ParserRule];
+	rule=[xtext::ParserRule];
 	
 MyRule returns xtext::ParserRule :
     name=ID;

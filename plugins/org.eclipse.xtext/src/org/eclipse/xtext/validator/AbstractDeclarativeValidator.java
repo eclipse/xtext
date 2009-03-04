@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
@@ -29,13 +28,13 @@ import org.eclipse.xtext.util.SimpleCache;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
- * 
+ *
+ *
  *         Allows subclasses to specify invariants in a declarative manner using
  *         {@link Check} annotation.
- * 
+ *
  *         Example:
- * 
+ *
  *         <pre>
  * &#064;Check
  * void checkName(ParserRule rule) {
@@ -45,11 +44,11 @@ import org.eclipse.xtext.util.SimpleCache;
  * }
  * </pre>
  */
-public abstract class AbstractDeclarativeValidator extends EObjectValidator implements EValidator {
+public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 
 	class MethodWrapper {
 		public final Method method;
-		private String s;
+		private final String s;
 
 		public MethodWrapper(Method m) {
 			this.method = m;
@@ -87,7 +86,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator impl
 
 	private HashSet<MethodWrapper> checkMethods = null;
 
-	private SimpleCache<Class<?>, List<Method>> methodsForType = new SimpleCache<Class<?>, List<Method>>(
+	private final SimpleCache<Class<?>, List<Method>> methodsForType = new SimpleCache<Class<?>, List<Method>>(
 			new Function<Class<?>, List<Method>>() {
 
 				public List<Method> exec(Class<?> param) {
@@ -105,7 +104,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator impl
 	private DiagnosticChain chain = null;
 	private EObject currentObject = null;
 	private Method currentMethod = null;
-	private Logger log = Logger.getLogger(getClass());
+	private final Logger log = Logger.getLogger(getClass());
 
 	private boolean hasErrors;
 
@@ -117,6 +116,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator impl
 		return this.currentMethod;
 	}
 
+	@Override
 	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		this.hasErrors = false;
@@ -228,13 +228,13 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator impl
 			}
 		}
 	}
-	
+
 	protected void guard(boolean guardExpression) {
 		if(!guardExpression) {
 			throw new GuardException();
 		}
 	}
-	
+
 	static class DiagnosticImpl implements Diagnostic {
 
 		private DiagnosticImpl(int severity, String message, EObject source, int feature) {

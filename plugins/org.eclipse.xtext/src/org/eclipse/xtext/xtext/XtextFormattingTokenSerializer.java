@@ -19,6 +19,7 @@ import org.eclipse.xtext.services.XtextGrammarAccess.GrammarElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParenthesizedElementElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TerminalRuleElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
 
 import com.google.inject.Inject;
 
@@ -87,6 +88,9 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 		cfg.setNoSpace().before(ac.ele3KeywordRightCurlyBracket());
 		cfg.setNoSpace().around(ac.ele2200KeywordEqualsSign());
 		cfg.setNoSpace().around(ac.ele2201KeywordPlusSignEqualsSign());
+
+		TypeRefElements typeRef = g.prTypeRef();
+		cfg.setNoSpace().around(typeRef.ele01KeywordColonColon());
 	}
 
 }

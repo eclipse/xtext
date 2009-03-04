@@ -23,11 +23,11 @@ ModelId returns ecore::EString:
 NestedModelId :
   ModelId '.' ModelId;
   
-Fraction returns EBigDecimal:
+Fraction returns ecore::EBigDecimal:
   INT ('/' INT)?;
   
 Vector :
   '(' INT INT ')';
   
-Dots returns EString:
+Dots returns ecore::EString:
   ( '.' '.' ) | '..';
