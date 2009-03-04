@@ -14,16 +14,16 @@ Optional returns test::Optional :
 	optionalString=ID
 	optionalInt=INT
 	optionalBoolean?="foo"
-	optionalReference=[Mandatory]
-	optionalMultivaluedReference+=[Mandatory]
+	optionalReference=[test::Mandatory]
+	optionalMultivaluedReference+=[test::Mandatory]
 ;
 
 Mandatory returns test::Mandatory :
 	mandatoryString=ID
 	mandatoryInt=INT
 	mandatoryBoolean?="foo"
-	mandatoryReference=[Optional]
-	mandatoryMultivaluedReference+=[Optional]
+	mandatoryReference=[test::Optional]
+	mandatoryMultivaluedReference+=[test::Optional]
 ;
 
 ObjectTypes returns test::ObjectTypes :

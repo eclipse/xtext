@@ -111,10 +111,11 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		if (!(grammarElement instanceof Keyword || grammarElement instanceof RuleCall || grammarElement instanceof CrossReference))
 			throw new IllegalArgumentException("grammarElement is of type: '" + grammarElement.eClass().getName() + "'");
 		AbstractRule rule = null;
+		EObject elementToUse = grammarElement;
 		if (grammarElement instanceof CrossReference)
-			grammarElement = ((CrossReference) grammarElement).getTerminal();
-		if (grammarElement instanceof RuleCall)
-			rule = ((RuleCall) grammarElement).getRule();
+			elementToUse = ((CrossReference) grammarElement).getTerminal();
+		if (elementToUse instanceof RuleCall)
+			rule = ((RuleCall) elementToUse).getRule();
 		return rule != null ? rule.getName() : null;
 	}
 

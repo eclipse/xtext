@@ -104,7 +104,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		if (EcorePackage.Literals.EPACKAGE == type) {
 			return createEPackageScope(grammar);
 		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
-			return new SimpleCachingScope(IScope.NULLSCOPE, grammar.eResource(), type) {
+			return new SimpleCachingScope(IScope.NULLSCOPE, grammar.eResource(), type, false) {
 				@Override
 				protected Iterator<AbstractMetamodelDeclaration> getRelevantContent(Resource resource) {
 					return grammar.getMetamodelDeclarations().iterator();

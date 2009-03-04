@@ -8,19 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GeneratedMetamodel;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
@@ -42,11 +35,6 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			final AbstractMetamodelDeclaration m = typeRef.getMetamodel();
 			if (m == null || Strings.isEmpty(m.getAlias()))
 				return true;
-			if (typeRef.getClassifier() != null) {
-				final Grammar g = GrammarUtil.getGrammar(typeRef);
-				if (isUniqueEClassifierName(g, typeRef.getClassifier().getName()))
-					return true;
-			}
 		}
 		else if (feature == XtextPackage.eINSTANCE.getAbstractRule_Type()) {
 			final AbstractRule rule = (AbstractRule) owner;
@@ -71,25 +59,4 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 		return super.isTransient(owner, feature, index);
 	}
 
-	private boolean isUniqueEClassifierName(Grammar grammar, String shortTypeName) {
-		final List<AbstractMetamodelDeclaration> declarations = GrammarUtil.allMetamodelDeclarations(grammar);
-		AbstractMetamodelDeclaration resultMetaModel = null;
-		int generatedMetamodelCount = 0;
-		for (AbstractMetamodelDeclaration decl : declarations) {
-			if (decl instanceof GeneratedMetamodel)
-				generatedMetamodelCount++;
-			EPackage pack = decl.getEPackage();
-			if (pack != null) {
-				EClassifier candidate = pack.getEClassifier(shortTypeName);
-				if (candidate != null) {
-					if (resultMetaModel == null) {
-						resultMetaModel = decl;
-					} else {
-						return false;
-					}
-				}
-			}
-		}
-		return !(resultMetaModel instanceof GeneratedMetamodel && generatedMetamodelCount > 1);
-	}
 }

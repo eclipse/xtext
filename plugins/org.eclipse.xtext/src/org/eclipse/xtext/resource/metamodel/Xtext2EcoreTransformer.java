@@ -354,17 +354,9 @@ public class Xtext2EcoreTransformer {
 			if (result.getMetamodel() == null) {
 				AbstractMetamodelDeclaration bestMatch = null;
 				for (AbstractMetamodelDeclaration decl : grammar.getMetamodelDeclarations()) {
-					if (decl instanceof GeneratedMetamodel) {
-						if (bestMatch == null)
-							bestMatch = decl;
-						else if (Strings.isEmpty(decl.getAlias())) {
-							result.setMetamodel(decl);
-							break;
-						}
-						else {
-							bestMatch = null;
-							break;
-						}
+					if (decl instanceof GeneratedMetamodel && Strings.isEmpty(decl.getAlias())) {
+						bestMatch = decl;
+						break;
 					}
 				}
 				if (result.getMetamodel() == null)
@@ -434,8 +426,6 @@ public class Xtext2EcoreTransformer {
 
 	public AbstractMetamodelDeclaration findMetamodel(Grammar grammar, String alias) {
 		final List<AbstractMetamodelDeclaration> declarations = grammar.getMetamodelDeclarations();
-		if (declarations.size() == 1 && Strings.isEmpty(alias))
-			return declarations.get(0);
 		AbstractMetamodelDeclaration result = null;
 		for (AbstractMetamodelDeclaration decl : declarations) {
 			if (isSameAlias(decl.getAlias(), alias)) {
