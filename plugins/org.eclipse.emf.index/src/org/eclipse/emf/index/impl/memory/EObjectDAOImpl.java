@@ -71,8 +71,8 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 	}
 
 	@Override
-	public void modify(EObjectDescriptor element, EObjectDescriptor newValues) {
-		((EObjectDescriptorImpl) element).copyDetails(newValues);
+	protected boolean doModify(EObjectDescriptor element, EObjectDescriptor newValues) {
+		return ((EObjectDescriptorImpl) element).copyDetails(newValues);
 	}
 	
 	public EObjectDescriptor.Query createQuery() {

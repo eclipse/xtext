@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
-
+import static org.eclipse.emf.index.util.CollectionUtils.equalsNullSafe;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
@@ -81,8 +81,16 @@ public abstract class BasicEObjectDescriptorImpl implements EObjectDescriptor {
 		return fragment.hashCode() + 97 * resourceDescriptor.hashCode();
 	}
 	
-	public void copyDetails(EObjectDescriptor eObjectDesc) {
-		name = eObjectDesc.getName();
-		displayName = eObjectDesc.getDisplayName();
+	public boolean copyDetails(EObjectDescriptor eObjectDesc) {
+		boolean hasChanged = false;
+		if(!equalsNullSafe(name, eObjectDesc.getName())) {
+			name = eObjectDesc.getName();
+			hasChanged = true;
+		}
+		if(!equalsNullSafe(displayName, eObjectDesc.getDisplayName())) { 
+			displayName = eObjectDesc.getDisplayName();
+			hasChanged = true;
+		}
+		return hasChanged;
 	}
 }

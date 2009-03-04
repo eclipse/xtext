@@ -8,7 +8,7 @@
 package org.eclipse.emf.index.integration;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -65,11 +65,12 @@ public class IntegrationTests extends TestCase {
 	public void testIntegration() throws Exception {
 		ecoreFeeder.index(EcorePackage.eINSTANCE, true);
 		indexExampleResource();
-		Collection<EObjectDescriptor> elementResult = index.eObjectDAO().createQuery().name("Entity")
+		Iterable<EObjectDescriptor> elementResult = index.eObjectDAO().createQuery().name("Entity")
 				.executeListResult();
 		assertNotNull(elementResult);
-		assertEquals(1, elementResult.size());
-		EObjectDescriptor elementDescriptor = elementResult.iterator().next();
+		Iterator<EObjectDescriptor> eObjectIterator = elementResult.iterator();
+		EObjectDescriptor elementDescriptor = eObjectIterator.next();
+		assertFalse(eObjectIterator.hasNext());
 		EObject entityClass = resourceSet.getEObject(elementDescriptor.getFragmentURI(), true);
 		assertNotNull(entityClass);
 		assertTrue(entityClass instanceof EClass);
@@ -77,11 +78,12 @@ public class IntegrationTests extends TestCase {
 
 		EClassDescriptor typeDescriptor = elementDescriptor.getEClassDescriptor();
 		assertNotNull(typeDescriptor);
-		Collection<org.eclipse.emf.index.ecore.EClassDescriptor> typeResult = index.eClassDAO().createQuery().name(
+		Iterable<EClassDescriptor> typeResult = index.eClassDAO().createQuery().name(
 				"EClass").executeListResult();
 		assertNotNull(typeResult);
-		assertEquals(1, typeResult.size());
-		EClassDescriptor typeDescriptor0 = typeResult.iterator().next();
+		Iterator<EClassDescriptor> eClassIterator = typeResult.iterator();
+		EClassDescriptor typeDescriptor0 = eClassIterator.next();
+		assertFalse(eClassIterator.hasNext());
 		assertEquals(typeDescriptor, typeDescriptor0);
 		EClassDescriptor[] superClasses = typeDescriptor0.getSuperClasses();
 		assertNotNull(superClasses);
@@ -91,10 +93,10 @@ public class IntegrationTests extends TestCase {
 
 		Query crossRefQuery = index.eCrossReferenceDAO().createQuery();
 		crossRefQuery.target().name("Feature");
-		Collection<org.eclipse.emf.index.ECrossReferenceDescriptor> crossRefDescriptors = crossRefQuery
+		Iterable<ECrossReferenceDescriptor> crossRefDescriptors = crossRefQuery
 				.executeListResult();
 		assertNotNull(crossRefDescriptors);
-		assertTrue(crossRefDescriptors.size() > 0);
+		assertTrue(crossRefDescriptors.iterator().hasNext());
 		for (ECrossReferenceDescriptor crossRefDescriptor : crossRefDescriptors) {
 			EObject source = resourceSet.getEObject(crossRefDescriptor.getSource().getFragmentURI(), false);
 			assertNotNull(source);

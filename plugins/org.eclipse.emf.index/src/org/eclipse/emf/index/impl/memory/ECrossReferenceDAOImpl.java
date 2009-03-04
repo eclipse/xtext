@@ -59,7 +59,7 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 	}
 	
 	@Override
-	public void modify(ECrossReferenceDescriptor element, ECrossReferenceDescriptor newValues) {
+	protected boolean doModify(ECrossReferenceDescriptor element, ECrossReferenceDescriptor newValues) {
 		throw new UnsupportedOperationException();
 	}
 
