@@ -34,8 +34,4 @@ public class MockQuery<T> implements IGenericQuery<T> {
 		return result;
 	}
 
-	public Iterable<T> executeIterableResult() {
-		return executeListResult();
-	}
-
 }
