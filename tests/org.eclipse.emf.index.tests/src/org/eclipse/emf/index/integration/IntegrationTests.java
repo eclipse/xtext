@@ -31,7 +31,6 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.memory.InMemoryIndex;
-import org.eclipse.emf.index.resource.EmfResourceChangeListenerRegistry;
 import org.eclipse.emf.index.resource.impl.DefaultEmfResourceChangeListenerImpl;
 import org.eclipse.emf.index.resource.impl.IndexBuilderImpl;
 
@@ -56,17 +55,15 @@ public class IntegrationTests extends TestCase {
 		index = new InMemoryIndex();
 		ecoreFeeder = new EcoreIndexFeederImpl(index);
 		indexBuilder = new IndexBuilderImpl(index);
-		resourceSet = new ResourceSetImpl();
-		EmfResourceChangeListenerRegistry.INSTANCE
-				.registerListener("ecore", new DefaultEmfResourceChangeListenerImpl());
+		indexBuilder.getListenerRegistry().registerListener("ecore", new DefaultEmfResourceChangeListenerImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
+		resourceSet = new ResourceSetImpl();
 	}
 
 	public void testIntegration() throws Exception {
 		ecoreFeeder.index(EcorePackage.eINSTANCE, true);
 		indexExampleResource();
-		Iterable<EObjectDescriptor> elementResult = index.eObjectDAO().createQuery().name("Entity")
-				.executeListResult();
+		Iterable<EObjectDescriptor> elementResult = index.eObjectDAO().createQuery().name("Entity").executeListResult();
 		assertNotNull(elementResult);
 		Iterator<EObjectDescriptor> eObjectIterator = elementResult.iterator();
 		EObjectDescriptor elementDescriptor = eObjectIterator.next();
@@ -78,8 +75,7 @@ public class IntegrationTests extends TestCase {
 
 		EClassDescriptor typeDescriptor = elementDescriptor.getEClassDescriptor();
 		assertNotNull(typeDescriptor);
-		Iterable<EClassDescriptor> typeResult = index.eClassDAO().createQuery().name(
-				"EClass").executeListResult();
+		Iterable<EClassDescriptor> typeResult = index.eClassDAO().createQuery().name("EClass").executeListResult();
 		assertNotNull(typeResult);
 		Iterator<EClassDescriptor> eClassIterator = typeResult.iterator();
 		EClassDescriptor typeDescriptor0 = eClassIterator.next();
@@ -93,8 +89,7 @@ public class IntegrationTests extends TestCase {
 
 		Query crossRefQuery = index.eCrossReferenceDAO().createQuery();
 		crossRefQuery.target().name("Feature");
-		Iterable<ECrossReferenceDescriptor> crossRefDescriptors = crossRefQuery
-				.executeListResult();
+		Iterable<ECrossReferenceDescriptor> crossRefDescriptors = crossRefQuery.executeListResult();
 		assertNotNull(crossRefDescriptors);
 		assertTrue(crossRefDescriptors.iterator().hasNext());
 		for (ECrossReferenceDescriptor crossRefDescriptor : crossRefDescriptors) {

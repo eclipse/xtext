@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index.resource;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.IIndexStore;
 
@@ -16,4 +18,12 @@ import org.eclipse.emf.index.IIndexStore;
 public interface EmfResourceChangeListener {
 
 	void resourceChanged(URI resourceURI, IIndexStore store, IndexFeeder indexFeeder);
+	
+	interface Registry {
+		void registerListener(String fileExtension, EmfResourceChangeListener listener);
+
+		void deregisterListeners(String fileExtension, EmfResourceChangeListener listener);
+
+		Collection<EmfResourceChangeListener> getListenersFor(String fileExtension);
+	}
 }

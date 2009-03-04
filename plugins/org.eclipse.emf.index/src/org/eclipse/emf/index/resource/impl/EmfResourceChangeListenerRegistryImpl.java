@@ -9,14 +9,13 @@ package org.eclipse.emf.index.resource.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.index.resource.EmfResourceChangeListenerRegistry;
 import org.eclipse.emf.index.resource.EmfResourceChangeListener;
 import org.eclipse.emf.index.util.MultiMap;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EmfResourceChangeListenerRegistryImpl implements EmfResourceChangeListenerRegistry{
+public class EmfResourceChangeListenerRegistryImpl implements EmfResourceChangeListener.Registry {
 
 	private MultiMap<String, EmfResourceChangeListener> registry = new MultiMap<String, EmfResourceChangeListener>();
 	
