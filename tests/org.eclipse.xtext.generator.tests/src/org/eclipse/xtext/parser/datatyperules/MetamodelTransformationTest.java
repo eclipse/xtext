@@ -32,7 +32,7 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 				"generate metamodel 'http://fooo'\n" +
 				"Start:\n" +
 				"  id=StartId id2=RecursiveId id3=CalledId value=Value;\n" +
-				"StartId returns EInt: ID '.' (ID|INT);\n" +
+				"StartId returns ecore::EInt: ID '.' (ID|INT);\n" +
 				"RecursiveId: ID ('/' RecursiveId)?;\n" +
 				"CalledId: StartId '-' ID;\n" +
 				"Value: name=StartId;";

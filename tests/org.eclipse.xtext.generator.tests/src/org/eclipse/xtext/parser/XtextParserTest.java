@@ -20,12 +20,16 @@ public class XtextParserTest extends AbstractGeneratorTest {
 	}
 
 	public void test_resolveReturnType() throws Exception {
-		Grammar model = (Grammar) getModel("grammar foo generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
+		Grammar model = (Grammar) getModel("grammar foo with org.eclipse.xtext.common.Terminals " +
+				"generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
 		assertWithXtend("'x'", "metamodelDeclarations.first().alias", model);
 	}
 
 	public void testParseCrossRef() throws Exception {
-		Grammar model = (Grammar) getModel("grammar foo generate foo 'bar' as boo Model : 'a' stuff+=Stuff*; Stuff : 'stuff' name=ID refersTo=[Stuff];");
+		Grammar model = (Grammar) getModel("grammar foo with org.eclipse.xtext.common.Terminals " +
+				"generate foo 'bar' as boo " +
+				"Model returns boo::Model : 'a' stuff+=Stuff*; " +
+				"Stuff returns boo::Stuff : 'stuff' name=ID refersTo=[boo::Stuff];");
 		assertWithXtend("'boo'", "eAllContents.typeSelect(xtext::CrossReference).first().type.metamodel.alias", model);
 		assertWithXtend("'Stuff'", "eAllContents.typeSelect(xtext::CrossReference).first().type.classifier.name", model);
 	}
