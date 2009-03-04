@@ -27,7 +27,8 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
-				"generate g 'http://3' as ecore startrule: name=ID;";
+				"generate g 'http://3' as ecore " +
+				"startrule returns ecore::startrule: name=ID;";
 		Resource r = getResourceFromString(model);
 		assertTrue(r.getErrors().isEmpty());
 		Grammar g = (Grammar) r.getContents().get(0);
@@ -51,7 +52,8 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 		String model = "grammar foo with org.eclipse.xtext.common.Terminals " +
 				"import 'http://www.eclipse.org/emf/2002/Ecore' as bar " +
-				"generate g 'http://3' as bar startrule: name=ID;";
+				"generate g 'http://3' as bar " +
+				"startrule returns bar::startrule: name=ID;";
 		Resource r = getResourceFromString(model);
 		assertTrue(r.getErrors().isEmpty());
 		Grammar g = (Grammar) r.getContents().get(0);

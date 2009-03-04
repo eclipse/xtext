@@ -18,7 +18,7 @@ Grammar:
     (rules+=AbstractRule)+
 ;
 
-GrammarID returns EString:
+GrammarID returns ecore::EString:
   ID ('.' ID)*;
   
 AbstractRule : ParserRule | TerminalRule;
@@ -43,7 +43,7 @@ ParserRule :
 ;
 
 TypeRef :
-	(metamodel=[AbstractMetamodelDeclaration] '::')? classifier=[EClassifier]
+	(metamodel=[AbstractMetamodelDeclaration] '::')? classifier=[ecore::EClassifier]
 ;
 
 Alternatives returns AbstractElement:
