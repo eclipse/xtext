@@ -12,7 +12,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.resource.EmfResourceChangeListener;
-import org.eclipse.emf.index.resource.EmfResourceChangeListenerRegistry;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -23,6 +22,8 @@ public class IndexBuilderImpl {
 
 	private IndexFeederImpl indexFeeder;
 
+	private EmfResourceChangeListener.Registry listenerRegistry = new EmfResourceChangeListenerRegistryImpl();
+
 	public IndexBuilderImpl(IIndexStore indexStore) {
 		this.indexStore = indexStore;
 		indexFeeder = new IndexFeederImpl(indexStore);
@@ -32,10 +33,13 @@ public class IndexBuilderImpl {
 		this(IIndexStore.INSTANCE);
 	}
 
+	public EmfResourceChangeListener.Registry getListenerRegistry() {
+		return listenerRegistry;
+	}
+
 	public void resourceChanged(URI resourceURI) {
 		String fileExtension = resourceURI.fileExtension();
-		Collection<EmfResourceChangeListener> resourceChangeListeners = EmfResourceChangeListenerRegistry.INSTANCE
-				.getListenersFor(fileExtension);
+		Collection<EmfResourceChangeListener> resourceChangeListeners = listenerRegistry.getListenersFor(fileExtension);
 		if (resourceChangeListeners != null) {
 			for (EmfResourceChangeListener resourceChangeListener : resourceChangeListeners) {
 				synchronized (indexFeeder) {
@@ -46,9 +50,9 @@ public class IndexBuilderImpl {
 			}
 		}
 	}
-	
+
 	public void resourceDeleted(URI resource) {
 		// TODO: implement
 	}
-	
+
 }
