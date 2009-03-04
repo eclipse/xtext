@@ -33,7 +33,7 @@ InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 DatatypeHiddens:
   'datatype' valid?=DatatypeRule;
   
-DatatypeRule returns EString hidden(WS):
+DatatypeRule returns ecore::EString hidden(WS):
   'rule' ';';
   
 HidingHiddens hidden():

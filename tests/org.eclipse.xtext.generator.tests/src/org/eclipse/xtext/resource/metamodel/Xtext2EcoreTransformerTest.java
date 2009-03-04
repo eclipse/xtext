@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractRule;
@@ -913,10 +912,32 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
 	}
+
 	/**
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266807
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266440
 	 */
-	public void testBug266807() throws Exception {
+	public void testBug_266440() throws Exception {
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals" +
+				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				" generate bugreport 'http://bugreport/266440'\n" +
+				"CompositeModel: (type+=EClassifier)+;\n" +
+				"EClassifier: EDataType | EClass;\n" +
+				"EClass: 'class' name=ID;\n" +
+				"EDataType: 'dt' name=ID;";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().isEmpty());
+		Grammar parsedGrammar = (Grammar) resource.getContents().get(0);
+		for(AbstractRule rule: parsedGrammar.getRules()) {
+			EClassifier classifier = rule.getType().getClassifier();
+			EPackage pack = classifier.getEPackage();
+			assertEquals("bugreport", pack.getName());
+		}
+	}
+
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266807
+	 */
+	public void testBug_266807() throws Exception {
 		with(new XtextStandaloneSetup());
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
