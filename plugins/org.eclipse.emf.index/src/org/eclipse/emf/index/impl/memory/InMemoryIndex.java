@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
 
-import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
+import org.eclipse.emf.index.impl.BasicIndexStore;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class InMemoryIndex implements IIndexStore {
+public class InMemoryIndex extends BasicIndexStore {
 
 	private EClassDAOImpl eClassDAO;
 	private ResourceDAOImpl resourceDAO;
@@ -48,5 +48,7 @@ public class InMemoryIndex implements IIndexStore {
 	public DAO ePackageDAO() {
 		return ePackageDAO;
 	}
+	
+	
 	
 }

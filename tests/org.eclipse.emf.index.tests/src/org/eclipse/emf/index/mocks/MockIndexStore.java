@@ -19,17 +19,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor.Query;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
+import org.eclipse.emf.index.impl.BasicIndexStore;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class MockIndexStore implements IIndexStore {
+public class MockIndexStore extends BasicIndexStore {
 	public final List<ECrossReferenceDescriptor> addedCrossRefDescriptors = new ArrayList<ECrossReferenceDescriptor>();
 	public final List<ECrossReferenceDescriptor> removedCrossRefDescriptors = new ArrayList<ECrossReferenceDescriptor>();
 	public final List<EObjectDescriptor> addedEObjectDescriptors = new ArrayList<EObjectDescriptor>();
@@ -202,5 +202,4 @@ public class MockIndexStore implements IIndexStore {
 			}
 		};
 	}
-
 }

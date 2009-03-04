@@ -9,6 +9,7 @@ package org.eclipse.emf.index.resource.impl;
 
 import static org.eclipse.emf.index.util.CollectionUtils.addAllIfNotNull;
 import static org.eclipse.emf.index.util.CollectionUtils.findEquivalent;
+import static org.eclipse.emf.index.util.CollectionUtils.toList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -118,8 +119,8 @@ public class IndexFeederImpl implements IndexFeeder {
 			ResourceDescriptor newResourceDescriptor = new ResourceDescriptorImpl(data.uri, data.indexingDate,
 					data.userData);
 			if (existingResourceDesc != null) {
-				Collection<EObjectDescriptor> existingEObjectsInResource = index.eObjectDAO()
-						.createQueryEObjectsInResource(existingResourceDesc).executeListResult();
+				Collection<EObjectDescriptor> existingEObjectsInResource = toList(index.eObjectDAO()
+						.createQueryEObjectsInResource(existingResourceDesc).executeListResult());
 				addAllIfNotNull(allExistingEObjectDescs, existingEObjectsInResource);
 				index.resourceDAO().modify(existingResourceDesc, newResourceDescriptor);
 				resourceDescCache.put(resource, existingResourceDesc);
@@ -143,8 +144,8 @@ public class IndexFeederImpl implements IndexFeeder {
 					data.displayName, eClassDescriptor, data.userData);
 			EObjectDescriptor existingEObjectDesc = findEquivalent(allExistingEObjectDescs, newEObjectDesc);
 			if (existingEObjectDesc != null) {
-				Collection<ECrossReferenceDescriptor> existingECrossRefDescsFrom = index.eCrossReferenceDAO()
-						.createQueryCrossReferencesFrom(existingEObjectDesc).executeListResult();
+				Collection<ECrossReferenceDescriptor> existingECrossRefDescsFrom = toList(index.eCrossReferenceDAO()
+						.createQueryCrossReferencesFrom(existingEObjectDesc).executeListResult());
 				addAllIfNotNull(allExistingECrossRefDescs, existingECrossRefDescsFrom);
 				index.eObjectDAO().modify(existingEObjectDesc, newEObjectDesc);
 				allExistingEObjectDescs.remove(existingEObjectDesc);

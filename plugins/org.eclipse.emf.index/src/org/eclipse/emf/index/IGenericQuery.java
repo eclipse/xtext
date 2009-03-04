@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
-import java.util.Collection;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -16,7 +15,5 @@ public interface IGenericQuery<T> {
 	
 	T executeSingleResult();
 	
-	Collection<T> executeListResult();
-	
-	Iterable<T> executeIterableResult();
+	Iterable<T> executeListResult();
 }

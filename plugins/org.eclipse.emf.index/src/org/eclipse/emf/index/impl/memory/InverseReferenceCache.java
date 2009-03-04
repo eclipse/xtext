@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
-
+import static org.eclipse.emf.index.util.CollectionUtils.union;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -67,10 +67,10 @@ public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
 		}
 		if (parentScopeQuery != null) {
 			isScopeDefined = true;
-			Collection<TargetDesc> parentScopes = parentScopeQuery.executeListResult();
+			Iterable<TargetDesc> parentScopes = parentScopeQuery.executeListResult();
 			if (parentScopes != null) {
 				for (TargetDesc parentScope : parentScopes) {
-					queryScope = CollectionUtils.union(queryScope, lookup(parentScope));
+					queryScope = union(queryScope, lookup(parentScope));
 				}
 			}
 		}
@@ -99,10 +99,6 @@ public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
 				return result.iterator().next();
 			}
 			return null;
-		}
-
-		public Iterable<SourceDesc> executeIterableResult() {
-			return executeListResult();
 		}
 	}
 }

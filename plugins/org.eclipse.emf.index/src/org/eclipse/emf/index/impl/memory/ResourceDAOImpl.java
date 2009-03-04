@@ -25,8 +25,8 @@ public class ResourceDAOImpl extends BasicMemoryDAOImpl<ResourceDescriptor> impl
 	}
 	
 	@Override
-	public void modify(ResourceDescriptor element, ResourceDescriptor newValues) {
-		((ResourceDescriptorImpl) element).copyDetails(newValues);
+	protected boolean doModify(ResourceDescriptor element, ResourceDescriptor newValues) {
+		return ((ResourceDescriptorImpl) element).copyDetails(newValues);
 	}
 
 	public ResourceDescriptor.Query createQuery() {

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ecore.impl;
 
+import static org.eclipse.emf.index.util.CollectionUtils.toList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -60,8 +61,8 @@ public class EcoreIndexFeederImpl implements EcoreIndexFeeder {
 
 	protected List<EClassDescriptor> internalIndexEPackageContents(EPackage ePackage,
 			EPackageDescriptor ePackageDescriptor) {
-		Collection<EClassDescriptor> oldEClassDescriptors = index.eClassDAO().createQueryEClassesInPackage(
-				ePackageDescriptor).executeListResult();
+		List<EClassDescriptor> oldEClassDescriptors = toList(index.eClassDAO().createQueryEClassesInPackage(
+				ePackageDescriptor).executeListResult());
 		List<EClassDescriptor> newEClassDescriptors = new ArrayList<EClassDescriptor>();
 		MultiMap<EClassDescriptor, EClass> forwardSuperClassMap = new MultiMap<EClassDescriptor, EClass>();
 		for (EClassifier eClassifier : ePackage.getEClassifiers()) {

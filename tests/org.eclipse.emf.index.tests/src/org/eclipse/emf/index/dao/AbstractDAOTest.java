@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.dao;
 
-import java.util.Collection;
+import java.util.Iterator;
 
 import junit.framework.TestCase;
 
@@ -27,6 +27,8 @@ import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
+import org.eclipse.emf.index.event.IndexChangeEvent;
+import org.eclipse.emf.index.event.IndexChangeListener;
 import org.eclipse.emf.index.mocks.MockDescriptors;
 
 /**
@@ -133,25 +135,46 @@ public abstract class AbstractDAOTest extends TestCase implements MockDescriptor
 				return eCrossReferenceDAO;
 			}
 
+			public void addIndexChangeListener(IndexChangeListener listener) {
+			}
+
+			public void beginTransaction() {
+			}
+
+			public void endTransaction() {
+			}
+
+			public void removeIndexChangeListener(IndexChangeListener listener) {
+			}
+
+			public void fireIndexChangedEvent(IndexChangeEvent event) {
+			}
+
 		};
 	}
 
 	protected <T> void assertResultIs(T descriptor, IGenericQuery<T> query) {
-		Collection<T> result = query.executeListResult();
+		Iterable<T> result = query.executeListResult();
 		assertNotNull(result);
-		assertEquals(1, result.size());
-		assertEquals(descriptor, result.iterator().next());
+		Iterator<T> iterator = result.iterator();
+		assertEquals(descriptor, iterator.next());
+		assertFalse(iterator.hasNext());
 	}
 
 	protected <T> void assertContains(T descriptor, IGenericQuery<T> query) {
-		Collection<T> result = query.executeListResult();
+		Iterable<T> result = query.executeListResult();
 		assertNotNull(result);
-		assertEquals(descriptor, result.contains(descriptor));
+		for(Iterator<T> iterator = result.iterator(); iterator.hasNext();) {
+			if(descriptor.equals(iterator.next())) {
+				return;
+			}
+		}
+		fail("Descriptor not in result");
 	}
 
 	protected <T> void assertEmptyResult(IGenericQuery<T> query) {
-		Collection<T> result = query.executeListResult();
-		assertTrue(result == null || result.isEmpty());
+		Iterable<T> result = query.executeListResult();
+		assertTrue(result == null || !result.iterator().hasNext());
 	}
 
 	protected <T> void genericQuerySingleResultTest(IDAO<T> dao, T descriptor, IGenericQuery<T> query) {

@@ -12,13 +12,14 @@ import static org.eclipse.emf.index.util.CollectionUtils.isNotEmpty;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.index.IDAO;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.event.IndexChangeEvent;
+import org.eclipse.emf.index.event.impl.IndexChangeEventImpl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -36,13 +37,20 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
 
 	public void store(T element) {
 		store.add(element);
+		indexStore.fireIndexChangedEvent(new IndexChangeEventImpl(element, IndexChangeEvent.Type.ADDED));
 	}
 
 	public void delete(T element) {
 		store.remove(element);
+		indexStore.fireIndexChangedEvent(new IndexChangeEventImpl(element, IndexChangeEvent.Type.REMOVED));
 	}
 
-	public abstract void modify(T element, T newValues);
+	public void modify(T element, T newValues) {
+		if (doModify(element, newValues))
+			indexStore.fireIndexChangedEvent(new IndexChangeEventImpl(element, IndexChangeEvent.Type.MODIFIED));
+	}
+
+	protected abstract boolean doModify(T element, T newValues);
 
 	protected abstract class Query implements IGenericQuery<T> {
 
@@ -101,45 +109,6 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
 				}
 			}
 			return result;
-		}
-
-		public Iterable<T> executeIterableResult() {
-			final Iterator<T> queryScope = scope().iterator();
-			return new Iterable<T>() {
-
-				public Iterator<T> iterator() {
-					return new Iterator<T>() {
-						private T next = null;
-
-						public boolean hasNext() {
-							if (next!=null)
-								return true;
-							while (queryScope.hasNext()) {
-								T candidate = queryScope.next();
-								if (matches(candidate)) {
-									next = candidate;
-									return true;
-								}
-							}
-							return false;
-						}
-
-						public T next() {
-							if (!hasNext())
-								return null;
-							try {
-								return next;
-							} finally {
-								next = null;
-							}
-						}
-
-						public void remove() {
-							throw new UnsupportedOperationException();
-						}
-					};
-				}
-			};
 		}
 
 		protected Collection<T> mergeScopes(Collection<T> scope0, Collection<T> scope1) {

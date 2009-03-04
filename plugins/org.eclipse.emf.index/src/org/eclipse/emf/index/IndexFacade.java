@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -24,11 +22,11 @@ public class IndexFacade {
 		this.store = store;
 	}
 
-	public Collection<ECrossReferenceDescriptor> findReferencesTo(EObject target) {
+	public Iterable<ECrossReferenceDescriptor> findReferencesTo(EObject target) {
 		return store.eCrossReferenceDAO().createQueryCrossReferencesTo(target).executeListResult();
 	}
 
-	public Collection<EObjectDescriptor> findInstances(EClass eClass) {
+	public Iterable<EObjectDescriptor> findInstances(EClass eClass) {
 		return store.eObjectDAO().createQueryEObjectsByType(eClass).executeListResult();
 	}
 

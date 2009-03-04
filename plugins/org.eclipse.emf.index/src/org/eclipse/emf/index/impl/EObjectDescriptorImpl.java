@@ -29,12 +29,20 @@ public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 			this.userData = Collections.unmodifiableMap(userData);
 	}
 
-	public void copyDetails(EObjectDescriptor eObjectDesc) {
-		super.copyDetails(eObjectDesc);
-		if (eObjectDesc.getUserData() != null)
-			userData = Collections.unmodifiableMap(new HashMap<String, String>(eObjectDesc.getUserData()));
-		else 
+	public boolean copyDetails(EObjectDescriptor newDesc) {
+		boolean hasChanged = super.copyDetails(newDesc);
+		Map<String, String> newUserData = newDesc.getUserData();
+		if (newUserData != null) {
+			if (!newUserData.equals(userData)) {
+				userData = Collections.unmodifiableMap(new HashMap<String, String>(newUserData));
+				return true;
+			}
+		}
+		else if (userData != null) {
 			userData = null;
+			return true;
+		}
+		return hasChanged;
 	}
 
 	public String getUserData(String key) {

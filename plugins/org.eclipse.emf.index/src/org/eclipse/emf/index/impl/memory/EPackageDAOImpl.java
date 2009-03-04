@@ -22,7 +22,7 @@ public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> impl
 	}
 
 	@Override
-	public void modify(EPackageDescriptor element, EPackageDescriptor newValues) {
+	protected boolean doModify(EPackageDescriptor element, EPackageDescriptor newValues) {
 		throw new UnsupportedOperationException();
 	}
 	

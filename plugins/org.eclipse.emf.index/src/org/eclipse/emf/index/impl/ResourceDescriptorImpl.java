@@ -64,11 +64,19 @@ public class ResourceDescriptorImpl implements ResourceDescriptor {
 		return uri.hashCode();
 	}
 
-	public void copyDetails(ResourceDescriptor resourceDesc) {
-		if(resourceDesc.getUserData() != null) 
-			userData = Collections.unmodifiableMap(new HashMap<String, String>(resourceDesc.getUserData()));
-		else
+	public boolean copyDetails(ResourceDescriptor resourceDesc) {
+		Map<String, String> newUserData = resourceDesc.getUserData();
+		if (newUserData != null) {
+			if (!newUserData.equals(userData)) {
+				userData = Collections.unmodifiableMap(new HashMap<String, String>(newUserData));
+				return true;
+			}
+		}
+		else if (userData != null) {
 			userData = null;
+			return true;
+		}
+		return false;
 	}
 
 }

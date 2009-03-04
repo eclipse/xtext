@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
-import java.util.Collection;
+import java.util.Iterator;
 
 import junit.framework.TestCase;
 
@@ -25,14 +25,16 @@ public class EPackageRegistryTest extends TestCase {
 		EcorePackage.eINSTANCE.eClass();
 		IIndexStore indexStore = IIndexStore.INSTANCE;
 		EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(indexStore);
-		Collection<EPackageDescriptor> ePackageDescriptors = indexStore.ePackageDAO().createQueryEPackage(EcorePackage.eINSTANCE).executeListResult();
+		Iterable<EPackageDescriptor> ePackageDescriptors = indexStore.ePackageDAO().createQueryEPackage(EcorePackage.eINSTANCE).executeListResult();
 		assertNotNull(ePackageDescriptors);
-		assertEquals(1, ePackageDescriptors.size());
-		assertEquals("ecore", ePackageDescriptors.iterator().next().getName());
+		Iterator<EPackageDescriptor> ePackageIterator = ePackageDescriptors.iterator();
+		assertEquals("ecore", ePackageIterator.next().getName());
+		assertFalse(ePackageIterator.hasNext());
 		
-		Collection<EClassDescriptor> eClassDescriptors = indexStore.eClassDAO().createQueryEClass(EcorePackage.Literals.ECLASS).executeListResult();
+		Iterable<EClassDescriptor> eClassDescriptors = indexStore.eClassDAO().createQueryEClass(EcorePackage.Literals.ECLASS).executeListResult();
 		assertNotNull(eClassDescriptors);
-		assertEquals(1, eClassDescriptors.size());
-		assertEquals("EClass", eClassDescriptors.iterator().next().getName());
+		Iterator<EClassDescriptor> eClassIterator = eClassDescriptors.iterator();
+		assertEquals("EClass", eClassIterator.next().getName());
+		assertFalse(eClassIterator.hasNext());
 	}
 }

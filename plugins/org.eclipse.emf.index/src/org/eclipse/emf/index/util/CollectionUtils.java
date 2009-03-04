@@ -9,8 +9,8 @@ package org.eclipse.emf.index.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -18,10 +18,11 @@ import java.util.Map;
 public class CollectionUtils {
 
 	public static <T> Collection<T> copyOrNull(Collection<T> source) {
-		if(source == null) return null;
-		return new ArrayList<T>(source); 
+		if (source == null)
+			return null;
+		return new ArrayList<T>(source);
 	}
-	
+
 	public static <T> Collection<T> addIfNotNull(Collection<T> c, T element) {
 		if (element != null)
 			c.add(element);
@@ -44,6 +45,27 @@ public class CollectionUtils {
 		return addAllIfNotNull(a, b);
 	}
 
+	/**
+	 * Returns null if the iterable is null or empty.
+	 * 
+	 * @param <T>
+	 * @param iterable
+	 * @return
+	 */
+	public static <T> List<T> toList(Iterable<T> iterable) {
+		if (iterable != null) {
+			Iterator<T> iterator = iterable.iterator();
+			if (iterator.hasNext()) {
+				List<T> result = new ArrayList<T>();
+				do {
+					result.add(iterator.next());
+				} while (iterator.hasNext());
+				return result;
+			}
+		}
+		return null;
+	}
+
 	public static <T> boolean isNotEmpty(Collection<T> c) {
 		return c != null && !c.isEmpty();
 	}
@@ -52,17 +74,17 @@ public class CollectionUtils {
 		return c == null || c.isEmpty();
 	}
 
-	public static <T,U> boolean equalsNullSafe(Map<T,U> one, Map<T,U> two) {
-		if(one == null && two == null) 
+	public static boolean equalsNullSafe(Object one, Object two) {
+		if (one == null && two == null)
 			return true;
-		if(one==null || two==null) 
+		if (one == null || two == null)
 			return false;
 		return one.equals(two);
 	}
-	
+
 	public static <T> T findEquivalent(List<T> list, T object) {
 		int index = list.indexOf(object);
-		return (index<0) ? null : list.get(index); 
+		return (index < 0) ? null : list.get(index);
 	}
-	
+
 }

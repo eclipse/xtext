@@ -7,15 +7,16 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ui.dialog;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
+import java.util.Iterator;
 
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
+import org.eclipse.emf.index.util.PreloadingListIterator;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ILazyContentProvider;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -23,6 +24,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -37,13 +39,47 @@ public class FindEClassbyName extends ListDialog {
 
 	protected IIndexStore index = IIndexStore.INSTANCE;
 
+	private Label messageLabel;
+
 	public FindEClassbyName(Shell parent) {
 		super(parent);
 		setTitle("Find EClass");
 		setMessage("Enter name of EClass (use * for wildcard)");
 		setAddCancelButton(false);
-		setContentProvider(new EClassDescriptorContentProvider());
+		// set a dummy content provider, as superclass expects an
+		// IStructuredContentProvider
+		setContentProvider(new IStructuredContentProvider() {
+			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			}
+
+			public void dispose() {
+			}
+
+			public Object[] getElements(Object inputElement) {
+				return null;
+			}
+		});
 		setLabelProvider(new EClassDescriptorLabelProvider());
+	}
+
+	@Override
+	protected int getTableStyle() {
+		return super.getTableStyle() | SWT.VIRTUAL;
+	}
+
+	@Override
+	protected Control createContents(Composite parent) {
+		Control contents = super.createContents(parent);
+		// set real content provider :-)
+		getTableViewer().setContentProvider(new EClassDescriptorLazyContentProvider());
+		return contents;
+	}
+
+	protected Control createDialogArea(Composite container) {
+		Composite parent = (Composite) super.createDialogArea(container);
+		messageLabel = new Label(parent, SWT.NONE);
+		messageLabel.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
+		return parent;
 	}
 
 	@Override
@@ -62,37 +98,70 @@ public class FindEClassbyName extends ListDialog {
 
 	protected void handleSearchPatternChanged(ModifyEvent e) {
 		String searchPattern = searchControl.getText();
-		if(searchPattern.length() >0 && searchPattern.charAt(searchPattern.length()-1) !='*') {
+		if (searchPattern.length() > 0 && searchPattern.charAt(searchPattern.length() - 1) != '*') {
 			searchPattern += '*';
 		}
-		Collection<EClassDescriptor> matches = index.eClassDAO().createQuery().name(searchPattern).executeListResult();
+		Iterable<EClassDescriptor> matches = index.eClassDAO().createQuery().name(searchPattern).executeListResult();
 		getTableViewer().setInput(matches);
 	}
-	
-	class EClassDescriptorContentProvider implements IStructuredContentProvider {
-		@SuppressWarnings("unchecked")
-		public Object[] getElements(Object inputElement) {
-			if (inputElement instanceof Collection<?>) {
-				Collection<EClassDescriptor> collection = (Collection<EClassDescriptor>) inputElement;
-				EClassDescriptor[] array = collection.toArray(new EClassDescriptor[collection.size()]);
-				Arrays.sort(array, new Comparator<EClassDescriptor>() {
-					public int compare(EClassDescriptor desc0, EClassDescriptor desc1) {
-						return desc0.getDisplayName().compareTo(desc1.getDisplayName());
-					}
-				});
-				return array;
+
+	class EClassDescriptorLazyContentProvider implements ILazyContentProvider {
+
+		private PreloadingListIterator<EClassDescriptor> iterator;
+
+		private TableViewer viewer;
+
+		private static final int PREFETCH_ITEM_COUNT = 20;
+
+		private int currentItemCount = 0;
+
+		public void updateElement(int index) {
+			if (iterator != null) {
+				while (iterator.nextIndex() > index) {
+					iterator.previous();
+				}
+				while (iterator.nextIndex() < index) {
+					iterator.next();
+				}
+				EClassDescriptor element = iterator.next();
+				viewer.replace(element, index);
+				if (index == currentItemCount - 1) {
+					currentItemCount += iterator.preloadNext(PREFETCH_ITEM_COUNT);
+					updateItemCount();
+				}
 			}
-			else if (inputElement instanceof EClassDescriptor) {
-				return new EClassDescriptor[] { (EClassDescriptor) inputElement };
-			}
-			return null;
 		}
 
 		public void dispose() {
+			iterator = null;
+			viewer = null;
 		}
 
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		private void updateItemCount() {
+			if (currentItemCount >= PREFETCH_ITEM_COUNT)
+				if(currentItemCount % PREFETCH_ITEM_COUNT == 0)
+					messageLabel.setText("More than " + currentItemCount + " hits. Scroll down to see more.");
+				else 
+					messageLabel.setText("" + currentItemCount + " hits.");
+			else
+				messageLabel.setText("");
+			this.viewer.setItemCount(currentItemCount);
 
+		}
+
+		@SuppressWarnings("unchecked")
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			this.viewer = (TableViewer) viewer;
+			iterator = null;
+			if (newInput instanceof Iterable<?>)
+				iterator = new PreloadingListIterator(((Iterable<EClassDescriptor>) newInput).iterator());
+			else if (newInput instanceof Iterator<?>)
+				iterator = new PreloadingListIterator((Iterator<EClassDescriptor>) newInput);
+			if (this.iterator != null)
+				currentItemCount = iterator.preloadNext(PREFETCH_ITEM_COUNT);
+			else
+				currentItemCount = 0;
+			updateItemCount();
 		}
 	}
 
@@ -107,21 +176,16 @@ public class FindEClassbyName extends ListDialog {
 		}
 
 		public void addListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
 		}
 
 		public void dispose() {
-			// TODO Auto-generated method stub
 		}
 
 		public boolean isLabelProperty(Object element, String property) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		public void removeListener(ILabelProviderListener listener) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}
