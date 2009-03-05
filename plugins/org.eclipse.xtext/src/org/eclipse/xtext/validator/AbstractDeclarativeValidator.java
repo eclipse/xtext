@@ -120,7 +120,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		this.hasErrors = false;
-		boolean isValid = super.validate(class1,object,diagnostics,context);
+		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
 		boolean skipExpensive = false;
 		if (context != null) {
 			Object object2 = context.get(CheckMode.KEY);
@@ -263,7 +263,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		}
 
 		public List<?> getData() {
-			List<Object> result = new ArrayList<Object>();
+			List<Object> result = new ArrayList<Object>(2);
 			result.add(source);
 			if (feature != null)
 				result.add(feature);
@@ -284,6 +284,50 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 
 		public String getSource() {
 			return source.toString();
+		}
+
+		// partially copied from BasicDiagnostic#toString()
+		@Override
+		public String toString() {
+			StringBuilder result = new StringBuilder();
+			result.append("Diagnostic ");
+			switch (severity) {
+				case OK: {
+					result.append("OK");
+					break;
+				}
+				case INFO: {
+					result.append("INFO");
+					break;
+				}
+				case WARNING: {
+					result.append("WARNING");
+					break;
+				}
+				case ERROR: {
+					result.append("ERROR");
+					break;
+				}
+				case CANCEL: {
+					result.append("CANCEL");
+					break;
+				}
+				default: {
+					result.append(Integer.toHexString(severity));
+					break;
+				}
+			}
+
+			result.append(" source=");
+			result.append(source);
+
+			result.append(' ');
+			result.append(message);
+
+			result.append(" feature=");
+			result.append(feature);
+
+			return result.toString();
 		}
 
 	}

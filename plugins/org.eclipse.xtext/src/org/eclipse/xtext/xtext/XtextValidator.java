@@ -8,8 +8,10 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
@@ -53,6 +55,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (metamodel.getName() != null && metamodel.getName().length() != 0)
 			if (Character.isUpperCase(metamodel.getName().charAt(0)))
 				warning("Metamodel names should start with a lower case letter.", XtextPackage.GENERATED_METAMODEL__NAME);
+	}
+
+	@Check
+	public void checkCrossReferenceTerminal(CrossReference reference) {
+		if (!(reference.getTerminal() instanceof RuleCall))
+			warning("Your grammar will not work with the default linking implementation, " +
+					"because Alternatives are currently not handled properly in CrossReferences.",
+					XtextPackage.CROSS_REFERENCE__TERMINAL);
 	}
 
 }

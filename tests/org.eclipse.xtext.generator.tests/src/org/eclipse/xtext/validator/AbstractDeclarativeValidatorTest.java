@@ -9,7 +9,7 @@ package org.eclipse.xtext.validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -56,11 +56,15 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 			}
 		};
 		TestChain chain = chain();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.singletonMap((Object)CheckMode.KEY, (Object)CheckMode.FAST));
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object,Object>() {
+			{ put(CheckMode.KEY, Integer.valueOf(CheckMode.FAST)); }
+		});
 		assertMatch(chain, 1, 3);
 
 		chain = chain();
-		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, Collections.singletonMap((Object)CheckMode.KEY, (Object)CheckMode.ALL));
+		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object,Object>() {
+			{ put(CheckMode.KEY, Integer.valueOf(CheckMode.ALL)); }
+		});
 		assertMatch(chain, 1, 3, 27);
 
 		chain = chain();
@@ -78,21 +82,22 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 	private TestChain chain() {
 		return new TestChain();
 	}
-	
-	
+
+
 	public void testGuard() throws Exception {
 		AbstractDeclarativeValidator validator = new AbstractDeclarativeValidator(){
+			@SuppressWarnings("unused")
 			@Check
 			public void guarded(EClass x) {
 				guard("".equals(x.getName()));
 			}
 		};
-		
+
 		TestChain diagnostics = new TestChain();
 		validator.validate(EcorePackage.eINSTANCE.getEClass(), diagnostics, null);
 		assertEquals(0,diagnostics.integers.size());
 	}
-	
+
 	@SuppressWarnings("unused")
 	private class TestValidator extends AbstractDeclarativeValidator {
 		@Check
