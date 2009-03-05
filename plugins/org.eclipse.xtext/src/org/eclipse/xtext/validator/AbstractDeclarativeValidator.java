@@ -121,11 +121,11 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 			Map<Object, Object> context) {
 		this.hasErrors = false;
 		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
-		boolean skipExpensive = false;
+		CheckMode checkMode = CheckMode.ALL;
 		if (context != null) {
 			Object object2 = context.get(CheckMode.KEY);
-			if (object2 instanceof Integer) {
-				skipExpensive = CheckMode.FAST == (Integer) object2;
+			if (object2 instanceof CheckMode) {
+				checkMode = (CheckMode) object2;
 			}
 		}
 
@@ -134,11 +134,9 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 			this.currentObject = object;
 			List<Method> list = methodsForType.get(object.getClass());
 			for (Method method : list) {
-				if (skipExpensive) {
-					Check annotation = method.getAnnotation(Check.class);
-					if (annotation.value() == CheckType.EXPENSIVE)
-						continue;
-				}
+				Check annotation = method.getAnnotation(Check.class);
+				if (!checkMode.shouldCheck(annotation.value()))
+					continue;
 				try {
 					this.currentMethod = method;
 					method.setAccessible(true);

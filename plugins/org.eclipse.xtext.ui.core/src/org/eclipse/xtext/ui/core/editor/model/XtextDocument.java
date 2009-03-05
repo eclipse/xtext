@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.core.editor.model;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +18,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -33,13 +31,11 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -47,6 +43,7 @@ import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validator.CheckMode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -150,7 +147,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 			checkAndUpdateMarkers();
 		}
 	}
-
+	
 	private void ensureThatStateIsNotReturned(Object exec, UnitOfWork<?> uow) {
 		// TODO activate
 		// if (exec instanceof EObject) {
@@ -203,6 +200,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	private final class UpdateMarkerJob extends Job {
+
 		private UpdateMarkerJob(String name) {
 			super(name);
 		}
@@ -211,7 +209,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		protected IStatus run(IProgressMonitor monitor) {
 			final List<Map<String, Object>> issues = readOnly(new UnitOfWork<List<Map<String, Object>>>() {
 				public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-					return XtextResourceChecker.check(resource);
+					return XtextResourceChecker.check(resource,Collections.singletonMap(CheckMode.KEY, CheckMode.FAST_ONLY));
 				}
 			});
 
@@ -219,36 +217,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 				throw new IllegalStateException("Couldn't find IFile for Document");
 
 			// cleanup
-			try {
-				new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(file)) {
-					@Override
-					protected void execute(final IProgressMonitor monitor) throws CoreException,
-							InvocationTargetException, InterruptedException {
-						file.deleteMarkers(MARKER_ID, true, IResource.DEPTH_INFINITE);
-						if (!issues.isEmpty()) {
-							// update
-							for (Map<String, Object> map : issues) {
-								IMarker marker = file.createMarker(MARKER_ID);
-								Object lNr = map.get(IMarker.LINE_NUMBER);
-								String lineNR = "";
-								if (lNr != null) {
-									lineNR = "line: " + lNr + " ";
-								}
-								map.put(IMarker.LOCATION, lineNR + file.getFullPath().toString());
-								marker.setAttributes(map);
-							}
-						}
-					}
-				}.run(monitor);
-			} catch (InvocationTargetException e) {
-				log.error("Could not create marker.", e);
-			} catch (InterruptedException e) {
-				log.error("Could not create marker.", e);
-			}
+			XtextResourceChecker.addMarkers(file, issues, true, monitor);
 
 			return Status.OK_STATUS;
 		}
+
 	}
+	
 
 	class LockAwareProcessor implements Processor {
 
@@ -268,9 +243,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
-	private static final String MARKER_ID = EValidator.MARKER;
-//	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
 	private final UpdateMarkerJob updateMarkerJob = new UpdateMarkerJob("updateMarkers");
 
 	private void checkAndUpdateMarkers() {
@@ -285,5 +259,5 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 		return null;
 	}
-
+	
 }
