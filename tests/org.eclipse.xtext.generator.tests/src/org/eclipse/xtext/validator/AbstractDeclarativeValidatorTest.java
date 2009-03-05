@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 
@@ -77,7 +78,21 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 	private TestChain chain() {
 		return new TestChain();
 	}
-
+	
+	
+	public void testGuard() throws Exception {
+		AbstractDeclarativeValidator validator = new AbstractDeclarativeValidator(){
+			@Check
+			public void guarded(EClass x) {
+				guard("".equals(x.getName()));
+			}
+		};
+		
+		TestChain diagnostics = new TestChain();
+		validator.validate(EcorePackage.eINSTANCE.getEClass(), diagnostics, null);
+		assertEquals(0,diagnostics.integers.size());
+	}
+	
 	@SuppressWarnings("unused")
 	private class TestValidator extends AbstractDeclarativeValidator {
 		@Check
@@ -100,6 +115,7 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		public List<Integer> integers = new ArrayList<Integer>();
 
 		public void add(org.eclipse.emf.common.util.Diagnostic diagnostic) {
+			assertTrue(diagnostic.getData().get(0) instanceof EObject);
 			integers.add((Integer) diagnostic.getData().get(1));
 		}
 
