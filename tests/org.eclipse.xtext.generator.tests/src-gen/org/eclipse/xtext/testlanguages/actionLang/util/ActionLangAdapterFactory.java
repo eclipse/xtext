@@ -83,19 +83,14 @@ public class ActionLangAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
-      public Adapter caseType(Type object)
+      public Adapter caseChild(Child object)
       {
-        return createTypeAdapter();
+        return createChildAdapter();
       }
       @Override
-      public Adapter caseItem(Item object)
+      public Adapter caseParent(Parent object)
       {
-        return createItemAdapter();
-      }
-      @Override
-      public Adapter caseThing(Thing object)
-      {
-        return createThingAdapter();
+        return createParentAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -135,46 +130,31 @@ public class ActionLangAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.actionLang.Type <em>Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.actionLang.Child <em>Child</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Type
+   * @see org.eclipse.xtext.testlanguages.actionLang.Child
    * @generated
    */
-  public Adapter createTypeAdapter()
+  public Adapter createChildAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.actionLang.Item <em>Item</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.actionLang.Parent <em>Parent</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Item
+   * @see org.eclipse.xtext.testlanguages.actionLang.Parent
    * @generated
    */
-  public Adapter createItemAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.testlanguages.actionLang.Thing <em>Thing</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Thing
-   * @generated
-   */
-  public Adapter createThingAdapter()
+  public Adapter createParentAdapter()
   {
     return null;
   }

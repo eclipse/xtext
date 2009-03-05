@@ -68,9 +68,8 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
     switch (eClass.getClassifierID())
     {
       case ActionLangPackage.MODEL: return createModel();
-      case ActionLangPackage.TYPE: return createType();
-      case ActionLangPackage.ITEM: return createItem();
-      case ActionLangPackage.THING: return createThing();
+      case ActionLangPackage.CHILD: return createChild();
+      case ActionLangPackage.PARENT: return createParent();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -92,10 +91,10 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
+  public Child createChild()
   {
-    TypeImpl type = new TypeImpl();
-    return type;
+    ChildImpl child = new ChildImpl();
+    return child;
   }
 
   /**
@@ -103,21 +102,10 @@ public class ActionLangFactoryImpl extends EFactoryImpl implements ActionLangFac
    * <!-- end-user-doc -->
    * @generated
    */
-  public Item createItem()
+  public Parent createParent()
   {
-    ItemImpl item = new ItemImpl();
-    return item;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Thing createThing()
-  {
-    ThingImpl thing = new ThingImpl();
-    return thing;
+    ParentImpl parent = new ParentImpl();
+    return parent;
   }
 
   /**

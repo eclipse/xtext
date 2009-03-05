@@ -35,31 +35,22 @@ public interface ActionLangFactory extends EFactory
   Model createModel();
 
   /**
-   * Returns a new object of class '<em>Type</em>'.
+   * Returns a new object of class '<em>Child</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type</em>'.
+   * @return a new object of class '<em>Child</em>'.
    * @generated
    */
-  Type createType();
+  Child createChild();
 
   /**
-   * Returns a new object of class '<em>Item</em>'.
+   * Returns a new object of class '<em>Parent</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Item</em>'.
+   * @return a new object of class '<em>Parent</em>'.
    * @generated
    */
-  Item createItem();
-
-  /**
-   * Returns a new object of class '<em>Thing</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Thing</em>'.
-   * @generated
-   */
-  Thing createThing();
+  Parent createParent();
 
   /**
    * Returns the package supported by this factory.

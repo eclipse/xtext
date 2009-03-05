@@ -9,8 +9,8 @@ package org.eclipse.xtext.parser.packrat;
 
 import java.util.LinkedList;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
@@ -83,7 +83,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		LeafNode result = ParsetreeFactory.eINSTANCE.createLeafNode();
 		enhanceNode(parsedToken, result);
 		result.setText(parsedToken.getText(input).toString());
-		((BasicEList<AbstractNode>)currentNode.getChildren()).addUnique(result);
+		((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(result);
 		return result;
 	}
 
@@ -143,7 +143,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		CompositeNode node = createCompositeNode(token);
 		node.setGrammarElement(token.getGrammarElement());
 		if (currentNode != null)
-			((BasicEList<AbstractNode>)currentNode.getChildren()).addUnique(node);
+			((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(node);
 		currentNode = node;
 	}
 
@@ -343,9 +343,10 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
         currentNode = prevCurrentNode.getParent();
         CompositeNode newCurrentNode = createCompositeNode(token);
         prevCurrentNode.setParent(newCurrentNode);
-        ((BasicEList<AbstractNode>)currentNode.getChildren()).addUnique(newCurrentNode);
-        newCurrentNode.setGrammarElement(token.getGrammarElement());
-        associateNodeWithAstElement(newCurrentNode, newCurrent);
+        if (currentNode != null)
+        	((InternalEList<AbstractNode>)currentNode.getChildren()).addUnique(newCurrentNode);
+	    newCurrentNode.setGrammarElement(token.getGrammarElement());
+	    associateNodeWithAstElement(newCurrentNode, newCurrent);
         currentNode = newCurrentNode;
 	}
 

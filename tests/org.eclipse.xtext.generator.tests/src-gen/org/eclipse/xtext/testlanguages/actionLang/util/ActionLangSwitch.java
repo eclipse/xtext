@@ -102,26 +102,19 @@ public class ActionLangSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ActionLangPackage.TYPE:
+      case ActionLangPackage.CHILD:
       {
-        Type type = (Type)theEObject;
-        T result = caseType(type);
+        Child child = (Child)theEObject;
+        T result = caseChild(child);
+        if (result == null) result = caseModel(child);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ActionLangPackage.ITEM:
+      case ActionLangPackage.PARENT:
       {
-        Item item = (Item)theEObject;
-        T result = caseItem(item);
-        if (result == null) result = caseType(item);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ActionLangPackage.THING:
-      {
-        Thing thing = (Thing)theEObject;
-        T result = caseThing(thing);
-        if (result == null) result = caseType(thing);
+        Parent parent = (Parent)theEObject;
+        T result = caseParent(parent);
+        if (result == null) result = caseModel(parent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -146,49 +139,33 @@ public class ActionLangSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Child</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Child</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseType(Type object)
+  public T caseChild(Child object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Item</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Parent</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Item</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Parent</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseItem(Item object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Thing</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Thing</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseThing(Thing object)
+  public T caseParent(Parent object)
   {
     return null;
   }

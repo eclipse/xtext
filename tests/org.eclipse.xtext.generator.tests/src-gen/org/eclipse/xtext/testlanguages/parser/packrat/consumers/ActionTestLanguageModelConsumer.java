@@ -6,7 +6,9 @@ package org.eclipse.xtext.testlanguages.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
@@ -21,21 +23,30 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 
 	private ModelElements rule;	
 
-	private INonTerminalConsumer elementConsumer;
+	private INonTerminalConsumer childConsumer;
 
-	private IElementConsumer assignment$1$Consumer;
+	private IElementConsumer group$1$Consumer;
 
 	private IElementConsumer ruleCall$2$Consumer;
 
-	protected class Assignment$1$Consumer extends LoopAssignmentConsumer {
+	private IElementConsumer group$3$Consumer;
+
+	private IElementConsumer action$4$Consumer;
+
+	private IElementConsumer assignment$6$Consumer;
+
+	private IElementConsumer ruleCall$7$Consumer;
+
+	protected class Group$1$Consumer extends GroupConsumer {
 		
-		protected Assignment$1$Consumer(final Assignment assignment) {
-			super(assignment);
+		protected Group$1$Consumer(final Group group) {
+			super(group);
 		}
 		
 		@Override
-		protected IElementConsumer getConsumer() {
-			return ruleCall$2$Consumer;
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(ruleCall$2$Consumer);
+			acceptor.accept(group$3$Consumer);
 		}
 	}
 
@@ -47,7 +58,57 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(elementConsumer, "children", true, false, false, getElement(), optional);
+			return consumeNonTerminal(childConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Group$3$Consumer extends OptionalGroupConsumer {
+		
+		protected Group$3$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(action$4$Consumer);
+			acceptor.accept(assignment$6$Consumer);
+		}
+	}
+
+	protected class Action$4$Consumer extends ElementConsumer<Action> {
+		
+		protected Action$4$Consumer(final Action action) {
+			super(action);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			consumeAction(getElement(), false);
+			return SUCCESS;
+		}
+	}
+
+	protected class Assignment$6$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$6$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$7$Consumer;
+		}
+	}
+
+	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(childConsumer, "right", false, false, false, getElement(), optional);
 		}
 	}
 
@@ -57,7 +118,7 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 	
 	@Override
 	protected int doConsume() throws Exception {
-		return assignment$1$Consumer.consume();
+		return group$1$Consumer.consume();
 	}
 
 	public ModelElements getRule() {
@@ -67,8 +128,12 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentChildren());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallElement());
+		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallChild());
+		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
+		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionParentleft());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentRight());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallChild());
 	}
 	
 	@Override
@@ -81,8 +146,8 @@ public final class ActionTestLanguageModelConsumer extends NonTerminalConsumer {
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setElementConsumer(INonTerminalConsumer elementConsumer) {
-		this.elementConsumer = elementConsumer;
+	public void setChildConsumer(INonTerminalConsumer childConsumer) {
+		this.childConsumer = childConsumer;
 	}
 	
 }

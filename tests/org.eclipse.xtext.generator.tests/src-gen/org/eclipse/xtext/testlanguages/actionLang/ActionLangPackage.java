@@ -70,88 +70,23 @@ public interface ActionLangPackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Children</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__CHILDREN = 0;
-
-  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 1;
+  int MODEL_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.TypeImpl <em>Type</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ChildImpl <em>Child</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.testlanguages.actionLang.impl.TypeImpl
-   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getType()
+   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ChildImpl
+   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getChild()
    * @generated
    */
-  int TYPE = 1;
-
-  /**
-   * The number of structural features of the '<em>Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ItemImpl <em>Item</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ItemImpl
-   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getItem()
-   * @generated
-   */
-  int ITEM = 2;
-
-  /**
-   * The feature id for the '<em><b>Items</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ITEM__ITEMS = TYPE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Item</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ITEM_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ThingImpl <em>Thing</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ThingImpl
-   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getThing()
-   * @generated
-   */
-  int THING = 3;
-
-  /**
-   * The feature id for the '<em><b>Content</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int THING__CONTENT = TYPE_FEATURE_COUNT + 0;
+  int CHILD = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -160,16 +95,53 @@ public interface ActionLangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THING__NAME = TYPE_FEATURE_COUNT + 1;
+  int CHILD__NAME = MODEL_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Thing</em>' class.
+   * The number of structural features of the '<em>Child</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int THING_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+  int CHILD_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ParentImpl <em>Parent</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ParentImpl
+   * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getParent()
+   * @generated
+   */
+  int PARENT = 2;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT__LEFT = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT__RIGHT = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Parent</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
 
 
   /**
@@ -183,78 +155,57 @@ public interface ActionLangPackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.testlanguages.actionLang.Model#getChildren <em>Children</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.actionLang.Child <em>Child</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Children</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Model#getChildren()
-   * @see #getModel()
+   * @return the meta object for class '<em>Child</em>'.
+   * @see org.eclipse.xtext.testlanguages.actionLang.Child
    * @generated
    */
-  EReference getModel_Children();
+  EClass getChild();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.actionLang.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Type
-   * @generated
-   */
-  EClass getType();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.actionLang.Item <em>Item</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Item</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Item
-   * @generated
-   */
-  EClass getItem();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.testlanguages.actionLang.Item#getItems <em>Items</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Items</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Item#getItems()
-   * @see #getItem()
-   * @generated
-   */
-  EReference getItem_Items();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.actionLang.Thing <em>Thing</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Thing</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Thing
-   * @generated
-   */
-  EClass getThing();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.testlanguages.actionLang.Thing#getContent <em>Content</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Content</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Thing#getContent()
-   * @see #getThing()
-   * @generated
-   */
-  EReference getThing_Content();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.actionLang.Thing#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.testlanguages.actionLang.Child#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.testlanguages.actionLang.Thing#getName()
-   * @see #getThing()
+   * @see org.eclipse.xtext.testlanguages.actionLang.Child#getName()
+   * @see #getChild()
    * @generated
    */
-  EAttribute getThing_Name();
+  EAttribute getChild_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.testlanguages.actionLang.Parent <em>Parent</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parent</em>'.
+   * @see org.eclipse.xtext.testlanguages.actionLang.Parent
+   * @generated
+   */
+  EClass getParent();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.testlanguages.actionLang.Parent#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.eclipse.xtext.testlanguages.actionLang.Parent#getLeft()
+   * @see #getParent()
+   * @generated
+   */
+  EReference getParent_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.testlanguages.actionLang.Parent#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.eclipse.xtext.testlanguages.actionLang.Parent#getRight()
+   * @see #getParent()
+   * @generated
+   */
+  EReference getParent_Right();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -290,58 +241,14 @@ public interface ActionLangPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ChildImpl <em>Child</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ChildImpl
+     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getChild()
      * @generated
      */
-    EReference MODEL__CHILDREN = eINSTANCE.getModel_Children();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.TypeImpl <em>Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.testlanguages.actionLang.impl.TypeImpl
-     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getType()
-     * @generated
-     */
-    EClass TYPE = eINSTANCE.getType();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ItemImpl <em>Item</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ItemImpl
-     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getItem()
-     * @generated
-     */
-    EClass ITEM = eINSTANCE.getItem();
-
-    /**
-     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ITEM__ITEMS = eINSTANCE.getItem_Items();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ThingImpl <em>Thing</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ThingImpl
-     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getThing()
-     * @generated
-     */
-    EClass THING = eINSTANCE.getThing();
-
-    /**
-     * The meta object literal for the '<em><b>Content</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference THING__CONTENT = eINSTANCE.getThing_Content();
+    EClass CHILD = eINSTANCE.getChild();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -349,7 +256,33 @@ public interface ActionLangPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute THING__NAME = eINSTANCE.getThing_Name();
+    EAttribute CHILD__NAME = eINSTANCE.getChild_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.testlanguages.actionLang.impl.ParentImpl <em>Parent</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ParentImpl
+     * @see org.eclipse.xtext.testlanguages.actionLang.impl.ActionLangPackageImpl#getParent()
+     * @generated
+     */
+    EClass PARENT = eINSTANCE.getParent();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARENT__LEFT = eINSTANCE.getParent_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARENT__RIGHT = eINSTANCE.getParent_Right();
 
   }
 
