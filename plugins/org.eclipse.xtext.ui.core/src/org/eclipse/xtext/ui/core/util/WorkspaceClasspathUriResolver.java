@@ -18,7 +18,7 @@ import org.eclipse.xtext.resource.ClasspathUriUtil;
 
 /**
  * TODO: implement JDT independent strategy, maybe ignoring JARs
- * 
+ *
  * @author Jan Köhnlein
  */
 public class WorkspaceClasspathUriResolver extends JdtClasspathUriResolver {
@@ -33,7 +33,10 @@ public class WorkspaceClasspathUriResolver extends JdtClasspathUriResolver {
             if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
                 IProject project = resource.getProject();
                 IJavaProject javaProject = JavaCore.create(project);
-                return findResourceInWorkspace(javaProject, classpathUri);
+                URI result = findResourceInWorkspace(javaProject, classpathUri);
+ 				if (classpathUri.fragment() != null)
+ 					result = result.appendFragment(classpathUri.fragment());
+ 				return result;
             }
         } catch (Exception exc) {
             throw new ClasspathUriResolutionException(exc);

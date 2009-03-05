@@ -20,6 +20,13 @@ public class BundleClasspathUriResolverTest extends AbstractClasspathUriResolver
 		assertResourceLoadable(classpathUri, normalizedUri, null);
 	}
 
+	public void testClasspathUriForFileInPluginWithFragment() {
+		URI classpathUri = URI.createURI("classpath:/org/eclipse/xtext/ui/core/util/simple.ecore#/");
+		URI normalizedUri = _resolver.resolve(Platform.getBundle(XtextUIIntegrationTestsPlugin.PLUGIN_ID), classpathUri);
+		assertEquals("/", normalizedUri.fragment());
+		assertResourceLoadable(classpathUri, normalizedUri, null);
+	}
+
 	public void testPluginClasspathUriForJarredFile() {
 		// doesn't work
 	}
@@ -27,6 +34,13 @@ public class BundleClasspathUriResolverTest extends AbstractClasspathUriResolver
 	public void testClasspathUriForEcore() {
 		URI classpathUri = URI.createURI("classpath:/model/Ecore.ecore");
 		URI normalizedUri = _resolver.resolve(Platform.getBundle("org.eclipse.emf.ecore"), classpathUri);
+		assertResourceLoadable(classpathUri, normalizedUri, null);
+	}
+
+	public void testClasspathUriForEcoreWithFragment() {
+		URI classpathUri = URI.createURI("classpath:/model/Ecore.ecore#/");
+		URI normalizedUri = _resolver.resolve(Platform.getBundle("org.eclipse.emf.ecore"), classpathUri);
+		assertEquals("/", normalizedUri.fragment());
 		assertResourceLoadable(classpathUri, normalizedUri, null);
 	}
 

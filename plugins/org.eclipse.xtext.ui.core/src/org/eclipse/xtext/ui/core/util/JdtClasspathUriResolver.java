@@ -42,7 +42,10 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 		try {
 			if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
 				IJavaProject javaProject = javaElement.getJavaProject();
-				return findResourceInWorkspace(javaProject, classpathUri);
+				URI result = findResourceInWorkspace(javaProject, classpathUri);
+				if (classpathUri.fragment() != null)
+					result = result.appendFragment(classpathUri.fragment());
+				return result;
 			}
 		}
 		catch (Exception exc) {

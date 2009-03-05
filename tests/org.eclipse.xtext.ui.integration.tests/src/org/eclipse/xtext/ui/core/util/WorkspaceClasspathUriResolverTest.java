@@ -27,6 +27,17 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 
+	public void testClasspathUriForFileInWorkspaceWithFragment() throws Exception {
+		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
+		_project = _javaProject.getProject();
+		PluginUtil.copyFileToWorkspace(XtextUIIntegrationTestsPlugin.getDefault(), "/testfiles/" + MODEL_FILE, _project, "src/"
+				+ MODEL_FILE);
+		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE + "#/");
+		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/src/" + MODEL_FILE + "#/";
+		URI normalizedUri = _resolver.resolve(_project, classpathUri);
+		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
+	}
+
 	public void testClasspathUriForFileInJarInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
@@ -35,6 +46,18 @@ public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResol
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE);
 		String expectedUri = "jar:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE;
+		URI normalizedUri = _resolver.resolve(_project, classpathUri);
+		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
+	}
+
+	public void testClasspathUriForFileInJarInWorkspaceWithFragment() throws Exception {
+		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
+		_project = _javaProject.getProject();
+		IFile jarFile = PluginUtil.copyFileToWorkspace(XtextUIIntegrationTestsPlugin.getDefault(), "/testfiles/" + JAR_FILE, _project, "/"
+				+ JAR_FILE);
+		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
+		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
+		String expectedUri = "jar:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE + "#/";
 		URI normalizedUri = _resolver.resolve(_project, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}

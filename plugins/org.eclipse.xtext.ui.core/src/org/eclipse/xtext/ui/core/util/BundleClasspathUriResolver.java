@@ -32,7 +32,10 @@ public class BundleClasspathUriResolver implements IClasspathUriResolver {
         Bundle bundle = (Bundle) context;
         try {
             if (ClasspathUriUtil.isClasspathUri(classpathUri)) {
-                return findResourceInBundle(bundle, classpathUri);
+                URI result = findResourceInBundle(bundle, classpathUri);
+ 				if (classpathUri.fragment() != null)
+ 					result = result.appendFragment(classpathUri.fragment());
+ 				return result;
             }
         } catch (Exception exc) {
             throw new ClasspathUriResolutionException(exc);
