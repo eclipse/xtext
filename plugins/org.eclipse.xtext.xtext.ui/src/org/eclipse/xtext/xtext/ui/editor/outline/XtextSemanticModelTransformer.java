@@ -13,12 +13,19 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.NegatedToken;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UntilToken;
+import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -35,6 +42,8 @@ import com.google.inject.Inject;
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextSemanticModelTransformer extends DefaultSemanticModelTransformer {
+
+	private static final String UNKNOWN = "<unknown>";
 
 	@Inject
 	public XtextSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
@@ -74,7 +83,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				}
 
 				@Override
-				public Boolean caseParserRule(org.eclipse.xtext.ParserRule object) {
+				public Boolean caseAbstractRule(org.eclipse.xtext.AbstractRule object) {
 					if (isFilterActive(ParserRulesOutlineFilter.class)) {
 						return false;
 					}
@@ -83,12 +92,23 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 				@Override
 				public Boolean caseAssignment(org.eclipse.xtext.Assignment object) {
-					return false;
+					return object.getTerminal() instanceof Alternatives || object.getTerminal() instanceof CrossReference &&
+						caseCrossReference((CrossReference) object.getTerminal());
+				}
+
+				@Override
+				public Boolean caseCrossReference(CrossReference object) {
+					return object.getTerminal() instanceof Alternatives;
 				}
 
 				@Override
 				public Boolean caseAlternatives(org.eclipse.xtext.Alternatives object) {
 					return true;
+				}
+
+				@Override
+				public Boolean caseCharacterRange(CharacterRange object) {
+					return false;
 				}
 
 				@Override
@@ -98,6 +118,32 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 			}.doSwitch(semanticNode);
 		}
 		return true;
+	}
+
+	@Override
+	protected List<EObject> getChildren(EObject semanticNode) {
+		return new XtextSwitch<List<EObject>>() {
+
+			@Override
+			public List<EObject> caseAssignment(Assignment object) {
+				if (object.getTerminal() instanceof Alternatives || object.getTerminal() instanceof CrossReference)
+					return getChildren(object.getTerminal());
+				return super.caseAssignment(object);
+			}
+
+			@Override
+			public List<EObject> caseCrossReference(CrossReference object) {
+				if (object.getTerminal() instanceof Alternatives)
+					return getChildren(object.getTerminal());
+				return super.caseCrossReference(object);
+			}
+
+			@Override
+			public List<EObject> defaultCase(EObject object) {
+				return object.eContents();
+			}
+		}.doSwitch(semanticNode);
+
 	}
 
 	@Override
@@ -141,23 +187,73 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					}
 					else if (terminal instanceof Keyword) {
 						Keyword keyword = (Keyword) terminal;
-						String value = keyword.getValue();
+						String value = "'" + keyword.getValue() + "'";
 						label.append(value);
 					}
 					else if (terminal instanceof CrossReference) {
 						CrossReference crossReference = (CrossReference) terminal;
-						TypeRef type = crossReference.getType();
-						String typeName = "<unknown>";
-						if (type != null && type.getClassifier() != null) {
-							typeName = type.getClassifier().getName();
-						}
-						label.append("[").append(typeName).append("]");
+						label.append(getLabel(crossReference));
+					} else {
+						label.append("(..)");
 					}
 
 					String cardinality = object.getCardinality();
 					label.append(cardinality != null ? cardinality : "");
 					outlineNode.setLabel(label.toString());
 					return outlineNode;
+				}
+
+				private String getLabel(RuleCall ruleCall) {
+					if (ruleCall.getRule() != null) {
+						return ruleCall.getRule().getName();
+					}
+					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ruleCall);
+					String ruleName = UNKNOWN;
+					if (nodeAdapter != null) {
+						List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
+						for (LeafNode leaf : leafs) {
+							if (!leaf.isHidden()) {
+								ruleName = leaf.getText();
+								break;
+							}
+						}
+					}
+					return ruleName;
+				}
+
+				private String getLabel(CrossReference ref) {
+					TypeRef type = ref.getType();
+					String typeName = getClassifierName(type);
+					if (ref.getTerminal() instanceof RuleCall)
+						return "[" + typeName + "|" + getLabel((RuleCall) ref.getTerminal()) + "]";
+					return "[" + typeName + "|..]";
+				}
+
+				@Override
+				public ContentOutlineNode caseCrossReference(CrossReference object) {
+					outlineNode.setLabel(getLabel(object));
+					return outlineNode;
+				}
+
+				private String getClassifierName(TypeRef ref) {
+					String classifierName = UNKNOWN;
+					if (ref != null) {
+						if (ref.getClassifier() != null)
+							classifierName = ref.getClassifier().getName();
+						else {
+							NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ref);
+							if (nodeAdapter != null) {
+								List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
+								for (int i = leafs.size() - 1; i >= 0 ; i--) {
+									if (!leafs.get(i).isHidden()) {
+										classifierName = leafs.get(i).getText();
+										break;
+									}
+								}
+							}
+						}
+					}
+					return classifierName;
 				}
 
 				@Override
@@ -169,23 +265,7 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 				@Override
 				public ContentOutlineNode caseRuleCall(RuleCall ruleCall) {
-					if (ruleCall.getRule() != null) {
-						outlineNode.setLabel(ruleCall.getRule().getName());
-					}
-					else {
-						NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ruleCall);
-						String ruleName = "???";
-						if (nodeAdapter != null) {
-							List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
-							for (LeafNode leaf : leafs) {
-								if (!leaf.isHidden()) {
-									ruleName = leaf.getText();
-									break;
-								}
-							}
-						}
-						outlineNode.setLabel("unresolved call " + ruleName);
-					}
+					outlineNode.setLabel(getLabel(ruleCall));
 					// TODO show another icon, if unresolved
 					// TODO how to show text in another color?
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/rule.gif"));
@@ -195,6 +275,38 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseAlternatives(org.eclipse.xtext.Alternatives object) {
 					outlineNode.setLabel("|");
+					return outlineNode;
+				}
+
+				@Override
+				public ContentOutlineNode caseAction(Action object) {
+					String classifierName = getClassifierName(object.getType());
+					outlineNode.setLabel("{" + classifierName +
+							(object.getFeature() != null ? ("." + object.getFeature()) : "") + "}");
+					return outlineNode;
+				}
+
+				@Override
+				public ContentOutlineNode caseCharacterRange(CharacterRange object) {
+					outlineNode.setLabel(object.getLeft().getValue() + " .. " + object.getRight().getValue());
+					return outlineNode;
+				}
+
+				@Override
+				public ContentOutlineNode caseNegatedToken(NegatedToken object) {
+					outlineNode.setLabel("!");
+					return outlineNode;
+				}
+
+				@Override
+				public ContentOutlineNode caseUntilToken(UntilToken object) {
+					outlineNode.setLabel("->");
+					return outlineNode;
+				}
+
+				@Override
+				public ContentOutlineNode caseWildcard(Wildcard object) {
+					outlineNode.setLabel("*");
 					return outlineNode;
 				}
 
