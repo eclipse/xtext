@@ -29,13 +29,13 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -50,18 +50,18 @@ import com.google.inject.Inject;
  * Represents an implementation of interface {@link IHyperlinkDetector} to find
  * and convert {@link CrossReference elements}, at a given location, to
  * <code>IHyperlink</code>.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
  * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector
  * @see org.eclipse.jface.text.hyperlink.IHyperlink
  */
 public class DefaultHyperlinkDetector extends org.eclipse.core.commands.AbstractHandler implements IHyperlinkDetector {
 
-	private ILinkingService linkingService;
-	private ILocationInFileProvider locationProvider;
-	private ILabelProvider labelProvider;
-	
-	
+	private final ILinkingService linkingService;
+	private final ILocationInFileProvider locationProvider;
+	private final ILabelProvider labelProvider;
+
+
 	@Inject
 	public DefaultHyperlinkDetector(ILinkingService linkingService, ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
 		super();
@@ -72,7 +72,7 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
@@ -92,8 +92,9 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 				for (EObject crossReffed : crossLinkedEObjects) {
 					final String label = labelProvider.getText(crossReffed);
 					final URI uri = EcoreUtil.getURI(crossReffed);
+					final URI normalized = crossReffed.eResource().getResourceSet().getURIConverter().normalize(uri);
 					links.add(new IHyperlink() {
-							 
+
 							public IRegion getHyperlinkRegion() {
 								return location;
 							}
@@ -104,9 +105,9 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 								return null;
 							}
 							public void open() {
-								new OpenDeclarationAction(uri, locationProvider).run();
+								new OpenDeclarationAction(normalized, locationProvider).run();
 							}
-							
+
 						});
 				}
 				return links.toArray(new IHyperlink[links.size()]);
@@ -132,17 +133,21 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 		});
 		return this;
 	}
-	
+
 	protected List<EObject> findCrossLinkedEObject(AbstractNode node) {
-		if (node instanceof LeafNode && node.getGrammarElement() instanceof CrossReference) {
-			EObject semanticModel = NodeUtil.getNearestSemanticObject(node);
-			EReference eReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
-					semanticModel.eClass());
-			try {
-				return linkingService.getLinkedObjects(semanticModel, eReference, node);
-			} catch (IllegalNodeException ex) {
-				return Collections.emptyList();
+		AbstractNode nodeToCheck = node;
+		while(nodeToCheck != null && !(nodeToCheck.getGrammarElement() instanceof Assignment)) {
+			if (nodeToCheck.getGrammarElement() instanceof CrossReference) {
+				EObject semanticModel = NodeUtil.getNearestSemanticObject(nodeToCheck);
+				EReference eReference = GrammarUtil.getReference((CrossReference) nodeToCheck.getGrammarElement(),
+						semanticModel.eClass());
+				try {
+					return linkingService.getLinkedObjects(semanticModel, eReference, nodeToCheck);
+				} catch (IllegalNodeException ex) {
+					return Collections.emptyList();
+				}
 			}
+			nodeToCheck = nodeToCheck.getParent();
 		}
 		return Collections.emptyList();
 	}
