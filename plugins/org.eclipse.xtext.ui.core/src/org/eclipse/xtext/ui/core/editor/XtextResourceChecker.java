@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,12 +16,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -39,12 +48,70 @@ public class XtextResourceChecker {
 	}
 
 	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 * 
+	 */
+	public static final class AddMarkersOperation extends WorkspaceModifyOperation {
+		/**
+		 * 
+		 */
+		private final List<Map<String, Object>> issues;
+		private IFile file;
+		private String markerId;
+		private boolean deleteMarkers;
+
+		/**
+		 * @param rule
+		 * @param issues
+		 */
+		public AddMarkersOperation(ISchedulingRule rule, List<Map<String, Object>> issues, IFile file, String markerId,
+				boolean deleteMarkers) {
+			super(rule);
+			this.issues = issues;
+			this.file = file;
+			this.markerId = markerId;
+			this.deleteMarkers = deleteMarkers;
+		}
+
+		@Override
+		protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+				InterruptedException {
+			if (deleteMarkers)
+				file.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
+			if (!issues.isEmpty()) {
+				// update
+				for (Map<String, Object> map : issues) {
+					IMarker marker = file.createMarker(markerId);
+					Object lNr = map.get(IMarker.LINE_NUMBER);
+					String lineNR = "";
+					if (lNr != null) {
+						lineNR = "line: " + lNr + " ";
+					}
+					map.put(IMarker.LOCATION, lineNR + file.getFullPath().toString());
+					marker.setAttributes(map);
+				}
+			}
+		}
+	}
+
+	public static void addMarkers(final IFile file, final List<Map<String, Object>> issues, boolean deleteOldMarkers, IProgressMonitor monitor) {
+		try {
+			new AddMarkersOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(file), issues, file, EValidator.MARKER, deleteOldMarkers)
+					.run(monitor);
+		} catch (InvocationTargetException e) {
+			log.error("Could not create marker.", e);
+		} catch (InterruptedException e) {
+			log.error("Could not create marker.", e);
+		}
+	}
+
+	/**
 	 * Checks an {@link XtextResource}
 	 * 
 	 * @param resource
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
-	public static List<Map<String, Object>> check(final Resource resource) {
+	public static List<Map<String, Object>> check(final Resource resource, Map<?, ?> context) {
 		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>();
 		try {
 			// Syntactical errors
@@ -56,22 +123,9 @@ public class XtextResourceChecker {
 			boolean syntaxDiagFail = !markers.isEmpty();
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
-			// Semantic Errors
-			// EValidator
-			if (resource.getAllContents().hasNext()) {
-				EObject rootObject = resource.getAllContents().next();
-				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
-				// diagnostic != null should not happen, but in exception
-				// state NPE can occur and and reconciler thread will die,
-				// so prevent this
-				if (diagnostic != null) {
-					// The root Diagnostician is a BasicDiagnostic that
-					// normally act as a chain start and has any kind of
-					// impotent information if Severity is OK, so just
-					// ignore it
-					// boolean semanticDiagFail = diagnostic.getSeverity() !=
-					// Diagnostic.OK;
-					// if (semanticDiagFail) {
+			for (EObject ele : resource.getContents()) {
+				try {
+					Diagnostic diagnostic = Diagnostician.INSTANCE.validate(ele, context);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 							markers.add(markerFromEValidatorDiagnostic(childDiagnostic));
@@ -83,11 +137,11 @@ public class XtextResourceChecker {
 						if (markers.size() > MAX_ERRORS)
 							return markers;
 					}
-					// }
-					// logCheckStatus(resource, semanticDiagFail, "Semantic");
+				} catch (RuntimeException e) {
+					log.error(e.getMessage(), e);
 				}
 			}
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			log.error(e.getMessage(), e);
 		}
 		return markers;

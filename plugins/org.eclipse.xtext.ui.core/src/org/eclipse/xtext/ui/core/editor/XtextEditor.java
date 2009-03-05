@@ -8,9 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
@@ -26,11 +35,15 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.internal.Activator;
+import org.eclipse.xtext.validator.CheckMode;
+import org.eclipse.xtext.validator.CheckType;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -195,18 +208,47 @@ public class XtextEditor extends TextEditor {
 		return getSourceViewer();
 	}
 
-	// @Override
-	// protected String[] collectContextMenuPreferencePages() {
-	// String[] ids = super.collectContextMenuPreferencePages();
-	// String[] more = new String[ids.length + 4];
-	// // NOTE: preference page at index 0 will be opened, see
-	// // PreferencesUtil.createPreferenceDialogOn
-	// String languageId = languageDescriptor.getId();
-	//		more[0] = languageId + ".editor"; //$NON-NLS-1$
-	// more[1] = languageId;
-	//		more[2] = languageId + ".editor.templates"; //$NON-NLS-1$
-	//		more[3] = languageId + ".editor.syntaxcoloring"; //$NON-NLS-1$
-	// System.arraycopy(ids, 0, more, 4, ids.length);
-	// return more;
-	// }
+	@Override
+	protected void performSaveAs(IProgressMonitor progressMonitor) {
+		super.performSaveAs(progressMonitor);
+		doExpensiveValidation();
+	}
+
+	@Override
+	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
+		super.performSave(overwrite, progressMonitor);
+		doExpensiveValidation();
+	}
+
+	@Override
+	protected void performRevert() {
+		super.performRevert();
+		doExpensiveValidation();
+	}
+
+	/**
+	 * 
+	 */
+	private void doExpensiveValidation() {
+		longRunningChecks.schedule();
+	}
+
+	private final Job longRunningChecks = new Job("expensive validation") {
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			if (getResource() instanceof IFile) {
+				final List<Map<String, Object>> issues = getDocument().readOnly(
+						new UnitOfWork<List<Map<String, Object>>>() {
+							public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
+								return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY,CheckType.EXPENSIVE));
+							}
+						});
+				XtextResourceChecker.addMarkers((IFile) getResource(), issues, false, monitor);
+			}
+
+			return Status.OK_STATUS;
+		}
+
+	};
 }
