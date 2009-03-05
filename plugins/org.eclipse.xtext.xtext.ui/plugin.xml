@@ -81,7 +81,6 @@
             project="true">
       </wizard>
    </extension>
-   
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
@@ -94,5 +93,4 @@
 			</activeWhen>
 		</handler>
 	</extension>
-   
 </plugin>
