@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -59,7 +60,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	}
 
 	private EObject[] sortChildren(EObject semanticNode) {
-		EObject[] result = semanticNode.eContents().toArray(new EObject[semanticNode.eContents().size()]);
+		EObject[] result = getChildren(semanticNode).toArray(new EObject[semanticNode.eContents().size()]);
 		if (sorted) {
 			Arrays.sort(result, new Comparator<EObject>() {
 				public int compare(EObject arg0, EObject arg1) {
@@ -70,6 +71,10 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			});
 		}
 		return result;
+	}
+
+	protected List<EObject> getChildren(EObject semanticNode) {
+		return semanticNode.eContents();
 	}
 
 	public void setSorted(boolean on) {
@@ -88,7 +93,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			filters.remove(filterSpec.getClass());
 		}
 	}
-	
+
 	public boolean isFilterActive(IOutlineFilter filterSpec) {
 		if (filters != null) {
 			return filters.containsKey(filterSpec.getClass());
@@ -97,7 +102,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			return false;
 		}
 	}
-	
+
 	public boolean isFilterActive(Class clazz) {
 		if (filters != null) {
 			return filters.containsKey(clazz);
@@ -106,7 +111,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			return false;
 		}
 	}
-	
+
 	protected abstract boolean doSortChildren(EObject semanticNode);
 
 	protected abstract ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode);

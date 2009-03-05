@@ -38,12 +38,12 @@ import com.google.inject.Inject;
 public class LazyTransformingTreeProvider extends LabelProvider implements ILazyTreeProvider, ISortableContentProvider, IFilterableContentProvider {
 
 	final static Logger logger = Logger.getLogger(LazyTransformingTreeProvider.class);
-	
-	private LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
+
+	private final LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
 
 	private TreeViewer viewer;
 	private ContentOutlineNode outlineModel;
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -60,7 +60,11 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			outlineModel = document.readOnly(new UnitOfWork<ContentOutlineNode>() {
 				public ContentOutlineNode exec(XtextResource resource) throws Exception {
 					EObject semanticModelRoot = resource.getParseResult().getRootASTElement();
-					return transformSemanticModelToOutlineModel(semanticModelRoot);
+					if (semanticModelRoot != null)
+						return transformSemanticModelToOutlineModel(semanticModelRoot);
+					ContentOutlineNode errorNode = new ContentOutlineNode();
+					errorNode.setLabel("Error: No model available.");
+					return errorNode;
 				}
 			});
 		}
@@ -133,7 +137,7 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 		}
 		return super.getImage(element);
 	}
-	
+
 	public void setSorted(boolean on) {
 		semanticModelTransformer.setSorted(on);
 	}

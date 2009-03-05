@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -27,7 +28,7 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- * 
+ *
  */
 public class PartialParsingPointers {
 
@@ -36,8 +37,8 @@ public class PartialParsingPointers {
 	private CompositeNode rootNode;
 	private int length;
 	private int offset;
-	private List<CompositeNode> validReplaceRootNodes;
-	private List<CompositeNode> nodesEnclosingChangeRegion;
+	private final List<CompositeNode> validReplaceRootNodes;
+	private final List<CompositeNode> nodesEnclosingChangeRegion;
 
 	public PartialParsingPointers(CompositeNode rootNode, int offset, int length,
 			List<CompositeNode> validReplaceRootNodes, List<CompositeNode> nodesEnclosingRegion) {
@@ -68,6 +69,9 @@ public class PartialParsingPointers {
 
 	public String findEntryRuleName(CompositeNode replaceRootNode) {
 		EObject grammarElement = replaceRootNode.getGrammarElement();
+		if (grammarElement instanceof CrossReference) {
+			grammarElement = ((CrossReference) grammarElement).getTerminal();
+		}
 		if (GrammarUtil.isParserRuleCall(grammarElement)) {
 			return ((RuleCall) grammarElement).getRule().getName();
 		}
@@ -85,7 +89,8 @@ public class PartialParsingPointers {
 		}
 		else
 			throw new IllegalArgumentException(
-					"Entry rule can only be resolved for parser rules, rule calls or actions");
+					"Entry rule can only be resolved for parser rules, rule calls, cross-references or actions, but tried to resolve for: "
+					+ replaceRootNode.getGrammarElement().eClass().getName());
 	}
 
 	public EObject findASTReplaceElement() {
@@ -195,11 +200,11 @@ public class PartialParsingPointers {
 	public void dump() {
 		dump(getDefaultReplaceRootNode());
 	}
-		
+
 	public void dump(CompositeNode replaceRootNode) {
 		if (!logger.isDebugEnabled())
 			return;
-		
+
 		logger.debug("Parsing " + findReparseRegion(replaceRootNode));
 		logger.debug("with rule " + findEntryRuleName(replaceRootNode));
 		dumpCompositeNodeInfo("Replacing node ", replaceRootNode);
@@ -210,5 +215,5 @@ public class PartialParsingPointers {
 				+ Strings.notNull(findASTContainmentFeatureName(replaceRootNode)));
 		logger.debug("");
 	}
-	
+
 }

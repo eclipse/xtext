@@ -75,14 +75,21 @@ public class XtextLinkingService extends DefaultLinkingService {
 	private List<EObject> getUsedGrammar(Grammar grammar, AbstractNode node) {
 		try {
 			String grammarName = (String) valueConverterService.toValue("", "GrammarID", node);
-			final ResourceSet resourceSet = grammar.eResource().getResourceSet();
-			final Resource resource = resourceSet.getResource(URI.createURI(
-					ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
-			return Collections.singletonList(resource.getContents().get(0));
+			if (grammarName != null) {
+				final ResourceSet resourceSet = grammar.eResource().getResourceSet();
+				final Resource resource = resourceSet.getResource(URI.createURI(
+						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
+				final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
+				if (grammarName.equals(usedGrammar.getName()))
+					return Collections.<EObject>singletonList(usedGrammar);
+			}
+			return Collections.emptyList();
 		}
-		catch (ClasspathUriResolutionException ex) {
+		catch (ClasspathUriResolutionException e) {
+			log.debug("Cannot load used grammar." , e);
 			return Collections.emptyList();
 		} catch (ValueConverterException e) {
+			log.debug("Cannot load used grammar." , e);
 			return Collections.emptyList();
 		}
 	}
