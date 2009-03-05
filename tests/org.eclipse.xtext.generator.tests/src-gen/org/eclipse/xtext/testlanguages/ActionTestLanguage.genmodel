@@ -4,26 +4,20 @@
     <ecorePackage href="ActionTestLanguage.ecore#/"/>
     <genClasses>
       <ecoreClass href="ActionTestLanguage.ecore#//Model"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ActionTestLanguage.ecore#//Model/children"/>
-      </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="ActionTestLanguage.ecore#//Type"/>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="ActionTestLanguage.ecore#//Item"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ActionTestLanguage.ecore#//Item/items"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="ActionTestLanguage.ecore#//Thing"/>
-      <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="ActionTestLanguage.ecore#//Thing/content"/>
-      </genFeatures>
+      <ecoreClass href="ActionTestLanguage.ecore#//Child"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="ActionTestLanguage.ecore#//Thing/name"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="ActionTestLanguage.ecore#//Child/name"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="ActionTestLanguage.ecore#//Parent"/>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ActionTestLanguage.ecore#//Parent/left"/>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="ActionTestLanguage.ecore#//Parent/right"/>
       </genFeatures>
     </genClasses>
   </genPackages>

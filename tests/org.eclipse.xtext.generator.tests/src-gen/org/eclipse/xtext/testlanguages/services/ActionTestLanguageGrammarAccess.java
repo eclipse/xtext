@@ -19,27 +19,12 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Assignment cAssignmentChildren = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallElement = (RuleCall)cAssignmentChildren.eContents().get(0);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public Assignment eleAssignmentChildren() { return cAssignmentChildren; }
-
-		// not supported
-		public RuleCall ele0ParserRuleCallElement() { return c0ParserRuleCallElement; }
-	}
-
-	public class ElementElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallItem = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall c0ParserRuleCallChild = (RuleCall)cGroup.eContents().get(0);
 		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Action c10ActionItemitems = (Action)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentItems = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallItem = (RuleCall)c11AssignmentItems.eContents().get(0);
+		private final Action c10ActionParentleft = (Action)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentRight = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallChild = (RuleCall)c11AssignmentRight.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -48,47 +33,38 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public RuleCall ele0ParserRuleCallItem() { return c0ParserRuleCallItem; }
+		public RuleCall ele0ParserRuleCallChild() { return c0ParserRuleCallChild; }
 
 		// not supported
 		public Group ele1Group() { return c1Group; }
 
 		// not supported
-		public Action ele10ActionItemitems() { return c10ActionItemitems; }
+		public Action ele10ActionParentleft() { return c10ActionParentleft; }
 
 		// not supported
-		public Assignment ele11AssignmentItems() { return c11AssignmentItems; }
+		public Assignment ele11AssignmentRight() { return c11AssignmentRight; }
 
 		// not supported
-		public RuleCall ele110ParserRuleCallItem() { return c110ParserRuleCallItem; }
+		public RuleCall ele110ParserRuleCallChild() { return c110ParserRuleCallChild; }
 	}
 
-	public class ItemElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Item");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action c0ActionThingcontent = (Action)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+	public class ChildElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
+		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0TerminalRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
 
 		// not supported
-		public Group eleGroup() { return cGroup; }
+		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// not supported
-		public Action ele0ActionThingcontent() { return c0ActionThingcontent; }
-
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
-
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
 	}
 	
 	private ModelElements pModel;
-	private ElementElements pElement;
-	private ItemElements pItem;
+	private ChildElements pChild;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -117,13 +93,8 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public ElementElements prElement() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
-	} 
-
-	// not supported
-	public ItemElements prItem() {
-		return (pItem != null) ? pItem : (pItem = new ItemElements());
+	public ChildElements prChild() {
+		return (pChild != null) ? pChild : (pChild = new ChildElements());
 	} 
 
 	// not supported

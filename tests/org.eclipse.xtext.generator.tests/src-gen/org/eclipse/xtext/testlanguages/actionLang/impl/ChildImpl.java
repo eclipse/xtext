@@ -5,53 +5,56 @@
  */
 package org.eclipse.xtext.testlanguages.actionLang.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage;
-import org.eclipse.xtext.testlanguages.actionLang.Item;
-import org.eclipse.xtext.testlanguages.actionLang.Type;
+import org.eclipse.xtext.testlanguages.actionLang.Child;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Item</b></em>'.
+ * An implementation of the model object '<em><b>Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.impl.ItemImpl#getItems <em>Items</em>}</li>
+ *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.impl.ChildImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ItemImpl extends TypeImpl implements Item
+public class ChildImpl extends ModelImpl implements Child
 {
   /**
-   * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getItems()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<Type> items;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ItemImpl()
+  protected ChildImpl()
   {
     super();
   }
@@ -64,7 +67,7 @@ public class ItemImpl extends TypeImpl implements Item
   @Override
   protected EClass eStaticClass()
   {
-    return ActionLangPackage.Literals.ITEM;
+    return ActionLangPackage.Literals.CHILD;
   }
 
   /**
@@ -72,13 +75,9 @@ public class ItemImpl extends TypeImpl implements Item
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Type> getItems()
+  public String getName()
   {
-    if (items == null)
-    {
-      items = new EObjectContainmentEList<Type>(Type.class, this, ActionLangPackage.ITEM__ITEMS);
-    }
-    return items;
+    return name;
   }
 
   /**
@@ -86,15 +85,12 @@ public class ItemImpl extends TypeImpl implements Item
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setName(String newName)
   {
-    switch (featureID)
-    {
-      case ActionLangPackage.ITEM__ITEMS:
-        return ((InternalEList<?>)getItems()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ActionLangPackage.CHILD__NAME, oldName, name));
   }
 
   /**
@@ -107,8 +103,8 @@ public class ItemImpl extends TypeImpl implements Item
   {
     switch (featureID)
     {
-      case ActionLangPackage.ITEM__ITEMS:
-        return getItems();
+      case ActionLangPackage.CHILD__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -118,15 +114,13 @@ public class ItemImpl extends TypeImpl implements Item
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case ActionLangPackage.ITEM__ITEMS:
-        getItems().clear();
-        getItems().addAll((Collection<? extends Type>)newValue);
+      case ActionLangPackage.CHILD__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +136,8 @@ public class ItemImpl extends TypeImpl implements Item
   {
     switch (featureID)
     {
-      case ActionLangPackage.ITEM__ITEMS:
-        getItems().clear();
+      case ActionLangPackage.CHILD__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -159,10 +153,27 @@ public class ItemImpl extends TypeImpl implements Item
   {
     switch (featureID)
     {
-      case ActionLangPackage.ITEM__ITEMS:
-        return items != null && !items.isEmpty();
+      case ActionLangPackage.CHILD__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //ItemImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //ChildImpl

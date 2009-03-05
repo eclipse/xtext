@@ -14,10 +14,9 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.testlanguages.actionLang.ActionLangFactory;
 import org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage;
-import org.eclipse.xtext.testlanguages.actionLang.Item;
+import org.eclipse.xtext.testlanguages.actionLang.Child;
 import org.eclipse.xtext.testlanguages.actionLang.Model;
-import org.eclipse.xtext.testlanguages.actionLang.Thing;
-import org.eclipse.xtext.testlanguages.actionLang.Type;
+import org.eclipse.xtext.testlanguages.actionLang.Parent;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,21 +38,14 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass typeEClass = null;
+  private EClass childEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass itemEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass thingEClass = null;
+  private EClass parentEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -140,9 +132,9 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Children()
+  public EClass getChild()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(0);
+    return childEClass;
   }
 
   /**
@@ -150,9 +142,9 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getType()
+  public EAttribute getChild_Name()
   {
-    return typeEClass;
+    return (EAttribute)childEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -160,9 +152,9 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getItem()
+  public EClass getParent()
   {
-    return itemEClass;
+    return parentEClass;
   }
 
   /**
@@ -170,9 +162,9 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getItem_Items()
+  public EReference getParent_Left()
   {
-    return (EReference)itemEClass.getEStructuralFeatures().get(0);
+    return (EReference)parentEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -180,29 +172,9 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getThing()
+  public EReference getParent_Right()
   {
-    return thingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getThing_Content()
-  {
-    return (EReference)thingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getThing_Name()
-  {
-    return (EAttribute)thingEClass.getEStructuralFeatures().get(1);
+    return (EReference)parentEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -236,16 +208,13 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__CHILDREN);
 
-    typeEClass = createEClass(TYPE);
+    childEClass = createEClass(CHILD);
+    createEAttribute(childEClass, CHILD__NAME);
 
-    itemEClass = createEClass(ITEM);
-    createEReference(itemEClass, ITEM__ITEMS);
-
-    thingEClass = createEClass(THING);
-    createEReference(thingEClass, THING__CONTENT);
-    createEAttribute(thingEClass, THING__NAME);
+    parentEClass = createEClass(PARENT);
+    createEReference(parentEClass, PARENT__LEFT);
+    createEReference(parentEClass, PARENT__RIGHT);
   }
 
   /**
@@ -277,21 +246,18 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    itemEClass.getESuperTypes().add(this.getType());
-    thingEClass.getESuperTypes().add(this.getType());
+    childEClass.getESuperTypes().add(this.getModel());
+    parentEClass.getESuperTypes().add(this.getModel());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Children(), this.getType(), null, "children", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(childEClass, Child.class, "Child", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getChild_Name(), ecorePackage.getEString(), "name", null, 0, 1, Child.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(itemEClass, Item.class, "Item", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getItem_Items(), this.getType(), null, "items", null, 0, -1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(thingEClass, Thing.class, "Thing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getThing_Content(), this.getType(), null, "content", null, 0, 1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getThing_Name(), ecorePackage.getEString(), "name", null, 0, 1, Thing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(parentEClass, Parent.class, "Parent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getParent_Left(), this.getChild(), null, "left", null, 0, 1, Parent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getParent_Right(), this.getChild(), null, "right", null, 0, 1, Parent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

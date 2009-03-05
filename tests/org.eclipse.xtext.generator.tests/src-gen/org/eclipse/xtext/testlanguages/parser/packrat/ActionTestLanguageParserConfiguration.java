@@ -10,8 +10,7 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLanguageModelConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLanguageElementConsumer;
-import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLanguageItemConsumer;
+import org.eclipse.xtext.testlanguages.parser.packrat.consumers.ActionTestLanguageChildConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -24,8 +23,7 @@ public class ActionTestLanguageParserConfiguration extends AbstractParserConfigu
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private ActionTestLanguageModelConsumer modelConsumer;
-    private ActionTestLanguageElementConsumer elementConsumer;
-    private ActionTestLanguageItemConsumer itemConsumer;
+    private ActionTestLanguageChildConsumer childConsumer;
 
 	private ActionTestLanguageGrammarAccess grammarAccess;
 
@@ -44,10 +42,7 @@ public class ActionTestLanguageParserConfiguration extends AbstractParserConfigu
 		modelConsumer = new ActionTestLanguageModelConsumer(
     		this, null
     	);
-		elementConsumer = new ActionTestLanguageElementConsumer(
-    		this, null
-    	);
-		itemConsumer = new ActionTestLanguageItemConsumer(
+		childConsumer = new ActionTestLanguageChildConsumer(
     		this, null
     	);
 	}
@@ -60,8 +55,7 @@ public class ActionTestLanguageParserConfiguration extends AbstractParserConfigu
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.prModel());
-		getElementConsumer().setRule(grammarAccess.prElement());
-		getItemConsumer().setRule(grammarAccess.prItem());
+		getChildConsumer().setRule(grammarAccess.prChild());
 		getIdConsumer().setRule(grammarAccess.trID());
 		getIntConsumer().setRule(grammarAccess.trINT());
 		getStringConsumer().setRule(grammarAccess.trSTRING());
@@ -71,13 +65,11 @@ public class ActionTestLanguageParserConfiguration extends AbstractParserConfigu
 		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
 
 
-		getModelConsumer().setElementConsumer(getElementConsumer());
+		getModelConsumer().setChildConsumer(getChildConsumer());
 
-		getElementConsumer().setItemConsumer(getItemConsumer());
+		getChildConsumer().setIdConsumer(getIdConsumer());
 
-		getItemConsumer().setIdConsumer(getIdConsumer());
-
-		getItemConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ActionTestLanguageDelimiters.ruleCall$20$Delimiter);
+		getChildConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.testlanguages.parser.packrat.ActionTestLanguageDelimiters.ruleCall$13$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -88,12 +80,8 @@ public class ActionTestLanguageParserConfiguration extends AbstractParserConfigu
     	return modelConsumer;
     }
 
-    public ActionTestLanguageElementConsumer getElementConsumer() {
-    	return elementConsumer;
-    }
-
-    public ActionTestLanguageItemConsumer getItemConsumer() {
-    	return itemConsumer;
+    public ActionTestLanguageChildConsumer getChildConsumer() {
+    	return childConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {
