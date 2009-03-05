@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,9 +18,9 @@ import org.eclipse.xtext.crossref.IScope;
  */
 public class LazyReferencedResourceScope extends AbstractCachingScope {
 
-	private EObject context;
+	private final EObject context;
 
-	private String uri;
+	private final String uri;
 
 	public LazyReferencedResourceScope(IScope parent, EClass type, EObject context, String uri) {
 		super(parent, type, true);
@@ -31,12 +30,8 @@ public class LazyReferencedResourceScope extends AbstractCachingScope {
 
 	@Override
 	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
-		URI contextURI = context.eResource().getURI();
-		URI newURI = URI.createURI(uri);
-		if (contextURI.isHierarchical() && !contextURI.isRelative() && newURI.isRelative()) {
-			newURI = newURI.resolve(contextURI);
-		}
-		final Resource resource = context.eResource().getResourceSet().getResource(newURI, true);
-		initElements(resolver, resource, producer);
+		final Resource resource = ImportUriUtil.getResource(context, uri);
+		if (resource != null)
+			initElements(resolver, resource, producer);
 	}
 }

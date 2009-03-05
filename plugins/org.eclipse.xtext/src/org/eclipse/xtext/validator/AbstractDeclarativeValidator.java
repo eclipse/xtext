@@ -7,13 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.validator;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -46,101 +49,43 @@ import org.eclipse.xtext.util.SimpleCache;
  */
 public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 
-	class MethodWrapper {
+	public static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
+
+	static class MethodWrapper {
 		public final Method method;
 		private final String s;
+		private final AbstractDeclarativeValidator instance;
 
-		public MethodWrapper(Method m) {
+		public MethodWrapper(AbstractDeclarativeValidator instance, Method m) {
+			this.instance = instance;
 			this.method = m;
 			this.s = m.getName() + ":" + m.getParameterTypes()[0].getName();
 		}
 
 		@Override
 		public int hashCode() {
-			return s.hashCode();
+			return s.hashCode() ^ instance.hashCode();
 		}
 
-		@Override
-		public boolean equals(Object obj) {
-			MethodWrapper mw = (MethodWrapper) obj;
-			return s.equals(mw.s);
-		}
-	}
-
-	public AbstractDeclarativeValidator() {
-		checkMethods = new HashSet<MethodWrapper>();
-		checkMethods.addAll(collectMethods(getClass()));
-	}
-
-	private List<MethodWrapper> collectMethods(Class<?> clazz) {
-		List<MethodWrapper> checkMethods = clazz.getSuperclass() == AbstractDeclarativeValidator.class ? new ArrayList<MethodWrapper>()
-				: new ArrayList<MethodWrapper>(collectMethods(clazz.getSuperclass()));
-		Method[] methods = clazz.getDeclaredMethods();
-		for (Method method : methods) {
-			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
-				checkMethods.add(new MethodWrapper(method));
-			}
-		}
-		return checkMethods;
-	}
-
-	private HashSet<MethodWrapper> checkMethods = null;
-
-	private final SimpleCache<Class<?>, List<Method>> methodsForType = new SimpleCache<Class<?>, List<Method>>(
-			new Function<Class<?>, List<Method>>() {
-
-				public List<Method> exec(Class<?> param) {
-					List<Method> result = new ArrayList<Method>();
-					for (MethodWrapper mw : checkMethods) {
-						Method method = mw.method;
-						if (method.getParameterTypes()[0].isAssignableFrom(param)) {
-							result.add(method);
-						}
-					}
-					return result;
-				}
-			});
-
-	private DiagnosticChain chain = null;
-	private EObject currentObject = null;
-	private Method currentMethod = null;
-	private final Logger log = Logger.getLogger(getClass());
-
-	private boolean hasErrors;
-
-	protected EObject getCurrentObject() {
-		return this.currentObject;
-	}
-
-	protected Method getCurrentMethod() {
-		return this.currentMethod;
-	}
-
-	@Override
-	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
-		this.hasErrors = false;
-		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
-		CheckMode checkMode = CheckMode.ALL;
-		if (context != null) {
-			Object object2 = context.get(CheckMode.KEY);
-			if (object2 instanceof CheckMode) {
-				checkMode = (CheckMode) object2;
-			}
+		public boolean isMatching(Class<?> param) {
+			return method.getParameterTypes()[0].isAssignableFrom(param);
 		}
 
-		try {
-			this.chain = diagnostics;
-			this.currentObject = object;
-			List<Method> list = methodsForType.get(object.getClass());
-			for (Method method : list) {
+		public void invoke(State state) {
+			if (instance.state != null && instance.state != state)
+				throw new IllegalStateException("State is already assigned.");
+			boolean wasNull = instance.state == null;
+			if (wasNull)
+				instance.state = state;
+			try {
 				Check annotation = method.getAnnotation(Check.class);
-				if (!checkMode.shouldCheck(annotation.value()))
-					continue;
+				if (!state.checkMode.shouldCheck(annotation.value()))
+					return;
+				boolean wasAccessible = method.isAccessible();
 				try {
-					this.currentMethod = method;
+					state.currentMethod = method;
 					method.setAccessible(true);
-					method.invoke(this, currentObject);
+					method.invoke(instance, state.currentObject);
 				}
 				catch (IllegalArgumentException e) {
 					log.error(e.getMessage(), e);
@@ -156,24 +101,171 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 						log.error(e.getMessage(), targetException);
 				}
 				finally {
-					method.setAccessible(false);
+					method.setAccessible(wasAccessible);
 				}
+			} finally {
+				if (wasNull)
+					instance.state = null;
 			}
-			return isValid && !hasErrors;
 		}
-		finally {
-			this.currentObject = null;
-			this.chain = null;
+
+		@Override
+		public boolean equals(Object obj) {
+			MethodWrapper mw = (MethodWrapper) obj;
+			return s.equals(mw.s) && instance == mw.instance;
 		}
+	}
+
+	private HashSet<MethodWrapper> checkMethods = null;
+
+	public AbstractDeclarativeValidator() {
+	}
+
+	private List<MethodWrapper> collectMethods(Class<? extends AbstractDeclarativeValidator> clazz) {
+		List<MethodWrapper> checkMethods = new ArrayList<MethodWrapper>();
+		Set<Class<?>> visitedClasses = new HashSet<Class<?>>(4);
+		collectMethods(this, clazz, visitedClasses, checkMethods);
+		return checkMethods;
+	}
+
+	private void collectMethods(AbstractDeclarativeValidator instance, Class<? extends AbstractDeclarativeValidator> clazz,
+			Collection<Class<?>> visitedClasses, Collection<MethodWrapper> result) {
+		if (visitedClasses.contains(clazz))
+			return;
+		collectMethodsImpl(instance, clazz, visitedClasses, result);
+		Class<? extends AbstractDeclarativeValidator> k = clazz;
+		while(k != null) {
+			ComposedChecks checks = k.getAnnotation(ComposedChecks.class);
+			if (checks != null) {
+				for(Class<? extends AbstractDeclarativeValidator> external: checks.validators())
+					collectMethods(null, external, visitedClasses, result);
+			}
+			k = getSuperClass(k);
+		}
+	}
+
+	private Class<? extends AbstractDeclarativeValidator> getSuperClass(Class<? extends AbstractDeclarativeValidator> clazz) {
+		try {
+			Class<? extends AbstractDeclarativeValidator> superClass = clazz.getSuperclass().asSubclass(AbstractDeclarativeValidator.class);
+			if (AbstractDeclarativeValidator.class.equals(superClass))
+				return null;
+			return superClass;
+		} catch(ClassCastException e) {
+			return null;
+		}
+	}
+
+	private void collectMethodsImpl(AbstractDeclarativeValidator instance, Class<? extends AbstractDeclarativeValidator> clazz,
+			Collection<Class<?>> visitedClasses,
+			Collection<MethodWrapper> result) {
+		if (!visitedClasses.add(clazz))
+			return;
+		AbstractDeclarativeValidator instanceToUse;
+		try {
+			instanceToUse = instance == null ? clazz.newInstance() : instance;
+		}
+		catch (Exception e) {
+			Constructor<? extends AbstractDeclarativeValidator> constr = null;
+			boolean wasAccessible = false;
+			try {
+				constr = clazz.getDeclaredConstructor();
+				wasAccessible = constr.isAccessible();
+				constr.setAccessible(true);
+				instanceToUse = constr.newInstance();
+			}
+			catch (Exception ex) {
+				return;
+			}
+			finally {
+				if (constr != null)
+					constr.setAccessible(wasAccessible);
+			}
+		}
+		Method[] methods = clazz.getDeclaredMethods();
+		for (Method method : methods) {
+			if (method.getAnnotation(Check.class) != null && method.getParameterTypes().length == 1) {
+				result.add(new MethodWrapper(instanceToUse, method));
+			}
+		}
+		Class<? extends AbstractDeclarativeValidator> superClass = getSuperClass(clazz);
+		if (superClass != null)
+			collectMethodsImpl(instanceToUse, superClass, visitedClasses, result);
+	}
+
+	private final SimpleCache<Class<?>, List<MethodWrapper>> methodsForType = new SimpleCache<Class<?>, List<MethodWrapper>>(
+			new Function<Class<?>, List<MethodWrapper>>() {
+				public List<MethodWrapper> exec(Class<?> param) {
+					List<MethodWrapper> result = new ArrayList<MethodWrapper>();
+					for (MethodWrapper mw : checkMethods) {
+						if (mw.isMatching(param))
+							result.add(mw);
+					}
+					return result;
+				}
+			});
+
+	public static class State {
+		private DiagnosticChain chain = null;
+		private EObject currentObject = null;
+		private Method currentMethod = null;
+		private CheckMode checkMode = null;
+		private boolean hasErrors = false;
+	}
+
+	private State state;
+
+	protected EObject getCurrentObject() {
+		return state.currentObject;
+	}
+
+	protected Method getCurrentMethod() {
+		return state.currentMethod;
+	}
+
+	protected DiagnosticChain getChain() {
+		return state.chain;
+	}
+
+	protected CheckMode getCheckMode() {
+		return state.checkMode;
+	}
+
+	@Override
+	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		if (checkMethods == null) {
+			checkMethods = new HashSet<MethodWrapper>();
+			checkMethods.addAll(collectMethods(getClass()));
+		}
+		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
+
+		CheckMode checkMode = CheckMode.ALL;
+		if (context != null) {
+			Object object2 = context.get(CheckMode.KEY);
+			if (object2 instanceof CheckMode) {
+				checkMode = (CheckMode) object2;
+			}
+		}
+
+		State state = new State();
+		state.chain = diagnostics;
+		state.currentObject = object;
+		state.checkMode = checkMode;
+
+		for(MethodWrapper method: methodsForType.get(object.getClass())) {
+			method.invoke(state);
+		}
+
+		return isValid && !state.hasErrors;
 	}
 
 	protected void warning(String string, int feature) {
-		chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, currentObject, feature));
+		state.chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.currentObject, feature));
 	}
 
 	protected void error(String string, int feature) {
-		this.hasErrors = true;
-		chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, currentObject, feature));
+		this.state.hasErrors = true;
+		state.chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.currentObject, feature));
 	}
 
 	protected void assertTrue(String message, int feature, boolean executedPredicate) {
@@ -217,7 +309,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 	}
 
 	/**
-	 * 
+	 *
 	 * @deprecated Since the contract of a scope is, that for all IScopedElements returned by {@link IScope#getContents()} the name feature is unique
 	 * it doesn't make sense to use a scope to find duplicate names (as they shouldn't be returned at all)
 	 */
