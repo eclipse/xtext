@@ -82,17 +82,19 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 										switch (delta.getKind()) {
 										case IResourceDelta.REMOVED:
 											// UNLOAD
-											document.modify(new UnitOfWork<Object>() {
-												public Object exec(XtextResource arg) throws Exception {
+											document.modify(new UnitOfWork<Void>() {
+												public Void exec(XtextResource arg) throws Exception {
 													emfResource.unload();
 													return null;
 												}
 											});
+											if (emfResource.getResourceSet() != null)
+												set.getResources().remove(emfResource);
 											break;
 										case IResourceDelta.CHANGED:
 											// RELOAD
-											document.modify(new UnitOfWork<Object>() {
-												public Object exec(XtextResource arg) throws Exception {
+											document.modify(new UnitOfWork<Void>() {
+												public Void exec(XtextResource arg) throws Exception {
 													emfResource.unload();
 													try {
 														emfResource.load(null);
@@ -145,7 +147,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		}
 	}
 
-	private List<IResourceChangeListener> resourceChangeListener = new ArrayList<IResourceChangeListener>();
+	private final List<IResourceChangeListener> resourceChangeListener = new ArrayList<IResourceChangeListener>();
 
 	@Override
 	protected IDocument createEmptyDocument() {
@@ -154,7 +156,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		resourceChangeListener.add(listener);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(listener,
 				IResourceChangeEvent.POST_CHANGE);
-		
+
 		return xtextDocument;
 	}
 
