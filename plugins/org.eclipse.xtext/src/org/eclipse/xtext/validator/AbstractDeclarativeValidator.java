@@ -144,12 +144,6 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 					method.setAccessible(true);
 					method.invoke(this, currentObject);
 				}
-				catch (GuardException e) {
-					// ignore, check is just not evaluated if guard is false
-				}
-				catch (NullPointerException e) {
-					// ignore, as not having to check for NPEs all the time is a convenience feature
-				}
 				catch (IllegalArgumentException e) {
 					log.error(e.getMessage(), e);
 				}
@@ -157,7 +151,11 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 					log.error(e.getMessage(), e);
 				}
 				catch (InvocationTargetException e) {
-					log.error(e.getMessage(), e.getTargetException());
+					// ignore GuardException, check is just not evaluated if guard is false
+					// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
+					Throwable targetException = e.getTargetException();
+					if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException))
+						log.error(e.getMessage(), targetException);
 				}
 				finally {
 					method.setAccessible(false);
@@ -220,10 +218,16 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 			error(message, feature);
 	}
 
+	/**
+	 * 
+	 * @deprecated Since the contract of a scope is, that for all IScopedElements returned by {@link IScope#getContents()} the name feature is unique
+	 * it doesn't make sense to use a scope to find duplicate names (as they shouldn't be returned at all)
+	 */
+	@Deprecated
 	protected void assertNameIsUniqueInScope(String message, int feature, EObject object, String name, IScope scope) {
 		for(Iterator<IScopedElement> i=scope.getContents().iterator(); i.hasNext(); ) {
 			IScopedElement scopedElement = i.next();
-			if(!object.equals(scopedElement.element()) && !name.equals(scopedElement.name())) {
+			if(!object.equals(scopedElement.element()) && name.equals(scopedElement.name())) {
 				error(message, feature);
 			}
 		}
