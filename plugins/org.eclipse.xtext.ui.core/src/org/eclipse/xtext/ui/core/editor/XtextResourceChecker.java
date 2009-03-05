@@ -37,7 +37,7 @@ import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
 public class XtextResourceChecker {
 
@@ -49,16 +49,16 @@ public class XtextResourceChecker {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 * 
+	 *
 	 */
 	public static final class AddMarkersOperation extends WorkspaceModifyOperation {
 		/**
-		 * 
+		 *
 		 */
 		private final List<Map<String, Object>> issues;
-		private IFile file;
-		private String markerId;
-		private boolean deleteMarkers;
+		private final IFile file;
+		private final String markerId;
+		private final boolean deleteMarkers;
 
 		/**
 		 * @param rule
@@ -76,6 +76,8 @@ public class XtextResourceChecker {
 		@Override
 		protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 				InterruptedException {
+			if (!file.exists())
+				return;
 			if (deleteMarkers)
 				file.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
 			if (!issues.isEmpty()) {
@@ -107,7 +109,7 @@ public class XtextResourceChecker {
 
 	/**
 	 * Checks an {@link XtextResource}
-	 * 
+	 *
 	 * @param resource
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
