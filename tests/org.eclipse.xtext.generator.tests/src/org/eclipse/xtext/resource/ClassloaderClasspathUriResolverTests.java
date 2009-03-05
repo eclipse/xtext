@@ -42,11 +42,28 @@ public class ClassloaderClasspathUriResolverTests extends TestCase {
 		normalizeUriAndLoadResource(classpathUri, expectedUri);
 	}
 
+	public void testClasspathUriForFileWithFragment() {
+		URI classpathUri = URI
+				.createURI("classpath:/org/eclipse/xtext/resource/mydsl.ecore#/");
+		URL rootURL = getClass().getClassLoader().getResource(
+				"org/eclipse/xtext/resource/mydsl.ecore");
+		String expectedUri = rootURL.toString() + "#/";
+		normalizeUriAndLoadResource(classpathUri, expectedUri);
+	}
+
 	public void testClasspathUriForFileInJar() {
 		URI classpathUri = URI.createURI("classpath:/model/simple.ecore");
 		URL rootURL = getClass().getClassLoader().getResource(
 				"model/simple.ecore");
 		String expectedUri = rootURL.toString();
+		normalizeUriAndLoadResource(classpathUri, expectedUri);
+	}
+
+	public void testClasspathUriForFileInJarWithFragment() {
+		URI classpathUri = URI.createURI("classpath:/model/simple.ecore#/");
+		URL rootURL = getClass().getClassLoader().getResource(
+				"model/simple.ecore");
+		String expectedUri = rootURL.toString() + "#/";
 		normalizeUriAndLoadResource(classpathUri, expectedUri);
 	}
 
