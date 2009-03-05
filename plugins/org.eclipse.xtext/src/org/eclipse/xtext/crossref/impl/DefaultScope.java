@@ -19,7 +19,7 @@ import org.eclipse.xtext.crossref.IScope;
  */
 public class DefaultScope extends SimpleCachingScope {
 
-	private final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importURI");
+	private final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, ImportUriValidator.IMPORT_URI);
 
 	public DefaultScope(Resource resource, EClass type) {
 		super(null, resource, type);

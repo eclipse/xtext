@@ -37,6 +37,10 @@ public class SimpleAttributeResolver<T> {
 		return new SimpleAttributeResolver<T>(type, attributeName);
 	}
 
+	public EAttribute getAttribute(EObject object) {
+		return attributeCache.get(object.eClass());
+	}
+
 	private SimpleAttributeResolver(final Class<T> type, final String attributeName) {
 		this.attributeName = attributeName;
 		this.discardingAdapter = new DiscardingAdapter();

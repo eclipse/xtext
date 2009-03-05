@@ -13,6 +13,7 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
+		binder.bind(DomainModelValidator.class).asEagerSingleton();
 	}
-	
+
 }
