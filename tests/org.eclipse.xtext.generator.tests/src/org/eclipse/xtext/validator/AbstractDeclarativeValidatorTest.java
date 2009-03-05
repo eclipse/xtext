@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EcorePackage;
 public class AbstractDeclarativeValidatorTest extends TestCase {
 
 	public void testSimpleDispatch() throws Exception {
-
 		AbstractDeclarativeValidator test = new TestValidator();
 		TestChain chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
@@ -99,13 +98,8 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		assertEquals(0,diagnostics.integers.size());
 	}
 
-	@SuppressWarnings("unused")
-	private class TestValidator extends AbstractDeclarativeValidator {
-		@Check
-		private void foo(EClass x) {
-			error("fooString",1);
-		}
-
+	@ComposedChecks(validators= {ExternalValidator.class})
+	private static class TestValidator extends AbstractDeclarativeValidator {
 		@Check
 		protected void foo(EStructuralFeature x) {
 			error("fooInteger",2);
@@ -114,6 +108,15 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		@Check
 		public void foo(Object x) {
 			error("fooObject",3);
+		}
+	}
+
+	@ComposedChecks(validators= {TestValidator.class})
+	private static class ExternalValidator extends AbstractDeclarativeValidator {
+		@SuppressWarnings("unused")
+		@Check
+		private void foo(EClass x) {
+			error("fooString",1);
 		}
 	}
 
