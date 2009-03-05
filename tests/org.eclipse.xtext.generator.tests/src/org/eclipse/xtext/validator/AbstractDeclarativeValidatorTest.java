@@ -47,6 +47,7 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		assertMatch(chain, 1, 5);
 	}
 
+	@SuppressWarnings("serial")
 	public void testSkipExpensive() throws Exception {
 		AbstractDeclarativeValidator test = new TestValidator() {
 			@SuppressWarnings("unused")
@@ -57,13 +58,13 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		};
 		TestChain chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object,Object>() {
-			{ put(CheckMode.KEY, Integer.valueOf(CheckMode.FAST)); }
+			{ put(CheckMode.KEY, CheckMode.NORMAL_AND_FAST); }
 		});
 		assertMatch(chain, 1, 3);
 
 		chain = chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object,Object>() {
-			{ put(CheckMode.KEY, Integer.valueOf(CheckMode.ALL)); }
+			{ put(CheckMode.KEY, CheckMode.ALL); }
 		});
 		assertMatch(chain, 1, 3, 27);
 
