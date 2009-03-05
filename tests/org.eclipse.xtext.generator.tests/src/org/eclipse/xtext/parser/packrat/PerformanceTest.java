@@ -32,7 +32,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		this.generatedWithTerminals = get(XtextTerminalsTestLanguagePackratParser.class);
-		StringBuilder modelBuilder = new StringBuilder("grammar a.bc.def.ghi extends e.fh.ijk\n");
+		StringBuilder modelBuilder = new StringBuilder("grammar a.bc.def.ghi with e.fh.ijk\n");
 		for(int i = 0; i < metamodelCount; i++) {
 			if (i % 2 == 0)
 				modelBuilder.append("import 'http://test' as mm" + i + "\n");

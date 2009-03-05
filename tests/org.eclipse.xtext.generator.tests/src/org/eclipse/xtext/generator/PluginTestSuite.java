@@ -89,6 +89,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.xtext.ExceptionTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ResourceLoadTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.parser.packrat.XtextPackratParserTest.class);
+		suite.addTestSuite(org.eclipse.xtext.xtext.XtextValidationTest.class);
 		return suite;
 	}
 }
