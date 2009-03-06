@@ -249,7 +249,7 @@ public class XtextEditor extends TextEditor {
 				final List<Map<String, Object>> issues = getDocument().readOnly(
 						new UnitOfWork<List<Map<String, Object>>>() {
 							public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-								return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY,CheckType.EXPENSIVE));
+								return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY,CheckType.NORMAL));
 							}
 						});
 				XtextResourceChecker.addMarkers((IFile) getResource(), issues, false, monitor);
