@@ -38,14 +38,14 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  *         The main xtext generator. Can be configured with
  *         {@link IGeneratorFragment} instances as well as with some properties
  *         declared via setter or adder methods.
  */
 public class Generator extends AbstractWorkflowComponent2 {
 
-	private Logger log = Logger.getLogger(getClass());
+	private final Logger log = Logger.getLogger(getClass());
 
 	public static final String SRC_GEN_UI = "SRC_GEN_UI";
 	public static final String SRC_UI = "SRC_UI";
@@ -53,7 +53,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String SRC = "SRC";
 	public static final String SRC_GEN = "SRC_GEN";
 	public static final String PLUGIN_RT = "PLUGIN";
-	
+
 	public Generator() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
@@ -68,6 +68,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (getProjectNameRt()==null)
 			issues.addError("The property 'projectNameRt' is mandatory");
 	}
+
+
 
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
@@ -147,12 +149,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return System.getProperty("file.encoding");
 	}
 
-	private List<LanguageConfig> languageConfigs = new ArrayList<LanguageConfig>();
-	
+	private final List<LanguageConfig> languageConfigs = new ArrayList<LanguageConfig>();
+
 	public void addLanguage(LanguageConfig langConfig) {
 		this.languageConfigs.add(langConfig);
 	}
-	
+
 	private List<Grammar> getGrammars(List<LanguageConfig> configs) {
 		List<Grammar> grammars = new ArrayList<Grammar>();
 		for (LanguageConfig conf : configs) {
@@ -160,7 +162,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		return grammars;
 	}
-	
+
 	private void generatePluginXmlRt(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		String filePath = "plugin.xml_gen";
 		deleteFile(ctx, filePath, PLUGIN_RT);
@@ -180,7 +182,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			ctx.getOutput().closeFile();
 		}
 	}
-	
+
 	private void generateExecutableExtensionsFactory(LanguageConfig config, XpandExecutionContext exeCtx) {
 		XpandFacade facade = XpandFacade.create(exeCtx);
 		facade.evaluate("org::eclipse::xtext::generator::ExecutableExtensionFactory::file", config.getGrammar(), getActivator());
@@ -277,7 +279,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			ctx.getOutput().closeFile();
 		}
 	}
-	
+
 	private void generateManifestUi(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		if (isUi() && !isMergedProjects()) {
 			String manifestPath = "META-INF/MANIFEST.MF_gen";
