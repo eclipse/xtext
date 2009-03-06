@@ -37,7 +37,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			throw new IllegalStateException(resource.getErrors().toString());
 		}
 
-		grammar = (Grammar) resource.getContents().get(0);
+		final Grammar grammar = (Grammar) resource.getContents().get(0);
 		EValidator validator = EValidator.Registry.INSTANCE.getEValidator(XtextPackage.eINSTANCE);
 		if (validator != null) {
 			DiagnosticChain chain = new DiagnosticChain() {
@@ -60,6 +60,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			while (iterator.hasNext())
 				validator.validate(iterator.next(), chain, null);
 		}
+		this.grammar = grammar;
 	}
 
 	/**

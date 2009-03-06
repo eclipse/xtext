@@ -59,4 +59,18 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertEquals(child.getData().toString(), 2, child.getData().size());
 	}
 
+	public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: name=ID ref=[Model|(ID)];\n" +
+				"moDel: name=ID ref='foo';");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
 }

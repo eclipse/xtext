@@ -98,7 +98,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 					// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
 					Throwable targetException = e.getTargetException();
 					if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException))
-						log.error(e.getMessage(), targetException);
+						throw new RuntimeException(targetException);
 				}
 				finally {
 					method.setAccessible(wasAccessible);
