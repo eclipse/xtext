@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.TreeSet;
+
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
@@ -63,6 +67,31 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			warning("Your grammar will not work with the default linking implementation, " +
 					"because Alternatives are currently not handled properly in CrossReferences.",
 					XtextPackage.CROSS_REFERENCE__TERMINAL);
+	}
+
+	@Check
+	public void checkRuleName(AbstractRule rule) {
+		final Grammar grammar = GrammarUtil.getGrammar(rule);
+		final TreeSet<String> foundNames = new TreeSet<String>();
+		for(AbstractRule otherRule: GrammarUtil.allRules(grammar)) {
+			if (rule.getName().equalsIgnoreCase(otherRule.getName()) && rule != otherRule) {
+				foundNames.add(otherRule.getName());
+			}
+		}
+		if (!foundNames.isEmpty()) {
+			final String message = "Rulename has to be unique even case insensitive.";
+			if (foundNames.size() == 1)
+				error(message + "\nOther rule was: " + foundNames.first(), XtextPackage.ABSTRACT_RULE__NAME);
+			else {
+				final StringBuilder builder = new StringBuilder((rule.getName().length() + 2) * foundNames.size() - 2);
+				for(String name: foundNames) {
+					if (builder.length() != 0)
+						builder.append(", ");
+					builder.append(name);
+				}
+				error(message + "\nOther rules were: " + builder + ".", XtextPackage.ABSTRACT_RULE__NAME);
+			}
+		}
 	}
 
 }
