@@ -30,7 +30,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject(optional = true)
 	private ITokenScanner tokenScanner;
-	
+
 	@Inject
 	private IHyperlinkDetector detector;
 
@@ -56,16 +56,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		if (tokenScanner != null) {
 			PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
-			DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(tokenScanner);
+			DefaultDamagerRepairer defDR = new XtextDamagerRepairer(tokenScanner);
 			reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 			reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 			return reconciler;
 		}
-		else {
-			return super.getPresentationReconciler(sourceViewer);
-		}
+		return super.getPresentationReconciler(sourceViewer);
 	}
-	
+
 	@Override
 	public IHyperlinkDetector[] getHyperlinkDetectors(ISourceViewer sourceViewer) {
 		List<IHyperlinkDetector> detectors = new LinkedList<IHyperlinkDetector>();

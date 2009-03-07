@@ -27,12 +27,12 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.parsetree.Range;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- * 
+ *
  */
 public class PartialParsingUtil {
 
@@ -104,7 +104,7 @@ public class PartialParsingUtil {
 		}
 		return parseResult;
 	}
-	
+
 	private static void transferLookAhead(CompositeNode from, CompositeNode to) {
 		if (!from.getLookaheadLeafNodes().isEmpty()) {
 			final boolean wasEmpty = to.getLookaheadLeafNodes().isEmpty();
@@ -167,71 +167,29 @@ public class PartialParsingUtil {
 		int myOffset = offset;
 		int myReplacedTextLength = replacedTextLength;
 		if (myOffset == rootNode.getTotalLength() && myOffset != 0) {
-			// newText is appended, so look for the last original character instead 
+			// newText is appended, so look for the last original character instead
 			--myOffset;
 			myReplacedTextLength = 1;
 		}
 		// include any existing parse errors
 		Range range = new Range(myOffset, myOffset + myReplacedTextLength);
-		mergeErrorRange(rootNode, range);
-		
-		myOffset = range.fromOffset;
+		range.mergeAllErrors(rootNode);
+
+		myOffset = range.getFromOffset();
 //		EList<SyntaxError> allErrors = rootNode.allSyntaxErrors(); // uses TreeIterator and is not as fast as it should be
-		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.fromOffset,
-				range.toOffset - range.fromOffset);
+		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.getFromOffset(),
+				range.getToOffset() - range.getFromOffset());
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
-				nodesEnclosingRegion, range.fromOffset,
-				range.toOffset - range.fromOffset);
-		
+				nodesEnclosingRegion, range.getFromOffset(),
+				range.getToOffset() - range.getFromOffset());
+
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
 		return new PartialParsingPointers(rootNode, myOffset, myReplacedTextLength, validReplaceRootNodes,
 				nodesEnclosingRegion);
 	}
-	
-	public static void mergeErrorRange(AbstractNode node, Range result) {
-		if (node.getSyntaxError() != null)
-			result.merge(node.getSyntaxError());
-		else if (node instanceof CompositeNode) {
-			for(AbstractNode child: ((CompositeNode)node).getChildren()) {
-				mergeErrorRange(child, result);
-			}
-		}
-	}
 
-	static class Range {
-		int fromOffset;
-		int toOffset;
-		
-		Range(SyntaxError error) {
-			this(error.getNode());
-		}
-		
-		Range(AbstractNode node) {
-			this(node.getTotalOffset(), node.getTotalOffset() + node.getTotalLength());
-		}
-		
-		Range(int fromOffest, int toOffset) {
-			this.fromOffset = fromOffest;
-			this.toOffset = toOffset;
-		}
-		
-		void merge(Range range) {
-			this.fromOffset = Math.min(fromOffset, range.fromOffset);
-			this.toOffset = Math.max(toOffset, range.toOffset);
-		}
-		
-		void merge(SyntaxError error) {
-			merge(new Range(error));
-		}
-		
-		@Override
-		public String toString() {
-			return fromOffset + " - " + toOffset;
-		}
-	}
-	
 	/**
 	 * Collects a list of all nodes containing the change region
 	 */
@@ -270,7 +228,7 @@ public class PartialParsingUtil {
 	 * collects a list of nodes which could possibly replaced by a partial
 	 * parse. Such a node has a parent that consumes all his current lookahead
 	 * tokens and all of these tokens are located before the changed region.
-	 * 
+	 *
 	 * @param nodesEnclosingRegion
 	 * @param offset
 	 * @param length
