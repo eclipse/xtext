@@ -8,38 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.impl.IllegalNodeException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
@@ -57,60 +36,22 @@ import com.google.inject.Inject;
  */
 public class DefaultHyperlinkDetector extends org.eclipse.core.commands.AbstractHandler implements IHyperlinkDetector {
 
-	private final ILinkingService linkingService;
-	private final ILocationInFileProvider locationProvider;
-	private final ILabelProvider labelProvider;
-
+	private final HyperlinkHelper helper;
 
 	@Inject
-	public DefaultHyperlinkDetector(ILinkingService linkingService, ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
+	public DefaultHyperlinkDetector(HyperlinkHelper helper) {
 		super();
-		this.linkingService = linkingService;
-		this.locationProvider = locationProvider;
-		this.labelProvider = labelProvider;
+		this.helper = helper;
 	}
-
-	// logger available to subclasses
-	protected final Logger logger = Logger.getLogger(getClass());
 
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
 	 */
-	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, boolean canShowMultipleHyperlinks) {
+	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
 		return ((IXtextDocument)textViewer.getDocument()).readOnly(new UnitOfWork<IHyperlink[]>() {
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
-				IParseResult parseResult = resource.getParseResult();
-				Assert.isNotNull(parseResult);
-				AbstractNode abstractNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(),
-						region.getOffset());
-				final Region location = new Region(abstractNode.getOffset(), abstractNode.getLength());
-				List<EObject> crossLinkedEObjects = findCrossLinkedEObject(abstractNode);
-				if (crossLinkedEObjects.isEmpty())
-					return null;
-				List<IHyperlink> links = new ArrayList<IHyperlink>();
-				for (EObject crossReffed : crossLinkedEObjects) {
-					final String label = labelProvider.getText(crossReffed);
-					final URI uri = EcoreUtil.getURI(crossReffed);
-					final URI normalized = crossReffed.eResource().getResourceSet().getURIConverter().normalize(uri);
-					links.add(new IHyperlink() {
-
-							public IRegion getHyperlinkRegion() {
-								return location;
-							}
-							public String getHyperlinkText() {
-								return label;
-							}
-							public String getTypeLabel() {
-								return null;
-							}
-							public void open() {
-								new OpenDeclarationAction(normalized, locationProvider).run();
-							}
-
-						});
-				}
-				return links.toArray(new IHyperlink[links.size()]);
+				return helper.createHyperlinksByOffset(resource, region.getOffset(), canShowMultipleHyperlinks);
 			}
 		});
 	}
@@ -120,35 +61,13 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 		final IXtextDocument document = activeEditor.getDocument();
 		final int offset = ((StyledText) activeEditor.getAdapter(Control.class)).getCaretOffset();
 		document.readOnly(new UnitOfWork<Object>() {
-			public Object exec(XtextResource resource) throws Exception {
-				AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(resource
-						.getParseResult().getRootNode(), offset);
-				List<EObject> crossLinkedEObject = findCrossLinkedEObject(node);
-				if (crossLinkedEObject.isEmpty())
-					return null;
-				URI uri = EcoreUtil.getURI(crossLinkedEObject.get(0));
-				new OpenDeclarationAction(uri, locationProvider).run();
+			public Void exec(XtextResource resource) throws Exception {
+				OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, offset);
+				action.run();
 				return null;
 			}
 		});
 		return this;
 	}
 
-	protected List<EObject> findCrossLinkedEObject(AbstractNode node) {
-		AbstractNode nodeToCheck = node;
-		while(nodeToCheck != null && !(nodeToCheck.getGrammarElement() instanceof Assignment)) {
-			if (nodeToCheck.getGrammarElement() instanceof CrossReference) {
-				EObject semanticModel = NodeUtil.getNearestSemanticObject(nodeToCheck);
-				EReference eReference = GrammarUtil.getReference((CrossReference) nodeToCheck.getGrammarElement(),
-						semanticModel.eClass());
-				try {
-					return linkingService.getLinkedObjects(semanticModel, eReference, nodeToCheck);
-				} catch (IllegalNodeException ex) {
-					return Collections.emptyList();
-				}
-			}
-			nodeToCheck = nodeToCheck.getParent();
-		}
-		return Collections.emptyList();
-	}
 }
