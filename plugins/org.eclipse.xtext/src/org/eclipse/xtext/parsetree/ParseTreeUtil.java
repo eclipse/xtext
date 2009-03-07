@@ -215,6 +215,7 @@ public final class ParseTreeUtil {
 		}
 		return contextNode;
 	}
+
 	/**
 	 *
 	 * This method returns the parent grammar of the given eObject by recursive
