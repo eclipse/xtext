@@ -12,11 +12,12 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessorTest;
+import org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
 public class AllTests {
 
@@ -24,8 +25,8 @@ public class AllTests {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui.common.tests");
 		// $JUnit-BEGIN$
 		suite.addTestSuite(DefaultContentAssistProcessorTest.class);
-
 		suite.addTestSuite(DefaultSemanticModelTransformerTest.class);
+		suite.addTestSuite(HyperlinkHelperTest.class);
 		// $JUnit-END$
 		return suite;
 	}

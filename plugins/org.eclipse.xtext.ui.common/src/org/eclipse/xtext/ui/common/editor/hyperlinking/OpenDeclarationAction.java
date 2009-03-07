@@ -21,9 +21,9 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
  * This action opens a <code>XtextEditor</code> on a selected <code>CrossReference</code> element.
- * 
+ *
  * @author Michael Clay - Initial contribution and API
- * 
+ *
  * @see org.eclipse.jface.action.Action
  */
 public class OpenDeclarationAction extends Action {
@@ -31,10 +31,9 @@ public class OpenDeclarationAction extends Action {
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 
-	private URI uri;
+	private final URI uri;
 
-	private ILocationInFileProvider locationProvider;
-	
+	private final ILocationInFileProvider locationProvider;
 
 	public OpenDeclarationAction(URI uri, ILocationInFileProvider locationProvider) {
 		super();
@@ -46,7 +45,11 @@ public class OpenDeclarationAction extends Action {
 	public void run() {
 		doOpen(uri);
 	}
-	
+
+	public URI getURI() {
+		return uri;
+	}
+
 	public void doOpen(final URI uri) {
 		IFile file = getContainingResourceSetFile(uri);
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
@@ -73,9 +76,9 @@ public class OpenDeclarationAction extends Action {
 					partInitException);
 		}
 	}
-	
+
 	private IFile getContainingResourceSetFile(URI uri) {
-		IFile targetFile = uri.isPlatformResource() ? 
+		IFile targetFile = uri.isPlatformResource() ?
 				ResourcesPlugin.getWorkspace().getRoot().getFile(
 						new Path(uri.toPlatformString(true)))
 				: ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(
