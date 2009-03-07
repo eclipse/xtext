@@ -99,20 +99,20 @@ public class XtextEditor extends TextEditor {
 
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
-		
+
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the source viewer yet (it will be created later).
 
 		super.init(site, input);
 	}
-	
+
 	/**
 	 * Set key binding scope. Needed to make F3 work properly.
 	 */
+	@Override
 	protected void initializeKeyBindingScopes() {
 		setKeyBindingScopes(new String[] { "org.eclipse.xtext.ui.core.XtextEditorScope" });  //$NON-NLS-1$
 	}
-	
 
 	public IResource getResource() {
 		Object adapter = getEditorInput().getAdapter(IResource.class);
@@ -161,7 +161,7 @@ public class XtextEditor extends TextEditor {
 
 	/**
 	 * @return true if content assist is available
-	 * 
+	 *
 	 */
 	public boolean isContentAssistAvailable() {
 		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
@@ -235,7 +235,7 @@ public class XtextEditor extends TextEditor {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private void doExpensiveValidation() {
 		longRunningChecks.schedule();
