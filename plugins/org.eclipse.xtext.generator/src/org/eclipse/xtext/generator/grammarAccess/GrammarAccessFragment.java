@@ -35,6 +35,13 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
 		return Collections.singletonMap(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar));
 	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return new String[]{
+				GrammarUtil.getNamespace(grammar)
+		};
+	}
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {

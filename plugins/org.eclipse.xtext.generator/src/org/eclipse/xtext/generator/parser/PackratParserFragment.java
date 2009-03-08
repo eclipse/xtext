@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.Tuples.*;
 import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.parser.packrat.IPackratParser;
 
@@ -26,6 +27,14 @@ public class PackratParserFragment extends AbstractGeneratorFragment {
 		return toMap(
 				pair(IPackratParser.class.getName(),PackratParserGenUtil.getGeneratedParser(g))			
 				);
+	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return new String[]{
+				GrammarUtil.getNamespace(grammar) + ".parser.packrat",
+				GrammarUtil.getNamespace(grammar) + ".parser.packrat.consumers",
+		};
 	}
 
 }

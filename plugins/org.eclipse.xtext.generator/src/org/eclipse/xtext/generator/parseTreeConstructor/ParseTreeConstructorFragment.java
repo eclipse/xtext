@@ -22,4 +22,11 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 		bindings.put(IParseTreeConstructor.class.getName(),ParseTreeConstructorUtil.getParseTreeConstructorName(grammar));
 		return bindings;
 	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return new String[]{
+				ParseTreeConstructorUtil.getPackage(grammar)
+		};
+	}
 }

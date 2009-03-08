@@ -95,7 +95,15 @@ public class ParseTreeConstructorUtil {
 	}
 
 	public static String getParseTreeConstructorName(Grammar g) {
-		return GrammarUtil.getNamespace(g)+".parseTreeConstruction."+GrammarUtil.getName(g)+"ParsetreeConstructor";
+		return getPackage(g)+"."+GrammarUtil.getName(g)+"ParsetreeConstructor";
+	}
+
+	/**
+	 * @param g
+	 * @return
+	 */
+	public static String getPackage(Grammar g) {
+		return GrammarUtil.getNamespace(g)+".parseTreeConstruction";
 	}
 
 }
