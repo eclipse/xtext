@@ -1,7 +1,7 @@
 <workflow>
-	<property name="grammarURI" value="classpath:/xtext/example/Domainmodel.xtext"/>
-	<property name="file.extensions" value="dmodel"/>
-	<property name="projectName" value="org.eclipse.xtext.example.domainmodel"/>
+	<property name="grammarURI" value="classpath:/org/eclipse/xtext/example/FowlerDsl.xtext"/>
+	<property name="file.extensions" value="fowlerdsl"/>
+	<property name="projectName" value="org.eclipse.xtext.example.fowlerdsl"/>
 	
 	<property name="runtimeProject" value="../${projectName}"/>
 	
@@ -15,10 +15,9 @@
 		<pathUiProject value="${runtimeProject}.ui"/>
 		<projectNameRt value="${projectName}"/>
 		<projectNameUi value="${projectName}.ui"/>
-		<activator value="org.eclipse.xtext.example.ui.internal.DomainmodelActivator"/>
 		
 		<language uri="${grammarURI}">
-			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+			<fragments file="org/eclipse/xtext/ui/generator/StandardUiAndRuntime.mwe">
 				<file.extensions value="${file.extensions}"/>
 			</fragments>
 		</language>
