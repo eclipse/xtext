@@ -14,4 +14,14 @@ public class XtendBasedContentAssistFragment extends AbstractGeneratorFragment {
 		return Collections.singletonMap(IProposalProvider.class.getName(), grammar.getName()+"Proposals");
 	}
 	
+	@Override
+	public String[] getRequiredBundlesUi(Grammar grammar) {
+		return new String[]{
+				"org.eclipse.xpand",
+				"org.eclipse.xtend",
+				"org.eclipse.xtend.typesystem.emf",
+				"org.eclipse.xtext.xtend"
+		};
+	}
+	
 }

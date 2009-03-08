@@ -34,7 +34,10 @@ public class BasicUiGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { "org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common", "org.eclipse.ui.editors",
+		return new String[] { 
+				"org.eclipse.xtext.ui.core", 
+				"org.eclipse.xtext.ui.common", 
+				"org.eclipse.ui.editors",
 				"org.eclipse.ui" };
 	}
 

@@ -23,16 +23,6 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	
 	@Override
-	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
-		super.addToPluginXmlUi(grammar, ctx);
-	}
-
-	@Override
-	public Map<String, String> getGuiceBindingsUi(Grammar grammar) {
-		return super.getGuiceBindingsUi(grammar);
-	}
-
-	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[] { 
 				"org.eclipse.ui", 
@@ -50,16 +40,16 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	 * @return
 	 */
 	private String getGeneratorProjectName(Grammar g) {
-		if (generatorProjetName!=null)
-			return generatorProjetName;
+		if (generatorProjectName!=null)
+			return generatorProjectName;
 		throw new IllegalStateException(getClass().getName()+" : The property 'generatorProjectName' is mandatory but has not been configured.");
 	}
 	
-	private String generatorProjetName;
+	private String generatorProjectName;
 	
 	public void setGeneratorProjetName(String generatorProjetName) {
 		if ("".equals(generatorProjetName.trim()))
 			return;
-		this.generatorProjetName = generatorProjetName;
+		this.generatorProjectName = generatorProjetName;
 	}
 }

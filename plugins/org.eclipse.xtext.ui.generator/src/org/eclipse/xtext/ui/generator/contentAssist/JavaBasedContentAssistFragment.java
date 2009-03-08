@@ -14,4 +14,11 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 		return Collections.singletonMap(IProposalProvider.class.getName(), grammar.getName()+"Proposals");
 	}
 	
+	@Override
+	public String[] getRequiredBundlesUi(Grammar grammar) {
+		return new String[]{
+				"org.eclipse.xtext.ui.common"
+		};
+	}
+	
 }
