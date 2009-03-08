@@ -12,6 +12,6 @@ public class XtextDocumentUtil {
 			return get(((ProjectionDocument) ctx).getMasterDocument());
 		if (ctx instanceof ITextViewer)
 			return get(((ITextViewer) ctx).getDocument());
-		throw new IllegalArgumentException("Couldn't handle " + ctx.toString());
+		return null;
 	}
 }
