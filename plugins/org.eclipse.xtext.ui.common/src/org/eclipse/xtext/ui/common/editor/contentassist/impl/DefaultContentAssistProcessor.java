@@ -24,16 +24,16 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.jface.text.templates.TemplateContextType;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -43,6 +43,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -54,54 +55,22 @@ import com.google.inject.Inject;
  * @author Jan K&ouml;hnlein
  */
 public class DefaultContentAssistProcessor implements IContentAssistProcessor {
-
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
-
 	@Inject
 	protected ITemplateContentAssistProcessor templateContentAssistProcessor;
-
 	@Inject
 	protected IContentAssistCalculator contentAssistCalculator;
-
 	@Inject
 	protected IProposalProvider proposalProvider;
-
 	/**
 	 * Computes the possible grammar elements following the one at the given offset and calls the respective methods on
 	 * the proposal provider.
 	 */
 	public ICompletionProposal[] computeCompletionProposals(final ITextViewer viewer, final int offset) {
-
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
-
-		return document.readOnly(new UnitOfWork<ICompletionProposal[]>() {
-
-			public ICompletionProposal[] exec(XtextResource resource) throws Exception {
-
-				IContentAssistContext contentAssistContext = createContext(resource, viewer, offset);
-
-				List<AbstractElement> computeProposalElements = contentAssistCalculator
-						.computeProposalElements(contentAssistContext);
-
-				List<ICompletionProposal> completionProposalList = collectCompletionProposals(computeProposalElements,
-						contentAssistContext);
-
-				for (TemplateContextType templateContextType : collectTemplateContextTypes(computeProposalElements,
-						contentAssistContext)) {
-					addTemplates(viewer, offset, contentAssistContext, templateContextType, completionProposalList);
-				}
-
-				List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider.sortAndFilter(
-						completionProposalList, contentAssistContext);
-
-				return processedCompletionProposalList.toArray(new ICompletionProposal[processedCompletionProposalList
-						.size()]);
-			}
-
-		});
+		return document.readOnly(new ContentAssistProcessorUow(offset, viewer));
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#getCompletionProposalAutoActivationCharacters()
@@ -141,26 +110,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	public IContextInformationValidator getContextInformationValidator() {
 		return new ContextInformationValidator(this);
 	}
-
-	/**
-	 * adds templates to the list of proposals
-	 *
-	 * @param viewer the viewer whose document is used to compute the proposals
-	 * @param offset an offset within the document for which completions should be computed
-	 * @param contentAssistContext the current context of the content assist proposal request
-	 * @param templateContextType within which templates are resolved
-	 * @param completionProposalList list of proposal to add to
-	 */
-	protected void addTemplates(ITextViewer viewer, int offset, IContentAssistContext contentAssistContext,
-			TemplateContextType templateContextType, List<ICompletionProposal> completionProposalList) {
-		if (templateContentAssistProcessor != null) {
-			templateContentAssistProcessor.setContentAssistContext(contentAssistContext);
-			templateContentAssistProcessor.setContextType(templateContextType);
-			completionProposalList.addAll(Arrays.asList(templateContentAssistProcessor.computeCompletionProposals(
-					viewer, offset)));
-		}
-	}
-
+	
 	protected List<ICompletionProposal> collectCompletionProposals(List<AbstractElement> computeProposalElements, IContentAssistContext contentAssistContext) {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 		for (AbstractElement computeProposalElement : computeProposalElements) {
@@ -201,82 +151,116 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					break;
 				case XtextPackage.ASSIGNMENT:
 					// TODO: change interface
-					// templateContextType =
-					// proposalProvider.getTemplateContextType((Assignment)
-					// computeProposalElement, contentAssistContext);
+					// templateContextType = 
+					// proposalProvider.getTemplateContextType((Assignment)computeProposalElement, contentAssistContext);
 					// addIfNotNull(templateContextTypes, templateContextType);
 					break;
 			}
 		}
 		return templateContextTypes;
 	}
-
+	/**
+	 * Adds templates to the list of proposals,
+	 *
+	 * @param viewer the viewer whose document is used to compute the proposals
+	 * @param offset an offset within the document for which completions should be computed
+	 * @param contentAssistContext the current context of the content assist proposal request
+	 * @param templateContextType within which templates are resolved
+	 * @param completionProposalList list of proposal to add to
+	 */
+	protected void addTemplates(ITextViewer viewer, int offset, IContentAssistContext contentAssistContext,
+			TemplateContextType templateContextType, List<ICompletionProposal> completionProposalList) {
+		if (templateContentAssistProcessor != null) {
+			templateContentAssistProcessor.setContentAssistContext(contentAssistContext);
+			templateContentAssistProcessor.setContextType(templateContextType);
+			completionProposalList.addAll(Arrays.asList(templateContentAssistProcessor.computeCompletionProposals(
+					viewer, offset)));
+		}
+	}
 	/**
 	 * Creates a new <code>IContentAssistContext</code> with all required informations for the current CA request.
 	 *
 	 * @param resource the underlying EMF resource to read (parse) from
 	 * @param viewer the viewer whose document is used to compute the proposals
-	 * @param offset an offset within the document for which the context should be created
-	 * @return a matching context containing all necessary informations for the current content assist request
+	 * @param offset the offset within the resource for which the context should be created
+	 * @return a list of applicable <code>IContentAssistContext</code>
 	 */
-	protected IContentAssistContext createContext(XtextResource resource, ITextViewer viewer, final int offset) {
-
+	protected List<IContentAssistContext> createContextList(XtextResource resource, String text, final int offset) {
+		List<IContentAssistContext> result = new ArrayList<IContentAssistContext>();
 		IParseResult parseResult = resource.getParseResult();
-
 		Assert.isNotNull(parseResult);
-
 		CompositeNode rootNode = parseResult.getRootNode();
-
 		AbstractNode referenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-
-		EObject model = NodeUtil.getNearestSemanticObject(referenceNode);
-
-		AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
-
-		String matchingString = node == null ? "" : calculateMatchString(viewer, offset, node);
-
-		/**
-		 *
-		 * if cursor is behind a complete keyword, accept any input => empty
-		 *
-		 * TODO: Find a way to distinguish between keywords like "+" or "-" and
-		 * "extends" or "class" in the latter case, the prefix "" would not
-		 * always be sufficient
-		 * XXX SZ: the formatter may help to answer this question
-		 */
-		if (node != null && node.getGrammarElement() instanceof Keyword
-				&& (node instanceof LeafNode && ((LeafNode) node).getText().equals(matchingString))) {
-			matchingString = "";
+		AbstractNode nodeAtOffset = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
+		
+		if (referenceNode.getOffset()+referenceNode.getLength() == offset) {
+			AbstractNode precedingReferenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode,Math.max(0, referenceNode.getOffset()-1));
+			String matchingString = calculateMatchString(nodeAtOffset,text, offset);
+			result.add(newCompletionProposal(matchingString, offset, rootNode, precedingReferenceNode));
+			if (!Strings.isEmpty(matchingString) && 
+					referenceNode.getGrammarElement() instanceof Keyword || 
+					referenceNode.getGrammarElement() instanceof CrossReference ||
+					(referenceNode.getGrammarElement() instanceof RuleCall &&
+					 ((RuleCall)referenceNode.getGrammarElement()).getRule() instanceof TerminalRule)) {
+				result.add(newCompletionProposal("", offset, rootNode, referenceNode));
+			}
+		} else {
+			String matchingString = calculateMatchString(nodeAtOffset,text, offset);
+			result.add(newCompletionProposal(matchingString, offset, rootNode, referenceNode));
 		}
-
-		return new ContentAssistContext(model, offset, matchingString, node, referenceNode, rootNode);
+		
+		return result;
 	}
-
 	/**
-	 * Calculates the match string of the current <code>IContentAssistContext</code> based on the
-	 * specified location within the text viewer.
+	 * Calculates the match string of the based on the specified location within the given text.
 	 *
-	 * @param viewer the viewer whose document is used to compute the proposals
+	 * @param caretNode the node at the current caret position
+	 * @param text the text to compute the matching string
 	 * @param offset an offset within the document for which the matchstring should be computed
 	 * @return a matching string
 	 */
-	protected String calculateMatchString(ITextViewer viewer, int offset,AbstractNode node) {
+	protected String calculateMatchString(AbstractNode caretNode, String text, int offset) {
+		StringBuilder matchString = new StringBuilder();
+		char c = ' ';
+		while (offset>caretNode.getOffset() && !Character.isWhitespace(c = text.charAt(--offset))) {
+			matchString.insert(0, c);
+		}
+		return matchString.toString();
+	}
+	
+	private ContentAssistContext newCompletionProposal(String matchingString, final int offset, CompositeNode rootNode,
+			AbstractNode referenceNode) {
+		EObject model = NodeUtil.getNearestSemanticObject(referenceNode);
+		AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
+		return new ContentAssistContext(model, offset, matchingString, node, referenceNode, rootNode);
+	}
+	
+	private final class ContentAssistProcessorUow implements UnitOfWork<ICompletionProposal[]> {
+		private final int offset;
+		private final ITextViewer viewer;
 
-		String prefix = "";
-
-		StyledText textWidget = viewer.getTextWidget();
-
-		if (textWidget.getCharCount() > 0) {
-			int boundedOffset = Math.min(offset, textWidget.getCharCount()) - 1;
-			if (node.getTotalOffset() <= boundedOffset) {
-				prefix = textWidget.getText(node.getTotalOffset(), boundedOffset).trim();
-			}
+		private ContentAssistProcessorUow(int offset, ITextViewer viewer) {
+			this.offset = offset;
+			this.viewer = viewer;
 		}
 
-		return prefix;
+		public ICompletionProposal[] exec(XtextResource resource) throws Exception {
+			List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+			for (IContentAssistContext contentAssistContext : createContextList(
+					resource, viewer.getTextWidget().getText(), offset)) {
+				List<AbstractElement> computedElements = contentAssistCalculator
+						.computeProposalElements(contentAssistContext);
+				completionProposalList.addAll(collectCompletionProposals(computedElements,contentAssistContext));
+				for (TemplateContextType templateContextType : collectTemplateContextTypes(computedElements,
+						contentAssistContext)) {
+					addTemplates(viewer, offset, contentAssistContext, templateContextType, completionProposalList);
+				}
+				proposalProvider.filter(completionProposalList,contentAssistContext);
+			}
+			proposalProvider.sort(completionProposalList);
+			return completionProposalList.toArray(new ICompletionProposal[completionProposalList.size()]);
+		}
 	}
-
-
 
 }
 

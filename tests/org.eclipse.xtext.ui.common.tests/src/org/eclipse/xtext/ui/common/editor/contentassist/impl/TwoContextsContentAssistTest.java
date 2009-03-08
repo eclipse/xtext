@@ -27,10 +27,7 @@ import com.google.inject.Injector;
 public class TwoContextsContentAssistTest extends AbstractXtextTests {
 
 	public void testTwoContexts() throws Exception {
-		System.err.println(getClass().getSimpleName()+" says: PLEASE ACTIVATE ME!");
-//    	newBuilder(getGrammarSetup())
-//                    .append("Foo; FooBar; Bar refersTo Foo").assertText(
-//                                    ";", "FooBar");
+    	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "FooBar");
     }
 
     /**

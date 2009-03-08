@@ -39,8 +39,7 @@ public class JavaReflectiveMethodInvoker {
 		if (method == null) {
 			return null;
 		}
-		Object result = invokeMethod(method, target, parameterValues.toArray(new Object[] {}));
-		return result;
+		return invokeMethod(method, target, parameterValues.toArray(new Object[] {}));
 	}
 
 	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
