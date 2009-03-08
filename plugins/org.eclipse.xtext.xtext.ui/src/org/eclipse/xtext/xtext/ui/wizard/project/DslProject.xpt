@@ -8,38 +8,26 @@
  *
  *******************************************************************************/
 «ENDREM»
-«DEFINE root FOR XtextProjectInfo»
-	«EXPAND GrammarGenerator FOR this»
-	«EXPAND WorkflowFile FOR this»
+«IMPORT org::eclipse::xtext::xtext::ui::wizard::project»
+
+«EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::Extensions»
+
+«DEFINE main FOR XtextProjectInfo»
+	«EXPAND workflow»
+	«EXPAND grammar»
 «ENDDEFINE»
 
-«DEFINE GrammarGenerator FOR XtextProjectInfo»
-«FILE "GenerateGrammar.java" GRAMMAR_GENERATOR_OUTLET -»
-package «this.basePackage»;
+«DEFINE workflow FOR XtextProjectInfo»
 
-import java.io.IOException;
-
-import org.eclipse.emf.mwe.core.WorkflowFacade;
-
-/**
- * Run this class in order to generate the domain model grammar.
- */
-public class GenerateGrammar {
-
-	public static void main(String... args) throws IOException {
-		new WorkflowFacade("«this.basePackagePath»/generate«languageNameAbbreviation».mwe").run();
-	}
-
-}
+«FILE basePackagePath+"/Generate"+languageNameAbbreviation+".properties" -»
+grammarURI=classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext
+file.extensions=«this.firstFileExtension»
+projectName=«this.projectName»
 «ENDFILE»
-«ENDDEFINE»
 
-«DEFINE WorkflowFile FOR XtextProjectInfo»
-«FILE "generate"+languageNameAbbreviation+".mwe" GRAMMAR_GENERATOR_OUTLET -»
+«FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe" -»
 <workflow>
-	<property name="grammarURI" value="classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext"/>
-	<property name="file.extensions" value="«this.firstFileExtension»"/>
-	<property name="projectName" value="«this.projectName»"/>
+	<property file="«basePackagePath»/Generate«languageNameAbbreviation».properties"/>
 	
 	<property name="runtimeProject" value="../${projectName}"/>
 	
@@ -55,12 +43,30 @@ public class GenerateGrammar {
 		<projectNameUi value="${projectName}.ui"/>
 		
 		<language uri="${grammarURI}">
-			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+			<fragments file="org/eclipse/xtext/ui/generator/StandardUiAndRuntime.mwe">
 				<file.extensions value="${file.extensions}"/>
 			</fragments>
 		</language>
 	</component>
-	
 </workflow>
+«ENDFILE»
+
+«ENDDEFINE»
+
+«DEFINE grammar FOR XtextProjectInfo»
+«FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
+grammar «this.languageName» with org.eclipse.xtext.common.Terminals
+
+generate «this.languageNameAbbreviation.toFirstLower()» "«this.nsURI»"
+
+Model :
+	(imports+=Import)*
+	(elements+=Class)*;
+	
+Import :
+	'import' importURI=STRING;
+	
+Class :
+	'class' name=ID ('extends' references=[Class])?;
 «ENDFILE»
 «ENDDEFINE»

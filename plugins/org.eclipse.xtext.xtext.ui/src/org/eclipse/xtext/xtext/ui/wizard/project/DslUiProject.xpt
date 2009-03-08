@@ -1,0 +1,4 @@
+«IMPORT org::eclipse::xtext::xtext::ui::wizard::project»
+
+«DEFINE main FOR XtextProjectInfo»
+«ENDDEFINE»
