@@ -164,7 +164,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void generatePluginXmlRt(List<LanguageConfig> configs, XpandExecutionContext ctx) {
-		String filePath = "plugin.xml_gen";
+		String filePath = fileExists(ctx, "plugin.xml", PLUGIN_RT)?  "plugin.xml_gen" : "plugin.xml";
 		deleteFile(ctx, filePath, PLUGIN_RT);
 		try {
 			ctx.getOutput().openFile(filePath, PLUGIN_RT);
@@ -195,7 +195,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generatePluginXmlUi(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		if (isUi() && !isMergedProjects()) {
-			String filePath = "plugin.xml_gen";
+			String filePath = fileExists(ctx, "plugin.xml", PLUGIN_UI)?  "plugin.xml_gen" : "plugin.xml";
 			deleteFile(ctx, filePath, PLUGIN_UI);
 			try {
 				ctx.getOutput().openFile(filePath, PLUGIN_UI);
@@ -311,6 +311,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 				throw new IllegalStateException("couldn't delete file '" + pathname);
 			}
 		}
+	}
+	
+	private boolean fileExists(XpandExecutionContext ctx, String filePath, String outlet) {
+		String pathname = ctx.getOutput().getOutlet(outlet).getPath() + "/" + filePath;
+		File file = new File(pathname);
+		return file.exists();
 	}
 
 	private boolean isMergedProjects() {
