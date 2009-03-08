@@ -162,11 +162,6 @@ public class NewXtextProjectWizardPage extends WizardPage {
 			setPageComplete(false);
 			return;
 		}
-		if (!xtextProjectInfo.getFileExtension().matches("\\w{2,6}")) {
-			setErrorMessage("A file extension consists of 2 to 6 characters (example: dsl)");
-			setPageComplete(false);
-			return;
-		}
 		try {
 			new URI(xtextProjectInfo.getNsURI());
 		}

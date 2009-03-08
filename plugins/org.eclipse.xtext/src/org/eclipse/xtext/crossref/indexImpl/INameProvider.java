@@ -1,4 +1,3 @@
-«REM»
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -7,28 +6,23 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-«ENDREM»
-«DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation+".xtext" GRAMMAR_GENERATOR_OUTLET -»
-grammar «this.languageName» with org.eclipse.xtext.common.Terminals
+package org.eclipse.xtext.crossref.indexImpl;
 
-generate «this.languageNameAbbreviation» "«this.nsURI»"
+import org.eclipse.emf.ecore.EObject;
 
-Model :
-	(imports+=Import)*
-	(elements+=Element)*;
-	
-Import :
-	'import' importURI=STRING;
-	
-Element :
-	Foo | Bar;
-	
-Foo :
-	"foo" name=ID;
-	
-Bar :
-	"bar" name=ID (references=[Foo])?;
-«ENDFILE»
-«ENDDEFINE»
+import com.google.inject.ImplementedBy;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ *
+ */
+@ImplementedBy(DefaultNameProvider.class)
+public interface INameProvider {
+	/**
+	 * returns the name the passed element can be referred to
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	String getGlobalName(EObject obj);
+}

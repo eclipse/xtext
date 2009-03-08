@@ -10,14 +10,14 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.crossref.impl.AbstractNestedScope;
+import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class StringScope extends AbstractNestedScope {
+class StringScope extends SimpleNestedScope {
 
 	public StringScope(IScope parentScope, Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
 		super(parentScope, CollectionUtils.map(content, new Function<Object, IScopedElement>() {

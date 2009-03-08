@@ -19,14 +19,13 @@ import org.eclipse.xtext.crossref.IScope;
  */
 public class DefaultScope extends SimpleCachingScope {
 
-	private final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, ImportUriValidator.IMPORT_URI);
+	private final static SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, ImportUriValidator.IMPORT_URI);
 
 	public DefaultScope(Resource resource, EClass type) {
-		super(null, resource, type);
-		setOuterScope(createParent(resource.getAllContents(), type));
+		super(createParent(resource.getAllContents(), type), resource, type);
 	}
 
-	private IScope createParent(Iterator<EObject> iter, EClass type) {
+	private static IScope createParent(Iterator<EObject> iter, EClass type) {
 		while (iter.hasNext()) {
 			EObject object = iter.next();
 			String uri = importResolver.getValue(object);

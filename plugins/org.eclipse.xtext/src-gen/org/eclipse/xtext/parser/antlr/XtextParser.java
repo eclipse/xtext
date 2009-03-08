@@ -4,17 +4,11 @@
 package org.eclipse.xtext.parser.antlr;
 
 import org.antlr.runtime.ANTLRInputStream;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.services.XtextGrammarAccess;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
-import org.eclipse.xtext.parser.antlr.internal.InternalXtextParser;
-
-import org.eclipse.xtext.services.XtextGrammarAccess;
 
 public class XtextParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
