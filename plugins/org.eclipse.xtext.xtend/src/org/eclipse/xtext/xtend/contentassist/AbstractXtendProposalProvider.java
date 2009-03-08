@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -25,8 +23,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
@@ -168,21 +164,21 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";
 	}
-
-	/**
-	 * Concrete subclasses can override this for custom sort and filter
-	 * behavior. Called right after all completion proposals have been
-	 * collected.
-	 *
-	 * The default behavior of this implementation is to filter duplicates and
-	 * to trim matching <code>ICompletionProposal#displayString</code> with
-	 * matching prefix values.
-	 *
-	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode,
-	 *      LeafNode)
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#filter(java.util.List, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
-	public List<? extends ICompletionProposal> sortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
-		return ProposalFilterSorterUtil.sortAndFilter(completionProposalList, contentAssistContext);
+	public List<? extends ICompletionProposal> filter(List<ICompletionProposal> completionProposalList,
+			IContentAssistContext contentAssistContext) {
+		return ProposalFilterSorterUtil.filter(completionProposalList,contentAssistContext);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#sort(java.util.List)
+	 */
+	public List<? extends ICompletionProposal> sort(List<ICompletionProposal> completionProposalList) {
+		return ProposalFilterSorterUtil.sort(completionProposalList);
 	}
 }

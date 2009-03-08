@@ -45,16 +45,13 @@ import com.google.inject.Inject;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public abstract class AbstractJavaProposalProvider implements IProposalProvider {
-
 	// constants
 	// protected static final String LEXER_RULE_ID = "ID";
 	protected static final String LEXER_RULE_INT = "INT";
 	protected static final String LEXER_RULE_STRING = "STRING";
 
 	// logger available to subclasses
-	protected final static Logger logger = Logger
-			.getLogger(IProposalProvider.class);
-
+	protected final static Logger logger = Logger.getLogger(IProposalProvider.class);
 	@Inject
 	protected IScopeProvider scopeProvider;
 
@@ -63,7 +60,6 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	protected AbstractJavaProposalProvider() {
 		invoker = new JavaReflectiveMethodInvoker(this);
 	}
-
 	/**
 	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword,
 	 *      IContentAssistContext)
@@ -71,10 +67,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
 			IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeKeyword '" + keyword.getValue()
-					+ "' for model '" + contentAssistContext.getModel()
-					+ "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
+			logger.debug("completeKeyword '" + keyword.getValue()+ "' for model '" + contentAssistContext.getModel()
+				+ "' and prefix '"+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.singletonList(createCompletionProposal(keyword,
 				keyword.getValue(), contentAssistContext));
@@ -87,41 +81,21 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	public List<? extends ICompletionProposal> completeRuleCall(
 			RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("completeRuleCall '"
-							+ ruleCall.getRule().getName()
-							+ "' cardinality '"
-							+ ruleCall.getCardinality()
-							+ "' for model '"
-							+ contentAssistContext.getModel()
-							+ "' and prefix '"
-							+ contentAssistContext.getMatchString().trim()
-									.trim() + "'");
+			logger.debug("completeRuleCall '"+ ruleCall.getRule().getName()+ "' cardinality '"
+				+ ruleCall.getCardinality()+ "' for model '"+ contentAssistContext.getModel()
+				+ "' and prefix '"+ contentAssistContext.getMatchString().trim().trim() + "'");
 		}
-
 		AbstractRule calledRule = ruleCall.getRule();
-
 		if (calledRule instanceof TerminalRule) {
-			return completeTerminalRuleRuleCall((TerminalRule) calledRule, ruleCall,
-					contentAssistContext);
+			return completeTerminalRuleRuleCall((TerminalRule) calledRule, ruleCall,contentAssistContext);
 		} else if (calledRule.getType() != null) {
-
 			TypeRef typeRef = calledRule.getType();
-
-			return invokeMethod(
-					"complete"
-							+ Strings.toFirstUpper(typeRef.getMetamodel()
-									.getAlias()) + "_"
+			return invokeMethod("complete"+ Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
 							+ Strings.toFirstUpper(typeRef.getClassifier().getName()),
-					Arrays
-							.<Class<?>> asList(
-									RuleCall.class,
-									contentAssistContext.getModel() == null ? EObject.class
-											: contentAssistContext.getModel()
-													.getClass(),
-									IContentAssistContext.class), Arrays
-							.asList(ruleCall, contentAssistContext.getModel(),
-									contentAssistContext));
+							Arrays.<Class<?>> asList(RuleCall.class,contentAssistContext.getModel() == null ? 
+							EObject.class : contentAssistContext.getModel().getClass(),
+							IContentAssistContext.class), Arrays.asList(ruleCall,
+									contentAssistContext.getModel(),contentAssistContext));
 		}
 		return Collections.emptyList();
 	}
@@ -134,12 +108,9 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			Assignment assignment, IContentAssistContext contentAssistContext) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		// TODO : Better call completeRuleCall ?
-		return invokeMethod("complete"
-				+ Strings.toFirstUpper(parserRule.getName()) + "_"
-				+ Strings.toFirstUpper(assignment.getFeature()), Arrays
-				.<Class<?>> asList(Assignment.class,
-						IContentAssistContext.class), Arrays.asList(assignment,
-				contentAssistContext));
+		return invokeMethod("complete"+ Strings.toFirstUpper(parserRule.getName()) + "_"+ 
+					Strings.toFirstUpper(assignment.getFeature()), Arrays.<Class<?>> asList(Assignment.class,
+						IContentAssistContext.class), Arrays.asList(assignment,contentAssistContext));
 	}
 
 	/**
@@ -149,20 +120,13 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	protected ICompletionProposal createCompletionProposal(
 			AbstractElement abstractElement, String displayString,
 			IContentAssistContext contentAssistContext) {
-		return new XtextCompletionProposal(abstractElement, displayString,
-				contentAssistContext);
+		return new XtextCompletionProposal(abstractElement, displayString,contentAssistContext);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected List<? extends ICompletionProposal> invokeMethod(
-			String methodName, List<Class<?>> parameterTypes,
+	protected List<? extends ICompletionProposal> invokeMethod(String methodName, List<Class<?>> parameterTypes,
 			List<?> parameterValues) {
-		try {
-			return (List<? extends ICompletionProposal>) invoker.invoke(
-					methodName, parameterTypes, parameterValues);
-		} catch (NullPointerException exc) {
-			return null;
-		}
+		return (List<? extends ICompletionProposal>) invoker.invoke(methodName, parameterTypes, parameterValues);
 	}
 
 	/**
@@ -231,23 +195,21 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 */
 	protected abstract String getDefaultImageFilePath();
 
-	/**
-	 * Concrete subclasses can override this for custom sort and filter
-	 * behavior. Called right after all completion proposals have been
-	 * collected.
-	 *
-	 * The default behavior of this implementation is to filter duplicates and
-	 * to trim matching <code>ICompletionProposal#displayString</code> with
-	 * matching prefix values.
-	 *
-	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode,
-	 *      LeafNode)
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#filter(java.util.List, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
-	public List<? extends ICompletionProposal> sortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList,
+	public List<? extends ICompletionProposal> filter(List<ICompletionProposal> completionProposalList,
 			IContentAssistContext contentAssistContext) {
-		return ProposalFilterSorterUtil.sortAndFilter(completionProposalList,
-				contentAssistContext);
+		return ProposalFilterSorterUtil.filter(completionProposalList,contentAssistContext);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#sort(java.util.List)
+	 */
+	public List<? extends ICompletionProposal> sort(List<ICompletionProposal> completionProposalList) {
+		return ProposalFilterSorterUtil.sort(completionProposalList);
 	}
 
 	/**
@@ -259,29 +221,21 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 *         assignment
 	 */
 	protected List<? extends ICompletionProposal> lookupCrossReference(
-			CrossReference crossReference,
-			IContentAssistContext contentAssistContext) {
-
+			CrossReference crossReference,IContentAssistContext contentAssistContext) {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
-
 		if (scopeProvider != null) {
 			ParserRule containingParserRule = GrammarUtil
 					.containingParserRule(crossReference);
 			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
-				final EClass eClass = (EClass) containingParserRule.getType().getClassifier();
-				final EReference ref = GrammarUtil.getReference(crossReference,
-						eClass);
-				final String trimmedPrefix = contentAssistContext
-						.getMatchString().trim();
-				final Iterable<IScopedElement> candidates = scopeProvider
-						.getScope(contentAssistContext.getModel(), ref)
+				EClass eClass = (EClass) containingParserRule.getType().getClassifier();
+				EReference ref = GrammarUtil.getReference(crossReference,eClass);
+				String trimmedPrefix = contentAssistContext.getMatchString().trim();
+				Iterable<IScopedElement> candidates = scopeProvider.getScope(contentAssistContext.getModel(), ref)
 						.getAllContents();
 				for (IScopedElement candidate : candidates) {
-					if (candidate.name() != null
-							&& isCandidateMatchingPrefix(contentAssistContext
+					if (candidate.name() != null && isCandidateMatchingPrefix(contentAssistContext
 									.getModel(), ref, candidate, trimmedPrefix)) {
-						completionProposalList.add(createCompletionProposal(
-								crossReference, candidate.name(),
+						completionProposalList.add(createCompletionProposal(crossReference, candidate.name(),
 								contentAssistContext));
 					}
 				}
@@ -294,9 +248,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref,
 			IScopedElement candidate, String prefix) {
 		if (candidate.name() == null)
-			throw new IllegalArgumentException(
-					"unnamed candidates may not be proposed");
-		return candidate.name().regionMatches(true, 0, prefix, 0,
-				prefix.length());
+			throw new IllegalArgumentException("unnamed candidates may not be proposed");
+		return candidate.name().regionMatches(true, 0, prefix, 0,prefix.length());
 	}
 }

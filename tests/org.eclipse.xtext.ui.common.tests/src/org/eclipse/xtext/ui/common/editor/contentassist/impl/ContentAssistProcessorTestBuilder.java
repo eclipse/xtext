@@ -13,7 +13,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -128,24 +129,19 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
-
-		final String currentModelToParse = getModel();
-
+		String currentModelToParse = getModel();
 		final XtextResource xtextResource = getResource(new StringInputStream(currentModelToParse));
-
-		final IXtextDocument xtextDocument = getDocument(xtextResource);
-
-		IContentAssistContext contentAssistContext = new DefaultContentAssistProcessor() {
+		List<IContentAssistContext> contentAssistContextList = new DefaultContentAssistProcessor() {
 			@Override
-			public IContentAssistContext createContext(XtextResource resource, ITextViewer viewer, int offset) {
-				IContentAssistContext createContext = super.createContext(resource,viewer,offset);
-				return createContext;
+			public List<IContentAssistContext> createContextList(XtextResource resource, String text, final int offset) {
+				return super.createContextList(xtextResource, text, offset);
 			}
-		}.createContext(xtextResource, resetTextViewerMock(currentModelToParse, xtextDocument),cursorPosition);
-
-
-		assertEquals(matchString, contentAssistContext.getMatchString());
-
+		}.createContextList(xtextResource, currentModelToParse,cursorPosition);
+		
+		for (IContentAssistContext contentAssistContext : contentAssistContextList) {		
+			assertEquals(matchString, contentAssistContext.getMatchString());
+			break;
+		}
 		return this;
 	}
 
@@ -169,8 +165,15 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
 
+		StringBuffer computedProposals = new StringBuffer();
+		for (int i = 0; i < computeCompletionProposals.length; i++) {
+			computedProposals.append(computeCompletionProposals[i].getDisplayString());
+			if (i<(computeCompletionProposals.length-1)) {
+				computedProposals.append(",");
+			}
+		}
 		assertEquals("expect only " + completionProposalCount + " CompletionProposal item for model '"
-				+ currentModelToParse + "'", completionProposalCount, computeCompletionProposals.length);
+				+ currentModelToParse + "' but got '"+computedProposals+"'", completionProposalCount, computeCompletionProposals.length);
 
 		return this;
 	}
@@ -211,7 +214,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 	private ITextViewer resetTextViewerMock(final String currentModelToParse, final IXtextDocument xtextDocument) {
 		EasyMock.reset(textViewerMock);
 		expect(textViewerMock.getDocument()).andReturn(xtextDocument);
-		expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(currentModelToParse));
+		expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(currentModelToParse)).times(2);
 		replay(textViewerMock);
 		return textViewerMock;
 	}
@@ -233,6 +236,11 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 			@Override
 			public String getText(int start, int end) {
 				return testDslModel.substring(start, end + 1);
+			}
+			
+			@Override
+			public String getText() {
+				return testDslModel;
 			}
 		};
 	}

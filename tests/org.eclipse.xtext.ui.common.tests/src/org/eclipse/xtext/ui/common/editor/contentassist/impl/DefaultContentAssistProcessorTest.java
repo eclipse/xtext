@@ -40,9 +40,8 @@ import com.google.inject.Injector;
  * @author Jan Koehnlein
  * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
  */
-public class DefaultContentAssistProcessorTest extends AbstractXtextTests
-{
-
+public class DefaultContentAssistProcessorTest extends AbstractXtextTests {	
+	
 	private ISetup getRefGrammarSetup() {
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
 			@Override
@@ -80,11 +79,12 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 	}
 
 	public void testComputePrefix() throws Exception {
+		String model = "spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ";
 		newBuilder(getRefGrammarSetup())
-		.append("foo fvdf dfv(").assertMatchString("(").reset()
-		.append("foo fvdf dfv").assertMatchString("dfv").reset()
-		.append("foo fvdf dfv_").assertMatchString("dfv_").reset()
-		.append("foo fvdf dfv_ ").assertMatchString("").reset()
+		.append(model+" familie( dfv(").assertMatchString("(").reset()
+		.append(model+" familie( dfv").assertMatchString("dfv").reset()
+		.append(model+" familie( dfv_").assertMatchString("dfv_").reset()
+		.append(model+" familie( dfv_ ").assertMatchString("").reset()
 		.append("").assertMatchString("");
 	}
 
@@ -134,13 +134,13 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 		builder.append(" ER").assertText("erwachsener");
 		builder.append(" SP").assertText("spielzeug");
 		builder.append(" FA").assertText("familie");
-		builder.append(" familie ( KEY").assertText("keyword");
-		builder.append(" familie ( K").assertText("keyword");
+		builder.append(" familie ( KEY").assertText("keyword","e1","e2");
+		builder.append(" familie ( K").assertText("keyword","e1","e2");
 		builder.append(" familie ( keyword E").assertText("e1", "e2");
-		builder.append(" familie ( keyword e1 E").assertText("e1", "e2");
+		builder.append(" familie ( keyword e1 E").assertText("e1", "e2","k1","k2");
 		builder.append(" familie ( keyword e1 e2 K").assertText("k1", "k2", ",", ")");
-		builder.append(" familie ( keyword e1 e2 k1,K").assertText("k1", "k2", ",", ")");
-		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
+		builder.append(" familie ( keyword e1 e2 k1,K").assertText(",", ")");
+		builder.append(" familie ( keyword e1 e2 k1,k2").assertText(",", ")");
 	}
 
 	/**
@@ -189,8 +189,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 					"R3",
 					"\"Keyword_Value\"",
 					"(",
-					"[",
-					"+=" // TODO: Why does this proposal come up?
+					"["
 			);
 	}
 
@@ -200,8 +199,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
 					"R1",
-					"R2",
-					":" // TODO: Why does this proposal come up?
+					"R2"
 			);
 	}
 
@@ -223,25 +221,22 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests
                     .appendNl("MyRule : 'foo' name=ID; ").assertText(
                                     "ParserRule_Name", "terminal"
                     );
-
     }
 
     /**
-     * SZ: uncomment because it fails and neither the result nor the excpectation
-     * seem to be right
      * regression test for:
      *
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=262313
      */
-//    public void testCompleteAssignmentWithBacktracking() throws Exception {
-//    	newBuilder(getXtextGrammarSetup())
-//                    .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
-//                    .appendNl("generate foo \"foo\"")
-//                    .append("MyRule : 'foo' name").assertText(
-//                                    "*", "+", "+=", ";", "=", "?", "?="
-//                    );
-//    }
+    public void testCompleteAssignmentWithBacktracking() throws Exception {
+    	newBuilder(getXtextGrammarSetup())
+        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate foo \"foo\"")
+        .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=", 
+        		"Assignment_Feature", "MyRule",  "{");
+
+    }
 
     public void testKeywordWithBackslashes() throws Exception {
 		newBuilder(getKeywordsLangSetup())
