@@ -507,7 +507,7 @@ public final class ParseTreeUtil {
 			if (terminal instanceof CrossReference) {
 				terminal = ((CrossReference) terminal).getTerminal();
 			}
-			else if (terminal instanceof RuleCall) {
+			if (terminal instanceof RuleCall) {
 				rule = ((RuleCall) terminal).getRule();
 			}
 			return rule;
