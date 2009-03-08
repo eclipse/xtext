@@ -27,7 +27,7 @@ import org.eclipse.xtext.util.Filter;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractCachingScope extends AbstractNestedScope {
+public abstract class AbstractCachingScope extends SimpleNestedScope {
 
 	private Iterable<IScopedElement> elements;
 

@@ -23,17 +23,17 @@ import org.eclipse.xtext.util.Function;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractNestedScope extends AbstractScope {
+public class SimpleNestedScope extends AbstractScope {
 
 	private IScope outer;
 
 	private Iterable<IScopedElement> elements;
 
-	public AbstractNestedScope(IScope outer) {
+	public SimpleNestedScope(IScope outer) {
 		this.outer = outer;
 	}
 
-	protected AbstractNestedScope(IScope outer, Iterable<IScopedElement> elements) {
+	public SimpleNestedScope(IScope outer, Iterable<IScopedElement> elements) {
 		this(outer);
 		this.elements = elements;
 	}
@@ -53,10 +53,6 @@ public abstract class AbstractNestedScope extends AbstractScope {
 
 	public IScope getOuterScope() {
 		return outer;
-	}
-
-	protected void setOuterScope(IScope outer) {
-		this.outer = outer;
 	}
 
 	public Iterable<IScopedElement> getContents() {
