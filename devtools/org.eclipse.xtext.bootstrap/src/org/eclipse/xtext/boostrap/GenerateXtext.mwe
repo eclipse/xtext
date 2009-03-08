@@ -15,7 +15,7 @@
 		<projectNameUi value="${uiProjectName}"/>
 		<activator value="org.eclipse.xtext.xtext.ui.internal.Activator"/>		
 		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext">
-			<fragments file="org/eclipse/xtext/ui/generator/standardUiAndRuntime.mwe">
+			<fragments file="org/eclipse/xtext/ui/generator/StandardUiAndRuntime.mwe">
 				<file.extensions value="${file.extensions}"/>
 				<basePackage value="org.eclipse"/>
 			</fragments>

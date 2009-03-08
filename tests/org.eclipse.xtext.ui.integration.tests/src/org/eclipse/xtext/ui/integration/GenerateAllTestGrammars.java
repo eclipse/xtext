@@ -19,7 +19,7 @@ public class GenerateAllTestGrammars {
 
 	public static void main(String... args) throws Exception {
 		try {
-			new WorkflowFacade("org/eclipse/xtext/ui/integration/testLanguage.mwe").run();
+			new WorkflowFacade("org/eclipse/xtext/ui/integration/GenerateUiIntegrationTestLanguage.mwe").run();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}

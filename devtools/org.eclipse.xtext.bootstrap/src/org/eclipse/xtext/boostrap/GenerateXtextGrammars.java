@@ -21,7 +21,7 @@ public class GenerateXtextGrammars {
 
 		try {
 			logger.info("Generating Xtext and default languages.");
-			new WorkflowFacade("org/eclipse/xtext/boostrap/generateXtext.mwe").run();
+			new WorkflowFacade("org/eclipse/xtext/boostrap/GenerateXtext.mwe").run();
 			logger.info("DONE.");
 		}
 		catch (Throwable e) {
