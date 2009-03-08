@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.xtext,
  de.itemis.xtext.antlr;resolution:=optional,
  org.easymock;bundle-version="2.3.0",
  org.eclipse.xtext.junit;bundle-version="0.7.0",
- org.eclipse.emf.mwe.utils;bundle-version="0.7.0"
+ org.eclipse.emf.mwe.utils;bundle-version="0.7.0",
+ org.eclipse.emf.index;bundle-version="1.0.0"
 Bundle-ClassPath: lib/simple.jar,
  .
 Export-Package: org.eclipse.xtext,
