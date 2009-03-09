@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,29 +29,27 @@ import com.google.inject.Injector;
  *
  */
 public class MweReader extends AbstractWorkflowComponent2 {
-	
-	/**
-	 * 
-	 */
+
 	public static final String DEFAULT_OUTPUT_SLOT = "model";
+
 	private Injector injector;
 
 	public void setRegister(ISetup setup) {
 		injector = setup.createInjectorAndDoEMFRegistration();
 	}
-	
+
 	private String outputSlot = DEFAULT_OUTPUT_SLOT;
-	
+
 	public void setOutputSlot(String outputSlot) {
 		this.outputSlot = outputSlot;
 	}
-	
+
 	private String uri = null;
-	
+
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-	
+
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
 		if (injector==null)
@@ -60,7 +57,7 @@ public class MweReader extends AbstractWorkflowComponent2 {
 		if (uri == null)
 			issues.addError(this,"No resource uri configured (property 'uri')");
 	}
-	
+
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
@@ -68,13 +65,13 @@ public class MweReader extends AbstractWorkflowComponent2 {
 		EObject value = resource.getContents().get(0);
 		ctx.set(outputSlot, value);
 		registerIssues(resource,issues);
-		
+
 		if (validate) {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(value, getContext());
 			registerIssues(diagnostic, issues);
 		}
 	}
-	
+
 	/**
 	 * @param resource
 	 */
@@ -95,11 +92,11 @@ public class MweReader extends AbstractWorkflowComponent2 {
 	}
 
 	private boolean validate = true;
-	
+
 	public void setValidate(boolean validate) {
 		this.validate = validate;
 	}
-	
+
 	/**
 	 * @param diagnostic
 	 * @param issues
@@ -114,14 +111,14 @@ public class MweReader extends AbstractWorkflowComponent2 {
 			registerIssues(diag, issues);
 		}
 	}
-	
+
 	private Object getContextObject(Diagnostic d) {
 		return d != null && d.getData() != null && d.getData().size() > 0 ? d.getData().get(0) : null;
 	}
-	
+
 	@Override
 	public String getLogMessage() {
 		return "loading file from "+uri;
 	}
-	
+
 }

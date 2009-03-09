@@ -10,6 +10,7 @@ package org.eclipse.xtext.crossrefs;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
@@ -74,6 +75,10 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		if (doFakeScope && context == this.context && reference == this.reference)
 			return IScope.NULLSCOPE;
 		return scopeProvider.getScope(context, reference);
+	}
+
+	public IScope getScope(EObject context, EClass type) {
+		throw new UnsupportedOperationException();
 	}
 
 	@SuppressWarnings("unchecked")

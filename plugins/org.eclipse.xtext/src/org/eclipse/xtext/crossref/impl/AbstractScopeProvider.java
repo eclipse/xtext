@@ -7,11 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public abstract class AbstractScopeProvider implements IScopeProvider {
+
+	public IScope getScope(EObject context, EReference reference) {
+		return getScope(context, reference != null ? reference.getEReferenceType() : null);
+	}
 
 }

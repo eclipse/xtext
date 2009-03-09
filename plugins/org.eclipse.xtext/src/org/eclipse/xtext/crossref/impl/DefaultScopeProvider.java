@@ -51,7 +51,7 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 		}
 	};
 
-	//TODO SimpleCache uses WeakHashMap, since the pairs are never referenced from somewhere else, GC will clean them up ASAP. 
+	//TODO SimpleCache uses WeakHashMap, since the pairs are never referenced from somewhere else, GC will clean them up ASAP.
 	// this might result in no caching at all, depending on how often the GC is triggered
 	private final SimpleCache<Pair<Resource, EClass>, IScope> cache = new SimpleCache<Pair<Resource, EClass>, IScope>(
 			new Function<Pair<Resource, EClass>, IScope>() {
@@ -62,14 +62,13 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 					return createScope(param.getFirst(), param.getSecond());
 				}
 			});
-	
+
 	protected IScope createScope(Resource resource, EClass type) {
 		return new DefaultScope(resource, type);
 	}
 
-	public IScope getScope(EObject context, EReference reference) {
-		return cache.get(Tuples.create(context.eResource(), reference != null ? reference
-				.getEReferenceType() : context.eClass().eClass()));
+	public IScope getScope(EObject context, EClass type) {
+		return cache.get(Tuples.create(context.eResource(), type != null ? type : context.eClass().eClass()));
 	}
 
 }

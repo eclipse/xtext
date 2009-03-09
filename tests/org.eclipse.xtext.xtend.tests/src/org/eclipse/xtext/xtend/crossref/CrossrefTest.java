@@ -11,6 +11,7 @@ import static org.eclipse.xtext.util.CollectionUtils.*;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -26,8 +27,12 @@ import org.eclipse.xtext.util.Function;
  */
 public class CrossrefTest extends AbstractXtextTests {
 
-	public void testCrossRef() throws Exception {
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
+	}
+	public void testCrossRef() throws Exception {
 		EObject spielplatz = getModel("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(v1 1) erwachsener(m1 1) }");
 		EObject familie = getASTFactory().create(spielplatz.eClass().getEPackage().getEClassifier("Familie"));
 		getASTFactory().add(spielplatz, "familie", familie, null, null);
@@ -37,6 +42,14 @@ public class CrossrefTest extends AbstractXtextTests {
 		assertInScope(familie, familie.eClass().getEStructuralFeature("mutter"), "v1", "m1");
 	}
 
+	public void testUnsupportedOperationException() {
+		try {
+			getScopeProvider().getScope(null, (EClass) null);
+			fail("Expected: UnsupportedOperationException");
+		} catch(UnsupportedOperationException e) {
+			// expected
+		}
+	}
 	private void assertInScope(EObject familie, EStructuralFeature eReference, String... names) {
 		IScopeProvider scopeProvider = getScopeProvider();
 		assertTrue(scopeProvider instanceof AbstractXtendScopeProvider);
