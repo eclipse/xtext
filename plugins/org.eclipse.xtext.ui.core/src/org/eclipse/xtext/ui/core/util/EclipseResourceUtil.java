@@ -199,7 +199,7 @@ public class EclipseResourceUtil {
 		final StringBuilder mainContent = new StringBuilder("Manifest-Version: 1.0\n");
 		mainContent.append("Bundle-ManifestVersion: 2\n");
 		mainContent.append("Bundle-Name: " + projectName + "\n");
-		mainContent.append("Bundle-Vendor: itemis AG\n");
+		mainContent.append("Bundle-Vendor: My Company\n");
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
 		mainContent.append("Eclipse-RegisterBuddy: org.eclipse.xtext.log4j\n");
