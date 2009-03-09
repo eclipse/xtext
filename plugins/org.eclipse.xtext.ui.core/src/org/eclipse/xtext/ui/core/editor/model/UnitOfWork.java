@@ -13,15 +13,15 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * A unit of work acts as a transaction block, which can be passed to an
  * IXtextDocument in order to get read or write access to it's parsed models.
- * 
- * 
+ *
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
 public interface UnitOfWork<T> {
 
 	/**
-	 * @param resource - The resource containing the current state - <b>Do not return any references to something contained in this resource</b>
+	 * @param resource - The resource containing the current state -
+	 * <b>Do not return any references to something contained in this resource</b>
 	 * @return
 	 * @throws Exception
 	 */

@@ -86,12 +86,13 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 
 	public void updateChildCount(Object element, int currentChildCount) {
 		int length = 0;
-		if (element instanceof IXtextDocument) {
-			length = outlineModel.getChildren().size();
-		}
-		else if (element instanceof ContentOutlineNode) {
-			ContentOutlineNode node = (ContentOutlineNode) element;
-			length = node.getChildren().size();
+		if (outlineModel != null) { // happens, when tree was disposed.
+			if (element instanceof IXtextDocument) {
+				length = outlineModel.getChildren().size();
+			} else if (element instanceof ContentOutlineNode) {
+				ContentOutlineNode node = (ContentOutlineNode) element;
+				length = node.getChildren().size();
+			}
 		}
 		viewer.setChildCount(element, length);
 	}

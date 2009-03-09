@@ -8,19 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class MergeableManifest extends Manifest {
 
@@ -46,6 +48,74 @@ public class MergeableManifest extends Manifest {
 				throw new IllegalStateException(e);
 			}
 		}
+
+		/*
+		 * Copied from base class, but omitted call to make72Safe(buffer)
+		 */
+		@SuppressWarnings("deprecation")
+		public void myWriteMain(DataOutputStream out) throws IOException {
+			// write out the *-Version header first, if it exists
+			String vername = Name.MANIFEST_VERSION.toString();
+			String version = getValue(vername);
+			if (version == null) {
+				vername = Name.SIGNATURE_VERSION.toString();
+				version = getValue(vername);
+			}
+
+			if (version != null) {
+				out.writeBytes(vername + ": " + version + "\r\n");
+			}
+
+			// write out all attributes except for the version
+			// we wrote out earlier
+			Iterator<Map.Entry<Object, Object>> it = entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<Object, Object> e = it.next();
+				String name = ((Name) e.getKey()).toString();
+				if ((version != null) && !(name.equalsIgnoreCase(vername))) {
+
+					StringBuffer buffer = new StringBuffer(name);
+					buffer.append(": ");
+
+					String value = (String) e.getValue();
+					if (value != null) {
+						byte[] vb = value.getBytes("UTF8");
+						value = new String(vb, 0, 0, vb.length);
+					}
+					buffer.append(value);
+
+					buffer.append("\r\n");
+					// Manifest.make72Safe(buffer);
+					out.writeBytes(buffer.toString());
+				}
+			}
+			out.writeBytes("\r\n");
+		}
+
+		/*
+		 * Copied from base class, but omitted call to make72Safe(buffer)
+		 */
+		@SuppressWarnings("deprecation")
+		public void myWrite(DataOutputStream out) throws IOException {
+			Iterator<Map.Entry<Object, Object>> it = entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<Object, Object> e = it.next();
+				StringBuffer buffer = new StringBuffer(((Name) e.getKey()).toString());
+				buffer.append(": ");
+
+				String value = (String) e.getValue();
+				if (value != null) {
+					byte[] vb = value.getBytes("UTF8");
+					value = new String(vb, 0, 0, vb.length);
+				}
+				buffer.append(value);
+
+				buffer.append("\r\n");
+				// Manifest.make72Safe(buffer);
+				out.writeBytes(buffer.toString());
+			}
+			out.writeBytes("\r\n");
+		}
 	}
 
 	/**
@@ -60,13 +130,13 @@ public class MergeableManifest extends Manifest {
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
-		super.read(in);
+		read(in);
 	}
 
 	/**
 	 * adds the qualified names to the require-bundle attribute, if not already
 	 * present.
-	 * 
+	 *
 	 * @param bundles - passing parameterized bundled (e.g. versions, etc.) is not supported
 	 */
 	public void addRequiredBundles(Set<String> bundles) {
@@ -76,10 +146,38 @@ public class MergeableManifest extends Manifest {
 			getMainAttributes().put(REQUIRE_BUNDLE, result);
 	}
 
+	/*
+	 * Copied from base class to omit the call to make72Safe(..).
+	 */
+	@SuppressWarnings("deprecation")
+	@Override
+	public void write(OutputStream out) throws IOException {
+		DataOutputStream dos = new DataOutputStream(out);
+		// Write out the main attributes for the manifest
+		((OrderAwareAttributes)getMainAttributes()).myWriteMain(dos);
+		// Now write out the pre-entry attributes
+		Iterator<Map.Entry<String,Attributes>> it = getEntries().entrySet().iterator();
+		while (it.hasNext()) {
+		    Map.Entry<String,Attributes> e = it.next();
+	            StringBuffer buffer = new StringBuffer("Name: ");
+	            String value = e.getKey();
+	            if (value != null) {
+	                byte[] vb = value.getBytes("UTF8");
+	                value = new String(vb, 0, 0, vb.length);
+	            }
+		    buffer.append(value);
+		    buffer.append("\r\n");
+	            // make72Safe(buffer); // SZ: uncomment as it messes the formatting
+	            dos.writeBytes(buffer.toString());
+		    ((OrderAwareAttributes)e.getValue()).myWrite(dos);
+		}
+		dos.flush();
+	}
+
 	/**
 	 * adds the qualified names to the export-package attribute, if not already
-	 * present. 
-	 * 
+	 * present.
+	 *
 	 * @param packages - passing parameterized packages is not supported
 	 */
 	public void addExportedPackages(Set<String> bundles) {
@@ -89,9 +187,8 @@ public class MergeableManifest extends Manifest {
 			getMainAttributes().put(EXPORT_PACKAGE, result);
 	}
 
-	protected static String mergeIntoCommaSeparatedList(String string, Set<String> toMergeIn) {
-		if (string == null)
-			string = "";
+	protected static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn) {
+		String string = currentString == null ? "" : currentString;
 		String[] split = string.split("\\s*,\\s*");
 		Set<ParameterizedElement> all = new LinkedHashSet<ParameterizedElement>();
 		for (int i = 0; i < split.length; i++) {
@@ -109,21 +206,21 @@ public class MergeableManifest extends Manifest {
 			}
 		}
 
-		StringBuffer buff = new StringBuffer();
+		StringBuffer buff = new StringBuffer(string.length());
 		Iterator<ParameterizedElement> iterator = all.iterator();
 		while (iterator.hasNext()) {
-			String s = (String) iterator.next().toString();
+			String s = iterator.next().toString();
 			buff.append(s);
 			if (iterator.hasNext())
-				buff.append(",");
+				buff.append(",\r\n ");
 		}
 		String result = buff.toString();
 		return result;
 	}
 
 	public static class ParameterizedElement {
-		private String name;
-		private String value;
+		private final String name;
+		private final String value;
 
 		public ParameterizedElement(String value) {
 			this.value = value;

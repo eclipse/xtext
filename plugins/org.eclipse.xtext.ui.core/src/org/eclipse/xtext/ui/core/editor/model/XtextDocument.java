@@ -120,10 +120,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public <T> T readOnly(UnitOfWork<T> work) {
 		readLock.lock();
 		try {
-			updateContentBeforeRead();
-			T exec = work.exec(resource);
-			ensureThatStateIsNotReturned(exec, work);
-			return exec;
+			if (resource != null) {
+				updateContentBeforeRead();
+				T exec = work.exec(resource);
+				ensureThatStateIsNotReturned(exec, work);
+				return exec;
+			}
+			return null;
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {
@@ -136,11 +139,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public <T> T modify(UnitOfWork<T> work) {
 		writeLock.lock();
 		try {
-			T exec = work.exec(resource);
-			ensureThatStateIsNotReturned(exec, work);
-			notifyModelListeners(resource);
-			// TODO track modifications and serialize back to the text buffer
-			return exec;
+			if (resource != null) {
+				T exec = work.exec(resource);
+				ensureThatStateIsNotReturned(exec, work);
+				notifyModelListeners(resource);
+				// TODO track modifications and serialize back to the text buffer
+				return exec;
+			}
+			return null;
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {
