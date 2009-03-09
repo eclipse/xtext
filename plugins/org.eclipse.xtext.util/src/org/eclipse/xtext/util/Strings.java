@@ -14,6 +14,12 @@ import java.util.List;
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class Strings {
+	
+	public static boolean equalsIgnoreWhitespace(String left, String right) {
+		String l = left==null?"":left.replaceAll("\\s","");
+		String r = right==null?"":right.replaceAll("\\s","");
+		return l.equals(r);
+	}
 
 	public static String notNull(Object o) {
 		String string = String.valueOf(o);
