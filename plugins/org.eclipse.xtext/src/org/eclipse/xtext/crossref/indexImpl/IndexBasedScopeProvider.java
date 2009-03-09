@@ -13,7 +13,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EObjectDescriptor;
@@ -35,21 +34,20 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class IndexBasedScopeProvider extends AbstractScopeProvider {
-	
-	private IIndexStore index;
-	
+
+	private final IIndexStore index;
+
 	@Inject
 	public IndexBasedScopeProvider(IIndexStore index) {
 		this.index = index;
 	}
 
-	public IScope getScope(EObject context, EReference reference) {
+	public IScope getScope(EObject context, EClass type) {
 		Resource eResource = context.eResource();
-		EClass eClazz = (EClass) reference.getEType();
-		Iterable<IScopedElement> iterable = getElements(eResource.getURI().toPlatformString(true), eClazz);
+		Iterable<IScopedElement> iterable = getElements(eResource.getURI().toPlatformString(true), type);
 		TreeIterator<EObject> eAllContents = EcoreUtil.getRootContainer(context).eAllContents();
-			
-		return new SimpleNestedScope(createOuter(eAllContents,reference), iterable);
+
+		return new SimpleNestedScope(createOuter(eAllContents, type), iterable);
 	}
 
 	private Iterable<IScopedElement> getElements(String uri, EClass eClazz) {
@@ -65,20 +63,19 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	private final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importURI");
+
 	/**
 	 * @param context
 	 * @param reference
 	 * @return
 	 */
-
-	private IScope createOuter(Iterator<EObject> iter, EReference ref) {
+	private IScope createOuter(Iterator<EObject> iter, EClass type) {
 		while (iter.hasNext()) {
 			EObject object = iter.next();
 			String uri = importResolver.getValue(object);
 			if (uri != null) {
-				EClass eType = (EClass) ref.getEType();
-				Iterable<IScopedElement> elements = getElements(uri, eType);
-				return new SimpleNestedScope(createOuter(iter, ref), elements);
+				Iterable<IScopedElement> elements = getElements(uri, type);
+				return new SimpleNestedScope(createOuter(iter, type), elements);
 			}
 		}
 		return IScope.NULLSCOPE;
