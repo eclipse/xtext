@@ -5,11 +5,17 @@ Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.example.domainmodel
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.domainmodel,
+ org.eclipse.xtext.example.parser.packrat,
+ org.eclipse.xtext.example.parser.packrat.consumers,
+ org.eclipse.xtext.example.parseTreeConstruction,
+ org.eclipse.xtext.example.parser.antlr
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.xtend,
- org.eclipse.xtend.typesystem.emf
+ org.eclipse.xtend.typesystem.emf,
+ org.antlr.runtime
 
