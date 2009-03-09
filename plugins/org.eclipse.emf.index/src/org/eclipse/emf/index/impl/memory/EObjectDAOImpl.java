@@ -155,8 +155,7 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 
 		public boolean matches(EObjectDescriptor elementDescriptor) {
 			if (matchesGlobbing(elementDescriptor.getFragment(), fragmentPattern)
-					&& matchesGlobbing(elementDescriptor.getName(), namePattern)
-					&& (typeDescriptor == null || typeDescriptor.equals(elementDescriptor.getEClassDescriptor()))) {
+					&& matchesGlobbing(elementDescriptor.getName(), namePattern)) {
 				if (userDataPatterns != null) {
 					for (Entry<String, String> userDataEntry : userDataPatterns.entrySet()) {
 						if (!matchesGlobbing(elementDescriptor.getUserData(userDataEntry.getKey()), userDataEntry

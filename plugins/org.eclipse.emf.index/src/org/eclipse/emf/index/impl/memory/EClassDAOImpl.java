@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl.memory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +26,7 @@ import org.eclipse.emf.index.impl.DefaultQueryTool;
 public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implements EClassDescriptor.DAO {
 
 	protected InverseReferenceCache<EPackageDescriptor, EClassDescriptor> ePackageScope;
+	protected InverseReferenceCache<EClassDescriptor, EClassDescriptor> superClassScope;
 	
 	public EClassDAOImpl(IIndexStore indexStore) {
 		super(indexStore);
@@ -33,18 +36,26 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 				return Collections.singletonList(source.getEPackageDescriptor());
 			}
 		};
+		superClassScope = new InverseReferenceCache<EClassDescriptor, EClassDescriptor>(){
+			@Override
+			protected List<EClassDescriptor> targets(EClassDescriptor source) {
+				return source.getSuperClasses() != null ? Arrays.asList(source.getSuperClasses()) : new ArrayList<EClassDescriptor>(0);
+			}
+		};
 	}
 	
 	@Override
 	public void store(EClassDescriptor element) {
 		super.store(element);
 		ePackageScope.put(element);
+		superClassScope.put(element);
 	}
 	
 	@Override
 	public void delete(EClassDescriptor element) {
 		super.delete(element);
 		ePackageScope.remove(element);
+		superClassScope.remove(element);
 	}
 
 	@Override
@@ -117,10 +128,9 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		@Override
 		protected Collection<EClassDescriptor> scope() {
 			Collection<EClassDescriptor> eClassesByEPackage = ePackageScope.lookup(ePackageDescriptor, ePackageQuery);
-			if(eClassesByEPackage == null) {
-				return super.scope();
-			}
-			return eClassesByEPackage;
+			Collection<EClassDescriptor> eClassesBySuperClass = superClassScope.lookup(superClassDescriptor, superClassQuery);
+			Collection<EClassDescriptor> mergedScopes = mergeScopes(eClassesByEPackage, eClassesBySuperClass);
+			return (mergedScopes == null) ? super.scope() : mergedScopes;
 		}
 
 	}
