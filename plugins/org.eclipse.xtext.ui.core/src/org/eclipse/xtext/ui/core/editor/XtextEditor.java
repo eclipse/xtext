@@ -8,18 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
@@ -35,15 +27,13 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.validator.CheckMode;
-import org.eclipse.xtext.validator.CheckType;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -111,7 +101,7 @@ public class XtextEditor extends TextEditor {
 	 */
 	@Override
 	protected void initializeKeyBindingScopes() {
-		setKeyBindingScopes(new String[] { "org.eclipse.xtext.ui.core.XtextEditorScope" });  //$NON-NLS-1$
+		setKeyBindingScopes(new String[] { "org.eclipse.xtext.ui.core.XtextEditorScope" }); //$NON-NLS-1$
 	}
 
 	public IResource getResource() {
@@ -161,7 +151,7 @@ public class XtextEditor extends TextEditor {
 
 	/**
 	 * @return true if content assist is available
-	 *
+	 * 
 	 */
 	public boolean isContentAssistAvailable() {
 		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
@@ -238,25 +228,7 @@ public class XtextEditor extends TextEditor {
 	 *
 	 */
 	private void doExpensiveValidation() {
-		longRunningChecks.schedule();
+		new ValidationJob(this, CheckMode.NORMAL_ONLY).schedule();
 	}
 
-	private final Job longRunningChecks = new Job("expensive validation") {
-
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			if (getResource() instanceof IFile) {
-				final List<Map<String, Object>> issues = getDocument().readOnly(
-						new UnitOfWork<List<Map<String, Object>>>() {
-							public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-								return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY,CheckType.NORMAL));
-							}
-						});
-				XtextResourceChecker.addMarkers((IFile) getResource(), issues, false, monitor);
-			}
-
-			return Status.OK_STATUS;
-		}
-
-	};
 }
