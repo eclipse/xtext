@@ -15,7 +15,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: «this»
-Bundle-SymbolicName: «symbolicName»
+Bundle-SymbolicName: «symbolicName»; singleton:=true
 Bundle-Version: «version»
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
