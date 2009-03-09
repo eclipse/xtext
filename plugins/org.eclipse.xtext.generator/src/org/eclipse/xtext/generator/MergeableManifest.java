@@ -21,6 +21,8 @@ import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.eclipse.xtext.util.Strings;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -118,6 +120,8 @@ public class MergeableManifest extends Manifest {
 		}
 	}
 
+	private boolean modified = false;
+
 	/**
 	 * @param resourceAsStream
 	 * @throws IOException
@@ -142,8 +146,14 @@ public class MergeableManifest extends Manifest {
 	public void addRequiredBundles(Set<String> bundles) {
 		String s = (String) getMainAttributes().get(REQUIRE_BUNDLE);
 		String result = mergeIntoCommaSeparatedList(s, bundles);
-		if (!"".equals(result.trim()))
+		if (!"".equals(result.trim()) && !Strings.equalsIgnoreWhitespace(result,s)) {
+			modified = true;
 			getMainAttributes().put(REQUIRE_BUNDLE, result);
+		}
+	}
+	
+	public boolean isModified() {
+		return modified;
 	}
 
 	/*
@@ -183,8 +193,10 @@ public class MergeableManifest extends Manifest {
 	public void addExportedPackages(Set<String> bundles) {
 		String s = (String) getMainAttributes().get(EXPORT_PACKAGE);
 		String result = mergeIntoCommaSeparatedList(s, bundles);
-		if (!"".equals(result.trim()))
+		if (!"".equals(result.trim()) && !Strings.equalsIgnoreWhitespace(result,s)) {
+			modified  =true;
 			getMainAttributes().put(EXPORT_PACKAGE, result);
+		}
 	}
 
 	protected static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn) {

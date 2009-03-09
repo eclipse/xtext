@@ -302,9 +302,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 			MergeableManifest manifest = new MergeableManifest(in);
 			manifest.addExportedPackages(exported);
 			manifest.addRequiredBundles(requiredBundles);
-			out = new FileOutputStream(file);
-			manifest.write(out);
-			out.close();
+			if (manifest.isModified()) {
+				out = new FileOutputStream(file);
+				manifest.write(out);
+				out.close();
+			}
 		} catch (Exception e) {
 			throw new WrappedException(e);
 		} finally {
@@ -338,7 +340,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 				exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
 				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
 			}
-			
+
 			if (isMergeManifest()) {
 				String path = ctx.getOutput().getOutlet(PLUGIN_UI).getPath() + "/" + manifestPath;
 				mergeManifest(path, exported, requiredBundles);
