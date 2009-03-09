@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
@@ -34,11 +35,33 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 
 	private static final String SCOPE_EXTENSION_PREFIX = "scope_";
 
+	public IScope getScope(EObject context, final EClass type) {
+		throw new UnsupportedOperationException();
+//		try {
+//			List<IScopedElement> scopedElements = invokeExtension(extensionName(context, type),
+//					Collections.singletonList(context));
+//			final Collection<String> names = new HashSet<String>(scopedElements.size());
+//			return new XtendScope(list(filter(scopedElements, new Filter<IScopedElement>() {
+//				public boolean matches(IScopedElement param) {
+//					boolean result = type.isSuperTypeOf(param.element().eClass());
+//					if (result) {
+//						result = names.add(param.name());
+//					}
+//					return result;
+//				}
+//			})));
+//		}
+//		catch (Throwable e) {
+//			log.error("Error invoking scope extension", e);
+//		}
+//		return null;
+	}
+
 	public IScope getScope(EObject context, final EReference reference) {
 		try {
 			List<IScopedElement> scopedElements = invokeExtension(extensionName(context, reference), Collections
 					.singletonList(context));
-			final Collection<String> names = new HashSet<String>(scopedElements.size()); 
+			final Collection<String> names = new HashSet<String>(scopedElements.size());
 			return new XtendScope(list(filter(scopedElements, new Filter<IScopedElement>() {
 				public boolean matches(IScopedElement param) {
 					boolean result = reference.getEReferenceType().isSuperTypeOf(param.element().eClass());
@@ -61,7 +84,7 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 
 	public static class XtendScope implements IScope {
 
-		private Iterable<IScopedElement> scopedElements;
+		private final Iterable<IScopedElement> scopedElements;
 
 		public XtendScope(List<IScopedElement> scopedElements) {
 			this.scopedElements = scopedElements;
