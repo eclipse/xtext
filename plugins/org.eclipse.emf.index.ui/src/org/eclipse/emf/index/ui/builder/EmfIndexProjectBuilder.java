@@ -101,9 +101,9 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 					Resource.Factory emfResourceFactory = Resource.Factory.Registry.INSTANCE.getFactory(resourceURI);
 					if (emfResourceFactory != null) {
 						if (isDeleted)
-							indexBuilder.resourceChanged(resourceURI);
-						else
 							indexBuilder.resourceDeleted(resourceURI);
+						else
+							indexBuilder.resourceChanged(resourceURI);
 						return true;
 					}
 				}

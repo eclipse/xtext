@@ -33,6 +33,7 @@ import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
 import org.eclipse.emf.index.impl.memory.InMemoryIndex;
 import org.eclipse.emf.index.resource.impl.DefaultEmfResourceChangeListenerImpl;
 import org.eclipse.emf.index.resource.impl.IndexBuilderImpl;
+import org.eclipse.emf.index.util.CollectionUtils;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -106,6 +107,14 @@ public class IntegrationTests extends TestCase {
 				assertEquals(target, source.eGet(structuralFeature));
 			}
 		}
+
+		org.eclipse.emf.index.EObjectDescriptor.Query objectQuery = index.eObjectDAO().createQuery();
+		objectQuery.eClass().name("EClassifier").ePackage().nsURI(EcorePackage.eNS_URI);
+		assertEquals(15, CollectionUtils.toList(objectQuery.executeListResult()).size());
+
+		objectQuery = index.eObjectDAO().createQuery();
+		objectQuery.eClass(index.eClassDAO().createQueryEClass(EcorePackage.eINSTANCE.getEClassifier()).executeSingleResult());
+		assertEquals(15, CollectionUtils.toList(objectQuery.executeListResult()).size());
 	}
 
 	private void indexExampleResource() throws IOException {
