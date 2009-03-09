@@ -1,12 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Integration Tests Plug-in
-Bundle-SymbolicName: org.eclipse.xtext.ui.integration.tests;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.ui.integration.tests;singleton:
+ =true
 Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.ui.core.util,
  org.eclipse.xtext.ui.integration,
  org.eclipse.xtext.ui.integration.editor,
+ org.eclipse.xtext.ui.integration.foo,
+ org.eclipse.xtext.ui.integration.parseTreeConstruction,
+ org.eclipse.xtext.ui.integration.parser.antlr,
+ org.eclipse.xtext.ui.integration.parser.packrat,
+ org.eclipse.xtext.ui.integration.parser.packrat.consumers,
  org.eclipse.xtext.ui.integration.workbench
 Require-Bundle: org.eclipse.xtext.generator;bundle-version="0.7.0",
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
@@ -21,6 +27,16 @@ Require-Bundle: org.eclipse.xtext.generator;bundle-version="0.7.0",
  org.eclipse.xtext.reference.ui;bundle-version="0.7.0",
  org.eclipse.xtext.generator.tests;bundle-version="0.7.0",
  org.eclipse.xtext.ui.generator;bundle-version="0.7.0",
- org.eclipse.emf.mwe.core;bundle-version="0.7.0"
+ org.eclipse.emf.mwe.core;bundle-version="0.7.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.eclipse.xtend,
+ org.eclipse.xtend.typesystem.emf,
+ org.antlr.runtime,
+ org.eclipse.ui.editors,
+ org.eclipse.ui
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.eclipse.xtext.ui.integration.XtextUIIntegrationTestsPlugin
+Bundle-Activator: org.eclipse.xtext.ui.integration.XtextUIIntegrationT
+ estsPlugin
+

@@ -3,27 +3,22 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.domainmodel
 Bundle-Vendor: itemis AG
 Bundle-Version: 0.7.0
-Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:
+ =true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtext,
- org.eclipse.xtext.generator,
- org.eclipse.xtend,
- org.eclipse.xtend.typesystem.emf,
- org.eclipse.xpand,
- org.apache.commons.logging,
- org.eclipse.xtend.util.stdlib,
- de.itemis.xtext.antlr;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.xtext.ui.generator
-Export-Package: org.eclipse.xtext.example,
- org.eclipse.xtext.example.domainmodel,
- org.eclipse.xtext.example.domainmodel.impl,
- org.eclipse.xtext.example.domainmodel.util,
- org.eclipse.xtext.example.parseTreeConstruction,
- org.eclipse.xtext.example.parser.antlr,
- org.eclipse.xtext.example.parser.antlr.internal,
- org.eclipse.xtext.example.parser.packrat,
- org.eclipse.xtext.example.parser.packrat.consumers,
- org.eclipse.xtext.example.services,
- xtext.example
+Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",org.ec
+ lipse.xtext,org.eclipse.xtext.generator,org.eclipse.xtend,org.eclipse
+ .xtend.typesystem.emf,org.eclipse.xpand,org.apache.commons.logging,or
+ g.eclipse.xtend.util.stdlib,de.itemis.xtext.antlr;bundle-version="1.0
+ .0";resolution:=optional,org.eclipse.xtext.ui.generator,org.eclipse.x
+ text.util,org.eclipse.emf.ecore,org.eclipse.emf.common,org.antlr.runt
+ ime
+Export-Package: org.eclipse.xtext.example,org.eclipse.xtext.example.do
+ mainmodel,org.eclipse.xtext.example.domainmodel.impl,org.eclipse.xtex
+ t.example.domainmodel.util,org.eclipse.xtext.example.parseTreeConstru
+ ction,org.eclipse.xtext.example.parser.antlr,org.eclipse.xtext.exampl
+ e.parser.antlr.internal,org.eclipse.xtext.example.parser.packrat,org.
+ eclipse.xtext.example.parser.packrat.consumers,org.eclipse.xtext.exam
+ ple.services,xtext.example
+
