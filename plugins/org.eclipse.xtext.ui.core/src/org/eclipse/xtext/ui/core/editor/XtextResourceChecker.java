@@ -130,14 +130,20 @@ public class XtextResourceChecker {
 					Diagnostic diagnostic = Diagnostician.INSTANCE.validate(ele, context);
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-							markers.add(markerFromEValidatorDiagnostic(childDiagnostic));
+							Map<String, Object> marker = markerFromEValidatorDiagnostic(childDiagnostic);
+							if (marker != null) {
+								markers.add(marker);
+								if (markers.size() > MAX_ERRORS)
+									return markers;
+							}
+						}
+					} else {
+						Map<String, Object> marker = markerFromEValidatorDiagnostic(diagnostic);
+						if (marker != null) {
+							markers.add(marker);
 							if (markers.size() > MAX_ERRORS)
 								return markers;
 						}
-					} else {
-						markers.add(markerFromEValidatorDiagnostic(diagnostic));
-						if (markers.size() > MAX_ERRORS)
-							return markers;
 					}
 				} catch (RuntimeException e) {
 					log.error(e.getMessage(), e);
@@ -173,16 +179,17 @@ public class XtextResourceChecker {
 	}
 
 	private static Map<String, Object> markerFromEValidatorDiagnostic(Diagnostic diagnostic) {
+		if (diagnostic.getSeverity() == Diagnostic.OK)
+			return null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sever = IMarker.SEVERITY_ERROR;
 		switch (diagnostic.getSeverity()) {
-		case Diagnostic.WARNING:
-			sever = IMarker.SEVERITY_WARNING;
-			break;
-		case Diagnostic.OK:
-		case Diagnostic.INFO:
-			sever = IMarker.SEVERITY_INFO;
-			break;
+			case Diagnostic.WARNING:
+				sever = IMarker.SEVERITY_WARNING;
+				break;
+			case Diagnostic.INFO:
+				sever = IMarker.SEVERITY_INFO;
+				break;
 		}
 		map.put(IMarker.SEVERITY, sever);
 		Iterator<?> data = diagnostic.getData().iterator();
@@ -191,10 +198,10 @@ public class XtextResourceChecker {
 		if (causer instanceof EObject) {
 			EObject ele = (EObject) causer;
 			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
-			if (nodeAdapter != null && data.hasNext()) {
+			if (nodeAdapter != null) {
 				AbstractNode parserNode = nodeAdapter.getParserNode();
 				// feature is the second element see Diagnostician.getData
-				Object feature = data.next();
+				Object feature = data.hasNext() ? data.next() : null;
 				EStructuralFeature structuralFeature = resolveStructuralFeature(ele, feature);
 				if (structuralFeature != null) {
 					List<AbstractNode> nodes = NodeUtil.findNodesForFeature(ele, structuralFeature);

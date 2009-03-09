@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -161,13 +161,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	}
 
 	@Override
-	public IDocument getDocument(Object element) {
-		final XtextDocument document = (XtextDocument) super.getDocument(element);
-		if (!(element instanceof IFileEditorInput))
-			throw new IllegalArgumentException("Can only handle instances of " + IFileEditorInput.class.getSimpleName()
-					+ " as input.");
-		document.setInput((IFileEditorInput) element);
-		return document;
+	protected void setupDocument(Object element, IDocument document) {
+		((XtextDocument) document).setInput((IEditorInput) element);
 	}
 
 	@Override
