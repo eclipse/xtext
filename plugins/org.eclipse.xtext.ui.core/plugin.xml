@@ -23,6 +23,15 @@
             </reference>
          </activeWhen>
       </handler>
+      <handler
+            class="org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.editor.validate">
+         <activeWhen>
+            <reference
+                  definitionId="isActiveEditorAnInstanceOfXtextEditor">
+            </reference>
+         </activeWhen>
+      </handler>
    </extension>
    <extension
          point="org.eclipse.core.expressions.definitions">
@@ -50,6 +59,21 @@
             </visibleWhen>
          </command>
       </menuContribution>
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.open">
+             <command
+                 commandId="org.eclipse.xtext.ui.editor.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+   
    </extension>
    <extension
          point="org.eclipse.ui.contexts">
@@ -59,6 +83,14 @@
             name="Editing Xtext Source"
             parentId="org.eclipse.ui.textEditorScope">
       </context>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.ui.editor.validate"
+            name="Validate">
+      </command>
    </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">

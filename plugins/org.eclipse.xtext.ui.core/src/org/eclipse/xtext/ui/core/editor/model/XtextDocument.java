@@ -9,9 +9,7 @@
 package org.eclipse.xtext.ui.core.editor.model;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -22,12 +20,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -39,8 +33,8 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
+import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validator.CheckMode;
@@ -82,7 +76,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 			try {
 				String string = get();
 				resource.load(new StringInputStream(string), null);
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				throw new WrappedException(e);
 			}
 		}
@@ -121,11 +116,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 			T exec = work.exec(resource);
 			ensureThatStateIsNotReturned(exec, work);
 			return exec;
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) {
 			throw e;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new WrappedException(e);
-		} finally {
+		}
+		finally {
 			readLock.unlock();
 		}
 	}
@@ -138,16 +136,19 @@ public class XtextDocument extends Document implements IXtextDocument {
 			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) {
 			throw e;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new WrappedException(e);
-		} finally {
+		}
+		finally {
 			writeLock.unlock();
 			checkAndUpdateMarkers();
 		}
 	}
-	
+
 	private void ensureThatStateIsNotReturned(Object exec, UnitOfWork<?> uow) {
 		// TODO activate
 		// if (exec instanceof EObject) {
@@ -199,32 +200,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
-	private final class UpdateMarkerJob extends Job {
-
-		private UpdateMarkerJob(String name) {
-			super(name);
-		}
-
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			final List<Map<String, Object>> issues = readOnly(new UnitOfWork<List<Map<String, Object>>>() {
-				public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-					return XtextResourceChecker.check(resource,Collections.singletonMap(CheckMode.KEY, CheckMode.FAST_ONLY));
-				}
-			});
-
-			if (file == null)
-				throw new IllegalStateException("Couldn't find IFile for Document");
-
-			// cleanup
-			XtextResourceChecker.addMarkers(file, issues, true, monitor);
-
-			return Status.OK_STATUS;
-		}
-
-	}
-	
-
 	class LockAwareProcessor implements Processor {
 
 		public <T> T process(UnitOfWork<T> transaction) {
@@ -233,7 +208,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 				writeLock.lock();
 				try {
 					return modify(transaction);
-				} finally {
+				}
+				finally {
 					readLock.lock();
 					writeLock.unlock();
 				}
@@ -245,10 +221,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
-	private final UpdateMarkerJob updateMarkerJob = new UpdateMarkerJob("updateMarkers");
 
 	private void checkAndUpdateMarkers() {
-		updateMarkerJob.schedule();
+		new ValidationJob(this, file, CheckMode.FAST_ONLY).schedule();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -259,5 +234,5 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 		return null;
 	}
-	
+
 }
