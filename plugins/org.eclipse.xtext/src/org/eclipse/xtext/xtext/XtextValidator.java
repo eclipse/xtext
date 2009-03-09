@@ -10,13 +10,22 @@ package org.eclipse.xtext.xtext;
 import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
 import org.eclipse.xtext.validator.CheckType;
@@ -91,6 +100,176 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				}
 				error(message + "\nOther rules were: " + builder + ".", XtextPackage.ABSTRACT_RULE__NAME);
 			}
+		}
+	}
+
+	@Check
+	public void checkUnassignedActionAfterAssignment(final Action action) {
+		if (action.getFeature() == null) {
+			checkCurrentMustBeUnassigned(action);
+		}
+	}
+
+	@Check
+	public void checkUnassignedRuleCallAllowed(final RuleCall call) {
+		if (call.getRule() != null && GrammarUtil.containingAssignment(call) == null) {
+			AbstractRule container = EcoreUtil2.getContainerOfType(call, AbstractRule.class);
+			if (call.getRule() instanceof ParserRule) {
+				if (container instanceof TerminalRule) {
+					error("Cannot call parser rule from terminal rule.", null);
+				} else if (!GrammarUtil.isDatatypeRule((ParserRule) call.getRule()))
+					checkCurrentMustBeUnassigned(call);
+			}
+		}
+	}
+
+	private void checkCurrentMustBeUnassigned(final AbstractElement element) {
+		ParserRule rule = GrammarUtil.containingParserRule(element);
+		if (GrammarUtil.isDatatypeRule(rule))
+			return;
+		XtextSwitch<Boolean> visitor = new XtextSwitch<Boolean>() {
+			private boolean isNull = true;
+
+			@Override
+			public Boolean caseAbstractElement(AbstractElement object) {
+				return isNull;
+			}
+
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				final boolean wasIsNull = isNull;
+				boolean localIsNull = wasIsNull;
+				for(AbstractElement element: object.getGroups()) {
+					isNull = wasIsNull;
+					localIsNull &= doSwitch(element);
+				}
+				isNull = localIsNull;
+				return isNull;
+			}
+
+			@Override
+			public Boolean caseAssignment(Assignment object) {
+				isNull = false;
+				return isNull;
+			}
+
+			@Override
+			public Boolean caseGroup(Group object) {
+				for(AbstractElement element: object.getTokens())
+					doSwitch(element);
+				return isNull;
+			}
+
+			@Override
+			public Boolean caseAction(Action object) {
+				if (object == element) {
+					assertTrue("An unassigned action is not allowed, when the 'current' was already created.",
+							null, isNull && !isMany(object));
+					checkDone();
+				}
+				isNull = false;
+				return isNull;
+			}
+
+			@Override
+			public Boolean caseRuleCall(RuleCall object) {
+				if (object == element) {
+					assertTrue("An unassigned rule call is not allowed, when the 'current' was already created.", null, isNull && !isMany(object));
+					checkDone();
+				}
+				return doSwitch(object.getRule());
+			}
+
+			@Override
+			public Boolean caseParserRule(ParserRule object) {
+				isNull = false;
+				return isNull;
+			}
+
+			@Override
+			public Boolean caseTerminalRule(TerminalRule object) {
+				isNull = false;
+				return isNull;
+			}
+
+			public boolean isMany(AbstractElement element) {
+				return GrammarUtil.isMultipleCardinality(element) ||
+					((element.eContainer() instanceof AbstractElement) && isMany((AbstractElement) element.eContainer()));
+			}
+
+		};
+		visitor.doSwitch(rule.getAlternatives());
+	}
+
+	@Check
+	public void checkAssignedActionAfterAssignment(final Action action) {
+		if (action.getFeature() != null) {
+			ParserRule rule = GrammarUtil.containingParserRule(action);
+			XtextSwitch<Boolean> visitor = new XtextSwitch<Boolean>() {
+				private boolean assignedActionAllowed = false;
+
+				@Override
+				public Boolean caseAbstractElement(AbstractElement object) {
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseAlternatives(Alternatives object) {
+					boolean wasActionAllowed = assignedActionAllowed;
+					boolean localActionAllowed = true;
+					for(AbstractElement element: object.getGroups()) {
+						assignedActionAllowed = wasActionAllowed;
+						localActionAllowed &= doSwitch(element);
+					}
+					assignedActionAllowed = wasActionAllowed || (localActionAllowed && !GrammarUtil.isOptionalCardinality(object));
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseAssignment(Assignment object) {
+					assignedActionAllowed = assignedActionAllowed || !GrammarUtil.isOptionalCardinality(object);
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseGroup(Group object) {
+					boolean wasAssignedActionAllowed = assignedActionAllowed;
+					for(AbstractElement element: object.getTokens())
+						doSwitch(element);
+					assignedActionAllowed = wasAssignedActionAllowed || (assignedActionAllowed && !GrammarUtil.isOptionalCardinality(object));
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseAction(Action object) {
+					if (object == action) {
+						assertTrue("An action is not allowed, when the current may still be unassigned.",
+								null, assignedActionAllowed);
+						checkDone();
+					}
+					assignedActionAllowed = true;
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseRuleCall(RuleCall object) {
+					assignedActionAllowed = assignedActionAllowed || doSwitch(object.getRule()) && !GrammarUtil.isOptionalCardinality(object);
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseParserRule(ParserRule object) {
+					assignedActionAllowed = !GrammarUtil.isDatatypeRule(object);
+					return assignedActionAllowed;
+				}
+
+				@Override
+				public Boolean caseTerminalRule(TerminalRule object) {
+					return assignedActionAllowed;
+				}
+
+			};
+			visitor.doSwitch(rule.getAlternatives());
 		}
 	}
 
