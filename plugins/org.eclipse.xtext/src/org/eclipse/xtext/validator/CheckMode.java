@@ -9,37 +9,57 @@ package org.eclipse.xtext.validator;
 
 public interface CheckMode {
 	public final static String KEY = "check.mode";
-	
-	public final static CheckMode FAST_ONLY = new CheckMode(){
+
+	public final static CheckMode FAST_ONLY = new CheckMode() {
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.FAST;
 		}
+
+		public String toString() {
+			return CheckType.FAST.toString();
+		};
 	};
-	
-	public final static CheckMode NORMAL_ONLY = new CheckMode(){
+
+	public final static CheckMode NORMAL_ONLY = new CheckMode() {
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.NORMAL;
 		}
+
+		public String toString() {
+			return CheckType.NORMAL.toString();
+		};
 	};
-	
-	public final static CheckMode EXPENSIVE_ONLY = new CheckMode(){
+
+	public final static CheckMode EXPENSIVE_ONLY = new CheckMode() {
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.EXPENSIVE;
 		}
+
+		public String toString() {
+			return CheckType.EXPENSIVE.toString();
+		};
 	};
-	
-	public final static CheckMode NORMAL_AND_FAST = new CheckMode(){
+
+	public final static CheckMode NORMAL_AND_FAST = new CheckMode() {
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.NORMAL || type == CheckType.FAST;
 		}
+
+		public String toString() {
+			return CheckType.NORMAL + "|" + CheckType.FAST;
+		};
 	};
-	
-	public final static CheckMode ALL = new CheckMode(){
+
+	public final static CheckMode ALL = new CheckMode() {
 		public boolean shouldCheck(CheckType type) {
 			return true;
 		}
+
+		public String toString() {
+			return "ALL";
+		};
 	};
-	
+
 	boolean shouldCheck(CheckType type);
-	
+
 }

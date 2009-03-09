@@ -31,13 +31,13 @@ import org.eclipse.xtext.util.SimpleCache;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- *
+ * 
+ * 
  *         Allows subclasses to specify invariants in a declarative manner using
  *         {@link Check} annotation.
- *
+ * 
  *         Example:
- *
+ * 
  *         <pre>
  * &#064;Check
  * void checkName(ParserRule rule) {
@@ -94,16 +94,20 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 					log.error(e.getMessage(), e);
 				}
 				catch (InvocationTargetException e) {
-					// ignore GuardException, check is just not evaluated if guard is false
-					// ignore NullPointerException, as not having to check for NPEs all the time is a convenience feature
+					// ignore GuardException, check is just not evaluated if
+					// guard is false
+					// ignore NullPointerException, as not having to check for
+					// NPEs all the time is a convenience feature
 					Throwable targetException = e.getTargetException();
-					if (!(targetException instanceof GuardException) && !(targetException instanceof NullPointerException))
+					if (!(targetException instanceof GuardException)
+							&& !(targetException instanceof NullPointerException))
 						throw new RuntimeException(targetException);
 				}
 				finally {
 					method.setAccessible(wasAccessible);
 				}
-			} finally {
+			}
+			finally {
 				if (wasNull)
 					instance.state = null;
 			}
@@ -128,35 +132,39 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		return checkMethods;
 	}
 
-	private void collectMethods(AbstractDeclarativeValidator instance, Class<? extends AbstractDeclarativeValidator> clazz,
-			Collection<Class<?>> visitedClasses, Collection<MethodWrapper> result) {
+	private void collectMethods(AbstractDeclarativeValidator instance,
+			Class<? extends AbstractDeclarativeValidator> clazz, Collection<Class<?>> visitedClasses,
+			Collection<MethodWrapper> result) {
 		if (visitedClasses.contains(clazz))
 			return;
 		collectMethodsImpl(instance, clazz, visitedClasses, result);
 		Class<? extends AbstractDeclarativeValidator> k = clazz;
-		while(k != null) {
+		while (k != null) {
 			ComposedChecks checks = k.getAnnotation(ComposedChecks.class);
 			if (checks != null) {
-				for(Class<? extends AbstractDeclarativeValidator> external: checks.validators())
+				for (Class<? extends AbstractDeclarativeValidator> external : checks.validators())
 					collectMethods(null, external, visitedClasses, result);
 			}
 			k = getSuperClass(k);
 		}
 	}
 
-	private Class<? extends AbstractDeclarativeValidator> getSuperClass(Class<? extends AbstractDeclarativeValidator> clazz) {
+	private Class<? extends AbstractDeclarativeValidator> getSuperClass(
+			Class<? extends AbstractDeclarativeValidator> clazz) {
 		try {
-			Class<? extends AbstractDeclarativeValidator> superClass = clazz.getSuperclass().asSubclass(AbstractDeclarativeValidator.class);
+			Class<? extends AbstractDeclarativeValidator> superClass = clazz.getSuperclass().asSubclass(
+					AbstractDeclarativeValidator.class);
 			if (AbstractDeclarativeValidator.class.equals(superClass))
 				return null;
 			return superClass;
-		} catch(ClassCastException e) {
+		}
+		catch (ClassCastException e) {
 			return null;
 		}
 	}
 
-	private void collectMethodsImpl(AbstractDeclarativeValidator instance, Class<? extends AbstractDeclarativeValidator> clazz,
-			Collection<Class<?>> visitedClasses,
+	private void collectMethodsImpl(AbstractDeclarativeValidator instance,
+			Class<? extends AbstractDeclarativeValidator> clazz, Collection<Class<?>> visitedClasses,
 			Collection<MethodWrapper> result) {
 		if (!visitedClasses.add(clazz))
 			return;
@@ -245,6 +253,10 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 			if (object2 instanceof CheckMode) {
 				checkMode = (CheckMode) object2;
 			}
+			else if (object2 != null) {
+				throw new IllegalArgumentException("Context object for key " + CheckMode.KEY + " should be of Type "
+						+ CheckMode.class.getName() + " but was " + object2.getClass().getName());
+			}
 		}
 
 		State state = new State();
@@ -252,7 +264,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		state.currentObject = object;
 		state.checkMode = checkMode;
 
-		for(MethodWrapper method: methodsForType.get(object.getClass())) {
+		for (MethodWrapper method : methodsForType.get(object.getClass())) {
 			method.invoke(state);
 		}
 
@@ -309,22 +321,25 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 	}
 
 	/**
-	 *
-	 * @deprecated Since the contract of a scope is, that for all IScopedElements returned by {@link IScope#getContents()} the name feature is unique
-	 * it doesn't make sense to use a scope to find duplicate names (as they shouldn't be returned at all)
+	 * 
+	 * @deprecated Since the contract of a scope is, that for all
+	 *             IScopedElements returned by {@link IScope#getContents()} the
+	 *             name feature is unique it doesn't make sense to use a scope
+	 *             to find duplicate names (as they shouldn't be returned at
+	 *             all)
 	 */
 	@Deprecated
 	protected void assertNameIsUniqueInScope(String message, int feature, EObject object, String name, IScope scope) {
-		for(Iterator<IScopedElement> i=scope.getContents().iterator(); i.hasNext(); ) {
+		for (Iterator<IScopedElement> i = scope.getContents().iterator(); i.hasNext();) {
 			IScopedElement scopedElement = i.next();
-			if(!object.equals(scopedElement.element()) && name.equals(scopedElement.name())) {
+			if (!object.equals(scopedElement.element()) && name.equals(scopedElement.name())) {
 				error(message, feature);
 			}
 		}
 	}
 
 	protected void guard(boolean guardExpression) {
-		if(!guardExpression) {
+		if (!guardExpression) {
 			throw new GuardException();
 		}
 	}
