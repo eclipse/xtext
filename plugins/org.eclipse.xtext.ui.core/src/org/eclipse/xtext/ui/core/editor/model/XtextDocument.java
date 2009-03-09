@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.model;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -19,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
@@ -30,13 +30,13 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validator.CheckMode;
 
 import com.google.inject.Inject;
@@ -45,42 +45,50 @@ import com.google.inject.Provider;
 public class XtextDocument extends Document implements IXtextDocument {
 
 	private XtextResourceSet resourceSet = null;
+
 	private XtextResource resource = null;
-	private IEditorInput editorInput;
+
 	private IFile file;
+
+	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
+
+	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 
 	public void setInput(IEditorInput editorInput) {
 		file = ResourceUtil.getFile(editorInput);
-		Assert.isTrue(file != null && this.editorInput == null || this.editorInput.equals(editorInput));
-		if (this.editorInput != null)
-			return;
-		this.editorInput = editorInput;
-		resourceSet = resourceSetProvider.get();
 
-		IJavaProject javaProject = getIJavaProject(file);
-		if (javaProject != null) {
-			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
-			resourceSet.setClasspathURIContext(javaProject);
+		resourceSet = resourceSetProvider.get();
+		if (file != null) {
+			// TODO find a way to identify a project for an IStorageEditorInput
+			IJavaProject javaProject = getIJavaProject(file);
+			if (javaProject != null) {
+				resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
+				resourceSet.setClasspathURIContext(javaProject);
+			}
 		}
 
-		IPath path = file.getFullPath();
+		IPath path = null;
+		if (file != null) {
+			path = file.getFullPath();
+		} else {
+			IStorageEditorInput storageInput = (IStorageEditorInput) editorInput;
+			try {
+				// TODO get the FQN of the resource
+				path = storageInput.getStorage().getFullPath();
+			}
+			catch (CoreException e) {
+				throw new WrappedException(e);
+			}
+		}
 		Resource aResource = resourceSet.createResource(URI.createPlatformResourceURI(path.toString(), true));
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + path
 					+ " is not an XtextResourceFactory. Make sure the right resource factory has been registered.");
 		resource = (XtextResource) aResource;
-		if (!resource.isLoaded()) {
-			try {
-				String string = get();
-				resource.load(new StringInputStream(string), null);
-			}
-			catch (IOException e) {
-				throw new WrappedException(e);
-			}
-		}
+		resource.setValidationDisabled(file == null);
 	}
 
 	public boolean isReferenced(IResource anIResource) {
@@ -98,8 +106,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return uriToRes.containsKey(anIResource.getFullPath().lastSegment());
 	}
 
-	private IJavaProject getIJavaProject(IFile file) {
-		IJavaProject create = JavaCore.create(file.getProject());
+	private IJavaProject getIJavaProject(IResource resource) {
+		IJavaProject create = JavaCore.create(resource.getProject());
 		if (create.exists())
 			return create;
 		return null;
@@ -116,14 +124,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 			T exec = work.exec(resource);
 			ensureThatStateIsNotReturned(exec, work);
 			return exec;
-		}
-		catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw e;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new WrappedException(e);
-		}
-		finally {
+		} finally {
 			readLock.unlock();
 		}
 	}
@@ -136,14 +141,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
-		}
-		catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw e;
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new WrappedException(e);
-		}
-		finally {
+		} finally {
 			writeLock.unlock();
 			checkAndUpdateMarkers();
 		}
@@ -161,8 +163,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 		// }
 	}
 
-	ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
-
 	public void addModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
 		modelListeners.add(listener);
@@ -179,8 +179,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 			((IXtextModelListener) listeners[i]).modelChanged(res);
 		}
 	}
-
-	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
 
 	public void addXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
 		addDocumentListener(observer);
@@ -208,8 +206,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				writeLock.lock();
 				try {
 					return modify(transaction);
-				}
-				finally {
+				} finally {
 					readLock.lock();
 					writeLock.unlock();
 				}

@@ -32,9 +32,9 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
  * performed for each DR in the queue. We overcome this situation by writing our
  * own reconciler that only creates ReplaceRegions which can always be merged,
  * such that we have to call the partial parser only once.
- * 
+ *
  * Additionally, we simplify the reconciler by using the Job API.
- * 
+ *
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class XtextReconciler extends Job implements IReconciler {
@@ -44,9 +44,9 @@ public class XtextReconciler extends Job implements IReconciler {
 	private boolean isInstalled;
 	private ITextViewer textViewer;
 	private TextInputListener textInputListener;
-	private DocumentListener documentListener;
+	private final DocumentListener documentListener;
 	private ReplaceRegion pendingReplaceRegion;
-	private Object pendingReplaceRegionLock;
+	private final Object pendingReplaceRegionLock;
 	private int delay;
 	private IReconcilingStrategy strategy;
 
@@ -59,7 +59,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		public void documentChanged(DocumentEvent event) {
 			handleDocumentChanged(event);
 		}
-		
+
 		public void performNecessaryUpdates(Processor processor) {
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			if (document != null) {
@@ -176,8 +176,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (log.isDebugEnabled()) {
 			log.debug("Preparing reconciliation.");
 		}
-		
-		IStatus result = null;
+
 		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 		if (document != null) {
 			final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
@@ -186,8 +185,8 @@ public class XtextReconciler extends Job implements IReconciler {
 			}
 		}
 		if (log.isDebugEnabled())
-			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start));	
-		return (result != null) ? result : Status.OK_STATUS;
+			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start));
+		return Status.OK_STATUS;
 	}
 
 	private ReplaceRegion getAndResetReplaceRegion() {

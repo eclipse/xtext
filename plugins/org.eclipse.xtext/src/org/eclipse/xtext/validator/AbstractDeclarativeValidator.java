@@ -271,21 +271,21 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		return isValid && !state.hasErrors;
 	}
 
-	protected void warning(String string, int feature) {
+	protected void warning(String string, Integer feature) {
 		state.chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.currentObject, feature));
 	}
 
-	protected void error(String string, int feature) {
+	protected void error(String string, Integer feature) {
 		this.state.hasErrors = true;
 		state.chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.currentObject, feature));
 	}
 
-	protected void assertTrue(String message, int feature, boolean executedPredicate) {
+	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
 		if (!executedPredicate)
 			error(message, feature);
 	}
 
-	protected void assertFalse(String message, int feature, boolean executedPredicate) {
+	protected void assertFalse(String message, Integer feature, boolean executedPredicate) {
 		if (executedPredicate)
 			error(message, feature);
 	}
@@ -344,9 +344,13 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		}
 	}
 
+	protected void checkDone() {
+		throw new GuardException();
+	}
+
 	static class DiagnosticImpl implements Diagnostic {
 
-		private DiagnosticImpl(int severity, String message, EObject source, int feature) {
+		private DiagnosticImpl(int severity, String message, EObject source, Integer feature) {
 			super();
 			this.severity = severity;
 			this.message = message;

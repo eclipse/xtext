@@ -20,7 +20,6 @@ import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
@@ -80,9 +79,6 @@ public class XtextEditor extends TextEditor {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		if (log.isDebugEnabled())
 			log.debug("init:" + input);
-
-		if (!(input instanceof IURIEditorInput))
-			throw new IllegalArgumentException("Can only handle IURIEditorInputs");
 
 		// do document provider setup
 		setDocumentProvider(documentProvider.get());

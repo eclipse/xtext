@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -36,12 +37,14 @@ import com.google.inject.Inject;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
- * 
+ *
  * @author Jan Köhnlein
  * @author Heiko Behrens
  * @author Dennis Hübner
  */
 public class XtextResource extends ResourceImpl {
+
+	private boolean validationDisabled;
 
 	private IParser parser;
 
@@ -63,11 +66,11 @@ public class XtextResource extends ResourceImpl {
 	protected void setInjectedParser(ISwitchingParser parser) {
 		this.parser = parser;
 	}
-	
+
 	public XtextResource(URI uri) {
 		super(uri);
 	}
-	
+
 	public XtextResource() {
 		super();
 	}
@@ -130,15 +133,15 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	protected void doLinking() {
-		if (parseResult.getRootASTElement() == null)
+		if (parseResult.getRootASTElement() == null && !validationDisabled)
 			return;
-		
+
 		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(parseResult.getRootASTElement(), consumer);
 		getErrors().addAll(consumer.getResult());
 		// logger.debug("errors: " + errors.size());
 	}
-	
+
 	private void addAdaptersToRoot() {
 		NodeContentAdapter.createAdapterAndAddToNode(parseResult.getRootNode());
 	}
@@ -188,12 +191,15 @@ public class XtextResource extends ResourceImpl {
 	/**
 	 * Creates {@link Diagnostic}s from {@link SyntaxError}s in
 	 * {@link ParseResult}
-	 * 
+	 *
 	 * @param list
 	 *            of {@link SyntaxError}s
 	 * @return list of {@link Diagnostic}
 	 */
 	private List<Diagnostic> createDiagnostics(IParseResult parseResult) {
+		if (validationDisabled)
+			return Collections.emptyList();
+
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
 		for (SyntaxError error : parseResult.getParseErrors()) {
 			diagnostics.add(new XtextSyntaxDiagnostic(error));
@@ -243,5 +249,17 @@ public class XtextResource extends ResourceImpl {
 
 	public void setParseResult(IParseResult parseResult) {
 		this.parseResult = parseResult;
+	}
+
+	public boolean isValidationDisabled() {
+		return validationDisabled;
+	}
+
+	public void setValidationDisabled(boolean validationDisabled) {
+		this.validationDisabled = validationDisabled;
+		if (validationDisabled) {
+			getWarnings().clear();
+			getErrors().clear();
+		}
 	}
 }
