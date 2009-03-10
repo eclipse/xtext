@@ -22,13 +22,13 @@ public class GrammarAccessTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		with(KeywordsTestLanguageStandaloneSetup.class);
 		this.grammarAccess = get(KeywordsTestLanguageGrammarAccess.class);
-		this.modelElements = grammarAccess.prModel();
+		this.modelElements = grammarAccess.getModelAccess();
 	}
 
 	public void testKeywordValues() {
-		assertEquals("foo\\bar", modelElements.ele00KeywordFooBar().getValue());
-		assertEquals("foo\\", modelElements.ele10KeywordFoo().getValue());
-		assertEquals("\\bar", modelElements.ele20KeywordBar().getValue());
-		assertEquals("\\", modelElements.ele30KeywordReverseSolidus().getValue());
+		assertEquals("foo\\bar", modelElements.getFirstFooBarKeyword_0_0().getValue());
+		assertEquals("foo\\", modelElements.getSecondFooKeyword_1_0().getValue());
+		assertEquals("\\bar", modelElements.getThirdBarKeyword_2_0().getValue());
+		assertEquals("\\", modelElements.getForthReverseSolidusKeyword_3_0().getValue());
 	}
 }

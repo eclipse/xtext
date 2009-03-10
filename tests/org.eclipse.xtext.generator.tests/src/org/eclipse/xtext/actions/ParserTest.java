@@ -79,16 +79,16 @@ public abstract class ParserTest extends AbstractXtextTests {
 		assertNotNull("adapter", adapter);
 		CompositeNode node = adapter.getParserNode();
 		assertNotNull("node", node);
-		assertEquals("node.grammarElement", grammarAccess.prModel().ele0ParserRuleCallChild(), node.getGrammarElement());
+		assertEquals("node.grammarElement", grammarAccess.getModelAccess().getChildParserRuleCall_0(), node.getGrammarElement());
 		assertEquals(node.getChildren().toString(), 1, node.getChildren().size());
 		AbstractNode childNode = node.getChildren().get(0);
 		assertTrue(childNode.toString(), childNode instanceof LeafNode);
-		assertEquals("childNode.grammarElement", grammarAccess.prChild().ele0TerminalRuleCallID(), childNode.getGrammarElement());
+		assertEquals("childNode.grammarElement", grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(), childNode.getGrammarElement());
 		assertNull("childNode.element", childNode.getElement());
 
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
 		assertNotNull("rootNode", rootNode);
-		assertEquals("rootNode.grammarElement", grammarAccess.prModel().getRule(), rootNode.getGrammarElement());
+		assertEquals("rootNode.grammarElement", grammarAccess.getModelRule(), rootNode.getGrammarElement());
 		assertEquals(rootNode.getChildren().toString(), 1, rootNode.getChildren().size());
 		assertEquals("node is child of rootNode", rootNode, node.getParent());
 		assertNull("rootNode.element", rootNode.getElement());
@@ -117,32 +117,32 @@ public abstract class ParserTest extends AbstractXtextTests {
 		assertNotNull("adapter", adapter);
 		CompositeNode node = adapter.getParserNode();
 		assertNotNull("node", node);
-		assertEquals("node.grammarElement", grammarAccess.prModel().ele10ActionParentleft(), node.getGrammarElement());
+		assertEquals("node.grammarElement", grammarAccess.getModelAccess().getParentleftAction_1_0(), node.getGrammarElement());
 		assertEquals(node.getChildren().toString(), 2, node.getChildren().size());
 		CompositeNode firstChildNode = (CompositeNode) node.getChildren().get(0);
-		assertEquals("firstChildNode.grammarElement", grammarAccess.prModel().getRule(), firstChildNode.getGrammarElement());
+		assertEquals("firstChildNode.grammarElement", grammarAccess.getModelRule(), firstChildNode.getGrammarElement());
 		assertNull("firstChildNode.element", firstChildNode.getElement());
 		assertEquals(firstChildNode.getChildren().toString(), 1, firstChildNode.getChildren().size());
 
 		AbstractNode childNode = firstChildNode.getChildren().get(0);
 		assertTrue(childNode.toString(), childNode instanceof CompositeNode);
-		assertEquals("childNode.grammarElement", grammarAccess.prModel().ele0ParserRuleCallChild(), childNode.getGrammarElement());
+		assertEquals("childNode.grammarElement", grammarAccess.getModelAccess().getChildParserRuleCall_0(), childNode.getGrammarElement());
 		assertEquals("childNode.element", ((Parent)model).getLeft(), childNode.getElement());
 		assertEquals(((CompositeNode) childNode).getChildren().toString(), 1, ((CompositeNode) childNode).getChildren().size());
-		assertEquals("childNode.children[0].grammarElement", grammarAccess.prChild().ele0TerminalRuleCallID(),
+		assertEquals("childNode.children[0].grammarElement", grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(),
 				((CompositeNode) childNode).getChildren().get(0).getGrammarElement());
 
 		CompositeNode secondChildNode = (CompositeNode) node.getChildren().get(1);
-		assertEquals("childNode.grammarElement", grammarAccess.prModel().ele110ParserRuleCallChild(), secondChildNode.getGrammarElement());
+		assertEquals("childNode.grammarElement", grammarAccess.getModelAccess().getRightChildParserRuleCall_1_1_0(), secondChildNode.getGrammarElement());
 		assertEquals("childNode.element", ((Parent)model).getRight(), secondChildNode.getElement());
 
 		AbstractNode otherChildNode = secondChildNode.getChildren().get(1);
 		assertTrue(otherChildNode.toString(), otherChildNode instanceof LeafNode);
-		assertEquals("otherChildNode.grammarElement", grammarAccess.prChild().ele0TerminalRuleCallID(),	otherChildNode.getGrammarElement());
+		assertEquals("otherChildNode.grammarElement", grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(),	otherChildNode.getGrammarElement());
 
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
 		assertNotNull("rootNode", rootNode);
-		assertEquals("rootNode.grammarElement", grammarAccess.prModel().ele10ActionParentleft(), rootNode.getGrammarElement());
+		assertEquals("rootNode.grammarElement", grammarAccess.getModelAccess().getParentleftAction_1_0(), rootNode.getGrammarElement());
 		assertEquals(node, rootNode);
 	}
 

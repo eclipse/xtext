@@ -38,59 +38,59 @@ public class XtextFormattingTokenSerializer extends FormattingTokenSerializer {
 		XtextGrammarAccess g = (XtextGrammarAccess) getGrammarAccess();
 
 		// Grammar
-		GrammarElements gr = g.prGrammar();
-		cfg.setLinewrap(2).after(gr.ele2Group());
-		cfg.setLinewrap(2).after(gr.ele4AssignmentMetamodelDeclarations());
-		cfg.setLinewrap(2).after(gr.ele5AssignmentRules());
+		GrammarElements gr = g.getGrammarAccess();
+		cfg.setLinewrap(2).after(gr.getGroup_2());
+		cfg.setLinewrap(2).after(gr.getMetamodelDeclarationsAssignment_4());
+		cfg.setLinewrap(2).after(gr.getRulesAssignment_5());
 
 		// ParserRule
-		ParserRuleElements pr = g.prParserRule();
-		cfg.setLinewrap().after(pr.ele3KeywordColon());
-		cfg.setIndentation(pr.ele3KeywordColon(), pr.ele5KeywordSemicolon());
-		cfg.setNoSpace().before(pr.ele3KeywordColon());
-		cfg.setNoSpace().before(pr.ele5KeywordSemicolon());
+		ParserRuleElements pr = g.getParserRuleAccess();
+		cfg.setLinewrap().after(pr.getColonKeyword_3());
+		cfg.setIndentation(pr.getColonKeyword_3(), pr.getSemicolonKeyword_5());
+		cfg.setNoSpace().before(pr.getColonKeyword_3());
+		cfg.setNoSpace().before(pr.getSemicolonKeyword_5());
 
 		// TerminalRule
-		TerminalRuleElements tr = g.prTerminalRule();
-		cfg.setLinewrap().after(tr.ele3KeywordColon());
-		cfg.setIndentation(tr.ele3KeywordColon(), tr.ele5KeywordSemicolon());
-		cfg.setNoSpace().before(tr.ele3KeywordColon());
-		cfg.setNoSpace().before(tr.ele5KeywordSemicolon());
+		TerminalRuleElements tr = g.getTerminalRuleAccess();
+		cfg.setLinewrap().after(tr.getColonKeyword_3());
+		cfg.setIndentation(tr.getColonKeyword_3(), tr.getSemicolonKeyword_5());
+		cfg.setNoSpace().before(tr.getColonKeyword_3());
+		cfg.setNoSpace().before(tr.getSemicolonKeyword_5());
 
 		// Assignment
-		AssignmentElements as = g.prAssignment();
-		cfg.setNoSpace().around(as.ele1AssignmentOperator());
+		AssignmentElements as = g.getAssignmentAccess();
+		cfg.setNoSpace().around(as.getOperatorAssignment_1());
 
 		// AbstractToken
-		AbstractTokenWithCardinalityElements at = g.prAbstractTokenWithCardinality();
-		cfg.setNoSpace().before(at.ele1AssignmentCardinality());
+		AbstractTokenWithCardinalityElements at = g.getAbstractTokenWithCardinalityAccess();
+		cfg.setNoSpace().before(at.getCardinalityAssignment_1());
 
 		// ParenthesizedElement
-		ParenthesizedElementElements pe = g.prParenthesizedElement();
-		cfg.setNoSpace().after(pe.ele0KeywordLeftParenthesis());
-		cfg.setNoSpace().before(pe.ele2KeywordRightParenthesis());
+		ParenthesizedElementElements pe = g.getParenthesizedElementAccess();
+		cfg.setNoSpace().after(pe.getLeftParenthesisKeyword_0());
+		cfg.setNoSpace().before(pe.getRightParenthesisKeyword_2());
 
 		// CrossReference
-		CrossReferenceElements cr = g.prCrossReference();
-		cfg.setNoSpace().after(cr.ele0KeywordLeftSquareBracket());
-		cfg.setNoSpace().before(cr.ele3KeywordRightSquareBracket());
-		cfg.setNoSpace().around(cr.ele20KeywordVerticalLine());
+		CrossReferenceElements cr = g.getCrossReferenceAccess();
+		cfg.setNoSpace().after(cr.getLeftSquareBracketKeyword_0());
+		cfg.setNoSpace().before(cr.getRightSquareBracketKeyword_3());
+		cfg.setNoSpace().around(cr.getVerticalLineKeyword_2_0());
 
 		// Alternatives
-		AlternativesElements al = g.prAlternatives();
-		cfg.setNoSpace().around(al.ele110KeywordVerticalLine());
+		AlternativesElements al = g.getAlternativesAccess();
+		cfg.setNoSpace().around(al.getVerticalLineKeyword_1_1_0());
 
 		// Action
-		ActionElements ac = g.prAction();
-		cfg.setNoSpace().around(ac.ele22AssignmentOperator());
-		cfg.setNoSpace().around(ac.ele20KeywordFullStop());
-		cfg.setNoSpace().after(ac.ele0KeywordLeftCurlyBracket());
-		cfg.setNoSpace().before(ac.ele3KeywordRightCurlyBracket());
-		cfg.setNoSpace().around(ac.ele2200KeywordEqualsSign());
-		cfg.setNoSpace().around(ac.ele2201KeywordPlusSignEqualsSign());
+		ActionElements ac = g.getActionAccess();
+		cfg.setNoSpace().around(ac.getOperatorAssignment_2_2());
+		cfg.setNoSpace().around(ac.getFullStopKeyword_2_0());
+		cfg.setNoSpace().after(ac.getLeftCurlyBracketKeyword_0());
+		cfg.setNoSpace().before(ac.getRightCurlyBracketKeyword_3());
+		cfg.setNoSpace().around(ac.getOperatorEqualsSignKeyword_2_2_0_0());
+		cfg.setNoSpace().around(ac.getOperatorPlusSignEqualsSignKeyword_2_2_0_1());
 
-		TypeRefElements typeRef = g.prTypeRef();
-		cfg.setNoSpace().around(typeRef.ele01KeywordColonColon());
+		TypeRefElements typeRef = g.getTypeRefAccess();
+		cfg.setNoSpace().around(typeRef.getColonColonKeyword_0_1());
 	}
 
 }
