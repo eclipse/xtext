@@ -175,6 +175,9 @@ public class Xtext2EcoreTransformer {
 					}
 				} else {
 					if (rule.getType() != null) {
+						if (!(rule.getType().getClassifier() instanceof EDataType))
+							throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
+									"Return type of a terminal rule must be an EDataType.", rule.getType());
 						checkSupertypeOfOverriddenTerminalRule(rule);
 					}
 				}
@@ -700,6 +703,9 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name, boolean createIfMissing) throws TransformationException {
+		if (typeRef.getClassifier() != null && typeRef.getMetamodel() == null)
+			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias,
+					"Cannot find metamodel for type '" + typeRef.getClassifier().getName() + "'", typeRef);
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
 			// we assumend EString for terminal rules and datatype rules, so
