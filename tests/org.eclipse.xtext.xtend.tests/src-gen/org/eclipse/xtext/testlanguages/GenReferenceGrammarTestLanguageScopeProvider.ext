@@ -16,10 +16,10 @@ extension org::eclipse::xtend::util::stdlib::io;
  */
 
 
-List[IScopedElement] scope_mutter(Familie this):
+List[IScopedElement] scope_vater(Familie this):
 	allElements().typeSelect(Erwachsener).collect(x | createScopedElement(x.referenceName(), x));
 	
-List[IScopedElement] scope_mutter(emf::EObject this) :
+List[IScopedElement] scope_vater(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
 List[IScopedElement] scope_kinder(Familie this):
@@ -28,9 +28,9 @@ List[IScopedElement] scope_kinder(Familie this):
 List[IScopedElement] scope_kinder(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 
-List[IScopedElement] scope_vater(Familie this):
+List[IScopedElement] scope_mutter(Familie this):
 	allElements().typeSelect(Erwachsener).collect(x | createScopedElement(x.referenceName(), x));
 	
-List[IScopedElement] scope_vater(emf::EObject this) :
+List[IScopedElement] scope_mutter(emf::EObject this) :
 	allElements().collect(x | createScopedElement(x.referenceName(), x));
 

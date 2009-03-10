@@ -20,5 +20,15 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime
-Export-Package: org.eclipse.xtext.example,org.eclipse.xtext.example.domainmodel,org.eclipse.xtext.example.domainmodel.impl,org.eclipse.xtext.example.domainmodel.util,org.eclipse.xtext.example.parseTreeConstruction,org.eclipse.xtext.example.parser.antlr,org.eclipse.xtext.example.parser.antlr.internal,org.eclipse.xtext.example.parser.packrat,org.eclipse.xtext.example.parser.packrat.consumers,org.eclipse.xtext.example.services,xtext.example
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.domainmodel,
+ org.eclipse.xtext.example.domainmodel.impl,
+ org.eclipse.xtext.example.domainmodel.util,
+ org.eclipse.xtext.example.parseTreeConstruction,
+ org.eclipse.xtext.example.parser.antlr,
+ org.eclipse.xtext.example.parser.antlr.internal,
+ org.eclipse.xtext.example.parser.packrat,
+ org.eclipse.xtext.example.parser.packrat.consumers,
+ org.eclipse.xtext.example.services,
+ xtext.example
 
