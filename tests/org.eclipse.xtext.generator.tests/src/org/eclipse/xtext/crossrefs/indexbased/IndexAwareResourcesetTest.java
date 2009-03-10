@@ -59,6 +59,7 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 	}
 
 	private INameProvider nameProvider = new AbstractDeclarativeNameProvider() {
+		@SuppressWarnings("unused")
 		public String getName(Type type) {
 			return type.getName();
 		}
@@ -86,6 +87,7 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 								});
 					}
 
+					@SuppressWarnings("unused")
 					public Class<? extends IIndexStore> bindIIndexStore() {
 						return InMemoryIndex.class;
 					}
