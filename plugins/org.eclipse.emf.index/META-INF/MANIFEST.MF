@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMF Index Plug-in
 Bundle-SymbolicName: org.eclipse.emf.index
-Bundle-Version: 1.0.0
-Bundle-Vendor: itemis AG
+Bundle-Version: 0.7.0.qualifier
+Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport
 Export-Package: org.eclipse.emf.index,
