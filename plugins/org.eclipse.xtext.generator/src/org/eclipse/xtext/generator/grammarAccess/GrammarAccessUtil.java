@@ -42,8 +42,8 @@ public class GrammarAccessUtil {
 			String s = getSingleElementDescription(e);
 			if (s != null)
 				r.add(0, s);
-			e = e.eContainer() instanceof AbstractElement ? (AbstractElement) e
-					.eContainer() : null;
+			e = e.eContainer() instanceof AbstractElement ?
+					(AbstractElement) e.eContainer() : null;
 		}
 		return r;
 	}
