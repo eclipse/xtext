@@ -17,7 +17,7 @@ public class DefaultTransientValueService extends AbstractTransientValueService 
 	
 	@Override
 	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
-		return !owner.eIsSet(feature);
+		return feature.isTransient() || !owner.eIsSet(feature);
 	}
 
 }
