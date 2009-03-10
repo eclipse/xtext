@@ -19,5 +19,14 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
  org.antlr.runtime
-Export-Package: org.eclipse.xtext.example,org.eclipse.xtext.example.fowlerdsl,org.eclipse.xtext.example.fowlerdsl.impl,org.eclipse.xtext.example.fowlerdsl.util,org.eclipse.xtext.example.parseTreeConstruction,org.eclipse.xtext.example.parser.antlr,org.eclipse.xtext.example.parser.antlr.internal,org.eclipse.xtext.example.parser.packrat,org.eclipse.xtext.example.parser.packrat.consumers,org.eclipse.xtext.example.services
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.fowlerdsl,
+ org.eclipse.xtext.example.fowlerdsl.impl,
+ org.eclipse.xtext.example.fowlerdsl.util,
+ org.eclipse.xtext.example.parseTreeConstruction,
+ org.eclipse.xtext.example.parser.antlr,
+ org.eclipse.xtext.example.parser.antlr.internal,
+ org.eclipse.xtext.example.parser.packrat,
+ org.eclipse.xtext.example.parser.packrat.consumers,
+ org.eclipse.xtext.example.services
 
