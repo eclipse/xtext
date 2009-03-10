@@ -20,7 +20,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
- * base class redirecting callbacks to respective Xpand definitions.
+ * base class redirecting call backs to respective Xpand definitions.
  * The template needs to have the same qualified name the extending class has. 
  */
 public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
@@ -38,20 +38,14 @@ public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
 	}
 
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
-		if (log.isInfoEnabled())
-			log.info("executing addToPluginXmlRt for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 	
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
-		if (log.isInfoEnabled())
-			log.info("executing addToPluginXmlUi for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
-		if (log.isInfoEnabled())
-			log.info("executing addToStandaloneSetup for "+getClass().getName());
 		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
 	
