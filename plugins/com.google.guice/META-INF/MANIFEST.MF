@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Guice Plug-in
 Bundle-SymbolicName: com.google.guice
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: aopalliance.jar,
- guice-1.0.jar
+ guice-1.0_patched.jar
 Export-Package: com.google.inject,
  com.google.inject.asm,
  com.google.inject.asm.signature,
