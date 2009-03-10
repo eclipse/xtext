@@ -171,11 +171,14 @@ public class Linker extends AbstractLinker {
 	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
 		final IDiagnosticProducer producer = createDiagnosticProducer(consumer);
 		clearAllReferences(model);
+		ensureModelLinked(model, producer);
+	}
+
+	protected void ensureModelLinked(EObject model, final IDiagnosticProducer producer) {
 		ensureLinked(model, producer);
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
-
 	}
 
 	private void clearAllReferences(EObject model) {
