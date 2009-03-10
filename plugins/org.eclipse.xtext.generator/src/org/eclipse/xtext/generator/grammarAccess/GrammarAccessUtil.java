@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.grammarAccess;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -17,6 +21,11 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextRuntimeModule;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
+
+import com.google.inject.Guice;
 
 /**
  * @author Moritz Eysholdt
@@ -27,48 +36,52 @@ public class GrammarAccessUtil {
 		return obj.eClass().getName();
 	}
 
-	private static String getElementDescription(AbstractElement ele) {
+	private static List<String> getElementDescription(AbstractElement e) {
+		ArrayList<String> r = new ArrayList<String>();
+		while (e != null) {
+			String s = getSingleElementDescription(e);
+			if (s != null)
+				r.add(0, s);
+			e = e.eContainer() instanceof AbstractElement ? (AbstractElement) e
+					.eContainer() : null;
+		}
+		return r;
+	}
+
+	private static String getSingleElementDescription(AbstractElement ele) {
 		if (ele instanceof Keyword)
 			return ((Keyword) ele).getValue();
-		if (ele instanceof Assignment)
+		else if (ele instanceof Assignment)
 			return ((Assignment) ele).getFeature();
-		if (ele instanceof RuleCall)
+		else if (ele instanceof RuleCall)
 			return ((RuleCall) ele).getRule().getName();
-		if (ele instanceof Action) {
+		else if (ele instanceof Action) {
 			Action a = (Action) ele;
-			return (a.getType() != null && a.getType().getClassifier() != null ? a.getType().getClassifier().getName() : "") + a.getFeature();
-		}
-		if (ele instanceof CrossReference) {
+			return (a.getType() != null && a.getType().getClassifier() != null ? a
+					.getType().getClassifier().getName()
+					: "")
+					+ a.getFeature();
+		} else if (ele instanceof CrossReference) {
 			CrossReference cr = (CrossReference) ele;
-			String terminal = getElementDescription(cr.getTerminal());
-			String type = (cr.getType() != null && cr.getType().getClassifier() != null) ? cr.getType().getClassifier().getName() : "";
-			return terminal + type;
+			if (cr.getType() != null && cr.getType().getClassifier() != null)
+				return cr.getType().getClassifier().getName();
 		}
-		return "";
+		return null;
 	}
 
-	public static String serialize(EObject obj) {
-		return "not supported";
-//		Injector injector = Guice.createInjector(new XtextRuntimeModule());
-//		SerializerUtil serializer = injector.getInstance(SerializerUtil.class);
-//		return serializer.serialize(obj);
-	}
+	private static SerializerUtil xtextSerializer = Guice.createInjector(
+			new XtextRuntimeModule()).getInstance(SerializerUtil.class);
 
-	private static String getElementJavaDescription(AbstractElement ele) {
-		String name = getElementDescription(ele);
-		if (name == null || "".equals(name))
-			return "";
-		String jName = toJavaIdentifier(name, true);
-		if (jName == null || "".equals(jName)) {
-			StringBuffer b = new StringBuffer();
-			for (char c : name.toCharArray()) {
-				String n = UnicodeCharacterDatabaseNames.getCharacterName(c);
-				if (n != null)
-					b.append(n + " ");
-			}
-			return toJavaIdentifier(b.toString().toLowerCase().trim(), true);
+	public static String serialize(EObject obj, String prefix) {
+		String s;
+		try {
+			s = xtextSerializer.serialize(obj);
+		} catch (XtextSerializationException e) {
+			s = e.toString();
+			// e.printStackTrace();
 		}
-		return jName;
+		s = prefix + s.replaceAll("[\\r\\n]", "\n" + prefix);
+		return s;
 	}
 
 	private static String getElementPath(AbstractElement ele) {
@@ -78,6 +91,7 @@ public class GrammarAccessUtil {
 				&& obj.eContainer() != null) {
 			EObject tmp = obj.eContainer();
 			buf.insert(0, tmp.eContents().indexOf(obj));
+			buf.insert(0, "_");
 			obj = tmp;
 		}
 		return buf.toString();
@@ -101,17 +115,33 @@ public class GrammarAccessUtil {
 	}
 
 	public static String getUniqueElementName(AbstractElement ele) {
-		if (ele == null)
-			return "null";
-		StringBuffer r = new StringBuffer();
-		r.append(getElementPath(ele));
-		r.append(getElementTypeDescription(ele));
-		r.append(getElementJavaDescription(ele));
-		return r.toString();
+		try {
+			if (ele == null)
+				return "null";
+			ArrayList<String> r = new ArrayList<String>();
+			r.addAll(getElementDescription(ele));
+			r.add(getElementTypeDescription(ele));
+			r.add(getElementPath(ele));
+			return toJavaIdentifier(r, true);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return "failure";
+		}
 	}
 
-	public static String toJavaIdentifier(String text, Boolean uppercaseFirst) {
-		boolean start = true, up = true;
+	private static String toJavaIdentifier(List<String> text,
+			boolean uppercaseFirst) {
+		Iterator<String> i = text.iterator();
+		StringBuffer b = new StringBuffer(toJavaIdentifierSegment(i.next(),
+				true, uppercaseFirst));
+		while (i.hasNext())
+			b.append(toJavaIdentifierSegment(i.next(), false, true));
+		return b.toString();
+	}
+
+	private static String toJavaIdentifierSegmentInt(String text,
+			boolean isFirst, boolean uppercaseFirst) {
+		boolean start = isFirst, up = true;
 		StringBuffer r = new StringBuffer();
 		for (char c : text.toCharArray()) {
 			boolean valid = start ? Character.isJavaIdentifierStart(c)
@@ -128,5 +158,29 @@ public class GrammarAccessUtil {
 				up = true;
 		}
 		return r.toString();
+	}
+
+	private static String toJavaIdentifierSegment(String text, boolean isFirst,
+			boolean uppercaseFirst) {
+		String r = toJavaIdentifierSegmentInt(text, isFirst, uppercaseFirst);
+		if (r.length() > 0)
+			return r;
+		StringBuffer b = new StringBuffer();
+		for (char c : text.toCharArray()) {
+			String n = UnicodeCharacterDatabaseNames.getCharacterName(c);
+			if (n != null)
+				b.append(n + " ");
+		}
+		return toJavaIdentifierSegmentInt(b.toString().toLowerCase().trim(),
+				isFirst, true);
+	}
+
+	public static String toJavaIdentifier(String text, Boolean uppercaseFirst) {
+		try {
+			return toJavaIdentifierSegment(text, true, uppercaseFirst);
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return "failure";
+		}
 	}
 }

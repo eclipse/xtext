@@ -78,22 +78,19 @@ String gaSimpleName(Grammar grammar):
 	
 /**
  * Returns the method name for accessing a rule via a GrammarAccess implementation.
- * @param rule the rule for which the accesor method is needed
+ * @param rule the rule for which the accessor method is needed
  * @return the method's name.
  */
-String gaRuleAccessMethodName(TerminalRule rule):
-	"tr" + rule.gaRuleIdentifyer();
+String gaRuleAccessMethodName(AbstractRule rule):
+	"get" + rule.gaRuleIdentifyer() + "Rule";
 	
 /**
- * Returns the method name for accessing a rule via a GrammarAccess implementation.
- * @param rule the rule for which the accesor method is needed
+ * Returns the method name for accessing a rule's content via a ParseRuleAccess implementation.
+ * @param rule the rule for which the accessor method is needed
  * @return the method's name.
  */
-String gaRuleAccessMethodName(ParserRule rule):
-	"pr" + rule.gaRuleIdentifyer();
-	
-String gaRuleAccessMethodName(AbstractRule rule):
-	"unknownRuleType" + rule.gaRuleIdentifyer();
+String gaRuleElementsMethodName(ParserRule rule):
+	"get" + rule.gaRuleIdentifyer() + "Access";
 
 /**
  * Returns the method name for accessing an element via a GrammarAccess implementation.
@@ -101,7 +98,7 @@ String gaRuleAccessMethodName(AbstractRule rule):
  * @return the method's name.
  */
 String gaElementAccessMethodeName(AbstractElement element):
-	"ele" + element.gaElementIdentifyer();
+	"get" + element.gaElementIdentifyer();
 
 /**
  * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
@@ -114,12 +111,19 @@ String gaRuleAccesorClassName(AbstractRule rule):
 	
 /**
  * Returns the invokation of the rule accessor method as Java statement.
- * Example: prStatemachine() 
  * @param rule the rule
  * @return The java statement
  */	
 String gaRuleAccessor(AbstractRule rule):
 	rule.gaRuleAccessMethodName() + "()";
+	
+/**
+ * Returns the invokation of the rule's content accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaElementsAccessor(ParserRule rule):
+	rule.gaRuleElementsMethodName() + "()";
 	
 /**
  * Returns the invokation of the element accessor method as Java statement.
@@ -139,7 +143,7 @@ String gaElementAccessor(AbstractElement ele):
  * @return The java statement
  */	
 String gaRuleElementAccessor(AbstractElement ele):
-	ele.containingParserRule().gaRuleAccessor() + "." + ele.gaElementAccessor();
+	ele.containingParserRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
 		
 /**
  * Returns the invokation of the element accessor method as full qualified Java statement.
@@ -153,8 +157,8 @@ String gaFullAccessor(AbstractElement ele):
 /*
  *
  */
-String grammarFragmentToStr(EObject ele):	
-	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject);
+String grammarFragmentToStr(EObject ele, String prefix):	
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.serialize(org.eclipse.emf.ecore.EObject, java.lang.String);
 
 
 
@@ -162,6 +166,9 @@ String grammarFragmentToStr(EObject ele):
 // ***  the API below is private. Only GrammarAccess.xpt is allowed to use it ***
 // ******************************************************************************
 
+String gaGrammarAccessLocalVarName(Grammar g):
+	"ga" + g.getName();
+	
 String gaElementAccessorLocalVarName(AbstractElement ele):
 	"c" + ele.gaElementIdentifyer();
 	
@@ -176,6 +183,9 @@ String gaRuleAccessorLocalVarName(TerminalRule rule):
 	
 String getClassName(EObject obj):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
+	
+Grammar usedGrammar(AbstractRule rule, Grammar parent):
+	parent.usedGrammars.selectFirst(g|g.allRules().contains(rule));
 	
 String loadElementParentStatement(AbstractElement ele):
 	if (AbstractElement.isInstance(ele.eContainer)) then

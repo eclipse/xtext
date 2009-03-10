@@ -17,12 +17,12 @@ public class FormattingTokenSerializerTestImpl extends FormattingTokenSerializer
 	protected void configureFormatting(FormattingConfig c) {
 		FormatterTestLanguageGrammarAccess f = (FormatterTestLanguageGrammarAccess) getGrammarAccess();
 
-		c.setLinewrap().after(f.prTestLinewrap().ele0KeywordLinewrap());
-		c.setLinewrap().after(f.prLine().ele2KeywordSemicolon());
-		c.setNoSpace().before(f.prLine().ele2KeywordSemicolon());
-		c.setIndentation(f.prTestIndentation().ele1KeywordLeftCurlyBracket(),
-				f.prTestIndentation().ele3KeywordRightCurlyBracket());
-		c.setLinewrap().after(f.prTestIndentation().ele1KeywordLeftCurlyBracket());
-		c.setLinewrap().after(f.prTestIndentation().ele3KeywordRightCurlyBracket());
+		c.setLinewrap().after(f.getTestLinewrapAccess().getLinewrapKeyword_0());
+		c.setLinewrap().after(f.getLineAccess().getSemicolonKeyword_2());
+		c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_2());
+		c.setIndentation(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(),
+				f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
+		c.setLinewrap().after(f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());
+		c.setLinewrap().after(f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());
 	}
 }

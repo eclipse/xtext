@@ -30,7 +30,7 @@ public class Inheritance2Test extends AbstractXtextTests {
 	}
 
 	public void testReturnTypes_01() {
-		ParserRule rule = grammarAccess.prModel().getRule();
+		ParserRule rule = grammarAccess.getModelRule();
 		EClassifier classifier = rule.getType().getClassifier();
 		assertEquals("Model", classifier.getName());
 		EPackage pack = classifier.getEPackage();
@@ -44,7 +44,7 @@ public class Inheritance2Test extends AbstractXtextTests {
 	}
 
 	public void testReturnTypes_02() {
-		ParserRule rule = grammarAccess.prElement().getRule();
+		ParserRule rule = grammarAccess.getElementRule();
 		EClassifier classifier = rule.getType().getClassifier();
 		assertEquals("Element", classifier.getName());
 		EPackage pack = classifier.getEPackage();

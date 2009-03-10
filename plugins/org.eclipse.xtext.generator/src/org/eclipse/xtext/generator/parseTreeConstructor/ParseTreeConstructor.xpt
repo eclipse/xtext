@@ -47,7 +47,7 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 		Solution s;
 «FOREACH allParserRules() AS pr-»
 «IF !pr.isDatatypeRule()-»
-		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getRule().getType().getClassifier()) && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getType().getClassifier()) && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 «ENDIF-»
 «ENDFOREACH-»		
 		return null;
@@ -62,10 +62,9 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 «IF !isDatatypeRule()»
 /************ begin Rule «name» ****************
  *
- * «grammarFragmentToStr()»
+«grammarFragmentToStr(" * ")»
  *
  **/
-
 «EXPAND element FOR alternatives-»
 
 /************ end Rule «name» ****************/
@@ -95,64 +94,44 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 «REM» ************ Groups ************* «ENDREM»
 
 «DEFINE element FOR Group»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
 
-	«REM»		
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new «abstractTokens.get(1).elementMethodName()»(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new «abstractTokens.get(0).elementMethodName()»(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 == null) {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-				if(s1 == null) return null;
-			} else {
-				last = s2.getPredecessor();
-				return s2;
-			}
-		}
-		return null;
-	}
-	«ENDREM»
-
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new «tokens.last().elementMethodName()»(current, this).firstSolution();
-«EXPAND groupItem(1) FOR tokens.withoutLast().reverse().toList()-»
+«EXPAND groupItem(1,"		") FOR tokens.withoutLast().reverse().toList()-»
 		return null;
 	}
 }
 «EXPAND element FOREACH tokens»
 «ENDDEFINE»
 
-«DEFINE groupItem(int i) FOR List[AbstractElement]-»
-		while(s«i» != null) {
-			Solution s«i+1» = new «first().elementMethodName()»(s«i».getCurrent(), s«i».getPredecessor()).firstSolution();
+«DEFINE groupItem(int i, String s) FOR List[AbstractElement]-»
+«s»while(s«i» != null) {
+«s»	Solution s«i+1» = new «first().elementMethodName()»(s«i».getCurrent(), s«i».getPredecessor()).firstSolution();
 «IF size == 1-»
-			if(s«i+1» != null) {
-				last = s«i+1».getPredecessor();
-				return s«i+1»;
-			} else {
-				s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
-			}
+«s»	if(s«i+1» != null) {
+«s»		last = s«i+1».getPredecessor();
+«s»		return s«i+1»;
+«s»	} else {
+«s»		s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
+«s»	}
 «ELSE-»
-«EXPAND groupItem(i+1) FOR this.withoutFirst()-»
-			s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
+«EXPAND groupItem(i+1,s+"	") FOR this.withoutFirst()-»
+«s»	s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
 «ENDIF-»
-		}
+«s»}
 «ENDDEFINE»
-
-
 
 
 
 «REM» ************ Alternatives ************* «ENDREM»
 
 «DEFINE element FOR Alternatives»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
@@ -174,7 +153,7 @@ protected class «elementMethodName()» extends AlternativesToken {
 «REM» ************ RuleCall ************* «ENDREM»
 
 «DEFINE element FOR RuleCall»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor-»
@@ -183,7 +162,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 	protected Solution createSolution() {
 «IF calledParserRule() != null-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) return null;
 		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
 		// FIXME: lexer rule call
@@ -232,7 +211,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «IF !isDatatypeRule(calledParserRule())»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) {
 				Solution s = new «calledParserRule().alternatives.elementMethodName()»(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -259,7 +238,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 
 
 «DEFINE element FOR Assignment»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends AssignmentToken  {
 	
 «EXPAND constructor-»
@@ -279,7 +258,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 «REM» ************ Action ************* «ENDREM»
 
 «DEFINE element FOR Action»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends ActionToken  {
 
 «EXPAND constructor-»
@@ -300,7 +279,7 @@ protected class «elementMethodName()» extends ActionToken  {
 «REM» ************ Keyword ************* «ENDREM»
 
 «DEFINE element FOR Keyword»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends KeywordToken  {
 	
 	public «elementMethodName()»(IInstanceDescription curr, AbstractToken pred) {
@@ -317,7 +296,7 @@ protected class «elementMethodName()» extends KeywordToken  {
 «REM» ************ CrossReference ************* «ENDREM»
 
 «DEFINE element FOR CrossReference»
-// «grammarFragmentToStr()»
+«grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends AbstractToken  {
 
 «EXPAND constructor-»

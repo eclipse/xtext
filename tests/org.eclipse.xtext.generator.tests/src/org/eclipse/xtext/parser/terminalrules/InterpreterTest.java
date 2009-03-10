@@ -32,94 +32,94 @@ public class InterpreterTest extends AbstractGeneratorTest {
 	}
 
 	public void testId_01() throws Exception {
-		doTest(true, "abc", grammarAccess.trID());
+		doTest(true, "abc", grammarAccess.getIDRule());
 	}
 
 	public void testId_02() throws Exception {
-		doTest(true, "^abc", grammarAccess.trID());
+		doTest(true, "^abc", grammarAccess.getIDRule());
 	}
 
 	public void testId_03() throws Exception {
-		doTest(true, "abc1", grammarAccess.trID());
+		doTest(true, "abc1", grammarAccess.getIDRule());
 	}
 
 	public void testId_04() throws Exception {
-		doTest(true, "^abc1", grammarAccess.trID());
+		doTest(true, "^abc1", grammarAccess.getIDRule());
 	}
 
 	public void testId_05() throws Exception {
-		doTest(false, "^1abc1", grammarAccess.trID());
+		doTest(false, "^1abc1", grammarAccess.getIDRule());
 	}
 
 	public void testId_06() throws Exception {
-		doTest(false, "abc ", grammarAccess.trID());
+		doTest(false, "abc ", grammarAccess.getIDRule());
 	}
 
 	public void testInt_01() throws Exception {
-		doTest(true, "0", grammarAccess.trINT());
+		doTest(true, "0", grammarAccess.getINTRule());
 	}
 
 	public void testInt_02() throws Exception {
-		doTest(true, "111", grammarAccess.trINT());
+		doTest(true, "111", grammarAccess.getINTRule());
 	}
 
 	public void testString_01() throws Exception {
-		doTest(true, "'abc'", grammarAccess.trSTRING());
+		doTest(true, "'abc'", grammarAccess.getSTRINGRule());
 	}
 
 	public void testString_02() throws Exception {
-		doTest(true, "\"abc\"", grammarAccess.trSTRING());
+		doTest(true, "\"abc\"", grammarAccess.getSTRINGRule());
 	}
 
 	public void testString_03() throws Exception {
-		doTest(true, "'ab cd'", grammarAccess.trSTRING());
+		doTest(true, "'ab cd'", grammarAccess.getSTRINGRule());
 	}
 
 	public void testMlComment_01() throws Exception {
-		doTest(true, "/* abc */", grammarAccess.trML_COMMENT());
+		doTest(true, "/* abc */", grammarAccess.getML_COMMENTRule());
 	}
 
 	public void testMlComment_02() throws Exception {
-		doTest(true, "/* ab\nc */", grammarAccess.trML_COMMENT());
+		doTest(true, "/* ab\nc */", grammarAccess.getML_COMMENTRule());
 	}
 
 	public void testSlComment_01() throws Exception {
-		doTest(true , "// abc", grammarAccess.trSL_COMMENT());
+		doTest(true , "// abc", grammarAccess.getSL_COMMENTRule());
 	}
 
 	public void testSlComment_02() throws Exception {
-		doTest(true , "// abc\n", grammarAccess.trSL_COMMENT());
+		doTest(true , "// abc\n", grammarAccess.getSL_COMMENTRule());
 	}
 
 	public void testSlComment_03() throws Exception {
-		doTest(true , "// abc\r\n", grammarAccess.trSL_COMMENT());
+		doTest(true , "// abc\r\n", grammarAccess.getSL_COMMENTRule());
 	}
 
 	public void testSlComment_04() throws Exception {
-		doTest(true , "// abc", grammarAccess.trSL_COMMENT());
+		doTest(true , "// abc", grammarAccess.getSL_COMMENTRule());
 	}
 
 	public void testWs_01() throws Exception {
-		doTest(true, "  ", grammarAccess.trWS());
+		doTest(true, "  ", grammarAccess.getWSRule());
 	}
 
 	public void testWs_02() throws Exception {
-		doTest(true, "\t", grammarAccess.trWS());
+		doTest(true, "\t", grammarAccess.getWSRule());
 	}
 
 	public void testWs_03() throws Exception {
-		doTest(true, " \n ", grammarAccess.trWS());
+		doTest(true, " \n ", grammarAccess.getWSRule());
 	}
 
 	public void testAnyOther_01() throws Exception {
-		doTest(true, "'", grammarAccess.trANY_OTHER());
+		doTest(true, "'", grammarAccess.getANY_OTHERRule());
 	}
 
 	public void testAnyOther_02() throws Exception {
-		doTest(true, ".", grammarAccess.trANY_OTHER());
+		doTest(true, ".", grammarAccess.getANY_OTHERRule());
 	}
 
 	public void testAnyOther_03() throws Exception {
-		doTest(true, "\b", grammarAccess.trANY_OTHER());
+		doTest(true, "\b", grammarAccess.getANY_OTHERRule());
 	}
 }
