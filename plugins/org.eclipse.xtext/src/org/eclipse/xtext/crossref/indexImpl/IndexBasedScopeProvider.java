@@ -17,9 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor.Query;
-import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.AbstractScopeProvider;
@@ -34,9 +32,9 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class IndexBasedScopeProvider extends AbstractScopeProvider {
-
+	
 	private final IIndexStore index;
-
+	
 	@Inject
 	public IndexBasedScopeProvider(IIndexStore index) {
 		this.index = index;
@@ -46,14 +44,14 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		Resource eResource = context.eResource();
 		Iterable<IScopedElement> iterable = getElements(eResource.getURI().toPlatformString(true), type);
 		TreeIterator<EObject> eAllContents = EcoreUtil.getRootContainer(context).eAllContents();
-
+			
 		return new SimpleNestedScope(createOuter(eAllContents, type), iterable);
 	}
 
 	private Iterable<IScopedElement> getElements(String uri, EClass eClazz) {
-		ResourceDescriptor descriptor = index.resourceDAO().createQuery().uri(uri).executeSingleResult();
-		EClassDescriptor clazzDesc = index.eClassDAO().createQueryEClass(eClazz).executeSingleResult();
-		Query eClassQuery = index.eObjectDAO().createQuery().resource(descriptor).eClass(clazzDesc);
+		Query eClassQuery = index.eObjectDAO().createQuery();
+		eClassQuery.resource().uri(uri);
+		eClassQuery.eClass().name(eClazz.getName()).ePackage().nsURI(eClazz.getEPackage().getNsURI());
 		final Iterable<EObjectDescriptor> iter = eClassQuery.executeListResult();
 		return AdaptingIterable.create(iter, new Function<EObjectDescriptor, IScopedElement>(){
 
@@ -63,7 +61,6 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 	}
 
 	private final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importURI");
-
 	/**
 	 * @param context
 	 * @param reference
