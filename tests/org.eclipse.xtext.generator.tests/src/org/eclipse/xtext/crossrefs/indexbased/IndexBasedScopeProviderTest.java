@@ -73,6 +73,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	private INameProvider nameProvider = new AbstractDeclarativeNameProvider() {
+		@SuppressWarnings("unused")
 		public String getName(Type type) {
 			return type.getName();
 		}
