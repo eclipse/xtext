@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.example.domainmodel
-Bundle-Vendor: itemis AG
-Bundle-Version: 0.7.0
+Bundle-Name: Xtext Domainmodel Example (Incubation)
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Version: 0.7.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
@@ -31,3 +31,4 @@ Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.parser.packrat.consumers,
  org.eclipse.xtext.example.services,
  xtext.example
+
