@@ -22,11 +22,11 @@ EClassifierDecl returns ecore::EClassifier:
 
 EDataTypeDecl returns ecore::EDataType : 
     (eAnnotations+=EAnnotationDecl)*  
-    (serializable?="!serializable")? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";") | EEnumDecl
+    (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";") | EEnumDecl
 ;
 
 EAnnotationDecl returns ecore::EAnnotation: 
-    "@" source=STRING (eModelElement=[ecore::EModelElement])? "(" contents+=MapEntrySuper ("," contents+=MapEntrySuper)* ")" ;
+    "@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")? ;
 
 EClassDecl returns ecore::EClass : (eAnnotations+=EAnnotationDecl)*  (^abstract?="abstract")?  ((interface?="interface")|"class") name=ID 
     ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
@@ -40,13 +40,13 @@ EStructuralFeatureDecl returns ecore::EStructuralFeature:
             
 EAttributeDecl returns ecore::EAttribute:
     (eAnnotations+=EAnnotationDecl)* 
-    ((iD?="ID")|(unique?="bag")|(ordered?="random")|(changeable?="readonly")|(volatile?="volatile")|(transient?="transient")|(unsettable?="unsettable")|(derived?="derived"))*
+    ((iD?="ID")|(unique=Bag)|(ordered=Random)|(changeable=Readonly)|(volatile?="volatile")|(transient?="transient")|(unsettable?="unsettable")|(derived?="derived"))*
     "attr" eGenericType=EGenericTypeReferenceDecl ("["lowerBound=INT (".." upperBound=SINT)? "]")?  name=ID ("=" defaultValueLiteral=STRING)?  ";" 
 ;
 
 EReferenceDecl returns ecore::EReference:
     (eAnnotations+=EAnnotationDecl)* 
-    ((resolveProxies?="local")|(unique?="bag")|(ordered?="random")|(changeable?="readonly")|(volatile?="volatile")|(transient?="transient")|(unsettable?="unsettable")|(derived?="derived"))*
+    ((resolveProxies=Local)|(unique=Bag)|(ordered=Random)|(changeable=Readonly)|(volatile?="volatile")|(transient?="transient")|(unsettable?="unsettable")|(derived?="derived"))*
     ((containment?="val")|"ref") eGenericType=EGenericTypeReferenceDecl ("["lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";" 
 ;
 
@@ -86,15 +86,9 @@ EParameterDecl returns ecore::EParameter:
     eGenericType=EGenericTypeReferenceDecl name=ID
 ;
 
-MapEntrySuper returns ecore::EObject:
-    MapEntry
+MapEntry returns ecore::EStringToStringMapEntry:
+   key=ID "=" value=STRING 
 ;
-    
-MapEntry:
-   detailKey=ID "=" detailValue=STRING 
-;        
-
-MultiplicityExpr : "+" | "?" | "*" ; 
 
 QID: ID (("."|"$") ID)*;
 
@@ -103,3 +97,22 @@ STRING_OR_QID : STRING | QID ;
 SINT returns ecore::EInt :
        '-'? INT;
 
+terminal Bag returns ecore::EBoolean :
+	"bag"
+;
+
+terminal Random returns ecore::EBoolean :
+	"random"
+;
+
+terminal Readonly returns ecore::EBoolean :
+	"readonly"
+;
+
+terminal Local returns ecore::EBoolean :
+	"local"
+;
+
+terminal Serializable returns ecore::EBoolean :
+	"!serializable"
+;

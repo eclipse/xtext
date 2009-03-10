@@ -31,7 +31,7 @@ public class EcoreDslActivator extends org.eclipse.xtext.example.internal.EcoreD
 	Logger logger = Logger.getLogger(EcoreDslActivator.class);
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.xtext.ecore.dsl.ui";
+	public static final String PLUGIN_ID = "org.eclipse.xtext.ecoredsl.ui";
 	
 	private static final String RESOURCE_NAME = PLUGIN_ID + ".messages";
 

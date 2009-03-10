@@ -16,8 +16,6 @@ import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.EcoredslFactory;
 import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
 import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
-import org.eclipse.xtext.example.ecoredsl.MapEntry;
-import org.eclipse.xtext.example.ecoredsl.MultiplicityExpr;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,20 +38,6 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * @generated
    */
   private EClass importStatementDeclEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass mapEntryEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass multiplicityExprEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -190,46 +174,6 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMapEntry()
-  {
-    return mapEntryEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getMapEntry_DetailKey()
-  {
-    return (EAttribute)mapEntryEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getMapEntry_DetailValue()
-  {
-    return (EAttribute)mapEntryEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getMultiplicityExpr()
-  {
-    return multiplicityExprEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EcoredslFactory getEcoredslFactory()
   {
     return (EcoredslFactory)getEFactoryInstance();
@@ -262,12 +206,6 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
     importStatementDeclEClass = createEClass(IMPORT_STATEMENT_DECL);
     createEAttribute(importStatementDeclEClass, IMPORT_STATEMENT_DECL__ALIAS);
     createEAttribute(importStatementDeclEClass, IMPORT_STATEMENT_DECL__IMPORT_URI);
-
-    mapEntryEClass = createEClass(MAP_ENTRY);
-    createEAttribute(mapEntryEClass, MAP_ENTRY__DETAIL_KEY);
-    createEAttribute(mapEntryEClass, MAP_ENTRY__DETAIL_VALUE);
-
-    multiplicityExprEClass = createEClass(MULTIPLICITY_EXPR);
   }
 
   /**
@@ -299,7 +237,6 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    mapEntryEClass.getESuperTypes().add(ecorePackage.getEObject());
 
     // Initialize classes and features; add operations and parameters
     initEClass(ecoreDslEClass, EcoreDsl.class, "EcoreDsl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -309,12 +246,6 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
     initEClass(importStatementDeclEClass, ImportStatementDecl.class, "ImportStatementDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getImportStatementDecl_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, ImportStatementDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getImportStatementDecl_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, ImportStatementDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(mapEntryEClass, MapEntry.class, "MapEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getMapEntry_DetailKey(), ecorePackage.getEString(), "detailKey", null, 0, 1, MapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMapEntry_DetailValue(), ecorePackage.getEString(), "detailValue", null, 0, 1, MapEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(multiplicityExprEClass, MultiplicityExpr.class, "MultiplicityExpr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

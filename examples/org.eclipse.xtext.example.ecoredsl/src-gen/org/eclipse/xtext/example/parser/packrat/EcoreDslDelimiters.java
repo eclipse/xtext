@@ -24,8 +24,14 @@ public final class EcoreDslDelimiters {
 	public static final ICharacterClass keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 
 	public static final ISequenceMatcher ruleCall$15$Delimiter = new SetBasedKeywordMatcher(
-		"import", "package", "nsURI", "nsPrefix", "datatype", "abstract", "interface", "class", "extends", "ID", "bag", "random", "readonly", "volatile", "transient", "unsettable", "derived", "attr", "local", "val", "ref", "enum", "super", "op", "void", "throws");
+		"import", "package", "nsURI", "nsPrefix", "datatype", "abstract", "interface", "class", "extends", "ID", "volatile", "transient", "unsettable", "derived", "attr", "val", "ref", "enum", "super", "bag", "random", "op", "void", "throws");
 
 	public static final ISequenceMatcher ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+
+	public static final ISequenceMatcher ruleCall$150$Delimiter = new SetBasedKeywordMatcher(
+		"bag");
+
+	public static final ISequenceMatcher ruleCall$152$Delimiter = new SetBasedKeywordMatcher(
+		"random");
 
 }

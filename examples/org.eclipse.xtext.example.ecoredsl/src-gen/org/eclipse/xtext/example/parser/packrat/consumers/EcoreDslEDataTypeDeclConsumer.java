@@ -32,6 +32,8 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 
 	private ITerminalConsumer idConsumer;
 
+	private ITerminalConsumer serializableConsumer;
+
 	private INonTerminalConsumer stringOrQidConsumer;
 
 	private IElementConsumer alternatives$1$Consumer;
@@ -44,7 +46,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer assignment$5$Consumer;
 
-	private IElementConsumer keyword$6$Consumer;
+	private IElementConsumer ruleCall$6$Consumer;
 
 	private IElementConsumer keyword$8$Consumer;
 
@@ -62,13 +64,13 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer ruleCall$15$Consumer;
 
-	private ICharacterClass keyword$6$Delimiter;
-
 	private ICharacterClass keyword$8$Delimiter;
 
 	private ICharacterClass keyword$11$Delimiter;
 
 	private ICharacterClass keyword$14$Delimiter;
+
+	private ISequenceMatcher ruleCall$6$Delimiter;
 
 	private ISequenceMatcher ruleCall$10$Delimiter;
 
@@ -135,19 +137,19 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$6$Consumer;
+			return ruleCall$6$Consumer;
 		}
 	}
 
-	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$6$Consumer(final Keyword keyword) {
-			super(keyword);
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "serializable", false, true, getKeyword$6$Delimiter(), optional);
+			return consumeTerminal(serializableConsumer, "serializable", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -249,10 +251,10 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 
 	public EcoreDslEDataTypeDeclConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -273,7 +275,7 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentEAnnotations());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallEAnnotationDecl());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentSerializable());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele010KeywordSerializable());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010TerminalRuleCallSerializable());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele020KeywordDatatype());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele021AssignmentName());
 		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0210TerminalRuleCallID());
@@ -306,16 +308,12 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 		this.idConsumer = idConsumer;
 	}
 	
+	public void setSerializableConsumer(ITerminalConsumer serializableConsumer) {
+		this.serializableConsumer = serializableConsumer;
+	}
+	
 	public void setStringOrQidConsumer(INonTerminalConsumer stringOrQidConsumer) {
 		this.stringOrQidConsumer = stringOrQidConsumer;
-	}
-	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$8$Delimiter() {
@@ -340,6 +338,14 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$14$Delimiter(ICharacterClass characterClass) {
 		keyword$14$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$10$Delimiter() {
