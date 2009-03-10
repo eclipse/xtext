@@ -37,6 +37,8 @@ public final class ValidationJob extends Job {
 	private final IXtextDocument xtextDocument;
 	private final IFile iFile;
 
+	private boolean deleteOldMarkers;
+
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
 	 *
@@ -45,7 +47,7 @@ public final class ValidationJob extends Job {
 	 */
 	public ValidationJob(XtextEditor xtextEditor, CheckMode checkMode) {
 		this(xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ?
-				xtextEditor.getResource() : null), checkMode);
+				xtextEditor.getResource() : null), checkMode, false);
 	}
 
 	/**
@@ -55,12 +57,13 @@ public final class ValidationJob extends Job {
 	 * @param iFile
 	 * @param checkMode
 	 */
-	public ValidationJob(IXtextDocument xtextDocument, IFile iFile, CheckMode checkMode) {
+	public ValidationJob(IXtextDocument xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
 		super("Xtext validation");
 
 		this.xtextDocument = xtextDocument;
 		this.iFile = iFile;
 		this.checkMode = checkMode;
+		this.deleteOldMarkers = deleteOldMarkers;
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public final class ValidationJob extends Job {
 				return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY, checkMode));
 			}
 		});
-		XtextResourceChecker.addMarkers(iFile, issues, false, monitor);
+		XtextResourceChecker.addMarkers(iFile, issues, deleteOldMarkers, monitor);
 		return Status.OK_STATUS;
 	}
 }
