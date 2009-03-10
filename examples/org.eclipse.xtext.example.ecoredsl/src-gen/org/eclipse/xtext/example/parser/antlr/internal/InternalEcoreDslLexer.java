@@ -11,61 +11,61 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalEcoreDslLexer extends Lexer {
-    public static final int T14=14;
-    public static final int T29=29;
-    public static final int T36=36;
-    public static final int RULE_STRING=5;
-    public static final int T35=35;
-    public static final int T45=45;
-    public static final int T20=20;
-    public static final int T34=34;
-    public static final int T25=25;
-    public static final int T18=18;
-    public static final int T37=37;
-    public static final int T26=26;
-    public static final int RULE_INT=6;
-    public static final int T32=32;
-    public static final int T17=17;
-    public static final int T51=51;
-    public static final int T46=46;
-    public static final int T16=16;
-    public static final int T38=38;
-    public static final int T41=41;
-    public static final int T24=24;
-    public static final int T19=19;
-    public static final int T39=39;
-    public static final int T21=21;
-    public static final int T44=44;
-    public static final int T55=55;
-    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int T33=33;
-    public static final int T11=11;
-    public static final int T22=22;
-    public static final int T50=50;
-    public static final int T43=43;
-    public static final int T12=12;
-    public static final int T23=23;
-    public static final int T28=28;
-    public static final int T42=42;
-    public static final int T40=40;
-    public static final int T13=13;
-    public static final int T56=56;
-    public static final int RULE_WS=9;
-    public static final int T48=48;
-    public static final int T15=15;
-    public static final int T54=54;
-    public static final int EOF=-1;
-    public static final int T47=47;
-    public static final int Tokens=57;
-    public static final int T53=53;
     public static final int RULE_ANY_OTHER=10;
+    public static final int T29=29;
+    public static final int T28=28;
+    public static final int T27=27;
+    public static final int T26=26;
+    public static final int T25=25;
+    public static final int EOF=-1;
+    public static final int T24=24;
+    public static final int T23=23;
+    public static final int T22=22;
+    public static final int T21=21;
+    public static final int T20=20;
+    public static final int RULE_INT=6;
+    public static final int T38=38;
+    public static final int T37=37;
+    public static final int T39=39;
+    public static final int T34=34;
+    public static final int T33=33;
+    public static final int T36=36;
+    public static final int T35=35;
+    public static final int T30=30;
+    public static final int T32=32;
     public static final int T31=31;
     public static final int T49=49;
+    public static final int T48=48;
+    public static final int T43=43;
+    public static final int Tokens=57;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T27=27;
+    public static final int T42=42;
+    public static final int T41=41;
+    public static final int T40=40;
+    public static final int T47=47;
+    public static final int T46=46;
+    public static final int T45=45;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T44=44;
+    public static final int RULE_STRING=5;
+    public static final int T50=50;
+    public static final int T11=11;
+    public static final int T12=12;
+    public static final int T13=13;
+    public static final int T14=14;
     public static final int T52=52;
-    public static final int T30=30;
+    public static final int T15=15;
+    public static final int RULE_WS=9;
+    public static final int T51=51;
+    public static final int T16=16;
+    public static final int T54=54;
+    public static final int T17=17;
+    public static final int T53=53;
+    public static final int T18=18;
+    public static final int T56=56;
+    public static final int T19=19;
+    public static final int T55=55;
     public InternalEcoreDslLexer() {;} 
     public InternalEcoreDslLexer(CharStream input) {
         super(input);
@@ -1443,26 +1443,61 @@ public class InternalEcoreDslLexer extends Lexer {
 
         if ( (LA12_0=='i') ) {
             switch ( input.LA(2) ) {
-            case 'n':
+            case 'm':
                 {
                 int LA12_44 = input.LA(3);
 
-                if ( (LA12_44=='t') ) {
+                if ( (LA12_44=='p') ) {
                     int LA12_93 = input.LA(4);
 
-                    if ( (LA12_93=='e') ) {
+                    if ( (LA12_93=='o') ) {
                         int LA12_119 = input.LA(5);
 
                         if ( (LA12_119=='r') ) {
                             int LA12_143 = input.LA(6);
 
-                            if ( (LA12_143=='f') ) {
+                            if ( (LA12_143=='t') ) {
                                 int LA12_164 = input.LA(7);
 
-                                if ( (LA12_164=='a') ) {
-                                    int LA12_182 = input.LA(8);
+                                if ( ((LA12_164>='0' && LA12_164<='9')||(LA12_164>='A' && LA12_164<='Z')||LA12_164=='_'||(LA12_164>='a' && LA12_164<='z')) ) {
+                                    alt12=47;
+                                }
+                                else {
+                                    alt12=1;}
+                            }
+                            else {
+                                alt12=47;}
+                        }
+                        else {
+                            alt12=47;}
+                    }
+                    else {
+                        alt12=47;}
+                }
+                else {
+                    alt12=47;}
+                }
+                break;
+            case 'n':
+                {
+                int LA12_45 = input.LA(3);
 
-                                    if ( (LA12_182=='c') ) {
+                if ( (LA12_45=='t') ) {
+                    int LA12_94 = input.LA(4);
+
+                    if ( (LA12_94=='e') ) {
+                        int LA12_120 = input.LA(5);
+
+                        if ( (LA12_120=='r') ) {
+                            int LA12_144 = input.LA(6);
+
+                            if ( (LA12_144=='f') ) {
+                                int LA12_165 = input.LA(7);
+
+                                if ( (LA12_165=='a') ) {
+                                    int LA12_183 = input.LA(8);
+
+                                    if ( (LA12_183=='c') ) {
                                         int LA12_196 = input.LA(9);
 
                                         if ( (LA12_196=='e') ) {
@@ -1482,41 +1517,6 @@ public class InternalEcoreDslLexer extends Lexer {
                                 }
                                 else {
                                     alt12=47;}
-                            }
-                            else {
-                                alt12=47;}
-                        }
-                        else {
-                            alt12=47;}
-                    }
-                    else {
-                        alt12=47;}
-                }
-                else {
-                    alt12=47;}
-                }
-                break;
-            case 'm':
-                {
-                int LA12_45 = input.LA(3);
-
-                if ( (LA12_45=='p') ) {
-                    int LA12_94 = input.LA(4);
-
-                    if ( (LA12_94=='o') ) {
-                        int LA12_120 = input.LA(5);
-
-                        if ( (LA12_120=='r') ) {
-                            int LA12_144 = input.LA(6);
-
-                            if ( (LA12_144=='t') ) {
-                                int LA12_165 = input.LA(7);
-
-                                if ( ((LA12_165>='0' && LA12_165<='9')||(LA12_165>='A' && LA12_165<='Z')||LA12_165=='_'||(LA12_165>='a' && LA12_165<='z')) ) {
-                                    alt12=47;
-                                }
-                                else {
-                                    alt12=1;}
                             }
                             else {
                                 alt12=47;}
@@ -1591,43 +1591,20 @@ public class InternalEcoreDslLexer extends Lexer {
 
             if ( (LA12_5=='s') ) {
                 switch ( input.LA(3) ) {
-                case 'U':
+                case 'P':
                     {
                     int LA12_96 = input.LA(4);
 
-                    if ( (LA12_96=='R') ) {
+                    if ( (LA12_96=='r') ) {
                         int LA12_122 = input.LA(5);
 
-                        if ( (LA12_122=='I') ) {
+                        if ( (LA12_122=='e') ) {
                             int LA12_146 = input.LA(6);
 
-                            if ( ((LA12_146>='0' && LA12_146<='9')||(LA12_146>='A' && LA12_146<='Z')||LA12_146=='_'||(LA12_146>='a' && LA12_146<='z')) ) {
-                                alt12=47;
-                            }
-                            else {
-                                alt12=5;}
-                        }
-                        else {
-                            alt12=47;}
-                    }
-                    else {
-                        alt12=47;}
-                    }
-                    break;
-                case 'P':
-                    {
-                    int LA12_97 = input.LA(4);
+                            if ( (LA12_146=='f') ) {
+                                int LA12_167 = input.LA(7);
 
-                    if ( (LA12_97=='r') ) {
-                        int LA12_123 = input.LA(5);
-
-                        if ( (LA12_123=='e') ) {
-                            int LA12_147 = input.LA(6);
-
-                            if ( (LA12_147=='f') ) {
-                                int LA12_168 = input.LA(7);
-
-                                if ( (LA12_168=='i') ) {
+                                if ( (LA12_167=='i') ) {
                                     int LA12_185 = input.LA(8);
 
                                     if ( (LA12_185=='x') ) {
@@ -1647,6 +1624,29 @@ public class InternalEcoreDslLexer extends Lexer {
                             }
                             else {
                                 alt12=47;}
+                        }
+                        else {
+                            alt12=47;}
+                    }
+                    else {
+                        alt12=47;}
+                    }
+                    break;
+                case 'U':
+                    {
+                    int LA12_97 = input.LA(4);
+
+                    if ( (LA12_97=='R') ) {
+                        int LA12_123 = input.LA(5);
+
+                        if ( (LA12_123=='I') ) {
+                            int LA12_147 = input.LA(6);
+
+                            if ( ((LA12_147>='0' && LA12_147<='9')||(LA12_147>='A' && LA12_147<='Z')||LA12_147=='_'||(LA12_147>='a' && LA12_147<='z')) ) {
+                                alt12=47;
+                            }
+                            else {
+                                alt12=5;}
                         }
                         else {
                             alt12=47;}
@@ -1903,43 +1903,20 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='e') ) {
             switch ( input.LA(2) ) {
-            case 'n':
+            case 'x':
                 {
                 int LA12_66 = input.LA(3);
 
-                if ( (LA12_66=='u') ) {
+                if ( (LA12_66=='t') ) {
                     int LA12_103 = input.LA(4);
 
-                    if ( (LA12_103=='m') ) {
+                    if ( (LA12_103=='e') ) {
                         int LA12_129 = input.LA(5);
 
-                        if ( ((LA12_129>='0' && LA12_129<='9')||(LA12_129>='A' && LA12_129<='Z')||LA12_129=='_'||(LA12_129>='a' && LA12_129<='z')) ) {
-                            alt12=47;
-                        }
-                        else {
-                            alt12=38;}
-                    }
-                    else {
-                        alt12=47;}
-                }
-                else {
-                    alt12=47;}
-                }
-                break;
-            case 'x':
-                {
-                int LA12_67 = input.LA(3);
+                        if ( (LA12_129=='n') ) {
+                            int LA12_153 = input.LA(6);
 
-                if ( (LA12_67=='t') ) {
-                    int LA12_104 = input.LA(4);
-
-                    if ( (LA12_104=='e') ) {
-                        int LA12_130 = input.LA(5);
-
-                        if ( (LA12_130=='n') ) {
-                            int LA12_154 = input.LA(6);
-
-                            if ( (LA12_154=='d') ) {
+                            if ( (LA12_153=='d') ) {
                                 int LA12_173 = input.LA(7);
 
                                 if ( (LA12_173=='s') ) {
@@ -1959,6 +1936,29 @@ public class InternalEcoreDslLexer extends Lexer {
                         }
                         else {
                             alt12=47;}
+                    }
+                    else {
+                        alt12=47;}
+                }
+                else {
+                    alt12=47;}
+                }
+                break;
+            case 'n':
+                {
+                int LA12_67 = input.LA(3);
+
+                if ( (LA12_67=='u') ) {
+                    int LA12_104 = input.LA(4);
+
+                    if ( (LA12_104=='m') ) {
+                        int LA12_130 = input.LA(5);
+
+                        if ( ((LA12_130>='0' && LA12_130<='9')||(LA12_130>='A' && LA12_130<='Z')||LA12_130=='_'||(LA12_130>='a' && LA12_130<='z')) ) {
+                            alt12=47;
+                        }
+                        else {
+                            alt12=38;}
                     }
                     else {
                         alt12=47;}
@@ -2110,34 +2110,17 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='v') ) {
             switch ( input.LA(2) ) {
-            case 'a':
-                {
-                int LA12_72 = input.LA(3);
-
-                if ( (LA12_72=='l') ) {
-                    int LA12_110 = input.LA(4);
-
-                    if ( ((LA12_110>='0' && LA12_110<='9')||(LA12_110>='A' && LA12_110<='Z')||LA12_110=='_'||(LA12_110>='a' && LA12_110<='z')) ) {
-                        alt12=47;
-                    }
-                    else {
-                        alt12=35;}
-                }
-                else {
-                    alt12=47;}
-                }
-                break;
             case 'o':
                 {
                 switch ( input.LA(3) ) {
                 case 'i':
                     {
-                    int LA12_111 = input.LA(4);
+                    int LA12_110 = input.LA(4);
 
-                    if ( (LA12_111=='d') ) {
-                        int LA12_136 = input.LA(5);
+                    if ( (LA12_110=='d') ) {
+                        int LA12_135 = input.LA(5);
 
-                        if ( ((LA12_136>='0' && LA12_136<='9')||(LA12_136>='A' && LA12_136<='Z')||LA12_136=='_'||(LA12_136>='a' && LA12_136<='z')) ) {
+                        if ( ((LA12_135>='0' && LA12_135<='9')||(LA12_135>='A' && LA12_135<='Z')||LA12_135=='_'||(LA12_135>='a' && LA12_135<='z')) ) {
                             alt12=47;
                         }
                         else {
@@ -2149,12 +2132,12 @@ public class InternalEcoreDslLexer extends Lexer {
                     break;
                 case 'l':
                     {
-                    int LA12_112 = input.LA(4);
+                    int LA12_111 = input.LA(4);
 
-                    if ( (LA12_112=='a') ) {
-                        int LA12_137 = input.LA(5);
+                    if ( (LA12_111=='a') ) {
+                        int LA12_136 = input.LA(5);
 
-                        if ( (LA12_137=='t') ) {
+                        if ( (LA12_136=='t') ) {
                             int LA12_158 = input.LA(6);
 
                             if ( (LA12_158=='i') ) {
@@ -2191,6 +2174,23 @@ public class InternalEcoreDslLexer extends Lexer {
                 default:
                     alt12=47;}
 
+                }
+                break;
+            case 'a':
+                {
+                int LA12_73 = input.LA(3);
+
+                if ( (LA12_73=='l') ) {
+                    int LA12_112 = input.LA(4);
+
+                    if ( ((LA12_112>='0' && LA12_112<='9')||(LA12_112>='A' && LA12_112<='Z')||LA12_112=='_'||(LA12_112>='a' && LA12_112<='z')) ) {
+                        alt12=47;
+                    }
+                    else {
+                        alt12=35;}
+                }
+                else {
+                    alt12=47;}
                 }
                 break;
             default:
@@ -2497,14 +2497,14 @@ public class InternalEcoreDslLexer extends Lexer {
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt12=51;
-                }
-                break;
             case '*':
                 {
                 alt12=50;
+                }
+                break;
+            case '/':
+                {
+                alt12=51;
                 }
                 break;
             default:
