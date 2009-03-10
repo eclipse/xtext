@@ -31,7 +31,7 @@ public class CollectionUtils {
 	public static <T> Iterable<T> join(Iterator<? extends T> first, Iterator<? extends T> second) {
 		return new ChainedIterator<T>(first, second);
 	}
-	
+
 	/**
 	 * Merge two iterables into one. The iterables are lazy iterated.
 	 * @param <T>
@@ -42,18 +42,18 @@ public class CollectionUtils {
 	public static <T> Iterable<T> join(Iterable<? extends T> first, Iterable<? extends T> second) {
 		return join(first.iterator(), second.iterator());
 	}
-	
+
 	public static <T> Iterable<T> flatten(Iterable<? extends Iterable<T>> nested) {
 		return flatten(nested.iterator());
 	}
-	
+
 	public static <T> Iterable<T> flatten(Iterator<? extends Iterable<T>> nested) {
 		final Collection<T> result = new ArrayList<T>();
 		while(nested.hasNext())
 			addAll(result, nested.next());
 		return result;
 	}
-	
+
 	public static <T> void switchContent(Iterator<T> candidates, Collection<T> matches, Collection<T> refuses, Filter<T> filter) {
 		if (matches == refuses) {
 			if (matches == null)
@@ -70,19 +70,19 @@ public class CollectionUtils {
 			}
 		}
 	}
-	
+
 	public static <T> void switchContent(Iterable<T> candidates, Collection<T> matches, Collection<T> refuses, Filter<T> filter) {
 		switchContent(candidates.iterator(), matches, refuses, filter);
 	}
-	
+
 	public static <T, R> Iterable<R> map(Iterator<? extends T> input, Function<T, R> mapper) {
 		return new MappingIterator<T, R>(input, mapper);
 	}
-	
+
 	public static <T, R> Iterable<R> map(Iterable<? extends T> input, Function<T, R> mapper) {
 		return map(input.iterator(), mapper);
 	}
-	
+
 	public static <T> Iterable<T> filter(Iterator<? extends T> input, Filter<T> filter) {
 		return new FilteringIterator<T>(input, filter);
 	}
@@ -90,7 +90,7 @@ public class CollectionUtils {
 	public static <T> Iterable<T> filter(Iterable<? extends T> input, Filter<T> filter) {
 		return filter(input.iterator(), filter);
 	}
-	
+
 	public static <T, R extends T> Iterable<R> typeFilter(Iterator<T> input, final Class<R> type) {
 		return map(filter(input, Filter.Util.<T>instanceOf(type)), new Function<T, R>() {
 			public R exec(T param) {
@@ -98,11 +98,11 @@ public class CollectionUtils {
 			}
 		});
 	}
-	
+
 	public static <T, R extends T> Iterable<R> typeFilter(Iterable<T> input, final Class<R> type) {
 		return typeFilter(input, type);
 	}
-	
+
 	public static <T> Iterable<T> each(Iterator<? extends T> input, final Function.WithoutResult<T> fun) {
 		return map(input, new Function<T, T>() {
 			public T exec(T param) {
@@ -115,7 +115,7 @@ public class CollectionUtils {
 	public static <T> Iterable<T> each(Iterable<? extends T> input, Function.WithoutResult<T> fun) {
 		return each(input.iterator(), fun);
 	}
-	
+
 	public static <T> boolean addAll(Collection<T> target, Iterator<T> source) {
 		boolean result = false;
 		while(source.hasNext()) {
@@ -123,14 +123,14 @@ public class CollectionUtils {
 		}
 		return result;
 	}
-	
+
 	public static <T> boolean addAll(Collection<T> target, Iterable<T> source) {
 		return addAll(target, source.iterator());
 	}
-	
+
 	public static <T, R> Iterable<T> unique(Iterator<? extends T> input, final Function<T, R> mapper) {
 		return filter(input, new Filter<T>() {
-			private Set<R> values = new HashSet<R>();
+			private final Set<R> values = new HashSet<R>();
 			public boolean matches(T param) {
 				return values.add(mapper.exec(param));
 			}
@@ -140,7 +140,7 @@ public class CollectionUtils {
 	public static <T, R> Iterable<T> unique(Iterable<? extends T> input, Function<T, R> mapper) {
 		return unique(input.iterator(), mapper);
 	}
-	
+
 	public static <T> Iterable<T> unique(Iterator<? extends T> input) {
 		return unique(input, new Function<T, T>() {
 			public T exec(T param) {
@@ -152,7 +152,7 @@ public class CollectionUtils {
 	public static <T> Iterable<T> unique(Iterable<? extends T> input) {
 		return unique(input.iterator());
 	}
-	
+
 	public static <T> void clear(Iterator<T> iterator) {
 		while(iterator.hasNext()) {
 			iterator.next();
@@ -163,36 +163,36 @@ public class CollectionUtils {
 	public static <T> void clear(Iterable<T> iterable) {
 		clear(iterable.iterator());
 	}
-	
+
 	public static void loop(Iterator<?> iterator) {
 		while(iterator.hasNext())
 			iterator.next();
 	}
-	
+
 	public static void loop(Iterable<?> iterable) {
 		loop(iterable.iterator());
 	}
-	
+
 	public static <T> T next(Iterator<T> iterator) {
 		if (iterator.hasNext())
 			return iterator.next();
 		throw new NoSuchElementException();
 	}
-	
+
 	public static <T> T next(Iterable<T> iterable) {
 		return next(iterable.iterator());
 	}
-	
+
 	public static <T> T nextOrNull(Iterator<T> iterator) {
 		if (iterator.hasNext())
 			return iterator.next();
 		return null;
 	}
-	
+
 	public static <T> T nextOrNull(Iterable<T> iterable) {
 		return nextOrNull(iterable.iterator());
 	}
-	
+
 	public static <T> Iterable<Integer> indexes(Iterator<? extends T> input, final Filter<T> filter) {
 		return map(filter(map(input, new Function<T, Pair<T, Integer>>() {
 			private int index = 0;
@@ -209,21 +209,21 @@ public class CollectionUtils {
 			}
 		});
 	}
-	
+
 	public static <T> Iterable<Integer> indexes(Iterable<? extends T> input, Filter<T> filter) {
 		return indexes(input.iterator(), filter);
 	}
-	
+
 	public static <T> List<T> list(Iterator<T> iterator) {
 		final List<T> result = new ArrayList<T>();
 		addAll(result, iterator);
 		return result;
 	}
-	
+
 	public static <T> List<T> list(Iterable<T> iterable) {
 		return list(iterable.iterator());
 	}
-	
+
 	public static <T> boolean addAllIfNotNull(Collection<T> target, Collection<? extends T> toBeAdded) {
 		if(toBeAdded != null && !toBeAdded.isEmpty()) {
 			return target.addAll(toBeAdded);
@@ -236,5 +236,19 @@ public class CollectionUtils {
 			return target.add(toBeAdded);
 		}
 		return false;
+	}
+
+	public static <T> int count(Iterable<T> iterable, Filter<T> selector) {
+		return count(iterable.iterator(), selector);
+	}
+
+	public static <T> int count(Iterator<T> iterator, Filter<T> selector) {
+		final Wrapper<Integer> result = Wrapper.wrap(0);
+		loop(each(filter(iterator, selector), new Function.WithoutResult<T>(){
+			public void exec(T param) {
+				result.set(result.get() + 1);
+			}
+		}));
+		return result.get();
 	}
 }

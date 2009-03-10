@@ -78,6 +78,8 @@ public class XtextDamagerRepairer extends DefaultDamagerRepairer {
 					if (node.getTotalLength() + node.getTotalOffset() >= endOffset) {
 						while(end == null) {
 							if (node instanceof CompositeNode) {
+								if (((CompositeNode) node).getChildren().isEmpty())
+									break;
 								for(int i = ((CompositeNode) node).getChildren().size() - 1; i >= 0; i--) {
 									AbstractNode child = ((CompositeNode) node).getChildren().get(i);
 									if (child.getTotalOffset() + child.getTotalLength() >= endOffset && child.getTotalOffset() <= endOffset) {

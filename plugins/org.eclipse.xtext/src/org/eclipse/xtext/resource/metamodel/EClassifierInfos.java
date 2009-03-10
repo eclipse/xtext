@@ -26,6 +26,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
 /**
@@ -38,7 +40,7 @@ import org.eclipse.xtext.util.Tuples;
  */
 public class EClassifierInfos {
 
-	private final Map<Pair<String, String>, EClassifierInfo> infoMap;
+	private final Map<Triple<String, String, String>, EClassifierInfo> infoMap;
 
 	private final List<EClassifierInfos> parents;
 
@@ -47,7 +49,7 @@ public class EClassifierInfos {
 	}
 
 	public EClassifierInfos() {
-		infoMap = new LinkedHashMap<Pair<String, String>, EClassifierInfo>();
+		infoMap = new LinkedHashMap<Triple<String, String, String>, EClassifierInfo>();
 		parents = new ArrayList<EClassifierInfos>();
 	}
 
@@ -65,10 +67,10 @@ public class EClassifierInfos {
 		return infoMap.put(getKey(alias, name), metatypeInfo) == null;
 	}
 
-	private Pair<String, String> getKey(AbstractMetamodelDeclaration metamodelDecl, String name) {
+	private Triple<String, String, String> getKey(AbstractMetamodelDeclaration metamodelDecl, String name) {
 		if (metamodelDecl == null || name == null)
 			throw new NullPointerException("metamodelDecl: " + metamodelDecl + " / name: " + name);
-		return Tuples.create(metamodelDecl.getEPackage().getNsURI(), name);
+		return Tuples.create(metamodelDecl.getEPackage().getNsURI(), Strings.emptyIfNull(metamodelDecl.getAlias()), name);
 	}
 
 	public EClassifierInfo getInfo(TypeRef typeRef) {

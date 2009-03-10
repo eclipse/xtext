@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -25,6 +26,9 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
@@ -68,6 +72,27 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (metamodel.getName() != null && metamodel.getName().length() != 0)
 			if (Character.isUpperCase(metamodel.getName().charAt(0)))
 				warning("Metamodel names should start with a lower case letter.", XtextPackage.GENERATED_METAMODEL__NAME);
+	}
+
+	@Check
+	public void checkMetamodelUris(final AbstractMetamodelDeclaration declaration) {
+		guard(declaration.getEPackage().getNsURI() != null);
+
+		Grammar grammar = GrammarUtil.getGrammar(declaration);
+		Iterable<String> nsUris = CollectionUtils.map(grammar.getMetamodelDeclarations(), new Function<AbstractMetamodelDeclaration, String>() {
+			public String exec(AbstractMetamodelDeclaration param) {
+				if (param.getEPackage() != null)
+					return param.getEPackage().getNsURI();
+				return null;
+			}
+		});
+		int count = CollectionUtils.count(nsUris, new Filter<String>() {
+			public boolean matches(String param) {
+				return declaration.getEPackage().getNsURI().equals(param);
+			}
+		});
+		assertTrue("EPackage with ns-uri '"+ declaration.getEPackage().getNsURI() + "' is used twice.",
+			XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, count == 1);
 	}
 
 	@Check
@@ -272,5 +297,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			visitor.doSwitch(rule.getAlternatives());
 		}
 	}
+
+
 
 }
