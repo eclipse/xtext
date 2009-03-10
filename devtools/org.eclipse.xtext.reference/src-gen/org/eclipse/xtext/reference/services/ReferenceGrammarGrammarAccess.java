@@ -348,16 +348,16 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		private final Keyword cWertROTKeyword_0_0 = (Keyword)cWertAlternatives_0.eContents().get(0);
 		private final Keyword cWertBLAUKeyword_0_1 = (Keyword)cWertAlternatives_0.eContents().get(1);
 		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
-		private final Keyword cWertGRNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
+		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
 		//Farbe:
-		//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
+		//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
 		public ParserRule getRule() { return rule; }
 
-		//wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" )
+		//wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
 		public Assignment getWertAssignment() { return cWertAssignment; }
 
-		//"ROT"|"BLAU"|"GELB"|"GR\u2039N"
+		//"ROT"|"BLAU"|"GELB"|"GR\u00DCN"
 		public Alternatives getWertAlternatives_0() { return cWertAlternatives_0; }
 
 		//"ROT"
@@ -369,8 +369,8 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 		//"GELB"
 		public Keyword getWertGELBKeyword_0_2() { return cWertGELBKeyword_0_2; }
 
-		//"GR\u2039N"
-		public Keyword getWertGRNKeyword_0_3() { return cWertGRNKeyword_0_3; }
+		//"GR\u00DCN"
+		public Keyword getWertGRÜNKeyword_0_3() { return cWertGRÜNKeyword_0_3; }
 	}
 
 	public class CustomTypeParserRuleElements implements IParserRuleAccess {
@@ -488,7 +488,7 @@ public class ReferenceGrammarGrammarAccess implements IGrammarAccess {
 	}
 
 	//Farbe:
-	//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
+	//  wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
 	public FarbeElements getFarbeAccess() {
 		return (pFarbe != null) ? pFarbe : (pFarbe = new FarbeElements());
 	}

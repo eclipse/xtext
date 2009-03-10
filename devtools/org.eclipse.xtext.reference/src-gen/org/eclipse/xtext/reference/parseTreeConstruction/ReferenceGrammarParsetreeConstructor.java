@@ -1148,11 +1148,11 @@ protected class Familie_7_Keyword extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
+ *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
  *
  **/
 
-// wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" )
+// wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
 protected class Farbe_Assignment_wert extends AssignmentToken  {
 	
 	public Farbe_Assignment_wert(IInstanceDescription curr, AbstractToken pred) {
@@ -1192,7 +1192,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 
 		if("GRÜN".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3();
+			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
 			return new Solution(obj);
 		}
 
