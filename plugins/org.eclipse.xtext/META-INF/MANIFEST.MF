@@ -41,11 +41,11 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.xtext.util,
+ org.eclipse.emf.index,
  org.junit;resolution:=optional,
  org.antlr.runtime;bundle-version="3.0.0";visibility:=reexport,
  com.google.guice;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.emf.codegen;bundle-version="2.5.0";resolution:=optional,
  org.eclipse.emf.codegen.ecore;bundle-version="2.5.0";resolution:=optional,
  org.eclipse.emf.mwe.core;bundle-version="0.7.0";resolution:=optional,
- org.eclipse.emf.mwe.utils;bundle-version="0.7.0";resolution:=optional,
- org.eclipse.emf.index;bundle-version="1.0.0";resolution:=optional
+ org.eclipse.emf.mwe.utils;bundle-version="0.7.0";resolution:=optional
