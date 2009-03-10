@@ -47,3 +47,4 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.testlanguages.parser.antlr,
  org.eclipse.xtext.testlanguages.referenceGrammar,
  org.eclipse.xtext.testlanguages.treeTestLanguage
+
