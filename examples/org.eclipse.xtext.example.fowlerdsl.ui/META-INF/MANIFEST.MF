@@ -15,4 +15,3 @@ Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.ui
 Bundle-Activator: org.eclipse.xtext.example.FowlerDslActivator
 Bundle-ActivationPolicy: lazy
-

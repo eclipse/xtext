@@ -15,4 +15,3 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.ui
 Export-Package: org.eclipse.xtext.example
 Bundle-Activator: org.eclipse.xtext.example.ui.internal.DomainmodelActivator
-

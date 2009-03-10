@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -22,6 +23,7 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Wrapper;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -40,7 +42,38 @@ public class MergeableManifest extends Manifest {
 	public static final Attributes.Name BUNDLE_ACTIVATION_POLICY = new Attributes.Name("Bundle-ActivationPolicy");
 	public static final Attributes.Name BUNDLE_LOCALIZATION = new Attributes.Name("Bundle-Localization");
 
+	private static final String LINEBREAK = "\r\n";
+
+	/*
+	 * java.util.Manifest throws an exeception if line exceeds 512 chars
+	 */
+    static String make512Safe(StringBuffer lines) {
+        if (lines.length() > 512) {
+        	StringBuilder result = new StringBuilder(lines.length());
+        	String[] splitted = lines.toString().split("\\r\\n");
+        	for(String string: splitted) {
+        		if (string.length() > 512) {
+        			int idx = 510;
+        			StringBuilder temp = new StringBuilder(string);
+        			int length = temp.length();
+        			while (idx < length - 2) {
+                        temp.insert(idx, "\r\n ");
+                        idx += 512;
+                        length += 3;
+                    }
+        			result.append(temp.toString());
+        		} else {
+        			result.append(string);
+        		}
+        		result.append(LINEBREAK);
+        	}
+        	return result.toString();
+        }
+        return lines.toString();
+    }
+
 	public class OrderAwareAttributes extends Attributes {
+
 		public OrderAwareAttributes() {
 			try {
 				Field field = Attributes.class.getDeclaredField("map");
@@ -52,7 +85,8 @@ public class MergeableManifest extends Manifest {
 		}
 
 		/*
-		 * Copied from base class, but omitted call to make72Safe(buffer)
+		 * Copied from base class, but replaced call to make72Safe(buffer) with make512Safe(buffer)
+         * and does not write empty values
 		 */
 		@SuppressWarnings("deprecation")
 		public void myWriteMain(DataOutputStream out) throws IOException {
@@ -65,7 +99,7 @@ public class MergeableManifest extends Manifest {
 			}
 
 			if (version != null) {
-				out.writeBytes(vername + ": " + version + "\r\n");
+				out.writeBytes(vername + ": " + version + LINEBREAK);
 			}
 
 			// write out all attributes except for the version
@@ -73,50 +107,48 @@ public class MergeableManifest extends Manifest {
 			Iterator<Map.Entry<Object, Object>> it = entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry<Object, Object> e = it.next();
-				String name = ((Name) e.getKey()).toString();
-				if ((version != null) && !(name.equalsIgnoreCase(vername))) {
+				String value = (String) e.getValue();
+				if (!Strings.isEmpty(value)) {
+					String name = ((Name) e.getKey()).toString();
+					if ((version != null) && !(name.equalsIgnoreCase(vername))) {
+						StringBuffer buffer = new StringBuffer(name);
+						buffer.append(": ");
 
-					StringBuffer buffer = new StringBuffer(name);
-					buffer.append(": ");
-
-					String value = (String) e.getValue();
-					if (value != null) {
-						byte[] vb = value.getBytes("UTF8");
+						byte[] vb = value.trim().getBytes("UTF8");
 						value = new String(vb, 0, 0, vb.length);
+						buffer.append(value);
+						if (it.hasNext())
+							buffer.append(LINEBREAK);
+						out.writeBytes(make512Safe(buffer));
 					}
-					buffer.append(value);
-
-					buffer.append("\r\n");
-					// Manifest.make72Safe(buffer);
-					out.writeBytes(buffer.toString());
 				}
 			}
-			out.writeBytes("\r\n");
+			out.writeBytes(LINEBREAK);
 		}
 
 		/*
 		 * Copied from base class, but omitted call to make72Safe(buffer)
+         * and does not write empty values
 		 */
 		@SuppressWarnings("deprecation")
 		public void myWrite(DataOutputStream out) throws IOException {
 			Iterator<Map.Entry<Object, Object>> it = entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry<Object, Object> e = it.next();
-				StringBuffer buffer = new StringBuffer(((Name) e.getKey()).toString());
-				buffer.append(": ");
-
 				String value = (String) e.getValue();
-				if (value != null) {
-					byte[] vb = value.getBytes("UTF8");
-					value = new String(vb, 0, 0, vb.length);
-				}
-				buffer.append(value);
+				if (Strings.isEmpty(value)) {
+					StringBuffer buffer = new StringBuffer(((Name) e.getKey()).toString());
+					buffer.append(": ");
 
-				buffer.append("\r\n");
-				// Manifest.make72Safe(buffer);
-				out.writeBytes(buffer.toString());
+					byte[] vb = value.trim().getBytes("UTF8");
+					value = new String(vb, 0, 0, vb.length);
+					buffer.append(value);
+					if (it.hasNext())
+						buffer.append(LINEBREAK);
+					out.writeBytes(make512Safe(buffer));
+				}
 			}
-			out.writeBytes("\r\n");
+			out.writeBytes(LINEBREAK);
 		}
 	}
 
@@ -135,6 +167,9 @@ public class MergeableManifest extends Manifest {
 			throw new IllegalStateException(e);
 		}
 		read(in);
+		// hack: reconstruct linebreaks
+		addRequiredBundles(Collections.<String>emptySet());
+		addExportedPackages(Collections.<String>emptySet());
 	}
 
 	/**
@@ -145,13 +180,12 @@ public class MergeableManifest extends Manifest {
 	 */
 	public void addRequiredBundles(Set<String> bundles) {
 		String s = (String) getMainAttributes().get(REQUIRE_BUNDLE);
-		String result = mergeIntoCommaSeparatedList(s, bundles);
-		if (!"".equals(result.trim()) && !Strings.equalsIgnoreWhitespace(result,s)) {
-			modified = true;
-			getMainAttributes().put(REQUIRE_BUNDLE, result);
-		}
+		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
+		String result = mergeIntoCommaSeparatedList(s, bundles, modified);
+		this.modified = modified.get();
+		getMainAttributes().put(REQUIRE_BUNDLE, result);
 	}
-	
+
 	public boolean isModified() {
 		return modified;
 	}
@@ -164,22 +198,21 @@ public class MergeableManifest extends Manifest {
 	public void write(OutputStream out) throws IOException {
 		DataOutputStream dos = new DataOutputStream(out);
 		// Write out the main attributes for the manifest
-		((OrderAwareAttributes)getMainAttributes()).myWriteMain(dos);
+		((OrderAwareAttributes) getMainAttributes()).myWriteMain(dos);
 		// Now write out the pre-entry attributes
-		Iterator<Map.Entry<String,Attributes>> it = getEntries().entrySet().iterator();
+		Iterator<Map.Entry<String, Attributes>> it = getEntries().entrySet().iterator();
 		while (it.hasNext()) {
-		    Map.Entry<String,Attributes> e = it.next();
-	            StringBuffer buffer = new StringBuffer("Name: ");
-	            String value = e.getKey();
-	            if (value != null) {
-	                byte[] vb = value.getBytes("UTF8");
-	                value = new String(vb, 0, 0, vb.length);
-	            }
-		    buffer.append(value);
-		    buffer.append("\r\n");
-	            // make72Safe(buffer); // SZ: uncomment as it messes the formatting
-	            dos.writeBytes(buffer.toString());
-		    ((OrderAwareAttributes)e.getValue()).myWrite(dos);
+			Map.Entry<String, Attributes> e = it.next();
+			StringBuffer buffer = new StringBuffer("Name: ");
+			String value = e.getKey();
+			if (value != null) {
+				byte[] vb = value.getBytes("UTF8");
+				value = new String(vb, 0, 0, vb.length);
+			}
+			buffer.append(value);
+			buffer.append("\r\n");
+			dos.writeBytes(make512Safe(buffer));
+			((OrderAwareAttributes) e.getValue()).myWrite(dos);
 		}
 		dos.flush();
 	}
@@ -192,14 +225,13 @@ public class MergeableManifest extends Manifest {
 	 */
 	public void addExportedPackages(Set<String> bundles) {
 		String s = (String) getMainAttributes().get(EXPORT_PACKAGE);
-		String result = mergeIntoCommaSeparatedList(s, bundles);
-		if (!"".equals(result.trim()) && !Strings.equalsIgnoreWhitespace(result,s)) {
-			modified  =true;
-			getMainAttributes().put(EXPORT_PACKAGE, result);
-		}
+		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
+		String result = mergeIntoCommaSeparatedList(s, bundles, modified);
+		this.modified = modified.get();
+		getMainAttributes().put(EXPORT_PACKAGE, result);
 	}
 
-	protected static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn) {
+	protected static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
 		String string = currentString == null ? "" : currentString;
 		String[] split = string.split("\\s*,\\s*");
 		Set<ParameterizedElement> all = new LinkedHashSet<ParameterizedElement>();
@@ -214,7 +246,7 @@ public class MergeableManifest extends Manifest {
 				if (value.indexOf(';') != -1)
 					throw new IllegalArgumentException("Element " + value
 							+ " contains a semicolon. Merging parameterized elements is not yet supported");
-				all.add(new ParameterizedElement(value.trim()));
+				modified.set(all.add(new ParameterizedElement(value.trim())) || modified.get());
 			}
 		}
 

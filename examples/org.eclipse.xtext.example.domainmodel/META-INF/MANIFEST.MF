@@ -31,4 +31,3 @@ Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.parser.packrat.consumers,
  org.eclipse.xtext.example.services,
  xtext.example
-
