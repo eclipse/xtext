@@ -82,7 +82,7 @@ public class GrammarUtilTest extends AbstractGeneratorTest {
 		with(LangATestLanguageStandaloneSetup.class);
 		XtextResource resource = getResourceFromString("type A extends B");
 
-		ParserRule prType = get(LangATestLanguageGrammarAccess.class).prType().getRule();
+		ParserRule prType = get(LangATestLanguageGrammarAccess.class).getTypeRule();
 		Assignment asExtends = (Assignment) ((Group)prType.getAlternatives()).getTokens().get(3);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EObject model = getModel(resource);
