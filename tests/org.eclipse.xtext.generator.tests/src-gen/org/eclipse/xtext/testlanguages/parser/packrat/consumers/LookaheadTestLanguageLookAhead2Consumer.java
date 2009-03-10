@@ -148,13 +148,13 @@ public final class LookaheadTestLanguageLookAhead2Consumer extends NonTerminalCo
 	public void setRule(LookAhead2Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.ele0Alternatives());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentZ());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele000KeywordFoo());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentZ());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele010KeywordBar());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele1KeywordC());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.getAlternatives_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getZAssignment_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getZFooKeyword_0_0_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getZAssignment_0_1());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getZBarKeyword_0_1_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCKeyword_1());
 	}
 	
 	@Override

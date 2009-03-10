@@ -195,16 +195,16 @@ public final class ComplexReconstrTestLanguageTrickyG1Consumer extends NonTermin
 	public void setRule(TrickyG1Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftSquareBracket());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele10AssignmentVals());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele100ParserRuleCallTrickyG2());
-		group$6$Consumer = new Group$6$Consumer(rule.ele11Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele110KeywordComma());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele111AssignmentVals());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1110ParserRuleCallTrickyG2());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele2KeywordRightSquareBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getLeftSquareBracketKeyword_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getValsAssignment_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getValsTrickyG2ParserRuleCall_1_0_0());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_1_1());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCommaKeyword_1_1_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getValsAssignment_1_1_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getValsTrickyG2ParserRuleCall_1_1_1_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getRightSquareBracketKeyword_2());
 	}
 	
 	@Override

@@ -20,1551 +20,1573 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	public class EcoreDslElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EcoreDsl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentImports = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallImportStatementDecl = (RuleCall)c0AssignmentImports.eContents().get(0);
-		private final Assignment c1AssignmentPackage = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallEPackageDecl = (RuleCall)c1AssignmentPackage.eContents().get(0);
+		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cImportsImportStatementDeclParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Assignment cPackageAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cPackageEPackageDeclParserRuleCall_1_0 = (RuleCall)cPackageAssignment_1.eContents().get(0);
 		
-		// not supported
+		//EcoreDsl:
+		//  (imports+=ImportStatementDecl)* package=EPackageDecl;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(imports+=ImportStatementDecl)* package=EPackageDecl
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentImports() { return c0AssignmentImports; }
+		//(imports+=ImportStatementDecl)*
+		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallImportStatementDecl() { return c00ParserRuleCallImportStatementDecl; }
+		//ImportStatementDecl
+		public RuleCall getImportsImportStatementDeclParserRuleCall_0_0() { return cImportsImportStatementDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentPackage() { return c1AssignmentPackage; }
+		//package=EPackageDecl
+		public Assignment getPackageAssignment_1() { return cPackageAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallEPackageDecl() { return c10ParserRuleCallEPackageDecl; }
+		//EPackageDecl
+		public RuleCall getPackageEPackageDeclParserRuleCall_1_0() { return cPackageEPackageDeclParserRuleCall_1_0; }
 	}
 
 	public class ImportStatementDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImportStatementDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordImport = (Keyword)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Assignment c10AssignmentAlias = (Assignment)c1Group.eContents().get(0);
-		private final RuleCall c100TerminalRuleCallID = (RuleCall)c10AssignmentAlias.eContents().get(0);
-		private final Keyword c11KeywordEqualsSign = (Keyword)c1Group.eContents().get(1);
-		private final Assignment c2AssignmentImportURI = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentImportURI.eContents().get(0);
-		private final Keyword c3KeywordSemicolon = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cAliasAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cAliasIDTerminalRuleCall_1_0_0 = (RuleCall)cAliasAssignment_1_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cImportURIAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		// not supported
+		//ImportStatementDecl:
+		//  "import" (alias=ID "=")? importURI=STRING ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"import" (alias=ID "=")? importURI=STRING ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordImport() { return c0KeywordImport; }
+		//"import"
+		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//(alias=ID "=")?
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Assignment ele10AssignmentAlias() { return c10AssignmentAlias; }
+		//alias=ID
+		public Assignment getAliasAssignment_1_0() { return cAliasAssignment_1_0; }
 
-		// not supported
-		public RuleCall ele100TerminalRuleCallID() { return c100TerminalRuleCallID; }
+		//ID
+		public RuleCall getAliasIDTerminalRuleCall_1_0_0() { return cAliasIDTerminalRuleCall_1_0_0; }
 
-		// not supported
-		public Keyword ele11KeywordEqualsSign() { return c11KeywordEqualsSign; }
+		//"="
+		public Keyword getEqualsSignKeyword_1_1() { return cEqualsSignKeyword_1_1; }
 
-		// not supported
-		public Assignment ele2AssignmentImportURI() { return c2AssignmentImportURI; }
+		//importURI=STRING
+		public Assignment getImportURIAssignment_2() { return cImportURIAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getImportURISTRINGTerminalRuleCall_2_0() { return cImportURISTRINGTerminalRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordSemicolon() { return c3KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class EPackageDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EPackageDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Keyword c1KeywordPackage = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20ParserRuleCallQID = (RuleCall)c2AssignmentName.eContents().get(0);
-		private final Keyword c3KeywordNsURI = (Keyword)cGroup.eContents().get(3);
-		private final Keyword c4KeywordEqualsSign = (Keyword)cGroup.eContents().get(4);
-		private final Assignment c5AssignmentNsURI = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall c50TerminalRuleCallSTRING = (RuleCall)c5AssignmentNsURI.eContents().get(0);
-		private final Keyword c6KeywordNsPrefix = (Keyword)cGroup.eContents().get(6);
-		private final Keyword c7KeywordEqualsSign = (Keyword)cGroup.eContents().get(7);
-		private final Assignment c8AssignmentNsPrefix = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall c80ParserRuleCallQID = (RuleCall)c8AssignmentNsPrefix.eContents().get(0);
-		private final Keyword c9KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(9);
-		private final Alternatives c10Alternatives = (Alternatives)cGroup.eContents().get(10);
-		private final Assignment c100AssignmentESubpackages = (Assignment)c10Alternatives.eContents().get(0);
-		private final RuleCall c1000ParserRuleCallSubEPackageDecl = (RuleCall)c100AssignmentESubpackages.eContents().get(0);
-		private final Assignment c101AssignmentEClassifiers = (Assignment)c10Alternatives.eContents().get(1);
-		private final RuleCall c1010ParserRuleCallEClassifierDecl = (RuleCall)c101AssignmentEClassifiers.eContents().get(0);
-		private final Keyword c11KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Keyword cPackageKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameQIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cNsURIKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cEqualsSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cNsURIAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cNsURISTRINGTerminalRuleCall_5_0 = (RuleCall)cNsURIAssignment_5.eContents().get(0);
+		private final Keyword cNsPrefixKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cEqualsSignKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cNsPrefixAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cNsPrefixQIDParserRuleCall_8_0 = (RuleCall)cNsPrefixAssignment_8.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Alternatives cAlternatives_10 = (Alternatives)cGroup.eContents().get(10);
+		private final Assignment cESubpackagesAssignment_10_0 = (Assignment)cAlternatives_10.eContents().get(0);
+		private final RuleCall cESubpackagesSubEPackageDeclParserRuleCall_10_0_0 = (RuleCall)cESubpackagesAssignment_10_0.eContents().get(0);
+		private final Assignment cEClassifiersAssignment_10_1 = (Assignment)cAlternatives_10.eContents().get(1);
+		private final RuleCall cEClassifiersEClassifierDeclParserRuleCall_10_1_0 = (RuleCall)cEClassifiersAssignment_10_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
 		
-		// not supported
+		//EPackageDecl returns ecore::EPackage:
+		//  (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordPackage() { return c1KeywordPackage; }
+		//"package"
+		public Keyword getPackageKeyword_1() { return cPackageKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentName() { return c2AssignmentName; }
+		//name=QID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		// not supported
-		public RuleCall ele20ParserRuleCallQID() { return c20ParserRuleCallQID; }
+		//QID
+		public RuleCall getNameQIDParserRuleCall_2_0() { return cNameQIDParserRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordNsURI() { return c3KeywordNsURI; }
+		//"nsURI"
+		public Keyword getNsURIKeyword_3() { return cNsURIKeyword_3; }
 
-		// not supported
-		public Keyword ele4KeywordEqualsSign() { return c4KeywordEqualsSign; }
+		//"="
+		public Keyword getEqualsSignKeyword_4() { return cEqualsSignKeyword_4; }
 
-		// not supported
-		public Assignment ele5AssignmentNsURI() { return c5AssignmentNsURI; }
+		//nsURI=STRING
+		public Assignment getNsURIAssignment_5() { return cNsURIAssignment_5; }
 
-		// not supported
-		public RuleCall ele50TerminalRuleCallSTRING() { return c50TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getNsURISTRINGTerminalRuleCall_5_0() { return cNsURISTRINGTerminalRuleCall_5_0; }
 
-		// not supported
-		public Keyword ele6KeywordNsPrefix() { return c6KeywordNsPrefix; }
+		//"nsPrefix"
+		public Keyword getNsPrefixKeyword_6() { return cNsPrefixKeyword_6; }
 
-		// not supported
-		public Keyword ele7KeywordEqualsSign() { return c7KeywordEqualsSign; }
+		//"="
+		public Keyword getEqualsSignKeyword_7() { return cEqualsSignKeyword_7; }
 
-		// not supported
-		public Assignment ele8AssignmentNsPrefix() { return c8AssignmentNsPrefix; }
+		//nsPrefix=QID
+		public Assignment getNsPrefixAssignment_8() { return cNsPrefixAssignment_8; }
 
-		// not supported
-		public RuleCall ele80ParserRuleCallQID() { return c80ParserRuleCallQID; }
+		//QID
+		public RuleCall getNsPrefixQIDParserRuleCall_8_0() { return cNsPrefixQIDParserRuleCall_8_0; }
 
-		// not supported
-		public Keyword ele9KeywordLeftCurlyBracket() { return c9KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_9() { return cLeftCurlyBracketKeyword_9; }
 
-		// not supported
-		public Alternatives ele10Alternatives() { return c10Alternatives; }
+		//(eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+		public Alternatives getAlternatives_10() { return cAlternatives_10; }
 
-		// not supported
-		public Assignment ele100AssignmentESubpackages() { return c100AssignmentESubpackages; }
+		//eSubpackages+=SubEPackageDecl
+		public Assignment getESubpackagesAssignment_10_0() { return cESubpackagesAssignment_10_0; }
 
-		// not supported
-		public RuleCall ele1000ParserRuleCallSubEPackageDecl() { return c1000ParserRuleCallSubEPackageDecl; }
+		//SubEPackageDecl
+		public RuleCall getESubpackagesSubEPackageDeclParserRuleCall_10_0_0() { return cESubpackagesSubEPackageDeclParserRuleCall_10_0_0; }
 
-		// not supported
-		public Assignment ele101AssignmentEClassifiers() { return c101AssignmentEClassifiers; }
+		//eClassifiers+=EClassifierDecl
+		public Assignment getEClassifiersAssignment_10_1() { return cEClassifiersAssignment_10_1; }
 
-		// not supported
-		public RuleCall ele1010ParserRuleCallEClassifierDecl() { return c1010ParserRuleCallEClassifierDecl; }
+		//EClassifierDecl
+		public RuleCall getEClassifiersEClassifierDeclParserRuleCall_10_1_0() { return cEClassifiersEClassifierDeclParserRuleCall_10_1_0; }
 
-		// not supported
-		public Keyword ele11KeywordRightCurlyBracket() { return c11KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
 	}
 
 	public class SubEPackageDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubEPackageDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Keyword c1KeywordPackage = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
-		private final Keyword c3KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(3);
-		private final Alternatives c4Alternatives = (Alternatives)cGroup.eContents().get(4);
-		private final Assignment c40AssignmentESubpackages = (Assignment)c4Alternatives.eContents().get(0);
-		private final RuleCall c400ParserRuleCallSubEPackageDecl = (RuleCall)c40AssignmentESubpackages.eContents().get(0);
-		private final Assignment c41AssignmentEClassifiers = (Assignment)c4Alternatives.eContents().get(1);
-		private final RuleCall c410ParserRuleCallEClassifierDecl = (RuleCall)c41AssignmentEClassifiers.eContents().get(0);
-		private final Keyword c5KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Keyword cPackageKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Assignment cESubpackagesAssignment_4_0 = (Assignment)cAlternatives_4.eContents().get(0);
+		private final RuleCall cESubpackagesSubEPackageDeclParserRuleCall_4_0_0 = (RuleCall)cESubpackagesAssignment_4_0.eContents().get(0);
+		private final Assignment cEClassifiersAssignment_4_1 = (Assignment)cAlternatives_4.eContents().get(1);
+		private final RuleCall cEClassifiersEClassifierDeclParserRuleCall_4_1_0 = (RuleCall)cEClassifiersAssignment_4_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		// not supported
+		//SubEPackageDecl returns ecore::EPackage:
+		//  (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordPackage() { return c1KeywordPackage; }
+		//"package"
+		public Keyword getPackageKeyword_1() { return cPackageKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentName() { return c2AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordLeftCurlyBracket() { return c3KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		// not supported
-		public Alternatives ele4Alternatives() { return c4Alternatives; }
+		//(eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)*
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
-		// not supported
-		public Assignment ele40AssignmentESubpackages() { return c40AssignmentESubpackages; }
+		//eSubpackages+=SubEPackageDecl
+		public Assignment getESubpackagesAssignment_4_0() { return cESubpackagesAssignment_4_0; }
 
-		// not supported
-		public RuleCall ele400ParserRuleCallSubEPackageDecl() { return c400ParserRuleCallSubEPackageDecl; }
+		//SubEPackageDecl
+		public RuleCall getESubpackagesSubEPackageDeclParserRuleCall_4_0_0() { return cESubpackagesSubEPackageDeclParserRuleCall_4_0_0; }
 
-		// not supported
-		public Assignment ele41AssignmentEClassifiers() { return c41AssignmentEClassifiers; }
+		//eClassifiers+=EClassifierDecl
+		public Assignment getEClassifiersAssignment_4_1() { return cEClassifiersAssignment_4_1; }
 
-		// not supported
-		public RuleCall ele410ParserRuleCallEClassifierDecl() { return c410ParserRuleCallEClassifierDecl; }
+		//EClassifierDecl
+		public RuleCall getEClassifiersEClassifierDeclParserRuleCall_4_1_0() { return cEClassifiersEClassifierDeclParserRuleCall_4_1_0; }
 
-		// not supported
-		public Keyword ele5KeywordRightCurlyBracket() { return c5KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
 	public class EClassifierDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EClassifierDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallEClassDecl = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallEDataTypeDecl = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEClassDeclParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEDataTypeDeclParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//EClassifierDecl returns ecore::EClassifier:
+		//  EClassDecl|EDataTypeDecl;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//EClassDecl|EDataTypeDecl
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallEClassDecl() { return c0ParserRuleCallEClassDecl; }
+		//EClassDecl
+		public RuleCall getEClassDeclParserRuleCall_0() { return cEClassDeclParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallEDataTypeDecl() { return c1ParserRuleCallEDataTypeDecl; }
+		//EDataTypeDecl
+		public RuleCall getEDataTypeDeclParserRuleCall_1() { return cEDataTypeDeclParserRuleCall_1; }
 	}
 
 	public class EDataTypeDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EDataTypeDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
-		private final Assignment c00AssignmentEAnnotations = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000ParserRuleCallEAnnotationDecl = (RuleCall)c00AssignmentEAnnotations.eContents().get(0);
-		private final Assignment c01AssignmentSerializable = (Assignment)c0Group.eContents().get(1);
-		private final RuleCall c010TerminalRuleCallSerializable = (RuleCall)c01AssignmentSerializable.eContents().get(0);
-		private final Group c02Group = (Group)c0Group.eContents().get(2);
-		private final Keyword c020KeywordDatatype = (Keyword)c02Group.eContents().get(0);
-		private final Assignment c021AssignmentName = (Assignment)c02Group.eContents().get(1);
-		private final RuleCall c0210TerminalRuleCallID = (RuleCall)c021AssignmentName.eContents().get(0);
-		private final Keyword c022KeywordColon = (Keyword)c02Group.eContents().get(2);
-		private final Assignment c023AssignmentInstanceClassName = (Assignment)c02Group.eContents().get(3);
-		private final RuleCall c0230ParserRuleCallSTRING_OR_QID = (RuleCall)c023AssignmentInstanceClassName.eContents().get(0);
-		private final Keyword c024KeywordSemicolon = (Keyword)c02Group.eContents().get(4);
-		private final RuleCall c1ParserRuleCallEEnumDecl = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cEAnnotationsAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0_0 = (RuleCall)cEAnnotationsAssignment_0_0.eContents().get(0);
+		private final Assignment cSerializableAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cSerializableSerializableTerminalRuleCall_0_1_0 = (RuleCall)cSerializableAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cDatatypeKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cNameAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0_2_1_0 = (RuleCall)cNameAssignment_0_2_1.eContents().get(0);
+		private final Keyword cColonKeyword_0_2_2 = (Keyword)cGroup_0_2.eContents().get(2);
+		private final Assignment cInstanceClassNameAssignment_0_2_3 = (Assignment)cGroup_0_2.eContents().get(3);
+		private final RuleCall cInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0 = (RuleCall)cInstanceClassNameAssignment_0_2_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_0_2_4 = (Keyword)cGroup_0_2.eContents().get(4);
+		private final RuleCall cEEnumDeclParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//EDataTypeDecl returns ecore::EDataType:
+		//  (eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//(eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Group ele0Group() { return c0Group; }
+		//(eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
+		public Group getGroup_0() { return cGroup_0; }
 
-		// not supported
-		public Assignment ele00AssignmentEAnnotations() { return c00AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0_0() { return cEAnnotationsAssignment_0_0; }
 
-		// not supported
-		public RuleCall ele000ParserRuleCallEAnnotationDecl() { return c000ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0_0; }
 
-		// not supported
-		public Assignment ele01AssignmentSerializable() { return c01AssignmentSerializable; }
+		//(serializable=Serializable)?
+		public Assignment getSerializableAssignment_0_1() { return cSerializableAssignment_0_1; }
 
-		// not supported
-		public RuleCall ele010TerminalRuleCallSerializable() { return c010TerminalRuleCallSerializable; }
+		//Serializable
+		public RuleCall getSerializableSerializableTerminalRuleCall_0_1_0() { return cSerializableSerializableTerminalRuleCall_0_1_0; }
 
-		// not supported
-		public Group ele02Group() { return c02Group; }
+		//"datatype" name=ID ":" instanceClassName=STRING_OR_QID ";"
+		public Group getGroup_0_2() { return cGroup_0_2; }
 
-		// not supported
-		public Keyword ele020KeywordDatatype() { return c020KeywordDatatype; }
+		//"datatype"
+		public Keyword getDatatypeKeyword_0_2_0() { return cDatatypeKeyword_0_2_0; }
 
-		// not supported
-		public Assignment ele021AssignmentName() { return c021AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0_2_1() { return cNameAssignment_0_2_1; }
 
-		// not supported
-		public RuleCall ele0210TerminalRuleCallID() { return c0210TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_2_1_0() { return cNameIDTerminalRuleCall_0_2_1_0; }
 
-		// not supported
-		public Keyword ele022KeywordColon() { return c022KeywordColon; }
+		//":"
+		public Keyword getColonKeyword_0_2_2() { return cColonKeyword_0_2_2; }
 
-		// not supported
-		public Assignment ele023AssignmentInstanceClassName() { return c023AssignmentInstanceClassName; }
+		//instanceClassName=STRING_OR_QID
+		public Assignment getInstanceClassNameAssignment_0_2_3() { return cInstanceClassNameAssignment_0_2_3; }
 
-		// not supported
-		public RuleCall ele0230ParserRuleCallSTRING_OR_QID() { return c0230ParserRuleCallSTRING_OR_QID; }
+		//STRING_OR_QID
+		public RuleCall getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0() { return cInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0; }
 
-		// not supported
-		public Keyword ele024KeywordSemicolon() { return c024KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_0_2_4() { return cSemicolonKeyword_0_2_4; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallEEnumDecl() { return c1ParserRuleCallEEnumDecl; }
+		//EEnumDecl
+		public RuleCall getEEnumDeclParserRuleCall_1() { return cEEnumDeclParserRuleCall_1; }
 	}
 
 	public class EAnnotationDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EAnnotationDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordCommercialAt = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentSource = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallSTRING_OR_QID = (RuleCall)c1AssignmentSource.eContents().get(0);
-		private final Group c2Group = (Group)cGroup.eContents().get(2);
-		private final Keyword c20KeywordLeftParenthesis = (Keyword)c2Group.eContents().get(0);
-		private final Assignment c21AssignmentDetails = (Assignment)c2Group.eContents().get(1);
-		private final RuleCall c210ParserRuleCallMapEntry = (RuleCall)c21AssignmentDetails.eContents().get(0);
-		private final Group c22Group = (Group)c2Group.eContents().get(2);
-		private final Keyword c220KeywordComma = (Keyword)c22Group.eContents().get(0);
-		private final Assignment c221AssignmentDetails = (Assignment)c22Group.eContents().get(1);
-		private final RuleCall c2210ParserRuleCallMapEntry = (RuleCall)c221AssignmentDetails.eContents().get(0);
-		private final Keyword c23KeywordRightParenthesis = (Keyword)c2Group.eContents().get(3);
+		private final Keyword cCommercialAtKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cSourceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSourceSTRING_OR_QIDParserRuleCall_1_0 = (RuleCall)cSourceAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cDetailsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cDetailsMapEntryParserRuleCall_2_1_0 = (RuleCall)cDetailsAssignment_2_1.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cDetailsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cDetailsMapEntryParserRuleCall_2_2_1_0 = (RuleCall)cDetailsAssignment_2_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
-		// not supported
+		//EAnnotationDecl returns ecore::EAnnotation:
+		//  "@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")?;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")?
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordCommercialAt() { return c0KeywordCommercialAt; }
+		//"@"
+		public Keyword getCommercialAtKeyword_0() { return cCommercialAtKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentSource() { return c1AssignmentSource; }
+		//source=STRING_OR_QID
+		public Assignment getSourceAssignment_1() { return cSourceAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallSTRING_OR_QID() { return c10ParserRuleCallSTRING_OR_QID; }
+		//STRING_OR_QID
+		public RuleCall getSourceSTRING_OR_QIDParserRuleCall_1_0() { return cSourceSTRING_OR_QIDParserRuleCall_1_0; }
 
-		// not supported
-		public Group ele2Group() { return c2Group; }
+		//("(" details+=MapEntry ("," details+=MapEntry)* ")")?
+		public Group getGroup_2() { return cGroup_2; }
 
-		// not supported
-		public Keyword ele20KeywordLeftParenthesis() { return c20KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 
-		// not supported
-		public Assignment ele21AssignmentDetails() { return c21AssignmentDetails; }
+		//details+=MapEntry
+		public Assignment getDetailsAssignment_2_1() { return cDetailsAssignment_2_1; }
 
-		// not supported
-		public RuleCall ele210ParserRuleCallMapEntry() { return c210ParserRuleCallMapEntry; }
+		//MapEntry
+		public RuleCall getDetailsMapEntryParserRuleCall_2_1_0() { return cDetailsMapEntryParserRuleCall_2_1_0; }
 
-		// not supported
-		public Group ele22Group() { return c22Group; }
+		//("," details+=MapEntry)*
+		public Group getGroup_2_2() { return cGroup_2_2; }
 
-		// not supported
-		public Keyword ele220KeywordComma() { return c220KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
-		// not supported
-		public Assignment ele221AssignmentDetails() { return c221AssignmentDetails; }
+		//details+=MapEntry
+		public Assignment getDetailsAssignment_2_2_1() { return cDetailsAssignment_2_2_1; }
 
-		// not supported
-		public RuleCall ele2210ParserRuleCallMapEntry() { return c2210ParserRuleCallMapEntry; }
+		//MapEntry
+		public RuleCall getDetailsMapEntryParserRuleCall_2_2_1_0() { return cDetailsMapEntryParserRuleCall_2_2_1_0; }
 
-		// not supported
-		public Keyword ele23KeywordRightParenthesis() { return c23KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
 	}
 
 	public class EClassDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EClassDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Assignment c1AssignmentAbstract = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordAbstract = (Keyword)c1AssignmentAbstract.eContents().get(0);
-		private final Alternatives c2Alternatives = (Alternatives)cGroup.eContents().get(2);
-		private final Assignment c20AssignmentInterface = (Assignment)c2Alternatives.eContents().get(0);
-		private final Keyword c200KeywordInterface = (Keyword)c20AssignmentInterface.eContents().get(0);
-		private final Keyword c21KeywordClass = (Keyword)c2Alternatives.eContents().get(1);
-		private final Assignment c3AssignmentName = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30TerminalRuleCallID = (RuleCall)c3AssignmentName.eContents().get(0);
-		private final Group c4Group = (Group)cGroup.eContents().get(4);
-		private final Keyword c40KeywordLessThanSign = (Keyword)c4Group.eContents().get(0);
-		private final Assignment c41AssignmentETypeParameters = (Assignment)c4Group.eContents().get(1);
-		private final RuleCall c410ParserRuleCallETypeParameterDecl = (RuleCall)c41AssignmentETypeParameters.eContents().get(0);
-		private final Group c42Group = (Group)c4Group.eContents().get(2);
-		private final Keyword c420KeywordComma = (Keyword)c42Group.eContents().get(0);
-		private final Assignment c421AssignmentETypeParameters = (Assignment)c42Group.eContents().get(1);
-		private final RuleCall c4210ParserRuleCallETypeParameterDecl = (RuleCall)c421AssignmentETypeParameters.eContents().get(0);
-		private final Keyword c43KeywordGreaterThanSign = (Keyword)c4Group.eContents().get(3);
-		private final Group c5Group = (Group)cGroup.eContents().get(5);
-		private final Keyword c50KeywordExtends = (Keyword)c5Group.eContents().get(0);
-		private final Assignment c51AssignmentEGenericSuperTypes = (Assignment)c5Group.eContents().get(1);
-		private final RuleCall c510ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c51AssignmentEGenericSuperTypes.eContents().get(0);
-		private final Group c52Group = (Group)c5Group.eContents().get(2);
-		private final Keyword c520KeywordComma = (Keyword)c52Group.eContents().get(0);
-		private final Assignment c521AssignmentEGenericSuperTypes = (Assignment)c52Group.eContents().get(1);
-		private final RuleCall c5210ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c521AssignmentEGenericSuperTypes.eContents().get(0);
-		private final Group c6Group = (Group)cGroup.eContents().get(6);
-		private final Keyword c60KeywordColon = (Keyword)c6Group.eContents().get(0);
-		private final Assignment c61AssignmentInstanceClassName = (Assignment)c6Group.eContents().get(1);
-		private final RuleCall c610ParserRuleCallSTRING_OR_QID = (RuleCall)c61AssignmentInstanceClassName.eContents().get(0);
-		private final Keyword c7KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(7);
-		private final Alternatives c8Alternatives = (Alternatives)cGroup.eContents().get(8);
-		private final Assignment c80AssignmentEStructuralFeatures = (Assignment)c8Alternatives.eContents().get(0);
-		private final RuleCall c800ParserRuleCallEStructuralFeatureDecl = (RuleCall)c80AssignmentEStructuralFeatures.eContents().get(0);
-		private final Assignment c81AssignmentEOperations = (Assignment)c8Alternatives.eContents().get(1);
-		private final RuleCall c810ParserRuleCallEOperationDecl = (RuleCall)c81AssignmentEOperations.eContents().get(0);
-		private final Keyword c9KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Assignment cAbstractAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cAbstractAbstractKeyword_1_0 = (Keyword)cAbstractAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cInterfaceAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cInterfaceInterfaceKeyword_2_0_0 = (Keyword)cInterfaceAssignment_2_0.eContents().get(0);
+		private final Keyword cClassKeyword_2_1 = (Keyword)cAlternatives_2.eContents().get(1);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cLessThanSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cETypeParametersAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cETypeParametersETypeParameterDeclParserRuleCall_4_1_0 = (RuleCall)cETypeParametersAssignment_4_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
+		private final Keyword cCommaKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cETypeParametersAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0 = (RuleCall)cETypeParametersAssignment_4_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cExtendsKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cEGenericSuperTypesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0 = (RuleCall)cEGenericSuperTypesAssignment_5_1.eContents().get(0);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cEGenericSuperTypesAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final RuleCall cEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0 = (RuleCall)cEGenericSuperTypesAssignment_5_2_1.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cColonKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cInstanceClassNameAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0 = (RuleCall)cInstanceClassNameAssignment_6_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Alternatives cAlternatives_8 = (Alternatives)cGroup.eContents().get(8);
+		private final Assignment cEStructuralFeaturesAssignment_8_0 = (Assignment)cAlternatives_8.eContents().get(0);
+		private final RuleCall cEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0 = (RuleCall)cEStructuralFeaturesAssignment_8_0.eContents().get(0);
+		private final Assignment cEOperationsAssignment_8_1 = (Assignment)cAlternatives_8.eContents().get(1);
+		private final RuleCall cEOperationsEOperationDeclParserRuleCall_8_1_0 = (RuleCall)cEOperationsAssignment_8_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
-		// not supported
+		//EClassDecl returns ecore::EClass:
+		//  (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentAbstract() { return c1AssignmentAbstract; }
+		//(abstract?="abstract")?
+		public Assignment getAbstractAssignment_1() { return cAbstractAssignment_1; }
 
-		// not supported
-		public Keyword ele10KeywordAbstract() { return c10KeywordAbstract; }
+		//"abstract"
+		public Keyword getAbstractAbstractKeyword_1_0() { return cAbstractAbstractKeyword_1_0; }
 
-		// not supported
-		public Alternatives ele2Alternatives() { return c2Alternatives; }
+		//interface?="interface"|"class"
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		// not supported
-		public Assignment ele20AssignmentInterface() { return c20AssignmentInterface; }
+		//interface?="interface"
+		public Assignment getInterfaceAssignment_2_0() { return cInterfaceAssignment_2_0; }
 
-		// not supported
-		public Keyword ele200KeywordInterface() { return c200KeywordInterface; }
+		//"interface"
+		public Keyword getInterfaceInterfaceKeyword_2_0_0() { return cInterfaceInterfaceKeyword_2_0_0; }
 
-		// not supported
-		public Keyword ele21KeywordClass() { return c21KeywordClass; }
+		//"class"
+		public Keyword getClassKeyword_2_1() { return cClassKeyword_2_1; }
 
-		// not supported
-		public Assignment ele3AssignmentName() { return c3AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 
-		// not supported
-		public RuleCall ele30TerminalRuleCallID() { return c30TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 
-		// not supported
-		public Group ele4Group() { return c4Group; }
+		//("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
+		public Group getGroup_4() { return cGroup_4; }
 
-		// not supported
-		public Keyword ele40KeywordLessThanSign() { return c40KeywordLessThanSign; }
+		//"<"
+		public Keyword getLessThanSignKeyword_4_0() { return cLessThanSignKeyword_4_0; }
 
-		// not supported
-		public Assignment ele41AssignmentETypeParameters() { return c41AssignmentETypeParameters; }
+		//eTypeParameters+=ETypeParameterDecl
+		public Assignment getETypeParametersAssignment_4_1() { return cETypeParametersAssignment_4_1; }
 
-		// not supported
-		public RuleCall ele410ParserRuleCallETypeParameterDecl() { return c410ParserRuleCallETypeParameterDecl; }
+		//ETypeParameterDecl
+		public RuleCall getETypeParametersETypeParameterDeclParserRuleCall_4_1_0() { return cETypeParametersETypeParameterDeclParserRuleCall_4_1_0; }
 
-		// not supported
-		public Group ele42Group() { return c42Group; }
+		//("," eTypeParameters+=ETypeParameterDecl)*
+		public Group getGroup_4_2() { return cGroup_4_2; }
 
-		// not supported
-		public Keyword ele420KeywordComma() { return c420KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_4_2_0() { return cCommaKeyword_4_2_0; }
 
-		// not supported
-		public Assignment ele421AssignmentETypeParameters() { return c421AssignmentETypeParameters; }
+		//eTypeParameters+=ETypeParameterDecl
+		public Assignment getETypeParametersAssignment_4_2_1() { return cETypeParametersAssignment_4_2_1; }
 
-		// not supported
-		public RuleCall ele4210ParserRuleCallETypeParameterDecl() { return c4210ParserRuleCallETypeParameterDecl; }
+		//ETypeParameterDecl
+		public RuleCall getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0() { return cETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0; }
 
-		// not supported
-		public Keyword ele43KeywordGreaterThanSign() { return c43KeywordGreaterThanSign; }
+		//">"
+		public Keyword getGreaterThanSignKeyword_4_3() { return cGreaterThanSignKeyword_4_3; }
 
-		// not supported
-		public Group ele5Group() { return c5Group; }
+		//("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)?
+		public Group getGroup_5() { return cGroup_5; }
 
-		// not supported
-		public Keyword ele50KeywordExtends() { return c50KeywordExtends; }
+		//"extends"
+		public Keyword getExtendsKeyword_5_0() { return cExtendsKeyword_5_0; }
 
-		// not supported
-		public Assignment ele51AssignmentEGenericSuperTypes() { return c51AssignmentEGenericSuperTypes; }
+		//eGenericSuperTypes+=EGenericTypeReferenceDecl
+		public Assignment getEGenericSuperTypesAssignment_5_1() { return cEGenericSuperTypesAssignment_5_1; }
 
-		// not supported
-		public RuleCall ele510ParserRuleCallEGenericTypeReferenceDecl() { return c510ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0() { return cEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0; }
 
-		// not supported
-		public Group ele52Group() { return c52Group; }
+		//("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*
+		public Group getGroup_5_2() { return cGroup_5_2; }
 
-		// not supported
-		public Keyword ele520KeywordComma() { return c520KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
 
-		// not supported
-		public Assignment ele521AssignmentEGenericSuperTypes() { return c521AssignmentEGenericSuperTypes; }
+		//eGenericSuperTypes+=EGenericTypeReferenceDecl
+		public Assignment getEGenericSuperTypesAssignment_5_2_1() { return cEGenericSuperTypesAssignment_5_2_1; }
 
-		// not supported
-		public RuleCall ele5210ParserRuleCallEGenericTypeReferenceDecl() { return c5210ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0() { return cEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0; }
 
-		// not supported
-		public Group ele6Group() { return c6Group; }
+		//(":" instanceClassName=STRING_OR_QID)?
+		public Group getGroup_6() { return cGroup_6; }
 
-		// not supported
-		public Keyword ele60KeywordColon() { return c60KeywordColon; }
+		//":"
+		public Keyword getColonKeyword_6_0() { return cColonKeyword_6_0; }
 
-		// not supported
-		public Assignment ele61AssignmentInstanceClassName() { return c61AssignmentInstanceClassName; }
+		//instanceClassName=STRING_OR_QID
+		public Assignment getInstanceClassNameAssignment_6_1() { return cInstanceClassNameAssignment_6_1; }
 
-		// not supported
-		public RuleCall ele610ParserRuleCallSTRING_OR_QID() { return c610ParserRuleCallSTRING_OR_QID; }
+		//STRING_OR_QID
+		public RuleCall getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0() { return cInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0; }
 
-		// not supported
-		public Keyword ele7KeywordLeftCurlyBracket() { return c7KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
 
-		// not supported
-		public Alternatives ele8Alternatives() { return c8Alternatives; }
+		//(eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)*
+		public Alternatives getAlternatives_8() { return cAlternatives_8; }
 
-		// not supported
-		public Assignment ele80AssignmentEStructuralFeatures() { return c80AssignmentEStructuralFeatures; }
+		//eStructuralFeatures+=EStructuralFeatureDecl
+		public Assignment getEStructuralFeaturesAssignment_8_0() { return cEStructuralFeaturesAssignment_8_0; }
 
-		// not supported
-		public RuleCall ele800ParserRuleCallEStructuralFeatureDecl() { return c800ParserRuleCallEStructuralFeatureDecl; }
+		//EStructuralFeatureDecl
+		public RuleCall getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0() { return cEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0; }
 
-		// not supported
-		public Assignment ele81AssignmentEOperations() { return c81AssignmentEOperations; }
+		//eOperations+=EOperationDecl
+		public Assignment getEOperationsAssignment_8_1() { return cEOperationsAssignment_8_1; }
 
-		// not supported
-		public RuleCall ele810ParserRuleCallEOperationDecl() { return c810ParserRuleCallEOperationDecl; }
+		//EOperationDecl
+		public RuleCall getEOperationsEOperationDeclParserRuleCall_8_1_0() { return cEOperationsEOperationDeclParserRuleCall_8_1_0; }
 
-		// not supported
-		public Keyword ele9KeywordRightCurlyBracket() { return c9KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 
 	public class EStructuralFeatureDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EStructuralFeatureDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallEAttributeDecl = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallEReferenceDecl = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEAttributeDeclParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEReferenceDeclParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//EStructuralFeatureDecl returns ecore::EStructuralFeature:
+		//  EAttributeDecl|EReferenceDecl;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//EAttributeDecl|EReferenceDecl
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallEAttributeDecl() { return c0ParserRuleCallEAttributeDecl; }
+		//EAttributeDecl
+		public RuleCall getEAttributeDeclParserRuleCall_0() { return cEAttributeDeclParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallEReferenceDecl() { return c1ParserRuleCallEReferenceDecl; }
+		//EReferenceDecl
+		public RuleCall getEReferenceDeclParserRuleCall_1() { return cEReferenceDeclParserRuleCall_1; }
 	}
 
 	public class EAttributeDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EAttributeDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment c10AssignmentID = (Assignment)c1Alternatives.eContents().get(0);
-		private final Keyword c100KeywordID = (Keyword)c10AssignmentID.eContents().get(0);
-		private final Assignment c11AssignmentUnique = (Assignment)c1Alternatives.eContents().get(1);
-		private final RuleCall c110TerminalRuleCallBag = (RuleCall)c11AssignmentUnique.eContents().get(0);
-		private final Assignment c12AssignmentOrdered = (Assignment)c1Alternatives.eContents().get(2);
-		private final RuleCall c120TerminalRuleCallRandom = (RuleCall)c12AssignmentOrdered.eContents().get(0);
-		private final Assignment c13AssignmentChangeable = (Assignment)c1Alternatives.eContents().get(3);
-		private final RuleCall c130TerminalRuleCallReadonly = (RuleCall)c13AssignmentChangeable.eContents().get(0);
-		private final Assignment c14AssignmentVolatile = (Assignment)c1Alternatives.eContents().get(4);
-		private final Keyword c140KeywordVolatile = (Keyword)c14AssignmentVolatile.eContents().get(0);
-		private final Assignment c15AssignmentTransient = (Assignment)c1Alternatives.eContents().get(5);
-		private final Keyword c150KeywordTransient = (Keyword)c15AssignmentTransient.eContents().get(0);
-		private final Assignment c16AssignmentUnsettable = (Assignment)c1Alternatives.eContents().get(6);
-		private final Keyword c160KeywordUnsettable = (Keyword)c16AssignmentUnsettable.eContents().get(0);
-		private final Assignment c17AssignmentDerived = (Assignment)c1Alternatives.eContents().get(7);
-		private final Keyword c170KeywordDerived = (Keyword)c17AssignmentDerived.eContents().get(0);
-		private final Keyword c2KeywordAttr = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentEGenericType = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c3AssignmentEGenericType.eContents().get(0);
-		private final Group c4Group = (Group)cGroup.eContents().get(4);
-		private final Keyword c40KeywordLeftSquareBracket = (Keyword)c4Group.eContents().get(0);
-		private final Assignment c41AssignmentLowerBound = (Assignment)c4Group.eContents().get(1);
-		private final RuleCall c410TerminalRuleCallINT = (RuleCall)c41AssignmentLowerBound.eContents().get(0);
-		private final Group c42Group = (Group)c4Group.eContents().get(2);
-		private final Keyword c420KeywordFullStopFullStop = (Keyword)c42Group.eContents().get(0);
-		private final Assignment c421AssignmentUpperBound = (Assignment)c42Group.eContents().get(1);
-		private final RuleCall c4210ParserRuleCallSINT = (RuleCall)c421AssignmentUpperBound.eContents().get(0);
-		private final Keyword c43KeywordRightSquareBracket = (Keyword)c4Group.eContents().get(3);
-		private final Assignment c5AssignmentName = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall c50TerminalRuleCallID = (RuleCall)c5AssignmentName.eContents().get(0);
-		private final Group c6Group = (Group)cGroup.eContents().get(6);
-		private final Keyword c60KeywordEqualsSign = (Keyword)c6Group.eContents().get(0);
-		private final Assignment c61AssignmentDefaultValueLiteral = (Assignment)c6Group.eContents().get(1);
-		private final RuleCall c610TerminalRuleCallSTRING = (RuleCall)c61AssignmentDefaultValueLiteral.eContents().get(0);
-		private final Keyword c7KeywordSemicolon = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cIDAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cIDIDKeyword_1_0_0 = (Keyword)cIDAssignment_1_0.eContents().get(0);
+		private final Assignment cUniqueAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cUniqueBagTerminalRuleCall_1_1_0 = (RuleCall)cUniqueAssignment_1_1.eContents().get(0);
+		private final Assignment cOrderedAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cOrderedRandomTerminalRuleCall_1_2_0 = (RuleCall)cOrderedAssignment_1_2.eContents().get(0);
+		private final Assignment cChangeableAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
+		private final RuleCall cChangeableReadonlyTerminalRuleCall_1_3_0 = (RuleCall)cChangeableAssignment_1_3.eContents().get(0);
+		private final Assignment cVolatileAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
+		private final Keyword cVolatileVolatileKeyword_1_4_0 = (Keyword)cVolatileAssignment_1_4.eContents().get(0);
+		private final Assignment cTransientAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
+		private final Keyword cTransientTransientKeyword_1_5_0 = (Keyword)cTransientAssignment_1_5.eContents().get(0);
+		private final Assignment cUnsettableAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
+		private final Keyword cUnsettableUnsettableKeyword_1_6_0 = (Keyword)cUnsettableAssignment_1_6.eContents().get(0);
+		private final Assignment cDerivedAssignment_1_7 = (Assignment)cAlternatives_1.eContents().get(7);
+		private final Keyword cDerivedDerivedKeyword_1_7_0 = (Keyword)cDerivedAssignment_1_7.eContents().get(0);
+		private final Keyword cAttrKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cEGenericTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0 = (RuleCall)cEGenericTypeAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cLeftSquareBracketKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cLowerBoundAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cLowerBoundINTTerminalRuleCall_4_1_0 = (RuleCall)cLowerBoundAssignment_4_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
+		private final Keyword cFullStopFullStopKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cUpperBoundAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cUpperBoundSINTParserRuleCall_4_2_1_0 = (RuleCall)cUpperBoundAssignment_4_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Assignment cNameAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cNameIDTerminalRuleCall_5_0 = (RuleCall)cNameAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cEqualsSignKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cDefaultValueLiteralAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0 = (RuleCall)cDefaultValueLiteralAssignment_6_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		// not supported
+		//EAttributeDecl returns ecore::EAttribute:
+		//  (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Alternatives ele1Alternatives() { return c1Alternatives; }
+		//(iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		// not supported
-		public Assignment ele10AssignmentID() { return c10AssignmentID; }
+		//iD?="ID"
+		public Assignment getIDAssignment_1_0() { return cIDAssignment_1_0; }
 
-		// not supported
-		public Keyword ele100KeywordID() { return c100KeywordID; }
+		//"ID"
+		public Keyword getIDIDKeyword_1_0_0() { return cIDIDKeyword_1_0_0; }
 
-		// not supported
-		public Assignment ele11AssignmentUnique() { return c11AssignmentUnique; }
+		//unique=Bag
+		public Assignment getUniqueAssignment_1_1() { return cUniqueAssignment_1_1; }
 
-		// not supported
-		public RuleCall ele110TerminalRuleCallBag() { return c110TerminalRuleCallBag; }
+		//Bag
+		public RuleCall getUniqueBagTerminalRuleCall_1_1_0() { return cUniqueBagTerminalRuleCall_1_1_0; }
 
-		// not supported
-		public Assignment ele12AssignmentOrdered() { return c12AssignmentOrdered; }
+		//ordered=Random
+		public Assignment getOrderedAssignment_1_2() { return cOrderedAssignment_1_2; }
 
-		// not supported
-		public RuleCall ele120TerminalRuleCallRandom() { return c120TerminalRuleCallRandom; }
+		//Random
+		public RuleCall getOrderedRandomTerminalRuleCall_1_2_0() { return cOrderedRandomTerminalRuleCall_1_2_0; }
 
-		// not supported
-		public Assignment ele13AssignmentChangeable() { return c13AssignmentChangeable; }
+		//changeable=Readonly
+		public Assignment getChangeableAssignment_1_3() { return cChangeableAssignment_1_3; }
 
-		// not supported
-		public RuleCall ele130TerminalRuleCallReadonly() { return c130TerminalRuleCallReadonly; }
+		//Readonly
+		public RuleCall getChangeableReadonlyTerminalRuleCall_1_3_0() { return cChangeableReadonlyTerminalRuleCall_1_3_0; }
 
-		// not supported
-		public Assignment ele14AssignmentVolatile() { return c14AssignmentVolatile; }
+		//volatile?="volatile"
+		public Assignment getVolatileAssignment_1_4() { return cVolatileAssignment_1_4; }
 
-		// not supported
-		public Keyword ele140KeywordVolatile() { return c140KeywordVolatile; }
+		//"volatile"
+		public Keyword getVolatileVolatileKeyword_1_4_0() { return cVolatileVolatileKeyword_1_4_0; }
 
-		// not supported
-		public Assignment ele15AssignmentTransient() { return c15AssignmentTransient; }
+		//transient?="transient"
+		public Assignment getTransientAssignment_1_5() { return cTransientAssignment_1_5; }
 
-		// not supported
-		public Keyword ele150KeywordTransient() { return c150KeywordTransient; }
+		//"transient"
+		public Keyword getTransientTransientKeyword_1_5_0() { return cTransientTransientKeyword_1_5_0; }
 
-		// not supported
-		public Assignment ele16AssignmentUnsettable() { return c16AssignmentUnsettable; }
+		//unsettable?="unsettable"
+		public Assignment getUnsettableAssignment_1_6() { return cUnsettableAssignment_1_6; }
 
-		// not supported
-		public Keyword ele160KeywordUnsettable() { return c160KeywordUnsettable; }
+		//"unsettable"
+		public Keyword getUnsettableUnsettableKeyword_1_6_0() { return cUnsettableUnsettableKeyword_1_6_0; }
 
-		// not supported
-		public Assignment ele17AssignmentDerived() { return c17AssignmentDerived; }
+		//derived?="derived"
+		public Assignment getDerivedAssignment_1_7() { return cDerivedAssignment_1_7; }
 
-		// not supported
-		public Keyword ele170KeywordDerived() { return c170KeywordDerived; }
+		//"derived"
+		public Keyword getDerivedDerivedKeyword_1_7_0() { return cDerivedDerivedKeyword_1_7_0; }
 
-		// not supported
-		public Keyword ele2KeywordAttr() { return c2KeywordAttr; }
+		//"attr"
+		public Keyword getAttrKeyword_2() { return cAttrKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentEGenericType() { return c3AssignmentEGenericType; }
+		//eGenericType=EGenericTypeReferenceDecl
+		public Assignment getEGenericTypeAssignment_3() { return cEGenericTypeAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallEGenericTypeReferenceDecl() { return c30ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0() { return cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0; }
 
-		// not supported
-		public Group ele4Group() { return c4Group; }
+		//("[" lowerBound=INT (".." upperBound=SINT)? "]")?
+		public Group getGroup_4() { return cGroup_4; }
 
-		// not supported
-		public Keyword ele40KeywordLeftSquareBracket() { return c40KeywordLeftSquareBracket; }
+		//"["
+		public Keyword getLeftSquareBracketKeyword_4_0() { return cLeftSquareBracketKeyword_4_0; }
 
-		// not supported
-		public Assignment ele41AssignmentLowerBound() { return c41AssignmentLowerBound; }
+		//lowerBound=INT
+		public Assignment getLowerBoundAssignment_4_1() { return cLowerBoundAssignment_4_1; }
 
-		// not supported
-		public RuleCall ele410TerminalRuleCallINT() { return c410TerminalRuleCallINT; }
+		//INT
+		public RuleCall getLowerBoundINTTerminalRuleCall_4_1_0() { return cLowerBoundINTTerminalRuleCall_4_1_0; }
 
-		// not supported
-		public Group ele42Group() { return c42Group; }
+		//(".." upperBound=SINT)?
+		public Group getGroup_4_2() { return cGroup_4_2; }
 
-		// not supported
-		public Keyword ele420KeywordFullStopFullStop() { return c420KeywordFullStopFullStop; }
+		//".."
+		public Keyword getFullStopFullStopKeyword_4_2_0() { return cFullStopFullStopKeyword_4_2_0; }
 
-		// not supported
-		public Assignment ele421AssignmentUpperBound() { return c421AssignmentUpperBound; }
+		//upperBound=SINT
+		public Assignment getUpperBoundAssignment_4_2_1() { return cUpperBoundAssignment_4_2_1; }
 
-		// not supported
-		public RuleCall ele4210ParserRuleCallSINT() { return c4210ParserRuleCallSINT; }
+		//SINT
+		public RuleCall getUpperBoundSINTParserRuleCall_4_2_1_0() { return cUpperBoundSINTParserRuleCall_4_2_1_0; }
 
-		// not supported
-		public Keyword ele43KeywordRightSquareBracket() { return c43KeywordRightSquareBracket; }
+		//"]"
+		public Keyword getRightSquareBracketKeyword_4_3() { return cRightSquareBracketKeyword_4_3; }
 
-		// not supported
-		public Assignment ele5AssignmentName() { return c5AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_5() { return cNameAssignment_5; }
 
-		// not supported
-		public RuleCall ele50TerminalRuleCallID() { return c50TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_5_0() { return cNameIDTerminalRuleCall_5_0; }
 
-		// not supported
-		public Group ele6Group() { return c6Group; }
+		//("=" defaultValueLiteral=STRING)?
+		public Group getGroup_6() { return cGroup_6; }
 
-		// not supported
-		public Keyword ele60KeywordEqualsSign() { return c60KeywordEqualsSign; }
+		//"="
+		public Keyword getEqualsSignKeyword_6_0() { return cEqualsSignKeyword_6_0; }
 
-		// not supported
-		public Assignment ele61AssignmentDefaultValueLiteral() { return c61AssignmentDefaultValueLiteral; }
+		//defaultValueLiteral=STRING
+		public Assignment getDefaultValueLiteralAssignment_6_1() { return cDefaultValueLiteralAssignment_6_1; }
 
-		// not supported
-		public RuleCall ele610TerminalRuleCallSTRING() { return c610TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0; }
 
-		// not supported
-		public Keyword ele7KeywordSemicolon() { return c7KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
 	public class EReferenceDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EReferenceDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment c10AssignmentResolveProxies = (Assignment)c1Alternatives.eContents().get(0);
-		private final RuleCall c100TerminalRuleCallLocal = (RuleCall)c10AssignmentResolveProxies.eContents().get(0);
-		private final Assignment c11AssignmentUnique = (Assignment)c1Alternatives.eContents().get(1);
-		private final RuleCall c110TerminalRuleCallBag = (RuleCall)c11AssignmentUnique.eContents().get(0);
-		private final Assignment c12AssignmentOrdered = (Assignment)c1Alternatives.eContents().get(2);
-		private final RuleCall c120TerminalRuleCallRandom = (RuleCall)c12AssignmentOrdered.eContents().get(0);
-		private final Assignment c13AssignmentChangeable = (Assignment)c1Alternatives.eContents().get(3);
-		private final RuleCall c130TerminalRuleCallReadonly = (RuleCall)c13AssignmentChangeable.eContents().get(0);
-		private final Assignment c14AssignmentVolatile = (Assignment)c1Alternatives.eContents().get(4);
-		private final Keyword c140KeywordVolatile = (Keyword)c14AssignmentVolatile.eContents().get(0);
-		private final Assignment c15AssignmentTransient = (Assignment)c1Alternatives.eContents().get(5);
-		private final Keyword c150KeywordTransient = (Keyword)c15AssignmentTransient.eContents().get(0);
-		private final Assignment c16AssignmentUnsettable = (Assignment)c1Alternatives.eContents().get(6);
-		private final Keyword c160KeywordUnsettable = (Keyword)c16AssignmentUnsettable.eContents().get(0);
-		private final Assignment c17AssignmentDerived = (Assignment)c1Alternatives.eContents().get(7);
-		private final Keyword c170KeywordDerived = (Keyword)c17AssignmentDerived.eContents().get(0);
-		private final Alternatives c2Alternatives = (Alternatives)cGroup.eContents().get(2);
-		private final Assignment c20AssignmentContainment = (Assignment)c2Alternatives.eContents().get(0);
-		private final Keyword c200KeywordVal = (Keyword)c20AssignmentContainment.eContents().get(0);
-		private final Keyword c21KeywordRef = (Keyword)c2Alternatives.eContents().get(1);
-		private final Assignment c3AssignmentEGenericType = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c3AssignmentEGenericType.eContents().get(0);
-		private final Group c4Group = (Group)cGroup.eContents().get(4);
-		private final Keyword c40KeywordLeftSquareBracket = (Keyword)c4Group.eContents().get(0);
-		private final Assignment c41AssignmentLowerBound = (Assignment)c4Group.eContents().get(1);
-		private final RuleCall c410TerminalRuleCallINT = (RuleCall)c41AssignmentLowerBound.eContents().get(0);
-		private final Group c42Group = (Group)c4Group.eContents().get(2);
-		private final Keyword c420KeywordFullStopFullStop = (Keyword)c42Group.eContents().get(0);
-		private final Assignment c421AssignmentUpperBound = (Assignment)c42Group.eContents().get(1);
-		private final RuleCall c4210ParserRuleCallSINT = (RuleCall)c421AssignmentUpperBound.eContents().get(0);
-		private final Keyword c43KeywordRightSquareBracket = (Keyword)c4Group.eContents().get(3);
-		private final Group c5Group = (Group)cGroup.eContents().get(5);
-		private final Keyword c50KeywordNumberSign = (Keyword)c5Group.eContents().get(0);
-		private final Assignment c51AssignmentEOpposite = (Assignment)c5Group.eContents().get(1);
-		private final CrossReference c510CrossReferenceIDEReference = (CrossReference)c51AssignmentEOpposite.eContents().get(0);
-		private final RuleCall c5101TerminalRuleCallID = (RuleCall)c510CrossReferenceIDEReference.eContents().get(1);
-		private final Assignment c6AssignmentName = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall c60TerminalRuleCallID = (RuleCall)c6AssignmentName.eContents().get(0);
-		private final Keyword c7KeywordSemicolon = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cResolveProxiesAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cResolveProxiesLocalTerminalRuleCall_1_0_0 = (RuleCall)cResolveProxiesAssignment_1_0.eContents().get(0);
+		private final Assignment cUniqueAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cUniqueBagTerminalRuleCall_1_1_0 = (RuleCall)cUniqueAssignment_1_1.eContents().get(0);
+		private final Assignment cOrderedAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cOrderedRandomTerminalRuleCall_1_2_0 = (RuleCall)cOrderedAssignment_1_2.eContents().get(0);
+		private final Assignment cChangeableAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
+		private final RuleCall cChangeableReadonlyTerminalRuleCall_1_3_0 = (RuleCall)cChangeableAssignment_1_3.eContents().get(0);
+		private final Assignment cVolatileAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
+		private final Keyword cVolatileVolatileKeyword_1_4_0 = (Keyword)cVolatileAssignment_1_4.eContents().get(0);
+		private final Assignment cTransientAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
+		private final Keyword cTransientTransientKeyword_1_5_0 = (Keyword)cTransientAssignment_1_5.eContents().get(0);
+		private final Assignment cUnsettableAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
+		private final Keyword cUnsettableUnsettableKeyword_1_6_0 = (Keyword)cUnsettableAssignment_1_6.eContents().get(0);
+		private final Assignment cDerivedAssignment_1_7 = (Assignment)cAlternatives_1.eContents().get(7);
+		private final Keyword cDerivedDerivedKeyword_1_7_0 = (Keyword)cDerivedAssignment_1_7.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cContainmentAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final Keyword cContainmentValKeyword_2_0_0 = (Keyword)cContainmentAssignment_2_0.eContents().get(0);
+		private final Keyword cRefKeyword_2_1 = (Keyword)cAlternatives_2.eContents().get(1);
+		private final Assignment cEGenericTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0 = (RuleCall)cEGenericTypeAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cLeftSquareBracketKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cLowerBoundAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cLowerBoundINTTerminalRuleCall_4_1_0 = (RuleCall)cLowerBoundAssignment_4_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
+		private final Keyword cFullStopFullStopKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cUpperBoundAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cUpperBoundSINTParserRuleCall_4_2_1_0 = (RuleCall)cUpperBoundAssignment_4_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cNumberSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cEOppositeAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cEOppositeEReferenceCrossReference_5_1_0 = (CrossReference)cEOppositeAssignment_5_1.eContents().get(0);
+		private final RuleCall cEOppositeEReferenceIDTerminalRuleCall_5_1_0_1 = (RuleCall)cEOppositeEReferenceCrossReference_5_1_0.eContents().get(1);
+		private final Assignment cNameAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cNameIDTerminalRuleCall_6_0 = (RuleCall)cNameAssignment_6.eContents().get(0);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		// not supported
+		//EReferenceDecl returns ecore::EReference:
+		//  (eAnnotations+=EAnnotationDecl)* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Alternatives ele1Alternatives() { return c1Alternatives; }
+		//(resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")*
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		// not supported
-		public Assignment ele10AssignmentResolveProxies() { return c10AssignmentResolveProxies; }
+		//resolveProxies=Local
+		public Assignment getResolveProxiesAssignment_1_0() { return cResolveProxiesAssignment_1_0; }
 
-		// not supported
-		public RuleCall ele100TerminalRuleCallLocal() { return c100TerminalRuleCallLocal; }
+		//Local
+		public RuleCall getResolveProxiesLocalTerminalRuleCall_1_0_0() { return cResolveProxiesLocalTerminalRuleCall_1_0_0; }
 
-		// not supported
-		public Assignment ele11AssignmentUnique() { return c11AssignmentUnique; }
+		//unique=Bag
+		public Assignment getUniqueAssignment_1_1() { return cUniqueAssignment_1_1; }
 
-		// not supported
-		public RuleCall ele110TerminalRuleCallBag() { return c110TerminalRuleCallBag; }
+		//Bag
+		public RuleCall getUniqueBagTerminalRuleCall_1_1_0() { return cUniqueBagTerminalRuleCall_1_1_0; }
 
-		// not supported
-		public Assignment ele12AssignmentOrdered() { return c12AssignmentOrdered; }
+		//ordered=Random
+		public Assignment getOrderedAssignment_1_2() { return cOrderedAssignment_1_2; }
 
-		// not supported
-		public RuleCall ele120TerminalRuleCallRandom() { return c120TerminalRuleCallRandom; }
+		//Random
+		public RuleCall getOrderedRandomTerminalRuleCall_1_2_0() { return cOrderedRandomTerminalRuleCall_1_2_0; }
 
-		// not supported
-		public Assignment ele13AssignmentChangeable() { return c13AssignmentChangeable; }
+		//changeable=Readonly
+		public Assignment getChangeableAssignment_1_3() { return cChangeableAssignment_1_3; }
 
-		// not supported
-		public RuleCall ele130TerminalRuleCallReadonly() { return c130TerminalRuleCallReadonly; }
+		//Readonly
+		public RuleCall getChangeableReadonlyTerminalRuleCall_1_3_0() { return cChangeableReadonlyTerminalRuleCall_1_3_0; }
 
-		// not supported
-		public Assignment ele14AssignmentVolatile() { return c14AssignmentVolatile; }
+		//volatile?="volatile"
+		public Assignment getVolatileAssignment_1_4() { return cVolatileAssignment_1_4; }
 
-		// not supported
-		public Keyword ele140KeywordVolatile() { return c140KeywordVolatile; }
+		//"volatile"
+		public Keyword getVolatileVolatileKeyword_1_4_0() { return cVolatileVolatileKeyword_1_4_0; }
 
-		// not supported
-		public Assignment ele15AssignmentTransient() { return c15AssignmentTransient; }
+		//transient?="transient"
+		public Assignment getTransientAssignment_1_5() { return cTransientAssignment_1_5; }
 
-		// not supported
-		public Keyword ele150KeywordTransient() { return c150KeywordTransient; }
+		//"transient"
+		public Keyword getTransientTransientKeyword_1_5_0() { return cTransientTransientKeyword_1_5_0; }
 
-		// not supported
-		public Assignment ele16AssignmentUnsettable() { return c16AssignmentUnsettable; }
+		//unsettable?="unsettable"
+		public Assignment getUnsettableAssignment_1_6() { return cUnsettableAssignment_1_6; }
 
-		// not supported
-		public Keyword ele160KeywordUnsettable() { return c160KeywordUnsettable; }
+		//"unsettable"
+		public Keyword getUnsettableUnsettableKeyword_1_6_0() { return cUnsettableUnsettableKeyword_1_6_0; }
 
-		// not supported
-		public Assignment ele17AssignmentDerived() { return c17AssignmentDerived; }
+		//derived?="derived"
+		public Assignment getDerivedAssignment_1_7() { return cDerivedAssignment_1_7; }
 
-		// not supported
-		public Keyword ele170KeywordDerived() { return c170KeywordDerived; }
+		//"derived"
+		public Keyword getDerivedDerivedKeyword_1_7_0() { return cDerivedDerivedKeyword_1_7_0; }
 
-		// not supported
-		public Alternatives ele2Alternatives() { return c2Alternatives; }
+		//containment?="val"|"ref"
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		// not supported
-		public Assignment ele20AssignmentContainment() { return c20AssignmentContainment; }
+		//containment?="val"
+		public Assignment getContainmentAssignment_2_0() { return cContainmentAssignment_2_0; }
 
-		// not supported
-		public Keyword ele200KeywordVal() { return c200KeywordVal; }
+		//"val"
+		public Keyword getContainmentValKeyword_2_0_0() { return cContainmentValKeyword_2_0_0; }
 
-		// not supported
-		public Keyword ele21KeywordRef() { return c21KeywordRef; }
+		//"ref"
+		public Keyword getRefKeyword_2_1() { return cRefKeyword_2_1; }
 
-		// not supported
-		public Assignment ele3AssignmentEGenericType() { return c3AssignmentEGenericType; }
+		//eGenericType=EGenericTypeReferenceDecl
+		public Assignment getEGenericTypeAssignment_3() { return cEGenericTypeAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallEGenericTypeReferenceDecl() { return c30ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0() { return cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0; }
 
-		// not supported
-		public Group ele4Group() { return c4Group; }
+		//("[" lowerBound=INT (".." upperBound=SINT)? "]")?
+		public Group getGroup_4() { return cGroup_4; }
 
-		// not supported
-		public Keyword ele40KeywordLeftSquareBracket() { return c40KeywordLeftSquareBracket; }
+		//"["
+		public Keyword getLeftSquareBracketKeyword_4_0() { return cLeftSquareBracketKeyword_4_0; }
 
-		// not supported
-		public Assignment ele41AssignmentLowerBound() { return c41AssignmentLowerBound; }
+		//lowerBound=INT
+		public Assignment getLowerBoundAssignment_4_1() { return cLowerBoundAssignment_4_1; }
 
-		// not supported
-		public RuleCall ele410TerminalRuleCallINT() { return c410TerminalRuleCallINT; }
+		//INT
+		public RuleCall getLowerBoundINTTerminalRuleCall_4_1_0() { return cLowerBoundINTTerminalRuleCall_4_1_0; }
 
-		// not supported
-		public Group ele42Group() { return c42Group; }
+		//(".." upperBound=SINT)?
+		public Group getGroup_4_2() { return cGroup_4_2; }
 
-		// not supported
-		public Keyword ele420KeywordFullStopFullStop() { return c420KeywordFullStopFullStop; }
+		//".."
+		public Keyword getFullStopFullStopKeyword_4_2_0() { return cFullStopFullStopKeyword_4_2_0; }
 
-		// not supported
-		public Assignment ele421AssignmentUpperBound() { return c421AssignmentUpperBound; }
+		//upperBound=SINT
+		public Assignment getUpperBoundAssignment_4_2_1() { return cUpperBoundAssignment_4_2_1; }
 
-		// not supported
-		public RuleCall ele4210ParserRuleCallSINT() { return c4210ParserRuleCallSINT; }
+		//SINT
+		public RuleCall getUpperBoundSINTParserRuleCall_4_2_1_0() { return cUpperBoundSINTParserRuleCall_4_2_1_0; }
 
-		// not supported
-		public Keyword ele43KeywordRightSquareBracket() { return c43KeywordRightSquareBracket; }
+		//"]"
+		public Keyword getRightSquareBracketKeyword_4_3() { return cRightSquareBracketKeyword_4_3; }
 
-		// not supported
-		public Group ele5Group() { return c5Group; }
+		//("#" eOpposite=[ecore::EReference])?
+		public Group getGroup_5() { return cGroup_5; }
 
-		// not supported
-		public Keyword ele50KeywordNumberSign() { return c50KeywordNumberSign; }
+		//"#"
+		public Keyword getNumberSignKeyword_5_0() { return cNumberSignKeyword_5_0; }
 
-		// not supported
-		public Assignment ele51AssignmentEOpposite() { return c51AssignmentEOpposite; }
+		//eOpposite=[ecore::EReference]
+		public Assignment getEOppositeAssignment_5_1() { return cEOppositeAssignment_5_1; }
 
-		// not supported
-		public CrossReference ele510CrossReferenceIDEReference() { return c510CrossReferenceIDEReference; }
+		//[ecore::EReference]
+		public CrossReference getEOppositeEReferenceCrossReference_5_1_0() { return cEOppositeEReferenceCrossReference_5_1_0; }
 
-		// not supported
-		public RuleCall ele5101TerminalRuleCallID() { return c5101TerminalRuleCallID; }
+		//ID
+		public RuleCall getEOppositeEReferenceIDTerminalRuleCall_5_1_0_1() { return cEOppositeEReferenceIDTerminalRuleCall_5_1_0_1; }
 
-		// not supported
-		public Assignment ele6AssignmentName() { return c6AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_6() { return cNameAssignment_6; }
 
-		// not supported
-		public RuleCall ele60TerminalRuleCallID() { return c60TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_6_0() { return cNameIDTerminalRuleCall_6_0; }
 
-		// not supported
-		public Keyword ele7KeywordSemicolon() { return c7KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
 	public class EEnumDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EEnumDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Keyword c1KeywordEnum = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
-		private final Keyword c3KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(3);
-		private final Assignment c4AssignmentELiterals = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall c40ParserRuleCallEEnumLiteralDecl = (RuleCall)c4AssignmentELiterals.eContents().get(0);
-		private final Keyword c5KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Keyword cEnumKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cELiteralsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cELiteralsEEnumLiteralDeclParserRuleCall_4_0 = (RuleCall)cELiteralsAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		// not supported
+		//EEnumDecl returns ecore::EEnum:
+		//  (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordEnum() { return c1KeywordEnum; }
+		//"enum"
+		public Keyword getEnumKeyword_1() { return cEnumKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentName() { return c2AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordLeftCurlyBracket() { return c3KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		// not supported
-		public Assignment ele4AssignmentELiterals() { return c4AssignmentELiterals; }
+		//(eLiterals+=EEnumLiteralDecl)+
+		public Assignment getELiteralsAssignment_4() { return cELiteralsAssignment_4; }
 
-		// not supported
-		public RuleCall ele40ParserRuleCallEEnumLiteralDecl() { return c40ParserRuleCallEEnumLiteralDecl; }
+		//EEnumLiteralDecl
+		public RuleCall getELiteralsEEnumLiteralDeclParserRuleCall_4_0() { return cELiteralsEEnumLiteralDeclParserRuleCall_4_0; }
 
-		// not supported
-		public Keyword ele5KeywordRightCurlyBracket() { return c5KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
 	public class EEnumLiteralDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EEnumLiteralDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Group c2Group = (Group)cGroup.eContents().get(2);
-		private final Keyword c20KeywordEqualsSign = (Keyword)c2Group.eContents().get(0);
-		private final Assignment c21AssignmentValue = (Assignment)c2Group.eContents().get(1);
-		private final RuleCall c210TerminalRuleCallINT = (RuleCall)c21AssignmentValue.eContents().get(0);
-		private final Assignment c3AssignmentLiteral = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30TerminalRuleCallSTRING = (RuleCall)c3AssignmentLiteral.eContents().get(0);
-		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cEqualsSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cValueINTTerminalRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
+		private final Assignment cLiteralAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cLiteralSTRINGTerminalRuleCall_3_0 = (RuleCall)cLiteralAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//EEnumLiteralDecl returns ecore::EEnumLiteral:
+		//  (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Group ele2Group() { return c2Group; }
+		//("=" value=INT)?
+		public Group getGroup_2() { return cGroup_2; }
 
-		// not supported
-		public Keyword ele20KeywordEqualsSign() { return c20KeywordEqualsSign; }
+		//"="
+		public Keyword getEqualsSignKeyword_2_0() { return cEqualsSignKeyword_2_0; }
 
-		// not supported
-		public Assignment ele21AssignmentValue() { return c21AssignmentValue; }
+		//value=INT
+		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
 
-		// not supported
-		public RuleCall ele210TerminalRuleCallINT() { return c210TerminalRuleCallINT; }
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_2_1_0() { return cValueINTTerminalRuleCall_2_1_0; }
 
-		// not supported
-		public Assignment ele3AssignmentLiteral() { return c3AssignmentLiteral; }
+		//(literal=STRING)?
+		public Assignment getLiteralAssignment_3() { return cLiteralAssignment_3; }
 
-		// not supported
-		public RuleCall ele30TerminalRuleCallSTRING() { return c30TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getLiteralSTRINGTerminalRuleCall_3_0() { return cLiteralSTRINGTerminalRuleCall_3_0; }
 
-		// not supported
-		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class ETypeParameterDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ETypeParameterDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordExtends = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentEBounds = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallEGenericTypeDecl = (RuleCall)c11AssignmentEBounds.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cExtendsKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cEBoundsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cEBoundsEGenericTypeDeclParserRuleCall_1_1_0 = (RuleCall)cEBoundsAssignment_1_1.eContents().get(0);
 		
-		// not supported
+		//ETypeParameterDecl returns ecore::ETypeParameter:
+		//  name=ID ("extends" eBounds+=EGenericTypeDecl)?;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//name=ID ("extends" eBounds+=EGenericTypeDecl)?
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentName() { return c0AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//("extends" eBounds+=EGenericTypeDecl)?
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Keyword ele10KeywordExtends() { return c10KeywordExtends; }
+		//"extends"
+		public Keyword getExtendsKeyword_1_0() { return cExtendsKeyword_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentEBounds() { return c11AssignmentEBounds; }
+		//eBounds+=EGenericTypeDecl
+		public Assignment getEBoundsAssignment_1_1() { return cEBoundsAssignment_1_1; }
 
-		// not supported
-		public RuleCall ele110ParserRuleCallEGenericTypeDecl() { return c110ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getEBoundsEGenericTypeDeclParserRuleCall_1_1_0() { return cEBoundsEGenericTypeDeclParserRuleCall_1_1_0; }
 	}
 
 	public class EGenericTypeReferenceDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EGenericTypeReferenceDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
-		private final Assignment c00AssignmentEClassifier = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceIDEClassifier = (CrossReference)c00AssignmentEClassifier.eContents().get(0);
-		private final RuleCall c0001TerminalRuleCallID = (RuleCall)c000CrossReferenceIDEClassifier.eContents().get(1);
-		private final Group c01Group = (Group)c0Group.eContents().get(1);
-		private final Keyword c010KeywordLessThanSign = (Keyword)c01Group.eContents().get(0);
-		private final Assignment c011AssignmentETypeArguments = (Assignment)c01Group.eContents().get(1);
-		private final RuleCall c0110ParserRuleCallEGenericTypeDecl = (RuleCall)c011AssignmentETypeArguments.eContents().get(0);
-		private final Group c012Group = (Group)c01Group.eContents().get(2);
-		private final Keyword c0120KeywordComma = (Keyword)c012Group.eContents().get(0);
-		private final Assignment c0121AssignmentETypeArguments = (Assignment)c012Group.eContents().get(1);
-		private final RuleCall c01210ParserRuleCallEGenericTypeDecl = (RuleCall)c0121AssignmentETypeArguments.eContents().get(0);
-		private final Keyword c013KeywordGreaterThanSign = (Keyword)c01Group.eContents().get(3);
-		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
-		private final Keyword c10KeywordNumberSign = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentETypeParameter = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceIDETypeParameter = (CrossReference)c11AssignmentETypeParameter.eContents().get(0);
-		private final RuleCall c1101TerminalRuleCallID = (RuleCall)c110CrossReferenceIDETypeParameter.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cEClassifierAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final CrossReference cEClassifierEClassifierCrossReference_0_0_0 = (CrossReference)cEClassifierAssignment_0_0.eContents().get(0);
+		private final RuleCall cEClassifierEClassifierIDTerminalRuleCall_0_0_0_1 = (RuleCall)cEClassifierEClassifierCrossReference_0_0_0.eContents().get(1);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Assignment cETypeArgumentsAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0 = (RuleCall)cETypeArgumentsAssignment_0_1_1.eContents().get(0);
+		private final Group cGroup_0_1_2 = (Group)cGroup_0_1.eContents().get(2);
+		private final Keyword cCommaKeyword_0_1_2_0 = (Keyword)cGroup_0_1_2.eContents().get(0);
+		private final Assignment cETypeArgumentsAssignment_0_1_2_1 = (Assignment)cGroup_0_1_2.eContents().get(1);
+		private final RuleCall cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0 = (RuleCall)cETypeArgumentsAssignment_0_1_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_0_1_3 = (Keyword)cGroup_0_1.eContents().get(3);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cNumberSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cETypeParameterAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cETypeParameterETypeParameterCrossReference_1_1_0 = (CrossReference)cETypeParameterAssignment_1_1.eContents().get(0);
+		private final RuleCall cETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1 = (RuleCall)cETypeParameterETypeParameterCrossReference_1_1_0.eContents().get(1);
 		
-		// not supported
+		//EGenericTypeReferenceDecl returns ecore::EGenericType:
+		//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter];
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Group ele0Group() { return c0Group; }
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+		public Group getGroup_0() { return cGroup_0; }
 
-		// not supported
-		public Assignment ele00AssignmentEClassifier() { return c00AssignmentEClassifier; }
+		//eClassifier=[ecore::EClassifier]
+		public Assignment getEClassifierAssignment_0_0() { return cEClassifierAssignment_0_0; }
 
-		// not supported
-		public CrossReference ele000CrossReferenceIDEClassifier() { return c000CrossReferenceIDEClassifier; }
+		//[ecore::EClassifier]
+		public CrossReference getEClassifierEClassifierCrossReference_0_0_0() { return cEClassifierEClassifierCrossReference_0_0_0; }
 
-		// not supported
-		public RuleCall ele0001TerminalRuleCallID() { return c0001TerminalRuleCallID; }
+		//ID
+		public RuleCall getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1() { return cEClassifierEClassifierIDTerminalRuleCall_0_0_0_1; }
 
-		// not supported
-		public Group ele01Group() { return c01Group; }
+		//("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+		public Group getGroup_0_1() { return cGroup_0_1; }
 
-		// not supported
-		public Keyword ele010KeywordLessThanSign() { return c010KeywordLessThanSign; }
+		//"<"
+		public Keyword getLessThanSignKeyword_0_1_0() { return cLessThanSignKeyword_0_1_0; }
 
-		// not supported
-		public Assignment ele011AssignmentETypeArguments() { return c011AssignmentETypeArguments; }
+		//eTypeArguments+=EGenericTypeDecl
+		public Assignment getETypeArgumentsAssignment_0_1_1() { return cETypeArgumentsAssignment_0_1_1; }
 
-		// not supported
-		public RuleCall ele0110ParserRuleCallEGenericTypeDecl() { return c0110ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0() { return cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0; }
 
-		// not supported
-		public Group ele012Group() { return c012Group; }
+		//("," eTypeArguments+=EGenericTypeDecl)*
+		public Group getGroup_0_1_2() { return cGroup_0_1_2; }
 
-		// not supported
-		public Keyword ele0120KeywordComma() { return c0120KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_0_1_2_0() { return cCommaKeyword_0_1_2_0; }
 
-		// not supported
-		public Assignment ele0121AssignmentETypeArguments() { return c0121AssignmentETypeArguments; }
+		//eTypeArguments+=EGenericTypeDecl
+		public Assignment getETypeArgumentsAssignment_0_1_2_1() { return cETypeArgumentsAssignment_0_1_2_1; }
 
-		// not supported
-		public RuleCall ele01210ParserRuleCallEGenericTypeDecl() { return c01210ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0() { return cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0; }
 
-		// not supported
-		public Keyword ele013KeywordGreaterThanSign() { return c013KeywordGreaterThanSign; }
+		//">"
+		public Keyword getGreaterThanSignKeyword_0_1_3() { return cGreaterThanSignKeyword_0_1_3; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//"#" eTypeParameter=[ecore::ETypeParameter]
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Keyword ele10KeywordNumberSign() { return c10KeywordNumberSign; }
+		//"#"
+		public Keyword getNumberSignKeyword_1_0() { return cNumberSignKeyword_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentETypeParameter() { return c11AssignmentETypeParameter; }
+		//eTypeParameter=[ecore::ETypeParameter]
+		public Assignment getETypeParameterAssignment_1_1() { return cETypeParameterAssignment_1_1; }
 
-		// not supported
-		public CrossReference ele110CrossReferenceIDETypeParameter() { return c110CrossReferenceIDETypeParameter; }
+		//[ecore::ETypeParameter]
+		public CrossReference getETypeParameterETypeParameterCrossReference_1_1_0() { return cETypeParameterETypeParameterCrossReference_1_1_0; }
 
-		// not supported
-		public RuleCall ele1101TerminalRuleCallID() { return c1101TerminalRuleCallID; }
+		//ID
+		public RuleCall getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1() { return cETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1; }
 	}
 
 	public class EGenericTypeDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EGenericTypeDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
-		private final Assignment c00AssignmentEClassifier = (Assignment)c0Group.eContents().get(0);
-		private final CrossReference c000CrossReferenceIDEClassifier = (CrossReference)c00AssignmentEClassifier.eContents().get(0);
-		private final RuleCall c0001TerminalRuleCallID = (RuleCall)c000CrossReferenceIDEClassifier.eContents().get(1);
-		private final Group c01Group = (Group)c0Group.eContents().get(1);
-		private final Keyword c010KeywordLessThanSign = (Keyword)c01Group.eContents().get(0);
-		private final Assignment c011AssignmentETypeArguments = (Assignment)c01Group.eContents().get(1);
-		private final RuleCall c0110ParserRuleCallEGenericTypeDecl = (RuleCall)c011AssignmentETypeArguments.eContents().get(0);
-		private final Group c012Group = (Group)c01Group.eContents().get(2);
-		private final Keyword c0120KeywordComma = (Keyword)c012Group.eContents().get(0);
-		private final Assignment c0121AssignmentETypeArguments = (Assignment)c012Group.eContents().get(1);
-		private final RuleCall c01210ParserRuleCallEGenericTypeDecl = (RuleCall)c0121AssignmentETypeArguments.eContents().get(0);
-		private final Keyword c013KeywordGreaterThanSign = (Keyword)c01Group.eContents().get(3);
-		private final Group c1Group = (Group)cAlternatives.eContents().get(1);
-		private final Keyword c10KeywordNumberSign = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentETypeParameter = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceIDETypeParameter = (CrossReference)c11AssignmentETypeParameter.eContents().get(0);
-		private final RuleCall c1101TerminalRuleCallID = (RuleCall)c110CrossReferenceIDETypeParameter.eContents().get(1);
-		private final Group c2Group = (Group)cAlternatives.eContents().get(2);
-		private final Keyword c20KeywordQuestionMark = (Keyword)c2Group.eContents().get(0);
-		private final Alternatives c21Alternatives = (Alternatives)c2Group.eContents().get(1);
-		private final Group c210Group = (Group)c21Alternatives.eContents().get(0);
-		private final Keyword c2100KeywordExtends = (Keyword)c210Group.eContents().get(0);
-		private final Assignment c2101AssignmentEUpperBound = (Assignment)c210Group.eContents().get(1);
-		private final RuleCall c21010ParserRuleCallEGenericTypeDecl = (RuleCall)c2101AssignmentEUpperBound.eContents().get(0);
-		private final Group c211Group = (Group)c21Alternatives.eContents().get(1);
-		private final Keyword c2110KeywordSuper = (Keyword)c211Group.eContents().get(0);
-		private final Assignment c2111AssignmentELowerBound = (Assignment)c211Group.eContents().get(1);
-		private final RuleCall c21110ParserRuleCallEGenericTypeDecl = (RuleCall)c2111AssignmentELowerBound.eContents().get(0);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cEClassifierAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final CrossReference cEClassifierEClassifierCrossReference_0_0_0 = (CrossReference)cEClassifierAssignment_0_0.eContents().get(0);
+		private final RuleCall cEClassifierEClassifierIDTerminalRuleCall_0_0_0_1 = (RuleCall)cEClassifierEClassifierCrossReference_0_0_0.eContents().get(1);
+		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
+		private final Keyword cLessThanSignKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Assignment cETypeArgumentsAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0 = (RuleCall)cETypeArgumentsAssignment_0_1_1.eContents().get(0);
+		private final Group cGroup_0_1_2 = (Group)cGroup_0_1.eContents().get(2);
+		private final Keyword cCommaKeyword_0_1_2_0 = (Keyword)cGroup_0_1_2.eContents().get(0);
+		private final Assignment cETypeArgumentsAssignment_0_1_2_1 = (Assignment)cGroup_0_1_2.eContents().get(1);
+		private final RuleCall cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0 = (RuleCall)cETypeArgumentsAssignment_0_1_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_0_1_3 = (Keyword)cGroup_0_1.eContents().get(3);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cNumberSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cETypeParameterAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cETypeParameterETypeParameterCrossReference_1_1_0 = (CrossReference)cETypeParameterAssignment_1_1.eContents().get(0);
+		private final RuleCall cETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1 = (RuleCall)cETypeParameterETypeParameterCrossReference_1_1_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
+		private final Keyword cQuestionMarkKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Alternatives cAlternatives_2_1 = (Alternatives)cGroup_2.eContents().get(1);
+		private final Group cGroup_2_1_0 = (Group)cAlternatives_2_1.eContents().get(0);
+		private final Keyword cExtendsKeyword_2_1_0_0 = (Keyword)cGroup_2_1_0.eContents().get(0);
+		private final Assignment cEUpperBoundAssignment_2_1_0_1 = (Assignment)cGroup_2_1_0.eContents().get(1);
+		private final RuleCall cEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0 = (RuleCall)cEUpperBoundAssignment_2_1_0_1.eContents().get(0);
+		private final Group cGroup_2_1_1 = (Group)cAlternatives_2_1.eContents().get(1);
+		private final Keyword cSuperKeyword_2_1_1_0 = (Keyword)cGroup_2_1_1.eContents().get(0);
+		private final Assignment cELowerBoundAssignment_2_1_1_1 = (Assignment)cGroup_2_1_1.eContents().get(1);
+		private final RuleCall cELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0 = (RuleCall)cELowerBoundAssignment_2_1_1_1.eContents().get(0);
 		
-		// not supported
+		//EGenericTypeDecl returns ecore::EGenericType:
+		//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl);
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Group ele0Group() { return c0Group; }
+		//eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+		public Group getGroup_0() { return cGroup_0; }
 
-		// not supported
-		public Assignment ele00AssignmentEClassifier() { return c00AssignmentEClassifier; }
+		//eClassifier=[ecore::EClassifier]
+		public Assignment getEClassifierAssignment_0_0() { return cEClassifierAssignment_0_0; }
 
-		// not supported
-		public CrossReference ele000CrossReferenceIDEClassifier() { return c000CrossReferenceIDEClassifier; }
+		//[ecore::EClassifier]
+		public CrossReference getEClassifierEClassifierCrossReference_0_0_0() { return cEClassifierEClassifierCrossReference_0_0_0; }
 
-		// not supported
-		public RuleCall ele0001TerminalRuleCallID() { return c0001TerminalRuleCallID; }
+		//ID
+		public RuleCall getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1() { return cEClassifierEClassifierIDTerminalRuleCall_0_0_0_1; }
 
-		// not supported
-		public Group ele01Group() { return c01Group; }
+		//("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?
+		public Group getGroup_0_1() { return cGroup_0_1; }
 
-		// not supported
-		public Keyword ele010KeywordLessThanSign() { return c010KeywordLessThanSign; }
+		//"<"
+		public Keyword getLessThanSignKeyword_0_1_0() { return cLessThanSignKeyword_0_1_0; }
 
-		// not supported
-		public Assignment ele011AssignmentETypeArguments() { return c011AssignmentETypeArguments; }
+		//eTypeArguments+=EGenericTypeDecl
+		public Assignment getETypeArgumentsAssignment_0_1_1() { return cETypeArgumentsAssignment_0_1_1; }
 
-		// not supported
-		public RuleCall ele0110ParserRuleCallEGenericTypeDecl() { return c0110ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0() { return cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0; }
 
-		// not supported
-		public Group ele012Group() { return c012Group; }
+		//("," eTypeArguments+=EGenericTypeDecl)*
+		public Group getGroup_0_1_2() { return cGroup_0_1_2; }
 
-		// not supported
-		public Keyword ele0120KeywordComma() { return c0120KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_0_1_2_0() { return cCommaKeyword_0_1_2_0; }
 
-		// not supported
-		public Assignment ele0121AssignmentETypeArguments() { return c0121AssignmentETypeArguments; }
+		//eTypeArguments+=EGenericTypeDecl
+		public Assignment getETypeArgumentsAssignment_0_1_2_1() { return cETypeArgumentsAssignment_0_1_2_1; }
 
-		// not supported
-		public RuleCall ele01210ParserRuleCallEGenericTypeDecl() { return c01210ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0() { return cETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0; }
 
-		// not supported
-		public Keyword ele013KeywordGreaterThanSign() { return c013KeywordGreaterThanSign; }
+		//">"
+		public Keyword getGreaterThanSignKeyword_0_1_3() { return cGreaterThanSignKeyword_0_1_3; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//"#" eTypeParameter=[ecore::ETypeParameter]
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Keyword ele10KeywordNumberSign() { return c10KeywordNumberSign; }
+		//"#"
+		public Keyword getNumberSignKeyword_1_0() { return cNumberSignKeyword_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentETypeParameter() { return c11AssignmentETypeParameter; }
+		//eTypeParameter=[ecore::ETypeParameter]
+		public Assignment getETypeParameterAssignment_1_1() { return cETypeParameterAssignment_1_1; }
 
-		// not supported
-		public CrossReference ele110CrossReferenceIDETypeParameter() { return c110CrossReferenceIDETypeParameter; }
+		//[ecore::ETypeParameter]
+		public CrossReference getETypeParameterETypeParameterCrossReference_1_1_0() { return cETypeParameterETypeParameterCrossReference_1_1_0; }
 
-		// not supported
-		public RuleCall ele1101TerminalRuleCallID() { return c1101TerminalRuleCallID; }
+		//ID
+		public RuleCall getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1() { return cETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1; }
 
-		// not supported
-		public Group ele2Group() { return c2Group; }
+		//"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl)
+		public Group getGroup_2() { return cGroup_2; }
 
-		// not supported
-		public Keyword ele20KeywordQuestionMark() { return c20KeywordQuestionMark; }
+		//"?"
+		public Keyword getQuestionMarkKeyword_2_0() { return cQuestionMarkKeyword_2_0; }
 
-		// not supported
-		public Alternatives ele21Alternatives() { return c21Alternatives; }
+		//"extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl
+		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
-		// not supported
-		public Group ele210Group() { return c210Group; }
+		//"extends" eUpperBound=EGenericTypeDecl
+		public Group getGroup_2_1_0() { return cGroup_2_1_0; }
 
-		// not supported
-		public Keyword ele2100KeywordExtends() { return c2100KeywordExtends; }
+		//"extends"
+		public Keyword getExtendsKeyword_2_1_0_0() { return cExtendsKeyword_2_1_0_0; }
 
-		// not supported
-		public Assignment ele2101AssignmentEUpperBound() { return c2101AssignmentEUpperBound; }
+		//eUpperBound=EGenericTypeDecl
+		public Assignment getEUpperBoundAssignment_2_1_0_1() { return cEUpperBoundAssignment_2_1_0_1; }
 
-		// not supported
-		public RuleCall ele21010ParserRuleCallEGenericTypeDecl() { return c21010ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0() { return cEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0; }
 
-		// not supported
-		public Group ele211Group() { return c211Group; }
+		//"super" eLowerBound=EGenericTypeDecl
+		public Group getGroup_2_1_1() { return cGroup_2_1_1; }
 
-		// not supported
-		public Keyword ele2110KeywordSuper() { return c2110KeywordSuper; }
+		//"super"
+		public Keyword getSuperKeyword_2_1_1_0() { return cSuperKeyword_2_1_1_0; }
 
-		// not supported
-		public Assignment ele2111AssignmentELowerBound() { return c2111AssignmentELowerBound; }
+		//eLowerBound=EGenericTypeDecl
+		public Assignment getELowerBoundAssignment_2_1_1_1() { return cELowerBoundAssignment_2_1_1_1; }
 
-		// not supported
-		public RuleCall ele21110ParserRuleCallEGenericTypeDecl() { return c21110ParserRuleCallEGenericTypeDecl; }
+		//EGenericTypeDecl
+		public RuleCall getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0() { return cELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0; }
 	}
 
 	public class EOperationDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EOperationDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment c10AssignmentUnique = (Assignment)c1Alternatives.eContents().get(0);
-		private final Keyword c100KeywordBag = (Keyword)c10AssignmentUnique.eContents().get(0);
-		private final Assignment c11AssignmentOrdered = (Assignment)c1Alternatives.eContents().get(1);
-		private final Keyword c110KeywordRandom = (Keyword)c11AssignmentOrdered.eContents().get(0);
-		private final Keyword c2KeywordOp = (Keyword)cGroup.eContents().get(2);
-		private final Alternatives c3Alternatives = (Alternatives)cGroup.eContents().get(3);
-		private final Assignment c30AssignmentEGenericType = (Assignment)c3Alternatives.eContents().get(0);
-		private final RuleCall c300ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c30AssignmentEGenericType.eContents().get(0);
-		private final Keyword c31KeywordVoid = (Keyword)c3Alternatives.eContents().get(1);
-		private final Assignment c4AssignmentName = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall c40TerminalRuleCallID = (RuleCall)c4AssignmentName.eContents().get(0);
-		private final Group c5Group = (Group)cGroup.eContents().get(5);
-		private final Keyword c50KeywordLessThanSign = (Keyword)c5Group.eContents().get(0);
-		private final Assignment c51AssignmentETypeParameters = (Assignment)c5Group.eContents().get(1);
-		private final RuleCall c510ParserRuleCallETypeParameterDecl = (RuleCall)c51AssignmentETypeParameters.eContents().get(0);
-		private final Group c52Group = (Group)c5Group.eContents().get(2);
-		private final Keyword c520KeywordComma = (Keyword)c52Group.eContents().get(0);
-		private final Assignment c521AssignmentETypeParameters = (Assignment)c52Group.eContents().get(1);
-		private final RuleCall c5210ParserRuleCallETypeParameterDecl = (RuleCall)c521AssignmentETypeParameters.eContents().get(0);
-		private final Keyword c53KeywordGreaterThanSign = (Keyword)c5Group.eContents().get(3);
-		private final Keyword c6KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(6);
-		private final Group c7Group = (Group)cGroup.eContents().get(7);
-		private final Assignment c70AssignmentEParameters = (Assignment)c7Group.eContents().get(0);
-		private final RuleCall c700ParserRuleCallEParameterDecl = (RuleCall)c70AssignmentEParameters.eContents().get(0);
-		private final Group c71Group = (Group)c7Group.eContents().get(1);
-		private final Keyword c710KeywordComma = (Keyword)c71Group.eContents().get(0);
-		private final Assignment c711AssignmentEParameters = (Assignment)c71Group.eContents().get(1);
-		private final RuleCall c7110ParserRuleCallEParameterDecl = (RuleCall)c711AssignmentEParameters.eContents().get(0);
-		private final Keyword c8KeywordRightParenthesis = (Keyword)cGroup.eContents().get(8);
-		private final Group c9Group = (Group)cGroup.eContents().get(9);
-		private final Keyword c90KeywordThrows = (Keyword)c9Group.eContents().get(0);
-		private final Assignment c91AssignmentEGenericExceptions = (Assignment)c9Group.eContents().get(1);
-		private final RuleCall c910ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c91AssignmentEGenericExceptions.eContents().get(0);
-		private final Group c92Group = (Group)c9Group.eContents().get(2);
-		private final Keyword c920KeywordComma = (Keyword)c92Group.eContents().get(0);
-		private final Assignment c921AssignmentEGenericExceptions = (Assignment)c92Group.eContents().get(1);
-		private final RuleCall c9210ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c921AssignmentEGenericExceptions.eContents().get(0);
-		private final Keyword c10KeywordSemicolon = (Keyword)cGroup.eContents().get(10);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cUniqueAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cUniqueBagKeyword_1_0_0 = (Keyword)cUniqueAssignment_1_0.eContents().get(0);
+		private final Assignment cOrderedAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final Keyword cOrderedRandomKeyword_1_1_0 = (Keyword)cOrderedAssignment_1_1.eContents().get(0);
+		private final Keyword cOpKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cEGenericTypeAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0 = (RuleCall)cEGenericTypeAssignment_3_0.eContents().get(0);
+		private final Keyword cVoidKeyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
+		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cNameIDTerminalRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cLessThanSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cETypeParametersAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cETypeParametersETypeParameterDeclParserRuleCall_5_1_0 = (RuleCall)cETypeParametersAssignment_5_1.eContents().get(0);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cETypeParametersAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final RuleCall cETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0 = (RuleCall)cETypeParametersAssignment_5_2_1.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Assignment cEParametersAssignment_7_0 = (Assignment)cGroup_7.eContents().get(0);
+		private final RuleCall cEParametersEParameterDeclParserRuleCall_7_0_0 = (RuleCall)cEParametersAssignment_7_0.eContents().get(0);
+		private final Group cGroup_7_1 = (Group)cGroup_7.eContents().get(1);
+		private final Keyword cCommaKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
+		private final Assignment cEParametersAssignment_7_1_1 = (Assignment)cGroup_7_1.eContents().get(1);
+		private final RuleCall cEParametersEParameterDeclParserRuleCall_7_1_1_0 = (RuleCall)cEParametersAssignment_7_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
+		private final Keyword cThrowsKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Assignment cEGenericExceptionsAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
+		private final RuleCall cEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0 = (RuleCall)cEGenericExceptionsAssignment_9_1.eContents().get(0);
+		private final Group cGroup_9_2 = (Group)cGroup_9.eContents().get(2);
+		private final Keyword cCommaKeyword_9_2_0 = (Keyword)cGroup_9_2.eContents().get(0);
+		private final Assignment cEGenericExceptionsAssignment_9_2_1 = (Assignment)cGroup_9_2.eContents().get(1);
+		private final RuleCall cEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0 = (RuleCall)cEGenericExceptionsAssignment_9_2_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
-		// not supported
+		//EOperationDecl returns ecore::EOperation:
+		//  (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Alternatives ele1Alternatives() { return c1Alternatives; }
+		//(unique?="bag"|ordered?="random")*
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		// not supported
-		public Assignment ele10AssignmentUnique() { return c10AssignmentUnique; }
+		//unique?="bag"
+		public Assignment getUniqueAssignment_1_0() { return cUniqueAssignment_1_0; }
 
-		// not supported
-		public Keyword ele100KeywordBag() { return c100KeywordBag; }
+		//"bag"
+		public Keyword getUniqueBagKeyword_1_0_0() { return cUniqueBagKeyword_1_0_0; }
 
-		// not supported
-		public Assignment ele11AssignmentOrdered() { return c11AssignmentOrdered; }
+		//ordered?="random"
+		public Assignment getOrderedAssignment_1_1() { return cOrderedAssignment_1_1; }
 
-		// not supported
-		public Keyword ele110KeywordRandom() { return c110KeywordRandom; }
+		//"random"
+		public Keyword getOrderedRandomKeyword_1_1_0() { return cOrderedRandomKeyword_1_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordOp() { return c2KeywordOp; }
+		//"op"
+		public Keyword getOpKeyword_2() { return cOpKeyword_2; }
 
-		// not supported
-		public Alternatives ele3Alternatives() { return c3Alternatives; }
+		//eGenericType=EGenericTypeReferenceDecl|"void"
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		// not supported
-		public Assignment ele30AssignmentEGenericType() { return c30AssignmentEGenericType; }
+		//eGenericType=EGenericTypeReferenceDecl
+		public Assignment getEGenericTypeAssignment_3_0() { return cEGenericTypeAssignment_3_0; }
 
-		// not supported
-		public RuleCall ele300ParserRuleCallEGenericTypeReferenceDecl() { return c300ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0() { return cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0; }
 
-		// not supported
-		public Keyword ele31KeywordVoid() { return c31KeywordVoid; }
+		//"void"
+		public Keyword getVoidKeyword_3_1() { return cVoidKeyword_3_1; }
 
-		// not supported
-		public Assignment ele4AssignmentName() { return c4AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_4() { return cNameAssignment_4; }
 
-		// not supported
-		public RuleCall ele40TerminalRuleCallID() { return c40TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_4_0() { return cNameIDTerminalRuleCall_4_0; }
 
-		// not supported
-		public Group ele5Group() { return c5Group; }
+		//("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")?
+		public Group getGroup_5() { return cGroup_5; }
 
-		// not supported
-		public Keyword ele50KeywordLessThanSign() { return c50KeywordLessThanSign; }
+		//"<"
+		public Keyword getLessThanSignKeyword_5_0() { return cLessThanSignKeyword_5_0; }
 
-		// not supported
-		public Assignment ele51AssignmentETypeParameters() { return c51AssignmentETypeParameters; }
+		//eTypeParameters+=ETypeParameterDecl
+		public Assignment getETypeParametersAssignment_5_1() { return cETypeParametersAssignment_5_1; }
 
-		// not supported
-		public RuleCall ele510ParserRuleCallETypeParameterDecl() { return c510ParserRuleCallETypeParameterDecl; }
+		//ETypeParameterDecl
+		public RuleCall getETypeParametersETypeParameterDeclParserRuleCall_5_1_0() { return cETypeParametersETypeParameterDeclParserRuleCall_5_1_0; }
 
-		// not supported
-		public Group ele52Group() { return c52Group; }
+		//("," eTypeParameters+=ETypeParameterDecl)*
+		public Group getGroup_5_2() { return cGroup_5_2; }
 
-		// not supported
-		public Keyword ele520KeywordComma() { return c520KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
 
-		// not supported
-		public Assignment ele521AssignmentETypeParameters() { return c521AssignmentETypeParameters; }
+		//eTypeParameters+=ETypeParameterDecl
+		public Assignment getETypeParametersAssignment_5_2_1() { return cETypeParametersAssignment_5_2_1; }
 
-		// not supported
-		public RuleCall ele5210ParserRuleCallETypeParameterDecl() { return c5210ParserRuleCallETypeParameterDecl; }
+		//ETypeParameterDecl
+		public RuleCall getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0() { return cETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0; }
 
-		// not supported
-		public Keyword ele53KeywordGreaterThanSign() { return c53KeywordGreaterThanSign; }
+		//">"
+		public Keyword getGreaterThanSignKeyword_5_3() { return cGreaterThanSignKeyword_5_3; }
 
-		// not supported
-		public Keyword ele6KeywordLeftParenthesis() { return c6KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_6() { return cLeftParenthesisKeyword_6; }
 
-		// not supported
-		public Group ele7Group() { return c7Group; }
+		//(eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)?
+		public Group getGroup_7() { return cGroup_7; }
 
-		// not supported
-		public Assignment ele70AssignmentEParameters() { return c70AssignmentEParameters; }
+		//eParameters+=EParameterDecl
+		public Assignment getEParametersAssignment_7_0() { return cEParametersAssignment_7_0; }
 
-		// not supported
-		public RuleCall ele700ParserRuleCallEParameterDecl() { return c700ParserRuleCallEParameterDecl; }
+		//EParameterDecl
+		public RuleCall getEParametersEParameterDeclParserRuleCall_7_0_0() { return cEParametersEParameterDeclParserRuleCall_7_0_0; }
 
-		// not supported
-		public Group ele71Group() { return c71Group; }
+		//("," eParameters+=EParameterDecl)*
+		public Group getGroup_7_1() { return cGroup_7_1; }
 
-		// not supported
-		public Keyword ele710KeywordComma() { return c710KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_7_1_0() { return cCommaKeyword_7_1_0; }
 
-		// not supported
-		public Assignment ele711AssignmentEParameters() { return c711AssignmentEParameters; }
+		//eParameters+=EParameterDecl
+		public Assignment getEParametersAssignment_7_1_1() { return cEParametersAssignment_7_1_1; }
 
-		// not supported
-		public RuleCall ele7110ParserRuleCallEParameterDecl() { return c7110ParserRuleCallEParameterDecl; }
+		//EParameterDecl
+		public RuleCall getEParametersEParameterDeclParserRuleCall_7_1_1_0() { return cEParametersEParameterDeclParserRuleCall_7_1_1_0; }
 
-		// not supported
-		public Keyword ele8KeywordRightParenthesis() { return c8KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_8() { return cRightParenthesisKeyword_8; }
 
-		// not supported
-		public Group ele9Group() { return c9Group; }
+		//("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)?
+		public Group getGroup_9() { return cGroup_9; }
 
-		// not supported
-		public Keyword ele90KeywordThrows() { return c90KeywordThrows; }
+		//"throws"
+		public Keyword getThrowsKeyword_9_0() { return cThrowsKeyword_9_0; }
 
-		// not supported
-		public Assignment ele91AssignmentEGenericExceptions() { return c91AssignmentEGenericExceptions; }
+		//eGenericExceptions+=EGenericTypeReferenceDecl
+		public Assignment getEGenericExceptionsAssignment_9_1() { return cEGenericExceptionsAssignment_9_1; }
 
-		// not supported
-		public RuleCall ele910ParserRuleCallEGenericTypeReferenceDecl() { return c910ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0() { return cEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0; }
 
-		// not supported
-		public Group ele92Group() { return c92Group; }
+		//("," eGenericExceptions+=EGenericTypeReferenceDecl)*
+		public Group getGroup_9_2() { return cGroup_9_2; }
 
-		// not supported
-		public Keyword ele920KeywordComma() { return c920KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_9_2_0() { return cCommaKeyword_9_2_0; }
 
-		// not supported
-		public Assignment ele921AssignmentEGenericExceptions() { return c921AssignmentEGenericExceptions; }
+		//eGenericExceptions+=EGenericTypeReferenceDecl
+		public Assignment getEGenericExceptionsAssignment_9_2_1() { return cEGenericExceptionsAssignment_9_2_1; }
 
-		// not supported
-		public RuleCall ele9210ParserRuleCallEGenericTypeReferenceDecl() { return c9210ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0() { return cEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0; }
 
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_10() { return cSemicolonKeyword_10; }
 	}
 
 	public class EParameterDeclElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EParameterDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentEAnnotations = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
-		private final Assignment c1AssignmentEGenericType = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallEGenericTypeReferenceDecl = (RuleCall)c1AssignmentEGenericType.eContents().get(0);
-		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
+		private final Assignment cEAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cEAnnotationsEAnnotationDeclParserRuleCall_0_0 = (RuleCall)cEAnnotationsAssignment_0.eContents().get(0);
+		private final Assignment cEGenericTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0 = (RuleCall)cEGenericTypeAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		// not supported
+		//EParameterDecl returns ecore::EParameter:
+		//  (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentEAnnotations() { return c0AssignmentEAnnotations; }
+		//(eAnnotations+=EAnnotationDecl)*
+		public Assignment getEAnnotationsAssignment_0() { return cEAnnotationsAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallEAnnotationDecl() { return c00ParserRuleCallEAnnotationDecl; }
+		//EAnnotationDecl
+		public RuleCall getEAnnotationsEAnnotationDeclParserRuleCall_0_0() { return cEAnnotationsEAnnotationDeclParserRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentEGenericType() { return c1AssignmentEGenericType; }
+		//eGenericType=EGenericTypeReferenceDecl
+		public Assignment getEGenericTypeAssignment_1() { return cEGenericTypeAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallEGenericTypeReferenceDecl() { return c10ParserRuleCallEGenericTypeReferenceDecl; }
+		//EGenericTypeReferenceDecl
+		public RuleCall getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0() { return cEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentName() { return c2AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
 	public class MapEntryElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MapEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentKey = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentKey.eContents().get(0);
-		private final Keyword c1KeywordEqualsSign = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentValue = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentValue.eContents().get(0);
+		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cKeyIDTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
-		// not supported
+		//MapEntry returns ecore::EStringToStringMapEntry:
+		//  key=ID "=" value=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//key=ID "=" value=STRING
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentKey() { return c0AssignmentKey; }
+		//key=ID
+		public Assignment getKeyAssignment_0() { return cKeyAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getKeyIDTerminalRuleCall_0_0() { return cKeyIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordEqualsSign() { return c1KeywordEqualsSign; }
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentValue() { return c2AssignmentValue; }
+		//value=STRING
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_2_0() { return cValueSTRINGTerminalRuleCall_2_0; }
 	}
 
 	public class QIDElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallID = (RuleCall)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Alternatives c10Alternatives = (Alternatives)c1Group.eContents().get(0);
-		private final Keyword c100KeywordFullStop = (Keyword)c10Alternatives.eContents().get(0);
-		private final Keyword c101Keyword$ = (Keyword)c10Alternatives.eContents().get(1);
-		private final RuleCall c11TerminalRuleCallID = (RuleCall)c1Group.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_1_0 = (Alternatives)cGroup_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_1_0_0 = (Keyword)cAlternatives_1_0.eContents().get(0);
+		private final Keyword c$Keyword_1_0_1 = (Keyword)cAlternatives_1_0.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		// not supported
+		//QID returns ecore::EString:
+		//  ID (("."|"$") ID)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//ID (("."|"$") ID)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//(("."|"$") ID)*
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Alternatives ele10Alternatives() { return c10Alternatives; }
+		//"."|"$"
+		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
-		// not supported
-		public Keyword ele100KeywordFullStop() { return c100KeywordFullStop; }
+		//"."
+		public Keyword getFullStopKeyword_1_0_0() { return cFullStopKeyword_1_0_0; }
 
-		// not supported
-		public Keyword ele101Keyword$() { return c101Keyword$; }
+		//"$"
+		public Keyword get$Keyword_1_0_1() { return c$Keyword_1_0_1; }
 
-		// not supported
-		public RuleCall ele11TerminalRuleCallID() { return c11TerminalRuleCallID; }
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 
 	public class STRING_OR_QIDElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "STRING_OR_QID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallSTRING = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallQID = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cQIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//STRING_OR_QID returns ecore::EString:
+		//  STRING|QID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//STRING|QID
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallSTRING() { return c0TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallQID() { return c1ParserRuleCallQID; }
+		//QID
+		public RuleCall getQIDParserRuleCall_1() { return cQIDParserRuleCall_1; }
 	}
 
 	public class SINTElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SINT");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordHyphenMinus = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall c1TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		// not supported
+		//SINT returns ecore::EInt:
+		//  "-"? INT;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"-"? INT
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordHyphenMinus() { return c0KeywordHyphenMinus; }
+		//"-"?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 
-		// not supported
-		public RuleCall ele1TerminalRuleCallINT() { return c1TerminalRuleCallINT; }
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
 	}
 	
 	private EcoreDslElements pEcoreDsl;
@@ -1597,13 +1619,13 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EcoreDslGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -1612,177 +1634,298 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public EcoreDslElements prEcoreDsl() {
+	//EcoreDsl:
+	//  (imports+=ImportStatementDecl)* package=EPackageDecl;
+	public EcoreDslElements getEcoreDslAccess() {
 		return (pEcoreDsl != null) ? pEcoreDsl : (pEcoreDsl = new EcoreDslElements());
-	} 
+	}
+	
+	public ParserRule getEcoreDslRule() {
+		return getEcoreDslAccess().getRule();
+	}
 
-	// not supported
-	public ImportStatementDeclElements prImportStatementDecl() {
+	//ImportStatementDecl:
+	//  "import" (alias=ID "=")? importURI=STRING ";";
+	public ImportStatementDeclElements getImportStatementDeclAccess() {
 		return (pImportStatementDecl != null) ? pImportStatementDecl : (pImportStatementDecl = new ImportStatementDeclElements());
-	} 
+	}
+	
+	public ParserRule getImportStatementDeclRule() {
+		return getImportStatementDeclAccess().getRule();
+	}
 
-	// not supported
-	public EPackageDeclElements prEPackageDecl() {
+	//EPackageDecl returns ecore::EPackage:
+	//  (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+	public EPackageDeclElements getEPackageDeclAccess() {
 		return (pEPackageDecl != null) ? pEPackageDecl : (pEPackageDecl = new EPackageDeclElements());
-	} 
+	}
+	
+	public ParserRule getEPackageDeclRule() {
+		return getEPackageDeclAccess().getRule();
+	}
 
-	// not supported
-	public SubEPackageDeclElements prSubEPackageDecl() {
+	//SubEPackageDecl returns ecore::EPackage:
+	//  (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+	public SubEPackageDeclElements getSubEPackageDeclAccess() {
 		return (pSubEPackageDecl != null) ? pSubEPackageDecl : (pSubEPackageDecl = new SubEPackageDeclElements());
-	} 
+	}
+	
+	public ParserRule getSubEPackageDeclRule() {
+		return getSubEPackageDeclAccess().getRule();
+	}
 
-	// not supported
-	public EClassifierDeclElements prEClassifierDecl() {
+	//EClassifierDecl returns ecore::EClassifier:
+	//  EClassDecl|EDataTypeDecl;
+	public EClassifierDeclElements getEClassifierDeclAccess() {
 		return (pEClassifierDecl != null) ? pEClassifierDecl : (pEClassifierDecl = new EClassifierDeclElements());
-	} 
+	}
+	
+	public ParserRule getEClassifierDeclRule() {
+		return getEClassifierDeclAccess().getRule();
+	}
 
-	// not supported
-	public EDataTypeDeclElements prEDataTypeDecl() {
+	//EDataTypeDecl returns ecore::EDataType:
+	//  (eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
+	public EDataTypeDeclElements getEDataTypeDeclAccess() {
 		return (pEDataTypeDecl != null) ? pEDataTypeDecl : (pEDataTypeDecl = new EDataTypeDeclElements());
-	} 
+	}
+	
+	public ParserRule getEDataTypeDeclRule() {
+		return getEDataTypeDeclAccess().getRule();
+	}
 
-	// not supported
-	public EAnnotationDeclElements prEAnnotationDecl() {
+	//EAnnotationDecl returns ecore::EAnnotation:
+	//  "@" source=STRING_OR_QID ("(" details+=MapEntry ("," details+=MapEntry)* ")")?;
+	public EAnnotationDeclElements getEAnnotationDeclAccess() {
 		return (pEAnnotationDecl != null) ? pEAnnotationDecl : (pEAnnotationDecl = new EAnnotationDeclElements());
-	} 
+	}
+	
+	public ParserRule getEAnnotationDeclRule() {
+		return getEAnnotationDeclAccess().getRule();
+	}
 
-	// not supported
-	public EClassDeclElements prEClassDecl() {
+	//EClassDecl returns ecore::EClass:
+	//  (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
+	public EClassDeclElements getEClassDeclAccess() {
 		return (pEClassDecl != null) ? pEClassDecl : (pEClassDecl = new EClassDeclElements());
-	} 
+	}
+	
+	public ParserRule getEClassDeclRule() {
+		return getEClassDeclAccess().getRule();
+	}
 
-	// not supported
-	public EStructuralFeatureDeclElements prEStructuralFeatureDecl() {
+	//EStructuralFeatureDecl returns ecore::EStructuralFeature:
+	//  EAttributeDecl|EReferenceDecl;
+	public EStructuralFeatureDeclElements getEStructuralFeatureDeclAccess() {
 		return (pEStructuralFeatureDecl != null) ? pEStructuralFeatureDecl : (pEStructuralFeatureDecl = new EStructuralFeatureDeclElements());
-	} 
+	}
+	
+	public ParserRule getEStructuralFeatureDeclRule() {
+		return getEStructuralFeatureDeclAccess().getRule();
+	}
 
-	// not supported
-	public EAttributeDeclElements prEAttributeDecl() {
+	//EAttributeDecl returns ecore::EAttribute:
+	//  (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
+	public EAttributeDeclElements getEAttributeDeclAccess() {
 		return (pEAttributeDecl != null) ? pEAttributeDecl : (pEAttributeDecl = new EAttributeDeclElements());
-	} 
+	}
+	
+	public ParserRule getEAttributeDeclRule() {
+		return getEAttributeDeclAccess().getRule();
+	}
 
-	// not supported
-	public EReferenceDeclElements prEReferenceDecl() {
+	//EReferenceDecl returns ecore::EReference:
+	//  (eAnnotations+=EAnnotationDecl)* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
+	public EReferenceDeclElements getEReferenceDeclAccess() {
 		return (pEReferenceDecl != null) ? pEReferenceDecl : (pEReferenceDecl = new EReferenceDeclElements());
-	} 
+	}
+	
+	public ParserRule getEReferenceDeclRule() {
+		return getEReferenceDeclAccess().getRule();
+	}
 
-	// not supported
-	public EEnumDeclElements prEEnumDecl() {
+	//EEnumDecl returns ecore::EEnum:
+	//  (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}";
+	public EEnumDeclElements getEEnumDeclAccess() {
 		return (pEEnumDecl != null) ? pEEnumDecl : (pEEnumDecl = new EEnumDeclElements());
-	} 
+	}
+	
+	public ParserRule getEEnumDeclRule() {
+		return getEEnumDeclAccess().getRule();
+	}
 
-	// not supported
-	public EEnumLiteralDeclElements prEEnumLiteralDecl() {
+	//EEnumLiteralDecl returns ecore::EEnumLiteral:
+	//  (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";";
+	public EEnumLiteralDeclElements getEEnumLiteralDeclAccess() {
 		return (pEEnumLiteralDecl != null) ? pEEnumLiteralDecl : (pEEnumLiteralDecl = new EEnumLiteralDeclElements());
-	} 
+	}
+	
+	public ParserRule getEEnumLiteralDeclRule() {
+		return getEEnumLiteralDeclAccess().getRule();
+	}
 
-	// not supported
-	public ETypeParameterDeclElements prETypeParameterDecl() {
+	//ETypeParameterDecl returns ecore::ETypeParameter:
+	//  name=ID ("extends" eBounds+=EGenericTypeDecl)?;
+	public ETypeParameterDeclElements getETypeParameterDeclAccess() {
 		return (pETypeParameterDecl != null) ? pETypeParameterDecl : (pETypeParameterDecl = new ETypeParameterDeclElements());
-	} 
+	}
+	
+	public ParserRule getETypeParameterDeclRule() {
+		return getETypeParameterDeclAccess().getRule();
+	}
 
-	// not supported
-	public EGenericTypeReferenceDeclElements prEGenericTypeReferenceDecl() {
+	//EGenericTypeReferenceDecl returns ecore::EGenericType:
+	//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter];
+	public EGenericTypeReferenceDeclElements getEGenericTypeReferenceDeclAccess() {
 		return (pEGenericTypeReferenceDecl != null) ? pEGenericTypeReferenceDecl : (pEGenericTypeReferenceDecl = new EGenericTypeReferenceDeclElements());
-	} 
+	}
+	
+	public ParserRule getEGenericTypeReferenceDeclRule() {
+		return getEGenericTypeReferenceDeclAccess().getRule();
+	}
 
-	// not supported
-	public EGenericTypeDeclElements prEGenericTypeDecl() {
+	//EGenericTypeDecl returns ecore::EGenericType:
+	//  eClassifier=[ecore::EClassifier] ("<" eTypeArguments+=EGenericTypeDecl ("," eTypeArguments+=EGenericTypeDecl)* ">")?|"#" eTypeParameter=[ecore::ETypeParameter]|"?" ("extends" eUpperBound=EGenericTypeDecl|"super" eLowerBound=EGenericTypeDecl);
+	public EGenericTypeDeclElements getEGenericTypeDeclAccess() {
 		return (pEGenericTypeDecl != null) ? pEGenericTypeDecl : (pEGenericTypeDecl = new EGenericTypeDeclElements());
-	} 
+	}
+	
+	public ParserRule getEGenericTypeDeclRule() {
+		return getEGenericTypeDeclAccess().getRule();
+	}
 
-	// not supported
-	public EOperationDeclElements prEOperationDecl() {
+	//EOperationDecl returns ecore::EOperation:
+	//  (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
+	public EOperationDeclElements getEOperationDeclAccess() {
 		return (pEOperationDecl != null) ? pEOperationDecl : (pEOperationDecl = new EOperationDeclElements());
-	} 
+	}
+	
+	public ParserRule getEOperationDeclRule() {
+		return getEOperationDeclAccess().getRule();
+	}
 
-	// not supported
-	public EParameterDeclElements prEParameterDecl() {
+	//EParameterDecl returns ecore::EParameter:
+	//  (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID;
+	public EParameterDeclElements getEParameterDeclAccess() {
 		return (pEParameterDecl != null) ? pEParameterDecl : (pEParameterDecl = new EParameterDeclElements());
-	} 
+	}
+	
+	public ParserRule getEParameterDeclRule() {
+		return getEParameterDeclAccess().getRule();
+	}
 
-	// not supported
-	public MapEntryElements prMapEntry() {
+	//MapEntry returns ecore::EStringToStringMapEntry:
+	//  key=ID "=" value=STRING;
+	public MapEntryElements getMapEntryAccess() {
 		return (pMapEntry != null) ? pMapEntry : (pMapEntry = new MapEntryElements());
-	} 
+	}
+	
+	public ParserRule getMapEntryRule() {
+		return getMapEntryAccess().getRule();
+	}
 
-	// not supported
-	public QIDElements prQID() {
+	//QID returns ecore::EString:
+	//  ID (("."|"$") ID)*;
+	public QIDElements getQIDAccess() {
 		return (pQID != null) ? pQID : (pQID = new QIDElements());
-	} 
+	}
+	
+	public ParserRule getQIDRule() {
+		return getQIDAccess().getRule();
+	}
 
-	// not supported
-	public STRING_OR_QIDElements prSTRING_OR_QID() {
+	//STRING_OR_QID returns ecore::EString:
+	//  STRING|QID;
+	public STRING_OR_QIDElements getSTRING_OR_QIDAccess() {
 		return (pSTRING_OR_QID != null) ? pSTRING_OR_QID : (pSTRING_OR_QID = new STRING_OR_QIDElements());
-	} 
+	}
+	
+	public ParserRule getSTRING_OR_QIDRule() {
+		return getSTRING_OR_QIDAccess().getRule();
+	}
 
-	// not supported
-	public SINTElements prSINT() {
+	//SINT returns ecore::EInt:
+	//  "-"? INT;
+	public SINTElements getSINTAccess() {
 		return (pSINT != null) ? pSINT : (pSINT = new SINTElements());
-	} 
+	}
+	
+	public ParserRule getSINTRule() {
+		return getSINTAccess().getRule();
+	}
 
-	// not supported
-	public TerminalRule trBag() {
+	//terminal Bag returns ecore::EBoolean:
+	//  "bag";
+	public TerminalRule getBagRule() {
 		return (tBag != null) ? tBag : (tBag = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Bag"));
 	} 
 
-	// not supported
-	public TerminalRule trRandom() {
+	//terminal Random returns ecore::EBoolean:
+	//  "random";
+	public TerminalRule getRandomRule() {
 		return (tRandom != null) ? tRandom : (tRandom = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Random"));
 	} 
 
-	// not supported
-	public TerminalRule trReadonly() {
+	//terminal Readonly returns ecore::EBoolean:
+	//  "readonly";
+	public TerminalRule getReadonlyRule() {
 		return (tReadonly != null) ? tReadonly : (tReadonly = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Readonly"));
 	} 
 
-	// not supported
-	public TerminalRule trLocal() {
+	//terminal Local returns ecore::EBoolean:
+	//  "local";
+	public TerminalRule getLocalRule() {
 		return (tLocal != null) ? tLocal : (tLocal = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Local"));
 	} 
 
-	// not supported
-	public TerminalRule trSerializable() {
+	//terminal Serializable returns ecore::EBoolean:
+	//  "!serializable";
+	public TerminalRule getSerializableRule() {
 		return (tSerializable != null) ? tSerializable : (tSerializable = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Serializable"));
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

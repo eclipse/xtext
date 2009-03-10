@@ -22,20 +22,20 @@ public class TreeTestLanguageParsetreeConstructor extends AbstractParseTreeConst
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prNode().getRule().getType().getClassifier()) && (s = new Node_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getNodeRule().getType().getClassifier()) && (s = new Node_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   (children+=Node)*;
  *
  **/
 
-
-// not supported
+// (children+=Node)*
 protected class Model_Assignment_children extends AssignmentToken  {
 	
 	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -44,7 +44,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().eleAssignmentChildren();
+		return grammarAccess.getModelAccess().getChildrenAssignment();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prNode().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getNodeRule().getType().getClassifier())) {
 				Solution s = new Node_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -73,12 +73,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Node ****************
  *
- * not supported
+ * Node:
+ *   name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};";
  *
  **/
 
-
-// not supported
+// name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};"
 protected class Node_Group extends GroupToken {
 	
 	public Node_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -87,48 +87,46 @@ protected class Node_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prNode().eleGroup();
+		return grammarAccess.getNodeAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Node_6_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Node_5_Assignment_children(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Node_4_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Node_3_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Node_2_Assignment_attrib(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-		while(s5 != null) {
-			Solution s6 = new Node_1_Keyword(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-		while(s6 != null) {
-			Solution s7 = new Node_0_Assignment_name(s6.getCurrent(), s6.getPredecessor()).firstSolution();
-			if(s7 != null) {
-				last = s7.getPredecessor();
-				return s7;
-			} else {
-				s6 = s6.getPredecessor().nextSolution(this,s6);
+			while(s2 != null) {
+				Solution s3 = new Node_4_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Node_3_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Node_2_Assignment_attrib(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						while(s5 != null) {
+							Solution s6 = new Node_1_Keyword(s5.getCurrent(), s5.getPredecessor()).firstSolution();
+							while(s6 != null) {
+								Solution s7 = new Node_0_Assignment_name(s6.getCurrent(), s6.getPredecessor()).firstSolution();
+								if(s7 != null) {
+									last = s7.getPredecessor();
+									return s7;
+								} else {
+									s6 = s6.getPredecessor().nextSolution(this,s6);
+								}
+							}
+							s5 = s5.getPredecessor().nextSolution(this,s5);
+						}
+						s4 = s4.getPredecessor().nextSolution(this,s4);
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s5 = s5.getPredecessor().nextSolution(this,s5);
-		}
-			s4 = s4.getPredecessor().nextSolution(this,s4);
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// name=ID
 protected class Node_0_Assignment_name extends AssignmentToken  {
 	
 	public Node_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -137,7 +135,7 @@ protected class Node_0_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prNode().ele0AssignmentName();
+		return grammarAccess.getNodeAccess().getNameAssignment_0();
 	}
 	
 	@Override
@@ -146,14 +144,14 @@ protected class Node_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prNode().ele00TerminalRuleCallID();
+			element = grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "("
 protected class Node_1_Keyword extends KeywordToken  {
 	
 	public Node_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -161,11 +159,11 @@ protected class Node_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prNode().ele1KeywordLeftParenthesis();
+		return grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1();
 	}	
 }
 
-// not supported
+// attrib=STRING
 protected class Node_2_Assignment_attrib extends AssignmentToken  {
 	
 	public Node_2_Assignment_attrib(IInstanceDescription curr, AbstractToken pred) {
@@ -174,7 +172,7 @@ protected class Node_2_Assignment_attrib extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prNode().ele2AssignmentAttrib();
+		return grammarAccess.getNodeAccess().getAttribAssignment_2();
 	}
 	
 	@Override
@@ -183,14 +181,14 @@ protected class Node_2_Assignment_attrib extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("attrib");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prNode().ele20TerminalRuleCallSTRING();
+			element = grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// ")"
 protected class Node_3_Keyword extends KeywordToken  {
 	
 	public Node_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -198,11 +196,11 @@ protected class Node_3_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prNode().ele3KeywordRightParenthesis();
+		return grammarAccess.getNodeAccess().getRightParenthesisKeyword_3();
 	}	
 }
 
-// not supported
+// "{"
 protected class Node_4_Keyword extends KeywordToken  {
 	
 	public Node_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -210,11 +208,11 @@ protected class Node_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prNode().ele4KeywordLeftCurlyBracket();
+		return grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4();
 	}	
 }
 
-// not supported
+// (children+=Node)*
 protected class Node_5_Assignment_children extends AssignmentToken  {
 	
 	public Node_5_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -223,7 +221,7 @@ protected class Node_5_Assignment_children extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prNode().ele5AssignmentChildren();
+		return grammarAccess.getNodeAccess().getChildrenAssignment_5();
 	}
 	
 	@Override
@@ -233,7 +231,7 @@ protected class Node_5_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prNode().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getNodeRule().getType().getClassifier())) {
 				Solution s = new Node_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -247,7 +245,7 @@ protected class Node_5_Assignment_children extends AssignmentToken  {
 	}
 }
 
-// not supported
+// "};"
 protected class Node_6_Keyword extends KeywordToken  {
 	
 	public Node_6_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -255,7 +253,7 @@ protected class Node_6_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prNode().ele6KeywordRightCurlyBracketSemicolon();
+		return grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6();
 	}	
 }
 

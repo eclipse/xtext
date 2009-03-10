@@ -136,12 +136,12 @@ public final class TransientValuesTestRootConsumer extends NonTerminalConsumer {
 	public void setRule(RootElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTest());
-		alternatives$3$Consumer = new Alternatives$3$Consumer(rule.ele1Alternatives());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTestRequired());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele11ParserRuleCallTestOptional());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele12ParserRuleCallTestList());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTestKeyword_0());
+		alternatives$3$Consumer = new Alternatives$3$Consumer(rule.getAlternatives_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getTestRequiredParserRuleCall_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getTestOptionalParserRuleCall_1_1());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getTestListParserRuleCall_1_2());
 	}
 	
 	@Override

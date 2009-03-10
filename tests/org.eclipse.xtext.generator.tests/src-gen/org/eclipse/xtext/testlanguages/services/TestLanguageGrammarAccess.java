@@ -19,117 +19,122 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class EntryRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryRule");
-		private final Assignment cAssignmentMultiFeature = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAbstractRule = (RuleCall)cAssignmentMultiFeature.eContents().get(0);
+		private final Assignment cMultiFeatureAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cMultiFeatureAbstractRuleParserRuleCall_0 = (RuleCall)cMultiFeatureAssignment.eContents().get(0);
 		
-		// not supported
+		//EntryRule returns Model:
+		//  (multiFeature+=AbstractRule)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentMultiFeature() { return cAssignmentMultiFeature; }
+		//(multiFeature+=AbstractRule)*
+		public Assignment getMultiFeatureAssignment() { return cMultiFeatureAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAbstractRule() { return c0ParserRuleCallAbstractRule; }
+		//AbstractRule
+		public RuleCall getMultiFeatureAbstractRuleParserRuleCall_0() { return cMultiFeatureAbstractRuleParserRuleCall_0; }
 	}
 
 	public class AbstractRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallChoiceRule = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallReducibleRule = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cChoiceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cReducibleRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//AbstractRule returns AbstractElement:
+		//  ChoiceRule|ReducibleRule;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//ChoiceRule|ReducibleRule
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallChoiceRule() { return c0ParserRuleCallChoiceRule; }
+		//ChoiceRule
+		public RuleCall getChoiceRuleParserRuleCall_0() { return cChoiceRuleParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallReducibleRule() { return c1ParserRuleCallReducibleRule; }
+		//ReducibleRule
+		public RuleCall getReducibleRuleParserRuleCall_1() { return cReducibleRuleParserRuleCall_1; }
 	}
 
 	public class ChoiceRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ChoiceRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordChoice = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentOptionalKeyword = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordOptional = (Keyword)c1AssignmentOptionalKeyword.eContents().get(0);
-		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
+		private final Keyword cChoiceKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cOptionalKeywordAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cOptionalKeywordOptionalKeyword_1_0 = (Keyword)cOptionalKeywordAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		// not supported
+		//ChoiceRule returns ChoiceElement:
+		//  "choice" (optionalKeyword?="optional")? name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"choice" (optionalKeyword?="optional")? name=ID
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordChoice() { return c0KeywordChoice; }
+		//"choice"
+		public Keyword getChoiceKeyword_0() { return cChoiceKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentOptionalKeyword() { return c1AssignmentOptionalKeyword; }
+		//(optionalKeyword?="optional")?
+		public Assignment getOptionalKeywordAssignment_1() { return cOptionalKeywordAssignment_1; }
 
-		// not supported
-		public Keyword ele10KeywordOptional() { return c10KeywordOptional; }
+		//"optional"
+		public Keyword getOptionalKeywordOptionalKeyword_1_0() { return cOptionalKeywordOptionalKeyword_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentName() { return c2AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
 	public class ReducibleRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReducibleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordReducible = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall c1ParserRuleCallTerminalRule = (RuleCall)cGroup.eContents().get(1);
-		private final Group c2Group = (Group)cGroup.eContents().get(2);
-		private final Action c20ActionReducibleCompositeactionFeature = (Action)c2Group.eContents().get(0);
-		private final Assignment c21AssignmentActionFeature = (Assignment)c2Group.eContents().get(1);
-		private final RuleCall c210ParserRuleCallTerminalRule = (RuleCall)c21AssignmentActionFeature.eContents().get(0);
+		private final Keyword cReducibleKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cTerminalRuleParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Action cReducibleCompositeactionFeatureAction_2_0 = (Action)cGroup_2.eContents().get(0);
+		private final Assignment cActionFeatureAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cActionFeatureTerminalRuleParserRuleCall_2_1_0 = (RuleCall)cActionFeatureAssignment_2_1.eContents().get(0);
 		
-		// not supported
+		//ReducibleRule returns ReducibleElement:
+		//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordReducible() { return c0KeywordReducible; }
+		//"reducible"
+		public Keyword getReducibleKeyword_0() { return cReducibleKeyword_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallTerminalRule() { return c1ParserRuleCallTerminalRule; }
+		//TerminalRule
+		public RuleCall getTerminalRuleParserRuleCall_1() { return cTerminalRuleParserRuleCall_1; }
 
-		// not supported
-		public Group ele2Group() { return c2Group; }
+		//({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
+		public Group getGroup_2() { return cGroup_2; }
 
-		// not supported
-		public Action ele20ActionReducibleCompositeactionFeature() { return c20ActionReducibleCompositeactionFeature; }
+		//{ReducibleComposite.actionFeature+=current}
+		public Action getReducibleCompositeactionFeatureAction_2_0() { return cReducibleCompositeactionFeatureAction_2_0; }
 
-		// not supported
-		public Assignment ele21AssignmentActionFeature() { return c21AssignmentActionFeature; }
+		//actionFeature+=TerminalRule
+		public Assignment getActionFeatureAssignment_2_1() { return cActionFeatureAssignment_2_1; }
 
-		// not supported
-		public RuleCall ele210ParserRuleCallTerminalRule() { return c210ParserRuleCallTerminalRule; }
+		//TerminalRule
+		public RuleCall getActionFeatureTerminalRuleParserRuleCall_2_1_0() { return cActionFeatureTerminalRuleParserRuleCall_2_1_0; }
 	}
 
 	public class TerminalRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TerminalRule");
-		private final Assignment cAssignmentStringFeature = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallSTRING = (RuleCall)cAssignmentStringFeature.eContents().get(0);
+		private final Assignment cStringFeatureAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cStringFeatureSTRINGTerminalRuleCall_0 = (RuleCall)cStringFeatureAssignment.eContents().get(0);
 		
-		// not supported
+		//TerminalRule returns TerminalElement:
+		//  stringFeature=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentStringFeature() { return cAssignmentStringFeature; }
+		//stringFeature=STRING
+		public Assignment getStringFeatureAssignment() { return cStringFeatureAssignment; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallSTRING() { return c0TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getStringFeatureSTRINGTerminalRuleCall_0() { return cStringFeatureSTRINGTerminalRuleCall_0; }
 	}
 	
 	private EntryRuleElements pEntryRule;
@@ -140,13 +145,13 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -155,67 +160,98 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public EntryRuleElements prEntryRule() {
+	//EntryRule returns Model:
+	//  (multiFeature+=AbstractRule)*;
+	public EntryRuleElements getEntryRuleAccess() {
 		return (pEntryRule != null) ? pEntryRule : (pEntryRule = new EntryRuleElements());
-	} 
+	}
+	
+	public ParserRule getEntryRuleRule() {
+		return getEntryRuleAccess().getRule();
+	}
 
-	// not supported
-	public AbstractRuleElements prAbstractRule() {
+	//AbstractRule returns AbstractElement:
+	//  ChoiceRule|ReducibleRule;
+	public AbstractRuleElements getAbstractRuleAccess() {
 		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
-	} 
+	}
+	
+	public ParserRule getAbstractRuleRule() {
+		return getAbstractRuleAccess().getRule();
+	}
 
-	// not supported
-	public ChoiceRuleElements prChoiceRule() {
+	//ChoiceRule returns ChoiceElement:
+	//  "choice" (optionalKeyword?="optional")? name=ID;
+	public ChoiceRuleElements getChoiceRuleAccess() {
 		return (pChoiceRule != null) ? pChoiceRule : (pChoiceRule = new ChoiceRuleElements());
-	} 
+	}
+	
+	public ParserRule getChoiceRuleRule() {
+		return getChoiceRuleAccess().getRule();
+	}
 
-	// not supported
-	public ReducibleRuleElements prReducibleRule() {
+	//ReducibleRule returns ReducibleElement:
+	//  "reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
+	public ReducibleRuleElements getReducibleRuleAccess() {
 		return (pReducibleRule != null) ? pReducibleRule : (pReducibleRule = new ReducibleRuleElements());
-	} 
+	}
+	
+	public ParserRule getReducibleRuleRule() {
+		return getReducibleRuleAccess().getRule();
+	}
 
-	// not supported
-	public TerminalRuleElements prTerminalRule() {
+	//TerminalRule returns TerminalElement:
+	//  stringFeature=STRING;
+	public TerminalRuleElements getTerminalRuleAccess() {
 		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
+	}
+	
+	public ParserRule getTerminalRuleRule() {
+		return getTerminalRuleAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

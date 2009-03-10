@@ -76,7 +76,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.xtend.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -155,11 +155,11 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     lv_first_0=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleModel127); 
 
-                            createLeafNode(grammarAccess.prModel().ele00KeywordFooBar(), "first"); 
+                            createLeafNode(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0(), "first"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -184,11 +184,11 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     lv_second_1=(Token)input.LT(1);
                     match(input,12,FOLLOW_12_in_ruleModel167); 
 
-                            createLeafNode(grammarAccess.prModel().ele10KeywordFoo(), "second"); 
+                            createLeafNode(grammarAccess.getModelAccess().getSecondFooKeyword_1_0(), "second"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -213,11 +213,11 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     lv_third_2=(Token)input.LT(1);
                     match(input,13,FOLLOW_13_in_ruleModel207); 
 
-                            createLeafNode(grammarAccess.prModel().ele20KeywordBar(), "third"); 
+                            createLeafNode(grammarAccess.getModelAccess().getThirdBarKeyword_2_0(), "third"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -242,11 +242,11 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     lv_forth_3=(Token)input.LT(1);
                     match(input,14,FOLLOW_14_in_ruleModel247); 
 
-                            createLeafNode(grammarAccess.prModel().ele30KeywordReverseSolidus(), "forth"); 
+                            createLeafNode(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0(), "forth"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        

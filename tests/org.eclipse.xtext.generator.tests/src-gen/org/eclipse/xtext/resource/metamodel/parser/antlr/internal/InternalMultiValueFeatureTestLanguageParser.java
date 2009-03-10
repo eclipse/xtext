@@ -76,7 +76,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:69:47: (iv_ruleStart= ruleStart EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/resource/metamodel/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:70:2: iv_ruleStart= ruleStart EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prStart().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); 
             pushFollow(FOLLOW_ruleStart_in_entryRuleStart71);
             iv_ruleStart=ruleStart();
             _fsp--;
@@ -131,11 +131,11 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	    lv_featureA_0=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart127); 
 
-            	    		createLeafNode(grammarAccess.prStart().ele0TerminalRuleCallID(), "featureA"); 
+            	    		createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prStart().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getStartRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        

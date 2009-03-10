@@ -76,7 +76,7 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalLowerCaseNamedTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalLowerCaseNamedTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -118,11 +118,11 @@ public class InternalLowerCaseNamedTestLanguageParser extends AbstractInternalAn
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel127); 
 
-            		createLeafNode(grammarAccess.prModel().ele0TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

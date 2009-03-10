@@ -67,7 +67,7 @@ import org.eclipse.xtext.resource.metamodel.services.MultiValueFeatureTestLangua
 
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prStart().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleStart returns [EObject current=null]
 	
 	    lv_featureA_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prStart().ele0TerminalRuleCallID(), "featureA"); 
+		createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prStart().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getStartRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

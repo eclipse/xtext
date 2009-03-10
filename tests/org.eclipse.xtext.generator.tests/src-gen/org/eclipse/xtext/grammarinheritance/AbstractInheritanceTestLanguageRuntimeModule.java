@@ -34,23 +34,23 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends Defau
 		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTestLanguageParsetreeConstructor.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTestLanguageLexer.class;
-	}
-
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.InheritanceTestLanguageParser.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.InheritanceTestLanguageAntlrTokenFileProvider.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
+		return org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalInheritanceTestLanguageLexer.class;
+	}
+
+	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 }

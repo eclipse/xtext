@@ -79,20 +79,20 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getCompositeModelConsumer().setRule(grammarAccess.prCompositeModel());
-		getModelConsumer().setRule(grammarAccess.prModel());
-		getModelIdConsumer().setRule(grammarAccess.prModelId());
-		getNestedModelIdConsumer().setRule(grammarAccess.prNestedModelId());
-		getFractionConsumer().setRule(grammarAccess.prFraction());
-		getVectorConsumer().setRule(grammarAccess.prVector());
-		getDotsConsumer().setRule(grammarAccess.prDots());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getCompositeModelConsumer().setRule(grammarAccess.getCompositeModelAccess());
+		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getModelIdConsumer().setRule(grammarAccess.getModelIdAccess());
+		getNestedModelIdConsumer().setRule(grammarAccess.getNestedModelIdAccess());
+		getFractionConsumer().setRule(grammarAccess.getFractionAccess());
+		getVectorConsumer().setRule(grammarAccess.getVectorAccess());
+		getDotsConsumer().setRule(grammarAccess.getDotsAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getCompositeModelConsumer().setModelConsumer(getModelConsumer());

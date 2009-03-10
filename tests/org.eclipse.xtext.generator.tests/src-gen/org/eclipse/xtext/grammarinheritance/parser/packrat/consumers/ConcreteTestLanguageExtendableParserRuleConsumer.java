@@ -101,10 +101,10 @@ public final class ConcreteTestLanguageExtendableParserRuleConsumer extends NonT
 	public void setRule(ExtendableParserRuleElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallSubrule1());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallSubrule2());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallSubrule3());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getSubrule1ParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getSubrule2ParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getSubrule3ParserRuleCall_2());
 	}
 	
 	@Override

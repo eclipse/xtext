@@ -170,14 +170,14 @@ public final class TwoContextsTestLanguageAnElementConsumer extends NonTerminalC
 	public void setRule(AnElementElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		group$4$Consumer = new Group$4$Consumer(rule.ele1Group());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordRefersTo());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentReferred());
-		crossReference$7$Consumer = new CrossReference$7$Consumer(rule.ele110CrossReferenceIDAnElement());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele2KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameIDTerminalRuleCall_0_0());
+		group$4$Consumer = new Group$4$Consumer(rule.getGroup_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getRefersToKeyword_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getReferredAssignment_1_1());
+		crossReference$7$Consumer = new CrossReference$7$Consumer(rule.getReferredAnElementCrossReference_1_1_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getSemicolonKeyword_2());
 	}
 	
 	@Override

@@ -169,14 +169,14 @@ public final class DomainmodelPackageConsumer extends NonTerminalConsumer {
 	public void setRule(PackageElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordPackage());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallQualifiedName());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftCurlyBracket());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentNamedElements());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallNamedElement());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele4KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getPackageKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameQualifiedNameParserRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getNamedElementsAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getNamedElementsNamedElementParserRuleCall_3_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getRightCurlyBracketKeyword_4());
 	}
 	
 	@Override

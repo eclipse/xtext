@@ -76,7 +76,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:69:46: (iv_ruleFile= ruleFile EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:70:2: iv_ruleFile= ruleFile EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFile().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFileRule(), currentNode); 
             pushFollow(FOLLOW_ruleFile_in_entryRuleFile71);
             iv_ruleFile=ruleFile();
             _fsp--;
@@ -134,7 +134,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:86:6: lv_imports_0= ruleImport
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prFile().ele00ParserRuleCallImport(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFileAccess().getImportsImportParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImport_in_ruleFile140);
             	    lv_imports_0=ruleImport();
@@ -142,7 +142,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFile().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getFileRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -178,7 +178,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:107:6: lv_namedElements_1= ruleNamedElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prFile().ele10ParserRuleCallNamedElement(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFileAccess().getNamedElementsNamedElementParserRuleCall_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNamedElement_in_ruleFile179);
             	    lv_namedElements_1=ruleNamedElement();
@@ -186,7 +186,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFile().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getFileRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -240,7 +240,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:132:48: (iv_ruleImport= ruleImport EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:133:2: iv_ruleImport= ruleImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport217);
             iv_ruleImport=ruleImport();
             _fsp--;
@@ -281,7 +281,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleImport261); 
 
-                    createLeafNode(grammarAccess.prImport().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:150:1: (lv_importURI_1= RULE_STRING )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:152:6: lv_importURI_1= RULE_STRING
@@ -289,11 +289,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_importURI_1=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport283); 
 
-            		createLeafNode(grammarAccess.prImport().ele10TerminalRuleCallSTRING(), "importURI"); 
+            		createLeafNode(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), "importURI"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -340,7 +340,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:177:54: (iv_ruleNamedElement= ruleNamedElement EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:178:2: iv_ruleNamedElement= ruleNamedElement EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prNamedElement().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getNamedElementRule(), currentNode); 
             pushFollow(FOLLOW_ruleNamedElement_in_entryRuleNamedElement324);
             iv_ruleNamedElement=ruleNamedElement();
             _fsp--;
@@ -400,7 +400,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:192:5: this_Package_0= rulePackage
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prNamedElement().ele0ParserRuleCallPackage(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getPackageParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_rulePackage_in_ruleNamedElement381);
                     this_Package_0=rulePackage();
@@ -411,7 +411,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prNamedElement().ele0ParserRuleCallPackage(), null); 
+                        createLeafNode(grammarAccess.getNamedElementAccess().getPackageParserRuleCall_0(), null); 
                         
 
                     }
@@ -420,7 +420,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:206:5: this_Type_1= ruleType
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prNamedElement().ele1ParserRuleCallType(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getTypeParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleType_in_ruleNamedElement415);
                     this_Type_1=ruleType();
@@ -431,7 +431,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prNamedElement().ele1ParserRuleCallType(), null); 
+                        createLeafNode(grammarAccess.getNamedElementAccess().getTypeParserRuleCall_1(), null); 
                         
 
                     }
@@ -470,7 +470,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:225:49: (iv_rulePackage= rulePackage EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:226:2: iv_rulePackage= rulePackage EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prPackage().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getPackageRule(), currentNode); 
             pushFollow(FOLLOW_rulePackage_in_entryRulePackage454);
             iv_rulePackage=rulePackage();
             _fsp--;
@@ -514,13 +514,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,12,FOLLOW_12_in_rulePackage498); 
 
-                    createLeafNode(grammarAccess.prPackage().ele0KeywordPackage(), null); 
+                    createLeafNode(grammarAccess.getPackageAccess().getPackageKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:243:1: (lv_name_1= ruleQualifiedName )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:246:6: lv_name_1= ruleQualifiedName
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prPackage().ele10ParserRuleCallQualifiedName(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getPackageAccess().getNameQualifiedNameParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleQualifiedName_in_rulePackage532);
             lv_name_1=ruleQualifiedName();
@@ -528,7 +528,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prPackage().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getPackageRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -544,7 +544,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_rulePackage545); 
 
-                    createLeafNode(grammarAccess.prPackage().ele2KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getPackageAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:268:1: (lv_namedElements_3= ruleNamedElement )*
             loop4:
@@ -562,7 +562,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:271:6: lv_namedElements_3= ruleNamedElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prPackage().ele30ParserRuleCallNamedElement(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getPackageAccess().getNamedElementsNamedElementParserRuleCall_3_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNamedElement_in_rulePackage579);
             	    lv_namedElements_3=ruleNamedElement();
@@ -570,7 +570,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prPackage().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getPackageRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -592,7 +592,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,14,FOLLOW_14_in_rulePackage593); 
 
-                    createLeafNode(grammarAccess.prPackage().ele4KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getPackageAccess().getRightCurlyBracketKeyword_4(), null); 
                 
 
             }
@@ -628,7 +628,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:300:46: (iv_ruleType= ruleType EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:301:2: iv_ruleType= ruleType EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prType().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); 
             pushFollow(FOLLOW_ruleType_in_entryRuleType626);
             iv_ruleType=ruleType();
             _fsp--;
@@ -688,7 +688,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:315:5: this_Entity_0= ruleEntity
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prType().ele0ParserRuleCallEntity(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEntity_in_ruleType683);
                     this_Entity_0=ruleEntity();
@@ -699,7 +699,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prType().ele0ParserRuleCallEntity(), null); 
+                        createLeafNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_0(), null); 
                         
 
                     }
@@ -708,7 +708,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:329:5: this_DataType_1= ruleDataType
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prType().ele1ParserRuleCallDataType(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleDataType_in_ruleType717);
                     this_DataType_1=ruleDataType();
@@ -719,7 +719,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prType().ele1ParserRuleCallDataType(), null); 
+                        createLeafNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_1(), null); 
                         
 
                     }
@@ -758,7 +758,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:348:50: (iv_ruleDataType= ruleDataType EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:349:2: iv_ruleDataType= ruleDataType EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prDataType().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getDataTypeRule(), currentNode); 
             pushFollow(FOLLOW_ruleDataType_in_entryRuleDataType756);
             iv_ruleDataType=ruleDataType();
             _fsp--;
@@ -799,7 +799,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,15,FOLLOW_15_in_ruleDataType800); 
 
-                    createLeafNode(grammarAccess.prDataType().ele0KeywordDatatype(), null); 
+                    createLeafNode(grammarAccess.getDataTypeAccess().getDatatypeKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:366:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:368:6: lv_name_1= RULE_ID
@@ -807,11 +807,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDataType822); 
 
-            		createLeafNode(grammarAccess.prDataType().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prDataType().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getDataTypeRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -858,7 +858,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:393:48: (iv_ruleEntity= ruleEntity EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:394:2: iv_ruleEntity= ruleEntity EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEntity().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEntityRule(), currentNode); 
             pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity863);
             iv_ruleEntity=ruleEntity();
             _fsp--;
@@ -901,7 +901,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,16,FOLLOW_16_in_ruleEntity907); 
 
-                    createLeafNode(grammarAccess.prEntity().ele0KeywordEntity(), null); 
+                    createLeafNode(grammarAccess.getEntityAccess().getEntityKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:411:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:413:6: lv_name_1= RULE_ID
@@ -909,11 +909,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntity929); 
 
-            		createLeafNode(grammarAccess.prEntity().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEntity().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEntityRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -939,20 +939,20 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     {
                     match(input,17,FOLLOW_17_in_ruleEntity947); 
 
-                            createLeafNode(grammarAccess.prEntity().ele20KeywordExtends(), null); 
+                            createLeafNode(grammarAccess.getEntityAccess().getExtendsKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:435:1: ( RULE_ID )
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:438:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEntity().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEntityRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntity969); 
 
-                    		createLeafNode(grammarAccess.prEntity().ele210CrossReferenceIDEntity(), "superType"); 
+                    		createLeafNode(grammarAccess.getEntityAccess().getSuperTypeEntityCrossReference_2_1_0(), "superType"); 
                     	
 
                     }
@@ -965,7 +965,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleEntity983); 
 
-                    createLeafNode(grammarAccess.prEntity().ele3KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:455:1: (lv_features_5= ruleFeature )*
             loop7:
@@ -983,7 +983,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:458:6: lv_features_5= ruleFeature
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEntity().ele40ParserRuleCallFeature(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEntityAccess().getFeaturesFeatureParserRuleCall_4_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleFeature_in_ruleEntity1017);
             	    lv_features_5=ruleFeature();
@@ -991,7 +991,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEntity().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEntityRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1013,7 +1013,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,14,FOLLOW_14_in_ruleEntity1031); 
 
-                    createLeafNode(grammarAccess.prEntity().ele5KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5(), null); 
                 
 
             }
@@ -1049,7 +1049,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:487:49: (iv_ruleFeature= ruleFeature EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:488:2: iv_ruleFeature= ruleFeature EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFeature().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFeatureRule(), currentNode); 
             pushFollow(FOLLOW_ruleFeature_in_entryRuleFeature1064);
             iv_ruleFeature=ruleFeature();
             _fsp--;
@@ -1109,7 +1109,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:502:5: this_StructuralFeature_0= ruleStructuralFeature
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prFeature().ele0ParserRuleCallStructuralFeature(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getStructuralFeatureParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleStructuralFeature_in_ruleFeature1121);
                     this_StructuralFeature_0=ruleStructuralFeature();
@@ -1120,7 +1120,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prFeature().ele0ParserRuleCallStructuralFeature(), null); 
+                        createLeafNode(grammarAccess.getFeatureAccess().getStructuralFeatureParserRuleCall_0(), null); 
                         
 
                     }
@@ -1129,7 +1129,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:516:5: this_Operation_1= ruleOperation
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prFeature().ele1ParserRuleCallOperation(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getOperationParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleOperation_in_ruleFeature1155);
                     this_Operation_1=ruleOperation();
@@ -1140,7 +1140,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prFeature().ele1ParserRuleCallOperation(), null); 
+                        createLeafNode(grammarAccess.getFeatureAccess().getOperationParserRuleCall_1(), null); 
                         
 
                     }
@@ -1179,7 +1179,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:535:59: (iv_ruleStructuralFeature= ruleStructuralFeature EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:536:2: iv_ruleStructuralFeature= ruleStructuralFeature EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prStructuralFeature().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getStructuralFeatureRule(), currentNode); 
             pushFollow(FOLLOW_ruleStructuralFeature_in_entryRuleStructuralFeature1194);
             iv_ruleStructuralFeature=ruleStructuralFeature();
             _fsp--;
@@ -1239,7 +1239,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:550:5: this_Attribute_0= ruleAttribute
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prStructuralFeature().ele0ParserRuleCallAttribute(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getStructuralFeatureAccess().getAttributeParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleAttribute_in_ruleStructuralFeature1251);
                     this_Attribute_0=ruleAttribute();
@@ -1250,7 +1250,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prStructuralFeature().ele0ParserRuleCallAttribute(), null); 
+                        createLeafNode(grammarAccess.getStructuralFeatureAccess().getAttributeParserRuleCall_0(), null); 
                         
 
                     }
@@ -1259,7 +1259,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:564:5: this_Reference_1= ruleReference
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prStructuralFeature().ele1ParserRuleCallReference(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getStructuralFeatureAccess().getReferenceParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleReference_in_ruleStructuralFeature1285);
                     this_Reference_1=ruleReference();
@@ -1270,7 +1270,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prStructuralFeature().ele1ParserRuleCallReference(), null); 
+                        createLeafNode(grammarAccess.getStructuralFeatureAccess().getReferenceParserRuleCall_1(), null); 
                         
 
                     }
@@ -1309,7 +1309,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:583:51: (iv_ruleAttribute= ruleAttribute EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:584:2: iv_ruleAttribute= ruleAttribute EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prAttribute().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getAttributeRule(), currentNode); 
             pushFollow(FOLLOW_ruleAttribute_in_entryRuleAttribute1324);
             iv_ruleAttribute=ruleAttribute();
             _fsp--;
@@ -1352,7 +1352,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,18,FOLLOW_18_in_ruleAttribute1368); 
 
-                    createLeafNode(grammarAccess.prAttribute().ele0KeywordAttr(), null); 
+                    createLeafNode(grammarAccess.getAttributeAccess().getAttrKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:601:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:603:6: lv_name_1= RULE_ID
@@ -1360,11 +1360,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttribute1390); 
 
-            		createLeafNode(grammarAccess.prAttribute().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prAttribute().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAttributeRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1379,13 +1379,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,19,FOLLOW_19_in_ruleAttribute1407); 
 
-                    createLeafNode(grammarAccess.prAttribute().ele2KeywordColon(), null); 
+                    createLeafNode(grammarAccess.getAttributeAccess().getColonKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:625:1: (lv_type_3= ruleTypeRef )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:628:6: lv_type_3= ruleTypeRef
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prAttribute().ele30ParserRuleCallTypeRef(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getAttributeAccess().getTypeTypeRefParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleTypeRef_in_ruleAttribute1441);
             lv_type_3=ruleTypeRef();
@@ -1393,7 +1393,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prAttribute().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAttributeRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1441,7 +1441,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:653:51: (iv_ruleReference= ruleReference EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:654:2: iv_ruleReference= ruleReference EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prReference().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getReferenceRule(), currentNode); 
             pushFollow(FOLLOW_ruleReference_in_entryRuleReference1478);
             iv_ruleReference=ruleReference();
             _fsp--;
@@ -1484,7 +1484,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,20,FOLLOW_20_in_ruleReference1522); 
 
-                    createLeafNode(grammarAccess.prReference().ele0KeywordRef(), null); 
+                    createLeafNode(grammarAccess.getReferenceAccess().getRefKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:671:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:673:6: lv_name_1= RULE_ID
@@ -1492,11 +1492,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReference1544); 
 
-            		createLeafNode(grammarAccess.prReference().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prReference().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getReferenceRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1511,13 +1511,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,19,FOLLOW_19_in_ruleReference1561); 
 
-                    createLeafNode(grammarAccess.prReference().ele2KeywordColon(), null); 
+                    createLeafNode(grammarAccess.getReferenceAccess().getColonKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:695:1: (lv_type_3= ruleTypeRef )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:698:6: lv_type_3= ruleTypeRef
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prReference().ele30ParserRuleCallTypeRef(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getReferenceAccess().getTypeTypeRefParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleTypeRef_in_ruleReference1595);
             lv_type_3=ruleTypeRef();
@@ -1525,7 +1525,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prReference().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getReferenceRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1552,20 +1552,20 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     {
                     match(input,21,FOLLOW_21_in_ruleReference1609); 
 
-                            createLeafNode(grammarAccess.prReference().ele40KeywordOpposite(), null); 
+                            createLeafNode(grammarAccess.getReferenceAccess().getOppositeKeyword_4_0(), null); 
                         
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:720:1: ( RULE_ID )
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:723:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prReference().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getReferenceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReference1631); 
 
-                    		createLeafNode(grammarAccess.prReference().ele410CrossReferenceIDReference(), "opposite"); 
+                    		createLeafNode(grammarAccess.getReferenceAccess().getOppositeReferenceCrossReference_4_1_0(), "opposite"); 
                     	
 
                     }
@@ -1610,7 +1610,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:743:51: (iv_ruleOperation= ruleOperation EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:744:2: iv_ruleOperation= ruleOperation EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prOperation().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getOperationRule(), currentNode); 
             pushFollow(FOLLOW_ruleOperation_in_entryRuleOperation1669);
             iv_ruleOperation=ruleOperation();
             _fsp--;
@@ -1657,7 +1657,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
             match(input,22,FOLLOW_22_in_ruleOperation1713); 
 
-                    createLeafNode(grammarAccess.prOperation().ele0KeywordOp(), null); 
+                    createLeafNode(grammarAccess.getOperationAccess().getOpKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:761:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:763:6: lv_name_1= RULE_ID
@@ -1665,11 +1665,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOperation1735); 
 
-            		createLeafNode(grammarAccess.prOperation().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getOperationRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1684,7 +1684,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleOperation1752); 
 
-                    createLeafNode(grammarAccess.prOperation().ele2KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getOperationAccess().getLeftParenthesisKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:785:1: ( (lv_params_3= ruleParameter ) ( ',' (lv_params_5= ruleParameter ) )* )?
             int alt12=2;
@@ -1701,7 +1701,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:788:6: lv_params_3= ruleParameter
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prOperation().ele300ParserRuleCallParameter(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getOperationAccess().getParamsParameterParserRuleCall_3_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleParameter_in_ruleOperation1787);
                     lv_params_3=ruleParameter();
@@ -1709,7 +1709,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getOperationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1740,13 +1740,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,24,FOLLOW_24_in_ruleOperation1801); 
 
-                    	            createLeafNode(grammarAccess.prOperation().ele310KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getOperationAccess().getCommaKeyword_3_1_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:810:1: (lv_params_5= ruleParameter )
                     	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:813:6: lv_params_5= ruleParameter
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prOperation().ele3110ParserRuleCallParameter(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getOperationAccess().getParamsParameterParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleParameter_in_ruleOperation1835);
                     	    lv_params_5=ruleParameter();
@@ -1754,7 +1754,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getOperationRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1785,17 +1785,17 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
             match(input,25,FOLLOW_25_in_ruleOperation1852); 
 
-                    createLeafNode(grammarAccess.prOperation().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getOperationAccess().getRightParenthesisKeyword_4(), null); 
                 
             match(input,19,FOLLOW_19_in_ruleOperation1861); 
 
-                    createLeafNode(grammarAccess.prOperation().ele5KeywordColon(), null); 
+                    createLeafNode(grammarAccess.getOperationAccess().getColonKeyword_5(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:839:1: (lv_type_8= ruleTypeRef )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:842:6: lv_type_8= ruleTypeRef
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prOperation().ele60ParserRuleCallTypeRef(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getOperationAccess().getTypeTypeRefParserRuleCall_6_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleTypeRef_in_ruleOperation1895);
             lv_type_8=ruleTypeRef();
@@ -1803,7 +1803,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOperation().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getOperationRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1851,7 +1851,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:867:51: (iv_ruleParameter= ruleParameter EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:868:2: iv_ruleParameter= ruleParameter EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prParameter().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getParameterRule(), currentNode); 
             pushFollow(FOLLOW_ruleParameter_in_entryRuleParameter1932);
             iv_ruleParameter=ruleParameter();
             _fsp--;
@@ -1898,11 +1898,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleParameter1989); 
 
-            		createLeafNode(grammarAccess.prParameter().ele00TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prParameter().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getParameterRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1919,7 +1919,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:904:6: lv_type_1= ruleTypeRef
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prParameter().ele10ParserRuleCallTypeRef(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getParameterAccess().getTypeTypeRefParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleTypeRef_in_ruleParameter2031);
             lv_type_1=ruleTypeRef();
@@ -1927,7 +1927,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prParameter().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getParameterRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1975,7 +1975,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:931:49: (iv_ruleTypeRef= ruleTypeRef EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:932:2: iv_ruleTypeRef= ruleTypeRef EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTypeRef().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTypeRefRule(), currentNode); 
             pushFollow(FOLLOW_ruleTypeRef_in_entryRuleTypeRef2070);
             iv_ruleTypeRef=ruleTypeRef();
             _fsp--;
@@ -2014,13 +2014,13 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prTypeRef().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getTypeRefRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef2126); 
 
-            		createLeafNode(grammarAccess.prTypeRef().ele0CrossReferenceIDType(), "referenced"); 
+            		createLeafNode(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0(), "referenced"); 
             	
 
             }
@@ -2056,7 +2056,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:968:54: (iv_ruleQualifiedName= ruleQualifiedName EOF )
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:969:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prQualifiedName().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getQualifiedNameRule(), currentNode); 
             pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName2162);
             iv_ruleQualifiedName=ruleQualifiedName();
             _fsp--;
@@ -2103,7 +2103,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prQualifiedName().ele0TerminalRuleCallID(), null); 
+                createLeafNode(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalDomainmodel.g:990:1: (kw= '.' this_ID_2= RULE_ID )*
             loop13:
@@ -2124,7 +2124,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    match(input,26,FOLLOW_26_in_ruleQualifiedName2232); 
 
             	            current.merge(kw);
-            	            createLeafNode(grammarAccess.prQualifiedName().ele10KeywordFullStop(), null); 
+            	            createLeafNode(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0(), null); 
             	        
             	    this_ID_2=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQualifiedName2247); 
@@ -2132,7 +2132,7 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
             	    		current.merge(this_ID_2);
             	        
             	     
-            	        createLeafNode(grammarAccess.prQualifiedName().ele11TerminalRuleCallID(), null); 
+            	        createLeafNode(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1(), null); 
             	        
 
             	    }

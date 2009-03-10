@@ -155,13 +155,13 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 	public void setRule(QIDElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele10Alternatives());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordFullStop());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele101Keyword$());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele11TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getIDTerminalRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.getAlternatives_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getFullStopKeyword_1_0_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.get$Keyword_1_0_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getIDTerminalRuleCall_1_1());
 	}
 	
 	@Override

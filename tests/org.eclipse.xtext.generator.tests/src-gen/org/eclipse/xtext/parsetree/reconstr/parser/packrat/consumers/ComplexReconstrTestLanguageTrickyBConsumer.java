@@ -185,15 +185,15 @@ public final class ComplexReconstrTestLanguageTrickyBConsumer extends NonTermina
 	public void setRule(TrickyBElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTB());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele10AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele100TerminalRuleCallID());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentType());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110TerminalRuleCallINT());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele2AssignmentType());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele20TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTBKeyword_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_1_0_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getTypeAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getTypeINTTerminalRuleCall_1_1_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getTypeAssignment_2());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getTypeINTTerminalRuleCall_2_0());
 	}
 	
 	@Override

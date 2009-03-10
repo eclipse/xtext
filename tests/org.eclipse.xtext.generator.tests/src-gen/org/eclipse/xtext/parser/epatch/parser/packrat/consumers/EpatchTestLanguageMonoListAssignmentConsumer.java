@@ -266,20 +266,20 @@ public final class EpatchTestLanguageMonoListAssignmentConsumer extends NonTermi
 	public void setRule(MonoListAssignmentElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentFeature());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordEqualsSign());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftSquareBracket());
-		group$6$Consumer = new Group$6$Consumer(rule.ele3Group());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele30AssignmentLeftValues());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele300ParserRuleCallAssignmentValue());
-		group$9$Consumer = new Group$9$Consumer(rule.ele31Group());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele310KeywordComma());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele311AssignmentLeftValues());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele3110ParserRuleCallAssignmentValue());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele4KeywordRightSquareBracket());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele5KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getFeatureAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getFeatureIDTerminalRuleCall_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getEqualsSignKeyword_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftSquareBracketKeyword_2());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_3());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getLeftValuesAssignment_3_0());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getLeftValuesAssignmentValueParserRuleCall_3_0_0());
+		group$9$Consumer = new Group$9$Consumer(rule.getGroup_3_1());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getCommaKeyword_3_1_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getLeftValuesAssignment_3_1_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getLeftValuesAssignmentValueParserRuleCall_3_1_1_0());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.getRightSquareBracketKeyword_4());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getSemicolonKeyword_5());
 	}
 	
 	@Override

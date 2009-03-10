@@ -70,8 +70,8 @@ public final class EpatchTestLanguageExpressionExecutableConsumer extends NonTer
 	public void setRule(ExpressionExecutableElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentExprstr());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getExprstrAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getExprstrSTRINGTerminalRuleCall_0());
 	}
 	
 	@Override

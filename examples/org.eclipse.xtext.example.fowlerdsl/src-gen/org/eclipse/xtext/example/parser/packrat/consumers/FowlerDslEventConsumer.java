@@ -151,13 +151,13 @@ public final class FowlerDslEventConsumer extends NonTerminalConsumer {
 	public void setRule(EventElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentResetting());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordResetting());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallID());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele2AssignmentCode());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele20TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getResettingAssignment_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getResettingResettingKeyword_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getCodeAssignment_2());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getCodeIDTerminalRuleCall_2_0());
 	}
 	
 	@Override

@@ -22,19 +22,19 @@ public class MultiValueFeatureTestLanguageParsetreeConstructor extends AbstractP
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prStart().getRule().getType().getClassifier()) && (s = new Start_Assignment_featureA(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier()) && (s = new Start_Assignment_featureA(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Start ****************
  *
- * not supported
+ * Start:
+ *   (featureA+=ID)+;
  *
  **/
 
-
-// not supported
+// (featureA+=ID)+
 protected class Start_Assignment_featureA extends AssignmentToken  {
 	
 	public Start_Assignment_featureA(IInstanceDescription curr, AbstractToken pred) {
@@ -43,7 +43,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prStart().eleAssignmentFeatureA();
+		return grammarAccess.getStartAccess().getFeatureAAssignment();
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("featureA");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prStart().ele0TerminalRuleCallID();
+			element = grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0();
 			return new Solution(obj);
 		}
 		return null;

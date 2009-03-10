@@ -219,17 +219,17 @@ public final class PartialParserTestLanguageSomeContainerConsumer extends NonTer
 	public void setRule(SomeContainerElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordContainer());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftCurlyBracket());
-		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.ele3Alternatives());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele30AssignmentNested());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele300ParserRuleCallNested());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele31AssignmentContent());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele310ParserRuleCallContent());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele4KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getContainerKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_2());
+		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.getAlternatives_3());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getNestedAssignment_3_0());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getNestedNestedParserRuleCall_3_0_0());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getContentAssignment_3_1());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getContentContentParserRuleCall_3_1_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getRightCurlyBracketKeyword_4());
 	}
 	
 	@Override

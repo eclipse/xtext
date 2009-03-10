@@ -22,27 +22,27 @@ public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractPar
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier()) && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getClassifier()) && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier()) && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier()) && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier()) && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier()) && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getClassifier()) && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier()) && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getWithoutHiddensRule().getType().getClassifier()) && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getWithHiddensRule().getType().getClassifier()) && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getOverridingHiddensRule().getType().getClassifier()) && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier()) && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getInheritingHiddensRule().getType().getClassifier()) && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getDatatypeHiddensRule().getType().getClassifier()) && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier()) && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier()) && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
  *
  **/
 
-
-// not supported
+// WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -51,7 +51,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().eleAlternatives();
+		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -66,7 +66,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// WithoutHiddens
 protected class Model_0_RuleCall_WithoutHiddens extends RuleCallToken {
 	
 	public Model_0_RuleCall_WithoutHiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -75,18 +75,18 @@ protected class Model_0_RuleCall_WithoutHiddens extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prModel().ele0ParserRuleCallWithoutHiddens();
+		return grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithoutHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getWithoutHiddensRule().getType().getClassifier())) return null;
 		return new WithoutHiddens_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// WithHiddens
 protected class Model_1_RuleCall_WithHiddens extends RuleCallToken {
 	
 	public Model_1_RuleCall_WithHiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -95,18 +95,18 @@ protected class Model_1_RuleCall_WithHiddens extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prModel().ele1ParserRuleCallWithHiddens();
+		return grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(WithHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prWithHiddens().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getWithHiddensRule().getType().getClassifier())) return null;
 		return new WithHiddens_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// OverridingHiddens
 protected class Model_2_RuleCall_OverridingHiddens extends RuleCallToken {
 	
 	public Model_2_RuleCall_OverridingHiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -115,18 +115,18 @@ protected class Model_2_RuleCall_OverridingHiddens extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prModel().ele2ParserRuleCallOverridingHiddens();
+		return grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(OverridingHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getOverridingHiddensRule().getType().getClassifier())) return null;
 		return new OverridingHiddens_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// InheritingHiddens
 protected class Model_3_RuleCall_InheritingHiddens extends RuleCallToken {
 	
 	public Model_3_RuleCall_InheritingHiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -135,18 +135,18 @@ protected class Model_3_RuleCall_InheritingHiddens extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prModel().ele3ParserRuleCallInheritingHiddens();
+		return grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(InheritingHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getInheritingHiddensRule().getType().getClassifier())) return null;
 		return new InheritingHiddens_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// DatatypeHiddens
 protected class Model_4_RuleCall_DatatypeHiddens extends RuleCallToken {
 	
 	public Model_4_RuleCall_DatatypeHiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -155,13 +155,13 @@ protected class Model_4_RuleCall_DatatypeHiddens extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prModel().ele4ParserRuleCallDatatypeHiddens();
+		return grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(DatatypeHiddens_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getDatatypeHiddensRule().getType().getClassifier())) return null;
 		return new DatatypeHiddens_Group(current, this).firstSolution();
 	}
 }
@@ -172,12 +172,12 @@ protected class Model_4_RuleCall_DatatypeHiddens extends RuleCallToken {
 
 /************ begin Rule WithoutHiddens ****************
  *
- * not supported
+ * WithoutHiddens:
+ *   "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
  *
  **/
 
-
-// not supported
+// "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";"
 protected class WithoutHiddens_Group extends GroupToken {
 	
 	public WithoutHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -186,40 +186,38 @@ protected class WithoutHiddens_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prWithoutHiddens().eleGroup();
+		return grammarAccess.getWithoutHiddensAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithoutHiddens_4_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new WithoutHiddens_3_Assignment_spaces(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new WithoutHiddens_2_Keyword_hiddens(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new WithoutHiddens_1_Assignment_spaces(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new WithoutHiddens_0_Keyword_without(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-			if(s5 != null) {
-				last = s5.getPredecessor();
-				return s5;
-			} else {
-				s4 = s4.getPredecessor().nextSolution(this,s4);
+			while(s2 != null) {
+				Solution s3 = new WithoutHiddens_2_Keyword_hiddens(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new WithoutHiddens_1_Assignment_spaces(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new WithoutHiddens_0_Keyword_without(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						if(s5 != null) {
+							last = s5.getPredecessor();
+							return s5;
+						} else {
+							s4 = s4.getPredecessor().nextSolution(this,s4);
+						}
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "without"
 protected class WithoutHiddens_0_Keyword_without extends KeywordToken  {
 	
 	public WithoutHiddens_0_Keyword_without(IInstanceDescription curr, AbstractToken pred) {
@@ -227,11 +225,11 @@ protected class WithoutHiddens_0_Keyword_without extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prWithoutHiddens().ele0KeywordWithout();
+		return grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0();
 	}	
 }
 
-// not supported
+// spaces+=WS
 protected class WithoutHiddens_1_Assignment_spaces extends AssignmentToken  {
 	
 	public WithoutHiddens_1_Assignment_spaces(IInstanceDescription curr, AbstractToken pred) {
@@ -240,7 +238,7 @@ protected class WithoutHiddens_1_Assignment_spaces extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prWithoutHiddens().ele1AssignmentSpaces();
+		return grammarAccess.getWithoutHiddensAccess().getSpacesAssignment_1();
 	}
 	
 	@Override
@@ -249,14 +247,14 @@ protected class WithoutHiddens_1_Assignment_spaces extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prWithoutHiddens().ele10TerminalRuleCallWS();
+			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "hiddens"
 protected class WithoutHiddens_2_Keyword_hiddens extends KeywordToken  {
 	
 	public WithoutHiddens_2_Keyword_hiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -264,11 +262,11 @@ protected class WithoutHiddens_2_Keyword_hiddens extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prWithoutHiddens().ele2KeywordHiddens();
+		return grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2();
 	}	
 }
 
-// not supported
+// (spaces+=WS)?
 protected class WithoutHiddens_3_Assignment_spaces extends AssignmentToken  {
 	
 	public WithoutHiddens_3_Assignment_spaces(IInstanceDescription curr, AbstractToken pred) {
@@ -277,7 +275,7 @@ protected class WithoutHiddens_3_Assignment_spaces extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prWithoutHiddens().ele3AssignmentSpaces();
+		return grammarAccess.getWithoutHiddensAccess().getSpacesAssignment_3();
 	}
 	
 	@Override
@@ -286,14 +284,14 @@ protected class WithoutHiddens_3_Assignment_spaces extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prWithoutHiddens().ele30TerminalRuleCallWS();
+			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// valid?=";"
 protected class WithoutHiddens_4_Assignment_valid extends AssignmentToken  {
 	
 	public WithoutHiddens_4_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -302,7 +300,7 @@ protected class WithoutHiddens_4_Assignment_valid extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prWithoutHiddens().ele4AssignmentValid();
+		return grammarAccess.getWithoutHiddensAccess().getValidAssignment_4();
 	}
 	
 	@Override
@@ -312,7 +310,7 @@ protected class WithoutHiddens_4_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prWithoutHiddens().ele40KeywordSemicolon();
+			element = grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0();
 			return new Solution(obj);
 		}
 
@@ -326,12 +324,12 @@ protected class WithoutHiddens_4_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule WithHiddens ****************
  *
- * not supported
+ * WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+ *   "with" "hiddens" valid?=";";
  *
  **/
 
-
-// not supported
+// "with" "hiddens" valid?=";"
 protected class WithHiddens_Group extends GroupToken {
 	
 	public WithHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -340,32 +338,30 @@ protected class WithHiddens_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prWithHiddens().eleGroup();
+		return grammarAccess.getWithHiddensAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new WithHiddens_2_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new WithHiddens_1_Keyword_hiddens(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new WithHiddens_0_Keyword_with(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-			if(s3 != null) {
-				last = s3.getPredecessor();
-				return s3;
-			} else {
-				s2 = s2.getPredecessor().nextSolution(this,s2);
+			while(s2 != null) {
+				Solution s3 = new WithHiddens_0_Keyword_with(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "with"
 protected class WithHiddens_0_Keyword_with extends KeywordToken  {
 	
 	public WithHiddens_0_Keyword_with(IInstanceDescription curr, AbstractToken pred) {
@@ -373,11 +369,11 @@ protected class WithHiddens_0_Keyword_with extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prWithHiddens().ele0KeywordWith();
+		return grammarAccess.getWithHiddensAccess().getWithKeyword_0();
 	}	
 }
 
-// not supported
+// "hiddens"
 protected class WithHiddens_1_Keyword_hiddens extends KeywordToken  {
 	
 	public WithHiddens_1_Keyword_hiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -385,11 +381,11 @@ protected class WithHiddens_1_Keyword_hiddens extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prWithHiddens().ele1KeywordHiddens();
+		return grammarAccess.getWithHiddensAccess().getHiddensKeyword_1();
 	}	
 }
 
-// not supported
+// valid?=";"
 protected class WithHiddens_2_Assignment_valid extends AssignmentToken  {
 	
 	public WithHiddens_2_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -398,7 +394,7 @@ protected class WithHiddens_2_Assignment_valid extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prWithHiddens().ele2AssignmentValid();
+		return grammarAccess.getWithHiddensAccess().getValidAssignment_2();
 	}
 	
 	@Override
@@ -408,7 +404,7 @@ protected class WithHiddens_2_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prWithHiddens().ele20KeywordSemicolon();
+			element = grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0();
 			return new Solution(obj);
 		}
 
@@ -422,12 +418,12 @@ protected class WithHiddens_2_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule OverridingHiddens ****************
  *
- * not supported
+ * OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+ *   "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
  *
  **/
 
-
-// not supported
+// "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
 protected class OverridingHiddens_Group extends GroupToken {
 	
 	public OverridingHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -436,44 +432,42 @@ protected class OverridingHiddens_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().eleGroup();
+		return grammarAccess.getOverridingHiddensAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddens_5_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new OverridingHiddens_4_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new OverridingHiddens_3_Assignment_called(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new OverridingHiddens_2_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new OverridingHiddens_1_Keyword_hiddens(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-		while(s5 != null) {
-			Solution s6 = new OverridingHiddens_0_Keyword_overriding(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-			if(s6 != null) {
-				last = s6.getPredecessor();
-				return s6;
-			} else {
-				s5 = s5.getPredecessor().nextSolution(this,s5);
+			while(s2 != null) {
+				Solution s3 = new OverridingHiddens_3_Assignment_called(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new OverridingHiddens_2_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new OverridingHiddens_1_Keyword_hiddens(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						while(s5 != null) {
+							Solution s6 = new OverridingHiddens_0_Keyword_overriding(s5.getCurrent(), s5.getPredecessor()).firstSolution();
+							if(s6 != null) {
+								last = s6.getPredecessor();
+								return s6;
+							} else {
+								s5 = s5.getPredecessor().nextSolution(this,s5);
+							}
+						}
+						s4 = s4.getPredecessor().nextSolution(this,s4);
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s4 = s4.getPredecessor().nextSolution(this,s4);
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "overriding"
 protected class OverridingHiddens_0_Keyword_overriding extends KeywordToken  {
 	
 	public OverridingHiddens_0_Keyword_overriding(IInstanceDescription curr, AbstractToken pred) {
@@ -481,11 +475,11 @@ protected class OverridingHiddens_0_Keyword_overriding extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().ele0KeywordOverriding();
+		return grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0();
 	}	
 }
 
-// not supported
+// "hiddens"
 protected class OverridingHiddens_1_Keyword_hiddens extends KeywordToken  {
 	
 	public OverridingHiddens_1_Keyword_hiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -493,11 +487,11 @@ protected class OverridingHiddens_1_Keyword_hiddens extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().ele1KeywordHiddens();
+		return grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1();
 	}	
 }
 
-// not supported
+// "("
 protected class OverridingHiddens_2_Keyword extends KeywordToken  {
 	
 	public OverridingHiddens_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -505,11 +499,11 @@ protected class OverridingHiddens_2_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().ele2KeywordLeftParenthesis();
+		return grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2();
 	}	
 }
 
-// not supported
+// called=OverridingHiddensCall
 protected class OverridingHiddens_3_Assignment_called extends AssignmentToken  {
 	
 	public OverridingHiddens_3_Assignment_called(IInstanceDescription curr, AbstractToken pred) {
@@ -518,7 +512,7 @@ protected class OverridingHiddens_3_Assignment_called extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().ele3AssignmentCalled();
+		return grammarAccess.getOverridingHiddensAccess().getCalledAssignment_3();
 	}
 	
 	@Override
@@ -528,7 +522,7 @@ protected class OverridingHiddens_3_Assignment_called extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) {
 				Solution s = new OverridingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -542,7 +536,7 @@ protected class OverridingHiddens_3_Assignment_called extends AssignmentToken  {
 	}
 }
 
-// not supported
+// ")"
 protected class OverridingHiddens_4_Keyword extends KeywordToken  {
 	
 	public OverridingHiddens_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -550,11 +544,11 @@ protected class OverridingHiddens_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().ele4KeywordRightParenthesis();
+		return grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4();
 	}	
 }
 
-// not supported
+// valid?=";"
 protected class OverridingHiddens_5_Assignment_valid extends AssignmentToken  {
 	
 	public OverridingHiddens_5_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -563,7 +557,7 @@ protected class OverridingHiddens_5_Assignment_valid extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prOverridingHiddens().ele5AssignmentValid();
+		return grammarAccess.getOverridingHiddensAccess().getValidAssignment_5();
 	}
 	
 	@Override
@@ -573,7 +567,7 @@ protected class OverridingHiddens_5_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prOverridingHiddens().ele50KeywordSemicolon();
+			element = grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0();
 			return new Solution(obj);
 		}
 
@@ -587,12 +581,12 @@ protected class OverridingHiddens_5_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule OverridingHiddensCall ****************
  *
- * not supported
+ * OverridingHiddensCall hidden ( ):
+ *   "call" (spaces+=WS)? valid?=";";
  *
  **/
 
-
-// not supported
+// "call" (spaces+=WS)? valid?=";"
 protected class OverridingHiddensCall_Group extends GroupToken {
 	
 	public OverridingHiddensCall_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -601,32 +595,30 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prOverridingHiddensCall().eleGroup();
+		return grammarAccess.getOverridingHiddensCallAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new OverridingHiddensCall_2_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new OverridingHiddensCall_1_Assignment_spaces(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new OverridingHiddensCall_0_Keyword_call(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-			if(s3 != null) {
-				last = s3.getPredecessor();
-				return s3;
-			} else {
-				s2 = s2.getPredecessor().nextSolution(this,s2);
+			while(s2 != null) {
+				Solution s3 = new OverridingHiddensCall_0_Keyword_call(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "call"
 protected class OverridingHiddensCall_0_Keyword_call extends KeywordToken  {
 	
 	public OverridingHiddensCall_0_Keyword_call(IInstanceDescription curr, AbstractToken pred) {
@@ -634,11 +626,11 @@ protected class OverridingHiddensCall_0_Keyword_call extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridingHiddensCall().ele0KeywordCall();
+		return grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0();
 	}	
 }
 
-// not supported
+// (spaces+=WS)?
 protected class OverridingHiddensCall_1_Assignment_spaces extends AssignmentToken  {
 	
 	public OverridingHiddensCall_1_Assignment_spaces(IInstanceDescription curr, AbstractToken pred) {
@@ -647,7 +639,7 @@ protected class OverridingHiddensCall_1_Assignment_spaces extends AssignmentToke
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prOverridingHiddensCall().ele1AssignmentSpaces();
+		return grammarAccess.getOverridingHiddensCallAccess().getSpacesAssignment_1();
 	}
 	
 	@Override
@@ -656,14 +648,14 @@ protected class OverridingHiddensCall_1_Assignment_spaces extends AssignmentToke
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prOverridingHiddensCall().ele10TerminalRuleCallWS();
+			element = grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// valid?=";"
 protected class OverridingHiddensCall_2_Assignment_valid extends AssignmentToken  {
 	
 	public OverridingHiddensCall_2_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -672,7 +664,7 @@ protected class OverridingHiddensCall_2_Assignment_valid extends AssignmentToken
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prOverridingHiddensCall().ele2AssignmentValid();
+		return grammarAccess.getOverridingHiddensCallAccess().getValidAssignment_2();
 	}
 	
 	@Override
@@ -682,7 +674,7 @@ protected class OverridingHiddensCall_2_Assignment_valid extends AssignmentToken
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prOverridingHiddensCall().ele20KeywordSemicolon();
+			element = grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0();
 			return new Solution(obj);
 		}
 
@@ -696,12 +688,12 @@ protected class OverridingHiddensCall_2_Assignment_valid extends AssignmentToken
 
 /************ begin Rule InheritingHiddens ****************
  *
- * not supported
+ * InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+ *   "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
  *
  **/
 
-
-// not supported
+// "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";"
 protected class InheritingHiddens_Group extends GroupToken {
 	
 	public InheritingHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -710,44 +702,42 @@ protected class InheritingHiddens_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().eleGroup();
+		return grammarAccess.getInheritingHiddensAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new InheritingHiddens_5_Assignment_valid(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new InheritingHiddens_4_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new InheritingHiddens_3_Alternatives(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new InheritingHiddens_2_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new InheritingHiddens_1_Keyword_hiddens(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-		while(s5 != null) {
-			Solution s6 = new InheritingHiddens_0_Keyword_inheriting(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-			if(s6 != null) {
-				last = s6.getPredecessor();
-				return s6;
-			} else {
-				s5 = s5.getPredecessor().nextSolution(this,s5);
+			while(s2 != null) {
+				Solution s3 = new InheritingHiddens_3_Alternatives(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new InheritingHiddens_2_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new InheritingHiddens_1_Keyword_hiddens(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						while(s5 != null) {
+							Solution s6 = new InheritingHiddens_0_Keyword_inheriting(s5.getCurrent(), s5.getPredecessor()).firstSolution();
+							if(s6 != null) {
+								last = s6.getPredecessor();
+								return s6;
+							} else {
+								s5 = s5.getPredecessor().nextSolution(this,s5);
+							}
+						}
+						s4 = s4.getPredecessor().nextSolution(this,s4);
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s4 = s4.getPredecessor().nextSolution(this,s4);
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "inheriting"
 protected class InheritingHiddens_0_Keyword_inheriting extends KeywordToken  {
 	
 	public InheritingHiddens_0_Keyword_inheriting(IInstanceDescription curr, AbstractToken pred) {
@@ -755,11 +745,11 @@ protected class InheritingHiddens_0_Keyword_inheriting extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele0KeywordInheriting();
+		return grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0();
 	}	
 }
 
-// not supported
+// "hiddens"
 protected class InheritingHiddens_1_Keyword_hiddens extends KeywordToken  {
 	
 	public InheritingHiddens_1_Keyword_hiddens(IInstanceDescription curr, AbstractToken pred) {
@@ -767,11 +757,11 @@ protected class InheritingHiddens_1_Keyword_hiddens extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele1KeywordHiddens();
+		return grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1();
 	}	
 }
 
-// not supported
+// "("
 protected class InheritingHiddens_2_Keyword extends KeywordToken  {
 	
 	public InheritingHiddens_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -779,11 +769,11 @@ protected class InheritingHiddens_2_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele2KeywordLeftParenthesis();
+		return grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2();
 	}	
 }
 
-// not supported
+// called=InheritingHiddensCall|hidingCalled=HidingHiddens
 protected class InheritingHiddens_3_Alternatives extends AlternativesToken {
 
 	public InheritingHiddens_3_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -792,7 +782,7 @@ protected class InheritingHiddens_3_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele3Alternatives();
+		return grammarAccess.getInheritingHiddensAccess().getAlternatives_3();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -804,7 +794,7 @@ protected class InheritingHiddens_3_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// called=InheritingHiddensCall
 protected class InheritingHiddens_3_0_Assignment_called extends AssignmentToken  {
 	
 	public InheritingHiddens_3_0_Assignment_called(IInstanceDescription curr, AbstractToken pred) {
@@ -813,7 +803,7 @@ protected class InheritingHiddens_3_0_Assignment_called extends AssignmentToken 
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele30AssignmentCalled();
+		return grammarAccess.getInheritingHiddensAccess().getCalledAssignment_3_0();
 	}
 	
 	@Override
@@ -823,7 +813,7 @@ protected class InheritingHiddens_3_0_Assignment_called extends AssignmentToken 
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -837,7 +827,7 @@ protected class InheritingHiddens_3_0_Assignment_called extends AssignmentToken 
 	}
 }
 
-// not supported
+// hidingCalled=HidingHiddens
 protected class InheritingHiddens_3_1_Assignment_hidingCalled extends AssignmentToken  {
 	
 	public InheritingHiddens_3_1_Assignment_hidingCalled(IInstanceDescription curr, AbstractToken pred) {
@@ -846,7 +836,7 @@ protected class InheritingHiddens_3_1_Assignment_hidingCalled extends Assignment
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele31AssignmentHidingCalled();
+		return grammarAccess.getInheritingHiddensAccess().getHidingCalledAssignment_3_1();
 	}
 	
 	@Override
@@ -856,7 +846,7 @@ protected class InheritingHiddens_3_1_Assignment_hidingCalled extends Assignment
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prHidingHiddens().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) {
 				Solution s = new HidingHiddens_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -871,7 +861,7 @@ protected class InheritingHiddens_3_1_Assignment_hidingCalled extends Assignment
 }
 
 
-// not supported
+// ")"
 protected class InheritingHiddens_4_Keyword extends KeywordToken  {
 	
 	public InheritingHiddens_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -879,11 +869,11 @@ protected class InheritingHiddens_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele4KeywordRightParenthesis();
+		return grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4();
 	}	
 }
 
-// not supported
+// valid?=";"
 protected class InheritingHiddens_5_Assignment_valid extends AssignmentToken  {
 	
 	public InheritingHiddens_5_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -892,7 +882,7 @@ protected class InheritingHiddens_5_Assignment_valid extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prInheritingHiddens().ele5AssignmentValid();
+		return grammarAccess.getInheritingHiddensAccess().getValidAssignment_5();
 	}
 	
 	@Override
@@ -902,7 +892,7 @@ protected class InheritingHiddens_5_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prInheritingHiddens().ele50KeywordSemicolon();
+			element = grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0();
 			return new Solution(obj);
 		}
 
@@ -916,12 +906,12 @@ protected class InheritingHiddens_5_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule DatatypeHiddens ****************
  *
- * not supported
+ * DatatypeHiddens:
+ *   "datatype" valid?=DatatypeRule;
  *
  **/
 
-
-// not supported
+// "datatype" valid?=DatatypeRule
 protected class DatatypeHiddens_Group extends GroupToken {
 	
 	public DatatypeHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -930,10 +920,8 @@ protected class DatatypeHiddens_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prDatatypeHiddens().eleGroup();
+		return grammarAccess.getDatatypeHiddensAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -951,7 +939,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "datatype"
 protected class DatatypeHiddens_0_Keyword_datatype extends KeywordToken  {
 	
 	public DatatypeHiddens_0_Keyword_datatype(IInstanceDescription curr, AbstractToken pred) {
@@ -959,11 +947,11 @@ protected class DatatypeHiddens_0_Keyword_datatype extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prDatatypeHiddens().ele0KeywordDatatype();
+		return grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0();
 	}	
 }
 
-// not supported
+// valid?=DatatypeRule
 protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	public DatatypeHiddens_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -972,7 +960,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prDatatypeHiddens().ele1AssignmentValid();
+		return grammarAccess.getDatatypeHiddensAccess().getValidAssignment_1();
 	}
 	
 	@Override
@@ -982,7 +970,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
-			element = grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule();
+			element = grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0();
 			return new Solution(obj);
 		}
 
@@ -997,12 +985,12 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 
 /************ begin Rule HidingHiddens ****************
  *
- * not supported
+ * HidingHiddens hidden ( ):
+ *   "hiding" space=WS called=InheritingHiddensCall;
  *
  **/
 
-
-// not supported
+// "hiding" space=WS called=InheritingHiddensCall
 protected class HidingHiddens_Group extends GroupToken {
 	
 	public HidingHiddens_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1011,32 +999,30 @@ protected class HidingHiddens_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prHidingHiddens().eleGroup();
+		return grammarAccess.getHidingHiddensAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new HidingHiddens_2_Assignment_called(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new HidingHiddens_1_Assignment_space(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new HidingHiddens_0_Keyword_hiding(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-			if(s3 != null) {
-				last = s3.getPredecessor();
-				return s3;
-			} else {
-				s2 = s2.getPredecessor().nextSolution(this,s2);
+			while(s2 != null) {
+				Solution s3 = new HidingHiddens_0_Keyword_hiding(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "hiding"
 protected class HidingHiddens_0_Keyword_hiding extends KeywordToken  {
 	
 	public HidingHiddens_0_Keyword_hiding(IInstanceDescription curr, AbstractToken pred) {
@@ -1044,11 +1030,11 @@ protected class HidingHiddens_0_Keyword_hiding extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prHidingHiddens().ele0KeywordHiding();
+		return grammarAccess.getHidingHiddensAccess().getHidingKeyword_0();
 	}	
 }
 
-// not supported
+// space=WS
 protected class HidingHiddens_1_Assignment_space extends AssignmentToken  {
 	
 	public HidingHiddens_1_Assignment_space(IInstanceDescription curr, AbstractToken pred) {
@@ -1057,7 +1043,7 @@ protected class HidingHiddens_1_Assignment_space extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prHidingHiddens().ele1AssignmentSpace();
+		return grammarAccess.getHidingHiddensAccess().getSpaceAssignment_1();
 	}
 	
 	@Override
@@ -1066,14 +1052,14 @@ protected class HidingHiddens_1_Assignment_space extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("space");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prHidingHiddens().ele10TerminalRuleCallWS();
+			element = grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// called=InheritingHiddensCall
 protected class HidingHiddens_2_Assignment_called extends AssignmentToken  {
 	
 	public HidingHiddens_2_Assignment_called(IInstanceDescription curr, AbstractToken pred) {
@@ -1082,7 +1068,7 @@ protected class HidingHiddens_2_Assignment_called extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prHidingHiddens().ele2AssignmentCalled();
+		return grammarAccess.getHidingHiddensAccess().getCalledAssignment_2();
 	}
 	
 	@Override
@@ -1092,7 +1078,7 @@ protected class HidingHiddens_2_Assignment_called extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -1112,12 +1098,12 @@ protected class HidingHiddens_2_Assignment_called extends AssignmentToken  {
 
 /************ begin Rule InheritingHiddensCall ****************
  *
- * not supported
+ * InheritingHiddensCall:
+ *   "call" valid?=";";
  *
  **/
 
-
-// not supported
+// "call" valid?=";"
 protected class InheritingHiddensCall_Group extends GroupToken {
 	
 	public InheritingHiddensCall_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1126,10 +1112,8 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prInheritingHiddensCall().eleGroup();
+		return grammarAccess.getInheritingHiddensCallAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -1147,7 +1131,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "call"
 protected class InheritingHiddensCall_0_Keyword_call extends KeywordToken  {
 	
 	public InheritingHiddensCall_0_Keyword_call(IInstanceDescription curr, AbstractToken pred) {
@@ -1155,11 +1139,11 @@ protected class InheritingHiddensCall_0_Keyword_call extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prInheritingHiddensCall().ele0KeywordCall();
+		return grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0();
 	}	
 }
 
-// not supported
+// valid?=";"
 protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken  {
 	
 	public InheritingHiddensCall_1_Assignment_valid(IInstanceDescription curr, AbstractToken pred) {
@@ -1168,7 +1152,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prInheritingHiddensCall().ele1AssignmentValid();
+		return grammarAccess.getInheritingHiddensCallAccess().getValidAssignment_1();
 	}
 	
 	@Override
@@ -1178,7 +1162,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prInheritingHiddensCall().ele10KeywordSemicolon();
+			element = grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0();
 			return new Solution(obj);
 		}
 

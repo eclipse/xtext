@@ -179,15 +179,15 @@ public final class KeywordsTestLanguageModelConsumer extends NonTerminalConsumer
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentFirst());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordFooBar());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentSecond());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordFoo());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele2AssignmentThird());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele20KeywordBar());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele3AssignmentForth());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele30KeywordReverseSolidus());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getFirstAssignment_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getFirstFooBarKeyword_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getSecondAssignment_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getSecondFooKeyword_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getThirdAssignment_2());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getThirdBarKeyword_2_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getForthAssignment_3());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getForthReverseSolidusKeyword_3_0());
 	}
 	
 	@Override

@@ -218,17 +218,17 @@ public final class FowlerDslStatemachineConsumer extends NonTerminalConsumer {
 	public void setRule(StatemachineElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordEvents());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentEvents());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallEvent());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordEnd());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele3KeywordCommands());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele4AssignmentCommands());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele40ParserRuleCallCommand());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele5KeywordEnd());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele6AssignmentStates());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele60ParserRuleCallState());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getEventsKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getEventsAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getEventsEventParserRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getEndKeyword_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getCommandsKeyword_3());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getCommandsAssignment_4());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getCommandsCommandParserRuleCall_4_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getEndKeyword_5());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getStatesAssignment_6());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getStatesStateParserRuleCall_6_0());
 	}
 	
 	@Override

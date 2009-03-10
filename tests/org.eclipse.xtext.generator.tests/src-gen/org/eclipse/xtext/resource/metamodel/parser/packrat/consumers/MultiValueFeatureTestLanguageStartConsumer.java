@@ -70,8 +70,8 @@ public final class MultiValueFeatureTestLanguageStartConsumer extends NonTermina
 	public void setRule(StartElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentFeatureA());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getFeatureAAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getFeatureAIDTerminalRuleCall_0());
 	}
 	
 	@Override

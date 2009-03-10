@@ -90,9 +90,9 @@ public final class EcoreDslSINTConsumer extends NonTerminalConsumer {
 	public void setRule(SINTElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHyphenMinus());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getHyphenMinusKeyword_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getINTTerminalRuleCall_1());
 	}
 	
 	@Override

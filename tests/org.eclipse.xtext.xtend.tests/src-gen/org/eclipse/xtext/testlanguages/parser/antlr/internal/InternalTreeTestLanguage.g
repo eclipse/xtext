@@ -67,7 +67,7 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallNode(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getChildrenNodeParserRuleCall_0(), currentNode); 
 	    }
 	    lv_children_0=ruleNode 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -109,7 +109,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleNode
 entryRuleNode returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prNode().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getNodeRule(), currentNode); }
 	 iv_ruleNode=ruleNode 
 	 { $current=$iv_ruleNode.current; } 
 	 EOF 
@@ -126,12 +126,12 @@ ruleNode returns [EObject current=null]
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prNode().ele00TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prNode().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getNodeRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -144,18 +144,18 @@ ruleNode returns [EObject current=null]
 	
 )'(' 
     {
-        createLeafNode(grammarAccess.prNode().ele1KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1(), null); 
     }
 (	
 	
 	    lv_attrib_2=	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prNode().ele20TerminalRuleCallSTRING(), "attrib"); 
+		createLeafNode(grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0(), "attrib"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prNode().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getNodeRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -168,22 +168,22 @@ ruleNode returns [EObject current=null]
 	
 )')' 
     {
-        createLeafNode(grammarAccess.prNode().ele3KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.getNodeAccess().getRightParenthesisKeyword_3(), null); 
     }
 '{' 
     {
-        createLeafNode(grammarAccess.prNode().ele4KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prNode().ele50ParserRuleCallNode(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0(), currentNode); 
 	    }
 	    lv_children_5=ruleNode 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prNode().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getNodeRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -197,7 +197,7 @@ ruleNode returns [EObject current=null]
 	
 )*'};' 
     {
-        createLeafNode(grammarAccess.prNode().ele6KeywordRightCurlyBracketSemicolon(), null); 
+        createLeafNode(grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6(), null); 
     }
 );
 

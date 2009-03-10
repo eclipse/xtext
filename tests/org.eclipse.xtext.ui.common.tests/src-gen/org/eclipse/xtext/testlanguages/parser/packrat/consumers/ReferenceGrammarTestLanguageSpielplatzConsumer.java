@@ -315,23 +315,23 @@ public final class ReferenceGrammarTestLanguageSpielplatzConsumer extends NonTer
 	public void setRule(SpielplatzElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordSpielplatz());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentGroesse());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallINT());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentBeschreibung());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallSTRING());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele3KeywordLeftCurlyBracket());
-		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.ele4Alternatives());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele40AssignmentKinder());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele400ParserRuleCallKind());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele41AssignmentErzieher());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele410ParserRuleCallErwachsener());
-		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele42AssignmentSpielzeuge());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele420ParserRuleCallSpielzeug());
-		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele43AssignmentFamilie());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele430ParserRuleCallFamilie());
-		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele5KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getSpielplatzKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getGroesseAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getGroesseINTTerminalRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getBeschreibungAssignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getBeschreibungSTRINGTerminalRuleCall_2_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getLeftCurlyBracketKeyword_3());
+		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.getAlternatives_4());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getKinderAssignment_4_0());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getKinderKindParserRuleCall_4_0_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getErzieherAssignment_4_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getErzieherErwachsenerParserRuleCall_4_1_0());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.getSpielzeugeAssignment_4_2());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getSpielzeugeSpielzeugParserRuleCall_4_2_0());
+		assignment$15$Consumer = new Assignment$15$Consumer(rule.getFamilieAssignment_4_3());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getFamilieFamilieParserRuleCall_4_3_0());
+		keyword$17$Consumer = new Keyword$17$Consumer(rule.getRightCurlyBracketKeyword_5());
 	}
 	
 	@Override

@@ -67,8 +67,8 @@ public final class TwoContextsTestLanguageMainModelConsumer extends NonTerminalC
 	public void setRule(MainModelElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentElements());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAnElement());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getElementsAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getElementsAnElementParserRuleCall_0());
 	}
 	
 	@Override

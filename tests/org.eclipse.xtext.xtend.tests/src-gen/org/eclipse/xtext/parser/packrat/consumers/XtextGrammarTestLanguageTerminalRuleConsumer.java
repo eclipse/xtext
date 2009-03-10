@@ -236,18 +236,18 @@ public final class XtextGrammarTestLanguageTerminalRuleConsumer extends NonTermi
 	public void setRule(TerminalRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTerminal());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordReturns());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentType());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallTypeRef());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele3KeywordColon());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele4AssignmentAlternatives());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele40ParserRuleCallTerminalAlternatives());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele5KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTerminalKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getReturnsKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getTypeAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getTypeTypeRefParserRuleCall_2_1_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getColonKeyword_3());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getAlternativesAssignment_4());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getAlternativesTerminalAlternativesParserRuleCall_4_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getSemicolonKeyword_5());
 	}
 	
 	@Override

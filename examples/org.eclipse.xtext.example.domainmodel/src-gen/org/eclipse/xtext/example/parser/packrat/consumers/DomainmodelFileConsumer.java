@@ -113,11 +113,11 @@ public final class DomainmodelFileConsumer extends NonTerminalConsumer {
 	public void setRule(FileElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentImports());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallImport());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentNamedElements());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10ParserRuleCallNamedElement());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getImportsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getImportsImportParserRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNamedElementsAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNamedElementsNamedElementParserRuleCall_1_0());
 	}
 	
 	@Override

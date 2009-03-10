@@ -20,125 +20,129 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	public class RootElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordTest = (Keyword)cGroup.eContents().get(0);
-		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallTestLinewrap = (RuleCall)c1Alternatives.eContents().get(0);
-		private final RuleCall c11ParserRuleCallTestIndentation = (RuleCall)c1Alternatives.eContents().get(1);
+		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final RuleCall cTestLinewrapParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
+		private final RuleCall cTestIndentationParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		
-		// not supported
+		//Root:
+		//  "test" (TestLinewrap|TestIndentation);
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"test" (TestLinewrap|TestIndentation)
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordTest() { return c0KeywordTest; }
+		//"test"
+		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		// not supported
-		public Alternatives ele1Alternatives() { return c1Alternatives; }
+		//TestLinewrap|TestIndentation
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallTestLinewrap() { return c10ParserRuleCallTestLinewrap; }
+		//TestLinewrap
+		public RuleCall getTestLinewrapParserRuleCall_1_0() { return cTestLinewrapParserRuleCall_1_0; }
 
-		// not supported
-		public RuleCall ele11ParserRuleCallTestIndentation() { return c11ParserRuleCallTestIndentation; }
+		//TestIndentation
+		public RuleCall getTestIndentationParserRuleCall_1_1() { return cTestIndentationParserRuleCall_1_1; }
 	}
 
 	public class LineElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Line");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentType = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentType.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Keyword c2KeywordSemicolon = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTypeIDTerminalRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		// not supported
+		//Line:
+		//  type+=ID name+=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//type+=ID name+=ID ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentType() { return c0AssignmentType; }
+		//type+=ID
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getTypeIDTerminalRuleCall_0_0() { return cTypeIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name+=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordSemicolon() { return c2KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class TestLinewrapElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrap");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordLinewrap = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentItems = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallLine = (RuleCall)c1AssignmentItems.eContents().get(0);
+		private final Keyword cLinewrapKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cItemsLineParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
-		// not supported
+		//TestLinewrap:
+		//  "linewrap" (items+=Line)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"linewrap" (items+=Line)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordLinewrap() { return c0KeywordLinewrap; }
+		//"linewrap"
+		public Keyword getLinewrapKeyword_0() { return cLinewrapKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentItems() { return c1AssignmentItems; }
+		//(items+=Line)*
+		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallLine() { return c10ParserRuleCallLine; }
+		//Line
+		public RuleCall getItemsLineParserRuleCall_1_0() { return cItemsLineParserRuleCall_1_0; }
 	}
 
 	public class TestIndentationElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestIndentation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordIndentation = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(1);
-		private final Alternatives c2Alternatives = (Alternatives)cGroup.eContents().get(2);
-		private final Assignment c20AssignmentSub = (Assignment)c2Alternatives.eContents().get(0);
-		private final RuleCall c200ParserRuleCallTestIndentation = (RuleCall)c20AssignmentSub.eContents().get(0);
-		private final Assignment c21AssignmentItems = (Assignment)c2Alternatives.eContents().get(1);
-		private final RuleCall c210ParserRuleCallLine = (RuleCall)c21AssignmentItems.eContents().get(0);
-		private final Keyword c3KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cIndentationKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cSubAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cSubTestIndentationParserRuleCall_2_0_0 = (RuleCall)cSubAssignment_2_0.eContents().get(0);
+		private final Assignment cItemsAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cItemsLineParserRuleCall_2_1_0 = (RuleCall)cItemsAssignment_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		// not supported
+		//TestIndentation:
+		//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordIndentation() { return c0KeywordIndentation; }
+		//"indentation"
+		public Keyword getIndentationKeyword_0() { return cIndentationKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordLeftCurlyBracket() { return c1KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		// not supported
-		public Alternatives ele2Alternatives() { return c2Alternatives; }
+		//(sub+=TestIndentation|items+=Line)*
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		// not supported
-		public Assignment ele20AssignmentSub() { return c20AssignmentSub; }
+		//sub+=TestIndentation
+		public Assignment getSubAssignment_2_0() { return cSubAssignment_2_0; }
 
-		// not supported
-		public RuleCall ele200ParserRuleCallTestIndentation() { return c200ParserRuleCallTestIndentation; }
+		//TestIndentation
+		public RuleCall getSubTestIndentationParserRuleCall_2_0_0() { return cSubTestIndentationParserRuleCall_2_0_0; }
 
-		// not supported
-		public Assignment ele21AssignmentItems() { return c21AssignmentItems; }
+		//items+=Line
+		public Assignment getItemsAssignment_2_1() { return cItemsAssignment_2_1; }
 
-		// not supported
-		public RuleCall ele210ParserRuleCallLine() { return c210ParserRuleCallLine; }
+		//Line
+		public RuleCall getItemsLineParserRuleCall_2_1_0() { return cItemsLineParserRuleCall_2_1_0; }
 
-		// not supported
-		public Keyword ele3KeywordRightCurlyBracket() { return c3KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 	
 	private RootElements pRoot;
@@ -148,13 +152,13 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FormatterTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -163,62 +167,88 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public RootElements prRoot() {
+	//Root:
+	//  "test" (TestLinewrap|TestIndentation);
+	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
-	} 
+	}
+	
+	public ParserRule getRootRule() {
+		return getRootAccess().getRule();
+	}
 
-	// not supported
-	public LineElements prLine() {
+	//Line:
+	//  type+=ID name+=ID ";";
+	public LineElements getLineAccess() {
 		return (pLine != null) ? pLine : (pLine = new LineElements());
-	} 
+	}
+	
+	public ParserRule getLineRule() {
+		return getLineAccess().getRule();
+	}
 
-	// not supported
-	public TestLinewrapElements prTestLinewrap() {
+	//TestLinewrap:
+	//  "linewrap" (items+=Line)*;
+	public TestLinewrapElements getTestLinewrapAccess() {
 		return (pTestLinewrap != null) ? pTestLinewrap : (pTestLinewrap = new TestLinewrapElements());
-	} 
+	}
+	
+	public ParserRule getTestLinewrapRule() {
+		return getTestLinewrapAccess().getRule();
+	}
 
-	// not supported
-	public TestIndentationElements prTestIndentation() {
+	//TestIndentation:
+	//  "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
+	public TestIndentationElements getTestIndentationAccess() {
 		return (pTestIndentation != null) ? pTestIndentation : (pTestIndentation = new TestIndentationElements());
+	}
+	
+	public ParserRule getTestIndentationRule() {
+		return getTestIndentationAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

@@ -189,15 +189,15 @@ public final class EcoreDslImportStatementDeclConsumer extends NonTerminalConsum
 	public void setRule(ImportStatementDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordImport());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele10AssignmentAlias());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele100TerminalRuleCallID());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele11KeywordEqualsSign());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele2AssignmentImportURI());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele20TerminalRuleCallSTRING());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele3KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getImportKeyword_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getAliasAssignment_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getAliasIDTerminalRuleCall_1_0_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getEqualsSignKeyword_1_1());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getImportURIAssignment_2());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getImportURISTRINGTerminalRuleCall_2_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getSemicolonKeyword_3());
 	}
 	
 	@Override

@@ -157,13 +157,13 @@ public final class ConcreteTestLanguageOverridableParserRule2Consumer extends No
 	public void setRule(OverridableParserRule2Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordOverriddenOtherElement());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordHyphenMinus());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentAge());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getOverriddenOtherElementKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getHyphenMinusKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getAgeAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getAgeINTTerminalRuleCall_3_0());
 	}
 	
 	@Override

@@ -411,29 +411,29 @@ public final class XtextGrammarTestLanguageParserRuleConsumer extends NonTermina
 	public void setRule(ParserRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		group$4$Consumer = new Group$4$Consumer(rule.ele1Group());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordReturns());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentType());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallTypeRef());
-		group$8$Consumer = new Group$8$Consumer(rule.ele2Group());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele20AssignmentDefinesHiddenTokens());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele200KeywordHidden());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele21KeywordLeftParenthesis());
-		group$12$Consumer = new Group$12$Consumer(rule.ele22Group());
-		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele220AssignmentHiddenTokens());
-		crossReference$14$Consumer = new CrossReference$14$Consumer(rule.ele2200CrossReferenceIDAbstractRule());
-		group$17$Consumer = new Group$17$Consumer(rule.ele221Group());
-		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele2210KeywordComma());
-		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele2211AssignmentHiddenTokens());
-		crossReference$20$Consumer = new CrossReference$20$Consumer(rule.ele22110CrossReferenceIDAbstractRule());
-		keyword$23$Consumer = new Keyword$23$Consumer(rule.ele23KeywordRightParenthesis());
-		keyword$24$Consumer = new Keyword$24$Consumer(rule.ele3KeywordColon());
-		assignment$25$Consumer = new Assignment$25$Consumer(rule.ele4AssignmentAlternatives());
-		ruleCall$26$Consumer = new RuleCall$26$Consumer(rule.ele40ParserRuleCallAlternatives());
-		keyword$27$Consumer = new Keyword$27$Consumer(rule.ele5KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameIDTerminalRuleCall_0_0());
+		group$4$Consumer = new Group$4$Consumer(rule.getGroup_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getReturnsKeyword_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getTypeAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getTypeTypeRefParserRuleCall_1_1_0());
+		group$8$Consumer = new Group$8$Consumer(rule.getGroup_2());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getDefinesHiddenTokensAssignment_2_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getDefinesHiddenTokensHiddenKeyword_2_0_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getLeftParenthesisKeyword_2_1());
+		group$12$Consumer = new Group$12$Consumer(rule.getGroup_2_2());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.getHiddenTokensAssignment_2_2_0());
+		crossReference$14$Consumer = new CrossReference$14$Consumer(rule.getHiddenTokensAbstractRuleCrossReference_2_2_0_0());
+		group$17$Consumer = new Group$17$Consumer(rule.getGroup_2_2_1());
+		keyword$18$Consumer = new Keyword$18$Consumer(rule.getCommaKeyword_2_2_1_0());
+		assignment$19$Consumer = new Assignment$19$Consumer(rule.getHiddenTokensAssignment_2_2_1_1());
+		crossReference$20$Consumer = new CrossReference$20$Consumer(rule.getHiddenTokensAbstractRuleCrossReference_2_2_1_1_0());
+		keyword$23$Consumer = new Keyword$23$Consumer(rule.getRightParenthesisKeyword_2_3());
+		keyword$24$Consumer = new Keyword$24$Consumer(rule.getColonKeyword_3());
+		assignment$25$Consumer = new Assignment$25$Consumer(rule.getAlternativesAssignment_4());
+		ruleCall$26$Consumer = new RuleCall$26$Consumer(rule.getAlternativesAlternativesParserRuleCall_4_0());
+		keyword$27$Consumer = new Keyword$27$Consumer(rule.getSemicolonKeyword_5());
 	}
 	
 	@Override

@@ -126,11 +126,11 @@ public final class DatatypeRulesTestLanguageVectorConsumer extends NonTerminalCo
 	public void setRule(VectorElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftParenthesis());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1TerminalRuleCallINT());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2TerminalRuleCallINT());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele3KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getLeftParenthesisKeyword_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getINTTerminalRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getINTTerminalRuleCall_2());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getRightParenthesisKeyword_3());
 	}
 	
 	@Override

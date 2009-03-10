@@ -76,7 +76,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:69:46: (iv_ruleFile= ruleFile EOF )
             // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:70:2: iv_ruleFile= ruleFile EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFile().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFileRule(), currentNode); 
             pushFollow(FOLLOW_ruleFile_in_entryRuleFile71);
             iv_ruleFile=ruleFile();
             _fsp--;
@@ -129,7 +129,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:86:6: lv_stuff_0= ruleStuff
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prFile().ele0ParserRuleCallStuff(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFileAccess().getStuffStuffParserRuleCall_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleStuff_in_ruleFile139);
             	    lv_stuff_0=ruleStuff();
@@ -137,7 +137,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFile().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getFileRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -188,7 +188,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:111:47: (iv_ruleStuff= ruleStuff EOF )
             // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:112:2: iv_ruleStuff= ruleStuff EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prStuff().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getStuffRule(), currentNode); 
             pushFollow(FOLLOW_ruleStuff_in_entryRuleStuff176);
             iv_ruleStuff=ruleStuff();
             _fsp--;
@@ -229,7 +229,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleStuff220); 
 
-                    createLeafNode(grammarAccess.prStuff().ele0KeywordStuff(), null); 
+                    createLeafNode(grammarAccess.getStuffAccess().getStuffKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:129:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.ui.integration.tests/src-gen/org/eclipse/xtext/ui/integration/parser/antlr/internal/InternalTestLanguage.g:131:6: lv_name_1= RULE_ID
@@ -237,11 +237,11 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStuff242); 
 
-            		createLeafNode(grammarAccess.prStuff().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prStuff().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getStuffRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

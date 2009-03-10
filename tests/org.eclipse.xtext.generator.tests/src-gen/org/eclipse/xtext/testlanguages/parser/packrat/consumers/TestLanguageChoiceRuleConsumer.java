@@ -137,12 +137,12 @@ public final class TestLanguageChoiceRuleConsumer extends NonTerminalConsumer {
 	public void setRule(ChoiceRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordChoice());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentOptionalKeyword());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele10KeywordOptional());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getChoiceKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getOptionalKeywordAssignment_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getOptionalKeywordOptionalKeyword_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getNameAssignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNameIDTerminalRuleCall_2_0());
 	}
 	
 	@Override

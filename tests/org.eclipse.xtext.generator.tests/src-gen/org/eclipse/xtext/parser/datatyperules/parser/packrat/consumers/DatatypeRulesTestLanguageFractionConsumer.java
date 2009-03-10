@@ -122,11 +122,11 @@ public final class DatatypeRulesTestLanguageFractionConsumer extends NonTerminal
 	public void setRule(FractionElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallINT());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele10KeywordSolidus());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele11TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getINTTerminalRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getSolidusKeyword_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getINTTerminalRuleCall_1_1());
 	}
 	
 	@Override

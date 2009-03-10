@@ -49,14 +49,14 @@ public class MultiValueFeatureTestLanguageParserConfiguration extends AbstractPa
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getStartConsumer().setRule(grammarAccess.prStart());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getStartConsumer().setRule(grammarAccess.getStartAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getStartConsumer().setIdConsumer(getIdConsumer());

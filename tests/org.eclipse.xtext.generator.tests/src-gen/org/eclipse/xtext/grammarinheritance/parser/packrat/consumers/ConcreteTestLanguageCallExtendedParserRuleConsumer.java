@@ -67,8 +67,8 @@ public final class ConcreteTestLanguageCallExtendedParserRuleConsumer extends No
 	public void setRule(CallExtendedParserRuleElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentCall());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractCallExtendedParserRule());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getCallAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getCallAbstractCallExtendedParserRuleParserRuleCall_0());
 	}
 	
 	@Override

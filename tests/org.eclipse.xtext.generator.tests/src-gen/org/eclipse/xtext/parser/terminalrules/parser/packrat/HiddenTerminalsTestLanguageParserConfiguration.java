@@ -94,20 +94,20 @@ public class HiddenTerminalsTestLanguageParserConfiguration extends AbstractPars
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getModelConsumer().setRule(grammarAccess.prModel());
-		getWithoutHiddensConsumer().setRule(grammarAccess.prWithoutHiddens());
-		getWithHiddensConsumer().setRule(grammarAccess.prWithHiddens());
-		getOverridingHiddensConsumer().setRule(grammarAccess.prOverridingHiddens());
-		getOverridingHiddensCallConsumer().setRule(grammarAccess.prOverridingHiddensCall());
-		getInheritingHiddensConsumer().setRule(grammarAccess.prInheritingHiddens());
-		getDatatypeHiddensConsumer().setRule(grammarAccess.prDatatypeHiddens());
-		getDatatypeRuleConsumer().setRule(grammarAccess.prDatatypeRule());
-		getHidingHiddensConsumer().setRule(grammarAccess.prHidingHiddens());
-		getInheritingHiddensCallConsumer().setRule(grammarAccess.prInheritingHiddensCall());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getWithoutHiddensConsumer().setRule(grammarAccess.getWithoutHiddensAccess());
+		getWithHiddensConsumer().setRule(grammarAccess.getWithHiddensAccess());
+		getOverridingHiddensConsumer().setRule(grammarAccess.getOverridingHiddensAccess());
+		getOverridingHiddensCallConsumer().setRule(grammarAccess.getOverridingHiddensCallAccess());
+		getInheritingHiddensConsumer().setRule(grammarAccess.getInheritingHiddensAccess());
+		getDatatypeHiddensConsumer().setRule(grammarAccess.getDatatypeHiddensAccess());
+		getDatatypeRuleConsumer().setRule(grammarAccess.getDatatypeRuleAccess());
+		getHidingHiddensConsumer().setRule(grammarAccess.getHidingHiddensAccess());
+		getInheritingHiddensCallConsumer().setRule(grammarAccess.getInheritingHiddensCallAccess());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getModelConsumer().setDatatypeHiddensConsumer(getDatatypeHiddensConsumer());

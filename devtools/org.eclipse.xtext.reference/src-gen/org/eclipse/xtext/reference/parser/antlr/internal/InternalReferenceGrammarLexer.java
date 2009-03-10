@@ -307,10 +307,10 @@ public class InternalReferenceGrammarLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:5: ( 'GR\\u00DCN' )
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:7: 'GR\\u00DCN'
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:5: ( 'GR\\u2039N' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:24:7: 'GR\\u2039N'
             {
-            match("GR\u00DCN"); 
+            match("GR\u2039N"); 
 
 
             }
@@ -1201,7 +1201,7 @@ public class InternalReferenceGrammarLexer extends Lexer {
                 {
                 int LA12_35 = input.LA(3);
 
-                if ( (LA12_35=='\u00DC') ) {
+                if ( (LA12_35=='\u2039') ) {
                     alt12=15;
                 }
                 else {

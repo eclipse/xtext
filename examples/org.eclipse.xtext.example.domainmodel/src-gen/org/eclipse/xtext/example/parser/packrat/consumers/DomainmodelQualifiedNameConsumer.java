@@ -122,11 +122,11 @@ public final class DomainmodelQualifiedNameConsumer extends NonTerminalConsumer 
 	public void setRule(QualifiedNameElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele10KeywordFullStop());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele11TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getIDTerminalRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getFullStopKeyword_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getIDTerminalRuleCall_1_1());
 	}
 	
 	@Override

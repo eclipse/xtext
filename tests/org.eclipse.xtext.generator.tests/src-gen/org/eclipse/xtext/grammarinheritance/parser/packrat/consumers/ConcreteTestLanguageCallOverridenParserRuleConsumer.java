@@ -67,8 +67,8 @@ public final class ConcreteTestLanguageCallOverridenParserRuleConsumer extends N
 	public void setRule(CallOverridenParserRuleElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentCall());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractCallOverridenParserRule());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getCallAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getCallAbstractCallOverridenParserRuleParserRuleCall_0());
 	}
 	
 	@Override

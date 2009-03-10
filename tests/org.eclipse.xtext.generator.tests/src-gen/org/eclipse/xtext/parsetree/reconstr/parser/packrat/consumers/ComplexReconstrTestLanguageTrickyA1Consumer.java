@@ -70,8 +70,8 @@ public final class ComplexReconstrTestLanguageTrickyA1Consumer extends NonTermin
 	public void setRule(TrickyA1Elements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentName());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getNameAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getNameIDTerminalRuleCall_0());
 	}
 	
 	@Override

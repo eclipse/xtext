@@ -19,60 +19,62 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class MainModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MainModel");
-		private final Assignment cAssignmentElements = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAnElement = (RuleCall)cAssignmentElements.eContents().get(0);
+		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cElementsAnElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		// not supported
+		//MainModel:
+		//  (elements+=AnElement)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentElements() { return cAssignmentElements; }
+		//(elements+=AnElement)*
+		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAnElement() { return c0ParserRuleCallAnElement; }
+		//AnElement
+		public RuleCall getElementsAnElementParserRuleCall_0() { return cElementsAnElementParserRuleCall_0; }
 	}
 
 	public class AnElementElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordRefersTo = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentReferred = (Assignment)c1Group.eContents().get(1);
-		private final CrossReference c110CrossReferenceIDAnElement = (CrossReference)c11AssignmentReferred.eContents().get(0);
-		private final RuleCall c1101TerminalRuleCallID = (RuleCall)c110CrossReferenceIDAnElement.eContents().get(1);
-		private final Keyword c2KeywordSemicolon = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cRefersToKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cReferredAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cReferredAnElementCrossReference_1_1_0 = (CrossReference)cReferredAssignment_1_1.eContents().get(0);
+		private final RuleCall cReferredAnElementIDTerminalRuleCall_1_1_0_1 = (RuleCall)cReferredAnElementCrossReference_1_1_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		// not supported
+		//AnElement:
+		//  name=ID ("refersTo" referred=[AnElement])? ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//name=ID ("refersTo" referred=[AnElement])? ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentName() { return c0AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//("refersTo" referred=[AnElement])?
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Keyword ele10KeywordRefersTo() { return c10KeywordRefersTo; }
+		//"refersTo"
+		public Keyword getRefersToKeyword_1_0() { return cRefersToKeyword_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentReferred() { return c11AssignmentReferred; }
+		//referred=[AnElement]
+		public Assignment getReferredAssignment_1_1() { return cReferredAssignment_1_1; }
 
-		// not supported
-		public CrossReference ele110CrossReferenceIDAnElement() { return c110CrossReferenceIDAnElement; }
+		//[AnElement]
+		public CrossReference getReferredAnElementCrossReference_1_1_0() { return cReferredAnElementCrossReference_1_1_0; }
 
-		// not supported
-		public RuleCall ele1101TerminalRuleCallID() { return c1101TerminalRuleCallID; }
+		//ID
+		public RuleCall getReferredAnElementIDTerminalRuleCall_1_1_0_1() { return cReferredAnElementIDTerminalRuleCall_1_1_0_1; }
 
-		// not supported
-		public Keyword ele2KeywordSemicolon() { return c2KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	
 	private MainModelElements pMainModel;
@@ -80,13 +82,13 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TwoContextsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -95,52 +97,68 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public MainModelElements prMainModel() {
+	//MainModel:
+	//  (elements+=AnElement)*;
+	public MainModelElements getMainModelAccess() {
 		return (pMainModel != null) ? pMainModel : (pMainModel = new MainModelElements());
-	} 
+	}
+	
+	public ParserRule getMainModelRule() {
+		return getMainModelAccess().getRule();
+	}
 
-	// not supported
-	public AnElementElements prAnElement() {
+	//AnElement:
+	//  name=ID ("refersTo" referred=[AnElement])? ";";
+	public AnElementElements getAnElementAccess() {
 		return (pAnElement != null) ? pAnElement : (pAnElement = new AnElementElements());
+	}
+	
+	public ParserRule getAnElementRule() {
+		return getAnElementAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

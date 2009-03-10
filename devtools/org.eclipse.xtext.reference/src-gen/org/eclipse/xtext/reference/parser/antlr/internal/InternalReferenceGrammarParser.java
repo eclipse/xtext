@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'spielplatz'", "'{'", "'}'", "'kind'", "'('", "')'", "'erwachsener'", "'spielzeug'", "'familie'", "'keyword'", "','", "'ROT'", "'BLAU'", "'GELB'", "'GR\\u00DCN'", "'type'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'spielplatz'", "'{'", "'}'", "'kind'", "'('", "')'", "'erwachsener'", "'spielzeug'", "'familie'", "'keyword'", "','", "'ROT'", "'BLAU'", "'GELB'", "'GR\\u2039N'", "'type'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=6;
@@ -76,7 +76,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:69:52: (iv_ruleSpielplatz= ruleSpielplatz EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:70:2: iv_ruleSpielplatz= ruleSpielplatz EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSpielplatz().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSpielplatzRule(), currentNode); 
             pushFollow(FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz71);
             iv_ruleSpielplatz=ruleSpielplatz();
             _fsp--;
@@ -136,7 +136,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,11,FOLLOW_11_in_ruleSpielplatz115); 
 
-                            createLeafNode(grammarAccess.prSpielplatz().ele0KeywordSpielplatz(), null); 
+                            createLeafNode(grammarAccess.getSpielplatzAccess().getSpielplatzKeyword_0(), null); 
                         
                     // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:87:1: (lv_groesse_1= RULE_INT )
                     // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:89:6: lv_groesse_1= RULE_INT
@@ -144,11 +144,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     lv_groesse_1=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSpielplatz137); 
 
-                    		createLeafNode(grammarAccess.prSpielplatz().ele10TerminalRuleCallINT(), "groesse"); 
+                    		createLeafNode(grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0(), "groesse"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -175,11 +175,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                             lv_beschreibung_2=(Token)input.LT(1);
                             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSpielplatz167); 
 
-                            		createLeafNode(grammarAccess.prSpielplatz().ele20TerminalRuleCallSTRING(), "beschreibung"); 
+                            		createLeafNode(grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0(), "beschreibung"); 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -197,7 +197,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
                     match(input,12,FOLLOW_12_in_ruleSpielplatz185); 
 
-                            createLeafNode(grammarAccess.prSpielplatz().ele3KeywordLeftCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getSpielplatzAccess().getLeftCurlyBracketKeyword_3(), null); 
                         
                     // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:131:1: ( (lv_kinder_4= ruleKind ) | (lv_erzieher_5= ruleErwachsener ) | (lv_spielzeuge_6= ruleSpielzeug ) | (lv_familie_7= ruleFamilie ) | (lv_types_8= ruleCustomTypeParserRule ) )*
                     loop2:
@@ -240,7 +240,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:134:6: lv_kinder_4= ruleKind
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele400ParserRuleCallKind(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleKind_in_ruleSpielplatz220);
                     	    lv_kinder_4=ruleKind();
@@ -248,7 +248,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -272,7 +272,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:156:6: lv_erzieher_5= ruleErwachsener
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele410ParserRuleCallErwachsener(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleErwachsener_in_ruleSpielplatz264);
                     	    lv_erzieher_5=ruleErwachsener();
@@ -280,7 +280,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -304,7 +304,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:178:6: lv_spielzeuge_6= ruleSpielzeug
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele420ParserRuleCallSpielzeug(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleSpielzeug_in_ruleSpielplatz308);
                     	    lv_spielzeuge_6=ruleSpielzeug();
@@ -312,7 +312,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -336,7 +336,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:200:6: lv_familie_7= ruleFamilie
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele430ParserRuleCallFamilie(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleFamilie_in_ruleSpielplatz352);
                     	    lv_familie_7=ruleFamilie();
@@ -344,7 +344,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -368,7 +368,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:222:6: lv_types_8= ruleCustomTypeParserRule
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele440ParserRuleCallCustomTypeParserRule(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getTypesCustomTypeParserRuleParserRuleCall_4_4_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleCustomTypeParserRule_in_ruleSpielplatz396);
                     	    lv_types_8=ruleCustomTypeParserRule();
@@ -376,7 +376,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -401,7 +401,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
                     match(input,13,FOLLOW_13_in_ruleSpielplatz411); 
 
-                            createLeafNode(grammarAccess.prSpielplatz().ele5KeywordRightCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5(), null); 
                         
 
                     }
@@ -440,7 +440,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:253:46: (iv_ruleKind= ruleKind EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:254:2: iv_ruleKind= ruleKind EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prKind().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getKindRule(), currentNode); 
             pushFollow(FOLLOW_ruleKind_in_entryRuleKind447);
             iv_ruleKind=ruleKind();
             _fsp--;
@@ -482,11 +482,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
             match(input,14,FOLLOW_14_in_ruleKind491); 
 
-                    createLeafNode(grammarAccess.prKind().ele0KeywordKind(), null); 
+                    createLeafNode(grammarAccess.getKindAccess().getKindKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleKind500); 
 
-                    createLeafNode(grammarAccess.prKind().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getKindAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:275:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:277:6: lv_name_2= RULE_ID
@@ -494,11 +494,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKind522); 
 
-            		createLeafNode(grammarAccess.prKind().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prKind().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getKindRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -517,11 +517,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             lv_age_3=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleKind552); 
 
-            		createLeafNode(grammarAccess.prKind().ele30TerminalRuleCallINT(), "age"); 
+            		createLeafNode(grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0(), "age"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prKind().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getKindRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -536,7 +536,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
             match(input,16,FOLLOW_16_in_ruleKind569); 
 
-                    createLeafNode(grammarAccess.prKind().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getKindAccess().getRightParenthesisKeyword_4(), null); 
                 
 
             }
@@ -572,7 +572,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:326:53: (iv_ruleErwachsener= ruleErwachsener EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:327:2: iv_ruleErwachsener= ruleErwachsener EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prErwachsener().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getErwachsenerRule(), currentNode); 
             pushFollow(FOLLOW_ruleErwachsener_in_entryRuleErwachsener602);
             iv_ruleErwachsener=ruleErwachsener();
             _fsp--;
@@ -614,11 +614,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
             match(input,17,FOLLOW_17_in_ruleErwachsener646); 
 
-                    createLeafNode(grammarAccess.prErwachsener().ele0KeywordErwachsener(), null); 
+                    createLeafNode(grammarAccess.getErwachsenerAccess().getErwachsenerKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleErwachsener655); 
 
-                    createLeafNode(grammarAccess.prErwachsener().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getErwachsenerAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:348:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:350:6: lv_name_2= RULE_ID
@@ -626,11 +626,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleErwachsener677); 
 
-            		createLeafNode(grammarAccess.prErwachsener().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getErwachsenerRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -649,11 +649,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             lv_age_3=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleErwachsener707); 
 
-            		createLeafNode(grammarAccess.prErwachsener().ele30TerminalRuleCallINT(), "age"); 
+            		createLeafNode(grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0(), "age"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getErwachsenerRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -668,7 +668,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
             match(input,16,FOLLOW_16_in_ruleErwachsener724); 
 
-                    createLeafNode(grammarAccess.prErwachsener().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4(), null); 
                 
 
             }
@@ -704,7 +704,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:399:51: (iv_ruleSpielzeug= ruleSpielzeug EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:400:2: iv_ruleSpielzeug= ruleSpielzeug EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSpielzeug().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSpielzeugRule(), currentNode); 
             pushFollow(FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug757);
             iv_ruleSpielzeug=ruleSpielzeug();
             _fsp--;
@@ -747,11 +747,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
             match(input,18,FOLLOW_18_in_ruleSpielzeug801); 
 
-                    createLeafNode(grammarAccess.prSpielzeug().ele0KeywordSpielzeug(), null); 
+                    createLeafNode(grammarAccess.getSpielzeugAccess().getSpielzeugKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleSpielzeug810); 
 
-                    createLeafNode(grammarAccess.prSpielzeug().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getSpielzeugAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:421:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:423:6: lv_name_2= RULE_ID
@@ -759,11 +759,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSpielzeug832); 
 
-            		createLeafNode(grammarAccess.prSpielzeug().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getSpielzeugRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -780,7 +780,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:444:6: lv_farbe_3= ruleFarbe
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prSpielzeug().ele30ParserRuleCallFarbe(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleFarbe_in_ruleSpielzeug874);
             lv_farbe_3=ruleFarbe();
@@ -788,7 +788,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getSpielzeugRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -804,7 +804,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
             match(input,16,FOLLOW_16_in_ruleSpielzeug887); 
 
-                    createLeafNode(grammarAccess.prSpielzeug().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4(), null); 
                 
 
             }
@@ -840,7 +840,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:473:49: (iv_ruleFamilie= ruleFamilie EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:474:2: iv_ruleFamilie= ruleFamilie EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFamilie().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFamilieRule(), currentNode); 
             pushFollow(FOLLOW_ruleFamilie_in_entryRuleFamilie920);
             iv_ruleFamilie=ruleFamilie();
             _fsp--;
@@ -881,11 +881,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
             match(input,19,FOLLOW_19_in_ruleFamilie964); 
 
-                    createLeafNode(grammarAccess.prFamilie().ele0KeywordFamilie(), null); 
+                    createLeafNode(grammarAccess.getFamilieAccess().getFamilieKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleFamilie973); 
 
-                    createLeafNode(grammarAccess.prFamilie().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getFamilieAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:495:1: (lv_name_2= ( 'keyword' | RULE_STRING | RULE_ID ) )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:497:6: lv_name_2= ( 'keyword' | RULE_STRING | RULE_ID )
@@ -921,7 +921,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,20,FOLLOW_20_in_ruleFamilie995); 
 
-                            createLeafNode(grammarAccess.prFamilie().ele200KeywordKeyword(), "name"); 
+                            createLeafNode(grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0(), "name"); 
                         
 
                     }
@@ -931,7 +931,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFamilie1012); 
 
-                    		createLeafNode(grammarAccess.prFamilie().ele201TerminalRuleCallSTRING(), "name"); 
+                    		createLeafNode(grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1(), "name"); 
                     	
 
                     }
@@ -941,7 +941,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1024); 
 
-                    		createLeafNode(grammarAccess.prFamilie().ele202TerminalRuleCallID(), "name"); 
+                    		createLeafNode(grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2(), "name"); 
                     	
 
                     }
@@ -951,7 +951,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -969,13 +969,13 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1056); 
 
-            		createLeafNode(grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener(), "mutter"); 
+            		createLeafNode(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0(), "mutter"); 
             	
 
             }
@@ -985,13 +985,13 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1081); 
 
-            		createLeafNode(grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener(), "vater"); 
+            		createLeafNode(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0(), "vater"); 
             	
 
             }
@@ -1001,13 +1001,13 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1106); 
 
-            		createLeafNode(grammarAccess.prFamilie().ele50CrossReferenceIDKind(), "kinder"); 
+            		createLeafNode(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0(), "kinder"); 
             	
 
             }
@@ -1029,20 +1029,20 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             	    {
             	    match(input,21,FOLLOW_21_in_ruleFamilie1119); 
 
-            	            createLeafNode(grammarAccess.prFamilie().ele60KeywordComma(), null); 
+            	            createLeafNode(grammarAccess.getFamilieAccess().getCommaKeyword_6_0(), null); 
             	        
             	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:579:1: ( RULE_ID )
             	    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:582:3: RULE_ID
             	    {
 
             	    			if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1141); 
 
-            	    		createLeafNode(grammarAccess.prFamilie().ele610CrossReferenceIDKind(), "kinder"); 
+            	    		createLeafNode(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0(), "kinder"); 
             	    	
 
             	    }
@@ -1058,7 +1058,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
             match(input,16,FOLLOW_16_in_ruleFamilie1155); 
 
-                    createLeafNode(grammarAccess.prFamilie().ele7KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7(), null); 
                 
 
             }
@@ -1094,7 +1094,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:606:47: (iv_ruleFarbe= ruleFarbe EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:607:2: iv_ruleFarbe= ruleFarbe EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFarbe().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFarbeRule(), currentNode); 
             pushFollow(FOLLOW_ruleFarbe_in_entryRuleFarbe1188);
             iv_ruleFarbe=ruleFarbe();
             _fsp--;
@@ -1118,7 +1118,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start ruleFarbe
-    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:614:1: ruleFarbe returns [EObject current=null] : (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' ) ) ;
+    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:614:1: ruleFarbe returns [EObject current=null] : (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' ) ) ;
     public final EObject ruleFarbe() throws RecognitionException {
         EObject current = null;
 
@@ -1127,13 +1127,13 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:619:6: ( (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' ) ) )
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:620:1: (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' ) )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:619:6: ( (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' ) ) )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:620:1: (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' ) )
             {
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:620:1: (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' ) )
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:622:6: lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:620:1: (lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' ) )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:622:6: lv_wert_0= ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' )
             {
-            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:622:16: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' )
+            // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:622:16: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' )
             int alt6=4;
             switch ( input.LA(1) ) {
             case 22:
@@ -1158,7 +1158,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("622:16: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' )", 6, 0, input);
+                    new NoViableAltException("622:16: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' )", 6, 0, input);
 
                 throw nvae;
             }
@@ -1169,7 +1169,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,22,FOLLOW_22_in_ruleFarbe1244); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele00KeywordROT(), "wert"); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getWertROTKeyword_0_0(), "wert"); 
                         
 
                     }
@@ -1179,7 +1179,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,23,FOLLOW_23_in_ruleFarbe1260); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele01KeywordBLAU(), "wert"); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1(), "wert"); 
                         
 
                     }
@@ -1189,17 +1189,17 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
                     {
                     match(input,24,FOLLOW_24_in_ruleFarbe1276); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele02KeywordGELB(), "wert"); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2(), "wert"); 
                         
 
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:640:6: 'GR\\u00DCN'
+                    // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:640:6: 'GR\\u2039N'
                     {
                     match(input,25,FOLLOW_25_in_ruleFarbe1292); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele03KeywordGRÜN(), "wert"); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3(), "wert"); 
                         
 
                     }
@@ -1209,7 +1209,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFarbe().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFarbeRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1253,7 +1253,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:667:62: (iv_ruleCustomTypeParserRule= ruleCustomTypeParserRule EOF )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:668:2: iv_ruleCustomTypeParserRule= ruleCustomTypeParserRule EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prCustomTypeParserRule().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getCustomTypeParserRuleRule(), currentNode); 
             pushFollow(FOLLOW_ruleCustomTypeParserRule_in_entryRuleCustomTypeParserRule1339);
             iv_ruleCustomTypeParserRule=ruleCustomTypeParserRule();
             _fsp--;
@@ -1294,7 +1294,7 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             {
             match(input,26,FOLLOW_26_in_ruleCustomTypeParserRule1383); 
 
-                    createLeafNode(grammarAccess.prCustomTypeParserRule().ele0KeywordType(), null); 
+                    createLeafNode(grammarAccess.getCustomTypeParserRuleAccess().getTypeKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:685:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g:687:6: lv_name_1= RULE_ID
@@ -1302,11 +1302,11 @@ public class InternalReferenceGrammarParser extends AbstractInternalAntlrParser 
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCustomTypeParserRule1405); 
 
-            		createLeafNode(grammarAccess.prCustomTypeParserRule().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getCustomTypeParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prCustomTypeParserRule().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

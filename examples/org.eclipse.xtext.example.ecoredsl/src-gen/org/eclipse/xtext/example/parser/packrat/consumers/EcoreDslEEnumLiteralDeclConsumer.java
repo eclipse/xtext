@@ -237,18 +237,18 @@ public final class EcoreDslEEnumLiteralDeclConsumer extends NonTerminalConsumer 
 	public void setRule(EEnumLiteralDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentEAnnotations());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallEAnnotationDecl());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallID());
-		group$6$Consumer = new Group$6$Consumer(rule.ele2Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele20KeywordEqualsSign());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele21AssignmentValue());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele210TerminalRuleCallINT());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele3AssignmentLiteral());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele30TerminalRuleCallSTRING());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele4KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getEAnnotationsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEAnnotationsEAnnotationDeclParserRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_2());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getEqualsSignKeyword_2_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getValueAssignment_2_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getValueINTTerminalRuleCall_2_1_0());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getLiteralAssignment_3());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getLiteralSTRINGTerminalRuleCall_3_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getSemicolonKeyword_4());
 	}
 	
 	@Override

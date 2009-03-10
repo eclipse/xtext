@@ -152,13 +152,13 @@ public final class LookaheadTestLanguageLookAhead3Consumer extends NonTerminalCo
 	public void setRule(LookAhead3Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordFoo());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordBar());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentX());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele20KeywordB());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentZ());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallLookAhead4());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getFooKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getBarKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getXAssignment_2());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getXBKeyword_2_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getZAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getZLookAhead4ParserRuleCall_3_0());
 	}
 	
 	@Override

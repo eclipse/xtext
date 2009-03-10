@@ -102,10 +102,10 @@ public final class XtextTerminalsTestLanguageNegatedTokenConsumer extends NonTer
 	public void setRule(NegatedTokenElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordExclamationMark());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentTerminal());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTerminalTokenElement());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getExclamationMarkKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getTerminalAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getTerminalTerminalTokenElementParserRuleCall_1_0());
 	}
 	
 	@Override

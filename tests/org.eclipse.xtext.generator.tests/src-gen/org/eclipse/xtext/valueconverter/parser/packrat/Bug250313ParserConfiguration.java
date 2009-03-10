@@ -74,19 +74,19 @@ public class Bug250313ParserConfiguration extends AbstractParserConfiguration {
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getModelConsumer().setRule(grammarAccess.prModel());
-		getDatatypeConsumer().setRule(grammarAccess.prDatatype());
-		getNestedDatatypeConsumer().setRule(grammarAccess.prNestedDatatype());
-		getChildConsumer().setRule(grammarAccess.prChild());
-		getChild1Consumer().setRule(grammarAccess.prChild1());
-		getChild2Consumer().setRule(grammarAccess.prChild2());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getDatatypeConsumer().setRule(grammarAccess.getDatatypeAccess());
+		getNestedDatatypeConsumer().setRule(grammarAccess.getNestedDatatypeAccess());
+		getChildConsumer().setRule(grammarAccess.getChildAccess());
+		getChild1Consumer().setRule(grammarAccess.getChild1Access());
+		getChild2Consumer().setRule(grammarAccess.getChild2Access());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getModelConsumer().setChildConsumer(getChildConsumer());

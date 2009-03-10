@@ -67,8 +67,8 @@ public final class DummyTestLanguageModelConsumer extends NonTerminalConsumer {
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentElements());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallElement());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getElementsAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getElementsElementParserRuleCall_0());
 	}
 	
 	@Override

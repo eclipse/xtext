@@ -67,7 +67,7 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallGreeting(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getChildGreetingParserRuleCall_0(), currentNode); 
 	    }
 	    lv_child_0=ruleGreeting 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -109,7 +109,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleGreeting
 entryRuleGreeting returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prGreeting().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getGreetingRule(), currentNode); }
 	 iv_ruleGreeting=ruleGreeting 
 	 { $current=$iv_ruleGreeting.current; } 
 	 EOF 
@@ -124,18 +124,18 @@ ruleGreeting returns [EObject current=null]
     }:
 ('hallo' 
     {
-        createLeafNode(grammarAccess.prGreeting().ele0KeywordHallo(), null); 
+        createLeafNode(grammarAccess.getGreetingAccess().getHalloKeyword_0(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prGreeting().ele10TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prGreeting().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getGreetingRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

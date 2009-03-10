@@ -22,20 +22,20 @@ public class LexerTestLanguageParsetreeConstructor extends AbstractParseTreeCons
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prElement().getRule().getType().getClassifier()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Assignment_children(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   (children+=Element)*;
  *
  **/
 
-
-// not supported
+// (children+=Element)*
 protected class Model_Assignment_children extends AssignmentToken  {
 	
 	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
@@ -44,7 +44,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().eleAssignmentChildren();
+		return grammarAccess.getModelAccess().getChildrenAssignment();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prElement().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
 				Solution s = new Element_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -73,12 +73,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * not supported
+ * Element:
+ *   name=ID h=STRING;
  *
  **/
 
-
-// not supported
+// name=ID h=STRING
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -87,10 +87,8 @@ protected class Element_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prElement().eleGroup();
+		return grammarAccess.getElementAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -108,7 +106,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
-// not supported
+// name=ID
 protected class Element_0_Assignment_name extends AssignmentToken  {
 	
 	public Element_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -117,7 +115,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prElement().ele0AssignmentName();
+		return grammarAccess.getElementAccess().getNameAssignment_0();
 	}
 	
 	@Override
@@ -126,14 +124,14 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prElement().ele00TerminalRuleCallID();
+			element = grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// h=STRING
 protected class Element_1_Assignment_h extends AssignmentToken  {
 	
 	public Element_1_Assignment_h(IInstanceDescription curr, AbstractToken pred) {
@@ -142,7 +140,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prElement().ele1AssignmentH();
+		return grammarAccess.getElementAccess().getHAssignment_1();
 	}
 	
 	@Override
@@ -151,7 +149,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("h");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prElement().ele10TerminalRuleCallSTRING();
+			element = grammarAccess.getElementAccess().getHSTRINGTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;

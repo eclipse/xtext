@@ -84,9 +84,9 @@ public final class XtextGrammarTestLanguageAbstractRuleConsumer extends NonTermi
 	public void setRule(AbstractRuleElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallParserRule());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTerminalRule());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getParserRuleParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTerminalRuleParserRuleCall_1());
 	}
 	
 	@Override

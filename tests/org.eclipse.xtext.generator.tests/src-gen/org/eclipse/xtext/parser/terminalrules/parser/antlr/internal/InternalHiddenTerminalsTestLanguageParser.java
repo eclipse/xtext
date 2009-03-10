@@ -73,7 +73,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -158,7 +158,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:84:5: this_WithoutHiddens_0= ruleWithoutHiddens
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallWithoutHiddens(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleWithoutHiddens_in_ruleModel128);
                     this_WithoutHiddens_0=ruleWithoutHiddens();
@@ -169,7 +169,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModel().ele0ParserRuleCallWithoutHiddens(), null); 
+                        createLeafNode(grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0(), null); 
                         
 
                     }
@@ -178,7 +178,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:98:5: this_WithHiddens_1= ruleWithHiddens
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModel().ele1ParserRuleCallWithHiddens(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleWithHiddens_in_ruleModel162);
                     this_WithHiddens_1=ruleWithHiddens();
@@ -189,7 +189,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModel().ele1ParserRuleCallWithHiddens(), null); 
+                        createLeafNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1(), null); 
                         
 
                     }
@@ -198,7 +198,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:112:5: this_OverridingHiddens_2= ruleOverridingHiddens
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModel().ele2ParserRuleCallOverridingHiddens(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleOverridingHiddens_in_ruleModel196);
                     this_OverridingHiddens_2=ruleOverridingHiddens();
@@ -209,7 +209,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModel().ele2ParserRuleCallOverridingHiddens(), null); 
+                        createLeafNode(grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2(), null); 
                         
 
                     }
@@ -218,7 +218,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:126:5: this_InheritingHiddens_3= ruleInheritingHiddens
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModel().ele3ParserRuleCallInheritingHiddens(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleInheritingHiddens_in_ruleModel230);
                     this_InheritingHiddens_3=ruleInheritingHiddens();
@@ -229,7 +229,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModel().ele3ParserRuleCallInheritingHiddens(), null); 
+                        createLeafNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3(), null); 
                         
 
                     }
@@ -238,7 +238,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:140:5: this_DatatypeHiddens_4= ruleDatatypeHiddens
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModel().ele4ParserRuleCallDatatypeHiddens(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleDatatypeHiddens_in_ruleModel264);
                     this_DatatypeHiddens_4=ruleDatatypeHiddens();
@@ -249,7 +249,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModel().ele4ParserRuleCallDatatypeHiddens(), null); 
+                        createLeafNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4(), null); 
                         
 
                     }
@@ -288,7 +288,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:159:56: (iv_ruleWithoutHiddens= ruleWithoutHiddens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:160:2: iv_ruleWithoutHiddens= ruleWithoutHiddens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prWithoutHiddens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getWithoutHiddensRule(), currentNode); 
             pushFollow(FOLLOW_ruleWithoutHiddens_in_entryRuleWithoutHiddens303);
             iv_ruleWithoutHiddens=ruleWithoutHiddens();
             _fsp--;
@@ -331,7 +331,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,8,FOLLOW_8_in_ruleWithoutHiddens347); 
 
-                    createLeafNode(grammarAccess.prWithoutHiddens().ele0KeywordWithout(), null); 
+                    createLeafNode(grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:177:1: (lv_spaces_1= RULE_WS )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:179:6: lv_spaces_1= RULE_WS
@@ -339,11 +339,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_spaces_1=(Token)input.LT(1);
             match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleWithoutHiddens369); 
 
-            		createLeafNode(grammarAccess.prWithoutHiddens().ele10TerminalRuleCallWS(), "spaces"); 
+            		createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -358,7 +358,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             match(input,9,FOLLOW_9_in_ruleWithoutHiddens386); 
 
-                    createLeafNode(grammarAccess.prWithoutHiddens().ele2KeywordHiddens(), null); 
+                    createLeafNode(grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:201:1: (lv_spaces_3= RULE_WS )?
             int alt2=2;
@@ -374,11 +374,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     lv_spaces_3=(Token)input.LT(1);
                     match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleWithoutHiddens408); 
 
-                    		createLeafNode(grammarAccess.prWithoutHiddens().ele30TerminalRuleCallWS(), "spaces"); 
+                    		createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), "spaces"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -400,11 +400,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_valid_4=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleWithoutHiddens438); 
 
-                    createLeafNode(grammarAccess.prWithoutHiddens().ele40KeywordSemicolon(), "valid"); 
+                    createLeafNode(grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0(), "valid"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -451,7 +451,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:249:53: (iv_ruleWithHiddens= ruleWithHiddens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:250:2: iv_ruleWithHiddens= ruleWithHiddens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prWithHiddens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getWithHiddensRule(), currentNode); 
             pushFollow(FOLLOW_ruleWithHiddens_in_entryRuleWithHiddens484);
             iv_ruleWithHiddens=ruleWithHiddens();
             _fsp--;
@@ -493,11 +493,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,11,FOLLOW_11_in_ruleWithHiddens528); 
 
-                    createLeafNode(grammarAccess.prWithHiddens().ele0KeywordWith(), null); 
+                    createLeafNode(grammarAccess.getWithHiddensAccess().getWithKeyword_0(), null); 
                 
             match(input,9,FOLLOW_9_in_ruleWithHiddens537); 
 
-                    createLeafNode(grammarAccess.prWithHiddens().ele1KeywordHiddens(), null); 
+                    createLeafNode(grammarAccess.getWithHiddensAccess().getHiddensKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:273:1: (lv_valid_2= ';' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:275:6: lv_valid_2= ';'
@@ -505,11 +505,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_valid_2=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleWithHiddens558); 
 
-                    createLeafNode(grammarAccess.prWithHiddens().ele20KeywordSemicolon(), "valid"); 
+                    createLeafNode(grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0(), "valid"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prWithHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getWithHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -557,7 +557,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:301:59: (iv_ruleOverridingHiddens= ruleOverridingHiddens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:302:2: iv_ruleOverridingHiddens= ruleOverridingHiddens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prOverridingHiddens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getOverridingHiddensRule(), currentNode); 
             pushFollow(FOLLOW_ruleOverridingHiddens_in_entryRuleOverridingHiddens604);
             iv_ruleOverridingHiddens=ruleOverridingHiddens();
             _fsp--;
@@ -601,21 +601,21 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,12,FOLLOW_12_in_ruleOverridingHiddens648); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddens().ele0KeywordOverriding(), null); 
+                    createLeafNode(grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0(), null); 
                 
             match(input,9,FOLLOW_9_in_ruleOverridingHiddens657); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddens().ele1KeywordHiddens(), null); 
+                    createLeafNode(grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1(), null); 
                 
             match(input,13,FOLLOW_13_in_ruleOverridingHiddens666); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddens().ele2KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:329:1: (lv_called_3= ruleOverridingHiddensCall )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:332:6: lv_called_3= ruleOverridingHiddensCall
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prOverridingHiddens().ele30ParserRuleCallOverridingHiddensCall(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getOverridingHiddensAccess().getCalledOverridingHiddensCallParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleOverridingHiddensCall_in_ruleOverridingHiddens700);
             lv_called_3=ruleOverridingHiddensCall();
@@ -623,7 +623,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -639,7 +639,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             match(input,14,FOLLOW_14_in_ruleOverridingHiddens713); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddens().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:354:1: (lv_valid_5= ';' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:356:6: lv_valid_5= ';'
@@ -647,11 +647,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_valid_5=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleOverridingHiddens734); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddens().ele50KeywordSemicolon(), "valid"); 
+                    createLeafNode(grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -699,7 +699,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:382:63: (iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:383:2: iv_ruleOverridingHiddensCall= ruleOverridingHiddensCall EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prOverridingHiddensCall().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getOverridingHiddensCallRule(), currentNode); 
             pushFollow(FOLLOW_ruleOverridingHiddensCall_in_entryRuleOverridingHiddensCall780);
             iv_ruleOverridingHiddensCall=ruleOverridingHiddensCall();
             _fsp--;
@@ -742,7 +742,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,15,FOLLOW_15_in_ruleOverridingHiddensCall824); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddensCall().ele0KeywordCall(), null); 
+                    createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:402:1: (lv_spaces_1= RULE_WS )?
             int alt3=2;
@@ -758,11 +758,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     lv_spaces_1=(Token)input.LT(1);
                     match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleOverridingHiddensCall846); 
 
-                    		createLeafNode(grammarAccess.prOverridingHiddensCall().ele10TerminalRuleCallWS(), "spaces"); 
+                    		createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -784,11 +784,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_valid_2=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleOverridingHiddensCall876); 
 
-                    createLeafNode(grammarAccess.prOverridingHiddensCall().ele20KeywordSemicolon(), "valid"); 
+                    createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0(), "valid"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -836,7 +836,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:450:59: (iv_ruleInheritingHiddens= ruleInheritingHiddens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:451:2: iv_ruleInheritingHiddens= ruleInheritingHiddens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prInheritingHiddens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getInheritingHiddensRule(), currentNode); 
             pushFollow(FOLLOW_ruleInheritingHiddens_in_entryRuleInheritingHiddens922);
             iv_ruleInheritingHiddens=ruleInheritingHiddens();
             _fsp--;
@@ -882,15 +882,15 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,16,FOLLOW_16_in_ruleInheritingHiddens966); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddens().ele0KeywordInheriting(), null); 
+                    createLeafNode(grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0(), null); 
                 
             match(input,9,FOLLOW_9_in_ruleInheritingHiddens975); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddens().ele1KeywordHiddens(), null); 
+                    createLeafNode(grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1(), null); 
                 
             match(input,13,FOLLOW_13_in_ruleInheritingHiddens984); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddens().ele2KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:478:1: ( (lv_called_3= ruleInheritingHiddensCall ) | (lv_hidingCalled_4= ruleHidingHiddens ) )
             int alt4=2;
@@ -916,7 +916,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:481:6: lv_called_3= ruleInheritingHiddensCall
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele300ParserRuleCallInheritingHiddensCall(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getInheritingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_3_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleInheritingHiddensCall_in_ruleInheritingHiddens1019);
                     lv_called_3=ruleInheritingHiddensCall();
@@ -924,7 +924,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -948,7 +948,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:503:6: lv_hidingCalled_4= ruleHidingHiddens
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele310ParserRuleCallHidingHiddens(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getInheritingHiddensAccess().getHidingCalledHidingHiddensParserRuleCall_3_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleHidingHiddens_in_ruleInheritingHiddens1063);
                     lv_hidingCalled_4=ruleHidingHiddens();
@@ -956,7 +956,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -978,7 +978,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
             match(input,14,FOLLOW_14_in_ruleInheritingHiddens1077); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddens().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:525:1: (lv_valid_6= ';' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:527:6: lv_valid_6= ';'
@@ -986,11 +986,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_valid_6=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleInheritingHiddens1098); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddens().ele50KeywordSemicolon(), "valid"); 
+                    createLeafNode(grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1038,7 +1038,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:553:57: (iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:554:2: iv_ruleDatatypeHiddens= ruleDatatypeHiddens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prDatatypeHiddens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getDatatypeHiddensRule(), currentNode); 
             pushFollow(FOLLOW_ruleDatatypeHiddens_in_entryRuleDatatypeHiddens1144);
             iv_ruleDatatypeHiddens=ruleDatatypeHiddens();
             _fsp--;
@@ -1080,13 +1080,13 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,17,FOLLOW_17_in_ruleDatatypeHiddens1188); 
 
-                    createLeafNode(grammarAccess.prDatatypeHiddens().ele0KeywordDatatype(), null); 
+                    createLeafNode(grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:571:1: (lv_valid_1= ruleDatatypeRule )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:574:6: lv_valid_1= ruleDatatypeRule
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleDatatypeRule_in_ruleDatatypeHiddens1222);
             lv_valid_1=ruleDatatypeRule();
@@ -1094,7 +1094,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getDatatypeHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1142,7 +1142,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:599:53: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:600:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prDatatypeRule().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getDatatypeRuleRule(), currentNode); 
             pushFollow(FOLLOW_ruleDatatypeRule_in_entryRuleDatatypeRule1260);
             iv_ruleDatatypeRule=ruleDatatypeRule();
             _fsp--;
@@ -1186,13 +1186,13 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             match(input,18,FOLLOW_18_in_ruleDatatypeRule1309); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prDatatypeRule().ele0KeywordRule(), null); 
+                    createLeafNode(grammarAccess.getDatatypeRuleAccess().getRuleKeyword_0(), null); 
                 
             kw=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleDatatypeRule1322); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prDatatypeRule().ele1KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getDatatypeRuleAccess().getSemicolonKeyword_1(), null); 
                 
 
             }
@@ -1230,7 +1230,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:636:55: (iv_ruleHidingHiddens= ruleHidingHiddens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:637:2: iv_ruleHidingHiddens= ruleHidingHiddens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prHidingHiddens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getHidingHiddensRule(), currentNode); 
             pushFollow(FOLLOW_ruleHidingHiddens_in_entryRuleHidingHiddens1360);
             iv_ruleHidingHiddens=ruleHidingHiddens();
             _fsp--;
@@ -1274,7 +1274,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,19,FOLLOW_19_in_ruleHidingHiddens1404); 
 
-                    createLeafNode(grammarAccess.prHidingHiddens().ele0KeywordHiding(), null); 
+                    createLeafNode(grammarAccess.getHidingHiddensAccess().getHidingKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:656:1: (lv_space_1= RULE_WS )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:658:6: lv_space_1= RULE_WS
@@ -1282,11 +1282,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_space_1=(Token)input.LT(1);
             match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleHidingHiddens1426); 
 
-            		createLeafNode(grammarAccess.prHidingHiddens().ele10TerminalRuleCallWS(), "space"); 
+            		createLeafNode(grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), "space"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1303,7 +1303,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:679:6: lv_called_2= ruleInheritingHiddensCall
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prHidingHiddens().ele20ParserRuleCallInheritingHiddensCall(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getHidingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_2_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleInheritingHiddensCall_in_ruleHidingHiddens1468);
             lv_called_2=ruleInheritingHiddensCall();
@@ -1311,7 +1311,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1360,7 +1360,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:704:63: (iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:705:2: iv_ruleInheritingHiddensCall= ruleInheritingHiddensCall EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prInheritingHiddensCall().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getInheritingHiddensCallRule(), currentNode); 
             pushFollow(FOLLOW_ruleInheritingHiddensCall_in_entryRuleInheritingHiddensCall1505);
             iv_ruleInheritingHiddensCall=ruleInheritingHiddensCall();
             _fsp--;
@@ -1401,7 +1401,7 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             {
             match(input,15,FOLLOW_15_in_ruleInheritingHiddensCall1549); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddensCall().ele0KeywordCall(), null); 
+                    createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:722:1: (lv_valid_1= ';' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:724:6: lv_valid_1= ';'
@@ -1409,11 +1409,11 @@ public class InternalHiddenTerminalsTestLanguageParser extends AbstractInternalA
             lv_valid_1=(Token)input.LT(1);
             match(input,10,FOLLOW_10_in_ruleInheritingHiddensCall1570); 
 
-                    createLeafNode(grammarAccess.prInheritingHiddensCall().ele10KeywordSemicolon(), "valid"); 
+                    createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0(), "valid"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

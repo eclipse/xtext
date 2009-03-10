@@ -84,9 +84,9 @@ public final class EpatchTestLanguageNamedObjectConsumer extends NonTerminalCons
 	public void setRule(NamedObjectElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallObjectRef());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallCreatedObject());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getObjectRefParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getCreatedObjectParserRuleCall_1());
 	}
 	
 	@Override

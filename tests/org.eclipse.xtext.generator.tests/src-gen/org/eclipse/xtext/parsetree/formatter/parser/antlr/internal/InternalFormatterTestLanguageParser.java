@@ -76,7 +76,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:69:46: (iv_ruleRoot= ruleRoot EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); 
             pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot71);
             iv_ruleRoot=ruleRoot();
             _fsp--;
@@ -120,7 +120,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,11,FOLLOW_11_in_ruleRoot115); 
 
-                    createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
+                    createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:87:1: (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation )
             int alt1=2;
@@ -143,7 +143,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:88:5: this_TestLinewrap_1= ruleTestLinewrap
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestLinewrap_in_ruleRoot138);
                     this_TestLinewrap_1=ruleTestLinewrap();
@@ -154,7 +154,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), null); 
+                        createLeafNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0(), null); 
                         
 
                     }
@@ -163,7 +163,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:102:5: this_TestIndentation_2= ruleTestIndentation
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestIndentation_in_ruleRoot172);
                     this_TestIndentation_2=ruleTestIndentation();
@@ -174,7 +174,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), null); 
+                        createLeafNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1(), null); 
                         
 
                     }
@@ -216,7 +216,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:121:46: (iv_ruleLine= ruleLine EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:122:2: iv_ruleLine= ruleLine EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prLine().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getLineRule(), currentNode); 
             pushFollow(FOLLOW_ruleLine_in_entryRuleLine212);
             iv_ruleLine=ruleLine();
             _fsp--;
@@ -262,11 +262,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             lv_type_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine269); 
 
-            		createLeafNode(grammarAccess.prLine().ele00TerminalRuleCallID(), "type"); 
+            		createLeafNode(grammarAccess.getLineAccess().getTypeIDTerminalRuleCall_0_0(), "type"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLine().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLineRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -285,11 +285,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLine299); 
 
-            		createLeafNode(grammarAccess.prLine().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getLineAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLine().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLineRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -304,7 +304,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             match(input,12,FOLLOW_12_in_ruleLine316); 
 
-                    createLeafNode(grammarAccess.prLine().ele2KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_2(), null); 
                 
 
             }
@@ -340,7 +340,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:186:54: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:187:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTestLinewrap().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTestLinewrapRule(), currentNode); 
             pushFollow(FOLLOW_ruleTestLinewrap_in_entryRuleTestLinewrap349);
             iv_ruleTestLinewrap=ruleTestLinewrap();
             _fsp--;
@@ -382,7 +382,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,13,FOLLOW_13_in_ruleTestLinewrap393); 
 
-                    createLeafNode(grammarAccess.prTestLinewrap().ele0KeywordLinewrap(), null); 
+                    createLeafNode(grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:204:1: (lv_items_1= ruleLine )*
             loop2:
@@ -400,7 +400,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:207:6: lv_items_1= ruleLine
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prTestLinewrap().ele10ParserRuleCallLine(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleLine_in_ruleTestLinewrap427);
             	    lv_items_1=ruleLine();
@@ -408,7 +408,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestLinewrap().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getTestLinewrapRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -462,7 +462,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:232:57: (iv_ruleTestIndentation= ruleTestIndentation EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:233:2: iv_ruleTestIndentation= ruleTestIndentation EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTestIndentation().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTestIndentationRule(), currentNode); 
             pushFollow(FOLLOW_ruleTestIndentation_in_entryRuleTestIndentation465);
             iv_ruleTestIndentation=ruleTestIndentation();
             _fsp--;
@@ -506,11 +506,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,14,FOLLOW_14_in_ruleTestIndentation509); 
 
-                    createLeafNode(grammarAccess.prTestIndentation().ele0KeywordIndentation(), null); 
+                    createLeafNode(grammarAccess.getTestIndentationAccess().getIndentationKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleTestIndentation518); 
 
-                    createLeafNode(grammarAccess.prTestIndentation().ele1KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:254:1: ( (lv_sub_2= ruleTestIndentation ) | (lv_items_3= ruleLine ) )*
             loop3:
@@ -534,7 +534,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:257:6: lv_sub_2= ruleTestIndentation
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele200ParserRuleCallTestIndentation(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getTestIndentationAccess().getSubTestIndentationParserRuleCall_2_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTestIndentation_in_ruleTestIndentation553);
             	    lv_sub_2=ruleTestIndentation();
@@ -542,7 +542,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getTestIndentationRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -566,7 +566,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/formatter/parser/antlr/internal/InternalFormatterTestLanguage.g:279:6: lv_items_3= ruleLine
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele210ParserRuleCallLine(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_2_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleLine_in_ruleTestIndentation597);
             	    lv_items_3=ruleLine();
@@ -574,7 +574,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getTestIndentationRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -599,7 +599,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             match(input,16,FOLLOW_16_in_ruleTestIndentation612); 
 
-                    createLeafNode(grammarAccess.prTestIndentation().ele3KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3(), null); 
                 
 
             }

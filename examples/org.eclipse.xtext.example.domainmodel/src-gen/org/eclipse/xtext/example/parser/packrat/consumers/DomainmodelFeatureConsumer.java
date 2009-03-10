@@ -84,9 +84,9 @@ public final class DomainmodelFeatureConsumer extends NonTerminalConsumer {
 	public void setRule(FeatureElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallStructuralFeature());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallOperation());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getStructuralFeatureParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getOperationParserRuleCall_1());
 	}
 	
 	@Override

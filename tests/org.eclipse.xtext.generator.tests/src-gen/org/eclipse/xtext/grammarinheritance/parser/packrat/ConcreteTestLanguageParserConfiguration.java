@@ -98,27 +98,27 @@ public class ConcreteTestLanguageParserConfiguration extends AbstractParserConfi
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getRootRuleConsumer().setRule(grammarAccess.prRootRule());
-		getConcreteParserRuleConsumer().setRule(grammarAccess.prConcreteParserRule());
-		getOverridableParserRuleConsumer().setRule(grammarAccess.prOverridableParserRule());
-		getCallOverridenParserRuleConsumer().setRule(grammarAccess.prCallOverridenParserRule());
-		getOverridableParserRule2Consumer().setRule(grammarAccess.prOverridableParserRule2());
-		getExtendableParserRuleConsumer().setRule(grammarAccess.prExtendableParserRule());
-		getSubrule1Consumer().setRule(grammarAccess.prSubrule1());
-		getSubrule2Consumer().setRule(grammarAccess.prSubrule2());
-		getSubrule3Consumer().setRule(grammarAccess.prSubrule3());
-		getCallExtendedParserRuleConsumer().setRule(grammarAccess.prCallExtendedParserRule());
-		getInheritedParserRuleConsumer().setRule(grammarAccess.prInheritedParserRule());
-		getAbstractCallOverridenParserRuleConsumer().setRule(grammarAccess.prAbstractCallOverridenParserRule());
-		getAbstractCallExtendedParserRuleConsumer().setRule(grammarAccess.prAbstractCallExtendedParserRule());
-		getRealConsumer().setRule(grammarAccess.trREAL());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getRootRuleConsumer().setRule(grammarAccess.getRootRuleAccess());
+		getConcreteParserRuleConsumer().setRule(grammarAccess.getConcreteParserRuleAccess());
+		getOverridableParserRuleConsumer().setRule(grammarAccess.getOverridableParserRuleAccess());
+		getCallOverridenParserRuleConsumer().setRule(grammarAccess.getCallOverridenParserRuleAccess());
+		getOverridableParserRule2Consumer().setRule(grammarAccess.getOverridableParserRule2Access());
+		getExtendableParserRuleConsumer().setRule(grammarAccess.getExtendableParserRuleAccess());
+		getSubrule1Consumer().setRule(grammarAccess.getSubrule1Access());
+		getSubrule2Consumer().setRule(grammarAccess.getSubrule2Access());
+		getSubrule3Consumer().setRule(grammarAccess.getSubrule3Access());
+		getCallExtendedParserRuleConsumer().setRule(grammarAccess.getCallExtendedParserRuleAccess());
+		getInheritedParserRuleConsumer().setRule(grammarAccess.getInheritedParserRuleAccess());
+		getAbstractCallOverridenParserRuleConsumer().setRule(grammarAccess.getAbstractCallOverridenParserRuleAccess());
+		getAbstractCallExtendedParserRuleConsumer().setRule(grammarAccess.getAbstractCallExtendedParserRuleAccess());
+		getRealConsumer().setRule(grammarAccess.getREALRule());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getRootRuleConsumer().setCallExtendedParserRuleConsumer(getCallExtendedParserRuleConsumer());

@@ -138,12 +138,12 @@ public final class FowlerDslTestLanguageTransitionConsumer extends NonTerminalCo
 	public void setRule(TransitionElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentEvent());
-		crossReference$3$Consumer = new CrossReference$3$Consumer(rule.ele00CrossReferenceIDEvent());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele1KeywordEqualsSignGreaterThanSign());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele2AssignmentState());
-		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele20CrossReferenceIDState());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getEventAssignment_0());
+		crossReference$3$Consumer = new CrossReference$3$Consumer(rule.getEventEventCrossReference_0_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getEqualsSignGreaterThanSignKeyword_1());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getStateAssignment_2());
+		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.getStateStateCrossReference_2_0());
 	}
 	
 	@Override

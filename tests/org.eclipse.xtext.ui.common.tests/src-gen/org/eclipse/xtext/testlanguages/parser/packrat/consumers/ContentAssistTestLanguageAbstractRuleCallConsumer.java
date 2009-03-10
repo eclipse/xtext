@@ -71,8 +71,8 @@ public final class ContentAssistTestLanguageAbstractRuleCallConsumer extends Non
 	public void setRule(AbstractRuleCallElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentRule());
-		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.ele0CrossReferenceIDAbstractRule());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getRuleAssignment());
+		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.getRuleAbstractRuleCrossReference_0());
 	}
 	
 	@Override

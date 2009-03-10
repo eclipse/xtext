@@ -148,13 +148,13 @@ public final class EcoreDslEParameterDeclConsumer extends NonTerminalConsumer {
 	public void setRule(EParameterDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentEAnnotations());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallEAnnotationDecl());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentEGenericType());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10ParserRuleCallEGenericTypeReferenceDecl());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele2AssignmentName());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele20TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getEAnnotationsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEAnnotationsEAnnotationDeclParserRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getEGenericTypeAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getNameAssignment_2());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getNameIDTerminalRuleCall_2_0());
 	}
 	
 	@Override

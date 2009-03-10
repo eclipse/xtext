@@ -69,18 +69,18 @@ public class ContentAssistTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getStartConsumer().setRule(grammarAccess.prStart());
-		getAbstractRuleConsumer().setRule(grammarAccess.prAbstractRule());
-		getFirstAbstractRuleChildConsumer().setRule(grammarAccess.prFirstAbstractRuleChild());
-		getSecondAbstractRuleChildConsumer().setRule(grammarAccess.prSecondAbstractRuleChild());
-		getAbstractRuleCallConsumer().setRule(grammarAccess.prAbstractRuleCall());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getStartConsumer().setRule(grammarAccess.getStartAccess());
+		getAbstractRuleConsumer().setRule(grammarAccess.getAbstractRuleAccess());
+		getFirstAbstractRuleChildConsumer().setRule(grammarAccess.getFirstAbstractRuleChildAccess());
+		getSecondAbstractRuleChildConsumer().setRule(grammarAccess.getSecondAbstractRuleChildAccess());
+		getAbstractRuleCallConsumer().setRule(grammarAccess.getAbstractRuleCallAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getStartConsumer().setAbstractRuleConsumer(getAbstractRuleConsumer());

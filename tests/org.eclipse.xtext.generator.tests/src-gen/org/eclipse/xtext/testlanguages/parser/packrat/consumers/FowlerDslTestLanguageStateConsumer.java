@@ -256,19 +256,19 @@ public final class FowlerDslTestLanguageStateConsumer extends NonTerminalConsume
 	public void setRule(StateElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordState());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordActions());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele21KeywordLeftCurlyBracket());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele22AssignmentActions());
-		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele220CrossReferenceIDCommand());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele23KeywordRightCurlyBracket());
-		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele3AssignmentTransitions());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele30ParserRuleCallTransition());
-		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele4KeywordEnd());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getStateKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getActionsKeyword_2_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getLeftCurlyBracketKeyword_2_1());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getActionsAssignment_2_2());
+		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.getActionsCommandCrossReference_2_2_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getRightCurlyBracketKeyword_2_3());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.getTransitionsAssignment_3());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getTransitionsTransitionParserRuleCall_3_0());
+		keyword$15$Consumer = new Keyword$15$Consumer(rule.getEndKeyword_4());
 	}
 	
 	@Override

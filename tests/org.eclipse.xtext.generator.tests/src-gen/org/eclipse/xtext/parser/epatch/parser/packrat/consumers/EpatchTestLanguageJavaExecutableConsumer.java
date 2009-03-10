@@ -141,12 +141,12 @@ public final class EpatchTestLanguageJavaExecutableConsumer extends NonTerminalC
 	public void setRule(JavaExecutableElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordJava());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentMethod());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftParenthesis());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele3KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getJavaKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getMethodAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getMethodIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftParenthesisKeyword_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getRightParenthesisKeyword_3());
 	}
 	
 	@Override

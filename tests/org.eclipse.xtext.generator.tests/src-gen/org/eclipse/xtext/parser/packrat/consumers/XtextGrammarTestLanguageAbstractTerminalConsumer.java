@@ -101,10 +101,10 @@ public final class XtextGrammarTestLanguageAbstractTerminalConsumer extends NonT
 	public void setRule(AbstractTerminalElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallKeyword());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallRuleCall());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallParenthesizedElement());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getKeywordParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getRuleCallParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getParenthesizedElementParserRuleCall_2());
 	}
 	
 	@Override

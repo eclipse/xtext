@@ -102,10 +102,10 @@ public final class HiddenTerminalsTestLanguageDatatypeHiddensConsumer extends No
 	public void setRule(DatatypeHiddensElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordDatatype());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentValid());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallDatatypeRule());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getDatatypeKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getValidAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getValidDatatypeRuleParserRuleCall_1_0());
 	}
 	
 	@Override

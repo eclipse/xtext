@@ -76,7 +76,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:69:45: (iv_ruleFoo= ruleFoo EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:70:2: iv_ruleFoo= ruleFoo EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFoo().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); 
             pushFollow(FOLLOW_ruleFoo_in_entryRuleFoo71);
             iv_ruleFoo=ruleFoo();
             _fsp--;
@@ -123,11 +123,11 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo128); 
 
-            		createLeafNode(grammarAccess.prFoo().ele00TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFooRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -156,7 +156,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:106:6: lv_nameRefs_1= ruleNameRef
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prFoo().ele10ParserRuleCallNameRef(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo170);
             	    lv_nameRefs_1=ruleNameRef();
@@ -164,7 +164,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getFooRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -218,7 +218,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:131:49: (iv_ruleNameRef= ruleNameRef EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:132:2: iv_ruleNameRef= ruleNameRef EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prNameRef().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getNameRefRule(), currentNode); 
             pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef208);
             iv_ruleNameRef=ruleNameRef();
             _fsp--;
@@ -260,11 +260,11 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNameRef264); 
 
-            		createLeafNode(grammarAccess.prNameRef().ele0TerminalRuleCallSTRING(), "name"); 
+            		createLeafNode(grammarAccess.getNameRefAccess().getNameSTRINGTerminalRuleCall_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prNameRef().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getNameRefRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

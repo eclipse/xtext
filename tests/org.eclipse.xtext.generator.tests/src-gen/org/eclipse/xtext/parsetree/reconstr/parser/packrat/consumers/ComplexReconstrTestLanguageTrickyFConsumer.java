@@ -232,18 +232,18 @@ public final class ComplexReconstrTestLanguageTrickyFConsumer extends NonTermina
 	public void setRule(TrickyFElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTF());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele10AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele100TerminalRuleCallID());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentType());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110TerminalRuleCallINT());
-		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.ele2Alternatives());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele20AssignmentName());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele200TerminalRuleCallID());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele21AssignmentType());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele210TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTFKeyword_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_1_0());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_1_0_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getTypeAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getTypeINTTerminalRuleCall_1_1_0());
+		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.getAlternatives_2());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getNameAssignment_2_0());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getNameIDTerminalRuleCall_2_0_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getTypeAssignment_2_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getTypeINTTerminalRuleCall_2_1_0());
 	}
 	
 	@Override

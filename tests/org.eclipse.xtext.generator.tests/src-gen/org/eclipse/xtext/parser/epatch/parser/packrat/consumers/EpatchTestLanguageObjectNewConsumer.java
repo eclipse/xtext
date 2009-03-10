@@ -140,12 +140,12 @@ public final class EpatchTestLanguageObjectNewConsumer extends NonTerminalConsum
 	public void setRule(ObjectNewElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordNew());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentImport());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele10CrossReferenceIDImport());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele2AssignmentImpFrag());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele20TerminalRuleCallFRAGMENT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNewKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getImportAssignment_1());
+		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getImportImportCrossReference_1_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getImpFragAssignment_2());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getImpFragFRAGMENTTerminalRuleCall_2_0());
 	}
 	
 	@Override

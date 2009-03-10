@@ -162,14 +162,14 @@ public final class XtextTerminalsTestLanguageTerminalAlternativesConsumer extend
 	public void setRule(TerminalAlternativesElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerminalGroup());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionAlternativesgroups());
-		group$6$Consumer = new Group$6$Consumer(rule.ele11Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele110KeywordVerticalLine());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele111AssignmentGroups());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele1110ParserRuleCallTerminalGroup());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTerminalGroupParserRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesgroupsAction_1_0());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_1_1());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getVerticalLineKeyword_1_1_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getGroupsAssignment_1_1_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getGroupsTerminalGroupParserRuleCall_1_1_1_0());
 	}
 	
 	@Override

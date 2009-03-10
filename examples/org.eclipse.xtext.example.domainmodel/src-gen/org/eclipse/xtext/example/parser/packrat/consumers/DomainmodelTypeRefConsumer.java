@@ -71,8 +71,8 @@ public final class DomainmodelTypeRefConsumer extends NonTerminalConsumer {
 	public void setRule(TypeRefElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentReferenced());
-		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.ele0CrossReferenceIDType());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getReferencedAssignment());
+		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.getReferencedTypeCrossReference_0());
 	}
 	
 	@Override

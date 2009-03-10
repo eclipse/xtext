@@ -67,7 +67,7 @@ import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAcc
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -84,13 +84,13 @@ ruleModel returns [EObject current=null]
 	
 	    lv_first_0='foo\\bar' 
     {
-        createLeafNode(grammarAccess.prModel().ele00KeywordFooBar(), "first"); 
+        createLeafNode(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0(), "first"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -106,13 +106,13 @@ ruleModel returns [EObject current=null]
 	
 	    lv_second_1='foo\\' 
     {
-        createLeafNode(grammarAccess.prModel().ele10KeywordFoo(), "second"); 
+        createLeafNode(grammarAccess.getModelAccess().getSecondFooKeyword_1_0(), "second"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -128,13 +128,13 @@ ruleModel returns [EObject current=null]
 	
 	    lv_third_2='\\bar' 
     {
-        createLeafNode(grammarAccess.prModel().ele20KeywordBar(), "third"); 
+        createLeafNode(grammarAccess.getModelAccess().getThirdBarKeyword_2_0(), "third"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -150,13 +150,13 @@ ruleModel returns [EObject current=null]
 	
 	    lv_forth_3='\\' 
     {
-        createLeafNode(grammarAccess.prModel().ele30KeywordReverseSolidus(), "forth"); 
+        createLeafNode(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0(), "forth"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

@@ -86,9 +86,9 @@ public final class HiddenTerminalsTestLanguageDatatypeRuleConsumer extends NonTe
 	public void setRule(DatatypeRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordRule());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getRuleKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getSemicolonKeyword_1());
 	}
 	
 	@Override

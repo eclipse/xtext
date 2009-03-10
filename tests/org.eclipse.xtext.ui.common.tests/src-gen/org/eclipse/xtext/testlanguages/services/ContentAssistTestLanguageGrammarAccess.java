@@ -20,144 +20,149 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 	public class StartElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Start");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordAbstractRules = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentRules = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallAbstractRule = (RuleCall)c1AssignmentRules.eContents().get(0);
-		private final Keyword c2KeywordEnd = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cAbstractRulesKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRulesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRulesAbstractRuleParserRuleCall_1_0 = (RuleCall)cRulesAssignment_1.eContents().get(0);
+		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		// not supported
+		//Start:
+		//  "abstract rules" (rules+=AbstractRule)+ "end";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"abstract rules" (rules+=AbstractRule)+ "end"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordAbstractRules() { return c0KeywordAbstractRules; }
+		//"abstract rules"
+		public Keyword getAbstractRulesKeyword_0() { return cAbstractRulesKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentRules() { return c1AssignmentRules; }
+		//(rules+=AbstractRule)+
+		public Assignment getRulesAssignment_1() { return cRulesAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallAbstractRule() { return c10ParserRuleCallAbstractRule; }
+		//AbstractRule
+		public RuleCall getRulesAbstractRuleParserRuleCall_1_0() { return cRulesAbstractRuleParserRuleCall_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordEnd() { return c2KeywordEnd; }
+		//"end"
+		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
 	}
 
 	public class AbstractRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallFirstAbstractRuleChild = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallSecondAbstractRuleChild = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cFirstAbstractRuleChildParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSecondAbstractRuleChildParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//AbstractRule:
+		//  FirstAbstractRuleChild|SecondAbstractRuleChild;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//FirstAbstractRuleChild|SecondAbstractRuleChild
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallFirstAbstractRuleChild() { return c0ParserRuleCallFirstAbstractRuleChild; }
+		//FirstAbstractRuleChild
+		public RuleCall getFirstAbstractRuleChildParserRuleCall_0() { return cFirstAbstractRuleChildParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallSecondAbstractRuleChild() { return c1ParserRuleCallSecondAbstractRuleChild; }
+		//SecondAbstractRuleChild
+		public RuleCall getSecondAbstractRuleChildParserRuleCall_1() { return cSecondAbstractRuleChildParserRuleCall_1; }
 	}
 
 	public class FirstAbstractRuleChildElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstAbstractRuleChild");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
-		private final Keyword c1KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentElements = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20ParserRuleCallAbstractRule = (RuleCall)c2AssignmentElements.eContents().get(0);
-		private final Keyword c3KeywordRightParenthesis = (Keyword)cGroup.eContents().get(3);
-		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cElementsAbstractRuleParserRuleCall_2_0 = (RuleCall)cElementsAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//FirstAbstractRuleChild:
+		//  name=ID "(" (elements+=AbstractRule)+ ")" ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//name=ID "(" (elements+=AbstractRule)+ ")" ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentName() { return c0AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordLeftParenthesis() { return c1KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentElements() { return c2AssignmentElements; }
+		//(elements+=AbstractRule)+
+		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
 
-		// not supported
-		public RuleCall ele20ParserRuleCallAbstractRule() { return c20ParserRuleCallAbstractRule; }
+		//AbstractRule
+		public RuleCall getElementsAbstractRuleParserRuleCall_2_0() { return cElementsAbstractRuleParserRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordRightParenthesis() { return c3KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 
-		// not supported
-		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class SecondAbstractRuleChildElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondAbstractRuleChild");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
-		private final Keyword c1KeywordRule = (Keyword)cGroup.eContents().get(1);
-		private final Keyword c2KeywordColon = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentRule = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallAbstractRuleCall = (RuleCall)c3AssignmentRule.eContents().get(0);
-		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cRuleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cRuleAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRuleAbstractRuleCallParserRuleCall_3_0 = (RuleCall)cRuleAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//SecondAbstractRuleChild:
+		//  name=ID "rule" ":" rule=AbstractRuleCall ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//name=ID "rule" ":" rule=AbstractRuleCall ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentName() { return c0AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordRule() { return c1KeywordRule; }
+		//"rule"
+		public Keyword getRuleKeyword_1() { return cRuleKeyword_1; }
 
-		// not supported
-		public Keyword ele2KeywordColon() { return c2KeywordColon; }
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentRule() { return c3AssignmentRule; }
+		//rule=AbstractRuleCall
+		public Assignment getRuleAssignment_3() { return cRuleAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallAbstractRuleCall() { return c30ParserRuleCallAbstractRuleCall; }
+		//AbstractRuleCall
+		public RuleCall getRuleAbstractRuleCallParserRuleCall_3_0() { return cRuleAbstractRuleCallParserRuleCall_3_0; }
 
-		// not supported
-		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class AbstractRuleCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRuleCall");
-		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceIDAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
-		private final RuleCall c01TerminalRuleCallID = (RuleCall)c0CrossReferenceIDAbstractRule.eContents().get(1);
+		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cRuleAbstractRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);
+		private final RuleCall cRuleAbstractRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_0.eContents().get(1);
 		
-		// not supported
+		//AbstractRuleCall:
+		//  rule=[AbstractRule];
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentRule() { return cAssignmentRule; }
+		//rule=[AbstractRule]
+		public Assignment getRuleAssignment() { return cRuleAssignment; }
 
-		// not supported
-		public CrossReference ele0CrossReferenceIDAbstractRule() { return c0CrossReferenceIDAbstractRule; }
+		//[AbstractRule]
+		public CrossReference getRuleAbstractRuleCrossReference_0() { return cRuleAbstractRuleCrossReference_0; }
 
-		// not supported
-		public RuleCall ele01TerminalRuleCallID() { return c01TerminalRuleCallID; }
+		//ID
+		public RuleCall getRuleAbstractRuleIDTerminalRuleCall_0_1() { return cRuleAbstractRuleIDTerminalRuleCall_0_1; }
 	}
 	
 	private StartElements pStart;
@@ -168,13 +173,13 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ContentAssistTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -183,67 +188,98 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public StartElements prStart() {
+	//Start:
+	//  "abstract rules" (rules+=AbstractRule)+ "end";
+	public StartElements getStartAccess() {
 		return (pStart != null) ? pStart : (pStart = new StartElements());
-	} 
+	}
+	
+	public ParserRule getStartRule() {
+		return getStartAccess().getRule();
+	}
 
-	// not supported
-	public AbstractRuleElements prAbstractRule() {
+	//AbstractRule:
+	//  FirstAbstractRuleChild|SecondAbstractRuleChild;
+	public AbstractRuleElements getAbstractRuleAccess() {
 		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
-	} 
+	}
+	
+	public ParserRule getAbstractRuleRule() {
+		return getAbstractRuleAccess().getRule();
+	}
 
-	// not supported
-	public FirstAbstractRuleChildElements prFirstAbstractRuleChild() {
+	//FirstAbstractRuleChild:
+	//  name=ID "(" (elements+=AbstractRule)+ ")" ";";
+	public FirstAbstractRuleChildElements getFirstAbstractRuleChildAccess() {
 		return (pFirstAbstractRuleChild != null) ? pFirstAbstractRuleChild : (pFirstAbstractRuleChild = new FirstAbstractRuleChildElements());
-	} 
+	}
+	
+	public ParserRule getFirstAbstractRuleChildRule() {
+		return getFirstAbstractRuleChildAccess().getRule();
+	}
 
-	// not supported
-	public SecondAbstractRuleChildElements prSecondAbstractRuleChild() {
+	//SecondAbstractRuleChild:
+	//  name=ID "rule" ":" rule=AbstractRuleCall ";";
+	public SecondAbstractRuleChildElements getSecondAbstractRuleChildAccess() {
 		return (pSecondAbstractRuleChild != null) ? pSecondAbstractRuleChild : (pSecondAbstractRuleChild = new SecondAbstractRuleChildElements());
-	} 
+	}
+	
+	public ParserRule getSecondAbstractRuleChildRule() {
+		return getSecondAbstractRuleChildAccess().getRule();
+	}
 
-	// not supported
-	public AbstractRuleCallElements prAbstractRuleCall() {
+	//AbstractRuleCall:
+	//  rule=[AbstractRule];
+	public AbstractRuleCallElements getAbstractRuleCallAccess() {
 		return (pAbstractRuleCall != null) ? pAbstractRuleCall : (pAbstractRuleCall = new AbstractRuleCallElements());
+	}
+	
+	public ParserRule getAbstractRuleCallRule() {
+		return getAbstractRuleCallAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

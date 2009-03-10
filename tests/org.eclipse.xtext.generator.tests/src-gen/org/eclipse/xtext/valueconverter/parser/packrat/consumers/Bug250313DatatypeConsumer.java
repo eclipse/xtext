@@ -108,10 +108,10 @@ public final class Bug250313DatatypeConsumer extends NonTerminalConsumer {
 	public void setRule(DatatypeElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallID());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordHyphenMinus());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getIDTerminalRuleCall_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getHyphenMinusKeyword_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getIDTerminalRuleCall_2());
 	}
 	
 	@Override

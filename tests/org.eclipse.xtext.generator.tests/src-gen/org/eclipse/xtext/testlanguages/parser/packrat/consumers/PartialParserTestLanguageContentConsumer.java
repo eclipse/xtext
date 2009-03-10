@@ -84,9 +84,9 @@ public final class PartialParserTestLanguageContentConsumer extends NonTerminalC
 	public void setRule(ContentElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallChildren());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallAbstractChildren());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getChildrenParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getAbstractChildrenParserRuleCall_1());
 	}
 	
 	@Override

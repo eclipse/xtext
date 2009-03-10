@@ -67,7 +67,7 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
 	 EOF 
@@ -82,11 +82,11 @@ ruleRoot returns [EObject current=null]
     }:
 ('test' 
     {
-        createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
+        createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
     }
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0(), currentNode); 
     }
     this_TestLinewrap_1=ruleTestLinewrap
     { 
@@ -95,12 +95,12 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap(), null); 
+    createLeafNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1(), currentNode); 
     }
     this_TestIndentation_2=ruleTestIndentation
     { 
@@ -109,7 +109,7 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestIndentation(), null); 
+    createLeafNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1(), null); 
     }
 ));
 
@@ -119,7 +119,7 @@ ruleRoot returns [EObject current=null]
 
 // Entry rule entryRuleLine
 entryRuleLine returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prLine().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getLineRule(), currentNode); }
 	 iv_ruleLine=ruleLine 
 	 { $current=$iv_ruleLine.current; } 
 	 EOF 
@@ -136,12 +136,12 @@ ruleLine returns [EObject current=null]
 	
 	    lv_type_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prLine().ele00TerminalRuleCallID(), "type"); 
+		createLeafNode(grammarAccess.getLineAccess().getTypeIDTerminalRuleCall_0_0(), "type"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLine().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLineRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -156,12 +156,12 @@ ruleLine returns [EObject current=null]
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prLine().ele10TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getLineAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLine().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLineRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -174,7 +174,7 @@ ruleLine returns [EObject current=null]
 	
 )';' 
     {
-        createLeafNode(grammarAccess.prLine().ele2KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_2(), null); 
     }
 );
 
@@ -184,7 +184,7 @@ ruleLine returns [EObject current=null]
 
 // Entry rule entryRuleTestLinewrap
 entryRuleTestLinewrap returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prTestLinewrap().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getTestLinewrapRule(), currentNode); }
 	 iv_ruleTestLinewrap=ruleTestLinewrap 
 	 { $current=$iv_ruleTestLinewrap.current; } 
 	 EOF 
@@ -199,18 +199,18 @@ ruleTestLinewrap returns [EObject current=null]
     }:
 ('linewrap' 
     {
-        createLeafNode(grammarAccess.prTestLinewrap().ele0KeywordLinewrap(), null); 
+        createLeafNode(grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTestLinewrap().ele10ParserRuleCallLine(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_1_0(), currentNode); 
 	    }
 	    lv_items_1=ruleLine 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestLinewrap().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestLinewrapRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -230,7 +230,7 @@ ruleTestLinewrap returns [EObject current=null]
 
 // Entry rule entryRuleTestIndentation
 entryRuleTestIndentation returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prTestIndentation().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getTestIndentationRule(), currentNode); }
 	 iv_ruleTestIndentation=ruleTestIndentation 
 	 { $current=$iv_ruleTestIndentation.current; } 
 	 EOF 
@@ -245,22 +245,22 @@ ruleTestIndentation returns [EObject current=null]
     }:
 ('indentation' 
     {
-        createLeafNode(grammarAccess.prTestIndentation().ele0KeywordIndentation(), null); 
+        createLeafNode(grammarAccess.getTestIndentationAccess().getIndentationKeyword_0(), null); 
     }
 '{' 
     {
-        createLeafNode(grammarAccess.prTestIndentation().ele1KeywordLeftCurlyBracket(), null); 
+        createLeafNode(grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
 ((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele200ParserRuleCallTestIndentation(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTestIndentationAccess().getSubTestIndentationParserRuleCall_2_0_0(), currentNode); 
 	    }
 	    lv_sub_2=ruleTestIndentation 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestIndentationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -277,12 +277,12 @@ ruleTestIndentation returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prTestIndentation().ele210ParserRuleCallLine(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_2_1_0(), currentNode); 
 	    }
 	    lv_items_3=ruleLine 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestIndentation().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestIndentationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -296,7 +296,7 @@ ruleTestIndentation returns [EObject current=null]
 	
 ))*'}' 
     {
-        createLeafNode(grammarAccess.prTestIndentation().ele3KeywordRightCurlyBracket(), null); 
+        createLeafNode(grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3(), null); 
     }
 );
 

@@ -120,11 +120,11 @@ public final class ContentAssistTestLanguageStartConsumer extends NonTerminalCon
 	public void setRule(StartElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordAbstractRules());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentRules());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallAbstractRule());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordEnd());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getAbstractRulesKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getRulesAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getRulesAbstractRuleParserRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getEndKeyword_2());
 	}
 	
 	@Override

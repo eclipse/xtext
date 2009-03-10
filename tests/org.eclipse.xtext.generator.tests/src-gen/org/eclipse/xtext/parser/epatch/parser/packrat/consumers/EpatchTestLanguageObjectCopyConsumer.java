@@ -140,12 +140,12 @@ public final class EpatchTestLanguageObjectCopyConsumer extends NonTerminalConsu
 	public void setRule(ObjectCopyElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordCopy());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentResource());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele10CrossReferenceIDNamedResource());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele2AssignmentFragment());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele20TerminalRuleCallFRAGMENT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getCopyKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getResourceAssignment_1());
+		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getResourceNamedResourceCrossReference_1_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getFragmentAssignment_2());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getFragmentFRAGMENTTerminalRuleCall_2_0());
 	}
 	
 	@Override

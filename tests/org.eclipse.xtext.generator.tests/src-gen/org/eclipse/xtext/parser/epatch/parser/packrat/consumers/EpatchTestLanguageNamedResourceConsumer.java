@@ -433,30 +433,30 @@ public final class EpatchTestLanguageNamedResourceConsumer extends NonTerminalCo
 	public void setRule(NamedResourceElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordResource());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftCurlyBracket());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele3KeywordLeft());
-		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.ele4Alternatives());
-		group$8$Consumer = new Group$8$Consumer(rule.ele40Group());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele400KeywordUri());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele401AssignmentLeftUri());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele4010TerminalRuleCallSTRING());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele41AssignmentLeftRoot());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele410ParserRuleCallCreatedObject());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele5KeywordSemicolon());
-		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele6KeywordRight());
-		alternatives$16$Consumer = new Alternatives$16$Consumer(rule.ele7Alternatives());
-		group$17$Consumer = new Group$17$Consumer(rule.ele70Group());
-		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele700KeywordUri());
-		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele701AssignmentRightUri());
-		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele7010TerminalRuleCallSTRING());
-		assignment$21$Consumer = new Assignment$21$Consumer(rule.ele71AssignmentRightRoot());
-		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.ele710ParserRuleCallCreatedObject());
-		keyword$23$Consumer = new Keyword$23$Consumer(rule.ele8KeywordSemicolon());
-		keyword$24$Consumer = new Keyword$24$Consumer(rule.ele9KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getResourceKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getLeftKeyword_3());
+		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.getAlternatives_4());
+		group$8$Consumer = new Group$8$Consumer(rule.getGroup_4_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getUriKeyword_4_0_0());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getLeftUriAssignment_4_0_1());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getLeftUriSTRINGTerminalRuleCall_4_0_1_0());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getLeftRootAssignment_4_1());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getLeftRootCreatedObjectParserRuleCall_4_1_0());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getSemicolonKeyword_5());
+		keyword$15$Consumer = new Keyword$15$Consumer(rule.getRightKeyword_6());
+		alternatives$16$Consumer = new Alternatives$16$Consumer(rule.getAlternatives_7());
+		group$17$Consumer = new Group$17$Consumer(rule.getGroup_7_0());
+		keyword$18$Consumer = new Keyword$18$Consumer(rule.getUriKeyword_7_0_0());
+		assignment$19$Consumer = new Assignment$19$Consumer(rule.getRightUriAssignment_7_0_1());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.getRightUriSTRINGTerminalRuleCall_7_0_1_0());
+		assignment$21$Consumer = new Assignment$21$Consumer(rule.getRightRootAssignment_7_1());
+		ruleCall$22$Consumer = new RuleCall$22$Consumer(rule.getRightRootCreatedObjectParserRuleCall_7_1_0());
+		keyword$23$Consumer = new Keyword$23$Consumer(rule.getSemicolonKeyword_8());
+		keyword$24$Consumer = new Keyword$24$Consumer(rule.getRightCurlyBracketKeyword_9());
 	}
 	
 	@Override

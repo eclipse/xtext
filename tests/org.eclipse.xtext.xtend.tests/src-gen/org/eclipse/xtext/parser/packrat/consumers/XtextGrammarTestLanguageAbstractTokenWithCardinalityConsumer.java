@@ -184,18 +184,18 @@ public final class XtextGrammarTestLanguageAbstractTokenWithCardinalityConsumer 
 	public void setRule(AbstractTokenWithCardinalityElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.ele0Alternatives());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallAssignment());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallAbstractTerminal());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele1AssignmentCardinality());
-		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.ele10Alternatives());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele100KeywordQuestionMark());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele101KeywordAsterisk());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele102KeywordPlusSign());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele100KeywordQuestionMark());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele101KeywordAsterisk());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele102KeywordPlusSign());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.getAlternatives_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getAssignmentParserRuleCall_0_0());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getAbstractTerminalParserRuleCall_0_1());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getCardinalityAssignment_1());
+		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.getCardinalityAlternatives_1_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCardinalityQuestionMarkKeyword_1_0_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getCardinalityAsteriskKeyword_1_0_1());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getCardinalityPlusSignKeyword_1_0_2());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCardinalityQuestionMarkKeyword_1_0_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getCardinalityAsteriskKeyword_1_0_1());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getCardinalityPlusSignKeyword_1_0_2());
 	}
 	
 	@Override

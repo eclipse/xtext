@@ -22,24 +22,24 @@ public class AbstractTestLanguageParsetreeConstructor extends AbstractParseTreeC
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prInheritedParserRule().getRule().getType().getClassifier()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractCallOverridenParserRule().getRule().getType().getClassifier()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prOverridableParserRule2().getRule().getType().getClassifier()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAbstractCallExtendedParserRule().getRule().getType().getClassifier()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getClassifier()) && (s = new ExtendableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getInheritedParserRuleRule().getType().getClassifier()) && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getAbstractCallOverridenParserRuleRule().getType().getClassifier()) && (s = new AbstractCallOverridenParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier()) && (s = new OverridableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getOverridableParserRule2Rule().getType().getClassifier()) && (s = new OverridableParserRule2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getAbstractCallExtendedParserRuleRule().getType().getClassifier()) && (s = new AbstractCallExtendedParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier()) && (s = new ExtendableParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule InheritedParserRule ****************
  *
- * not supported
+ * InheritedParserRule returns mm::AType:
+ *   "element" name=ID;
  *
  **/
 
-
-// not supported
+// "element" name=ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
 	public InheritedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -48,10 +48,8 @@ protected class InheritedParserRule_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prInheritedParserRule().eleGroup();
+		return grammarAccess.getInheritedParserRuleAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -69,7 +67,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "element"
 protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 	
 	public InheritedParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
@@ -77,11 +75,11 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prInheritedParserRule().ele0KeywordElement();
+		return grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public InheritedParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -90,7 +88,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prInheritedParserRule().ele1AssignmentName();
+		return grammarAccess.getInheritedParserRuleAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -99,7 +97,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prInheritedParserRule().ele10TerminalRuleCallID();
+			element = grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -112,12 +110,12 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule AbstractCallOverridenParserRule ****************
  *
- * not supported
+ * AbstractCallOverridenParserRule returns mm::AModel:
+ *   "overridemodel" (elements+=OverridableParserRule)*;
  *
  **/
 
-
-// not supported
+// "overridemodel" (elements+=OverridableParserRule)*
 protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	
 	public AbstractCallOverridenParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -126,10 +124,8 @@ protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prAbstractCallOverridenParserRule().eleGroup();
+		return grammarAccess.getAbstractCallOverridenParserRuleAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -147,7 +143,7 @@ protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "overridemodel"
 protected class AbstractCallOverridenParserRule_0_Keyword_overridemodel extends KeywordToken  {
 	
 	public AbstractCallOverridenParserRule_0_Keyword_overridemodel(IInstanceDescription curr, AbstractToken pred) {
@@ -155,11 +151,11 @@ protected class AbstractCallOverridenParserRule_0_Keyword_overridemodel extends 
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prAbstractCallOverridenParserRule().ele0KeywordOverridemodel();
+		return grammarAccess.getAbstractCallOverridenParserRuleAccess().getOverridemodelKeyword_0();
 	}	
 }
 
-// not supported
+// (elements+=OverridableParserRule)*
 protected class AbstractCallOverridenParserRule_1_Assignment_elements extends AssignmentToken  {
 	
 	public AbstractCallOverridenParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -168,7 +164,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prAbstractCallOverridenParserRule().ele1AssignmentElements();
+		return grammarAccess.getAbstractCallOverridenParserRuleAccess().getElementsAssignment_1();
 	}
 	
 	@Override
@@ -178,7 +174,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prOverridableParserRule().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) {
 				Solution s = new OverridableParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -198,12 +194,12 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 
 /************ begin Rule OverridableParserRule ****************
  *
- * not supported
+ * OverridableParserRule returns mm::AType:
+ *   "element" name=ID;
  *
  **/
 
-
-// not supported
+// "element" name=ID
 protected class OverridableParserRule_Group extends GroupToken {
 	
 	public OverridableParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -212,10 +208,8 @@ protected class OverridableParserRule_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prOverridableParserRule().eleGroup();
+		return grammarAccess.getOverridableParserRuleAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -233,7 +227,7 @@ protected class OverridableParserRule_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "element"
 protected class OverridableParserRule_0_Keyword_element extends KeywordToken  {
 	
 	public OverridableParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
@@ -241,11 +235,11 @@ protected class OverridableParserRule_0_Keyword_element extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridableParserRule().ele0KeywordElement();
+		return grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class OverridableParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public OverridableParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -254,7 +248,7 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prOverridableParserRule().ele1AssignmentName();
+		return grammarAccess.getOverridableParserRuleAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -263,7 +257,7 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prOverridableParserRule().ele10TerminalRuleCallID();
+			element = grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -276,12 +270,12 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 
 /************ begin Rule OverridableParserRule2 ****************
  *
- * not supported
+ * OverridableParserRule2 returns mm::AType:
+ *   "other element" name=STRING;
  *
  **/
 
-
-// not supported
+// "other element" name=STRING
 protected class OverridableParserRule2_Group extends GroupToken {
 	
 	public OverridableParserRule2_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -290,10 +284,8 @@ protected class OverridableParserRule2_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prOverridableParserRule2().eleGroup();
+		return grammarAccess.getOverridableParserRule2Access().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -311,7 +303,7 @@ protected class OverridableParserRule2_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "other element"
 protected class OverridableParserRule2_0_Keyword_otherelement extends KeywordToken  {
 	
 	public OverridableParserRule2_0_Keyword_otherelement(IInstanceDescription curr, AbstractToken pred) {
@@ -319,11 +311,11 @@ protected class OverridableParserRule2_0_Keyword_otherelement extends KeywordTok
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prOverridableParserRule2().ele0KeywordOtherElement();
+		return grammarAccess.getOverridableParserRule2Access().getOtherElementKeyword_0();
 	}	
 }
 
-// not supported
+// name=STRING
 protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken  {
 	
 	public OverridableParserRule2_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -332,7 +324,7 @@ protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prOverridableParserRule2().ele1AssignmentName();
+		return grammarAccess.getOverridableParserRule2Access().getNameAssignment_1();
 	}
 	
 	@Override
@@ -341,7 +333,7 @@ protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prOverridableParserRule2().ele10TerminalRuleCallSTRING();
+			element = grammarAccess.getOverridableParserRule2Access().getNameSTRINGTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -354,12 +346,12 @@ protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken
 
 /************ begin Rule AbstractCallExtendedParserRule ****************
  *
- * not supported
+ * AbstractCallExtendedParserRule returns mm::AModel:
+ *   "extendedmodel" (elements+=ExtendableParserRule)*;
  *
  **/
 
-
-// not supported
+// "extendedmodel" (elements+=ExtendableParserRule)*
 protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	
 	public AbstractCallExtendedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -368,10 +360,8 @@ protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prAbstractCallExtendedParserRule().eleGroup();
+		return grammarAccess.getAbstractCallExtendedParserRuleAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -389,7 +379,7 @@ protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "extendedmodel"
 protected class AbstractCallExtendedParserRule_0_Keyword_extendedmodel extends KeywordToken  {
 	
 	public AbstractCallExtendedParserRule_0_Keyword_extendedmodel(IInstanceDescription curr, AbstractToken pred) {
@@ -397,11 +387,11 @@ protected class AbstractCallExtendedParserRule_0_Keyword_extendedmodel extends K
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prAbstractCallExtendedParserRule().ele0KeywordExtendedmodel();
+		return grammarAccess.getAbstractCallExtendedParserRuleAccess().getExtendedmodelKeyword_0();
 	}	
 }
 
-// not supported
+// (elements+=ExtendableParserRule)*
 protected class AbstractCallExtendedParserRule_1_Assignment_elements extends AssignmentToken  {
 	
 	public AbstractCallExtendedParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -410,7 +400,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prAbstractCallExtendedParserRule().ele1AssignmentElements();
+		return grammarAccess.getAbstractCallExtendedParserRuleAccess().getElementsAssignment_1();
 	}
 	
 	@Override
@@ -420,7 +410,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prExtendableParserRule().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) {
 				Solution s = new ExtendableParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -440,12 +430,12 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 
 /************ begin Rule ExtendableParserRule ****************
  *
- * not supported
+ * ExtendableParserRule returns mm::AType:
+ *   "element" name=ID;
  *
  **/
 
-
-// not supported
+// "element" name=ID
 protected class ExtendableParserRule_Group extends GroupToken {
 	
 	public ExtendableParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -454,10 +444,8 @@ protected class ExtendableParserRule_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prExtendableParserRule().eleGroup();
+		return grammarAccess.getExtendableParserRuleAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -475,7 +463,7 @@ protected class ExtendableParserRule_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "element"
 protected class ExtendableParserRule_0_Keyword_element extends KeywordToken  {
 	
 	public ExtendableParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
@@ -483,11 +471,11 @@ protected class ExtendableParserRule_0_Keyword_element extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prExtendableParserRule().ele0KeywordElement();
+		return grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class ExtendableParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public ExtendableParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -496,7 +484,7 @@ protected class ExtendableParserRule_1_Assignment_name extends AssignmentToken  
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prExtendableParserRule().ele1AssignmentName();
+		return grammarAccess.getExtendableParserRuleAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -505,7 +493,7 @@ protected class ExtendableParserRule_1_Assignment_name extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prExtendableParserRule().ele10TerminalRuleCallID();
+			element = grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;

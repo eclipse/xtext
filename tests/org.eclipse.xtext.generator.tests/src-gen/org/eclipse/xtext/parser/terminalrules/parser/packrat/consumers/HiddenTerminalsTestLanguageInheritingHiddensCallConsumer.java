@@ -101,10 +101,10 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensCallConsumer exte
 	public void setRule(InheritingHiddensCallElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordCall());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentValid());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele10KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getCallKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getValidAssignment_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getValidSemicolonKeyword_1_0());
 	}
 	
 	@Override

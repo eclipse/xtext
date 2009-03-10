@@ -225,17 +225,17 @@ public final class TreeTestLanguageNodeConsumer extends NonTerminalConsumer {
 	public void setRule(NodeElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordLeftParenthesis());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentAttrib());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallSTRING());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele3KeywordRightParenthesis());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele4KeywordLeftCurlyBracket());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele5AssignmentChildren());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele50ParserRuleCallNode());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele6KeywordRightCurlyBracketSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameIDTerminalRuleCall_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getLeftParenthesisKeyword_1());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getAttribAssignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getAttribSTRINGTerminalRuleCall_2_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getRightParenthesisKeyword_3());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getLeftCurlyBracketKeyword_4());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getChildrenAssignment_5());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getChildrenNodeParserRuleCall_5_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getRightCurlyBracketSemicolonKeyword_6());
 	}
 	
 	@Override

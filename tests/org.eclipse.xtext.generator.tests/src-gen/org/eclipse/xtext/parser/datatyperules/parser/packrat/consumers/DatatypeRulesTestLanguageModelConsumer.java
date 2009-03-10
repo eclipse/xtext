@@ -291,22 +291,22 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentId());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallNestedModelId());
-		group$4$Consumer = new Group$4$Consumer(rule.ele1Group());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordColon());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentValue());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallFraction());
-		group$8$Consumer = new Group$8$Consumer(rule.ele2Group());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele20KeywordNumberSign());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele21AssignmentVector());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele210ParserRuleCallVector());
-		group$12$Consumer = new Group$12$Consumer(rule.ele3Group());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele30KeywordPlusSign());
-		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele31AssignmentDots());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele310ParserRuleCallDots());
-		keyword$16$Consumer = new Keyword$16$Consumer(rule.ele4KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getIdAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getIdNestedModelIdParserRuleCall_0_0());
+		group$4$Consumer = new Group$4$Consumer(rule.getGroup_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getColonKeyword_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getValueAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getValueFractionParserRuleCall_1_1_0());
+		group$8$Consumer = new Group$8$Consumer(rule.getGroup_2());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getNumberSignKeyword_2_0());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getVectorAssignment_2_1());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getVectorVectorParserRuleCall_2_1_0());
+		group$12$Consumer = new Group$12$Consumer(rule.getGroup_3());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.getPlusSignKeyword_3_0());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.getDotsAssignment_3_1());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getDotsDotsParserRuleCall_3_1_0());
+		keyword$16$Consumer = new Keyword$16$Consumer(rule.getSemicolonKeyword_4());
 	}
 	
 	@Override

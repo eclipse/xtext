@@ -67,8 +67,8 @@ public final class TestLanguageFileConsumer extends NonTerminalConsumer {
 	public void setRule(FileElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentStuff());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallStuff());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getStuffAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getStuffStuffParserRuleCall_0());
 	}
 	
 	@Override

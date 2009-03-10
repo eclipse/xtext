@@ -94,23 +94,23 @@ public class PartialParserTestLanguageParserConfiguration extends AbstractParser
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getSomeContainerConsumer().setRule(grammarAccess.prSomeContainer());
-		getNestedConsumer().setRule(grammarAccess.prNested());
-		getContentConsumer().setRule(grammarAccess.prContent());
-		getChildrenConsumer().setRule(grammarAccess.prChildren());
-		getChildConsumer().setRule(grammarAccess.prChild());
-		getAbstractChildrenConsumer().setRule(grammarAccess.prAbstractChildren());
-		getAbstractChildConsumer().setRule(grammarAccess.prAbstractChild());
-		getFirstConcreteConsumer().setRule(grammarAccess.prFirstConcrete());
-		getSecondConcreteConsumer().setRule(grammarAccess.prSecondConcrete());
-		getNamedConsumer().setRule(grammarAccess.prNamed());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getSomeContainerConsumer().setRule(grammarAccess.getSomeContainerAccess());
+		getNestedConsumer().setRule(grammarAccess.getNestedAccess());
+		getContentConsumer().setRule(grammarAccess.getContentAccess());
+		getChildrenConsumer().setRule(grammarAccess.getChildrenAccess());
+		getChildConsumer().setRule(grammarAccess.getChildAccess());
+		getAbstractChildrenConsumer().setRule(grammarAccess.getAbstractChildrenAccess());
+		getAbstractChildConsumer().setRule(grammarAccess.getAbstractChildAccess());
+		getFirstConcreteConsumer().setRule(grammarAccess.getFirstConcreteAccess());
+		getSecondConcreteConsumer().setRule(grammarAccess.getSecondConcreteAccess());
+		getNamedConsumer().setRule(grammarAccess.getNamedAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getSomeContainerConsumer().setContentConsumer(getContentConsumer());

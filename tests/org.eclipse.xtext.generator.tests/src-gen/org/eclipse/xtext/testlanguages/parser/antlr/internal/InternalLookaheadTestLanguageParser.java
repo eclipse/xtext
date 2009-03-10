@@ -76,7 +76,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:69:47: (iv_ruleEntry= ruleEntry EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:70:2: iv_ruleEntry= ruleEntry EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEntry().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEntryRule(), currentNode); 
             pushFollow(FOLLOW_ruleEntry_in_entryRuleEntry71);
             iv_ruleEntry=ruleEntry();
             _fsp--;
@@ -129,7 +129,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:86:6: lv_contents_0= ruleAlts
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEntry().ele0ParserRuleCallAlts(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAlts_in_ruleEntry139);
             	    lv_contents_0=ruleAlts();
@@ -137,7 +137,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEntry().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEntryRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -188,7 +188,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:111:46: (iv_ruleAlts= ruleAlts EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:112:2: iv_ruleAlts= ruleAlts EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prAlts().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getAltsRule(), currentNode); 
             pushFollow(FOLLOW_ruleAlts_in_entryRuleAlts176);
             iv_ruleAlts=ruleAlts();
             _fsp--;
@@ -276,7 +276,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:126:5: this_LookAhead0_0= ruleLookAhead0
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prAlts().ele0ParserRuleCallLookAhead0(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleLookAhead0_in_ruleAlts233);
                     this_LookAhead0_0=ruleLookAhead0();
@@ -287,7 +287,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prAlts().ele0ParserRuleCallLookAhead0(), null); 
+                        createLeafNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0(), null); 
                         
 
                     }
@@ -296,7 +296,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:140:5: this_LookAhead1_1= ruleLookAhead1
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead1(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleLookAhead1_in_ruleAlts267);
                     this_LookAhead1_1=ruleLookAhead1();
@@ -307,7 +307,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead1(), null); 
+                        createLeafNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), null); 
                         
 
                     }
@@ -316,7 +316,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:154:5: this_LookAhead3_2= ruleLookAhead3
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prAlts().ele2ParserRuleCallLookAhead3(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleLookAhead3_in_ruleAlts301);
                     this_LookAhead3_2=ruleLookAhead3();
@@ -327,7 +327,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prAlts().ele2ParserRuleCallLookAhead3(), null); 
+                        createLeafNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), null); 
                         
 
                     }
@@ -366,7 +366,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:173:52: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:174:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prLookAhead0().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getLookAhead0Rule(), currentNode); 
             pushFollow(FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0340);
             iv_ruleLookAhead0=ruleLookAhead0();
             _fsp--;
@@ -407,7 +407,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,11,FOLLOW_11_in_ruleLookAhead0384); 
 
-                    createLeafNode(grammarAccess.prLookAhead0().ele0KeywordBar(), null); 
+                    createLeafNode(grammarAccess.getLookAhead0Access().getBarKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:191:1: (lv_x_1= 'a' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:193:6: lv_x_1= 'a'
@@ -415,11 +415,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x_1=(Token)input.LT(1);
             match(input,12,FOLLOW_12_in_ruleLookAhead0405); 
 
-                    createLeafNode(grammarAccess.prLookAhead0().ele10KeywordA(), "x"); 
+                    createLeafNode(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead0().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLookAhead0Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -466,7 +466,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:219:52: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:220:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prLookAhead1().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getLookAhead1Rule(), currentNode); 
             pushFollow(FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1451);
             iv_ruleLookAhead1=ruleLookAhead1();
             _fsp--;
@@ -510,13 +510,13 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,13,FOLLOW_13_in_ruleLookAhead1495); 
 
-                    createLeafNode(grammarAccess.prLookAhead1().ele0KeywordFoo(), null); 
+                    createLeafNode(grammarAccess.getLookAhead1Access().getFooKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:237:1: (lv_y_1= ruleLookAhead2 )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:240:6: lv_y_1= ruleLookAhead2
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prLookAhead1().ele10ParserRuleCallLookAhead2(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleLookAhead2_in_ruleLookAhead1529);
             lv_y_1=ruleLookAhead2();
@@ -524,7 +524,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -544,11 +544,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x_2=(Token)input.LT(1);
             match(input,14,FOLLOW_14_in_ruleLookAhead1554); 
 
-                    createLeafNode(grammarAccess.prLookAhead1().ele20KeywordB(), "x"); 
+                    createLeafNode(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -567,11 +567,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x_3=(Token)input.LT(1);
             match(input,15,FOLLOW_15_in_ruleLookAhead1588); 
 
-                    createLeafNode(grammarAccess.prLookAhead1().ele30KeywordD(), "x"); 
+                    createLeafNode(grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -618,7 +618,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:307:52: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:308:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prLookAhead2().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getLookAhead2Rule(), currentNode); 
             pushFollow(FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2634);
             iv_ruleLookAhead2=ruleLookAhead2();
             _fsp--;
@@ -684,11 +684,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_z_0=(Token)input.LT(1);
                     match(input,13,FOLLOW_13_in_ruleLookAhead2691); 
 
-                            createLeafNode(grammarAccess.prLookAhead2().ele000KeywordFoo(), "z"); 
+                            createLeafNode(grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getLookAhead2Rule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -713,11 +713,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_z_1=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleLookAhead2731); 
 
-                            createLeafNode(grammarAccess.prLookAhead2().ele010KeywordBar(), "z"); 
+                            createLeafNode(grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getLookAhead2Rule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -738,7 +738,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             match(input,16,FOLLOW_16_in_ruleLookAhead2754); 
 
-                    createLeafNode(grammarAccess.prLookAhead2().ele1KeywordC(), null); 
+                    createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
                 
 
             }
@@ -774,7 +774,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:375:52: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:376:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prLookAhead3().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getLookAhead3Rule(), currentNode); 
             pushFollow(FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3787);
             iv_ruleLookAhead3=ruleLookAhead3();
             _fsp--;
@@ -817,11 +817,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,13,FOLLOW_13_in_ruleLookAhead3831); 
 
-                    createLeafNode(grammarAccess.prLookAhead3().ele0KeywordFoo(), null); 
+                    createLeafNode(grammarAccess.getLookAhead3Access().getFooKeyword_0(), null); 
                 
             match(input,11,FOLLOW_11_in_ruleLookAhead3840); 
 
-                    createLeafNode(grammarAccess.prLookAhead3().ele1KeywordBar(), null); 
+                    createLeafNode(grammarAccess.getLookAhead3Access().getBarKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:397:1: (lv_x_2= 'b' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:399:6: lv_x_2= 'b'
@@ -829,11 +829,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             lv_x_2=(Token)input.LT(1);
             match(input,14,FOLLOW_14_in_ruleLookAhead3861); 
 
-                    createLeafNode(grammarAccess.prLookAhead3().ele20KeywordB(), "x"); 
+                    createLeafNode(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x"); 
                 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLookAhead3Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -850,7 +850,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:421:6: lv_z_3= ruleLookAhead4
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prLookAhead3().ele30ParserRuleCallLookAhead4(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleLookAhead4_in_ruleLookAhead3908);
             lv_z_3=ruleLookAhead4();
@@ -858,7 +858,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getLookAhead3Rule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -906,7 +906,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:446:52: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:447:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prLookAhead4().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getLookAhead4Rule(), currentNode); 
             pushFollow(FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4945);
             iv_ruleLookAhead4=ruleLookAhead4();
             _fsp--;
@@ -969,11 +969,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_x_0=(Token)input.LT(1);
                     match(input,16,FOLLOW_16_in_ruleLookAhead41001); 
 
-                            createLeafNode(grammarAccess.prLookAhead4().ele00KeywordC(), "x"); 
+                            createLeafNode(grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getLookAhead4Rule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -998,11 +998,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     lv_x_1=(Token)input.LT(1);
                     match(input,15,FOLLOW_15_in_ruleLookAhead41041); 
 
-                            createLeafNode(grammarAccess.prLookAhead4().ele10KeywordD(), "x"); 
+                            createLeafNode(grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getLookAhead4Rule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        

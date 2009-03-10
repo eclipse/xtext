@@ -22,22 +22,22 @@ public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getClassifier()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLine().getRule().getType().getClassifier()) && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getClassifier()) && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getClassifier()) && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier()) && (s = new Line_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier()) && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier()) && (s = new TestIndentation_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Root ****************
  *
- * not supported
+ * Root:
+ *   "test" (TestLinewrap|TestIndentation);
  *
  **/
 
-
-// not supported
+// "test" (TestLinewrap|TestIndentation)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -46,10 +46,8 @@ protected class Root_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prRoot().eleGroup();
+		return grammarAccess.getRootAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -67,7 +65,7 @@ protected class Root_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "test"
 protected class Root_0_Keyword_test extends KeywordToken  {
 	
 	public Root_0_Keyword_test(IInstanceDescription curr, AbstractToken pred) {
@@ -75,11 +73,11 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prRoot().ele0KeywordTest();
+		return grammarAccess.getRootAccess().getTestKeyword_0();
 	}	
 }
 
-// not supported
+// TestLinewrap|TestIndentation
 protected class Root_1_Alternatives extends AlternativesToken {
 
 	public Root_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -88,7 +86,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prRoot().ele1Alternatives();
+		return grammarAccess.getRootAccess().getAlternatives_1();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -100,7 +98,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// TestLinewrap
 protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 	
 	public Root_1_0_RuleCall_TestLinewrap(IInstanceDescription curr, AbstractToken pred) {
@@ -109,18 +107,18 @@ protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prRoot().ele10ParserRuleCallTestLinewrap();
+		return grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestLinewrap_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestLinewrap().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier())) return null;
 		return new TestLinewrap_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// TestIndentation
 protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 	
 	public Root_1_1_RuleCall_TestIndentation(IInstanceDescription curr, AbstractToken pred) {
@@ -129,13 +127,13 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prRoot().ele11ParserRuleCallTestIndentation();
+		return grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestIndentation_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) return null;
 		return new TestIndentation_Group(current, this).firstSolution();
 	}
 }
@@ -147,12 +145,12 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 
 /************ begin Rule Line ****************
  *
- * not supported
+ * Line:
+ *   type+=ID name+=ID ";";
  *
  **/
 
-
-// not supported
+// type+=ID name+=ID ";"
 protected class Line_Group extends GroupToken {
 	
 	public Line_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -161,32 +159,30 @@ protected class Line_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prLine().eleGroup();
+		return grammarAccess.getLineAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Line_2_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Line_1_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Line_0_Assignment_type(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-			if(s3 != null) {
-				last = s3.getPredecessor();
-				return s3;
-			} else {
-				s2 = s2.getPredecessor().nextSolution(this,s2);
+			while(s2 != null) {
+				Solution s3 = new Line_0_Assignment_type(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// type+=ID
 protected class Line_0_Assignment_type extends AssignmentToken  {
 	
 	public Line_0_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -195,7 +191,7 @@ protected class Line_0_Assignment_type extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLine().ele0AssignmentType();
+		return grammarAccess.getLineAccess().getTypeAssignment_0();
 	}
 	
 	@Override
@@ -204,14 +200,14 @@ protected class Line_0_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prLine().ele00TerminalRuleCallID();
+			element = grammarAccess.getLineAccess().getTypeIDTerminalRuleCall_0_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// name+=ID
 protected class Line_1_Assignment_name extends AssignmentToken  {
 	
 	public Line_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -220,7 +216,7 @@ protected class Line_1_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLine().ele1AssignmentName();
+		return grammarAccess.getLineAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -229,14 +225,14 @@ protected class Line_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prLine().ele10TerminalRuleCallID();
+			element = grammarAccess.getLineAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// ";"
 protected class Line_2_Keyword extends KeywordToken  {
 	
 	public Line_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -244,7 +240,7 @@ protected class Line_2_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prLine().ele2KeywordSemicolon();
+		return grammarAccess.getLineAccess().getSemicolonKeyword_2();
 	}	
 }
 
@@ -254,12 +250,12 @@ protected class Line_2_Keyword extends KeywordToken  {
 
 /************ begin Rule TestLinewrap ****************
  *
- * not supported
+ * TestLinewrap:
+ *   "linewrap" (items+=Line)*;
  *
  **/
 
-
-// not supported
+// "linewrap" (items+=Line)*
 protected class TestLinewrap_Group extends GroupToken {
 	
 	public TestLinewrap_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -268,10 +264,8 @@ protected class TestLinewrap_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prTestLinewrap().eleGroup();
+		return grammarAccess.getTestLinewrapAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -289,7 +283,7 @@ protected class TestLinewrap_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "linewrap"
 protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
 	
 	public TestLinewrap_0_Keyword_linewrap(IInstanceDescription curr, AbstractToken pred) {
@@ -297,11 +291,11 @@ protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestLinewrap().ele0KeywordLinewrap();
+		return grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0();
 	}	
 }
 
-// not supported
+// (items+=Line)*
 protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 	
 	public TestLinewrap_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
@@ -310,7 +304,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestLinewrap().ele1AssignmentItems();
+		return grammarAccess.getTestLinewrapAccess().getItemsAssignment_1();
 	}
 	
 	@Override
@@ -320,7 +314,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				Solution s = new Line_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -340,12 +334,12 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule TestIndentation ****************
  *
- * not supported
+ * TestIndentation:
+ *   "indentation" "{" (sub+=TestIndentation|items+=Line)* "}";
  *
  **/
 
-
-// not supported
+// "indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
 protected class TestIndentation_Group extends GroupToken {
 	
 	public TestIndentation_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -354,36 +348,34 @@ protected class TestIndentation_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prTestIndentation().eleGroup();
+		return grammarAccess.getTestIndentationAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestIndentation_3_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TestIndentation_2_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new TestIndentation_1_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new TestIndentation_0_Keyword_indentation(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-			if(s4 != null) {
-				last = s4.getPredecessor();
-				return s4;
-			} else {
-				s3 = s3.getPredecessor().nextSolution(this,s3);
+			while(s2 != null) {
+				Solution s3 = new TestIndentation_1_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new TestIndentation_0_Keyword_indentation(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					if(s4 != null) {
+						last = s4.getPredecessor();
+						return s4;
+					} else {
+						s3 = s3.getPredecessor().nextSolution(this,s3);
+					}
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "indentation"
 protected class TestIndentation_0_Keyword_indentation extends KeywordToken  {
 	
 	public TestIndentation_0_Keyword_indentation(IInstanceDescription curr, AbstractToken pred) {
@@ -391,11 +383,11 @@ protected class TestIndentation_0_Keyword_indentation extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestIndentation().ele0KeywordIndentation();
+		return grammarAccess.getTestIndentationAccess().getIndentationKeyword_0();
 	}	
 }
 
-// not supported
+// "{"
 protected class TestIndentation_1_Keyword extends KeywordToken  {
 	
 	public TestIndentation_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -403,11 +395,11 @@ protected class TestIndentation_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestIndentation().ele1KeywordLeftCurlyBracket();
+		return grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1();
 	}	
 }
 
-// not supported
+// (sub+=TestIndentation|items+=Line)*
 protected class TestIndentation_2_Alternatives extends AlternativesToken {
 
 	public TestIndentation_2_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -416,7 +408,7 @@ protected class TestIndentation_2_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prTestIndentation().ele2Alternatives();
+		return grammarAccess.getTestIndentationAccess().getAlternatives_2();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -428,7 +420,7 @@ protected class TestIndentation_2_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// sub+=TestIndentation
 protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
 	
 	public TestIndentation_2_0_Assignment_sub(IInstanceDescription curr, AbstractToken pred) {
@@ -437,7 +429,7 @@ protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestIndentation().ele20AssignmentSub();
+		return grammarAccess.getTestIndentationAccess().getSubAssignment_2_0();
 	}
 	
 	@Override
@@ -447,7 +439,7 @@ protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prTestIndentation().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) {
 				Solution s = new TestIndentation_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -461,7 +453,7 @@ protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
 	}
 }
 
-// not supported
+// items+=Line
 protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
 	
 	public TestIndentation_2_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
@@ -470,7 +462,7 @@ protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestIndentation().ele21AssignmentItems();
+		return grammarAccess.getTestIndentationAccess().getItemsAssignment_2_1();
 	}
 	
 	@Override
@@ -480,7 +472,7 @@ protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLine().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				Solution s = new Line_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -495,7 +487,7 @@ protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
 }
 
 
-// not supported
+// "}"
 protected class TestIndentation_3_Keyword extends KeywordToken  {
 	
 	public TestIndentation_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -503,7 +495,7 @@ protected class TestIndentation_3_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestIndentation().ele3KeywordRightCurlyBracket();
+		return grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3();
 	}	
 }
 

@@ -156,13 +156,13 @@ public final class PartialParserTestLanguageChildConsumer extends NonTerminalCon
 	public void setRule(ChildElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHyphenMinusGreaterThanSign());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordC());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordLeftParenthesis());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele3AssignmentValue());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele30ParserRuleCallNamed());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele4KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getHyphenMinusGreaterThanSignKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getCKeyword_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getLeftParenthesisKeyword_2());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getValueAssignment_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getValueNamedParserRuleCall_3_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getRightParenthesisKeyword_4());
 	}
 	
 	@Override

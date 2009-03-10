@@ -155,13 +155,13 @@ public final class SimpleReconstrTestLanguageBooleanConsumer extends NonTerminal
 	public void setRule(BooleanElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordNumberSignDigitFour());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentBool());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele10KeywordMyoption());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordKw());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentValue());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNumberSignDigitFourKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getBoolAssignment_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getBoolMyoptionKeyword_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getKwKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getValueAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getValueIDTerminalRuleCall_3_0());
 	}
 	
 	@Override

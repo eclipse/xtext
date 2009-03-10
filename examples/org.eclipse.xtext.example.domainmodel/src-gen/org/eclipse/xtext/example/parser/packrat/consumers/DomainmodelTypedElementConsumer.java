@@ -84,9 +84,9 @@ public final class DomainmodelTypedElementConsumer extends NonTerminalConsumer {
 	public void setRule(TypedElementElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallFeature());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallParameter());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getFeatureParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getParameterParserRuleCall_1());
 	}
 	
 	@Override

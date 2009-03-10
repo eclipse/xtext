@@ -67,7 +67,7 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -82,7 +82,7 @@ ruleModel returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallWithoutHiddens(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0(), currentNode); 
     }
     this_WithoutHiddens_0=ruleWithoutHiddens
     { 
@@ -91,12 +91,12 @@ ruleModel returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prModel().ele0ParserRuleCallWithoutHiddens(), null); 
+    createLeafNode(grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele1ParserRuleCallWithHiddens(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1(), currentNode); 
     }
     this_WithHiddens_1=ruleWithHiddens
     { 
@@ -105,12 +105,12 @@ ruleModel returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prModel().ele1ParserRuleCallWithHiddens(), null); 
+    createLeafNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele2ParserRuleCallOverridingHiddens(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2(), currentNode); 
     }
     this_OverridingHiddens_2=ruleOverridingHiddens
     { 
@@ -119,12 +119,12 @@ ruleModel returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prModel().ele2ParserRuleCallOverridingHiddens(), null); 
+    createLeafNode(grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele3ParserRuleCallInheritingHiddens(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3(), currentNode); 
     }
     this_InheritingHiddens_3=ruleInheritingHiddens
     { 
@@ -133,12 +133,12 @@ ruleModel returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prModel().ele3ParserRuleCallInheritingHiddens(), null); 
+    createLeafNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prModel().ele4ParserRuleCallDatatypeHiddens(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4(), currentNode); 
     }
     this_DatatypeHiddens_4=ruleDatatypeHiddens
     { 
@@ -147,7 +147,7 @@ ruleModel returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prModel().ele4ParserRuleCallDatatypeHiddens(), null); 
+    createLeafNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4(), null); 
     }
 );
 
@@ -157,7 +157,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleWithoutHiddens
 entryRuleWithoutHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prWithoutHiddens().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getWithoutHiddensRule(), currentNode); }
 	 iv_ruleWithoutHiddens=ruleWithoutHiddens 
 	 { $current=$iv_ruleWithoutHiddens.current; } 
 	 EOF 
@@ -172,18 +172,18 @@ ruleWithoutHiddens returns [EObject current=null]
     }:
 ('without' 
     {
-        createLeafNode(grammarAccess.prWithoutHiddens().ele0KeywordWithout(), null); 
+        createLeafNode(grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0(), null); 
     }
 (	
 	
 	    lv_spaces_1=	RULE_WS
 	{
-		createLeafNode(grammarAccess.prWithoutHiddens().ele10TerminalRuleCallWS(), "spaces"); 
+		createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -196,18 +196,18 @@ ruleWithoutHiddens returns [EObject current=null]
 	
 )'hiddens' 
     {
-        createLeafNode(grammarAccess.prWithoutHiddens().ele2KeywordHiddens(), null); 
+        createLeafNode(grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2(), null); 
     }
 (	
 	
 	    lv_spaces_3=	RULE_WS
 	{
-		createLeafNode(grammarAccess.prWithoutHiddens().ele30TerminalRuleCallWS(), "spaces"); 
+		createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), "spaces"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -222,13 +222,13 @@ ruleWithoutHiddens returns [EObject current=null]
 	
 	    lv_valid_4=';' 
     {
-        createLeafNode(grammarAccess.prWithoutHiddens().ele40KeywordSemicolon(), "valid"); 
+        createLeafNode(grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0(), "valid"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prWithoutHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getWithoutHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -247,7 +247,7 @@ ruleWithoutHiddens returns [EObject current=null]
 
 // Entry rule entryRuleWithHiddens
 entryRuleWithHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prWithHiddens().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getWithHiddensRule(), currentNode); }
 	 iv_ruleWithHiddens=ruleWithHiddens 
 	 { $current=$iv_ruleWithHiddens.current; } 
 	 EOF 
@@ -264,23 +264,23 @@ ruleWithHiddens returns [EObject current=null]
     }:
 ('with' 
     {
-        createLeafNode(grammarAccess.prWithHiddens().ele0KeywordWith(), null); 
+        createLeafNode(grammarAccess.getWithHiddensAccess().getWithKeyword_0(), null); 
     }
 'hiddens' 
     {
-        createLeafNode(grammarAccess.prWithHiddens().ele1KeywordHiddens(), null); 
+        createLeafNode(grammarAccess.getWithHiddensAccess().getHiddensKeyword_1(), null); 
     }
 (	
 	
 	    lv_valid_2=';' 
     {
-        createLeafNode(grammarAccess.prWithHiddens().ele20KeywordSemicolon(), "valid"); 
+        createLeafNode(grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0(), "valid"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prWithHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getWithHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -299,7 +299,7 @@ ruleWithHiddens returns [EObject current=null]
 
 // Entry rule entryRuleOverridingHiddens
 entryRuleOverridingHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prOverridingHiddens().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getOverridingHiddensRule(), currentNode); }
 	 iv_ruleOverridingHiddens=ruleOverridingHiddens 
 	 { $current=$iv_ruleOverridingHiddens.current; } 
 	 EOF 
@@ -316,26 +316,26 @@ ruleOverridingHiddens returns [EObject current=null]
     }:
 ('overriding' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddens().ele0KeywordOverriding(), null); 
+        createLeafNode(grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0(), null); 
     }
 'hiddens' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddens().ele1KeywordHiddens(), null); 
+        createLeafNode(grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1(), null); 
     }
 '(' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddens().ele2KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prOverridingHiddens().ele30ParserRuleCallOverridingHiddensCall(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getOverridingHiddensAccess().getCalledOverridingHiddensCallParserRuleCall_3_0(), currentNode); 
 	    }
 	    lv_called_3=ruleOverridingHiddensCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -349,19 +349,19 @@ ruleOverridingHiddens returns [EObject current=null]
 	
 )')' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddens().ele4KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4(), null); 
     }
 (	
 	
 	    lv_valid_5=';' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddens().ele50KeywordSemicolon(), "valid"); 
+        createLeafNode(grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getOverridingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -380,7 +380,7 @@ ruleOverridingHiddens returns [EObject current=null]
 
 // Entry rule entryRuleOverridingHiddensCall
 entryRuleOverridingHiddensCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prOverridingHiddensCall().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getOverridingHiddensCallRule(), currentNode); }
 	 iv_ruleOverridingHiddensCall=ruleOverridingHiddensCall 
 	 { $current=$iv_ruleOverridingHiddensCall.current; } 
 	 EOF 
@@ -397,18 +397,18 @@ ruleOverridingHiddensCall returns [EObject current=null]
     }:
 ('call' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddensCall().ele0KeywordCall(), null); 
+        createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0(), null); 
     }
 (	
 	
 	    lv_spaces_1=	RULE_WS
 	{
-		createLeafNode(grammarAccess.prOverridingHiddensCall().ele10TerminalRuleCallWS(), "spaces"); 
+		createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -423,13 +423,13 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	
 	    lv_valid_2=';' 
     {
-        createLeafNode(grammarAccess.prOverridingHiddensCall().ele20KeywordSemicolon(), "valid"); 
+        createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0(), "valid"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prOverridingHiddensCall().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -448,7 +448,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 
 // Entry rule entryRuleInheritingHiddens
 entryRuleInheritingHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prInheritingHiddens().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getInheritingHiddensRule(), currentNode); }
 	 iv_ruleInheritingHiddens=ruleInheritingHiddens 
 	 { $current=$iv_ruleInheritingHiddens.current; } 
 	 EOF 
@@ -465,26 +465,26 @@ ruleInheritingHiddens returns [EObject current=null]
     }:
 ('inheriting' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddens().ele0KeywordInheriting(), null); 
+        createLeafNode(grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0(), null); 
     }
 'hiddens' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddens().ele1KeywordHiddens(), null); 
+        createLeafNode(grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1(), null); 
     }
 '(' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddens().ele2KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
     }
 ((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele300ParserRuleCallInheritingHiddensCall(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getInheritingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_3_0_0(), currentNode); 
 	    }
 	    lv_called_3=ruleInheritingHiddensCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -501,12 +501,12 @@ ruleInheritingHiddens returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prInheritingHiddens().ele310ParserRuleCallHidingHiddens(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getInheritingHiddensAccess().getHidingCalledHidingHiddensParserRuleCall_3_1_0(), currentNode); 
 	    }
 	    lv_hidingCalled_4=ruleHidingHiddens 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -520,19 +520,19 @@ ruleInheritingHiddens returns [EObject current=null]
 	
 ))')' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddens().ele4KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4(), null); 
     }
 (	
 	
 	    lv_valid_6=';' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddens().ele50KeywordSemicolon(), "valid"); 
+        createLeafNode(grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prInheritingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getInheritingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -551,7 +551,7 @@ ruleInheritingHiddens returns [EObject current=null]
 
 // Entry rule entryRuleDatatypeHiddens
 entryRuleDatatypeHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prDatatypeHiddens().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getDatatypeHiddensRule(), currentNode); }
 	 iv_ruleDatatypeHiddens=ruleDatatypeHiddens 
 	 { $current=$iv_ruleDatatypeHiddens.current; } 
 	 EOF 
@@ -566,18 +566,18 @@ ruleDatatypeHiddens returns [EObject current=null]
     }:
 ('datatype' 
     {
-        createLeafNode(grammarAccess.prDatatypeHiddens().ele0KeywordDatatype(), null); 
+        createLeafNode(grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prDatatypeHiddens().ele10ParserRuleCallDatatypeRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0(), currentNode); 
 	    }
 	    lv_valid_1=ruleDatatypeRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prDatatypeHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getDatatypeHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -597,7 +597,7 @@ ruleDatatypeHiddens returns [EObject current=null]
 
 // Entry rule entryRuleDatatypeRule
 entryRuleDatatypeRule returns [String current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prDatatypeRule().getRule(), currentNode); } 
+	{ currentNode = createCompositeNode(grammarAccess.getDatatypeRuleRule(), currentNode); } 
 	 iv_ruleDatatypeRule=ruleDatatypeRule 
 	 { $current=$iv_ruleDatatypeRule.current.getText(); }  
 	 EOF 
@@ -617,13 +617,13 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 	kw='rule' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prDatatypeRule().ele0KeywordRule(), null); 
+        createLeafNode(grammarAccess.getDatatypeRuleAccess().getRuleKeyword_0(), null); 
     }
 
 	kw=';' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.prDatatypeRule().ele1KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.getDatatypeRuleAccess().getSemicolonKeyword_1(), null); 
     }
 )
     ;
@@ -634,7 +634,7 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 
 // Entry rule entryRuleHidingHiddens
 entryRuleHidingHiddens returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prHidingHiddens().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getHidingHiddensRule(), currentNode); }
 	 iv_ruleHidingHiddens=ruleHidingHiddens 
 	 { $current=$iv_ruleHidingHiddens.current; } 
 	 EOF 
@@ -651,18 +651,18 @@ ruleHidingHiddens returns [EObject current=null]
     }:
 ('hiding' 
     {
-        createLeafNode(grammarAccess.prHidingHiddens().ele0KeywordHiding(), null); 
+        createLeafNode(grammarAccess.getHidingHiddensAccess().getHidingKeyword_0(), null); 
     }
 (	
 	
 	    lv_space_1=	RULE_WS
 	{
-		createLeafNode(grammarAccess.prHidingHiddens().ele10TerminalRuleCallWS(), "space"); 
+		createLeafNode(grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), "space"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -677,12 +677,12 @@ ruleHidingHiddens returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prHidingHiddens().ele20ParserRuleCallInheritingHiddensCall(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getHidingHiddensAccess().getCalledInheritingHiddensCallParserRuleCall_2_0(), currentNode); 
 	    }
 	    lv_called_2=ruleInheritingHiddensCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prHidingHiddens().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getHidingHiddensRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -702,7 +702,7 @@ ruleHidingHiddens returns [EObject current=null]
 
 // Entry rule entryRuleInheritingHiddensCall
 entryRuleInheritingHiddensCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prInheritingHiddensCall().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getInheritingHiddensCallRule(), currentNode); }
 	 iv_ruleInheritingHiddensCall=ruleInheritingHiddensCall 
 	 { $current=$iv_ruleInheritingHiddensCall.current; } 
 	 EOF 
@@ -717,19 +717,19 @@ ruleInheritingHiddensCall returns [EObject current=null]
     }:
 ('call' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddensCall().ele0KeywordCall(), null); 
+        createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0(), null); 
     }
 (	
 	
 	    lv_valid_1=';' 
     {
-        createLeafNode(grammarAccess.prInheritingHiddensCall().ele10KeywordSemicolon(), "valid"); 
+        createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0(), "valid"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prInheritingHiddensCall().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

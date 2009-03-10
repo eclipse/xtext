@@ -81,7 +81,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:69:50: (iv_ruleEcoreDsl= ruleEcoreDsl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:70:2: iv_ruleEcoreDsl= ruleEcoreDsl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEcoreDsl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEcoreDslRule(), currentNode); 
             pushFollow(FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl71);
             iv_ruleEcoreDsl=ruleEcoreDsl();
             _fsp--;
@@ -139,7 +139,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:86:6: lv_imports_0= ruleImportStatementDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEcoreDsl().ele00ParserRuleCallImportStatementDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEcoreDslAccess().getImportsImportStatementDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImportStatementDecl_in_ruleEcoreDsl140);
             	    lv_imports_0=ruleImportStatementDecl();
@@ -147,7 +147,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEcoreDsl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEcoreDslRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -171,7 +171,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:107:6: lv_package_1= ruleEPackageDecl
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEcoreDsl().ele10ParserRuleCallEPackageDecl(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleEPackageDecl_in_ruleEcoreDsl179);
             lv_package_1=ruleEPackageDecl();
@@ -179,7 +179,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEcoreDsl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEcoreDslRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -227,7 +227,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:132:61: (iv_ruleImportStatementDecl= ruleImportStatementDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:133:2: iv_ruleImportStatementDecl= ruleImportStatementDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prImportStatementDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getImportStatementDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleImportStatementDecl_in_entryRuleImportStatementDecl216);
             iv_ruleImportStatementDecl=ruleImportStatementDecl();
             _fsp--;
@@ -269,7 +269,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             {
             match(input,16,FOLLOW_16_in_ruleImportStatementDecl260); 
 
-                    createLeafNode(grammarAccess.prImportStatementDecl().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getImportStatementDeclAccess().getImportKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:150:1: ( (lv_alias_1= RULE_ID ) '=' )?
             int alt2=2;
@@ -288,11 +288,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_alias_1=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleImportStatementDecl283); 
 
-                    		createLeafNode(grammarAccess.prImportStatementDecl().ele100TerminalRuleCallID(), "alias"); 
+                    		createLeafNode(grammarAccess.getImportStatementDeclAccess().getAliasIDTerminalRuleCall_1_0_0(), "alias"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prImportStatementDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getImportStatementDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -307,7 +307,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,17,FOLLOW_17_in_ruleImportStatementDecl300); 
 
-                            createLeafNode(grammarAccess.prImportStatementDecl().ele11KeywordEqualsSign(), null); 
+                            createLeafNode(grammarAccess.getImportStatementDeclAccess().getEqualsSignKeyword_1_1(), null); 
                         
 
                     }
@@ -321,11 +321,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_importURI_3=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImportStatementDecl324); 
 
-            		createLeafNode(grammarAccess.prImportStatementDecl().ele20TerminalRuleCallSTRING(), "importURI"); 
+            		createLeafNode(grammarAccess.getImportStatementDeclAccess().getImportURISTRINGTerminalRuleCall_2_0(), "importURI"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prImportStatementDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getImportStatementDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -340,7 +340,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleImportStatementDecl341); 
 
-                    createLeafNode(grammarAccess.prImportStatementDecl().ele3KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getImportStatementDeclAccess().getSemicolonKeyword_3(), null); 
                 
 
             }
@@ -376,7 +376,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:205:54: (iv_ruleEPackageDecl= ruleEPackageDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:206:2: iv_ruleEPackageDecl= ruleEPackageDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEPackageDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEPackageDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl374);
             iv_ruleEPackageDecl=ruleEPackageDecl();
             _fsp--;
@@ -441,7 +441,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:222:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEPackageDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEPackageDecl443);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -449,7 +449,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEPackageDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -471,13 +471,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,19,FOLLOW_19_in_ruleEPackageDecl457); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele1KeywordPackage(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getPackageKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:244:1: (lv_name_2= ruleQID )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:247:6: lv_name_2= ruleQID
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEPackageDecl().ele20ParserRuleCallQID(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleQID_in_ruleEPackageDecl491);
             lv_name_2=ruleQID();
@@ -485,7 +485,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEPackageDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -501,11 +501,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,20,FOLLOW_20_in_ruleEPackageDecl504); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele3KeywordNsURI(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getNsURIKeyword_3(), null); 
                 
             match(input,17,FOLLOW_17_in_ruleEPackageDecl513); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele4KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_4(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:273:1: (lv_nsURI_5= RULE_STRING )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:275:6: lv_nsURI_5= RULE_STRING
@@ -513,11 +513,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_nsURI_5=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageDecl535); 
 
-            		createLeafNode(grammarAccess.prEPackageDecl().ele50TerminalRuleCallSTRING(), "nsURI"); 
+            		createLeafNode(grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0(), "nsURI"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEPackageDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -532,17 +532,17 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,21,FOLLOW_21_in_ruleEPackageDecl552); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele6KeywordNsPrefix(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getNsPrefixKeyword_6(), null); 
                 
             match(input,17,FOLLOW_17_in_ruleEPackageDecl561); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele7KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_7(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:301:1: (lv_nsPrefix_8= ruleQID )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:304:6: lv_nsPrefix_8= ruleQID
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEPackageDecl().ele80ParserRuleCallQID(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleQID_in_ruleEPackageDecl595);
             lv_nsPrefix_8=ruleQID();
@@ -550,7 +550,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEPackageDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -566,7 +566,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,22,FOLLOW_22_in_ruleEPackageDecl608); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele9KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getLeftCurlyBracketKeyword_9(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:326:1: ( (lv_eSubpackages_10= ruleSubEPackageDecl ) | (lv_eClassifiers_11= ruleEClassifierDecl ) )*
             loop4:
@@ -581,7 +581,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:329:6: lv_eSubpackages_10= ruleSubEPackageDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEPackageDecl().ele1000ParserRuleCallSubEPackageDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleSubEPackageDecl_in_ruleEPackageDecl643);
             	    lv_eSubpackages_10=ruleSubEPackageDecl();
@@ -589,7 +589,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEPackageDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -613,7 +613,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:351:6: lv_eClassifiers_11= ruleEClassifierDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEPackageDecl().ele1010ParserRuleCallEClassifierDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEClassifierDecl_in_ruleEPackageDecl687);
             	    lv_eClassifiers_11=ruleEClassifierDecl();
@@ -621,7 +621,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPackageDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEPackageDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -646,7 +646,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleEPackageDecl702); 
 
-                    createLeafNode(grammarAccess.prEPackageDecl().ele11KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEPackageDeclAccess().getRightCurlyBracketKeyword_11(), null); 
                 
 
             }
@@ -682,7 +682,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:380:57: (iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:381:2: iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSubEPackageDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSubEPackageDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl735);
             iv_ruleSubEPackageDecl=ruleSubEPackageDecl();
             _fsp--;
@@ -743,7 +743,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:397:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prSubEPackageDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleSubEPackageDecl804);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -751,7 +751,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getSubEPackageDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -773,7 +773,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,19,FOLLOW_19_in_ruleSubEPackageDecl818); 
 
-                    createLeafNode(grammarAccess.prSubEPackageDecl().ele1KeywordPackage(), null); 
+                    createLeafNode(grammarAccess.getSubEPackageDeclAccess().getPackageKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:419:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:421:6: lv_name_2= RULE_ID
@@ -781,11 +781,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubEPackageDecl840); 
 
-            		createLeafNode(grammarAccess.prSubEPackageDecl().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getSubEPackageDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -800,7 +800,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,22,FOLLOW_22_in_ruleSubEPackageDecl857); 
 
-                    createLeafNode(grammarAccess.prSubEPackageDecl().ele3KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getSubEPackageDeclAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:443:1: ( (lv_eSubpackages_4= ruleSubEPackageDecl ) | (lv_eClassifiers_5= ruleEClassifierDecl ) )*
             loop6:
@@ -815,7 +815,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:446:6: lv_eSubpackages_4= ruleSubEPackageDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prSubEPackageDecl().ele400ParserRuleCallSubEPackageDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleSubEPackageDecl_in_ruleSubEPackageDecl892);
             	    lv_eSubpackages_4=ruleSubEPackageDecl();
@@ -823,7 +823,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getSubEPackageDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -847,7 +847,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:468:6: lv_eClassifiers_5= ruleEClassifierDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prSubEPackageDecl().ele410ParserRuleCallEClassifierDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEClassifierDecl_in_ruleSubEPackageDecl936);
             	    lv_eClassifiers_5=ruleEClassifierDecl();
@@ -855,7 +855,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSubEPackageDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getSubEPackageDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -880,7 +880,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleSubEPackageDecl951); 
 
-                    createLeafNode(grammarAccess.prSubEPackageDecl().ele5KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getSubEPackageDeclAccess().getRightCurlyBracketKeyword_5(), null); 
                 
 
             }
@@ -916,7 +916,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:497:57: (iv_ruleEClassifierDecl= ruleEClassifierDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:498:2: iv_ruleEClassifierDecl= ruleEClassifierDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEClassifierDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEClassifierDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl984);
             iv_ruleEClassifierDecl=ruleEClassifierDecl();
             _fsp--;
@@ -963,7 +963,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:512:5: this_EClassDecl_0= ruleEClassDecl
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prEClassifierDecl().ele0ParserRuleCallEClassDecl(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEClassDecl_in_ruleEClassifierDecl1041);
                     this_EClassDecl_0=ruleEClassDecl();
@@ -974,7 +974,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prEClassifierDecl().ele0ParserRuleCallEClassDecl(), null); 
+                        createLeafNode(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0(), null); 
                         
 
                     }
@@ -983,7 +983,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:526:5: this_EDataTypeDecl_1= ruleEDataTypeDecl
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEDataTypeDecl_in_ruleEClassifierDecl1075);
                     this_EDataTypeDecl_1=ruleEDataTypeDecl();
@@ -994,7 +994,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prEClassifierDecl().ele1ParserRuleCallEDataTypeDecl(), null); 
+                        createLeafNode(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1(), null); 
                         
 
                     }
@@ -1033,7 +1033,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:545:55: (iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:546:2: iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEDataTypeDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEDataTypeDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl1114);
             iv_ruleEDataTypeDecl=ruleEDataTypeDecl();
             _fsp--;
@@ -1102,7 +1102,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:562:6: lv_eAnnotations_0= ruleEAnnotationDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEDataTypeDecl().ele000ParserRuleCallEAnnotationDecl(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEDataTypeDecl1184);
                     	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -1110,7 +1110,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEDataTypeDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1144,11 +1144,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             lv_serializable_1=(Token)input.LT(1);
                             match(input,RULE_SERIALIZABLE,FOLLOW_RULE_SERIALIZABLE_in_ruleEDataTypeDecl1211); 
 
-                            		createLeafNode(grammarAccess.prEDataTypeDecl().ele010TerminalRuleCallSerializable(), "serializable"); 
+                            		createLeafNode(grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0(), "serializable"); 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEDataTypeDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -1169,7 +1169,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,24,FOLLOW_24_in_ruleEDataTypeDecl1230); 
 
-                            createLeafNode(grammarAccess.prEDataTypeDecl().ele020KeywordDatatype(), null); 
+                            createLeafNode(grammarAccess.getEDataTypeDeclAccess().getDatatypeKeyword_0_2_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:604:1: (lv_name_3= RULE_ID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:606:6: lv_name_3= RULE_ID
@@ -1177,11 +1177,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_name_3=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEDataTypeDecl1252); 
 
-                    		createLeafNode(grammarAccess.prEDataTypeDecl().ele0210TerminalRuleCallID(), "name"); 
+                    		createLeafNode(grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0(), "name"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEDataTypeDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1196,13 +1196,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,25,FOLLOW_25_in_ruleEDataTypeDecl1269); 
 
-                            createLeafNode(grammarAccess.prEDataTypeDecl().ele022KeywordColon(), null); 
+                            createLeafNode(grammarAccess.getEDataTypeDeclAccess().getColonKeyword_0_2_2(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:628:1: (lv_instanceClassName_5= ruleSTRING_OR_QID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:631:6: lv_instanceClassName_5= ruleSTRING_OR_QID
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEDataTypeDecl().ele0230ParserRuleCallSTRING_OR_QID(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEDataTypeDecl1303);
                     lv_instanceClassName_5=ruleSTRING_OR_QID();
@@ -1210,7 +1210,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEDataTypeDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEDataTypeDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1226,7 +1226,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,18,FOLLOW_18_in_ruleEDataTypeDecl1316); 
 
-                            createLeafNode(grammarAccess.prEDataTypeDecl().ele024KeywordSemicolon(), null); 
+                            createLeafNode(grammarAccess.getEDataTypeDeclAccess().getSemicolonKeyword_0_2_4(), null); 
                         
 
                     }
@@ -1241,7 +1241,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:655:5: this_EEnumDecl_7= ruleEEnumDecl
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prEDataTypeDecl().ele1ParserRuleCallEEnumDecl(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEEnumDecl_in_ruleEDataTypeDecl1346);
                     this_EEnumDecl_7=ruleEEnumDecl();
@@ -1252,7 +1252,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prEDataTypeDecl().ele1ParserRuleCallEEnumDecl(), null); 
+                        createLeafNode(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1(), null); 
                         
 
                     }
@@ -1291,7 +1291,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:674:57: (iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:675:2: iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEAnnotationDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEAnnotationDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1385);
             iv_ruleEAnnotationDecl=ruleEAnnotationDecl();
             _fsp--;
@@ -1337,13 +1337,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             {
             match(input,26,FOLLOW_26_in_ruleEAnnotationDecl1429); 
 
-                    createLeafNode(grammarAccess.prEAnnotationDecl().ele0KeywordCommercialAt(), null); 
+                    createLeafNode(grammarAccess.getEAnnotationDeclAccess().getCommercialAtKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:692:1: (lv_source_1= ruleSTRING_OR_QID )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:695:6: lv_source_1= ruleSTRING_OR_QID
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEAnnotationDecl().ele10ParserRuleCallSTRING_OR_QID(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEAnnotationDecl1463);
             lv_source_1=ruleSTRING_OR_QID();
@@ -1351,7 +1351,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEAnnotationDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -1378,13 +1378,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,27,FOLLOW_27_in_ruleEAnnotationDecl1477); 
 
-                            createLeafNode(grammarAccess.prEAnnotationDecl().ele20KeywordLeftParenthesis(), null); 
+                            createLeafNode(grammarAccess.getEAnnotationDeclAccess().getLeftParenthesisKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:717:1: (lv_details_3= ruleMapEntry )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:720:6: lv_details_3= ruleMapEntry
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEAnnotationDecl().ele210ParserRuleCallMapEntry(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1511);
                     lv_details_3=ruleMapEntry();
@@ -1392,7 +1392,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEAnnotationDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1423,13 +1423,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,28,FOLLOW_28_in_ruleEAnnotationDecl1525); 
 
-                    	            createLeafNode(grammarAccess.prEAnnotationDecl().ele220KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getEAnnotationDeclAccess().getCommaKeyword_2_2_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:742:1: (lv_details_5= ruleMapEntry )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:745:6: lv_details_5= ruleMapEntry
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEAnnotationDecl().ele2210ParserRuleCallMapEntry(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1559);
                     	    lv_details_5=ruleMapEntry();
@@ -1437,7 +1437,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEAnnotationDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEAnnotationDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1462,7 +1462,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,29,FOLLOW_29_in_ruleEAnnotationDecl1574); 
 
-                            createLeafNode(grammarAccess.prEAnnotationDecl().ele23KeywordRightParenthesis(), null); 
+                            createLeafNode(grammarAccess.getEAnnotationDeclAccess().getRightParenthesisKeyword_2_3(), null); 
                         
 
                     }
@@ -1504,7 +1504,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:774:52: (iv_ruleEClassDecl= ruleEClassDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:775:2: iv_ruleEClassDecl= ruleEClassDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEClassDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEClassDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1609);
             iv_ruleEClassDecl=ruleEClassDecl();
             _fsp--;
@@ -1577,7 +1577,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:791:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEClassDecl1678);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -1585,7 +1585,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -1619,11 +1619,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_abstract_1=(Token)input.LT(1);
                     match(input,30,FOLLOW_30_in_ruleEClassDecl1704); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele10KeywordAbstract(), "abstract"); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0(), "abstract"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1665,11 +1665,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_interface_2=(Token)input.LT(1);
                     match(input,31,FOLLOW_31_in_ruleEClassDecl1740); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele200KeywordInterface(), "interface"); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0(), "interface"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1690,7 +1690,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,32,FOLLOW_32_in_ruleEClassDecl1768); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele21KeywordClass(), null); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getClassKeyword_2_1(), null); 
                         
 
                     }
@@ -1704,11 +1704,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_4=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEClassDecl1791); 
 
-            		createLeafNode(grammarAccess.prEClassDecl().ele30TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1734,13 +1734,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,33,FOLLOW_33_in_ruleEClassDecl1809); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele40KeywordLessThanSign(), null); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getLessThanSignKeyword_4_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:880:1: (lv_eTypeParameters_6= ruleETypeParameterDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:883:6: lv_eTypeParameters_6= ruleETypeParameterDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele410ParserRuleCallETypeParameterDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1843);
                     lv_eTypeParameters_6=ruleETypeParameterDecl();
@@ -1748,7 +1748,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1779,13 +1779,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,28,FOLLOW_28_in_ruleEClassDecl1857); 
 
-                    	            createLeafNode(grammarAccess.prEClassDecl().ele420KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getEClassDeclAccess().getCommaKeyword_4_2_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:905:1: (lv_eTypeParameters_8= ruleETypeParameterDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:908:6: lv_eTypeParameters_8= ruleETypeParameterDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele4210ParserRuleCallETypeParameterDecl(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1891);
                     	    lv_eTypeParameters_8=ruleETypeParameterDecl();
@@ -1793,7 +1793,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1818,7 +1818,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,34,FOLLOW_34_in_ruleEClassDecl1906); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele43KeywordGreaterThanSign(), null); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getGreaterThanSignKeyword_4_3(), null); 
                         
 
                     }
@@ -1839,13 +1839,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,35,FOLLOW_35_in_ruleEClassDecl1918); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele50KeywordExtends(), null); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getExtendsKeyword_5_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:934:1: (lv_eGenericSuperTypes_11= ruleEGenericTypeReferenceDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:937:6: lv_eGenericSuperTypes_11= ruleEGenericTypeReferenceDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele510ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1952);
                     lv_eGenericSuperTypes_11=ruleEGenericTypeReferenceDecl();
@@ -1853,7 +1853,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1884,13 +1884,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,28,FOLLOW_28_in_ruleEClassDecl1966); 
 
-                    	            createLeafNode(grammarAccess.prEClassDecl().ele520KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getEClassDeclAccess().getCommaKeyword_5_2_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:959:1: (lv_eGenericSuperTypes_13= ruleEGenericTypeReferenceDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:962:6: lv_eGenericSuperTypes_13= ruleEGenericTypeReferenceDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele5210ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl2000);
                     	    lv_eGenericSuperTypes_13=ruleEGenericTypeReferenceDecl();
@@ -1898,7 +1898,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1940,13 +1940,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,25,FOLLOW_25_in_ruleEClassDecl2018); 
 
-                            createLeafNode(grammarAccess.prEClassDecl().ele60KeywordColon(), null); 
+                            createLeafNode(grammarAccess.getEClassDeclAccess().getColonKeyword_6_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:984:1: (lv_instanceClassName_15= ruleSTRING_OR_QID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:987:6: lv_instanceClassName_15= ruleSTRING_OR_QID
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele610ParserRuleCallSTRING_OR_QID(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEClassDecl2052);
                     lv_instanceClassName_15=ruleSTRING_OR_QID();
@@ -1954,7 +1954,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1976,7 +1976,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,22,FOLLOW_22_in_ruleEClassDecl2067); 
 
-                    createLeafNode(grammarAccess.prEClassDecl().ele7KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEClassDeclAccess().getLeftCurlyBracketKeyword_7(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1009:1: ( (lv_eStructuralFeatures_17= ruleEStructuralFeatureDecl ) | (lv_eOperations_18= ruleEOperationDecl ) )*
             loop21:
@@ -1991,7 +1991,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1012:6: lv_eStructuralFeatures_17= ruleEStructuralFeatureDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele800ParserRuleCallEStructuralFeatureDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_ruleEClassDecl2102);
             	    lv_eStructuralFeatures_17=ruleEStructuralFeatureDecl();
@@ -1999,7 +1999,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2023,7 +2023,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1034:6: lv_eOperations_18= ruleEOperationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEClassDecl().ele810ParserRuleCallEOperationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEOperationDecl_in_ruleEClassDecl2146);
             	    lv_eOperations_18=ruleEOperationDecl();
@@ -2031,7 +2031,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEClassDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEClassDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2056,7 +2056,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleEClassDecl2161); 
 
-                    createLeafNode(grammarAccess.prEClassDecl().ele9KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEClassDeclAccess().getRightCurlyBracketKeyword_9(), null); 
                 
 
             }
@@ -2092,7 +2092,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1063:64: (iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1064:2: iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEStructuralFeatureDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEStructuralFeatureDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl2194);
             iv_ruleEStructuralFeatureDecl=ruleEStructuralFeatureDecl();
             _fsp--;
@@ -2139,7 +2139,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1078:5: this_EAttributeDecl_0= ruleEAttributeDecl
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prEStructuralFeatureDecl().ele0ParserRuleCallEAttributeDecl(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEAttributeDecl_in_ruleEStructuralFeatureDecl2251);
                     this_EAttributeDecl_0=ruleEAttributeDecl();
@@ -2150,7 +2150,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prEStructuralFeatureDecl().ele0ParserRuleCallEAttributeDecl(), null); 
+                        createLeafNode(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0(), null); 
                         
 
                     }
@@ -2159,7 +2159,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1092:5: this_EReferenceDecl_1= ruleEReferenceDecl
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEReferenceDecl_in_ruleEStructuralFeatureDecl2285);
                     this_EReferenceDecl_1=ruleEReferenceDecl();
@@ -2170,7 +2170,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prEStructuralFeatureDecl().ele1ParserRuleCallEReferenceDecl(), null); 
+                        createLeafNode(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1(), null); 
                         
 
                     }
@@ -2209,7 +2209,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1111:56: (iv_ruleEAttributeDecl= ruleEAttributeDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1112:2: iv_ruleEAttributeDecl= ruleEAttributeDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEAttributeDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEAttributeDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl2324);
             iv_ruleEAttributeDecl=ruleEAttributeDecl();
             _fsp--;
@@ -2280,7 +2280,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1128:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEAttributeDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEAttributeDecl2393);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -2288,7 +2288,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2366,11 +2366,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_iD_1=(Token)input.LT(1);
             	    match(input,36,FOLLOW_36_in_ruleEAttributeDecl2420); 
 
-            	            createLeafNode(grammarAccess.prEAttributeDecl().ele100KeywordID(), "iD"); 
+            	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0(), "iD"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2395,11 +2395,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_unique_2=(Token)input.LT(1);
             	    match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEAttributeDecl2461); 
 
-            	    		createLeafNode(grammarAccess.prEAttributeDecl().ele110TerminalRuleCallBag(), "unique"); 
+            	    		createLeafNode(grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0(), "unique"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2424,11 +2424,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_ordered_3=(Token)input.LT(1);
             	    match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEAttributeDecl2497); 
 
-            	    		createLeafNode(grammarAccess.prEAttributeDecl().ele120TerminalRuleCallRandom(), "ordered"); 
+            	    		createLeafNode(grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0(), "ordered"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2453,11 +2453,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_changeable_4=(Token)input.LT(1);
             	    match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_ruleEAttributeDecl2533); 
 
-            	    		createLeafNode(grammarAccess.prEAttributeDecl().ele130TerminalRuleCallReadonly(), "changeable"); 
+            	    		createLeafNode(grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0(), "changeable"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2482,11 +2482,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_volatile_5=(Token)input.LT(1);
             	    match(input,37,FOLLOW_37_in_ruleEAttributeDecl2568); 
 
-            	            createLeafNode(grammarAccess.prEAttributeDecl().ele140KeywordVolatile(), "volatile"); 
+            	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0(), "volatile"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2511,11 +2511,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_transient_6=(Token)input.LT(1);
             	    match(input,38,FOLLOW_38_in_ruleEAttributeDecl2608); 
 
-            	            createLeafNode(grammarAccess.prEAttributeDecl().ele150KeywordTransient(), "transient"); 
+            	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0(), "transient"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2540,11 +2540,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_unsettable_7=(Token)input.LT(1);
             	    match(input,39,FOLLOW_39_in_ruleEAttributeDecl2648); 
 
-            	            createLeafNode(grammarAccess.prEAttributeDecl().ele160KeywordUnsettable(), "unsettable"); 
+            	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0(), "unsettable"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2569,11 +2569,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_derived_8=(Token)input.LT(1);
             	    match(input,40,FOLLOW_40_in_ruleEAttributeDecl2688); 
 
-            	            createLeafNode(grammarAccess.prEAttributeDecl().ele170KeywordDerived(), "derived"); 
+            	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0(), "derived"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -2597,13 +2597,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,41,FOLLOW_41_in_ruleEAttributeDecl2712); 
 
-                    createLeafNode(grammarAccess.prEAttributeDecl().ele2KeywordAttr(), null); 
+                    createLeafNode(grammarAccess.getEAttributeDeclAccess().getAttrKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1322:1: (lv_eGenericType_10= ruleEGenericTypeReferenceDecl )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1325:6: lv_eGenericType_10= ruleEGenericTypeReferenceDecl
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEAttributeDecl().ele30ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEAttributeDecl2746);
             lv_eGenericType_10=ruleEGenericTypeReferenceDecl();
@@ -2611,7 +2611,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2638,7 +2638,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,42,FOLLOW_42_in_ruleEAttributeDecl2760); 
 
-                            createLeafNode(grammarAccess.prEAttributeDecl().ele40KeywordLeftSquareBracket(), null); 
+                            createLeafNode(grammarAccess.getEAttributeDeclAccess().getLeftSquareBracketKeyword_4_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1347:1: (lv_lowerBound_12= RULE_INT )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1349:6: lv_lowerBound_12= RULE_INT
@@ -2646,11 +2646,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_lowerBound_12=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEAttributeDecl2782); 
 
-                    		createLeafNode(grammarAccess.prEAttributeDecl().ele410TerminalRuleCallINT(), "lowerBound"); 
+                    		createLeafNode(grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0(), "lowerBound"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2676,13 +2676,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,43,FOLLOW_43_in_ruleEAttributeDecl2800); 
 
-                                    createLeafNode(grammarAccess.prEAttributeDecl().ele420KeywordFullStopFullStop(), null); 
+                                    createLeafNode(grammarAccess.getEAttributeDeclAccess().getFullStopFullStopKeyword_4_2_0(), null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1371:1: (lv_upperBound_14= ruleSINT )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1374:6: lv_upperBound_14= ruleSINT
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prEAttributeDecl().ele4210ParserRuleCallSINT(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleSINT_in_ruleEAttributeDecl2834);
                             lv_upperBound_14=ruleSINT();
@@ -2690,7 +2690,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -2712,7 +2712,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,44,FOLLOW_44_in_ruleEAttributeDecl2849); 
 
-                            createLeafNode(grammarAccess.prEAttributeDecl().ele43KeywordRightSquareBracket(), null); 
+                            createLeafNode(grammarAccess.getEAttributeDeclAccess().getRightSquareBracketKeyword_4_3(), null); 
                         
 
                     }
@@ -2726,11 +2726,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_16=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEAttributeDecl2873); 
 
-            		createLeafNode(grammarAccess.prEAttributeDecl().ele50TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2756,7 +2756,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,17,FOLLOW_17_in_ruleEAttributeDecl2891); 
 
-                            createLeafNode(grammarAccess.prEAttributeDecl().ele60KeywordEqualsSign(), null); 
+                            createLeafNode(grammarAccess.getEAttributeDeclAccess().getEqualsSignKeyword_6_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1420:1: (lv_defaultValueLiteral_18= RULE_STRING )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1422:6: lv_defaultValueLiteral_18= RULE_STRING
@@ -2764,11 +2764,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_defaultValueLiteral_18=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEAttributeDecl2913); 
 
-                    		createLeafNode(grammarAccess.prEAttributeDecl().ele610TerminalRuleCallSTRING(), "defaultValueLiteral"); 
+                    		createLeafNode(grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0(), "defaultValueLiteral"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEAttributeDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEAttributeDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2789,7 +2789,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEAttributeDecl2932); 
 
-                    createLeafNode(grammarAccess.prEAttributeDecl().ele7KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getEAttributeDeclAccess().getSemicolonKeyword_7(), null); 
                 
 
             }
@@ -2825,7 +2825,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1451:56: (iv_ruleEReferenceDecl= ruleEReferenceDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1452:2: iv_ruleEReferenceDecl= ruleEReferenceDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEReferenceDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEReferenceDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl2965);
             iv_ruleEReferenceDecl=ruleEReferenceDecl();
             _fsp--;
@@ -2896,7 +2896,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1468:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEReferenceDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEReferenceDecl3034);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -2904,7 +2904,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -2982,11 +2982,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_resolveProxies_1=(Token)input.LT(1);
             	    match(input,RULE_LOCAL,FOLLOW_RULE_LOCAL_in_ruleEReferenceDecl3062); 
 
-            	    		createLeafNode(grammarAccess.prEReferenceDecl().ele100TerminalRuleCallLocal(), "resolveProxies"); 
+            	    		createLeafNode(grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0(), "resolveProxies"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3011,11 +3011,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_unique_2=(Token)input.LT(1);
             	    match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEReferenceDecl3098); 
 
-            	    		createLeafNode(grammarAccess.prEReferenceDecl().ele110TerminalRuleCallBag(), "unique"); 
+            	    		createLeafNode(grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0(), "unique"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3040,11 +3040,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_ordered_3=(Token)input.LT(1);
             	    match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEReferenceDecl3134); 
 
-            	    		createLeafNode(grammarAccess.prEReferenceDecl().ele120TerminalRuleCallRandom(), "ordered"); 
+            	    		createLeafNode(grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0(), "ordered"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3069,11 +3069,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_changeable_4=(Token)input.LT(1);
             	    match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_ruleEReferenceDecl3170); 
 
-            	    		createLeafNode(grammarAccess.prEReferenceDecl().ele130TerminalRuleCallReadonly(), "changeable"); 
+            	    		createLeafNode(grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0(), "changeable"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3098,11 +3098,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_volatile_5=(Token)input.LT(1);
             	    match(input,37,FOLLOW_37_in_ruleEReferenceDecl3205); 
 
-            	            createLeafNode(grammarAccess.prEReferenceDecl().ele140KeywordVolatile(), "volatile"); 
+            	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0(), "volatile"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3127,11 +3127,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_transient_6=(Token)input.LT(1);
             	    match(input,38,FOLLOW_38_in_ruleEReferenceDecl3245); 
 
-            	            createLeafNode(grammarAccess.prEReferenceDecl().ele150KeywordTransient(), "transient"); 
+            	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0(), "transient"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3156,11 +3156,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_unsettable_7=(Token)input.LT(1);
             	    match(input,39,FOLLOW_39_in_ruleEReferenceDecl3285); 
 
-            	            createLeafNode(grammarAccess.prEReferenceDecl().ele160KeywordUnsettable(), "unsettable"); 
+            	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0(), "unsettable"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3185,11 +3185,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_derived_8=(Token)input.LT(1);
             	    match(input,40,FOLLOW_40_in_ruleEReferenceDecl3325); 
 
-            	            createLeafNode(grammarAccess.prEReferenceDecl().ele170KeywordDerived(), "derived"); 
+            	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0(), "derived"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -3237,11 +3237,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_containment_9=(Token)input.LT(1);
                     match(input,45,FOLLOW_45_in_ruleEReferenceDecl3362); 
 
-                            createLeafNode(grammarAccess.prEReferenceDecl().ele200KeywordVal(), "containment"); 
+                            createLeafNode(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0(), "containment"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3262,7 +3262,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,46,FOLLOW_46_in_ruleEReferenceDecl3390); 
 
-                            createLeafNode(grammarAccess.prEReferenceDecl().ele21KeywordRef(), null); 
+                            createLeafNode(grammarAccess.getEReferenceDeclAccess().getRefKeyword_2_1(), null); 
                         
 
                     }
@@ -3274,7 +3274,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1686:6: lv_eGenericType_11= ruleEGenericTypeReferenceDecl
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEReferenceDecl().ele30ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEReferenceDecl3425);
             lv_eGenericType_11=ruleEGenericTypeReferenceDecl();
@@ -3282,7 +3282,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -3309,7 +3309,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,42,FOLLOW_42_in_ruleEReferenceDecl3439); 
 
-                            createLeafNode(grammarAccess.prEReferenceDecl().ele40KeywordLeftSquareBracket(), null); 
+                            createLeafNode(grammarAccess.getEReferenceDeclAccess().getLeftSquareBracketKeyword_4_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1708:1: (lv_lowerBound_13= RULE_INT )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1710:6: lv_lowerBound_13= RULE_INT
@@ -3317,11 +3317,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_lowerBound_13=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEReferenceDecl3461); 
 
-                    		createLeafNode(grammarAccess.prEReferenceDecl().ele410TerminalRuleCallINT(), "lowerBound"); 
+                    		createLeafNode(grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0(), "lowerBound"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3347,13 +3347,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,43,FOLLOW_43_in_ruleEReferenceDecl3479); 
 
-                                    createLeafNode(grammarAccess.prEReferenceDecl().ele420KeywordFullStopFullStop(), null); 
+                                    createLeafNode(grammarAccess.getEReferenceDeclAccess().getFullStopFullStopKeyword_4_2_0(), null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1732:1: (lv_upperBound_15= ruleSINT )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1735:6: lv_upperBound_15= ruleSINT
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prEReferenceDecl().ele4210ParserRuleCallSINT(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleSINT_in_ruleEReferenceDecl3513);
                             lv_upperBound_15=ruleSINT();
@@ -3361,7 +3361,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -3383,7 +3383,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,44,FOLLOW_44_in_ruleEReferenceDecl3528); 
 
-                            createLeafNode(grammarAccess.prEReferenceDecl().ele43KeywordRightSquareBracket(), null); 
+                            createLeafNode(grammarAccess.getEReferenceDeclAccess().getRightSquareBracketKeyword_4_3(), null); 
                         
 
                     }
@@ -3404,20 +3404,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,47,FOLLOW_47_in_ruleEReferenceDecl3540); 
 
-                            createLeafNode(grammarAccess.prEReferenceDecl().ele50KeywordNumberSign(), null); 
+                            createLeafNode(grammarAccess.getEReferenceDeclAccess().getNumberSignKeyword_5_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1761:1: ( RULE_ID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1764:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl3562); 
 
-                    		createLeafNode(grammarAccess.prEReferenceDecl().ele510CrossReferenceIDEReference(), "eOpposite"); 
+                    		createLeafNode(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceCrossReference_5_1_0(), "eOpposite"); 
                     	
 
                     }
@@ -3434,11 +3434,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_19=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl3589); 
 
-            		createLeafNode(grammarAccess.prEReferenceDecl().ele60TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEReferenceDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEReferenceDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3453,7 +3453,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEReferenceDecl3606); 
 
-                    createLeafNode(grammarAccess.prEReferenceDecl().ele7KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getEReferenceDeclAccess().getSemicolonKeyword_7(), null); 
                 
 
             }
@@ -3489,7 +3489,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1808:51: (iv_ruleEEnumDecl= ruleEEnumDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1809:2: iv_ruleEEnumDecl= ruleEEnumDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEEnumDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEEnumDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl3639);
             iv_ruleEEnumDecl=ruleEEnumDecl();
             _fsp--;
@@ -3548,7 +3548,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1825:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEEnumDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEEnumDecl3708);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -3556,7 +3556,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEEnumDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -3578,7 +3578,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,48,FOLLOW_48_in_ruleEEnumDecl3722); 
 
-                    createLeafNode(grammarAccess.prEEnumDecl().ele1KeywordEnum(), null); 
+                    createLeafNode(grammarAccess.getEEnumDeclAccess().getEnumKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1847:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1849:6: lv_name_2= RULE_ID
@@ -3586,11 +3586,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumDecl3744); 
 
-            		createLeafNode(grammarAccess.prEEnumDecl().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEEnumDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3605,7 +3605,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,22,FOLLOW_22_in_ruleEEnumDecl3761); 
 
-                    createLeafNode(grammarAccess.prEEnumDecl().ele3KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEEnumDeclAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1871:1: (lv_eLiterals_4= ruleEEnumLiteralDecl )+
             int cnt35=0;
@@ -3624,7 +3624,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1874:6: lv_eLiterals_4= ruleEEnumLiteralDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEEnumDecl().ele40ParserRuleCallEEnumLiteralDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_ruleEEnumDecl3795);
             	    lv_eLiterals_4=ruleEEnumLiteralDecl();
@@ -3632,7 +3632,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEEnumDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEEnumDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -3658,7 +3658,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,23,FOLLOW_23_in_ruleEEnumDecl3809); 
 
-                    createLeafNode(grammarAccess.prEEnumDecl().ele5KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEEnumDeclAccess().getRightCurlyBracketKeyword_5(), null); 
                 
 
             }
@@ -3694,7 +3694,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1903:58: (iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1904:2: iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEEnumLiteralDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEEnumLiteralDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl3842);
             iv_ruleEEnumLiteralDecl=ruleEEnumLiteralDecl();
             _fsp--;
@@ -3753,7 +3753,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1920:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEEnumLiteralDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEEnumLiteralDecl3911);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -3761,7 +3761,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -3787,11 +3787,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl3938); 
 
-            		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3817,7 +3817,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,17,FOLLOW_17_in_ruleEEnumLiteralDecl3956); 
 
-                            createLeafNode(grammarAccess.prEEnumLiteralDecl().ele20KeywordEqualsSign(), null); 
+                            createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getEqualsSignKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1962:1: (lv_value_3= RULE_INT )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1964:6: lv_value_3= RULE_INT
@@ -3825,11 +3825,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_value_3=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl3978); 
 
-                    		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele210TerminalRuleCallINT(), "value"); 
+                    		createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0(), "value"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3862,11 +3862,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     lv_literal_4=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl4010); 
 
-                    		createLeafNode(grammarAccess.prEEnumLiteralDecl().ele30TerminalRuleCallSTRING(), "literal"); 
+                    		createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0(), "literal"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEEnumLiteralDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3884,7 +3884,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEEnumLiteralDecl4028); 
 
-                    createLeafNode(grammarAccess.prEEnumLiteralDecl().ele4KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getSemicolonKeyword_4(), null); 
                 
 
             }
@@ -3920,7 +3920,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2013:60: (iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2014:2: iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prETypeParameterDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getETypeParameterDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl4061);
             iv_ruleETypeParameterDecl=ruleETypeParameterDecl();
             _fsp--;
@@ -3967,11 +3967,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleETypeParameterDecl4118); 
 
-            		createLeafNode(grammarAccess.prETypeParameterDecl().ele00TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getETypeParameterDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3997,13 +3997,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,35,FOLLOW_35_in_ruleETypeParameterDecl4136); 
 
-                            createLeafNode(grammarAccess.prETypeParameterDecl().ele10KeywordExtends(), null); 
+                            createLeafNode(grammarAccess.getETypeParameterDeclAccess().getExtendsKeyword_1_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2051:1: (lv_eBounds_2= ruleEGenericTypeDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2054:6: lv_eBounds_2= ruleEGenericTypeDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prETypeParameterDecl().ele110ParserRuleCallEGenericTypeDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleETypeParameterDecl4170);
                     lv_eBounds_2=ruleEGenericTypeDecl();
@@ -4011,7 +4011,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prETypeParameterDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getETypeParameterDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4065,7 +4065,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2079:67: (iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2080:2: iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEGenericTypeReferenceDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEGenericTypeReferenceDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl4209);
             iv_ruleEGenericTypeReferenceDecl=ruleEGenericTypeReferenceDecl();
             _fsp--;
@@ -4132,13 +4132,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl4267); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele000CrossReferenceIDEClassifier(), "eClassifier"); 
+                    		createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierCrossReference_0_0_0(), "eClassifier"); 
                     	
 
                     }
@@ -4156,13 +4156,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,33,FOLLOW_33_in_ruleEGenericTypeReferenceDecl4280); 
 
-                                    createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele010KeywordLessThanSign(), null); 
+                                    createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getLessThanSignKeyword_0_1_0(), null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2113:1: (lv_eTypeArguments_2= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2116:6: lv_eTypeArguments_2= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prEGenericTypeReferenceDecl().ele0110ParserRuleCallEGenericTypeDecl(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl4314);
                             lv_eTypeArguments_2=ruleEGenericTypeDecl();
@@ -4170,7 +4170,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4201,13 +4201,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,28,FOLLOW_28_in_ruleEGenericTypeReferenceDecl4328); 
 
-                            	            createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele0120KeywordComma(), null); 
+                            	            createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getCommaKeyword_0_1_2_0(), null); 
                             	        
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2138:1: (lv_eTypeArguments_4= ruleEGenericTypeDecl )
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2141:6: lv_eTypeArguments_4= ruleEGenericTypeDecl
                             	    {
                             	     
-                            	    	        currentNode=createCompositeNode(grammarAccess.prEGenericTypeReferenceDecl().ele01210ParserRuleCallEGenericTypeDecl(), currentNode); 
+                            	    	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0(), currentNode); 
                             	    	    
                             	    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl4362);
                             	    lv_eTypeArguments_4=ruleEGenericTypeDecl();
@@ -4215,7 +4215,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
+                            	    	            current = factory.create(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier());
                             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	    	        }
                             	    	        
@@ -4240,7 +4240,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                             match(input,34,FOLLOW_34_in_ruleEGenericTypeReferenceDecl4377); 
 
-                                    createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele013KeywordGreaterThanSign(), null); 
+                                    createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getGreaterThanSignKeyword_0_1_3(), null); 
                                 
 
                             }
@@ -4262,20 +4262,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,47,FOLLOW_47_in_ruleEGenericTypeReferenceDecl4396); 
 
-                            createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele10KeywordNumberSign(), null); 
+                            createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getNumberSignKeyword_1_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2168:1: ( RULE_ID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2171:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeReferenceDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl4418); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeReferenceDecl().ele110CrossReferenceIDETypeParameter(), "eTypeParameter"); 
+                    		createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0(), "eTypeParameter"); 
                     	
 
                     }
@@ -4320,7 +4320,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2191:58: (iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2192:2: iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEGenericTypeDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEGenericTypeDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl4455);
             iv_ruleEGenericTypeDecl=ruleEGenericTypeDecl();
             _fsp--;
@@ -4400,13 +4400,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl4513); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeDecl().ele000CrossReferenceIDEClassifier(), "eClassifier"); 
+                    		createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierCrossReference_0_0_0(), "eClassifier"); 
                     	
 
                     }
@@ -4424,13 +4424,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,33,FOLLOW_33_in_ruleEGenericTypeDecl4526); 
 
-                                    createLeafNode(grammarAccess.prEGenericTypeDecl().ele010KeywordLessThanSign(), null); 
+                                    createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getLessThanSignKeyword_0_1_0(), null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2225:1: (lv_eTypeArguments_2= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2228:6: lv_eTypeArguments_2= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prEGenericTypeDecl().ele0110ParserRuleCallEGenericTypeDecl(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4560);
                             lv_eTypeArguments_2=ruleEGenericTypeDecl();
@@ -4438,7 +4438,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4469,13 +4469,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	    {
                             	    match(input,28,FOLLOW_28_in_ruleEGenericTypeDecl4574); 
 
-                            	            createLeafNode(grammarAccess.prEGenericTypeDecl().ele0120KeywordComma(), null); 
+                            	            createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getCommaKeyword_0_1_2_0(), null); 
                             	        
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2250:1: (lv_eTypeArguments_4= ruleEGenericTypeDecl )
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2253:6: lv_eTypeArguments_4= ruleEGenericTypeDecl
                             	    {
                             	     
-                            	    	        currentNode=createCompositeNode(grammarAccess.prEGenericTypeDecl().ele01210ParserRuleCallEGenericTypeDecl(), currentNode); 
+                            	    	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0(), currentNode); 
                             	    	    
                             	    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4608);
                             	    lv_eTypeArguments_4=ruleEGenericTypeDecl();
@@ -4483,7 +4483,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	    	        if (current==null) {
-                            	    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
+                            	    	            current = factory.create(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier());
                             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	    	        }
                             	    	        
@@ -4508,7 +4508,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                             match(input,34,FOLLOW_34_in_ruleEGenericTypeDecl4623); 
 
-                                    createLeafNode(grammarAccess.prEGenericTypeDecl().ele013KeywordGreaterThanSign(), null); 
+                                    createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getGreaterThanSignKeyword_0_1_3(), null); 
                                 
 
                             }
@@ -4530,20 +4530,20 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,47,FOLLOW_47_in_ruleEGenericTypeDecl4642); 
 
-                            createLeafNode(grammarAccess.prEGenericTypeDecl().ele10KeywordNumberSign(), null); 
+                            createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getNumberSignKeyword_1_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2280:1: ( RULE_ID )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2283:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl4664); 
 
-                    		createLeafNode(grammarAccess.prEGenericTypeDecl().ele110CrossReferenceIDETypeParameter(), "eTypeParameter"); 
+                    		createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0(), "eTypeParameter"); 
                     	
 
                     }
@@ -4562,7 +4562,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,49,FOLLOW_49_in_ruleEGenericTypeDecl4684); 
 
-                            createLeafNode(grammarAccess.prEGenericTypeDecl().ele20KeywordQuestionMark(), null); 
+                            createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getQuestionMarkKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2301:1: ( ( 'extends' (lv_eUpperBound_10= ruleEGenericTypeDecl ) ) | ( 'super' (lv_eLowerBound_12= ruleEGenericTypeDecl ) ) )
                     int alt45=2;
@@ -4589,13 +4589,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,35,FOLLOW_35_in_ruleEGenericTypeDecl4695); 
 
-                                    createLeafNode(grammarAccess.prEGenericTypeDecl().ele2100KeywordExtends(), null); 
+                                    createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getExtendsKeyword_2_1_0_0(), null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2305:1: (lv_eUpperBound_10= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2308:6: lv_eUpperBound_10= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prEGenericTypeDecl().ele21010ParserRuleCallEGenericTypeDecl(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4729);
                             lv_eUpperBound_10=ruleEGenericTypeDecl();
@@ -4603,7 +4603,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4631,13 +4631,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             {
                             match(input,50,FOLLOW_50_in_ruleEGenericTypeDecl4750); 
 
-                                    createLeafNode(grammarAccess.prEGenericTypeDecl().ele2110KeywordSuper(), null); 
+                                    createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getSuperKeyword_2_1_1_0(), null); 
                                 
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2331:1: (lv_eLowerBound_12= ruleEGenericTypeDecl )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2334:6: lv_eLowerBound_12= ruleEGenericTypeDecl
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prEGenericTypeDecl().ele21110ParserRuleCallEGenericTypeDecl(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl4784);
                             lv_eLowerBound_12=ruleEGenericTypeDecl();
@@ -4645,7 +4645,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4708,7 +4708,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2359:56: (iv_ruleEOperationDecl= ruleEOperationDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2360:2: iv_ruleEOperationDecl= ruleEOperationDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEOperationDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEOperationDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl4824);
             iv_ruleEOperationDecl=ruleEOperationDecl();
             _fsp--;
@@ -4781,7 +4781,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2376:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEOperationDecl4893);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -4789,7 +4789,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -4833,11 +4833,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_unique_1=(Token)input.LT(1);
             	    match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEOperationDecl4920); 
 
-            	            createLeafNode(grammarAccess.prEOperationDecl().ele100KeywordBag(), "unique"); 
+            	            createLeafNode(grammarAccess.getEOperationDeclAccess().getUniqueBagKeyword_1_0_0(), "unique"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -4862,11 +4862,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    lv_ordered_2=(Token)input.LT(1);
             	    match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEOperationDecl4960); 
 
-            	            createLeafNode(grammarAccess.prEOperationDecl().ele110KeywordRandom(), "ordered"); 
+            	            createLeafNode(grammarAccess.getEOperationDeclAccess().getOrderedRandomKeyword_1_1_0(), "ordered"); 
             	        
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -4890,7 +4890,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,51,FOLLOW_51_in_ruleEOperationDecl4984); 
 
-                    createLeafNode(grammarAccess.prEOperationDecl().ele2KeywordOp(), null); 
+                    createLeafNode(grammarAccess.getEOperationDeclAccess().getOpKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2441:1: ( (lv_eGenericType_4= ruleEGenericTypeReferenceDecl ) | 'void' )
             int alt49=2;
@@ -4916,7 +4916,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2444:6: lv_eGenericType_4= ruleEGenericTypeReferenceDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele300ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl5019);
                     lv_eGenericType_4=ruleEGenericTypeReferenceDecl();
@@ -4924,7 +4924,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4946,7 +4946,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,52,FOLLOW_52_in_ruleEOperationDecl5038); 
 
-                            createLeafNode(grammarAccess.prEOperationDecl().ele31KeywordVoid(), null); 
+                            createLeafNode(grammarAccess.getEOperationDeclAccess().getVoidKeyword_3_1(), null); 
                         
 
                     }
@@ -4960,11 +4960,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_6=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEOperationDecl5061); 
 
-            		createLeafNode(grammarAccess.prEOperationDecl().ele40TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -4990,13 +4990,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,33,FOLLOW_33_in_ruleEOperationDecl5079); 
 
-                            createLeafNode(grammarAccess.prEOperationDecl().ele50KeywordLessThanSign(), null); 
+                            createLeafNode(grammarAccess.getEOperationDeclAccess().getLessThanSignKeyword_5_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2491:1: (lv_eTypeParameters_8= ruleETypeParameterDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2494:6: lv_eTypeParameters_8= ruleETypeParameterDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele510ParserRuleCallETypeParameterDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl5113);
                     lv_eTypeParameters_8=ruleETypeParameterDecl();
@@ -5004,7 +5004,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5035,13 +5035,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,28,FOLLOW_28_in_ruleEOperationDecl5127); 
 
-                    	            createLeafNode(grammarAccess.prEOperationDecl().ele520KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getEOperationDeclAccess().getCommaKeyword_5_2_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2516:1: (lv_eTypeParameters_10= ruleETypeParameterDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2519:6: lv_eTypeParameters_10= ruleETypeParameterDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele5210ParserRuleCallETypeParameterDecl(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl5161);
                     	    lv_eTypeParameters_10=ruleETypeParameterDecl();
@@ -5049,7 +5049,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -5074,7 +5074,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     match(input,34,FOLLOW_34_in_ruleEOperationDecl5176); 
 
-                            createLeafNode(grammarAccess.prEOperationDecl().ele53KeywordGreaterThanSign(), null); 
+                            createLeafNode(grammarAccess.getEOperationDeclAccess().getGreaterThanSignKeyword_5_3(), null); 
                         
 
                     }
@@ -5084,7 +5084,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,27,FOLLOW_27_in_ruleEOperationDecl5187); 
 
-                    createLeafNode(grammarAccess.prEOperationDecl().ele6KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getEOperationDeclAccess().getLeftParenthesisKeyword_6(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2545:1: ( (lv_eParameters_13= ruleEParameterDecl ) ( ',' (lv_eParameters_15= ruleEParameterDecl ) )* )?
             int alt53=2;
@@ -5101,7 +5101,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2548:6: lv_eParameters_13= ruleEParameterDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele700ParserRuleCallEParameterDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl5222);
                     lv_eParameters_13=ruleEParameterDecl();
@@ -5109,7 +5109,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5140,13 +5140,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,28,FOLLOW_28_in_ruleEOperationDecl5236); 
 
-                    	            createLeafNode(grammarAccess.prEOperationDecl().ele710KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getEOperationDeclAccess().getCommaKeyword_7_1_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2570:1: (lv_eParameters_15= ruleEParameterDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2573:6: lv_eParameters_15= ruleEParameterDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele7110ParserRuleCallEParameterDecl(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl5270);
                     	    lv_eParameters_15=ruleEParameterDecl();
@@ -5154,7 +5154,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -5185,7 +5185,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,29,FOLLOW_29_in_ruleEOperationDecl5287); 
 
-                    createLeafNode(grammarAccess.prEOperationDecl().ele8KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getEOperationDeclAccess().getRightParenthesisKeyword_8(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2595:1: ( 'throws' (lv_eGenericExceptions_18= ruleEGenericTypeReferenceDecl ) ( ',' (lv_eGenericExceptions_20= ruleEGenericTypeReferenceDecl ) )* )?
             int alt55=2;
@@ -5200,13 +5200,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     {
                     match(input,53,FOLLOW_53_in_ruleEOperationDecl5297); 
 
-                            createLeafNode(grammarAccess.prEOperationDecl().ele90KeywordThrows(), null); 
+                            createLeafNode(grammarAccess.getEOperationDeclAccess().getThrowsKeyword_9_0(), null); 
                         
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2599:1: (lv_eGenericExceptions_18= ruleEGenericTypeReferenceDecl )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2602:6: lv_eGenericExceptions_18= ruleEGenericTypeReferenceDecl
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele910ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl5331);
                     lv_eGenericExceptions_18=ruleEGenericTypeReferenceDecl();
@@ -5214,7 +5214,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -5245,13 +5245,13 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	    {
                     	    match(input,28,FOLLOW_28_in_ruleEOperationDecl5345); 
 
-                    	            createLeafNode(grammarAccess.prEOperationDecl().ele920KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getEOperationDeclAccess().getCommaKeyword_9_2_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2624:1: (lv_eGenericExceptions_20= ruleEGenericTypeReferenceDecl )
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2627:6: lv_eGenericExceptions_20= ruleEGenericTypeReferenceDecl
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prEOperationDecl().ele9210ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl5379);
                     	    lv_eGenericExceptions_20=ruleEGenericTypeReferenceDecl();
@@ -5259,7 +5259,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prEOperationDecl().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEOperationDeclRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -5290,7 +5290,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,18,FOLLOW_18_in_ruleEOperationDecl5396); 
 
-                    createLeafNode(grammarAccess.prEOperationDecl().ele10KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getEOperationDeclAccess().getSemicolonKeyword_10(), null); 
                 
 
             }
@@ -5326,7 +5326,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2656:56: (iv_ruleEParameterDecl= ruleEParameterDecl EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2657:2: iv_ruleEParameterDecl= ruleEParameterDecl EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEParameterDecl().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEParameterDeclRule(), currentNode); 
             pushFollow(FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl5429);
             iv_ruleEParameterDecl=ruleEParameterDecl();
             _fsp--;
@@ -5385,7 +5385,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2673:6: lv_eAnnotations_0= ruleEAnnotationDecl
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEParameterDecl().ele00ParserRuleCallEAnnotationDecl(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEParameterDecl5498);
             	    lv_eAnnotations_0=ruleEAnnotationDecl();
@@ -5393,7 +5393,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEParameterDeclRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -5417,7 +5417,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2694:6: lv_eGenericType_1= ruleEGenericTypeReferenceDecl
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prEParameterDecl().ele10ParserRuleCallEGenericTypeReferenceDecl(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEParameterDecl5537);
             lv_eGenericType_1=ruleEGenericTypeReferenceDecl();
@@ -5425,7 +5425,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEParameterDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -5445,11 +5445,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEParameterDecl5563); 
 
-            		createLeafNode(grammarAccess.prEParameterDecl().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEParameterDecl().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEParameterDeclRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5496,7 +5496,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2739:50: (iv_ruleMapEntry= ruleMapEntry EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2740:2: iv_ruleMapEntry= ruleMapEntry EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMapEntry().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMapEntryRule(), currentNode); 
             pushFollow(FOLLOW_ruleMapEntry_in_entryRuleMapEntry5604);
             iv_ruleMapEntry=ruleMapEntry();
             _fsp--;
@@ -5542,11 +5542,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_key_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMapEntry5661); 
 
-            		createLeafNode(grammarAccess.prMapEntry().ele00TerminalRuleCallID(), "key"); 
+            		createLeafNode(grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0(), "key"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMapEntry().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getMapEntryRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5561,7 +5561,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             match(input,17,FOLLOW_17_in_ruleMapEntry5678); 
 
-                    createLeafNode(grammarAccess.prMapEntry().ele1KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getMapEntryAccess().getEqualsSignKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2777:1: (lv_value_2= RULE_STRING )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2779:6: lv_value_2= RULE_STRING
@@ -5569,11 +5569,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             lv_value_2=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleMapEntry5700); 
 
-            		createLeafNode(grammarAccess.prMapEntry().ele20TerminalRuleCallSTRING(), "value"); 
+            		createLeafNode(grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0(), "value"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMapEntry().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getMapEntryRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5620,7 +5620,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2804:44: (iv_ruleQID= ruleQID EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2805:2: iv_ruleQID= ruleQID EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prQID().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getQIDRule(), currentNode); 
             pushFollow(FOLLOW_ruleQID_in_entryRuleQID5742);
             iv_ruleQID=ruleQID();
             _fsp--;
@@ -5667,7 +5667,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prQID().ele0TerminalRuleCallID(), null); 
+                createLeafNode(grammarAccess.getQIDAccess().getIDTerminalRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2826:1: ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )*
             loop58:
@@ -5708,7 +5708,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            match(input,54,FOLLOW_54_in_ruleQID5813); 
 
             	                    current.merge(kw);
-            	                    createLeafNode(grammarAccess.prQID().ele100KeywordFullStop(), null); 
+            	                    createLeafNode(grammarAccess.getQIDAccess().getFullStopKeyword_1_0_0(), null); 
             	                
 
             	            }
@@ -5720,7 +5720,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            match(input,55,FOLLOW_55_in_ruleQID5832); 
 
             	                    current.merge(kw);
-            	                    createLeafNode(grammarAccess.prQID().ele101Keyword$(), null); 
+            	                    createLeafNode(grammarAccess.getQIDAccess().get$Keyword_1_0_1(), null); 
             	                
 
             	            }
@@ -5734,7 +5734,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    		current.merge(this_ID_3);
             	        
             	     
-            	        createLeafNode(grammarAccess.prQID().ele11TerminalRuleCallID(), null); 
+            	        createLeafNode(grammarAccess.getQIDAccess().getIDTerminalRuleCall_1_1(), null); 
             	        
 
             	    }
@@ -5780,7 +5780,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2854:54: (iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2855:2: iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSTRING_OR_QID().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSTRING_OR_QIDRule(), currentNode); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID5894);
             iv_ruleSTRING_OR_QID=ruleSTRING_OR_QID();
             _fsp--;
@@ -5844,7 +5844,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     		current.merge(this_STRING_0);
                         
                      
-                        createLeafNode(grammarAccess.prSTRING_OR_QID().ele0TerminalRuleCallSTRING(), null); 
+                        createLeafNode(grammarAccess.getSTRING_OR_QIDAccess().getSTRINGTerminalRuleCall_0(), null); 
                         
 
                     }
@@ -5853,7 +5853,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2878:5: this_QID_1= ruleQID
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prSTRING_OR_QID().ele1ParserRuleCallQID(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getSTRING_OR_QIDAccess().getQIDParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleQID_in_ruleSTRING_OR_QID5978);
                     this_QID_1=ruleQID();
@@ -5903,7 +5903,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2896:45: (iv_ruleSINT= ruleSINT EOF )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2897:2: iv_ruleSINT= ruleSINT EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSINT().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSINTRule(), currentNode); 
             pushFollow(FOLLOW_ruleSINT_in_entryRuleSINT6022);
             iv_ruleSINT=ruleSINT();
             _fsp--;
@@ -5958,7 +5958,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     match(input,56,FOLLOW_56_in_ruleSINT6072); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.prSINT().ele0KeywordHyphenMinus(), null); 
+                            createLeafNode(grammarAccess.getSINTAccess().getHyphenMinusKeyword_0(), null); 
                         
 
                     }
@@ -5972,7 +5972,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             		current.merge(this_INT_1);
                 
              
-                createLeafNode(grammarAccess.prSINT().ele1TerminalRuleCallINT(), null); 
+                createLeafNode(grammarAccess.getSINTAccess().getINTTerminalRuleCall_1(), null); 
                 
 
             }

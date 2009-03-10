@@ -22,20 +22,20 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prFile().getRule().getType().getClassifier()) && (s = new File_Assignment_stuff(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prStuff().getRule().getType().getClassifier()) && (s = new Stuff_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getFileRule().getType().getClassifier()) && (s = new File_Assignment_stuff(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getStuffRule().getType().getClassifier()) && (s = new Stuff_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule File ****************
  *
- * not supported
+ * File:
+ *   (stuff+=Stuff)*;
  *
  **/
 
-
-// not supported
+// (stuff+=Stuff)*
 protected class File_Assignment_stuff extends AssignmentToken  {
 	
 	public File_Assignment_stuff(IInstanceDescription curr, AbstractToken pred) {
@@ -44,7 +44,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFile().eleAssignmentStuff();
+		return grammarAccess.getFileAccess().getStuffAssignment();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prStuff().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getStuffRule().getType().getClassifier())) {
 				Solution s = new Stuff_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -73,12 +73,12 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 
 /************ begin Rule Stuff ****************
  *
- * not supported
+ * Stuff:
+ *   "stuff" name=ID;
  *
  **/
 
-
-// not supported
+// "stuff" name=ID
 protected class Stuff_Group extends GroupToken {
 	
 	public Stuff_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -87,10 +87,8 @@ protected class Stuff_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prStuff().eleGroup();
+		return grammarAccess.getStuffAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -108,7 +106,7 @@ protected class Stuff_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "stuff"
 protected class Stuff_0_Keyword_stuff extends KeywordToken  {
 	
 	public Stuff_0_Keyword_stuff(IInstanceDescription curr, AbstractToken pred) {
@@ -116,11 +114,11 @@ protected class Stuff_0_Keyword_stuff extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prStuff().ele0KeywordStuff();
+		return grammarAccess.getStuffAccess().getStuffKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Stuff_1_Assignment_name extends AssignmentToken  {
 	
 	public Stuff_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -129,7 +127,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prStuff().ele1AssignmentName();
+		return grammarAccess.getStuffAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -138,7 +136,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prStuff().ele10TerminalRuleCallID();
+			element = grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;

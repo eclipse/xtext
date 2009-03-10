@@ -124,29 +124,29 @@ public class DomainmodelParserConfiguration extends AbstractParserConfiguration 
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getFileConsumer().setRule(grammarAccess.prFile());
-		getImportConsumer().setRule(grammarAccess.prImport());
-		getNamedElementConsumer().setRule(grammarAccess.prNamedElement());
-		getPackageConsumer().setRule(grammarAccess.prPackage());
-		getTypeConsumer().setRule(grammarAccess.prType());
-		getDataTypeConsumer().setRule(grammarAccess.prDataType());
-		getEntityConsumer().setRule(grammarAccess.prEntity());
-		getFeatureConsumer().setRule(grammarAccess.prFeature());
-		getStructuralFeatureConsumer().setRule(grammarAccess.prStructuralFeature());
-		getAttributeConsumer().setRule(grammarAccess.prAttribute());
-		getReferenceConsumer().setRule(grammarAccess.prReference());
-		getOperationConsumer().setRule(grammarAccess.prOperation());
-		getParameterConsumer().setRule(grammarAccess.prParameter());
-		getTypedElementConsumer().setRule(grammarAccess.prTypedElement());
-		getTypeRefConsumer().setRule(grammarAccess.prTypeRef());
-		getQualifiedNameConsumer().setRule(grammarAccess.prQualifiedName());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getFileConsumer().setRule(grammarAccess.getFileAccess());
+		getImportConsumer().setRule(grammarAccess.getImportAccess());
+		getNamedElementConsumer().setRule(grammarAccess.getNamedElementAccess());
+		getPackageConsumer().setRule(grammarAccess.getPackageAccess());
+		getTypeConsumer().setRule(grammarAccess.getTypeAccess());
+		getDataTypeConsumer().setRule(grammarAccess.getDataTypeAccess());
+		getEntityConsumer().setRule(grammarAccess.getEntityAccess());
+		getFeatureConsumer().setRule(grammarAccess.getFeatureAccess());
+		getStructuralFeatureConsumer().setRule(grammarAccess.getStructuralFeatureAccess());
+		getAttributeConsumer().setRule(grammarAccess.getAttributeAccess());
+		getReferenceConsumer().setRule(grammarAccess.getReferenceAccess());
+		getOperationConsumer().setRule(grammarAccess.getOperationAccess());
+		getParameterConsumer().setRule(grammarAccess.getParameterAccess());
+		getTypedElementConsumer().setRule(grammarAccess.getTypedElementAccess());
+		getTypeRefConsumer().setRule(grammarAccess.getTypeRefAccess());
+		getQualifiedNameConsumer().setRule(grammarAccess.getQualifiedNameAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getFileConsumer().setImportConsumer(getImportConsumer());

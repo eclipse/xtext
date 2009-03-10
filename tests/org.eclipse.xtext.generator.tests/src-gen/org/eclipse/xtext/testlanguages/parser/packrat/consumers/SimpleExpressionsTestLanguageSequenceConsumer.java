@@ -128,12 +128,12 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 	public void setRule(SequenceElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAddition());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionSequenceexpressions());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentExpressions());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallAddition());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAdditionParserRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		action$4$Consumer = new Action$4$Consumer(rule.getSequenceexpressionsAction_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getExpressionsAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getExpressionsAdditionParserRuleCall_1_1_0());
 	}
 	
 	@Override

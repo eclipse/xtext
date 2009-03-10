@@ -113,11 +113,11 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 	public void setRule(EcoreDslElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentImports());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallImportStatementDecl());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentPackage());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10ParserRuleCallEPackageDecl());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getImportsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getImportsImportStatementDeclParserRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getPackageAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getPackageEPackageDeclParserRuleCall_1_0());
 	}
 	
 	@Override

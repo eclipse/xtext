@@ -238,18 +238,18 @@ public final class DomainmodelEntityConsumer extends NonTerminalConsumer {
 	public void setRule(EntityElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordEntity());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordExtends());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentSuperType());
-		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele210CrossReferenceIDEntity());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele3KeywordLeftCurlyBracket());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele4AssignmentFeatures());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele40ParserRuleCallFeature());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele5KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getEntityKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getExtendsKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getSuperTypeAssignment_2_1());
+		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.getSuperTypeEntityCrossReference_2_1_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getLeftCurlyBracketKeyword_3());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getFeaturesAssignment_4());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getFeaturesFeatureParserRuleCall_4_0());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getRightCurlyBracketKeyword_5());
 	}
 	
 	@Override

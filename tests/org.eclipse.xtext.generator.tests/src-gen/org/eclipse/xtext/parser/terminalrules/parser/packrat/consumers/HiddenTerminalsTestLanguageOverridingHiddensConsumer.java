@@ -188,15 +188,15 @@ public final class HiddenTerminalsTestLanguageOverridingHiddensConsumer extends 
 	public void setRule(OverridingHiddensElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordOverriding());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordHiddens());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordLeftParenthesis());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele3AssignmentCalled());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele30ParserRuleCallOverridingHiddensCall());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele4KeywordRightParenthesis());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele5AssignmentValid());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele50KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getOverridingKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getHiddensKeyword_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getLeftParenthesisKeyword_2());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getCalledAssignment_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getCalledOverridingHiddensCallParserRuleCall_3_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getRightParenthesisKeyword_4());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getValidAssignment_5());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getValidSemicolonKeyword_5_0());
 	}
 	
 	@Override

@@ -152,13 +152,13 @@ public final class XtextGrammarTestLanguageTypeRefConsumer extends NonTerminalCo
 	public void setRule(TypeRefElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		group$2$Consumer = new Group$2$Consumer(rule.ele0Group());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentMetamodel());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele000CrossReferenceIDAbstractMetamodelDeclaration());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele01KeywordColonColon());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele1AssignmentClassifier());
-		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.ele10CrossReferenceIDEClassifier());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		group$2$Consumer = new Group$2$Consumer(rule.getGroup_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getMetamodelAssignment_0_0());
+		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getMetamodelAbstractMetamodelDeclarationCrossReference_0_0_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getColonColonKeyword_0_1());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getClassifierAssignment_1());
+		crossReference$9$Consumer = new CrossReference$9$Consumer(rule.getClassifierEClassifierCrossReference_1_0());
 	}
 	
 	@Override

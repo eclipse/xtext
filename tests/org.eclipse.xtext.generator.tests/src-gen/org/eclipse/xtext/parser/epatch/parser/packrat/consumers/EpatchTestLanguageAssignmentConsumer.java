@@ -118,11 +118,11 @@ public final class EpatchTestLanguageAssignmentConsumer extends NonTerminalConsu
 	public void setRule(AssignmentElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallBiSingleAssignment());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallBiListAssignment());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallMonoSingleAssignment());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallMonoListAssignment());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getBiSingleAssignmentParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getBiListAssignmentParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getMonoSingleAssignmentParserRuleCall_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getMonoListAssignmentParserRuleCall_3());
 	}
 	
 	@Override

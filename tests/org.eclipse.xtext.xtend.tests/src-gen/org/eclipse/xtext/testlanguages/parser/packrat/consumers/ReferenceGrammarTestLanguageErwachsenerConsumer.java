@@ -175,14 +175,14 @@ public final class ReferenceGrammarTestLanguageErwachsenerConsumer extends NonTe
 	public void setRule(ErwachsenerElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordErwachsener());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftParenthesis());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20TerminalRuleCallID());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentAge());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30TerminalRuleCallINT());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele4KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getErwachsenerKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getLeftParenthesisKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_2_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getAgeAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getAgeINTTerminalRuleCall_3_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getRightParenthesisKeyword_4());
 	}
 	
 	@Override

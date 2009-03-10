@@ -183,15 +183,15 @@ public final class SimpleReconstrTestLanguageTwoNumbersConsumer extends NonTermi
 	public void setRule(TwoNumbersElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentNum1());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallINT());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentNum2());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallINT());
-		group$6$Consumer = new Group$6$Consumer(rule.ele2Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele20KeywordNumberSign());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele21AssignmentNum3());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele210TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNum1Assignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNum1INTTerminalRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNum2Assignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNum2INTTerminalRuleCall_1_0());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_2());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getNumberSignKeyword_2_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getNum3Assignment_2_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getNum3INTTerminalRuleCall_2_1_0());
 	}
 	
 	@Override

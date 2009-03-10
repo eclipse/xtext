@@ -22,20 +22,20 @@ public class MultiGenMMTestLanguageParsetreeConstructor extends AbstractParseTre
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prFoo().getRule().getType().getClassifier()) && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getClassifier()) && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier()) && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier()) && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Foo ****************
  *
- * not supported
+ * Foo:
+ *   name=ID (nameRefs+=NameRef)*;
  *
  **/
 
-
-// not supported
+// name=ID (nameRefs+=NameRef)*
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -44,10 +44,8 @@ protected class Foo_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prFoo().eleGroup();
+		return grammarAccess.getFooAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -65,7 +63,7 @@ protected class Foo_Group extends GroupToken {
 	}
 }
 
-// not supported
+// name=ID
 protected class Foo_0_Assignment_name extends AssignmentToken  {
 	
 	public Foo_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -74,7 +72,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFoo().ele0AssignmentName();
+		return grammarAccess.getFooAccess().getNameAssignment_0();
 	}
 	
 	@Override
@@ -83,14 +81,14 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prFoo().ele00TerminalRuleCallID();
+			element = grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// (nameRefs+=NameRef)*
 protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	
 	public Foo_1_Assignment_nameRefs(IInstanceDescription curr, AbstractToken pred) {
@@ -99,7 +97,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFoo().ele1AssignmentNameRefs();
+		return grammarAccess.getFooAccess().getNameRefsAssignment_1();
 	}
 	
 	@Override
@@ -109,7 +107,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prNameRef().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) {
 				Solution s = new NameRef_Assignment_name(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -129,12 +127,12 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * not supported
+ * NameRef returns other::FooBar:
+ *   name=STRING;
  *
  **/
 
-
-// not supported
+// name=STRING
 protected class NameRef_Assignment_name extends AssignmentToken  {
 	
 	public NameRef_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -143,7 +141,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prNameRef().eleAssignmentName();
+		return grammarAccess.getNameRefAccess().getNameAssignment();
 	}
 	
 	@Override
@@ -152,7 +150,7 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prNameRef().ele0TerminalRuleCallSTRING();
+			element = grammarAccess.getNameRefAccess().getNameSTRINGTerminalRuleCall_0();
 			return new Solution(obj);
 		}
 		return null;

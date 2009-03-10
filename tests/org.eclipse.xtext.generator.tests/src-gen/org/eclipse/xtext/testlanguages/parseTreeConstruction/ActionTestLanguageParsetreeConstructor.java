@@ -22,20 +22,20 @@ public class ActionTestLanguageParsetreeConstructor extends AbstractParseTreeCon
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prChild().getRule().getType().getClassifier()) && (s = new Child_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier()) && (s = new Child_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   Child ({Parent.left=current} right=Child)?;
  *
  **/
 
-
-// not supported
+// Child ({Parent.left=current} right=Child)?
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -44,10 +44,8 @@ protected class Model_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prModel().eleGroup();
+		return grammarAccess.getModelAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -65,7 +63,7 @@ protected class Model_Group extends GroupToken {
 	}
 }
 
-// not supported
+// Child
 protected class Model_0_RuleCall_Child extends RuleCallToken {
 	
 	public Model_0_RuleCall_Child(IInstanceDescription curr, AbstractToken pred) {
@@ -74,18 +72,18 @@ protected class Model_0_RuleCall_Child extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prModel().ele0ParserRuleCallChild();
+		return grammarAccess.getModelAccess().getChildParserRuleCall_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Child_Assignment_name.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prChild().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) return null;
 		return new Child_Assignment_name(current, this).firstSolution();
 	}
 }
 
-// not supported
+// ({Parent.left=current} right=Child)?
 protected class Model_1_Group extends GroupToken {
 	
 	public Model_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -94,10 +92,8 @@ protected class Model_1_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prModel().ele1Group();
+		return grammarAccess.getModelAccess().getGroup_1();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -115,7 +111,7 @@ protected class Model_1_Group extends GroupToken {
 	}
 }
 
-// not supported
+// {Parent.left=current}
 protected class Model_1_0_Action_Parent_left extends ActionToken  {
 
 	public Model_1_0_Action_Parent_left(IInstanceDescription curr, AbstractToken pred) {
@@ -124,12 +120,12 @@ protected class Model_1_0_Action_Parent_left extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.prModel().ele10ActionParentleft();
+		return grammarAccess.getModelAccess().getParentleftAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.prModel().ele10ActionParentleft().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getModelAccess().getParentleftAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("left", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("left")) return null;
@@ -137,7 +133,7 @@ protected class Model_1_0_Action_Parent_left extends ActionToken  {
 	}
 }
 
-// not supported
+// right=Child
 protected class Model_1_1_Assignment_right extends AssignmentToken  {
 	
 	public Model_1_1_Assignment_right(IInstanceDescription curr, AbstractToken pred) {
@@ -146,7 +142,7 @@ protected class Model_1_1_Assignment_right extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele11AssignmentRight();
+		return grammarAccess.getModelAccess().getRightAssignment_1_1();
 	}
 	
 	@Override
@@ -156,7 +152,7 @@ protected class Model_1_1_Assignment_right extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prChild().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
 				Solution s = new Child_Assignment_name(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -177,12 +173,12 @@ protected class Model_1_1_Assignment_right extends AssignmentToken  {
 
 /************ begin Rule Child ****************
  *
- * not supported
+ * Child:
+ *   name=ID;
  *
  **/
 
-
-// not supported
+// name=ID
 protected class Child_Assignment_name extends AssignmentToken  {
 	
 	public Child_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -191,7 +187,7 @@ protected class Child_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prChild().eleAssignmentName();
+		return grammarAccess.getChildAccess().getNameAssignment();
 	}
 	
 	@Override
@@ -200,7 +196,7 @@ protected class Child_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prChild().ele0TerminalRuleCallID();
+			element = grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);
 		}
 		return null;

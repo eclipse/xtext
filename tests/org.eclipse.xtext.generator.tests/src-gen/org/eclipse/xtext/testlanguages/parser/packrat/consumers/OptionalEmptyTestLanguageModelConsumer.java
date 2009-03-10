@@ -67,8 +67,8 @@ public final class OptionalEmptyTestLanguageModelConsumer extends NonTerminalCon
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentChild());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallGreeting());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getChildAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getChildGreetingParserRuleCall_0());
 	}
 	
 	@Override

@@ -76,7 +76,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -129,7 +129,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:86:6: lv_elements_0= ruleElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallElement(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleElement_in_ruleModel139);
             	    lv_elements_0=ruleElement();
@@ -137,7 +137,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -188,7 +188,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:111:49: (iv_ruleElement= ruleElement EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:112:2: iv_ruleElement= ruleElement EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prElement().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement176);
             iv_ruleElement=ruleElement();
             _fsp--;
@@ -243,11 +243,11 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
                     lv_optional_0=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleElement232); 
 
-                            createLeafNode(grammarAccess.prElement().ele00KeywordOptional(), "optional"); 
+                            createLeafNode(grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0(), "optional"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -265,7 +265,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             match(input,12,FOLLOW_12_in_ruleElement255); 
 
-                    createLeafNode(grammarAccess.prElement().ele1KeywordElement(), null); 
+                    createLeafNode(grammarAccess.getElementAccess().getElementKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:150:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.g:152:6: lv_name_2= RULE_ID
@@ -273,11 +273,11 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement277); 
 
-            		createLeafNode(grammarAccess.prElement().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -308,11 +308,11 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             	    lv_descriptions_3=(Token)input.LT(1);
             	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement307); 
 
-            	    		createLeafNode(grammarAccess.prElement().ele30TerminalRuleCallSTRING(), "descriptions"); 
+            	    		createLeafNode(grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0(), "descriptions"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prElement().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -333,7 +333,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             match(input,13,FOLLOW_13_in_ruleElement325); 
 
-                    createLeafNode(grammarAccess.prElement().ele4KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getElementAccess().getSemicolonKeyword_4(), null); 
                 
 
             }

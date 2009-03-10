@@ -22,25 +22,25 @@ public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prEntry().getRule().getType().getClassifier()) && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prAlts().getRule().getType().getClassifier()) && (s = new Alts_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead0().getRule().getType().getClassifier()) && (s = new LookAhead0_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead1().getRule().getType().getClassifier()) && (s = new LookAhead1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead2().getRule().getType().getClassifier()) && (s = new LookAhead2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead3().getRule().getType().getClassifier()) && (s = new LookAhead3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prLookAhead4().getRule().getType().getClassifier()) && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEntryRule().getType().getClassifier()) && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier()) && (s = new Alts_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier()) && (s = new LookAhead0_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier()) && (s = new LookAhead1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier()) && (s = new LookAhead2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier()) && (s = new LookAhead3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier()) && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Entry ****************
  *
- * not supported
+ * Entry:
+ *   (contents+=Alts)*;
  *
  **/
 
-
-// not supported
+// (contents+=Alts)*
 protected class Entry_Assignment_contents extends AssignmentToken  {
 	
 	public Entry_Assignment_contents(IInstanceDescription curr, AbstractToken pred) {
@@ -49,7 +49,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prEntry().eleAssignmentContents();
+		return grammarAccess.getEntryAccess().getContentsAssignment();
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prAlts().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) {
 				Solution s = new Alts_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -78,12 +78,12 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 
 /************ begin Rule Alts ****************
  *
- * not supported
+ * Alts:
+ *   LookAhead0|LookAhead1|LookAhead3;
  *
  **/
 
-
-// not supported
+// LookAhead0|LookAhead1|LookAhead3
 protected class Alts_Alternatives extends AlternativesToken {
 
 	public Alts_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -92,7 +92,7 @@ protected class Alts_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prAlts().eleAlternatives();
+		return grammarAccess.getAltsAccess().getAlternatives();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -105,7 +105,7 @@ protected class Alts_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// LookAhead0
 protected class Alts_0_RuleCall_LookAhead0 extends RuleCallToken {
 	
 	public Alts_0_RuleCall_LookAhead0(IInstanceDescription curr, AbstractToken pred) {
@@ -114,18 +114,18 @@ protected class Alts_0_RuleCall_LookAhead0 extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prAlts().ele0ParserRuleCallLookAhead0();
+		return grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead0_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prLookAhead0().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier())) return null;
 		return new LookAhead0_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// LookAhead1
 protected class Alts_1_RuleCall_LookAhead1 extends RuleCallToken {
 	
 	public Alts_1_RuleCall_LookAhead1(IInstanceDescription curr, AbstractToken pred) {
@@ -134,18 +134,18 @@ protected class Alts_1_RuleCall_LookAhead1 extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prAlts().ele1ParserRuleCallLookAhead1();
+		return grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead1_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prLookAhead1().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier())) return null;
 		return new LookAhead1_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// LookAhead3
 protected class Alts_2_RuleCall_LookAhead3 extends RuleCallToken {
 	
 	public Alts_2_RuleCall_LookAhead3(IInstanceDescription curr, AbstractToken pred) {
@@ -154,13 +154,13 @@ protected class Alts_2_RuleCall_LookAhead3 extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prAlts().ele2ParserRuleCallLookAhead3();
+		return grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(LookAhead3_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prLookAhead3().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier())) return null;
 		return new LookAhead3_Group(current, this).firstSolution();
 	}
 }
@@ -171,12 +171,12 @@ protected class Alts_2_RuleCall_LookAhead3 extends RuleCallToken {
 
 /************ begin Rule LookAhead0 ****************
  *
- * not supported
+ * LookAhead0:
+ *   "bar" x="a";
  *
  **/
 
-
-// not supported
+// "bar" x="a"
 protected class LookAhead0_Group extends GroupToken {
 	
 	public LookAhead0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -185,10 +185,8 @@ protected class LookAhead0_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prLookAhead0().eleGroup();
+		return grammarAccess.getLookAhead0Access().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -206,7 +204,7 @@ protected class LookAhead0_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "bar"
 protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	
 	public LookAhead0_0_Keyword_bar(IInstanceDescription curr, AbstractToken pred) {
@@ -214,11 +212,11 @@ protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prLookAhead0().ele0KeywordBar();
+		return grammarAccess.getLookAhead0Access().getBarKeyword_0();
 	}	
 }
 
-// not supported
+// x="a"
 protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead0_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -227,7 +225,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead0().ele1AssignmentX();
+		return grammarAccess.getLookAhead0Access().getXAssignment_1();
 	}
 	
 	@Override
@@ -237,7 +235,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 		if("a".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead0().ele10KeywordA();
+			element = grammarAccess.getLookAhead0Access().getXAKeyword_1_0();
 			return new Solution(obj);
 		}
 
@@ -251,12 +249,12 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 /************ begin Rule LookAhead1 ****************
  *
- * not supported
+ * LookAhead1:
+ *   "foo" y=LookAhead2 x="b" x="d";
  *
  **/
 
-
-// not supported
+// "foo" y=LookAhead2 x="b" x="d"
 protected class LookAhead1_Group extends GroupToken {
 	
 	public LookAhead1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -265,36 +263,34 @@ protected class LookAhead1_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prLookAhead1().eleGroup();
+		return grammarAccess.getLookAhead1Access().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead1_3_Assignment_x(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new LookAhead1_2_Assignment_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new LookAhead1_1_Assignment_y(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new LookAhead1_0_Keyword_foo(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-			if(s4 != null) {
-				last = s4.getPredecessor();
-				return s4;
-			} else {
-				s3 = s3.getPredecessor().nextSolution(this,s3);
+			while(s2 != null) {
+				Solution s3 = new LookAhead1_1_Assignment_y(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new LookAhead1_0_Keyword_foo(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					if(s4 != null) {
+						last = s4.getPredecessor();
+						return s4;
+					} else {
+						s3 = s3.getPredecessor().nextSolution(this,s3);
+					}
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "foo"
 protected class LookAhead1_0_Keyword_foo extends KeywordToken  {
 	
 	public LookAhead1_0_Keyword_foo(IInstanceDescription curr, AbstractToken pred) {
@@ -302,11 +298,11 @@ protected class LookAhead1_0_Keyword_foo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prLookAhead1().ele0KeywordFoo();
+		return grammarAccess.getLookAhead1Access().getFooKeyword_0();
 	}	
 }
 
-// not supported
+// y=LookAhead2
 protected class LookAhead1_1_Assignment_y extends AssignmentToken  {
 	
 	public LookAhead1_1_Assignment_y(IInstanceDescription curr, AbstractToken pred) {
@@ -315,7 +311,7 @@ protected class LookAhead1_1_Assignment_y extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead1().ele1AssignmentY();
+		return grammarAccess.getLookAhead1Access().getYAssignment_1();
 	}
 	
 	@Override
@@ -325,7 +321,7 @@ protected class LookAhead1_1_Assignment_y extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLookAhead2().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) {
 				Solution s = new LookAhead2_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -339,7 +335,7 @@ protected class LookAhead1_1_Assignment_y extends AssignmentToken  {
 	}
 }
 
-// not supported
+// x="b"
 protected class LookAhead1_2_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead1_2_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -348,7 +344,7 @@ protected class LookAhead1_2_Assignment_x extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead1().ele2AssignmentX();
+		return grammarAccess.getLookAhead1Access().getXAssignment_2();
 	}
 	
 	@Override
@@ -358,7 +354,7 @@ protected class LookAhead1_2_Assignment_x extends AssignmentToken  {
 
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead1().ele20KeywordB();
+			element = grammarAccess.getLookAhead1Access().getXBKeyword_2_0();
 			return new Solution(obj);
 		}
 
@@ -366,7 +362,7 @@ protected class LookAhead1_2_Assignment_x extends AssignmentToken  {
 	}
 }
 
-// not supported
+// x="d"
 protected class LookAhead1_3_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead1_3_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -375,7 +371,7 @@ protected class LookAhead1_3_Assignment_x extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead1().ele3AssignmentX();
+		return grammarAccess.getLookAhead1Access().getXAssignment_3();
 	}
 	
 	@Override
@@ -385,7 +381,7 @@ protected class LookAhead1_3_Assignment_x extends AssignmentToken  {
 
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead1().ele30KeywordD();
+			element = grammarAccess.getLookAhead1Access().getXDKeyword_3_0();
 			return new Solution(obj);
 		}
 
@@ -399,12 +395,12 @@ protected class LookAhead1_3_Assignment_x extends AssignmentToken  {
 
 /************ begin Rule LookAhead2 ****************
  *
- * not supported
+ * LookAhead2:
+ *   (z="foo"|z="bar") "c";
  *
  **/
 
-
-// not supported
+// (z="foo"|z="bar") "c"
 protected class LookAhead2_Group extends GroupToken {
 	
 	public LookAhead2_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -413,10 +409,8 @@ protected class LookAhead2_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prLookAhead2().eleGroup();
+		return grammarAccess.getLookAhead2Access().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -434,7 +428,7 @@ protected class LookAhead2_Group extends GroupToken {
 	}
 }
 
-// not supported
+// z="foo"|z="bar"
 protected class LookAhead2_0_Alternatives extends AlternativesToken {
 
 	public LookAhead2_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -443,7 +437,7 @@ protected class LookAhead2_0_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prLookAhead2().ele0Alternatives();
+		return grammarAccess.getLookAhead2Access().getAlternatives_0();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -455,7 +449,7 @@ protected class LookAhead2_0_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// z="foo"
 protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	
 	public LookAhead2_0_0_Assignment_z(IInstanceDescription curr, AbstractToken pred) {
@@ -464,7 +458,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead2().ele00AssignmentZ();
+		return grammarAccess.getLookAhead2Access().getZAssignment_0_0();
 	}
 	
 	@Override
@@ -474,7 +468,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 
 		if("foo".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead2().ele000KeywordFoo();
+			element = grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0();
 			return new Solution(obj);
 		}
 
@@ -482,7 +476,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	}
 }
 
-// not supported
+// z="bar"
 protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	
 	public LookAhead2_0_1_Assignment_z(IInstanceDescription curr, AbstractToken pred) {
@@ -491,7 +485,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead2().ele01AssignmentZ();
+		return grammarAccess.getLookAhead2Access().getZAssignment_0_1();
 	}
 	
 	@Override
@@ -501,7 +495,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 
 		if("bar".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead2().ele010KeywordBar();
+			element = grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0();
 			return new Solution(obj);
 		}
 
@@ -510,7 +504,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 }
 
 
-// not supported
+// "c"
 protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 	
 	public LookAhead2_1_Keyword_c(IInstanceDescription curr, AbstractToken pred) {
@@ -518,7 +512,7 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prLookAhead2().ele1KeywordC();
+		return grammarAccess.getLookAhead2Access().getCKeyword_1();
 	}	
 }
 
@@ -528,12 +522,12 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 /************ begin Rule LookAhead3 ****************
  *
- * not supported
+ * LookAhead3:
+ *   "foo" "bar" x="b" z=LookAhead4;
  *
  **/
 
-
-// not supported
+// "foo" "bar" x="b" z=LookAhead4
 protected class LookAhead3_Group extends GroupToken {
 	
 	public LookAhead3_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -542,36 +536,34 @@ protected class LookAhead3_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prLookAhead3().eleGroup();
+		return grammarAccess.getLookAhead3Access().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new LookAhead3_3_Assignment_z(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new LookAhead3_2_Assignment_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new LookAhead3_1_Keyword_bar(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new LookAhead3_0_Keyword_foo(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-			if(s4 != null) {
-				last = s4.getPredecessor();
-				return s4;
-			} else {
-				s3 = s3.getPredecessor().nextSolution(this,s3);
+			while(s2 != null) {
+				Solution s3 = new LookAhead3_1_Keyword_bar(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new LookAhead3_0_Keyword_foo(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					if(s4 != null) {
+						last = s4.getPredecessor();
+						return s4;
+					} else {
+						s3 = s3.getPredecessor().nextSolution(this,s3);
+					}
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "foo"
 protected class LookAhead3_0_Keyword_foo extends KeywordToken  {
 	
 	public LookAhead3_0_Keyword_foo(IInstanceDescription curr, AbstractToken pred) {
@@ -579,11 +571,11 @@ protected class LookAhead3_0_Keyword_foo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prLookAhead3().ele0KeywordFoo();
+		return grammarAccess.getLookAhead3Access().getFooKeyword_0();
 	}	
 }
 
-// not supported
+// "bar"
 protected class LookAhead3_1_Keyword_bar extends KeywordToken  {
 	
 	public LookAhead3_1_Keyword_bar(IInstanceDescription curr, AbstractToken pred) {
@@ -591,11 +583,11 @@ protected class LookAhead3_1_Keyword_bar extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prLookAhead3().ele1KeywordBar();
+		return grammarAccess.getLookAhead3Access().getBarKeyword_1();
 	}	
 }
 
-// not supported
+// x="b"
 protected class LookAhead3_2_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead3_2_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -604,7 +596,7 @@ protected class LookAhead3_2_Assignment_x extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead3().ele2AssignmentX();
+		return grammarAccess.getLookAhead3Access().getXAssignment_2();
 	}
 	
 	@Override
@@ -614,7 +606,7 @@ protected class LookAhead3_2_Assignment_x extends AssignmentToken  {
 
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead3().ele20KeywordB();
+			element = grammarAccess.getLookAhead3Access().getXBKeyword_2_0();
 			return new Solution(obj);
 		}
 
@@ -622,7 +614,7 @@ protected class LookAhead3_2_Assignment_x extends AssignmentToken  {
 	}
 }
 
-// not supported
+// z=LookAhead4
 protected class LookAhead3_3_Assignment_z extends AssignmentToken  {
 	
 	public LookAhead3_3_Assignment_z(IInstanceDescription curr, AbstractToken pred) {
@@ -631,7 +623,7 @@ protected class LookAhead3_3_Assignment_z extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead3().ele3AssignmentZ();
+		return grammarAccess.getLookAhead3Access().getZAssignment_3();
 	}
 	
 	@Override
@@ -641,7 +633,7 @@ protected class LookAhead3_3_Assignment_z extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prLookAhead4().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) {
 				Solution s = new LookAhead4_Alternatives(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -661,12 +653,12 @@ protected class LookAhead3_3_Assignment_z extends AssignmentToken  {
 
 /************ begin Rule LookAhead4 ****************
  *
- * not supported
+ * LookAhead4:
+ *   x="c"|x="d";
  *
  **/
 
-
-// not supported
+// x="c"|x="d"
 protected class LookAhead4_Alternatives extends AlternativesToken {
 
 	public LookAhead4_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -675,7 +667,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prLookAhead4().eleAlternatives();
+		return grammarAccess.getLookAhead4Access().getAlternatives();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -687,7 +679,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// x="c"
 protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead4_0_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -696,7 +688,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead4().ele0AssignmentX();
+		return grammarAccess.getLookAhead4Access().getXAssignment_0();
 	}
 	
 	@Override
@@ -706,7 +698,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 
 		if("c".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead4().ele00KeywordC();
+			element = grammarAccess.getLookAhead4Access().getXCKeyword_0_0();
 			return new Solution(obj);
 		}
 
@@ -714,7 +706,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	}
 }
 
-// not supported
+// x="d"
 protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	
 	public LookAhead4_1_Assignment_x(IInstanceDescription curr, AbstractToken pred) {
@@ -723,7 +715,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prLookAhead4().ele1AssignmentX();
+		return grammarAccess.getLookAhead4Access().getXAssignment_1();
 	}
 	
 	@Override
@@ -733,7 +725,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prLookAhead4().ele10KeywordD();
+			element = grammarAccess.getLookAhead4Access().getXDKeyword_1_0();
 			return new Solution(obj);
 		}
 

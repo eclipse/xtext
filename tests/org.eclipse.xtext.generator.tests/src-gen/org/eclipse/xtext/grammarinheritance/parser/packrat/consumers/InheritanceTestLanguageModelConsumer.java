@@ -173,14 +173,14 @@ public final class InheritanceTestLanguageModelConsumer extends NonTerminalConsu
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordModel());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftCurlyBracket());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentElements());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallElement());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele4KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getModelKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getElementsAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getElementsElementParserRuleCall_3_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getRightCurlyBracketKeyword_4());
 	}
 	
 	@Override

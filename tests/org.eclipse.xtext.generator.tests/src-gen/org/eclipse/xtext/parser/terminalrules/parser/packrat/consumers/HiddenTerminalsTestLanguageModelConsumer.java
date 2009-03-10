@@ -135,12 +135,12 @@ public final class HiddenTerminalsTestLanguageModelConsumer extends NonTerminalC
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallWithoutHiddens());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallWithHiddens());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallOverridingHiddens());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallInheritingHiddens());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele4ParserRuleCallDatatypeHiddens());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getWithoutHiddensParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getWithHiddensParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getOverridingHiddensParserRuleCall_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getInheritingHiddensParserRuleCall_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getDatatypeHiddensParserRuleCall_4());
 	}
 	
 	@Override

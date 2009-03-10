@@ -67,8 +67,8 @@ public final class DatatypeRulesTestLanguageCompositeModelConsumer extends NonTe
 	public void setRule(CompositeModelElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentModel());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallModel());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getModelAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getModelModelParserRuleCall_0());
 	}
 	
 	@Override

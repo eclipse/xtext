@@ -84,9 +84,9 @@ public final class XtextTerminalsTestLanguageAbstractTokenConsumer extends NonTe
 	public void setRule(AbstractTokenElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractTokenWithCardinality());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallAction());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAbstractTokenWithCardinalityParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getActionParserRuleCall_1());
 	}
 	
 	@Override

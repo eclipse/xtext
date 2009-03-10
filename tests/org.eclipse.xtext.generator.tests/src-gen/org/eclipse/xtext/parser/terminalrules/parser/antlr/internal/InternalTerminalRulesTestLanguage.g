@@ -67,7 +67,7 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_idValue_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prModel().ele00TerminalRuleCallID(), "idValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), "idValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -105,12 +105,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_intValue_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallINT(), "intValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), "intValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -126,12 +126,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_stringValue_2=	RULE_STRING
 	{
-		createLeafNode(grammarAccess.prModel().ele20TerminalRuleCallSTRING(), "stringValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), "stringValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -147,12 +147,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_mlCommentValue_3=	RULE_ML_COMMENT
 	{
-		createLeafNode(grammarAccess.prModel().ele30TerminalRuleCallML_COMMENT(), "mlCommentValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), "mlCommentValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -168,12 +168,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_slCommentValue_4=	RULE_SL_COMMENT
 	{
-		createLeafNode(grammarAccess.prModel().ele40TerminalRuleCallSL_COMMENT(), "slCommentValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), "slCommentValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -189,12 +189,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_wsValue_5=	RULE_WS
 	{
-		createLeafNode(grammarAccess.prModel().ele50TerminalRuleCallWS(), "wsValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), "wsValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -210,12 +210,12 @@ ruleModel returns [EObject current=null]
 	
 	    lv_anyValue_6=	RULE_ANY_OTHER
 	{
-		createLeafNode(grammarAccess.prModel().ele60TerminalRuleCallANY_OTHER(), "anyValue"); 
+		createLeafNode(grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), "anyValue"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

@@ -22,19 +22,19 @@ public class LowerCaseNamedTestLanguageParsetreeConstructor extends AbstractPars
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   name=ID;
  *
  **/
 
-
-// not supported
+// name=ID
 protected class Model_Assignment_name extends AssignmentToken  {
 	
 	public Model_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -43,7 +43,7 @@ protected class Model_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().eleAssignmentName();
+		return grammarAccess.getModelAccess().getNameAssignment();
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ protected class Model_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele0TerminalRuleCallID();
+			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);
 		}
 		return null;

@@ -103,10 +103,10 @@ public final class ComplexReconstrTestLanguageTrickyG2Consumer extends NonTermin
 	public void setRule(TrickyG2Elements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTrickyG1());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentVal());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallINT());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTrickyG1ParserRuleCall_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getValAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getValINTTerminalRuleCall_1_0());
 	}
 	
 	@Override

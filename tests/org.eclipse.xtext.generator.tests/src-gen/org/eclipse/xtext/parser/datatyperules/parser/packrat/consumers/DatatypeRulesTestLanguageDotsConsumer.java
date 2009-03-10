@@ -119,11 +119,11 @@ public final class DatatypeRulesTestLanguageDotsConsumer extends NonTerminalCons
 	public void setRule(DotsElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		group$2$Consumer = new Group$2$Consumer(rule.ele0Group());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordFullStop());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordFullStop());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele1KeywordFullStopFullStop());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		group$2$Consumer = new Group$2$Consumer(rule.getGroup_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getFullStopKeyword_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getFullStopKeyword_0_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getFullStopFullStopKeyword_1());
 	}
 	
 	@Override

@@ -84,9 +84,9 @@ public final class SimpleExpressionsTestLanguageTermConsumer extends NonTerminal
 	public void setRule(TermElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAtom());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallParens());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAtomParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getParensParserRuleCall_1());
 	}
 	
 	@Override
