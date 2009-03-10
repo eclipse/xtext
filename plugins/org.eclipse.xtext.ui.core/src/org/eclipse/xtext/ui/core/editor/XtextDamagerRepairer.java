@@ -58,6 +58,8 @@ public class XtextDamagerRepairer extends DefaultDamagerRepairer {
 				// find latest node that covers the start of the change
 				while(node != null && start == null) {
 					if (node instanceof CompositeNode) {
+						if (((CompositeNode) node).getChildren().isEmpty())
+							break;
 						for(AbstractNode child: ((CompositeNode) node).getChildren()) {
 							if (child.getTotalOffset() <= offset && child.getTotalOffset() + child.getTotalLength() >= offset) {
 								node = child;
