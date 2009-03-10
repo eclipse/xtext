@@ -89,7 +89,7 @@ String gaRuleAccessMethodName(AbstractRule rule):
  * @param rule the rule for which the accessor method is needed
  * @return the method's name.
  */
-String gaRuleElementsMethodName(ParserRule rule):
+String gaRuleElementsMethodName(AbstractRule rule):
 	"get" + rule.gaRuleIdentifyer() + "Access";
 
 /**
@@ -122,7 +122,7 @@ String gaRuleAccessor(AbstractRule rule):
  * @param rule the rule
  * @return The java statement
  */	
-String gaElementsAccessor(ParserRule rule):
+String gaElementsAccessor(AbstractRule rule):
 	rule.gaRuleElementsMethodName() + "()";
 	
 /**
