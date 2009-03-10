@@ -84,9 +84,9 @@ public final class Bug250313ChildConsumer extends NonTerminalConsumer {
 	public void setRule(ChildElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallChild1());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallChild2());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getChild1ParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getChild2ParserRuleCall_1());
 	}
 	
 	@Override

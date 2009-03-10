@@ -76,7 +76,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -117,7 +117,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
             {
             match(input,11,FOLLOW_11_in_ruleModel115); 
 
-                    createLeafNode(grammarAccess.prModel().ele0KeywordModel(), null); 
+                    createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.g:87:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalBaseInheritanceTestLanguage.g:89:6: lv_name_1= RULE_ID
@@ -125,11 +125,11 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel137); 
 
-            		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

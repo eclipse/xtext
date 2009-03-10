@@ -76,7 +76,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:69:46: (iv_ruleMain= ruleMain EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:70:2: iv_ruleMain= ruleMain EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMain().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMainRule(), currentNode); 
             pushFollow(FOLLOW_ruleMain_in_entryRuleMain71);
             iv_ruleMain=ruleMain();
             _fsp--;
@@ -134,7 +134,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:86:6: lv_imports_0= ruleImport
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prMain().ele00ParserRuleCallImport(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImport_in_ruleMain140);
             	    lv_imports_0=ruleImport();
@@ -142,7 +142,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prMain().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getMainRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -178,7 +178,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:107:6: lv_types_1= ruleType
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prMain().ele10ParserRuleCallType(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleType_in_ruleMain179);
             	    lv_types_1=ruleType();
@@ -186,7 +186,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prMain().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getMainRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -240,7 +240,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:132:48: (iv_ruleImport= ruleImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:133:2: iv_ruleImport= ruleImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport217);
             iv_ruleImport=ruleImport();
             _fsp--;
@@ -281,7 +281,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,11,FOLLOW_11_in_ruleImport261); 
 
-                    createLeafNode(grammarAccess.prImport().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:150:1: (lv_importURI_1= RULE_STRING )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:152:6: lv_importURI_1= RULE_STRING
@@ -289,11 +289,11 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             lv_importURI_1=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport283); 
 
-            		createLeafNode(grammarAccess.prImport().ele10TerminalRuleCallSTRING(), "importURI"); 
+            		createLeafNode(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), "importURI"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -340,7 +340,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:177:46: (iv_ruleType= ruleType EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:178:2: iv_ruleType= ruleType EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prType().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); 
             pushFollow(FOLLOW_ruleType_in_entryRuleType324);
             iv_ruleType=ruleType();
             _fsp--;
@@ -381,7 +381,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             {
             match(input,12,FOLLOW_12_in_ruleType368); 
 
-                    createLeafNode(grammarAccess.prType().ele0KeywordType(), null); 
+                    createLeafNode(grammarAccess.getTypeAccess().getTypeKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:195:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:197:6: lv_name_1= RULE_ID
@@ -389,11 +389,11 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleType390); 
 
-            		createLeafNode(grammarAccess.prType().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prType().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -408,20 +408,20 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             match(input,13,FOLLOW_13_in_ruleType407); 
 
-                    createLeafNode(grammarAccess.prType().ele2KeywordExtends(), null); 
+                    createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:219:1: ( RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/parser/antlr/internal/InternalImportUriTestLanguage.g:222:3: RULE_ID
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prType().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleType429); 
 
-            		createLeafNode(grammarAccess.prType().ele30CrossReferenceIDType(), "extends"); 
+            		createLeafNode(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0(), "extends"); 
             	
 
             }

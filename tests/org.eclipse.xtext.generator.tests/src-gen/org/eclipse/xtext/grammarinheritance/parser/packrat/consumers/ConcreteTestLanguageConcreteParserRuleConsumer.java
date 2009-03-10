@@ -155,13 +155,13 @@ public final class ConcreteTestLanguageConcreteParserRuleConsumer extends NonTer
 	public void setRule(ConcreteParserRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordModel());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentMagicNumber());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallREAL());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordColon());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentElements());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallInheritedParserRule());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getModelKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getMagicNumberAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getMagicNumberREALTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getColonKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getElementsAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getElementsInheritedParserRuleParserRuleCall_3_0());
 	}
 	
 	@Override

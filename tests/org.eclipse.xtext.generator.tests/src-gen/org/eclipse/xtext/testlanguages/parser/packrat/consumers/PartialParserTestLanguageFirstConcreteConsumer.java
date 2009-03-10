@@ -192,15 +192,15 @@ public final class PartialParserTestLanguageFirstConcreteConsumer extends NonTer
 	public void setRule(FirstConcreteElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHyphenMinusGreaterThanSign());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordF());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordLeftParenthesis());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele3AssignmentValue());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele30ParserRuleCallNamed());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele4AssignmentReferencedContainer());
-		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.ele40CrossReferenceIDSomeContainer());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele5KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getHyphenMinusGreaterThanSignKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getFKeyword_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getLeftParenthesisKeyword_2());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getValueAssignment_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getValueNamedParserRuleCall_3_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getReferencedContainerAssignment_4());
+		crossReference$8$Consumer = new CrossReference$8$Consumer(rule.getReferencedContainerSomeContainerCrossReference_4_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getRightParenthesisKeyword_5());
 	}
 	
 	@Override

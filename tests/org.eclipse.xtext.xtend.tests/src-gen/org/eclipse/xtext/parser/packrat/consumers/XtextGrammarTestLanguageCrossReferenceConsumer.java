@@ -183,15 +183,15 @@ public final class XtextGrammarTestLanguageCrossReferenceConsumer extends NonTer
 	public void setRule(CrossReferenceElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftSquareBracket());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentType());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTypeRef());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordVerticalLine());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentTerminal());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallCrossReferenceableTerminal());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele3KeywordRightSquareBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getLeftSquareBracketKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getTypeAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getTypeTypeRefParserRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getVerticalLineKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getTerminalAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getRightSquareBracketKeyword_3());
 	}
 	
 	@Override

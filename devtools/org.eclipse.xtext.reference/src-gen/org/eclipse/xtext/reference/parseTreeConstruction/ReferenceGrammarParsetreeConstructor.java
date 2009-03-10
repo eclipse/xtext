@@ -22,26 +22,26 @@ public class ReferenceGrammarParsetreeConstructor extends AbstractParseTreeConst
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prSpielplatz().getRule().getType().getClassifier()) && (s = new Spielplatz_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prPerson().getRule().getType().getClassifier()) && (s = new Person_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prKind().getRule().getType().getClassifier()) && (s = new Kind_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getClassifier()) && (s = new Erwachsener_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prSpielzeug().getRule().getType().getClassifier()) && (s = new Spielzeug_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prFamilie().getRule().getType().getClassifier()) && (s = new Familie_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prFarbe().getRule().getType().getClassifier()) && (s = new Farbe_Assignment_wert(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prCustomTypeParserRule().getRule().getType().getClassifier()) && (s = new CustomTypeParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getSpielplatzRule().getType().getClassifier()) && (s = new Spielplatz_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getPersonRule().getType().getClassifier()) && (s = new Person_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier()) && (s = new Kind_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier()) && (s = new Erwachsener_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier()) && (s = new Spielzeug_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier()) && (s = new Familie_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier()) && (s = new Farbe_Assignment_wert(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier()) && (s = new CustomTypeParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Spielplatz ****************
  *
- * not supported
+ * Spielplatz:
+ *   ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?;
  *
  **/
 
-
-// not supported
+// ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -50,44 +50,42 @@ protected class Spielplatz_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prSpielplatz().eleGroup();
+		return grammarAccess.getSpielplatzAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielplatz_5_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Spielplatz_4_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Spielplatz_3_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Spielplatz_2_Assignment_beschreibung(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Spielplatz_1_Assignment_groesse(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-		while(s5 != null) {
-			Solution s6 = new Spielplatz_0_Keyword_spielplatz(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-			if(s6 != null) {
-				last = s6.getPredecessor();
-				return s6;
-			} else {
-				s5 = s5.getPredecessor().nextSolution(this,s5);
+			while(s2 != null) {
+				Solution s3 = new Spielplatz_3_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Spielplatz_2_Assignment_beschreibung(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Spielplatz_1_Assignment_groesse(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						while(s5 != null) {
+							Solution s6 = new Spielplatz_0_Keyword_spielplatz(s5.getCurrent(), s5.getPredecessor()).firstSolution();
+							if(s6 != null) {
+								last = s6.getPredecessor();
+								return s6;
+							} else {
+								s5 = s5.getPredecessor().nextSolution(this,s5);
+							}
+						}
+						s4 = s4.getPredecessor().nextSolution(this,s4);
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s4 = s4.getPredecessor().nextSolution(this,s4);
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "spielplatz"
 protected class Spielplatz_0_Keyword_spielplatz extends KeywordToken  {
 	
 	public Spielplatz_0_Keyword_spielplatz(IInstanceDescription curr, AbstractToken pred) {
@@ -95,11 +93,11 @@ protected class Spielplatz_0_Keyword_spielplatz extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele0KeywordSpielplatz();
+		return grammarAccess.getSpielplatzAccess().getSpielplatzKeyword_0();
 	}	
 }
 
-// not supported
+// groesse=INT
 protected class Spielplatz_1_Assignment_groesse extends AssignmentToken  {
 	
 	public Spielplatz_1_Assignment_groesse(IInstanceDescription curr, AbstractToken pred) {
@@ -108,7 +106,7 @@ protected class Spielplatz_1_Assignment_groesse extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele1AssignmentGroesse();
+		return grammarAccess.getSpielplatzAccess().getGroesseAssignment_1();
 	}
 	
 	@Override
@@ -117,14 +115,14 @@ protected class Spielplatz_1_Assignment_groesse extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prSpielplatz().ele10TerminalRuleCallINT();
+			element = grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// (beschreibung=STRING)?
 protected class Spielplatz_2_Assignment_beschreibung extends AssignmentToken  {
 	
 	public Spielplatz_2_Assignment_beschreibung(IInstanceDescription curr, AbstractToken pred) {
@@ -133,7 +131,7 @@ protected class Spielplatz_2_Assignment_beschreibung extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele2AssignmentBeschreibung();
+		return grammarAccess.getSpielplatzAccess().getBeschreibungAssignment_2();
 	}
 	
 	@Override
@@ -142,14 +140,14 @@ protected class Spielplatz_2_Assignment_beschreibung extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prSpielplatz().ele20TerminalRuleCallSTRING();
+			element = grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "{"
 protected class Spielplatz_3_Keyword extends KeywordToken  {
 	
 	public Spielplatz_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -157,11 +155,11 @@ protected class Spielplatz_3_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele3KeywordLeftCurlyBracket();
+		return grammarAccess.getSpielplatzAccess().getLeftCurlyBracketKeyword_3();
 	}	
 }
 
-// not supported
+// (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
 protected class Spielplatz_4_Alternatives extends AlternativesToken {
 
 	public Spielplatz_4_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -170,7 +168,7 @@ protected class Spielplatz_4_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele4Alternatives();
+		return grammarAccess.getSpielplatzAccess().getAlternatives_4();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -185,7 +183,7 @@ protected class Spielplatz_4_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// kinder+=Kind
 protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
 	
 	public Spielplatz_4_0_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -194,7 +192,7 @@ protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele40AssignmentKinder();
+		return grammarAccess.getSpielplatzAccess().getKinderAssignment_4_0();
 	}
 	
 	@Override
@@ -204,7 +202,7 @@ protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prKind().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) {
 				Solution s = new Kind_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -218,7 +216,7 @@ protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
 	}
 }
 
-// not supported
+// erzieher+=Erwachsener
 protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
 	
 	public Spielplatz_4_1_Assignment_erzieher(IInstanceDescription curr, AbstractToken pred) {
@@ -227,7 +225,7 @@ protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele41AssignmentErzieher();
+		return grammarAccess.getSpielplatzAccess().getErzieherAssignment_4_1();
 	}
 	
 	@Override
@@ -237,7 +235,7 @@ protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) {
 				Solution s = new Erwachsener_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -251,7 +249,7 @@ protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
 	}
 }
 
-// not supported
+// spielzeuge+=Spielzeug
 protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
 	
 	public Spielplatz_4_2_Assignment_spielzeuge(IInstanceDescription curr, AbstractToken pred) {
@@ -260,7 +258,7 @@ protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele42AssignmentSpielzeuge();
+		return grammarAccess.getSpielplatzAccess().getSpielzeugeAssignment_4_2();
 	}
 	
 	@Override
@@ -270,7 +268,7 @@ protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prSpielzeug().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) {
 				Solution s = new Spielzeug_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -284,7 +282,7 @@ protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
 	}
 }
 
-// not supported
+// familie+=Familie
 protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
 	
 	public Spielplatz_4_3_Assignment_familie(IInstanceDescription curr, AbstractToken pred) {
@@ -293,7 +291,7 @@ protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele43AssignmentFamilie();
+		return grammarAccess.getSpielplatzAccess().getFamilieAssignment_4_3();
 	}
 	
 	@Override
@@ -303,7 +301,7 @@ protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) {
 				Solution s = new Familie_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -317,7 +315,7 @@ protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
 	}
 }
 
-// not supported
+// types+=CustomTypeParserRule
 protected class Spielplatz_4_4_Assignment_types extends AssignmentToken  {
 	
 	public Spielplatz_4_4_Assignment_types(IInstanceDescription curr, AbstractToken pred) {
@@ -326,7 +324,7 @@ protected class Spielplatz_4_4_Assignment_types extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele44AssignmentTypes();
+		return grammarAccess.getSpielplatzAccess().getTypesAssignment_4_4();
 	}
 	
 	@Override
@@ -336,7 +334,7 @@ protected class Spielplatz_4_4_Assignment_types extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prCustomTypeParserRule().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) {
 				Solution s = new CustomTypeParserRule_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -351,7 +349,7 @@ protected class Spielplatz_4_4_Assignment_types extends AssignmentToken  {
 }
 
 
-// not supported
+// "}"
 protected class Spielplatz_5_Keyword extends KeywordToken  {
 	
 	public Spielplatz_5_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -359,7 +357,7 @@ protected class Spielplatz_5_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSpielplatz().ele5KeywordRightCurlyBracket();
+		return grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5();
 	}	
 }
 
@@ -369,12 +367,12 @@ protected class Spielplatz_5_Keyword extends KeywordToken  {
 
 /************ begin Rule Person ****************
  *
- * not supported
+ * Person:
+ *   Kind|Erwachsener;
  *
  **/
 
-
-// not supported
+// Kind|Erwachsener
 protected class Person_Alternatives extends AlternativesToken {
 
 	public Person_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -383,7 +381,7 @@ protected class Person_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prPerson().eleAlternatives();
+		return grammarAccess.getPersonAccess().getAlternatives();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -395,7 +393,7 @@ protected class Person_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// Kind
 protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	
 	public Person_0_RuleCall_Kind(IInstanceDescription curr, AbstractToken pred) {
@@ -404,18 +402,18 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prPerson().ele0ParserRuleCallKind();
+		return grammarAccess.getPersonAccess().getKindParserRuleCall_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Kind_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prKind().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
 		return new Kind_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// Erwachsener
 protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	
 	public Person_1_RuleCall_Erwachsener(IInstanceDescription curr, AbstractToken pred) {
@@ -424,13 +422,13 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prPerson().ele1ParserRuleCallErwachsener();
+		return grammarAccess.getPersonAccess().getErwachsenerParserRuleCall_1();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(Erwachsener_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prErwachsener().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
 		return new Erwachsener_Group(current, this).firstSolution();
 	}
 }
@@ -441,12 +439,12 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 
 /************ begin Rule Kind ****************
  *
- * not supported
+ * Kind:
+ *   "kind" "(" name=ID age=INT ")";
  *
  **/
 
-
-// not supported
+// "kind" "(" name=ID age=INT ")"
 protected class Kind_Group extends GroupToken {
 	
 	public Kind_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -455,40 +453,38 @@ protected class Kind_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prKind().eleGroup();
+		return grammarAccess.getKindAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Kind_4_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Kind_3_Assignment_age(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Kind_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Kind_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Kind_0_Keyword_kind(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-			if(s5 != null) {
-				last = s5.getPredecessor();
-				return s5;
-			} else {
-				s4 = s4.getPredecessor().nextSolution(this,s4);
+			while(s2 != null) {
+				Solution s3 = new Kind_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Kind_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Kind_0_Keyword_kind(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						if(s5 != null) {
+							last = s5.getPredecessor();
+							return s5;
+						} else {
+							s4 = s4.getPredecessor().nextSolution(this,s4);
+						}
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "kind"
 protected class Kind_0_Keyword_kind extends KeywordToken  {
 	
 	public Kind_0_Keyword_kind(IInstanceDescription curr, AbstractToken pred) {
@@ -496,11 +492,11 @@ protected class Kind_0_Keyword_kind extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prKind().ele0KeywordKind();
+		return grammarAccess.getKindAccess().getKindKeyword_0();
 	}	
 }
 
-// not supported
+// "("
 protected class Kind_1_Keyword extends KeywordToken  {
 	
 	public Kind_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -508,11 +504,11 @@ protected class Kind_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prKind().ele1KeywordLeftParenthesis();
+		return grammarAccess.getKindAccess().getLeftParenthesisKeyword_1();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Kind_2_Assignment_name extends AssignmentToken  {
 	
 	public Kind_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -521,7 +517,7 @@ protected class Kind_2_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prKind().ele2AssignmentName();
+		return grammarAccess.getKindAccess().getNameAssignment_2();
 	}
 	
 	@Override
@@ -530,14 +526,14 @@ protected class Kind_2_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prKind().ele20TerminalRuleCallID();
+			element = grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// age=INT
 protected class Kind_3_Assignment_age extends AssignmentToken  {
 	
 	public Kind_3_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
@@ -546,7 +542,7 @@ protected class Kind_3_Assignment_age extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prKind().ele3AssignmentAge();
+		return grammarAccess.getKindAccess().getAgeAssignment_3();
 	}
 	
 	@Override
@@ -555,14 +551,14 @@ protected class Kind_3_Assignment_age extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prKind().ele30TerminalRuleCallINT();
+			element = grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// ")"
 protected class Kind_4_Keyword extends KeywordToken  {
 	
 	public Kind_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -570,7 +566,7 @@ protected class Kind_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prKind().ele4KeywordRightParenthesis();
+		return grammarAccess.getKindAccess().getRightParenthesisKeyword_4();
 	}	
 }
 
@@ -580,12 +576,12 @@ protected class Kind_4_Keyword extends KeywordToken  {
 
 /************ begin Rule Erwachsener ****************
  *
- * not supported
+ * Erwachsener:
+ *   "erwachsener" "(" name=ID age=INT ")";
  *
  **/
 
-
-// not supported
+// "erwachsener" "(" name=ID age=INT ")"
 protected class Erwachsener_Group extends GroupToken {
 	
 	public Erwachsener_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -594,40 +590,38 @@ protected class Erwachsener_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prErwachsener().eleGroup();
+		return grammarAccess.getErwachsenerAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Erwachsener_4_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Erwachsener_3_Assignment_age(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Erwachsener_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Erwachsener_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Erwachsener_0_Keyword_erwachsener(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-			if(s5 != null) {
-				last = s5.getPredecessor();
-				return s5;
-			} else {
-				s4 = s4.getPredecessor().nextSolution(this,s4);
+			while(s2 != null) {
+				Solution s3 = new Erwachsener_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Erwachsener_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Erwachsener_0_Keyword_erwachsener(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						if(s5 != null) {
+							last = s5.getPredecessor();
+							return s5;
+						} else {
+							s4 = s4.getPredecessor().nextSolution(this,s4);
+						}
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "erwachsener"
 protected class Erwachsener_0_Keyword_erwachsener extends KeywordToken  {
 	
 	public Erwachsener_0_Keyword_erwachsener(IInstanceDescription curr, AbstractToken pred) {
@@ -635,11 +629,11 @@ protected class Erwachsener_0_Keyword_erwachsener extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prErwachsener().ele0KeywordErwachsener();
+		return grammarAccess.getErwachsenerAccess().getErwachsenerKeyword_0();
 	}	
 }
 
-// not supported
+// "("
 protected class Erwachsener_1_Keyword extends KeywordToken  {
 	
 	public Erwachsener_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -647,11 +641,11 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prErwachsener().ele1KeywordLeftParenthesis();
+		return grammarAccess.getErwachsenerAccess().getLeftParenthesisKeyword_1();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Erwachsener_2_Assignment_name extends AssignmentToken  {
 	
 	public Erwachsener_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -660,7 +654,7 @@ protected class Erwachsener_2_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prErwachsener().ele2AssignmentName();
+		return grammarAccess.getErwachsenerAccess().getNameAssignment_2();
 	}
 	
 	@Override
@@ -669,14 +663,14 @@ protected class Erwachsener_2_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prErwachsener().ele20TerminalRuleCallID();
+			element = grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// age=INT
 protected class Erwachsener_3_Assignment_age extends AssignmentToken  {
 	
 	public Erwachsener_3_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
@@ -685,7 +679,7 @@ protected class Erwachsener_3_Assignment_age extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prErwachsener().ele3AssignmentAge();
+		return grammarAccess.getErwachsenerAccess().getAgeAssignment_3();
 	}
 	
 	@Override
@@ -694,14 +688,14 @@ protected class Erwachsener_3_Assignment_age extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prErwachsener().ele30TerminalRuleCallINT();
+			element = grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// ")"
 protected class Erwachsener_4_Keyword extends KeywordToken  {
 	
 	public Erwachsener_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -709,7 +703,7 @@ protected class Erwachsener_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prErwachsener().ele4KeywordRightParenthesis();
+		return grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4();
 	}	
 }
 
@@ -719,12 +713,12 @@ protected class Erwachsener_4_Keyword extends KeywordToken  {
 
 /************ begin Rule Spielzeug ****************
  *
- * not supported
+ * Spielzeug:
+ *   "spielzeug" "(" name=ID farbe=Farbe ")";
  *
  **/
 
-
-// not supported
+// "spielzeug" "(" name=ID farbe=Farbe ")"
 protected class Spielzeug_Group extends GroupToken {
 	
 	public Spielzeug_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -733,40 +727,38 @@ protected class Spielzeug_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prSpielzeug().eleGroup();
+		return grammarAccess.getSpielzeugAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Spielzeug_4_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Spielzeug_3_Assignment_farbe(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Spielzeug_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Spielzeug_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Spielzeug_0_Keyword_spielzeug(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-			if(s5 != null) {
-				last = s5.getPredecessor();
-				return s5;
-			} else {
-				s4 = s4.getPredecessor().nextSolution(this,s4);
+			while(s2 != null) {
+				Solution s3 = new Spielzeug_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Spielzeug_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Spielzeug_0_Keyword_spielzeug(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						if(s5 != null) {
+							last = s5.getPredecessor();
+							return s5;
+						} else {
+							s4 = s4.getPredecessor().nextSolution(this,s4);
+						}
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "spielzeug"
 protected class Spielzeug_0_Keyword_spielzeug extends KeywordToken  {
 	
 	public Spielzeug_0_Keyword_spielzeug(IInstanceDescription curr, AbstractToken pred) {
@@ -774,11 +766,11 @@ protected class Spielzeug_0_Keyword_spielzeug extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSpielzeug().ele0KeywordSpielzeug();
+		return grammarAccess.getSpielzeugAccess().getSpielzeugKeyword_0();
 	}	
 }
 
-// not supported
+// "("
 protected class Spielzeug_1_Keyword extends KeywordToken  {
 	
 	public Spielzeug_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -786,11 +778,11 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSpielzeug().ele1KeywordLeftParenthesis();
+		return grammarAccess.getSpielzeugAccess().getLeftParenthesisKeyword_1();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Spielzeug_2_Assignment_name extends AssignmentToken  {
 	
 	public Spielzeug_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -799,7 +791,7 @@ protected class Spielzeug_2_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielzeug().ele2AssignmentName();
+		return grammarAccess.getSpielzeugAccess().getNameAssignment_2();
 	}
 	
 	@Override
@@ -808,14 +800,14 @@ protected class Spielzeug_2_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prSpielzeug().ele20TerminalRuleCallID();
+			element = grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// farbe=Farbe
 protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
 	
 	public Spielzeug_3_Assignment_farbe(IInstanceDescription curr, AbstractToken pred) {
@@ -824,7 +816,7 @@ protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prSpielzeug().ele3AssignmentFarbe();
+		return grammarAccess.getSpielzeugAccess().getFarbeAssignment_3();
 	}
 	
 	@Override
@@ -834,7 +826,7 @@ protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFarbe().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) {
 				Solution s = new Farbe_Assignment_wert(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -848,7 +840,7 @@ protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
 	}
 }
 
-// not supported
+// ")"
 protected class Spielzeug_4_Keyword extends KeywordToken  {
 	
 	public Spielzeug_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -856,7 +848,7 @@ protected class Spielzeug_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prSpielzeug().ele4KeywordRightParenthesis();
+		return grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4();
 	}	
 }
 
@@ -866,12 +858,12 @@ protected class Spielzeug_4_Keyword extends KeywordToken  {
 
 /************ begin Rule Familie ****************
  *
- * not supported
+ * Familie:
+ *   "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")";
  *
  **/
 
-
-// not supported
+// "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -880,52 +872,50 @@ protected class Familie_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prFamilie().eleGroup();
+		return grammarAccess.getFamilieAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Familie_7_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Familie_6_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Familie_5_Assignment_kinder(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Familie_4_Assignment_vater(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Familie_3_Assignment_mutter(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-		while(s5 != null) {
-			Solution s6 = new Familie_2_Assignment_name(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-		while(s6 != null) {
-			Solution s7 = new Familie_1_Keyword(s6.getCurrent(), s6.getPredecessor()).firstSolution();
-		while(s7 != null) {
-			Solution s8 = new Familie_0_Keyword_familie(s7.getCurrent(), s7.getPredecessor()).firstSolution();
-			if(s8 != null) {
-				last = s8.getPredecessor();
-				return s8;
-			} else {
-				s7 = s7.getPredecessor().nextSolution(this,s7);
+			while(s2 != null) {
+				Solution s3 = new Familie_5_Assignment_kinder(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Familie_4_Assignment_vater(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Familie_3_Assignment_mutter(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						while(s5 != null) {
+							Solution s6 = new Familie_2_Assignment_name(s5.getCurrent(), s5.getPredecessor()).firstSolution();
+							while(s6 != null) {
+								Solution s7 = new Familie_1_Keyword(s6.getCurrent(), s6.getPredecessor()).firstSolution();
+								while(s7 != null) {
+									Solution s8 = new Familie_0_Keyword_familie(s7.getCurrent(), s7.getPredecessor()).firstSolution();
+									if(s8 != null) {
+										last = s8.getPredecessor();
+										return s8;
+									} else {
+										s7 = s7.getPredecessor().nextSolution(this,s7);
+									}
+								}
+								s6 = s6.getPredecessor().nextSolution(this,s6);
+							}
+							s5 = s5.getPredecessor().nextSolution(this,s5);
+						}
+						s4 = s4.getPredecessor().nextSolution(this,s4);
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s6 = s6.getPredecessor().nextSolution(this,s6);
-		}
-			s5 = s5.getPredecessor().nextSolution(this,s5);
-		}
-			s4 = s4.getPredecessor().nextSolution(this,s4);
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "familie"
 protected class Familie_0_Keyword_familie extends KeywordToken  {
 	
 	public Familie_0_Keyword_familie(IInstanceDescription curr, AbstractToken pred) {
@@ -933,11 +923,11 @@ protected class Familie_0_Keyword_familie extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prFamilie().ele0KeywordFamilie();
+		return grammarAccess.getFamilieAccess().getFamilieKeyword_0();
 	}	
 }
 
-// not supported
+// "("
 protected class Familie_1_Keyword extends KeywordToken  {
 	
 	public Familie_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -945,11 +935,11 @@ protected class Familie_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prFamilie().ele1KeywordLeftParenthesis();
+		return grammarAccess.getFamilieAccess().getLeftParenthesisKeyword_1();
 	}	
 }
 
-// not supported
+// name=( "keyword" | STRING | ID )
 protected class Familie_2_Assignment_name extends AssignmentToken  {
 	
 	public Familie_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -958,7 +948,7 @@ protected class Familie_2_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFamilie().ele2AssignmentName();
+		return grammarAccess.getFamilieAccess().getNameAssignment_2();
 	}
 	
 	@Override
@@ -968,25 +958,25 @@ protected class Familie_2_Assignment_name extends AssignmentToken  {
 
 		if("keyword".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prFamilie().ele200KeywordKeyword();
+			element = grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0();
 			return new Solution(obj);
 		}
 
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prFamilie().ele201TerminalRuleCallSTRING();
+			element = grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1();
 			return new Solution(obj);
 		}
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prFamilie().ele202TerminalRuleCallID();
+			element = grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// mutter=[Erwachsener]
 protected class Familie_3_Assignment_mutter extends AssignmentToken  {
 	
 	public Familie_3_Assignment_mutter(IInstanceDescription curr, AbstractToken pred) {
@@ -995,7 +985,7 @@ protected class Familie_3_Assignment_mutter extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFamilie().ele3AssignmentMutter();
+		return grammarAccess.getFamilieAccess().getMutterAssignment_3();
 	}
 	
 	@Override
@@ -1004,9 +994,9 @@ protected class Familie_3_Assignment_mutter extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("mutter");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener(); 
+				element = grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0(); 
 				return new Solution(obj);
 			}
 		}
@@ -1014,7 +1004,7 @@ protected class Familie_3_Assignment_mutter extends AssignmentToken  {
 	}
 }
 
-// not supported
+// vater=[Erwachsener]
 protected class Familie_4_Assignment_vater extends AssignmentToken  {
 	
 	public Familie_4_Assignment_vater(IInstanceDescription curr, AbstractToken pred) {
@@ -1023,7 +1013,7 @@ protected class Familie_4_Assignment_vater extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFamilie().ele4AssignmentVater();
+		return grammarAccess.getFamilieAccess().getVaterAssignment_4();
 	}
 	
 	@Override
@@ -1032,9 +1022,9 @@ protected class Familie_4_Assignment_vater extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("vater");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener(); 
+				element = grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0(); 
 				return new Solution(obj);
 			}
 		}
@@ -1042,7 +1032,7 @@ protected class Familie_4_Assignment_vater extends AssignmentToken  {
 	}
 }
 
-// not supported
+// kinder+=[Kind]
 protected class Familie_5_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_5_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1051,7 +1041,7 @@ protected class Familie_5_Assignment_kinder extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFamilie().ele5AssignmentKinder();
+		return grammarAccess.getFamilieAccess().getKinderAssignment_5();
 	}
 	
 	@Override
@@ -1060,9 +1050,9 @@ protected class Familie_5_Assignment_kinder extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele50CrossReferenceIDKind().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele50CrossReferenceIDKind(); 
+				element = grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0(); 
 				return new Solution(obj);
 			}
 		}
@@ -1070,7 +1060,7 @@ protected class Familie_5_Assignment_kinder extends AssignmentToken  {
 	}
 }
 
-// not supported
+// ("," kinder+=[Kind])*
 protected class Familie_6_Group extends GroupToken {
 	
 	public Familie_6_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1079,10 +1069,8 @@ protected class Familie_6_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prFamilie().ele6Group();
+		return grammarAccess.getFamilieAccess().getGroup_6();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -1100,7 +1088,7 @@ protected class Familie_6_Group extends GroupToken {
 	}
 }
 
-// not supported
+// ","
 protected class Familie_6_0_Keyword extends KeywordToken  {
 	
 	public Familie_6_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1108,11 +1096,11 @@ protected class Familie_6_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prFamilie().ele60KeywordComma();
+		return grammarAccess.getFamilieAccess().getCommaKeyword_6_0();
 	}	
 }
 
-// not supported
+// kinder+=[Kind]
 protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_6_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1121,7 +1109,7 @@ protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFamilie().ele61AssignmentKinder();
+		return grammarAccess.getFamilieAccess().getKinderAssignment_6_1();
 	}
 	
 	@Override
@@ -1130,9 +1118,9 @@ protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prFamilie().ele610CrossReferenceIDKind().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prFamilie().ele610CrossReferenceIDKind(); 
+				element = grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0(); 
 				return new Solution(obj);
 			}
 		}
@@ -1141,7 +1129,7 @@ protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
 }
 
 
-// not supported
+// ")"
 protected class Familie_7_Keyword extends KeywordToken  {
 	
 	public Familie_7_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -1149,7 +1137,7 @@ protected class Familie_7_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prFamilie().ele7KeywordRightParenthesis();
+		return grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7();
 	}	
 }
 
@@ -1159,12 +1147,12 @@ protected class Familie_7_Keyword extends KeywordToken  {
 
 /************ begin Rule Farbe ****************
  *
- * not supported
+ * Farbe:
+ *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
  *
  **/
 
-
-// not supported
+// wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" )
 protected class Farbe_Assignment_wert extends AssignmentToken  {
 	
 	public Farbe_Assignment_wert(IInstanceDescription curr, AbstractToken pred) {
@@ -1173,7 +1161,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prFarbe().eleAssignmentWert();
+		return grammarAccess.getFarbeAccess().getWertAssignment();
 	}
 	
 	@Override
@@ -1183,28 +1171,28 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 
 		if("ROT".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prFarbe().ele00KeywordROT();
+			element = grammarAccess.getFarbeAccess().getWertROTKeyword_0_0();
 			return new Solution(obj);
 		}
 
 
 		if("BLAU".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prFarbe().ele01KeywordBLAU();
+			element = grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1();
 			return new Solution(obj);
 		}
 
 
 		if("GELB".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prFarbe().ele02KeywordGELB();
+			element = grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2();
 			return new Solution(obj);
 		}
 
 
 		if("GRÜN".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prFarbe().ele03KeywordGRÜN();
+			element = grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3();
 			return new Solution(obj);
 		}
 
@@ -1217,12 +1205,12 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 
 /************ begin Rule CustomTypeParserRule ****************
  *
- * not supported
+ * CustomTypeParserRule returns ReferenceModel::CustomType:
+ *   "type" name=ID;
  *
  **/
 
-
-// not supported
+// "type" name=ID
 protected class CustomTypeParserRule_Group extends GroupToken {
 	
 	public CustomTypeParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1231,10 +1219,8 @@ protected class CustomTypeParserRule_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prCustomTypeParserRule().eleGroup();
+		return grammarAccess.getCustomTypeParserRuleAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -1252,7 +1238,7 @@ protected class CustomTypeParserRule_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "type"
 protected class CustomTypeParserRule_0_Keyword_type extends KeywordToken  {
 	
 	public CustomTypeParserRule_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1260,11 +1246,11 @@ protected class CustomTypeParserRule_0_Keyword_type extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prCustomTypeParserRule().ele0KeywordType();
+		return grammarAccess.getCustomTypeParserRuleAccess().getTypeKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  {
 	
 	public CustomTypeParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -1273,7 +1259,7 @@ protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prCustomTypeParserRule().ele1AssignmentName();
+		return grammarAccess.getCustomTypeParserRuleAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -1282,7 +1268,7 @@ protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prCustomTypeParserRule().ele10TerminalRuleCallID();
+			element = grammarAccess.getCustomTypeParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;

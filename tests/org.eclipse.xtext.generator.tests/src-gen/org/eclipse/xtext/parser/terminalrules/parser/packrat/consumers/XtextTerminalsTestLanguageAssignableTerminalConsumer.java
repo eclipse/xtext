@@ -118,11 +118,11 @@ public final class XtextTerminalsTestLanguageAssignableTerminalConsumer extends 
 	public void setRule(AssignableTerminalElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallKeyword());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallRuleCall());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallParenthesizedAssignableElement());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallCrossReference());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getKeywordParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getRuleCallParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getParenthesizedAssignableElementParserRuleCall_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getCrossReferenceParserRuleCall_3());
 	}
 	
 	@Override

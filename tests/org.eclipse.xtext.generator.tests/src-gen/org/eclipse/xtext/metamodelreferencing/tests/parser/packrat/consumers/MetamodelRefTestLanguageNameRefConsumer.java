@@ -71,8 +71,8 @@ public final class MetamodelRefTestLanguageNameRefConsumer extends NonTerminalCo
 	public void setRule(NameRefElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentRule());
-		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.ele0CrossReferenceIDParserRule());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getRuleAssignment());
+		crossReference$2$Consumer = new CrossReference$2$Consumer(rule.getRuleParserRuleCrossReference_0());
 	}
 	
 	@Override

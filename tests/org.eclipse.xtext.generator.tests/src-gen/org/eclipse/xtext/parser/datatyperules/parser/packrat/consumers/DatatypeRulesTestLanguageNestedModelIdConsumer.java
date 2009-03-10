@@ -102,10 +102,10 @@ public final class DatatypeRulesTestLanguageNestedModelIdConsumer extends NonTer
 	public void setRule(NestedModelIdElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallModelId());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordFullStop());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallModelId());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getModelIdParserRuleCall_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getFullStopKeyword_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getModelIdParserRuleCall_2());
 	}
 	
 	@Override

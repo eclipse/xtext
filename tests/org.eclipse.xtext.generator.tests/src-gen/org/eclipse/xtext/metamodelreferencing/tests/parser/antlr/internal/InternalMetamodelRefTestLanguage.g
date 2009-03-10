@@ -67,7 +67,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
 
 // Entry rule entryRuleFoo
 entryRuleFoo returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prFoo().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); }
 	 iv_ruleFoo=ruleFoo 
 	 { $current=$iv_ruleFoo.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleFoo returns [EObject current=null]
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFoo().ele00TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getFooRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -104,12 +104,12 @@ ruleFoo returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prFoo().ele10ParserRuleCallNameRef(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0(), currentNode); 
 	    }
 	    lv_nameRefs_1=ruleNameRef 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFoo().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getFooRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -129,7 +129,7 @@ ruleFoo returns [EObject current=null]
 
 // Entry rule entryRuleNameRef
 entryRuleNameRef returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prNameRef().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getNameRefRule(), currentNode); }
 	 iv_ruleNameRef=ruleNameRef 
 	 { $current=$iv_ruleNameRef.current; } 
 	 EOF 
@@ -147,13 +147,13 @@ ruleNameRef returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prNameRef().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getNameRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prNameRef().ele0CrossReferenceIDParserRule(), "rule"); 
+		createLeafNode(grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0(), "rule"); 
 	}
 
 		// TODO assign feature to currentNode

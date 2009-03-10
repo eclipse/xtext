@@ -184,15 +184,15 @@ public final class FormatterTestLanguageTestIndentationConsumer extends NonTermi
 	public void setRule(TestIndentationElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordIndentation());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftCurlyBracket());
-		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele2Alternatives());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele20AssignmentSub());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele200ParserRuleCallTestIndentation());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentItems());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallLine());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele3KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getIndentationKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getLeftCurlyBracketKeyword_1());
+		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.getAlternatives_2());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getSubAssignment_2_0());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getSubTestIndentationParserRuleCall_2_0_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getItemsAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getItemsLineParserRuleCall_2_1_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getRightCurlyBracketKeyword_3());
 	}
 	
 	@Override

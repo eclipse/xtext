@@ -20,47 +20,49 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallChild = (RuleCall)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Action c10ActionParentleft = (Action)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentRight = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallChild = (RuleCall)c11AssignmentRight.eContents().get(0);
+		private final RuleCall cChildParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cParentleftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightChildParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
-		// not supported
+		//Model:
+		//  Child ({Parent.left=current} right=Child)?;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//Child ({Parent.left=current} right=Child)?
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallChild() { return c0ParserRuleCallChild; }
+		//Child
+		public RuleCall getChildParserRuleCall_0() { return cChildParserRuleCall_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//({Parent.left=current} right=Child)?
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Action ele10ActionParentleft() { return c10ActionParentleft; }
+		//{Parent.left=current}
+		public Action getParentleftAction_1_0() { return cParentleftAction_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentRight() { return c11AssignmentRight; }
+		//right=Child
+		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
 
-		// not supported
-		public RuleCall ele110ParserRuleCallChild() { return c110ParserRuleCallChild; }
+		//Child
+		public RuleCall getRightChildParserRuleCall_1_1_0() { return cRightChildParserRuleCall_1_1_0; }
 	}
 
 	public class ChildElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
-		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		// not supported
+		//Child:
+		//  name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentName() { return cAssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
 	private ModelElements pModel;
@@ -68,13 +70,13 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ActionTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -83,52 +85,68 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  Child ({Parent.left=current} right=Child)?;
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
-	} 
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
 
-	// not supported
-	public ChildElements prChild() {
+	//Child:
+	//  name=ID;
+	public ChildElements getChildAccess() {
 		return (pChild != null) ? pChild : (pChild = new ChildElements());
+	}
+	
+	public ParserRule getChildRule() {
+		return getChildAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

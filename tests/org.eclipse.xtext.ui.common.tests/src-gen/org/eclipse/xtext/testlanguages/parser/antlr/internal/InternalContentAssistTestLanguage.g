@@ -67,7 +67,7 @@ import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammar
 
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prStart().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
 	 EOF 
@@ -82,18 +82,18 @@ ruleStart returns [EObject current=null]
     }:
 ('abstract rules' 
     {
-        createLeafNode(grammarAccess.prStart().ele0KeywordAbstractRules(), null); 
+        createLeafNode(grammarAccess.getStartAccess().getAbstractRulesKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prStart().ele10ParserRuleCallAbstractRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getStartAccess().getRulesAbstractRuleParserRuleCall_1_0(), currentNode); 
 	    }
 	    lv_rules_1=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prStart().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getStartRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -107,7 +107,7 @@ ruleStart returns [EObject current=null]
 	
 )+'end' 
     {
-        createLeafNode(grammarAccess.prStart().ele2KeywordEnd(), null); 
+        createLeafNode(grammarAccess.getStartAccess().getEndKeyword_2(), null); 
     }
 );
 
@@ -117,7 +117,7 @@ ruleStart returns [EObject current=null]
 
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prAbstractRule().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getAbstractRuleRule(), currentNode); }
 	 iv_ruleAbstractRule=ruleAbstractRule 
 	 { $current=$iv_ruleAbstractRule.current; } 
 	 EOF 
@@ -132,7 +132,7 @@ ruleAbstractRule returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getFirstAbstractRuleChildParserRuleCall_0(), currentNode); 
     }
     this_FirstAbstractRuleChild_0=ruleFirstAbstractRuleChild
     { 
@@ -141,12 +141,12 @@ ruleAbstractRule returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild(), null); 
+    createLeafNode(grammarAccess.getAbstractRuleAccess().getFirstAbstractRuleChildParserRuleCall_0(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getSecondAbstractRuleChildParserRuleCall_1(), currentNode); 
     }
     this_SecondAbstractRuleChild_1=ruleSecondAbstractRuleChild
     { 
@@ -155,7 +155,7 @@ ruleAbstractRule returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild(), null); 
+    createLeafNode(grammarAccess.getAbstractRuleAccess().getSecondAbstractRuleChildParserRuleCall_1(), null); 
     }
 );
 
@@ -165,7 +165,7 @@ ruleAbstractRule returns [EObject current=null]
 
 // Entry rule entryRuleFirstAbstractRuleChild
 entryRuleFirstAbstractRuleChild returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prFirstAbstractRuleChild().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getFirstAbstractRuleChildRule(), currentNode); }
 	 iv_ruleFirstAbstractRuleChild=ruleFirstAbstractRuleChild 
 	 { $current=$iv_ruleFirstAbstractRuleChild.current; } 
 	 EOF 
@@ -182,12 +182,12 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele00TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -200,18 +200,18 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 )'(' 
     {
-        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele1KeywordLeftParenthesis(), null); 
+        createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prFirstAbstractRuleChild().ele20ParserRuleCallAbstractRule(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFirstAbstractRuleChildAccess().getElementsAbstractRuleParserRuleCall_2_0(), currentNode); 
 	    }
 	    lv_elements_2=ruleAbstractRule 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFirstAbstractRuleChild().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -225,11 +225,11 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	
 )+')' 
     {
-        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele3KeywordRightParenthesis(), null); 
+        createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3(), null); 
     }
 ';' 
     {
-        createLeafNode(grammarAccess.prFirstAbstractRuleChild().ele4KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
     }
 );
 
@@ -239,7 +239,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 
 // Entry rule entryRuleSecondAbstractRuleChild
 entryRuleSecondAbstractRuleChild returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prSecondAbstractRuleChild().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getSecondAbstractRuleChildRule(), currentNode); }
 	 iv_ruleSecondAbstractRuleChild=ruleSecondAbstractRuleChild 
 	 { $current=$iv_ruleSecondAbstractRuleChild.current; } 
 	 EOF 
@@ -256,12 +256,12 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele00TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -274,22 +274,22 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 )'rule' 
     {
-        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele1KeywordRule(), null); 
+        createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1(), null); 
     }
 ':' 
     {
-        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele2KeywordColon(), null); 
+        createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prSecondAbstractRuleChild().ele30ParserRuleCallAbstractRuleCall(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getSecondAbstractRuleChildAccess().getRuleAbstractRuleCallParserRuleCall_3_0(), currentNode); 
 	    }
 	    lv_rule_3=ruleAbstractRuleCall 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prSecondAbstractRuleChild().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -303,7 +303,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	
 )';' 
     {
-        createLeafNode(grammarAccess.prSecondAbstractRuleChild().ele4KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
     }
 );
 
@@ -313,7 +313,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 
 // Entry rule entryRuleAbstractRuleCall
 entryRuleAbstractRuleCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prAbstractRuleCall().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getAbstractRuleCallRule(), currentNode); }
 	 iv_ruleAbstractRuleCall=ruleAbstractRuleCall 
 	 { $current=$iv_ruleAbstractRuleCall.current; } 
 	 EOF 
@@ -331,13 +331,13 @@ ruleAbstractRuleCall returns [EObject current=null]
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prAbstractRuleCall().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAbstractRuleCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAbstractRuleCall().ele0CrossReferenceIDAbstractRule(), "rule"); 
+		createLeafNode(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleCrossReference_0(), "rule"); 
 	}
 
 		// TODO assign feature to currentNode

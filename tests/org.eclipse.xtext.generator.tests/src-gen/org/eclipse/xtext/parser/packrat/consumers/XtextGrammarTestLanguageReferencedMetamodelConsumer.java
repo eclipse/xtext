@@ -172,14 +172,14 @@ public final class XtextGrammarTestLanguageReferencedMetamodelConsumer extends N
 	public void setRule(ReferencedMetamodelElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordImport());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentEPackage());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele10CrossReferenceSTRINGEPackage());
-		group$7$Consumer = new Group$7$Consumer(rule.ele2Group());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele20KeywordAs());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele21AssignmentAlias());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele210TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getImportKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getEPackageAssignment_1());
+		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getEPackageEPackageCrossReference_1_0());
+		group$7$Consumer = new Group$7$Consumer(rule.getGroup_2());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getAsKeyword_2_0());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getAliasAssignment_2_1());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getAliasIDTerminalRuleCall_2_1_0());
 	}
 	
 	@Override

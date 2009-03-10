@@ -102,10 +102,10 @@ public final class XtextGrammarTestLanguageUntilTokenConsumer extends NonTermina
 	public void setRule(UntilTokenElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordHyphenMinusGreaterThanSign());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentTerminal());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTerminalTokenElement());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getHyphenMinusGreaterThanSignKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getTerminalAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getTerminalTerminalTokenElementParserRuleCall_1_0());
 	}
 	
 	@Override

@@ -84,9 +84,9 @@ public final class ComplexReconstrTestLanguageRootConsumer extends NonTerminalCo
 	public void setRule(RootElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallOp());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTrickyG());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getOpParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTrickyGParserRuleCall_1());
 	}
 	
 	@Override

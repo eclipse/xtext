@@ -148,13 +148,13 @@ public final class TestLanguageReducibleRuleConsumer extends NonTerminalConsumer
 	public void setRule(ReducibleRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordReducible());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTerminalRule());
-		group$4$Consumer = new Group$4$Consumer(rule.ele2Group());
-		action$5$Consumer = new Action$5$Consumer(rule.ele20ActionReducibleCompositeactionFeature());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentActionFeature());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallTerminalRule());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getReducibleKeyword_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTerminalRuleParserRuleCall_1());
+		group$4$Consumer = new Group$4$Consumer(rule.getGroup_2());
+		action$5$Consumer = new Action$5$Consumer(rule.getReducibleCompositeactionFeatureAction_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getActionFeatureAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getActionFeatureTerminalRuleParserRuleCall_2_1_0());
 	}
 	
 	@Override

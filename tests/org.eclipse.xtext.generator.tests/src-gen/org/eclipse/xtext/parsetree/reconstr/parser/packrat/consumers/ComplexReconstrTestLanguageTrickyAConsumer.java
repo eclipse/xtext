@@ -269,20 +269,20 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 	public void setRule(TrickyAElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTA());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTrickyA1());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentName());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20TerminalRuleCallID());
-		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.ele3Alternatives());
-		group$7$Consumer = new Group$7$Consumer(rule.ele30Group());
-		action$8$Consumer = new Action$8$Consumer(rule.ele300ActionTypeBx());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele301KeywordX());
-		group$11$Consumer = new Group$11$Consumer(rule.ele31Group());
-		action$12$Consumer = new Action$12$Consumer(rule.ele310ActionTypeCx());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele311KeywordY());
-		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele4AssignmentName());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele40TerminalRuleCallSTRING());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTAKeyword_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTrickyA1ParserRuleCall_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_2_0());
+		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.getAlternatives_3());
+		group$7$Consumer = new Group$7$Consumer(rule.getGroup_3_0());
+		action$8$Consumer = new Action$8$Consumer(rule.getTypeBxAction_3_0_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getXKeyword_3_0_1());
+		group$11$Consumer = new Group$11$Consumer(rule.getGroup_3_1());
+		action$12$Consumer = new Action$12$Consumer(rule.getTypeCxAction_3_1_0());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getYKeyword_3_1_1());
+		assignment$15$Consumer = new Assignment$15$Consumer(rule.getNameAssignment_4());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getNameSTRINGTerminalRuleCall_4_0());
 	}
 	
 	@Override

@@ -204,16 +204,16 @@ public final class EcoreDslEEnumDeclConsumer extends NonTerminalConsumer {
 	public void setRule(EEnumDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentEAnnotations());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallEAnnotationDecl());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordEnum());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallID());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele3KeywordLeftCurlyBracket());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele4AssignmentELiterals());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele40ParserRuleCallEEnumLiteralDecl());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele5KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getEAnnotationsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEAnnotationsEAnnotationDeclParserRuleCall_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getEnumKeyword_1());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getNameAssignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNameIDTerminalRuleCall_2_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getLeftCurlyBracketKeyword_3());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getELiteralsAssignment_4());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getELiteralsEEnumLiteralDeclParserRuleCall_4_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getRightCurlyBracketKeyword_5());
 	}
 	
 	@Override

@@ -250,19 +250,19 @@ public final class EcoreDslSubEPackageDeclConsumer extends NonTerminalConsumer {
 	public void setRule(SubEPackageDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentEAnnotations());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallEAnnotationDecl());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordPackage());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallID());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele3KeywordLeftCurlyBracket());
-		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.ele4Alternatives());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele40AssignmentESubpackages());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele400ParserRuleCallSubEPackageDecl());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele41AssignmentEClassifiers());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele410ParserRuleCallEClassifierDecl());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele5KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getEAnnotationsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEAnnotationsEAnnotationDeclParserRuleCall_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getPackageKeyword_1());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getNameAssignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNameIDTerminalRuleCall_2_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getLeftCurlyBracketKeyword_3());
+		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.getAlternatives_4());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getESubpackagesAssignment_4_0());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getESubpackagesSubEPackageDeclParserRuleCall_4_0_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getEClassifiersAssignment_4_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getEClassifiersEClassifierDeclParserRuleCall_4_1_0());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.getRightCurlyBracketKeyword_5());
 	}
 	
 	@Override

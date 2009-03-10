@@ -187,15 +187,15 @@ public final class HiddenTerminalsTestLanguageWithoutHiddensConsumer extends Non
 	public void setRule(WithoutHiddensElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordWithout());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentSpaces());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallWS());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordHiddens());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentSpaces());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30TerminalRuleCallWS());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele4AssignmentValid());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele40KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getWithoutKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getSpacesAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getSpacesWSTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getHiddensKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getSpacesAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getSpacesWSTerminalRuleCall_3_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getValidAssignment_4());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getValidSemicolonKeyword_4_0());
 	}
 	
 	@Override

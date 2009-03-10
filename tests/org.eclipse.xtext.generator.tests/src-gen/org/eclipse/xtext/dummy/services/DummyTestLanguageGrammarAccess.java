@@ -19,60 +19,62 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Assignment cAssignmentElements = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallElement = (RuleCall)cAssignmentElements.eContents().get(0);
+		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
-		// not supported
+		//Model:
+		//  (elements+=Element)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentElements() { return cAssignmentElements; }
+		//(elements+=Element)*
+		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallElement() { return c0ParserRuleCallElement; }
+		//Element
+		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
 	}
 
 	public class ElementElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentOptional = (Assignment)cGroup.eContents().get(0);
-		private final Keyword c00KeywordOptional = (Keyword)c0AssignmentOptional.eContents().get(0);
-		private final Keyword c1KeywordElement = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentName = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentName.eContents().get(0);
-		private final Assignment c3AssignmentDescriptions = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30TerminalRuleCallSTRING = (RuleCall)c3AssignmentDescriptions.eContents().get(0);
-		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cOptionalAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cOptionalOptionalKeyword_0_0 = (Keyword)cOptionalAssignment_0.eContents().get(0);
+		private final Keyword cElementKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Assignment cDescriptionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDescriptionsSTRINGTerminalRuleCall_3_0 = (RuleCall)cDescriptionsAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//Element:
+		//  (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(optional?="optional")? "element" name=ID (descriptions+=STRING)* ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentOptional() { return c0AssignmentOptional; }
+		//(optional?="optional")?
+		public Assignment getOptionalAssignment_0() { return cOptionalAssignment_0; }
 
-		// not supported
-		public Keyword ele00KeywordOptional() { return c00KeywordOptional; }
+		//"optional"
+		public Keyword getOptionalOptionalKeyword_0_0() { return cOptionalOptionalKeyword_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordElement() { return c1KeywordElement; }
+		//"element"
+		public Keyword getElementKeyword_1() { return cElementKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentName() { return c2AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		// not supported
-		public Assignment ele3AssignmentDescriptions() { return c3AssignmentDescriptions; }
+		//(descriptions+=STRING)*
+		public Assignment getDescriptionsAssignment_3() { return cDescriptionsAssignment_3; }
 
-		// not supported
-		public RuleCall ele30TerminalRuleCallSTRING() { return c30TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getDescriptionsSTRINGTerminalRuleCall_3_0() { return cDescriptionsSTRINGTerminalRuleCall_3_0; }
 
-		// not supported
-		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	
 	private ModelElements pModel;
@@ -80,13 +82,13 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DummyTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -95,52 +97,68 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  (elements+=Element)*;
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
-	} 
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
 
-	// not supported
-	public ElementElements prElement() {
+	//Element:
+	//  (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
+	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
+	}
+	
+	public ParserRule getElementRule() {
+		return getElementAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

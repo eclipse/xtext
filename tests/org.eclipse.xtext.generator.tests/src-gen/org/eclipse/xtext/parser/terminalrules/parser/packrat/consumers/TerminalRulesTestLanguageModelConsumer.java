@@ -289,21 +289,21 @@ public final class TerminalRulesTestLanguageModelConsumer extends NonTerminalCon
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentIdValue());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentIntValue());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10TerminalRuleCallINT());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele2AssignmentStringValue());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele20TerminalRuleCallSTRING());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele3AssignmentMlCommentValue());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele30TerminalRuleCallML_COMMENT());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele4AssignmentSlCommentValue());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele40TerminalRuleCallSL_COMMENT());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele5AssignmentWsValue());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele50TerminalRuleCallWS());
-		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele6AssignmentAnyValue());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele60TerminalRuleCallANY_OTHER());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getIdValueAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getIdValueIDTerminalRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getIntValueAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getIntValueINTTerminalRuleCall_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getStringValueAssignment_2());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getStringValueSTRINGTerminalRuleCall_2_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getMlCommentValueAssignment_3());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getMlCommentValueML_COMMENTTerminalRuleCall_3_0());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getSlCommentValueAssignment_4());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getSlCommentValueSL_COMMENTTerminalRuleCall_4_0());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getWsValueAssignment_5());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getWsValueWSTerminalRuleCall_5_0());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.getAnyValueAssignment_6());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getAnyValueANY_OTHERTerminalRuleCall_6_0());
 	}
 	
 	@Override

@@ -20,62 +20,65 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 	public class FooElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Foo");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
-		private final Assignment c1AssignmentNameRefs = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallNameRef = (RuleCall)c1AssignmentNameRefs.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Assignment cNameRefsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameRefsNameRefParserRuleCall_1_0 = (RuleCall)cNameRefsAssignment_1.eContents().get(0);
 		
-		// not supported
+		//Foo:
+		//  name=ID (nameRefs+=NameRef)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//name=ID (nameRefs+=NameRef)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentName() { return c0AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentNameRefs() { return c1AssignmentNameRefs; }
+		//(nameRefs+=NameRef)*
+		public Assignment getNameRefsAssignment_1() { return cNameRefsAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallNameRef() { return c10ParserRuleCallNameRef; }
+		//NameRef
+		public RuleCall getNameRefsNameRefParserRuleCall_1_0() { return cNameRefsNameRefParserRuleCall_1_0; }
 	}
 
 	public class NameRefElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameRef");
-		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
-		private final CrossReference c0CrossReferenceIDParserRule = (CrossReference)cAssignmentRule.eContents().get(0);
-		private final RuleCall c01TerminalRuleCallID = (RuleCall)c0CrossReferenceIDParserRule.eContents().get(1);
+		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cRuleParserRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);
+		private final RuleCall cRuleParserRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleParserRuleCrossReference_0.eContents().get(1);
 		
-		// not supported
+		//NameRef returns xtext::RuleCall:
+		//  rule=[xtext::ParserRule];
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentRule() { return cAssignmentRule; }
+		//rule=[xtext::ParserRule]
+		public Assignment getRuleAssignment() { return cRuleAssignment; }
 
-		// not supported
-		public CrossReference ele0CrossReferenceIDParserRule() { return c0CrossReferenceIDParserRule; }
+		//[xtext::ParserRule]
+		public CrossReference getRuleParserRuleCrossReference_0() { return cRuleParserRuleCrossReference_0; }
 
-		// not supported
-		public RuleCall ele01TerminalRuleCallID() { return c01TerminalRuleCallID; }
+		//ID
+		public RuleCall getRuleParserRuleIDTerminalRuleCall_0_1() { return cRuleParserRuleIDTerminalRuleCall_0_1; }
 	}
 
 	public class MyRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MyRule");
-		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		// not supported
+		//MyRule returns xtext::ParserRule:
+		//  name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentName() { return cAssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
 	private FooElements pFoo;
@@ -84,13 +87,13 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MetamodelRefTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -99,57 +102,78 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public FooElements prFoo() {
+	//Foo:
+	//  name=ID (nameRefs+=NameRef)*;
+	public FooElements getFooAccess() {
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
-	} 
+	}
+	
+	public ParserRule getFooRule() {
+		return getFooAccess().getRule();
+	}
 
-	// not supported
-	public NameRefElements prNameRef() {
+	//NameRef returns xtext::RuleCall:
+	//  rule=[xtext::ParserRule];
+	public NameRefElements getNameRefAccess() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
-	} 
+	}
+	
+	public ParserRule getNameRefRule() {
+		return getNameRefAccess().getRule();
+	}
 
-	// not supported
-	public MyRuleElements prMyRule() {
+	//MyRule returns xtext::ParserRule:
+	//  name=ID;
+	public MyRuleElements getMyRuleAccess() {
 		return (pMyRule != null) ? pMyRule : (pMyRule = new MyRuleElements());
+	}
+	
+	public ParserRule getMyRuleRule() {
+		return getMyRuleAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

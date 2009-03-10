@@ -67,8 +67,8 @@ public final class TestLanguageEntryRuleConsumer extends NonTerminalConsumer {
 	public void setRule(EntryRuleElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentMultiFeature());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAbstractRule());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getMultiFeatureAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getMultiFeatureAbstractRuleParserRuleCall_0());
 	}
 	
 	@Override

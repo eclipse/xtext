@@ -310,23 +310,23 @@ public final class EcoreDslEGenericTypeReferenceDeclConsumer extends NonTerminal
 	public void setRule(EGenericTypeReferenceDeclElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		group$2$Consumer = new Group$2$Consumer(rule.ele0Group());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentEClassifier());
-		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.ele000CrossReferenceIDEClassifier());
-		group$7$Consumer = new Group$7$Consumer(rule.ele01Group());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele010KeywordLessThanSign());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele011AssignmentETypeArguments());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0110ParserRuleCallEGenericTypeDecl());
-		group$11$Consumer = new Group$11$Consumer(rule.ele012Group());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele0120KeywordComma());
-		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele0121AssignmentETypeArguments());
-		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.ele01210ParserRuleCallEGenericTypeDecl());
-		keyword$15$Consumer = new Keyword$15$Consumer(rule.ele013KeywordGreaterThanSign());
-		group$16$Consumer = new Group$16$Consumer(rule.ele1Group());
-		keyword$17$Consumer = new Keyword$17$Consumer(rule.ele10KeywordNumberSign());
-		assignment$18$Consumer = new Assignment$18$Consumer(rule.ele11AssignmentETypeParameter());
-		crossReference$19$Consumer = new CrossReference$19$Consumer(rule.ele110CrossReferenceIDETypeParameter());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		group$2$Consumer = new Group$2$Consumer(rule.getGroup_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getEClassifierAssignment_0_0());
+		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getEClassifierEClassifierCrossReference_0_0_0());
+		group$7$Consumer = new Group$7$Consumer(rule.getGroup_0_1());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getLessThanSignKeyword_0_1_0());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getETypeArgumentsAssignment_0_1_1());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0());
+		group$11$Consumer = new Group$11$Consumer(rule.getGroup_0_1_2());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getCommaKeyword_0_1_2_0());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.getETypeArgumentsAssignment_0_1_2_1());
+		ruleCall$14$Consumer = new RuleCall$14$Consumer(rule.getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0());
+		keyword$15$Consumer = new Keyword$15$Consumer(rule.getGreaterThanSignKeyword_0_1_3());
+		group$16$Consumer = new Group$16$Consumer(rule.getGroup_1());
+		keyword$17$Consumer = new Keyword$17$Consumer(rule.getNumberSignKeyword_1_0());
+		assignment$18$Consumer = new Assignment$18$Consumer(rule.getETypeParameterAssignment_1_1());
+		crossReference$19$Consumer = new CrossReference$19$Consumer(rule.getETypeParameterETypeParameterCrossReference_1_1_0());
 	}
 	
 	@Override

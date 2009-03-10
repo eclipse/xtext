@@ -220,17 +220,17 @@ public final class DomainmodelReferenceConsumer extends NonTerminalConsumer {
 	public void setRule(ReferenceElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordRef());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordColon());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentType());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallTypeRef());
-		group$8$Consumer = new Group$8$Consumer(rule.ele4Group());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele40KeywordOpposite());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele41AssignmentOpposite());
-		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.ele410CrossReferenceIDReference());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getRefKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getColonKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getTypeAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getTypeTypeRefParserRuleCall_3_0());
+		group$8$Consumer = new Group$8$Consumer(rule.getGroup_4());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getOppositeKeyword_4_0());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getOppositeAssignment_4_1());
+		crossReference$11$Consumer = new CrossReference$11$Consumer(rule.getOppositeReferenceCrossReference_4_1_0());
 	}
 	
 	@Override

@@ -257,20 +257,20 @@ public final class EpatchTestLanguageMigrationConsumer extends NonTerminalConsum
 	public void setRule(MigrationElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordMigrate());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentFirst());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallExecutable());
-		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.ele2Alternatives());
-		group$6$Consumer = new Group$6$Consumer(rule.ele20Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele200KeywordAs());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele201AssignmentAsOp());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele2010ParserRuleCallExecutable());
-		group$10$Consumer = new Group$10$Consumer(rule.ele21Group());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele210KeywordEach());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele211AssignmentEachOp());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele2110ParserRuleCallExecutable());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele3KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getMigrateKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getFirstAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getFirstExecutableParserRuleCall_1_0());
+		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.getAlternatives_2());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_2_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getAsKeyword_2_0_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getAsOpAssignment_2_0_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getAsOpExecutableParserRuleCall_2_0_1_0());
+		group$10$Consumer = new Group$10$Consumer(rule.getGroup_2_1());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getEachKeyword_2_1_0());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getEachOpAssignment_2_1_1());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getEachOpExecutableParserRuleCall_2_1_1_0());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getSemicolonKeyword_3());
 	}
 	
 	@Override

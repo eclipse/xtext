@@ -355,28 +355,28 @@ public final class ReferenceGrammarFamilieConsumer extends NonTerminalConsumer {
 	public void setRule(FamilieElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordFamilie());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftParenthesis());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentName());
-		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.ele20Alternatives());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele200KeywordKeyword());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele201TerminalRuleCallSTRING());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele202TerminalRuleCallID());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele200KeywordKeyword());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele201TerminalRuleCallSTRING());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele202TerminalRuleCallID());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele3AssignmentMutter());
-		crossReference$10$Consumer = new CrossReference$10$Consumer(rule.ele30CrossReferenceIDErwachsener());
-		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele4AssignmentVater());
-		crossReference$14$Consumer = new CrossReference$14$Consumer(rule.ele40CrossReferenceIDErwachsener());
-		assignment$17$Consumer = new Assignment$17$Consumer(rule.ele5AssignmentKinder());
-		crossReference$18$Consumer = new CrossReference$18$Consumer(rule.ele50CrossReferenceIDKind());
-		group$21$Consumer = new Group$21$Consumer(rule.ele6Group());
-		keyword$22$Consumer = new Keyword$22$Consumer(rule.ele60KeywordComma());
-		assignment$23$Consumer = new Assignment$23$Consumer(rule.ele61AssignmentKinder());
-		crossReference$24$Consumer = new CrossReference$24$Consumer(rule.ele610CrossReferenceIDKind());
-		keyword$27$Consumer = new Keyword$27$Consumer(rule.ele7KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getFamilieKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getLeftParenthesisKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameAssignment_2());
+		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.getNameAlternatives_2_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getNameKeywordKeyword_2_0_0());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getNameSTRINGTerminalRuleCall_2_0_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getNameIDTerminalRuleCall_2_0_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getNameKeywordKeyword_2_0_0());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getNameSTRINGTerminalRuleCall_2_0_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getNameIDTerminalRuleCall_2_0_2());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getMutterAssignment_3());
+		crossReference$10$Consumer = new CrossReference$10$Consumer(rule.getMutterErwachsenerCrossReference_3_0());
+		assignment$13$Consumer = new Assignment$13$Consumer(rule.getVaterAssignment_4());
+		crossReference$14$Consumer = new CrossReference$14$Consumer(rule.getVaterErwachsenerCrossReference_4_0());
+		assignment$17$Consumer = new Assignment$17$Consumer(rule.getKinderAssignment_5());
+		crossReference$18$Consumer = new CrossReference$18$Consumer(rule.getKinderKindCrossReference_5_0());
+		group$21$Consumer = new Group$21$Consumer(rule.getGroup_6());
+		keyword$22$Consumer = new Keyword$22$Consumer(rule.getCommaKeyword_6_0());
+		assignment$23$Consumer = new Assignment$23$Consumer(rule.getKinderAssignment_6_1());
+		crossReference$24$Consumer = new CrossReference$24$Consumer(rule.getKinderKindCrossReference_6_1_0());
+		keyword$27$Consumer = new Keyword$27$Consumer(rule.getRightParenthesisKeyword_7());
 	}
 	
 	@Override

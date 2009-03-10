@@ -151,13 +151,13 @@ public final class EcoreDslETypeParameterDeclConsumer extends NonTerminalConsume
 	public void setRule(ETypeParameterDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		group$4$Consumer = new Group$4$Consumer(rule.ele1Group());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele10KeywordExtends());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentEBounds());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallEGenericTypeDecl());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameIDTerminalRuleCall_0_0());
+		group$4$Consumer = new Group$4$Consumer(rule.getGroup_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getExtendsKeyword_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getEBoundsAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getEBoundsEGenericTypeDeclParserRuleCall_1_1_0());
 	}
 	
 	@Override

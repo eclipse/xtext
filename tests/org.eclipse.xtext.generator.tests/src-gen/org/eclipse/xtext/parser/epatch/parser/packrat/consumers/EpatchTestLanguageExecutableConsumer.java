@@ -84,9 +84,9 @@ public final class EpatchTestLanguageExecutableConsumer extends NonTerminalConsu
 	public void setRule(ExecutableElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallJavaExecutable());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallExpressionExecutable());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getJavaExecutableParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getExpressionExecutableParserRuleCall_1());
 	}
 	
 	@Override

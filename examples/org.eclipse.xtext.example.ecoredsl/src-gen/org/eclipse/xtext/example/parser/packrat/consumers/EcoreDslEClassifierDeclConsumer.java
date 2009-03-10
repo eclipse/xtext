@@ -84,9 +84,9 @@ public final class EcoreDslEClassifierDeclConsumer extends NonTerminalConsumer {
 	public void setRule(EClassifierDeclElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallEClassDecl());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallEDataTypeDecl());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getEClassDeclParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEDataTypeDeclParserRuleCall_1());
 	}
 	
 	@Override

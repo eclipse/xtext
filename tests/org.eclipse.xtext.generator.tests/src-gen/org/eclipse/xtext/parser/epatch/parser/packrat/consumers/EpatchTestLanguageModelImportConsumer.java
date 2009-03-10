@@ -84,9 +84,9 @@ public final class EpatchTestLanguageModelImportConsumer extends NonTerminalCons
 	public void setRule(ModelImportElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallResourceImport());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallEPackageImport());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getResourceImportParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEPackageImportParserRuleCall_1());
 	}
 	
 	@Override

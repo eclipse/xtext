@@ -169,14 +169,14 @@ public final class TransientValuesTestTestOptionalConsumer extends NonTerminalCo
 	public void setRule(TestOptionalElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordOptional());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentOpt1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallINT());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordColon());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentOpt2());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getOptionalKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getOpt1Assignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getOpt1INTTerminalRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getColonKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getOpt2Assignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getOpt2INTTerminalRuleCall_2_1_0());
 	}
 	
 	@Override

@@ -19,68 +19,69 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment c0AssignmentIdValue = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentIdValue.eContents().get(0);
-		private final Assignment c1AssignmentIntValue = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentIntValue.eContents().get(0);
-		private final Assignment c2AssignmentStringValue = (Assignment)cAlternatives.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentStringValue.eContents().get(0);
-		private final Assignment c3AssignmentMlCommentValue = (Assignment)cAlternatives.eContents().get(3);
-		private final RuleCall c30TerminalRuleCallML_COMMENT = (RuleCall)c3AssignmentMlCommentValue.eContents().get(0);
-		private final Assignment c4AssignmentSlCommentValue = (Assignment)cAlternatives.eContents().get(4);
-		private final RuleCall c40TerminalRuleCallSL_COMMENT = (RuleCall)c4AssignmentSlCommentValue.eContents().get(0);
-		private final Assignment c5AssignmentWsValue = (Assignment)cAlternatives.eContents().get(5);
-		private final RuleCall c50TerminalRuleCallWS = (RuleCall)c5AssignmentWsValue.eContents().get(0);
-		private final Assignment c6AssignmentAnyValue = (Assignment)cAlternatives.eContents().get(6);
-		private final RuleCall c60TerminalRuleCallANY_OTHER = (RuleCall)c6AssignmentAnyValue.eContents().get(0);
+		private final Assignment cIdValueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cIdValueIDTerminalRuleCall_0_0 = (RuleCall)cIdValueAssignment_0.eContents().get(0);
+		private final Assignment cIntValueAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cIntValueINTTerminalRuleCall_1_0 = (RuleCall)cIntValueAssignment_1.eContents().get(0);
+		private final Assignment cStringValueAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cStringValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cStringValueAssignment_2.eContents().get(0);
+		private final Assignment cMlCommentValueAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cMlCommentValueML_COMMENTTerminalRuleCall_3_0 = (RuleCall)cMlCommentValueAssignment_3.eContents().get(0);
+		private final Assignment cSlCommentValueAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
+		private final RuleCall cSlCommentValueSL_COMMENTTerminalRuleCall_4_0 = (RuleCall)cSlCommentValueAssignment_4.eContents().get(0);
+		private final Assignment cWsValueAssignment_5 = (Assignment)cAlternatives.eContents().get(5);
+		private final RuleCall cWsValueWSTerminalRuleCall_5_0 = (RuleCall)cWsValueAssignment_5.eContents().get(0);
+		private final Assignment cAnyValueAssignment_6 = (Assignment)cAlternatives.eContents().get(6);
+		private final RuleCall cAnyValueANY_OTHERTerminalRuleCall_6_0 = (RuleCall)cAnyValueAssignment_6.eContents().get(0);
 		
-		// not supported
+		//Model:
+		//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Assignment ele0AssignmentIdValue() { return c0AssignmentIdValue; }
+		//idValue=ID
+		public Assignment getIdValueAssignment_0() { return cIdValueAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getIdValueIDTerminalRuleCall_0_0() { return cIdValueIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentIntValue() { return c1AssignmentIntValue; }
+		//intValue=INT
+		public Assignment getIntValueAssignment_1() { return cIntValueAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
+		//INT
+		public RuleCall getIntValueINTTerminalRuleCall_1_0() { return cIntValueINTTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentStringValue() { return c2AssignmentStringValue; }
+		//stringValue=STRING
+		public Assignment getStringValueAssignment_2() { return cStringValueAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getStringValueSTRINGTerminalRuleCall_2_0() { return cStringValueSTRINGTerminalRuleCall_2_0; }
 
-		// not supported
-		public Assignment ele3AssignmentMlCommentValue() { return c3AssignmentMlCommentValue; }
+		//mlCommentValue=ML_COMMENT
+		public Assignment getMlCommentValueAssignment_3() { return cMlCommentValueAssignment_3; }
 
-		// not supported
-		public RuleCall ele30TerminalRuleCallML_COMMENT() { return c30TerminalRuleCallML_COMMENT; }
+		//ML_COMMENT
+		public RuleCall getMlCommentValueML_COMMENTTerminalRuleCall_3_0() { return cMlCommentValueML_COMMENTTerminalRuleCall_3_0; }
 
-		// not supported
-		public Assignment ele4AssignmentSlCommentValue() { return c4AssignmentSlCommentValue; }
+		//slCommentValue=SL_COMMENT
+		public Assignment getSlCommentValueAssignment_4() { return cSlCommentValueAssignment_4; }
 
-		// not supported
-		public RuleCall ele40TerminalRuleCallSL_COMMENT() { return c40TerminalRuleCallSL_COMMENT; }
+		//SL_COMMENT
+		public RuleCall getSlCommentValueSL_COMMENTTerminalRuleCall_4_0() { return cSlCommentValueSL_COMMENTTerminalRuleCall_4_0; }
 
-		// not supported
-		public Assignment ele5AssignmentWsValue() { return c5AssignmentWsValue; }
+		//wsValue=WS
+		public Assignment getWsValueAssignment_5() { return cWsValueAssignment_5; }
 
-		// not supported
-		public RuleCall ele50TerminalRuleCallWS() { return c50TerminalRuleCallWS; }
+		//WS
+		public RuleCall getWsValueWSTerminalRuleCall_5_0() { return cWsValueWSTerminalRuleCall_5_0; }
 
-		// not supported
-		public Assignment ele6AssignmentAnyValue() { return c6AssignmentAnyValue; }
+		//anyValue=ANY_OTHER
+		public Assignment getAnyValueAssignment_6() { return cAnyValueAssignment_6; }
 
-		// not supported
-		public RuleCall ele60TerminalRuleCallANY_OTHER() { return c60TerminalRuleCallANY_OTHER; }
+		//ANY_OTHER
+		public RuleCall getAnyValueANY_OTHERTerminalRuleCall_6_0() { return cAnyValueANY_OTHERTerminalRuleCall_6_0; }
 	}
 	
 	private ModelElements pModel;
@@ -105,43 +106,54 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
-	} 
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
 
-	// not supported
-	public TerminalRule trID() {
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
+	//terminal INT:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
 		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
 		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
-	// not supported
-	public TerminalRule trANY_OTHER() {
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

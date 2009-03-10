@@ -76,7 +76,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:69:46: (iv_ruleRoot= ruleRoot EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:70:2: iv_ruleRoot= ruleRoot EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); 
             pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot71);
             iv_ruleRoot=ruleRoot();
             _fsp--;
@@ -122,7 +122,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,11,FOLLOW_11_in_ruleRoot115); 
 
-                    createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
+                    createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:87:1: (this_TestRequired_1= ruleTestRequired | this_TestOptional_2= ruleTestOptional | this_TestList_3= ruleTestList )
             int alt1=3;
@@ -154,7 +154,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:88:5: this_TestRequired_1= ruleTestRequired
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestRequired(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestRequired_in_ruleRoot138);
                     this_TestRequired_1=ruleTestRequired();
@@ -165,7 +165,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prRoot().ele10ParserRuleCallTestRequired(), null); 
+                        createLeafNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0(), null); 
                         
 
                     }
@@ -174,7 +174,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:102:5: this_TestOptional_2= ruleTestOptional
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestOptional(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestOptional_in_ruleRoot172);
                     this_TestOptional_2=ruleTestOptional();
@@ -185,7 +185,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestOptional(), null); 
+                        createLeafNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), null); 
                         
 
                     }
@@ -194,7 +194,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:116:5: this_TestList_3= ruleTestList
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prRoot().ele12ParserRuleCallTestList(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleTestList_in_ruleRoot206);
                     this_TestList_3=ruleTestList();
@@ -205,7 +205,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prRoot().ele12ParserRuleCallTestList(), null); 
+                        createLeafNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), null); 
                         
 
                     }
@@ -247,7 +247,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:135:54: (iv_ruleTestRequired= ruleTestRequired EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:136:2: iv_ruleTestRequired= ruleTestRequired EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTestRequired().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTestRequiredRule(), currentNode); 
             pushFollow(FOLLOW_ruleTestRequired_in_entryRuleTestRequired246);
             iv_ruleTestRequired=ruleTestRequired();
             _fsp--;
@@ -289,7 +289,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,12,FOLLOW_12_in_ruleTestRequired290); 
 
-                    createLeafNode(grammarAccess.prTestRequired().ele0KeywordRequired(), null); 
+                    createLeafNode(grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:153:1: (lv_required1_1= RULE_INT )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:155:6: lv_required1_1= RULE_INT
@@ -297,11 +297,11 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             lv_required1_1=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired312); 
 
-            		createLeafNode(grammarAccess.prTestRequired().ele10TerminalRuleCallINT(), "required1"); 
+            		createLeafNode(grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prTestRequired().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -320,11 +320,11 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             lv_required2_2=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestRequired342); 
 
-            		createLeafNode(grammarAccess.prTestRequired().ele20TerminalRuleCallINT(), "required2"); 
+            		createLeafNode(grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prTestRequired().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -371,7 +371,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:200:54: (iv_ruleTestOptional= ruleTestOptional EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:201:2: iv_ruleTestOptional= ruleTestOptional EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTestOptional().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTestOptionalRule(), currentNode); 
             pushFollow(FOLLOW_ruleTestOptional_in_entryRuleTestOptional383);
             iv_ruleTestOptional=ruleTestOptional();
             _fsp--;
@@ -413,7 +413,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,13,FOLLOW_13_in_ruleTestOptional427); 
 
-                    createLeafNode(grammarAccess.prTestOptional().ele0KeywordOptional(), null); 
+                    createLeafNode(grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:218:1: (lv_opt1_1= RULE_INT )?
             int alt2=2;
@@ -429,11 +429,11 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     lv_opt1_1=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional449); 
 
-                    		createLeafNode(grammarAccess.prTestOptional().ele10TerminalRuleCallINT(), "opt1"); 
+                    		createLeafNode(grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prTestOptional().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -462,7 +462,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     {
                     match(input,14,FOLLOW_14_in_ruleTestOptional468); 
 
-                            createLeafNode(grammarAccess.prTestOptional().ele20KeywordColon(), null); 
+                            createLeafNode(grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:242:1: (lv_opt2_3= RULE_INT )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:244:6: lv_opt2_3= RULE_INT
@@ -470,11 +470,11 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                     lv_opt2_3=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestOptional490); 
 
-                    		createLeafNode(grammarAccess.prTestOptional().ele210TerminalRuleCallINT(), "opt2"); 
+                    		createLeafNode(grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prTestOptional().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -527,7 +527,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:269:50: (iv_ruleTestList= ruleTestList EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:270:2: iv_ruleTestList= ruleTestList EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTestList().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTestListRule(), currentNode); 
             pushFollow(FOLLOW_ruleTestList_in_entryRuleTestList533);
             iv_ruleTestList=ruleTestList();
             _fsp--;
@@ -568,7 +568,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             {
             match(input,15,FOLLOW_15_in_ruleTestList577); 
 
-                    createLeafNode(grammarAccess.prTestList().ele0KeywordList(), null); 
+                    createLeafNode(grammarAccess.getTestListAccess().getListKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.g:287:1: (lv_item_1= RULE_INT )*
             loop4:
@@ -588,11 +588,11 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             	    lv_item_1=(Token)input.LT(1);
             	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTestList599); 
 
-            	    		createLeafNode(grammarAccess.prTestList().ele10TerminalRuleCallINT(), "item"); 
+            	    		createLeafNode(grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prTestList().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getTestListRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        

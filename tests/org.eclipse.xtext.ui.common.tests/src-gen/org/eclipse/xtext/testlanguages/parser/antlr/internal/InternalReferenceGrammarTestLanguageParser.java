@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class InternalReferenceGrammarTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'spielplatz'", "'{'", "'}'", "'kind'", "'('", "')'", "'erwachsener'", "'spielzeug'", "'ROT'", "'BLAU'", "'GELB'", "'GR\\u00DCN'", "'familie'", "'keyword'", "','"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'spielplatz'", "'{'", "'}'", "'kind'", "'('", "')'", "'erwachsener'", "'spielzeug'", "'ROT'", "'BLAU'", "'GELB'", "'GR\\u2039N'", "'familie'", "'keyword'", "','"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=6;
@@ -76,7 +76,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:69:52: (iv_ruleSpielplatz= ruleSpielplatz EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:70:2: iv_ruleSpielplatz= ruleSpielplatz EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSpielplatz().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSpielplatzRule(), currentNode); 
             pushFollow(FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz71);
             iv_ruleSpielplatz=ruleSpielplatz();
             _fsp--;
@@ -134,7 +134,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,11,FOLLOW_11_in_ruleSpielplatz115); 
 
-                            createLeafNode(grammarAccess.prSpielplatz().ele0KeywordSpielplatz(), null); 
+                            createLeafNode(grammarAccess.getSpielplatzAccess().getSpielplatzKeyword_0(), null); 
                         
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:87:1: (lv_groesse_1= RULE_INT )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:89:6: lv_groesse_1= RULE_INT
@@ -142,11 +142,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     lv_groesse_1=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSpielplatz137); 
 
-                    		createLeafNode(grammarAccess.prSpielplatz().ele10TerminalRuleCallINT(), "groesse"); 
+                    		createLeafNode(grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0(), "groesse"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -173,11 +173,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                             lv_beschreibung_2=(Token)input.LT(1);
                             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSpielplatz167); 
 
-                            		createLeafNode(grammarAccess.prSpielplatz().ele20TerminalRuleCallSTRING(), "beschreibung"); 
+                            		createLeafNode(grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0(), "beschreibung"); 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -195,7 +195,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
                     match(input,12,FOLLOW_12_in_ruleSpielplatz185); 
 
-                            createLeafNode(grammarAccess.prSpielplatz().ele3KeywordLeftCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getSpielplatzAccess().getLeftCurlyBracketKeyword_3(), null); 
                         
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:131:1: ( (lv_kinder_4= ruleKind ) | (lv_erzieher_5= ruleErwachsener ) | (lv_spielzeuge_6= ruleSpielzeug ) | (lv_familie_7= ruleFamilie ) )*
                     loop2:
@@ -233,7 +233,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:134:6: lv_kinder_4= ruleKind
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele400ParserRuleCallKind(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleKind_in_ruleSpielplatz220);
                     	    lv_kinder_4=ruleKind();
@@ -241,7 +241,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -265,7 +265,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:156:6: lv_erzieher_5= ruleErwachsener
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele410ParserRuleCallErwachsener(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleErwachsener_in_ruleSpielplatz264);
                     	    lv_erzieher_5=ruleErwachsener();
@@ -273,7 +273,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -297,7 +297,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:178:6: lv_spielzeuge_6= ruleSpielzeug
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele420ParserRuleCallSpielzeug(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleSpielzeug_in_ruleSpielplatz308);
                     	    lv_spielzeuge_6=ruleSpielzeug();
@@ -305,7 +305,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -329,7 +329,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:200:6: lv_familie_7= ruleFamilie
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prSpielplatz().ele430ParserRuleCallFamilie(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleFamilie_in_ruleSpielplatz352);
                     	    lv_familie_7=ruleFamilie();
@@ -337,7 +337,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prSpielplatz().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getSpielplatzRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -362,7 +362,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
                     match(input,13,FOLLOW_13_in_ruleSpielplatz367); 
 
-                            createLeafNode(grammarAccess.prSpielplatz().ele5KeywordRightCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5(), null); 
                         
 
                     }
@@ -401,7 +401,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:231:46: (iv_ruleKind= ruleKind EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:232:2: iv_ruleKind= ruleKind EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prKind().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getKindRule(), currentNode); 
             pushFollow(FOLLOW_ruleKind_in_entryRuleKind403);
             iv_ruleKind=ruleKind();
             _fsp--;
@@ -443,11 +443,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
             match(input,14,FOLLOW_14_in_ruleKind447); 
 
-                    createLeafNode(grammarAccess.prKind().ele0KeywordKind(), null); 
+                    createLeafNode(grammarAccess.getKindAccess().getKindKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleKind456); 
 
-                    createLeafNode(grammarAccess.prKind().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getKindAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:253:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:255:6: lv_name_2= RULE_ID
@@ -455,11 +455,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKind478); 
 
-            		createLeafNode(grammarAccess.prKind().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prKind().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getKindRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -478,11 +478,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             lv_age_3=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleKind508); 
 
-            		createLeafNode(grammarAccess.prKind().ele30TerminalRuleCallINT(), "age"); 
+            		createLeafNode(grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0(), "age"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prKind().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getKindRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -497,7 +497,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
             match(input,16,FOLLOW_16_in_ruleKind525); 
 
-                    createLeafNode(grammarAccess.prKind().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getKindAccess().getRightParenthesisKeyword_4(), null); 
                 
 
             }
@@ -533,7 +533,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:304:53: (iv_ruleErwachsener= ruleErwachsener EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:305:2: iv_ruleErwachsener= ruleErwachsener EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prErwachsener().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getErwachsenerRule(), currentNode); 
             pushFollow(FOLLOW_ruleErwachsener_in_entryRuleErwachsener558);
             iv_ruleErwachsener=ruleErwachsener();
             _fsp--;
@@ -575,11 +575,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
             match(input,17,FOLLOW_17_in_ruleErwachsener602); 
 
-                    createLeafNode(grammarAccess.prErwachsener().ele0KeywordErwachsener(), null); 
+                    createLeafNode(grammarAccess.getErwachsenerAccess().getErwachsenerKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleErwachsener611); 
 
-                    createLeafNode(grammarAccess.prErwachsener().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getErwachsenerAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:326:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:328:6: lv_name_2= RULE_ID
@@ -587,11 +587,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleErwachsener633); 
 
-            		createLeafNode(grammarAccess.prErwachsener().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getErwachsenerRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -610,11 +610,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             lv_age_3=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleErwachsener663); 
 
-            		createLeafNode(grammarAccess.prErwachsener().ele30TerminalRuleCallINT(), "age"); 
+            		createLeafNode(grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0(), "age"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prErwachsener().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getErwachsenerRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -629,7 +629,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
             match(input,16,FOLLOW_16_in_ruleErwachsener680); 
 
-                    createLeafNode(grammarAccess.prErwachsener().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4(), null); 
                 
 
             }
@@ -665,7 +665,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:377:51: (iv_ruleSpielzeug= ruleSpielzeug EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:378:2: iv_ruleSpielzeug= ruleSpielzeug EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSpielzeug().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSpielzeugRule(), currentNode); 
             pushFollow(FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug713);
             iv_ruleSpielzeug=ruleSpielzeug();
             _fsp--;
@@ -708,11 +708,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
             match(input,18,FOLLOW_18_in_ruleSpielzeug757); 
 
-                    createLeafNode(grammarAccess.prSpielzeug().ele0KeywordSpielzeug(), null); 
+                    createLeafNode(grammarAccess.getSpielzeugAccess().getSpielzeugKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleSpielzeug766); 
 
-                    createLeafNode(grammarAccess.prSpielzeug().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getSpielzeugAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:399:1: (lv_name_2= RULE_ID )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:401:6: lv_name_2= RULE_ID
@@ -720,11 +720,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             lv_name_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSpielzeug788); 
 
-            		createLeafNode(grammarAccess.prSpielzeug().ele20TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getSpielzeugRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -741,7 +741,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:422:6: lv_farbe_3= ruleFarbe
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prSpielzeug().ele30ParserRuleCallFarbe(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleFarbe_in_ruleSpielzeug830);
             lv_farbe_3=ruleFarbe();
@@ -749,7 +749,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prSpielzeug().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getSpielzeugRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -765,7 +765,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
             match(input,16,FOLLOW_16_in_ruleSpielzeug843); 
 
-                    createLeafNode(grammarAccess.prSpielzeug().ele4KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4(), null); 
                 
 
             }
@@ -801,7 +801,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:451:47: (iv_ruleFarbe= ruleFarbe EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:452:2: iv_ruleFarbe= ruleFarbe EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFarbe().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFarbeRule(), currentNode); 
             pushFollow(FOLLOW_ruleFarbe_in_entryRuleFarbe876);
             iv_ruleFarbe=ruleFarbe();
             _fsp--;
@@ -825,17 +825,17 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start ruleFarbe
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:459:1: ruleFarbe returns [EObject current=null] : ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:459:1: ruleFarbe returns [EObject current=null] : ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' ) ;
     public final EObject ruleFarbe() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:464:6: ( ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:465:1: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:464:6: ( ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:465:1: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:465:1: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:465:1: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' )
             int alt4=4;
             switch ( input.LA(1) ) {
             case 19:
@@ -860,7 +860,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("465:1: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u00DCN' )", 4, 0, input);
+                    new NoViableAltException("465:1: ( 'ROT' | 'BLAU' | 'GELB' | 'GR\\u2039N' )", 4, 0, input);
 
                 throw nvae;
             }
@@ -871,7 +871,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,19,FOLLOW_19_in_ruleFarbe920); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele0KeywordROT(), null); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getROTKeyword_0(), null); 
                         
 
                     }
@@ -881,7 +881,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,20,FOLLOW_20_in_ruleFarbe935); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele1KeywordBLAU(), null); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getBLAUKeyword_1(), null); 
                         
 
                     }
@@ -891,17 +891,17 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,21,FOLLOW_21_in_ruleFarbe950); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele2KeywordGELB(), null); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getGELBKeyword_2(), null); 
                         
 
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:480:6: 'GR\\u00DCN'
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:480:6: 'GR\\u2039N'
                     {
                     match(input,22,FOLLOW_22_in_ruleFarbe965); 
 
-                            createLeafNode(grammarAccess.prFarbe().ele3KeywordGRÜN(), null); 
+                            createLeafNode(grammarAccess.getFarbeAccess().getGRNKeyword_3(), null); 
                         
 
                     }
@@ -940,7 +940,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:491:49: (iv_ruleFamilie= ruleFamilie EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:492:2: iv_ruleFamilie= ruleFamilie EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFamilie().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFamilieRule(), currentNode); 
             pushFollow(FOLLOW_ruleFamilie_in_entryRuleFamilie998);
             iv_ruleFamilie=ruleFamilie();
             _fsp--;
@@ -981,11 +981,11 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
             match(input,23,FOLLOW_23_in_ruleFamilie1042); 
 
-                    createLeafNode(grammarAccess.prFamilie().ele0KeywordFamilie(), null); 
+                    createLeafNode(grammarAccess.getFamilieAccess().getFamilieKeyword_0(), null); 
                 
             match(input,15,FOLLOW_15_in_ruleFamilie1051); 
 
-                    createLeafNode(grammarAccess.prFamilie().ele1KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getFamilieAccess().getLeftParenthesisKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:513:1: (lv_name_2= ( 'keyword' | RULE_STRING | RULE_ID ) )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:515:6: lv_name_2= ( 'keyword' | RULE_STRING | RULE_ID )
@@ -1021,7 +1021,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,24,FOLLOW_24_in_ruleFamilie1073); 
 
-                            createLeafNode(grammarAccess.prFamilie().ele200KeywordKeyword(), "name"); 
+                            createLeafNode(grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0(), "name"); 
                         
 
                     }
@@ -1031,7 +1031,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFamilie1090); 
 
-                    		createLeafNode(grammarAccess.prFamilie().ele201TerminalRuleCallSTRING(), "name"); 
+                    		createLeafNode(grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1(), "name"); 
                     	
 
                     }
@@ -1041,7 +1041,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
                     {
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1102); 
 
-                    		createLeafNode(grammarAccess.prFamilie().ele202TerminalRuleCallID(), "name"); 
+                    		createLeafNode(grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2(), "name"); 
                     	
 
                     }
@@ -1051,7 +1051,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1069,13 +1069,13 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1134); 
 
-            		createLeafNode(grammarAccess.prFamilie().ele30CrossReferenceIDErwachsener(), "mutter"); 
+            		createLeafNode(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0(), "mutter"); 
             	
 
             }
@@ -1085,13 +1085,13 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1159); 
 
-            		createLeafNode(grammarAccess.prFamilie().ele40CrossReferenceIDErwachsener(), "vater"); 
+            		createLeafNode(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0(), "vater"); 
             	
 
             }
@@ -1101,13 +1101,13 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1184); 
 
-            		createLeafNode(grammarAccess.prFamilie().ele50CrossReferenceIDKind(), "kinder"); 
+            		createLeafNode(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0(), "kinder"); 
             	
 
             }
@@ -1129,20 +1129,20 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
             	    {
             	    match(input,25,FOLLOW_25_in_ruleFamilie1197); 
 
-            	            createLeafNode(grammarAccess.prFamilie().ele60KeywordComma(), null); 
+            	            createLeafNode(grammarAccess.getFamilieAccess().getCommaKeyword_6_0(), null); 
             	        
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:597:1: ( RULE_ID )
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarTestLanguage.g:600:3: RULE_ID
             	    {
 
             	    			if (current==null) {
-            	    	            current = factory.create(grammarAccess.prFamilie().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getFamilieRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1219); 
 
-            	    		createLeafNode(grammarAccess.prFamilie().ele610CrossReferenceIDKind(), "kinder"); 
+            	    		createLeafNode(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0(), "kinder"); 
             	    	
 
             	    }
@@ -1158,7 +1158,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractInternal
 
             match(input,16,FOLLOW_16_in_ruleFamilie1233); 
 
-                    createLeafNode(grammarAccess.prFamilie().ele7KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7(), null); 
                 
 
             }

@@ -294,22 +294,22 @@ public final class EpatchTestLanguageCreatedObjectConsumer extends NonTerminalCo
 	public void setRule(CreatedObjectElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.ele0Alternatives());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallObjectNew());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele01ParserRuleCallObjectCopy());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele1AssignmentName());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele10TerminalRuleCallID());
-		group$7$Consumer = new Group$7$Consumer(rule.ele2Group());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele20KeywordLeftCurlyBracket());
-		alternatives$9$Consumer = new Alternatives$9$Consumer(rule.ele21Alternatives());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele210AssignmentAssignments());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele2100ParserRuleCallMonoSingleAssignment());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele211AssignmentAssignments());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele2110ParserRuleCallMonoListAssignment());
-		assignment$14$Consumer = new Assignment$14$Consumer(rule.ele22AssignmentLeftMig());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele220ParserRuleCallMigration());
-		keyword$16$Consumer = new Keyword$16$Consumer(rule.ele23KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.getAlternatives_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getObjectNewParserRuleCall_0_0());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getObjectCopyParserRuleCall_0_1());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getNameAssignment_1());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		group$7$Consumer = new Group$7$Consumer(rule.getGroup_2());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getLeftCurlyBracketKeyword_2_0());
+		alternatives$9$Consumer = new Alternatives$9$Consumer(rule.getAlternatives_2_1());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getAssignmentsAssignment_2_1_0());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getAssignmentsMonoSingleAssignmentParserRuleCall_2_1_0_0());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getAssignmentsAssignment_2_1_1());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getAssignmentsMonoListAssignmentParserRuleCall_2_1_1_0());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.getLeftMigAssignment_2_2());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getLeftMigMigrationParserRuleCall_2_2_0());
+		keyword$16$Consumer = new Keyword$16$Consumer(rule.getRightCurlyBracketKeyword_2_3());
 	}
 	
 	@Override

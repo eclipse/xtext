@@ -166,14 +166,14 @@ public final class LookaheadTestLanguageLookAhead1Consumer extends NonTerminalCo
 	public void setRule(LookAhead1Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordFoo());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentY());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallLookAhead2());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentX());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordB());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele3AssignmentX());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele30KeywordD());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getFooKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getYAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getYLookAhead2ParserRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getXAssignment_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getXBKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getXAssignment_3());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getXDKeyword_3_0());
 	}
 	
 	@Override

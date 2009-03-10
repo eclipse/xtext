@@ -137,12 +137,12 @@ public final class TransientValuesTestTestRequiredConsumer extends NonTerminalCo
 	public void setRule(TestRequiredElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordRequired());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentRequired1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallINT());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentRequired2());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getRequiredKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getRequired1Assignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getRequired1INTTerminalRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getRequired2Assignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getRequired2INTTerminalRuleCall_2_0());
 	}
 	
 	@Override

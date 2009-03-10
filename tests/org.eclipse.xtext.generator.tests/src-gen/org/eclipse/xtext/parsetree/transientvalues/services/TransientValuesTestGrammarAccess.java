@@ -20,125 +20,129 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	public class RootElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordTest = (Keyword)cGroup.eContents().get(0);
-		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallTestRequired = (RuleCall)c1Alternatives.eContents().get(0);
-		private final RuleCall c11ParserRuleCallTestOptional = (RuleCall)c1Alternatives.eContents().get(1);
-		private final RuleCall c12ParserRuleCallTestList = (RuleCall)c1Alternatives.eContents().get(2);
+		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final RuleCall cTestRequiredParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
+		private final RuleCall cTestOptionalParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
+		private final RuleCall cTestListParserRuleCall_1_2 = (RuleCall)cAlternatives_1.eContents().get(2);
 		
-		// not supported
+		//Root:
+		//  "test" (TestRequired|TestOptional|TestList);
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"test" (TestRequired|TestOptional|TestList)
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordTest() { return c0KeywordTest; }
+		//"test"
+		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		// not supported
-		public Alternatives ele1Alternatives() { return c1Alternatives; }
+		//TestRequired|TestOptional|TestList
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallTestRequired() { return c10ParserRuleCallTestRequired; }
+		//TestRequired
+		public RuleCall getTestRequiredParserRuleCall_1_0() { return cTestRequiredParserRuleCall_1_0; }
 
-		// not supported
-		public RuleCall ele11ParserRuleCallTestOptional() { return c11ParserRuleCallTestOptional; }
+		//TestOptional
+		public RuleCall getTestOptionalParserRuleCall_1_1() { return cTestOptionalParserRuleCall_1_1; }
 
-		// not supported
-		public RuleCall ele12ParserRuleCallTestList() { return c12ParserRuleCallTestList; }
+		//TestList
+		public RuleCall getTestListParserRuleCall_1_2() { return cTestListParserRuleCall_1_2; }
 	}
 
 	public class TestRequiredElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordRequired = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentRequired1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentRequired1.eContents().get(0);
-		private final Assignment c2AssignmentRequired2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallINT = (RuleCall)c2AssignmentRequired2.eContents().get(0);
+		private final Keyword cRequiredKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cRequired1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRequired1INTTerminalRuleCall_1_0 = (RuleCall)cRequired1Assignment_1.eContents().get(0);
+		private final Assignment cRequired2Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cRequired2INTTerminalRuleCall_2_0 = (RuleCall)cRequired2Assignment_2.eContents().get(0);
 		
-		// not supported
+		//TestRequired:
+		//  "required" required1=INT required2=INT;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"required" required1=INT required2=INT
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordRequired() { return c0KeywordRequired; }
+		//"required"
+		public Keyword getRequiredKeyword_0() { return cRequiredKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentRequired1() { return c1AssignmentRequired1; }
+		//required1=INT
+		public Assignment getRequired1Assignment_1() { return cRequired1Assignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
+		//INT
+		public RuleCall getRequired1INTTerminalRuleCall_1_0() { return cRequired1INTTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentRequired2() { return c2AssignmentRequired2; }
+		//required2=INT
+		public Assignment getRequired2Assignment_2() { return cRequired2Assignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallINT() { return c20TerminalRuleCallINT; }
+		//INT
+		public RuleCall getRequired2INTTerminalRuleCall_2_0() { return cRequired2INTTerminalRuleCall_2_0; }
 	}
 
 	public class TestOptionalElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestOptional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordOptional = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentOpt1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentOpt1.eContents().get(0);
-		private final Group c2Group = (Group)cGroup.eContents().get(2);
-		private final Keyword c20KeywordColon = (Keyword)c2Group.eContents().get(0);
-		private final Assignment c21AssignmentOpt2 = (Assignment)c2Group.eContents().get(1);
-		private final RuleCall c210TerminalRuleCallINT = (RuleCall)c21AssignmentOpt2.eContents().get(0);
+		private final Keyword cOptionalKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cOpt1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOpt1INTTerminalRuleCall_1_0 = (RuleCall)cOpt1Assignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cColonKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cOpt2Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cOpt2INTTerminalRuleCall_2_1_0 = (RuleCall)cOpt2Assignment_2_1.eContents().get(0);
 		
-		// not supported
+		//TestOptional:
+		//  "optional" (opt1=INT)? (":" opt2=INT)?;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"optional" (opt1=INT)? (":" opt2=INT)?
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordOptional() { return c0KeywordOptional; }
+		//"optional"
+		public Keyword getOptionalKeyword_0() { return cOptionalKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentOpt1() { return c1AssignmentOpt1; }
+		//(opt1=INT)?
+		public Assignment getOpt1Assignment_1() { return cOpt1Assignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
+		//INT
+		public RuleCall getOpt1INTTerminalRuleCall_1_0() { return cOpt1INTTerminalRuleCall_1_0; }
 
-		// not supported
-		public Group ele2Group() { return c2Group; }
+		//(":" opt2=INT)?
+		public Group getGroup_2() { return cGroup_2; }
 
-		// not supported
-		public Keyword ele20KeywordColon() { return c20KeywordColon; }
+		//":"
+		public Keyword getColonKeyword_2_0() { return cColonKeyword_2_0; }
 
-		// not supported
-		public Assignment ele21AssignmentOpt2() { return c21AssignmentOpt2; }
+		//opt2=INT
+		public Assignment getOpt2Assignment_2_1() { return cOpt2Assignment_2_1; }
 
-		// not supported
-		public RuleCall ele210TerminalRuleCallINT() { return c210TerminalRuleCallINT; }
+		//INT
+		public RuleCall getOpt2INTTerminalRuleCall_2_1_0() { return cOpt2INTTerminalRuleCall_2_1_0; }
 	}
 
 	public class TestListElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordList = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentItem = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallINT = (RuleCall)c1AssignmentItem.eContents().get(0);
+		private final Keyword cListKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cItemINTTerminalRuleCall_1_0 = (RuleCall)cItemAssignment_1.eContents().get(0);
 		
-		// not supported
+		//TestList:
+		//  "list" (item+=INT)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"list" (item+=INT)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordList() { return c0KeywordList; }
+		//"list"
+		public Keyword getListKeyword_0() { return cListKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentItem() { return c1AssignmentItem; }
+		//(item+=INT)*
+		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallINT() { return c10TerminalRuleCallINT; }
+		//INT
+		public RuleCall getItemINTTerminalRuleCall_1_0() { return cItemINTTerminalRuleCall_1_0; }
 	}
 	
 	private RootElements pRoot;
@@ -148,13 +152,13 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TransientValuesTestGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -163,62 +167,88 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public RootElements prRoot() {
+	//Root:
+	//  "test" (TestRequired|TestOptional|TestList);
+	public RootElements getRootAccess() {
 		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
-	} 
+	}
+	
+	public ParserRule getRootRule() {
+		return getRootAccess().getRule();
+	}
 
-	// not supported
-	public TestRequiredElements prTestRequired() {
+	//TestRequired:
+	//  "required" required1=INT required2=INT;
+	public TestRequiredElements getTestRequiredAccess() {
 		return (pTestRequired != null) ? pTestRequired : (pTestRequired = new TestRequiredElements());
-	} 
+	}
+	
+	public ParserRule getTestRequiredRule() {
+		return getTestRequiredAccess().getRule();
+	}
 
-	// not supported
-	public TestOptionalElements prTestOptional() {
+	//TestOptional:
+	//  "optional" (opt1=INT)? (":" opt2=INT)?;
+	public TestOptionalElements getTestOptionalAccess() {
 		return (pTestOptional != null) ? pTestOptional : (pTestOptional = new TestOptionalElements());
-	} 
+	}
+	
+	public ParserRule getTestOptionalRule() {
+		return getTestOptionalAccess().getRule();
+	}
 
-	// not supported
-	public TestListElements prTestList() {
+	//TestList:
+	//  "list" (item+=INT)*;
+	public TestListElements getTestListAccess() {
 		return (pTestList != null) ? pTestList : (pTestList = new TestListElements());
+	}
+	
+	public ParserRule getTestListRule() {
+		return getTestListAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

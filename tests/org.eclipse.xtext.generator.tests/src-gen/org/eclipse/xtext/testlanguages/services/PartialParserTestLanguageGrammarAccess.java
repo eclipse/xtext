@@ -20,347 +20,357 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	public class SomeContainerElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SomeContainer");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordContainer = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Keyword c2KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(2);
-		private final Alternatives c3Alternatives = (Alternatives)cGroup.eContents().get(3);
-		private final Assignment c30AssignmentNested = (Assignment)c3Alternatives.eContents().get(0);
-		private final RuleCall c300ParserRuleCallNested = (RuleCall)c30AssignmentNested.eContents().get(0);
-		private final Assignment c31AssignmentContent = (Assignment)c3Alternatives.eContents().get(1);
-		private final RuleCall c310ParserRuleCallContent = (RuleCall)c31AssignmentContent.eContents().get(0);
-		private final Keyword c4KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cContainerKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cNestedAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cNestedNestedParserRuleCall_3_0_0 = (RuleCall)cNestedAssignment_3_0.eContents().get(0);
+		private final Assignment cContentAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cContentContentParserRuleCall_3_1_0 = (RuleCall)cContentAssignment_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//SomeContainer:
+		//  "container" name=ID "{" (nested+=Nested|content+=Content)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"container" name=ID "{" (nested+=Nested|content+=Content)* "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordContainer() { return c0KeywordContainer; }
+		//"container"
+		public Keyword getContainerKeyword_0() { return cContainerKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordLeftCurlyBracket() { return c2KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		// not supported
-		public Alternatives ele3Alternatives() { return c3Alternatives; }
+		//(nested+=Nested|content+=Content)*
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		// not supported
-		public Assignment ele30AssignmentNested() { return c30AssignmentNested; }
+		//nested+=Nested
+		public Assignment getNestedAssignment_3_0() { return cNestedAssignment_3_0; }
 
-		// not supported
-		public RuleCall ele300ParserRuleCallNested() { return c300ParserRuleCallNested; }
+		//Nested
+		public RuleCall getNestedNestedParserRuleCall_3_0_0() { return cNestedNestedParserRuleCall_3_0_0; }
 
-		// not supported
-		public Assignment ele31AssignmentContent() { return c31AssignmentContent; }
+		//content+=Content
+		public Assignment getContentAssignment_3_1() { return cContentAssignment_3_1; }
 
-		// not supported
-		public RuleCall ele310ParserRuleCallContent() { return c310ParserRuleCallContent; }
+		//Content
+		public RuleCall getContentContentParserRuleCall_3_1_0() { return cContentContentParserRuleCall_3_1_0; }
 
-		// not supported
-		public Keyword ele4KeywordRightCurlyBracket() { return c4KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class NestedElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Nested");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordNested = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentNested = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20ParserRuleCallSomeContainer = (RuleCall)c2AssignmentNested.eContents().get(0);
-		private final Keyword c3KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cNestedKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNestedAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNestedSomeContainerParserRuleCall_2_0 = (RuleCall)cNestedAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		// not supported
+		//Nested:
+		//  "nested" "{" (nested+=SomeContainer)+ "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"nested" "{" (nested+=SomeContainer)+ "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordNested() { return c0KeywordNested; }
+		//"nested"
+		public Keyword getNestedKeyword_0() { return cNestedKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordLeftCurlyBracket() { return c1KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentNested() { return c2AssignmentNested; }
+		//(nested+=SomeContainer)+
+		public Assignment getNestedAssignment_2() { return cNestedAssignment_2; }
 
-		// not supported
-		public RuleCall ele20ParserRuleCallSomeContainer() { return c20ParserRuleCallSomeContainer; }
+		//SomeContainer
+		public RuleCall getNestedSomeContainerParserRuleCall_2_0() { return cNestedSomeContainerParserRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordRightCurlyBracket() { return c3KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class ContentElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Content");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallChildren = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallAbstractChildren = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cChildrenParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cAbstractChildrenParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//Content:
+		//  Children|AbstractChildren;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//Children|AbstractChildren
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallChildren() { return c0ParserRuleCallChildren; }
+		//Children
+		public RuleCall getChildrenParserRuleCall_0() { return cChildrenParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallAbstractChildren() { return c1ParserRuleCallAbstractChildren; }
+		//AbstractChildren
+		public RuleCall getAbstractChildrenParserRuleCall_1() { return cAbstractChildrenParserRuleCall_1; }
 	}
 
 	public class ChildrenElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Children");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordChildren = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentChildren = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20ParserRuleCallChild = (RuleCall)c2AssignmentChildren.eContents().get(0);
-		private final Group c3Group = (Group)cGroup.eContents().get(3);
-		private final Keyword c30KeywordComma = (Keyword)c3Group.eContents().get(0);
-		private final Assignment c31AssignmentChildren = (Assignment)c3Group.eContents().get(1);
-		private final RuleCall c310ParserRuleCallChild = (RuleCall)c31AssignmentChildren.eContents().get(0);
-		private final Keyword c4KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cChildrenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cChildrenAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cChildrenChildParserRuleCall_2_0 = (RuleCall)cChildrenAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cChildrenAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cChildrenChildParserRuleCall_3_1_0 = (RuleCall)cChildrenAssignment_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//Children:
+		//  "children" "{" children+=Child ("," children+=Child)* "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"children" "{" children+=Child ("," children+=Child)* "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordChildren() { return c0KeywordChildren; }
+		//"children"
+		public Keyword getChildrenKeyword_0() { return cChildrenKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordLeftCurlyBracket() { return c1KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentChildren() { return c2AssignmentChildren; }
+		//children+=Child
+		public Assignment getChildrenAssignment_2() { return cChildrenAssignment_2; }
 
-		// not supported
-		public RuleCall ele20ParserRuleCallChild() { return c20ParserRuleCallChild; }
+		//Child
+		public RuleCall getChildrenChildParserRuleCall_2_0() { return cChildrenChildParserRuleCall_2_0; }
 
-		// not supported
-		public Group ele3Group() { return c3Group; }
+		//("," children+=Child)*
+		public Group getGroup_3() { return cGroup_3; }
 
-		// not supported
-		public Keyword ele30KeywordComma() { return c30KeywordComma; }
+		//","
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 
-		// not supported
-		public Assignment ele31AssignmentChildren() { return c31AssignmentChildren; }
+		//children+=Child
+		public Assignment getChildrenAssignment_3_1() { return cChildrenAssignment_3_1; }
 
-		// not supported
-		public RuleCall ele310ParserRuleCallChild() { return c310ParserRuleCallChild; }
+		//Child
+		public RuleCall getChildrenChildParserRuleCall_3_1_0() { return cChildrenChildParserRuleCall_3_1_0; }
 
-		// not supported
-		public Keyword ele4KeywordRightCurlyBracket() { return c4KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class ChildElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordHyphenMinusGreaterThanSign = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordC = (Keyword)cGroup.eContents().get(1);
-		private final Keyword c2KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentValue = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallNamed = (RuleCall)c3AssignmentValue.eContents().get(0);
-		private final Keyword c4KeywordRightParenthesis = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cCKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValueNamedParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//Child:
+		//  "->" "C" "(" value=Named ")";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"->" "C" "(" value=Named ")"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordHyphenMinusGreaterThanSign() { return c0KeywordHyphenMinusGreaterThanSign; }
+		//"->"
+		public Keyword getHyphenMinusGreaterThanSignKeyword_0() { return cHyphenMinusGreaterThanSignKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordC() { return c1KeywordC; }
+		//"C"
+		public Keyword getCKeyword_1() { return cCKeyword_1; }
 
-		// not supported
-		public Keyword ele2KeywordLeftParenthesis() { return c2KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentValue() { return c3AssignmentValue; }
+		//value=Named
+		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallNamed() { return c30ParserRuleCallNamed; }
+		//Named
+		public RuleCall getValueNamedParserRuleCall_3_0() { return cValueNamedParserRuleCall_3_0; }
 
-		// not supported
-		public Keyword ele4KeywordRightParenthesis() { return c4KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
 	public class AbstractChildrenElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractChildren");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordAbstractChildren = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentAbstractChildren = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20ParserRuleCallAbstractChild = (RuleCall)c2AssignmentAbstractChildren.eContents().get(0);
-		private final Keyword c3KeywordRightCurlyBracket = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cAbstractChildrenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cAbstractChildrenAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAbstractChildrenAbstractChildParserRuleCall_2_0 = (RuleCall)cAbstractChildrenAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		// not supported
+		//AbstractChildren:
+		//  "abstract children" "{" (abstractChildren+=AbstractChild)+ "}";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"abstract children" "{" (abstractChildren+=AbstractChild)+ "}"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordAbstractChildren() { return c0KeywordAbstractChildren; }
+		//"abstract children"
+		public Keyword getAbstractChildrenKeyword_0() { return cAbstractChildrenKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordLeftCurlyBracket() { return c1KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentAbstractChildren() { return c2AssignmentAbstractChildren; }
+		//(abstractChildren+=AbstractChild)+
+		public Assignment getAbstractChildrenAssignment_2() { return cAbstractChildrenAssignment_2; }
 
-		// not supported
-		public RuleCall ele20ParserRuleCallAbstractChild() { return c20ParserRuleCallAbstractChild; }
+		//AbstractChild
+		public RuleCall getAbstractChildrenAbstractChildParserRuleCall_2_0() { return cAbstractChildrenAbstractChildParserRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordRightCurlyBracket() { return c3KeywordRightCurlyBracket; }
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class AbstractChildElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractChild");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallFirstConcrete = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallSecondConcrete = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cFirstConcreteParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSecondConcreteParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//AbstractChild:
+		//  FirstConcrete|SecondConcrete;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//FirstConcrete|SecondConcrete
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallFirstConcrete() { return c0ParserRuleCallFirstConcrete; }
+		//FirstConcrete
+		public RuleCall getFirstConcreteParserRuleCall_0() { return cFirstConcreteParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallSecondConcrete() { return c1ParserRuleCallSecondConcrete; }
+		//SecondConcrete
+		public RuleCall getSecondConcreteParserRuleCall_1() { return cSecondConcreteParserRuleCall_1; }
 	}
 
 	public class FirstConcreteElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstConcrete");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordHyphenMinusGreaterThanSign = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordF = (Keyword)cGroup.eContents().get(1);
-		private final Keyword c2KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentValue = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallNamed = (RuleCall)c3AssignmentValue.eContents().get(0);
-		private final Assignment c4AssignmentReferencedContainer = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference c40CrossReferenceIDSomeContainer = (CrossReference)c4AssignmentReferencedContainer.eContents().get(0);
-		private final RuleCall c401TerminalRuleCallID = (RuleCall)c40CrossReferenceIDSomeContainer.eContents().get(1);
-		private final Keyword c5KeywordRightParenthesis = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cFKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cValueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cValueNamedParserRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
+		private final Assignment cReferencedContainerAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cReferencedContainerSomeContainerCrossReference_4_0 = (CrossReference)cReferencedContainerAssignment_4.eContents().get(0);
+		private final RuleCall cReferencedContainerSomeContainerIDTerminalRuleCall_4_0_1 = (RuleCall)cReferencedContainerSomeContainerCrossReference_4_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		// not supported
+		//FirstConcrete:
+		//  "->" "F" "(" value=Named (referencedContainer=[SomeContainer])? ")";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"->" "F" "(" value=Named (referencedContainer=[SomeContainer])? ")"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordHyphenMinusGreaterThanSign() { return c0KeywordHyphenMinusGreaterThanSign; }
+		//"->"
+		public Keyword getHyphenMinusGreaterThanSignKeyword_0() { return cHyphenMinusGreaterThanSignKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordF() { return c1KeywordF; }
+		//"F"
+		public Keyword getFKeyword_1() { return cFKeyword_1; }
 
-		// not supported
-		public Keyword ele2KeywordLeftParenthesis() { return c2KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentValue() { return c3AssignmentValue; }
+		//value=Named
+		public Assignment getValueAssignment_3() { return cValueAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallNamed() { return c30ParserRuleCallNamed; }
+		//Named
+		public RuleCall getValueNamedParserRuleCall_3_0() { return cValueNamedParserRuleCall_3_0; }
 
-		// not supported
-		public Assignment ele4AssignmentReferencedContainer() { return c4AssignmentReferencedContainer; }
+		//(referencedContainer=[SomeContainer])?
+		public Assignment getReferencedContainerAssignment_4() { return cReferencedContainerAssignment_4; }
 
-		// not supported
-		public CrossReference ele40CrossReferenceIDSomeContainer() { return c40CrossReferenceIDSomeContainer; }
+		//[SomeContainer]
+		public CrossReference getReferencedContainerSomeContainerCrossReference_4_0() { return cReferencedContainerSomeContainerCrossReference_4_0; }
 
-		// not supported
-		public RuleCall ele401TerminalRuleCallID() { return c401TerminalRuleCallID; }
+		//ID
+		public RuleCall getReferencedContainerSomeContainerIDTerminalRuleCall_4_0_1() { return cReferencedContainerSomeContainerIDTerminalRuleCall_4_0_1; }
 
-		// not supported
-		public Keyword ele5KeywordRightParenthesis() { return c5KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class SecondConcreteElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondConcrete");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordHyphenMinusGreaterThanSign = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordF = (Keyword)cGroup.eContents().get(1);
-		private final Keyword c2KeywordS = (Keyword)cGroup.eContents().get(2);
-		private final Keyword c3KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(3);
-		private final Assignment c4AssignmentValue = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall c40ParserRuleCallNamed = (RuleCall)c4AssignmentValue.eContents().get(0);
-		private final Assignment c5AssignmentReferencedChildren = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference c50CrossReferenceIDChild = (CrossReference)c5AssignmentReferencedChildren.eContents().get(0);
-		private final RuleCall c501TerminalRuleCallID = (RuleCall)c50CrossReferenceIDChild.eContents().get(1);
-		private final Keyword c6KeywordRightParenthesis = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cFKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cSKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cValueNamedParserRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
+		private final Assignment cReferencedChildrenAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cReferencedChildrenChildCrossReference_5_0 = (CrossReference)cReferencedChildrenAssignment_5.eContents().get(0);
+		private final RuleCall cReferencedChildrenChildIDTerminalRuleCall_5_0_1 = (RuleCall)cReferencedChildrenChildCrossReference_5_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		// not supported
+		//SecondConcrete:
+		//  "->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordHyphenMinusGreaterThanSign() { return c0KeywordHyphenMinusGreaterThanSign; }
+		//"->"
+		public Keyword getHyphenMinusGreaterThanSignKeyword_0() { return cHyphenMinusGreaterThanSignKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordF() { return c1KeywordF; }
+		//"F"
+		public Keyword getFKeyword_1() { return cFKeyword_1; }
 
-		// not supported
-		public Keyword ele2KeywordS() { return c2KeywordS; }
+		//"S"
+		public Keyword getSKeyword_2() { return cSKeyword_2; }
 
-		// not supported
-		public Keyword ele3KeywordLeftParenthesis() { return c3KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		// not supported
-		public Assignment ele4AssignmentValue() { return c4AssignmentValue; }
+		//value=Named
+		public Assignment getValueAssignment_4() { return cValueAssignment_4; }
 
-		// not supported
-		public RuleCall ele40ParserRuleCallNamed() { return c40ParserRuleCallNamed; }
+		//Named
+		public RuleCall getValueNamedParserRuleCall_4_0() { return cValueNamedParserRuleCall_4_0; }
 
-		// not supported
-		public Assignment ele5AssignmentReferencedChildren() { return c5AssignmentReferencedChildren; }
+		//(referencedChildren+=[Child])?
+		public Assignment getReferencedChildrenAssignment_5() { return cReferencedChildrenAssignment_5; }
 
-		// not supported
-		public CrossReference ele50CrossReferenceIDChild() { return c50CrossReferenceIDChild; }
+		//[Child]
+		public CrossReference getReferencedChildrenChildCrossReference_5_0() { return cReferencedChildrenChildCrossReference_5_0; }
 
-		// not supported
-		public RuleCall ele501TerminalRuleCallID() { return c501TerminalRuleCallID; }
+		//ID
+		public RuleCall getReferencedChildrenChildIDTerminalRuleCall_5_0_1() { return cReferencedChildrenChildIDTerminalRuleCall_5_0_1; }
 
-		// not supported
-		public Keyword ele6KeywordRightParenthesis() { return c6KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
 	}
 
 	public class NamedElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Named");
-		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		// not supported
+		//Named:
+		//  name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentName() { return cAssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
 	private SomeContainerElements pSomeContainer;
@@ -376,13 +386,13 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public PartialParserTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -391,92 +401,148 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public SomeContainerElements prSomeContainer() {
+	//SomeContainer:
+	//  "container" name=ID "{" (nested+=Nested|content+=Content)* "}";
+	public SomeContainerElements getSomeContainerAccess() {
 		return (pSomeContainer != null) ? pSomeContainer : (pSomeContainer = new SomeContainerElements());
-	} 
+	}
+	
+	public ParserRule getSomeContainerRule() {
+		return getSomeContainerAccess().getRule();
+	}
 
-	// not supported
-	public NestedElements prNested() {
+	//Nested:
+	//  "nested" "{" (nested+=SomeContainer)+ "}";
+	public NestedElements getNestedAccess() {
 		return (pNested != null) ? pNested : (pNested = new NestedElements());
-	} 
+	}
+	
+	public ParserRule getNestedRule() {
+		return getNestedAccess().getRule();
+	}
 
-	// not supported
-	public ContentElements prContent() {
+	//Content:
+	//  Children|AbstractChildren;
+	public ContentElements getContentAccess() {
 		return (pContent != null) ? pContent : (pContent = new ContentElements());
-	} 
+	}
+	
+	public ParserRule getContentRule() {
+		return getContentAccess().getRule();
+	}
 
-	// not supported
-	public ChildrenElements prChildren() {
+	//Children:
+	//  "children" "{" children+=Child ("," children+=Child)* "}";
+	public ChildrenElements getChildrenAccess() {
 		return (pChildren != null) ? pChildren : (pChildren = new ChildrenElements());
-	} 
+	}
+	
+	public ParserRule getChildrenRule() {
+		return getChildrenAccess().getRule();
+	}
 
-	// not supported
-	public ChildElements prChild() {
+	//Child:
+	//  "->" "C" "(" value=Named ")";
+	public ChildElements getChildAccess() {
 		return (pChild != null) ? pChild : (pChild = new ChildElements());
-	} 
+	}
+	
+	public ParserRule getChildRule() {
+		return getChildAccess().getRule();
+	}
 
-	// not supported
-	public AbstractChildrenElements prAbstractChildren() {
+	//AbstractChildren:
+	//  "abstract children" "{" (abstractChildren+=AbstractChild)+ "}";
+	public AbstractChildrenElements getAbstractChildrenAccess() {
 		return (pAbstractChildren != null) ? pAbstractChildren : (pAbstractChildren = new AbstractChildrenElements());
-	} 
+	}
+	
+	public ParserRule getAbstractChildrenRule() {
+		return getAbstractChildrenAccess().getRule();
+	}
 
-	// not supported
-	public AbstractChildElements prAbstractChild() {
+	//AbstractChild:
+	//  FirstConcrete|SecondConcrete;
+	public AbstractChildElements getAbstractChildAccess() {
 		return (pAbstractChild != null) ? pAbstractChild : (pAbstractChild = new AbstractChildElements());
-	} 
+	}
+	
+	public ParserRule getAbstractChildRule() {
+		return getAbstractChildAccess().getRule();
+	}
 
-	// not supported
-	public FirstConcreteElements prFirstConcrete() {
+	//FirstConcrete:
+	//  "->" "F" "(" value=Named (referencedContainer=[SomeContainer])? ")";
+	public FirstConcreteElements getFirstConcreteAccess() {
 		return (pFirstConcrete != null) ? pFirstConcrete : (pFirstConcrete = new FirstConcreteElements());
-	} 
+	}
+	
+	public ParserRule getFirstConcreteRule() {
+		return getFirstConcreteAccess().getRule();
+	}
 
-	// not supported
-	public SecondConcreteElements prSecondConcrete() {
+	//SecondConcrete:
+	//  "->" "F" "S" "(" value=Named (referencedChildren+=[Child])? ")";
+	public SecondConcreteElements getSecondConcreteAccess() {
 		return (pSecondConcrete != null) ? pSecondConcrete : (pSecondConcrete = new SecondConcreteElements());
-	} 
+	}
+	
+	public ParserRule getSecondConcreteRule() {
+		return getSecondConcreteAccess().getRule();
+	}
 
-	// not supported
-	public NamedElements prNamed() {
+	//Named:
+	//  name=ID;
+	public NamedElements getNamedAccess() {
 		return (pNamed != null) ? pNamed : (pNamed = new NamedElements());
+	}
+	
+	public ParserRule getNamedRule() {
+		return getNamedAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

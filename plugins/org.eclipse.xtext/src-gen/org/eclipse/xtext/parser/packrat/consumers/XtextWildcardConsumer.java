@@ -85,9 +85,9 @@ public final class XtextWildcardConsumer extends NonTerminalConsumer {
 	public void setRule(WildcardElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		action$2$Consumer = new Action$2$Consumer(rule.ele0ActionWildcardnull());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordFullStop());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		action$2$Consumer = new Action$2$Consumer(rule.getWildcardnullAction_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getFullStopKeyword_1());
 	}
 	
 	@Override

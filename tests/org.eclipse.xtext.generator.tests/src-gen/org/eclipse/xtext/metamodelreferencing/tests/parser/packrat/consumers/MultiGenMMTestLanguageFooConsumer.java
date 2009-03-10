@@ -117,11 +117,11 @@ public final class MultiGenMMTestLanguageFooConsumer extends NonTerminalConsumer
 	public void setRule(FooElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentNameRefs());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele10ParserRuleCallNameRef());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameIDTerminalRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNameRefsAssignment_1());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameRefsNameRefParserRuleCall_1_0());
 	}
 	
 	@Override

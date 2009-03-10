@@ -84,21 +84,21 @@ public class ReferenceGrammarParserConfiguration extends AbstractParserConfigura
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getSpielplatzConsumer().setRule(grammarAccess.prSpielplatz());
-		getPersonConsumer().setRule(grammarAccess.prPerson());
-		getKindConsumer().setRule(grammarAccess.prKind());
-		getErwachsenerConsumer().setRule(grammarAccess.prErwachsener());
-		getSpielzeugConsumer().setRule(grammarAccess.prSpielzeug());
-		getFamilieConsumer().setRule(grammarAccess.prFamilie());
-		getFarbeConsumer().setRule(grammarAccess.prFarbe());
-		getCustomTypeParserRuleConsumer().setRule(grammarAccess.prCustomTypeParserRule());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getSpielplatzConsumer().setRule(grammarAccess.getSpielplatzAccess());
+		getPersonConsumer().setRule(grammarAccess.getPersonAccess());
+		getKindConsumer().setRule(grammarAccess.getKindAccess());
+		getErwachsenerConsumer().setRule(grammarAccess.getErwachsenerAccess());
+		getSpielzeugConsumer().setRule(grammarAccess.getSpielzeugAccess());
+		getFamilieConsumer().setRule(grammarAccess.getFamilieAccess());
+		getFarbeConsumer().setRule(grammarAccess.getFarbeAccess());
+		getCustomTypeParserRuleConsumer().setRule(grammarAccess.getCustomTypeParserRuleAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getSpielplatzConsumer().setCustomTypeParserRuleConsumer(getCustomTypeParserRuleConsumer());

@@ -195,18 +195,18 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 	public void setRule(MultiplicationElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerm());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionOpvalues());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentOperator());
-		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.ele110Alternatives());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele1100KeywordAsterisk());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele1101KeywordSolidus());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele1100KeywordAsterisk());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.ele1101KeywordSolidus());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele12AssignmentValues());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele120ParserRuleCallTerm());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTermParserRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		action$4$Consumer = new Action$4$Consumer(rule.getOpvaluesAction_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getOperatorAssignment_1_1());
+		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.getOperatorAlternatives_1_1_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getOperatorAsteriskKeyword_1_1_0_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getOperatorSolidusKeyword_1_1_0_1());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getOperatorAsteriskKeyword_1_1_0_0());
+		keyword$9$Consumer = new Keyword$9$Consumer(rule.getOperatorSolidusKeyword_1_1_0_1());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getValuesAssignment_1_2());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getValuesTermParserRuleCall_1_2_0());
 	}
 	
 	@Override

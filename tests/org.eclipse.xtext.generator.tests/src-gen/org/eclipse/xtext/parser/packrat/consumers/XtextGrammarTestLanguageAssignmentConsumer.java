@@ -202,19 +202,19 @@ public final class XtextGrammarTestLanguageAssignmentConsumer extends NonTermina
 	public void setRule(AssignmentElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentFeature());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele1AssignmentOperator());
-		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.ele10Alternatives());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele100KeywordPlusSignEqualsSign());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele101KeywordEqualsSign());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele102KeywordQuestionMarkEqualsSign());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele100KeywordPlusSignEqualsSign());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele101KeywordEqualsSign());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele102KeywordQuestionMarkEqualsSign());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele2AssignmentTerminal());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele20ParserRuleCallAssignableTerminal());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getFeatureAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getFeatureIDTerminalRuleCall_0_0());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getOperatorAssignment_1());
+		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.getOperatorAlternatives_1_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getOperatorPlusSignEqualsSignKeyword_1_0_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getOperatorEqualsSignKeyword_1_0_1());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getOperatorQuestionMarkEqualsSignKeyword_1_0_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getOperatorPlusSignEqualsSignKeyword_1_0_0());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getOperatorEqualsSignKeyword_1_0_1());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getOperatorQuestionMarkEqualsSignKeyword_1_0_2());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getTerminalAssignment_2());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getTerminalAssignableTerminalParserRuleCall_2_0());
 	}
 	
 	@Override

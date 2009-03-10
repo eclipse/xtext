@@ -22,21 +22,21 @@ public class ImportUriTestLanguageParsetreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prMain().getRule().getType().getClassifier()) && (s = new Main_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prImport().getRule().getType().getClassifier()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getMainRule().getType().getClassifier()) && (s = new Main_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Main ****************
  *
- * not supported
+ * Main:
+ *   (imports+=Import)* (types+=Type)*;
  *
  **/
 
-
-// not supported
+// (imports+=Import)* (types+=Type)*
 protected class Main_Group extends GroupToken {
 	
 	public Main_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -45,10 +45,8 @@ protected class Main_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prMain().eleGroup();
+		return grammarAccess.getMainAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -66,7 +64,7 @@ protected class Main_Group extends GroupToken {
 	}
 }
 
-// not supported
+// (imports+=Import)*
 protected class Main_0_Assignment_imports extends AssignmentToken  {
 	
 	public Main_0_Assignment_imports(IInstanceDescription curr, AbstractToken pred) {
@@ -75,7 +73,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prMain().ele0AssignmentImports();
+		return grammarAccess.getMainAccess().getImportsAssignment_0();
 	}
 	
 	@Override
@@ -85,7 +83,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prImport().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
 				Solution s = new Import_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -99,7 +97,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 	}
 }
 
-// not supported
+// (types+=Type)*
 protected class Main_1_Assignment_types extends AssignmentToken  {
 	
 	public Main_1_Assignment_types(IInstanceDescription curr, AbstractToken pred) {
@@ -108,7 +106,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prMain().ele1AssignmentTypes();
+		return grammarAccess.getMainAccess().getTypesAssignment_1();
 	}
 	
 	@Override
@@ -118,7 +116,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prType().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) {
 				Solution s = new Type_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -138,12 +136,12 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 
 /************ begin Rule Import ****************
  *
- * not supported
+ * Import:
+ *   "import" importURI=STRING;
  *
  **/
 
-
-// not supported
+// "import" importURI=STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -152,10 +150,8 @@ protected class Import_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prImport().eleGroup();
+		return grammarAccess.getImportAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -173,7 +169,7 @@ protected class Import_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "import"
 protected class Import_0_Keyword_import extends KeywordToken  {
 	
 	public Import_0_Keyword_import(IInstanceDescription curr, AbstractToken pred) {
@@ -181,11 +177,11 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prImport().ele0KeywordImport();
+		return grammarAccess.getImportAccess().getImportKeyword_0();
 	}	
 }
 
-// not supported
+// importURI=STRING
 protected class Import_1_Assignment_importURI extends AssignmentToken  {
 	
 	public Import_1_Assignment_importURI(IInstanceDescription curr, AbstractToken pred) {
@@ -194,7 +190,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prImport().ele1AssignmentImportURI();
+		return grammarAccess.getImportAccess().getImportURIAssignment_1();
 	}
 	
 	@Override
@@ -203,7 +199,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prImport().ele10TerminalRuleCallSTRING();
+			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -216,12 +212,12 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * not supported
+ * Type:
+ *   "type" name=ID "extends" extends=[Type];
  *
  **/
 
-
-// not supported
+// "type" name=ID "extends" extends=[Type]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -230,36 +226,34 @@ protected class Type_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prType().eleGroup();
+		return grammarAccess.getTypeAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Type_3_Assignment_extends(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Type_2_Keyword_extends(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Type_1_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Type_0_Keyword_type(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-			if(s4 != null) {
-				last = s4.getPredecessor();
-				return s4;
-			} else {
-				s3 = s3.getPredecessor().nextSolution(this,s3);
+			while(s2 != null) {
+				Solution s3 = new Type_1_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Type_0_Keyword_type(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					if(s4 != null) {
+						last = s4.getPredecessor();
+						return s4;
+					} else {
+						s3 = s3.getPredecessor().nextSolution(this,s3);
+					}
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "type"
 protected class Type_0_Keyword_type extends KeywordToken  {
 	
 	public Type_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
@@ -267,11 +261,11 @@ protected class Type_0_Keyword_type extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prType().ele0KeywordType();
+		return grammarAccess.getTypeAccess().getTypeKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Type_1_Assignment_name extends AssignmentToken  {
 	
 	public Type_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -280,7 +274,7 @@ protected class Type_1_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prType().ele1AssignmentName();
+		return grammarAccess.getTypeAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -289,14 +283,14 @@ protected class Type_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prType().ele10TerminalRuleCallID();
+			element = grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "extends"
 protected class Type_2_Keyword_extends extends KeywordToken  {
 	
 	public Type_2_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
@@ -304,11 +298,11 @@ protected class Type_2_Keyword_extends extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prType().ele2KeywordExtends();
+		return grammarAccess.getTypeAccess().getExtendsKeyword_2();
 	}	
 }
 
-// not supported
+// extends=[Type]
 protected class Type_3_Assignment_extends extends AssignmentToken  {
 	
 	public Type_3_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {
@@ -317,7 +311,7 @@ protected class Type_3_Assignment_extends extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prType().ele3AssignmentExtends();
+		return grammarAccess.getTypeAccess().getExtendsAssignment_3();
 	}
 	
 	@Override
@@ -326,9 +320,9 @@ protected class Type_3_Assignment_extends extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prType().ele30CrossReferenceIDType().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.prType().ele30CrossReferenceIDType(); 
+				element = grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0(); 
 				return new Solution(obj);
 			}
 		}

@@ -141,7 +141,11 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 «FOREACH allRules() AS rule-»
+«IF ParserRule.isInstance(rule)-»
+		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaElementsAccessor()»);
+«ELSE-»
 		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaRuleAccessor()»);
+«ENDIF-»
 «ENDFOREACH»
 
 «FOREACH allParserRules() AS rule-»

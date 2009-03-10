@@ -199,16 +199,16 @@ public final class PartialParserTestLanguageChildrenConsumer extends NonTerminal
 	public void setRule(ChildrenElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordChildren());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftCurlyBracket());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentChildren());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20ParserRuleCallChild());
-		group$6$Consumer = new Group$6$Consumer(rule.ele3Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele30KeywordComma());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele31AssignmentChildren());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele310ParserRuleCallChild());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele4KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getChildrenKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getLeftCurlyBracketKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getChildrenAssignment_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getChildrenChildParserRuleCall_2_0());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_3());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCommaKeyword_3_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getChildrenAssignment_3_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getChildrenChildParserRuleCall_3_1_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getRightCurlyBracketKeyword_4());
 	}
 	
 	@Override

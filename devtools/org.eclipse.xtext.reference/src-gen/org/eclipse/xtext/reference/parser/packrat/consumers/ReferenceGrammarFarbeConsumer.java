@@ -137,16 +137,16 @@ public final class ReferenceGrammarFarbeConsumer extends NonTerminalConsumer {
 	public void setRule(FarbeElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentWert());
-		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.ele0Alternatives());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordROT());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordBLAU());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele02KeywordGELB());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele03KeywordGRÜN());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele00KeywordROT());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele01KeywordBLAU());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele02KeywordGELB());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele03KeywordGRÜN());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getWertAssignment());
+		alternatives$2$Consumer = new Alternatives$2$Consumer(rule.getWertAlternatives_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getWertROTKeyword_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getWertBLAUKeyword_0_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getWertGELBKeyword_0_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRNKeyword_0_3());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getWertROTKeyword_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getWertBLAUKeyword_0_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getWertGELBKeyword_0_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRNKeyword_0_3());
 	}
 	
 	@Override

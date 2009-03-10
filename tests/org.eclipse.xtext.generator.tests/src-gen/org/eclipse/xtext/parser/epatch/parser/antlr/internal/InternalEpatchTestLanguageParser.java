@@ -77,7 +77,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:69:48: (iv_ruleEPatch= ruleEPatch EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:70:2: iv_ruleEPatch= ruleEPatch EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEPatch().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEPatchRule(), currentNode); 
             pushFollow(FOLLOW_ruleEPatch_in_entryRuleEPatch71);
             iv_ruleEPatch=ruleEPatch();
             _fsp--;
@@ -124,7 +124,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,12,FOLLOW_12_in_ruleEPatch115); 
 
-                    createLeafNode(grammarAccess.prEPatch().ele0KeywordEpatch(), null); 
+                    createLeafNode(grammarAccess.getEPatchAccess().getEpatchKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:87:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:89:6: lv_name_1= RULE_ID
@@ -132,11 +132,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPatch137); 
 
-            		createLeafNode(grammarAccess.prEPatch().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEPatchAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -151,7 +151,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,13,FOLLOW_13_in_ruleEPatch154); 
 
-                    createLeafNode(grammarAccess.prEPatch().ele2KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEPatchAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:111:1: (lv_imports_3= ruleImport )*
             loop1:
@@ -169,7 +169,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:114:6: lv_imports_3= ruleImport
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEPatch().ele30ParserRuleCallImport(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEPatchAccess().getImportsImportParserRuleCall_3_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImport_in_ruleEPatch188);
             	    lv_imports_3=ruleImport();
@@ -177,7 +177,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -213,7 +213,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:135:6: lv_resources_4= ruleNamedResource
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEPatch().ele40ParserRuleCallNamedResource(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEPatchAccess().getResourcesNamedResourceParserRuleCall_4_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNamedResource_in_ruleEPatch227);
             	    lv_resources_4=ruleNamedResource();
@@ -221,7 +221,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -257,7 +257,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:156:6: lv_objects_5= ruleObjectRef
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prEPatch().ele50ParserRuleCallObjectRef(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getEPatchAccess().getObjectsObjectRefParserRuleCall_5_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleObjectRef_in_ruleEPatch266);
             	    lv_objects_5=ruleObjectRef();
@@ -265,7 +265,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prEPatch().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getEPatchRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -287,7 +287,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,14,FOLLOW_14_in_ruleEPatch280); 
 
-                    createLeafNode(grammarAccess.prEPatch().ele6KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getEPatchAccess().getRightCurlyBracketKeyword_6(), null); 
                 
 
             }
@@ -323,7 +323,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:185:48: (iv_ruleImport= ruleImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:186:2: iv_ruleImport= ruleImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport313);
             iv_ruleImport=ruleImport();
             _fsp--;
@@ -404,7 +404,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:200:5: this_ModelImport_0= ruleModelImport
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prImport().ele0ParserRuleCallModelImport(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getImportAccess().getModelImportParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleModelImport_in_ruleImport370);
                     this_ModelImport_0=ruleModelImport();
@@ -415,7 +415,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prImport().ele0ParserRuleCallModelImport(), null); 
+                        createLeafNode(grammarAccess.getImportAccess().getModelImportParserRuleCall_0(), null); 
                         
 
                     }
@@ -424,7 +424,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:214:5: this_JavaImport_1= ruleJavaImport
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prImport().ele1ParserRuleCallJavaImport(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getImportAccess().getJavaImportParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleJavaImport_in_ruleImport404);
                     this_JavaImport_1=ruleJavaImport();
@@ -435,7 +435,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prImport().ele1ParserRuleCallJavaImport(), null); 
+                        createLeafNode(grammarAccess.getImportAccess().getJavaImportParserRuleCall_1(), null); 
                         
 
                     }
@@ -444,7 +444,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:228:5: this_ExtensionImport_2= ruleExtensionImport
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prImport().ele2ParserRuleCallExtensionImport(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getImportAccess().getExtensionImportParserRuleCall_2(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleExtensionImport_in_ruleImport438);
                     this_ExtensionImport_2=ruleExtensionImport();
@@ -455,7 +455,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prImport().ele2ParserRuleCallExtensionImport(), null); 
+                        createLeafNode(grammarAccess.getImportAccess().getExtensionImportParserRuleCall_2(), null); 
                         
 
                     }
@@ -494,7 +494,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:247:53: (iv_ruleModelImport= ruleModelImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:248:2: iv_ruleModelImport= ruleModelImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModelImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleModelImport_in_entryRuleModelImport477);
             iv_ruleModelImport=ruleModelImport();
             _fsp--;
@@ -574,7 +574,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:262:5: this_ResourceImport_0= ruleResourceImport
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModelImport().ele0ParserRuleCallResourceImport(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelImportAccess().getResourceImportParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleResourceImport_in_ruleModelImport534);
                     this_ResourceImport_0=ruleResourceImport();
@@ -585,7 +585,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModelImport().ele0ParserRuleCallResourceImport(), null); 
+                        createLeafNode(grammarAccess.getModelImportAccess().getResourceImportParserRuleCall_0(), null); 
                         
 
                     }
@@ -594,7 +594,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:276:5: this_EPackageImport_1= ruleEPackageImport
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prModelImport().ele1ParserRuleCallEPackageImport(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getModelImportAccess().getEPackageImportParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleEPackageImport_in_ruleModelImport568);
                     this_EPackageImport_1=ruleEPackageImport();
@@ -605,7 +605,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prModelImport().ele1ParserRuleCallEPackageImport(), null); 
+                        createLeafNode(grammarAccess.getModelImportAccess().getEPackageImportParserRuleCall_1(), null); 
                         
 
                     }
@@ -644,7 +644,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:295:56: (iv_ruleResourceImport= ruleResourceImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:296:2: iv_ruleResourceImport= ruleResourceImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prResourceImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getResourceImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleResourceImport_in_entryRuleResourceImport607);
             iv_ruleResourceImport=ruleResourceImport();
             _fsp--;
@@ -686,7 +686,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleResourceImport651); 
 
-                    createLeafNode(grammarAccess.prResourceImport().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getResourceImportAccess().getImportKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:313:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:315:6: lv_name_1= RULE_ID
@@ -694,11 +694,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleResourceImport673); 
 
-            		createLeafNode(grammarAccess.prResourceImport().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getResourceImportAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prResourceImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getResourceImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -713,7 +713,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,16,FOLLOW_16_in_ruleResourceImport690); 
 
-                    createLeafNode(grammarAccess.prResourceImport().ele2KeywordUri(), null); 
+                    createLeafNode(grammarAccess.getResourceImportAccess().getUriKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:337:1: (lv_uri_3= RULE_STRING )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:339:6: lv_uri_3= RULE_STRING
@@ -721,11 +721,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_uri_3=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleResourceImport712); 
 
-            		createLeafNode(grammarAccess.prResourceImport().ele30TerminalRuleCallSTRING(), "uri"); 
+            		createLeafNode(grammarAccess.getResourceImportAccess().getUriSTRINGTerminalRuleCall_3_0(), "uri"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prResourceImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getResourceImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -772,7 +772,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:364:56: (iv_ruleEPackageImport= ruleEPackageImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:365:2: iv_ruleEPackageImport= ruleEPackageImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prEPackageImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getEPackageImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleEPackageImport_in_entryRuleEPackageImport753);
             iv_ruleEPackageImport=ruleEPackageImport();
             _fsp--;
@@ -814,7 +814,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleEPackageImport797); 
 
-                    createLeafNode(grammarAccess.prEPackageImport().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getEPackageImportAccess().getImportKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:382:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:384:6: lv_name_1= RULE_ID
@@ -822,11 +822,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEPackageImport819); 
 
-            		createLeafNode(grammarAccess.prEPackageImport().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getEPackageImportAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEPackageImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -841,7 +841,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,17,FOLLOW_17_in_ruleEPackageImport836); 
 
-                    createLeafNode(grammarAccess.prEPackageImport().ele2KeywordNs(), null); 
+                    createLeafNode(grammarAccess.getEPackageImportAccess().getNsKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:406:1: (lv_nsURI_3= RULE_STRING )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:408:6: lv_nsURI_3= RULE_STRING
@@ -849,11 +849,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_nsURI_3=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageImport858); 
 
-            		createLeafNode(grammarAccess.prEPackageImport().ele30TerminalRuleCallSTRING(), "nsURI"); 
+            		createLeafNode(grammarAccess.getEPackageImportAccess().getNsURISTRINGTerminalRuleCall_3_0(), "nsURI"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prEPackageImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEPackageImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -900,7 +900,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:433:52: (iv_ruleJavaImport= ruleJavaImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:434:2: iv_ruleJavaImport= ruleJavaImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prJavaImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getJavaImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleJavaImport_in_entryRuleJavaImport899);
             iv_ruleJavaImport=ruleJavaImport();
             _fsp--;
@@ -942,11 +942,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleJavaImport943); 
 
-                    createLeafNode(grammarAccess.prJavaImport().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getJavaImportAccess().getImportKeyword_0(), null); 
                 
             match(input,18,FOLLOW_18_in_ruleJavaImport952); 
 
-                    createLeafNode(grammarAccess.prJavaImport().ele1KeywordJava(), null); 
+                    createLeafNode(grammarAccess.getJavaImportAccess().getJavaKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:455:1: (lv_path_2= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:457:6: lv_path_2= RULE_ID
@@ -954,11 +954,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_path_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport974); 
 
-            		createLeafNode(grammarAccess.prJavaImport().ele20TerminalRuleCallID(), "path"); 
+            		createLeafNode(grammarAccess.getJavaImportAccess().getPathIDTerminalRuleCall_2_0(), "path"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prJavaImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getJavaImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -988,7 +988,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    {
             	    match(input,19,FOLLOW_19_in_ruleJavaImport992); 
 
-            	            createLeafNode(grammarAccess.prJavaImport().ele30KeywordFullStop(), null); 
+            	            createLeafNode(grammarAccess.getJavaImportAccess().getFullStopKeyword_3_0(), null); 
             	        
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:479:1: (lv_path_4= RULE_ID )
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:481:6: lv_path_4= RULE_ID
@@ -996,11 +996,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    lv_path_4=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaImport1014); 
 
-            	    		createLeafNode(grammarAccess.prJavaImport().ele310TerminalRuleCallID(), "path"); 
+            	    		createLeafNode(grammarAccess.getJavaImportAccess().getPathIDTerminalRuleCall_3_1_0(), "path"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prJavaImport().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getJavaImportRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -1056,7 +1056,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:506:57: (iv_ruleExtensionImport= ruleExtensionImport EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:507:2: iv_ruleExtensionImport= ruleExtensionImport EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prExtensionImport().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getExtensionImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleExtensionImport_in_entryRuleExtensionImport1057);
             iv_ruleExtensionImport=ruleExtensionImport();
             _fsp--;
@@ -1098,11 +1098,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,15,FOLLOW_15_in_ruleExtensionImport1101); 
 
-                    createLeafNode(grammarAccess.prExtensionImport().ele0KeywordImport(), null); 
+                    createLeafNode(grammarAccess.getExtensionImportAccess().getImportKeyword_0(), null); 
                 
             match(input,20,FOLLOW_20_in_ruleExtensionImport1110); 
 
-                    createLeafNode(grammarAccess.prExtensionImport().ele1KeywordExtension(), null); 
+                    createLeafNode(grammarAccess.getExtensionImportAccess().getExtensionKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:528:1: (lv_path_2= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:530:6: lv_path_2= RULE_ID
@@ -1110,11 +1110,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_path_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1132); 
 
-            		createLeafNode(grammarAccess.prExtensionImport().ele20TerminalRuleCallID(), "path"); 
+            		createLeafNode(grammarAccess.getExtensionImportAccess().getPathIDTerminalRuleCall_2_0(), "path"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prExtensionImport().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getExtensionImportRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1144,7 +1144,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    {
             	    match(input,21,FOLLOW_21_in_ruleExtensionImport1150); 
 
-            	            createLeafNode(grammarAccess.prExtensionImport().ele30KeywordColonColon(), null); 
+            	            createLeafNode(grammarAccess.getExtensionImportAccess().getColonColonKeyword_3_0(), null); 
             	        
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:552:1: (lv_path_4= RULE_ID )
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:554:6: lv_path_4= RULE_ID
@@ -1152,11 +1152,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             	    lv_path_4=(Token)input.LT(1);
             	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExtensionImport1172); 
 
-            	    		createLeafNode(grammarAccess.prExtensionImport().ele310TerminalRuleCallID(), "path"); 
+            	    		createLeafNode(grammarAccess.getExtensionImportAccess().getPathIDTerminalRuleCall_3_1_0(), "path"); 
             	    	
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prExtensionImport().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getExtensionImportRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -1212,7 +1212,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:579:55: (iv_ruleNamedResource= ruleNamedResource EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:580:2: iv_ruleNamedResource= ruleNamedResource EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prNamedResource().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getNamedResourceRule(), currentNode); 
             pushFollow(FOLLOW_ruleNamedResource_in_entryRuleNamedResource1215);
             iv_ruleNamedResource=ruleNamedResource();
             _fsp--;
@@ -1259,7 +1259,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,22,FOLLOW_22_in_ruleNamedResource1259); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele0KeywordResource(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getResourceKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:597:1: (lv_name_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:599:6: lv_name_1= RULE_ID
@@ -1267,11 +1267,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_name_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNamedResource1281); 
 
-            		createLeafNode(grammarAccess.prNamedResource().ele10TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getNamedResourceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -1286,11 +1286,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,13,FOLLOW_13_in_ruleNamedResource1298); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele2KeywordLeftCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
             match(input,23,FOLLOW_23_in_ruleNamedResource1307); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele3KeywordLeft(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getLeftKeyword_3(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:625:1: ( ( 'uri' (lv_leftUri_5= RULE_STRING ) ) | (lv_leftRoot_6= ruleCreatedObject ) )
             int alt8=2;
@@ -1317,7 +1317,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,16,FOLLOW_16_in_ruleNamedResource1318); 
 
-                            createLeafNode(grammarAccess.prNamedResource().ele400KeywordUri(), null); 
+                            createLeafNode(grammarAccess.getNamedResourceAccess().getUriKeyword_4_0_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:629:1: (lv_leftUri_5= RULE_STRING )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:631:6: lv_leftUri_5= RULE_STRING
@@ -1325,11 +1325,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_leftUri_5=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1340); 
 
-                    		createLeafNode(grammarAccess.prNamedResource().ele4010TerminalRuleCallSTRING(), "leftUri"); 
+                    		createLeafNode(grammarAccess.getNamedResourceAccess().getLeftUriSTRINGTerminalRuleCall_4_0_1_0(), "leftUri"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1355,7 +1355,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:653:6: lv_leftRoot_6= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prNamedResource().ele410ParserRuleCallCreatedObject(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getNamedResourceAccess().getLeftRootCreatedObjectParserRuleCall_4_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1389);
                     lv_leftRoot_6=ruleCreatedObject();
@@ -1363,7 +1363,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1385,11 +1385,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleNamedResource1403); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele5KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getSemicolonKeyword_5(), null); 
                 
             match(input,25,FOLLOW_25_in_ruleNamedResource1412); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele6KeywordRight(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getRightKeyword_6(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:679:1: ( ( 'uri' (lv_rightUri_10= RULE_STRING ) ) | (lv_rightRoot_11= ruleCreatedObject ) )
             int alt9=2;
@@ -1416,7 +1416,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,16,FOLLOW_16_in_ruleNamedResource1423); 
 
-                            createLeafNode(grammarAccess.prNamedResource().ele700KeywordUri(), null); 
+                            createLeafNode(grammarAccess.getNamedResourceAccess().getUriKeyword_7_0_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:683:1: (lv_rightUri_10= RULE_STRING )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:685:6: lv_rightUri_10= RULE_STRING
@@ -1424,11 +1424,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_rightUri_10=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNamedResource1445); 
 
-                    		createLeafNode(grammarAccess.prNamedResource().ele7010TerminalRuleCallSTRING(), "rightUri"); 
+                    		createLeafNode(grammarAccess.getNamedResourceAccess().getRightUriSTRINGTerminalRuleCall_7_0_1_0(), "rightUri"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1454,7 +1454,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:707:6: lv_rightRoot_11= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prNamedResource().ele710ParserRuleCallCreatedObject(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getNamedResourceAccess().getRightRootCreatedObjectParserRuleCall_7_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleNamedResource1494);
                     lv_rightRoot_11=ruleCreatedObject();
@@ -1462,7 +1462,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prNamedResource().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getNamedResourceRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -1484,11 +1484,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleNamedResource1508); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele8KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getSemicolonKeyword_8(), null); 
                 
             match(input,14,FOLLOW_14_in_ruleNamedResource1517); 
 
-                    createLeafNode(grammarAccess.prNamedResource().ele9KeywordRightCurlyBracket(), null); 
+                    createLeafNode(grammarAccess.getNamedResourceAccess().getRightCurlyBracketKeyword_9(), null); 
                 
 
             }
@@ -1524,7 +1524,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:742:51: (iv_ruleObjectRef= ruleObjectRef EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:743:2: iv_ruleObjectRef= ruleObjectRef EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prObjectRef().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getObjectRefRule(), currentNode); 
             pushFollow(FOLLOW_ruleObjectRef_in_entryRuleObjectRef1552);
             iv_ruleObjectRef=ruleObjectRef();
             _fsp--;
@@ -1576,7 +1576,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,26,FOLLOW_26_in_ruleObjectRef1596); 
 
-                    createLeafNode(grammarAccess.prObjectRef().ele0KeywordObject(), null); 
+                    createLeafNode(grammarAccess.getObjectRefAccess().getObjectKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:760:1: (lv_name_1= RULE_ID )?
             int alt10=2;
@@ -1596,11 +1596,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_name_1=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1618); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele10TerminalRuleCallID(), "name"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1644,13 +1644,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1651); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2000CrossReferenceIDNamedResource(), "leftRes"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getLeftResNamedResourceCrossReference_2_0_0_0(), "leftRes"); 
                     	
 
                     }
@@ -1661,11 +1661,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_leftFrag_3=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1676); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2010TerminalRuleCallFRAGMENT(), "leftFrag"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getLeftFragFRAGMENTTerminalRuleCall_2_0_1_0(), "leftFrag"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1692,20 +1692,20 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,23,FOLLOW_23_in_ruleObjectRef1701); 
 
-                            createLeafNode(grammarAccess.prObjectRef().ele210KeywordLeft(), null); 
+                            createLeafNode(grammarAccess.getObjectRefAccess().getLeftKeyword_2_1_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:821:1: ( RULE_ID )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:824:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1723); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2110CrossReferenceIDNamedResource(), "leftRes"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getLeftResNamedResourceCrossReference_2_1_1_0(), "leftRes"); 
                     	
 
                     }
@@ -1716,11 +1716,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_leftFrag_6=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1748); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2120TerminalRuleCallFRAGMENT(), "leftFrag"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getLeftFragFRAGMENTTerminalRuleCall_2_1_2_0(), "leftFrag"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1735,20 +1735,20 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,25,FOLLOW_25_in_ruleObjectRef1765); 
 
-                            createLeafNode(grammarAccess.prObjectRef().ele213KeywordRight(), null); 
+                            createLeafNode(grammarAccess.getObjectRefAccess().getRightKeyword_2_1_3(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:861:1: ( RULE_ID )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:864:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectRef1787); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2140CrossReferenceIDNamedResource(), "rightRes"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getRightResNamedResourceCrossReference_2_1_4_0(), "rightRes"); 
                     	
 
                     }
@@ -1759,11 +1759,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_rightFrag_9=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectRef1812); 
 
-                    		createLeafNode(grammarAccess.prObjectRef().ele2150TerminalRuleCallFRAGMENT(), "rightFrag"); 
+                    		createLeafNode(grammarAccess.getObjectRefAccess().getRightFragFRAGMENTTerminalRuleCall_2_1_5_0(), "rightFrag"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -1798,7 +1798,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,13,FOLLOW_13_in_ruleObjectRef1832); 
 
-                            createLeafNode(grammarAccess.prObjectRef().ele30KeywordLeftCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getObjectRefAccess().getLeftCurlyBracketKeyword_3_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:901:1: ( (lv_assignments_11= ruleBiSingleAssignment ) | (lv_assignments_12= ruleBiListAssignment ) )+
                     int cnt12=0;
@@ -1835,7 +1835,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:904:6: lv_assignments_11= ruleBiSingleAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prObjectRef().ele3100ParserRuleCallBiSingleAssignment(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getAssignmentsBiSingleAssignmentParserRuleCall_3_1_0_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleBiSingleAssignment_in_ruleObjectRef1867);
                     	    lv_assignments_11=ruleBiSingleAssignment();
@@ -1843,7 +1843,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1867,7 +1867,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:926:6: lv_assignments_12= ruleBiListAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prObjectRef().ele3110ParserRuleCallBiListAssignment(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getAssignmentsBiListAssignmentParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleBiListAssignment_in_ruleObjectRef1911);
                     	    lv_assignments_12=ruleBiListAssignment();
@@ -1875,7 +1875,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -1915,13 +1915,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,23,FOLLOW_23_in_ruleObjectRef1927); 
 
-                                    createLeafNode(grammarAccess.prObjectRef().ele320KeywordLeft(), null); 
+                                    createLeafNode(grammarAccess.getObjectRefAccess().getLeftKeyword_3_2_0(), null); 
                                 
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:948:1: (lv_leftMig_14= ruleMigration )
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:951:6: lv_leftMig_14= ruleMigration
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prObjectRef().ele3210ParserRuleCallMigration(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getLeftMigMigrationParserRuleCall_3_2_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef1961);
                             lv_leftMig_14=ruleMigration();
@@ -1929,7 +1929,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -1962,13 +1962,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,25,FOLLOW_25_in_ruleObjectRef1977); 
 
-                                    createLeafNode(grammarAccess.prObjectRef().ele330KeywordRight(), null); 
+                                    createLeafNode(grammarAccess.getObjectRefAccess().getRightKeyword_3_3_0(), null); 
                                 
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:973:1: (lv_rightMig_16= ruleMigration )
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:976:6: lv_rightMig_16= ruleMigration
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prObjectRef().ele3310ParserRuleCallMigration(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getObjectRefAccess().getRightMigMigrationParserRuleCall_3_3_1_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleMigration_in_ruleObjectRef2011);
                             lv_rightMig_16=ruleMigration();
@@ -1976,7 +1976,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prObjectRef().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getObjectRefRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -1998,7 +1998,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,14,FOLLOW_14_in_ruleObjectRef2026); 
 
-                            createLeafNode(grammarAccess.prObjectRef().ele34KeywordRightCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getObjectRefAccess().getRightCurlyBracketKeyword_3_4(), null); 
                         
 
                     }
@@ -2040,7 +2040,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1007:60: (iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1008:2: iv_ruleBiSingleAssignment= ruleBiSingleAssignment EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prBiSingleAssignment().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getBiSingleAssignmentRule(), currentNode); 
             pushFollow(FOLLOW_ruleBiSingleAssignment_in_entryRuleBiSingleAssignment2063);
             iv_ruleBiSingleAssignment=ruleBiSingleAssignment();
             _fsp--;
@@ -2089,11 +2089,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiSingleAssignment2120); 
 
-            		createLeafNode(grammarAccess.prBiSingleAssignment().ele00TerminalRuleCallID(), "feature"); 
+            		createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2108,13 +2108,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleBiSingleAssignment2137); 
 
-                    createLeafNode(grammarAccess.prBiSingleAssignment().ele1KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1045:1: (lv_leftValue_2= ruleSingleAssignmentValue )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1048:6: lv_leftValue_2= ruleSingleAssignmentValue
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prBiSingleAssignment().ele20ParserRuleCallSingleAssignmentValue(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getBiSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2171);
             lv_leftValue_2=ruleSingleAssignmentValue();
@@ -2122,7 +2122,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2138,13 +2138,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,28,FOLLOW_28_in_ruleBiSingleAssignment2184); 
 
-                    createLeafNode(grammarAccess.prBiSingleAssignment().ele3KeywordVerticalLine(), null); 
+                    createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getVerticalLineKeyword_3(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1070:1: (lv_rightValue_4= ruleSingleAssignmentValue )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1073:6: lv_rightValue_4= ruleSingleAssignmentValue
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prBiSingleAssignment().ele40ParserRuleCallSingleAssignmentValue(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getBiSingleAssignmentAccess().getRightValueSingleAssignmentValueParserRuleCall_4_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleBiSingleAssignment2218);
             lv_rightValue_4=ruleSingleAssignmentValue();
@@ -2152,7 +2152,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiSingleAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2168,7 +2168,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleBiSingleAssignment2231); 
 
-                    createLeafNode(grammarAccess.prBiSingleAssignment().ele5KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getBiSingleAssignmentAccess().getSemicolonKeyword_5(), null); 
                 
 
             }
@@ -2204,7 +2204,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1102:58: (iv_ruleBiListAssignment= ruleBiListAssignment EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1103:2: iv_ruleBiListAssignment= ruleBiListAssignment EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prBiListAssignment().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getBiListAssignmentRule(), currentNode); 
             pushFollow(FOLLOW_ruleBiListAssignment_in_entryRuleBiListAssignment2264);
             iv_ruleBiListAssignment=ruleBiListAssignment();
             _fsp--;
@@ -2257,11 +2257,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBiListAssignment2321); 
 
-            		createLeafNode(grammarAccess.prBiListAssignment().ele00TerminalRuleCallID(), "feature"); 
+            		createLeafNode(grammarAccess.getBiListAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2276,11 +2276,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleBiListAssignment2338); 
 
-                    createLeafNode(grammarAccess.prBiListAssignment().ele1KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getBiListAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
             match(input,29,FOLLOW_29_in_ruleBiListAssignment2347); 
 
-                    createLeafNode(grammarAccess.prBiListAssignment().ele2KeywordLeftSquareBracket(), null); 
+                    createLeafNode(grammarAccess.getBiListAssignmentAccess().getLeftSquareBracketKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1144:1: ( (lv_leftValues_3= ruleListAssignmentValue ) ( ',' (lv_leftValues_5= ruleListAssignmentValue ) )* )?
             int alt17=2;
@@ -2297,7 +2297,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1147:6: lv_leftValues_3= ruleListAssignmentValue
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prBiListAssignment().ele300ParserRuleCallListAssignmentValue(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getLeftValuesListAssignmentValueParserRuleCall_3_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2382);
                     lv_leftValues_3=ruleListAssignmentValue();
@@ -2305,7 +2305,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2336,13 +2336,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    {
                     	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2396); 
 
-                    	            createLeafNode(grammarAccess.prBiListAssignment().ele310KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getBiListAssignmentAccess().getCommaKeyword_3_1_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1169:1: (lv_leftValues_5= ruleListAssignmentValue )
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1172:6: lv_leftValues_5= ruleListAssignmentValue
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prBiListAssignment().ele3110ParserRuleCallListAssignmentValue(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getLeftValuesListAssignmentValueParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2430);
                     	    lv_leftValues_5=ruleListAssignmentValue();
@@ -2350,7 +2350,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -2381,7 +2381,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,28,FOLLOW_28_in_ruleBiListAssignment2447); 
 
-                    createLeafNode(grammarAccess.prBiListAssignment().ele4KeywordVerticalLine(), null); 
+                    createLeafNode(grammarAccess.getBiListAssignmentAccess().getVerticalLineKeyword_4(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1194:1: ( (lv_rightValues_7= ruleListAssignmentValue ) ( ',' (lv_rightValues_9= ruleListAssignmentValue ) )* )?
             int alt19=2;
@@ -2398,7 +2398,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1197:6: lv_rightValues_7= ruleListAssignmentValue
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prBiListAssignment().ele500ParserRuleCallListAssignmentValue(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getRightValuesListAssignmentValueParserRuleCall_5_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2482);
                     lv_rightValues_7=ruleListAssignmentValue();
@@ -2406,7 +2406,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2437,13 +2437,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    {
                     	    match(input,30,FOLLOW_30_in_ruleBiListAssignment2496); 
 
-                    	            createLeafNode(grammarAccess.prBiListAssignment().ele510KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getBiListAssignmentAccess().getCommaKeyword_5_1_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1219:1: (lv_rightValues_9= ruleListAssignmentValue )
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1222:6: lv_rightValues_9= ruleListAssignmentValue
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prBiListAssignment().ele5110ParserRuleCallListAssignmentValue(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getBiListAssignmentAccess().getRightValuesListAssignmentValueParserRuleCall_5_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleListAssignmentValue_in_ruleBiListAssignment2530);
                     	    lv_rightValues_9=ruleListAssignmentValue();
@@ -2451,7 +2451,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prBiListAssignment().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getBiListAssignmentRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -2482,11 +2482,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,31,FOLLOW_31_in_ruleBiListAssignment2547); 
 
-                    createLeafNode(grammarAccess.prBiListAssignment().ele6KeywordRightSquareBracket(), null); 
+                    createLeafNode(grammarAccess.getBiListAssignmentAccess().getRightSquareBracketKeyword_6(), null); 
                 
             match(input,24,FOLLOW_24_in_ruleBiListAssignment2556); 
 
-                    createLeafNode(grammarAccess.prBiListAssignment().ele7KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getBiListAssignmentAccess().getSemicolonKeyword_7(), null); 
                 
 
             }
@@ -2522,7 +2522,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1255:62: (iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1256:2: iv_ruleMonoSingleAssignment= ruleMonoSingleAssignment EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMonoSingleAssignment().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMonoSingleAssignmentRule(), currentNode); 
             pushFollow(FOLLOW_ruleMonoSingleAssignment_in_entryRuleMonoSingleAssignment2589);
             iv_ruleMonoSingleAssignment=ruleMonoSingleAssignment();
             _fsp--;
@@ -2569,11 +2569,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoSingleAssignment2646); 
 
-            		createLeafNode(grammarAccess.prMonoSingleAssignment().ele00TerminalRuleCallID(), "feature"); 
+            		createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMonoSingleAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2588,13 +2588,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleMonoSingleAssignment2663); 
 
-                    createLeafNode(grammarAccess.prMonoSingleAssignment().ele1KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1293:1: (lv_leftValue_2= ruleSingleAssignmentValue )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1296:6: lv_leftValue_2= ruleSingleAssignmentValue
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prMonoSingleAssignment().ele20ParserRuleCallSingleAssignmentValue(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getMonoSingleAssignmentAccess().getLeftValueSingleAssignmentValueParserRuleCall_2_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_ruleMonoSingleAssignment2697);
             lv_leftValue_2=ruleSingleAssignmentValue();
@@ -2602,7 +2602,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMonoSingleAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -2618,7 +2618,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleMonoSingleAssignment2710); 
 
-                    createLeafNode(grammarAccess.prMonoSingleAssignment().ele3KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getMonoSingleAssignmentAccess().getSemicolonKeyword_3(), null); 
                 
 
             }
@@ -2654,7 +2654,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1325:60: (iv_ruleMonoListAssignment= ruleMonoListAssignment EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1326:2: iv_ruleMonoListAssignment= ruleMonoListAssignment EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMonoListAssignment().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMonoListAssignmentRule(), currentNode); 
             pushFollow(FOLLOW_ruleMonoListAssignment_in_entryRuleMonoListAssignment2743);
             iv_ruleMonoListAssignment=ruleMonoListAssignment();
             _fsp--;
@@ -2703,11 +2703,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_feature_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMonoListAssignment2800); 
 
-            		createLeafNode(grammarAccess.prMonoListAssignment().ele00TerminalRuleCallID(), "feature"); 
+            		createLeafNode(grammarAccess.getMonoListAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getMonoListAssignmentRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -2722,11 +2722,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,27,FOLLOW_27_in_ruleMonoListAssignment2817); 
 
-                    createLeafNode(grammarAccess.prMonoListAssignment().ele1KeywordEqualsSign(), null); 
+                    createLeafNode(grammarAccess.getMonoListAssignmentAccess().getEqualsSignKeyword_1(), null); 
                 
             match(input,29,FOLLOW_29_in_ruleMonoListAssignment2826); 
 
-                    createLeafNode(grammarAccess.prMonoListAssignment().ele2KeywordLeftSquareBracket(), null); 
+                    createLeafNode(grammarAccess.getMonoListAssignmentAccess().getLeftSquareBracketKeyword_2(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1367:1: ( (lv_leftValues_3= ruleAssignmentValue ) ( ',' (lv_leftValues_5= ruleAssignmentValue ) )* )?
             int alt21=2;
@@ -2743,7 +2743,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1370:6: lv_leftValues_3= ruleAssignmentValue
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prMonoListAssignment().ele300ParserRuleCallAssignmentValue(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getMonoListAssignmentAccess().getLeftValuesAssignmentValueParserRuleCall_3_0_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2861);
                     lv_leftValues_3=ruleAssignmentValue();
@@ -2751,7 +2751,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getMonoListAssignmentRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -2782,13 +2782,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    {
                     	    match(input,30,FOLLOW_30_in_ruleMonoListAssignment2875); 
 
-                    	            createLeafNode(grammarAccess.prMonoListAssignment().ele310KeywordComma(), null); 
+                    	            createLeafNode(grammarAccess.getMonoListAssignmentAccess().getCommaKeyword_3_1_0(), null); 
                     	        
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1392:1: (lv_leftValues_5= ruleAssignmentValue )
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1395:6: lv_leftValues_5= ruleAssignmentValue
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prMonoListAssignment().ele3110ParserRuleCallAssignmentValue(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getMonoListAssignmentAccess().getLeftValuesAssignmentValueParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleAssignmentValue_in_ruleMonoListAssignment2909);
                     	    lv_leftValues_5=ruleAssignmentValue();
@@ -2796,7 +2796,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prMonoListAssignment().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getMonoListAssignmentRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -2827,11 +2827,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,31,FOLLOW_31_in_ruleMonoListAssignment2926); 
 
-                    createLeafNode(grammarAccess.prMonoListAssignment().ele4KeywordRightSquareBracket(), null); 
+                    createLeafNode(grammarAccess.getMonoListAssignmentAccess().getRightSquareBracketKeyword_4(), null); 
                 
             match(input,24,FOLLOW_24_in_ruleMonoListAssignment2935); 
 
-                    createLeafNode(grammarAccess.prMonoListAssignment().ele5KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getMonoListAssignmentAccess().getSemicolonKeyword_5(), null); 
                 
 
             }
@@ -2867,7 +2867,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1428:57: (iv_ruleAssignmentValue= ruleAssignmentValue EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1429:2: iv_ruleAssignmentValue= ruleAssignmentValue EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prAssignmentValue().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getAssignmentValueRule(), currentNode); 
             pushFollow(FOLLOW_ruleAssignmentValue_in_entryRuleAssignmentValue2968);
             iv_ruleAssignmentValue=ruleAssignmentValue();
             _fsp--;
@@ -2957,11 +2957,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_value_0=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleAssignmentValue3025); 
 
-                    		createLeafNode(grammarAccess.prAssignmentValue().ele00TerminalRuleCallSTRING(), "value"); 
+                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getValueSTRINGTerminalRuleCall_0_0(), "value"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2988,13 +2988,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3062); 
 
-                    		createLeafNode(grammarAccess.prAssignmentValue().ele100CrossReferenceIDNamedObject(), "refObject"); 
+                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getRefObjectNamedObjectCrossReference_1_0_0(), "refObject"); 
                     	
 
                     }
@@ -3012,7 +3012,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,19,FOLLOW_19_in_ruleAssignmentValue3075); 
 
-                                    createLeafNode(grammarAccess.prAssignmentValue().ele110KeywordFullStop(), null); 
+                                    createLeafNode(grammarAccess.getAssignmentValueAccess().getFullStopKeyword_1_1_0(), null); 
                                 
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1483:1: (lv_refFeature_3= RULE_ID )
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1485:6: lv_refFeature_3= RULE_ID
@@ -3020,11 +3020,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             lv_refFeature_3=(Token)input.LT(1);
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3097); 
 
-                            		createLeafNode(grammarAccess.prAssignmentValue().ele1110TerminalRuleCallID(), "refFeature"); 
+                            		createLeafNode(grammarAccess.getAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_1_1_1_0(), "refFeature"); 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -3050,7 +3050,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     {
                                     match(input,29,FOLLOW_29_in_ruleAssignmentValue3115); 
 
-                                            createLeafNode(grammarAccess.prAssignmentValue().ele1120KeywordLeftSquareBracket(), null); 
+                                            createLeafNode(grammarAccess.getAssignmentValueAccess().getLeftSquareBracketKeyword_1_1_2_0(), null); 
                                         
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1507:1: (lv_refIndex_5= RULE_INT )
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1509:6: lv_refIndex_5= RULE_INT
@@ -3058,11 +3058,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     lv_refIndex_5=(Token)input.LT(1);
                                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleAssignmentValue3137); 
 
-                                    		createLeafNode(grammarAccess.prAssignmentValue().ele11210TerminalRuleCallINT(), "refIndex"); 
+                                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getRefIndexINTTerminalRuleCall_1_1_2_1_0(), "refIndex"); 
                                     	
 
                                     	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                                    	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
                                     	        
@@ -3077,7 +3077,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                     match(input,31,FOLLOW_31_in_ruleAssignmentValue3154); 
 
-                                            createLeafNode(grammarAccess.prAssignmentValue().ele1122KeywordRightSquareBracket(), null); 
+                                            createLeafNode(grammarAccess.getAssignmentValueAccess().getRightSquareBracketKeyword_1_1_2_2(), null); 
                                         
 
                                     }
@@ -3104,7 +3104,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1535:6: lv_newObject_7= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prAssignmentValue().ele20ParserRuleCallCreatedObject(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_2_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleAssignmentValue3199);
                     lv_newObject_7=ruleCreatedObject();
@@ -3112,7 +3112,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -3140,13 +3140,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignmentValue3232); 
 
-                    		createLeafNode(grammarAccess.prAssignmentValue().ele300CrossReferenceIDImport(), "import"); 
+                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getImportImportCrossReference_3_0_0(), "import"); 
                     	
 
                     }
@@ -3157,11 +3157,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_impFrag_9=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleAssignmentValue3257); 
 
-                    		createLeafNode(grammarAccess.prAssignmentValue().ele310TerminalRuleCallFRAGMENT(), "impFrag"); 
+                    		createLeafNode(grammarAccess.getAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_3_1_0(), "impFrag"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3214,7 +3214,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1597:61: (iv_ruleListAssignmentValue= ruleListAssignmentValue EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1598:2: iv_ruleListAssignmentValue= ruleListAssignmentValue EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prListAssignmentValue().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getListAssignmentValueRule(), currentNode); 
             pushFollow(FOLLOW_ruleListAssignmentValue_in_entryRuleListAssignmentValue3299);
             iv_ruleListAssignmentValue=ruleListAssignmentValue();
             _fsp--;
@@ -3266,11 +3266,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_index_0=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3356); 
 
-            		createLeafNode(grammarAccess.prListAssignmentValue().ele00TerminalRuleCallINT(), "index"); 
+            		createLeafNode(grammarAccess.getListAssignmentValueAccess().getIndexINTTerminalRuleCall_0_0(), "index"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -3285,7 +3285,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,32,FOLLOW_32_in_ruleListAssignmentValue3373); 
 
-                    createLeafNode(grammarAccess.prListAssignmentValue().ele1KeywordColon(), null); 
+                    createLeafNode(grammarAccess.getListAssignmentValueAccess().getColonKeyword_1(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1635:1: ( ( '[' (lv_refIndex_3= RULE_INT ) ']' ) | (lv_value_5= RULE_STRING ) | ( ( RULE_ID ) ( '.' (lv_refFeature_8= RULE_ID ) ( '[' (lv_refIndex_10= RULE_INT ) ']' )? )? ) | (lv_newObject_12= ruleCreatedObject ) | ( ( RULE_ID ) (lv_impFrag_14= RULE_FRAGMENT ) ) )
             int alt27=5;
@@ -3340,7 +3340,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,29,FOLLOW_29_in_ruleListAssignmentValue3384); 
 
-                            createLeafNode(grammarAccess.prListAssignmentValue().ele200KeywordLeftSquareBracket(), null); 
+                            createLeafNode(grammarAccess.getListAssignmentValueAccess().getLeftSquareBracketKeyword_2_0_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1639:1: (lv_refIndex_3= RULE_INT )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1641:6: lv_refIndex_3= RULE_INT
@@ -3348,11 +3348,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_refIndex_3=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3406); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2010TerminalRuleCallINT(), "refIndex"); 
+                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_0_1_0(), "refIndex"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3367,7 +3367,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,31,FOLLOW_31_in_ruleListAssignmentValue3423); 
 
-                            createLeafNode(grammarAccess.prListAssignmentValue().ele202KeywordRightSquareBracket(), null); 
+                            createLeafNode(grammarAccess.getListAssignmentValueAccess().getRightSquareBracketKeyword_2_0_2(), null); 
                         
 
                     }
@@ -3384,11 +3384,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_value_5=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleListAssignmentValue3452); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele210TerminalRuleCallSTRING(), "value"); 
+                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getValueSTRINGTerminalRuleCall_2_1_0(), "value"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3415,13 +3415,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3489); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2200CrossReferenceIDNamedObject(), "refObject"); 
+                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefObjectNamedObjectCrossReference_2_2_0_0(), "refObject"); 
                     	
 
                     }
@@ -3439,7 +3439,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,19,FOLLOW_19_in_ruleListAssignmentValue3502); 
 
-                                    createLeafNode(grammarAccess.prListAssignmentValue().ele2210KeywordFullStop(), null); 
+                                    createLeafNode(grammarAccess.getListAssignmentValueAccess().getFullStopKeyword_2_2_1_0(), null); 
                                 
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1705:1: (lv_refFeature_8= RULE_ID )
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1707:6: lv_refFeature_8= RULE_ID
@@ -3447,11 +3447,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             lv_refFeature_8=(Token)input.LT(1);
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3524); 
 
-                            		createLeafNode(grammarAccess.prListAssignmentValue().ele22110TerminalRuleCallID(), "refFeature"); 
+                            		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_2_2_1_1_0(), "refFeature"); 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -3477,7 +3477,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     {
                                     match(input,29,FOLLOW_29_in_ruleListAssignmentValue3542); 
 
-                                            createLeafNode(grammarAccess.prListAssignmentValue().ele22120KeywordLeftSquareBracket(), null); 
+                                            createLeafNode(grammarAccess.getListAssignmentValueAccess().getLeftSquareBracketKeyword_2_2_1_2_0(), null); 
                                         
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1729:1: (lv_refIndex_10= RULE_INT )
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1731:6: lv_refIndex_10= RULE_INT
@@ -3485,11 +3485,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     lv_refIndex_10=(Token)input.LT(1);
                                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleListAssignmentValue3564); 
 
-                                    		createLeafNode(grammarAccess.prListAssignmentValue().ele221210TerminalRuleCallINT(), "refIndex"); 
+                                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_2_1_2_1_0(), "refIndex"); 
                                     	
 
                                     	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
                                     	        
@@ -3504,7 +3504,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                     match(input,31,FOLLOW_31_in_ruleListAssignmentValue3581); 
 
-                                            createLeafNode(grammarAccess.prListAssignmentValue().ele22122KeywordRightSquareBracket(), null); 
+                                            createLeafNode(grammarAccess.getListAssignmentValueAccess().getRightSquareBracketKeyword_2_2_1_2_2(), null); 
                                         
 
                                     }
@@ -3531,7 +3531,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1757:6: lv_newObject_12= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prListAssignmentValue().ele230ParserRuleCallCreatedObject(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getListAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_2_3_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleListAssignmentValue3626);
                     lv_newObject_12=ruleCreatedObject();
@@ -3539,7 +3539,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -3567,13 +3567,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleListAssignmentValue3659); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2400CrossReferenceIDImport(), "import"); 
+                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getImportImportCrossReference_2_4_0_0(), "import"); 
                     	
 
                     }
@@ -3584,11 +3584,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_impFrag_14=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleListAssignmentValue3684); 
 
-                    		createLeafNode(grammarAccess.prListAssignmentValue().ele2410TerminalRuleCallFRAGMENT(), "impFrag"); 
+                    		createLeafNode(grammarAccess.getListAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_2_4_1_0(), "impFrag"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prListAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getListAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3644,7 +3644,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1819:63: (iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1820:2: iv_ruleSingleAssignmentValue= ruleSingleAssignmentValue EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSingleAssignmentValue().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSingleAssignmentValueRule(), currentNode); 
             pushFollow(FOLLOW_ruleSingleAssignmentValue_in_entryRuleSingleAssignmentValue3727);
             iv_ruleSingleAssignmentValue=ruleSingleAssignmentValue();
             _fsp--;
@@ -3740,11 +3740,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_keyword_0=(Token)input.LT(1);
                     match(input,33,FOLLOW_33_in_ruleSingleAssignmentValue3783); 
 
-                            createLeafNode(grammarAccess.prSingleAssignmentValue().ele00KeywordNull(), "keyword"); 
+                            createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getKeywordNullKeyword_0_0(), "keyword"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3769,11 +3769,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_value_1=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSingleAssignmentValue3824); 
 
-                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele10TerminalRuleCallSTRING(), "value"); 
+                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getValueSTRINGTerminalRuleCall_1_0(), "value"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -3800,13 +3800,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3861); 
 
-                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele200CrossReferenceIDNamedObject(), "refObject"); 
+                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefObjectNamedObjectCrossReference_2_0_0(), "refObject"); 
                     	
 
                     }
@@ -3824,7 +3824,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             {
                             match(input,19,FOLLOW_19_in_ruleSingleAssignmentValue3874); 
 
-                                    createLeafNode(grammarAccess.prSingleAssignmentValue().ele210KeywordFullStop(), null); 
+                                    createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getFullStopKeyword_2_1_0(), null); 
                                 
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1896:1: (lv_refFeature_4= RULE_ID )
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1898:6: lv_refFeature_4= RULE_ID
@@ -3832,11 +3832,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             lv_refFeature_4=(Token)input.LT(1);
                             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue3896); 
 
-                            		createLeafNode(grammarAccess.prSingleAssignmentValue().ele2110TerminalRuleCallID(), "refFeature"); 
+                            		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefFeatureIDTerminalRuleCall_2_1_1_0(), "refFeature"); 
                             	
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
@@ -3862,7 +3862,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     {
                                     match(input,29,FOLLOW_29_in_ruleSingleAssignmentValue3914); 
 
-                                            createLeafNode(grammarAccess.prSingleAssignmentValue().ele2120KeywordLeftSquareBracket(), null); 
+                                            createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getLeftSquareBracketKeyword_2_1_2_0(), null); 
                                         
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1920:1: (lv_refIndex_6= RULE_INT )
                                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1922:6: lv_refIndex_6= RULE_INT
@@ -3870,11 +3870,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                                     lv_refIndex_6=(Token)input.LT(1);
                                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSingleAssignmentValue3936); 
 
-                                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele21210TerminalRuleCallINT(), "refIndex"); 
+                                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRefIndexINTTerminalRuleCall_2_1_2_1_0(), "refIndex"); 
                                     	
 
                                     	        if (current==null) {
-                                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                                     	            associateNodeWithAstElement(currentNode, current);
                                     	        }
                                     	        
@@ -3889,7 +3889,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                                     match(input,31,FOLLOW_31_in_ruleSingleAssignmentValue3953); 
 
-                                            createLeafNode(grammarAccess.prSingleAssignmentValue().ele2122KeywordRightSquareBracket(), null); 
+                                            createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getRightSquareBracketKeyword_2_1_2_2(), null); 
                                         
 
                                     }
@@ -3916,7 +3916,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:1948:6: lv_newObject_8= ruleCreatedObject
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prSingleAssignmentValue().ele30ParserRuleCallCreatedObject(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getSingleAssignmentValueAccess().getNewObjectCreatedObjectParserRuleCall_3_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleCreatedObject_in_ruleSingleAssignmentValue3998);
                     lv_newObject_8=ruleCreatedObject();
@@ -3924,7 +3924,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -3952,13 +3952,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSingleAssignmentValue4031); 
 
-                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele400CrossReferenceIDImport(), "import"); 
+                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getImportImportCrossReference_4_0_0(), "import"); 
                     	
 
                     }
@@ -3969,11 +3969,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_impFrag_10=(Token)input.LT(1);
                     match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleSingleAssignmentValue4056); 
 
-                    		createLeafNode(grammarAccess.prSingleAssignmentValue().ele410TerminalRuleCallFRAGMENT(), "impFrag"); 
+                    		createLeafNode(grammarAccess.getSingleAssignmentValueAccess().getImpFragFRAGMENTTerminalRuleCall_4_1_0(), "impFrag"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prSingleAssignmentValue().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -4026,7 +4026,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2010:55: (iv_ruleCreatedObject= ruleCreatedObject EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2011:2: iv_ruleCreatedObject= ruleCreatedObject EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prCreatedObject().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getCreatedObjectRule(), currentNode); 
             pushFollow(FOLLOW_ruleCreatedObject_in_entryRuleCreatedObject4098);
             iv_ruleCreatedObject=ruleCreatedObject();
             _fsp--;
@@ -4096,7 +4096,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2025:5: this_ObjectNew_0= ruleObjectNew
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prCreatedObject().ele00ParserRuleCallObjectNew(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getObjectNewParserRuleCall_0_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleObjectNew_in_ruleCreatedObject4156);
                     this_ObjectNew_0=ruleObjectNew();
@@ -4107,7 +4107,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prCreatedObject().ele00ParserRuleCallObjectNew(), null); 
+                        createLeafNode(grammarAccess.getCreatedObjectAccess().getObjectNewParserRuleCall_0_0(), null); 
                         
 
                     }
@@ -4116,7 +4116,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2039:5: this_ObjectCopy_1= ruleObjectCopy
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prCreatedObject().ele01ParserRuleCallObjectCopy(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getObjectCopyParserRuleCall_0_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleObjectCopy_in_ruleCreatedObject4190);
                     this_ObjectCopy_1=ruleObjectCopy();
@@ -4127,7 +4127,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prCreatedObject().ele01ParserRuleCallObjectCopy(), null); 
+                        createLeafNode(grammarAccess.getCreatedObjectAccess().getObjectCopyParserRuleCall_0_1(), null); 
                         
 
                     }
@@ -4149,11 +4149,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     lv_name_2=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCreatedObject4219); 
 
-                    		createLeafNode(grammarAccess.prCreatedObject().ele10TerminalRuleCallID(), "name"); 
+                    		createLeafNode(grammarAccess.getCreatedObjectAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -4182,7 +4182,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,13,FOLLOW_13_in_ruleCreatedObject4238); 
 
-                            createLeafNode(grammarAccess.prCreatedObject().ele20KeywordLeftCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getCreatedObjectAccess().getLeftCurlyBracketKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2075:1: ( (lv_assignments_4= ruleMonoSingleAssignment ) | (lv_assignments_5= ruleMonoListAssignment ) )+
                     int cnt33=0;
@@ -4219,7 +4219,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2078:6: lv_assignments_4= ruleMonoSingleAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prCreatedObject().ele2100ParserRuleCallMonoSingleAssignment(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getAssignmentsMonoSingleAssignmentParserRuleCall_2_1_0_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleMonoSingleAssignment_in_ruleCreatedObject4273);
                     	    lv_assignments_4=ruleMonoSingleAssignment();
@@ -4227,7 +4227,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -4251,7 +4251,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2100:6: lv_assignments_5= ruleMonoListAssignment
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.prCreatedObject().ele2110ParserRuleCallMonoListAssignment(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getAssignmentsMonoListAssignmentParserRuleCall_2_1_1_0(), currentNode); 
                     	    	    
                     	    pushFollow(FOLLOW_ruleMonoListAssignment_in_ruleCreatedObject4317);
                     	    lv_assignments_5=ruleMonoListAssignment();
@@ -4259,7 +4259,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        
@@ -4298,7 +4298,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2121:6: lv_leftMig_6= ruleMigration
                             {
                              
-                            	        currentNode=createCompositeNode(grammarAccess.prCreatedObject().ele220ParserRuleCallMigration(), currentNode); 
+                            	        currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getLeftMigMigrationParserRuleCall_2_2_0(), currentNode); 
                             	    
                             pushFollow(FOLLOW_ruleMigration_in_ruleCreatedObject4357);
                             lv_leftMig_6=ruleMigration();
@@ -4306,7 +4306,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                             	        if (current==null) {
-                            	            current = factory.create(grammarAccess.prCreatedObject().getRule().getType().getClassifier());
+                            	            current = factory.create(grammarAccess.getCreatedObjectRule().getType().getClassifier());
                             	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
@@ -4325,7 +4325,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
                     match(input,14,FOLLOW_14_in_ruleCreatedObject4371); 
 
-                            createLeafNode(grammarAccess.prCreatedObject().ele23KeywordRightCurlyBracket(), null); 
+                            createLeafNode(grammarAccess.getCreatedObjectAccess().getRightCurlyBracketKeyword_2_3(), null); 
                         
 
                     }
@@ -4367,7 +4367,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2150:51: (iv_ruleObjectNew= ruleObjectNew EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2151:2: iv_ruleObjectNew= ruleObjectNew EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prObjectNew().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getObjectNewRule(), currentNode); 
             pushFollow(FOLLOW_ruleObjectNew_in_entryRuleObjectNew4406);
             iv_ruleObjectNew=ruleObjectNew();
             _fsp--;
@@ -4408,20 +4408,20 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,34,FOLLOW_34_in_ruleObjectNew4450); 
 
-                    createLeafNode(grammarAccess.prObjectNew().ele0KeywordNew(), null); 
+                    createLeafNode(grammarAccess.getObjectNewAccess().getNewKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2168:1: ( RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2171:3: RULE_ID
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectNew().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getObjectNewRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectNew4472); 
 
-            		createLeafNode(grammarAccess.prObjectNew().ele10CrossReferenceIDImport(), "import"); 
+            		createLeafNode(grammarAccess.getObjectNewAccess().getImportImportCrossReference_1_0(), "import"); 
             	
 
             }
@@ -4432,11 +4432,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_impFrag_2=(Token)input.LT(1);
             match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectNew4497); 
 
-            		createLeafNode(grammarAccess.prObjectNew().ele20TerminalRuleCallFRAGMENT(), "impFrag"); 
+            		createLeafNode(grammarAccess.getObjectNewAccess().getImpFragFRAGMENTTerminalRuleCall_2_0(), "impFrag"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectNew().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getObjectNewRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -4483,7 +4483,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2211:52: (iv_ruleObjectCopy= ruleObjectCopy EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2212:2: iv_ruleObjectCopy= ruleObjectCopy EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prObjectCopy().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getObjectCopyRule(), currentNode); 
             pushFollow(FOLLOW_ruleObjectCopy_in_entryRuleObjectCopy4538);
             iv_ruleObjectCopy=ruleObjectCopy();
             _fsp--;
@@ -4524,20 +4524,20 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,35,FOLLOW_35_in_ruleObjectCopy4582); 
 
-                    createLeafNode(grammarAccess.prObjectCopy().ele0KeywordCopy(), null); 
+                    createLeafNode(grammarAccess.getObjectCopyAccess().getCopyKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2229:1: ( RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2232:3: RULE_ID
             {
 
             			if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectCopy().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getObjectCopyRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleObjectCopy4604); 
 
-            		createLeafNode(grammarAccess.prObjectCopy().ele10CrossReferenceIDNamedResource(), "resource"); 
+            		createLeafNode(grammarAccess.getObjectCopyAccess().getResourceNamedResourceCrossReference_1_0(), "resource"); 
             	
 
             }
@@ -4548,11 +4548,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_fragment_2=(Token)input.LT(1);
             match(input,RULE_FRAGMENT,FOLLOW_RULE_FRAGMENT_in_ruleObjectCopy4629); 
 
-            		createLeafNode(grammarAccess.prObjectCopy().ele20TerminalRuleCallFRAGMENT(), "fragment"); 
+            		createLeafNode(grammarAccess.getObjectCopyAccess().getFragmentFRAGMENTTerminalRuleCall_2_0(), "fragment"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prObjectCopy().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getObjectCopyRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -4599,7 +4599,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2272:51: (iv_ruleMigration= ruleMigration EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2273:2: iv_ruleMigration= ruleMigration EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMigration().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMigrationRule(), currentNode); 
             pushFollow(FOLLOW_ruleMigration_in_entryRuleMigration4670);
             iv_ruleMigration=ruleMigration();
             _fsp--;
@@ -4645,7 +4645,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,36,FOLLOW_36_in_ruleMigration4714); 
 
-                    createLeafNode(grammarAccess.prMigration().ele0KeywordMigrate(), null); 
+                    createLeafNode(grammarAccess.getMigrationAccess().getMigrateKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2290:1: (lv_first_1= ruleExecutable )?
             int alt36=2;
@@ -4659,7 +4659,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2293:6: lv_first_1= ruleExecutable
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prMigration().ele10ParserRuleCallExecutable(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getMigrationAccess().getFirstExecutableParserRuleCall_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4748);
                     lv_first_1=ruleExecutable();
@@ -4667,7 +4667,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getMigrationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4703,13 +4703,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,37,FOLLOW_37_in_ruleMigration4764); 
 
-                            createLeafNode(grammarAccess.prMigration().ele200KeywordAs(), null); 
+                            createLeafNode(grammarAccess.getMigrationAccess().getAsKeyword_2_0_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2315:1: (lv_asOp_3= ruleExecutable )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2318:6: lv_asOp_3= ruleExecutable
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prMigration().ele2010ParserRuleCallExecutable(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getMigrationAccess().getAsOpExecutableParserRuleCall_2_0_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4798);
                     lv_asOp_3=ruleExecutable();
@@ -4717,7 +4717,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getMigrationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4745,13 +4745,13 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     {
                     match(input,38,FOLLOW_38_in_ruleMigration4819); 
 
-                            createLeafNode(grammarAccess.prMigration().ele210KeywordEach(), null); 
+                            createLeafNode(grammarAccess.getMigrationAccess().getEachKeyword_2_1_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2341:1: (lv_eachOp_5= ruleExecutable )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2344:6: lv_eachOp_5= ruleExecutable
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prMigration().ele2110ParserRuleCallExecutable(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getMigrationAccess().getEachOpExecutableParserRuleCall_2_1_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExecutable_in_ruleMigration4853);
                     lv_eachOp_5=ruleExecutable();
@@ -4759,7 +4759,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prMigration().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getMigrationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -4784,7 +4784,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,24,FOLLOW_24_in_ruleMigration4869); 
 
-                    createLeafNode(grammarAccess.prMigration().ele3KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getMigrationAccess().getSemicolonKeyword_3(), null); 
                 
 
             }
@@ -4820,7 +4820,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2373:52: (iv_ruleExecutable= ruleExecutable EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2374:2: iv_ruleExecutable= ruleExecutable EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prExecutable().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getExecutableRule(), currentNode); 
             pushFollow(FOLLOW_ruleExecutable_in_entryRuleExecutable4902);
             iv_ruleExecutable=ruleExecutable();
             _fsp--;
@@ -4880,7 +4880,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2388:5: this_JavaExecutable_0= ruleJavaExecutable
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prExecutable().ele0ParserRuleCallJavaExecutable(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getExecutableAccess().getJavaExecutableParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleJavaExecutable_in_ruleExecutable4959);
                     this_JavaExecutable_0=ruleJavaExecutable();
@@ -4891,7 +4891,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prExecutable().ele0ParserRuleCallJavaExecutable(), null); 
+                        createLeafNode(grammarAccess.getExecutableAccess().getJavaExecutableParserRuleCall_0(), null); 
                         
 
                     }
@@ -4900,7 +4900,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2402:5: this_ExpressionExecutable_1= ruleExpressionExecutable
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prExecutable().ele1ParserRuleCallExpressionExecutable(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getExecutableAccess().getExpressionExecutableParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleExpressionExecutable_in_ruleExecutable4993);
                     this_ExpressionExecutable_1=ruleExpressionExecutable();
@@ -4911,7 +4911,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prExecutable().ele1ParserRuleCallExpressionExecutable(), null); 
+                        createLeafNode(grammarAccess.getExecutableAccess().getExpressionExecutableParserRuleCall_1(), null); 
                         
 
                     }
@@ -4950,7 +4950,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2421:56: (iv_ruleJavaExecutable= ruleJavaExecutable EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2422:2: iv_ruleJavaExecutable= ruleJavaExecutable EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prJavaExecutable().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getJavaExecutableRule(), currentNode); 
             pushFollow(FOLLOW_ruleJavaExecutable_in_entryRuleJavaExecutable5032);
             iv_ruleJavaExecutable=ruleJavaExecutable();
             _fsp--;
@@ -4991,7 +4991,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             {
             match(input,18,FOLLOW_18_in_ruleJavaExecutable5076); 
 
-                    createLeafNode(grammarAccess.prJavaExecutable().ele0KeywordJava(), null); 
+                    createLeafNode(grammarAccess.getJavaExecutableAccess().getJavaKeyword_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2439:1: (lv_method_1= RULE_ID )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2441:6: lv_method_1= RULE_ID
@@ -4999,11 +4999,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_method_1=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleJavaExecutable5098); 
 
-            		createLeafNode(grammarAccess.prJavaExecutable().ele10TerminalRuleCallID(), "method"); 
+            		createLeafNode(grammarAccess.getJavaExecutableAccess().getMethodIDTerminalRuleCall_1_0(), "method"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prJavaExecutable().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getJavaExecutableRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -5018,11 +5018,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
 
             match(input,39,FOLLOW_39_in_ruleJavaExecutable5115); 
 
-                    createLeafNode(grammarAccess.prJavaExecutable().ele2KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getJavaExecutableAccess().getLeftParenthesisKeyword_2(), null); 
                 
             match(input,40,FOLLOW_40_in_ruleJavaExecutable5124); 
 
-                    createLeafNode(grammarAccess.prJavaExecutable().ele3KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getJavaExecutableAccess().getRightParenthesisKeyword_3(), null); 
                 
 
             }
@@ -5058,7 +5058,7 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2474:62: (iv_ruleExpressionExecutable= ruleExpressionExecutable EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/epatch/parser/antlr/internal/InternalEpatchTestLanguage.g:2475:2: iv_ruleExpressionExecutable= ruleExpressionExecutable EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prExpressionExecutable().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getExpressionExecutableRule(), currentNode); 
             pushFollow(FOLLOW_ruleExpressionExecutable_in_entryRuleExpressionExecutable5157);
             iv_ruleExpressionExecutable=ruleExpressionExecutable();
             _fsp--;
@@ -5100,11 +5100,11 @@ public class InternalEpatchTestLanguageParser extends AbstractInternalAntlrParse
             lv_exprstr_0=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExpressionExecutable5213); 
 
-            		createLeafNode(grammarAccess.prExpressionExecutable().ele0TerminalRuleCallSTRING(), "exprstr"); 
+            		createLeafNode(grammarAccess.getExpressionExecutableAccess().getExprstrSTRINGTerminalRuleCall_0(), "exprstr"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prExpressionExecutable().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getExpressionExecutableRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

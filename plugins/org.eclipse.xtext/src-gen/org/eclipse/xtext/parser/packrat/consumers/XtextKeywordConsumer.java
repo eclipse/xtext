@@ -70,8 +70,8 @@ public final class XtextKeywordConsumer extends NonTerminalConsumer {
 	public void setRule(KeywordElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentValue());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getValueAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getValueSTRINGTerminalRuleCall_0());
 	}
 	
 	@Override

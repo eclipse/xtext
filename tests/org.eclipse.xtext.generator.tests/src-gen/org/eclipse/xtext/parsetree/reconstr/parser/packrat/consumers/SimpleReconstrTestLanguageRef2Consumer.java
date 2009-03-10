@@ -156,16 +156,16 @@ public final class SimpleReconstrTestLanguageRef2Consumer extends NonTerminalCon
 	public void setRule(Ref2Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordNumberSignDigitTwo());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentRef2());
-		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele10Alternatives());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordMykeyword1());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele101TerminalRuleCallSTRING());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele102KeywordMykeyword2());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordMykeyword1());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele101TerminalRuleCallSTRING());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele102KeywordMykeyword2());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNumberSignDigitTwoKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getRef2Assignment_1());
+		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.getRef2Alternatives_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getRef2Mykeyword1Keyword_1_0_0());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getRef2STRINGTerminalRuleCall_1_0_1());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getRef2Mykeyword2Keyword_1_0_2());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getRef2Mykeyword1Keyword_1_0_0());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getRef2STRINGTerminalRuleCall_1_0_1());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getRef2Mykeyword2Keyword_1_0_2());
 	}
 	
 	@Override

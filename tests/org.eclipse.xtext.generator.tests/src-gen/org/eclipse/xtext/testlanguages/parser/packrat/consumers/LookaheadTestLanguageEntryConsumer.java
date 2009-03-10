@@ -67,8 +67,8 @@ public final class LookaheadTestLanguageEntryConsumer extends NonTerminalConsume
 	public void setRule(EntryElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentContents());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAlts());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getContentsAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getContentsAltsParserRuleCall_0());
 	}
 	
 	@Override

@@ -76,7 +76,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:69:50: (iv_ruleSequence= ruleSequence EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:70:2: iv_ruleSequence= ruleSequence EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prSequence().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getSequenceRule(), currentNode); 
             pushFollow(FOLLOW_ruleSequence_in_entryRuleSequence71);
             iv_ruleSequence=ruleSequence();
             _fsp--;
@@ -119,7 +119,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:84:5: this_Addition_0= ruleAddition ( () (lv_expressions_2= ruleAddition ) )*
             {
              
-                    currentNode=createCompositeNode(grammarAccess.prSequence().ele0ParserRuleCallAddition(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getSequenceAccess().getAdditionParserRuleCall_0(), currentNode); 
                 
             pushFollow(FOLLOW_ruleAddition_in_ruleSequence128);
             this_Addition_0=ruleAddition();
@@ -130,7 +130,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                     currentNode = currentNode.getParent();
                 
              
-                createLeafNode(grammarAccess.prSequence().ele0ParserRuleCallAddition(), null); 
+                createLeafNode(grammarAccess.getSequenceAccess().getAdditionParserRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:96:1: ( () (lv_expressions_2= ruleAddition ) )*
             loop1:
@@ -151,7 +151,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:97:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.prSequence().ele10ActionSequenceexpressions().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "expressions", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -159,7 +159,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.prSequence().ele10ActionSequenceexpressions(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -172,7 +172,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:115:6: lv_expressions_2= ruleAddition
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prSequence().ele110ParserRuleCallAddition(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getSequenceAccess().getExpressionsAdditionParserRuleCall_1_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAddition_in_ruleSequence178);
             	    lv_expressions_2=ruleAddition();
@@ -180,7 +180,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prSequence().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getSequenceRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -237,7 +237,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:140:50: (iv_ruleAddition= ruleAddition EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:141:2: iv_ruleAddition= ruleAddition EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prAddition().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getAdditionRule(), currentNode); 
             pushFollow(FOLLOW_ruleAddition_in_entryRuleAddition217);
             iv_ruleAddition=ruleAddition();
             _fsp--;
@@ -281,7 +281,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:155:5: this_Multiplication_0= ruleMultiplication ( () (lv_operator_2= ( '+' | '-' ) ) (lv_values_3= ruleMultiplication ) )*
             {
              
-                    currentNode=createCompositeNode(grammarAccess.prAddition().ele0ParserRuleCallMultiplication(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0(), currentNode); 
                 
             pushFollow(FOLLOW_ruleMultiplication_in_ruleAddition274);
             this_Multiplication_0=ruleMultiplication();
@@ -292,7 +292,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                     currentNode = currentNode.getParent();
                 
              
-                createLeafNode(grammarAccess.prAddition().ele0ParserRuleCallMultiplication(), null); 
+                createLeafNode(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:167:1: ( () (lv_operator_2= ( '+' | '-' ) ) (lv_values_3= ruleMultiplication ) )*
             loop3:
@@ -313,7 +313,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:168:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.prAddition().ele10ActionOpvalues().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -321,7 +321,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.prAddition().ele10ActionOpvalues(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -355,7 +355,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            {
             	            match(input,11,FOLLOW_11_in_ruleAddition312); 
 
-            	                    createLeafNode(grammarAccess.prAddition().ele1100KeywordPlusSign(), "operator"); 
+            	                    createLeafNode(grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0(), "operator"); 
             	                
 
             	            }
@@ -365,7 +365,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            {
             	            match(input,12,FOLLOW_12_in_ruleAddition328); 
 
-            	                    createLeafNode(grammarAccess.prAddition().ele1101KeywordHyphenMinus(), "operator"); 
+            	                    createLeafNode(grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1(), "operator"); 
             	                
 
             	            }
@@ -375,7 +375,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prAddition().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getAdditionRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -392,7 +392,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:214:6: lv_values_3= ruleMultiplication
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prAddition().ele120ParserRuleCallMultiplication(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getAdditionAccess().getValuesMultiplicationParserRuleCall_1_2_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleMultiplication_in_ruleAddition377);
             	    lv_values_3=ruleMultiplication();
@@ -400,7 +400,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prAddition().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getAdditionRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -457,7 +457,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:239:56: (iv_ruleMultiplication= ruleMultiplication EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:240:2: iv_ruleMultiplication= ruleMultiplication EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMultiplication().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMultiplicationRule(), currentNode); 
             pushFollow(FOLLOW_ruleMultiplication_in_entryRuleMultiplication416);
             iv_ruleMultiplication=ruleMultiplication();
             _fsp--;
@@ -501,7 +501,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:254:5: this_Term_0= ruleTerm ( () (lv_operator_2= ( '*' | '/' ) ) (lv_values_3= ruleTerm ) )*
             {
              
-                    currentNode=createCompositeNode(grammarAccess.prMultiplication().ele0ParserRuleCallTerm(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getMultiplicationAccess().getTermParserRuleCall_0(), currentNode); 
                 
             pushFollow(FOLLOW_ruleTerm_in_ruleMultiplication473);
             this_Term_0=ruleTerm();
@@ -512,7 +512,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                     currentNode = currentNode.getParent();
                 
              
-                createLeafNode(grammarAccess.prMultiplication().ele0ParserRuleCallTerm(), null); 
+                createLeafNode(grammarAccess.getMultiplicationAccess().getTermParserRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:266:1: ( () (lv_operator_2= ( '*' | '/' ) ) (lv_values_3= ruleTerm ) )*
             loop5:
@@ -533,7 +533,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:267:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.prMultiplication().ele10ActionOpvalues().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -541,7 +541,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.prMultiplication().ele10ActionOpvalues(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -575,7 +575,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            {
             	            match(input,13,FOLLOW_13_in_ruleMultiplication511); 
 
-            	                    createLeafNode(grammarAccess.prMultiplication().ele1100KeywordAsterisk(), "operator"); 
+            	                    createLeafNode(grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0(), "operator"); 
             	                
 
             	            }
@@ -585,7 +585,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            {
             	            match(input,14,FOLLOW_14_in_ruleMultiplication527); 
 
-            	                    createLeafNode(grammarAccess.prMultiplication().ele1101KeywordSolidus(), "operator"); 
+            	                    createLeafNode(grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1(), "operator"); 
             	                
 
             	            }
@@ -595,7 +595,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prMultiplication().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getMultiplicationRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	    	        
@@ -612,7 +612,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:313:6: lv_values_3= ruleTerm
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prMultiplication().ele120ParserRuleCallTerm(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getMultiplicationAccess().getValuesTermParserRuleCall_1_2_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTerm_in_ruleMultiplication576);
             	    lv_values_3=ruleTerm();
@@ -620,7 +620,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prMultiplication().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getMultiplicationRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -677,7 +677,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:338:46: (iv_ruleTerm= ruleTerm EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:339:2: iv_ruleTerm= ruleTerm EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prTerm().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getTermRule(), currentNode); 
             pushFollow(FOLLOW_ruleTerm_in_entryRuleTerm615);
             iv_ruleTerm=ruleTerm();
             _fsp--;
@@ -737,7 +737,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:353:5: this_Atom_0= ruleAtom
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prTerm().ele0ParserRuleCallAtom(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleAtom_in_ruleTerm672);
                     this_Atom_0=ruleAtom();
@@ -748,7 +748,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prTerm().ele0ParserRuleCallAtom(), null); 
+                        createLeafNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0(), null); 
                         
 
                     }
@@ -757,7 +757,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:367:5: this_Parens_1= ruleParens
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), currentNode); 
                         
                     pushFollow(FOLLOW_ruleParens_in_ruleTerm706);
                     this_Parens_1=ruleParens();
@@ -768,7 +768,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                             currentNode = currentNode.getParent();
                         
                      
-                        createLeafNode(grammarAccess.prTerm().ele1ParserRuleCallParens(), null); 
+                        createLeafNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), null); 
                         
 
                     }
@@ -807,7 +807,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:386:46: (iv_ruleAtom= ruleAtom EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:387:2: iv_ruleAtom= ruleAtom EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prAtom().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); 
             pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom745);
             iv_ruleAtom=ruleAtom();
             _fsp--;
@@ -849,11 +849,11 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom801); 
 
-            		createLeafNode(grammarAccess.prAtom().ele0TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prAtom().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAtomRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -897,7 +897,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:427:48: (iv_ruleParens= ruleParens EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:428:2: iv_ruleParens= ruleParens EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prParens().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getParensRule(), currentNode); 
             pushFollow(FOLLOW_ruleParens_in_entryRuleParens841);
             iv_ruleParens=ruleParens();
             _fsp--;
@@ -939,10 +939,10 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             {
             match(input,15,FOLLOW_15_in_ruleParens885); 
 
-                    createLeafNode(grammarAccess.prParens().ele0KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null); 
                 
              
-                    currentNode=createCompositeNode(grammarAccess.prParens().ele1ParserRuleCallAddition(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getParensAccess().getAdditionParserRuleCall_1(), currentNode); 
                 
             pushFollow(FOLLOW_ruleAddition_in_ruleParens907);
             this_Addition_1=ruleAddition();
@@ -953,11 +953,11 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
                     currentNode = currentNode.getParent();
                 
              
-                createLeafNode(grammarAccess.prParens().ele1ParserRuleCallAddition(), null); 
+                createLeafNode(grammarAccess.getParensAccess().getAdditionParserRuleCall_1(), null); 
                 
             match(input,16,FOLLOW_16_in_ruleParens922); 
 
-                    createLeafNode(grammarAccess.prParens().ele2KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
                 
 
             }

@@ -94,23 +94,23 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getOpConsumer().setRule(grammarAccess.prOp());
-		getTermConsumer().setRule(grammarAccess.prTerm());
-		getAtomConsumer().setRule(grammarAccess.prAtom());
-		getParensConsumer().setRule(grammarAccess.prParens());
-		getTwoNumbersConsumer().setRule(grammarAccess.prTwoNumbers());
-		getManyStringsConsumer().setRule(grammarAccess.prManyStrings());
-		getTypeConsumer().setRule(grammarAccess.prType());
-		getRef2Consumer().setRule(grammarAccess.prRef2());
-		getSpareConsumer().setRule(grammarAccess.prSpare());
-		getBooleanConsumer().setRule(grammarAccess.prBoolean());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getOpConsumer().setRule(grammarAccess.getOpAccess());
+		getTermConsumer().setRule(grammarAccess.getTermAccess());
+		getAtomConsumer().setRule(grammarAccess.getAtomAccess());
+		getParensConsumer().setRule(grammarAccess.getParensAccess());
+		getTwoNumbersConsumer().setRule(grammarAccess.getTwoNumbersAccess());
+		getManyStringsConsumer().setRule(grammarAccess.getManyStringsAccess());
+		getTypeConsumer().setRule(grammarAccess.getTypeAccess());
+		getRef2Consumer().setRule(grammarAccess.getRef2Access());
+		getSpareConsumer().setRule(grammarAccess.getSpareAccess());
+		getBooleanConsumer().setRule(grammarAccess.getBooleanAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getOpConsumer().setTermConsumer(getTermConsumer());

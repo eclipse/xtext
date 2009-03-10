@@ -138,12 +138,12 @@ public final class PartialParserTestLanguageAbstractChildrenConsumer extends Non
 	public void setRule(AbstractChildrenElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordAbstractChildren());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftCurlyBracket());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentAbstractChildren());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20ParserRuleCallAbstractChild());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele3KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getAbstractChildrenKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getLeftCurlyBracketKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getAbstractChildrenAssignment_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getAbstractChildrenAbstractChildParserRuleCall_2_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getRightCurlyBracketKeyword_3());
 	}
 	
 	@Override

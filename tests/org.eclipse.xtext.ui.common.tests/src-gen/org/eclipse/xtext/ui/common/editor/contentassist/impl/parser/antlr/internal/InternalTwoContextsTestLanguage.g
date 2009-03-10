@@ -67,7 +67,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.impl.services.TwoContext
 
 // Entry rule entryRuleMainModel
 entryRuleMainModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prMainModel().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getMainModelRule(), currentNode); }
 	 iv_ruleMainModel=ruleMainModel 
 	 { $current=$iv_ruleMainModel.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleMainModel returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prMainModel().ele0ParserRuleCallAnElement(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0(), currentNode); 
 	    }
 	    lv_elements_0=ruleAnElement 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prMainModel().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getMainModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -109,7 +109,7 @@ ruleMainModel returns [EObject current=null]
 
 // Entry rule entryRuleAnElement
 entryRuleAnElement returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prAnElement().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getAnElementRule(), currentNode); }
 	 iv_ruleAnElement=ruleAnElement 
 	 { $current=$iv_ruleAnElement.current; } 
 	 EOF 
@@ -126,12 +126,12 @@ ruleAnElement returns [EObject current=null]
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAnElement().ele00TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAnElementRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -144,27 +144,27 @@ ruleAnElement returns [EObject current=null]
 	
 )('refersTo' 
     {
-        createLeafNode(grammarAccess.prAnElement().ele10KeywordRefersTo(), null); 
+        createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
     }
 (	
 	
 		
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAnElementRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceIDAnElement(), "referred"); 
+		createLeafNode(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
 	}
 
 		// TODO assign feature to currentNode
 	
 ))?';' 
     {
-        createLeafNode(grammarAccess.prAnElement().ele2KeywordSemicolon(), null); 
+        createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
     }
 );
 

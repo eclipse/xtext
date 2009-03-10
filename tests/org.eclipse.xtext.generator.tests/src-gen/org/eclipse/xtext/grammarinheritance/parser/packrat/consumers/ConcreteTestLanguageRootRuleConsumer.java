@@ -118,11 +118,11 @@ public final class ConcreteTestLanguageRootRuleConsumer extends NonTerminalConsu
 	public void setRule(RootRuleElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallConcreteParserRule());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallCallOverridenParserRule());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallCallExtendedParserRule());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallOverridableParserRule2());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getConcreteParserRuleParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getCallOverridenParserRuleParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getCallExtendedParserRuleParserRuleCall_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getOverridableParserRule2ParserRuleCall_3());
 	}
 	
 	@Override

@@ -119,11 +119,11 @@ public final class HiddenTerminalsTestLanguageWithHiddensConsumer extends NonTer
 	public void setRule(WithHiddensElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordWith());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordHiddens());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentValid());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele20KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getWithKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getHiddensKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getValidAssignment_2());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getValidSemicolonKeyword_2_0());
 	}
 	
 	@Override

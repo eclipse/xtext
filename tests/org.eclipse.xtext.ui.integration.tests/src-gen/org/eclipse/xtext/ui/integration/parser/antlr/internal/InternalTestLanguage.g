@@ -67,7 +67,7 @@ import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 
 // Entry rule entryRuleFile
 entryRuleFile returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prFile().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getFileRule(), currentNode); }
 	 iv_ruleFile=ruleFile 
 	 { $current=$iv_ruleFile.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleFile returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prFile().ele0ParserRuleCallStuff(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFileAccess().getStuffStuffParserRuleCall_0(), currentNode); 
 	    }
 	    lv_stuff_0=ruleStuff 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prFile().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getFileRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -109,7 +109,7 @@ ruleFile returns [EObject current=null]
 
 // Entry rule entryRuleStuff
 entryRuleStuff returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prStuff().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getStuffRule(), currentNode); }
 	 iv_ruleStuff=ruleStuff 
 	 { $current=$iv_ruleStuff.current; } 
 	 EOF 
@@ -124,18 +124,18 @@ ruleStuff returns [EObject current=null]
     }:
 ('stuff' 
     {
-        createLeafNode(grammarAccess.prStuff().ele0KeywordStuff(), null); 
+        createLeafNode(grammarAccess.getStuffAccess().getStuffKeyword_0(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.prStuff().ele10TerminalRuleCallID(), "name"); 
+		createLeafNode(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prStuff().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getStuffRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

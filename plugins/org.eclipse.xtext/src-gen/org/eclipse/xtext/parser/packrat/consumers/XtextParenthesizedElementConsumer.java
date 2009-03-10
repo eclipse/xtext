@@ -105,10 +105,10 @@ public final class XtextParenthesizedElementConsumer extends NonTerminalConsumer
 	public void setRule(ParenthesizedElementElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftParenthesis());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallAlternatives());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getLeftParenthesisKeyword_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getAlternativesParserRuleCall_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getRightParenthesisKeyword_2());
 	}
 	
 	@Override

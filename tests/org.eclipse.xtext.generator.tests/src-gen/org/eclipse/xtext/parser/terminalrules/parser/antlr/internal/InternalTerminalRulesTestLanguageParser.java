@@ -76,7 +76,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -173,11 +173,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_idValue_0=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel128); 
 
-                    		createLeafNode(grammarAccess.prModel().ele00TerminalRuleCallID(), "idValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), "idValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -202,11 +202,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_intValue_1=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel164); 
 
-                    		createLeafNode(grammarAccess.prModel().ele10TerminalRuleCallINT(), "intValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), "intValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -231,11 +231,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_stringValue_2=(Token)input.LT(1);
                     match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel200); 
 
-                    		createLeafNode(grammarAccess.prModel().ele20TerminalRuleCallSTRING(), "stringValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), "stringValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -260,11 +260,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_mlCommentValue_3=(Token)input.LT(1);
                     match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleModel236); 
 
-                    		createLeafNode(grammarAccess.prModel().ele30TerminalRuleCallML_COMMENT(), "mlCommentValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), "mlCommentValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -289,11 +289,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_slCommentValue_4=(Token)input.LT(1);
                     match(input,RULE_SL_COMMENT,FOLLOW_RULE_SL_COMMENT_in_ruleModel272); 
 
-                    		createLeafNode(grammarAccess.prModel().ele40TerminalRuleCallSL_COMMENT(), "slCommentValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), "slCommentValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -318,11 +318,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_wsValue_5=(Token)input.LT(1);
                     match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleModel308); 
 
-                    		createLeafNode(grammarAccess.prModel().ele50TerminalRuleCallWS(), "wsValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), "wsValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -347,11 +347,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     lv_anyValue_6=(Token)input.LT(1);
                     match(input,RULE_ANY_OTHER,FOLLOW_RULE_ANY_OTHER_in_ruleModel344); 
 
-                    		createLeafNode(grammarAccess.prModel().ele60TerminalRuleCallANY_OTHER(), "anyValue"); 
+                    		createLeafNode(grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), "anyValue"); 
                     	
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        

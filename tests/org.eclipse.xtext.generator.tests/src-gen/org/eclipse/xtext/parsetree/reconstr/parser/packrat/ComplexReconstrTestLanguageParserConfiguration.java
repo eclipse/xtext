@@ -119,28 +119,28 @@ public class ComplexReconstrTestLanguageParserConfiguration extends AbstractPars
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getRootConsumer().setRule(grammarAccess.prRoot());
-		getOpConsumer().setRule(grammarAccess.prOp());
-		getTermConsumer().setRule(grammarAccess.prTerm());
-		getAtomConsumer().setRule(grammarAccess.prAtom());
-		getParensConsumer().setRule(grammarAccess.prParens());
-		getTrickyAConsumer().setRule(grammarAccess.prTrickyA());
-		getTrickyA1Consumer().setRule(grammarAccess.prTrickyA1());
-		getTrickyBConsumer().setRule(grammarAccess.prTrickyB());
-		getTrickyCConsumer().setRule(grammarAccess.prTrickyC());
-		getTrickyDConsumer().setRule(grammarAccess.prTrickyD());
-		getTrickyEConsumer().setRule(grammarAccess.prTrickyE());
-		getTrickyFConsumer().setRule(grammarAccess.prTrickyF());
-		getTrickyGConsumer().setRule(grammarAccess.prTrickyG());
-		getTrickyG1Consumer().setRule(grammarAccess.prTrickyG1());
-		getTrickyG2Consumer().setRule(grammarAccess.prTrickyG2());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getRootConsumer().setRule(grammarAccess.getRootAccess());
+		getOpConsumer().setRule(grammarAccess.getOpAccess());
+		getTermConsumer().setRule(grammarAccess.getTermAccess());
+		getAtomConsumer().setRule(grammarAccess.getAtomAccess());
+		getParensConsumer().setRule(grammarAccess.getParensAccess());
+		getTrickyAConsumer().setRule(grammarAccess.getTrickyAAccess());
+		getTrickyA1Consumer().setRule(grammarAccess.getTrickyA1Access());
+		getTrickyBConsumer().setRule(grammarAccess.getTrickyBAccess());
+		getTrickyCConsumer().setRule(grammarAccess.getTrickyCAccess());
+		getTrickyDConsumer().setRule(grammarAccess.getTrickyDAccess());
+		getTrickyEConsumer().setRule(grammarAccess.getTrickyEAccess());
+		getTrickyFConsumer().setRule(grammarAccess.getTrickyFAccess());
+		getTrickyGConsumer().setRule(grammarAccess.getTrickyGAccess());
+		getTrickyG1Consumer().setRule(grammarAccess.getTrickyG1Access());
+		getTrickyG2Consumer().setRule(grammarAccess.getTrickyG2Access());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getRootConsumer$().setOpConsumer(getOpConsumer());

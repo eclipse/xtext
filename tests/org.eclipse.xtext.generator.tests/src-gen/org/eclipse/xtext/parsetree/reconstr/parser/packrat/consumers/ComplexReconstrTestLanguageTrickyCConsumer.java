@@ -250,19 +250,19 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 	public void setRule(TrickyCElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTC());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		action$6$Consumer = new Action$6$Consumer(rule.ele20ActionC1x());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele21KeywordX());
-		group$9$Consumer = new Group$9$Consumer(rule.ele3Group());
-		action$10$Consumer = new Action$10$Consumer(rule.ele30ActionC2y());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele31KeywordY());
-		group$13$Consumer = new Group$13$Consumer(rule.ele4Group());
-		action$14$Consumer = new Action$14$Consumer(rule.ele40ActionC3z());
-		keyword$16$Consumer = new Keyword$16$Consumer(rule.ele41KeywordZ());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTCKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		action$6$Consumer = new Action$6$Consumer(rule.getC1xAction_2_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getXKeyword_2_1());
+		group$9$Consumer = new Group$9$Consumer(rule.getGroup_3());
+		action$10$Consumer = new Action$10$Consumer(rule.getC2yAction_3_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getYKeyword_3_1());
+		group$13$Consumer = new Group$13$Consumer(rule.getGroup_4());
+		action$14$Consumer = new Action$14$Consumer(rule.getC3zAction_4_0());
+		keyword$16$Consumer = new Keyword$16$Consumer(rule.getZKeyword_4_1());
 	}
 	
 	@Override

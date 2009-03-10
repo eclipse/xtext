@@ -187,15 +187,15 @@ public final class EpatchTestLanguageExtensionImportConsumer extends NonTerminal
 	public void setRule(ExtensionImportElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordImport());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordExtension());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentPath());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20TerminalRuleCallID());
-		group$6$Consumer = new Group$6$Consumer(rule.ele3Group());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele30KeywordColonColon());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele31AssignmentPath());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele310TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getImportKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getExtensionKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getPathAssignment_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getPathIDTerminalRuleCall_2_0());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_3());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getColonColonKeyword_3_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getPathAssignment_3_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getPathIDTerminalRuleCall_3_1_0());
 	}
 	
 	@Override

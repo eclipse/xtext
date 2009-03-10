@@ -148,13 +148,13 @@ public final class XtextTerminalsTestLanguageCharacterRangeConsumer extends NonT
 	public void setRule(CharacterRangeElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallKeyword());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionCharacterRangeleft());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele11KeywordFullStopFullStop());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele12AssignmentRight());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele120ParserRuleCallKeyword());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getKeywordParserRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		action$4$Consumer = new Action$4$Consumer(rule.getCharacterRangeleftAction_1_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getFullStopFullStopKeyword_1_1());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getRightAssignment_1_2());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getRightKeywordParserRuleCall_1_2_0());
 	}
 	
 	@Override

@@ -22,19 +22,19 @@ public class KeywordsTestLanguageParsetreeConstructor extends AbstractParseTreeC
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
  *
  **/
 
-
-// not supported
+// first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -43,7 +43,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().eleAlternatives();
+		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -57,7 +57,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// first?="foo\\bar"
 protected class Model_0_Assignment_first extends AssignmentToken  {
 	
 	public Model_0_Assignment_first(IInstanceDescription curr, AbstractToken pred) {
@@ -66,7 +66,7 @@ protected class Model_0_Assignment_first extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele0AssignmentFirst();
+		return grammarAccess.getModelAccess().getFirstAssignment_0();
 	}
 	
 	@Override
@@ -76,7 +76,7 @@ protected class Model_0_Assignment_first extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele00KeywordFooBar();
+			element = grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0();
 			return new Solution(obj);
 		}
 
@@ -84,7 +84,7 @@ protected class Model_0_Assignment_first extends AssignmentToken  {
 	}
 }
 
-// not supported
+// second?="foo\\"
 protected class Model_1_Assignment_second extends AssignmentToken  {
 	
 	public Model_1_Assignment_second(IInstanceDescription curr, AbstractToken pred) {
@@ -93,7 +93,7 @@ protected class Model_1_Assignment_second extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele1AssignmentSecond();
+		return grammarAccess.getModelAccess().getSecondAssignment_1();
 	}
 	
 	@Override
@@ -103,7 +103,7 @@ protected class Model_1_Assignment_second extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele10KeywordFoo();
+			element = grammarAccess.getModelAccess().getSecondFooKeyword_1_0();
 			return new Solution(obj);
 		}
 
@@ -111,7 +111,7 @@ protected class Model_1_Assignment_second extends AssignmentToken  {
 	}
 }
 
-// not supported
+// third?="\\bar"
 protected class Model_2_Assignment_third extends AssignmentToken  {
 	
 	public Model_2_Assignment_third(IInstanceDescription curr, AbstractToken pred) {
@@ -120,7 +120,7 @@ protected class Model_2_Assignment_third extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele2AssignmentThird();
+		return grammarAccess.getModelAccess().getThirdAssignment_2();
 	}
 	
 	@Override
@@ -130,7 +130,7 @@ protected class Model_2_Assignment_third extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele20KeywordBar();
+			element = grammarAccess.getModelAccess().getThirdBarKeyword_2_0();
 			return new Solution(obj);
 		}
 
@@ -138,7 +138,7 @@ protected class Model_2_Assignment_third extends AssignmentToken  {
 	}
 }
 
-// not supported
+// forth?="\\"
 protected class Model_3_Assignment_forth extends AssignmentToken  {
 	
 	public Model_3_Assignment_forth(IInstanceDescription curr, AbstractToken pred) {
@@ -147,7 +147,7 @@ protected class Model_3_Assignment_forth extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele3AssignmentForth();
+		return grammarAccess.getModelAccess().getForthAssignment_3();
 	}
 	
 	@Override
@@ -157,7 +157,7 @@ protected class Model_3_Assignment_forth extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prModel().ele30KeywordReverseSolidus();
+			element = grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0();
 			return new Solution(obj);
 		}
 

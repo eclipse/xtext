@@ -67,7 +67,7 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 
 // Entry rule entryRuleEntry
 entryRuleEntry returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prEntry().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getEntryRule(), currentNode); }
 	 iv_ruleEntry=ruleEntry 
 	 { $current=$iv_ruleEntry.current; } 
 	 EOF 
@@ -84,12 +84,12 @@ ruleEntry returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prEntry().ele0ParserRuleCallAlts(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0(), currentNode); 
 	    }
 	    lv_contents_0=ruleAlts 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prEntry().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getEntryRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -109,7 +109,7 @@ ruleEntry returns [EObject current=null]
 
 // Entry rule entryRuleAlts
 entryRuleAlts returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prAlts().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getAltsRule(), currentNode); }
 	 iv_ruleAlts=ruleAlts 
 	 { $current=$iv_ruleAlts.current; } 
 	 EOF 
@@ -124,7 +124,7 @@ ruleAlts returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.prAlts().ele0ParserRuleCallLookAhead0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0(), currentNode); 
     }
     this_LookAhead0_0=ruleLookAhead0
     { 
@@ -133,12 +133,12 @@ ruleAlts returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAlts().ele0ParserRuleCallLookAhead0(), null); 
+    createLeafNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), currentNode); 
     }
     this_LookAhead1_1=ruleLookAhead1
     { 
@@ -147,12 +147,12 @@ ruleAlts returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAlts().ele1ParserRuleCallLookAhead1(), null); 
+    createLeafNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prAlts().ele2ParserRuleCallLookAhead3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), currentNode); 
     }
     this_LookAhead3_2=ruleLookAhead3
     { 
@@ -161,7 +161,7 @@ ruleAlts returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prAlts().ele2ParserRuleCallLookAhead3(), null); 
+    createLeafNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), null); 
     }
 );
 
@@ -171,7 +171,7 @@ ruleAlts returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead0
 entryRuleLookAhead0 returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prLookAhead0().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getLookAhead0Rule(), currentNode); }
 	 iv_ruleLookAhead0=ruleLookAhead0 
 	 { $current=$iv_ruleLookAhead0.current; } 
 	 EOF 
@@ -186,19 +186,19 @@ ruleLookAhead0 returns [EObject current=null]
     }:
 ('bar' 
     {
-        createLeafNode(grammarAccess.prLookAhead0().ele0KeywordBar(), null); 
+        createLeafNode(grammarAccess.getLookAhead0Access().getBarKeyword_0(), null); 
     }
 (	
 	
 	    lv_x_1='a' 
     {
-        createLeafNode(grammarAccess.prLookAhead0().ele10KeywordA(), "x"); 
+        createLeafNode(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead0().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead0Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -217,7 +217,7 @@ ruleLookAhead0 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead1
 entryRuleLookAhead1 returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prLookAhead1().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getLookAhead1Rule(), currentNode); }
 	 iv_ruleLookAhead1=ruleLookAhead1 
 	 { $current=$iv_ruleLookAhead1.current; } 
 	 EOF 
@@ -232,18 +232,18 @@ ruleLookAhead1 returns [EObject current=null]
     }:
 ('foo' 
     {
-        createLeafNode(grammarAccess.prLookAhead1().ele0KeywordFoo(), null); 
+        createLeafNode(grammarAccess.getLookAhead1Access().getFooKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prLookAhead1().ele10ParserRuleCallLookAhead2(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(), currentNode); 
 	    }
 	    lv_y_1=ruleLookAhead2 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -259,13 +259,13 @@ ruleLookAhead1 returns [EObject current=null]
 	
 	    lv_x_2='b' 
     {
-        createLeafNode(grammarAccess.prLookAhead1().ele20KeywordB(), "x"); 
+        createLeafNode(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -280,13 +280,13 @@ ruleLookAhead1 returns [EObject current=null]
 	
 	    lv_x_3='d' 
     {
-        createLeafNode(grammarAccess.prLookAhead1().ele30KeywordD(), "x"); 
+        createLeafNode(grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead1().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead1Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -305,7 +305,7 @@ ruleLookAhead1 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead2
 entryRuleLookAhead2 returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prLookAhead2().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getLookAhead2Rule(), currentNode); }
 	 iv_ruleLookAhead2=ruleLookAhead2 
 	 { $current=$iv_ruleLookAhead2.current; } 
 	 EOF 
@@ -322,13 +322,13 @@ ruleLookAhead2 returns [EObject current=null]
 	
 	    lv_z_0='foo' 
     {
-        createLeafNode(grammarAccess.prLookAhead2().ele000KeywordFoo(), "z"); 
+        createLeafNode(grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead2Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -344,13 +344,13 @@ ruleLookAhead2 returns [EObject current=null]
 	
 	    lv_z_1='bar' 
     {
-        createLeafNode(grammarAccess.prLookAhead2().ele010KeywordBar(), "z"); 
+        createLeafNode(grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead2().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead2Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -363,7 +363,7 @@ ruleLookAhead2 returns [EObject current=null]
 	
 ))'c' 
     {
-        createLeafNode(grammarAccess.prLookAhead2().ele1KeywordC(), null); 
+        createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
     }
 );
 
@@ -373,7 +373,7 @@ ruleLookAhead2 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead3
 entryRuleLookAhead3 returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prLookAhead3().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getLookAhead3Rule(), currentNode); }
 	 iv_ruleLookAhead3=ruleLookAhead3 
 	 { $current=$iv_ruleLookAhead3.current; } 
 	 EOF 
@@ -388,23 +388,23 @@ ruleLookAhead3 returns [EObject current=null]
     }:
 ('foo' 
     {
-        createLeafNode(grammarAccess.prLookAhead3().ele0KeywordFoo(), null); 
+        createLeafNode(grammarAccess.getLookAhead3Access().getFooKeyword_0(), null); 
     }
 'bar' 
     {
-        createLeafNode(grammarAccess.prLookAhead3().ele1KeywordBar(), null); 
+        createLeafNode(grammarAccess.getLookAhead3Access().getBarKeyword_1(), null); 
     }
 (	
 	
 	    lv_x_2='b' 
     {
-        createLeafNode(grammarAccess.prLookAhead3().ele20KeywordB(), "x"); 
+        createLeafNode(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead3Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -419,12 +419,12 @@ ruleLookAhead3 returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.prLookAhead3().ele30ParserRuleCallLookAhead4(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(), currentNode); 
 	    }
 	    lv_z_3=ruleLookAhead4 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead3().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead3Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -444,7 +444,7 @@ ruleLookAhead3 returns [EObject current=null]
 
 // Entry rule entryRuleLookAhead4
 entryRuleLookAhead4 returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prLookAhead4().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getLookAhead4Rule(), currentNode); }
 	 iv_ruleLookAhead4=ruleLookAhead4 
 	 { $current=$iv_ruleLookAhead4.current; } 
 	 EOF 
@@ -461,13 +461,13 @@ ruleLookAhead4 returns [EObject current=null]
 	
 	    lv_x_0='c' 
     {
-        createLeafNode(grammarAccess.prLookAhead4().ele00KeywordC(), "x"); 
+        createLeafNode(grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead4Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -483,13 +483,13 @@ ruleLookAhead4 returns [EObject current=null]
 	
 	    lv_x_1='d' 
     {
-        createLeafNode(grammarAccess.prLookAhead4().ele10KeywordD(), "x"); 
+        createLeafNode(grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prLookAhead4().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLookAhead4Rule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

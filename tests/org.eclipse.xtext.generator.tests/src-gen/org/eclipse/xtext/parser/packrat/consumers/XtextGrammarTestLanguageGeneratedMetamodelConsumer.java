@@ -204,16 +204,16 @@ public final class XtextGrammarTestLanguageGeneratedMetamodelConsumer extends No
 	public void setRule(GeneratedMetamodelElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordGenerate());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentEPackage());
-		crossReference$6$Consumer = new CrossReference$6$Consumer(rule.ele20CrossReferenceSTRINGEPackage());
-		group$9$Consumer = new Group$9$Consumer(rule.ele3Group());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele30KeywordAs());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele31AssignmentAlias());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele310TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getGenerateKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getEPackageAssignment_2());
+		crossReference$6$Consumer = new CrossReference$6$Consumer(rule.getEPackageEPackageCrossReference_2_0());
+		group$9$Consumer = new Group$9$Consumer(rule.getGroup_3());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getAsKeyword_3_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getAliasAssignment_3_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getAliasIDTerminalRuleCall_3_1_0());
 	}
 	
 	@Override

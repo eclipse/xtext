@@ -20,267 +20,277 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	public class RootRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RootRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallConcreteParserRule = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallCallOverridenParserRule = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall c2ParserRuleCallCallExtendedParserRule = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall c3ParserRuleCallOverridableParserRule2 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cConcreteParserRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCallOverridenParserRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCallExtendedParserRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cOverridableParserRule2ParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		// not supported
+		//RootRule:
+		//  ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallConcreteParserRule() { return c0ParserRuleCallConcreteParserRule; }
+		//ConcreteParserRule
+		public RuleCall getConcreteParserRuleParserRuleCall_0() { return cConcreteParserRuleParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallCallOverridenParserRule() { return c1ParserRuleCallCallOverridenParserRule; }
+		//CallOverridenParserRule
+		public RuleCall getCallOverridenParserRuleParserRuleCall_1() { return cCallOverridenParserRuleParserRuleCall_1; }
 
-		// not supported
-		public RuleCall ele2ParserRuleCallCallExtendedParserRule() { return c2ParserRuleCallCallExtendedParserRule; }
+		//CallExtendedParserRule
+		public RuleCall getCallExtendedParserRuleParserRuleCall_2() { return cCallExtendedParserRuleParserRuleCall_2; }
 
-		// not supported
-		public RuleCall ele3ParserRuleCallOverridableParserRule2() { return c3ParserRuleCallOverridableParserRule2; }
+		//OverridableParserRule2
+		public RuleCall getOverridableParserRule2ParserRuleCall_3() { return cOverridableParserRule2ParserRuleCall_3; }
 	}
 
 	public class ConcreteParserRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordModel = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentMagicNumber = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallREAL = (RuleCall)c1AssignmentMagicNumber.eContents().get(0);
-		private final Keyword c2KeywordColon = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentElements = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallInheritedParserRule = (RuleCall)c3AssignmentElements.eContents().get(0);
+		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cMagicNumberAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cMagicNumberREALTerminalRuleCall_1_0 = (RuleCall)cMagicNumberAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cElementsInheritedParserRuleParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		
-		// not supported
+		//ConcreteParserRule:
+		//  "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"model" magicNumber=REAL ":" (elements+=InheritedParserRule)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordModel() { return c0KeywordModel; }
+		//"model"
+		public Keyword getModelKeyword_0() { return cModelKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentMagicNumber() { return c1AssignmentMagicNumber; }
+		//magicNumber=REAL
+		public Assignment getMagicNumberAssignment_1() { return cMagicNumberAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallREAL() { return c10TerminalRuleCallREAL; }
+		//REAL
+		public RuleCall getMagicNumberREALTerminalRuleCall_1_0() { return cMagicNumberREALTerminalRuleCall_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordColon() { return c2KeywordColon; }
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentElements() { return c3AssignmentElements; }
+		//(elements+=InheritedParserRule)*
+		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallInheritedParserRule() { return c30ParserRuleCallInheritedParserRule; }
+		//InheritedParserRule
+		public RuleCall getElementsInheritedParserRuleParserRuleCall_3_0() { return cElementsInheritedParserRuleParserRuleCall_3_0; }
 	}
 
 	public class OverridableParserRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridableParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordOverriddenelement = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
+		private final Keyword cOverriddenelementKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		// not supported
+		//OverridableParserRule returns mm::AType:
+		//  "overriddenelement" name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"overriddenelement" name=ID
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordOverriddenelement() { return c0KeywordOverriddenelement; }
+		//"overriddenelement"
+		public Keyword getOverriddenelementKeyword_0() { return cOverriddenelementKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
 	public class CallOverridenParserRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallOverridenParserRule");
-		private final Assignment cAssignmentCall = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAbstractCallOverridenParserRule = (RuleCall)cAssignmentCall.eContents().get(0);
+		private final Assignment cCallAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cCallAbstractCallOverridenParserRuleParserRuleCall_0 = (RuleCall)cCallAssignment.eContents().get(0);
 		
-		// not supported
+		//CallOverridenParserRule:
+		//  call=AbstractCallOverridenParserRule;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentCall() { return cAssignmentCall; }
+		//call=AbstractCallOverridenParserRule
+		public Assignment getCallAssignment() { return cCallAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAbstractCallOverridenParserRule() { return c0ParserRuleCallAbstractCallOverridenParserRule; }
+		//AbstractCallOverridenParserRule
+		public RuleCall getCallAbstractCallOverridenParserRuleParserRuleCall_0() { return cCallAbstractCallOverridenParserRuleParserRuleCall_0; }
 	}
 
 	public class OverridableParserRule2Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridableParserRule2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordOverriddenOtherElement = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Keyword c2KeywordHyphenMinus = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentAge = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30TerminalRuleCallINT = (RuleCall)c3AssignmentAge.eContents().get(0);
+		private final Keyword cOverriddenOtherElementKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cAgeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAgeINTTerminalRuleCall_3_0 = (RuleCall)cAgeAssignment_3.eContents().get(0);
 		
-		// not supported
+		//OverridableParserRule2 returns AType2:
+		//  "overridden other element" name=ID "-" age=INT;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"overridden other element" name=ID "-" age=INT
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordOverriddenOtherElement() { return c0KeywordOverriddenOtherElement; }
+		//"overridden other element"
+		public Keyword getOverriddenOtherElementKeyword_0() { return cOverriddenOtherElementKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordHyphenMinus() { return c2KeywordHyphenMinus; }
+		//"-"
+		public Keyword getHyphenMinusKeyword_2() { return cHyphenMinusKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentAge() { return c3AssignmentAge; }
+		//age=INT
+		public Assignment getAgeAssignment_3() { return cAgeAssignment_3; }
 
-		// not supported
-		public RuleCall ele30TerminalRuleCallINT() { return c30TerminalRuleCallINT; }
+		//INT
+		public RuleCall getAgeINTTerminalRuleCall_3_0() { return cAgeINTTerminalRuleCall_3_0; }
 	}
 
 	public class ExtendableParserRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExtendableParserRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallSubrule1 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallSubrule2 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall c2ParserRuleCallSubrule3 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cSubrule1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSubrule2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSubrule3ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		// not supported
+		//ExtendableParserRule returns mm::AType:
+		//  Subrule1|Subrule2|Subrule3;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//Subrule1|Subrule2|Subrule3
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallSubrule1() { return c0ParserRuleCallSubrule1; }
+		//Subrule1
+		public RuleCall getSubrule1ParserRuleCall_0() { return cSubrule1ParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallSubrule2() { return c1ParserRuleCallSubrule2; }
+		//Subrule2
+		public RuleCall getSubrule2ParserRuleCall_1() { return cSubrule2ParserRuleCall_1; }
 
-		// not supported
-		public RuleCall ele2ParserRuleCallSubrule3() { return c2ParserRuleCallSubrule3; }
+		//Subrule3
+		public RuleCall getSubrule3ParserRuleCall_2() { return cSubrule3ParserRuleCall_2; }
 	}
 
 	public class Subrule1Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Subrule1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordSubrule1 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Assignment c2AssignmentSub1 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallID = (RuleCall)c2AssignmentSub1.eContents().get(0);
+		private final Keyword cSubrule1Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSub1Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSub1IDTerminalRuleCall_2_0 = (RuleCall)cSub1Assignment_2.eContents().get(0);
 		
-		// not supported
+		//Subrule1:
+		//  "subrule1" name=ID sub1=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"subrule1" name=ID sub1=ID
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordSubrule1() { return c0KeywordSubrule1; }
+		//"subrule1"
+		public Keyword getSubrule1Keyword_0() { return cSubrule1Keyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentSub1() { return c2AssignmentSub1; }
+		//sub1=ID
+		public Assignment getSub1Assignment_2() { return cSub1Assignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
+		//ID
+		public RuleCall getSub1IDTerminalRuleCall_2_0() { return cSub1IDTerminalRuleCall_2_0; }
 	}
 
 	public class Subrule2Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Subrule2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordSubrule3 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Assignment c2AssignmentSub2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentSub2.eContents().get(0);
+		private final Keyword cSubrule3Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSub2Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSub2STRINGTerminalRuleCall_2_0 = (RuleCall)cSub2Assignment_2.eContents().get(0);
 		
-		// not supported
+		//Subrule2:
+		//  "subrule3" name=ID sub2=STRING;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"subrule3" name=ID sub2=STRING
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordSubrule3() { return c0KeywordSubrule3; }
+		//"subrule3"
+		public Keyword getSubrule3Keyword_0() { return cSubrule3Keyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentSub2() { return c2AssignmentSub2; }
+		//sub2=STRING
+		public Assignment getSub2Assignment_2() { return cSub2Assignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getSub2STRINGTerminalRuleCall_2_0() { return cSub2STRINGTerminalRuleCall_2_0; }
 	}
 
 	public class Subrule3Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Subrule3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordSubrule3 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
-		private final Assignment c2AssignmentSub1 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallINT = (RuleCall)c2AssignmentSub1.eContents().get(0);
+		private final Keyword cSubrule3Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cSub1Assignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cSub1INTTerminalRuleCall_2_0 = (RuleCall)cSub1Assignment_2.eContents().get(0);
 		
-		// not supported
+		//Subrule3:
+		//  "subrule3" name=ID sub1=INT;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"subrule3" name=ID sub1=INT
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordSubrule3() { return c0KeywordSubrule3; }
+		//"subrule3"
+		public Keyword getSubrule3Keyword_0() { return cSubrule3Keyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentName() { return c1AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallID() { return c10TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentSub1() { return c2AssignmentSub1; }
+		//sub1=INT
+		public Assignment getSub1Assignment_2() { return cSub1Assignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallINT() { return c20TerminalRuleCallINT; }
+		//INT
+		public RuleCall getSub1INTTerminalRuleCall_2_0() { return cSub1INTTerminalRuleCall_2_0; }
 	}
 
 	public class CallExtendedParserRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallExtendedParserRule");
-		private final Assignment cAssignmentCall = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAbstractCallExtendedParserRule = (RuleCall)cAssignmentCall.eContents().get(0);
+		private final Assignment cCallAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cCallAbstractCallExtendedParserRuleParserRuleCall_0 = (RuleCall)cCallAssignment.eContents().get(0);
 		
-		// not supported
+		//CallExtendedParserRule:
+		//  call=AbstractCallExtendedParserRule;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentCall() { return cAssignmentCall; }
+		//call=AbstractCallExtendedParserRule
+		public Assignment getCallAssignment() { return cCallAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAbstractCallExtendedParserRule() { return c0ParserRuleCallAbstractCallExtendedParserRule; }
+		//AbstractCallExtendedParserRule
+		public RuleCall getCallAbstractCallExtendedParserRuleParserRuleCall_0() { return cCallAbstractCallExtendedParserRuleParserRuleCall_0; }
 	}
 	
 	private RootRuleElements pRootRule;
@@ -296,13 +306,13 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private AbstractTestLanguageGrammarAccess abstractTestLanguageGrammarAccess;
+	private AbstractTestLanguageGrammarAccess gaAbstractTestLanguage;
 
 	@Inject
 	public ConcreteTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		AbstractTestLanguageGrammarAccess abstractTestLanguageGrammarAccess) {
+		AbstractTestLanguageGrammarAccess gaAbstractTestLanguage) {
 		this.grammarProvider = grammarProvider;
-		this.abstractTestLanguageGrammarAccess = abstractTestLanguageGrammarAccess;
+		this.gaAbstractTestLanguage = gaAbstractTestLanguage;
 	}
 	
 	public Grammar getGrammar() {	
@@ -311,112 +321,182 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public AbstractTestLanguageGrammarAccess getAbstractTestLanguageGrammarAccess() {
-		return abstractTestLanguageGrammarAccess;
+		return gaAbstractTestLanguage;
 	}
 
 	
-	// not supported
-	public RootRuleElements prRootRule() {
+	//RootRule:
+	//  ConcreteParserRule|CallOverridenParserRule|CallExtendedParserRule|OverridableParserRule2;
+	public RootRuleElements getRootRuleAccess() {
 		return (pRootRule != null) ? pRootRule : (pRootRule = new RootRuleElements());
-	} 
+	}
+	
+	public ParserRule getRootRuleRule() {
+		return getRootRuleAccess().getRule();
+	}
 
-	// not supported
-	public ConcreteParserRuleElements prConcreteParserRule() {
+	//ConcreteParserRule:
+	//  "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
+	public ConcreteParserRuleElements getConcreteParserRuleAccess() {
 		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());
-	} 
+	}
+	
+	public ParserRule getConcreteParserRuleRule() {
+		return getConcreteParserRuleAccess().getRule();
+	}
 
-	// not supported
-	public OverridableParserRuleElements prOverridableParserRule() {
+	//OverridableParserRule returns mm::AType:
+	//  "overriddenelement" name=ID;
+	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return (pOverridableParserRule != null) ? pOverridableParserRule : (pOverridableParserRule = new OverridableParserRuleElements());
-	} 
+	}
+	
+	public ParserRule getOverridableParserRuleRule() {
+		return getOverridableParserRuleAccess().getRule();
+	}
 
-	// not supported
-	public CallOverridenParserRuleElements prCallOverridenParserRule() {
+	//CallOverridenParserRule:
+	//  call=AbstractCallOverridenParserRule;
+	public CallOverridenParserRuleElements getCallOverridenParserRuleAccess() {
 		return (pCallOverridenParserRule != null) ? pCallOverridenParserRule : (pCallOverridenParserRule = new CallOverridenParserRuleElements());
-	} 
+	}
+	
+	public ParserRule getCallOverridenParserRuleRule() {
+		return getCallOverridenParserRuleAccess().getRule();
+	}
 
-	// not supported
-	public OverridableParserRule2Elements prOverridableParserRule2() {
+	//OverridableParserRule2 returns AType2:
+	//  "overridden other element" name=ID "-" age=INT;
+	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return (pOverridableParserRule2 != null) ? pOverridableParserRule2 : (pOverridableParserRule2 = new OverridableParserRule2Elements());
-	} 
+	}
+	
+	public ParserRule getOverridableParserRule2Rule() {
+		return getOverridableParserRule2Access().getRule();
+	}
 
-	// not supported
-	public ExtendableParserRuleElements prExtendableParserRule() {
+	//ExtendableParserRule returns mm::AType:
+	//  Subrule1|Subrule2|Subrule3;
+	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return (pExtendableParserRule != null) ? pExtendableParserRule : (pExtendableParserRule = new ExtendableParserRuleElements());
-	} 
+	}
+	
+	public ParserRule getExtendableParserRuleRule() {
+		return getExtendableParserRuleAccess().getRule();
+	}
 
-	// not supported
-	public Subrule1Elements prSubrule1() {
+	//Subrule1:
+	//  "subrule1" name=ID sub1=ID;
+	public Subrule1Elements getSubrule1Access() {
 		return (pSubrule1 != null) ? pSubrule1 : (pSubrule1 = new Subrule1Elements());
-	} 
+	}
+	
+	public ParserRule getSubrule1Rule() {
+		return getSubrule1Access().getRule();
+	}
 
-	// not supported
-	public Subrule2Elements prSubrule2() {
+	//Subrule2:
+	//  "subrule3" name=ID sub2=STRING;
+	public Subrule2Elements getSubrule2Access() {
 		return (pSubrule2 != null) ? pSubrule2 : (pSubrule2 = new Subrule2Elements());
-	} 
+	}
+	
+	public ParserRule getSubrule2Rule() {
+		return getSubrule2Access().getRule();
+	}
 
-	// not supported
-	public Subrule3Elements prSubrule3() {
+	//Subrule3:
+	//  "subrule3" name=ID sub1=INT;
+	public Subrule3Elements getSubrule3Access() {
 		return (pSubrule3 != null) ? pSubrule3 : (pSubrule3 = new Subrule3Elements());
-	} 
+	}
+	
+	public ParserRule getSubrule3Rule() {
+		return getSubrule3Access().getRule();
+	}
 
-	// not supported
-	public CallExtendedParserRuleElements prCallExtendedParserRule() {
+	//CallExtendedParserRule:
+	//  call=AbstractCallExtendedParserRule;
+	public CallExtendedParserRuleElements getCallExtendedParserRuleAccess() {
 		return (pCallExtendedParserRule != null) ? pCallExtendedParserRule : (pCallExtendedParserRule = new CallExtendedParserRuleElements());
+	}
+	
+	public ParserRule getCallExtendedParserRuleRule() {
+		return getCallExtendedParserRuleAccess().getRule();
+	}
+
+	//InheritedParserRule returns mm::AType:
+	//  "element" name=ID;
+	public AbstractTestLanguageGrammarAccess.InheritedParserRuleElements getInheritedParserRuleAccess() {
+		return gaAbstractTestLanguage.getInheritedParserRuleAccess();
+	}
+	
+	public ParserRule getInheritedParserRuleRule() {
+		return getInheritedParserRuleAccess().getRule();
+	}
+
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@d1bc2d (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@f9aaf1 (name: OverridableParserRule) (definesHiddenTokens: false)
+	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
+		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
+	}
+	
+	public ParserRule getAbstractCallOverridenParserRuleRule() {
+		return getAbstractCallOverridenParserRuleAccess().getRule();
+	}
+
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@a04054 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@3bbd78 (name: ExtendableParserRule) (definesHiddenTokens: false)
+	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
+		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
+	}
+	
+	public ParserRule getAbstractCallExtendedParserRuleRule() {
+		return getAbstractCallExtendedParserRuleAccess().getRule();
+	}
+
+	//terminal REAL returns ecore::EDouble:
+	//  INT "." INT;
+	public TerminalRule getREALRule() {
+		return gaAbstractTestLanguage.getREALRule();
 	} 
 
-	// not supported
-	public org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.InheritedParserRuleElements prInheritedParserRule() {
-		return abstractTestLanguageGrammarAccess.prInheritedParserRule();
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "\u02C6" | "\u2030" | "\u00B8" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaAbstractTestLanguage.getIDRule();
 	} 
 
-	// not supported
-	public org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements prAbstractCallOverridenParserRule() {
-		return abstractTestLanguageGrammarAccess.prAbstractCallOverridenParserRule();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaAbstractTestLanguage.getINTRule();
 	} 
 
-	// not supported
-	public org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements prAbstractCallExtendedParserRule() {
-		return abstractTestLanguageGrammarAccess.prAbstractCallExtendedParserRule();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaAbstractTestLanguage.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trREAL() {
-		return abstractTestLanguageGrammarAccess.trREAL();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaAbstractTestLanguage.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return abstractTestLanguageGrammarAccess.trID();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaAbstractTestLanguage.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return abstractTestLanguageGrammarAccess.trINT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaAbstractTestLanguage.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return abstractTestLanguageGrammarAccess.trSTRING();
-	} 
-
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return abstractTestLanguageGrammarAccess.trML_COMMENT();
-	} 
-
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return abstractTestLanguageGrammarAccess.trSL_COMMENT();
-	} 
-
-	// not supported
-	public TerminalRule trWS() {
-		return abstractTestLanguageGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return abstractTestLanguageGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaAbstractTestLanguage.getANY_OTHERRule();
 	} 
 }

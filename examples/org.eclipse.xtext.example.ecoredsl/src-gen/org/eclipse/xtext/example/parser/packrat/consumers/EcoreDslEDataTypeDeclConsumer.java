@@ -270,20 +270,20 @@ public final class EcoreDslEDataTypeDeclConsumer extends NonTerminalConsumer {
 	public void setRule(EDataTypeDeclElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		group$2$Consumer = new Group$2$Consumer(rule.ele0Group());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele00AssignmentEAnnotations());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele000ParserRuleCallEAnnotationDecl());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele01AssignmentSerializable());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele010TerminalRuleCallSerializable());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele020KeywordDatatype());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele021AssignmentName());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele0210TerminalRuleCallID());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele022KeywordColon());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.ele023AssignmentInstanceClassName());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.ele0230ParserRuleCallSTRING_OR_QID());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele024KeywordSemicolon());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.ele1ParserRuleCallEEnumDecl());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		group$2$Consumer = new Group$2$Consumer(rule.getGroup_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getEAnnotationsAssignment_0_0());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getSerializableAssignment_0_1());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getSerializableSerializableTerminalRuleCall_0_1_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getDatatypeKeyword_0_2_0());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getNameAssignment_0_2_1());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getNameIDTerminalRuleCall_0_2_1_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getColonKeyword_0_2_2());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getInstanceClassNameAssignment_0_2_3());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getSemicolonKeyword_0_2_4());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getEEnumDeclParserRuleCall_1());
 	}
 	
 	@Override

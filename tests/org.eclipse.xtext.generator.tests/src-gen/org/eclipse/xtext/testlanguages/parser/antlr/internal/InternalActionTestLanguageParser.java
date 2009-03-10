@@ -76,7 +76,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:69:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -119,7 +119,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:84:5: this_Child_0= ruleChild ( () (lv_right_2= ruleChild ) )?
             {
              
-                    currentNode=createCompositeNode(grammarAccess.prModel().ele0ParserRuleCallChild(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getModelAccess().getChildParserRuleCall_0(), currentNode); 
                 
             pushFollow(FOLLOW_ruleChild_in_ruleModel128);
             this_Child_0=ruleChild();
@@ -130,7 +130,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                     currentNode = currentNode.getParent();
                 
              
-                createLeafNode(grammarAccess.prModel().ele0ParserRuleCallChild(), null); 
+                createLeafNode(grammarAccess.getModelAccess().getChildParserRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:96:1: ( () (lv_right_2= ruleChild ) )?
             int alt1=2;
@@ -147,7 +147,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:97:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.prModel().ele10ActionParentleft().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getModelAccess().getParentleftAction_1_0().getType().getClassifier());
                             try {
                             	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -155,7 +155,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.prModel().ele10ActionParentleft(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getParentleftAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -168,7 +168,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:115:6: lv_right_2= ruleChild
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele110ParserRuleCallChild(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getRightChildParserRuleCall_1_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleChild_in_ruleModel178);
                     lv_right_2=ruleChild();
@@ -176,7 +176,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -230,7 +230,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:140:47: (iv_ruleChild= ruleChild EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:141:2: iv_ruleChild= ruleChild EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prChild().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getChildRule(), currentNode); 
             pushFollow(FOLLOW_ruleChild_in_entryRuleChild217);
             iv_ruleChild=ruleChild();
             _fsp--;
@@ -272,11 +272,11 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild273); 
 
-            		createLeafNode(grammarAccess.prChild().ele0TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prChild().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getChildRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        

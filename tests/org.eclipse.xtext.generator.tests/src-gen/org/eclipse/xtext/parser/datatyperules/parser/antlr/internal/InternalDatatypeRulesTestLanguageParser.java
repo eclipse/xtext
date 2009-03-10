@@ -76,7 +76,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:69:56: (iv_ruleCompositeModel= ruleCompositeModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:70:2: iv_ruleCompositeModel= ruleCompositeModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prCompositeModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getCompositeModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleCompositeModel_in_entryRuleCompositeModel71);
             iv_ruleCompositeModel=ruleCompositeModel();
             _fsp--;
@@ -130,7 +130,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:86:6: lv_model_0= ruleModel
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prCompositeModel().ele0ParserRuleCallModel(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getCompositeModelAccess().getModelModelParserRuleCall_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleModel_in_ruleCompositeModel139);
             	    lv_model_0=ruleModel();
@@ -138,7 +138,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prCompositeModel().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getCompositeModelRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -193,7 +193,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:111:47: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:112:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel176);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -243,7 +243,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:128:6: lv_id_0= ruleNestedModelId
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.prModel().ele00ParserRuleCallNestedModelId(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getIdNestedModelIdParserRuleCall_0_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleNestedModelId_in_ruleModel245);
             lv_id_0=ruleNestedModelId();
@@ -251,7 +251,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        
@@ -278,13 +278,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     {
                     match(input,11,FOLLOW_11_in_ruleModel259); 
 
-                            createLeafNode(grammarAccess.prModel().ele10KeywordColon(), null); 
+                            createLeafNode(grammarAccess.getModelAccess().getColonKeyword_1_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:150:1: (lv_value_2= ruleFraction )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:153:6: lv_value_2= ruleFraction
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele110ParserRuleCallFraction(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getValueFractionParserRuleCall_1_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleFraction_in_ruleModel293);
                     lv_value_2=ruleFraction();
@@ -292,7 +292,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -325,13 +325,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     {
                     match(input,12,FOLLOW_12_in_ruleModel309); 
 
-                            createLeafNode(grammarAccess.prModel().ele20KeywordNumberSign(), null); 
+                            createLeafNode(grammarAccess.getModelAccess().getNumberSignKeyword_2_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:175:1: (lv_vector_4= ruleVector )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:178:6: lv_vector_4= ruleVector
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele210ParserRuleCallVector(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getVectorVectorParserRuleCall_2_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleVector_in_ruleModel343);
                     lv_vector_4=ruleVector();
@@ -339,7 +339,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -372,13 +372,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     {
                     match(input,13,FOLLOW_13_in_ruleModel359); 
 
-                            createLeafNode(grammarAccess.prModel().ele30KeywordPlusSign(), null); 
+                            createLeafNode(grammarAccess.getModelAccess().getPlusSignKeyword_3_0(), null); 
                         
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:200:1: (lv_dots_6= ruleDots )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:203:6: lv_dots_6= ruleDots
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.prModel().ele310ParserRuleCallDots(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDotsDotsParserRuleCall_3_1_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleDots_in_ruleModel393);
                     lv_dots_6=ruleDots();
@@ -386,7 +386,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.prModel().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
@@ -408,7 +408,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
 
             match(input,14,FOLLOW_14_in_ruleModel408); 
 
-                    createLeafNode(grammarAccess.prModel().ele4KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_4(), null); 
                 
 
             }
@@ -444,7 +444,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:232:48: (iv_ruleModelId= ruleModelId EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:233:2: iv_ruleModelId= ruleModelId EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prModelId().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getModelIdRule(), currentNode); 
             pushFollow(FOLLOW_ruleModelId_in_entryRuleModelId442);
             iv_ruleModelId=ruleModelId();
             _fsp--;
@@ -491,13 +491,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.prModelId().ele0TerminalRuleCallID(), null); 
+                createLeafNode(grammarAccess.getModelIdAccess().getIDTerminalRuleCall_0(), null); 
                 
             kw=(Token)input.LT(1);
             match(input,15,FOLLOW_15_in_ruleModelId511); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prModelId().ele1KeywordFullStop(), null); 
+                    createLeafNode(grammarAccess.getModelIdAccess().getFullStopKeyword_1(), null); 
                 
             this_ID_2=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModelId526); 
@@ -505,7 +505,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_ID_2);
                 
              
-                createLeafNode(grammarAccess.prModelId().ele2TerminalRuleCallID(), null); 
+                createLeafNode(grammarAccess.getModelIdAccess().getIDTerminalRuleCall_2(), null); 
                 
 
             }
@@ -542,7 +542,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:275:54: (iv_ruleNestedModelId= ruleNestedModelId EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:276:2: iv_ruleNestedModelId= ruleNestedModelId EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prNestedModelId().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getNestedModelIdRule(), currentNode); 
             pushFollow(FOLLOW_ruleNestedModelId_in_entryRuleNestedModelId570);
             iv_ruleNestedModelId=ruleNestedModelId();
             _fsp--;
@@ -586,7 +586,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:291:5: this_ModelId_0= ruleModelId kw= '.' this_ModelId_2= ruleModelId
             {
              
-                    currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele0ParserRuleCallModelId(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getNestedModelIdAccess().getModelIdParserRuleCall_0(), currentNode); 
                 
             pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId628);
             this_ModelId_0=ruleModelId();
@@ -602,10 +602,10 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             match(input,15,FOLLOW_15_in_ruleNestedModelId646); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prNestedModelId().ele1KeywordFullStop(), null); 
+                    createLeafNode(grammarAccess.getNestedModelIdAccess().getFullStopKeyword_1(), null); 
                 
              
-                    currentNode=createCompositeNode(grammarAccess.prNestedModelId().ele2ParserRuleCallModelId(), currentNode); 
+                    currentNode=createCompositeNode(grammarAccess.getNestedModelIdAccess().getModelIdParserRuleCall_2(), currentNode); 
                 
             pushFollow(FOLLOW_ruleModelId_in_ruleNestedModelId668);
             this_ModelId_2=ruleModelId();
@@ -652,7 +652,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:326:49: (iv_ruleFraction= ruleFraction EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:327:2: iv_ruleFraction= ruleFraction EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prFraction().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getFractionRule(), currentNode); 
             pushFollow(FOLLOW_ruleFraction_in_entryRuleFraction712);
             iv_ruleFraction=ruleFraction();
             _fsp--;
@@ -699,7 +699,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT_0);
                 
              
-                createLeafNode(grammarAccess.prFraction().ele0TerminalRuleCallINT(), null); 
+                createLeafNode(grammarAccess.getFractionAccess().getINTTerminalRuleCall_0(), null); 
                 
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:348:1: (kw= '/' this_INT_2= RULE_INT )?
             int alt5=2;
@@ -716,7 +716,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     match(input,16,FOLLOW_16_in_ruleFraction782); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.prFraction().ele10KeywordSolidus(), null); 
+                            createLeafNode(grammarAccess.getFractionAccess().getSolidusKeyword_1_0(), null); 
                         
                     this_INT_2=(Token)input.LT(1);
                     match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFraction797); 
@@ -724,7 +724,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     		current.merge(this_INT_2);
                         
                      
-                        createLeafNode(grammarAccess.prFraction().ele11TerminalRuleCallINT(), null); 
+                        createLeafNode(grammarAccess.getFractionAccess().getINTTerminalRuleCall_1_1(), null); 
                         
 
                     }
@@ -767,7 +767,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:369:47: (iv_ruleVector= ruleVector EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:370:2: iv_ruleVector= ruleVector EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prVector().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getVectorRule(), currentNode); 
             pushFollow(FOLLOW_ruleVector_in_entryRuleVector843);
             iv_ruleVector=ruleVector();
             _fsp--;
@@ -812,7 +812,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             match(input,17,FOLLOW_17_in_ruleVector892); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prVector().ele0KeywordLeftParenthesis(), null); 
+                    createLeafNode(grammarAccess.getVectorAccess().getLeftParenthesisKeyword_0(), null); 
                 
             this_INT_1=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector907); 
@@ -820,7 +820,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT_1);
                 
              
-                createLeafNode(grammarAccess.prVector().ele1TerminalRuleCallINT(), null); 
+                createLeafNode(grammarAccess.getVectorAccess().getINTTerminalRuleCall_1(), null); 
                 
             this_INT_2=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVector927); 
@@ -828,13 +828,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             		current.merge(this_INT_2);
                 
              
-                createLeafNode(grammarAccess.prVector().ele2TerminalRuleCallINT(), null); 
+                createLeafNode(grammarAccess.getVectorAccess().getINTTerminalRuleCall_2(), null); 
                 
             kw=(Token)input.LT(1);
             match(input,18,FOLLOW_18_in_ruleVector945); 
 
                     current.merge(kw);
-                    createLeafNode(grammarAccess.prVector().ele3KeywordRightParenthesis(), null); 
+                    createLeafNode(grammarAccess.getVectorAccess().getRightParenthesisKeyword_3(), null); 
                 
 
             }
@@ -871,7 +871,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:418:45: (iv_ruleDots= ruleDots EOF )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.g:419:2: iv_ruleDots= ruleDots EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prDots().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getDotsRule(), currentNode); 
             pushFollow(FOLLOW_ruleDots_in_entryRuleDots984);
             iv_ruleDots=ruleDots();
             _fsp--;
@@ -934,13 +934,13 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     match(input,15,FOLLOW_15_in_ruleDots1034); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.prDots().ele00KeywordFullStop(), null); 
+                            createLeafNode(grammarAccess.getDotsAccess().getFullStopKeyword_0_0(), null); 
                         
                     kw=(Token)input.LT(1);
                     match(input,15,FOLLOW_15_in_ruleDots1047); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.prDots().ele01KeywordFullStop(), null); 
+                            createLeafNode(grammarAccess.getDotsAccess().getFullStopKeyword_0_1(), null); 
                         
 
                     }
@@ -955,7 +955,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                     match(input,19,FOLLOW_19_in_ruleDots1067); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.prDots().ele1KeywordFullStopFullStop(), null); 
+                            createLeafNode(grammarAccess.getDotsAccess().getFullStopFullStopKeyword_1(), null); 
                         
 
                     }

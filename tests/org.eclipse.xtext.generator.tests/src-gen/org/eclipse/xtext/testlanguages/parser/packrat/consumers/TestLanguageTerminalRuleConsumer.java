@@ -70,8 +70,8 @@ public final class TestLanguageTerminalRuleConsumer extends NonTerminalConsumer 
 	public void setRule(TerminalRuleElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentStringFeature());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getStringFeatureAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getStringFeatureSTRINGTerminalRuleCall_0());
 	}
 	
 	@Override

@@ -19,215 +19,222 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class CompositeModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CompositeModel");
-		private final Assignment cAssignmentModel = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallModel = (RuleCall)cAssignmentModel.eContents().get(0);
+		private final Assignment cModelAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cModelModelParserRuleCall_0 = (RuleCall)cModelAssignment.eContents().get(0);
 		
-		// not supported
+		//CompositeModel:
+		//  (model+=Model)+;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentModel() { return cAssignmentModel; }
+		//(model+=Model)+
+		public Assignment getModelAssignment() { return cModelAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallModel() { return c0ParserRuleCallModel; }
+		//Model
+		public RuleCall getModelModelParserRuleCall_0() { return cModelModelParserRuleCall_0; }
 	}
 
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentId = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00ParserRuleCallNestedModelId = (RuleCall)c0AssignmentId.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordColon = (Keyword)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentValue = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallFraction = (RuleCall)c11AssignmentValue.eContents().get(0);
-		private final Group c2Group = (Group)cGroup.eContents().get(2);
-		private final Keyword c20KeywordNumberSign = (Keyword)c2Group.eContents().get(0);
-		private final Assignment c21AssignmentVector = (Assignment)c2Group.eContents().get(1);
-		private final RuleCall c210ParserRuleCallVector = (RuleCall)c21AssignmentVector.eContents().get(0);
-		private final Group c3Group = (Group)cGroup.eContents().get(3);
-		private final Keyword c30KeywordPlusSign = (Keyword)c3Group.eContents().get(0);
-		private final Assignment c31AssignmentDots = (Assignment)c3Group.eContents().get(1);
-		private final RuleCall c310ParserRuleCallDots = (RuleCall)c31AssignmentDots.eContents().get(0);
-		private final Keyword c4KeywordSemicolon = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cIdAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cIdNestedModelIdParserRuleCall_0_0 = (RuleCall)cIdAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cColonKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cValueFractionParserRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cNumberSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cVectorAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cVectorVectorParserRuleCall_2_1_0 = (RuleCall)cVectorAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cPlusSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cDotsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cDotsDotsParserRuleCall_3_1_0 = (RuleCall)cDotsAssignment_3_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		// not supported
+		//Model:
+		//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentId() { return c0AssignmentId; }
+		//id=NestedModelId
+		public Assignment getIdAssignment_0() { return cIdAssignment_0; }
 
-		// not supported
-		public RuleCall ele00ParserRuleCallNestedModelId() { return c00ParserRuleCallNestedModelId; }
+		//NestedModelId
+		public RuleCall getIdNestedModelIdParserRuleCall_0_0() { return cIdNestedModelIdParserRuleCall_0_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//(":" value=Fraction)?
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Keyword ele10KeywordColon() { return c10KeywordColon; }
+		//":"
+		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentValue() { return c11AssignmentValue; }
+		//value=Fraction
+		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		// not supported
-		public RuleCall ele110ParserRuleCallFraction() { return c110ParserRuleCallFraction; }
+		//Fraction
+		public RuleCall getValueFractionParserRuleCall_1_1_0() { return cValueFractionParserRuleCall_1_1_0; }
 
-		// not supported
-		public Group ele2Group() { return c2Group; }
+		//("#" vector=Vector)?
+		public Group getGroup_2() { return cGroup_2; }
 
-		// not supported
-		public Keyword ele20KeywordNumberSign() { return c20KeywordNumberSign; }
+		//"#"
+		public Keyword getNumberSignKeyword_2_0() { return cNumberSignKeyword_2_0; }
 
-		// not supported
-		public Assignment ele21AssignmentVector() { return c21AssignmentVector; }
+		//vector=Vector
+		public Assignment getVectorAssignment_2_1() { return cVectorAssignment_2_1; }
 
-		// not supported
-		public RuleCall ele210ParserRuleCallVector() { return c210ParserRuleCallVector; }
+		//Vector
+		public RuleCall getVectorVectorParserRuleCall_2_1_0() { return cVectorVectorParserRuleCall_2_1_0; }
 
-		// not supported
-		public Group ele3Group() { return c3Group; }
+		//("+" dots=Dots)?
+		public Group getGroup_3() { return cGroup_3; }
 
-		// not supported
-		public Keyword ele30KeywordPlusSign() { return c30KeywordPlusSign; }
+		//"+"
+		public Keyword getPlusSignKeyword_3_0() { return cPlusSignKeyword_3_0; }
 
-		// not supported
-		public Assignment ele31AssignmentDots() { return c31AssignmentDots; }
+		//dots=Dots
+		public Assignment getDotsAssignment_3_1() { return cDotsAssignment_3_1; }
 
-		// not supported
-		public RuleCall ele310ParserRuleCallDots() { return c310ParserRuleCallDots; }
+		//Dots
+		public RuleCall getDotsDotsParserRuleCall_3_1_0() { return cDotsDotsParserRuleCall_3_1_0; }
 
-		// not supported
-		public Keyword ele4KeywordSemicolon() { return c4KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class ModelIdElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallID = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword c1KeywordFullStop = (Keyword)cGroup.eContents().get(1);
-		private final RuleCall c2TerminalRuleCallID = (RuleCall)cGroup.eContents().get(2);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		// not supported
+		//ModelId returns ecore::EString:
+		//  ID "." ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//ID "." ID
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		// not supported
-		public Keyword ele1KeywordFullStop() { return c1KeywordFullStop; }
+		//"."
+		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
 
-		// not supported
-		public RuleCall ele2TerminalRuleCallID() { return c2TerminalRuleCallID; }
+		//ID
+		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
 	}
 
 	public class NestedModelIdElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallModelId = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword c1KeywordFullStop = (Keyword)cGroup.eContents().get(1);
-		private final RuleCall c2ParserRuleCallModelId = (RuleCall)cGroup.eContents().get(2);
+		private final RuleCall cModelIdParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cModelIdParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		// not supported
+		//NestedModelId returns ecore::EString:
+		//  ModelId "." ModelId;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//ModelId "." ModelId
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallModelId() { return c0ParserRuleCallModelId; }
+		//ModelId
+		public RuleCall getModelIdParserRuleCall_0() { return cModelIdParserRuleCall_0; }
 
-		// not supported
-		public Keyword ele1KeywordFullStop() { return c1KeywordFullStop; }
+		//"."
+		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
 
-		// not supported
-		public RuleCall ele2ParserRuleCallModelId() { return c2ParserRuleCallModelId; }
+		//ModelId
+		public RuleCall getModelIdParserRuleCall_2() { return cModelIdParserRuleCall_2; }
 	}
 
 	public class FractionElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Fraction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSolidus = (Keyword)c1Group.eContents().get(0);
-		private final RuleCall c11TerminalRuleCallINT = (RuleCall)c1Group.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cSolidusKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		// not supported
+		//Fraction returns ecore::EBigDecimal:
+		//  INT ("/" INT)?;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//INT ("/" INT)?
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallINT() { return c0TerminalRuleCallINT; }
+		//INT
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//("/" INT)?
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Keyword ele10KeywordSolidus() { return c10KeywordSolidus; }
+		//"/"
+		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
 
-		// not supported
-		public RuleCall ele11TerminalRuleCallINT() { return c11TerminalRuleCallINT; }
+		//INT
+		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 	}
 
 	public class VectorElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Vector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall c1TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(1);
-		private final RuleCall c2TerminalRuleCallINT = (RuleCall)cGroup.eContents().get(2);
-		private final Keyword c3KeywordRightParenthesis = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		// not supported
+		//Vector returns ecore::EString:
+		//  "(" INT INT ")";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"(" INT INT ")"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordLeftParenthesis() { return c0KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
-		// not supported
-		public RuleCall ele1TerminalRuleCallINT() { return c1TerminalRuleCallINT; }
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
 
-		// not supported
-		public RuleCall ele2TerminalRuleCallINT() { return c2TerminalRuleCallINT; }
+		//INT
+		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
 
-		// not supported
-		public Keyword ele3KeywordRightParenthesis() { return c3KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
 	public class DotsElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Dots");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
-		private final Keyword c00KeywordFullStop = (Keyword)c0Group.eContents().get(0);
-		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
-		private final Keyword c1KeywordFullStopFullStop = (Keyword)cAlternatives.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Keyword cFullStopKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Keyword cFullStopKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Keyword cFullStopFullStopKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//Dots returns ecore::EString:
+		//  "." "."|"..";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//"." "."|".."
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Group ele0Group() { return c0Group; }
+		//"." "."
+		public Group getGroup_0() { return cGroup_0; }
 
-		// not supported
-		public Keyword ele00KeywordFullStop() { return c00KeywordFullStop; }
+		//"."
+		public Keyword getFullStopKeyword_0_0() { return cFullStopKeyword_0_0; }
 
-		// not supported
-		public Keyword ele01KeywordFullStop() { return c01KeywordFullStop; }
+		//"."
+		public Keyword getFullStopKeyword_0_1() { return cFullStopKeyword_0_1; }
 
-		// not supported
-		public Keyword ele1KeywordFullStopFullStop() { return c1KeywordFullStopFullStop; }
+		//".."
+		public Keyword getFullStopFullStopKeyword_1() { return cFullStopFullStopKeyword_1; }
 	}
 	
 	private CompositeModelElements pCompositeModel;
@@ -240,13 +247,13 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DatatypeRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -255,77 +262,118 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public CompositeModelElements prCompositeModel() {
+	//CompositeModel:
+	//  (model+=Model)+;
+	public CompositeModelElements getCompositeModelAccess() {
 		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
-	} 
+	}
+	
+	public ParserRule getCompositeModelRule() {
+		return getCompositeModelAccess().getRule();
+	}
 
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
-	} 
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
 
-	// not supported
-	public ModelIdElements prModelId() {
+	//ModelId returns ecore::EString:
+	//  ID "." ID;
+	public ModelIdElements getModelIdAccess() {
 		return (pModelId != null) ? pModelId : (pModelId = new ModelIdElements());
-	} 
+	}
+	
+	public ParserRule getModelIdRule() {
+		return getModelIdAccess().getRule();
+	}
 
-	// not supported
-	public NestedModelIdElements prNestedModelId() {
+	//NestedModelId returns ecore::EString:
+	//  ModelId "." ModelId;
+	public NestedModelIdElements getNestedModelIdAccess() {
 		return (pNestedModelId != null) ? pNestedModelId : (pNestedModelId = new NestedModelIdElements());
-	} 
+	}
+	
+	public ParserRule getNestedModelIdRule() {
+		return getNestedModelIdAccess().getRule();
+	}
 
-	// not supported
-	public FractionElements prFraction() {
+	//Fraction returns ecore::EBigDecimal:
+	//  INT ("/" INT)?;
+	public FractionElements getFractionAccess() {
 		return (pFraction != null) ? pFraction : (pFraction = new FractionElements());
-	} 
+	}
+	
+	public ParserRule getFractionRule() {
+		return getFractionAccess().getRule();
+	}
 
-	// not supported
-	public VectorElements prVector() {
+	//Vector returns ecore::EString:
+	//  "(" INT INT ")";
+	public VectorElements getVectorAccess() {
 		return (pVector != null) ? pVector : (pVector = new VectorElements());
-	} 
+	}
+	
+	public ParserRule getVectorRule() {
+		return getVectorAccess().getRule();
+	}
 
-	// not supported
-	public DotsElements prDots() {
+	//Dots returns ecore::EString:
+	//  "." "."|"..";
+	public DotsElements getDotsAccess() {
 		return (pDots != null) ? pDots : (pDots = new DotsElements());
+	}
+	
+	public ParserRule getDotsRule() {
+		return getDotsAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

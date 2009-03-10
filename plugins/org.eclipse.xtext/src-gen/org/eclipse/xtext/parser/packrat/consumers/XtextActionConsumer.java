@@ -270,22 +270,22 @@ public final class XtextActionConsumer extends NonTerminalConsumer {
 	public void setRule(ActionElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftCurlyBracket());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentType());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTypeRef());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordFullStop());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentFeature());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210TerminalRuleCallID());
-		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele22AssignmentOperator());
-		alternatives$10$Consumer = new Alternatives$10$Consumer(rule.ele220Alternatives());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele2200KeywordEqualsSign());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele2201KeywordPlusSignEqualsSign());
-		keyword$11$Consumer = new Keyword$11$Consumer(rule.ele2200KeywordEqualsSign());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele2201KeywordPlusSignEqualsSign());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele23KeywordCurrent());
-		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele3KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getLeftCurlyBracketKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getTypeAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getTypeTypeRefParserRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getFullStopKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getFeatureAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getFeatureIDTerminalRuleCall_2_1_0());
+		assignment$9$Consumer = new Assignment$9$Consumer(rule.getOperatorAssignment_2_2());
+		alternatives$10$Consumer = new Alternatives$10$Consumer(rule.getOperatorAlternatives_2_2_0());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getOperatorEqualsSignKeyword_2_2_0_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getOperatorPlusSignEqualsSignKeyword_2_2_0_1());
+		keyword$11$Consumer = new Keyword$11$Consumer(rule.getOperatorEqualsSignKeyword_2_2_0_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getOperatorPlusSignEqualsSignKeyword_2_2_0_1());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.getCurrentKeyword_2_3());
+		keyword$14$Consumer = new Keyword$14$Consumer(rule.getRightCurlyBracketKeyword_3());
 	}
 	
 	@Override

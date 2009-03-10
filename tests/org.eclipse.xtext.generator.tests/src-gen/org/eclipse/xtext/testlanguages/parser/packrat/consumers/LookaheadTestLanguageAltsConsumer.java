@@ -101,10 +101,10 @@ public final class LookaheadTestLanguageAltsConsumer extends NonTerminalConsumer
 	public void setRule(AltsElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallLookAhead0());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallLookAhead1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallLookAhead3());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getLookAhead0ParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getLookAhead1ParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getLookAhead3ParserRuleCall_2());
 	}
 	
 	@Override

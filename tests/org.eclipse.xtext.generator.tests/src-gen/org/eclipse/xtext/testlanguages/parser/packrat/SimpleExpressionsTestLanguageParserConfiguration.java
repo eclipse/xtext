@@ -74,19 +74,19 @@ public class SimpleExpressionsTestLanguageParserConfiguration extends AbstractPa
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
-		getSequenceConsumer().setRule(grammarAccess.prSequence());
-		getAdditionConsumer().setRule(grammarAccess.prAddition());
-		getMultiplicationConsumer().setRule(grammarAccess.prMultiplication());
-		getTermConsumer().setRule(grammarAccess.prTerm());
-		getAtomConsumer().setRule(grammarAccess.prAtom());
-		getParensConsumer().setRule(grammarAccess.prParens());
-		getIdConsumer().setRule(grammarAccess.trID());
-		getIntConsumer().setRule(grammarAccess.trINT());
-		getStringConsumer().setRule(grammarAccess.trSTRING());
-		getMlCommentConsumer().setRule(grammarAccess.trML_COMMENT());
-		getSlCommentConsumer().setRule(grammarAccess.trSL_COMMENT());
-		getWsConsumer().setRule(grammarAccess.trWS());
-		getAnyOtherConsumer().setRule(grammarAccess.trANY_OTHER());
+		getSequenceConsumer().setRule(grammarAccess.getSequenceAccess());
+		getAdditionConsumer().setRule(grammarAccess.getAdditionAccess());
+		getMultiplicationConsumer().setRule(grammarAccess.getMultiplicationAccess());
+		getTermConsumer().setRule(grammarAccess.getTermAccess());
+		getAtomConsumer().setRule(grammarAccess.getAtomAccess());
+		getParensConsumer().setRule(grammarAccess.getParensAccess());
+		getIdConsumer().setRule(grammarAccess.getIDRule());
+		getIntConsumer().setRule(grammarAccess.getINTRule());
+		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
+		getMlCommentConsumer().setRule(grammarAccess.getML_COMMENTRule());
+		getSlCommentConsumer().setRule(grammarAccess.getSL_COMMENTRule());
+		getWsConsumer().setRule(grammarAccess.getWSRule());
+		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
 		getSequenceConsumer().setAdditionConsumer(getAdditionConsumer());

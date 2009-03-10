@@ -388,28 +388,28 @@ public final class EpatchTestLanguageBiListAssignmentConsumer extends NonTermina
 	public void setRule(BiListAssignmentElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentFeature());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordEqualsSign());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftSquareBracket());
-		group$6$Consumer = new Group$6$Consumer(rule.ele3Group());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele30AssignmentLeftValues());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele300ParserRuleCallListAssignmentValue());
-		group$9$Consumer = new Group$9$Consumer(rule.ele31Group());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele310KeywordComma());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele311AssignmentLeftValues());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele3110ParserRuleCallListAssignmentValue());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele4KeywordVerticalLine());
-		group$14$Consumer = new Group$14$Consumer(rule.ele5Group());
-		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele50AssignmentRightValues());
-		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.ele500ParserRuleCallListAssignmentValue());
-		group$17$Consumer = new Group$17$Consumer(rule.ele51Group());
-		keyword$18$Consumer = new Keyword$18$Consumer(rule.ele510KeywordComma());
-		assignment$19$Consumer = new Assignment$19$Consumer(rule.ele511AssignmentRightValues());
-		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.ele5110ParserRuleCallListAssignmentValue());
-		keyword$21$Consumer = new Keyword$21$Consumer(rule.ele6KeywordRightSquareBracket());
-		keyword$22$Consumer = new Keyword$22$Consumer(rule.ele7KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getFeatureAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getFeatureIDTerminalRuleCall_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getEqualsSignKeyword_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftSquareBracketKeyword_2());
+		group$6$Consumer = new Group$6$Consumer(rule.getGroup_3());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getLeftValuesAssignment_3_0());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getLeftValuesListAssignmentValueParserRuleCall_3_0_0());
+		group$9$Consumer = new Group$9$Consumer(rule.getGroup_3_1());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getCommaKeyword_3_1_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getLeftValuesAssignment_3_1_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getLeftValuesListAssignmentValueParserRuleCall_3_1_1_0());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.getVerticalLineKeyword_4());
+		group$14$Consumer = new Group$14$Consumer(rule.getGroup_5());
+		assignment$15$Consumer = new Assignment$15$Consumer(rule.getRightValuesAssignment_5_0());
+		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getRightValuesListAssignmentValueParserRuleCall_5_0_0());
+		group$17$Consumer = new Group$17$Consumer(rule.getGroup_5_1());
+		keyword$18$Consumer = new Keyword$18$Consumer(rule.getCommaKeyword_5_1_0());
+		assignment$19$Consumer = new Assignment$19$Consumer(rule.getRightValuesAssignment_5_1_1());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.getRightValuesListAssignmentValueParserRuleCall_5_1_1_0());
+		keyword$21$Consumer = new Keyword$21$Consumer(rule.getRightSquareBracketKeyword_6());
+		keyword$22$Consumer = new Keyword$22$Consumer(rule.getSemicolonKeyword_7());
 	}
 	
 	@Override

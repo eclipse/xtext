@@ -186,15 +186,15 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	public void setRule(TermElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallAtom());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallTwoNumbers());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele2ParserRuleCallManyStrings());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele3ParserRuleCallParens());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele4ParserRuleCallType());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele5ParserRuleCallRef2());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele6ParserRuleCallSpare());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele7ParserRuleCallBoolean());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAtomParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTwoNumbersParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getManyStringsParserRuleCall_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getParensParserRuleCall_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getTypeParserRuleCall_4());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getRef2ParserRuleCall_5());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getSpareParserRuleCall_6());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getBooleanParserRuleCall_7());
 	}
 	
 	@Override

@@ -20,57 +20,58 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment c0AssignmentFirst = (Assignment)cAlternatives.eContents().get(0);
-		private final Keyword c00KeywordFooBar = (Keyword)c0AssignmentFirst.eContents().get(0);
-		private final Assignment c1AssignmentSecond = (Assignment)cAlternatives.eContents().get(1);
-		private final Keyword c10KeywordFoo = (Keyword)c1AssignmentSecond.eContents().get(0);
-		private final Assignment c2AssignmentThird = (Assignment)cAlternatives.eContents().get(2);
-		private final Keyword c20KeywordBar = (Keyword)c2AssignmentThird.eContents().get(0);
-		private final Assignment c3AssignmentForth = (Assignment)cAlternatives.eContents().get(3);
-		private final Keyword c30KeywordReverseSolidus = (Keyword)c3AssignmentForth.eContents().get(0);
+		private final Assignment cFirstAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final Keyword cFirstFooBarKeyword_0_0 = (Keyword)cFirstAssignment_0.eContents().get(0);
+		private final Assignment cSecondAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final Keyword cSecondFooKeyword_1_0 = (Keyword)cSecondAssignment_1.eContents().get(0);
+		private final Assignment cThirdAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final Keyword cThirdBarKeyword_2_0 = (Keyword)cThirdAssignment_2.eContents().get(0);
+		private final Assignment cForthAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final Keyword cForthReverseSolidusKeyword_3_0 = (Keyword)cForthAssignment_3.eContents().get(0);
 		
-		// not supported
+		//Model:
+		//  first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\"
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Assignment ele0AssignmentFirst() { return c0AssignmentFirst; }
+		//first?="foo\\bar"
+		public Assignment getFirstAssignment_0() { return cFirstAssignment_0; }
 
-		// not supported
-		public Keyword ele00KeywordFooBar() { return c00KeywordFooBar; }
+		//"foo\\bar"
+		public Keyword getFirstFooBarKeyword_0_0() { return cFirstFooBarKeyword_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentSecond() { return c1AssignmentSecond; }
+		//second?="foo\\"
+		public Assignment getSecondAssignment_1() { return cSecondAssignment_1; }
 
-		// not supported
-		public Keyword ele10KeywordFoo() { return c10KeywordFoo; }
+		//"foo\\"
+		public Keyword getSecondFooKeyword_1_0() { return cSecondFooKeyword_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentThird() { return c2AssignmentThird; }
+		//third?="\\bar"
+		public Assignment getThirdAssignment_2() { return cThirdAssignment_2; }
 
-		// not supported
-		public Keyword ele20KeywordBar() { return c20KeywordBar; }
+		//"\\bar"
+		public Keyword getThirdBarKeyword_2_0() { return cThirdBarKeyword_2_0; }
 
-		// not supported
-		public Assignment ele3AssignmentForth() { return c3AssignmentForth; }
+		//forth?="\\"
+		public Assignment getForthAssignment_3() { return cForthAssignment_3; }
 
-		// not supported
-		public Keyword ele30KeywordReverseSolidus() { return c30KeywordReverseSolidus; }
+		//"\\"
+		public Keyword getForthReverseSolidusKeyword_3_0() { return cForthReverseSolidusKeyword_3_0; }
 	}
 	
 	private ModelElements pModel;
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public KeywordsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -79,47 +80,58 @@ public class KeywordsTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  first?="foo\\bar"|second?="foo\\"|third?="\\bar"|forth?="\\";
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

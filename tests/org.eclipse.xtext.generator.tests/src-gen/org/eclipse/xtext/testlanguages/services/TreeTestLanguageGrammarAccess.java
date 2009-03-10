@@ -19,68 +19,70 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Assignment cAssignmentChildren = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallNode = (RuleCall)cAssignmentChildren.eContents().get(0);
+		private final Assignment cChildrenAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cChildrenNodeParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
-		// not supported
+		//Model:
+		//  (children+=Node)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentChildren() { return cAssignmentChildren; }
+		//(children+=Node)*
+		public Assignment getChildrenAssignment() { return cChildrenAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallNode() { return c0ParserRuleCallNode; }
+		//Node
+		public RuleCall getChildrenNodeParserRuleCall_0() { return cChildrenNodeParserRuleCall_0; }
 	}
 
 	public class NodeElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Node");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
-		private final Keyword c1KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentAttrib = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentAttrib.eContents().get(0);
-		private final Keyword c3KeywordRightParenthesis = (Keyword)cGroup.eContents().get(3);
-		private final Keyword c4KeywordLeftCurlyBracket = (Keyword)cGroup.eContents().get(4);
-		private final Assignment c5AssignmentChildren = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall c50ParserRuleCallNode = (RuleCall)c5AssignmentChildren.eContents().get(0);
-		private final Keyword c6KeywordRightCurlyBracketSemicolon = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cAttribAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAttribSTRINGTerminalRuleCall_2_0 = (RuleCall)cAttribAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cChildrenAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cChildrenNodeParserRuleCall_5_0 = (RuleCall)cChildrenAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		// not supported
+		//Node:
+		//  name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Assignment ele0AssignmentName() { return c0AssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		// not supported
-		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		// not supported
-		public Keyword ele1KeywordLeftParenthesis() { return c1KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentAttrib() { return c2AssignmentAttrib; }
+		//attrib=STRING
+		public Assignment getAttribAssignment_2() { return cAttribAssignment_2; }
 
-		// not supported
-		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
+		//STRING
+		public RuleCall getAttribSTRINGTerminalRuleCall_2_0() { return cAttribSTRINGTerminalRuleCall_2_0; }
 
-		// not supported
-		public Keyword ele3KeywordRightParenthesis() { return c3KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 
-		// not supported
-		public Keyword ele4KeywordLeftCurlyBracket() { return c4KeywordLeftCurlyBracket; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		// not supported
-		public Assignment ele5AssignmentChildren() { return c5AssignmentChildren; }
+		//(children+=Node)*
+		public Assignment getChildrenAssignment_5() { return cChildrenAssignment_5; }
 
-		// not supported
-		public RuleCall ele50ParserRuleCallNode() { return c50ParserRuleCallNode; }
+		//Node
+		public RuleCall getChildrenNodeParserRuleCall_5_0() { return cChildrenNodeParserRuleCall_5_0; }
 
-		// not supported
-		public Keyword ele6KeywordRightCurlyBracketSemicolon() { return c6KeywordRightCurlyBracketSemicolon; }
+		//"};"
+		public Keyword getRightCurlyBracketSemicolonKeyword_6() { return cRightCurlyBracketSemicolonKeyword_6; }
 	}
 	
 	private ModelElements pModel;
@@ -88,13 +90,13 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TreeTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -103,52 +105,68 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  (children+=Node)*;
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
-	} 
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
 
-	// not supported
-	public NodeElements prNode() {
+	//Node:
+	//  name=ID "(" attrib=STRING ")" "{" (children+=Node)* "};";
+	public NodeElements getNodeAccess() {
 		return (pNode != null) ? pNode : (pNode = new NodeElements());
+	}
+	
+	public ParserRule getNodeRule() {
+		return getNodeAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

@@ -138,12 +138,12 @@ public final class SimpleReconstrTestLanguageParensConsumer extends NonTerminalC
 	public void setRule(ParensElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordLeftParenthesis());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallOp());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordRightParenthesis());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele3AssignmentEm());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele30KeywordExclamationMark());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getLeftParenthesisKeyword_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getOpParserRuleCall_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getRightParenthesisKeyword_2());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getEmAssignment_3());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getEmExclamationMarkKeyword_3_0());
 	}
 	
 	@Override

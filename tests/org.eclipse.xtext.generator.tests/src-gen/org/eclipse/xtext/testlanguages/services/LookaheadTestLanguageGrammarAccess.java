@@ -19,199 +19,206 @@ public class LookaheadTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public class EntryElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entry");
-		private final Assignment cAssignmentContents = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAlts = (RuleCall)cAssignmentContents.eContents().get(0);
+		private final Assignment cContentsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cContentsAltsParserRuleCall_0 = (RuleCall)cContentsAssignment.eContents().get(0);
 		
-		// not supported
+		//Entry:
+		//  (contents+=Alts)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentContents() { return cAssignmentContents; }
+		//(contents+=Alts)*
+		public Assignment getContentsAssignment() { return cContentsAssignment; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAlts() { return c0ParserRuleCallAlts; }
+		//Alts
+		public RuleCall getContentsAltsParserRuleCall_0() { return cContentsAltsParserRuleCall_0; }
 	}
 
 	public class AltsElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Alts");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallLookAhead0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallLookAhead1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall c2ParserRuleCallLookAhead3 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cLookAhead0ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cLookAhead1ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cLookAhead3ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		// not supported
+		//Alts:
+		//  LookAhead0|LookAhead1|LookAhead3;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//LookAhead0|LookAhead1|LookAhead3
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallLookAhead0() { return c0ParserRuleCallLookAhead0; }
+		//LookAhead0
+		public RuleCall getLookAhead0ParserRuleCall_0() { return cLookAhead0ParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallLookAhead1() { return c1ParserRuleCallLookAhead1; }
+		//LookAhead1
+		public RuleCall getLookAhead1ParserRuleCall_1() { return cLookAhead1ParserRuleCall_1; }
 
-		// not supported
-		public RuleCall ele2ParserRuleCallLookAhead3() { return c2ParserRuleCallLookAhead3; }
+		//LookAhead3
+		public RuleCall getLookAhead3ParserRuleCall_2() { return cLookAhead3ParserRuleCall_2; }
 	}
 
 	public class LookAhead0Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead0");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordBar = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentX = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordA = (Keyword)c1AssignmentX.eContents().get(0);
+		private final Keyword cBarKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cXAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cXAKeyword_1_0 = (Keyword)cXAssignment_1.eContents().get(0);
 		
-		// not supported
+		//LookAhead0:
+		//  "bar" x="a";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"bar" x="a"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordBar() { return c0KeywordBar; }
+		//"bar"
+		public Keyword getBarKeyword_0() { return cBarKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentX() { return c1AssignmentX; }
+		//x="a"
+		public Assignment getXAssignment_1() { return cXAssignment_1; }
 
-		// not supported
-		public Keyword ele10KeywordA() { return c10KeywordA; }
+		//"a"
+		public Keyword getXAKeyword_1_0() { return cXAKeyword_1_0; }
 	}
 
 	public class LookAhead1Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordFoo = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentY = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallLookAhead2 = (RuleCall)c1AssignmentY.eContents().get(0);
-		private final Assignment c2AssignmentX = (Assignment)cGroup.eContents().get(2);
-		private final Keyword c20KeywordB = (Keyword)c2AssignmentX.eContents().get(0);
-		private final Assignment c3AssignmentX = (Assignment)cGroup.eContents().get(3);
-		private final Keyword c30KeywordD = (Keyword)c3AssignmentX.eContents().get(0);
+		private final Keyword cFooKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cYAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cYLookAhead2ParserRuleCall_1_0 = (RuleCall)cYAssignment_1.eContents().get(0);
+		private final Assignment cXAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cXBKeyword_2_0 = (Keyword)cXAssignment_2.eContents().get(0);
+		private final Assignment cXAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cXDKeyword_3_0 = (Keyword)cXAssignment_3.eContents().get(0);
 		
-		// not supported
+		//LookAhead1:
+		//  "foo" y=LookAhead2 x="b" x="d";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"foo" y=LookAhead2 x="b" x="d"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordFoo() { return c0KeywordFoo; }
+		//"foo"
+		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentY() { return c1AssignmentY; }
+		//y=LookAhead2
+		public Assignment getYAssignment_1() { return cYAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallLookAhead2() { return c10ParserRuleCallLookAhead2; }
+		//LookAhead2
+		public RuleCall getYLookAhead2ParserRuleCall_1_0() { return cYLookAhead2ParserRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentX() { return c2AssignmentX; }
+		//x="b"
+		public Assignment getXAssignment_2() { return cXAssignment_2; }
 
-		// not supported
-		public Keyword ele20KeywordB() { return c20KeywordB; }
+		//"b"
+		public Keyword getXBKeyword_2_0() { return cXBKeyword_2_0; }
 
-		// not supported
-		public Assignment ele3AssignmentX() { return c3AssignmentX; }
+		//x="d"
+		public Assignment getXAssignment_3() { return cXAssignment_3; }
 
-		// not supported
-		public Keyword ele30KeywordD() { return c30KeywordD; }
+		//"d"
+		public Keyword getXDKeyword_3_0() { return cXDKeyword_3_0; }
 	}
 
 	public class LookAhead2Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives c0Alternatives = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment c00AssignmentZ = (Assignment)c0Alternatives.eContents().get(0);
-		private final Keyword c000KeywordFoo = (Keyword)c00AssignmentZ.eContents().get(0);
-		private final Assignment c01AssignmentZ = (Assignment)c0Alternatives.eContents().get(1);
-		private final Keyword c010KeywordBar = (Keyword)c01AssignmentZ.eContents().get(0);
-		private final Keyword c1KeywordC = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cZAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final Keyword cZFooKeyword_0_0_0 = (Keyword)cZAssignment_0_0.eContents().get(0);
+		private final Assignment cZAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final Keyword cZBarKeyword_0_1_0 = (Keyword)cZAssignment_0_1.eContents().get(0);
+		private final Keyword cCKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		// not supported
+		//LookAhead2:
+		//  (z="foo"|z="bar") "c";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//(z="foo"|z="bar") "c"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Alternatives ele0Alternatives() { return c0Alternatives; }
+		//z="foo"|z="bar"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		// not supported
-		public Assignment ele00AssignmentZ() { return c00AssignmentZ; }
+		//z="foo"
+		public Assignment getZAssignment_0_0() { return cZAssignment_0_0; }
 
-		// not supported
-		public Keyword ele000KeywordFoo() { return c000KeywordFoo; }
+		//"foo"
+		public Keyword getZFooKeyword_0_0_0() { return cZFooKeyword_0_0_0; }
 
-		// not supported
-		public Assignment ele01AssignmentZ() { return c01AssignmentZ; }
+		//z="bar"
+		public Assignment getZAssignment_0_1() { return cZAssignment_0_1; }
 
-		// not supported
-		public Keyword ele010KeywordBar() { return c010KeywordBar; }
+		//"bar"
+		public Keyword getZBarKeyword_0_1_0() { return cZBarKeyword_0_1_0; }
 
-		// not supported
-		public Keyword ele1KeywordC() { return c1KeywordC; }
+		//"c"
+		public Keyword getCKeyword_1() { return cCKeyword_1; }
 	}
 
 	public class LookAhead3Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordFoo = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordBar = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentX = (Assignment)cGroup.eContents().get(2);
-		private final Keyword c20KeywordB = (Keyword)c2AssignmentX.eContents().get(0);
-		private final Assignment c3AssignmentZ = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallLookAhead4 = (RuleCall)c3AssignmentZ.eContents().get(0);
+		private final Keyword cFooKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cBarKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cXAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cXBKeyword_2_0 = (Keyword)cXAssignment_2.eContents().get(0);
+		private final Assignment cZAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cZLookAhead4ParserRuleCall_3_0 = (RuleCall)cZAssignment_3.eContents().get(0);
 		
-		// not supported
+		//LookAhead3:
+		//  "foo" "bar" x="b" z=LookAhead4;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"foo" "bar" x="b" z=LookAhead4
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordFoo() { return c0KeywordFoo; }
+		//"foo"
+		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordBar() { return c1KeywordBar; }
+		//"bar"
+		public Keyword getBarKeyword_1() { return cBarKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentX() { return c2AssignmentX; }
+		//x="b"
+		public Assignment getXAssignment_2() { return cXAssignment_2; }
 
-		// not supported
-		public Keyword ele20KeywordB() { return c20KeywordB; }
+		//"b"
+		public Keyword getXBKeyword_2_0() { return cXBKeyword_2_0; }
 
-		// not supported
-		public Assignment ele3AssignmentZ() { return c3AssignmentZ; }
+		//z=LookAhead4
+		public Assignment getZAssignment_3() { return cZAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallLookAhead4() { return c30ParserRuleCallLookAhead4; }
+		//LookAhead4
+		public RuleCall getZLookAhead4ParserRuleCall_3_0() { return cZLookAhead4ParserRuleCall_3_0; }
 	}
 
 	public class LookAhead4Elements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LookAhead4");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment c0AssignmentX = (Assignment)cAlternatives.eContents().get(0);
-		private final Keyword c00KeywordC = (Keyword)c0AssignmentX.eContents().get(0);
-		private final Assignment c1AssignmentX = (Assignment)cAlternatives.eContents().get(1);
-		private final Keyword c10KeywordD = (Keyword)c1AssignmentX.eContents().get(0);
+		private final Assignment cXAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final Keyword cXCKeyword_0_0 = (Keyword)cXAssignment_0.eContents().get(0);
+		private final Assignment cXAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final Keyword cXDKeyword_1_0 = (Keyword)cXAssignment_1.eContents().get(0);
 		
-		// not supported
+		//LookAhead4:
+		//  x="c"|x="d";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//x="c"|x="d"
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public Assignment ele0AssignmentX() { return c0AssignmentX; }
+		//x="c"
+		public Assignment getXAssignment_0() { return cXAssignment_0; }
 
-		// not supported
-		public Keyword ele00KeywordC() { return c00KeywordC; }
+		//"c"
+		public Keyword getXCKeyword_0_0() { return cXCKeyword_0_0; }
 
-		// not supported
-		public Assignment ele1AssignmentX() { return c1AssignmentX; }
+		//x="d"
+		public Assignment getXAssignment_1() { return cXAssignment_1; }
 
-		// not supported
-		public Keyword ele10KeywordD() { return c10KeywordD; }
+		//"d"
+		public Keyword getXDKeyword_1_0() { return cXDKeyword_1_0; }
 	}
 	
 	private EntryElements pEntry;
@@ -224,13 +231,13 @@ public class LookaheadTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LookaheadTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -239,77 +246,118 @@ public class LookaheadTestLanguageGrammarAccess implements IGrammarAccess {
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public EntryElements prEntry() {
+	//Entry:
+	//  (contents+=Alts)*;
+	public EntryElements getEntryAccess() {
 		return (pEntry != null) ? pEntry : (pEntry = new EntryElements());
-	} 
+	}
+	
+	public ParserRule getEntryRule() {
+		return getEntryAccess().getRule();
+	}
 
-	// not supported
-	public AltsElements prAlts() {
+	//Alts:
+	//  LookAhead0|LookAhead1|LookAhead3;
+	public AltsElements getAltsAccess() {
 		return (pAlts != null) ? pAlts : (pAlts = new AltsElements());
-	} 
+	}
+	
+	public ParserRule getAltsRule() {
+		return getAltsAccess().getRule();
+	}
 
-	// not supported
-	public LookAhead0Elements prLookAhead0() {
+	//LookAhead0:
+	//  "bar" x="a";
+	public LookAhead0Elements getLookAhead0Access() {
 		return (pLookAhead0 != null) ? pLookAhead0 : (pLookAhead0 = new LookAhead0Elements());
-	} 
+	}
+	
+	public ParserRule getLookAhead0Rule() {
+		return getLookAhead0Access().getRule();
+	}
 
-	// not supported
-	public LookAhead1Elements prLookAhead1() {
+	//LookAhead1:
+	//  "foo" y=LookAhead2 x="b" x="d";
+	public LookAhead1Elements getLookAhead1Access() {
 		return (pLookAhead1 != null) ? pLookAhead1 : (pLookAhead1 = new LookAhead1Elements());
-	} 
+	}
+	
+	public ParserRule getLookAhead1Rule() {
+		return getLookAhead1Access().getRule();
+	}
 
-	// not supported
-	public LookAhead2Elements prLookAhead2() {
+	//LookAhead2:
+	//  (z="foo"|z="bar") "c";
+	public LookAhead2Elements getLookAhead2Access() {
 		return (pLookAhead2 != null) ? pLookAhead2 : (pLookAhead2 = new LookAhead2Elements());
-	} 
+	}
+	
+	public ParserRule getLookAhead2Rule() {
+		return getLookAhead2Access().getRule();
+	}
 
-	// not supported
-	public LookAhead3Elements prLookAhead3() {
+	//LookAhead3:
+	//  "foo" "bar" x="b" z=LookAhead4;
+	public LookAhead3Elements getLookAhead3Access() {
 		return (pLookAhead3 != null) ? pLookAhead3 : (pLookAhead3 = new LookAhead3Elements());
-	} 
+	}
+	
+	public ParserRule getLookAhead3Rule() {
+		return getLookAhead3Access().getRule();
+	}
 
-	// not supported
-	public LookAhead4Elements prLookAhead4() {
+	//LookAhead4:
+	//  x="c"|x="d";
+	public LookAhead4Elements getLookAhead4Access() {
 		return (pLookAhead4 != null) ? pLookAhead4 : (pLookAhead4 = new LookAhead4Elements());
+	}
+	
+	public ParserRule getLookAhead4Rule() {
+		return getLookAhead4Access().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

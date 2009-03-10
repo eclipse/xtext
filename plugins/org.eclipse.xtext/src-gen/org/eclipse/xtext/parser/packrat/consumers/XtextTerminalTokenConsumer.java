@@ -153,16 +153,16 @@ public final class XtextTerminalTokenConsumer extends NonTerminalConsumer {
 	public void setRule(TerminalTokenElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerminalTokenElement());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentCardinality());
-		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele10Alternatives());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordQuestionMark());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele101KeywordAsterisk());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele102KeywordPlusSign());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele100KeywordQuestionMark());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele101KeywordAsterisk());
-		keyword$7$Consumer = new Keyword$7$Consumer(rule.ele102KeywordPlusSign());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTerminalTokenElementParserRuleCall_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getCardinalityAssignment_1());
+		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.getCardinalityAlternatives_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getCardinalityQuestionMarkKeyword_1_0_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getCardinalityAsteriskKeyword_1_0_1());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCardinalityPlusSignKeyword_1_0_2());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getCardinalityQuestionMarkKeyword_1_0_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getCardinalityAsteriskKeyword_1_0_1());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getCardinalityPlusSignKeyword_1_0_2());
 	}
 	
 	@Override

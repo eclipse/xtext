@@ -76,7 +76,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:69:51: (iv_ruleMainModel= ruleMainModel EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:70:2: iv_ruleMainModel= ruleMainModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prMainModel().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getMainModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleMainModel_in_entryRuleMainModel71);
             iv_ruleMainModel=ruleMainModel();
             _fsp--;
@@ -129,7 +129,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:86:6: lv_elements_0= ruleAnElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.prMainModel().ele0ParserRuleCallAnElement(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAnElement_in_ruleMainModel139);
             	    lv_elements_0=ruleAnElement();
@@ -137,7 +137,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.prMainModel().getRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getMainModelRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        
@@ -188,7 +188,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:111:51: (iv_ruleAnElement= ruleAnElement EOF )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:112:2: iv_ruleAnElement= ruleAnElement EOF
             {
-             currentNode = createCompositeNode(grammarAccess.prAnElement().getRule(), currentNode); 
+             currentNode = createCompositeNode(grammarAccess.getAnElementRule(), currentNode); 
             pushFollow(FOLLOW_ruleAnElement_in_entryRuleAnElement176);
             iv_ruleAnElement=ruleAnElement();
             _fsp--;
@@ -233,11 +233,11 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             lv_name_0=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement233); 
 
-            		createLeafNode(grammarAccess.prAnElement().ele00TerminalRuleCallID(), "name"); 
+            		createLeafNode(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             	
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAnElementRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
@@ -263,20 +263,20 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
                     {
                     match(input,11,FOLLOW_11_in_ruleAnElement251); 
 
-                            createLeafNode(grammarAccess.prAnElement().ele10KeywordRefersTo(), null); 
+                            createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
                         
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:149:1: ( RULE_ID )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/impl/parser/antlr/internal/InternalTwoContextsTestLanguage.g:152:3: RULE_ID
                     {
 
                     			if (current==null) {
-                    	            current = factory.create(grammarAccess.prAnElement().getRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAnElementRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement273); 
 
-                    		createLeafNode(grammarAccess.prAnElement().ele110CrossReferenceIDAnElement(), "referred"); 
+                    		createLeafNode(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
                     	
 
                     }
@@ -289,7 +289,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
             match(input,12,FOLLOW_12_in_ruleAnElement287); 
 
-                    createLeafNode(grammarAccess.prAnElement().ele2KeywordSemicolon(), null); 
+                    createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
                 
 
             }

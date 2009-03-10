@@ -102,10 +102,10 @@ public final class ComplexReconstrTestLanguageTrickyGConsumer extends NonTermina
 	public void setRule(TrickyGElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordTG());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentTree());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallTrickyG1());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getTGKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getTreeAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getTreeTrickyG1ParserRuleCall_1_0());
 	}
 	
 	@Override

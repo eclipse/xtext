@@ -137,12 +137,12 @@ public final class SimpleReconstrTestLanguageManyStringsConsumer extends NonTerm
 	public void setRule(ManyStringsElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordEqualsSign());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentStr1());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallSTRING());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentStr2());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallSTRING());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getEqualsSignKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getStr1Assignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getStr1STRINGTerminalRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getStr2Assignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getStr2STRINGTerminalRuleCall_2_0());
 	}
 	
 	@Override

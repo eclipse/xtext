@@ -173,14 +173,14 @@ public final class ContentAssistTestLanguageSecondAbstractRuleChildConsumer exte
 	public void setRule(SecondAbstractRuleChildElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentName());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordRule());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordColon());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentRule());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallAbstractRuleCall());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele4KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getNameAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getNameIDTerminalRuleCall_0_0());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getRuleKeyword_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getColonKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getRuleAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getRuleAbstractRuleCallParserRuleCall_3_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getSemicolonKeyword_4());
 	}
 	
 	@Override

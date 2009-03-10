@@ -20,183 +20,189 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 	public class SequenceElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Sequence");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAddition = (RuleCall)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Action c10ActionSequenceexpressions = (Action)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentExpressions = (Assignment)c1Group.eContents().get(1);
-		private final RuleCall c110ParserRuleCallAddition = (RuleCall)c11AssignmentExpressions.eContents().get(0);
+		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cSequenceexpressionsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cExpressionsAdditionParserRuleCall_1_1_0 = (RuleCall)cExpressionsAssignment_1_1.eContents().get(0);
 		
-		// not supported
+		//Sequence:
+		//  Addition ({Sequence.expressions+=current} expressions+=Addition)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//Addition ({Sequence.expressions+=current} expressions+=Addition)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAddition() { return c0ParserRuleCallAddition; }
+		//Addition
+		public RuleCall getAdditionParserRuleCall_0() { return cAdditionParserRuleCall_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//({Sequence.expressions+=current} expressions+=Addition)*
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Action ele10ActionSequenceexpressions() { return c10ActionSequenceexpressions; }
+		//{Sequence.expressions+=current}
+		public Action getSequenceexpressionsAction_1_0() { return cSequenceexpressionsAction_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentExpressions() { return c11AssignmentExpressions; }
+		//expressions+=Addition
+		public Assignment getExpressionsAssignment_1_1() { return cExpressionsAssignment_1_1; }
 
-		// not supported
-		public RuleCall ele110ParserRuleCallAddition() { return c110ParserRuleCallAddition; }
+		//Addition
+		public RuleCall getExpressionsAdditionParserRuleCall_1_1_0() { return cExpressionsAdditionParserRuleCall_1_1_0; }
 	}
 
 	public class AdditionElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallMultiplication = (RuleCall)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Action c10ActionOpvalues = (Action)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentOperator = (Assignment)c1Group.eContents().get(1);
-		private final Alternatives c110Alternatives = (Alternatives)c11AssignmentOperator.eContents().get(0);
-		private final Keyword c1100KeywordPlusSign = (Keyword)c110Alternatives.eContents().get(0);
-		private final Keyword c1101KeywordHyphenMinus = (Keyword)c110Alternatives.eContents().get(1);
-		private final Assignment c12AssignmentValues = (Assignment)c1Group.eContents().get(2);
-		private final RuleCall c120ParserRuleCallMultiplication = (RuleCall)c12AssignmentValues.eContents().get(0);
+		private final RuleCall cMultiplicationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cOpvaluesAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Alternatives cOperatorAlternatives_1_1_0 = (Alternatives)cOperatorAssignment_1_1.eContents().get(0);
+		private final Keyword cOperatorPlusSignKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
+		private final Keyword cOperatorHyphenMinusKeyword_1_1_0_1 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(1);
+		private final Assignment cValuesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cValuesMultiplicationParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
-		// not supported
+		//Addition returns Expression:
+		//  Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallMultiplication() { return c0ParserRuleCallMultiplication; }
+		//Multiplication
+		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Action ele10ActionOpvalues() { return c10ActionOpvalues; }
+		//{Op.values+=current}
+		public Action getOpvaluesAction_1_0() { return cOpvaluesAction_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentOperator() { return c11AssignmentOperator; }
+		//operator=( "+" | "-" )
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
-		// not supported
-		public Alternatives ele110Alternatives() { return c110Alternatives; }
+		//"+"|"-"
+		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
 
-		// not supported
-		public Keyword ele1100KeywordPlusSign() { return c1100KeywordPlusSign; }
+		//"+"
+		public Keyword getOperatorPlusSignKeyword_1_1_0_0() { return cOperatorPlusSignKeyword_1_1_0_0; }
 
-		// not supported
-		public Keyword ele1101KeywordHyphenMinus() { return c1101KeywordHyphenMinus; }
+		//"-"
+		public Keyword getOperatorHyphenMinusKeyword_1_1_0_1() { return cOperatorHyphenMinusKeyword_1_1_0_1; }
 
-		// not supported
-		public Assignment ele12AssignmentValues() { return c12AssignmentValues; }
+		//values+=Multiplication
+		public Assignment getValuesAssignment_1_2() { return cValuesAssignment_1_2; }
 
-		// not supported
-		public RuleCall ele120ParserRuleCallMultiplication() { return c120ParserRuleCallMultiplication; }
+		//Multiplication
+		public RuleCall getValuesMultiplicationParserRuleCall_1_2_0() { return cValuesMultiplicationParserRuleCall_1_2_0; }
 	}
 
 	public class MultiplicationElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallTerm = (RuleCall)cGroup.eContents().get(0);
-		private final Group c1Group = (Group)cGroup.eContents().get(1);
-		private final Action c10ActionOpvalues = (Action)c1Group.eContents().get(0);
-		private final Assignment c11AssignmentOperator = (Assignment)c1Group.eContents().get(1);
-		private final Alternatives c110Alternatives = (Alternatives)c11AssignmentOperator.eContents().get(0);
-		private final Keyword c1100KeywordAsterisk = (Keyword)c110Alternatives.eContents().get(0);
-		private final Keyword c1101KeywordSolidus = (Keyword)c110Alternatives.eContents().get(1);
-		private final Assignment c12AssignmentValues = (Assignment)c1Group.eContents().get(2);
-		private final RuleCall c120ParserRuleCallTerm = (RuleCall)c12AssignmentValues.eContents().get(0);
+		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cOpvaluesAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Alternatives cOperatorAlternatives_1_1_0 = (Alternatives)cOperatorAssignment_1_1.eContents().get(0);
+		private final Keyword cOperatorAsteriskKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
+		private final Keyword cOperatorSolidusKeyword_1_1_0_1 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(1);
+		private final Assignment cValuesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cValuesTermParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
-		// not supported
+		//Multiplication returns Expression:
+		//  Term ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//Term ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallTerm() { return c0ParserRuleCallTerm; }
+		//Term
+		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		// not supported
-		public Group ele1Group() { return c1Group; }
+		//({Op.values+=current} operator=( "*" | "/" ) values+=Term)*
+		public Group getGroup_1() { return cGroup_1; }
 
-		// not supported
-		public Action ele10ActionOpvalues() { return c10ActionOpvalues; }
+		//{Op.values+=current}
+		public Action getOpvaluesAction_1_0() { return cOpvaluesAction_1_0; }
 
-		// not supported
-		public Assignment ele11AssignmentOperator() { return c11AssignmentOperator; }
+		//operator=( "*" | "/" )
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
-		// not supported
-		public Alternatives ele110Alternatives() { return c110Alternatives; }
+		//"*"|"/"
+		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
 
-		// not supported
-		public Keyword ele1100KeywordAsterisk() { return c1100KeywordAsterisk; }
+		//"*"
+		public Keyword getOperatorAsteriskKeyword_1_1_0_0() { return cOperatorAsteriskKeyword_1_1_0_0; }
 
-		// not supported
-		public Keyword ele1101KeywordSolidus() { return c1101KeywordSolidus; }
+		//"/"
+		public Keyword getOperatorSolidusKeyword_1_1_0_1() { return cOperatorSolidusKeyword_1_1_0_1; }
 
-		// not supported
-		public Assignment ele12AssignmentValues() { return c12AssignmentValues; }
+		//values+=Term
+		public Assignment getValuesAssignment_1_2() { return cValuesAssignment_1_2; }
 
-		// not supported
-		public RuleCall ele120ParserRuleCallTerm() { return c120ParserRuleCallTerm; }
+		//Term
+		public RuleCall getValuesTermParserRuleCall_1_2_0() { return cValuesTermParserRuleCall_1_2_0; }
 	}
 
 	public class TermElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallAtom = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallParens = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cParensParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		// not supported
+		//Term returns Expression:
+		//  Atom|Parens;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//Atom|Parens
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallAtom() { return c0ParserRuleCallAtom; }
+		//Atom
+		public RuleCall getAtomParserRuleCall_0() { return cAtomParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallParens() { return c1ParserRuleCallParens; }
+		//Parens
+		public RuleCall getParensParserRuleCall_1() { return cParensParserRuleCall_1; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
-		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
-		private final RuleCall c0TerminalRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		// not supported
+		//Atom:
+		//  name=ID;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Assignment eleAssignmentName() { return cAssignmentName; }
+		//name=ID
+		public Assignment getNameAssignment() { return cNameAssignment; }
 
-		// not supported
-		public RuleCall ele0TerminalRuleCallID() { return c0TerminalRuleCallID; }
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
 	public class ParensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall c1ParserRuleCallAddition = (RuleCall)cGroup.eContents().get(1);
-		private final Keyword c2KeywordRightParenthesis = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cAdditionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		// not supported
+		//Parens returns Expression:
+		//  "(" Addition ")";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"(" Addition ")"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordLeftParenthesis() { return c0KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallAddition() { return c1ParserRuleCallAddition; }
+		//Addition
+		public RuleCall getAdditionParserRuleCall_1() { return cAdditionParserRuleCall_1; }
 
-		// not supported
-		public Keyword ele2KeywordRightParenthesis() { return c2KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 	
 	private SequenceElements pSequence;
@@ -208,13 +214,13 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 	
 	private final GrammarProvider grammarProvider;
 
-	private TerminalsGrammarAccess terminalsGrammarAccess;
+	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SimpleExpressionsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess terminalsGrammarAccess) {
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
-		this.terminalsGrammarAccess = terminalsGrammarAccess;
+		this.gaTerminals = gaTerminals;
 	}
 	
 	public Grammar getGrammar() {	
@@ -223,72 +229,108 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 	
 
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return terminalsGrammarAccess;
+		return gaTerminals;
 	}
 
 	
-	// not supported
-	public SequenceElements prSequence() {
+	//Sequence:
+	//  Addition ({Sequence.expressions+=current} expressions+=Addition)*;
+	public SequenceElements getSequenceAccess() {
 		return (pSequence != null) ? pSequence : (pSequence = new SequenceElements());
-	} 
+	}
+	
+	public ParserRule getSequenceRule() {
+		return getSequenceAccess().getRule();
+	}
 
-	// not supported
-	public AdditionElements prAddition() {
+	//Addition returns Expression:
+	//  Multiplication ({Op.values+=current} operator=( "+" | "-" ) values+=Multiplication)*;
+	public AdditionElements getAdditionAccess() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
-	} 
+	}
+	
+	public ParserRule getAdditionRule() {
+		return getAdditionAccess().getRule();
+	}
 
-	// not supported
-	public MultiplicationElements prMultiplication() {
+	//Multiplication returns Expression:
+	//  Term ({Op.values+=current} operator=( "*" | "/" ) values+=Term)*;
+	public MultiplicationElements getMultiplicationAccess() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
-	} 
+	}
+	
+	public ParserRule getMultiplicationRule() {
+		return getMultiplicationAccess().getRule();
+	}
 
-	// not supported
-	public TermElements prTerm() {
+	//Term returns Expression:
+	//  Atom|Parens;
+	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
-	} 
+	}
+	
+	public ParserRule getTermRule() {
+		return getTermAccess().getRule();
+	}
 
-	// not supported
-	public AtomElements prAtom() {
+	//Atom:
+	//  name=ID;
+	public AtomElements getAtomAccess() {
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
-	} 
+	}
+	
+	public ParserRule getAtomRule() {
+		return getAtomAccess().getRule();
+	}
 
-	// not supported
-	public ParensElements prParens() {
+	//Parens returns Expression:
+	//  "(" Addition ")";
+	public ParensElements getParensAccess() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
+	}
+	
+	public ParserRule getParensRule() {
+		return getParensAccess().getRule();
+	}
+
+	//terminal ID:
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	public TerminalRule getIDRule() {
+		return gaTerminals.getIDRule();
 	} 
 
-	// not supported
-	public TerminalRule trID() {
-		return terminalsGrammarAccess.trID();
+	//terminal INT returns ecore::EInt:
+	//  "0" .. "9" +;
+	public TerminalRule getINTRule() {
+		return gaTerminals.getINTRule();
 	} 
 
-	// not supported
-	public TerminalRule trINT() {
-		return terminalsGrammarAccess.trINT();
+	//terminal STRING:
+	//  "\"" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\"" ) ) * "\"" | "\'" ( "\\" ( "b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\" ) | ! ( "\\" | "\'" ) ) * "\'";
+	public TerminalRule getSTRINGRule() {
+		return gaTerminals.getSTRINGRule();
 	} 
 
-	// not supported
-	public TerminalRule trSTRING() {
-		return terminalsGrammarAccess.trSTRING();
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
-		return terminalsGrammarAccess.trML_COMMENT();
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
-		return terminalsGrammarAccess.trSL_COMMENT();
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
-		return terminalsGrammarAccess.trWS();
-	} 
-
-	// not supported
-	public TerminalRule trANY_OTHER() {
-		return terminalsGrammarAccess.trANY_OTHER();
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

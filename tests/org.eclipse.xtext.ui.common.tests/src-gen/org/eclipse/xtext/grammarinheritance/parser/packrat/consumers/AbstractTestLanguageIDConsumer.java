@@ -70,15 +70,15 @@ public final class AbstractTestLanguageIDConsumer extends AbstractRuleAwareTermi
 	}
 
 	protected boolean consumeKeyword$10() {
-		return readChar('\u00F6');
+		return readChar('\u02C6');
 	}
 
 	protected boolean consumeKeyword$11() {
-		return readChar('\u00E4');
+		return readChar('\u2030');
 	}
 
 	protected boolean consumeKeyword$12() {
-		return readChar('\u00FC');
+		return readChar('\u00B8');
 	}
 
 	protected boolean consumeKeyword$13() {

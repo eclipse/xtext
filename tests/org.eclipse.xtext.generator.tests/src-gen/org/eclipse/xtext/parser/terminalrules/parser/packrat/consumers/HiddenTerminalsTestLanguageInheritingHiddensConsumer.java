@@ -234,18 +234,18 @@ public final class HiddenTerminalsTestLanguageInheritingHiddensConsumer extends 
 	public void setRule(InheritingHiddensElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordInheriting());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordHiddens());
-		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele2KeywordLeftParenthesis());
-		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.ele3Alternatives());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele30AssignmentCalled());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele300ParserRuleCallInheritingHiddensCall());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele31AssignmentHidingCalled());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele310ParserRuleCallHidingHiddens());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele4KeywordRightParenthesis());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele5AssignmentValid());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele50KeywordSemicolon());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getInheritingKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getHiddensKeyword_1());
+		keyword$4$Consumer = new Keyword$4$Consumer(rule.getLeftParenthesisKeyword_2());
+		alternatives$5$Consumer = new Alternatives$5$Consumer(rule.getAlternatives_3());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getCalledAssignment_3_0());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getCalledInheritingHiddensCallParserRuleCall_3_0_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getHidingCalledAssignment_3_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getHidingCalledHidingHiddensParserRuleCall_3_1_0());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getRightParenthesisKeyword_4());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getValidAssignment_5());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getValidSemicolonKeyword_5_0());
 	}
 	
 	@Override

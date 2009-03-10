@@ -22,20 +22,20 @@ public class OptionalEmptyTestLanguageParsetreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_child(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prGreeting().getRule().getType().getClassifier()) && (s = new Greeting_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Assignment_child(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getGreetingRule().getType().getClassifier()) && (s = new Greeting_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   (child=Greeting)?;
  *
  **/
 
-
-// not supported
+// (child=Greeting)?
 protected class Model_Assignment_child extends AssignmentToken  {
 	
 	public Model_Assignment_child(IInstanceDescription curr, AbstractToken pred) {
@@ -44,7 +44,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().eleAssignmentChild();
+		return grammarAccess.getModelAccess().getChildAssignment();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prGreeting().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getGreetingRule().getType().getClassifier())) {
 				Solution s = new Greeting_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -73,12 +73,12 @@ protected class Model_Assignment_child extends AssignmentToken  {
 
 /************ begin Rule Greeting ****************
  *
- * not supported
+ * Greeting:
+ *   "hallo" name=ID;
  *
  **/
 
-
-// not supported
+// "hallo" name=ID
 protected class Greeting_Group extends GroupToken {
 	
 	public Greeting_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -87,10 +87,8 @@ protected class Greeting_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prGreeting().eleGroup();
+		return grammarAccess.getGreetingAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -108,7 +106,7 @@ protected class Greeting_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "hallo"
 protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 	
 	public Greeting_0_Keyword_hallo(IInstanceDescription curr, AbstractToken pred) {
@@ -116,11 +114,11 @@ protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prGreeting().ele0KeywordHallo();
+		return grammarAccess.getGreetingAccess().getHalloKeyword_0();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Greeting_1_Assignment_name extends AssignmentToken  {
 	
 	public Greeting_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -129,7 +127,7 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prGreeting().ele1AssignmentName();
+		return grammarAccess.getGreetingAccess().getNameAssignment_1();
 	}
 	
 	@Override
@@ -138,7 +136,7 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prGreeting().ele10TerminalRuleCallID();
+			element = grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;

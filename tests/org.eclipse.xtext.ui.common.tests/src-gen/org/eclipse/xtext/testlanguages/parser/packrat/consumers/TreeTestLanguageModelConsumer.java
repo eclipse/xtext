@@ -67,8 +67,8 @@ public final class TreeTestLanguageModelConsumer extends NonTerminalConsumer {
 	public void setRule(ModelElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentChildren());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallNode());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getChildrenAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getChildrenNodeParserRuleCall_0());
 	}
 	
 	@Override

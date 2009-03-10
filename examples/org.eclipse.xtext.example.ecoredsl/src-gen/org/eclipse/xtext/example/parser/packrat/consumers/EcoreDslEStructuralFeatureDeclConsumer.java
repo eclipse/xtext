@@ -84,9 +84,9 @@ public final class EcoreDslEStructuralFeatureDeclConsumer extends NonTerminalCon
 	public void setRule(EStructuralFeatureDeclElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallEAttributeDecl());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallEReferenceDecl());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getEAttributeDeclParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEReferenceDeclParserRuleCall_1());
 	}
 	
 	@Override

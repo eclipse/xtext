@@ -22,20 +22,20 @@ public class DummyTestLanguageParsetreeConstructor extends AbstractParseTreeCons
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Assignment_elements(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prElement().getRule().getType().getClassifier()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Assignment_elements(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier()) && (s = new Element_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   (elements+=Element)*;
  *
  **/
 
-
-// not supported
+// (elements+=Element)*
 protected class Model_Assignment_elements extends AssignmentToken  {
 	
 	public Model_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
@@ -44,7 +44,7 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().eleAssignmentElements();
+		return grammarAccess.getModelAccess().getElementsAssignment();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prElement().getRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
 				Solution s = new Element_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
@@ -73,12 +73,12 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * not supported
+ * Element:
+ *   (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
  *
  **/
 
-
-// not supported
+// (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";"
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -87,40 +87,38 @@ protected class Element_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prElement().eleGroup();
+		return grammarAccess.getElementAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new Element_4_Keyword(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new Element_3_Assignment_descriptions(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new Element_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new Element_1_Keyword_element(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new Element_0_Assignment_optional(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-			if(s5 != null) {
-				last = s5.getPredecessor();
-				return s5;
-			} else {
-				s4 = s4.getPredecessor().nextSolution(this,s4);
+			while(s2 != null) {
+				Solution s3 = new Element_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new Element_1_Keyword_element(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new Element_0_Assignment_optional(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						if(s5 != null) {
+							last = s5.getPredecessor();
+							return s5;
+						} else {
+							s4 = s4.getPredecessor().nextSolution(this,s4);
+						}
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// (optional?="optional")?
 protected class Element_0_Assignment_optional extends AssignmentToken  {
 	
 	public Element_0_Assignment_optional(IInstanceDescription curr, AbstractToken pred) {
@@ -129,7 +127,7 @@ protected class Element_0_Assignment_optional extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prElement().ele0AssignmentOptional();
+		return grammarAccess.getElementAccess().getOptionalAssignment_0();
 	}
 	
 	@Override
@@ -139,7 +137,7 @@ protected class Element_0_Assignment_optional extends AssignmentToken  {
 
 		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = grammarAccess.prElement().ele00KeywordOptional();
+			element = grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0();
 			return new Solution(obj);
 		}
 
@@ -147,7 +145,7 @@ protected class Element_0_Assignment_optional extends AssignmentToken  {
 	}
 }
 
-// not supported
+// "element"
 protected class Element_1_Keyword_element extends KeywordToken  {
 	
 	public Element_1_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
@@ -155,11 +153,11 @@ protected class Element_1_Keyword_element extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prElement().ele1KeywordElement();
+		return grammarAccess.getElementAccess().getElementKeyword_1();
 	}	
 }
 
-// not supported
+// name=ID
 protected class Element_2_Assignment_name extends AssignmentToken  {
 	
 	public Element_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
@@ -168,7 +166,7 @@ protected class Element_2_Assignment_name extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prElement().ele2AssignmentName();
+		return grammarAccess.getElementAccess().getNameAssignment_2();
 	}
 	
 	@Override
@@ -177,14 +175,14 @@ protected class Element_2_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prElement().ele20TerminalRuleCallID();
+			element = grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// (descriptions+=STRING)*
 protected class Element_3_Assignment_descriptions extends AssignmentToken  {
 	
 	public Element_3_Assignment_descriptions(IInstanceDescription curr, AbstractToken pred) {
@@ -193,7 +191,7 @@ protected class Element_3_Assignment_descriptions extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prElement().ele3AssignmentDescriptions();
+		return grammarAccess.getElementAccess().getDescriptionsAssignment_3();
 	}
 	
 	@Override
@@ -202,14 +200,14 @@ protected class Element_3_Assignment_descriptions extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("descriptions");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prElement().ele30TerminalRuleCallSTRING();
+			element = grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// ";"
 protected class Element_4_Keyword extends KeywordToken  {
 	
 	public Element_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -217,7 +215,7 @@ protected class Element_4_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prElement().ele4KeywordSemicolon();
+		return grammarAccess.getElementAccess().getSemicolonKeyword_4();
 	}	
 }
 

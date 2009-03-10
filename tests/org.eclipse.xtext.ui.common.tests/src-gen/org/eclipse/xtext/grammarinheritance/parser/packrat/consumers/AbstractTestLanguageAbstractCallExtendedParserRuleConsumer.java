@@ -102,10 +102,10 @@ public final class AbstractTestLanguageAbstractCallExtendedParserRuleConsumer ex
 	public void setRule(AbstractCallExtendedParserRuleElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordExtendedmodel());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentElements());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallExtendableParserRule());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getExtendedmodelKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getElementsAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getElementsExtendableParserRuleParserRuleCall_1_0());
 	}
 	
 	@Override

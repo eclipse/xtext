@@ -244,19 +244,19 @@ public final class EcoreDslEAnnotationDeclConsumer extends NonTerminalConsumer {
 	public void setRule(EAnnotationDeclElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordCommercialAt());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentSource());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10ParserRuleCallSTRING_OR_QID());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordLeftParenthesis());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentDetails());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210ParserRuleCallMapEntry());
-		group$9$Consumer = new Group$9$Consumer(rule.ele22Group());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele220KeywordComma());
-		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele221AssignmentDetails());
-		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele2210ParserRuleCallMapEntry());
-		keyword$13$Consumer = new Keyword$13$Consumer(rule.ele23KeywordRightParenthesis());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getCommercialAtKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getSourceAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getSourceSTRING_OR_QIDParserRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getLeftParenthesisKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getDetailsAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getDetailsMapEntryParserRuleCall_2_1_0());
+		group$9$Consumer = new Group$9$Consumer(rule.getGroup_2_2());
+		keyword$10$Consumer = new Keyword$10$Consumer(rule.getCommaKeyword_2_2_0());
+		assignment$11$Consumer = new Assignment$11$Consumer(rule.getDetailsAssignment_2_2_1());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.getDetailsMapEntryParserRuleCall_2_2_1_0());
+		keyword$13$Consumer = new Keyword$13$Consumer(rule.getRightParenthesisKeyword_2_3());
 	}
 	
 	@Override

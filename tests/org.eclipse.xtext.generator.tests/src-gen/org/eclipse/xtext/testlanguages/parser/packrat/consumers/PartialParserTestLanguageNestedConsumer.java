@@ -138,12 +138,12 @@ public final class PartialParserTestLanguageNestedConsumer extends NonTerminalCo
 	public void setRule(NestedElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordNested());
-		keyword$3$Consumer = new Keyword$3$Consumer(rule.ele1KeywordLeftCurlyBracket());
-		assignment$4$Consumer = new Assignment$4$Consumer(rule.ele2AssignmentNested());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.ele20ParserRuleCallSomeContainer());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele3KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNestedKeyword_0());
+		keyword$3$Consumer = new Keyword$3$Consumer(rule.getLeftCurlyBracketKeyword_1());
+		assignment$4$Consumer = new Assignment$4$Consumer(rule.getNestedAssignment_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNestedSomeContainerParserRuleCall_2_0());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getRightCurlyBracketKeyword_3());
 	}
 	
 	@Override

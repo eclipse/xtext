@@ -67,7 +67,7 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prRoot().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
 	 EOF 
@@ -82,11 +82,11 @@ ruleRoot returns [EObject current=null]
     }:
 ('test' 
     {
-        createLeafNode(grammarAccess.prRoot().ele0KeywordTest(), null); 
+        createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
     }
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele10ParserRuleCallTestRequired(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0(), currentNode); 
     }
     this_TestRequired_1=ruleTestRequired
     { 
@@ -95,12 +95,12 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele10ParserRuleCallTestRequired(), null); 
+    createLeafNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele11ParserRuleCallTestOptional(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), currentNode); 
     }
     this_TestOptional_2=ruleTestOptional
     { 
@@ -109,12 +109,12 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele11ParserRuleCallTestOptional(), null); 
+    createLeafNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), null); 
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.prRoot().ele12ParserRuleCallTestList(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), currentNode); 
     }
     this_TestList_3=ruleTestList
     { 
@@ -123,7 +123,7 @@ ruleRoot returns [EObject current=null]
     }
 
     { 
-    createLeafNode(grammarAccess.prRoot().ele12ParserRuleCallTestList(), null); 
+    createLeafNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), null); 
     }
 ));
 
@@ -133,7 +133,7 @@ ruleRoot returns [EObject current=null]
 
 // Entry rule entryRuleTestRequired
 entryRuleTestRequired returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prTestRequired().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getTestRequiredRule(), currentNode); }
 	 iv_ruleTestRequired=ruleTestRequired 
 	 { $current=$iv_ruleTestRequired.current; } 
 	 EOF 
@@ -148,18 +148,18 @@ ruleTestRequired returns [EObject current=null]
     }:
 ('required' 
     {
-        createLeafNode(grammarAccess.prTestRequired().ele0KeywordRequired(), null); 
+        createLeafNode(grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null); 
     }
 (	
 	
 	    lv_required1_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestRequired().ele10TerminalRuleCallINT(), "required1"); 
+		createLeafNode(grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestRequired().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -174,12 +174,12 @@ ruleTestRequired returns [EObject current=null]
 	
 	    lv_required2_2=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestRequired().ele20TerminalRuleCallINT(), "required2"); 
+		createLeafNode(grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestRequired().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestRequiredRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -198,7 +198,7 @@ ruleTestRequired returns [EObject current=null]
 
 // Entry rule entryRuleTestOptional
 entryRuleTestOptional returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prTestOptional().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getTestOptionalRule(), currentNode); }
 	 iv_ruleTestOptional=ruleTestOptional 
 	 { $current=$iv_ruleTestOptional.current; } 
 	 EOF 
@@ -213,18 +213,18 @@ ruleTestOptional returns [EObject current=null]
     }:
 ('optional' 
     {
-        createLeafNode(grammarAccess.prTestOptional().ele0KeywordOptional(), null); 
+        createLeafNode(grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null); 
     }
 (	
 	
 	    lv_opt1_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestOptional().ele10TerminalRuleCallINT(), "opt1"); 
+		createLeafNode(grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestOptional().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -237,18 +237,18 @@ ruleTestOptional returns [EObject current=null]
 	
 )?(':' 
     {
-        createLeafNode(grammarAccess.prTestOptional().ele20KeywordColon(), null); 
+        createLeafNode(grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null); 
     }
 (	
 	
 	    lv_opt2_3=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestOptional().ele210TerminalRuleCallINT(), "opt2"); 
+		createLeafNode(grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestOptional().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestOptionalRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -267,7 +267,7 @@ ruleTestOptional returns [EObject current=null]
 
 // Entry rule entryRuleTestList
 entryRuleTestList returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.prTestList().getRule(), currentNode); }
+	{ currentNode = createCompositeNode(grammarAccess.getTestListRule(), currentNode); }
 	 iv_ruleTestList=ruleTestList 
 	 { $current=$iv_ruleTestList.current; } 
 	 EOF 
@@ -282,18 +282,18 @@ ruleTestList returns [EObject current=null]
     }:
 ('list' 
     {
-        createLeafNode(grammarAccess.prTestList().ele0KeywordList(), null); 
+        createLeafNode(grammarAccess.getTestListAccess().getListKeyword_0(), null); 
     }
 (	
 	
 	    lv_item_1=	RULE_INT
 	{
-		createLeafNode(grammarAccess.prTestList().ele10TerminalRuleCallINT(), "item"); 
+		createLeafNode(grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.prTestList().getRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getTestListRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        

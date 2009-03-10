@@ -105,10 +105,10 @@ public final class ImportUriTestLanguageImportConsumer extends NonTerminalConsum
 	public void setRule(ImportElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordImport());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentImportURI());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallSTRING());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getImportKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getImportURIAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getImportURISTRINGTerminalRuleCall_1_0());
 	}
 	
 	@Override

@@ -22,22 +22,22 @@ public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeCo
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prRoot().getRule().getType().getClassifier()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getClassifier()) && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getClassifier()) && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prTestList().getRule().getType().getClassifier()) && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier()) && (s = new Root_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier()) && (s = new TestRequired_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier()) && (s = new TestOptional_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier()) && (s = new TestList_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Root ****************
  *
- * not supported
+ * Root:
+ *   "test" (TestRequired|TestOptional|TestList);
  *
  **/
 
-
-// not supported
+// "test" (TestRequired|TestOptional|TestList)
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -46,10 +46,8 @@ protected class Root_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prRoot().eleGroup();
+		return grammarAccess.getRootAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -67,7 +65,7 @@ protected class Root_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "test"
 protected class Root_0_Keyword_test extends KeywordToken  {
 	
 	public Root_0_Keyword_test(IInstanceDescription curr, AbstractToken pred) {
@@ -75,11 +73,11 @@ protected class Root_0_Keyword_test extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prRoot().ele0KeywordTest();
+		return grammarAccess.getRootAccess().getTestKeyword_0();
 	}	
 }
 
-// not supported
+// TestRequired|TestOptional|TestList
 protected class Root_1_Alternatives extends AlternativesToken {
 
 	public Root_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -88,7 +86,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prRoot().ele1Alternatives();
+		return grammarAccess.getRootAccess().getAlternatives_1();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -101,7 +99,7 @@ protected class Root_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// TestRequired
 protected class Root_1_0_RuleCall_TestRequired extends RuleCallToken {
 	
 	public Root_1_0_RuleCall_TestRequired(IInstanceDescription curr, AbstractToken pred) {
@@ -110,18 +108,18 @@ protected class Root_1_0_RuleCall_TestRequired extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prRoot().ele10ParserRuleCallTestRequired();
+		return grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestRequired_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestRequired().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
 		return new TestRequired_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// TestOptional
 protected class Root_1_1_RuleCall_TestOptional extends RuleCallToken {
 	
 	public Root_1_1_RuleCall_TestOptional(IInstanceDescription curr, AbstractToken pred) {
@@ -130,18 +128,18 @@ protected class Root_1_1_RuleCall_TestOptional extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prRoot().ele11ParserRuleCallTestOptional();
+		return grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestOptional_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestOptional().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
 		return new TestOptional_Group(current, this).firstSolution();
 	}
 }
 
-// not supported
+// TestList
 protected class Root_1_2_RuleCall_TestList extends RuleCallToken {
 	
 	public Root_1_2_RuleCall_TestList(IInstanceDescription curr, AbstractToken pred) {
@@ -150,13 +148,13 @@ protected class Root_1_2_RuleCall_TestList extends RuleCallToken {
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.prRoot().ele12ParserRuleCallTestList();
+		return grammarAccess.getRootAccess().getTestListParserRuleCall_1_2();
 	}
 	
 	@Override
 	protected Solution createSolution() {
 		if(checkForRecursion(TestList_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prTestList().getRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
 		return new TestList_Group(current, this).firstSolution();
 	}
 }
@@ -168,12 +166,12 @@ protected class Root_1_2_RuleCall_TestList extends RuleCallToken {
 
 /************ begin Rule TestRequired ****************
  *
- * not supported
+ * TestRequired:
+ *   "required" required1=INT required2=INT;
  *
  **/
 
-
-// not supported
+// "required" required1=INT required2=INT
 protected class TestRequired_Group extends GroupToken {
 	
 	public TestRequired_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -182,32 +180,30 @@ protected class TestRequired_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prTestRequired().eleGroup();
+		return grammarAccess.getTestRequiredAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestRequired_2_Assignment_required2(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TestRequired_1_Assignment_required1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new TestRequired_0_Keyword_required(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-			if(s3 != null) {
-				last = s3.getPredecessor();
-				return s3;
-			} else {
-				s2 = s2.getPredecessor().nextSolution(this,s2);
+			while(s2 != null) {
+				Solution s3 = new TestRequired_0_Keyword_required(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "required"
 protected class TestRequired_0_Keyword_required extends KeywordToken  {
 	
 	public TestRequired_0_Keyword_required(IInstanceDescription curr, AbstractToken pred) {
@@ -215,11 +211,11 @@ protected class TestRequired_0_Keyword_required extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestRequired().ele0KeywordRequired();
+		return grammarAccess.getTestRequiredAccess().getRequiredKeyword_0();
 	}	
 }
 
-// not supported
+// required1=INT
 protected class TestRequired_1_Assignment_required1 extends AssignmentToken  {
 	
 	public TestRequired_1_Assignment_required1(IInstanceDescription curr, AbstractToken pred) {
@@ -228,7 +224,7 @@ protected class TestRequired_1_Assignment_required1 extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestRequired().ele1AssignmentRequired1();
+		return grammarAccess.getTestRequiredAccess().getRequired1Assignment_1();
 	}
 	
 	@Override
@@ -237,14 +233,14 @@ protected class TestRequired_1_Assignment_required1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("required1");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prTestRequired().ele10TerminalRuleCallINT();
+			element = grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// required2=INT
 protected class TestRequired_2_Assignment_required2 extends AssignmentToken  {
 	
 	public TestRequired_2_Assignment_required2(IInstanceDescription curr, AbstractToken pred) {
@@ -253,7 +249,7 @@ protected class TestRequired_2_Assignment_required2 extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestRequired().ele2AssignmentRequired2();
+		return grammarAccess.getTestRequiredAccess().getRequired2Assignment_2();
 	}
 	
 	@Override
@@ -262,7 +258,7 @@ protected class TestRequired_2_Assignment_required2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("required2");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prTestRequired().ele20TerminalRuleCallINT();
+			element = grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -275,12 +271,12 @@ protected class TestRequired_2_Assignment_required2 extends AssignmentToken  {
 
 /************ begin Rule TestOptional ****************
  *
- * not supported
+ * TestOptional:
+ *   "optional" (opt1=INT)? (":" opt2=INT)?;
  *
  **/
 
-
-// not supported
+// "optional" (opt1=INT)? (":" opt2=INT)?
 protected class TestOptional_Group extends GroupToken {
 	
 	public TestOptional_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -289,32 +285,30 @@ protected class TestOptional_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prTestOptional().eleGroup();
+		return grammarAccess.getTestOptionalAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
 		Solution s1 = new TestOptional_2_Group(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TestOptional_1_Assignment_opt1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-		while(s2 != null) {
-			Solution s3 = new TestOptional_0_Keyword_optional(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-			if(s3 != null) {
-				last = s3.getPredecessor();
-				return s3;
-			} else {
-				s2 = s2.getPredecessor().nextSolution(this,s2);
+			while(s2 != null) {
+				Solution s3 = new TestOptional_0_Keyword_optional(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
-		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// not supported
+// "optional"
 protected class TestOptional_0_Keyword_optional extends KeywordToken  {
 	
 	public TestOptional_0_Keyword_optional(IInstanceDescription curr, AbstractToken pred) {
@@ -322,11 +316,11 @@ protected class TestOptional_0_Keyword_optional extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestOptional().ele0KeywordOptional();
+		return grammarAccess.getTestOptionalAccess().getOptionalKeyword_0();
 	}	
 }
 
-// not supported
+// (opt1=INT)?
 protected class TestOptional_1_Assignment_opt1 extends AssignmentToken  {
 	
 	public TestOptional_1_Assignment_opt1(IInstanceDescription curr, AbstractToken pred) {
@@ -335,7 +329,7 @@ protected class TestOptional_1_Assignment_opt1 extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestOptional().ele1AssignmentOpt1();
+		return grammarAccess.getTestOptionalAccess().getOpt1Assignment_1();
 	}
 	
 	@Override
@@ -344,14 +338,14 @@ protected class TestOptional_1_Assignment_opt1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("opt1");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prTestOptional().ele10TerminalRuleCallINT();
+			element = grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// (":" opt2=INT)?
 protected class TestOptional_2_Group extends GroupToken {
 	
 	public TestOptional_2_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -360,10 +354,8 @@ protected class TestOptional_2_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prTestOptional().ele2Group();
+		return grammarAccess.getTestOptionalAccess().getGroup_2();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -381,7 +373,7 @@ protected class TestOptional_2_Group extends GroupToken {
 	}
 }
 
-// not supported
+// ":"
 protected class TestOptional_2_0_Keyword extends KeywordToken  {
 	
 	public TestOptional_2_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
@@ -389,11 +381,11 @@ protected class TestOptional_2_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestOptional().ele20KeywordColon();
+		return grammarAccess.getTestOptionalAccess().getColonKeyword_2_0();
 	}	
 }
 
-// not supported
+// opt2=INT
 protected class TestOptional_2_1_Assignment_opt2 extends AssignmentToken  {
 	
 	public TestOptional_2_1_Assignment_opt2(IInstanceDescription curr, AbstractToken pred) {
@@ -402,7 +394,7 @@ protected class TestOptional_2_1_Assignment_opt2 extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestOptional().ele21AssignmentOpt2();
+		return grammarAccess.getTestOptionalAccess().getOpt2Assignment_2_1();
 	}
 	
 	@Override
@@ -411,7 +403,7 @@ protected class TestOptional_2_1_Assignment_opt2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("opt2");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prTestOptional().ele210TerminalRuleCallINT();
+			element = grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -425,12 +417,12 @@ protected class TestOptional_2_1_Assignment_opt2 extends AssignmentToken  {
 
 /************ begin Rule TestList ****************
  *
- * not supported
+ * TestList:
+ *   "list" (item+=INT)*;
  *
  **/
 
-
-// not supported
+// "list" (item+=INT)*
 protected class TestList_Group extends GroupToken {
 	
 	public TestList_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -439,10 +431,8 @@ protected class TestList_Group extends GroupToken {
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prTestList().eleGroup();
+		return grammarAccess.getTestListAccess().getGroup();
 	}
-
-	
 
 	@Override
 	protected Solution createSolution() {	
@@ -460,7 +450,7 @@ protected class TestList_Group extends GroupToken {
 	}
 }
 
-// not supported
+// "list"
 protected class TestList_0_Keyword_list extends KeywordToken  {
 	
 	public TestList_0_Keyword_list(IInstanceDescription curr, AbstractToken pred) {
@@ -468,11 +458,11 @@ protected class TestList_0_Keyword_list extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prTestList().ele0KeywordList();
+		return grammarAccess.getTestListAccess().getListKeyword_0();
 	}	
 }
 
-// not supported
+// (item+=INT)*
 protected class TestList_1_Assignment_item extends AssignmentToken  {
 	
 	public TestList_1_Assignment_item(IInstanceDescription curr, AbstractToken pred) {
@@ -481,7 +471,7 @@ protected class TestList_1_Assignment_item extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prTestList().ele1AssignmentItem();
+		return grammarAccess.getTestListAccess().getItemAssignment_1();
 	}
 	
 	@Override
@@ -490,7 +480,7 @@ protected class TestList_1_Assignment_item extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("item");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prTestList().ele10TerminalRuleCallINT();
+			element = grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;

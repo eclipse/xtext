@@ -235,18 +235,18 @@ public final class EpatchTestLanguageEPatchConsumer extends NonTerminalConsumer 
 	public void setRule(EPatchElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordEpatch());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		keyword$5$Consumer = new Keyword$5$Consumer(rule.ele2KeywordLeftCurlyBracket());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele3AssignmentImports());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele30ParserRuleCallImport());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.ele4AssignmentResources());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.ele40ParserRuleCallNamedResource());
-		assignment$10$Consumer = new Assignment$10$Consumer(rule.ele5AssignmentObjects());
-		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.ele50ParserRuleCallObjectRef());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele6KeywordRightCurlyBracket());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getEpatchKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getImportsAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getImportsImportParserRuleCall_3_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getResourcesAssignment_4());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getResourcesNamedResourceParserRuleCall_4_0());
+		assignment$10$Consumer = new Assignment$10$Consumer(rule.getObjectsAssignment_5());
+		ruleCall$11$Consumer = new RuleCall$11$Consumer(rule.getObjectsObjectRefParserRuleCall_5_0());
+		keyword$12$Consumer = new Keyword$12$Consumer(rule.getRightCurlyBracketKeyword_6());
 	}
 	
 	@Override

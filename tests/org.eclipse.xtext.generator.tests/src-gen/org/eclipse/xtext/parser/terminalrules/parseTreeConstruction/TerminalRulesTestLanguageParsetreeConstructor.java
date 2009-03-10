@@ -22,19 +22,19 @@ public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
-		if(inst.isInstanceOf(grammarAccess.prModel().getRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
 
 /************ begin Rule Model ****************
  *
- * not supported
+ * Model:
+ *   idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER;
  *
  **/
 
-
-// not supported
+// idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -43,7 +43,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.prModel().eleAlternatives();
+		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
 	protected AbstractToken createChild(int id) {
@@ -60,7 +60,7 @@ protected class Model_Alternatives extends AlternativesToken {
 	}
 }
 
-// not supported
+// idValue=ID
 protected class Model_0_Assignment_idValue extends AssignmentToken  {
 	
 	public Model_0_Assignment_idValue(IInstanceDescription curr, AbstractToken pred) {
@@ -69,7 +69,7 @@ protected class Model_0_Assignment_idValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele0AssignmentIdValue();
+		return grammarAccess.getModelAccess().getIdValueAssignment_0();
 	}
 	
 	@Override
@@ -78,14 +78,14 @@ protected class Model_0_Assignment_idValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele00TerminalRuleCallID();
+			element = grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// intValue=INT
 protected class Model_1_Assignment_intValue extends AssignmentToken  {
 	
 	public Model_1_Assignment_intValue(IInstanceDescription curr, AbstractToken pred) {
@@ -94,7 +94,7 @@ protected class Model_1_Assignment_intValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele1AssignmentIntValue();
+		return grammarAccess.getModelAccess().getIntValueAssignment_1();
 	}
 	
 	@Override
@@ -103,14 +103,14 @@ protected class Model_1_Assignment_intValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele10TerminalRuleCallINT();
+			element = grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// stringValue=STRING
 protected class Model_2_Assignment_stringValue extends AssignmentToken  {
 	
 	public Model_2_Assignment_stringValue(IInstanceDescription curr, AbstractToken pred) {
@@ -119,7 +119,7 @@ protected class Model_2_Assignment_stringValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele2AssignmentStringValue();
+		return grammarAccess.getModelAccess().getStringValueAssignment_2();
 	}
 	
 	@Override
@@ -128,14 +128,14 @@ protected class Model_2_Assignment_stringValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele20TerminalRuleCallSTRING();
+			element = grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// mlCommentValue=ML_COMMENT
 protected class Model_3_Assignment_mlCommentValue extends AssignmentToken  {
 	
 	public Model_3_Assignment_mlCommentValue(IInstanceDescription curr, AbstractToken pred) {
@@ -144,7 +144,7 @@ protected class Model_3_Assignment_mlCommentValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele3AssignmentMlCommentValue();
+		return grammarAccess.getModelAccess().getMlCommentValueAssignment_3();
 	}
 	
 	@Override
@@ -153,14 +153,14 @@ protected class Model_3_Assignment_mlCommentValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele30TerminalRuleCallML_COMMENT();
+			element = grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// slCommentValue=SL_COMMENT
 protected class Model_4_Assignment_slCommentValue extends AssignmentToken  {
 	
 	public Model_4_Assignment_slCommentValue(IInstanceDescription curr, AbstractToken pred) {
@@ -169,7 +169,7 @@ protected class Model_4_Assignment_slCommentValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele4AssignmentSlCommentValue();
+		return grammarAccess.getModelAccess().getSlCommentValueAssignment_4();
 	}
 	
 	@Override
@@ -178,14 +178,14 @@ protected class Model_4_Assignment_slCommentValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele40TerminalRuleCallSL_COMMENT();
+			element = grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// wsValue=WS
 protected class Model_5_Assignment_wsValue extends AssignmentToken  {
 	
 	public Model_5_Assignment_wsValue(IInstanceDescription curr, AbstractToken pred) {
@@ -194,7 +194,7 @@ protected class Model_5_Assignment_wsValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele5AssignmentWsValue();
+		return grammarAccess.getModelAccess().getWsValueAssignment_5();
 	}
 	
 	@Override
@@ -203,14 +203,14 @@ protected class Model_5_Assignment_wsValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele50TerminalRuleCallWS();
+			element = grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0();
 			return new Solution(obj);
 		}
 		return null;
 	}
 }
 
-// not supported
+// anyValue=ANY_OTHER
 protected class Model_6_Assignment_anyValue extends AssignmentToken  {
 	
 	public Model_6_Assignment_anyValue(IInstanceDescription curr, AbstractToken pred) {
@@ -219,7 +219,7 @@ protected class Model_6_Assignment_anyValue extends AssignmentToken  {
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prModel().ele6AssignmentAnyValue();
+		return grammarAccess.getModelAccess().getAnyValueAssignment_6();
 	}
 	
 	@Override
@@ -228,7 +228,7 @@ protected class Model_6_Assignment_anyValue extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.prModel().ele60TerminalRuleCallANY_OTHER();
+			element = grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0();
 			return new Solution(obj);
 		}
 		return null;

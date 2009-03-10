@@ -84,9 +84,9 @@ public final class XtextTerminalsTestLanguageAbstractNegatedTokenConsumer extend
 	public void setRule(AbstractNegatedTokenElements rule) {
 		this.rule = rule;
 		
-		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.eleAlternatives());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallNegatedToken());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele1ParserRuleCallUntilToken());
+		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getNegatedTokenParserRuleCall_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getUntilTokenParserRuleCall_1());
 	}
 	
 	@Override

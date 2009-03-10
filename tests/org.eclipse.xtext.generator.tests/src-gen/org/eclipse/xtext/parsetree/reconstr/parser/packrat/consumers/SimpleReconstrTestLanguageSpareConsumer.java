@@ -169,14 +169,14 @@ public final class SimpleReconstrTestLanguageSpareConsumer extends NonTerminalCo
 	public void setRule(SpareElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordNumberSignDigitThree());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentId());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		group$5$Consumer = new Group$5$Consumer(rule.ele2Group());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele20KeywordFullStop());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele21AssignmentId());
-		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele210TerminalRuleCallID());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getNumberSignDigitThreeKeyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getIdAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getIdIDTerminalRuleCall_1_0());
+		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getFullStopKeyword_2_0());
+		assignment$7$Consumer = new Assignment$7$Consumer(rule.getIdAssignment_2_1());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getIdIDTerminalRuleCall_2_1_0());
 	}
 	
 	@Override

@@ -139,12 +139,12 @@ public final class ConcreteTestLanguageSubrule3Consumer extends NonTerminalConsu
 	public void setRule(Subrule3Elements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		keyword$2$Consumer = new Keyword$2$Consumer(rule.ele0KeywordSubrule3());
-		assignment$3$Consumer = new Assignment$3$Consumer(rule.ele1AssignmentName());
-		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.ele10TerminalRuleCallID());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentSub1());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallINT());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		keyword$2$Consumer = new Keyword$2$Consumer(rule.getSubrule3Keyword_0());
+		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getSub1Assignment_2());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getSub1INTTerminalRuleCall_2_0());
 	}
 	
 	@Override

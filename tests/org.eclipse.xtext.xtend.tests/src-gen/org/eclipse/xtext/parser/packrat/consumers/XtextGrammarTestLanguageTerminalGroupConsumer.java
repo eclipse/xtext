@@ -128,12 +128,12 @@ public final class XtextGrammarTestLanguageTerminalGroupConsumer extends NonTerm
 	public void setRule(TerminalGroupElements rule) {
 		this.rule = rule;
 		
-		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0ParserRuleCallTerminalToken());
-		group$3$Consumer = new Group$3$Consumer(rule.ele1Group());
-		action$4$Consumer = new Action$4$Consumer(rule.ele10ActionGrouptokens());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.ele11AssignmentTokens());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.ele110ParserRuleCallTerminalToken());
+		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTerminalTokenParserRuleCall_0());
+		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
+		action$4$Consumer = new Action$4$Consumer(rule.getGrouptokensAction_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getTokensAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getTokensTerminalTokenParserRuleCall_1_1_0());
 	}
 	
 	@Override

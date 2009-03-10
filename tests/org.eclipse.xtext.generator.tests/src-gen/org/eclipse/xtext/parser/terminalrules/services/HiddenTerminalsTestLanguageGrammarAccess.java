@@ -19,327 +19,337 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	public class ModelElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall c0ParserRuleCallWithoutHiddens = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall c1ParserRuleCallWithHiddens = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall c2ParserRuleCallOverridingHiddens = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall c3ParserRuleCallInheritingHiddens = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall c4ParserRuleCallDatatypeHiddens = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cWithoutHiddensParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cWithHiddensParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cOverridingHiddensParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cInheritingHiddensParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cDatatypeHiddensParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
-		// not supported
+		//Model:
+		//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
+		//WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens
+		public Alternatives getAlternatives() { return cAlternatives; }
 
-		// not supported
-		public RuleCall ele0ParserRuleCallWithoutHiddens() { return c0ParserRuleCallWithoutHiddens; }
+		//WithoutHiddens
+		public RuleCall getWithoutHiddensParserRuleCall_0() { return cWithoutHiddensParserRuleCall_0; }
 
-		// not supported
-		public RuleCall ele1ParserRuleCallWithHiddens() { return c1ParserRuleCallWithHiddens; }
+		//WithHiddens
+		public RuleCall getWithHiddensParserRuleCall_1() { return cWithHiddensParserRuleCall_1; }
 
-		// not supported
-		public RuleCall ele2ParserRuleCallOverridingHiddens() { return c2ParserRuleCallOverridingHiddens; }
+		//OverridingHiddens
+		public RuleCall getOverridingHiddensParserRuleCall_2() { return cOverridingHiddensParserRuleCall_2; }
 
-		// not supported
-		public RuleCall ele3ParserRuleCallInheritingHiddens() { return c3ParserRuleCallInheritingHiddens; }
+		//InheritingHiddens
+		public RuleCall getInheritingHiddensParserRuleCall_3() { return cInheritingHiddensParserRuleCall_3; }
 
-		// not supported
-		public RuleCall ele4ParserRuleCallDatatypeHiddens() { return c4ParserRuleCallDatatypeHiddens; }
+		//DatatypeHiddens
+		public RuleCall getDatatypeHiddensParserRuleCall_4() { return cDatatypeHiddensParserRuleCall_4; }
 	}
 
 	public class WithoutHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithoutHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordWithout = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentSpaces = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallWS = (RuleCall)c1AssignmentSpaces.eContents().get(0);
-		private final Keyword c2KeywordHiddens = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentSpaces = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30TerminalRuleCallWS = (RuleCall)c3AssignmentSpaces.eContents().get(0);
-		private final Assignment c4AssignmentValid = (Assignment)cGroup.eContents().get(4);
-		private final Keyword c40KeywordSemicolon = (Keyword)c4AssignmentValid.eContents().get(0);
+		private final Keyword cWithoutKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cSpacesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSpacesWSTerminalRuleCall_1_0 = (RuleCall)cSpacesAssignment_1.eContents().get(0);
+		private final Keyword cHiddensKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSpacesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSpacesWSTerminalRuleCall_3_0 = (RuleCall)cSpacesAssignment_3.eContents().get(0);
+		private final Assignment cValidAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final Keyword cValidSemicolonKeyword_4_0 = (Keyword)cValidAssignment_4.eContents().get(0);
 		
-		// not supported
+		//WithoutHiddens:
+		//  "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordWithout() { return c0KeywordWithout; }
+		//"without"
+		public Keyword getWithoutKeyword_0() { return cWithoutKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentSpaces() { return c1AssignmentSpaces; }
+		//spaces+=WS
+		public Assignment getSpacesAssignment_1() { return cSpacesAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallWS() { return c10TerminalRuleCallWS; }
+		//WS
+		public RuleCall getSpacesWSTerminalRuleCall_1_0() { return cSpacesWSTerminalRuleCall_1_0; }
 
-		// not supported
-		public Keyword ele2KeywordHiddens() { return c2KeywordHiddens; }
+		//"hiddens"
+		public Keyword getHiddensKeyword_2() { return cHiddensKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentSpaces() { return c3AssignmentSpaces; }
+		//(spaces+=WS)?
+		public Assignment getSpacesAssignment_3() { return cSpacesAssignment_3; }
 
-		// not supported
-		public RuleCall ele30TerminalRuleCallWS() { return c30TerminalRuleCallWS; }
+		//WS
+		public RuleCall getSpacesWSTerminalRuleCall_3_0() { return cSpacesWSTerminalRuleCall_3_0; }
 
-		// not supported
-		public Assignment ele4AssignmentValid() { return c4AssignmentValid; }
+		//valid?=";"
+		public Assignment getValidAssignment_4() { return cValidAssignment_4; }
 
-		// not supported
-		public Keyword ele40KeywordSemicolon() { return c40KeywordSemicolon; }
+		//";"
+		public Keyword getValidSemicolonKeyword_4_0() { return cValidSemicolonKeyword_4_0; }
 	}
 
 	public class WithHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordWith = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordHiddens = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentValid = (Assignment)cGroup.eContents().get(2);
-		private final Keyword c20KeywordSemicolon = (Keyword)c2AssignmentValid.eContents().get(0);
+		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cHiddensKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValidAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cValidSemicolonKeyword_2_0 = (Keyword)cValidAssignment_2.eContents().get(0);
 		
-		// not supported
+		//WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+		//  "with" "hiddens" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"with" "hiddens" valid?=";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordWith() { return c0KeywordWith; }
+		//"with"
+		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordHiddens() { return c1KeywordHiddens; }
+		//"hiddens"
+		public Keyword getHiddensKeyword_1() { return cHiddensKeyword_1; }
 
-		// not supported
-		public Assignment ele2AssignmentValid() { return c2AssignmentValid; }
+		//valid?=";"
+		public Assignment getValidAssignment_2() { return cValidAssignment_2; }
 
-		// not supported
-		public Keyword ele20KeywordSemicolon() { return c20KeywordSemicolon; }
+		//";"
+		public Keyword getValidSemicolonKeyword_2_0() { return cValidSemicolonKeyword_2_0; }
 	}
 
 	public class OverridingHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordOverriding = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordHiddens = (Keyword)cGroup.eContents().get(1);
-		private final Keyword c2KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(2);
-		private final Assignment c3AssignmentCalled = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall c30ParserRuleCallOverridingHiddensCall = (RuleCall)c3AssignmentCalled.eContents().get(0);
-		private final Keyword c4KeywordRightParenthesis = (Keyword)cGroup.eContents().get(4);
-		private final Assignment c5AssignmentValid = (Assignment)cGroup.eContents().get(5);
-		private final Keyword c50KeywordSemicolon = (Keyword)c5AssignmentValid.eContents().get(0);
+		private final Keyword cOverridingKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cHiddensKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cCalledAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cCalledOverridingHiddensCallParserRuleCall_3_0 = (RuleCall)cCalledAssignment_3.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cValidAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final Keyword cValidSemicolonKeyword_5_0 = (Keyword)cValidAssignment_5.eContents().get(0);
 		
-		// not supported
+		//OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+		//  "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordOverriding() { return c0KeywordOverriding; }
+		//"overriding"
+		public Keyword getOverridingKeyword_0() { return cOverridingKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordHiddens() { return c1KeywordHiddens; }
+		//"hiddens"
+		public Keyword getHiddensKeyword_1() { return cHiddensKeyword_1; }
 
-		// not supported
-		public Keyword ele2KeywordLeftParenthesis() { return c2KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		// not supported
-		public Assignment ele3AssignmentCalled() { return c3AssignmentCalled; }
+		//called=OverridingHiddensCall
+		public Assignment getCalledAssignment_3() { return cCalledAssignment_3; }
 
-		// not supported
-		public RuleCall ele30ParserRuleCallOverridingHiddensCall() { return c30ParserRuleCallOverridingHiddensCall; }
+		//OverridingHiddensCall
+		public RuleCall getCalledOverridingHiddensCallParserRuleCall_3_0() { return cCalledOverridingHiddensCallParserRuleCall_3_0; }
 
-		// not supported
-		public Keyword ele4KeywordRightParenthesis() { return c4KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		// not supported
-		public Assignment ele5AssignmentValid() { return c5AssignmentValid; }
+		//valid?=";"
+		public Assignment getValidAssignment_5() { return cValidAssignment_5; }
 
-		// not supported
-		public Keyword ele50KeywordSemicolon() { return c50KeywordSemicolon; }
+		//";"
+		public Keyword getValidSemicolonKeyword_5_0() { return cValidSemicolonKeyword_5_0; }
 	}
 
 	public class OverridingHiddensCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OverridingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordCall = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentSpaces = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallWS = (RuleCall)c1AssignmentSpaces.eContents().get(0);
-		private final Assignment c2AssignmentValid = (Assignment)cGroup.eContents().get(2);
-		private final Keyword c20KeywordSemicolon = (Keyword)c2AssignmentValid.eContents().get(0);
+		private final Keyword cCallKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cSpacesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSpacesWSTerminalRuleCall_1_0 = (RuleCall)cSpacesAssignment_1.eContents().get(0);
+		private final Assignment cValidAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Keyword cValidSemicolonKeyword_2_0 = (Keyword)cValidAssignment_2.eContents().get(0);
 		
-		// not supported
+		//OverridingHiddensCall hidden ( ):
+		//  "call" (spaces+=WS)? valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"call" (spaces+=WS)? valid?=";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordCall() { return c0KeywordCall; }
+		//"call"
+		public Keyword getCallKeyword_0() { return cCallKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentSpaces() { return c1AssignmentSpaces; }
+		//(spaces+=WS)?
+		public Assignment getSpacesAssignment_1() { return cSpacesAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallWS() { return c10TerminalRuleCallWS; }
+		//WS
+		public RuleCall getSpacesWSTerminalRuleCall_1_0() { return cSpacesWSTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentValid() { return c2AssignmentValid; }
+		//valid?=";"
+		public Assignment getValidAssignment_2() { return cValidAssignment_2; }
 
-		// not supported
-		public Keyword ele20KeywordSemicolon() { return c20KeywordSemicolon; }
+		//";"
+		public Keyword getValidSemicolonKeyword_2_0() { return cValidSemicolonKeyword_2_0; }
 	}
 
 	public class InheritingHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordInheriting = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordHiddens = (Keyword)cGroup.eContents().get(1);
-		private final Keyword c2KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(2);
-		private final Alternatives c3Alternatives = (Alternatives)cGroup.eContents().get(3);
-		private final Assignment c30AssignmentCalled = (Assignment)c3Alternatives.eContents().get(0);
-		private final RuleCall c300ParserRuleCallInheritingHiddensCall = (RuleCall)c30AssignmentCalled.eContents().get(0);
-		private final Assignment c31AssignmentHidingCalled = (Assignment)c3Alternatives.eContents().get(1);
-		private final RuleCall c310ParserRuleCallHidingHiddens = (RuleCall)c31AssignmentHidingCalled.eContents().get(0);
-		private final Keyword c4KeywordRightParenthesis = (Keyword)cGroup.eContents().get(4);
-		private final Assignment c5AssignmentValid = (Assignment)cGroup.eContents().get(5);
-		private final Keyword c50KeywordSemicolon = (Keyword)c5AssignmentValid.eContents().get(0);
+		private final Keyword cInheritingKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cHiddensKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Assignment cCalledAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
+		private final RuleCall cCalledInheritingHiddensCallParserRuleCall_3_0_0 = (RuleCall)cCalledAssignment_3_0.eContents().get(0);
+		private final Assignment cHidingCalledAssignment_3_1 = (Assignment)cAlternatives_3.eContents().get(1);
+		private final RuleCall cHidingCalledHidingHiddensParserRuleCall_3_1_0 = (RuleCall)cHidingCalledAssignment_3_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cValidAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final Keyword cValidSemicolonKeyword_5_0 = (Keyword)cValidAssignment_5.eContents().get(0);
 		
-		// not supported
+		//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+		//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordInheriting() { return c0KeywordInheriting; }
+		//"inheriting"
+		public Keyword getInheritingKeyword_0() { return cInheritingKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordHiddens() { return c1KeywordHiddens; }
+		//"hiddens"
+		public Keyword getHiddensKeyword_1() { return cHiddensKeyword_1; }
 
-		// not supported
-		public Keyword ele2KeywordLeftParenthesis() { return c2KeywordLeftParenthesis; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		// not supported
-		public Alternatives ele3Alternatives() { return c3Alternatives; }
+		//called=InheritingHiddensCall|hidingCalled=HidingHiddens
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		// not supported
-		public Assignment ele30AssignmentCalled() { return c30AssignmentCalled; }
+		//called=InheritingHiddensCall
+		public Assignment getCalledAssignment_3_0() { return cCalledAssignment_3_0; }
 
-		// not supported
-		public RuleCall ele300ParserRuleCallInheritingHiddensCall() { return c300ParserRuleCallInheritingHiddensCall; }
+		//InheritingHiddensCall
+		public RuleCall getCalledInheritingHiddensCallParserRuleCall_3_0_0() { return cCalledInheritingHiddensCallParserRuleCall_3_0_0; }
 
-		// not supported
-		public Assignment ele31AssignmentHidingCalled() { return c31AssignmentHidingCalled; }
+		//hidingCalled=HidingHiddens
+		public Assignment getHidingCalledAssignment_3_1() { return cHidingCalledAssignment_3_1; }
 
-		// not supported
-		public RuleCall ele310ParserRuleCallHidingHiddens() { return c310ParserRuleCallHidingHiddens; }
+		//HidingHiddens
+		public RuleCall getHidingCalledHidingHiddensParserRuleCall_3_1_0() { return cHidingCalledHidingHiddensParserRuleCall_3_1_0; }
 
-		// not supported
-		public Keyword ele4KeywordRightParenthesis() { return c4KeywordRightParenthesis; }
+		//")"
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		// not supported
-		public Assignment ele5AssignmentValid() { return c5AssignmentValid; }
+		//valid?=";"
+		public Assignment getValidAssignment_5() { return cValidAssignment_5; }
 
-		// not supported
-		public Keyword ele50KeywordSemicolon() { return c50KeywordSemicolon; }
+		//";"
+		public Keyword getValidSemicolonKeyword_5_0() { return cValidSemicolonKeyword_5_0; }
 	}
 
 	public class DatatypeHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordDatatype = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10ParserRuleCallDatatypeRule = (RuleCall)c1AssignmentValid.eContents().get(0);
+		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValidAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValidDatatypeRuleParserRuleCall_1_0 = (RuleCall)cValidAssignment_1.eContents().get(0);
 		
-		// not supported
+		//DatatypeHiddens:
+		//  "datatype" valid?=DatatypeRule;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"datatype" valid?=DatatypeRule
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordDatatype() { return c0KeywordDatatype; }
+		//"datatype"
+		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
+		//valid?=DatatypeRule
+		public Assignment getValidAssignment_1() { return cValidAssignment_1; }
 
-		// not supported
-		public RuleCall ele10ParserRuleCallDatatypeRule() { return c10ParserRuleCallDatatypeRule; }
+		//DatatypeRule
+		public RuleCall getValidDatatypeRuleParserRuleCall_1_0() { return cValidDatatypeRuleParserRuleCall_1_0; }
 	}
 
 	public class DatatypeRuleElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordRule = (Keyword)cGroup.eContents().get(0);
-		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cRuleKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		// not supported
+		//DatatypeRule returns ecore::EString hidden ( WS ):
+		//  "rule" ";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"rule" ";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordRule() { return c0KeywordRule; }
+		//"rule"
+		public Keyword getRuleKeyword_0() { return cRuleKeyword_0; }
 
-		// not supported
-		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
+		//";"
+		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 
 	public class HidingHiddensElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HidingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordHiding = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentSpace = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallWS = (RuleCall)c1AssignmentSpace.eContents().get(0);
-		private final Assignment c2AssignmentCalled = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20ParserRuleCallInheritingHiddensCall = (RuleCall)c2AssignmentCalled.eContents().get(0);
+		private final Keyword cHidingKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cSpaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cSpaceWSTerminalRuleCall_1_0 = (RuleCall)cSpaceAssignment_1.eContents().get(0);
+		private final Assignment cCalledAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cCalledInheritingHiddensCallParserRuleCall_2_0 = (RuleCall)cCalledAssignment_2.eContents().get(0);
 		
-		// not supported
+		//HidingHiddens hidden ( ):
+		//  "hiding" space=WS called=InheritingHiddensCall;
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"hiding" space=WS called=InheritingHiddensCall
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordHiding() { return c0KeywordHiding; }
+		//"hiding"
+		public Keyword getHidingKeyword_0() { return cHidingKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentSpace() { return c1AssignmentSpace; }
+		//space=WS
+		public Assignment getSpaceAssignment_1() { return cSpaceAssignment_1; }
 
-		// not supported
-		public RuleCall ele10TerminalRuleCallWS() { return c10TerminalRuleCallWS; }
+		//WS
+		public RuleCall getSpaceWSTerminalRuleCall_1_0() { return cSpaceWSTerminalRuleCall_1_0; }
 
-		// not supported
-		public Assignment ele2AssignmentCalled() { return c2AssignmentCalled; }
+		//called=InheritingHiddensCall
+		public Assignment getCalledAssignment_2() { return cCalledAssignment_2; }
 
-		// not supported
-		public RuleCall ele20ParserRuleCallInheritingHiddensCall() { return c20ParserRuleCallInheritingHiddensCall; }
+		//InheritingHiddensCall
+		public RuleCall getCalledInheritingHiddensCallParserRuleCall_2_0() { return cCalledInheritingHiddensCallParserRuleCall_2_0; }
 	}
 
 	public class InheritingHiddensCallElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InheritingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword c0KeywordCall = (Keyword)cGroup.eContents().get(0);
-		private final Assignment c1AssignmentValid = (Assignment)cGroup.eContents().get(1);
-		private final Keyword c10KeywordSemicolon = (Keyword)c1AssignmentValid.eContents().get(0);
+		private final Keyword cCallKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValidAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cValidSemicolonKeyword_1_0 = (Keyword)cValidAssignment_1.eContents().get(0);
 		
-		// not supported
+		//InheritingHiddensCall:
+		//  "call" valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		// not supported
-		public Group eleGroup() { return cGroup; }
+		//"call" valid?=";"
+		public Group getGroup() { return cGroup; }
 
-		// not supported
-		public Keyword ele0KeywordCall() { return c0KeywordCall; }
+		//"call"
+		public Keyword getCallKeyword_0() { return cCallKeyword_0; }
 
-		// not supported
-		public Assignment ele1AssignmentValid() { return c1AssignmentValid; }
+		//valid?=";"
+		public Assignment getValidAssignment_1() { return cValidAssignment_1; }
 
-		// not supported
-		public Keyword ele10KeywordSemicolon() { return c10KeywordSemicolon; }
+		//";"
+		public Keyword getValidSemicolonKeyword_1_0() { return cValidSemicolonKeyword_1_0; }
 	}
 	
 	private ModelElements pModel;
@@ -370,73 +380,126 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	
 
 	
-	// not supported
-	public ModelElements prModel() {
+	//Model:
+	//  WithoutHiddens|WithHiddens|OverridingHiddens|InheritingHiddens|DatatypeHiddens;
+	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
-	} 
+	}
+	
+	public ParserRule getModelRule() {
+		return getModelAccess().getRule();
+	}
 
-	// not supported
-	public WithoutHiddensElements prWithoutHiddens() {
+	//WithoutHiddens:
+	//  "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
+	public WithoutHiddensElements getWithoutHiddensAccess() {
 		return (pWithoutHiddens != null) ? pWithoutHiddens : (pWithoutHiddens = new WithoutHiddensElements());
-	} 
+	}
+	
+	public ParserRule getWithoutHiddensRule() {
+		return getWithoutHiddensAccess().getRule();
+	}
 
-	// not supported
-	public WithHiddensElements prWithHiddens() {
+	//WithHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+	//  "with" "hiddens" valid?=";";
+	public WithHiddensElements getWithHiddensAccess() {
 		return (pWithHiddens != null) ? pWithHiddens : (pWithHiddens = new WithHiddensElements());
-	} 
+	}
+	
+	public ParserRule getWithHiddensRule() {
+		return getWithHiddensAccess().getRule();
+	}
 
-	// not supported
-	public OverridingHiddensElements prOverridingHiddens() {
+	//OverridingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+	//  "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
+	public OverridingHiddensElements getOverridingHiddensAccess() {
 		return (pOverridingHiddens != null) ? pOverridingHiddens : (pOverridingHiddens = new OverridingHiddensElements());
-	} 
+	}
+	
+	public ParserRule getOverridingHiddensRule() {
+		return getOverridingHiddensAccess().getRule();
+	}
 
-	// not supported
-	public OverridingHiddensCallElements prOverridingHiddensCall() {
+	//OverridingHiddensCall hidden ( ):
+	//  "call" (spaces+=WS)? valid?=";";
+	public OverridingHiddensCallElements getOverridingHiddensCallAccess() {
 		return (pOverridingHiddensCall != null) ? pOverridingHiddensCall : (pOverridingHiddensCall = new OverridingHiddensCallElements());
-	} 
+	}
+	
+	public ParserRule getOverridingHiddensCallRule() {
+		return getOverridingHiddensCallAccess().getRule();
+	}
 
-	// not supported
-	public InheritingHiddensElements prInheritingHiddens() {
+	//InheritingHiddens hidden ( WS , ML_COMMENT , SL_COMMENT ):
+	//  "inheriting" "hiddens" "(" (called=InheritingHiddensCall|hidingCalled=HidingHiddens) ")" valid?=";";
+	public InheritingHiddensElements getInheritingHiddensAccess() {
 		return (pInheritingHiddens != null) ? pInheritingHiddens : (pInheritingHiddens = new InheritingHiddensElements());
-	} 
+	}
+	
+	public ParserRule getInheritingHiddensRule() {
+		return getInheritingHiddensAccess().getRule();
+	}
 
-	// not supported
-	public DatatypeHiddensElements prDatatypeHiddens() {
+	//DatatypeHiddens:
+	//  "datatype" valid?=DatatypeRule;
+	public DatatypeHiddensElements getDatatypeHiddensAccess() {
 		return (pDatatypeHiddens != null) ? pDatatypeHiddens : (pDatatypeHiddens = new DatatypeHiddensElements());
-	} 
+	}
+	
+	public ParserRule getDatatypeHiddensRule() {
+		return getDatatypeHiddensAccess().getRule();
+	}
 
-	// not supported
-	public DatatypeRuleElements prDatatypeRule() {
+	//DatatypeRule returns ecore::EString hidden ( WS ):
+	//  "rule" ";";
+	public DatatypeRuleElements getDatatypeRuleAccess() {
 		return (pDatatypeRule != null) ? pDatatypeRule : (pDatatypeRule = new DatatypeRuleElements());
-	} 
+	}
+	
+	public ParserRule getDatatypeRuleRule() {
+		return getDatatypeRuleAccess().getRule();
+	}
 
-	// not supported
-	public HidingHiddensElements prHidingHiddens() {
+	//HidingHiddens hidden ( ):
+	//  "hiding" space=WS called=InheritingHiddensCall;
+	public HidingHiddensElements getHidingHiddensAccess() {
 		return (pHidingHiddens != null) ? pHidingHiddens : (pHidingHiddens = new HidingHiddensElements());
-	} 
+	}
+	
+	public ParserRule getHidingHiddensRule() {
+		return getHidingHiddensAccess().getRule();
+	}
 
-	// not supported
-	public InheritingHiddensCallElements prInheritingHiddensCall() {
+	//InheritingHiddensCall:
+	//  "call" valid?=";";
+	public InheritingHiddensCallElements getInheritingHiddensCallAccess() {
 		return (pInheritingHiddensCall != null) ? pInheritingHiddensCall : (pInheritingHiddensCall = new InheritingHiddensCallElements());
-	} 
+	}
+	
+	public ParserRule getInheritingHiddensCallRule() {
+		return getInheritingHiddensCallAccess().getRule();
+	}
 
-	// not supported
-	public TerminalRule trML_COMMENT() {
+	//terminal ML_COMMENT:
+	//  "/*" -> "*/";
+	public TerminalRule getML_COMMENTRule() {
 		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
 	} 
 
-	// not supported
-	public TerminalRule trSL_COMMENT() {
+	//terminal SL_COMMENT:
+	//  "//" ! ( "\n" | "\r" ) * ( "\r" ? "\n" ) ?;
+	public TerminalRule getSL_COMMENTRule() {
 		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
 	} 
 
-	// not supported
-	public TerminalRule trWS() {
+	//terminal WS:
+	//  ( " " | "\t" | "\r" | "\n" ) +;
+	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
-	// not supported
-	public TerminalRule trANY_OTHER() {
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	public TerminalRule getANY_OTHERRule() {
 		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
 	} 
 }

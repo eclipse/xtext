@@ -70,8 +70,8 @@ public final class Bug250313Child2Consumer extends NonTerminalConsumer {
 	public void setRule(Child2Elements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.eleAssignmentName());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.ele0TerminalRuleCallSTRING());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getNameAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getNameSTRINGTerminalRuleCall_0());
 	}
 	
 	@Override
