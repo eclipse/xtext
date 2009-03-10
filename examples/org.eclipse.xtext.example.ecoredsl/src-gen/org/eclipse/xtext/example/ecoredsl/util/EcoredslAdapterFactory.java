@@ -88,16 +88,6 @@ public class EcoredslAdapterFactory extends AdapterFactoryImpl
         return createImportStatementDeclAdapter();
       }
       @Override
-      public Adapter caseMapEntry(MapEntry object)
-      {
-        return createMapEntryAdapter();
-      }
-      @Override
-      public Adapter caseMultiplicityExpr(MultiplicityExpr object)
-      {
-        return createMultiplicityExprAdapter();
-      }
-      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -145,36 +135,6 @@ public class EcoredslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createImportStatementDeclAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.ecoredsl.MapEntry <em>Map Entry</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.ecoredsl.MapEntry
-   * @generated
-   */
-  public Adapter createMapEntryAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.ecoredsl.MultiplicityExpr <em>Multiplicity Expr</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.ecoredsl.MultiplicityExpr
-   * @generated
-   */
-  public Adapter createMultiplicityExprAdapter()
   {
     return null;
   }

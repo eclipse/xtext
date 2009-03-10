@@ -80,7 +80,7 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "detailKey", false, false, getElement(), getRuleCall$3$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "key", false, false, getElement(), getRuleCall$3$Delimiter(), optional);
 		}
 	}
 
@@ -116,7 +116,7 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "detailValue", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "value", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -140,10 +140,10 @@ public final class EcoreDslMapEntryConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.eleGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentDetailKey());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.ele0AssignmentKey());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00TerminalRuleCallID());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.ele1KeywordEqualsSign());
-		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentDetailValue());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele2AssignmentValue());
 		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele20TerminalRuleCallSTRING());
 	}
 	

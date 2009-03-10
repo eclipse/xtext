@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -134,62 +133,6 @@ public interface EcoredslPackage extends EPackage
    */
   int IMPORT_STATEMENT_DECL_FEATURE_COUNT = 2;
 
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.ecoredsl.impl.MapEntryImpl <em>Map Entry</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.ecoredsl.impl.MapEntryImpl
-   * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getMapEntry()
-   * @generated
-   */
-  int MAP_ENTRY = 2;
-
-  /**
-   * The feature id for the '<em><b>Detail Key</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MAP_ENTRY__DETAIL_KEY = EcorePackage.EOBJECT_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Detail Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MAP_ENTRY__DETAIL_VALUE = EcorePackage.EOBJECT_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Map Entry</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MAP_ENTRY_FEATURE_COUNT = EcorePackage.EOBJECT_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.ecoredsl.impl.MultiplicityExprImpl <em>Multiplicity Expr</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.ecoredsl.impl.MultiplicityExprImpl
-   * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getMultiplicityExpr()
-   * @generated
-   */
-  int MULTIPLICITY_EXPR = 3;
-
-  /**
-   * The number of structural features of the '<em>Multiplicity Expr</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MULTIPLICITY_EXPR_FEATURE_COUNT = 0;
-
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl <em>Ecore Dsl</em>}'.
@@ -254,48 +197,6 @@ public interface EcoredslPackage extends EPackage
    * @generated
    */
   EAttribute getImportStatementDecl_ImportURI();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.ecoredsl.MapEntry <em>Map Entry</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Map Entry</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.MapEntry
-   * @generated
-   */
-  EClass getMapEntry();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.ecoredsl.MapEntry#getDetailKey <em>Detail Key</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Detail Key</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.MapEntry#getDetailKey()
-   * @see #getMapEntry()
-   * @generated
-   */
-  EAttribute getMapEntry_DetailKey();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.ecoredsl.MapEntry#getDetailValue <em>Detail Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Detail Value</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.MapEntry#getDetailValue()
-   * @see #getMapEntry()
-   * @generated
-   */
-  EAttribute getMapEntry_DetailValue();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.ecoredsl.MultiplicityExpr <em>Multiplicity Expr</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Multiplicity Expr</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.MultiplicityExpr
-   * @generated
-   */
-  EClass getMultiplicityExpr();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -371,42 +272,6 @@ public interface EcoredslPackage extends EPackage
      * @generated
      */
     EAttribute IMPORT_STATEMENT_DECL__IMPORT_URI = eINSTANCE.getImportStatementDecl_ImportURI();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.ecoredsl.impl.MapEntryImpl <em>Map Entry</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.ecoredsl.impl.MapEntryImpl
-     * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getMapEntry()
-     * @generated
-     */
-    EClass MAP_ENTRY = eINSTANCE.getMapEntry();
-
-    /**
-     * The meta object literal for the '<em><b>Detail Key</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MAP_ENTRY__DETAIL_KEY = eINSTANCE.getMapEntry_DetailKey();
-
-    /**
-     * The meta object literal for the '<em><b>Detail Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MAP_ENTRY__DETAIL_VALUE = eINSTANCE.getMapEntry_DetailValue();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.ecoredsl.impl.MultiplicityExprImpl <em>Multiplicity Expr</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.ecoredsl.impl.MultiplicityExprImpl
-     * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getMultiplicityExpr()
-     * @generated
-     */
-    EClass MULTIPLICITY_EXPR = eINSTANCE.getMultiplicityExpr();
 
   }
 

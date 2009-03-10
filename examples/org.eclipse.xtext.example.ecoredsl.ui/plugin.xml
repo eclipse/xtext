@@ -59,38 +59,35 @@
    <extension point="org.eclipse.ui.editors.templates">
         <contextType name="EPackageDecl"
             class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EPackageDecl">
+            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EPackageDecl">
         </contextType>
         <contextType name="EClassDecl"
             class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EClassDecl">
+            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EClassDecl">
         </contextType>
         <contextType name="EDataTypeDecl"
             class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EDataTypeDecl">
+            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EDataTypeDecl">
         </contextType>
         <contextType name="EEnumDecl"
             class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EEnumDecl">
+            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EEnumDecl">
         </contextType>
         <contextType name="EAttributeDecl"
             class="org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EAttributeDecl">
+            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EAttributeDecl">
         </contextType>
         <include file="templates/templates.xml" /> 
     </extension>
     <extension
          point="org.eclipse.ui.commands">
          <command
-               id="org.eclipse.xtext.ecore.dsl.GenerateEcore"
+               id="org.eclipse.xtext.example.ecoredsl.ui.GenerateEcore"
                name="Generate Ecore Model"
                description="Generate Ecore Model">
          </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
          <command
-               id="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl"
+               id="org.eclipse.xtext.example.ecoredsl.ui.GenerateEcoreDsl"
                name="Generate Ecore Dsl"
                description="Generate Ecore Dsl">
          </command>
@@ -98,19 +95,19 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="guice.Aware:org.eclipse.xtext.example.handler.GenerateEcoreDslHandler"
-            commandId="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl">
+            class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.example.handler.GenerateEcoreDslHandler"
+            commandId="org.eclipse.xtext.example.ecoredsl.ui.GenerateEcoreDsl">
       </handler>
       <handler
-            class="guice.Aware:org.eclipse.xtext.example.handler.GenerateEcoreHandler"
-            commandId="org.eclipse.xtext.ecore.dsl.GenerateEcore">
+            class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.example.handler.GenerateEcoreHandler"
+            commandId="org.eclipse.xtext.example.ecoredsl.ui.GenerateEcore">
       </handler>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-         <command commandId="org.eclipse.xtext.ecore.dsl.GenerateEcore">
+         <command commandId="org.eclipse.xtext.example.ecoredsl.ui.GenerateEcore">
             <visibleWhen
                   checkEnabled="false">
                <iterate>
@@ -122,7 +119,7 @@
                   </adapt></iterate>
             </visibleWhen>
          </command>
-         <command commandId="org.eclipse.xtext.ecore.dsl.GenerateEcoreDsl">
+         <command commandId="org.eclipse.xtext.example.ecoredsl.ui.GenerateEcoreDsl">
             <visibleWhen
                   checkEnabled="false">
                <iterate>
@@ -136,6 +133,5 @@
          </command>
       </menuContribution>
    </extension>
-	
 
 </plugin>

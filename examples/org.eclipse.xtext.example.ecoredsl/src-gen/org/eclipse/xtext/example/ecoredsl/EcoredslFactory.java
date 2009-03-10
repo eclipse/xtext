@@ -44,24 +44,6 @@ public interface EcoredslFactory extends EFactory
   ImportStatementDecl createImportStatementDecl();
 
   /**
-   * Returns a new object of class '<em>Map Entry</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Map Entry</em>'.
-   * @generated
-   */
-  MapEntry createMapEntry();
-
-  /**
-   * Returns a new object of class '<em>Multiplicity Expr</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Multiplicity Expr</em>'.
-   * @generated
-   */
-  MultiplicityExpr createMultiplicityExpr();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

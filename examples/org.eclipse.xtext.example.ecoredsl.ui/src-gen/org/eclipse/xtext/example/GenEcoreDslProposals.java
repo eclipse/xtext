@@ -198,21 +198,12 @@ public class GenEcoreDslProposals extends AbstractJavaProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"EAnnotationDecl_Source\"", contentAssistContext));		
+		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeEAnnotationDecl_EModelElement(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEAnnotationDecl_Details(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEAnnotationDecl_EModelElement feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
-		}
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
-	}
-			
-	public List<? extends ICompletionProposal> completeEAnnotationDecl_Contents(Assignment assignment, IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeEAnnotationDecl_Contents feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeEAnnotationDecl_Details feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -821,22 +812,22 @@ public class GenEcoreDslProposals extends AbstractJavaProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment, "EParameterDecl_Name", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeMapEntry_DetailKey(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeMapEntry_Key(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeMapEntry_DetailKey feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeMapEntry_Key feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "MapEntry_DetailKey", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "MapEntry_Key", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeMapEntry_DetailValue(Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeMapEntry_Value(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeMapEntry_DetailValue feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeMapEntry_Value feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"MapEntry_DetailValue\"", contentAssistContext));		
+		return Collections.singletonList(createCompletionProposal(assignment, "\"MapEntry_Value\"", contentAssistContext));		
 	}
     
 			
@@ -963,15 +954,13 @@ public class GenEcoreDslProposals extends AbstractJavaProposalProvider {
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeEcore_EObject(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEcore_EStringToStringMapEntry(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEcore_EObject '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeEcore_EStringToStringMapEntry '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();
 	}
-			
-			
 			
 	public List<? extends ICompletionProposal> completeEcore_EString(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {

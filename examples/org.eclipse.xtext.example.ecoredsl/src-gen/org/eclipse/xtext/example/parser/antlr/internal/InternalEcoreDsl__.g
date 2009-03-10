@@ -7,40 +7,35 @@ package org.eclipse.xtext.example.parser.antlr.internal;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-T11 : 'import' ;
-T12 : '=' ;
-T13 : ';' ;
-T14 : 'package' ;
-T15 : 'nsURI' ;
-T16 : 'nsPrefix' ;
-T17 : '{' ;
-T18 : '}' ;
-T19 : '!serializable' ;
-T20 : 'datatype' ;
-T21 : ':' ;
-T22 : '@' ;
-T23 : '(' ;
-T24 : ',' ;
-T25 : ')' ;
-T26 : 'abstract' ;
-T27 : 'interface' ;
-T28 : 'class' ;
-T29 : '<' ;
-T30 : '>' ;
-T31 : 'extends' ;
-T32 : 'ID' ;
-T33 : 'bag' ;
-T34 : 'random' ;
-T35 : 'readonly' ;
-T36 : 'volatile' ;
-T37 : 'transient' ;
-T38 : 'unsettable' ;
-T39 : 'derived' ;
-T40 : 'attr' ;
-T41 : '[' ;
-T42 : '..' ;
-T43 : ']' ;
-T44 : 'local' ;
+T16 : 'import' ;
+T17 : '=' ;
+T18 : ';' ;
+T19 : 'package' ;
+T20 : 'nsURI' ;
+T21 : 'nsPrefix' ;
+T22 : '{' ;
+T23 : '}' ;
+T24 : 'datatype' ;
+T25 : ':' ;
+T26 : '@' ;
+T27 : '(' ;
+T28 : ',' ;
+T29 : ')' ;
+T30 : 'abstract' ;
+T31 : 'interface' ;
+T32 : 'class' ;
+T33 : '<' ;
+T34 : '>' ;
+T35 : 'extends' ;
+T36 : 'ID' ;
+T37 : 'volatile' ;
+T38 : 'transient' ;
+T39 : 'unsettable' ;
+T40 : 'derived' ;
+T41 : 'attr' ;
+T42 : '[' ;
+T43 : '..' ;
+T44 : ']' ;
 T45 : 'val' ;
 T46 : 'ref' ;
 T47 : '#' ;
@@ -54,25 +49,40 @@ T54 : '.' ;
 T55 : '$' ;
 T56 : '-' ;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2989
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2930
+RULE_BAG : 'bag';
+
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2932
+RULE_RANDOM : 'random';
+
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2934
+RULE_READONLY : 'readonly';
+
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2936
+RULE_LOCAL : 'local';
+
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2938
+RULE_SERIALIZABLE : '!serializable';
+
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2940
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2991
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2942
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2993
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2944
 RULE_STRING : ('\"' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\"')))* '\"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2995
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2946
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2997
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2948
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2999
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2950
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 3001
+// $ANTLR src "../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g" 2952
 RULE_ANY_OTHER : .;
 
 

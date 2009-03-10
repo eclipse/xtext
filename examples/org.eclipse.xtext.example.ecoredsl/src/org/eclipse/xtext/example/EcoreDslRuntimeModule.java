@@ -10,24 +10,25 @@ package org.eclipse.xtext.example;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
+import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
-import org.eclipse.xtext.parser.DefaultEcoreElementFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 
 /**
  * Used to register components to be used within the IDE.
@@ -45,23 +46,60 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 	}
 	
 	@Override
-	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
-		return EcoreDslRuntimeModule.EcoreDslElementFactory.class;
-	}
-	
-	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return EcoreDslRuntimeModule.EcoreDslConverters.class;
+	}
+
+	@Override
+	public Class<? extends ITransientValueService> bindITransientValueService() {
+		return EcoreDslRuntimeModule.EcoreDslTransientValueService.class;
 	}
 	
 	public static class EcoreDslConverters extends DefaultTerminalConverters {
 
 		@ValueConverter(rule = "SINT")
-		public IValueConverter<Integer> SINT() {
+		public IValueConverter<Integer> sint() {
 			return new AbstractToStringConverter<Integer>() {
 				@Override
 				public Integer internalToValue(String string, AbstractNode node) {
 					return Integer.valueOf(string);
+				}
+			};
+		}
+
+		@ValueConverter(rule = "Bag")
+		public IValueConverter<Boolean> bag() {
+			return negatedBooleanConverter("bag");
+		}
+
+		@ValueConverter(rule = "Random")
+		public IValueConverter<Boolean> random() {
+			return negatedBooleanConverter("random");
+		}
+
+		@ValueConverter(rule = "Readonly")
+		public IValueConverter<Boolean> readonly() {
+			return negatedBooleanConverter("readonly");
+		}
+
+		@ValueConverter(rule = "Local")
+		public IValueConverter<Boolean> local() {
+			return negatedBooleanConverter("local");
+		}
+
+		@ValueConverter(rule = "Serializable")
+		public IValueConverter<Boolean> serializable() {
+			return negatedBooleanConverter("!serializable");
+		}
+
+		private IValueConverter<Boolean> negatedBooleanConverter(final String keyword) {
+			return new AbstractValueConverter<Boolean>(){
+				public Boolean toValue(String string, AbstractNode node) throws ValueConverterException {
+					return string == null;
+				}
+			
+				public String toString(Boolean value) {
+					return value ? "" : keyword;
 				}
 			};
 		}
@@ -106,55 +144,15 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 		}
 	}
 
-	public static class EcoreDslElementFactory extends DefaultEcoreElementFactory {
-
-		// logger available to subclasses
-		protected final Logger logger = Logger.getLogger(getClass());
-		
+	public static class EcoreDslTransientValueService extends DefaultTransientValueService {
 		@Override
-		public void set(EObject _this, String feature, Object value, String ruleName, AbstractNode node)
-				throws ValueConverterException {
-			// hack: negated boolean assignments (not possible out of the box with xtext)
-			if (ruleName.equals("readonly")) {
-				((EStructuralFeature) _this).setChangeable(false);
-				return;
-			}
-			else if (ruleName.equals("readonly")) {
-				((EStructuralFeature) _this).setChangeable(false);
-				return;
-			}
-			else if (ruleName.equals("local")) {
-				((EReference) _this).setResolveProxies(false);
-				return;
-			}
-			else if (ruleName.equals("random")) {
-				((ETypedElement) _this).setOrdered(false);
-				return;
-			}
-			else if (ruleName.equals("bag")) {
-				((ETypedElement) _this).setUnique(false);
-				return;
-			}
-			else if (ruleName.equals("!serializable")) {
-				((EDataType) _this).setSerializable(false);
-				return;
-			}
-			super.set(_this, feature, value, ruleName, node);
+		public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
+			if (EcorePackage.eINSTANCE.getETypedElement_EType() == feature || EcorePackage.eINSTANCE.getEClass_ESuperTypes() == feature)
+				return true;
+			if (EcorePackage.eINSTANCE.getETypedElement_EGenericType() == feature || EcorePackage.eINSTANCE.getEClass_EGenericSuperTypes() == feature)
+				return false;
+			return super.isTransient(owner, feature, index);
 		}
-
-		@Override
-		public void add(EObject _this, String feature, Object value, String ruleName, AbstractNode node)
-				throws ValueConverterException {
-			if (feature.equals("contents") && _this instanceof EAnnotation) {
-				String key = (String) ((EObject) value).eGet(((EObject) value).eClass().getEAllAttributes().get(0));
-				String stringValue = (String) ((EObject) value).eGet(((EObject) value).eClass().getEAllAttributes()
-						.get(1));
-				((EAnnotation) _this).getDetails().put(key, stringValue);
-				return;
-			}
-			super.add(_this, feature, value, ruleName, node);
-		}
-
 	}
-	
+
 }

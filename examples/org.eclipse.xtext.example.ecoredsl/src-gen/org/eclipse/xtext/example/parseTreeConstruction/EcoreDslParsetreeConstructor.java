@@ -40,9 +40,7 @@ public class EcoreDslParsetreeConstructor extends AbstractParseTreeConstructor {
 		if(inst.isInstanceOf(grammarAccess.prEGenericTypeDecl().getRule().getType().getClassifier()) && (s = new EGenericTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prEOperationDecl().getRule().getType().getClassifier()) && (s = new EOperationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prEParameterDecl().getRule().getType().getClassifier()) && (s = new EParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getClassifier()) && (s = new MapEntrySuper_RuleCall_MapEntry(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getClassifier()) && (s = new MapEntry_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.prMultiplicityExpr().getRule().getType().getClassifier()) && (s = new MultiplicityExpr_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -1107,13 +1105,11 @@ protected class EDataTypeDecl_0_1_Assignment_serializable extends AssignmentToke
 	protected Solution createSolution() {
 		if((value = current.getConsumable("serializable",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serializable");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEDataTypeDecl().ele010KeywordSerializable();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEDataTypeDecl().ele010TerminalRuleCallSerializable();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -1297,33 +1293,17 @@ protected class EAnnotationDecl_Group extends GroupToken {
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new EAnnotationDecl_6_Keyword(current, this).firstSolution();
+		Solution s1 = new EAnnotationDecl_2_Group(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new EAnnotationDecl_5_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new EAnnotationDecl_1_Assignment_source(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 		while(s2 != null) {
-			Solution s3 = new EAnnotationDecl_4_Assignment_contents(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-		while(s3 != null) {
-			Solution s4 = new EAnnotationDecl_3_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-		while(s4 != null) {
-			Solution s5 = new EAnnotationDecl_2_Assignment_eModelElement(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-		while(s5 != null) {
-			Solution s6 = new EAnnotationDecl_1_Assignment_source(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-		while(s6 != null) {
-			Solution s7 = new EAnnotationDecl_0_Keyword(s6.getCurrent(), s6.getPredecessor()).firstSolution();
-			if(s7 != null) {
-				last = s7.getPredecessor();
-				return s7;
+			Solution s3 = new EAnnotationDecl_0_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+			if(s3 != null) {
+				last = s3.getPredecessor();
+				return s3;
 			} else {
-				s6 = s6.getPredecessor().nextSolution(this,s6);
+				s2 = s2.getPredecessor().nextSolution(this,s2);
 			}
-		}
-			s5 = s5.getPredecessor().nextSolution(this,s5);
-		}
-			s4 = s4.getPredecessor().nextSolution(this,s4);
-		}
-			s3 = s3.getPredecessor().nextSolution(this,s3);
-		}
-			s2 = s2.getPredecessor().nextSolution(this,s2);
 		}
 			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
@@ -1359,76 +1339,88 @@ protected class EAnnotationDecl_1_Assignment_source extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("source",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("source");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.prEAnnotationDecl().ele10TerminalRuleCallSTRING();
+
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = grammarAccess.prEAnnotationDecl().ele10ParserRuleCallSTRING_OR_QID();
 			return new Solution(obj);
 		}
+
 		return null;
 	}
 }
 
 // not supported
-protected class EAnnotationDecl_2_Assignment_eModelElement extends AssignmentToken  {
+protected class EAnnotationDecl_2_Group extends GroupToken {
 	
-	public EAnnotationDecl_2_Assignment_eModelElement(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele2AssignmentEModelElement();
+	public Group getGrammarElement() {
+		return grammarAccess.prEAnnotationDecl().ele2Group();
 	}
+
 	
+
 	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("eModelElement",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("eModelElement");
-		if(value instanceof EObject) { // xtext::CrossReference
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prEAnnotationDecl().ele20CrossReferenceIDEModelElement().getType().getClassifier())) {
-				type = AssignmentType.CR;
-				element = grammarAccess.prEAnnotationDecl().ele20CrossReferenceIDEModelElement(); 
-				return new Solution(obj);
+	protected Solution createSolution() {	
+		Solution s1 = new EAnnotationDecl_2_3_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EAnnotationDecl_2_2_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s2 != null) {
+			Solution s3 = new EAnnotationDecl_2_1_Assignment_details(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+		while(s3 != null) {
+			Solution s4 = new EAnnotationDecl_2_0_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+			if(s4 != null) {
+				last = s4.getPredecessor();
+				return s4;
+			} else {
+				s3 = s3.getPredecessor().nextSolution(this,s3);
 			}
+		}
+			s2 = s2.getPredecessor().nextSolution(this,s2);
+		}
+			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
 // not supported
-protected class EAnnotationDecl_3_Keyword extends KeywordToken  {
+protected class EAnnotationDecl_2_0_Keyword extends KeywordToken  {
 	
-	public EAnnotationDecl_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele3KeywordLeftParenthesis();
+		return grammarAccess.prEAnnotationDecl().ele20KeywordLeftParenthesis();
 	}	
 }
 
 // not supported
-protected class EAnnotationDecl_4_Assignment_contents extends AssignmentToken  {
+protected class EAnnotationDecl_2_1_Assignment_details extends AssignmentToken  {
 	
-	public EAnnotationDecl_4_Assignment_contents(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_1_Assignment_details(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele4AssignmentContents();
+		return grammarAccess.prEAnnotationDecl().ele21AssignmentDetails();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("contents",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("contents");
+		if((value = current.getConsumable("details",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("details");
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getClassifier())) {
-				Solution s = new MapEntrySuper_RuleCall_MapEntry(param, this).firstSolution();
+			if(param.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getClassifier())) {
+				Solution s = new MapEntry_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -1442,24 +1434,24 @@ protected class EAnnotationDecl_4_Assignment_contents extends AssignmentToken  {
 }
 
 // not supported
-protected class EAnnotationDecl_5_Group extends GroupToken {
+protected class EAnnotationDecl_2_2_Group extends GroupToken {
 	
-	public EAnnotationDecl_5_Group(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_2_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele5Group();
+		return grammarAccess.prEAnnotationDecl().ele22Group();
 	}
 
 	
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new EAnnotationDecl_5_1_Assignment_contents(current, this).firstSolution();
+		Solution s1 = new EAnnotationDecl_2_2_1_Assignment_details(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new EAnnotationDecl_5_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new EAnnotationDecl_2_2_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
@@ -1472,38 +1464,38 @@ protected class EAnnotationDecl_5_Group extends GroupToken {
 }
 
 // not supported
-protected class EAnnotationDecl_5_0_Keyword extends KeywordToken  {
+protected class EAnnotationDecl_2_2_0_Keyword extends KeywordToken  {
 	
-	public EAnnotationDecl_5_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_2_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele50KeywordComma();
+		return grammarAccess.prEAnnotationDecl().ele220KeywordComma();
 	}	
 }
 
 // not supported
-protected class EAnnotationDecl_5_1_Assignment_contents extends AssignmentToken  {
+protected class EAnnotationDecl_2_2_1_Assignment_details extends AssignmentToken  {
 	
-	public EAnnotationDecl_5_1_Assignment_contents(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_2_1_Assignment_details(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele51AssignmentContents();
+		return grammarAccess.prEAnnotationDecl().ele221AssignmentDetails();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("contents",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("contents");
+		if((value = current.getConsumable("details",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("details");
 
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.prMapEntrySuper().getRule().getType().getClassifier())) {
-				Solution s = new MapEntrySuper_RuleCall_MapEntry(param, this).firstSolution();
+			if(param.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getClassifier())) {
+				Solution s = new MapEntry_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -1518,16 +1510,17 @@ protected class EAnnotationDecl_5_1_Assignment_contents extends AssignmentToken 
 
 
 // not supported
-protected class EAnnotationDecl_6_Keyword extends KeywordToken  {
+protected class EAnnotationDecl_2_3_Keyword extends KeywordToken  {
 	
-	public EAnnotationDecl_6_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public EAnnotationDecl_2_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.prEAnnotationDecl().ele6KeywordRightParenthesis();
+		return grammarAccess.prEAnnotationDecl().ele23KeywordRightParenthesis();
 	}	
 }
+
 
 
 /************ end Rule EAnnotationDecl ****************/
@@ -2498,13 +2491,11 @@ protected class EAttributeDecl_1_1_Assignment_unique extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unique",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEAttributeDecl().ele110KeywordBag();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEAttributeDecl().ele110TerminalRuleCallBag();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -2525,13 +2516,11 @@ protected class EAttributeDecl_1_2_Assignment_ordered extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ordered",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEAttributeDecl().ele120KeywordRandom();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEAttributeDecl().ele120TerminalRuleCallRandom();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -2552,13 +2541,11 @@ protected class EAttributeDecl_1_3_Assignment_changeable extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("changeable",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEAttributeDecl().ele130KeywordReadonly();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEAttributeDecl().ele130TerminalRuleCallReadonly();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -3121,13 +3108,11 @@ protected class EReferenceDecl_1_0_Assignment_resolveProxies extends AssignmentT
 	protected Solution createSolution() {
 		if((value = current.getConsumable("resolveProxies",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resolveProxies");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEReferenceDecl().ele100KeywordLocal();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEReferenceDecl().ele100TerminalRuleCallLocal();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -3148,13 +3133,11 @@ protected class EReferenceDecl_1_1_Assignment_unique extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("unique",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEReferenceDecl().ele110KeywordBag();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEReferenceDecl().ele110TerminalRuleCallBag();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -3175,13 +3158,11 @@ protected class EReferenceDecl_1_2_Assignment_ordered extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("ordered",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEReferenceDecl().ele120KeywordRandom();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEReferenceDecl().ele120TerminalRuleCallRandom();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -3202,13 +3183,11 @@ protected class EReferenceDecl_1_3_Assignment_changeable extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("changeable",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
-
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
-			type = AssignmentType.KW;
-			element = grammarAccess.prEReferenceDecl().ele130KeywordReadonly();
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.prEReferenceDecl().ele130TerminalRuleCallReadonly();
 			return new Solution(obj);
 		}
-
 		return null;
 	}
 }
@@ -6044,36 +6023,6 @@ protected class EParameterDecl_2_Assignment_name extends AssignmentToken  {
 /************ end Rule EParameterDecl ****************/
 
 
-/************ begin Rule MapEntrySuper ****************
- *
- * not supported
- *
- **/
-
-
-// not supported
-protected class MapEntrySuper_RuleCall_MapEntry extends RuleCallToken {
-	
-	public MapEntrySuper_RuleCall_MapEntry(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.prMapEntrySuper().eleParserRuleCallMapEntry();
-	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(MapEntry_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.prMapEntry().getRule().getType().getClassifier())) return null;
-		return new MapEntry_Group(current, this).firstSolution();
-	}
-}
-
-/************ end Rule MapEntrySuper ****************/
-
-
 /************ begin Rule MapEntry ****************
  *
  * not supported
@@ -6097,11 +6046,11 @@ protected class MapEntry_Group extends GroupToken {
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new MapEntry_2_Assignment_detailValue(current, this).firstSolution();
+		Solution s1 = new MapEntry_2_Assignment_value(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new MapEntry_1_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 		while(s2 != null) {
-			Solution s3 = new MapEntry_0_Assignment_detailKey(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+			Solution s3 = new MapEntry_0_Assignment_key(s2.getCurrent(), s2.getPredecessor()).firstSolution();
 			if(s3 != null) {
 				last = s3.getPredecessor();
 				return s3;
@@ -6116,21 +6065,21 @@ protected class MapEntry_Group extends GroupToken {
 }
 
 // not supported
-protected class MapEntry_0_Assignment_detailKey extends AssignmentToken  {
+protected class MapEntry_0_Assignment_key extends AssignmentToken  {
 	
-	public MapEntry_0_Assignment_detailKey(IInstanceDescription curr, AbstractToken pred) {
+	public MapEntry_0_Assignment_key(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prMapEntry().ele0AssignmentDetailKey();
+		return grammarAccess.prMapEntry().ele0AssignmentKey();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("detailKey",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("detailKey");
+		if((value = current.getConsumable("key",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("key");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.prMapEntry().ele00TerminalRuleCallID();
@@ -6153,21 +6102,21 @@ protected class MapEntry_1_Keyword extends KeywordToken  {
 }
 
 // not supported
-protected class MapEntry_2_Assignment_detailValue extends AssignmentToken  {
+protected class MapEntry_2_Assignment_value extends AssignmentToken  {
 	
-	public MapEntry_2_Assignment_detailValue(IInstanceDescription curr, AbstractToken pred) {
+	public MapEntry_2_Assignment_value(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.prMapEntry().ele2AssignmentDetailValue();
+		return grammarAccess.prMapEntry().ele2AssignmentValue();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("detailValue",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("detailValue");
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.prMapEntry().ele20TerminalRuleCallSTRING();
@@ -6179,75 +6128,6 @@ protected class MapEntry_2_Assignment_detailValue extends AssignmentToken  {
 
 
 /************ end Rule MapEntry ****************/
-
-
-/************ begin Rule MultiplicityExpr ****************
- *
- * not supported
- *
- **/
-
-
-// not supported
-protected class MultiplicityExpr_Alternatives extends AlternativesToken {
-
-	public MultiplicityExpr_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.prMultiplicityExpr().eleAlternatives();
-	}
-
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new MultiplicityExpr_0_Keyword(current, this);
-			case 1: return new MultiplicityExpr_1_Keyword(current, this);
-			case 2: return new MultiplicityExpr_2_Keyword(current, this);
-			default: return null;
-		}
-	}
-}
-
-// not supported
-protected class MultiplicityExpr_0_Keyword extends KeywordToken  {
-	
-	public MultiplicityExpr_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.prMultiplicityExpr().ele0KeywordPlusSign();
-	}	
-}
-
-// not supported
-protected class MultiplicityExpr_1_Keyword extends KeywordToken  {
-	
-	public MultiplicityExpr_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.prMultiplicityExpr().ele1KeywordQuestionMark();
-	}	
-}
-
-// not supported
-protected class MultiplicityExpr_2_Keyword extends KeywordToken  {
-	
-	public MultiplicityExpr_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.prMultiplicityExpr().ele2KeywordAsterisk();
-	}	
-}
-
-
-/************ end Rule MultiplicityExpr ****************/
 
 
 

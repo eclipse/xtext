@@ -27,6 +27,8 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 
 	private EReferenceDeclElements rule;	
 
+	private ITerminalConsumer bagConsumer;
+
 	private INonTerminalConsumer eAnnotationDeclConsumer;
 
 	private INonTerminalConsumer eGenericTypeReferenceDeclConsumer;
@@ -34,6 +36,12 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 	private ITerminalConsumer idConsumer;
 
 	private ITerminalConsumer intConsumer;
+
+	private ITerminalConsumer localConsumer;
+
+	private ITerminalConsumer randomConsumer;
+
+	private ITerminalConsumer readonlyConsumer;
 
 	private INonTerminalConsumer sintConsumer;
 
@@ -47,19 +55,19 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer assignment$5$Consumer;
 
-	private IElementConsumer keyword$6$Consumer;
+	private IElementConsumer ruleCall$6$Consumer;
 
 	private IElementConsumer assignment$7$Consumer;
 
-	private IElementConsumer keyword$8$Consumer;
+	private IElementConsumer ruleCall$8$Consumer;
 
 	private IElementConsumer assignment$9$Consumer;
 
-	private IElementConsumer keyword$10$Consumer;
+	private IElementConsumer ruleCall$10$Consumer;
 
 	private IElementConsumer assignment$11$Consumer;
 
-	private IElementConsumer keyword$12$Consumer;
+	private IElementConsumer ruleCall$12$Consumer;
 
 	private IElementConsumer assignment$13$Consumer;
 
@@ -121,14 +129,6 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 
 	private IElementConsumer keyword$44$Consumer;
 
-	private ICharacterClass keyword$6$Delimiter;
-
-	private ICharacterClass keyword$8$Delimiter;
-
-	private ICharacterClass keyword$10$Delimiter;
-
-	private ICharacterClass keyword$12$Delimiter;
-
 	private ICharacterClass keyword$14$Delimiter;
 
 	private ICharacterClass keyword$16$Delimiter;
@@ -150,6 +150,14 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 	private ICharacterClass keyword$37$Delimiter;
 
 	private ICharacterClass keyword$44$Delimiter;
+
+	private ISequenceMatcher ruleCall$6$Delimiter;
+
+	private ISequenceMatcher ruleCall$8$Delimiter;
+
+	private ISequenceMatcher ruleCall$10$Delimiter;
+
+	private ISequenceMatcher ruleCall$12$Delimiter;
 
 	private ISequenceMatcher ruleCall$30$Delimiter;
 
@@ -227,19 +235,19 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$6$Consumer;
+			return ruleCall$6$Consumer;
 		}
 	}
 
-	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$6$Consumer(final Keyword keyword) {
-			super(keyword);
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "resolveProxies", false, true, getKeyword$6$Delimiter(), optional);
+			return consumeTerminal(localConsumer, "resolveProxies", false, false, getElement(), getRuleCall$6$Delimiter(), optional);
 		}
 	}
 
@@ -251,19 +259,19 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$8$Consumer;
+			return ruleCall$8$Consumer;
 		}
 	}
 
-	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$8$Consumer(final Keyword keyword) {
-			super(keyword);
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "unique", false, true, getKeyword$8$Delimiter(), optional);
+			return consumeTerminal(bagConsumer, "unique", false, false, getElement(), getRuleCall$8$Delimiter(), optional);
 		}
 	}
 
@@ -275,19 +283,19 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$10$Consumer;
+			return ruleCall$10$Consumer;
 		}
 	}
 
-	protected class Keyword$10$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$10$Consumer(final Keyword keyword) {
-			super(keyword);
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "ordered", false, true, getKeyword$10$Delimiter(), optional);
+			return consumeTerminal(randomConsumer, "ordered", false, false, getElement(), getRuleCall$10$Delimiter(), optional);
 		}
 	}
 
@@ -299,19 +307,19 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return keyword$12$Consumer;
+			return ruleCall$12$Consumer;
 		}
 	}
 
-	protected class Keyword$12$Consumer extends ElementConsumer<Keyword> {
+	protected class RuleCall$12$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Keyword$12$Consumer(final Keyword keyword) {
-			super(keyword);
+		protected RuleCall$12$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), "changeable", false, true, getKeyword$12$Delimiter(), optional);
+			return consumeTerminal(readonlyConsumer, "changeable", false, false, getElement(), getRuleCall$12$Delimiter(), optional);
 		}
 	}
 
@@ -683,10 +691,6 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 
 	public EcoreDslEReferenceDeclConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
@@ -698,6 +702,10 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		keyword$35$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$37$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$44$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$12$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$30$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$41$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$43$Delimiter = ISequenceMatcher.Factory.nullMatcher();
@@ -720,13 +728,13 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.ele00ParserRuleCallEAnnotationDecl());
 		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.ele1Alternatives());
 		assignment$5$Consumer = new Assignment$5$Consumer(rule.ele10AssignmentResolveProxies());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.ele100KeywordLocal());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.ele100TerminalRuleCallLocal());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.ele11AssignmentUnique());
-		keyword$8$Consumer = new Keyword$8$Consumer(rule.ele110KeywordBag());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.ele110TerminalRuleCallBag());
 		assignment$9$Consumer = new Assignment$9$Consumer(rule.ele12AssignmentOrdered());
-		keyword$10$Consumer = new Keyword$10$Consumer(rule.ele120KeywordRandom());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.ele120TerminalRuleCallRandom());
 		assignment$11$Consumer = new Assignment$11$Consumer(rule.ele13AssignmentChangeable());
-		keyword$12$Consumer = new Keyword$12$Consumer(rule.ele130KeywordReadonly());
+		ruleCall$12$Consumer = new RuleCall$12$Consumer(rule.ele130TerminalRuleCallReadonly());
 		assignment$13$Consumer = new Assignment$13$Consumer(rule.ele14AssignmentVolatile());
 		keyword$14$Consumer = new Keyword$14$Consumer(rule.ele140KeywordVolatile());
 		assignment$15$Consumer = new Assignment$15$Consumer(rule.ele15AssignmentTransient());
@@ -769,6 +777,10 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		return getGrammarElement().getType().getClassifier();
 	}
 	
+	public void setBagConsumer(ITerminalConsumer bagConsumer) {
+		this.bagConsumer = bagConsumer;
+	}
+	
 	public void setEAnnotationDeclConsumer(INonTerminalConsumer eAnnotationDeclConsumer) {
 		this.eAnnotationDeclConsumer = eAnnotationDeclConsumer;
 	}
@@ -785,40 +797,20 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 		this.intConsumer = intConsumer;
 	}
 	
+	public void setLocalConsumer(ITerminalConsumer localConsumer) {
+		this.localConsumer = localConsumer;
+	}
+	
+	public void setRandomConsumer(ITerminalConsumer randomConsumer) {
+		this.randomConsumer = randomConsumer;
+	}
+	
+	public void setReadonlyConsumer(ITerminalConsumer readonlyConsumer) {
+		this.readonlyConsumer = readonlyConsumer;
+	}
+	
 	public void setSintConsumer(INonTerminalConsumer sintConsumer) {
 		this.sintConsumer = sintConsumer;
-	}
-	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
-	}
-	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$10$Delimiter() {
-		return keyword$10$Delimiter;
-	}
-	
-	public void setKeyword$10$Delimiter(ICharacterClass characterClass) {
-		keyword$10$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$12$Delimiter() {
-		return keyword$12$Delimiter;
-	}
-	
-	public void setKeyword$12$Delimiter(ICharacterClass characterClass) {
-		keyword$12$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$14$Delimiter() {
@@ -907,6 +899,38 @@ public final class EcoreDslEReferenceDeclConsumer extends NonTerminalConsumer {
 	
 	public void setKeyword$44$Delimiter(ICharacterClass characterClass) {
 		keyword$44$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ISequenceMatcher getRuleCall$6$Delimiter() {
+		return ruleCall$6$Delimiter;
+	}
+	
+	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$8$Delimiter() {
+		return ruleCall$8$Delimiter;
+	}
+	
+	public void setRuleCall$8$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$8$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
+	}
+	
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$12$Delimiter() {
+		return ruleCall$12$Delimiter;
+	}
+	
+	public void setRuleCall$12$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$12$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$30$Delimiter() {

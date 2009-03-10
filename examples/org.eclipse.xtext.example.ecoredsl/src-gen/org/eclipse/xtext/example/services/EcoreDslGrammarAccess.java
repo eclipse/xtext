@@ -263,7 +263,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Assignment c00AssignmentEAnnotations = (Assignment)c0Group.eContents().get(0);
 		private final RuleCall c000ParserRuleCallEAnnotationDecl = (RuleCall)c00AssignmentEAnnotations.eContents().get(0);
 		private final Assignment c01AssignmentSerializable = (Assignment)c0Group.eContents().get(1);
-		private final Keyword c010KeywordSerializable = (Keyword)c01AssignmentSerializable.eContents().get(0);
+		private final RuleCall c010TerminalRuleCallSerializable = (RuleCall)c01AssignmentSerializable.eContents().get(0);
 		private final Group c02Group = (Group)c0Group.eContents().get(2);
 		private final Keyword c020KeywordDatatype = (Keyword)c02Group.eContents().get(0);
 		private final Assignment c021AssignmentName = (Assignment)c02Group.eContents().get(1);
@@ -293,7 +293,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele01AssignmentSerializable() { return c01AssignmentSerializable; }
 
 		// not supported
-		public Keyword ele010KeywordSerializable() { return c010KeywordSerializable; }
+		public RuleCall ele010TerminalRuleCallSerializable() { return c010TerminalRuleCallSerializable; }
 
 		// not supported
 		public Group ele02Group() { return c02Group; }
@@ -328,18 +328,16 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword c0KeywordCommercialAt = (Keyword)cGroup.eContents().get(0);
 		private final Assignment c1AssignmentSource = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10TerminalRuleCallSTRING = (RuleCall)c1AssignmentSource.eContents().get(0);
-		private final Assignment c2AssignmentEModelElement = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference c20CrossReferenceIDEModelElement = (CrossReference)c2AssignmentEModelElement.eContents().get(0);
-		private final RuleCall c201TerminalRuleCallID = (RuleCall)c20CrossReferenceIDEModelElement.eContents().get(1);
-		private final Keyword c3KeywordLeftParenthesis = (Keyword)cGroup.eContents().get(3);
-		private final Assignment c4AssignmentContents = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall c40ParserRuleCallMapEntrySuper = (RuleCall)c4AssignmentContents.eContents().get(0);
-		private final Group c5Group = (Group)cGroup.eContents().get(5);
-		private final Keyword c50KeywordComma = (Keyword)c5Group.eContents().get(0);
-		private final Assignment c51AssignmentContents = (Assignment)c5Group.eContents().get(1);
-		private final RuleCall c510ParserRuleCallMapEntrySuper = (RuleCall)c51AssignmentContents.eContents().get(0);
-		private final Keyword c6KeywordRightParenthesis = (Keyword)cGroup.eContents().get(6);
+		private final RuleCall c10ParserRuleCallSTRING_OR_QID = (RuleCall)c1AssignmentSource.eContents().get(0);
+		private final Group c2Group = (Group)cGroup.eContents().get(2);
+		private final Keyword c20KeywordLeftParenthesis = (Keyword)c2Group.eContents().get(0);
+		private final Assignment c21AssignmentDetails = (Assignment)c2Group.eContents().get(1);
+		private final RuleCall c210ParserRuleCallMapEntry = (RuleCall)c21AssignmentDetails.eContents().get(0);
+		private final Group c22Group = (Group)c2Group.eContents().get(2);
+		private final Keyword c220KeywordComma = (Keyword)c22Group.eContents().get(0);
+		private final Assignment c221AssignmentDetails = (Assignment)c22Group.eContents().get(1);
+		private final RuleCall c2210ParserRuleCallMapEntry = (RuleCall)c221AssignmentDetails.eContents().get(0);
+		private final Keyword c23KeywordRightParenthesis = (Keyword)c2Group.eContents().get(3);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -354,40 +352,34 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele1AssignmentSource() { return c1AssignmentSource; }
 
 		// not supported
-		public RuleCall ele10TerminalRuleCallSTRING() { return c10TerminalRuleCallSTRING; }
+		public RuleCall ele10ParserRuleCallSTRING_OR_QID() { return c10ParserRuleCallSTRING_OR_QID; }
 
 		// not supported
-		public Assignment ele2AssignmentEModelElement() { return c2AssignmentEModelElement; }
+		public Group ele2Group() { return c2Group; }
 
 		// not supported
-		public CrossReference ele20CrossReferenceIDEModelElement() { return c20CrossReferenceIDEModelElement; }
+		public Keyword ele20KeywordLeftParenthesis() { return c20KeywordLeftParenthesis; }
 
 		// not supported
-		public RuleCall ele201TerminalRuleCallID() { return c201TerminalRuleCallID; }
+		public Assignment ele21AssignmentDetails() { return c21AssignmentDetails; }
 
 		// not supported
-		public Keyword ele3KeywordLeftParenthesis() { return c3KeywordLeftParenthesis; }
+		public RuleCall ele210ParserRuleCallMapEntry() { return c210ParserRuleCallMapEntry; }
 
 		// not supported
-		public Assignment ele4AssignmentContents() { return c4AssignmentContents; }
+		public Group ele22Group() { return c22Group; }
 
 		// not supported
-		public RuleCall ele40ParserRuleCallMapEntrySuper() { return c40ParserRuleCallMapEntrySuper; }
+		public Keyword ele220KeywordComma() { return c220KeywordComma; }
 
 		// not supported
-		public Group ele5Group() { return c5Group; }
+		public Assignment ele221AssignmentDetails() { return c221AssignmentDetails; }
 
 		// not supported
-		public Keyword ele50KeywordComma() { return c50KeywordComma; }
+		public RuleCall ele2210ParserRuleCallMapEntry() { return c2210ParserRuleCallMapEntry; }
 
 		// not supported
-		public Assignment ele51AssignmentContents() { return c51AssignmentContents; }
-
-		// not supported
-		public RuleCall ele510ParserRuleCallMapEntrySuper() { return c510ParserRuleCallMapEntrySuper; }
-
-		// not supported
-		public Keyword ele6KeywordRightParenthesis() { return c6KeywordRightParenthesis; }
+		public Keyword ele23KeywordRightParenthesis() { return c23KeywordRightParenthesis; }
 	}
 
 	public class EClassDeclElements implements IParserRuleAccess {
@@ -581,11 +573,11 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Assignment c10AssignmentID = (Assignment)c1Alternatives.eContents().get(0);
 		private final Keyword c100KeywordID = (Keyword)c10AssignmentID.eContents().get(0);
 		private final Assignment c11AssignmentUnique = (Assignment)c1Alternatives.eContents().get(1);
-		private final Keyword c110KeywordBag = (Keyword)c11AssignmentUnique.eContents().get(0);
+		private final RuleCall c110TerminalRuleCallBag = (RuleCall)c11AssignmentUnique.eContents().get(0);
 		private final Assignment c12AssignmentOrdered = (Assignment)c1Alternatives.eContents().get(2);
-		private final Keyword c120KeywordRandom = (Keyword)c12AssignmentOrdered.eContents().get(0);
+		private final RuleCall c120TerminalRuleCallRandom = (RuleCall)c12AssignmentOrdered.eContents().get(0);
 		private final Assignment c13AssignmentChangeable = (Assignment)c1Alternatives.eContents().get(3);
-		private final Keyword c130KeywordReadonly = (Keyword)c13AssignmentChangeable.eContents().get(0);
+		private final RuleCall c130TerminalRuleCallReadonly = (RuleCall)c13AssignmentChangeable.eContents().get(0);
 		private final Assignment c14AssignmentVolatile = (Assignment)c1Alternatives.eContents().get(4);
 		private final Keyword c140KeywordVolatile = (Keyword)c14AssignmentVolatile.eContents().get(0);
 		private final Assignment c15AssignmentTransient = (Assignment)c1Alternatives.eContents().get(5);
@@ -639,19 +631,19 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele11AssignmentUnique() { return c11AssignmentUnique; }
 
 		// not supported
-		public Keyword ele110KeywordBag() { return c110KeywordBag; }
+		public RuleCall ele110TerminalRuleCallBag() { return c110TerminalRuleCallBag; }
 
 		// not supported
 		public Assignment ele12AssignmentOrdered() { return c12AssignmentOrdered; }
 
 		// not supported
-		public Keyword ele120KeywordRandom() { return c120KeywordRandom; }
+		public RuleCall ele120TerminalRuleCallRandom() { return c120TerminalRuleCallRandom; }
 
 		// not supported
 		public Assignment ele13AssignmentChangeable() { return c13AssignmentChangeable; }
 
 		// not supported
-		public Keyword ele130KeywordReadonly() { return c130KeywordReadonly; }
+		public RuleCall ele130TerminalRuleCallReadonly() { return c130TerminalRuleCallReadonly; }
 
 		// not supported
 		public Assignment ele14AssignmentVolatile() { return c14AssignmentVolatile; }
@@ -742,13 +734,13 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall c00ParserRuleCallEAnnotationDecl = (RuleCall)c0AssignmentEAnnotations.eContents().get(0);
 		private final Alternatives c1Alternatives = (Alternatives)cGroup.eContents().get(1);
 		private final Assignment c10AssignmentResolveProxies = (Assignment)c1Alternatives.eContents().get(0);
-		private final Keyword c100KeywordLocal = (Keyword)c10AssignmentResolveProxies.eContents().get(0);
+		private final RuleCall c100TerminalRuleCallLocal = (RuleCall)c10AssignmentResolveProxies.eContents().get(0);
 		private final Assignment c11AssignmentUnique = (Assignment)c1Alternatives.eContents().get(1);
-		private final Keyword c110KeywordBag = (Keyword)c11AssignmentUnique.eContents().get(0);
+		private final RuleCall c110TerminalRuleCallBag = (RuleCall)c11AssignmentUnique.eContents().get(0);
 		private final Assignment c12AssignmentOrdered = (Assignment)c1Alternatives.eContents().get(2);
-		private final Keyword c120KeywordRandom = (Keyword)c12AssignmentOrdered.eContents().get(0);
+		private final RuleCall c120TerminalRuleCallRandom = (RuleCall)c12AssignmentOrdered.eContents().get(0);
 		private final Assignment c13AssignmentChangeable = (Assignment)c1Alternatives.eContents().get(3);
-		private final Keyword c130KeywordReadonly = (Keyword)c13AssignmentChangeable.eContents().get(0);
+		private final RuleCall c130TerminalRuleCallReadonly = (RuleCall)c13AssignmentChangeable.eContents().get(0);
 		private final Assignment c14AssignmentVolatile = (Assignment)c1Alternatives.eContents().get(4);
 		private final Keyword c140KeywordVolatile = (Keyword)c14AssignmentVolatile.eContents().get(0);
 		private final Assignment c15AssignmentTransient = (Assignment)c1Alternatives.eContents().get(5);
@@ -800,25 +792,25 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Assignment ele10AssignmentResolveProxies() { return c10AssignmentResolveProxies; }
 
 		// not supported
-		public Keyword ele100KeywordLocal() { return c100KeywordLocal; }
+		public RuleCall ele100TerminalRuleCallLocal() { return c100TerminalRuleCallLocal; }
 
 		// not supported
 		public Assignment ele11AssignmentUnique() { return c11AssignmentUnique; }
 
 		// not supported
-		public Keyword ele110KeywordBag() { return c110KeywordBag; }
+		public RuleCall ele110TerminalRuleCallBag() { return c110TerminalRuleCallBag; }
 
 		// not supported
 		public Assignment ele12AssignmentOrdered() { return c12AssignmentOrdered; }
 
 		// not supported
-		public Keyword ele120KeywordRandom() { return c120KeywordRandom; }
+		public RuleCall ele120TerminalRuleCallRandom() { return c120TerminalRuleCallRandom; }
 
 		// not supported
 		public Assignment ele13AssignmentChangeable() { return c13AssignmentChangeable; }
 
 		// not supported
-		public Keyword ele130KeywordReadonly() { return c130KeywordReadonly; }
+		public RuleCall ele130TerminalRuleCallReadonly() { return c130TerminalRuleCallReadonly; }
 
 		// not supported
 		public Assignment ele14AssignmentVolatile() { return c14AssignmentVolatile; }
@@ -1471,25 +1463,14 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall ele20TerminalRuleCallID() { return c20TerminalRuleCallID; }
 	}
 
-	public class MapEntrySuperElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MapEntrySuper");
-		private final RuleCall cParserRuleCallMapEntry = (RuleCall)rule.eContents().get(1);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public RuleCall eleParserRuleCallMapEntry() { return cParserRuleCallMapEntry; }
-	}
-
 	public class MapEntryElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MapEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment c0AssignmentDetailKey = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentDetailKey.eContents().get(0);
+		private final Assignment c0AssignmentKey = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00TerminalRuleCallID = (RuleCall)c0AssignmentKey.eContents().get(0);
 		private final Keyword c1KeywordEqualsSign = (Keyword)cGroup.eContents().get(1);
-		private final Assignment c2AssignmentDetailValue = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentDetailValue.eContents().get(0);
+		private final Assignment c2AssignmentValue = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall c20TerminalRuleCallSTRING = (RuleCall)c2AssignmentValue.eContents().get(0);
 		
 		// not supported
 		public ParserRule getRule() { return rule; }
@@ -1498,7 +1479,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Group eleGroup() { return cGroup; }
 
 		// not supported
-		public Assignment ele0AssignmentDetailKey() { return c0AssignmentDetailKey; }
+		public Assignment ele0AssignmentKey() { return c0AssignmentKey; }
 
 		// not supported
 		public RuleCall ele00TerminalRuleCallID() { return c00TerminalRuleCallID; }
@@ -1507,33 +1488,10 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword ele1KeywordEqualsSign() { return c1KeywordEqualsSign; }
 
 		// not supported
-		public Assignment ele2AssignmentDetailValue() { return c2AssignmentDetailValue; }
+		public Assignment ele2AssignmentValue() { return c2AssignmentValue; }
 
 		// not supported
 		public RuleCall ele20TerminalRuleCallSTRING() { return c20TerminalRuleCallSTRING; }
-	}
-
-	public class MultiplicityExprElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiplicityExpr");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword c0KeywordPlusSign = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword c1KeywordQuestionMark = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword c2KeywordAsterisk = (Keyword)cAlternatives.eContents().get(2);
-		
-		// not supported
-		public ParserRule getRule() { return rule; }
-
-		// not supported
-		public Alternatives eleAlternatives() { return cAlternatives; }
-
-		// not supported
-		public Keyword ele0KeywordPlusSign() { return c0KeywordPlusSign; }
-
-		// not supported
-		public Keyword ele1KeywordQuestionMark() { return c1KeywordQuestionMark; }
-
-		// not supported
-		public Keyword ele2KeywordAsterisk() { return c2KeywordAsterisk; }
 	}
 
 	public class QIDElements implements IParserRuleAccess {
@@ -1627,12 +1585,15 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	private EGenericTypeDeclElements pEGenericTypeDecl;
 	private EOperationDeclElements pEOperationDecl;
 	private EParameterDeclElements pEParameterDecl;
-	private MapEntrySuperElements pMapEntrySuper;
 	private MapEntryElements pMapEntry;
-	private MultiplicityExprElements pMultiplicityExpr;
 	private QIDElements pQID;
 	private STRING_OR_QIDElements pSTRING_OR_QID;
 	private SINTElements pSINT;
+	private TerminalRule tBag;
+	private TerminalRule tRandom;
+	private TerminalRule tReadonly;
+	private TerminalRule tLocal;
+	private TerminalRule tSerializable;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1746,18 +1707,8 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	} 
 
 	// not supported
-	public MapEntrySuperElements prMapEntrySuper() {
-		return (pMapEntrySuper != null) ? pMapEntrySuper : (pMapEntrySuper = new MapEntrySuperElements());
-	} 
-
-	// not supported
 	public MapEntryElements prMapEntry() {
 		return (pMapEntry != null) ? pMapEntry : (pMapEntry = new MapEntryElements());
-	} 
-
-	// not supported
-	public MultiplicityExprElements prMultiplicityExpr() {
-		return (pMultiplicityExpr != null) ? pMultiplicityExpr : (pMultiplicityExpr = new MultiplicityExprElements());
 	} 
 
 	// not supported
@@ -1773,6 +1724,31 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	// not supported
 	public SINTElements prSINT() {
 		return (pSINT != null) ? pSINT : (pSINT = new SINTElements());
+	} 
+
+	// not supported
+	public TerminalRule trBag() {
+		return (tBag != null) ? tBag : (tBag = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Bag"));
+	} 
+
+	// not supported
+	public TerminalRule trRandom() {
+		return (tRandom != null) ? tRandom : (tRandom = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Random"));
+	} 
+
+	// not supported
+	public TerminalRule trReadonly() {
+		return (tReadonly != null) ? tReadonly : (tReadonly = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Readonly"));
+	} 
+
+	// not supported
+	public TerminalRule trLocal() {
+		return (tLocal != null) ? tLocal : (tLocal = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Local"));
+	} 
+
+	// not supported
+	public TerminalRule trSerializable() {
+		return (tSerializable != null) ? tSerializable : (tSerializable = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Serializable"));
 	} 
 
 	// not supported

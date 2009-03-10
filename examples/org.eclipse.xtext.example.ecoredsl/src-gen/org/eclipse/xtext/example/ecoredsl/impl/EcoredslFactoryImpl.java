@@ -69,8 +69,6 @@ public class EcoredslFactoryImpl extends EFactoryImpl implements EcoredslFactory
     {
       case EcoredslPackage.ECORE_DSL: return createEcoreDsl();
       case EcoredslPackage.IMPORT_STATEMENT_DECL: return createImportStatementDecl();
-      case EcoredslPackage.MAP_ENTRY: return createMapEntry();
-      case EcoredslPackage.MULTIPLICITY_EXPR: return createMultiplicityExpr();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -96,28 +94,6 @@ public class EcoredslFactoryImpl extends EFactoryImpl implements EcoredslFactory
   {
     ImportStatementDeclImpl importStatementDecl = new ImportStatementDeclImpl();
     return importStatementDecl;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MapEntry createMapEntry()
-  {
-    MapEntryImpl mapEntry = new MapEntryImpl();
-    return mapEntry;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MultiplicityExpr createMultiplicityExpr()
-  {
-    MultiplicityExprImpl multiplicityExpr = new MultiplicityExprImpl();
-    return multiplicityExpr;
   }
 
   /**

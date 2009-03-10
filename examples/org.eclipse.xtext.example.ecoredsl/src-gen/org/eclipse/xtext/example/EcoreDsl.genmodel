@@ -20,17 +20,5 @@
         <ecoreFeature xsi:type="ecore:EAttribute" href="EcoreDsl.ecore#//ImportStatementDecl/importURI"/>
       </genFeatures>
     </genClasses>
-    <genClasses>
-      <ecoreClass href="EcoreDsl.ecore#//MapEntry"/>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="EcoreDsl.ecore#//MapEntry/detailKey"/>
-      </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="EcoreDsl.ecore#//MapEntry/detailValue"/>
-      </genFeatures>
-    </genClasses>
-    <genClasses>
-      <ecoreClass href="EcoreDsl.ecore#//MultiplicityExpr"/>
-    </genClasses>
   </genPackages>
 </genmodel:GenModel>
