@@ -43,7 +43,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  *         The main xtext generator. Can be configured with
  *         {@link IGeneratorFragment} instances as well as with some properties
  *         declared via setter or adder methods.
