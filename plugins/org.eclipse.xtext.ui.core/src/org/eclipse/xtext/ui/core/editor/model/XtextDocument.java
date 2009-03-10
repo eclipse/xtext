@@ -226,7 +226,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
 
 	private void checkAndUpdateMarkers() {
-		new ValidationJob(this, file, CheckMode.FAST_ONLY).schedule();
+		new ValidationJob(this, file, CheckMode.FAST_ONLY,true).schedule();
 	}
 
 	@SuppressWarnings("unchecked")
