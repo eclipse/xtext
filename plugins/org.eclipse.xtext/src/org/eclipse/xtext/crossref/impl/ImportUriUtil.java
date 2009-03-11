@@ -22,7 +22,7 @@ public class ImportUriUtil {
 	private static Logger log = Logger.getLogger(ImportUriUtil.class);
 
 	public static boolean isValid(EObject context, String uri) {
-		URI newURI = getResolvedImportUri(context, uri);
+		URI newURI = getResolvedImportUri(context.eResource(), uri);
 		try {
 			URI normalized = context.eResource().getResourceSet().getURIConverter().normalize(newURI);
 			if (normalized != null)
@@ -33,8 +33,8 @@ public class ImportUriUtil {
 		return false;
 	}
 
-	private static URI getResolvedImportUri(EObject context, String uri) {
-		URI contextURI = context.eResource().getURI();
+	private static URI getResolvedImportUri(Resource context, String uri) {
+		URI contextURI = context.getURI();
 		URI newURI = URI.createURI(uri);
 		if (contextURI.isHierarchical() && !contextURI.isRelative() && newURI.isRelative()) {
 			newURI = newURI.resolve(contextURI);
@@ -42,10 +42,10 @@ public class ImportUriUtil {
 		return newURI;
 	}
 
-	public static Resource getResource(EObject context, String uri) {
+	public static Resource getResource(Resource context, String uri) {
 		URI newURI = getResolvedImportUri(context, uri);
 		try {
-			return context.eResource().getResourceSet().getResource(newURI, true);
+			return context.getResourceSet().getResource(newURI, true);
 		} catch(RuntimeException e) { // thrown by org.eclipse.emf.ecore.resource.ResourceSet#getResource(URI, boolean)
 			log.trace("Cannot load resource: " + newURI, e);
 		}

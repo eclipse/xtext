@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -22,17 +26,23 @@ public class DefaultScope extends SimpleCachingScope {
 	private final static SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, ImportUriValidator.IMPORT_URI);
 
 	public DefaultScope(Resource resource, EClass type) {
-		super(createParent(resource.getAllContents(), type), resource, type);
+		super(createParent(resource.getAllContents(), type, resource), resource, type);
 	}
 
-	private static IScope createParent(Iterator<EObject> iter, EClass type) {
+	private static IScope createParent(Iterator<EObject> iter, EClass type, Resource resource) {
+		final Set<String> uniqueImportURIs = new HashSet<String>(10);
+		final List<String> orderedImportURIs = new ArrayList<String>(10);
 		while (iter.hasNext()) {
 			EObject object = iter.next();
 			String uri = importResolver.getValue(object);
-			if (uri != null) {
-				return new LazyReferencedResourceScope(createParent(iter, type), type, object, uri);
+			if (uri != null && uniqueImportURIs.add(uri) && ImportUriUtil.isValid(object, uri)) {
+				orderedImportURIs.add(uri);
 			}
 		}
-		return IScope.NULLSCOPE;
+		IScope result = IScope.NULLSCOPE;
+		for(int i = orderedImportURIs.size() - 1; i >= 0; i--) {
+			result = new LazyReferencedResourceScope(result, type, resource, orderedImportURIs.get(i));
+		}
+		return result;
 	}
 }
