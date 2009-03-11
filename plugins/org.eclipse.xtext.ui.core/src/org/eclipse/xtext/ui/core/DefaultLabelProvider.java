@@ -11,8 +11,8 @@ import org.eclipse.jface.viewers.LabelProvider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Peter Friese - Implementation
  */
-public class DefaultLabelProvider extends LabelProvider implements org.eclipse.jface.viewers.ILabelProvider {
-	
+public class DefaultLabelProvider extends LabelProvider {
+
 	@Override
 	public String getText(Object object) {
 		if (object != null) {
@@ -26,7 +26,7 @@ public class DefaultLabelProvider extends LabelProvider implements org.eclipse.j
 					return value.toString();
 				}
 			}
-			return (object.getClass().getName());
+			return eClass.getName();
 		}
 		return "<unknown>";
 	}
