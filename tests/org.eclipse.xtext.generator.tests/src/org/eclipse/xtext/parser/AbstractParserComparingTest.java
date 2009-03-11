@@ -12,7 +12,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormater;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.StringInputStream;
@@ -61,12 +61,12 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 				checkResource(pair.getFirst() + " - " + getFirstParserName(), firstResult);
 				checkResource(pair.getFirst() + " - " + getSecondParserName(), secondResult);
 
-				String firstNodeResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
-				String secondNodeResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
+				String firstNodeResultAsString = EmfFormatter.objToStr(firstResult.getParseResult().getRootNode(), getIgnoredFeatures());
+				String secondNodeResultAsString = EmfFormatter.objToStr(secondResult.getParseResult().getRootNode(), getIgnoredFeatures());
 				assertEquals(modelName.get(), firstNodeResultAsString, secondNodeResultAsString);
 
-				String firstResultAsString = EmfFormater.objToStr(firstResult.getParseResult().getRootASTElement());
-				String secondResultAsString = EmfFormater.objToStr(secondResult.getParseResult().getRootASTElement());
+				String firstResultAsString = EmfFormatter.objToStr(firstResult.getParseResult().getRootASTElement());
+				String secondResultAsString = EmfFormatter.objToStr(secondResult.getParseResult().getRootASTElement());
 				assertEquals(modelName.get(), firstResultAsString, secondResultAsString);
 
 				comparator.assertSameStructure(firstResult.getParseResult().getRootASTElement(), secondResult.getParseResult().getRootASTElement());

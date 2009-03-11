@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormater;
+import org.eclipse.xtext.util.EmfFormatter;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
 
@@ -42,9 +42,9 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
 		if (logger.isTraceEnabled()) {
-			logger.trace(EmfFormater.objToStr(result));
-			logger.trace(EmfFormater.objToStr(NodeUtil.getRootNode(result)));
-			logger.trace(EmfFormater.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
+			logger.trace(EmfFormatter.objToStr(result));
+			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
+			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 		}
 		return serialize(result);
 	}
