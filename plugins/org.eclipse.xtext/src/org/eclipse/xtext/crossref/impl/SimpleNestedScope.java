@@ -25,7 +25,7 @@ import org.eclipse.xtext.util.Function;
  */
 public class SimpleNestedScope extends AbstractScope {
 
-	private IScope outer;
+	private final IScope outer;
 
 	private Iterable<IScopedElement> elements;
 
@@ -45,7 +45,7 @@ public class SimpleNestedScope extends AbstractScope {
 				identifiers.add(param.name());
 			}
 		}), filter(getOuterScope().getAllContents(), new Filter<IScopedElement>() {
-			public boolean matches(IScopedElement param) {
+			public boolean accept(IScopedElement param) {
 				return !identifiers.contains(param.name());
 			}
 		}));

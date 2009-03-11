@@ -63,7 +63,7 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 					.singletonList(context));
 			final Collection<String> names = new HashSet<String>(scopedElements.size());
 			return new XtendScope(list(filter(scopedElements, new Filter<IScopedElement>() {
-				public boolean matches(IScopedElement param) {
+				public boolean accept(IScopedElement param) {
 					boolean result = reference.getEReferenceType().isSuperTypeOf(param.element().eClass());
 					if (result) {
 						result = names.add(param.name());
@@ -104,7 +104,7 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 
 		public IScopedElement getScopedElement(final EObject element) {
 			Iterable<IScopedElement> allMatches = filter(scopedElements, new Filter<IScopedElement>() {
-				public boolean matches(IScopedElement param) {
+				public boolean accept(IScopedElement param) {
 					return param.element().equals(element);
 				}
 			});

@@ -20,7 +20,7 @@ public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 	private final Iterator<? extends T> base;
 
 	private T next;
-	
+
 	public FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
 		this(origin.iterator(), matcher);
 	}
@@ -33,7 +33,7 @@ public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 	public boolean hasNext() {
 		while (next == null && base.hasNext()) {
 			final T nextCandidate = base.next();
-			if (matcher.matches(nextCandidate))
+			if (matcher.accept(nextCandidate))
 				next = nextCandidate;
 		}
 		return next != null;
