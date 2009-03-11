@@ -8,15 +8,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.parseerrorhandling;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.treeTestLanguage.Model;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
@@ -90,7 +97,6 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		assertEquals(1,node.allSyntaxErrors().size());
 	}
 
-
 	public void testLexerError() throws Exception {
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 '}";
@@ -98,6 +104,35 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		CompositeNode node = NodeUtil.getRootNode(object);
 		assertEquals(1,node.allSyntaxErrors().size());
 		logger.debug(node.allSyntaxErrors().get(0).getMessage());
+	}
+
+	public void testTrailingRecoverableError() throws Exception {
+		with(TreeTestLanguageStandaloneSetup.class);
+		String model = "parent ('Teststring') { \n" +
+			"	child ('Teststring'){};\n" +
+			"	child ('Teststring'){};\n" +
+			"};\n" +
+			"};\n" +
+			"\n";
+		Resource res = getResourceFromString(model);
+		assertEquals(res.getErrors().size(), 1, res.getErrors().size());
+		Diagnostic diag = res.getErrors().get(0);
+		assertNotNull(diag);
+		assertEquals(5, diag.getLine());
+		assertEquals(1, diag.getColumn());
+		Model parsedModel = (Model) res.getContents().get(0);
+		assertNotNull(parsedModel);
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(parsedModel);
+		assertNotNull(nodeAdapter);
+		List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
+		LeafNode lastWs = leafs.get(leafs.size() - 1);
+		assertTrue(lastWs.isHidden());
+		assertNull(lastWs.getSyntaxError());
+		LeafNode lastNode = leafs.get(leafs.size() - 2);
+		assertTrue(lastNode.isHidden());
+		assertNotNull(lastNode);
+		assertEquals("};", lastNode.getText());
+		assertNotNull(lastNode.getSyntaxError());
 	}
 
 }

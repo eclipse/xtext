@@ -331,6 +331,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			} catch (Exception e) {
 				throw new WrappedException(e);
 			}
+			appendSkippedTokens();
 			appendTrailingHiddenTokens();
 		} finally {
 			try {
