@@ -73,7 +73,7 @@ public class SimpleAttributeResolver<T> {
 
 	public Iterable<EObject> getMatches(Iterable<? extends EObject> candidates, final T value) {
 		return CollectionUtils.filter(candidates.iterator(), new Filter<EObject>() {
-			public boolean matches(EObject param) {
+			public boolean accept(EObject param) {
 				final T candidateValue = getValue(param);
 				return value.equals(candidateValue);
 			}

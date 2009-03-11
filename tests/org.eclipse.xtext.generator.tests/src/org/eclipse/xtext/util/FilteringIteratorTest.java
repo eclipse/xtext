@@ -33,7 +33,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		list = new ArrayList<String>();
 	}
 
-	public boolean matches(String param) {
+	public boolean accept(String param) {
 		return param.equals(matchMe);
 	}
 

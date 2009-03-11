@@ -38,7 +38,7 @@ public abstract class AbstractCachingScope extends SimpleNestedScope {
 	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EReference reference) {
 		this(parent,elements,(EClass) reference.getEType());
 	}
-	
+
 	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EClass clazz) {
 		super(parent, elements);
 		this.refuseDuplicates = true;
@@ -103,7 +103,7 @@ public abstract class AbstractCachingScope extends SimpleNestedScope {
 
 	protected Iterable<IScopedElement> filter(final Iterable<IScopedElement> elements, final EClass type) {
 		return CollectionUtils.filter(elements.iterator(), new Filter<IScopedElement>() {
-			public boolean matches(IScopedElement param) {
+			public boolean accept(IScopedElement param) {
 				return type == null || EcoreUtil2.isAssignableFrom(type, param.element());
 			}
 		});

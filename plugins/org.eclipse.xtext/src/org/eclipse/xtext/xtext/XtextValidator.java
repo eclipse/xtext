@@ -46,7 +46,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		registry.put(XtextPackage.eINSTANCE, this);
 	}
 
-	@Check(CheckType.NORMAL)
+	@Check(CheckType.FAST)
 	public void checkGrammarUsesMaxOneOther(Grammar grammar) {
 		assertTrue("You may not use more than one other grammar.", XtextPackage.GRAMMAR__USED_GRAMMARS,
 				grammar.getUsedGrammars().size() <= 1);
@@ -87,7 +87,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			}
 		});
 		int count = CollectionUtils.count(nsUris, new Filter<String>() {
-			public boolean matches(String param) {
+			public boolean accept(String param) {
 				return declaration.getEPackage().getNsURI().equals(param);
 			}
 		});

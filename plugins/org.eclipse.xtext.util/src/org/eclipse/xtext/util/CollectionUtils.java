@@ -63,7 +63,7 @@ public class CollectionUtils {
 		}
 		while(candidates.hasNext()) {
 			T t = candidates.next();
-			if (filter.matches(t)) {
+			if (filter.accept(t)) {
 				if (matches != null) matches.add(t);
 			} else {
 				if (refuses != null) refuses.add(t);
@@ -131,7 +131,7 @@ public class CollectionUtils {
 	public static <T, R> Iterable<T> unique(Iterator<? extends T> input, final Function<T, R> mapper) {
 		return filter(input, new Filter<T>() {
 			private final Set<R> values = new HashSet<R>();
-			public boolean matches(T param) {
+			public boolean accept(T param) {
 				return values.add(mapper.exec(param));
 			}
 		});
@@ -200,8 +200,8 @@ public class CollectionUtils {
 				return Tuples.create(param, index++);
 			}
 		}), new Filter<Pair<T, Integer>>() {
-			public boolean matches(Pair<T, Integer> param) {
-				return filter.matches(param.getFirst());
+			public boolean accept(Pair<T, Integer> param) {
+				return filter.accept(param.getFirst());
 			}
 		}), new Function<Pair<T, Integer>, Integer>() {
 			public Integer exec(Pair<T, Integer> param) {

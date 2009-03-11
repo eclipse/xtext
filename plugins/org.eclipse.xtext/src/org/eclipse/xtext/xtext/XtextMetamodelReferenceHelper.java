@@ -92,7 +92,7 @@ class XtextMetamodelReferenceHelper {
 			final List<AbstractMetamodelDeclaration> exactMatches) {
 		addAll(exactMatches, filter(importedMetamodels,
 				new Filter<AbstractMetamodelDeclaration>() {
-					public boolean matches(AbstractMetamodelDeclaration param) {
+					public boolean accept(AbstractMetamodelDeclaration param) {
 						return alias.equals(param.getAlias());
 					}
 				}));
@@ -106,11 +106,11 @@ class XtextMetamodelReferenceHelper {
 				return (AbstractMetamodelDeclaration) param.element();
 			}
 		}), new Filter<AbstractMetamodelDeclaration>() {
-			public boolean matches(AbstractMetamodelDeclaration param) {
+			public boolean accept(AbstractMetamodelDeclaration param) {
 				return metamodelAliasMatches(param, alias);
 			}
 		}), generatedMetamodels, importedMetamodels, new Filter<AbstractMetamodelDeclaration>() {
-			public boolean matches(AbstractMetamodelDeclaration param) {
+			public boolean accept(AbstractMetamodelDeclaration param) {
 				return param instanceof GeneratedMetamodel;
 			}
 		});
