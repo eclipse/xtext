@@ -8,7 +8,6 @@
 package org.eclipse.xtext.crossref.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.crossref.IScope;
 
@@ -18,11 +17,11 @@ import org.eclipse.xtext.crossref.IScope;
  */
 public class LazyReferencedResourceScope extends AbstractCachingScope {
 
-	private final EObject context;
+	private final Resource context;
 
 	private final String uri;
 
-	public LazyReferencedResourceScope(IScope parent, EClass type, EObject context, String uri) {
+	public LazyReferencedResourceScope(IScope parent, EClass type, Resource context, String uri) {
 		super(parent, type, true);
 		this.context = context;
 		this.uri = uri;

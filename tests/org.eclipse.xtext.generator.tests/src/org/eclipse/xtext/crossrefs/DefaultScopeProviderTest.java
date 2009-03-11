@@ -93,8 +93,6 @@ public class DefaultScopeProviderTest extends AbstractGeneratorTest {
 		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
 	}
 
-	// TODO: report a meaningful error to the user when resolving of an import fails
-
 	public void testUnresolvableImport() throws Exception {
 		TestURIConverter models = new TestURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
@@ -151,7 +149,14 @@ public class DefaultScopeProviderTest extends AbstractGeneratorTest {
 
 		@Override
 		public boolean exists(URI uri, Map<?, ?> options) {
-		 	return models.containsKey(uri);
+		 	boolean result = models.containsKey(uri);
+		 	if (!result) {
+		 		for(URI knownUri: models.keySet()) {
+		 			if (uri.toString().endsWith(knownUri.toString()))
+		 				return true;
+		 		}
+		 	}
+		 	return result;
 		}
 
 		@Override
