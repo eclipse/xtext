@@ -6,7 +6,7 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.tests.EcoreModelComparator;
+import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.StringInputStream;
 
 public class OffsetInformationTest extends AbstractGeneratorTest {
@@ -33,10 +33,8 @@ public class OffsetInformationTest extends AbstractGeneratorTest {
 			String substring = string.substring(i, string.length()-i);
 			resource.update(i, substring.length(), substring);
 			CompositeNode model = resource.getParseResult().getRootNode();
-			EcoreModelComparator comparator = new EcoreModelComparator();
-			comparator.addIgnoredFeature(ParsetreePackage.eINSTANCE.getAbstractNode_Element());
 			NodeUtil.checkOffsetConsistency(model);
-			assertFalse(comparator.modelsDiffer(rootNode, model));
+			EmfAssert.assertEObjectsEqual(rootNode, model,ParsetreePackage.eINSTANCE.getAbstractNode_Element());
 		}
 		
 	}

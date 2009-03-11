@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.tests.EcoreModelComparator;
-import org.eclipse.xtext.util.EmfFormater;
+import org.eclipse.xtext.tests.EmfAssert;
+import org.eclipse.xtext.util.EmfFormatter;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 
@@ -37,7 +37,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 				ParserRule pr = (ParserRule) x;
 				if (pr.getName().toLowerCase().contains("tricky")) {
 					if (logger.isTraceEnabled())
-						logger.trace(EmfFormater.objToStr(pr));
+						logger.trace(EmfFormatter.objToStr(pr));
 				}
 			}
 	}
@@ -55,7 +55,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
 		if (logger.isTraceEnabled())
-			logger.trace(EmfFormater.objToStr(result));
+			logger.trace(EmfFormatter.objToStr(result));
 		return serialize(result);
 	}
 
@@ -83,8 +83,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 			InterruptedException {
 		EObject model = getModel(mymodel);
 		EObject model2 = getModel(parseAndSerialize(mymodel));
-		EcoreModelComparator ecoreModelComparator = new EcoreModelComparator();
-		assertFalse(ecoreModelComparator.modelsDiffer(model, model2));
+		EmfAssert.assertEObjectsEqual(model, model2);
 	}
 
 }

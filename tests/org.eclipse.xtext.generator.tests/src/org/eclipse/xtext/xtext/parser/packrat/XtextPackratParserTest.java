@@ -11,7 +11,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.packrat.XtextPackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormater;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -37,10 +37,10 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 		assertNotNull(parseResult);
 		assertNotNull(parseResult.getRootNode());
 		assertNotNull(parseResult.getRootASTElement());
-		String rootNode = EmfFormater.objToStr(parseResult.getRootASTElement());
+		String rootNode = EmfFormatter.objToStr(parseResult.getRootASTElement());
 //		printParseResult(parseResult);
 		IParseResult orig = getParser().parse(new StringInputStream(model));
-		String origRootNode = EmfFormater.objToStr(orig.getRootASTElement());
+		String origRootNode = EmfFormatter.objToStr(orig.getRootASTElement());
 		assertEquals("Model: '" + model + "'", origRootNode, rootNode);
 	}
 
