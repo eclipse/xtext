@@ -42,6 +42,7 @@ public class ManifestMergerTest extends TestCase {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
 		InputStream resourceAsStream = getClass().getResourceAsStream("/" + packageName + "/Test_Manifest.MF");
 		MergeableManifest manifest = new MergeableManifest(resourceAsStream);
+		assertFalse(manifest.isModified());
 
 		manifest.addExportedPackages(Collections.singleton("org.eclipse.xtext"));
 		assertFalse(manifest.isModified());

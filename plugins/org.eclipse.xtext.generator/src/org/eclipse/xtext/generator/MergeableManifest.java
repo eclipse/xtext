@@ -88,7 +88,7 @@ public class MergeableManifest extends Manifest {
 		@Override
 		public Object put(Object name, Object value) {
 			final Object result = super.put(name, value);
-			if (result != value)
+			if (result != null && !result.equals(value))
 				modified = true;
 			return result;
 		}
