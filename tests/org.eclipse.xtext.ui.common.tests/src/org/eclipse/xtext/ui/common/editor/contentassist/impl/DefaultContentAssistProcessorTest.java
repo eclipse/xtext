@@ -228,16 +228,19 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      *
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=262313
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=267582
      */
     public void testCompleteAssignmentWithBacktracking() throws Exception {
     	newBuilder(getXtextGrammarSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate foo \"foo\"")
         .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=", 
-        		"Assignment_Feature", "MyRule",  "{");
+        		"Assignment_Feature", "MyRule",  "{")
+        .appendNl(";")
+        .append("terminal Other_Id").assertText(":","returns");
 
     }
-
+    
     public void testKeywordWithBackslashes() throws Exception {
 		newBuilder(getKeywordsLangSetup())
 			.assertText("foo\\bar", "foo\\", "\\bar", "\\");

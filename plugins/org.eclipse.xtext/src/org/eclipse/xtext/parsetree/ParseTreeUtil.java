@@ -392,16 +392,18 @@ public final class ParseTreeUtil {
 		return abstractElementSet;
 	}
 
-
 	private static Alternatives getOutermostAlternativesElement(final AbstractNode node) {
 		Alternatives alternatives = null;
-		AbstractNode baseNode = node;
-		while ((baseNode = (AbstractNode) baseNode.eContainer()) != null
-				&& baseNode.getGrammarElement().eContainer() instanceof Alternatives) {
-			for (AbstractElement abstractElement = (AbstractElement) baseNode.getGrammarElement(); abstractElement
-					.eContainer() instanceof Alternatives; abstractElement = (AbstractElement) abstractElement
-					.eContainer()) {
-				alternatives = (Alternatives) abstractElement.eContainer();
+		for (AbstractNode baseNode = node; baseNode.eContainer() != null; 
+			baseNode = (AbstractNode) baseNode.eContainer()) {
+			for (AbstractElement abstractElement = (AbstractElement) baseNode.getGrammarElement(); 
+				abstractElement.eContainer() instanceof AbstractElement; 
+					abstractElement = (AbstractElement) abstractElement.eContainer()) {
+				if (abstractElement instanceof Group) {
+					return alternatives;
+				} else if (abstractElement instanceof Alternatives) {
+					alternatives = (Alternatives) abstractElement;
+				}
 			}
 		}
 		return alternatives;
