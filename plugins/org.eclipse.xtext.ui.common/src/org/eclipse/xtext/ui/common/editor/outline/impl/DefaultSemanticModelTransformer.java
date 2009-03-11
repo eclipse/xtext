@@ -23,7 +23,7 @@ import com.google.inject.Inject;
  */
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
 
-	final static Logger logger = Logger.getLogger(AbstractSemanticModelTransformer.class);
+	final static Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
 
 	private final ILocationInFileProvider locationProvider;
 
