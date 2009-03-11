@@ -89,8 +89,16 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		super.generate(grammar, ctx);
 		List<GeneratedMetamodel> list = typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		List<EPackage> packs = collect(list, GENERATED_METAMODEL__EPACKAGE, EPackage.class);
-		String path = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
-		generateEcoreJavaClasses(packs, getBasePackage(grammar), path, grammar);
+		String javaPath, xmiPath;
+		if(javaModelDirectory == null || "".equals(javaModelDirectory))
+			javaPath = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
+		else 
+			javaPath = javaModelDirectory;
+		if(xmiModelDirectory == null || "".equals(xmiModelDirectory))
+			xmiPath = javaPath + "/" + grammar.getName().substring(0, grammar.getName().lastIndexOf('.')).replace('.', '/');
+		else 
+			xmiPath = xmiModelDirectory;
+		generateEcoreJavaClasses(packs, getBasePackage(grammar), javaPath, xmiPath, grammar);
 	}
 
 	private String urisString;
@@ -123,7 +131,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return result;
 	}
 
-	public void generateEcoreJavaClasses(Collection<? extends EPackage> ps, final String basePackage, final String uri,
+	public void generateEcoreJavaClasses(Collection<? extends EPackage> ps, final String basePackage, final String javaPath, final String xmiPath,
 			final Grammar grammar) throws ConfigurationException {
 
 		Collection<? extends EPackage> packs2 = EcoreUtil.copyAll(ps);
@@ -132,18 +140,16 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		Resource res2;
 		Resource res;
 		try {
-			res2 = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
-					+ ".ecore").getCanonicalPath()));
-			res = rs.createResource(URI.createFileURI(new File(uri + "/" + grammar.getName().replace('.', '/')
-					+ ".genmodel").getCanonicalPath()));
+			String prefix = new File(xmiPath).getCanonicalPath() + "/" + grammar.getName().substring(grammar.getName().lastIndexOf('.') + 1);
+			res2 = rs.createResource(URI.createFileURI(prefix + ".ecore"));
+			res = rs.createResource(URI.createFileURI(prefix + ".genmodel"));
 		} catch (IOException e1) {
-			throw new IllegalStateException("Couldn't compute canonical path for "+new File(uri + "/" + grammar.getName().replace('.', '/')
-					+ ".genmodel").getAbsolutePath());
+			throw new IllegalStateException("Couldn't compute canonical path for "+new File(xmiPath).getAbsolutePath());
 		}
 
 		GenModel genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
 		genModel.initialize(packs2);
-		genModel.setModelDirectory(uri);
+		genModel.setModelDirectory(javaPath);
 
 		// genModel.setModelDirectory(modelProjectName);
 
@@ -205,7 +211,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 									@Override
 									protected URI toURI(String pathName) {
-										return URI.createFileURI(uri);
+										return URI.createFileURI(javaPath);
 									}
 								};
 							}
@@ -215,7 +221,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 								return new GenPackageGeneratorAdapter(this) {
 									@Override
 									protected URI toURI(String pathName) {
-										return URI.createFileURI(uri);
+										return URI.createFileURI(javaPath);
 									}
 
 									@Override
@@ -239,15 +245,29 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	
 	
 	private String basePackage = null;
+	
 	public void setBasePackage(String basePackage) {
 		if ("".equals(basePackage.trim()))
 			return;
 		this.basePackage = basePackage;
 	}
+	
 	public String getBasePackage(Grammar g) {
 		if (basePackage==null)
 			return GrammarUtil.getNamespace(g);
 		return basePackage;
+	}
+	
+	private String javaModelDirectory = null;
+	
+	private String xmiModelDirectory = null;
+	
+	public void setJavaModelDirectory(String dir) {
+		javaModelDirectory = dir;		
+	}
+	
+	public void setXmiModelDirectory(String dir) {
+		xmiModelDirectory = dir;		
 	}
 
 	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
