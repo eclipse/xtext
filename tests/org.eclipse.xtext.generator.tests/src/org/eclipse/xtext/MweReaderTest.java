@@ -19,8 +19,7 @@ import junit.framework.TestCase;
  *
  */
 public class MweReaderTest extends TestCase {
-	protected void setUp() throws Exception {};
-	
+
 	public void testSimple() throws Exception {
 		MweReader reader = new MweReader();
 		reader.setRegister(new XtextStandaloneSetup());
@@ -33,7 +32,7 @@ public class MweReaderTest extends TestCase {
 		assertTrue(ctx.get(MweReader.DEFAULT_OUTPUT_SLOT) instanceof Grammar);
 		assertEquals(issues.toString(),1,issues.getErrors().length);
 	}
-	
+
 	public void testMissingRegistration() throws Exception {
 		MweReader reader = new MweReader();
 //		reader.setRegister(new XtextStandaloneSetup());
@@ -42,7 +41,7 @@ public class MweReaderTest extends TestCase {
 		reader.checkConfiguration(issues);
 		assertTrue(issues.hasErrors());
 	}
-	
+
 	public void testMissingUri() throws Exception {
 		MweReader reader = new MweReader();
 		reader.setRegister(new XtextStandaloneSetup());
