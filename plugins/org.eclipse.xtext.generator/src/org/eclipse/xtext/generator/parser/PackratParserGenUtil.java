@@ -225,7 +225,7 @@ public final class PackratParserGenUtil {
 
 	public static Iterable<Keyword> getConflictingKeywords(final TerminalRule rule, final Iterable<Keyword> allKeywords) {
 		return CollectionUtils.filter(allKeywords, new Filter<Keyword>() {
-			public boolean matches(Keyword param) {
+			public boolean accept(Keyword param) {
 				final ParserRule containerRule = EcoreUtil2.getContainerOfType(param, ParserRule.class);
 				if (containerRule == null)
 					return false;
@@ -271,7 +271,7 @@ public final class PackratParserGenUtil {
 	public static AbstractElement findFirstWithSameConflicts(final AbstractElement element, final Grammar grammar) {
 		final List<String> conflicting = getConflictingKeywords(element, grammar);
 		AbstractElement result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class), new Filter<AbstractElement>() {
-			public boolean matches(AbstractElement param) {
+			public boolean accept(AbstractElement param) {
 				final List<String> otherConflicting = getConflictingKeywords(param, grammar);
 				return otherConflicting != null && otherConflicting.equals(conflicting);
 			}
@@ -285,7 +285,7 @@ public final class PackratParserGenUtil {
 	public static Keyword findFirstKeywordWithSameConflicts(final Keyword element, final Grammar grammar) {
 		final List<AbstractRule> conflicting = getConflictingLexerRules(element, grammar);
 		Keyword result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Filter<Keyword>() {
-			public boolean matches(Keyword param) {
+			public boolean accept(Keyword param) {
 				if (GrammarUtil.containingParserRule(param) == null)
 					return false;
 				final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
