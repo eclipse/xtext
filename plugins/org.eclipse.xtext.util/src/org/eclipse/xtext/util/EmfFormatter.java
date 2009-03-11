@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
-public class EmfFormater {
+public class EmfFormatter {
 
 	private static final char SPACE = ' ';
 	private static final String INDENT = "    ";

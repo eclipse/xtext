@@ -11,7 +11,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguagePackratParser;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.tests.EcoreModelComparator;
+import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -45,8 +45,7 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 		assertNotNull(antlrResult);
 		assertNotNull(antlrResult.getRootASTElement());
 		assertNotNull(antlrResult.getRootNode());
-		EcoreModelComparator comparator = new EcoreModelComparator();
-		assertFalse(comparator.modelsDiffer(antlrResult.getRootASTElement(), packratResult.getRootASTElement()));
+		EmfAssert.assertEObjectsEqual(antlrResult.getRootASTElement(), packratResult.getRootASTElement());
 	}
 
 	public void testAntlr() {
