@@ -41,6 +41,7 @@ public class MergeableManifest extends Manifest {
 	public static final Attributes.Name REQUIRE_BUNDLE = new Attributes.Name("Require-Bundle");
 	public static final Attributes.Name BUNDLE_ACTIVATION_POLICY = new Attributes.Name("Bundle-ActivationPolicy");
 	public static final Attributes.Name BUNDLE_LOCALIZATION = new Attributes.Name("Bundle-Localization");
+	public static final Attributes.Name BUNDLE_ACTIVATOR = new Attributes.Name("Bundle-Activator");
 
 	private static final String LINEBREAK = "\r\n";
 
@@ -82,6 +83,14 @@ public class MergeableManifest extends Manifest {
 			} catch (Exception e) {
 				throw new IllegalStateException(e);
 			}
+		}
+
+		@Override
+		public Object put(Object name, Object value) {
+			final Object result = super.put(name, value);
+			if (result != value)
+				modified = true;
+			return result;
 		}
 
 		/*
@@ -170,6 +179,7 @@ public class MergeableManifest extends Manifest {
 		// hack: reconstruct linebreaks
 		addRequiredBundles(Collections.<String>emptySet());
 		addExportedPackages(Collections.<String>emptySet());
+		modified = false;
 	}
 
 	/**
@@ -286,7 +296,6 @@ public class MergeableManifest extends Manifest {
 			ParameterizedElement other = (ParameterizedElement) obj;
 			return name.equals(other.name);
 		}
-
 	}
 
 }

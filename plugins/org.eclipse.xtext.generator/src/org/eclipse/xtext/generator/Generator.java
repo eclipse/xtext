@@ -278,7 +278,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		if (isMergeManifest()) {
 			String path = ctx.getOutput().getOutlet(PLUGIN_RT).getPath() + "/" + manifestPath;
-			mergeManifest(path, exported, requiredBundles);
+			mergeManifest(path, exported, requiredBundles, activator);
 		} else {
 			try {
 				manifestPath = manifestPath + "_gen";
@@ -293,7 +293,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 	}
 
-	private void mergeManifest(String path, Set<String> exported, Set<String> requiredBundles) {
+	private void mergeManifest(String path, Set<String> exported, Set<String> requiredBundles, String activator) {
 		File file = new File(path);
 		InputStream in = null;
 		OutputStream out = null;
@@ -302,6 +302,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 			MergeableManifest manifest = new MergeableManifest(in);
 			manifest.addExportedPackages(exported);
 			manifest.addRequiredBundles(requiredBundles);
+			if (activator != null && !manifest.getMainAttributes().containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
+				manifest.getMainAttributes().put(MergeableManifest.BUNDLE_ACTIVATOR, activator);
+			}
 			if (manifest.isModified()) {
 				out = new FileOutputStream(file);
 				manifest.write(out);
@@ -343,7 +346,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 			if (isMergeManifest()) {
 				String path = ctx.getOutput().getOutlet(PLUGIN_UI).getPath() + "/" + manifestPath;
-				mergeManifest(path, exported, requiredBundles);
+				mergeManifest(path, exported, requiredBundles, getActivator());
 			} else {
 				try {
 					manifestPath = manifestPath + "_gen";
