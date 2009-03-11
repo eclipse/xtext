@@ -60,6 +60,7 @@ public class XtextDamagerRepairer extends DefaultDamagerRepairer {
 					if (node instanceof CompositeNode) {
 						if (((CompositeNode) node).getChildren().isEmpty())
 							break;
+						AbstractNode prevNode = node;
 						for(AbstractNode child: ((CompositeNode) node).getChildren()) {
 							if (child.getTotalOffset() <= offset && child.getTotalOffset() + child.getTotalLength() >= offset) {
 								node = child;
@@ -68,6 +69,8 @@ public class XtextDamagerRepairer extends DefaultDamagerRepairer {
 								break;
 							}
 						}
+						if (prevNode == node)
+							start = node;
 					} else {
 						throw new IllegalStateException("node is not in expected range but is not a composite.");
 					}
