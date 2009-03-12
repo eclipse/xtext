@@ -47,6 +47,19 @@
 		</editor>
 	</extension>
 	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -77,18 +90,7 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
+	
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -134,6 +136,19 @@
 		</editor>
 	</extension>
 	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -164,18 +179,7 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
+	
 
 
 
@@ -223,6 +227,19 @@
 		</editor>
 	</extension>
 	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -253,18 +270,7 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
+	
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -310,6 +316,19 @@
 		</editor>
 	</extension>
 	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -340,18 +359,7 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
+	
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -397,6 +405,19 @@
 		</editor>
 	</extension>
 	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -427,18 +448,7 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
+	
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -484,6 +494,19 @@
 		</editor>
 	</extension>
 	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	
+	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
 			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
@@ -514,17 +537,6 @@
 			label="Task Tags">
 		</keyword>
 	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
+	
 
 </plugin>
