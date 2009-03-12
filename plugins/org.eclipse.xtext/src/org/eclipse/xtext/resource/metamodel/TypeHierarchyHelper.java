@@ -101,7 +101,7 @@ public class TypeHierarchyHelper {
 		// only if all subtypes' compatible type is superType itself
 		// features can be lifted into superType
 		Collection<? extends EClassifierInfo> subTypesAsClassifiers = subTypes;
-		if (infos.getCompatibleTypeOf((Collection<EClassifierInfo>) subTypesAsClassifiers).equals(superType)) {
+		if (superType.equals(infos.getCompatibleTypeOf((Collection<EClassifierInfo>) subTypesAsClassifiers))) {
 			Collection<EStructuralFeature> commonFeatures = getCommonDirectFeatures(subTypes);
 			Collection<EStructuralFeature> liftedFeatures = joinFeaturesInto(commonFeatures, superType);
 			for (EClassInfo subClassInfo : subTypes)
