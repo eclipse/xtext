@@ -20,6 +20,10 @@ public abstract class AbstractTestLanguageUiModule extends DefaultUIModule {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
 	}
 
+	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenStyleProvider> bindITokenStyleProvider() {
+		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenStyleProvider.class;
+	}
+
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
 		return org.eclipse.xtext.ui.integration.TestLanguageProposals.class;
 	}

@@ -435,7 +435,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return getInheritedParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@456e30 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@f229cd (name: OverridableParserRule) (definesHiddenTokens: false)
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@a18283 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@110fa8 (name: OverridableParserRule) (definesHiddenTokens: false)
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
 	}
@@ -444,7 +444,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@41d249 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@d1f3c3 (name: ExtendableParserRule) (definesHiddenTokens: false)
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@a75bee (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@164721 (name: ExtendableParserRule) (definesHiddenTokens: false)
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
 	}
