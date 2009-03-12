@@ -34,6 +34,7 @@ import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
@@ -71,19 +72,26 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 
 		IPath path = null;
+		Resource aResource = null;
+		URI uri = null;
 		if (file != null) {
 			path = file.getFullPath();
+			uri = URI.createPlatformResourceURI(path.toString(), true);
+		} else if (editorInput instanceof XtextReadonlyEditorInput){
+			uri = ((XtextReadonlyEditorInput) editorInput).getURI();
 		} else {
 			IStorageEditorInput storageInput = (IStorageEditorInput) editorInput;
 			try {
 				// TODO get the FQN of the resource
 				path = storageInput.getStorage().getFullPath();
+				uri = URI.createPlatformResourceURI(path.toString(), true);
 			}
 			catch (CoreException e) {
 				throw new WrappedException(e);
 			}
 		}
-		Resource aResource = resourceSet.createResource(URI.createPlatformResourceURI(path.toString(), true));
+
+		aResource = resourceSet.createResource(uri);
 		if (!(aResource instanceof XtextResource))
 			throw new IllegalStateException("The resource factory registered for " + path
 					+ " is not an XtextResourceFactory. Make sure the right resource factory has been registered.");
