@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
@@ -39,6 +40,16 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 
 	public void addFragments(CompositeGeneratorFragment fragment) {
 		this.fragments.add(fragment);
+	}
+
+	public void addLog(LoggingGeneratorFragment message) {
+		message.setLevel(Level.INFO);
+		addFragment(message);
+	}
+
+	public void addWarn(LoggingGeneratorFragment message) {
+		message.setLevel(Level.WARN);
+		addFragment(message);
 	}
 
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {

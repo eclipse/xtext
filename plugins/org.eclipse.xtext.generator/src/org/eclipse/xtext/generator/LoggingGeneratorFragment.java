@@ -1,80 +1,84 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-
 package org.eclipse.xtext.generator;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
-import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.util.Strings;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
- *
- * base class redirecting call backs to respective Xpand definitions.
- * The template needs to have the same qualified name the extending class has.
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
+public class LoggingGeneratorFragment implements IGeneratorFragment {
 
-	private static Logger log = Logger.getLogger(AbstractGeneratorFragment.class);
+	private static Logger log = Logger.getLogger(LoggingGeneratorFragment.class);
 
-	protected String getTemplate() {
-		return getClass().getName().replaceAll("\\.", "::");
-	}
+	private String message;
+
+	private Level level;
 
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		if (log.isInfoEnabled())
-			log.info("executing generate for "+getClass().getName());
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, getParameters(grammar));
+		if (message != null)
+			log.log(level, message);
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
 
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		return null;
+		return Strings.EMPTY_ARRAY;
 	}
 
 	public String[] getExportedPackagesUi(Grammar grammar) {
-		return null;
+		return Strings.EMPTY_ARRAY;
 	}
 
 	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
-		return null;
+		return Collections.emptyMap();
 	}
 
 	public Map<String, String> getGuiceBindingsUi(Grammar grammar) {
-		return null;
+		return Collections.emptyMap();
 	}
 
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return null;
+		return Strings.EMPTY_ARRAY;
 	}
 
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return null;
-	}
-
-	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.emptyList();
+		return Strings.EMPTY_ARRAY;
 	}
 
 }
