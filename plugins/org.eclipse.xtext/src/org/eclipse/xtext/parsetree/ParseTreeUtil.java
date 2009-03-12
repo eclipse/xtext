@@ -122,27 +122,21 @@ public final class ParseTreeUtil {
 	 */
 	public static final AbstractNode getLastCompleteNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 		assertParameterNotNull(contextNode, "contextNode");
-
-		AbstractNode abstractNode = contextNode.eContainer()==null ? contextNode : null;
-
-		if (contextNode.getTotalOffset() < offsetPosition
-				|| (0 == offsetPosition && offsetPosition == contextNode.getTotalOffset())) {
-
-			for (AbstractNode childNode : contextNode.getLeafNodes()) {
-				AbstractNode lastElementByOffset = getLastCompleteNodeByOffset(childNode, offsetPosition);
-
-				if (lastElementByOffset != null) {
-					abstractNode = lastElementByOffset;
-				}
-			}
-			if (abstractNode == null && contextNode.getTotalOffset() + contextNode.getTotalLength() <= offsetPosition) {
-				EObject grammarElement = contextNode.getGrammarElement();
-				if (grammarElement instanceof AbstractElement || grammarElement instanceof ParserRule) {
-					abstractNode = contextNode;
+		AbstractNode result = contextNode.eContainer()==null ? contextNode : null;
+		TreeIterator<EObject> allContentsTreeIterator = EcoreUtil.getRootContainer(contextNode).eAllContents();
+		while (allContentsTreeIterator.hasNext()) {
+			EObject eObject = allContentsTreeIterator.next();
+			if (eObject instanceof AbstractNode) {
+				AbstractNode abstractNode = (AbstractNode) eObject;
+				if (abstractNode.getTotalOffset() >= offsetPosition ) {
+					break;
+				} else if (abstractNode.getGrammarElement() instanceof AbstractElement || 
+						   abstractNode.getGrammarElement() instanceof ParserRule) {
+					result = abstractNode;
 				}
 			}
 		}
-		return abstractNode;
+		return result;
 	}
 	/**
 	 * @param contextNode		the node representing the 'scope' of the current lookup
@@ -396,9 +390,9 @@ public final class ParseTreeUtil {
 		Alternatives alternatives = null;
 		for (AbstractNode baseNode = node; baseNode.eContainer() != null; 
 			baseNode = (AbstractNode) baseNode.eContainer()) {
-			for (AbstractElement abstractElement = (AbstractElement) baseNode.getGrammarElement(); 
-				abstractElement.eContainer() instanceof AbstractElement; 
-					abstractElement = (AbstractElement) abstractElement.eContainer()) {
+			for (EObject abstractElement = baseNode.getGrammarElement(); 
+				abstractElement instanceof AbstractElement; 
+					abstractElement = abstractElement.eContainer()) {
 				if (abstractElement instanceof Group) {
 					return alternatives;
 				} else if (abstractElement instanceof Alternatives) {
