@@ -26,9 +26,9 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.validator.CheckMode;
 
 /**
- *
+ * 
  * @author Dennis Hübner - Initial contribution and API
- *
+ * 
  */
 public final class ValidationJob extends Job {
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
@@ -41,21 +41,33 @@ public final class ValidationJob extends Job {
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 *
+	 * 
 	 * @param xtextEditor
 	 * @param checkMode
 	 */
 	public ValidationJob(XtextEditor xtextEditor, CheckMode checkMode) {
-		this(xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ?
-				xtextEditor.getResource() : null), checkMode, false);
+		this(xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ? xtextEditor
+				.getResource() : null), checkMode, true);
 	}
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 *
+	 * 
+	 * @param xtextEditor
+	 * @param checkMode
+	 */
+	public ValidationJob(XtextEditor xtextEditor, CheckMode checkMode, boolean deleteOldMarkers) {
+		this(xtextEditor.getDocument(), (IFile) (IFile.class.isInstance(xtextEditor.getResource()) ? xtextEditor
+				.getResource() : null), checkMode, deleteOldMarkers);
+	}
+
+	/**
+	 * Constructs a ValidationJob with a specified {@link CheckMode}
+	 * 
 	 * @param xtextDocument
 	 * @param iFile
 	 * @param checkMode
+	 * @param deleteOldMarkers - whenever marker should be deleted or not
 	 */
 	public ValidationJob(IXtextDocument xtextDocument, IFile iFile, CheckMode checkMode, boolean deleteOldMarkers) {
 		super("Xtext validation");
@@ -69,7 +81,8 @@ public final class ValidationJob extends Job {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		log.debug("Starting Xtext Validation with CheckMode: " + checkMode);
-		if (iFile == null) { // file may be null, if it was opend from an IStorageEditorInput
+		if (iFile == null) { // file may be null, if it was opend from an
+			// IStorageEditorInput
 			log.debug("Aborting Xtext Validation with CheckMode: " + checkMode + " because file does not exist.");
 			return Status.OK_STATUS;
 		}
