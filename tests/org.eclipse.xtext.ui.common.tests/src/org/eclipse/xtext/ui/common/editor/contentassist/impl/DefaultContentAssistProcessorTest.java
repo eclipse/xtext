@@ -127,6 +127,12 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 
 	}
 
+	public void testBetweenContext() throws Exception {
+		newBuilder(getRefGrammarSetup())
+		.append("spielplatz 1 \"1\" {kind")
+		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","}");
+	}
+	
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
 		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
@@ -139,7 +145,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 		builder.append(" familie ( keyword E").assertText("e1", "e2");
 		builder.append(" familie ( keyword e1 E").assertText("e1", "e2","k1","k2");
 		builder.append(" familie ( keyword e1 e2 K").assertText("k1", "k2", ",", ")");
-		builder.append(" familie ( keyword e1 e2 k1,K").assertText(",", ")");
+		builder.append(" familie ( keyword e1 e2 k1,K").assertText("k1", "k2",",", ")");
 		builder.append(" familie ( keyword e1 e2 k1,k2").assertText(",", ")");
 	}
 

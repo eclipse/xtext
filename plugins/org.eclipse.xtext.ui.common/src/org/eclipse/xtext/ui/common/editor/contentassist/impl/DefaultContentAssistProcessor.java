@@ -43,7 +43,6 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -192,16 +191,15 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		CompositeNode rootNode = parseResult.getRootNode();
 		AbstractNode referenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 		AbstractNode nodeAtOffset = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
-		
+
 		if (referenceNode.getOffset()+referenceNode.getLength() == offset) {
-			AbstractNode precedingReferenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode,Math.max(0, referenceNode.getOffset()-1));
-			String matchingString = calculateMatchString(nodeAtOffset,text, offset);
+			AbstractNode precedingReferenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode,Math.max(0, referenceNode.getOffset()));
+			String matchingString = referenceNode.serialize();
 			result.add(newCompletionProposal(matchingString, offset, rootNode, precedingReferenceNode));
-			if (!Strings.isEmpty(matchingString) && 
-					referenceNode.getGrammarElement() instanceof Keyword || 
-					referenceNode.getGrammarElement() instanceof CrossReference ||
-					(referenceNode.getGrammarElement() instanceof RuleCall &&
-					 ((RuleCall)referenceNode.getGrammarElement()).getRule() instanceof TerminalRule)) {
+			if (referenceNode.getGrammarElement() instanceof Keyword || 
+				referenceNode.getGrammarElement() instanceof CrossReference ||
+				(referenceNode.getGrammarElement() instanceof RuleCall &&
+				((RuleCall)referenceNode.getGrammarElement()).getRule() instanceof TerminalRule)) {
 				result.add(newCompletionProposal("", offset, rootNode, referenceNode));
 			}
 		} else {
