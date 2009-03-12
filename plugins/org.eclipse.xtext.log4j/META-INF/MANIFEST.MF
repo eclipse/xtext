@@ -24,4 +24,3 @@ Export-Package: org.apache.log4j,
  org.apache.log4j.xml
 Eclipse-BuddyPolicy: registered
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-ClassPath: log4j-1.2.15.jar
