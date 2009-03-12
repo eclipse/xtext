@@ -97,7 +97,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkCrossReferenceTerminal(CrossReference reference) {
-		if (!(reference.getTerminal() instanceof RuleCall))
+		if (reference.getTerminal() != null && !(reference.getTerminal() instanceof RuleCall))
 			warning("Your grammar will not work with the default linking implementation, " +
 					"because Alternatives are currently not handled properly in CrossReferences.",
 					XtextPackage.CROSS_REFERENCE__TERMINAL);
