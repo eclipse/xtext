@@ -107,7 +107,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 											break;
 										}
 									}
-									if (set.getResources().get(i) == emfResource)
+									if (set.getResources().size() > i && set.getResources().get(i) == emfResource)
 										i++;
 								}
 							}
