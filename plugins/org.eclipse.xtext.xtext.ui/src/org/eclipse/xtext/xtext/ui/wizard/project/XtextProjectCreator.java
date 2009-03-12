@@ -43,7 +43,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	protected XtextProjectInfo getXtextProjectInfo() {
 		return (XtextProjectInfo) getProjectInfo();
 	}
-	
+
 	@Override
 	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 			InterruptedException {
@@ -63,10 +63,9 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		setResult(dslGrammarFile);
 	}
 
-	private IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException,
-			InvocationTargetException, InterruptedException {
+	private IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getProjectName()+".ui";
-		
+
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
 				getXtextProjectInfo().getProjectName().toLowerCase() + ";visibility:=reexport",
 				"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
@@ -75,18 +74,18 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.ui.ide;bundle-version=\"3.4.0\""));
 
 		String templateName = pathToTemplates()+"DslUiProject::main";
-		
+
 		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
 				monitor);
 	}
 
 
 
-	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
-			InterruptedException {
+	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getProjectName();
-		
+
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
+				"org.eclipse.xtext",
 				"org.eclipse.xtext.generator;resolution:=optional",
 				"org.eclipse.xtext.ui.generator;resolution:=optional",
 				"de.itemis.xtext.antlr;resolution:=optional",
@@ -97,21 +96,20 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.emf.mwe.core;resolution:=optional"));
 
 		String templateName = pathToTemplates()+"DslProject::main";
-		
 		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
 				monitor);
 	}
-	
+
 	private IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
 		String projectName = getXtextProjectInfo().getProjectName()+".generator";
-		
+
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(
 				getXtextProjectInfo().getProjectName().toLowerCase(), "org.eclipse.xpand", "org.eclipse.xtend",
 				"org.eclipse.xtext", "org.eclipse.emf.mwe.core", "org.eclipse.emf.mwe.utils",
 				"org.eclipse.xtend.typesystem.emf"));
 
 		String templateName = pathToTemplates()+"GeneratorProject::main";
-		
+
 		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
 				monitor);
 	}
@@ -149,16 +147,13 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 		return dslProject;
 	}
-	
+
 	private String getEncoding() throws CoreException {
 		return ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
 	}
-	
-
 
 	private String pathToTemplates() {
 		return "org::eclipse::xtext::xtext::ui::wizard::project::";
 	}
-
 
 }

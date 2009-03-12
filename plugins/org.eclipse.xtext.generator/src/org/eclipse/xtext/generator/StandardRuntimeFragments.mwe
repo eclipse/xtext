@@ -1,7 +1,9 @@
 <compose class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
 	<property name="file.extensions" value=""/>
 	<fragment file="org/eclipse/xtext/generator/RuntimeFragmentsWithoutResource.mwe" inheritAll="true"/>
-	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+	<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+		delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
+		message="You are generating without ANTLR. If this was not desired, please install the missing plugin 'de.itemis.xtext.antlr'."/>
 	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 		fileExtensions="${file.extensions}"/>
 </compose>
