@@ -7,83 +7,82 @@
  *******************************************************************************/
 package org.eclipse.xtext.validator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.validator.ValidationTestHelper.TestChain;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class AbstractDeclarativeValidatorTest extends TestCase {
 
+	private ValidationTestHelper helper;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.helper = new ValidationTestHelper();
+	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		this.helper = null;
+		super.tearDown();
+	}
+
 	public void testSimpleDispatch() throws Exception {
-		AbstractDeclarativeValidator test = new TestValidator();
-		TestChain chain = chain();
+		AbstractDeclarativeValidator test = helper.validator();
+		TestChain chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
-		assertMatch(chain, 1, 3);
+		helper.assertMatch(chain, 1, 3);
 	}
 
 	public void testDeeperHierarchyWithOverwrittenJavaMethods() throws Exception {
-		AbstractDeclarativeValidator test = new TestValidator() {
+		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@Override
 			@Check
 			public void foo(Object x) {
 				error("fooObject", 5);
 			}
 		};
-		TestChain chain = chain();
+		TestChain chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
-		assertMatch(chain, 1, 5);
+		helper.assertMatch(chain, 1, 5);
 	}
 
 	@SuppressWarnings("serial")
 	public void testSkipExpensive() throws Exception {
-		AbstractDeclarativeValidator test = new TestValidator() {
+		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
 			@SuppressWarnings("unused")
 			@Check(CheckType.EXPENSIVE)
 			public void bar(Object x) {
 				error("fooObject", 27);
 			}
 		};
-		TestChain chain = chain();
+		TestChain chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object, Object>() {
 			{
 				put(CheckMode.KEY, CheckMode.NORMAL_AND_FAST);
 			}
 		});
-		assertMatch(chain, 1, 3);
+		helper.assertMatch(chain, 1, 3);
 
-		chain = chain();
+		chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object, Object>() {
 			{
 				put(CheckMode.KEY, CheckMode.ALL);
 			}
 		});
-		assertMatch(chain, 1, 3, 27);
+		helper.assertMatch(chain, 1, 3, 27);
 
-		chain = chain();
+		chain = helper.chain();
 		test.validate(EcorePackage.eINSTANCE.getEClass(), chain, null);
-		assertMatch(chain, 1, 3, 27);
-	}
-
-	private void assertMatch(TestChain chain, Integer... expectedFeatureIds) {
-		assertEquals(expectedFeatureIds.length, chain.integers.size());
-		List<Integer> asList = Arrays.asList(expectedFeatureIds);
-		assertTrue("expected : " + asList + " , but was " + chain.integers, chain.integers.containsAll(asList));
-	}
-
-	private TestChain chain() {
-		return new TestChain();
+		helper.assertMatch(chain, 1, 3, 27);
 	}
 
 	public void testGuard() throws Exception {
@@ -95,15 +94,15 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 			}
 		};
 
-		TestChain diagnostics = new TestChain();
+		TestChain diagnostics = helper.chain();
 		validator.validate(EcorePackage.eINSTANCE.getEClass(), diagnostics, null);
-		assertEquals(0, diagnostics.integers.size());
+		assertTrue(diagnostics.toString(), diagnostics.isEmpty());
 	}
 
 	@SuppressWarnings("serial")
 	public void testCheckModeSettedProperly() throws Exception {
-		AbstractDeclarativeValidator test = new TestValidator();
-		TestChain chain = chain();
+		AbstractDeclarativeValidator test = helper.validator();
+		TestChain chain = helper.chain();
 		try {
 			test.validate(EcorePackage.eINSTANCE.getEClass(), chain, new HashMap<Object, Object>() {
 				{
@@ -117,42 +116,4 @@ public class AbstractDeclarativeValidatorTest extends TestCase {
 		fail("CheckMode with wrong type, should throw an IllegalArgumentException");
 	}
 
-	@ComposedChecks(validators = { ExternalValidator.class })
-	private static class TestValidator extends AbstractDeclarativeValidator {
-		@Check
-		protected void foo(EStructuralFeature x) {
-			error("fooInteger", 2);
-		}
-
-		@Check
-		public void foo(Object x) {
-			error("fooObject", 3);
-		}
-	}
-
-	@ComposedChecks(validators = { TestValidator.class })
-	private static class ExternalValidator extends AbstractDeclarativeValidator {
-		@SuppressWarnings("unused")
-		@Check
-		private void foo(EClass x) {
-			error("fooString", 1);
-		}
-	}
-
-	private final class TestChain implements DiagnosticChain {
-		public List<Integer> integers = new ArrayList<Integer>();
-
-		public void add(org.eclipse.emf.common.util.Diagnostic diagnostic) {
-			assertTrue(diagnostic.getData().get(0) instanceof EObject);
-			integers.add((Integer) diagnostic.getData().get(1));
-		}
-
-		public void addAll(org.eclipse.emf.common.util.Diagnostic diagnostic) {
-			throw new UnsupportedOperationException();
-		}
-
-		public void merge(org.eclipse.emf.common.util.Diagnostic diagnostic) {
-			throw new UnsupportedOperationException();
-		}
-	}
 }
