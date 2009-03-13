@@ -40,8 +40,8 @@ import com.google.inject.Injector;
  * @author Jan Koehnlein
  * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
  */
-public class DefaultContentAssistProcessorTest extends AbstractXtextTests {	
-	
+public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
+
 	private ISetup getRefGrammarSetup() {
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
 			@Override
@@ -132,7 +132,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 		.append("spielplatz 1 \"1\" {kind")
 		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","}");
 	}
-	
+
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
 		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
@@ -240,13 +240,13 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     	newBuilder(getXtextGrammarSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate foo \"foo\"")
-        .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=", 
+        .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=",
         		"Assignment_Feature", "MyRule",  "{")
         .appendNl(";")
         .append("terminal Other_Id").assertText(":","returns");
 
     }
-    
+
     public void testKeywordWithBackslashes() throws Exception {
 		newBuilder(getKeywordsLangSetup())
 			.assertText("foo\\bar", "foo\\", "\\bar", "\\");
@@ -254,7 +254,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
-		return new ContentAssistProcessorTestBuilder(standAloneSetup);
+		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
 	}
 
 }
