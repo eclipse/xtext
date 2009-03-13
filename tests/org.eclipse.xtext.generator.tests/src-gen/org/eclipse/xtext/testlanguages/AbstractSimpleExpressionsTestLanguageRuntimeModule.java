@@ -38,19 +38,9 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 		return org.eclipse.xtext.testlanguages.parseTreeConstruction.SimpleExpressionsTestLanguageParsetreeConstructor.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageCheckValidator> bindSimpleExpressionsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageCheckValidator.class;
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding
@@ -58,14 +48,24 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageCheckValidator> bindSimpleExpressionsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageCheckValidator.class;
+	}
+
 	
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.SimpleExpressionsTestLanguageParser.class;
+	}
+
+	
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	

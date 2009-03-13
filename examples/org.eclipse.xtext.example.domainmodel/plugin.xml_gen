@@ -12,16 +12,4 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.example.xtext/Domainmodel">
-			<checkFile
-				path="org/eclipse/xtext/example/DomainmodelChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 </plugin>

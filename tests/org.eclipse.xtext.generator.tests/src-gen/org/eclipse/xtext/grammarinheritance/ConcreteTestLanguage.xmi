@@ -226,9 +226,9 @@
             <left value="A"/>
             <right value="Z"/>
           </groups>
-          <groups xsi:type="xtext:Keyword" value="&#xf6;"/>
-          <groups xsi:type="xtext:Keyword" value="&#xe4;"/>
-          <groups xsi:type="xtext:Keyword" value="&#xfc;"/>
+          <groups xsi:type="xtext:Keyword" value="&#x2c6;"/>
+          <groups xsi:type="xtext:Keyword" value="&#x2030;"/>
+          <groups xsi:type="xtext:Keyword" value="&#xb8;"/>
           <groups xsi:type="xtext:Keyword" value="_"/>
         </tokens>
         <tokens xsi:type="xtext:Alternatives" cardinality="*">

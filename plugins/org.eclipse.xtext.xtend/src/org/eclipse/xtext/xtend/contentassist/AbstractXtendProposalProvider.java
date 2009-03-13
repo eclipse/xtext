@@ -35,23 +35,23 @@ import org.eclipse.xtext.xtend.NoSuchExtensionException;
 /**
  * Super class for <code>IProposalProvider</code> implementations that call
  * Xtend extensions.
- *
+ * 
  * Delegates calls to {@link #completeRuleCall(RuleCall, IContentAssistContext)}
  * and {@link #completeAssignment(Assignment, IContentAssistContext)} to grammar
  * specific extensions. The signature of such funcions invoked reflectively
  * follows the following pattern:
- *
+ * 
  * List[ICompletionProposal] complete[Typename][featureName](Assignment ele,
  * EObject model, String prefix)
- *
+ * 
  * <b>Example</b> Given the following grammar : <code>
  *  RuleA returns MyType :
  *  	"myType" name=ID;
  *  </code>
- *
+ * 
  * @author Jan K&ouml;hnlein
  * @author Michael Clay
- *
+ * 
  * @see IProposalProvider
  * @see AbstractJavaProposalProvider
  */
@@ -60,7 +60,8 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	protected final Logger logger = Logger.getLogger(IProposalProvider.class);
 
 	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword, IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword,
+	 *      IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
 			IContentAssistContext contentAssistContext) {
@@ -73,7 +74,8 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	}
 
 	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeRuleCall(RuleCall, IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeRuleCall(RuleCall,
+	 *      IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
@@ -89,20 +91,22 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 		else if (calledRule.getType() != null) {
 			TypeRef typeRef = calledRule.getType();
 			return invokeExtension("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
-					+ Strings.toFirstUpper(typeRef.getClassifier().getName()), Arrays.asList(ruleCall, contentAssistContext
-					.getModel(), contentAssistContext));
+					+ Strings.toFirstUpper(typeRef.getClassifier().getName()), Arrays.asList(contentAssistContext
+					.getModel(), ruleCall, contentAssistContext));
 		}
 		return Collections.emptyList();
 	}
 
 	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeAssignment(Assignment, IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeAssignment(Assignment,
+	 *      IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> completeAssignment(Assignment assignment,
 			IContentAssistContext contentAssistContext) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		return invokeExtension("complete" + Strings.toFirstUpper(parserRule.getName()) + "_"
-				+ Strings.toFirstUpper(assignment.getFeature()), Arrays.asList(assignment, contentAssistContext));
+				+ Strings.toFirstUpper(assignment.getFeature()), Arrays.asList(contentAssistContext.getModel(),
+				assignment, contentAssistContext));
 	}
 
 	protected List<? extends ICompletionProposal> invokeExtension(String extensionName, List<?> parameterValues) {
@@ -110,24 +114,26 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 			List<ICompletionProposal> proposals = super.invokeExtension(extensionName, parameterValues);
 			return proposals;
 		}
-		catch(NoSuchExtensionException nsee) {
+		catch (NoSuchExtensionException nsee) {
 			return null;
 		}
-		catch(Throwable e) {
+		catch (Throwable e) {
 			logger.error("Error invoking extension " + extensionName, e);
 		}
 		return null;
 	}
 
 	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(Keyword, IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(Keyword,
+	 *      IContentAssistContext)
 	 */
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
 		return null;
 	}
 
 	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(RuleCall, IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(RuleCall,
+	 *      IContentAssistContext)
 	 */
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		return null;
@@ -150,22 +156,21 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	 * root of the containing plug-in; the path must be legal The image would
 	 * typically be shown to the left of the <code>ICompletionProposal</code>
 	 * display string.
-	 *
-	 * @return the image file path of the default image to be shown or
-	 *         <code>null</code> if no image is desired
+	 * 
+	 * @return the image file path of the default image to be shown or <code>null</code> if no image is desired
 	 * @see #getPluginId()
 	 */
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#filter(java.util.List, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> filter(List<ICompletionProposal> completionProposalList,
 			IContentAssistContext contentAssistContext) {
-		return ProposalFilterSorterUtil.filter(completionProposalList,contentAssistContext);
+		return ProposalFilterSorterUtil.filter(completionProposalList, contentAssistContext);
 	}
 
 	/*

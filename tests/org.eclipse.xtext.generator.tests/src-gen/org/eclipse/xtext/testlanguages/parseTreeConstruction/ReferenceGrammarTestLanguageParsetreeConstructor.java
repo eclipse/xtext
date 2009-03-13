@@ -824,11 +824,11 @@ protected class Spielzeug_4_Keyword extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   "ROT"|"BLAU"|"GELB"|"GR\u00DCN";
+ *   "ROT"|"BLAU"|"GELB"|"GR\u2039N";
  *
  **/
 
-// "ROT"|"BLAU"|"GELB"|"GR\u00DCN"
+// "ROT"|"BLAU"|"GELB"|"GR\u2039N"
 protected class Farbe_Alternatives extends AlternativesToken {
 
 	public Farbe_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -887,7 +887,7 @@ protected class Farbe_2_Keyword_GELB extends KeywordToken  {
 	}	
 }
 
-// "GR\u00DCN"
+// "GR\u2039N"
 protected class Farbe_3_Keyword_GRN extends KeywordToken  {
 	
 	public Farbe_3_Keyword_GRN(IInstanceDescription curr, AbstractToken pred) {
@@ -895,7 +895,7 @@ protected class Farbe_3_Keyword_GRN extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getFarbeAccess().getGRÜNKeyword_3();
+		return grammarAccess.getFarbeAccess().getGRNKeyword_3();
 	}	
 }
 

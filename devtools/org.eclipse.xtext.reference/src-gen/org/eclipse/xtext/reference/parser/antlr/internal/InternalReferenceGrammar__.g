@@ -21,7 +21,7 @@ T21 : ',' ;
 T22 : 'ROT' ;
 T23 : 'BLAU' ;
 T24 : 'GELB' ;
-T25 : 'GR\u00DCN' ;
+T25 : 'GR\u2039N' ;
 T26 : 'type' ;
 
 // $ANTLR src "../org.eclipse.xtext.reference/src-gen/org/eclipse/xtext/reference/parser/antlr/internal/InternalReferenceGrammar.g" 710

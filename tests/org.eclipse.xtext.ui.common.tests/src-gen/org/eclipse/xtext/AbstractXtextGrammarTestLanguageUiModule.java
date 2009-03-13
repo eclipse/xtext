@@ -13,6 +13,11 @@ public abstract class AbstractXtextGrammarTestLanguageUiModule extends DefaultUI
 	
 	
 	
+	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
+		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.CommonAntlrTokenColorer.class;
+	}
+
+	
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
 	}
@@ -23,13 +28,8 @@ public abstract class AbstractXtextGrammarTestLanguageUiModule extends DefaultUI
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
-		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.CommonAntlrTokenColorer.class;
-	}
-
-	
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
-		return org.eclipse.xtext.XtextGrammarTestLanguageProposals.class;
+		return org.eclipse.xtext.XtextGrammarTestLanguageProposalProvider.class;
 	}
 
 }

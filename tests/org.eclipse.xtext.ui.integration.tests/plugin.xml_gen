@@ -12,18 +12,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://foo">
-			<checkFile
-				path="org/eclipse/xtext/ui/integration/FooChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 <!-- adding resource factories -->
 
 	<extension

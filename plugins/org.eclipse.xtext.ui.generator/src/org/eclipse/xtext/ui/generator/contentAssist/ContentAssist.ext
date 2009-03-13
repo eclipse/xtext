@@ -13,10 +13,10 @@ extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::GrammarUtil;
 
 getProposalProvider(Grammar grammar) :
-	grammar.name + "Proposals";
+	grammar.name + "ProposalProvider";
 
 getGenProposalProvider(Grammar grammar) :
-	grammar.name.toJavaPackage() + ".Gen" + grammar.name.toSimpleName() + "Proposals";
+	grammar.name.toJavaPackage() + ".Gen" + grammar.name.toSimpleName() + "ProposalProvider";
 
 String getFqFeatureName(Assignment this):
 	containingParserRule().name.toFirstUpper()+"_"+feature.toFirstUpper();
@@ -27,8 +27,6 @@ String getFqFeatureName(ParserRule this):
 List[ParserRule] getParserRulesWithType(Grammar grammar) :
 	grammar.allParserRules().select(parserRule|parserRule.type!=null);
 	
-
-
 
 	
 
