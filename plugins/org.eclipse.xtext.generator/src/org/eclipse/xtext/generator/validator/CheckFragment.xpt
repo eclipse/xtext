@@ -57,21 +57,7 @@ public class «getCheckValidatorName().toSimpleName()» extends org.eclipse.xtext.
 
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(List[String] packageQNames) FOR Grammar-»
-«IF !metamodelDeclarations.typeSelect(GeneratedMetamodel).isEmpty»
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS p-»
-		<metaModel
-			nsURI="«p.ePackage.nsURI»">
-			<checkFile
-				path="«name.toJavaPackage().asPath()+"/"+p.name.toFirstUpper()»Checks.chk">
-			</checkFile>
-		</metaModel>
-	«ENDFOREACH»
-	</extension>
-«ENDIF»
-«ENDDEFINE»
+«DEFINE addToPluginXmlRt(List[String] packageQNames) FOR Grammar-»«ENDDEFINE»
 
 
 «DEFINE addToPluginXmlUi(List[String] packageQNames) FOR Grammar-»«ENDDEFINE»
