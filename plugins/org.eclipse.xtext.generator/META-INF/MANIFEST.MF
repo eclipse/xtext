@@ -21,7 +21,6 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtend.typesystem.emf;visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.xtend.util.stdlib;bundle-version="0.7.0",
- org.eclipse.emf.mwe.utils;bundle-version="0.7.0",
- org.eclipse.xtext.xtend;bundle-version="0.7.0";resolution:=optional
+ org.eclipse.emf.mwe.utils;bundle-version="0.7.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
