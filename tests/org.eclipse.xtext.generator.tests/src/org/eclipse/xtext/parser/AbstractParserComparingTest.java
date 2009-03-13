@@ -30,6 +30,7 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(getStandaloneSetupClass());
 		firstParser = createFirstParser();
 		secondParser = createSecondParser();

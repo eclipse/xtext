@@ -1,4 +1,10 @@
-import OptionalEmpty;
+
+import xtext;
+
+import anotherSimpleTest;
+
+import ecore;
+
 /*
  * this check file is used to specify constraints for the derived metamodels
  * example:

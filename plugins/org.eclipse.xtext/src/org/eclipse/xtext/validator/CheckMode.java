@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.validator;
 
-public interface CheckMode {
+import java.util.Map;
+
+public abstract class CheckMode {
 	public final static String KEY = "check.mode";
 
 	public final static CheckMode FAST_ONLY = new CheckMode() {
@@ -60,6 +62,21 @@ public interface CheckMode {
 		};
 	};
 
-	boolean shouldCheck(CheckType type);
+	public abstract boolean shouldCheck(CheckType type);
+	
+	public static CheckMode getCheckMode(Map<Object, Object> context) {
+		CheckMode checkMode = CheckMode.ALL;
+		if (context != null) {
+			Object object2 = context.get(CheckMode.KEY);
+			if (object2 instanceof CheckMode) {
+				checkMode = (CheckMode) object2;
+			}
+			else if (object2 != null) {
+				throw new IllegalArgumentException("Context object for key " + CheckMode.KEY + " should be of Type "
+						+ CheckMode.class.getName() + " but was " + object2.getClass().getName());
+			}
+		}
+		return checkMode;
+	}
 
 }

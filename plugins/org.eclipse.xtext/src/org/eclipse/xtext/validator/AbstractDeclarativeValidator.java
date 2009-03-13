@@ -252,17 +252,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		}
 		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
 
-		CheckMode checkMode = CheckMode.ALL;
-		if (context != null) {
-			Object object2 = context.get(CheckMode.KEY);
-			if (object2 instanceof CheckMode) {
-				checkMode = (CheckMode) object2;
-			}
-			else if (object2 != null) {
-				throw new IllegalArgumentException("Context object for key " + CheckMode.KEY + " should be of Type "
-						+ CheckMode.class.getName() + " but was " + object2.getClass().getName());
-			}
-		}
+		CheckMode checkMode = CheckMode.getCheckMode(context);
 
 		State state = new State();
 		state.chain = diagnostics;
