@@ -21,40 +21,71 @@ public abstract class AbstractTwoContextsTestLanguageRuntimeModule extends Defau
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage");
 	}
-
+	
+	
+	
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.impl.services.TwoContextsTestLanguageGrammarAccess.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.packrat.TwoContextsTestLanguagePackratParser.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.impl.parseTreeConstruction.TwoContextsTestLanguageParsetreeConstructor.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.antlr.TwoContextsTestLanguageParser.class;
+	
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
+		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageCheckValidator> bindTwoContextsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageCheckValidator.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
+		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
+	
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.antlr.TwoContextsTestLanguageParser.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.antlr.TwoContextsTestLanguageAntlrTokenFileProvider.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.impl.parser.antlr.internal.InternalTwoContextsTestLanguageLexer.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.crossref.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguageScopeProvider.class;
 	}
+
 }

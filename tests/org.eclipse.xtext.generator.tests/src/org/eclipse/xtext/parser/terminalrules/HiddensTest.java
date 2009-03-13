@@ -37,6 +37,7 @@ public class HiddensTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(HiddenTerminalsTestLanguageStandaloneSetup.class);
 		EPackage pack = HiddenTerminalsTestLanguagePackage.eINSTANCE;
 		withoutHiddens = (EClass) pack.getEClassifier("WithoutHiddens");

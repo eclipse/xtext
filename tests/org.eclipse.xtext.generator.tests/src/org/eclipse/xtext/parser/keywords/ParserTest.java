@@ -32,6 +32,7 @@ public abstract class ParserTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(KeywordsTestLanguageStandaloneSetup.class);
 		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY));
 		EPackage pack = KeywordsTestLanguagePackage.eINSTANCE;

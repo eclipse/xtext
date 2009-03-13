@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.xtend.typesystem.emf,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.xtext.xtend
 Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.ecoredsl,
  org.eclipse.xtext.example.parseTreeConstruction,

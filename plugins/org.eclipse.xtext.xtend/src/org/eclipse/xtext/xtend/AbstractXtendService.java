@@ -7,22 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.mwe.core.resources.ResourceLoader;
-import org.eclipse.emf.mwe.core.resources.ResourceLoaderFactory;
-import org.eclipse.emf.mwe.core.resources.ResourceLoaderImpl;
-import org.eclipse.internal.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContext;
-import org.eclipse.xtend.expression.ExecutionContextImpl;
-import org.eclipse.xtend.expression.TypeSystemImpl;
-import org.eclipse.xtend.expression.Variable;
-import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.crossref.IScopeProvider;
 
 import com.google.inject.Inject;
 
@@ -34,44 +22,16 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractXtendService {
 
-	@Inject
-	protected IGrammarAccess grammarAccess;
+	protected ExecutionContext ctx;
 
 	@Inject
-	protected IScopeProvider scopeProvider;
-
-	private static final String GRAMMAR_ACCESS_VAR_NAME = "grammarAccess";
-//	private static final String METAMODEL_ACCESS_VAR_NAME = "metamodelAccess";
-	private static final String SCOPE_PROVIDER_VAR_NAME = "scopeProvider";
+	public void setExecutionContext(ExecutionContext ctx) {
+		this.ctx = ctx;
+	}
 
 	protected ExecutionContext createExecutionContext() {
-		TypeSystemImpl typeSystem = new TypeSystemImpl();
-		typeSystem.registerMetaModel(new EmfRegistryMetaModel());
-		typeSystem.registerMetaModel(new JavaBeansMetaModel());
-		ExecutionContext executionContext = new ExecutionContextImpl(typeSystem, createGlobalVars());
-		return executionContext;
+		return ctx;
 	}
-
-	protected Map<String, Variable> createGlobalVars() {
-		Map<String, Variable> globalVars = new HashMap<String, Variable>();
-		addServiceGlobalVar(globalVars, GRAMMAR_ACCESS_VAR_NAME, grammarAccess);
-//		addServiceGlobalVar(globalVars, METAMODEL_ACCESS_VAR_NAME, metamodelAccess);
-		addServiceGlobalVar(globalVars, SCOPE_PROVIDER_VAR_NAME, scopeProvider);
-		return globalVars;
-	}
-
-	protected void addServiceGlobalVar(Map<String, Variable> globalVars, String variableName, Object service) {
-		Variable variable = new Variable(variableName, service);
-		globalVars.put(variableName, variable);
-	}
-
-	/**
-	 * Subclasses must  override this to return the right classloader that is
-	 * able to locate the Xtend files.
-	 * 
-	 * @return the classloader 
-	 */
-	protected abstract ClassLoader getClassLoader();
 
 	/**
 	 * Returns the fully qualified name of the xtend file containing the
@@ -82,25 +42,18 @@ public abstract class AbstractXtendService {
 	protected abstract String getMasterXtendFileName();
 
 	@SuppressWarnings("unchecked")
-	protected <T> T invokeExtension(String extensionName, List<?> parameterValues) throws AbstractXtendExecutionException {
-		ResourceLoader oldResourceLoader = ResourceLoaderFactory.createResourceLoader();
-		try {
-			ResourceLoaderFactory.setCurrentThreadResourceLoader(new ResourceLoaderImpl(getClassLoader()));
-			ExecutionContext executionContext = createExecutionContext();
-			XtendFacade facade = XtendFacade.create(executionContext, getMasterXtendFileName());
-			if (!facade.hasExtension(extensionName, parameterValues)) {
-				throw new NoSuchExtensionException(extensionName, parameterValues);
-			}
-			Object resultObject = facade.call(extensionName, parameterValues);
-			try {
-				return (T) resultObject; 
-			}
-			catch(ClassCastException e) {
-				throw new IllegalReturnTypeException(extensionName, parameterValues, e);
-			}
+	protected <T> T invokeExtension(String extensionName, List<?> parameterValues)
+			throws AbstractXtendExecutionException {
+		ExecutionContext executionContext = createExecutionContext();
+		XtendFacade facade = XtendFacade.create(executionContext, getMasterXtendFileName());
+		if (!facade.hasExtension(extensionName, parameterValues)) {
+			throw new NoSuchExtensionException(extensionName, parameterValues);
 		}
-		finally {
-			ResourceLoaderFactory.setCurrentThreadResourceLoader(oldResourceLoader);
+		Object resultObject = facade.call(extensionName, parameterValues);
+		try {
+			return (T) resultObject;
+		} catch (ClassCastException e) {
+			throw new IllegalReturnTypeException(extensionName, parameterValues, e);
 		}
 	}
 

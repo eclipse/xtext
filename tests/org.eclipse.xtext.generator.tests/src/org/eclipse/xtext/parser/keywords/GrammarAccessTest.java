@@ -20,6 +20,7 @@ public class GrammarAccessTest extends AbstractXtextTests {
 	private KeywordsTestLanguageGrammarAccess.ModelElements modelElements;
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(KeywordsTestLanguageStandaloneSetup.class);
 		this.grammarAccess = get(KeywordsTestLanguageGrammarAccess.class);
 		this.modelElements = grammarAccess.getModelAccess();
