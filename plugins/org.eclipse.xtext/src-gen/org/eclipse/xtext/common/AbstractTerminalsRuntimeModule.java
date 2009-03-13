@@ -21,16 +21,25 @@ public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModul
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.common.Terminals");
 	}
-
+	
+	
+	
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.common.services.TerminalsGrammarAccess.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.common.parser.packrat.TerminalsPackratParser.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.common.parseTreeConstruction.TerminalsParsetreeConstructor.class;
 	}
+	
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
+	}
+
 }

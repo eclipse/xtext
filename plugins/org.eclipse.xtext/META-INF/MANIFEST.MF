@@ -36,7 +36,9 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.services,
  org.eclipse.xtext.util,
  org.eclipse.xtext.validator,
- org.eclipse.xtext.xtext
+ org.eclipse.xtext.xtext,
+ org.eclipse.xtext.parseTreeConstruction,
+ org.eclipse.xtext.common.parseTreeConstruction
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="2.5.0";visibility:=reexport,
@@ -48,4 +50,9 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.codegen;bundle-version="2.5.0";resolution:=optional,
  org.eclipse.emf.codegen.ecore;bundle-version="2.5.0";resolution:=optional,
  org.eclipse.emf.mwe.core;bundle-version="0.7.0";resolution:=optional,
- org.eclipse.emf.mwe.utils;bundle-version="0.7.0";resolution:=optional
+ org.eclipse.emf.mwe.utils;bundle-version="0.7.0";resolution:=optional,
+ org.eclipse.emf.common,
+ org.eclipse.xtend,
+ org.eclipse.xtend.typesystem.emf
+
+

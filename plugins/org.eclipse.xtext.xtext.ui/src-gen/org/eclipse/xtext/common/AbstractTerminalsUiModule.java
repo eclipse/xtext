@@ -11,4 +11,5 @@ import org.eclipse.xtext.ui.common.service.DefaultUIModule;
  */
 public abstract class AbstractTerminalsUiModule extends DefaultUIModule {
 	
+	
 }
