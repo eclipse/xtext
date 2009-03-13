@@ -477,9 +477,9 @@ ruleFarbe returns [EObject current=null]
         createLeafNode(grammarAccess.getFarbeAccess().getGELBKeyword_2(), null); 
     }
 
-    |'GR\u00DCN' 
+    |'GR\u2039N' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getGRÜNKeyword_3(), null); 
+        createLeafNode(grammarAccess.getFarbeAccess().getGRNKeyword_3(), null); 
     }
 );
 

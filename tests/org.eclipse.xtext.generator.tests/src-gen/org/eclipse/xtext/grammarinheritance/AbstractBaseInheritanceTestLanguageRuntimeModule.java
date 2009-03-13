@@ -38,19 +38,9 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.BaseInheritanceTestLanguageParsetreeConstructor.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageCheckValidator> bindBaseInheritanceTestLanguageCheckValidator() {
-		return org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageCheckValidator.class;
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding
@@ -58,14 +48,24 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageCheckValidator> bindBaseInheritanceTestLanguageCheckValidator() {
+		return org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageCheckValidator.class;
+	}
+
 	
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.BaseInheritanceTestLanguageParser.class;
+	}
+
+	
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	

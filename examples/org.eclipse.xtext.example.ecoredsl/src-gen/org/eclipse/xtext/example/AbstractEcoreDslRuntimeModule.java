@@ -38,11 +38,6 @@ public abstract class AbstractEcoreDslRuntimeModule extends DefaultRuntimeModule
 		return org.eclipse.xtext.example.parseTreeConstruction.EcoreDslParsetreeConstructor.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
@@ -59,13 +54,18 @@ public abstract class AbstractEcoreDslRuntimeModule extends DefaultRuntimeModule
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.example.parser.antlr.EcoreDslParser.class;
+	}
+
+	
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	

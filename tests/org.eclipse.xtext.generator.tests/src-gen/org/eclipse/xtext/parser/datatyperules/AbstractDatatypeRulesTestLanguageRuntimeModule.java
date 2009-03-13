@@ -38,11 +38,6 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.parser.datatyperules.parseTreeConstruction.DatatypeRulesTestLanguageParsetreeConstructor.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
@@ -59,13 +54,18 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.datatyperules.parser.antlr.DatatypeRulesTestLanguageParser.class;
+	}
+
+	
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	

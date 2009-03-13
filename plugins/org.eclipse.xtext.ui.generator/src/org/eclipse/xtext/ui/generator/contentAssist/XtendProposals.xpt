@@ -53,7 +53,7 @@ extension org::eclipse::xtend::util::stdlib::io;
 		LET getFqFeatureName(assignment) AS fqnFeatureName»«
 			IF !processedFqnFeatureNames.contains(fqnFeatureName)»«
 				processedFqnFeatureNames.add(fqnFeatureName)->""»	 
-List[ICompletionProposal] complete«fqnFeatureName»(Assignment assignment, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] complete«fqnFeatureName»(emf::EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("complete«fqnFeatureName» feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->«
@@ -75,7 +75,7 @@ List[ICompletionProposal] complete«fqnFeatureName»(Assignment assignment, IConte
 		LET getFqFeatureName(parserRule) AS fqnFeatureName»«
 			IF !processedFqnFeatureNames.contains(fqnFeatureName)»«
 				processedFqnFeatureNames.add(fqnFeatureName)->""»	 	  
-List[ICompletionProposal] complete«fqnFeatureName»(RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] complete«fqnFeatureName»(emf::EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 «			ENDIF»«
 		ENDLET»«

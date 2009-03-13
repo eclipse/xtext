@@ -12,18 +12,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/Test/XtextTest">
-			<checkFile
-				path="org/eclipse/xtext/XtextTestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/importUriTestLanguage" 
@@ -31,18 +19,6 @@
        genModel = "org/eclipse/xtext/crossrefs/ImportUriTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://eclipse.org/xtext/importUriTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/crossrefs/ImportedURIChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -54,18 +30,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://eclipse.org/xtext/langATestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/crossrefs/LangATestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/DummyLang" 
@@ -75,18 +39,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/DummyLang">
-			<checkFile
-				path="org/eclipse/xtext/dummy/DummyLangChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/lowerCaseNamedTestLanguage" 
@@ -94,19 +46,6 @@
        genModel = "org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2009/tmf/xtext/lowerCaseNamedTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/generator/LowerCaseNamedTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
 
 
 
@@ -119,18 +58,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2009/tmf/xtext/BaseInheritanceTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/grammarinheritance/BaseInheritanceTestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://holla" 
@@ -138,18 +65,6 @@
        genModel = "org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://holla">
-			<checkFile
-				path="org/eclipse/xtext/grammarinheritance/FooChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -161,18 +76,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/grammarinheritance/InheritanceTestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/tests/AnotherSimpleTest" 
@@ -180,18 +83,6 @@
        genModel = "org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://eclipse.org/xtext/tests/AnotherSimpleTest">
-			<checkFile
-				path="org/eclipse/xtext/metamodelreferencing/tests/AnotherSimpleTestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -207,24 +98,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://eclipse.org/xtext/tests/SimpleTest">
-			<checkFile
-				path="org/eclipse/xtext/metamodelreferencing/tests/SimpleTestChecks.chk">
-			</checkFile>
-		</metaModel>
-		<metaModel
-			nsURI="http://eclipse.org/xtext/tests/OtherTest">
-			<checkFile
-				path="org/eclipse/xtext/metamodelreferencing/tests/OtherTestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest" 
@@ -232,18 +105,6 @@
        genModel = "org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest">
-			<checkFile
-				path="org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -255,18 +116,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/parser/epatch/EpatchTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage" 
@@ -274,18 +123,6 @@
        genModel = "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/parser/keywords/KeywordsTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -297,18 +134,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest">
-			<checkFile
-				path="org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/TerminalRulesTest" 
@@ -316,18 +141,6 @@
        genModel = "org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/TerminalRulesTest">
-			<checkFile
-				path="org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -339,18 +152,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/XtextTerminalsTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://simple/formattertestlanguage" 
@@ -358,18 +159,6 @@
        genModel = "org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://simple/formattertestlanguage">
-			<checkFile
-				path="org/eclipse/xtext/parsetree/formatter/FormattertestlanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -381,18 +170,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://complex/rewrite/test">
-			<checkFile
-				path="org/eclipse/xtext/parsetree/reconstr/ComplexrewritetestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://simple/rewrite/test" 
@@ -400,18 +177,6 @@
        genModel = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://simple/rewrite/test">
-			<checkFile
-				path="org/eclipse/xtext/parsetree/reconstr/SimplerewritetestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -423,18 +188,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://simple/transientvaluestest">
-			<checkFile
-				path="org/eclipse/xtext/parsetree/transientvalues/TransientvaluestestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage" 
@@ -442,18 +195,6 @@
        genModel = "org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/resource/metamodel/MultiValueFeatureTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -465,18 +206,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/ActionLang">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/ActionLangChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/tests/ContentAssist" 
@@ -484,18 +213,6 @@
        genModel = "org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/tests/ContentAssist">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/ContentAssistTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -507,18 +224,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://example.xtext.org/FowlerDslTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/FowlerdslChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/LexerLang" 
@@ -526,18 +231,6 @@
        genModel = "org/eclipse/xtext/testlanguages/LexerTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/LexerLang">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/LexerLangChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -549,18 +242,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/LookaheadLangChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty" 
@@ -568,18 +249,6 @@
        genModel = "org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/OptionalEmptyChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -591,18 +260,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://example.xtext.org/PartialParserTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/PartialParserTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/reference/ReferenceGrammar" 
@@ -610,18 +267,6 @@
        genModel = "org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/ReferenceGrammarChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -633,18 +278,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/xtext/test/simpleExpressions">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/SimpleExpressionsChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2008/xtext/TestLang" 
@@ -652,18 +285,6 @@
        genModel = "org/eclipse/xtext/testlanguages/TestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/TestLang">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/TestLangChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -675,18 +296,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/TreeTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://org.eclipse.xtext.valueconverter.Bug250313" 
@@ -694,18 +303,6 @@
        genModel = "org/eclipse/xtext/valueconverter/Bug250313.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://org.eclipse.xtext.valueconverter.Bug250313">
-			<checkFile
-				path="org/eclipse/xtext/valueconverter/Bug250313Checks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
 </plugin>

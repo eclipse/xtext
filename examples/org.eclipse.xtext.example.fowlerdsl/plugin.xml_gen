@@ -12,16 +12,4 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://example.xtext.org/FowlerDsl">
-			<checkFile
-				path="org/eclipse/xtext/example/FowlerdslChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 </plugin>

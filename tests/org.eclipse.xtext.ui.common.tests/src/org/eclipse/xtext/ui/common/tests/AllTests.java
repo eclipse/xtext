@@ -12,6 +12,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessorTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DynamicDispatchTest;
 import org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest;
 
@@ -27,6 +28,7 @@ public class AllTests {
 		suite.addTestSuite(DefaultContentAssistProcessorTest.class);
 		suite.addTestSuite(DefaultSemanticModelTransformerTest.class);
 		suite.addTestSuite(HyperlinkHelperTest.class);
+		suite.addTestSuite(DynamicDispatchTest.class);
 		// $JUnit-END$
 		return suite;
 	}

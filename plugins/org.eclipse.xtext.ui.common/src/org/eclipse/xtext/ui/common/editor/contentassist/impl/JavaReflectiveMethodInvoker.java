@@ -15,10 +15,11 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 /**
- * Calls methods on a target object reflectively. Caches resolved methods in a
- * map.
+ * Calls methods on a target object reflectively. Caches resolved methods in a map.
  * 
  * @author Jan K&ouml;hnlein - Initial contribution and API
  * @author Michael Clay
@@ -26,7 +27,8 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
  */
 public class JavaReflectiveMethodInvoker {
 
-	private static final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
+	@SuppressWarnings("unchecked")
+	private final Map<Pair<String, Class>, Method> methodLookupMap = new HashMap<Pair<String, Class>, Method>();
 
 	private Object target;
 
@@ -42,21 +44,25 @@ public class JavaReflectiveMethodInvoker {
 		return invokeMethod(method, target, parameterValues.toArray(new Object[] {}));
 	}
 
-	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
+	@SuppressWarnings("unchecked")
+	private final Method findMethod(Class<?> clazz, String name, Class... paramTypes) {
 		Assert.isNotNull(clazz, "Class must not be null");
 		Assert.isNotNull(name, "Method name must not be null");
-		Method result = methodLookupMap.get(name);
+		Pair<String, Class> methodKey = Tuples.pair(name, (paramTypes == null || paramTypes.length == 0) ? null
+				: paramTypes[0]);
+		Method result = methodLookupMap.get(methodKey);
+		if (result != null)
+			return result;
 		Class<?> searchType = clazz;
-		while (!Object.class.equals(searchType) && searchType != null && null == result) {
+		while (!Object.class.equals(searchType) && searchType != null) {
 			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
 			for (int i = 0; i < methods.length; i++) {
 				Method method = methods[i];
 				if (name.equals(method.getName())
 						&& (paramTypes == null || equalOrAssignableTypes(method.getParameterTypes(), paramTypes))) {
-					if (result == null
-							|| equalOrAssignableTypes(result.getParameterTypes(), method.getParameterTypes())) {
+					if (result == null || equalOrAssignableTypes(result.getParameterTypes(), method.getParameterTypes())) {
 						result = method;
-						methodLookupMap.put(name, method);
+						methodLookupMap.put(methodKey, method);
 					}
 				}
 			}
@@ -67,7 +73,6 @@ public class JavaReflectiveMethodInvoker {
 
 	@SuppressWarnings("unchecked")
 	private final List<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
-
 		try {
 			return (List<ICompletionProposal>) method.invoke(target, args);
 		}

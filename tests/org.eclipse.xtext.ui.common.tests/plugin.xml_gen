@@ -12,18 +12,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/Test/XtextTest">
-			<checkFile
-				path="org/eclipse/xtext/XtextTestChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 <!-- adding resource factories -->
 
 	<extension
@@ -101,18 +89,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/tmf/tests/2009/twoContexts">
-			<checkFile
-				path="org/eclipse/xtext/ui/common/editor/contentassist/impl/TwoContextsChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 <!-- adding resource factories -->
 
 	<extension
@@ -182,7 +158,6 @@
 	
 
 
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage" 
@@ -190,18 +165,6 @@
        genModel = "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/parser/keywords/KeywordsTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
 <!-- adding resource factories -->
@@ -281,18 +244,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/xtext/tests/ContentAssist">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/ContentAssistTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 <!-- adding resource factories -->
 
 	<extension
@@ -370,18 +321,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/ReferenceGrammarChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
 <!-- adding resource factories -->
 
 	<extension
@@ -457,18 +396,6 @@
        genModel = "org/eclipse/xtext/testlanguages/TreeTestLanguage.genmodel" /> 
 	
   </extension>
-
-
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/TreeTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
 
 
 <!-- adding resource factories -->

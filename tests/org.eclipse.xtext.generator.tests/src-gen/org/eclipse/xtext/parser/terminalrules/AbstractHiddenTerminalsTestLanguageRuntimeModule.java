@@ -38,19 +38,9 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.HiddenTerminalsTestLanguageParsetreeConstructor.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguageCheckValidator> bindHiddenTerminalsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguageCheckValidator.class;
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding
@@ -58,14 +48,24 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguageCheckValidator> bindHiddenTerminalsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguageCheckValidator.class;
+	}
+
 	
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.HiddenTerminalsTestLanguageParser.class;
+	}
+
+	
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	

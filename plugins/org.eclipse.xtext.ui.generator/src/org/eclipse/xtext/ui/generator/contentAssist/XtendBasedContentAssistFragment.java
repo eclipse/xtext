@@ -14,7 +14,7 @@ public class XtendBasedContentAssistFragment extends AbstractGeneratorFragment {
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IProposalProvider.class.getName(), grammar.getName()+"Proposals")
+			.addTypeToType(IProposalProvider.class.getName(), grammar.getName()+"ProposalProvider")
 			.getBindings();
 	}
 	

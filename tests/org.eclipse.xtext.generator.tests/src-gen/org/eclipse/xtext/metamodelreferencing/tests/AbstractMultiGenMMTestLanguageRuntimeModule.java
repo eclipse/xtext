@@ -38,19 +38,9 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 		return org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction.MultiGenMMTestLanguageParsetreeConstructor.class;
 	}
 
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
 	@org.eclipse.xtext.service.SingletonBinding
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageCheckValidator> bindMultiGenMMTestLanguageCheckValidator() {
-		return org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageCheckValidator.class;
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding
@@ -58,14 +48,24 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageCheckValidator> bindMultiGenMMTestLanguageCheckValidator() {
+		return org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageCheckValidator.class;
+	}
+
 	
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.MultiGenMMTestLanguageParser.class;
+	}
+
+	
+	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
+		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
 	

@@ -92,10 +92,10 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			TypeRef typeRef = calledRule.getType();
 			return invokeMethod("complete"+ Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
 							+ Strings.toFirstUpper(typeRef.getClassifier().getName()),
-							Arrays.<Class<?>> asList(RuleCall.class,contentAssistContext.getModel() == null ? 
+							Arrays.<Class<?>> asList(EObject.class, RuleCall.class,contentAssistContext.getModel() == null ? 
 							EObject.class : contentAssistContext.getModel().getClass(),
-							IContentAssistContext.class), Arrays.asList(ruleCall,
-									contentAssistContext.getModel(),contentAssistContext));
+							IContentAssistContext.class), Arrays.asList(
+									contentAssistContext.getModel(),ruleCall,contentAssistContext));
 		}
 		return Collections.emptyList();
 	}
@@ -109,8 +109,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		// TODO : Better call completeRuleCall ?
 		return invokeMethod("complete"+ Strings.toFirstUpper(parserRule.getName()) + "_"+ 
-					Strings.toFirstUpper(assignment.getFeature()), Arrays.<Class<?>> asList(Assignment.class,
-						IContentAssistContext.class), Arrays.asList(assignment,contentAssistContext));
+					Strings.toFirstUpper(assignment.getFeature()), Arrays.<Class<?>> asList(EObject.class, Assignment.class,
+						IContentAssistContext.class), Arrays.asList(contentAssistContext.getModel(), assignment,contentAssistContext));
 	}
 
 	/**
