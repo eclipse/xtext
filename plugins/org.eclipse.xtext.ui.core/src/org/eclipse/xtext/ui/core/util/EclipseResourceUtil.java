@@ -45,7 +45,7 @@ import org.eclipse.ui.ide.IDE;
  * Represents a helper/util class to work with eclipse core resource
  * abstractions for workspace,project,files and directories. For the most part
  * this code was copied from the last version 4.3.x of openArchitectureWare.
- * 
+ *
  * @author Michael Clay
  */
 public class EclipseResourceUtil {
@@ -56,8 +56,8 @@ public class EclipseResourceUtil {
 
 	public static IProject createProject(final String projectName, final List<String> srcFolders,
 			final List<IProject> referencedProjects, final Set<String> requiredBundles,
-			final List<String> exportedPackages, final List<String> importedPackages, 
-			final String activatorClassName, 
+			final List<String> exportedPackages, final List<String> importedPackages,
+			final String activatorClassName,
 			final IProgressMonitor progressMonitor,	final Shell theShell) {
 		IProject project = null;
 		try {
@@ -188,13 +188,16 @@ public class EclipseResourceUtil {
 			}
 		}
 		bpContent.append("\n");
-		bpContent.append("bin.includes = META-INF/,.\n");
+		bpContent.append("bin.includes = META-INF/,\\\n");
+		bpContent.append("               .,\\\n");
+		bpContent.append("               plugin.xml");
+
 		createFile("build.properties", project, bpContent.toString(), progressMonitor);
 	}
 
 	private static void createManifest(final String projectName, final Set<String> requiredBundles,
 			final List<String> exportedPackages, final List<String> importedPackages,
-			final String activatorClassName, 
+			final String activatorClassName,
 			final IProgressMonitor progressMonitor,	final IProject project) throws CoreException {
 		final StringBuilder mainContent = new StringBuilder("Manifest-Version: 1.0\n");
 		mainContent.append("Bundle-ManifestVersion: 2\n");
@@ -212,7 +215,7 @@ public class EclipseResourceUtil {
 		if (!requiredBundles.isEmpty()) {
 			mainContent.append("Require-Bundle: ");
 		}
-		
+
 		for (Iterator<String> iterator = requiredBundles.iterator(); iterator.hasNext();) {
 			mainContent.append(" " + iterator.next());
 			if (iterator.hasNext()) {
@@ -228,7 +231,7 @@ public class EclipseResourceUtil {
 			}
 			mainContent.append("\n");
 		}
-		
+
 		if (importedPackages != null && !importedPackages.isEmpty()) {
 			mainContent.append("Import-Package: " + importedPackages.get(0));
 			for (int i = 1, x = importedPackages.size(); i < x; i++) {
