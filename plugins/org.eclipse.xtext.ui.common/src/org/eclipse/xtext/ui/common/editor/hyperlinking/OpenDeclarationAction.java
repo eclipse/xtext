@@ -73,15 +73,17 @@ public class OpenDeclarationAction extends Action {
 				openEditor = IDE.openEditor(page, input, PlatformUI.getWorkbench().getEditorRegistry()
 						.getDefaultEditor(uri.lastSegment()).getId());
 			} else {
-				// fall back: URI is bundle resource uri and has to converted
+				// fall back: URI is bundle resource uri and has to converted, or http uri
 				URL url = FileLocator.toFileURL(new URL(uri.scheme()+ ":" +uri.devicePath()));
 				URI urlAsUri = URI.createURI(url.toString());
 				String path = urlAsUri.toFileString();
-				File ioFile = new File(path);
-				// TODO don't fall back to java.io
-				IEditorInput input = new XtextReadonlyEditorInput(new ReadonlyFileStorage(ioFile, uri));
-				openEditor = IDE.openEditor(page, input, PlatformUI.getWorkbench().getEditorRegistry()
-						.getDefaultEditor(uri.lastSegment()).getId());
+				if (path != null) {
+					File ioFile = new File(path);
+					// TODO don't fall back to java.io
+					IEditorInput input = new XtextReadonlyEditorInput(new ReadonlyFileStorage(ioFile, uri));
+					openEditor = IDE.openEditor(page, input, PlatformUI.getWorkbench().getEditorRegistry()
+							.getDefaultEditor(uri.lastSegment()).getId());
+				}
 			}
 		} catch (PartInitException partInitException) {
 			logger.error("Error while opening editor part for EMF URI '" + uri + "'",
