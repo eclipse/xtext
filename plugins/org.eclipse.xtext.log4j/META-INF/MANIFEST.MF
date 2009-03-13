@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Log4j
 Bundle-SymbolicName: org.eclipse.xtext.log4j
-Bundle-Version: 1.2.15
+Bundle-Version: 1.2.15.qualifier
 Export-Package: org.apache.log4j,
  org.apache.log4j.chainsaw,
  org.apache.log4j.config,
