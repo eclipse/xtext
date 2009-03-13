@@ -23,6 +23,7 @@ public class XtextPackratParserTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(XtextStandaloneSetup.class);
 		this.parser = get(XtextPackratParser.class);
 	}

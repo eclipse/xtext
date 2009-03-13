@@ -27,7 +27,7 @@ public final class Tuples {
 
 	public static <A,B> Map<A,B> toMap(Pair<A,B>...pairs) {
 		Map<A, B> result = new LinkedHashMap<A, B>();
-		for (Pair<A, B> pair : pairs) {
+		for (Pair<A, ? extends B> pair : pairs) {
 			result.put(pair.getFirst(), pair.getSecond());
 		}
 		return result;

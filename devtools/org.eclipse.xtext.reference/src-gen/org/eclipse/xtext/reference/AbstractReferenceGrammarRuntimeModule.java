@@ -21,36 +21,66 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.reference.ReferenceGrammar");
 	}
-
+	
+	
+	
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.reference.parser.packrat.ReferenceGrammarPackratParser.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.reference.parseTreeConstruction.ReferenceGrammarParsetreeConstructor.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.reference.parser.antlr.ReferenceGrammarParser.class;
+	
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.reference.ReferenceGrammarCheckValidator> bindReferenceGrammarCheckValidator() {
+		return org.eclipse.xtext.reference.ReferenceGrammarCheckValidator.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
+		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
+		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
+	
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+		return org.eclipse.xtext.reference.parser.antlr.ReferenceGrammarParser.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.reference.parser.antlr.ReferenceGrammarAntlrTokenFileProvider.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.reference.parser.antlr.internal.InternalReferenceGrammarLexer.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
+
 }

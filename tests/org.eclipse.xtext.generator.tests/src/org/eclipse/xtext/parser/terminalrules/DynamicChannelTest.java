@@ -40,6 +40,7 @@ public class DynamicChannelTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 	}
 

@@ -65,11 +65,11 @@ public class LoggingGeneratorFragment implements IGeneratorFragment {
 		return Strings.EMPTY_ARRAY;
 	}
 
-	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
+	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
 		return Collections.emptyMap();
 	}
 
-	public Map<String, String> getGuiceBindingsUi(Grammar grammar) {
+	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		return Collections.emptyMap();
 	}
 

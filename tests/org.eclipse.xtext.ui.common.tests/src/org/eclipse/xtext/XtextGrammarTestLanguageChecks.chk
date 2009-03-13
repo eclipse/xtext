@@ -1,4 +1,8 @@
-import LexerLang;
+
+import xtextTest;
+
+import ecore;
+
 /*
  * this check file is used to specify constraints for the derived metamodels
  * example:

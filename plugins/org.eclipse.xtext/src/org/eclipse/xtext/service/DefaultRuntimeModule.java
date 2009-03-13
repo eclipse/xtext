@@ -102,4 +102,5 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
 		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
 	}
+	
 }

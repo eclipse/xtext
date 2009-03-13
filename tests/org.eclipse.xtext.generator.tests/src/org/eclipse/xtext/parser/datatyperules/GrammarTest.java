@@ -26,6 +26,7 @@ public class GrammarTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(DatatypeRulesTestLanguageStandaloneSetup.class);
 		grammarAccess = get(DatatypeRulesTestLanguageGrammarAccess.class);
 		grammar = grammarAccess.getGrammar();

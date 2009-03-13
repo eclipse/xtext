@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
@@ -30,6 +31,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.internal.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -145,6 +147,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
+		execCtx.registerMetaModel(new JavaBeansMetaModel());
 		return execCtx;
 	}
 
@@ -230,7 +233,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
 		XpandFacade facade = XpandFacade.create(ctx);
-		Map<String, String> bindings = config.getGuiceBindingsRt(config.getGrammar());
+		Map<BindKey, BindValue> bindings = config.getGuiceBindingsRt(config.getGrammar());
 		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(),
 				xpandify(bindings));
 	}
@@ -238,7 +241,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private void generateGuiceModuleUi(LanguageConfig config, XpandExecutionContext ctx) {
 		if (isUi()) {
 			XpandFacade facade = XpandFacade.create(ctx);
-			Map<String, String> bindings = config.getGuiceBindingsUi(config.getGrammar());
+			Map<BindKey, BindValue> bindings = config.getGuiceBindingsUi(config.getGrammar());
 			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", config.getGrammar(),
 					xpandify(bindings));
 		}
@@ -248,10 +251,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return getPathUiProject() != null;
 	}
 
-	private List<String> xpandify(Map<String, String> bindings) {
-		List<String> result = new ArrayList<String>();
-		for (Map.Entry<String, String> entry : bindings.entrySet()) {
-			result.add(entry.getKey() + "::" + entry.getValue());
+	private List<Binding> xpandify(Map<BindKey, BindValue> bindings) {
+		List<Binding> result = new ArrayList<Binding>();
+		for (Entry<BindKey, BindValue> entry : bindings.entrySet()) {
+			result.add(new Binding(entry.getKey(), entry.getValue()));
 		}
 		return result;
 	}

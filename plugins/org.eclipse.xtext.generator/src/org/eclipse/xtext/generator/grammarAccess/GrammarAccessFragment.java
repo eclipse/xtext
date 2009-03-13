@@ -9,7 +9,6 @@
 package org.eclipse.xtext.generator.grammarAccess;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +24,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.BindKey;
+import org.eclipse.xtext.generator.BindValue;
 import org.eclipse.xtext.generator.Generator;
 
 public class GrammarAccessFragment extends AbstractGeneratorFragment {
@@ -32,15 +34,15 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	private final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
 	@Override
-	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
-		return Collections.singletonMap(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar));
+	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
+		return new BindFactory()
+			.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar))
+			.getBindings();
 	}
-	
+
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		return new String[]{
-				GrammarUtil.getNamespace(grammar)
-		};
+		return new String[] { GrammarUtil.getNamespace(grammar) };
 	}
 
 	@Override
@@ -49,8 +51,8 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		// save grammar model
 		ResourceSet setImpl = grammar.eResource().getResourceSet();
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(grammar);
-		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
-				+ xmiPath));
+		Resource resource = setImpl.createResource(URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath()
+				+ "/" + xmiPath));
 		addAllGrammarsToResource(resource, grammar, new HashSet<Grammar>());
 		try {
 			resource.save(null);
@@ -63,12 +65,12 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		if (!visitedGrammars.add(grammar))
 			return;
 		resource.getContents().add(grammar);
-		for(AbstractMetamodelDeclaration metamodelDecl: grammar.getMetamodelDeclarations()) {
+		for (AbstractMetamodelDeclaration metamodelDecl : grammar.getMetamodelDeclarations()) {
 			EPackage generatedPackage = metamodelDecl.getEPackage();
 			Resource packResource = generatedPackage.eResource();
 			packResource.setURI(URI.createURI(generatedPackage.getNsURI()));
 		}
-		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
 			addAllGrammarsToResource(resource, usedGrammar, visitedGrammars);
 		}
 	}

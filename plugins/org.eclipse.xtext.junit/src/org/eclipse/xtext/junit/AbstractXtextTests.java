@@ -13,12 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.XtendFacade;
@@ -56,6 +58,8 @@ import com.google.inject.TypeLiteral;
 public abstract class AbstractXtextTests extends TestCase {
 
 	private Injector injector;
+	private HashMap<EPackage, Object> validatorReg;
+	private HashMap<String, Object> epackageReg;
 
 	static {
 		//EMF Standalone setup
@@ -68,11 +72,23 @@ public abstract class AbstractXtextTests extends TestCase {
 		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);
+		this.epackageReg = new HashMap<String, Object>(EPackage.Registry.INSTANCE);
+	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		injector = null;
 		super.tearDown();
+		injector = null;
+		EValidator.Registry.INSTANCE.clear();
+		EValidator.Registry.INSTANCE.putAll(validatorReg);
+		
+		EPackage.Registry.INSTANCE.clear();
+		EPackage.Registry.INSTANCE.putAll(epackageReg);
 	}
 
 	protected String serialize(EObject obj) {

@@ -10,9 +10,7 @@ package org.eclipse.xtext.ui.generator.projectWizard;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 

@@ -29,6 +29,7 @@ public class PerformanceTestXtextGrammar extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		model = readFileIntoString("org/eclipse/xtext/Xtext.xtext");
 		modelAsStream = new StringInputStream(model);

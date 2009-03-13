@@ -21,36 +21,66 @@ public abstract class AbstractFowlerDslRuntimeModule extends DefaultRuntimeModul
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.example.FowlerDsl");
 	}
-
+	
+	
+	
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.example.services.FowlerDslGrammarAccess.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.example.parser.packrat.FowlerDslPackratParser.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.example.parseTreeConstruction.FowlerDslParsetreeConstructor.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.example.parser.antlr.FowlerDslParser.class;
+	
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
+		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
+		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.example.FowlerDslCheckValidator> bindFowlerDslCheckValidator() {
+		return org.eclipse.xtext.example.FowlerDslCheckValidator.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
+	
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+		return org.eclipse.xtext.example.parser.antlr.FowlerDslParser.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.example.parser.antlr.FowlerDslAntlrTokenFileProvider.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.example.parser.antlr.internal.InternalFowlerDslLexer.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
+
 }

@@ -59,14 +59,14 @@ public interface IGeneratorFragment {
 	 * 
 	 * @param grammar
 	 */
-	Map<String, String> getGuiceBindingsRt(Grammar grammar);
+	Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar);
 	
 	/**
 	 * return a map containing the contributed guice bindings for the ui part created in this generator fragment
 	 * 
 	 * @param grammar
 	 */
-	Map<String, String> getGuiceBindingsUi(Grammar grammar);
+	Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar);
 	
 	/**
 	 * return the bundles this fragment requires at runtime

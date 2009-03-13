@@ -146,12 +146,6 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	}
 
 	/**
-	 * @return the id of the plug-in containing the image files;
-	 *         <code>null </code> is returned if the plug-in does not exist
-	 */
-	protected abstract String getPluginId();
-
-	/**
 	 * Returns the the relative path of the default image file, relative to the
 	 * root of the containing plug-in; the path must be legal The image would
 	 * typically be shown to the left of the <code>ICompletionProposal</code>

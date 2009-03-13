@@ -21,36 +21,66 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends Default
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"org.eclipse.xtext.testlanguages.FowlerDslTestLanguage");
 	}
-
+	
+	
+	
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
 		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
 		return org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguagePackratParser.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.testlanguages.parseTreeConstruction.FowlerDslTestLanguageParsetreeConstructor.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.testlanguages.parser.antlr.FowlerDslTestLanguageParser.class;
+	
+	public java.lang.ClassLoader bindClassLoader() {
+		return getClass().getClassLoader();
 	}
 
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
+		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
+		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.testlanguages.FowlerDslTestLanguageCheckValidator> bindFowlerDslTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.FowlerDslTestLanguageCheckValidator.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
 	}
 
+	
+	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+		return org.eclipse.xtext.testlanguages.parser.antlr.FowlerDslTestLanguageParser.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.FowlerDslTestLanguageAntlrTokenFileProvider.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalFowlerDslTestLanguageLexer.class;
 	}
 
+	
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
+
 }

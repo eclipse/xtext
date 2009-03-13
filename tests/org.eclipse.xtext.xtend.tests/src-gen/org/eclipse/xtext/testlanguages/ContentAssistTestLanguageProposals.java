@@ -11,20 +11,6 @@ import org.eclipse.xtext.xtend.contentassist.AbstractXtendProposalProvider;
  */
 public class ContentAssistTestLanguageProposals extends AbstractXtendProposalProvider {
 
-	//TODO get rid of the UI_PLUGIN field 
-	
-	private static final String UI_PLUGIN_ID = "TODO";
-		
-	@Override
-	protected String getPluginId() {
-		return UI_PLUGIN_ID;
-	}
-	
-	@Override
-	protected ClassLoader getClassLoader() {
-		return this.getClass().getClassLoader();
-	}
-
 	@Override
 	protected String getMasterXtendFileName() {
 		return "org::eclipse::xtext::testlanguages::ContentAssistTestLanguageProposals";	

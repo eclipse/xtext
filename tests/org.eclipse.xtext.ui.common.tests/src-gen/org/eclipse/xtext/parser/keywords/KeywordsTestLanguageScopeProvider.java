@@ -12,11 +12,6 @@ import org.eclipse.xtext.xtend.crossref.AbstractXtendScopeProvider;
 public class KeywordsTestLanguageScopeProvider extends AbstractXtendScopeProvider {
 
 	@Override
-	protected ClassLoader getClassLoader() {
-		return this.getClass().getClassLoader();
-	}
-
-	@Override
 	protected String getMasterXtendFileName() {
 		return "org::eclipse::xtext::parser::keywords::KeywordsTestLanguageScopeProvider";	
 	}

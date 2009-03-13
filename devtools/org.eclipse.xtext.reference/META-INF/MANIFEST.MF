@@ -28,4 +28,5 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.common,
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.xtext.xtend
