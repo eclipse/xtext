@@ -25,7 +25,6 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xtend.InjectableResourceManager;
 
 public class CheckFragment extends AbstractGeneratorFragment {
 
@@ -35,17 +34,17 @@ public class CheckFragment extends AbstractGeneratorFragment {
 			"org.eclipse.xtend","org.eclipse.xtend.typesystem.emf","org.eclipse.xtext.xtend"
 		};
 	}
-	
+
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToTypeSingleton(ExecutionContext.class.getName(),org.eclipse.xtext.xtend.InjectableExecutionContext.class.getName())
-			.addTypeToTypeSingleton(ResourceManager.class.getName(),InjectableResourceManager.class.getName())
+			.addTypeToTypeSingleton(ExecutionContext.class.getName(), "org.eclipse.xtext.xtend.InjectableExecutionContext")
+			.addTypeToTypeSingleton(ResourceManager.class.getName(), "org.eclipse.xtext.xtend.InjectableResourceManager")
 			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar),getCheckValidatorName(grammar))
 			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
 			.getBindings();
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		List<String> packageQNames = new ArrayList<String>();
@@ -55,25 +54,25 @@ public class CheckFragment extends AbstractGeneratorFragment {
 		}
 		return Collections.singletonList((Object)packageQNames);
 	}
-	
+
 	public static String getCheckValidatorName(Grammar g) {
 		return g.getName()+"CheckValidator";
 	}
 
 	private String basePackage = null;
-	
+
 	public void setBasePackage(String basePackage) {
 		if ("".equals(basePackage.trim()))
 			return;
 		this.basePackage = basePackage;
 	}
-	
+
 	public String getBasePackage(Grammar g) {
 		if (basePackage==null)
 			return GrammarUtil.getNamespace(g);
 		return basePackage;
 	}
-	
+
 	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
 		return getBasePackage(g) + "." +pack.getName() +"."+ Strings.toFirstUpper(pack.getName())
 				+ "Package";

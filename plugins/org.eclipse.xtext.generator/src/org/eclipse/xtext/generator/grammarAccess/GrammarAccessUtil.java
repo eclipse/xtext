@@ -36,16 +36,17 @@ public class GrammarAccessUtil {
 		return obj.eClass().getName();
 	}
 
-	private static List<String> getElementDescription(AbstractElement e) {
-		ArrayList<String> r = new ArrayList<String>();
-		while (e != null) {
-			String s = getSingleElementDescription(e);
+	private static List<String> getElementDescription(AbstractElement element) {
+		final ArrayList<String> result = new ArrayList<String>();
+		AbstractElement container = element;
+		while (container != null) {
+			String s = getSingleElementDescription(container);
 			if (s != null)
-				r.add(0, s);
-			e = e.eContainer() instanceof AbstractElement ?
-					(AbstractElement) e.eContainer() : null;
+				result.add(0, s);
+			container = container.eContainer() instanceof AbstractElement ?
+					(AbstractElement) container.eContainer() : null;
 		}
-		return r;
+		return result;
 	}
 
 	private static String getSingleElementDescription(AbstractElement ele) {
