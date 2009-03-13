@@ -9,7 +9,9 @@
 package org.eclipse.xtext.ui.core.internal;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -55,6 +57,8 @@ public class Activator extends AbstractUIPlugin {
 
 		if (log.isDebugEnabled())
 			log.debug("Starting Xtext UI Core bundle.");
+		// make sure classpath entries are being resolved
+		JavaCore.initializeAfterLoad(new NullProgressMonitor());
 	}
 
 	private static void setDefault(Activator activator) {
