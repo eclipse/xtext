@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BindFactory {
-	private Map<BindKey, BindValue> bindings = new HashMap<BindKey, BindValue>();
-	
+	private final Map<BindKey, BindValue> bindings = new LinkedHashMap<BindKey, BindValue>();
+
 	public BindFactory addTypeToInstance(String s1, String s2) {
 		bindings.put(BindKey.type(s1), BindValue.expr(s2));
 		return this;
@@ -30,7 +30,7 @@ public class BindFactory {
 		bindings.put(BindKey.eagerSingleton(s1), BindValue.type(s2));
 		return this;
 	}
-	
+
 	public Map<BindKey, BindValue> getBindings() {
 		return bindings;
 	}
