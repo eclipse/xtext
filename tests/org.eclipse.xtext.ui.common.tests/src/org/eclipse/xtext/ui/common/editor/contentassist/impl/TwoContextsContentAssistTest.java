@@ -34,25 +34,23 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 	 * @return
 	 */
 	private ISetup getGrammarSetup() {
-		return new TwoContextsTestLanguageStandaloneSetup()
-		{
+		return new TwoContextsTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new TwoContextsTestLanguageRuntimeModule(), new TwoContextsTestLanguageUiModule(){
 
-		@Override
-		public Injector createInjector() {
-			return Guice.createInjector(new TwoContextsTestLanguageRuntimeModule(), new TwoContextsTestLanguageUiModule(){
-
-				@Override
-				public Class<? extends IProposalProvider> bindIProposalProvider() {
-					return TwoContextsTestLanguageTestProposals.class;
-				}
-			});
-		}
+					@Override
+					public Class<? extends IProposalProvider> bindIProposalProvider() {
+						return TwoContextsTestLanguageTestProposals.class;
+					}
+				});
+			}
 		};
 	}
 
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
-		return new ContentAssistProcessorTestBuilder(standAloneSetup);
+		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
 	}
 
 	public static class TwoContextsTestLanguageTestProposals extends org.eclipse.xtext.ui.common.editor.contentassist.impl.GenTwoContextsTestLanguageProposals {

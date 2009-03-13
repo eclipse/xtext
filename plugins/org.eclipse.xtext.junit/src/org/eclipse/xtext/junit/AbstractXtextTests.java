@@ -72,7 +72,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
 	}
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -82,13 +82,13 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	@Override
 	protected void tearDown() throws Exception {
-		super.tearDown();
 		injector = null;
 		EValidator.Registry.INSTANCE.clear();
 		EValidator.Registry.INSTANCE.putAll(validatorReg);
-		
+
 		EPackage.Registry.INSTANCE.clear();
 		EPackage.Registry.INSTANCE.putAll(epackageReg);
+		super.tearDown();
 	}
 
 	protected String serialize(EObject obj) {
@@ -107,7 +107,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		injector = instance.createInjectorAndDoEMFRegistration();
 	}
 
-	protected void with(ISetup setup) throws Exception {
+	public void with(ISetup setup) throws Exception {
 		injector = setup.createInjectorAndDoEMFRegistration();
 	}
 
@@ -181,7 +181,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		return getResource(new org.eclipse.xtext.util.StringInputStream(model));
 	}
 
-	protected XtextResource getResource(InputStream in) throws Exception {
+	public XtextResource getResource(InputStream in) throws Exception {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));

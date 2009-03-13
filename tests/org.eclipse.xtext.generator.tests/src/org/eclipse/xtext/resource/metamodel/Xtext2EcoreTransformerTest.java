@@ -92,7 +92,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	}
 
 	@Override
-	protected XtextResource getResource(InputStream in) throws Exception {
+	public XtextResource getResource(InputStream in) throws Exception {
 		ResourceSet rs = get(XtextResourceSet.class);
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
 		rs.getResources().add(resource);

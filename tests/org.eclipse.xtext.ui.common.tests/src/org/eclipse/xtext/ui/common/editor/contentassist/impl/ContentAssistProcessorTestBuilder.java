@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.easymock.EasyMock;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -45,18 +47,20 @@ import org.eclipse.xtext.util.Strings;
  * @author Michael Clay - Initial contribution and API
  * @author Sven Efftinge
  */
-public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
+public class ContentAssistProcessorTestBuilder {
 
 	private final IContentAssistProcessor contentAssistProcessor;
 	private final ITextViewer textViewerMock;
 	private String model;
 	private int cursorPosition;
 	private final ISetup setupClazz;
+	private final AbstractXtextTests tests;
 
-	public ContentAssistProcessorTestBuilder(ISetup setupClazz) throws Exception {
+	public ContentAssistProcessorTestBuilder(ISetup setupClazz, AbstractXtextTests tests) throws Exception {
 		this.setupClazz = setupClazz;
-		with(setupClazz);
-		this.contentAssistProcessor = get(IContentAssistProcessor.class);
+		this.tests = tests;
+		tests.with(setupClazz);
+		this.contentAssistProcessor = tests.get(IContentAssistProcessor.class);
 		this.textViewerMock = EasyMock.createMock(ITextViewer.class);
 	}
 
@@ -113,14 +117,14 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
 
-		assertEquals("expect " + expectedText.length + " CompletionProposal item for model '"
+		Assert.assertEquals("expect " + expectedText.length + " CompletionProposal item for model '"
 				+ currentModelToParse + "': expectation was:\n" + Strings.concat(", ", Arrays.asList(expectedText))
 				+ "\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
 				expectedText.length, computeCompletionProposals.length);
 
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
-			assertTrue("expect completionProposal text '" + completionProposal.getDisplayString() + "' ", Arrays.asList(expectedText)
+			Assert.assertTrue("expect completionProposal text '" + completionProposal.getDisplayString() + "' ", Arrays.asList(expectedText)
 					.contains(completionProposal.getDisplayString()));
 		}
 
@@ -130,16 +134,16 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
-		final XtextResource xtextResource = getResource(new StringInputStream(currentModelToParse));
+		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
 		List<IContentAssistContext> contentAssistContextList = new DefaultContentAssistProcessor() {
 			@Override
 			public List<IContentAssistContext> createContextList(XtextResource resource, String text, final int offset) {
 				return super.createContextList(xtextResource, text, offset);
 			}
 		}.createContextList(xtextResource, currentModelToParse,cursorPosition);
-		
-		for (IContentAssistContext contentAssistContext : contentAssistContextList) {		
-			assertEquals(matchString, contentAssistContext.getMatchString());
+
+		for (IContentAssistContext contentAssistContext : contentAssistContextList) {
+			Assert.assertEquals(matchString, contentAssistContext.getMatchString());
 			break;
 		}
 		return this;
@@ -172,7 +176,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 				computedProposals.append(",");
 			}
 		}
-		assertEquals("expect only " + completionProposalCount + " CompletionProposal item for model '"
+		Assert.assertEquals("expect only " + completionProposalCount + " CompletionProposal item for model '"
 				+ currentModelToParse + "' but got '"+computedProposals+"'", completionProposalCount, computeCompletionProposals.length);
 
 		return this;
@@ -181,7 +185,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
 
-		final XtextResource xtextResource = getResource(new StringInputStream(currentModelToParse));
+		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
 
 		final IXtextDocument xtextDocument = getDocument(xtextResource);
 
@@ -220,7 +224,7 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 	}
 
 	private ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
-		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(setupClazz);
+		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(setupClazz, tests);
 		builder.model = model;
 		builder.cursorPosition = offset;
 		return builder;
@@ -237,12 +241,16 @@ public class ContentAssistProcessorTestBuilder extends AbstractXtextTests {
 			public String getText(int start, int end) {
 				return testDslModel.substring(start, end + 1);
 			}
-			
+
 			@Override
 			public String getText() {
 				return testDslModel;
 			}
 		};
+	}
+
+	public <T> T get(Class<T> clazz) {
+		return tests.get(clazz);
 	}
 
 }

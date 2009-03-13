@@ -26,6 +26,6 @@ public class DefaultXtendContentAssistProcessorTest extends DefaultContentAssist
 		assertTrue(newBuilder.get(IProposalProvider.class) instanceof AbstractXtendProposalProvider);
 		return newBuilder;
 	}
-	
+
 }
 

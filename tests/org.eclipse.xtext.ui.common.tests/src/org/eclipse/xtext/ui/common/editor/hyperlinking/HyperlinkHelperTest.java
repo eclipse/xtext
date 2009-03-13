@@ -43,6 +43,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(getSetup());
 		helper = get(HyperlinkHelper.class);
 		model = "grammar org.eclipse.xtext.ui.common.HyperlinkTest with org.eclipse.xtext.common.Terminals\n" +
