@@ -31,13 +31,13 @@ import org.eclipse.xtext.util.SimpleCache;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
- * 
+ *
+ *
  *         Allows subclasses to specify invariants in a declarative manner using
  *         {@link Check} annotation.
- * 
+ *
  *         Example:
- * 
+ *
  *         <pre>
  * &#064;Check
  * void checkName(ParserRule rule) {
@@ -72,11 +72,11 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		}
 
 		public void invoke(State state) {
-			if (instance.state != null && instance.state != state)
+			if (instance.state.get() != null && instance.state.get() != state)
 				throw new IllegalStateException("State is already assigned.");
-			boolean wasNull = instance.state == null;
+			boolean wasNull = instance.state.get() == null;
 			if (wasNull)
-				instance.state = state;
+				instance.state.set(state);
 			try {
 				Check annotation = method.getAnnotation(Check.class);
 				if (!state.checkMode.shouldCheck(annotation.value()))
@@ -109,7 +109,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 			}
 			finally {
 				if (wasNull)
-					instance.state = null;
+					instance.state.set(null);
 			}
 		}
 
@@ -120,9 +120,10 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		}
 	}
 
-	private HashSet<MethodWrapper> checkMethods = null;
+	private volatile HashSet<MethodWrapper> checkMethods = null;
 
 	public AbstractDeclarativeValidator() {
+		this.state = new ThreadLocal<State>();
 	}
 
 	private List<MethodWrapper> collectMethods(Class<? extends AbstractDeclarativeValidator> clazz) {
@@ -220,30 +221,34 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		private boolean hasErrors = false;
 	}
 
-	private State state;
+	private final ThreadLocal<State> state;
 
 	protected EObject getCurrentObject() {
-		return state.currentObject;
+		return state.get().currentObject;
 	}
 
 	protected Method getCurrentMethod() {
-		return state.currentMethod;
+		return state.get().currentMethod;
 	}
 
 	protected DiagnosticChain getChain() {
-		return state.chain;
+		return state.get().chain;
 	}
 
 	protected CheckMode getCheckMode() {
-		return state.checkMode;
+		return state.get().checkMode;
 	}
 
 	@Override
 	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		if (checkMethods == null) {
-			checkMethods = new HashSet<MethodWrapper>();
-			checkMethods.addAll(collectMethods(getClass()));
+			synchronized(this) {
+				if (checkMethods == null) {
+					checkMethods = new HashSet<MethodWrapper>();
+					checkMethods.addAll(collectMethods(getClass()));
+				}
+			}
 		}
 		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
 
@@ -272,12 +277,12 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 	}
 
 	protected void warning(String string, Integer feature) {
-		state.chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.currentObject, feature));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, string, state.get().currentObject, feature));
 	}
 
 	protected void error(String string, Integer feature) {
-		this.state.hasErrors = true;
-		state.chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.currentObject, feature));
+		this.state.get().hasErrors = true;
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, string, state.get().currentObject, feature));
 	}
 
 	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
@@ -321,7 +326,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 	}
 
 	/**
-	 * 
+	 *
 	 * @deprecated Since the contract of a scope is, that for all
 	 *             IScopedElements returned by {@link IScope#getContents()} the
 	 *             name feature is unique it doesn't make sense to use a scope
