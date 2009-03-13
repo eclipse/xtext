@@ -675,18 +675,6 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage">
-			<checkFile
-				path="org/eclipse/xtext/testlanguages/TreeTestLanguageChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://org.eclipse.xtext.valueconverter.Bug250313" 

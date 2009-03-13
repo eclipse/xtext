@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -233,8 +234,15 @@ public class XtextDocument extends Document implements IXtextDocument {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(XtextDocument.class);
 
+	private final Object validationLock = new Object();
+	private Job validationJob;
 	private void checkAndUpdateMarkers() {
-		new ValidationJob(this, file, CheckMode.FAST_ONLY,true).schedule();
+		synchronized(validationLock) {
+			if (validationJob != null)
+				validationJob.cancel();
+			validationJob = new ValidationJob(this, file, CheckMode.FAST_ONLY, true);
+			validationJob.schedule(250);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
