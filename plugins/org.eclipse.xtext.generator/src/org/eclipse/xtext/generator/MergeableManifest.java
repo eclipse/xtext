@@ -163,10 +163,8 @@ public class MergeableManifest extends Manifest {
 
 	private boolean modified = false;
 
-	/**
-	 * @param resourceAsStream
-	 * @throws IOException
-	 */
+	private String projectName;
+
 	public MergeableManifest(InputStream in) throws IOException {
 		try {
 			Field field = Manifest.class.getDeclaredField("attr");
@@ -182,6 +180,11 @@ public class MergeableManifest extends Manifest {
 		modified = false;
 	}
 
+	public MergeableManifest(InputStream in, String projectName) throws IOException {
+		this(in);
+		this.projectName = projectName;
+	}
+
 	/**
 	 * adds the qualified names to the require-bundle attribute, if not already
 	 * present.
@@ -189,9 +192,20 @@ public class MergeableManifest extends Manifest {
 	 * @param bundles - passing parameterized bundled (e.g. versions, etc.) is not supported
 	 */
 	public void addRequiredBundles(Set<String> bundles) {
+		// TODO manage transitive dependencies
+		// don't require self
+		Set<String> bundlesToMerge;
+		String bundleName = (String) getMainAttributes().get(BUNDLE_NAME);
+		if (bundleName != null && bundles.contains(bundleName) || projectName != null && bundles.contains(projectName)) {
+			bundlesToMerge = new LinkedHashSet<String>(bundles);
+			bundlesToMerge.remove(bundleName);
+			bundlesToMerge.remove(projectName);
+		} else {
+			bundlesToMerge = bundles;
+		}
 		String s = (String) getMainAttributes().get(REQUIRE_BUNDLE);
 		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
-		String result = mergeIntoCommaSeparatedList(s, bundles, modified);
+		String result = mergeIntoCommaSeparatedList(s, bundlesToMerge, modified);
 		this.modified = modified.get();
 		getMainAttributes().put(REQUIRE_BUNDLE, result);
 	}

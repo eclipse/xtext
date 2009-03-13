@@ -13,15 +13,30 @@
 		<pathUiProject value="${uiProject}"/>
 		<projectNameRt value="${runtimeProjectName}"/>
 		<projectNameUi value="${uiProjectName}"/>
-		<activator value="org.eclipse.xtext.xtext.ui.internal.Activator"/>		
+		<activator value="org.eclipse.xtext.xtext.ui.internal.Activator"/>
+				
 		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext">
-			<fragments file="org/eclipse/xtext/ui/generator/StandardUiAndRuntime.mwe">
-				<file.extensions value="${file.extensions}"/>
-				<basePackage value="org.eclipse"/>
-			</fragments>
+			<property name="file.extensions" value="${file.extensions}"/>
+			<property name="basePackage" value="org.eclipse"/>
+			
+			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" basePackage="${basePackage}"/>
+			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/> 
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+				fileExtensions="${file.extensions}"/>
+			<fragment class="org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment"
+			  fileExtensions="${file.extensions}"/>
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/common/Terminals.xtext">
-			<fragments file="org/eclipse/xtext/generator/RuntimeFragmentsWithoutResource.mwe"/>
+			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 		</language>
 	</component>
 </workflow>

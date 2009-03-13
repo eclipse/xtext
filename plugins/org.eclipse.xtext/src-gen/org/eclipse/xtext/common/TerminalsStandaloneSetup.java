@@ -39,7 +39,6 @@ public class TerminalsStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	//TODO registration of EValidators should be added here, too
 
 	}
 }
