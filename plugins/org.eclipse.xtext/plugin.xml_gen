@@ -12,18 +12,5 @@
   </extension>
 
 
-  <extension
-		point="org.eclipse.xtend.typesystem.emf.checks">
-		<metaModel
-			nsURI="http://www.eclipse.org/2008/Xtext">
-			<checkFile
-				path="org/eclipse/xtext/XtextChecks.chk">
-			</checkFile>
-		</metaModel>
-	
-	</extension>
-
-
-
 
 </plugin>
