@@ -23,7 +23,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.Function;
@@ -47,7 +46,7 @@ import org.eclipse.xtext.util.SimpleCache;
  * }
  * </pre>
  */
-public abstract class AbstractDeclarativeValidator extends EObjectValidator {
+public abstract class AbstractDeclarativeValidator extends AbstractInjectableValidator {
 
 	public static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
 
@@ -239,7 +238,6 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 		return state.get().checkMode;
 	}
 
-	@Override
 	public final boolean validate(EClass class1, EObject object, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
 		if (checkMethods == null) {
@@ -250,8 +248,6 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 				}
 			}
 		}
-		boolean isValid = validate_EveryDefaultConstraint(object, diagnostics, context);
-
 		CheckMode checkMode = CheckMode.getCheckMode(context);
 
 		State state = new State();
@@ -263,7 +259,7 @@ public abstract class AbstractDeclarativeValidator extends EObjectValidator {
 			method.invoke(state);
 		}
 
-		return isValid && !state.hasErrors;
+		return !state.hasErrors;
 	}
 
 	protected void warning(String string, Integer feature) {

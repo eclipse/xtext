@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.TreeSet;
 
-import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -34,16 +36,14 @@ import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
 import org.eclipse.xtext.validator.CheckType;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
 
-	@Inject
-	public XtextValidator(EValidator.Registry registry) {
-		registry.put(XtextPackage.eINSTANCE, this);
+	@Override
+	protected List<? extends EPackage> getEPackages() {
+		return Collections.singletonList(XtextPackage.eINSTANCE);
 	}
 
 	@Check(CheckType.FAST)

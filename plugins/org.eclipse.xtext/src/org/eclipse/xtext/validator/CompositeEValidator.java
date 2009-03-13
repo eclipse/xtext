@@ -9,7 +9,6 @@
 package org.eclipse.xtext.validator;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,24 +18,42 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class CompositeEValidator implements EValidator {
 
-	/**
-	 * @param validator
-	 */
-	public CompositeEValidator(EValidator validator) {
-		this.contents.add(validator);
+	private final Set<EValidatorEqualitySupport> contents;
+
+	private static class EValidatorEqualitySupport {
+		private final EValidator delegate;
+
+		public EValidatorEqualitySupport(EValidator delegate) {
+			this.delegate = delegate;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return obj != null && ((EValidatorEqualitySupport)obj).delegate.getClass().getName().equals(
+					delegate.getClass().getName());
+		}
+
+		@Override
+		public int hashCode() {
+			return delegate.getClass().getName().hashCode();
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public CompositeEValidator() {
+		contents = new LinkedHashSet<EValidatorEqualitySupport>();
+		this.contents.add(new EValidatorEqualitySupport(new EObjectValidator()));
+	}
+
+	public CompositeEValidator(EValidator validator) {
+		this();
+		addValidator(validator);
 	}
 
 	public static void register(EPackage pack, EValidator val, EValidator.Registry registry) {
@@ -50,32 +67,33 @@ public class CompositeEValidator implements EValidator {
 		registry.put(pack, validator);
 	}
 
-	private Set<EValidator> contents = new LinkedHashSet<EValidator>();
-
 	public void addValidator(EValidator validator) {
-		this.contents.add(validator);
+		if (validator instanceof CompositeEValidator)
+			contents.addAll(((CompositeEValidator)validator).contents);
+		else
+			this.contents.add(new EValidatorEqualitySupport(validator));
 	}
 
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidator val : contents) {
-			result = result && val.validate(eObject, diagnostics, context);
+		for (EValidatorEqualitySupport val : contents) {
+			result = result && val.delegate.validate(eObject, diagnostics, context);
 		}
 		return result;
 	}
 
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidator val : contents) {
-			result = result && val.validate(eClass, eObject, diagnostics, context);
+		for (EValidatorEqualitySupport val : contents) {
+			result = result && val.delegate.validate(eClass, eObject, diagnostics, context);
 		}
 		return result;
 	}
 
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidator val : contents) {
-			result = result && val.validate(eDataType, value, diagnostics, context);
+		for (EValidatorEqualitySupport val : contents) {
+			result = result && val.delegate.validate(eDataType, value, diagnostics, context);
 		}
 		return result;
 	}

@@ -13,57 +13,67 @@ public abstract class CheckMode {
 	public final static String KEY = "check.mode";
 
 	public final static CheckMode FAST_ONLY = new CheckMode() {
+		@Override
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.FAST;
 		}
 
+		@Override
 		public String toString() {
 			return CheckType.FAST.toString();
-		};
+		}
 	};
 
 	public final static CheckMode NORMAL_ONLY = new CheckMode() {
+		@Override
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.NORMAL;
 		}
 
+		@Override
 		public String toString() {
 			return CheckType.NORMAL.toString();
-		};
+		}
 	};
 
 	public final static CheckMode EXPENSIVE_ONLY = new CheckMode() {
+		@Override
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.EXPENSIVE;
 		}
 
+		@Override
 		public String toString() {
 			return CheckType.EXPENSIVE.toString();
-		};
+		}
 	};
 
 	public final static CheckMode NORMAL_AND_FAST = new CheckMode() {
+		@Override
 		public boolean shouldCheck(CheckType type) {
 			return type == CheckType.NORMAL || type == CheckType.FAST;
 		}
 
+		@Override
 		public String toString() {
 			return CheckType.NORMAL + "|" + CheckType.FAST;
-		};
+		}
 	};
 
 	public final static CheckMode ALL = new CheckMode() {
+		@Override
 		public boolean shouldCheck(CheckType type) {
 			return true;
 		}
 
+		@Override
 		public String toString() {
 			return "ALL";
-		};
+		}
 	};
 
 	public abstract boolean shouldCheck(CheckType type);
-	
+
 	public static CheckMode getCheckMode(Map<Object, Object> context) {
 		CheckMode checkMode = CheckMode.ALL;
 		if (context != null) {
