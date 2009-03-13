@@ -27,7 +27,7 @@ public class PackratParserTest extends ParserTest  {
 	}
 
 	@Override
-	protected XtextResource getResource(InputStream in) throws Exception {
+	public XtextResource getResource(InputStream in) throws Exception {
 		ParserTestHelper helper = new ParserTestHelper(getResourceFactory(), parser, get(Keys.RESOURCE_SET_KEY));
 		return helper.getResourceFromStream(in);
 	}
