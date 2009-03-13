@@ -43,9 +43,37 @@ projectName=«this.projectName»
 		<projectNameUi value="${projectName}.ui"/>
 		
 		<language uri="${grammarURI}">
-			<fragments file="org/eclipse/xtext/ui/generator/StandardUiAndRuntime.mwe">
-				<file.extensions value="${file.extensions}"/>
-			</fragments>
+			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
+			
+			<!-- Java API to access grammar elements (required by several other fragments) -->
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			
+			<!-- generates Java API for the generated EPackages -->
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			
+			<!-- the packrat parser -->
+			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+			
+			<!-- the serialization component -->
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			
+			<!-- a check based validation component -->
+			<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
+			
+			<!-- a custom ResourceFactory for use with EMF -->
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+				fileExtensions="${file.extensions}"/>
+				
+			<!-- the following fragment tries to use the Antlr Generator fragment which can be downloaded from http://www.itemis.com -->
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
+				message="You are generating without ANTLR. If this was not desired, please install the missing plugin 'de.itemis.xtext.antlr'."/>
+			
+			<!-- Basic UI setup -->
+			<fragment class="org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment"
+			  fileExtensions="${file.extensions}"/>
+			 <!-- a java-based API for content assistance -->
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>
 </workflow>
