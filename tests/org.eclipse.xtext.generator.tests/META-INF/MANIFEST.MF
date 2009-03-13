@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.xtext.xtend
 Bundle-ClassPath: lib/simple.jar,.
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.grammarinheritance,
