@@ -21,6 +21,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.util.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -80,54 +81,53 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		}
 	}
 
-	public String[] getExportedPackagesRt(Grammar grammar) {
+	public String[] getExportedPackagesRt(final Grammar grammar) {
+		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>(){
+
+			public String[] exec(IGeneratorFragment param) {
+				return param.getExportedPackagesRt(grammar);
+			}});
+	}
+	
+	public String[] getExportedPackagesUi(final Grammar grammar) {
+		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>(){
+			public String[] exec(IGeneratorFragment param) {
+				return param.getExportedPackagesUi(grammar);
+			}});
+	}
+	
+	public Map<BindKey, BindValue> getGuiceBindingsRt(final Grammar grammar) {
+		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Map<BindKey,BindValue>>(){
+			public Map<BindKey, BindValue> exec(IGeneratorFragment param) {
+				return param.getGuiceBindingsRt(grammar);
+			}});
+	}
+	
+	public Map<BindKey, BindValue> getGuiceBindingsUi(final Grammar grammar) {
+		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Map<BindKey,BindValue>>(){
+			public Map<BindKey, BindValue> exec(IGeneratorFragment param) {
+				return param.getGuiceBindingsUi(grammar);
+			}});
+	}
+	
+	
+	private String[] internalGetExportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
-			String[] exportedPackagesRt = f.getExportedPackagesRt(grammar);
+			String[] exportedPackagesRt = func.exec(f);
 			if (exportedPackagesRt != null)
 				all.addAll(Arrays.asList(exportedPackagesRt));
 		}
 		return all.toArray(new String[all.size()]);
 	}
-
-	public String[] getExportedPackagesUi(Grammar grammar) {
-		Set<String> all = new LinkedHashSet<String>();
-		for (IGeneratorFragment f : this.fragments) {
-			String[] exportedPackagesUi = f.getExportedPackagesUi(grammar);
-			if (exportedPackagesUi != null)
-				all.addAll(Arrays.asList(exportedPackagesUi));
-		}
-		return all.toArray(new String[all.size()]);
-	}
-
-	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
-		Map<String, String> bindings = new LinkedHashMap<String, String>();
-		Map<String, Class<? extends IGeneratorFragment>> contributedBy = new HashMap<String, Class<? extends IGeneratorFragment>>();
+	
+	private Map<BindKey, BindValue> internalGetGuiceBindings(Grammar grammar, Function<IGeneratorFragment,Map<BindKey, BindValue>> func) {
+		Map<BindKey, BindValue> bindings = new LinkedHashMap<BindKey, BindValue>();
+		Map<BindKey, Class<? extends IGeneratorFragment>> contributedBy = new HashMap<BindKey, Class<? extends IGeneratorFragment>>();
 		for (IGeneratorFragment module : fragments) {
-			Map<String, String> temp = module.getGuiceBindingsRt(grammar);
+			Map<BindKey, BindValue> temp =func.exec(module);
 			if (temp != null) {
-				for (Map.Entry<String, String> entry : temp.entrySet()) {
-					if (!contributedBy.containsKey(entry.getKey())) {
-						contributedBy.put(entry.getKey(), module.getClass());
-					} else {
-						throw new IllegalStateException("Duplicate binding for " + entry.getKey()
-								+ ". Contributed by '" + contributedBy.get(entry.getKey()).getName() + "' and '"
-								+ module.getClass().getName() + "'");
-					}
-					bindings.put(entry.getKey(), entry.getValue());
-				}
-			}
-		}
-		return bindings;
-	}
-
-	public Map<String, String> getGuiceBindingsUi(Grammar grammar) {
-		Map<String, String> bindings = new LinkedHashMap<String, String>();
-		Map<String, Class<? extends IGeneratorFragment>> contributedBy = new HashMap<String, Class<? extends IGeneratorFragment>>();
-		for (IGeneratorFragment module : fragments) {
-			Map<String, String> temp = module.getGuiceBindingsUi(grammar);
-			if (temp != null) {
-				for (Map.Entry<String, String> entry : temp.entrySet()) {
+				for (Map.Entry<BindKey, BindValue> entry : temp.entrySet()) {
 					if (!contributedBy.containsKey(entry.getKey())) {
 						contributedBy.put(entry.getKey(), module.getClass());
 					} else {

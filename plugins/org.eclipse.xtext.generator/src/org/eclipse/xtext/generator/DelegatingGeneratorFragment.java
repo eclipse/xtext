@@ -89,13 +89,13 @@ public class DelegatingGeneratorFragment implements IGeneratorFragment {
 		return Strings.EMPTY_ARRAY;
 	}
 
-	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
+	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getGuiceBindingsRt(grammar);
 		return Collections.emptyMap();
 	}
 
-	public Map<String, String> getGuiceBindingsUi(Grammar grammar) {
+	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		if (delegate != null)
 			return delegate.getGuiceBindingsUi(grammar);
 		return Collections.emptyMap();

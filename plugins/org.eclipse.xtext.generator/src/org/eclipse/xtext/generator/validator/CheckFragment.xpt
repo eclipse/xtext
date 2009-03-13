@@ -13,11 +13,14 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::validator::CheckFragment»
 
-«DEFINE generate FOR Grammar»
-«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS p-»
-«FILE this.name.toJavaPackage().asPath()+"/"+p.name.toFirstUpper()+"Checks.chk" SRC-»
-import «p.name»;
+«DEFINE generate(List[String] packageQNames) FOR Grammar»
+
+«FILE this.name.asPath()+"Checks.chk" SRC-»
+«FOREACH allMetamodelDeclarations().ePackage AS pack»
+import «pack.name»;
+«ENDFOREACH»
 /*
  * this check file is used to specify constraints for the derived metamodels
  * example:
@@ -25,10 +28,36 @@ import «p.name»;
  *    name.toFirstUpper() == name;
  */
 «ENDFILE»
-«ENDFOREACH-»
+
+«FILE getCheckValidatorName().asPath()+".java" SRC_GEN»
+package «getCheckValidatorName().toJavaPackage()»;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.validator.CheckType;
+
+public class «getCheckValidatorName().toSimpleName()» extends org.eclipse.xtext.check.AbstractCheckValidator {
+
+	public «getCheckValidatorName().toSimpleName()»() {
+		addCheckFile("«(name+"Checks").replaceAll("\\.","::")»", CheckType.FAST);
+	}
+	
+	@Override
+	protected List<? extends EPackage> getEPackages() {
+	    List<EPackage> result = new ArrayList<EPackage>();
+	    «FOREACH packageQNames AS e»
+	    result.add(«e».eINSTANCE);
+	    «ENDFOREACH»
+		return result;
+	}
+	
+}
+«ENDFILE»
+
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar-»
+«DEFINE addToPluginXmlRt(List[String] packageQNames) FOR Grammar-»
 «IF !metamodelDeclarations.typeSelect(GeneratedMetamodel).isEmpty»
   <extension
 		point="org.eclipse.xtend.typesystem.emf.checks">
@@ -45,9 +74,9 @@ import «p.name»;
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlUi FOR Grammar-»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(List[String] packageQNames) FOR Grammar-»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar-»
+«DEFINE addToStandaloneSetup(List[String] packageQNames) FOR Grammar-»
 	//TODO registration of EValidators should be added here, too
 «ENDDEFINE»
 

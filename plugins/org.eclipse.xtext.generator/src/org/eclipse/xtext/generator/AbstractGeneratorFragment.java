@@ -57,11 +57,11 @@ public abstract class AbstractGeneratorFragment implements IGeneratorFragment {
 		return null;
 	}
 
-	public Map<String, String> getGuiceBindingsRt(Grammar grammar) {
+	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
 		return null;
 	}
 
-	public Map<String, String> getGuiceBindingsUi(Grammar grammar) {
+	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		return null;
 	}
 

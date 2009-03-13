@@ -103,11 +103,6 @@ import org.eclipse.xtext.xtend.crossref.AbstractXtendScopeProvider;
 public class «javaXtendScopeProvider().toSimpleName()» extends AbstractXtendScopeProvider {
 
 	@Override
-	protected ClassLoader getClassLoader() {
-		return this.getClass().getClassLoader();
-	}
-
-	@Override
 	protected String getMasterXtendFileName() {
 		return "«xtendScopeProvider().toXtendFqName()»";	
 	}

@@ -8,13 +8,13 @@
  *
  *******************************************************************************/
 «ENDREM»
-
+«IMPORT org::eclipse::xtext::generator»
 «IMPORT xtext»
 «IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(List[String] bindings) FOR Grammar»
+«DEFINE generate(List[Binding] bindings) FOR Grammar»
 «EXPAND guiceModuleRt»
 
 «FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN»
@@ -40,14 +40,8 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultR
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
 			"«name»");
 	}
-	«FOREACH bindings AS b-»
-	«LET b.split("::") AS binding-»
-
-	public Class<? extends «binding.get(0)»> bind«binding.get(0).toSimpleName()»() {
-		return «binding.get(1)».class;
-	}
-	«ENDLET-»
-	«ENDFOREACH-»
+	
+	«EXPAND bindingMethod FOREACH bindings»
 }
 «ENDFILE»	
 «ENDDEFINE»
@@ -67,4 +61,12 @@ public class «guiceModuleRt().toSimpleName()» extends «guiceModuleRtGenerated()»
 
 }
 «ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE bindingMethod FOR Binding»
+	«IF key.singleton»@org.eclipse.xtext.service.SingletonBinding«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
+	public «IF value.expression==null»Class<? extends «key.type»>«ELSE»«key.type»«ENDIF» bind«key.type.toSimpleName()»() {
+		return «IF value.expression!=null»«value.expression»«ELSE»«value.typeName».class«ENDIF»;
+	}
 «ENDDEFINE»

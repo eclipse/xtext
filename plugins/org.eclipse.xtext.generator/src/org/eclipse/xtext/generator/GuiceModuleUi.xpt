@@ -8,13 +8,13 @@
  *
  *******************************************************************************/
 «ENDREM»
-
+«IMPORT org::eclipse::xtext::generator»
 «IMPORT xtext»
 «IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(List[String] bindings) FOR Grammar»
+«DEFINE generate(List[Binding] bindings) FOR Grammar»
 «EXPAND guiceModuleUi»
 
 «FILE guiceModuleUiGenerated().asPath()+".java" SRC_GEN_UI»
@@ -30,14 +30,7 @@ import org.eclipse.xtext.ui.common.service.DefaultUIModule;
  */
 public abstract class «guiceModuleUiGenerated().toSimpleName()» extends DefaultUIModule {
 	
-	«FOREACH bindings AS b-»
-	«LET b.split("::") AS binding-»
-
-	public Class<? extends «binding.get(0)»> bind«binding.get(0).toSimpleName()»() {
-		return «binding.get(1)».class;
-	}
-	«ENDLET-»
-	«ENDFOREACH-»
+	«EXPAND GuiceModuleRt::bindingMethod FOREACH bindings»
 }
 «ENDFILE»	
 
