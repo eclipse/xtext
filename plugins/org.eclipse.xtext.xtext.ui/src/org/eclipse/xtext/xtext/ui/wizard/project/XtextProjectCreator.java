@@ -93,7 +93,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.emf.codegen.ecore;resolution:=optional",
 				"org.eclipse.xtext.log4j;resolution:=optional",
 				"org.eclipse.emf.mwe.utils;resolution:=optional",
-				"org.eclipse.emf.mwe.core;resolution:=optional"));
+				"org.eclipse.emf.mwe.core;resolution:=optional",
+				"org.eclipse.xtext.xtend;resolution:=optional"));
 
 		String templateName = pathToTemplates()+"DslProject::main";
 		return createProject(getXtextProjectInfo(), projectName, requiredBundles, SRC_FOLDER_LIST, templateName,
