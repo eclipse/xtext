@@ -172,6 +172,9 @@ public class XtextReconciler extends Job implements IReconciler {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
 		long start = System.currentTimeMillis();
 		if (log.isDebugEnabled()) {
 			log.debug("Preparing reconciliation.");

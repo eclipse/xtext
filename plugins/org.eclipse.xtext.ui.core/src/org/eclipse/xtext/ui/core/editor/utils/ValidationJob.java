@@ -26,9 +26,7 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.validator.CheckMode;
 
 /**
- * 
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public final class ValidationJob extends Job {
 	private static final Logger log = Logger.getLogger(ValidationJob.class);
@@ -37,11 +35,11 @@ public final class ValidationJob extends Job {
 	private final IXtextDocument xtextDocument;
 	private final IFile iFile;
 
-	private boolean deleteOldMarkers;
+	private final boolean deleteOldMarkers;
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 * 
+	 *
 	 * @param xtextEditor
 	 * @param checkMode
 	 */
@@ -52,7 +50,7 @@ public final class ValidationJob extends Job {
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 * 
+	 *
 	 * @param xtextEditor
 	 * @param checkMode
 	 */
@@ -63,7 +61,7 @@ public final class ValidationJob extends Job {
 
 	/**
 	 * Constructs a ValidationJob with a specified {@link CheckMode}
-	 * 
+	 *
 	 * @param xtextDocument
 	 * @param iFile
 	 * @param checkMode
@@ -79,7 +77,9 @@ public final class ValidationJob extends Job {
 	}
 
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
+	protected IStatus run(final IProgressMonitor monitor) {
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
 		log.debug("Starting Xtext Validation with CheckMode: " + checkMode);
 		if (iFile == null) { // file may be null, if it was opend from an
 			// IStorageEditorInput
@@ -88,10 +88,14 @@ public final class ValidationJob extends Job {
 		}
 		final List<Map<String, Object>> issues = xtextDocument.readOnly(new UnitOfWork<List<Map<String, Object>>>() {
 			public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
-				return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY, checkMode));
+				return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY, checkMode), monitor);
 			}
 		});
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
 		XtextResourceChecker.addMarkers(iFile, issues, deleteOldMarkers, monitor);
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
 		return Status.OK_STATUS;
 	}
 }

@@ -83,6 +83,8 @@ public class XtextResourceChecker {
 			if (!issues.isEmpty()) {
 				// update
 				for (Map<String, Object> map : issues) {
+					if (monitor.isCanceled())
+						return;
 					IMarker marker = file.createMarker(markerId);
 					Object lNr = map.get(IMarker.LINE_NUMBER);
 					String lineNR = "";
@@ -113,21 +115,31 @@ public class XtextResourceChecker {
 	 * @param resource
 	 * @return a {@link List} of {@link IMarker} attributes
 	 */
-	public static List<Map<String, Object>> check(final Resource resource, Map<?, ?> context) {
+	public static List<Map<String, Object>> check(final Resource resource, Map<?, ?> context, IProgressMonitor monitor) {
 		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>();
 		try {
 			// Syntactical errors
 			// Collect EMF Resource Diagnostics
 			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic error : resource.getErrors())
 				markers.add(markerFromXtextResourceDiagnostic(error, IMarker.SEVERITY_ERROR));
+
+			if (monitor.isCanceled())
+				return null;
+
 			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic warning : resource.getWarnings())
 				markers.add(markerFromXtextResourceDiagnostic(warning, IMarker.SEVERITY_WARNING));
+
+			if (monitor.isCanceled())
+				return null;
+
 			boolean syntaxDiagFail = !markers.isEmpty();
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
 			for (EObject ele : resource.getContents()) {
 				try {
 					Diagnostic diagnostic = Diagnostician.INSTANCE.validate(ele, context);
+					if (monitor.isCanceled())
+						return null;
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 							Map<String, Object> marker = markerFromEValidatorDiagnostic(childDiagnostic);
