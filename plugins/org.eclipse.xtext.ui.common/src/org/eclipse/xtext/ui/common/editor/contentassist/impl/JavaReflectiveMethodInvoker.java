@@ -20,17 +20,16 @@ import org.eclipse.xtext.util.Tuples;
 
 /**
  * Calls methods on a target object reflectively. Caches resolved methods in a map.
- * 
+ *
  * @author Jan K&ouml;hnlein - Initial contribution and API
  * @author Michael Clay
- * 
+ *
  */
 public class JavaReflectiveMethodInvoker {
 
-	@SuppressWarnings("unchecked")
-	private final Map<Pair<String, Class>, Method> methodLookupMap = new HashMap<Pair<String, Class>, Method>();
+	private final Map<Pair<String, ? extends Class<?>>, Method> methodLookupMap = new HashMap<Pair<String, ? extends Class<?>>, Method>();
 
-	private Object target;
+	private final Object target;
 
 	public JavaReflectiveMethodInvoker(Object target) {
 		this.target = target;
@@ -44,11 +43,10 @@ public class JavaReflectiveMethodInvoker {
 		return invokeMethod(method, target, parameterValues.toArray(new Object[] {}));
 	}
 
-	@SuppressWarnings("unchecked")
-	private final Method findMethod(Class<?> clazz, String name, Class... paramTypes) {
+	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
 		Assert.isNotNull(clazz, "Class must not be null");
 		Assert.isNotNull(name, "Method name must not be null");
-		Pair<String, Class> methodKey = Tuples.pair(name, (paramTypes == null || paramTypes.length == 0) ? null
+		Pair<String, ? extends Class<?>>  methodKey = Tuples.pair(name, (paramTypes == null || paramTypes.length == 0) ? null
 				: paramTypes[0]);
 		Method result = methodLookupMap.get(methodKey);
 		if (result != null)
@@ -73,45 +71,28 @@ public class JavaReflectiveMethodInvoker {
 
 	@SuppressWarnings("unchecked")
 	private final List<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
+		boolean wasAccessible = method.isAccessible();
 		try {
+			method.setAccessible(true);
 			return (List<ICompletionProposal>) method.invoke(target, args);
 		}
-		catch (Exception ex) {
-			handleReflectionException(ex);
+		catch (IllegalArgumentException e) {
+			throw new IllegalStateException("Illegal argument exception: " + e.getMessage(), e);
 		}
-		throw new IllegalStateException("huh?");
-	}
-
-	private void handleReflectionException(Exception ex) {
-		if (ex instanceof NoSuchMethodException) {
-			throw new IllegalStateException("Method not found: " + ex.getMessage());
+		catch (IllegalAccessException e) {
+			throw new IllegalStateException("Could not access method: " + e.getMessage(), e);
 		}
-		if (ex instanceof IllegalAccessException) {
-			throw new IllegalStateException("Could not access method: " + ex.getMessage());
+		catch (InvocationTargetException e) {
+			Throwable targetEx = e.getTargetException();
+			if (targetEx instanceof RuntimeException)
+				throw (RuntimeException) targetEx;
+			if (targetEx instanceof Error)
+				throw (Error)targetEx;
+			throw new IllegalStateException("Unexpected exception thrown", targetEx);
 		}
-		if (ex instanceof InvocationTargetException) {
-			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
+		finally {
+			method.setAccessible(wasAccessible);
 		}
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	private void handleUnexpectedException(Throwable ex) {
-		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
-		isex.initCause(ex);
-		throw isex;
-	}
-
-	private final void rethrowRuntimeException(Throwable ex) {
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		if (ex instanceof Error) {
-			throw (Error) ex;
-		}
-		handleUnexpectedException(ex);
 	}
 
 	private boolean equalOrAssignableTypes(Class<?>[] a, Class<?>[] a2) {
