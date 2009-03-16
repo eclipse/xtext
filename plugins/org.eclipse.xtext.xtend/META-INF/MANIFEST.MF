@@ -19,3 +19,4 @@ Export-Package: org.eclipse.xtext.check,
  org.eclipse.xtext.xtend,
  org.eclipse.xtext.xtend.contentassist,
  org.eclipse.xtext.xtend.crossref
+Bundle-Vendor: Eclipse Modeling Project
