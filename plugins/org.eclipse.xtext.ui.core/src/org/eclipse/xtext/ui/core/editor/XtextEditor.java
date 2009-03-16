@@ -13,15 +13,19 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
@@ -85,6 +89,11 @@ public class XtextEditor extends TextEditor {
 
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
+
+		// create chained pref. store
+		IPreferenceStore store = new ChainedPreferenceStore(new IPreferenceStore[] {
+				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() });
+		setPreferenceStore(store);
 
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the source viewer yet (it will be created later).
@@ -227,4 +236,17 @@ public class XtextEditor extends TextEditor {
 		new ValidationJob(this, CheckMode.NORMAL_ONLY).schedule();
 	}
 
+	@Override
+	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
+		super.handlePreferenceStoreChanged(event);
+		if (getSourceViewer() == null)
+			return;
+		// TODO (dennis) move preference store constants to ui.core or create a
+		// handlePrefStoreChanged service
+		boolean tokenStyleChanged = event.getProperty().contains(".syntaxColorer.tokenStyles");
+		if (tokenStyleChanged) {
+			initializeViewerColors(getSourceViewer());
+			getSourceViewer().invalidateTextPresentation();
+		}
+	}
 }
