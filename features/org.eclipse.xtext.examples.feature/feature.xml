@@ -3,10 +3,10 @@
       id="org.eclipse.xtext.examples"
       label="%featureName"
       version="0.7.0.qualifier"
-      provider-name="Eclipse.org">
+      provider-name="%providerName">
 
    <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+      %description
    </description>
 
    <copyright>
