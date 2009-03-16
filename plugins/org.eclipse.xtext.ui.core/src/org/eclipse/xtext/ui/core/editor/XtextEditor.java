@@ -233,7 +233,7 @@ public class XtextEditor extends TextEditor {
 	 *
 	 */
 	private void doExpensiveValidation() {
-		new ValidationJob(this, CheckMode.NORMAL_ONLY).schedule();
+		new ValidationJob(this, CheckMode.NORMAL_AND_FAST).schedule();
 	}
 
 	@Override
