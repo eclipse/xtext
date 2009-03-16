@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.xtext.reference,
  org.eclipse.xtext.xtend;bundle-version="0.7.0";resolution:=optional,
  org.eclipse.ui.editors,
  org.eclipse.ui
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
