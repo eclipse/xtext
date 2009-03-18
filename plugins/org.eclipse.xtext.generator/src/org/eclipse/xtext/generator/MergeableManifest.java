@@ -255,7 +255,7 @@ public class MergeableManifest extends Manifest {
 		getMainAttributes().put(EXPORT_PACKAGE, result);
 	}
 
-	protected static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
+	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
 		String string = currentString == null ? "" : currentString;
 		String[] split = string.split("\\s*,\\s*");
 		Set<ParameterizedElement> all = new LinkedHashSet<ParameterizedElement>();
