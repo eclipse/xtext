@@ -21,22 +21,22 @@ import org.apache.log4j.Logger;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class PolymorphicDispatcher<RT> {
 
 	private static Logger log = Logger.getLogger(PolymorphicDispatcher.class);
 	private final List<? extends Object> targets;
-	private final Function<Method, Boolean> methodFilter;
+	private final Filter<Method> methodFilter;
 	private final Comparator<MethodDesc> comparator;
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 * 
+	 *
 	 */
 	private final class DefaultComparator implements Comparator<MethodDesc> {
 		/**
-		 * 
+		 *
 		 */
 		private final List<? extends Object> targets;
 
@@ -103,8 +103,8 @@ public class PolymorphicDispatcher<RT> {
 
 	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
 			final List<? extends Object> targets) {
-		this.methodFilter = new Function<Method, Boolean>() {
-			public Boolean exec(Method param) {
+		this.methodFilter = new Filter<Method>() {
+			public boolean accept(Method param) {
 				return param.getName().equals(methodName) && param.getParameterTypes().length >= minParams
 						&& param.getParameterTypes().length <= maxParams;
 			}
@@ -113,7 +113,7 @@ public class PolymorphicDispatcher<RT> {
 		this.comparator = new DefaultComparator(targets);
 	}
 
-	public PolymorphicDispatcher(List<? extends Object> targets, Function<Method, Boolean> methodFilter,
+	public PolymorphicDispatcher(List<? extends Object> targets, Filter<Method> methodFilter,
 			Comparator<MethodDesc> comparator, ErrorHandler<RT> handler) {
 		super();
 		this.targets = targets;
@@ -123,8 +123,8 @@ public class PolymorphicDispatcher<RT> {
 	}
 
 	static class MethodDesc {
-		private Object target;
-		private Method method;
+		private final Object target;
+		private final Method method;
 
 		private MethodDesc(Object target, Method method) {
 			super();
@@ -206,7 +206,7 @@ public class PolymorphicDispatcher<RT> {
 			while (current != Object.class) {
 				Method[] methods = current.getDeclaredMethods();
 				for (Method method : methods) {
-					if (methodFilter.exec(method)) {
+					if (methodFilter.accept(method)) {
 						cachedDescriptors.add(new MethodDesc(target, method));
 					}
 				}
