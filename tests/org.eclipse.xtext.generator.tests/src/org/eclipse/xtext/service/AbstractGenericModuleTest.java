@@ -35,6 +35,7 @@ public class AbstractGenericModuleTest extends TestCase {
 	public void testInstanceBinding() throws Exception {
 		final Date date = new Date();
 		AbstractGenericModule m = new AbstractGenericModule(){
+			@SuppressWarnings("unused")
 			public Date bindDate() {
 				return date;
 			}
@@ -42,7 +43,7 @@ public class AbstractGenericModuleTest extends TestCase {
 		
 		Set<Binding> bindings = m.getBindings();
 		assertEquals(1,bindings.size());
-		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Date.class, 
+		assertTrue(bindings.contains(new AbstractGenericModule.Binding(Date.class,
 				date,false,false)));
 	}
 	
