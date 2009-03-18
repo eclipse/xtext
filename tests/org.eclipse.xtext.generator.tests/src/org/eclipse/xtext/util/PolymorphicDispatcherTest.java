@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import static org.eclipse.xtext.util.Collections.*;
+import static org.eclipse.xtext.util.CollectionUtils.*;
 
 import java.math.BigInteger;
 
@@ -16,7 +16,7 @@ import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 @SuppressWarnings("unused")
 public class PolymorphicDispatcherTest extends TestCase {
@@ -51,7 +51,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 			}
 		};
 
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", asList(o1, o2));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(o1, o2));
 
 		assertEquals("Integer2_3", dispatcher.invoke(new Integer(3)));
 		assertEquals("Number_from_superclass_3", dispatcher.invoke(new Long(3)));
@@ -73,7 +73,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, asList(o1));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, list(o1));
 
 		assertEquals("Object_3", dispatcher.invoke(new Integer(3)));
 		assertNull("Integer_3_4", dispatcher.invoke(new Long(3), 4));
@@ -93,7 +93,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return Comparable.class.getSimpleName();
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", asList(o1));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(o1));
 		try {
 			dispatcher.invoke("string");
 			fail("exception expected, due to ambigous methods");
