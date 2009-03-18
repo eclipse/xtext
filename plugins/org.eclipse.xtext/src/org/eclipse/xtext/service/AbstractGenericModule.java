@@ -27,7 +27,7 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
  */
 public abstract class AbstractGenericModule implements Module {
 
-	protected Logger LOG = Logger.getLogger(AbstractGenericModule.class);
+	private static Logger LOG = Logger.getLogger(AbstractGenericModule.class);
 
 	@SuppressWarnings("unchecked")
 	public void configure(Binder binder) {
@@ -74,8 +74,15 @@ public abstract class AbstractGenericModule implements Module {
 							}
 						}
 					} else {
-						Object object = method.invoke(this, (Object[]) null);
-						result.add(new Binding(method.getReturnType(), object, isSingleton(method), isEager(method)));
+						boolean wasAccessible = method.isAccessible();
+						try {
+							method.setAccessible(true);
+							Object object = method.invoke(this, (Object[]) null);
+							result.add(new Binding(method.getReturnType(), object, isSingleton(method), isEager(method)));
+						} finally {
+							if (!wasAccessible)
+								method.setAccessible(false);
+						}
 					}
 				}
 			} catch (Exception e) {
@@ -118,7 +125,7 @@ public abstract class AbstractGenericModule implements Module {
 		return method.getAnnotation(SingletonBinding.class) != null;
 	}
 
-	static class Binding {
+	public static class Binding {
 		public boolean singleton = false;
 		public boolean eager = false;
 
@@ -126,7 +133,7 @@ public abstract class AbstractGenericModule implements Module {
 		public Class<?> toType = null;
 		public Object toInstance = null;
 
-		Binding(Class<?> from, Class<?> toType, boolean singleton, boolean eagerSingleton) {
+		public Binding(Class<?> from, Class<?> toType, boolean singleton, boolean eagerSingleton) {
 			super();
 			this.from = from;
 			this.toType = toType;
@@ -134,7 +141,7 @@ public abstract class AbstractGenericModule implements Module {
 			this.eager = eagerSingleton;
 		}
 
-		Binding(Class<?> from, Object toInstance, boolean singleton, boolean eagerSingleton) {
+		public Binding(Class<?> from, Object toInstance, boolean singleton, boolean eagerSingleton) {
 			super();
 			this.from = from;
 			this.toInstance = toInstance;
