@@ -352,6 +352,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		public Keyword getValidSemicolonKeyword_1_0() { return cValidSemicolonKeyword_1_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private WithoutHiddensElements pWithoutHiddens;
 	private WithHiddensElements pWithHiddens;

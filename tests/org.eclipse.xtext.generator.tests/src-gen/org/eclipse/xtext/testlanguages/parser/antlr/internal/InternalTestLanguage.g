@@ -132,10 +132,6 @@ ruleAbstractRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getAbstractRuleAccess().getChoiceRuleParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getReducibleRuleParserRuleCall_1(), currentNode); 
@@ -144,10 +140,6 @@ ruleAbstractRule returns [EObject current=null]
     { 
         $current = $this_ReducibleRule_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getAbstractRuleAccess().getReducibleRuleParserRuleCall_1(), null); 
     }
 );
 
@@ -249,10 +241,6 @@ ruleReducibleRule returns [EObject current=null]
         $current = $this_TerminalRule_1.current; 
         currentNode = currentNode.getParent();
     }
-
-    { 
-    createLeafNode(grammarAccess.getReducibleRuleAccess().getTerminalRuleParserRuleCall_1(), null); 
-    }
 ((
     { 
         temp=factory.create(grammarAccess.getReducibleRuleAccess().getReducibleCompositeactionFeatureAction_2_0().getType().getClassifier());
@@ -332,6 +320,7 @@ ruleTerminalRule returns [EObject current=null]
 	    }
 	
 );
+
 
 
 

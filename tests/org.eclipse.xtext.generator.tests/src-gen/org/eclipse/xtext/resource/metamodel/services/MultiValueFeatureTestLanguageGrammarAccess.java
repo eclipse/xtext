@@ -33,6 +33,7 @@ public class MultiValueFeatureTestLanguageGrammarAccess implements IGrammarAcces
 		public RuleCall getFeatureAIDTerminalRuleCall_0() { return cFeatureAIDTerminalRuleCall_0; }
 	}
 	
+	
 	private StartElements pStart;
 	
 	private final GrammarProvider grammarProvider;

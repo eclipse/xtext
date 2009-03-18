@@ -237,6 +237,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getStateStateIDTerminalRuleCall_2_0_1() { return cStateStateIDTerminalRuleCall_2_0_1; }
 	}
 	
+	
 	private StatemachineElements pStatemachine;
 	private EventElements pEvent;
 	private CommandElements pCommand;

@@ -90,10 +90,6 @@ ruleModel returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getModelAccess().getWithoutHiddensParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1(), currentNode); 
@@ -102,10 +98,6 @@ ruleModel returns [EObject current=null]
     { 
         $current = $this_WithHiddens_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getModelAccess().getWithHiddensParserRuleCall_1(), null); 
     }
 
     |
@@ -118,10 +110,6 @@ ruleModel returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getModelAccess().getOverridingHiddensParserRuleCall_2(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3(), currentNode); 
@@ -132,10 +120,6 @@ ruleModel returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getModelAccess().getInheritingHiddensParserRuleCall_3(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4(), currentNode); 
@@ -144,10 +128,6 @@ ruleModel returns [EObject current=null]
     { 
         $current = $this_DatatypeHiddens_4.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getModelAccess().getDatatypeHiddensParserRuleCall_4(), null); 
     }
 );
 
@@ -741,6 +721,7 @@ ruleInheritingHiddensCall returns [EObject current=null]
 	    }
 	
 ));
+
 
 
 

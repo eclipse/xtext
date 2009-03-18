@@ -77,6 +77,7 @@ public class TwoContextsTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	
+	
 	private MainModelElements pMainModel;
 	private AnElementElements pAnElement;
 	

@@ -77,6 +77,7 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	
+	
 	private ModelElements pModel;
 	private ElementElements pElement;
 	

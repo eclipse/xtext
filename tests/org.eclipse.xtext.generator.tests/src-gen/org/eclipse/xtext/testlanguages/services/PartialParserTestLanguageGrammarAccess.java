@@ -373,6 +373,7 @@ public class PartialParserTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
+	
 	private SomeContainerElements pSomeContainer;
 	private NestedElements pNested;
 	private ContentElements pContent;

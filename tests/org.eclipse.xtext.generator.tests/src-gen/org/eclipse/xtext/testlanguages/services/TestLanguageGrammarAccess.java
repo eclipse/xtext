@@ -137,6 +137,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getStringFeatureSTRINGTerminalRuleCall_0() { return cStringFeatureSTRINGTerminalRuleCall_0; }
 	}
 	
+	
 	private EntryRuleElements pEntryRule;
 	private AbstractRuleElements pAbstractRule;
 	private ChoiceRuleElements pChoiceRule;

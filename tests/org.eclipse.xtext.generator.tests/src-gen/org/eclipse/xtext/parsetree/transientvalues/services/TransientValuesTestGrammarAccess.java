@@ -145,6 +145,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		public RuleCall getItemINTTerminalRuleCall_1_0() { return cItemINTTerminalRuleCall_1_0; }
 	}
 	
+	
 	private RootElements pRoot;
 	private TestRequiredElements pTestRequired;
 	private TestOptionalElements pTestOptional;

@@ -160,7 +160,7 @@ public final class EcoreDslQIDConsumer extends NonTerminalConsumer {
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
 		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.getAlternatives_1_0());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.getFullStopKeyword_1_0_0());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.get$Keyword_1_0_1());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getDollarSignKeyword_1_0_1());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getIDTerminalRuleCall_1_1());
 	}
 	

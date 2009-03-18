@@ -132,10 +132,6 @@ ruleAlts returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), currentNode); 
@@ -146,10 +142,6 @@ ruleAlts returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), currentNode); 
@@ -158,10 +150,6 @@ ruleAlts returns [EObject current=null]
     { 
         $current = $this_LookAhead3_2.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), null); 
     }
 );
 
@@ -501,6 +489,7 @@ ruleLookAhead4 returns [EObject current=null]
 	    }
 	
 ));
+
 
 
 

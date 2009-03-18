@@ -286,19 +286,16 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             current = this_LookAhead0_0; 
                             currentNode = currentNode.getParent();
                         
-                     
-                        createLeafNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0(), null); 
-                        
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:140:5: this_LookAhead1_1= ruleLookAhead1
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:136:5: this_LookAhead1_1= ruleLookAhead1
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleLookAhead1_in_ruleAlts267);
+                    pushFollow(FOLLOW_ruleLookAhead1_in_ruleAlts260);
                     this_LookAhead1_1=ruleLookAhead1();
                     _fsp--;
 
@@ -306,28 +303,22 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                             current = this_LookAhead1_1; 
                             currentNode = currentNode.getParent();
                         
-                     
-                        createLeafNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1(), null); 
-                        
 
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:154:5: this_LookAhead3_2= ruleLookAhead3
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:146:5: this_LookAhead3_2= ruleLookAhead3
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleLookAhead3_in_ruleAlts301);
+                    pushFollow(FOLLOW_ruleLookAhead3_in_ruleAlts287);
                     this_LookAhead3_2=ruleLookAhead3();
                     _fsp--;
 
                      
                             current = this_LookAhead3_2; 
                             currentNode = currentNode.getParent();
-                        
-                     
-                        createLeafNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2(), null); 
                         
 
                     }
@@ -355,7 +346,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLookAhead0
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:173:1: entryRuleLookAhead0 returns [EObject current=null] : iv_ruleLookAhead0= ruleLookAhead0 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:161:1: entryRuleLookAhead0 returns [EObject current=null] : iv_ruleLookAhead0= ruleLookAhead0 EOF ;
     public final EObject entryRuleLookAhead0() throws RecognitionException {
         EObject current = null;
 
@@ -363,16 +354,16 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:173:52: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:174:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:161:52: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:162:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLookAhead0Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0340);
+            pushFollow(FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0319);
             iv_ruleLookAhead0=ruleLookAhead0();
             _fsp--;
 
              current =iv_ruleLookAhead0; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead0350); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead0329); 
 
             }
 
@@ -390,7 +381,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLookAhead0
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:181:1: ruleLookAhead0 returns [EObject current=null] : ( 'bar' (lv_x_1= 'a' ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:169:1: ruleLookAhead0 returns [EObject current=null] : ( 'bar' (lv_x_1= 'a' ) ) ;
     public final EObject ruleLookAhead0() throws RecognitionException {
         EObject current = null;
 
@@ -399,21 +390,21 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:186:6: ( ( 'bar' (lv_x_1= 'a' ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:187:1: ( 'bar' (lv_x_1= 'a' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:174:6: ( ( 'bar' (lv_x_1= 'a' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:175:1: ( 'bar' (lv_x_1= 'a' ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:187:1: ( 'bar' (lv_x_1= 'a' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:187:2: 'bar' (lv_x_1= 'a' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:175:1: ( 'bar' (lv_x_1= 'a' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:175:2: 'bar' (lv_x_1= 'a' )
             {
-            match(input,11,FOLLOW_11_in_ruleLookAhead0384); 
+            match(input,11,FOLLOW_11_in_ruleLookAhead0363); 
 
                     createLeafNode(grammarAccess.getLookAhead0Access().getBarKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:191:1: (lv_x_1= 'a' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:193:6: lv_x_1= 'a'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:179:1: (lv_x_1= 'a' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:181:6: lv_x_1= 'a'
             {
             lv_x_1=(Token)input.LT(1);
-            match(input,12,FOLLOW_12_in_ruleLookAhead0405); 
+            match(input,12,FOLLOW_12_in_ruleLookAhead0384); 
 
                     createLeafNode(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x"); 
                 
@@ -455,7 +446,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLookAhead1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:219:1: entryRuleLookAhead1 returns [EObject current=null] : iv_ruleLookAhead1= ruleLookAhead1 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:207:1: entryRuleLookAhead1 returns [EObject current=null] : iv_ruleLookAhead1= ruleLookAhead1 EOF ;
     public final EObject entryRuleLookAhead1() throws RecognitionException {
         EObject current = null;
 
@@ -463,16 +454,16 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:219:52: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:220:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:207:52: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:208:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLookAhead1Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1451);
+            pushFollow(FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1430);
             iv_ruleLookAhead1=ruleLookAhead1();
             _fsp--;
 
              current =iv_ruleLookAhead1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead1461); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead1440); 
 
             }
 
@@ -490,7 +481,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLookAhead1
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:227:1: ruleLookAhead1 returns [EObject current=null] : ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:215:1: ruleLookAhead1 returns [EObject current=null] : ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) ) ;
     public final EObject ruleLookAhead1() throws RecognitionException {
         EObject current = null;
 
@@ -502,23 +493,23 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:232:6: ( ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:233:1: ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:220:6: ( ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:221:1: ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:233:1: ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:233:2: 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:221:1: ( 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:221:2: 'foo' (lv_y_1= ruleLookAhead2 ) (lv_x_2= 'b' ) (lv_x_3= 'd' )
             {
-            match(input,13,FOLLOW_13_in_ruleLookAhead1495); 
+            match(input,13,FOLLOW_13_in_ruleLookAhead1474); 
 
                     createLeafNode(grammarAccess.getLookAhead1Access().getFooKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:237:1: (lv_y_1= ruleLookAhead2 )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:240:6: lv_y_1= ruleLookAhead2
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:225:1: (lv_y_1= ruleLookAhead2 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:228:6: lv_y_1= ruleLookAhead2
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleLookAhead2_in_ruleLookAhead1529);
+            pushFollow(FOLLOW_ruleLookAhead2_in_ruleLookAhead1508);
             lv_y_1=ruleLookAhead2();
             _fsp--;
 
@@ -538,11 +529,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:258:2: (lv_x_2= 'b' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:260:6: lv_x_2= 'b'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:246:2: (lv_x_2= 'b' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:248:6: lv_x_2= 'b'
             {
             lv_x_2=(Token)input.LT(1);
-            match(input,14,FOLLOW_14_in_ruleLookAhead1554); 
+            match(input,14,FOLLOW_14_in_ruleLookAhead1533); 
 
                     createLeafNode(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x"); 
                 
@@ -561,11 +552,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:279:2: (lv_x_3= 'd' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:281:6: lv_x_3= 'd'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:267:2: (lv_x_3= 'd' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:269:6: lv_x_3= 'd'
             {
             lv_x_3=(Token)input.LT(1);
-            match(input,15,FOLLOW_15_in_ruleLookAhead1588); 
+            match(input,15,FOLLOW_15_in_ruleLookAhead1567); 
 
                     createLeafNode(grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x"); 
                 
@@ -607,7 +598,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLookAhead2
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:307:1: entryRuleLookAhead2 returns [EObject current=null] : iv_ruleLookAhead2= ruleLookAhead2 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:295:1: entryRuleLookAhead2 returns [EObject current=null] : iv_ruleLookAhead2= ruleLookAhead2 EOF ;
     public final EObject entryRuleLookAhead2() throws RecognitionException {
         EObject current = null;
 
@@ -615,16 +606,16 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:307:52: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:308:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:295:52: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:296:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLookAhead2Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2634);
+            pushFollow(FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2613);
             iv_ruleLookAhead2=ruleLookAhead2();
             _fsp--;
 
              current =iv_ruleLookAhead2; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead2644); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead2623); 
 
             }
 
@@ -642,7 +633,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLookAhead2
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:315:1: ruleLookAhead2 returns [EObject current=null] : ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:303:1: ruleLookAhead2 returns [EObject current=null] : ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' ) ;
     public final EObject ruleLookAhead2() throws RecognitionException {
         EObject current = null;
 
@@ -652,13 +643,13 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:320:6: ( ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:321:1: ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:308:6: ( ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:309:1: ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:321:1: ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:321:2: ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:309:1: ( ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:309:2: ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) ) 'c'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:321:2: ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:309:2: ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -670,19 +661,19 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("321:2: ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) )", 3, 0, input);
+                    new NoViableAltException("309:2: ( (lv_z_0= 'foo' ) | (lv_z_1= 'bar' ) )", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:321:3: (lv_z_0= 'foo' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:309:3: (lv_z_0= 'foo' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:321:3: (lv_z_0= 'foo' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:323:6: lv_z_0= 'foo'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:309:3: (lv_z_0= 'foo' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:311:6: lv_z_0= 'foo'
                     {
                     lv_z_0=(Token)input.LT(1);
-                    match(input,13,FOLLOW_13_in_ruleLookAhead2691); 
+                    match(input,13,FOLLOW_13_in_ruleLookAhead2670); 
 
                             createLeafNode(grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z"); 
                         
@@ -705,13 +696,13 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:343:6: (lv_z_1= 'bar' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:331:6: (lv_z_1= 'bar' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:343:6: (lv_z_1= 'bar' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:345:6: lv_z_1= 'bar'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:331:6: (lv_z_1= 'bar' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:333:6: lv_z_1= 'bar'
                     {
                     lv_z_1=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleLookAhead2731); 
+                    match(input,11,FOLLOW_11_in_ruleLookAhead2710); 
 
                             createLeafNode(grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z"); 
                         
@@ -736,7 +727,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleLookAhead2754); 
+            match(input,16,FOLLOW_16_in_ruleLookAhead2733); 
 
                     createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
                 
@@ -763,7 +754,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLookAhead3
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:375:1: entryRuleLookAhead3 returns [EObject current=null] : iv_ruleLookAhead3= ruleLookAhead3 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:363:1: entryRuleLookAhead3 returns [EObject current=null] : iv_ruleLookAhead3= ruleLookAhead3 EOF ;
     public final EObject entryRuleLookAhead3() throws RecognitionException {
         EObject current = null;
 
@@ -771,16 +762,16 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:375:52: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:376:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:363:52: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:364:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLookAhead3Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3787);
+            pushFollow(FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3766);
             iv_ruleLookAhead3=ruleLookAhead3();
             _fsp--;
 
              current =iv_ruleLookAhead3; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead3797); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead3776); 
 
             }
 
@@ -798,7 +789,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLookAhead3
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:383:1: ruleLookAhead3 returns [EObject current=null] : ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:371:1: ruleLookAhead3 returns [EObject current=null] : ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) ) ;
     public final EObject ruleLookAhead3() throws RecognitionException {
         EObject current = null;
 
@@ -809,25 +800,25 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:388:6: ( ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:389:1: ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:376:6: ( ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:377:1: ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:389:1: ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:389:2: 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:377:1: ( 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:377:2: 'foo' 'bar' (lv_x_2= 'b' ) (lv_z_3= ruleLookAhead4 )
             {
-            match(input,13,FOLLOW_13_in_ruleLookAhead3831); 
+            match(input,13,FOLLOW_13_in_ruleLookAhead3810); 
 
                     createLeafNode(grammarAccess.getLookAhead3Access().getFooKeyword_0(), null); 
                 
-            match(input,11,FOLLOW_11_in_ruleLookAhead3840); 
+            match(input,11,FOLLOW_11_in_ruleLookAhead3819); 
 
                     createLeafNode(grammarAccess.getLookAhead3Access().getBarKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:397:1: (lv_x_2= 'b' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:399:6: lv_x_2= 'b'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:385:1: (lv_x_2= 'b' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:387:6: lv_x_2= 'b'
             {
             lv_x_2=(Token)input.LT(1);
-            match(input,14,FOLLOW_14_in_ruleLookAhead3861); 
+            match(input,14,FOLLOW_14_in_ruleLookAhead3840); 
 
                     createLeafNode(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x"); 
                 
@@ -846,13 +837,13 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:418:2: (lv_z_3= ruleLookAhead4 )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:421:6: lv_z_3= ruleLookAhead4
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:406:2: (lv_z_3= ruleLookAhead4 )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:409:6: lv_z_3= ruleLookAhead4
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleLookAhead4_in_ruleLookAhead3908);
+            pushFollow(FOLLOW_ruleLookAhead4_in_ruleLookAhead3887);
             lv_z_3=ruleLookAhead4();
             _fsp--;
 
@@ -895,7 +886,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleLookAhead4
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:446:1: entryRuleLookAhead4 returns [EObject current=null] : iv_ruleLookAhead4= ruleLookAhead4 EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:434:1: entryRuleLookAhead4 returns [EObject current=null] : iv_ruleLookAhead4= ruleLookAhead4 EOF ;
     public final EObject entryRuleLookAhead4() throws RecognitionException {
         EObject current = null;
 
@@ -903,16 +894,16 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:446:52: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:447:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:434:52: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:435:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLookAhead4Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4945);
+            pushFollow(FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4924);
             iv_ruleLookAhead4=ruleLookAhead4();
             _fsp--;
 
              current =iv_ruleLookAhead4; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead4955); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLookAhead4934); 
 
             }
 
@@ -930,7 +921,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleLookAhead4
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:454:1: ruleLookAhead4 returns [EObject current=null] : ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:442:1: ruleLookAhead4 returns [EObject current=null] : ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) ) ;
     public final EObject ruleLookAhead4() throws RecognitionException {
         EObject current = null;
 
@@ -940,10 +931,10 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:459:6: ( ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:460:1: ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:447:6: ( ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:448:1: ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:460:1: ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:448:1: ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -955,19 +946,19 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("460:1: ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) )", 4, 0, input);
+                    new NoViableAltException("448:1: ( (lv_x_0= 'c' ) | (lv_x_1= 'd' ) )", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:460:2: (lv_x_0= 'c' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:448:2: (lv_x_0= 'c' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:460:2: (lv_x_0= 'c' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:462:6: lv_x_0= 'c'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:448:2: (lv_x_0= 'c' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:450:6: lv_x_0= 'c'
                     {
                     lv_x_0=(Token)input.LT(1);
-                    match(input,16,FOLLOW_16_in_ruleLookAhead41001); 
+                    match(input,16,FOLLOW_16_in_ruleLookAhead4980); 
 
                             createLeafNode(grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x"); 
                         
@@ -990,13 +981,13 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:482:6: (lv_x_1= 'd' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:470:6: (lv_x_1= 'd' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:482:6: (lv_x_1= 'd' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:484:6: lv_x_1= 'd'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:470:6: (lv_x_1= 'd' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.g:472:6: lv_x_1= 'd'
                     {
                     lv_x_1=(Token)input.LT(1);
-                    match(input,15,FOLLOW_15_in_ruleLookAhead41041); 
+                    match(input,15,FOLLOW_15_in_ruleLookAhead41020); 
 
                             createLeafNode(grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x"); 
                         
@@ -1048,32 +1039,32 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
     public static final BitSet FOLLOW_ruleAlts_in_entryRuleAlts176 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAlts186 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLookAhead0_in_ruleAlts233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead1_in_ruleAlts267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead3_in_ruleAlts301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0340 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead0350 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleLookAhead0384 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleLookAhead0405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1451 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead1461 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleLookAhead1495 = new BitSet(new long[]{0x0000000000002800L});
-    public static final BitSet FOLLOW_ruleLookAhead2_in_ruleLookAhead1529 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleLookAhead1554 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleLookAhead1588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2634 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead2644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleLookAhead2691 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_11_in_ruleLookAhead2731 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleLookAhead2754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3787 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead3797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleLookAhead3831 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleLookAhead3840 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleLookAhead3861 = new BitSet(new long[]{0x0000000000018000L});
-    public static final BitSet FOLLOW_ruleLookAhead4_in_ruleLookAhead3908 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4945 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead4955 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleLookAhead41001 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleLookAhead41041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead1_in_ruleAlts260 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead3_in_ruleAlts287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead0_in_entryRuleLookAhead0319 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead0329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleLookAhead0363 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleLookAhead0384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead1_in_entryRuleLookAhead1430 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead1440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleLookAhead1474 = new BitSet(new long[]{0x0000000000002800L});
+    public static final BitSet FOLLOW_ruleLookAhead2_in_ruleLookAhead1508 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleLookAhead1533 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleLookAhead1567 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead2_in_entryRuleLookAhead2613 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead2623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleLookAhead2670 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_11_in_ruleLookAhead2710 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleLookAhead2733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead3_in_entryRuleLookAhead3766 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead3776 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleLookAhead3810 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_ruleLookAhead3819 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleLookAhead3840 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_ruleLookAhead4_in_ruleLookAhead3887 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLookAhead4_in_entryRuleLookAhead4924 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLookAhead4934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleLookAhead4980 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleLookAhead41020 = new BitSet(new long[]{0x0000000000000002L});
 
 }

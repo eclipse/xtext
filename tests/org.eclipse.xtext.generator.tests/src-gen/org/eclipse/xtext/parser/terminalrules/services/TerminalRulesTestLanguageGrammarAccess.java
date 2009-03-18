@@ -84,6 +84,7 @@ public class TerminalRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getAnyValueANY_OTHERTerminalRuleCall_6_0() { return cAnyValueANY_OTHERTerminalRuleCall_6_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private TerminalRule tID;
 	private TerminalRule tINT;

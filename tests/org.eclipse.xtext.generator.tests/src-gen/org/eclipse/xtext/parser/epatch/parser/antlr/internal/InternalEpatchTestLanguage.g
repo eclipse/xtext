@@ -206,10 +206,6 @@ ruleImport returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getImportAccess().getModelImportParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getImportAccess().getJavaImportParserRuleCall_1(), currentNode); 
@@ -220,10 +216,6 @@ ruleImport returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getImportAccess().getJavaImportParserRuleCall_1(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getImportAccess().getExtensionImportParserRuleCall_2(), currentNode); 
@@ -232,10 +224,6 @@ ruleImport returns [EObject current=null]
     { 
         $current = $this_ExtensionImport_2.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getImportAccess().getExtensionImportParserRuleCall_2(), null); 
     }
 );
 
@@ -268,10 +256,6 @@ ruleModelImport returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getModelImportAccess().getResourceImportParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getModelImportAccess().getEPackageImportParserRuleCall_1(), currentNode); 
@@ -280,10 +264,6 @@ ruleModelImport returns [EObject current=null]
     { 
         $current = $this_EPackageImport_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getModelImportAccess().getEPackageImportParserRuleCall_1(), null); 
     }
 );
 
@@ -2031,10 +2011,6 @@ ruleCreatedObject returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getCreatedObjectAccess().getObjectNewParserRuleCall_0_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getCreatedObjectAccess().getObjectCopyParserRuleCall_0_1(), currentNode); 
@@ -2043,10 +2019,6 @@ ruleCreatedObject returns [EObject current=null]
     { 
         $current = $this_ObjectCopy_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getCreatedObjectAccess().getObjectCopyParserRuleCall_0_1(), null); 
     }
 )(	
 	
@@ -2394,10 +2366,6 @@ ruleExecutable returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getExecutableAccess().getJavaExecutableParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getExecutableAccess().getExpressionExecutableParserRuleCall_1(), currentNode); 
@@ -2406,10 +2374,6 @@ ruleExecutable returns [EObject current=null]
     { 
         $current = $this_ExpressionExecutable_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getExecutableAccess().getExpressionExecutableParserRuleCall_1(), null); 
     }
 );
 
@@ -2506,6 +2470,7 @@ ruleExpressionExecutable returns [EObject current=null]
 	    }
 	
 );
+
 
 
 

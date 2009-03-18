@@ -89,10 +89,6 @@ ruleSequence returns [EObject current=null]
         $current = $this_Addition_0.current; 
         currentNode = currentNode.getParent();
     }
-
-    { 
-    createLeafNode(grammarAccess.getSequenceAccess().getAdditionParserRuleCall_0(), null); 
-    }
 ((
     { 
         temp=factory.create(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0().getType().getClassifier());
@@ -159,10 +155,6 @@ ruleAddition returns [EObject current=null]
     { 
         $current = $this_Multiplication_0.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getAdditionAccess().getMultiplicationParserRuleCall_0(), null); 
     }
 ((
     { 
@@ -258,10 +250,6 @@ ruleMultiplication returns [EObject current=null]
     { 
         $current = $this_Term_0.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getMultiplicationAccess().getTermParserRuleCall_0(), null); 
     }
 ((
     { 
@@ -359,10 +347,6 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), currentNode); 
@@ -371,10 +355,6 @@ ruleTerm returns [EObject current=null]
     { 
         $current = $this_Parens_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), null); 
     }
 );
 
@@ -451,15 +431,12 @@ ruleParens returns [EObject current=null]
         $current = $this_Addition_1.current; 
         currentNode = currentNode.getParent();
     }
-
-    { 
-    createLeafNode(grammarAccess.getParensAccess().getAdditionParserRuleCall_1(), null); 
-    }
 ')' 
     {
         createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
     }
 );
+
 
 
 

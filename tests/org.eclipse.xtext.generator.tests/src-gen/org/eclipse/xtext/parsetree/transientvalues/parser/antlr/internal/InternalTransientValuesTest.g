@@ -94,10 +94,6 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), currentNode); 
@@ -108,10 +104,6 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), currentNode); 
@@ -120,10 +112,6 @@ ruleRoot returns [EObject current=null]
     { 
         $current = $this_TestList_3.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), null); 
     }
 ));
 
@@ -305,6 +293,7 @@ ruleTestList returns [EObject current=null]
 	    }
 	
 )*);
+
 
 
 

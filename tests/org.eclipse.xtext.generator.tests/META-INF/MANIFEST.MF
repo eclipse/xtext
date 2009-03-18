@@ -137,5 +137,11 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.valueconverter.parser.packrat,
  org.eclipse.xtext.valueconverter.parser.packrat.consumers,
  org.eclipse.xtext.valueconverter.parseTreeConstruction,
- org.eclipse.xtext.valueconverter.parser.antlr
+ org.eclipse.xtext.valueconverter.parser.antlr,
+ org.eclipse.xtext.enumrules,
+ org.eclipse.xtext.enumrules.enumRulesTestLanguage,
+ org.eclipse.xtext.enumrules.parser.packrat,
+ org.eclipse.xtext.enumrules.parser.packrat.consumers,
+ org.eclipse.xtext.enumrules.parseTreeConstruction,
+ org.eclipse.xtext.enumrules.parser.antlr
 

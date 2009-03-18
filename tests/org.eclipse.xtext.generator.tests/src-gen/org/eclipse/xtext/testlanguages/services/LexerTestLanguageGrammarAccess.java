@@ -61,6 +61,7 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getHSTRINGTerminalRuleCall_1_0() { return cHSTRINGTerminalRuleCall_1_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private ElementElements pElement;
 	private TerminalRule tSTRING;

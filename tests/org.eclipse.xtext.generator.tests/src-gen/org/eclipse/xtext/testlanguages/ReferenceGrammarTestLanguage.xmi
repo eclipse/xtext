@@ -99,7 +99,7 @@
         <groups xsi:type="xtext:Keyword" value="ROT"/>
         <groups xsi:type="xtext:Keyword" value="BLAU"/>
         <groups xsi:type="xtext:Keyword" value="GELB"/>
-        <groups xsi:type="xtext:Keyword" value="GR&#x2039;N"/>
+        <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Familie">

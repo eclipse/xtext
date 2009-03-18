@@ -90,10 +90,6 @@ ruleRootRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getRootRuleAccess().getConcreteParserRuleParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getRootRuleAccess().getCallOverridenParserRuleParserRuleCall_1(), currentNode); 
@@ -102,10 +98,6 @@ ruleRootRule returns [EObject current=null]
     { 
         $current = $this_CallOverridenParserRule_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getRootRuleAccess().getCallOverridenParserRuleParserRuleCall_1(), null); 
     }
 
     |
@@ -118,10 +110,6 @@ ruleRootRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getRootRuleAccess().getCallExtendedParserRuleParserRuleCall_2(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getRootRuleAccess().getOverridableParserRule2ParserRuleCall_3(), currentNode); 
@@ -130,10 +118,6 @@ ruleRootRule returns [EObject current=null]
     { 
         $current = $this_OverridableParserRule2_3.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getRootRuleAccess().getOverridableParserRule2ParserRuleCall_3(), null); 
     }
 );
 
@@ -392,10 +376,6 @@ ruleExtendableParserRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getExtendableParserRuleAccess().getSubrule1ParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getExtendableParserRuleAccess().getSubrule2ParserRuleCall_1(), currentNode); 
@@ -406,10 +386,6 @@ ruleExtendableParserRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getExtendableParserRuleAccess().getSubrule2ParserRuleCall_1(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getExtendableParserRuleAccess().getSubrule3ParserRuleCall_2(), currentNode); 
@@ -418,10 +394,6 @@ ruleExtendableParserRule returns [EObject current=null]
     { 
         $current = $this_Subrule3_2.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getExtendableParserRuleAccess().getSubrule3ParserRuleCall_2(), null); 
     }
 );
 
@@ -802,9 +774,10 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
 
 
 
+
 RULE_REAL : RULE_INT '.' RULE_INT;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\u02C6'|'\u2030'|'\u00B8'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\u00F6'|'\u00E4'|'\u00FC'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

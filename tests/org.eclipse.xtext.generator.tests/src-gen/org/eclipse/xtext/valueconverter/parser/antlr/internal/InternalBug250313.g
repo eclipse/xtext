@@ -508,10 +508,6 @@ ruleChild returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getChildAccess().getChild1ParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getChildAccess().getChild2ParserRuleCall_1(), currentNode); 
@@ -520,10 +516,6 @@ ruleChild returns [EObject current=null]
     { 
         $current = $this_Child2_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getChildAccess().getChild2ParserRuleCall_1(), null); 
     }
 );
 
@@ -608,6 +600,7 @@ ruleChild2 returns [EObject current=null]
 	    }
 	
 );
+
 
 
 

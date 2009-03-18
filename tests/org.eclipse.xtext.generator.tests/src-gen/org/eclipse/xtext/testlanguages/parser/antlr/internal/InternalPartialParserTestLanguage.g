@@ -240,10 +240,6 @@ ruleContent returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getContentAccess().getChildrenParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getContentAccess().getAbstractChildrenParserRuleCall_1(), currentNode); 
@@ -252,10 +248,6 @@ ruleContent returns [EObject current=null]
     { 
         $current = $this_AbstractChildren_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getContentAccess().getAbstractChildrenParserRuleCall_1(), null); 
     }
 );
 
@@ -479,10 +471,6 @@ ruleAbstractChild returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getAbstractChildAccess().getFirstConcreteParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractChildAccess().getSecondConcreteParserRuleCall_1(), currentNode); 
@@ -491,10 +479,6 @@ ruleAbstractChild returns [EObject current=null]
     { 
         $current = $this_SecondConcrete_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getAbstractChildAccess().getSecondConcreteParserRuleCall_1(), null); 
     }
 );
 
@@ -690,6 +674,7 @@ ruleNamed returns [EObject current=null]
 	    }
 	
 );
+
 
 
 

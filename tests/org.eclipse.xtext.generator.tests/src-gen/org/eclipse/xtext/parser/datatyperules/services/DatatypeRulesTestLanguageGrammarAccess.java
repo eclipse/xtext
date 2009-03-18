@@ -237,6 +237,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getFullStopFullStopKeyword_1() { return cFullStopFullStopKeyword_1; }
 	}
 	
+	
 	private CompositeModelElements pCompositeModel;
 	private ModelElements pModel;
 	private ModelIdElements pModelId;

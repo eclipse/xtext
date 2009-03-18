@@ -4,6 +4,7 @@
 	<property name="runtimeProject" value="../${projectName}"/>
 	
 	<property name="ametamodel.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"/>
+	<property name="enums.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"/>
 	<property name="baseinheritance.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
 	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"/>
 	
@@ -26,6 +27,9 @@
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
+			<fragment file="${standardFragments}" genmodels="${enums.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>

@@ -140,10 +140,6 @@ ruleAbstractRule returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getAbstractRuleAccess().getFirstAbstractRuleChildParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getSecondAbstractRuleChildParserRuleCall_1(), currentNode); 
@@ -152,10 +148,6 @@ ruleAbstractRule returns [EObject current=null]
     { 
         $current = $this_SecondAbstractRuleChild_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getAbstractRuleAccess().getSecondAbstractRuleChildParserRuleCall_1(), null); 
     }
 );
 
@@ -343,6 +335,7 @@ ruleAbstractRuleCall returns [EObject current=null]
 		// TODO assign feature to currentNode
 	
 );
+
 
 
 

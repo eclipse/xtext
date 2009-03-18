@@ -205,6 +205,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 	
+	
 	private SequenceElements pSequence;
 	private AdditionElements pAddition;
 	private MultiplicationElements pMultiplication;

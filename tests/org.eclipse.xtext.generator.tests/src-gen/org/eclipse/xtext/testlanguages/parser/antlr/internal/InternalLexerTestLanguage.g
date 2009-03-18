@@ -167,6 +167,7 @@ ruleElement returns [EObject current=null]
 
 
 
+
 RULE_STRING : '#' 'B'+;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

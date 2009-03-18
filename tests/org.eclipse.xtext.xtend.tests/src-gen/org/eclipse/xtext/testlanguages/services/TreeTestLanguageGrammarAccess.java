@@ -85,6 +85,7 @@ public class TreeTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketSemicolonKeyword_6() { return cRightCurlyBracketSemicolonKeyword_6; }
 	}
 	
+	
 	private ModelElements pModel;
 	private NodeElements pNode;
 	

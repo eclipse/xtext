@@ -369,6 +369,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getValueIDTerminalRuleCall_3_0() { return cValueIDTerminalRuleCall_3_0; }
 	}
 	
+	
 	private OpElements pOp;
 	private TermElements pTerm;
 	private AtomElements pAtom;
