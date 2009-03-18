@@ -31,8 +31,8 @@ public class EnumRulesTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/EnumRulesTest")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/EnumRulesTest", org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest", org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage.eINSTANCE);
 	}
 	//TODO registration of EValidators should be added here, too
 

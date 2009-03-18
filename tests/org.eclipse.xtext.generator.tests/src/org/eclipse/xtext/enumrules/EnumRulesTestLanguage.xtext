@@ -9,7 +9,7 @@
 grammar org.eclipse.xtext.enumrules.EnumRulesTestLanguage with org.eclipse.xtext.common.Terminals
 
 import "classpath:/org/eclipse/xtext/enumrules/enums.ecore"
-generate enumRulesTestLanguage "http://www.eclipse.org/2008/tmf/xtext/EnumRulesTest"
+generate enumRulesTestLanguage "http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest"
  
 Model:
   'existing' existing=ExistingEnum | 'generated' generated=GeneratedEnum
