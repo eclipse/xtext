@@ -30,6 +30,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
@@ -188,8 +189,11 @@ public abstract class AbstractXtextTests extends TestCase {
 		rs.getResources().add(resource);
 		resource.load(in, null);
 
-		for(Diagnostic d: resource.getErrors())
+		for(Diagnostic d: resource.getErrors()) {
 			System.out.println("Resource Error: "+d);
+			if (d instanceof ExceptionDiagnostic)
+				fail(d.getMessage());
+		}
 
 		for(Diagnostic d: resource.getWarnings())
 			System.out.println("Resource Warning: "+d);

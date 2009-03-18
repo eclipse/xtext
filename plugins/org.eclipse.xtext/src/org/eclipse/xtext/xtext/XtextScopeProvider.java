@@ -16,6 +16,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -25,6 +27,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
@@ -68,7 +72,26 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			}
 			return IScope.NULLSCOPE;
 		}
+		if (reference == XtextPackage.eINSTANCE.getEnumLiteralDeclaration_EnumLiteral()) {
+			if (context instanceof EnumLiteralDeclaration) {
+				final EnumLiteralDeclaration decl = (EnumLiteralDeclaration) context;
+				final EnumRule rule = GrammarUtil.containingEnumRule(decl);
+				if (rule.getType() != null && rule.getType().getClassifier() != null) {
+					return createEnumLiteralsScope((EEnum) rule.getType().getClassifier());
+				}
+				return IScope.NULLSCOPE;
+			}
+		}
 		return super.getScope(context, reference);
+	}
+
+	private IScope createEnumLiteralsScope(EEnum eEnum) {
+		return new SimpleScope(IScope.NULLSCOPE,
+				CollectionUtils.map(eEnum.getELiterals(), new Function<EEnumLiteral, IScopedElement>() {
+					public IScopedElement exec(EEnumLiteral param) {
+						return ScopedElement.create(param.getName(), param);
+					}
+				}));
 	}
 
 	private SimpleScope createClassifierScope(Iterable<EClassifier> classifiers) {
