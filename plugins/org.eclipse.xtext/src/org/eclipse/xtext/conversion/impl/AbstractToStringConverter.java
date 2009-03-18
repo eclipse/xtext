@@ -8,7 +8,6 @@
 package org.eclipse.xtext.conversion.impl;
 
 import org.eclipse.xtext.Stable;
-import org.eclipse.xtext.conversion.ValueConverter;
 
 /**
  * Abstract implementation of a {@link ValueConverter}, that does not fail on
