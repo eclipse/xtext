@@ -224,6 +224,14 @@ public class CollectionUtils {
 		return list(iterable.iterator());
 	}
 
+	public static <T> List<T> list(T... values) {
+		final List<T> result = new ArrayList<T>(values.length);
+		for(T value: values) {
+			result.add(value);
+		}
+		return result;
+	}
+
 	public static <T> boolean addAllIfNotNull(Collection<T> target, Collection<? extends T> toBeAdded) {
 		if(toBeAdded != null && !toBeAdded.isEmpty()) {
 			return target.addAll(toBeAdded);
