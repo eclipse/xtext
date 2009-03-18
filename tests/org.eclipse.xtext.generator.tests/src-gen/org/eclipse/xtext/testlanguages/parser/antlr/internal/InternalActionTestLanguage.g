@@ -89,10 +89,6 @@ ruleModel returns [EObject current=null]
         $current = $this_Child_0.current; 
         currentNode = currentNode.getParent();
     }
-
-    { 
-    createLeafNode(grammarAccess.getModelAccess().getChildParserRuleCall_0(), null); 
-    }
 ((
     { 
         temp=factory.create(grammarAccess.getModelAccess().getParentleftAction_1_0().getType().getClassifier());
@@ -172,6 +168,7 @@ ruleChild returns [EObject current=null]
 	    }
 	
 );
+
 
 
 

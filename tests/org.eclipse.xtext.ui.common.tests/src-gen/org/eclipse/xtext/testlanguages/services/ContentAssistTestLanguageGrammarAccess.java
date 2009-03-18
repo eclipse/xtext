@@ -165,6 +165,7 @@ public class ContentAssistTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getRuleAbstractRuleIDTerminalRuleCall_0_1() { return cRuleAbstractRuleIDTerminalRuleCall_0_1; }
 	}
 	
+	
 	private StartElements pStart;
 	private AbstractRuleElements pAbstractRule;
 	private FirstAbstractRuleChildElements pFirstAbstractRuleChild;

@@ -61,6 +61,7 @@ public class MultiGenMMTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
 	
+	
 	private FooElements pFoo;
 	private NameRefElements pNameRef;
 	

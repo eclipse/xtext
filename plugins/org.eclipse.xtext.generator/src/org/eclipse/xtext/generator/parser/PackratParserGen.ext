@@ -46,6 +46,9 @@ cached String consumerInterfaceName(AbstractRule this):
 cached String consumerInterfaceName(ParserRule this):
 	"INonTerminalConsumer";
 
+cached String consumerInterfaceName(EnumRule this):
+	"INonTerminalConsumer";
+	
 cached String consumerInterfaceName(TerminalRule this):
 	"ITerminalConsumer";
 				

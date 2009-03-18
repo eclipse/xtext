@@ -26,6 +26,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -38,16 +40,22 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Filter;
@@ -173,13 +181,17 @@ public class Xtext2EcoreTransformer {
 							checkSupertypeOfOverriddenTerminalRule(rule);
 						}
 					}
-				} else {
+				} else if (rule instanceof TerminalRule) {
 					if (rule.getType() != null) {
 						if (!(rule.getType().getClassifier() instanceof EDataType))
 							throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
 									"Return type of a terminal rule must be an EDataType.", rule.getType());
 						checkSupertypeOfOverriddenTerminalRule(rule);
 					}
+				} else if (rule instanceof EnumRule) {
+					// check overridden type
+				} else {
+					throw new IllegalStateException("Unknown rule type: " + rule.eClass().getName());
 				}
 			}
 			catch (TransformationException e) {
@@ -242,7 +254,9 @@ public class Xtext2EcoreTransformer {
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
 				if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule)) {
-					this.deriveFeatures((ParserRule) rule);
+					deriveFeatures((ParserRule) rule);
+				} else if (rule instanceof EnumRule) {
+					deriveEnums((EnumRule) rule);
 				}
 			}
 			catch (TransformationException e) {
@@ -251,6 +265,48 @@ public class Xtext2EcoreTransformer {
 			}
 		}
 		return result;
+	}
+
+	private void deriveEnums(EnumRule rule) {
+		EEnum returnType = (EEnum) rule.getType().getClassifier();
+		if (returnType != null) {
+			List<EnumLiteralDeclaration> decls = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
+			for(EnumLiteralDeclaration decl : decls) {
+				if (decl.getEnumLiteral() == null) {
+					List<AbstractNode> nodes = NodeUtil.findNodesForFeature(decl, XtextPackage.Literals.ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
+					if (!nodes.isEmpty()) {
+						if (nodes.size() > 1)
+							throw new IllegalStateException("Unexpected nodes found: " + nodes);
+						AbstractNode node = nodes.get(0);
+						String text = node.serialize();
+						EEnumLiteral literal = null;
+						if (rule.getType().getMetamodel() instanceof ReferencedMetamodel) {
+							literal = returnType.getEEnumLiteral(text);
+						} else {
+							literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
+							returnType.getELiterals().add(literal);
+							literal.setName(text);
+							literal.setValue(decls.indexOf(decl));
+							if (decl.getLiteral() != null) {
+								literal.setLiteral(decl.getLiteral().getValue());
+							} else {
+								literal.setLiteral(text);
+							}
+						}
+						if (literal == null) {
+							reportError(new TransformationException(TransformationErrorCode.InvalidFeature, "Enum '" + text + "' does not exist.", decl));
+						} else {
+							decl.setEnumLiteral(literal);
+							if (decl.getLiteral() == null) {
+								Keyword kw = XtextFactory.eINSTANCE.createKeyword();
+								kw.setValue(literal.getLiteral());
+								decl.setLiteral(kw);
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private Xtext2ECoreInterpretationContext deriveFeatures(final Xtext2ECoreInterpretationContext context,
@@ -373,7 +429,7 @@ public class Xtext2EcoreTransformer {
 	EClassifier getClassifierFor(AbstractRule rule) {
 		if (rule.getType() != null && rule.getType().getClassifier() != null)
 			return rule.getType().getClassifier();
-		if (rule instanceof TerminalRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
+		if (rule instanceof TerminalRule || rule instanceof ParserRule && DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
 			if (isEcorePackageUsed(grammar, new HashSet<Grammar>()))
 				return EcorePackage.Literals.ESTRING;
 		}
@@ -412,10 +468,10 @@ public class Xtext2EcoreTransformer {
 		String[] split = qualifiedName.split("::");
 		String name = qualifiedName;
 		if (split.length > 1) {
-			result.setMetamodel(findMetamodel(grammar, split[0]));
+			result.setMetamodel(findMetamodel(grammar, split[0], split[1]));
 			name = split[1];
 		} else {
-			result.setMetamodel(findDefaultMetamodel(grammar));
+			result.setMetamodel(findDefaultMetamodel(grammar, qualifiedName));
 		}
 		if (result.getMetamodel() instanceof ReferencedMetamodel && result.getMetamodel().getEPackage() != null) {
 			result.setClassifier(result.getMetamodel().getEPackage().getEClassifier(name));
@@ -423,18 +479,21 @@ public class Xtext2EcoreTransformer {
 		return result;
 	}
 
-	public AbstractMetamodelDeclaration findDefaultMetamodel(Grammar grammar) {
-		return findMetamodel(grammar, "");
+	public AbstractMetamodelDeclaration findDefaultMetamodel(Grammar grammar, String containedClassifier) {
+		return findMetamodel(grammar, "", containedClassifier);
 	}
 
-	public AbstractMetamodelDeclaration findMetamodel(Grammar grammar, String alias) {
+	public AbstractMetamodelDeclaration findMetamodel(Grammar grammar, String alias, String containedClassifier) {
 		final List<AbstractMetamodelDeclaration> declarations = grammar.getMetamodelDeclarations();
 		AbstractMetamodelDeclaration result = null;
 		for (AbstractMetamodelDeclaration decl : declarations) {
 			if (isSameAlias(decl.getAlias(), alias)) {
-				if (result != null)
-					return null;
-				result = decl;
+				EPackage pack = decl.getEPackage();
+				if (pack != null && pack.getEClassifier(containedClassifier) != null) {
+					if (result != null)
+						return null;
+					result = decl;
+				}
 			}
 		}
 		return result;
@@ -746,16 +805,20 @@ public class Xtext2EcoreTransformer {
 
 		EClassifier classifier = generatedEPackage.getEClassifier(classifierName);
 		if (classifier == null) {
-			classifier = EcoreFactory.eINSTANCE.createEClass();
+			if (GrammarUtil.containingParserRule(typeRef) != null)
+				classifier = EcoreFactory.eINSTANCE.createEClass();
+			else if (GrammarUtil.containingEnumRule(typeRef) != null)
+				classifier = EcoreFactory.eINSTANCE.createEEnum();
+			else
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create datatype " + classifierName, typeRef);
 			classifier.setName(classifierName);
 			generatedEPackage.getEClassifiers().add(classifier);
 			typeRef.setClassifier(classifier);
 
 			EClassifierInfo result;
-			// TODO: Enums?
 			if (classifier instanceof EClass)
 				result = EClassifierInfo.createEClassInfo((EClass) classifier, true);
-			else
+			else // datatype or enum
 				result = EClassifierInfo.createEDataTypeInfo((EDataType) classifier, true);
 
 			if (!eClassifierInfos.addInfo(typeRef, result))

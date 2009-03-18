@@ -145,6 +145,7 @@ public class FormatterTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 	
+	
 	private RootElements pRoot;
 	private LineElements pLine;
 	private TestLinewrapElements pTestLinewrap;

@@ -33,8 +33,14 @@ String getClasspathRelativePathToXmi(Grammar g) :
 Grammar containingGrammar(emf::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.getGrammar(org.eclipse.emf.ecore.EObject); 
 
+AbstractRule containingRule(emf::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingRule(org.eclipse.emf.ecore.EObject);
+	
 ParserRule containingParserRule(emf::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingParserRule(org.eclipse.emf.ecore.EObject);
+	
+EnumRule containingEnumRule(emf::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingEnumRule(org.eclipse.emf.ecore.EObject);
 	 
 Assignment containingAssignment(emf::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
@@ -78,6 +84,9 @@ List[TerminalRule] allTerminalRules(Grammar this) :
 
 List[ParserRule] allParserRules(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allParserRules(org.eclipse.xtext.Grammar);
+	
+List[EnumRule] allEnumRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allEnumRules(org.eclipse.xtext.Grammar);
 	
 List[AbstractMetamodelDeclaration] allMetamodelDeclarations(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allMetamodelDeclarations(org.eclipse.xtext.Grammar);

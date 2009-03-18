@@ -518,10 +518,6 @@ ruleEClassifierDecl returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1(), currentNode); 
@@ -530,10 +526,6 @@ ruleEClassifierDecl returns [EObject current=null]
     { 
         $current = $this_EDataTypeDecl_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1(), null); 
     }
 );
 
@@ -659,10 +651,6 @@ ruleEDataTypeDecl returns [EObject current=null]
     { 
         $current = $this_EEnumDecl_7.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1(), null); 
     }
 );
 
@@ -1084,10 +1072,6 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1(), currentNode); 
@@ -1096,10 +1080,6 @@ ruleEStructuralFeatureDecl returns [EObject current=null]
     { 
         $current = $this_EReferenceDecl_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1(), null); 
     }
 );
 
@@ -2834,7 +2814,7 @@ ruleQID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='$' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getQIDAccess().get$Keyword_1_0_1(), null); 
+        createLeafNode(grammarAccess.getQIDAccess().getDollarSignKeyword_1_0_1(), null); 
     }
 )    this_ID_3=RULE_ID    {
 		$current.merge(this_ID_3);
@@ -2923,6 +2903,7 @@ ruleSINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 )
     ;
+
 
 
 

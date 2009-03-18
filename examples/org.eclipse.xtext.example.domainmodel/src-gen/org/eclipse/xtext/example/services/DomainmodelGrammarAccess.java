@@ -533,6 +533,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
 	
+	
 	private FileElements pFile;
 	private ImportElements pImport;
 	private NamedElementElements pNamedElement;

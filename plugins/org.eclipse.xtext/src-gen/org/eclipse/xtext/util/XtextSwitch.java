@@ -236,6 +236,22 @@ public class XtextSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XtextPackage.ENUM_RULE:
+      {
+        EnumRule enumRule = (EnumRule)theEObject;
+        T result = caseEnumRule(enumRule);
+        if (result == null) result = caseAbstractRule(enumRule);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextPackage.ENUM_LITERAL_DECLARATION:
+      {
+        EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration)theEObject;
+        T result = caseEnumLiteralDeclaration(enumLiteralDeclaration);
+        if (result == null) result = caseAbstractElement(enumLiteralDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XtextPackage.ALTERNATIVES:
       {
         Alternatives alternatives = (Alternatives)theEObject;
@@ -548,6 +564,38 @@ public class XtextSwitch<T>
    * @generated
    */
   public T caseWildcard(Wildcard object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enum Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enum Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumRule(EnumRule object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enum Literal Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enum Literal Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnumLiteralDeclaration(EnumLiteralDeclaration object)
   {
     return null;
   }

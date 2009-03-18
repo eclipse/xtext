@@ -81,6 +81,7 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private ElementElements pElement;
 	

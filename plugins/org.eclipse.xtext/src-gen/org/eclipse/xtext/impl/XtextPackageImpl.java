@@ -21,6 +21,8 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
@@ -169,6 +171,20 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * @generated
    */
   private EClass wildcardEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enumLiteralDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -726,6 +742,46 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEnumRule()
+  {
+    return enumRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnumLiteralDeclaration()
+  {
+    return enumLiteralDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumLiteralDeclaration_EnumLiteral()
+  {
+    return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnumLiteralDeclaration_Literal()
+  {
+    return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAlternatives()
   {
     return alternativesEClass;
@@ -885,6 +941,12 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
     wildcardEClass = createEClass(WILDCARD);
 
+    enumRuleEClass = createEClass(ENUM_RULE);
+
+    enumLiteralDeclarationEClass = createEClass(ENUM_LITERAL_DECLARATION);
+    createEReference(enumLiteralDeclarationEClass, ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
+    createEReference(enumLiteralDeclarationEClass, ENUM_LITERAL_DECLARATION__LITERAL);
+
     alternativesEClass = createEClass(ALTERNATIVES);
     createEReference(alternativesEClass, ALTERNATIVES__GROUPS);
 
@@ -938,6 +1000,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     negatedTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
     untilTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
     wildcardEClass.getESuperTypes().add(this.getAbstractElement());
+    enumRuleEClass.getESuperTypes().add(this.getAbstractRule());
+    enumLiteralDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
     alternativesEClass.getESuperTypes().add(this.getAbstractElement());
     groupEClass.getESuperTypes().add(this.getAbstractElement());
     characterRangeEClass.getESuperTypes().add(this.getAbstractElement());
@@ -1006,6 +1070,12 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     initEClass(untilTokenEClass, UntilToken.class, "UntilToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(enumRuleEClass, EnumRule.class, "EnumRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(enumLiteralDeclarationEClass, EnumLiteralDeclaration.class, "EnumLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEnumLiteralDeclaration_EnumLiteral(), ecorePackage.getEEnumLiteral(), null, "enumLiteral", null, 0, 1, EnumLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEnumLiteralDeclaration_Literal(), this.getKeyword(), null, "literal", null, 0, 1, EnumLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(alternativesEClass, Alternatives.class, "Alternatives", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAlternatives_Groups(), this.getAbstractElement(), null, "groups", null, 0, -1, Alternatives.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

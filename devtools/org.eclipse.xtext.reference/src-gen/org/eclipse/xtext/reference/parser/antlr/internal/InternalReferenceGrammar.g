@@ -637,9 +637,9 @@ ruleFarbe returns [EObject current=null]
     }
 
 
-    |'GR\u2039N' 
+    |'GR\u00DCN' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3(), "wert"); 
+        createLeafNode(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), "wert"); 
     }
 
 )
@@ -703,6 +703,7 @@ ruleCustomTypeParserRule returns [EObject current=null]
 	    }
 	
 ));
+
 
 
 

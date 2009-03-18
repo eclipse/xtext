@@ -81,6 +81,7 @@ public class MetamodelRefTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
+	
 	private FooElements pFoo;
 	private NameRefElements pNameRef;
 	private MyRuleElements pMyRule;

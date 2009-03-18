@@ -20,7 +20,7 @@ Grammar:
 GrammarID returns ecore::EString:
   ID ('.' ID)*;
   
-AbstractRule : ParserRule | TerminalRule;
+AbstractRule : ParserRule | TerminalRule | EnumRule;
 
 AbstractMetamodelDeclaration :
 	GeneratedMetamodel | ReferencedMetamodel;
@@ -159,4 +159,18 @@ Wildcard:
 
 CharacterRange returns AbstractElement:
 	Keyword ( {CharacterRange.left=current} '..' right=Keyword)?
+;
+
+EnumRule:
+    'enum' name=ID ('returns' type=TypeRef)? ':' 
+    	alternatives=EnumLiterals   
+    ';'
+;
+
+EnumLiterals returns AbstractElement:
+	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
+; 
+
+EnumLiteralDeclaration:
+    enumLiteral=[ecore::EEnumLiteral] ('=' literal=Keyword)?
 ;

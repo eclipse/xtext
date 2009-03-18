@@ -69,8 +69,16 @@ public class GrammarUtil {
 		return null;
 	}
 
+	public static AbstractRule containingRule(EObject e) {
+		return getContainerOfType(e, AbstractRule.class);
+	}
+	
 	public static ParserRule containingParserRule(EObject e) {
 		return getContainerOfType(e, ParserRule.class);
+	}
+
+	public static EnumRule containingEnumRule(EObject e) {
+		return getContainerOfType(e, EnumRule.class);
 	}
 
 	public static Assignment containingAssignment(EObject e) {
@@ -164,6 +172,10 @@ public class GrammarUtil {
 
 	public static List<ParserRule> allParserRules(Grammar _this) {
 		return typeSelect(allRules(_this), ParserRule.class);
+	}
+
+	public static List<EnumRule> allEnumRules(Grammar _this) {
+		return typeSelect(allRules(_this), EnumRule.class);
 	}
 
 	public static List<TerminalRule> allTerminalRules(Grammar _this) {

@@ -1520,7 +1520,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_1_0 = (Alternatives)cGroup_1.eContents().get(0);
 		private final Keyword cFullStopKeyword_1_0_0 = (Keyword)cAlternatives_1_0.eContents().get(0);
-		private final Keyword c$Keyword_1_0_1 = (Keyword)cAlternatives_1_0.eContents().get(1);
+		private final Keyword cDollarSignKeyword_1_0_1 = (Keyword)cAlternatives_1_0.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QID returns ecore::EString:
@@ -1543,7 +1543,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public Keyword getFullStopKeyword_1_0_0() { return cFullStopKeyword_1_0_0; }
 
 		//"$"
-		public Keyword get$Keyword_1_0_1() { return c$Keyword_1_0_1; }
+		public Keyword getDollarSignKeyword_1_0_1() { return cDollarSignKeyword_1_0_1; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
@@ -1588,6 +1588,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//INT
 		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
 	}
+	
 	
 	private EcoreDslElements pEcoreDsl;
 	private ImportStatementDeclElements pImportStatementDecl;

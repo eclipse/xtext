@@ -90,10 +90,6 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getOpParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getRootAccess().getTrickyGParserRuleCall_1(), currentNode); 
@@ -102,10 +98,6 @@ ruleRoot returns [EObject current=null]
     { 
         $current = $this_TrickyG_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getTrickyGParserRuleCall_1(), null); 
     }
 );
 
@@ -136,10 +128,6 @@ ruleOp returns [EObject current=null]
     { 
         $current = $this_Term_0.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getOpAccess().getTermParserRuleCall_0(), null); 
     }
 (((
     { 
@@ -255,10 +243,6 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), currentNode); 
@@ -267,10 +251,6 @@ ruleTerm returns [EObject current=null]
     { 
         $current = $this_Parens_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), null); 
     }
 );
 
@@ -346,10 +326,6 @@ ruleParens returns [EObject current=null]
     { 
         $current = $this_Op_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getParensAccess().getOpParserRuleCall_1(), null); 
     }
 ')' 
     {
@@ -581,10 +557,6 @@ ruleTrickyG2 returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getTrickyG2Access().getTrickyG1ParserRuleCall_0(), null); 
-    }
-
     |(	
 	
 	    lv_val_1=	RULE_INT
@@ -606,6 +578,7 @@ ruleTrickyG2 returns [EObject current=null]
 	    }
 	
 ));
+
 
 
 

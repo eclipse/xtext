@@ -293,6 +293,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getCallAbstractCallExtendedParserRuleParserRuleCall_0() { return cCallAbstractCallExtendedParserRuleParserRuleCall_0; }
 	}
 	
+	
 	private RootRuleElements pRootRule;
 	private ConcreteParserRuleElements pConcreteParserRule;
 	private OverridableParserRuleElements pOverridableParserRule;
@@ -435,7 +436,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return getInheritedParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@a8a044 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@874647 (name: OverridableParserRule) (definesHiddenTokens: false)
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@455910 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@62a121 (name: OverridableParserRule) (definesHiddenTokens: false)
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
 	}
@@ -444,7 +445,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@9c539d (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@263003 (name: ExtendableParserRule) (definesHiddenTokens: false)
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@6e3a9c (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@f35bd (name: ExtendableParserRule) (definesHiddenTokens: false)
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
 	}
@@ -460,7 +461,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//terminal ID:
-	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "\u02C6" | "\u2030" | "\u00B8" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
+	//  "^" ? ( "a" .. "z" | "A" .. "Z" | "\u00F6" | "\u00E4" | "\u00FC" | "_" ) ( "a" .. "z" | "A" .. "Z" | "_" | "0" .. "9" ) *;
 	public TerminalRule getIDRule() {
 		return gaAbstractTestLanguage.getIDRule();
 	} 

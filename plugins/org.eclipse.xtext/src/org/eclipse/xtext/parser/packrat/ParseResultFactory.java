@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat;
 
 import java.util.LinkedList;
 
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractRule;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.parser.packrat.tokens.CompoundParsedTokenVisitor;
 import org.eclipse.xtext.parser.packrat.tokens.ErrorToken;
 import org.eclipse.xtext.parser.packrat.tokens.FakedToken;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedAction;
+import org.eclipse.xtext.parser.packrat.tokens.ParsedEnumLiteral;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
@@ -59,6 +61,8 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	private CharSequence input;
 
+	private EEnumLiteral lastEnumLiteral;
+
 	public ParseResultFactory() {
 		this.currentStack = new LinkedList<EObject>();
 		this.nonterminalStack = new LinkedList<ParsedNonTerminal>();
@@ -89,7 +93,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 
 	private void enhanceNode(AbstractParsedToken parsedToken, AbstractNode node) {
 		node.setTotalOffset(parsedToken.getOffset());
-//		node.setTotalLength(parsedToken.getLength());
+		node.setTotalLength(parsedToken.getLength());
 	}
 
 	protected CompositeNode createCompositeNode(AbstractParsedToken parsedToken) {
@@ -155,13 +159,17 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		final ParsedNonTerminal nonTerminal = nonterminalStack.removeLast();
 		EObject created = currentStack.removeLast();
 		if (!token.isDatatype()) {
-			if (created == null) {
-				if (!token.isBoolean()) {
-					created = factory.create(nonTerminal.getType());
-					associateNodeWithAstElement(currentNode, created);
+			if (lastEnumLiteral == null) {
+				if (created == null) {
+					if (!token.isBoolean()) {
+						created = factory.create(nonTerminal.getType());
+						associateNodeWithAstElement(currentNode, created);
+					}
 				}
 			}
 			if (token.getFeature() == null) {
+				if (lastEnumLiteral != null)
+					throw new IllegalStateException("cannot parse enum literal and discard it");
 				if (currentStack.isEmpty())
 					currentStack.add(created);
 				else if (currentStack.getLast() == null) {
@@ -170,27 +178,26 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 					throw new RuntimeException("Cannot discard created object");
 				}
 			} else {
-				final AbstractRule rule = nonTerminal.getGrammarElement() instanceof AbstractRule ?
-						(AbstractRule)nonTerminal.getGrammarElement() :
-						((RuleCall)nonTerminal.getGrammarElement()).getRule();
-				if (!token.isBoolean())
-					setFeatureValue(token, created, rule);
-				else
+				final AbstractRule rule = getAbstractRule(nonTerminal);
+				if (rule == null)
+					throw new IllegalStateException("Unexpected grammar element '" + nonTerminal.getGrammarElement() + "'");
+				if (!token.isBoolean()) {
+					if (lastEnumLiteral == null)
+						setFeatureValue(token, created, rule);
+					else {
+						setFeatureValue(token, lastEnumLiteral.getInstance(), rule);
+						lastEnumLiteral = null;
+					}
+				} else
 					setFeatureValue(token, true, rule);
 			}
 		} else {
 			if (token.getFeature() != null && !(nonTerminal.getGrammarElement() instanceof CrossReference)) {
-				AbstractRule rule = null;
-				if (nonTerminal.getGrammarElement() instanceof AbstractRule)
-					rule = (AbstractRule)nonTerminal.getGrammarElement();
-				else if (nonTerminal.getGrammarElement() instanceof RuleCall)
-					rule = ((RuleCall)nonTerminal.getGrammarElement()).getRule();
-				if (rule == null)
-					throw new IllegalStateException("Unexpected grammar element '" + nonTerminal.getGrammarElement() + "'");
+				final AbstractRule rule = getAbstractRule(nonTerminal);
 				if (!token.isBoolean()) {
 					final StringBuilder builder = new StringBuilder(token.getLength());
 					final boolean[] wasHidden = new boolean[] {false};
-					getDatatypeValue(currentNode, builder, wasHidden);
+					readDatatypeValue(currentNode, builder, wasHidden);
 					setFeatureValue(token, builder.toString(), rule);
 				} else {
 					setFeatureValue(token, true, rule);
@@ -200,6 +207,12 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		if (currentNode.getParent() != null) {
 			currentNode = currentNode.getParent();
 		}
+	}
+
+	private AbstractRule getAbstractRule(final ParsedNonTerminal nonTerminal) {
+		return nonTerminal.getGrammarElement() instanceof AbstractRule ?
+				(AbstractRule)nonTerminal.getGrammarElement() :
+				((RuleCall)nonTerminal.getGrammarElement()).getRule();
 	}
 
 	private void setFeatureValue(ParsedNonTerminalEnd token, Object created, AbstractRule rule) {
@@ -221,27 +234,25 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			}
 		} catch(ValueConverterException ex) {
 			handleValueConverterException(ex);
-		} catch(Exception ex) {
-			throw new RuntimeException(ex);
 		}
 	}
 
-	private void getDatatypeValue(AbstractNode node, StringBuilder builder, boolean[] wasHidden) {
+	private void readDatatypeValue(AbstractNode node, final StringBuilder target, boolean[] wasHidden) {
 		 if (node instanceof LeafNode) {
 			 LeafNode leaf = (LeafNode) node;
 			 if (leaf.isHidden()) {
 				 if (!wasHidden[0]) {
 					 wasHidden[0] = true;
-					 if (builder.length() != 0)
-						 builder.append(' ');
+					 if (target.length() != 0)
+						 target.append(' ');
 				 }
 			 } else {
 				 wasHidden[0] = false;
-				 builder.append(leaf.getText());
+				 target.append(leaf.getText());
 			 }
 		 } else {
 			 for(AbstractNode child: ((CompositeNode)node).getChildren()) {
-				 getDatatypeValue(child, builder, wasHidden);
+				 readDatatypeValue(child, target, wasHidden);
 			 }
 		 }
 	}
@@ -260,6 +271,16 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			}
 		} else
 			throw new RuntimeException(ex);
+	}
+
+	@Override
+	public void visitParsedEnumLiteral(ParsedEnumLiteral token) {
+		if (token.isSkipped())
+			return;
+		LeafNode node = createLeafNode(token);
+		node.setGrammarElement(token.getGrammarElement());
+		node.setHidden(false);
+		lastEnumLiteral = token.getGrammarElement().getEnumLiteral();
 	}
 
 	@Override

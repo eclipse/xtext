@@ -126,6 +126,9 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 «ENDIF-»
     	);
 «ENDFOREACH-»
+«FOREACH rules.typeSelect(EnumRule) AS rule-»
+		«rule.consumerFieldName()» = new «rule.consumerClassName()»(this, null);
+«ENDFOREACH-»
 	}
 	
 	public void createTerminalConsumers() {
@@ -141,7 +144,7 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 «FOREACH allRules() AS rule-»
-«IF ParserRule.isInstance(rule)-»
+«IF ParserRule.isInstance(rule) || EnumRule.isInstance(rule)-»
 		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaElementsAccessor()»);
 «ELSE-»
 		«rule.consumerGetterName()»().setRule(grammarAccess.«rule.gaRuleAccessor()»);

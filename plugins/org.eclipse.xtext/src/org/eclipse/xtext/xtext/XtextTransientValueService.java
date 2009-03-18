@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
@@ -55,6 +56,11 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			if (ref.getTerminal() instanceof RuleCall && ((RuleCall) ref.getTerminal()).getRule() != null &&
 					"ID".equals(((RuleCall) ref.getTerminal()).getRule().getName()))
 				return true;
+		}
+		else if (feature == XtextPackage.eINSTANCE.getEnumLiteralDeclaration_Literal()) {
+			final EnumLiteralDeclaration decl = (EnumLiteralDeclaration) owner;
+			return decl.getEnumLiteral() != null && decl.getLiteral() != null &&
+				Strings.equal(decl.getLiteral().getValue(), decl.getEnumLiteral().getLiteral());
 		}
 		return super.isTransient(owner, feature, index);
 	}

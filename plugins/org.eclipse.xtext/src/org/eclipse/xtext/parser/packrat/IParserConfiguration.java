@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.packrat;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.EnumLiteralConsumer;
 
 /**
  * This interface is not intended to be implemented by clients. A implementation
@@ -23,11 +24,11 @@ public interface IParserConfiguration {
 	 * @return a consumer that allows to parse the root node of a language.
 	 */
 	INonTerminalConsumer getRootConsumer();
-	
+
 	/**
-	 * Create any non-terminal consumers, that are required. 
+	 * Create any non-terminal consumers, that are required.
 	 * Do not initialize their internal state except for a valid constructor call.
-	 * Implementors should note, that any created consumer should be referable by 
+	 * Implementors should note, that any created consumer should be referable by
 	 * a meaningful getter.
 	 * Ensure that you call {@link #createNonTerminalConsumers()} for any referenced
 	 * other parser configuration in this method.
@@ -37,7 +38,7 @@ public interface IParserConfiguration {
 	 * @see #createTerminalConsumers()
 	 */
 	void createNonTerminalConsumers();
-	
+
 	/**
 	 * Create any terminal consumers, that are required.
 	 * This is the first method that is called during the lifecycle. Do not initialize
@@ -45,7 +46,7 @@ public interface IParserConfiguration {
 	 * @see #configureConsumers()
 	 */
 	void createTerminalConsumers();
-	
+
 	/**
 	 * Initialize the created consumers. Set any references to allowed or disallowed follow rules.
 	 * It is ensured, that {@link #createNonTerminalConsumers()} and {@link #createTerminalConsumers()}
@@ -60,9 +61,15 @@ public interface IParserConfiguration {
 	KeywordConsumer createKeywordConsumer();
 
 	/**
+	 * The created literal consumer should not be referenced from the parser configuration.
+	 * @return a fresh literal consumer.
+	 */
+	EnumLiteralConsumer createLiteralConsumer();
+
+	/**
 	 * Provides access to the initial (e.g. default) hidden terminal consumers.
 	 * @return the initial hidden terminals.
 	 */
 	ITerminalConsumer[] getInitialHiddenTerminals();
-	
+
 }

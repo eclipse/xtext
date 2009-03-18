@@ -347,6 +347,20 @@ ruleAbstractRule returns [EObject current=null]
     { 
     createLeafNode(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1(), null); 
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2(), currentNode); 
+    }
+    this_EnumRule_2=ruleEnumRule
+    { 
+        $current = $this_EnumRule_2.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2(), null); 
+    }
 );
 
 
@@ -2566,6 +2580,243 @@ ruleCharacterRange returns [EObject current=null]
 	    }
 	
 ))?);
+
+
+
+
+
+// Entry rule entryRuleEnumRule
+entryRuleEnumRule returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEnumRuleRule(), currentNode); }
+	 iv_ruleEnumRule=ruleEnumRule 
+	 { $current=$iv_ruleEnumRule.current; } 
+	 EOF 
+;
+
+// Rule EnumRule
+ruleEnumRule returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('enum' 
+    {
+        createLeafNode(grammarAccess.getEnumRuleAccess().getEnumKeyword_0(), null); 
+    }
+(	
+	
+	    lv_name_1=	RULE_ID
+	{
+		createLeafNode(grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumRuleRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)('returns' 
+    {
+        createLeafNode(grammarAccess.getEnumRuleAccess().getReturnsKeyword_2_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0(), currentNode); 
+	    }
+	    lv_type_3=ruleTypeRef 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumRuleRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "type", lv_type_3, "TypeRef", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+))?':' 
+    {
+        createLeafNode(grammarAccess.getEnumRuleAccess().getColonKeyword_3(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0(), currentNode); 
+	    }
+	    lv_alternatives_5=ruleEnumLiterals 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumRuleRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "alternatives", lv_alternatives_5, "EnumLiterals", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)';' 
+    {
+        createLeafNode(grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5(), null); 
+    }
+);
+
+
+
+
+
+// Entry rule entryRuleEnumLiterals
+entryRuleEnumLiterals returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEnumLiteralsRule(), currentNode); }
+	 iv_ruleEnumLiterals=ruleEnumLiterals 
+	 { $current=$iv_ruleEnumLiterals.current; } 
+	 EOF 
+;
+
+// Rule EnumLiterals
+ruleEnumLiterals returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0(), currentNode); 
+    }
+    this_EnumLiteralDeclaration_0=ruleEnumLiteralDeclaration
+    { 
+        $current = $this_EnumLiteralDeclaration_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    { 
+    createLeafNode(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0(), null); 
+    }
+((
+    { 
+        temp=factory.create(grammarAccess.getEnumLiteralsAccess().getAlternativesgroupsAction_1_0().getType().getClassifier());
+        try {
+        	factory.add(temp, "groups", $current, null /*ParserRule*/, currentNode);
+        } catch(ValueConverterException vce) {
+        	handleValueConverterException(vce);
+        }
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getEnumLiteralsAccess().getAlternativesgroupsAction_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)('|' 
+    {
+        createLeafNode(grammarAccess.getEnumLiteralsAccess().getVerticalLineKeyword_1_1_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0(), currentNode); 
+	    }
+	    lv_groups_3=ruleEnumLiteralDeclaration 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumLiteralsRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		add($current, "groups", lv_groups_3, "EnumLiteralDeclaration", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+))+)?);
+
+
+
+
+
+// Entry rule entryRuleEnumLiteralDeclaration
+entryRuleEnumLiteralDeclaration returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getEnumLiteralDeclarationRule(), currentNode); }
+	 iv_ruleEnumLiteralDeclaration=ruleEnumLiteralDeclaration 
+	 { $current=$iv_ruleEnumLiteralDeclaration.current; } 
+	 EOF 
+;
+
+// Rule EnumLiteralDeclaration
+ruleEnumLiteralDeclaration returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	
+	
+		
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0(), "enumLiteral"); 
+	}
+
+		// TODO assign feature to currentNode
+	
+)('=' 
+    {
+        createLeafNode(grammarAccess.getEnumLiteralDeclarationAccess().getEqualsSignKeyword_1_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0(), currentNode); 
+	    }
+	    lv_literal_2=ruleKeyword 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "literal", lv_literal_2, "Keyword", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+))?);
+
 
 
 

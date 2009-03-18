@@ -843,6 +843,98 @@ public interface XtextPackage extends EPackage
   int WILDCARD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.impl.EnumRuleImpl <em>Enum Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.impl.EnumRuleImpl
+   * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumRule()
+   * @generated
+   */
+  int ENUM_RULE = 18;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_RULE__NAME = ABSTRACT_RULE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_RULE__TYPE = ABSTRACT_RULE__TYPE;
+
+  /**
+   * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
+
+  /**
+   * The number of structural features of the '<em>Enum Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.impl.EnumLiteralDeclarationImpl <em>Enum Literal Declaration</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.impl.EnumLiteralDeclarationImpl
+   * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumLiteralDeclaration()
+   * @generated
+   */
+  int ENUM_LITERAL_DECLARATION = 19;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_LITERAL_DECLARATION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Enum Literal</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_LITERAL_DECLARATION__ENUM_LITERAL = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Literal</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_LITERAL_DECLARATION__LITERAL = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Enum Literal Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_LITERAL_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.AlternativesImpl <em>Alternatives</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -850,7 +942,7 @@ public interface XtextPackage extends EPackage
    * @see org.eclipse.xtext.impl.XtextPackageImpl#getAlternatives()
    * @generated
    */
-  int ALTERNATIVES = 18;
+  int ALTERNATIVES = 20;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -887,7 +979,7 @@ public interface XtextPackage extends EPackage
    * @see org.eclipse.xtext.impl.XtextPackageImpl#getGroup()
    * @generated
    */
-  int GROUP = 19;
+  int GROUP = 21;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -924,7 +1016,7 @@ public interface XtextPackage extends EPackage
    * @see org.eclipse.xtext.impl.XtextPackageImpl#getCharacterRange()
    * @generated
    */
-  int CHARACTER_RANGE = 20;
+  int CHARACTER_RANGE = 22;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1452,6 +1544,48 @@ public interface XtextPackage extends EPackage
   EClass getWildcard();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.EnumRule <em>Enum Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Enum Rule</em>'.
+   * @see org.eclipse.xtext.EnumRule
+   * @generated
+   */
+  EClass getEnumRule();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.EnumLiteralDeclaration <em>Enum Literal Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Enum Literal Declaration</em>'.
+   * @see org.eclipse.xtext.EnumLiteralDeclaration
+   * @generated
+   */
+  EClass getEnumLiteralDeclaration();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.EnumLiteralDeclaration#getEnumLiteral <em>Enum Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Enum Literal</em>'.
+   * @see org.eclipse.xtext.EnumLiteralDeclaration#getEnumLiteral()
+   * @see #getEnumLiteralDeclaration()
+   * @generated
+   */
+  EReference getEnumLiteralDeclaration_EnumLiteral();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.EnumLiteralDeclaration#getLiteral <em>Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Literal</em>'.
+   * @see org.eclipse.xtext.EnumLiteralDeclaration#getLiteral()
+   * @see #getEnumLiteralDeclaration()
+   * @generated
+   */
+  EReference getEnumLiteralDeclaration_Literal();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.Alternatives <em>Alternatives</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1951,6 +2085,42 @@ public interface XtextPackage extends EPackage
      * @generated
      */
     EClass WILDCARD = eINSTANCE.getWildcard();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.impl.EnumRuleImpl <em>Enum Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.impl.EnumRuleImpl
+     * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumRule()
+     * @generated
+     */
+    EClass ENUM_RULE = eINSTANCE.getEnumRule();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.impl.EnumLiteralDeclarationImpl <em>Enum Literal Declaration</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.impl.EnumLiteralDeclarationImpl
+     * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumLiteralDeclaration()
+     * @generated
+     */
+    EClass ENUM_LITERAL_DECLARATION = eINSTANCE.getEnumLiteralDeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Enum Literal</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENUM_LITERAL_DECLARATION__ENUM_LITERAL = eINSTANCE.getEnumLiteralDeclaration_EnumLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Literal</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENUM_LITERAL_DECLARATION__LITERAL = eINSTANCE.getEnumLiteralDeclaration_Literal();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.AlternativesImpl <em>Alternatives</em>}' class.

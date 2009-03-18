@@ -65,6 +65,7 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private ChildElements pChild;
 	

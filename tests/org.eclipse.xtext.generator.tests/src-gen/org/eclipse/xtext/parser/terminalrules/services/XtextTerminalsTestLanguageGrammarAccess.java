@@ -1368,6 +1368,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getRightKeywordParserRuleCall_1_2_0() { return cRightKeywordParserRuleCall_1_2_0; }
 	}
 	
+	
 	private GrammarElements pGrammar;
 	private GrammarIDElements pGrammarID;
 	private AbstractRuleElements pAbstractRule;

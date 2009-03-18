@@ -1473,6 +1473,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getExprstrSTRINGTerminalRuleCall_0() { return cExprstrSTRINGTerminalRuleCall_0; }
 	}
 	
+	
 	private EPatchElements pEPatch;
 	private ImportElements pImport;
 	private ModelImportElements pModelImport;

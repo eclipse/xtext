@@ -17,6 +17,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -66,6 +67,9 @@ public class GrammarAccessUtil {
 			CrossReference cr = (CrossReference) ele;
 			if (cr.getType() != null && cr.getType().getClassifier() != null)
 				return cr.getType().getClassifier().getName();
+		} else if (ele instanceof EnumLiteralDeclaration) {
+			EnumLiteralDeclaration decl = (EnumLiteralDeclaration) ele;
+			return decl.getEnumLiteral().getName();
 		}
 		return null;
 	}
@@ -145,8 +149,8 @@ public class GrammarAccessUtil {
 		boolean start = isFirst, up = true;
 		StringBuffer r = new StringBuffer();
 		for (char c : text.toCharArray()) {
-			boolean valid = start ? Character.isJavaIdentifierStart(c)
-					: Character.isJavaIdentifierPart(c);
+			boolean valid = c!='$' /* special case: don't use dollar sign, since antlr uses them as variable prefix */
+				&& (start ? Character.isJavaIdentifierStart(c) : Character.isJavaIdentifierPart(c));
 			if (valid) {
 				if (start)
 					r.append(uppercaseFirst ? Character.toUpperCase(c)
@@ -181,7 +185,7 @@ public class GrammarAccessUtil {
 			return toJavaIdentifierSegment(text, true, uppercaseFirst);
 		} catch (Throwable t) {
 			t.printStackTrace();
-			return "failure";
+			return "%_FAILURE_(" + text + ")%";
 		}
 	}
 }

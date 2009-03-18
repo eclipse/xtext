@@ -57,6 +57,7 @@ public class OptionalEmptyTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private GreetingElements pGreeting;
 	

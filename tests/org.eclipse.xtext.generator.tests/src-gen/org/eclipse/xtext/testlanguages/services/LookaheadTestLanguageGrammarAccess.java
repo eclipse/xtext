@@ -221,6 +221,7 @@ public class LookaheadTestLanguageGrammarAccess implements IGrammarAccess {
 		public Keyword getXDKeyword_1_0() { return cXDKeyword_1_0; }
 	}
 	
+	
 	private EntryElements pEntry;
 	private AltsElements pAlts;
 	private LookAhead0Elements pLookAhead0;

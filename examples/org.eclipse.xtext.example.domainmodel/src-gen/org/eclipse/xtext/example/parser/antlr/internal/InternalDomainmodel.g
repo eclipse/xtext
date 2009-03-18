@@ -198,10 +198,6 @@ ruleNamedElement returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getNamedElementAccess().getPackageParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getTypeParserRuleCall_1(), currentNode); 
@@ -210,10 +206,6 @@ ruleNamedElement returns [EObject current=null]
     { 
         $current = $this_Type_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getNamedElementAccess().getTypeParserRuleCall_1(), null); 
     }
 );
 
@@ -321,10 +313,6 @@ ruleType returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_1(), currentNode); 
@@ -333,10 +321,6 @@ ruleType returns [EObject current=null]
     { 
         $current = $this_DataType_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_1(), null); 
     }
 );
 
@@ -508,10 +492,6 @@ ruleFeature returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getFeatureAccess().getStructuralFeatureParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getOperationParserRuleCall_1(), currentNode); 
@@ -520,10 +500,6 @@ ruleFeature returns [EObject current=null]
     { 
         $current = $this_Operation_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getFeatureAccess().getOperationParserRuleCall_1(), null); 
     }
 );
 
@@ -556,10 +532,6 @@ ruleStructuralFeature returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getStructuralFeatureAccess().getAttributeParserRuleCall_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getStructuralFeatureAccess().getReferenceParserRuleCall_1(), currentNode); 
@@ -568,10 +540,6 @@ ruleStructuralFeature returns [EObject current=null]
     { 
         $current = $this_Reference_1.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getStructuralFeatureAccess().getReferenceParserRuleCall_1(), null); 
     }
 );
 
@@ -1002,6 +970,7 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 )*)
     ;
+
 
 
 

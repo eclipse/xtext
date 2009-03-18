@@ -57,6 +57,9 @@ public class XtextParsetreeConstructor extends AbstractParseTreeConstructor {
 		if(inst.isInstanceOf(grammarAccess.getUntilTokenRule().getType().getClassifier()) && (s = new UntilToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.getWildcardRule().getType().getClassifier()) && (s = new Wildcard_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.getCharacterRangeRule().getType().getClassifier()) && (s = new CharacterRange_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier()) && (s = new EnumRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier()) && (s = new EnumLiterals_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier()) && (s = new EnumLiteralDeclaration_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		return null;
 	}
 	
@@ -581,11 +584,11 @@ protected class Grammar_5_Assignment_rules extends AssignmentToken  {
 /************ begin Rule AbstractRule ****************
  *
  * AbstractRule:
- *   ParserRule|TerminalRule;
+ *   ParserRule|TerminalRule|EnumRule;
  *
  **/
 
-// ParserRule|TerminalRule
+// ParserRule|TerminalRule|EnumRule
 protected class AbstractRule_Alternatives extends AlternativesToken {
 
 	public AbstractRule_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -601,6 +604,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 		switch(id) {
 			case 0: return new AbstractRule_0_RuleCall_ParserRule(current, this);
 			case 1: return new AbstractRule_1_RuleCall_TerminalRule(current, this);
+			case 2: return new AbstractRule_2_RuleCall_EnumRule(current, this);
 			default: return null;
 		}
 	}
@@ -643,6 +647,26 @@ protected class AbstractRule_1_RuleCall_TerminalRule extends RuleCallToken {
 		if(checkForRecursion(TerminalRule_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) return null;
 		return new TerminalRule_Group(current, this).firstSolution();
+	}
+}
+
+// EnumRule
+protected class AbstractRule_2_RuleCall_EnumRule extends RuleCallToken {
+	
+	public AbstractRule_2_RuleCall_EnumRule(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if(checkForRecursion(EnumRule_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier())) return null;
+		return new EnumRule_Group(current, this).firstSolution();
 	}
 }
 
@@ -5039,5 +5063,553 @@ protected class CharacterRange_1_2_Assignment_right extends AssignmentToken  {
 
 
 /************ end Rule CharacterRange ****************/
+
+
+/************ begin Rule EnumRule ****************
+ *
+ * EnumRule:
+ *   "enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
+ *
+ **/
+
+// "enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";"
+protected class EnumRule_Group extends GroupToken {
+	
+	public EnumRule_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getGroup();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumRule_5_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumRule_4_Assignment_alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			while(s2 != null) {
+				Solution s3 = new EnumRule_3_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				while(s3 != null) {
+					Solution s4 = new EnumRule_2_Group(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					while(s4 != null) {
+						Solution s5 = new EnumRule_1_Assignment_name(s4.getCurrent(), s4.getPredecessor()).firstSolution();
+						while(s5 != null) {
+							Solution s6 = new EnumRule_0_Keyword_enum(s5.getCurrent(), s5.getPredecessor()).firstSolution();
+							if(s6 != null) {
+								last = s6.getPredecessor();
+								return s6;
+							} else {
+								s5 = s5.getPredecessor().nextSolution(this,s5);
+							}
+						}
+						s4 = s4.getPredecessor().nextSolution(this,s4);
+					}
+					s3 = s3.getPredecessor().nextSolution(this,s3);
+				}
+				s2 = s2.getPredecessor().nextSolution(this,s2);
+			}
+			s1 = s1.getPredecessor().nextSolution(this,s1);
+		}
+		return null;
+	}
+}
+
+// "enum"
+protected class EnumRule_0_Keyword_enum extends KeywordToken  {
+	
+	public EnumRule_0_Keyword_enum(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getEnumKeyword_0();
+	}	
+}
+
+// name=ID
+protected class EnumRule_1_Assignment_name extends AssignmentToken  {
+	
+	public EnumRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getNameAssignment_1();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0();
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+// ("returns" type=TypeRef)?
+protected class EnumRule_2_Group extends GroupToken {
+	
+	public EnumRule_2_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getGroup_2();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumRule_2_1_Assignment_type(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumRule_2_0_Keyword_returns(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
+				last = s2.getPredecessor();
+				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+			}
+		}
+		return null;
+	}
+}
+
+// "returns"
+protected class EnumRule_2_0_Keyword_returns extends KeywordToken  {
+	
+	public EnumRule_2_0_Keyword_returns(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getReturnsKeyword_2_0();
+	}	
+}
+
+// type=TypeRef
+protected class EnumRule_2_1_Assignment_type extends AssignmentToken  {
+	
+	public EnumRule_2_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getTypeAssignment_2_1();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("type");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
+				Solution s = new TypeRef_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+
+// ":"
+protected class EnumRule_3_Keyword extends KeywordToken  {
+	
+	public EnumRule_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getColonKeyword_3();
+	}	
+}
+
+// alternatives=EnumLiterals
+protected class EnumRule_4_Assignment_alternatives extends AssignmentToken  {
+	
+	public EnumRule_4_Assignment_alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getAlternativesAssignment_4();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("alternatives",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("alternatives");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier())) {
+				Solution s = new EnumLiterals_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+// ";"
+protected class EnumRule_5_Keyword extends KeywordToken  {
+	
+	public EnumRule_5_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5();
+	}	
+}
+
+
+/************ end Rule EnumRule ****************/
+
+
+/************ begin Rule EnumLiterals ****************
+ *
+ * EnumLiterals returns AbstractElement:
+ *   EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+ *
+ **/
+
+// EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+protected class EnumLiterals_Group extends GroupToken {
+	
+	public EnumLiterals_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getGroup();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumLiterals_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumLiterals_0_RuleCall_EnumLiteralDeclaration(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
+				last = s2.getPredecessor();
+				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+			}
+		}
+		return null;
+	}
+}
+
+// EnumLiteralDeclaration
+protected class EnumLiterals_0_RuleCall_EnumLiteralDeclaration extends RuleCallToken {
+	
+	public EnumLiterals_0_RuleCall_EnumLiteralDeclaration(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if(checkForRecursion(EnumLiteralDeclaration_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) return null;
+		return new EnumLiteralDeclaration_Group(current, this).firstSolution();
+	}
+}
+
+// ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+protected class EnumLiterals_1_Group extends GroupToken {
+	
+	public EnumLiterals_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getGroup_1();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumLiterals_1_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumLiterals_1_0_Action_Alternatives_groups(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
+				last = s2.getPredecessor();
+				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+			}
+		}
+		return null;
+	}
+}
+
+// {Alternatives.groups+=current}
+protected class EnumLiterals_1_0_Action_Alternatives_groups extends ActionToken  {
+
+	public EnumLiterals_1_0_Action_Alternatives_groups(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getAlternativesgroupsAction_1_0();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if(!current.isInstanceOf(grammarAccess.getEnumLiteralsAccess().getAlternativesgroupsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("groups", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("groups")) return null;
+		return new Solution(getDescr((EObject)val));
+	}
+}
+
+// ("|" groups+=EnumLiteralDeclaration)+
+protected class EnumLiterals_1_1_Group extends GroupToken {
+	
+	public EnumLiterals_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getGroup_1_1();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumLiterals_1_1_1_Assignment_groups(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumLiterals_1_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
+				last = s2.getPredecessor();
+				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+			}
+		}
+		return null;
+	}
+}
+
+// "|"
+protected class EnumLiterals_1_1_0_Keyword extends KeywordToken  {
+	
+	public EnumLiterals_1_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getVerticalLineKeyword_1_1_0();
+	}	
+}
+
+// groups+=EnumLiteralDeclaration
+protected class EnumLiterals_1_1_1_Assignment_groups extends AssignmentToken  {
+	
+	public EnumLiterals_1_1_1_Assignment_groups(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumLiteralsAccess().getGroupsAssignment_1_1_1();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("groups",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("groups");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) {
+				Solution s = new EnumLiteralDeclaration_Group(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+
+
+
+/************ end Rule EnumLiterals ****************/
+
+
+/************ begin Rule EnumLiteralDeclaration ****************
+ *
+ * EnumLiteralDeclaration:
+ *   enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
+ *
+ **/
+
+// enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?
+protected class EnumLiteralDeclaration_Group extends GroupToken {
+	
+	public EnumLiteralDeclaration_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralDeclarationAccess().getGroup();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumLiteralDeclaration_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumLiteralDeclaration_0_Assignment_enumLiteral(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
+				last = s2.getPredecessor();
+				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+			}
+		}
+		return null;
+	}
+}
+
+// enumLiteral=[ecore::EEnumLiteral]
+protected class EnumLiteralDeclaration_0_Assignment_enumLiteral extends AssignmentToken  {
+	
+	public EnumLiteralDeclaration_0_Assignment_enumLiteral(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralAssignment_0();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("enumLiteral",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("enumLiteral");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0(); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+// ("=" literal=Keyword)?
+protected class EnumLiteralDeclaration_1_Group extends GroupToken {
+	
+	public EnumLiteralDeclaration_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEnumLiteralDeclarationAccess().getGroup_1();
+	}
+
+	@Override
+	protected Solution createSolution() {	
+		Solution s1 = new EnumLiteralDeclaration_1_1_Assignment_literal(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new EnumLiteralDeclaration_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 != null) {
+				last = s2.getPredecessor();
+				return s2;
+			} else {
+				s1 = s1.getPredecessor().nextSolution(this,s1);
+			}
+		}
+		return null;
+	}
+}
+
+// "="
+protected class EnumLiteralDeclaration_1_0_Keyword extends KeywordToken  {
+	
+	public EnumLiteralDeclaration_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEnumLiteralDeclarationAccess().getEqualsSignKeyword_1_0();
+	}	
+}
+
+// literal=Keyword
+protected class EnumLiteralDeclaration_1_1_Assignment_literal extends AssignmentToken  {
+	
+	public EnumLiteralDeclaration_1_1_Assignment_literal(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEnumLiteralDeclarationAccess().getLiteralAssignment_1_1();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("literal",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("literal");
+
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) {
+				Solution s = new Keyword_Assignment_value(param, this).firstSolution();
+				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+
+		return null;
+	}
+}
+
+
+
+/************ end Rule EnumLiteralDeclaration ****************/
 
 }

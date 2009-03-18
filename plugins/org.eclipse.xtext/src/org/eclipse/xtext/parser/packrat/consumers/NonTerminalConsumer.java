@@ -16,6 +16,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.IBacktracker;
@@ -733,6 +734,10 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	protected final int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean,
 			ICharacterClass notFollowedBy, boolean optional) {
 		return consumerUtil.consumeKeyword(keyword, feature, isMany, isBoolean, notFollowedBy, optional);
+	}
+
+	protected final int consumeEnum(EnumLiteralDeclaration literal, ICharacterClass notFollowedBy) {
+		return consumerUtil.consumeEnum(literal, notFollowedBy);
 	}
 
 	protected final int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany,

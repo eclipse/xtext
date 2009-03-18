@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.packrat.consumers;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
@@ -28,4 +29,6 @@ public interface IConsumerUtility {
 			boolean isMany, boolean isDatatype, boolean isBoolean, AbstractElement grammarElement, boolean optional) throws Exception;
 
 	void consumeAction(Action action, boolean isMany);
+
+	int consumeEnum(EnumLiteralDeclaration literal, ICharacterClass notFollowedBy);
 }

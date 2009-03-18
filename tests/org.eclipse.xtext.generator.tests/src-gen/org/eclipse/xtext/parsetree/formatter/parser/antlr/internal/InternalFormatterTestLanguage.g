@@ -94,10 +94,6 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0(), null); 
-    }
-
     |
     { 
         currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1(), currentNode); 
@@ -106,10 +102,6 @@ ruleRoot returns [EObject current=null]
     { 
         $current = $this_TestIndentation_2.current; 
         currentNode = currentNode.getParent();
-    }
-
-    { 
-    createLeafNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1(), null); 
     }
 ));
 
@@ -299,6 +291,7 @@ ruleTestIndentation returns [EObject current=null]
         createLeafNode(grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3(), null); 
     }
 );
+
 
 
 

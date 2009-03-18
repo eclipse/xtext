@@ -12,6 +12,7 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfigurat
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.EnumLiteralConsumer;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
 
 /**
@@ -82,6 +83,10 @@ public abstract class AbstractParserConfiguration implements
 
 	public KeywordConsumer createKeywordConsumer() {
 		return new KeywordConsumer(this);
+	}
+
+	public EnumLiteralConsumer createLiteralConsumer() {
+		return new EnumLiteralConsumer(this);
 	}
 
 	public ITerminalConsumer[] getInitialHiddenTerminals() {

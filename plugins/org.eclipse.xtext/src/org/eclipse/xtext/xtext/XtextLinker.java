@@ -28,6 +28,7 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -82,10 +83,27 @@ public class XtextLinker extends Linker {
 			public void setTarget(EObject object, EStructuralFeature feature) {
 				super.setTarget(object, feature);
 				// we don't want to mark generated types as errors unless generation fails
-				filter = (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() &&
-					((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel) ||
-					(feature == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() &&
-					(object instanceof GeneratedMetamodel));
+				filter = isTypeRef(object, feature) ||
+					isGeneratedPackage(object, feature) ||
+					isEnumLiteral(object, feature);
+			}
+
+			private boolean isEnumLiteral(EObject object, EStructuralFeature feature) {
+				if (feature == XtextPackage.eINSTANCE.getEnumLiteralDeclaration_EnumLiteral()) {
+					EnumRule rule = GrammarUtil.containingEnumRule(object);
+					return rule.getType() == null;
+				}
+				return false;
+			}
+
+			private boolean isGeneratedPackage(EObject object, EStructuralFeature feature) {
+				return (feature == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() &&
+						(object instanceof GeneratedMetamodel));
+			}
+
+			private boolean isTypeRef(EObject object, EStructuralFeature feature) {
+				return (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() &&
+						((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel);
 			}
 
 		};

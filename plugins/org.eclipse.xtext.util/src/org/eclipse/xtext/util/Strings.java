@@ -16,11 +16,15 @@ import java.util.List;
 public class Strings {
 
 	public static final String[] EMPTY_ARRAY = new String[0];
-	
+
 	public static boolean equalsIgnoreWhitespace(String left, String right) {
 		String l = left==null?"":left.replaceAll("\\s","");
 		String r = right==null?"":right.replaceAll("\\s","");
 		return l.equals(r);
+	}
+
+	public static boolean equal(String literal, String name) {
+		return isEmpty(name) ? isEmpty(literal) : literal.equals(name);
 	}
 
 	public static String notNull(Object o) {

@@ -109,6 +109,7 @@ public class ImportUriTestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getExtendsTypeIDTerminalRuleCall_3_0_1() { return cExtendsTypeIDTerminalRuleCall_3_0_1; }
 	}
 	
+	
 	private MainElements pMain;
 	private ImportElements pImport;
 	private TypeElements pType;

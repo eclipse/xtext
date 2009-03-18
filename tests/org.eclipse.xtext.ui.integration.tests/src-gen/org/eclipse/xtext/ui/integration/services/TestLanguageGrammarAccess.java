@@ -57,6 +57,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 	
+	
 	private FileElements pFile;
 	private StuffElements pStuff;
 	

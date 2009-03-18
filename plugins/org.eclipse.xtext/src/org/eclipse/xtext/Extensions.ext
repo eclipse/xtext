@@ -17,7 +17,10 @@ extension org::eclipse::xtext::GrammarUtil reexport;
 	 
 ParserRule calledParserRule(RuleCall this) :
 	if ParserRule.isInstance(rule) then rule;
-	
+
+EnumRule calledEnumRule(RuleCall this) :
+	if EnumRule.isInstance(rule) then rule;
+		
 boolean isKeywordAssignment(Assignment a) :
 	Keyword.isInstance(a.terminal) || 
 	a.eAllContents.forAll(e | !(RuleCall.isInstance(e)));
@@ -28,6 +31,9 @@ boolean isRuleAssignment(Assignment a) :
 boolean isParserRuleAssignment(Assignment a) :
 	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null;
 
+boolean isEnumRuleAssignment(Assignment a) :
+	a.isRuleAssignment() && ((RuleCall) a.terminal).calledEnumRule() != null;
+	
 Boolean isBoolean(Assignment a) :
 	a.operator == "?="
 ;

@@ -45,6 +45,9 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextNegatedTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextUntilTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextWildcardConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCharacterRangeConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextEnumRuleConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextEnumLiteralsConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextEnumLiteralDeclarationConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -92,6 +95,9 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     private XtextUntilTokenConsumer untilTokenConsumer;
     private XtextWildcardConsumer wildcardConsumer;
     private XtextCharacterRangeConsumer characterRangeConsumer;
+    private XtextEnumRuleConsumer enumRuleConsumer;
+    private XtextEnumLiteralsConsumer enumLiteralsConsumer;
+    private XtextEnumLiteralDeclarationConsumer enumLiteralDeclarationConsumer;
 
 	private XtextGrammarAccess grammarAccess;
 
@@ -215,6 +221,15 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		characterRangeConsumer = new XtextCharacterRangeConsumer(
     		this, null
     	);
+		enumRuleConsumer = new XtextEnumRuleConsumer(
+    		this, null
+    	);
+		enumLiteralsConsumer = new XtextEnumLiteralsConsumer(
+    		this, null
+    	);
+		enumLiteralDeclarationConsumer = new XtextEnumLiteralDeclarationConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -260,6 +275,9 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getUntilTokenConsumer().setRule(grammarAccess.getUntilTokenAccess());
 		getWildcardConsumer().setRule(grammarAccess.getWildcardAccess());
 		getCharacterRangeConsumer().setRule(grammarAccess.getCharacterRangeAccess());
+		getEnumRuleConsumer().setRule(grammarAccess.getEnumRuleAccess());
+		getEnumLiteralsConsumer().setRule(grammarAccess.getEnumLiteralsAccess());
+		getEnumLiteralDeclarationConsumer().setRule(grammarAccess.getEnumLiteralDeclarationAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -276,6 +294,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
 		getGrammarIdConsumer().setIdConsumer(getIdConsumer());
 
+		getAbstractRuleConsumer().setEnumRuleConsumer(getEnumRuleConsumer());
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setTerminalRuleConsumer(getTerminalRuleConsumer());
 
@@ -367,6 +386,15 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
+		getEnumRuleConsumer().setEnumLiteralsConsumer(getEnumLiteralsConsumer());
+		getEnumRuleConsumer().setIdConsumer(getIdConsumer());
+		getEnumRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
+
+		getEnumLiteralsConsumer().setEnumLiteralDeclarationConsumer(getEnumLiteralDeclarationConsumer());
+
+		getEnumLiteralDeclarationConsumer().setIdConsumer(getIdConsumer());
+		getEnumLiteralDeclarationConsumer().setKeywordConsumer(getKeywordConsumer());
+
 		getGrammarConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getGrammarConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
 		getGrammarConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
@@ -382,11 +410,11 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getGeneratedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
-		getGeneratedMetamodelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$66$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$67$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
-		getReferencedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$66$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$67$Delimiter);
 		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
 		getParserRuleConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getParserRuleConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
@@ -412,7 +440,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getActionConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
 		getActionConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getActionConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
-		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$66$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$67$Delimiter);
 		getRuleCallConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
 		getAssignmentConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getAssignmentConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
@@ -444,6 +472,14 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getWildcardConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getCharacterRangeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
+		getEnumRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
+		getEnumRuleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
+		getEnumRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
+		getEnumRuleConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
+		getEnumRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
+		getEnumLiteralsConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
+		getEnumLiteralDeclarationConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
+		getEnumLiteralDeclarationConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -592,6 +628,18 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
     public XtextCharacterRangeConsumer getCharacterRangeConsumer() {
     	return characterRangeConsumer;
+    }
+
+    public XtextEnumRuleConsumer getEnumRuleConsumer() {
+    	return enumRuleConsumer;
+    }
+
+    public XtextEnumLiteralsConsumer getEnumLiteralsConsumer() {
+    	return enumLiteralsConsumer;
+    }
+
+    public XtextEnumLiteralDeclarationConsumer getEnumLiteralDeclarationConsumer() {
+    	return enumLiteralDeclarationConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

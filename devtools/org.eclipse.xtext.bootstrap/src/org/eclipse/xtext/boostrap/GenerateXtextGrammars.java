@@ -18,7 +18,6 @@ public class GenerateXtextGrammars {
 	private static Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
 
 	public static void main(String... args) {
-
 		try {
 			logger.info("Generating Xtext and default languages.");
 			new WorkflowFacade("org/eclipse/xtext/boostrap/GenerateXtext.mwe").run();

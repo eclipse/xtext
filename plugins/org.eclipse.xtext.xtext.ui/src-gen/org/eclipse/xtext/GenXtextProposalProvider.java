@@ -413,6 +413,60 @@ public class GenXtextProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
+			
+	public List<? extends ICompletionProposal> completeEnumRule_Name(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEnumRule_Name feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal(assignment, "EnumRule_Name", contentAssistContext));
+	}
+			
+	public List<? extends ICompletionProposal> completeEnumRule_Type(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEnumRule_Type feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeEnumRule_Alternatives(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEnumRule_Alternatives feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeEnumLiterals_Groups(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEnumLiterals_Groups feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+			
+	public List<? extends ICompletionProposal> completeEnumLiteralDeclaration_EnumLiteral(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEnumLiteralDeclaration_EnumLiteral feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
+	}
+			
+	public List<? extends ICompletionProposal> completeEnumLiteralDeclaration_Literal(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEnumLiteralDeclaration_Literal feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
+		}
+		return Collections.emptyList();
+	}
     
 			
 	public List<? extends ICompletionProposal> complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
@@ -430,6 +484,9 @@ public class GenXtextProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
+			
+			
+			
 			
 			
 			

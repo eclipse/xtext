@@ -349,6 +349,7 @@ public class Bug250313GrammarAccess implements IGrammarAccess {
 		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
 	
+	
 	private ModelElements pModel;
 	private DatatypeElements pDatatype;
 	private NestedDatatypeElements pNestedDatatype;
