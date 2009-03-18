@@ -91,7 +91,7 @@ public class XtextLinker extends Linker {
 			private boolean isEnumLiteral(EObject object, EStructuralFeature feature) {
 				if (feature == XtextPackage.eINSTANCE.getEnumLiteralDeclaration_EnumLiteral()) {
 					EnumRule rule = GrammarUtil.containingEnumRule(object);
-					return rule.getType() == null;
+					return rule.getType() == null || rule.getType().getClassifier() == null;
 				}
 				return false;
 			}
