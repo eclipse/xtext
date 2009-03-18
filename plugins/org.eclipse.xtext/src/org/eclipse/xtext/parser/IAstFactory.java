@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.ValueConverterException;

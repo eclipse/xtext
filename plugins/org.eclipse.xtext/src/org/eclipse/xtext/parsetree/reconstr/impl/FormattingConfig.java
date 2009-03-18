@@ -42,9 +42,9 @@ public class FormattingConfig extends AbstractFormattingConfig {
 				return " ";
 		}
 
-		public void seek(int cols) {
-			column += cols;
-		}
+//		public void seek(int cols) {
+//			column += cols;
+//		}
 
 		protected String wrap(int lines) {
 			column = 0;
@@ -82,7 +82,7 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	public class LinewrapLocator extends ElementLocator {
 
-		private int lines;
+		private final int lines;
 
 		public LinewrapLocator(int lines) {
 			super();

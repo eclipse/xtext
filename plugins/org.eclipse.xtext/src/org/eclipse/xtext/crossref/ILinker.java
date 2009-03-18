@@ -11,22 +11,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.crossref.impl.AbstractLinker;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Stable(since="0.7.0", subClass=AbstractLinker.class)
 public interface ILinker {
-	
+
 	/**
-	 * sets cross references in the passed {@link EObject} and it's {@link EObject#eAllContents()}, 
+	 * sets cross references in the passed {@link EObject} and its {@link EObject#eAllContents()},
 	 * using the information available (usually using the {@link AbstractNode} model associated via {@link NodeAdapter})
 	 * 
 	 * @param model
 	 * @param diagnosticsConsumer
 	 */
 	void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
-	
+
 }

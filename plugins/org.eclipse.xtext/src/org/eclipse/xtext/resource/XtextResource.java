@@ -24,7 +24,6 @@ import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ISwitchingParser;
-import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -148,7 +147,7 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-			parseResult = parser.parse(inputStream);
+		parseResult = parser.parse(inputStream);
 		if (parseResult != null) {
 			getErrors().addAll(createDiagnostics(parseResult));
 			EObject rootElement = parseResult.getRootASTElement();
