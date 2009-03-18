@@ -143,7 +143,7 @@ String gaElementAccessor(AbstractElement ele):
  * @return The java statement
  */	
 String gaRuleElementAccessor(AbstractElement ele):
-	ele.containingParserRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
+	ele.containingRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
 		
 /**
  * Returns the invokation of the element accessor method as full qualified Java statement.

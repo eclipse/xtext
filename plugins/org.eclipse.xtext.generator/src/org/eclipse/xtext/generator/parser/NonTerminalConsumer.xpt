@@ -18,9 +18,10 @@
 
 «DEFINE root FOR Grammar»
 «EXPAND nonTerminalConsumer FOREACH rules.typeSelect(ParserRule)»
+«EXPAND nonTerminalConsumer FOREACH rules.typeSelect(EnumRule)»
 «ENDDEFINE»
 
-«DEFINE nonTerminalConsumer FOR ParserRule»
+«DEFINE nonTerminalConsumer FOR AbstractRule»
 «FILE this.fullConsumerClassName().asPath()+".java" SRC_GEN-»
 /*
 «fileHeader()»
@@ -426,6 +427,10 @@ GroupConsumer«ENDDEFINE»
 			return consumeKeyword(getElement(), null, false, false, get«delimiterFieldName().toFirstUpper()»(), optional);
 «ENDDEFINE»
 
+«DEFINE doConsumeBody FOR EnumLiteralDeclaration-»
+			return consumeEnum(getElement(), get«literal.delimiterFieldName().toFirstUpper()»());
+«ENDDEFINE»
+
 «DEFINE doConsumeBody FOR RuleCall-»
 «EXPAND doConsumeBody(this) FOR rule-»
 «ENDDEFINE»
@@ -440,6 +445,10 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE doConsumeBody(RuleCall call) FOR ParserRule-»
 			return consumeNonTerminal(«consumerFieldName()», null, false, «isDatatypeRule()», false, getElement(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(RuleCall call) FOR EnumRule-»
+			return consumeNonTerminal(«consumerFieldName()», null, false, false, false, getElement(), optional);
 «ENDDEFINE»
 
 «REM»
@@ -502,6 +511,10 @@ GroupConsumer«ENDDEFINE»
 			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
 «ENDDEFINE»
 
+«DEFINE doConsumeBody(Assignment assignment, RuleCall call) FOR EnumRule-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», false, «assignment.isBoolean()», getElement(), optional);
+«ENDDEFINE»
+
 «DEFINE doConsumeBody(Assignment assignment) FOR CrossReference-»
 «EXPAND doConsumeBody(assignment, this) FOR terminal-»
 «ENDDEFINE»
@@ -524,6 +537,10 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR ParserRule-»
 			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», «isDatatypeRule()», «assignment.isBoolean()», getElement(), optional);
+«ENDDEFINE»
+
+«DEFINE doConsumeBody(Assignment assignment, CrossReference reference, RuleCall call) FOR EnumRule-»
+			return consumeNonTerminal(«consumerFieldName()», "«assignment.feature»", «assignment.isMultiple()», false, «assignment.isBoolean()», getElement(), optional);
 «ENDDEFINE»
 
 «REM»

@@ -46,6 +46,8 @@ public class «gaSimpleName()» implements IGrammarAccess {
 	
 	«EXPAND parseRuleClasses FOREACH rules.typeSelect(ParserRule)-»
 	
+	«EXPAND parseRuleClasses FOREACH rules.typeSelect(EnumRule)-»
+	
 	«EXPAND cache FOREACH rules-»
 	
 	private final GrammarProvider grammarProvider;
@@ -97,13 +99,31 @@ public class «gaSimpleName()» implements IGrammarAccess {
 	}
 «ENDDEFINE»
 
-	
+«DEFINE parseRuleClasses FOR EnumRule»
+	public class «gaRuleAccesorClassName()» implements IEnumRuleAccess {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
+«FOREACH containedAbstractElements() AS e-»
+		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
+«ENDFOREACH-»
+		
+«grammarFragmentToStr("		//")»
+		public EnumRule getRule() { return rule; }
+«FOREACH containedAbstractElements() AS e»
+«grammarFragmentToStr(e, "		//")»
+		public «e.getClassName()» «e.gaElementAccessMethodeName()»() { return «e.gaElementAccessorLocalVarName()»; }
+«ENDFOREACH-»
+	}
+«ENDDEFINE»	
 
 «DEFINE cache FOR AbstractRule»
 «ERROR "unknown rule type " + metaType»
 «ENDDEFINE»
 
 «DEFINE cache FOR ParserRule-»
+	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
+«ENDDEFINE»
+
+«DEFINE cache FOR EnumRule-»
 	private «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
 «ENDDEFINE»
 
@@ -129,6 +149,23 @@ public class «gaSimpleName()» implements IGrammarAccess {
 «ENDIF-»
 	
 	public ParserRule «gaRuleAccessor()» {
+		return «gaElementsAccessor()».getRule();
+	}
+«ENDDEFINE»
+
+«DEFINE getter(Grammar original) FOR EnumRule»
+«grammarFragmentToStr("	//")»
+«IF containingGrammar() == original-»
+	public «gaRuleAccesorClassName()» «gaElementsAccessor()» {
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
+	}
+«ELSE-»	
+	public «usedGrammar(original).gaSimpleName()».«gaRuleAccesorClassName()» «gaElementsAccessor()» {
+		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
+	}
+«ENDIF-»
+	
+	public EnumRule «gaRuleAccessor()» {
 		return «gaElementsAccessor()».getRule();
 	}
 «ENDDEFINE»

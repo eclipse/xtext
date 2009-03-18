@@ -29,6 +29,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenClassGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenEnumGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenPackageGeneratorAdapter;
 import org.eclipse.emf.common.notify.Adapter;
@@ -92,11 +93,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		String javaPath, xmiPath;
 		if(javaModelDirectory == null || "".equals(javaModelDirectory))
 			javaPath = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
-		else 
+		else
 			javaPath = javaModelDirectory;
 		if(xmiModelDirectory == null || "".equals(xmiModelDirectory))
 			xmiPath = javaPath + "/" + grammar.getName().substring(0, grammar.getName().lastIndexOf('.')).replace('.', '/');
-		else 
+		else
 			xmiPath = xmiModelDirectory;
 		generateEcoreJavaClasses(packs, getBasePackage(grammar), javaPath, xmiPath, grammar);
 	}
@@ -201,6 +202,22 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 						return new GenModelGeneratorAdapterFactory() {
 
 							@Override
+							public Adapter createGenEnumAdapter() {
+								return new GenEnumGeneratorAdapter(this) {
+									@Override
+									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
+										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath),
+												" * $Id" + "$");
+									}
+
+									@Override
+									protected URI toURI(String pathName) {
+										return URI.createFileURI(javaPath);
+									}
+								};
+							}
+							
+							@Override
 							public Adapter createGenClassAdapter() {
 								return new GenClassGeneratorAdapter(this) {
 									@Override
@@ -263,11 +280,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	private String xmiModelDirectory = null;
 	
 	public void setJavaModelDirectory(String dir) {
-		javaModelDirectory = dir;		
+		javaModelDirectory = dir;
 	}
 	
 	public void setXmiModelDirectory(String dir) {
-		xmiModelDirectory = dir;		
+		xmiModelDirectory = dir;
 	}
 
 	public String getGeneratedEPackageName(Grammar g, EPackage pack) {

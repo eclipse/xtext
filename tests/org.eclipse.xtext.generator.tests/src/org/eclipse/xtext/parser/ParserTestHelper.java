@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
@@ -59,5 +60,12 @@ public class ParserTestHelper {
 		XtextResource result = (XtextResource) factory.createResource(uri);
 		result.setParser(parser);
 		return result;
+	}
+
+	public EObject getModel(String model) throws IOException {
+		XtextResource res= getResourceFromString(model);
+		if (res.getContents().isEmpty())
+			return null;
+		return res.getContents().get(0);
 	}
 }
