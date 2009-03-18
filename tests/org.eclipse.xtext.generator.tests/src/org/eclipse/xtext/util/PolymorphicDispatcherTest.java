@@ -8,15 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import static org.eclipse.xtext.util.CollectionUtils.*;
+import static org.eclipse.xtext.util.CollectionUtils.list;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Method;
 import java.math.BigInteger;
 
 import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 @SuppressWarnings("unused")
 public class PolymorphicDispatcherTest extends TestCase {
@@ -100,5 +104,45 @@ public class PolymorphicDispatcherTest extends TestCase {
 		} catch (IllegalStateException e) {
 			// ignore
 		}
+	}
+	
+	public void testPrivateMethodAccess() {
+		Object o1 = new Object() {
+			private String label(Integer i) {
+				return "Integer_" + i;
+			}
+			
+			private String label(Number n) {
+				return "Number_" + n;
+			}
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(o1));
+		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
+		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
+	}
+	
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target({ ElementType.METHOD})
+	private @interface TestLabelAnnotation {
+	}
+	
+	public void testCustomFilter() {
+		Object o1 = new Object() {
+			@TestLabelAnnotation
+			private String sillyMethodName(Integer i) {
+				return "Integer_" + i;
+			}
+			private String label(Number n) {
+				return "Number_" + n;
+			}
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>(list(o1), new Filter<Method>() {
+			public boolean accept(Method param) {
+				return ( (param.getName().equals("label")) || (param.getAnnotation(TestLabelAnnotation.class) != null));
+			}
+		});
+
+		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
+		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
 	}
 }

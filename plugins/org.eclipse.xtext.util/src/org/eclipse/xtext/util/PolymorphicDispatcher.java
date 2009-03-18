@@ -21,7 +21,6 @@ import org.apache.log4j.Logger;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public class PolymorphicDispatcher<RT> {
 
@@ -32,17 +31,11 @@ public class PolymorphicDispatcher<RT> {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 *
 	 */
 	private final class DefaultComparator implements Comparator<MethodDesc> {
-		/**
-		 *
-		 */
+
 		private final List<? extends Object> targets;
 
-		/**
-		 * @param targets
-		 */
 		private DefaultComparator(List<? extends Object> targets) {
 			this.targets = targets;
 		}
@@ -86,7 +79,6 @@ public class PolymorphicDispatcher<RT> {
 	}
 
 	private ErrorHandler<RT> handler = new ErrorHandler<RT>() {
-
 		public RT handle(Exception e) {
 			log.error(e.getMessage(), e);
 			return null;
@@ -113,9 +105,14 @@ public class PolymorphicDispatcher<RT> {
 		this.comparator = new DefaultComparator(targets);
 	}
 
-	public PolymorphicDispatcher(List<? extends Object> targets, Filter<Method> methodFilter,
+	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter) {
+		this.targets = targets;
+		this.methodFilter = methodFilter;
+		this.comparator = new DefaultComparator(targets);
+	}
+	
+	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter,
 			Comparator<MethodDesc> comparator, ErrorHandler<RT> handler) {
-		super();
 		this.targets = targets;
 		this.methodFilter = methodFilter;
 		this.comparator = comparator;
