@@ -69,6 +69,8 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 	private EditorSelectionChangedListener editorSelectionChangedListener;
 
+	private IXtextModelListener modelListener;
+
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -94,24 +96,47 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
 
 			// TODO: it would be better to have NodeContentAdapter update the
-			// parts of the outline model that need updates
-			xtextDocument.addModelListener(new IXtextModelListener() {
-				public void modelChanged(XtextResource resource) {
-					if (logger.isDebugEnabled()) {
-						logger.debug("Document has been changed. Triggering update of outline.");
-					}
-					runInSWTThread(new Runnable() {
-						public void run() {
-							TreeViewer viewer = getTreeViewer();
-							IDocument document = sourceViewer.getDocument();
-							internalSetInput(XtextDocumentUtil.get(document));
-							viewer.refresh();
-						}
-					});
-				}
-			});
+			// parts of the outline model that need updates instead of
+			// installing a model listener.
+			installModelListener();
 
 			internalSetInput(xtextDocument);
+		}
+	}
+
+	private void installModelListener() {
+		if (sourceViewer != null) {
+			IDocument document = sourceViewer.getDocument();
+			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
+
+			if (modelListener == null) {
+				modelListener = new IXtextModelListener() {
+					public void modelChanged(XtextResource resource) {
+						if (logger.isDebugEnabled()) {
+							logger.debug("Document has been changed. Triggering update of outline.");
+						}
+						runInSWTThread(new Runnable() {
+							public void run() {
+								TreeViewer viewer = getTreeViewer();
+								IDocument document = sourceViewer.getDocument();
+								internalSetInput(XtextDocumentUtil.get(document));
+								viewer.refresh();
+							}
+						});
+					}
+				};
+			}
+			xtextDocument.addModelListener(modelListener);
+		}
+	}
+
+	private void uninstallModelListener() {
+		if (sourceViewer != null) {
+			IDocument document = sourceViewer.getDocument();
+			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
+			if (xtextDocument != null) {
+				xtextDocument.removeModelListener(modelListener);
+			}
 		}
 	}
 
@@ -143,6 +168,7 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 		outlineSelectionChangedListener = null;
 		editorSelectionChangedListener.uninstall(sourceViewer.getSelectionProvider());
 		editorSelectionChangedListener = null;
+		uninstallModelListener();
 		provider.dispose();
 		provider = null;
 		super.dispose();
@@ -300,5 +326,5 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 			}
 		});
 	}
-	
+
 }
