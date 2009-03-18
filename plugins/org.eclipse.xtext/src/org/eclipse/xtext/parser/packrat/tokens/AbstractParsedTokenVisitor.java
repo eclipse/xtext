@@ -99,4 +99,7 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 		param.accept(this);
 	}
 
+	public void visitParsedEnumLiteral(ParsedEnumLiteral token) {
+		visitParsedToken(token);
+	}
 }

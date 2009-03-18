@@ -11,6 +11,7 @@ package org.eclipse.xtext.resource.metamodel;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -25,8 +26,8 @@ import org.eclipse.xtext.util.Strings;
  */
 public abstract class EClassifierInfo {
 
-	private EClassifier eClassifier;
-	private boolean isGenerated;
+	private final EClassifier eClassifier;
+	private final boolean isGenerated;
 
 	private EClassifierInfo(EClassifier metaType, boolean isGenerated) {
 		super();
@@ -49,7 +50,7 @@ public abstract class EClassifierInfo {
 	public boolean isGenerated() {
 		return isGenerated;
 	}
-	
+
 	public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
 		return getEClassifier().equals(subTypeInfo.getEClassifier());
 	}
@@ -64,23 +65,22 @@ public abstract class EClassifierInfo {
 		public EClassInfo(EClassifier metaType, boolean isGenerated) {
 			super(metaType, isGenerated);
 		}
-		
+
 		@Override
 		public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
-			return super.isAssignableFrom(subTypeInfo) || 
-				(subTypeInfo instanceof EClassInfo) &&
-				getEClass().isSuperTypeOf((EClass) subTypeInfo.getEClassifier());
+			return super.isAssignableFrom(subTypeInfo) || (subTypeInfo instanceof EClassInfo)
+					&& getEClass().isSuperTypeOf((EClass) subTypeInfo.getEClassifier());
 		}
 
 		@Override
 		public boolean addSupertype(EClassifierInfo superTypeInfo) {
 			EClass eClass = getEClass();
 			EClass superEClass = (EClass) superTypeInfo.getEClassifier();
-			
+
 			if (superEClass.isSuperTypeOf(eClass)) {
 				return true;
 			}
-			
+
 			if (!isGenerated()) {
 				throw new IllegalStateException("Type " + this.getEClassifier().getName()
 						+ " is not generated and cannot be modified.");
@@ -88,7 +88,7 @@ public abstract class EClassifierInfo {
 			if (!(superTypeInfo instanceof EClassInfo)) {
 				throw new IllegalArgumentException("superTypeInfo must represent EClass");
 			}
-			
+
 			if (eClass.equals(superEClass))
 				// cannot add class as it's own superclass
 				// this usually happens due to a rule call
@@ -128,15 +128,17 @@ public abstract class EClassifierInfo {
 			}
 			EStructuralFeature newFeature = createFeatureWith(featureName, featureClassifier, isMultivalue,
 					isContainment);
-			
+
 			switch (EcoreUtil2.containsSemanticallyEqualFeature(getEClass(), newFeature)) {
-				case FeatureDoesNotExist: 
+				case FeatureDoesNotExist:
 					if (!isGenerated())
 						throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", parserElement);
 					return getEClass().getEStructuralFeatures().add(newFeature);
 				case FeatureExists:
 					// do nothing
 					return false;
+				default:
+					// do nothing
 			}
 
 			// feature with same name exists, but have a different, potentially
@@ -149,7 +151,7 @@ public abstract class EClassifierInfo {
 						parserElement);
 
 			EClassifier compatibleType = EcoreUtil2
-					.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
+			.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
 			if (compatibleType == null)
 				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
 						"Cannot find compatible type for features", parserElement);
@@ -169,14 +171,17 @@ public abstract class EClassifierInfo {
 				EReference reference = EcoreFactory.eINSTANCE.createEReference();
 				reference.setContainment(isContainment);
 				newFeature = reference;
-			}
-			else
+			} else {
 				newFeature = EcoreFactory.eINSTANCE.createEAttribute();
+			}
 			newFeature.setName(featureName);
 			newFeature.setEType(featureClassifier);
 			newFeature.setLowerBound(0);
 			newFeature.setUpperBound(isMultivalue ? -1 : 1);
 			newFeature.setUnique(!isMultivalue || (isContainment && featureClassifier instanceof EClass));
+			if (newFeature.getEType() instanceof EEnum) {
+				newFeature.setDefaultValue(null);
+			}
 			return newFeature;
 		}
 

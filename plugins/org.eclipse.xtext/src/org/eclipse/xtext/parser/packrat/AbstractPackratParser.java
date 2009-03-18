@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.AbstractParser;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfigurat
 import org.eclipse.xtext.parser.packrat.consumers.IRootConsumerListener;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.KeywordConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.EnumLiteralConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.debug.DebugBacktracker;
 import org.eclipse.xtext.parser.packrat.debug.DebugCharSequenceWithOffset;
@@ -97,6 +99,8 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 
 	private final KeywordConsumer keywordConsumer;
 
+	private final EnumLiteralConsumer literalConsumer;
+
 	private final IParserConfiguration parserConfiguration;
 
 	private final IBacktracker backtracker;
@@ -115,6 +119,7 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 		backtracker = new Backtracker(this);
 		parserConfiguration = createParserConfiguration();
 		keywordConsumer = createKeywordConsumer();
+		literalConsumer = createLiteralConsumer();
 		markerBuffer = new Marker[MARKER_BUFFER_SIZE];
 		hiddens = parserConfiguration.getInitialHiddenTerminals();
 		for(ITerminalConsumer hidden: this.hiddens)
@@ -159,6 +164,10 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 
 	protected KeywordConsumer createKeywordConsumer() {
 		return parserConfiguration.createKeywordConsumer();
+	}
+
+	protected EnumLiteralConsumer createLiteralConsumer() {
+		return parserConfiguration.createLiteralConsumer();
 	}
 
 	public CharSequence getInput() {
@@ -264,6 +273,11 @@ public abstract class AbstractPackratParser extends AbstractParser<CharSequence>
 	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy, boolean optional) {
 		keywordConsumer.configure(keyword, notFollowedBy);
 		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher(), optional);
+	}
+
+	public int consumeEnum(EnumLiteralDeclaration literal, ICharacterClass notFollowedBy) {
+		literalConsumer.configure(literal, notFollowedBy);
+		return consumeTerminal(literalConsumer, null, false, false, literal, ISequenceMatcher.Factory.nullMatcher(), false);
 	}
 
 	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean,

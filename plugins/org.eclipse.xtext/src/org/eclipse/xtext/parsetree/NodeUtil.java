@@ -190,11 +190,6 @@ public class NodeUtil {
 		return null;
 	}
 
-	/**
-	 * @param ele
-	 * @param structuralFeature
-	 * @return
-	 */
 	public static List<AbstractNode> findNodesForFeature(EObject ele, EStructuralFeature structuralFeature) {
 		NodeAdapter adapter = getNodeAdapter(ele);
 		if (adapter != null && adapter.getParserNode() != null) {

@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.packrat.debug;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.packrat.consumers.IConsumerUtility;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
@@ -86,6 +87,18 @@ public class DebugConsumerUtility implements IConsumerUtility {
 		int result = delegate.consumeTerminal(consumer, feature, isMany, isBoolean, grammarElement, notMatching, optional);
 		if (log.isDebugEnabled()) {
 			log.debug("consumeTerminal(" + consumer + ") = " + result);
+		}
+		return result;
+	}
+
+	public int consumeEnum(EnumLiteralDeclaration literal, ICharacterClass notFollowedBy) {
+		if (log.isDebugEnabled()) {
+			log.debug("consumeEnum(enum = '" + literal.getEnumLiteral().getName() + "', " +
+					"literal = " + literal.getLiteral() + ")");
+		}
+		int result = delegate.consumeEnum(literal, notFollowedBy);
+		if (log.isDebugEnabled()) {
+			log.debug("consumeKeyword('" + literal.getLiteral() + "') = " + result);
 		}
 		return result;
 	}

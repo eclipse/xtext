@@ -32,7 +32,8 @@ import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ * TODO this test fails with NoClassDefFound for a guice class, when
+ *      executed as plugin test
  */
 public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 
@@ -58,7 +59,7 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 		assertEquals("A",next.getTarget().getName());
 	}
 
-	private INameProvider nameProvider = new AbstractDeclarativeNameProvider() {
+	private final INameProvider nameProvider = new AbstractDeclarativeNameProvider() {
 		@SuppressWarnings("unused")
 		public String getName(Type type) {
 			return type.getName();
