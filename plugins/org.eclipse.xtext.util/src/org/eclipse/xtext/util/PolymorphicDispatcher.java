@@ -178,7 +178,9 @@ public class PolymorphicDispatcher<RT> {
 								+ next.method + " for params " + Arrays.toString(params));
 					}
 				}
+				boolean wasAccessible = methodDesc.method.isAccessible();
 				try {
+					methodDesc.method.setAccessible(true);
 					return (RT) methodDesc.method.invoke(methodDesc.target, params);
 				} catch (IllegalArgumentException e) {
 					return handler.handle(e);
@@ -188,6 +190,9 @@ public class PolymorphicDispatcher<RT> {
 					return handler.handle(e);
 				} catch (RuntimeException e) {
 					return handler.handle(e);
+				} finally {
+					if (!wasAccessible)
+						methodDesc.method.setAccessible(false);
 				}
 			}
 		}
