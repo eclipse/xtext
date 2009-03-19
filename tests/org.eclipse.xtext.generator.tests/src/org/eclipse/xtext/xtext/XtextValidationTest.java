@@ -73,4 +73,36 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
+	
+	public void testDuplicateEnumLiterals() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/validation/literal/1'\n" +
+				"Model: enumValue=ExistingEnum;\n" +
+				"enum ExistingEnum: SameName | DifferentName='SameName';");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testDefinedLiteralTwice() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/validation/literal/2'\n" +
+				"Model: enumValue=GeneratedEnum;\n" +
+				"enum GeneratedEnum: SameName ='value' | SameName='otherValue';");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
+	}
+	
 }
