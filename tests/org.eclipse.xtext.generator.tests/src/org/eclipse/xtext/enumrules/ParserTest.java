@@ -7,28 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.enumrules;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.GeneratedEnum;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.Model;
 import org.eclipse.xtext.enumrules.enums.EnumsPackage;
 import org.eclipse.xtext.enumrules.enums.ExistingEnum;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class ParserTest extends AbstractXtextTests {
+public abstract class ParserTest extends AbstractEnumRulesTest {
 
 	private ParserTestHelper helper;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		EnumsPackage pack = EnumsPackage.eINSTANCE;
-		EPackage.Registry.INSTANCE.put(pack.getNsURI(), pack);
 		with(EnumRulesTestLanguageStandaloneSetup.class);
 		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY));
 	}
