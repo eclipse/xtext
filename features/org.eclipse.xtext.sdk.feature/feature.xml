@@ -110,13 +110,12 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/interim/"/>
+      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/milestones/"/>
    </url>
 
    <includes
          id="org.eclipse.xtext.runtime"
          version="0.0.0"/>
-
 
    <includes
          id="org.eclipse.xtext.ui"
@@ -133,15 +132,15 @@ This Agreement is governed by the laws of the State of New York and the intellec
    <includes
          id="org.eclipse.xtext.runtime.source"
          version="0.0.0"/>
-         
-	<includes
+
+   <includes
          id="org.eclipse.xtext.ui.source"
          version="0.0.0"/>
-         
+
    <includes
          id="org.eclipse.xtext.examples.source"
          version="0.0.0"/>
-         
+
    <plugin
          id="org.eclipse.xtext.bootstrap"
          download-size="0"
