@@ -178,7 +178,7 @@ public class Xtext2EcoreTransformer {
 						if (!GrammarUtil.isDatatypeRule(parserRule)) {
 							deriveTypesAndHierarchy(parserRule, generatedEClass, parserRule.getAlternatives());
 						} else {
-							checkSupertypeOfOverriddenTerminalRule(rule);
+							checkSupertypeOfOverriddenDatatypeRule(rule);
 						}
 					}
 				} else if (rule instanceof TerminalRule) {
@@ -186,10 +186,15 @@ public class Xtext2EcoreTransformer {
 						if (!(rule.getType().getClassifier() instanceof EDataType))
 							throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
 									"Return type of a terminal rule must be an EDataType.", rule.getType());
-						checkSupertypeOfOverriddenTerminalRule(rule);
+						checkSupertypeOfOverriddenDatatypeRule(rule);
 					}
 				} else if (rule instanceof EnumRule) {
-					// check overridden type
+					if (rule.getType() != null) {
+						if (!(rule.getType().getClassifier() instanceof EEnum))
+							throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
+									"Return type of an enum rule must be an EEnum.", rule.getType());
+						checkSupertypeOfOverriddenDatatypeRule(rule);
+					}
 				} else {
 					throw new IllegalStateException("Unknown rule type: " + rule.eClass().getName());
 				}
@@ -202,7 +207,7 @@ public class Xtext2EcoreTransformer {
 		return result;
 	}
 
-	private void checkSupertypeOfOverriddenTerminalRule(AbstractRule rule) throws TransformationException {
+	private void checkSupertypeOfOverriddenDatatypeRule(AbstractRule rule) throws TransformationException {
 		EDataType datatype = (EDataType) rule.getType().getClassifier();
 		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
 			AbstractRule parentRule = GrammarUtil.findRuleForName(usedGrammar, rule.getName());
@@ -210,9 +215,15 @@ public class Xtext2EcoreTransformer {
 				if (parentRule.getType() == null || parentRule.getType().getClassifier() == null)
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
 							"Cannot determine return type of overridden rule.", rule.getType());
-				if (!datatype.equals(parentRule.getType().getClassifier()))
+				if (!datatype.equals(parentRule.getType().getClassifier())) {
+					String ruleName = "datatype ";
+					if (rule instanceof TerminalRule)
+						ruleName = "terminal ";
+					else if (rule instanceof EnumRule)
+						ruleName = "enum ";
 					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
-							"Cannot inherit from datatype rule and return another type.", rule.getType());
+							"Cannot inherit from " + ruleName + "rule and return another type.", rule.getType());
+				}
 				return;
 			}
 		}

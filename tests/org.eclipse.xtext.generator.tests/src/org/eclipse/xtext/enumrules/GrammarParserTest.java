@@ -219,4 +219,45 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		int offset = diag.getOffset();
 		assertEquals(modelAsString.lastIndexOf("Absent"), offset);
 	}
+	
+	public void testEnum_10() throws Exception {
+		String modelAsString =
+			"grammar TestLanguage with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'\n" +
+			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/10'\n" +
+			"Model: enumValue=ExistingEnum;\n" +
+			"enum ExistingEnum: SameName;";
+		Grammar grammar = (Grammar) getModel(modelAsString);
+		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
+		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported", pack.getNsURI());
+		EEnum eEnum = (EEnum) pack.getEClassifier("ExistingEnum");
+		assertNotNull(eEnum);
+		assertEquals(3, eEnum.getELiterals().size());
+		EEnumLiteral value = eEnum.getELiterals().get(0);
+		assertEquals(ExistingEnum.SAME_NAME.getName(), value.getName());
+		assertEquals(ExistingEnum.SAME_NAME.getValue(), value.getValue());
+		assertEquals(ExistingEnum.SAME_NAME.getLiteral(), value.getLiteral());
+		
+		EnumRule rule = (EnumRule) grammar.getRules().get(1);
+		assertEquals(eEnum, rule.getType().getClassifier());
+		EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule.getAlternatives();
+		assertEquals(value, decl.getEnumLiteral());
+		assertNotNull(decl.getLiteral());
+		assertEquals("SameName", decl.getLiteral().getValue());
+	}
+	
+	public void testEnum_11() throws Exception {
+		String modelAsString =
+			"grammar TestLanguage with org.eclipse.xtext.enumrules.EnumRulesTestLanguage\n" +
+			"import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore' as existing\n" +
+			"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/11'\n" +
+			"Model: enumValue=ExistingEnum;\n" +
+			"enum ExistingEnum: SameName;";
+		Grammar grammar = (Grammar) getModel(modelAsString);
+		assertEquals(grammar.eResource().getErrors().toString(), 1, grammar.eResource().getErrors().size());
+		TransformationDiagnostic diag = (TransformationDiagnostic) grammar.eResource().getErrors().get(0);
+		int offset = diag.getOffset();
+		assertEquals(modelAsString.lastIndexOf("enum ExistingEnum"), offset);
+	}
 }
