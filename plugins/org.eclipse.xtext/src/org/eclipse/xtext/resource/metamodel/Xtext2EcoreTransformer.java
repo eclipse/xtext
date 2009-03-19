@@ -283,18 +283,23 @@ public class Xtext2EcoreTransformer {
 						if (rule.getType().getMetamodel() instanceof ReferencedMetamodel) {
 							literal = returnType.getEEnumLiteral(text);
 						} else {
-							literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
-							returnType.getELiterals().add(literal);
-							literal.setName(text);
-							literal.setValue(decls.indexOf(decl));
-							if (decl.getLiteral() != null) {
-								literal.setLiteral(decl.getLiteral().getValue());
+							EEnumLiteral existing = returnType.getEEnumLiteral(text);
+							if (existing == null) {
+								literal = EcoreFactory.eINSTANCE.createEEnumLiteral();
+								returnType.getELiterals().add(literal);
+								literal.setName(text);
+								literal.setValue(decls.indexOf(decl));
+								if (decl.getLiteral() != null) {
+									literal.setLiteral(decl.getLiteral().getValue());
+								} else {
+									literal.setLiteral(text);
+								}
 							} else {
-								literal.setLiteral(text);
+								literal = existing;
 							}
 						}
 						if (literal == null) {
-							reportError(new TransformationException(TransformationErrorCode.InvalidFeature, "Enum '" + text + "' does not exist.", decl));
+							reportError(new TransformationException(TransformationErrorCode.InvalidFeature, "Enum literal '" + text + "' does not exist.", decl));
 						} else {
 							decl.setEnumLiteral(literal);
 							if (decl.getLiteral() == null) {
