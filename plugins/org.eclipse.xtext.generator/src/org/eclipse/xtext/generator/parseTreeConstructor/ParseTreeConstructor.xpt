@@ -227,6 +227,12 @@ protected class «elementMethodName()» extends RuleCallToken {
 			return new Solution(obj);
 		}
 «ENDIF»
+«ELSEIF calledEnumRule()!=null-»
+		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
+			type = AssignmentType.ERC;
+			element = grammarAccess.«gaRuleElementAccessor()»;
+			return new Solution(obj);
+		}
 «ELSE-»
 		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
