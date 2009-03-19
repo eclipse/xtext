@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.enumrules;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -28,6 +31,13 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		with(XtextStandaloneSetup.class);
 	}
 	
+	private void checkEnums(Grammar grammar) {
+		List<EnumLiteralDeclaration> decls = EcoreUtil2.getAllContentsOfType(grammar, EnumLiteralDeclaration.class);
+		for(EnumLiteralDeclaration decl: decls) {
+			assertNotNull(decl.getLiteral());
+		}
+	}
+	
 	public void testEnum_01() throws Exception {
 		String modelAsString =
 			"grammar TestLanguage with org.eclipse.xtext.common.Terminals\n" +
@@ -36,6 +46,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum MyEnum: Value1;";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/1", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("MyEnum");
@@ -55,6 +66,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum MyEnumRule returns MyEnum: Value1;";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/2", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("MyEnum");
@@ -74,6 +86,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum MyEnumRule returns MyEnum: Value1 = 'value';";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/3", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("MyEnum");
@@ -94,6 +107,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum ExistingEnum: SameName;";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("ExistingEnum");
@@ -121,6 +135,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum ExistingEnum: SameName = 'value';";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("ExistingEnum");
@@ -147,6 +162,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum MyEnum: Value1 | Value2='value' | Value3;";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/6", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("MyEnum");
@@ -176,6 +192,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum MyEnum: Value | Value;";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/7", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("MyEnum");
@@ -195,6 +212,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum MyEnum: Value | Value = 'foo';";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest/TestEnum/8", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("MyEnum");
@@ -229,6 +247,7 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 			"enum ExistingEnum: SameName;";
 		Grammar grammar = (Grammar) getModel(modelAsString);
 		assertTrue(grammar.eResource().getErrors().toString(), grammar.eResource().getErrors().isEmpty());
+		checkEnums(grammar);
 		EPackage pack = grammar.getMetamodelDeclarations().get(0).getEPackage();
 		assertEquals("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported", pack.getNsURI());
 		EEnum eEnum = (EEnum) pack.getEClassifier("ExistingEnum");
