@@ -18,6 +18,9 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
+import org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule;
+import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
+import org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule;
 import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetup;
@@ -74,6 +77,15 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUiModule());
+			}
+		};
+	}
+	
+	private ISetup getEnumsLangSetup() {
+		return new EnumRulesTestLanguageStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new EnumRulesTestLanguageRuntimeModule(), new EnumRulesTestLanguageUiModule());
 			}
 		};
 	}
@@ -251,7 +263,31 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 		newBuilder(getKeywordsLangSetup())
 			.assertText("foo\\bar", "foo\\", "\\bar", "\\");
 	}
-
+    
+    public void testEnumCompletion_01() throws Exception {
+    	newBuilder(getEnumsLangSetup()).assertText("existing", "generated");
+    }
+    
+    public void testEnumCompletion_02() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append("exi").assertText("existing");
+    }
+    
+    public void _testEnumCompletion_03() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append(" ").assertText("existing", "generated");
+    }
+    
+    public void testEnumCompletion_04() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden");
+    }
+    
+    public void _testEnumCompletion_05() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append("existing ").assertText("SameName", "DifferentLiteral", "overridden");
+    }
+    
+    public void _testEnumCompletion_06() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append("existing Same").assertText("SameName");
+    }
+    
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);

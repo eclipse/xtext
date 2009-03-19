@@ -44,6 +44,8 @@ public class Activator extends AbstractUIPlugin {
 		
 		injectors.put("org.eclipse.xtext.testlanguages.TreeTestLanguage",Guice.createInjector(new org.eclipse.xtext.testlanguages.TreeTestLanguageRuntimeModule(), new org.eclipse.xtext.testlanguages.TreeTestLanguageUiModule()));
 		
+		injectors.put("org.eclipse.xtext.enumrules.EnumRulesTestLanguage",Guice.createInjector(new org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule(), new org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule()));
+		
 	}
 	
 	public static Activator getInstance() {
