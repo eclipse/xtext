@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -20,6 +21,8 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -298,6 +301,38 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-
+	@Check
+	public void checkEnumLiteralIsUnique(EnumLiteralDeclaration decl) {
+		EnumRule rule = GrammarUtil.containingEnumRule(decl);
+		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
+		String literal = decl.getLiteral().getValue();
+		for(EnumLiteralDeclaration otherDecl: declarations) {
+			if (otherDecl != decl && literal.equals(otherDecl.getLiteral().getValue())) {
+				error("Enum literal '" + literal + "' is used multiple times in enum rule '" + rule.getName() + "'.",
+						XtextPackage.ENUM_LITERAL_DECLARATION__LITERAL);
+			}
+		}
+	}
+	
+	@Check
+	public void checkGeneratedEnumIsValid(EnumLiteralDeclaration decl) {
+		EnumRule rule = GrammarUtil.containingEnumRule(decl);
+		guard(rule.getType().getMetamodel() instanceof GeneratedMetamodel);
+		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
+		EEnum eEnum = (EEnum) rule.getType().getClassifier();
+		guard(declarations.size() != eEnum.getELiterals().size());
+		for(EnumLiteralDeclaration otherDecl: declarations) {
+			if (decl == otherDecl) {
+				return;
+			}
+			if (otherDecl.getEnumLiteral() == decl.getEnumLiteral()) {
+				if (!decl.getEnumLiteral().getLiteral().equals(decl.getLiteral().getValue()))
+					warning("Enum literal '" + decl.getEnumLiteral().getName() +
+							"' has already been defined with literal '" + decl.getEnumLiteral().getLiteral() + "'.",
+							XtextPackage.ENUM_LITERAL_DECLARATION__ENUM_LITERAL);
+				return;
+			}
+		}
+	}
 
 }

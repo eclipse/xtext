@@ -313,13 +313,13 @@ public class Xtext2EcoreTransformer {
 							reportError(new TransformationException(TransformationErrorCode.InvalidFeature, "Enum literal '" + text + "' does not exist.", decl));
 						} else {
 							decl.setEnumLiteral(literal);
-							if (decl.getLiteral() == null) {
-								Keyword kw = XtextFactory.eINSTANCE.createKeyword();
-								kw.setValue(literal.getLiteral());
-								decl.setLiteral(kw);
-							}
 						}
 					}
+				}
+				if (decl.getLiteral() == null && decl.getEnumLiteral() != null) {
+					Keyword kw = XtextFactory.eINSTANCE.createKeyword();
+					kw.setValue(decl.getEnumLiteral().getLiteral());
+					decl.setLiteral(kw);
 				}
 			}
 		}
