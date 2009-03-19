@@ -124,8 +124,9 @@ public class ContentAssistProcessorTestBuilder {
 
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
-			Assert.assertTrue("expect completionProposal text '" + completionProposal.getDisplayString() + "' ", Arrays.asList(expectedText)
-					.contains(completionProposal.getDisplayString()));
+			Assert.assertTrue("expect completionProposal text '" + completionProposal.getDisplayString() + "', but got " +
+					Strings.concat(", ", toString(computeCompletionProposals)),
+					Arrays.asList(expectedText).contains(completionProposal.getDisplayString()));
 		}
 
 		return this;

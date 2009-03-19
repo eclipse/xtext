@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +23,8 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
@@ -67,6 +70,11 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		}
 		return elementList;
 	}
+	
+	@Override
+	public List<AbstractElement> caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
+		return Arrays.asList(object.getLiteral(), object);
+	}
 
 	@Override
 	public List<AbstractElement> caseGroup(Group group) {
@@ -80,7 +88,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		}
 		return elementList;
 	}
-
+	
 	@Override
 	public List<AbstractElement> caseAssignment(Assignment assignment) {
 		List<AbstractElement> elementList = new ArrayList<AbstractElement>();
@@ -99,8 +107,8 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 	public List<AbstractElement> caseRuleCall(RuleCall ruleCall) {
 		List<AbstractElement> elementList = new ArrayList<AbstractElement>(Collections.singleton(ruleCall));
 		AbstractRule abstractRule = ruleCall.getRule();
-		if (abstractRule instanceof ParserRule) {
-			addWithNullCheck(elementList, doSwitch(((ParserRule) abstractRule).getAlternatives()));
+		if (abstractRule instanceof ParserRule || abstractRule instanceof EnumRule) {
+			addWithNullCheck(elementList, doSwitch(abstractRule.getAlternatives()));
 		}
 		return elementList;
 	}
@@ -124,7 +132,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 	private boolean isOptional(AbstractElement groupElement) {
 		boolean isOptional = true;
 		if ((groupElement instanceof Group || groupElement instanceof Alternatives) && !GrammarUtil.isOptionalCardinality(groupElement)) {
-			EList<AbstractElement> abstractTokens = groupElement instanceof Group ? 
+			EList<AbstractElement> abstractTokens = groupElement instanceof Group ?
 					((Group) groupElement).getTokens() : ((Alternatives) groupElement).getGroups();
 			for (Iterator<AbstractElement> iterator = abstractTokens.iterator(); isOptional && iterator.hasNext();) {
 				AbstractElement abstractElement = iterator.next();
