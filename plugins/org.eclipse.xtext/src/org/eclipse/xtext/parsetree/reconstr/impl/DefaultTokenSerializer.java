@@ -12,7 +12,10 @@ import java.io.OutputStream;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -42,13 +45,13 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 	protected OutputStream out;
 
 	/**
-	 * @throws IOException  
+	 * @throws IOException
 	 */
 	protected void afterElement(IInstanceDescription curr, AbstractElement ele) throws IOException {
 	}
 
 	/**
-	 * @throws IOException  
+	 * @throws IOException
 	 */
 	protected void afterToken(IAbstractToken token) throws IOException {
 	}
@@ -67,7 +70,7 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 	}
 
 	/**
-	 * @throws IOException  
+	 * @throws IOException
 	 */
 	protected void beforeToken(IAbstractToken token) throws IOException {
 	}
@@ -90,6 +93,25 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 			RuleCall call, Object value) throws IOException {
 		beforeElement(current, call);
 		append(converterService.toString(value, call.getRule().getName()));
+		afterElement(current, call);
+	}
+	
+	protected void elementEnumRuleCall(IInstanceDescription current,
+			RuleCall call, Object value) throws IOException {
+		beforeElement(current, call);
+		EnumRule rule = (EnumRule) call.getRule();
+		if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
+			EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule.getAlternatives();
+			append(decl.getLiteral().getValue());
+		} else {
+			for(AbstractElement element: ((Alternatives) rule.getAlternatives()).getGroups()) {
+				EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
+				if (decl.getEnumLiteral().getInstance().equals(value)) {
+					append(decl.getLiteral().getValue());
+					break;
+				}
+			}
+		}
 		afterElement(current, call);
 	}
 
@@ -115,29 +137,29 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 		if (ass == null || ass.getType() == null)
 			return;
 		switch (ass.getType()) {
-		case CR:
-			elementCrossRef(ass.getCurrent(), (CrossReference) ass
-					.getAssignmentElement(), (EObject) ass.getValue());
-			break;
-		case KW:
-			elementKeyword(ass.getCurrent(), (Keyword) ass
-					.getAssignmentElement());
-			break;
-		case LRC:
-			elementLexerRuleCall(ass.getCurrent(), (RuleCall) ass
-					.getAssignmentElement(), ass.getValue());
-			break;
-		case PRC: 
-			final RuleCall ruleCall = (RuleCall) ass.getAssignmentElement();
-			if (ruleCall != null) {
-				final ParserRule parserRule = (ParserRule) ruleCall.getRule();
-				if (GrammarUtil.isDatatypeRule(parserRule)) {
-					elementLexerRuleCall(ass.getCurrent(), ruleCall, ass.getValue());	
+			case CR:
+				elementCrossRef(ass.getCurrent(), (CrossReference) ass.getAssignmentElement(), (EObject) ass.getValue());
+				break;
+			case KW:
+				elementKeyword(ass.getCurrent(), (Keyword) ass.getAssignmentElement());
+				break;
+			case LRC:
+				elementLexerRuleCall(ass.getCurrent(), (RuleCall) ass.getAssignmentElement(), ass.getValue());
+				break;
+			case ERC:
+				elementEnumRuleCall(ass.getCurrent(), (RuleCall) ass.getAssignmentElement(), ass.getValue());
+				break;
+			case PRC:
+				final RuleCall ruleCall = (RuleCall) ass.getAssignmentElement();
+				if (ruleCall != null) {
+					final ParserRule parserRule = (ParserRule) ruleCall.getRule();
+					if (GrammarUtil.isDatatypeRule(parserRule)) {
+						elementLexerRuleCall(ass.getCurrent(), ruleCall, ass.getValue());
+					}
 				}
-			}
-			break;
-		default:
-			break;
+				break;
+			default:
+				break;
 		}
 
 	}
