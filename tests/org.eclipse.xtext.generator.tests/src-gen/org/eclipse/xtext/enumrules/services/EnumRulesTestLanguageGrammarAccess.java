@@ -24,19 +24,23 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cExistingKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cExistingAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final RuleCall cExistingExistingEnumEnumRuleCall_0_1_0 = (RuleCall)cExistingAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cGeneratedKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cGeneratedAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cGeneratedGeneratedEnumEnumRuleCall_0_2_1_0 = (RuleCall)cGeneratedAssignment_0_2_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final Keyword cGeneratedKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cGeneratedAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cGeneratedGeneratedEnumEnumRuleCall_1_1_0 = (RuleCall)cGeneratedAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//  "existing" existing=ExistingEnum|"generated" generated=GeneratedEnum;
+		//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum;
 		public ParserRule getRule() { return rule; }
 
-		//"existing" existing=ExistingEnum|"generated" generated=GeneratedEnum
+		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"existing" existing=ExistingEnum
+		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"existing"
@@ -47,6 +51,18 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//ExistingEnum
 		public RuleCall getExistingExistingEnumEnumRuleCall_0_1_0() { return cExistingExistingEnumEnumRuleCall_0_1_0; }
+
+		//("generated" generated=GeneratedEnum)?
+		public Group getGroup_0_2() { return cGroup_0_2; }
+
+		//"generated"
+		public Keyword getGeneratedKeyword_0_2_0() { return cGeneratedKeyword_0_2_0; }
+
+		//generated=GeneratedEnum
+		public Assignment getGeneratedAssignment_0_2_1() { return cGeneratedAssignment_0_2_1; }
+
+		//GeneratedEnum
+		public RuleCall getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0() { return cGeneratedGeneratedEnumEnumRuleCall_0_2_1_0; }
 
 		//"generated" generated=GeneratedEnum
 		public Group getGroup_1() { return cGroup_1; }
@@ -150,7 +166,7 @@ public class EnumRulesTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  "existing" existing=ExistingEnum|"generated" generated=GeneratedEnum;
+	//  "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?|"generated" generated=GeneratedEnum;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

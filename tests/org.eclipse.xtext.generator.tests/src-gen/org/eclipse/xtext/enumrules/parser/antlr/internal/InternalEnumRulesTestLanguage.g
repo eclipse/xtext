@@ -106,16 +106,15 @@ ruleModel returns [EObject current=null]
 	        currentNode = currentNode.getParent();
 	    }
 	
-))
-    |('generated' 
+)('generated' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_1_0(), null); 
+        createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), currentNode); 
 	    }
 	    lv_generated_3=ruleGeneratedEnum 
 	    {
@@ -126,6 +125,32 @@ ruleModel returns [EObject current=null]
 	        
 	        try {
 	       		set($current, "generated", lv_generated_3, "GeneratedEnum", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+))?)
+    |('generated' 
+    {
+        createLeafNode(grammarAccess.getModelAccess().getGeneratedKeyword_1_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), currentNode); 
+	    }
+	    lv_generated_5=ruleGeneratedEnum 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "generated", lv_generated_5, "GeneratedEnum", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
