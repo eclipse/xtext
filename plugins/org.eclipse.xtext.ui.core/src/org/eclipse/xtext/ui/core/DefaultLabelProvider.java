@@ -6,16 +6,30 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Peter Friese - Implementation
  */
 public class DefaultLabelProvider extends LabelProvider {
-
+	
+	private PolymorphicDispatcher<String> getText = new PolymorphicDispatcher<String>("getTextFor",this);
+	private PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("getImageFor",this);
+	
 	@Override
-	public String getText(Object object) {
-		if (object != null) {
+	public final String getText(Object element) {
+		return getText.invoke(element);
+	}
+	
+	@Override
+	public final Image getImage(Object element) {
+		return getImage.invoke(element);
+	}
+
+	public String getTextFor(Object object) {
+		if (object instanceof EObject) {
 			EObject eObject = (EObject) object;
 			EClass eClass = eObject.eClass();
 
@@ -29,6 +43,10 @@ public class DefaultLabelProvider extends LabelProvider {
 			return eClass.getName();
 		}
 		return "<unknown>";
+	}
+	
+	public Image getImageFor(Object obj) {
+		return null;
 	}
 
 	protected EStructuralFeature getLabelFeature(EClass eClass) {
