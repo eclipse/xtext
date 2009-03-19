@@ -50,7 +50,7 @@ public interface IParseTreeConstructor {
 	}
 
 	public enum AssignmentType {
-		KW, PRC, LRC, CR
+		KW, PRC, LRC, ERC, CR
 	}
 
 	public interface IAssignmentToken extends IValueToken {
