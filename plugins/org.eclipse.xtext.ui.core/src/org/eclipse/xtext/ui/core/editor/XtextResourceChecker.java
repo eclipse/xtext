@@ -225,8 +225,8 @@ public class XtextResourceChecker {
 				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
 				map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.getLength()));
 			}
-			map.put(IMarker.MESSAGE, diagnostic.getMessage());
 		}
+		map.put(IMarker.MESSAGE, diagnostic.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
 	}
