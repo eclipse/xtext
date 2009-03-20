@@ -12,6 +12,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -36,8 +38,9 @@ public class CompositeEValidator implements EValidator {
 
 		@Override
 		public boolean equals(Object obj) {
-			return obj != null && ((EValidatorEqualitySupport)obj).delegate.getClass().getName().equals(
-					delegate.getClass().getName());
+			return obj != null
+					&& ((EValidatorEqualitySupport) obj).delegate.getClass().getName().equals(
+							delegate.getClass().getName());
 		}
 
 		@Override
@@ -60,16 +63,17 @@ public class CompositeEValidator implements EValidator {
 		EValidator validator = registry.getEValidator(pack);
 		if (validator == null) {
 			validator = new CompositeEValidator();
-		} else if (!(validator instanceof CompositeEValidator)) {
+		}
+		else if (!(validator instanceof CompositeEValidator)) {
 			validator = new CompositeEValidator(validator);
 		}
-		((CompositeEValidator)validator).addValidator(val);
+		((CompositeEValidator) validator).addValidator(val);
 		registry.put(pack, validator);
 	}
 
 	public void addValidator(EValidator validator) {
 		if (validator instanceof CompositeEValidator)
-			contents.addAll(((CompositeEValidator)validator).contents);
+			contents.addAll(((CompositeEValidator) validator).contents);
 		else
 			this.contents.add(new EValidatorEqualitySupport(validator));
 	}
@@ -77,7 +81,12 @@ public class CompositeEValidator implements EValidator {
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (EValidatorEqualitySupport val : contents) {
-			result = result && val.delegate.validate(eObject, diagnostics, context);
+			try {
+				result = result && val.delegate.validate(eObject, diagnostics, context);
+			}
+			catch (Exception e) {
+				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
+			}
 		}
 		return result;
 	}
@@ -85,7 +94,12 @@ public class CompositeEValidator implements EValidator {
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (EValidatorEqualitySupport val : contents) {
-			result = result && val.delegate.validate(eClass, eObject, diagnostics, context);
+			try {
+				result = result && val.delegate.validate(eClass, eObject, diagnostics, context);
+			}
+			catch (Exception e) {
+				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
+			}
 		}
 		return result;
 	}
@@ -93,9 +107,18 @@ public class CompositeEValidator implements EValidator {
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (EValidatorEqualitySupport val : contents) {
-			result = result && val.delegate.validate(eDataType, value, diagnostics, context);
+			try {
+				result = result && val.delegate.validate(eDataType, value, diagnostics, context);
+			}
+			catch (Exception e) {
+				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eDataType, e));
+			}
 		}
 		return result;
 	}
 
+	private Diagnostic createExceptionDiagnostic(String message, Object source, Throwable t) {
+		return new BasicDiagnostic(Diagnostic.ERROR, source.toString(), 0, message, new Object[] { t });
+
+	}
 }
