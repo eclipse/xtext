@@ -109,6 +109,11 @@ public class ContentAssistProcessorTestBuilder {
 		return assertTextAtCursorPosition(this.cursorPosition, expectedText);
 	}
 
+	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(String cursorPosition, String... expectedText)
+	throws Exception {
+		return assertTextAtCursorPosition(getModel().indexOf(cursorPosition), expectedText);
+	}
+	
 	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(int cursorPosition, String... expectedText)
 			throws Exception {
 

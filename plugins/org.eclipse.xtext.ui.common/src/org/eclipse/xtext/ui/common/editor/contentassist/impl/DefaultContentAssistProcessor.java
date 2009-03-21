@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.CollectionUtils.addIfNotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -150,7 +152,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					break;
 				case XtextPackage.ASSIGNMENT:
 					// TODO: change interface
-					// templateContextType = 
+					// templateContextType =
 					// proposalProvider.getTemplateContextType((Assignment)computeProposalElement, contentAssistContext);
 					// addIfNotNull(templateContextTypes, templateContextType);
 					break;
@@ -194,9 +196,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 		if (referenceNode.getOffset()+referenceNode.getLength() == offset) {
 			AbstractNode precedingReferenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode,Math.max(0, referenceNode.getOffset()));
-			String matchingString = referenceNode.serialize();
+			String matchingString = computeMatchString(referenceNode);
 			result.add(newCompletionProposal(matchingString, offset, rootNode, precedingReferenceNode));
-			if (referenceNode.getGrammarElement() instanceof Keyword || 
+			if (referenceNode.getGrammarElement() instanceof Keyword ||
 				referenceNode.getGrammarElement() instanceof CrossReference ||
 				(referenceNode.getGrammarElement() instanceof RuleCall &&
 				((RuleCall)referenceNode.getGrammarElement()).getRule() instanceof TerminalRule)) {
@@ -209,6 +211,37 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		
 		return result;
 	}
+	
+	protected String computeMatchString(AbstractNode node) {
+		if (node instanceof LeafNode) {
+			return ((LeafNode) node).getText();
+		}
+		StringBuilder result = new StringBuilder(node.getTotalLength());
+		doComputeMatchString((CompositeNode) node, result);
+		return result.toString();
+	}
+	
+	protected void doComputeMatchString(CompositeNode node, StringBuilder result) {
+		List<LeafNode> hiddens = new ArrayList<LeafNode>(2);
+		for (AbstractNode child: node.getChildren()) {
+			if (child instanceof CompositeNode) {
+				doComputeMatchString((CompositeNode) child, result);
+			} else {
+				if (((LeafNode) child).isHidden()) {
+					if (result.length() != 0)
+						hiddens.add((LeafNode)child);
+				} else {
+					Iterator<LeafNode> iter = hiddens.iterator();
+					while(iter.hasNext()) {
+						result.append(iter.next().getText());
+						iter.remove();
+					}
+					result.append(((LeafNode) child).getText());
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Calculates the match string of the based on the specified location within the given text.
 	 *
@@ -244,8 +277,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 		public ICompletionProposal[] exec(XtextResource resource) throws Exception {
 			List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
-			for (IContentAssistContext contentAssistContext : createContextList(
-					resource, viewer.getTextWidget().getText(), offset)) {
+			List<IContentAssistContext> contextList = createContextList(
+					resource, viewer.getTextWidget().getText(), offset);
+			for (IContentAssistContext contentAssistContext : contextList) {
 				List<AbstractElement> computedElements = contentAssistCalculator
 						.computeProposalElements(contentAssistContext);
 				completionProposalList.addAll(collectCompletionProposals(computedElements,contentAssistContext));

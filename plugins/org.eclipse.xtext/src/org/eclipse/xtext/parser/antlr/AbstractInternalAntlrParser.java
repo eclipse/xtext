@@ -108,7 +108,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
 				for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
 					Token hidden = input.get(x);
-					LeafNode leafNode = createLeafNode(hidden, true);
+					LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 					setLexerRule(leafNode, hidden);
 				}
 			}
@@ -214,7 +214,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	protected void appendAllTokens() {
 		for (int x = lastConsumedIndex + 1; input.size() > x; input.consume(), x++) {
 			Token hidden = input.get(x);
-			LeafNode leafNode = createLeafNode(hidden, true);
+			LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 			setLexerRule(leafNode, hidden);
 		}
 		if (currentError != null) {
@@ -240,17 +240,15 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (indexOfTokenBefore + 1 < currentTokenIndex) {
 			for (int x = indexOfTokenBefore + 1; x < currentTokenIndex; x++) {
 				Token hidden = input.get(x);
-				LeafNode leafNode = createLeafNode(hidden, true);
+				LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 				setLexerRule(leafNode, hidden);
 				skipped.add(leafNode);
 			}
 		}
-		if (lastConsumedIndex < currentTokenIndex) {
-			LeafNode leafNode = createLeafNode(currentToken, true);
+		if (lastConsumedIndex < currentTokenIndex && currentToken != null) {
+			LeafNode leafNode = createLeafNode(currentToken, currentToken.getChannel() == HIDDEN);
 			setLexerRule(leafNode, currentToken);
 			skipped.add(leafNode);
-			if (currentToken == null)
-				throw new IllegalStateException("currentToken is null");
 			lastConsumedIndex = currentToken.getTokenIndex();
 		}
 		return skipped;
@@ -262,7 +260,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (tokenBefore != null && tokenBefore.getTokenIndex() < size) {
 			for (int x = tokenBefore.getTokenIndex() + 1; x < size; x++) {
 				Token hidden = input.get(x);
-				LeafNode leafNode = createLeafNode(hidden, true);
+				LeafNode leafNode = createLeafNode(hidden, hidden.getChannel() == HIDDEN);
 				setLexerRule(leafNode, hidden);
 				lastConsumedIndex = hidden.getTokenIndex();
 			}
