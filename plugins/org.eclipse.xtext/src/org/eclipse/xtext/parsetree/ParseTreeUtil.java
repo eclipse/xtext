@@ -27,12 +27,14 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
@@ -74,6 +76,8 @@ public final class ParseTreeUtil {
                     CompositeNode rootNode, AbstractNode lastCompleteNode, int offset) {
             Set<AbstractElement> abstractElementSet = new HashSet<AbstractElement>();
             AbstractElement grammarElement = getGrammarElementFromNode(lastCompleteNode);
+            if (lastCompleteNode.getOffset() + lastCompleteNode.getLength() > offset)
+            	abstractElementSet.add(grammarElement);
             abstractElementSet.addAll(backtrackAlternativeAssignments(lastCompleteNode, grammarElement));
             abstractElementSet.addAll(calculatePossibleElementSet(lastCompleteNode,null));
             return abstractElementSet;
@@ -128,9 +132,9 @@ public final class ParseTreeUtil {
 			EObject eObject = allContentsTreeIterator.next();
 			if (eObject instanceof AbstractNode) {
 				AbstractNode abstractNode = (AbstractNode) eObject;
-				if (abstractNode.getTotalOffset() >= offsetPosition ) {
+				if (abstractNode.getOffset() >= offsetPosition ) {
 					break;
-				} else if (abstractNode.getGrammarElement() instanceof AbstractElement || 
+				} else if (abstractNode.getGrammarElement() instanceof AbstractElement ||
 						   abstractNode.getGrammarElement() instanceof ParserRule) {
 					result = abstractNode;
 				}
@@ -252,8 +256,9 @@ public final class ParseTreeUtil {
 		if (abstractNode.getGrammarElement() instanceof AbstractElement) {
 			abstractElement = (AbstractElement) abstractNode.getGrammarElement();
 		}
-		else if (abstractNode.getGrammarElement() instanceof ParserRule) {
-			abstractElement = ((ParserRule) abstractNode.getGrammarElement()).getAlternatives();
+		else if ((abstractNode.getGrammarElement() instanceof ParserRule) ||
+				(abstractNode.getGrammarElement() instanceof EnumRule)) {
+			abstractElement = ((AbstractRule) abstractNode.getGrammarElement()).getAlternatives();
 
 		}
 		return abstractElement;
@@ -265,11 +270,16 @@ public final class ParseTreeUtil {
 
 		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
 		AbstractNode contextNode = node;
-		if (getGrammarElementFromNode(contextNode).eContainer() instanceof ParserRule
+		AbstractElement initialgrammarElement = abstractElement != null ?
+				abstractElement:
+				getGrammarElementFromNode(node);
+		if (initialgrammarElement.eContainer() instanceof ParserRule
 				&& isDefaultRule((ParserRule) getGrammarElementFromNode(contextNode).eContainer())) {
-			elementSet.add(getGrammarElementFromNode(contextNode));
-		}
-		else {
+			elementSet.add(initialgrammarElement);
+		} else if (contextNode.getGrammarElement() instanceof RuleCall &&
+				(!(((RuleCall) contextNode.getGrammarElement()).getRule() instanceof TerminalRule))) {
+			elementSet.add(initialgrammarElement);
+		} else {
 			for (; contextNode != null; contextNode = contextNode.getParent()) {
 				for (EObject grammarElementObject = null != abstractElement ? abstractElement
 						: getGrammarElementFromNode(contextNode); grammarElementObject instanceof AbstractElement
@@ -277,7 +287,6 @@ public final class ParseTreeUtil {
 						.eContainer()) {
 
 					AbstractElement grammarElement = (AbstractElement) grammarElementObject;
-
 					if (grammarElement.eContainer() instanceof Group) {
 						EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
 						int indexOf = contents.indexOf(grammarElement) + 1;
@@ -388,10 +397,10 @@ public final class ParseTreeUtil {
 
 	private static Alternatives getOutermostAlternativesElement(final AbstractNode node) {
 		Alternatives alternatives = null;
-		for (AbstractNode baseNode = node; baseNode.eContainer() != null; 
+		for (AbstractNode baseNode = node; baseNode.eContainer() != null;
 			baseNode = (AbstractNode) baseNode.eContainer()) {
-			for (EObject abstractElement = baseNode.getGrammarElement(); 
-				abstractElement instanceof AbstractElement; 
+			for (EObject abstractElement = baseNode.getGrammarElement();
+				abstractElement instanceof AbstractElement;
 					abstractElement = abstractElement.eContainer()) {
 				if (abstractElement instanceof Group) {
 					return alternatives;

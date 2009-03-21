@@ -129,7 +129,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		assertTrue(lastWs.isHidden());
 		assertNull(lastWs.getSyntaxError());
 		LeafNode lastNode = leafs.get(leafs.size() - 2);
-		assertTrue(lastNode.isHidden());
+		assertFalse(lastNode.isHidden());
 		assertNotNull(lastNode);
 		assertEquals("};", lastNode.getText());
 		assertNotNull(lastNode.getSyntaxError());
