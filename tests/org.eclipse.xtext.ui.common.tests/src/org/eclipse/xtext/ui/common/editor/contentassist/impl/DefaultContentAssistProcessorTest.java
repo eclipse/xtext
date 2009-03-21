@@ -210,7 +210,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 					"["
 			);
 	}
-
+	
 	public void testCompleteAbstractRuleCall() throws Exception {
 		newBuilder(getContentAssistGrammarSetup())
 			.appendNl("abstract rules")
@@ -232,13 +232,33 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      *
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      */
-    public void testCompleteParserRule() throws Exception {
+    public void testCompleteParserRule_01() throws Exception {
             newBuilder(getXtextGrammarSetup())
                     .appendNl("grammar foo")
                     .appendNl("generate foo \"foo\"")
                     .appendNl("MyRule : 'foo' name=ID; ").assertText(
                                     "ParserRule_Name", "terminal"
                     );
+    }
+    
+    public void testCompleteParserRule_02() throws Exception {
+            newBuilder(getXtextGrammarSetup())
+                    .appendNl("grammar foo")
+                    .appendNl("generate foo \"foo\"")
+                    .appendNl("")
+                    .appendNl("MyRule : 'foo' name=ID; ").
+                    assertTextAtCursorPosition("MyRule",
+                    		"ParserRule_Name", "terminal");
+    }
+    
+    public void testCompleteParserRule_03() throws Exception {
+        newBuilder(getXtextGrammarSetup())
+                .appendNl("grammar foo")
+                .appendNl("generate foo \"foo\"")
+                .appendNl("")
+                .appendNl(" MyRule : 'foo' name=ID; ").
+                assertTextAtCursorPosition(" MyRule",
+                		"ParserRule_Name", "terminal");
     }
 
     /**
@@ -272,7 +292,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     	newBuilder(getEnumsLangSetup()).append("exi").assertText("existing");
     }
     
-    public void _testEnumCompletion_03() throws Exception {
+    public void testEnumCompletion_03() throws Exception {
     	newBuilder(getEnumsLangSetup()).append(" ").assertText("existing", "generated");
     }
     
@@ -280,12 +300,24 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     	newBuilder(getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden");
     }
     
-    public void _testEnumCompletion_05() throws Exception {
+    public void testEnumCompletion_05() throws Exception {
     	newBuilder(getEnumsLangSetup()).append("existing ").assertText("SameName", "DifferentLiteral", "overridden");
     }
     
-    public void _testEnumCompletion_06() throws Exception {
+    public void testEnumCompletion_06() throws Exception {
     	newBuilder(getEnumsLangSetup()).append("existing Same").assertText("SameName");
+    }
+    
+    public void testEnumCompletion_07() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append("generated SameName").assertTextAtCursorPosition(0, "existing", "generated");
+    }
+    
+    public void testEnumCompletion_08() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append(" generated SameName").assertTextAtCursorPosition(0, "existing", "generated");
+    }
+    
+    public void testEnumCompletion_09() throws Exception {
+    	newBuilder(getEnumsLangSetup()).append(" generated SameName").assertTextAtCursorPosition(2, "generated");
     }
     
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {

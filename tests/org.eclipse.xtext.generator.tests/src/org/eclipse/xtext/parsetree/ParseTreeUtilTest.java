@@ -123,7 +123,7 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 		String text = "spielplatz 1 \"junit\" { kin  ";
 		CompositeNode rootNode = getRootNode(text);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, 26);
-		assertEquals("expect node with text '" + text + "'", currentNodeByOffset.serialize(), text);
+		assertEquals("expect node with text ''", "kin", currentNodeByOffset.serialize());
 	}
 
 	public void testGetCurrentOrPrecedingNodeByOffset_05() throws Exception {
