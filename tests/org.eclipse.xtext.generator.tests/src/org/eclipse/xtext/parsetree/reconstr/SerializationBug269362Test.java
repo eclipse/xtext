@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SerializationBug269362Test extends AbstractXtextTests {
+public abstract class SerializationBug269362Test extends AbstractXtextTests {
 
 	private XtextResource resource;
 	private XtextResourceSet resourceSet;
