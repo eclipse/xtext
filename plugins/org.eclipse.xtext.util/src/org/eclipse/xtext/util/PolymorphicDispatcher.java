@@ -18,12 +18,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.WrappedException;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class PolymorphicDispatcher<RT> {
 
+	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(PolymorphicDispatcher.class);
 	private final List<? extends Object> targets;
 	private final Filter<Method> methodFilter;
@@ -75,18 +77,29 @@ public class PolymorphicDispatcher<RT> {
 	}
 
 	public static interface ErrorHandler<P> {
-		P handle(Exception e);
+		P handle(Object[] params, Throwable throwable);
 	}
 
 	private ErrorHandler<RT> handler = new ErrorHandler<RT>() {
-		public RT handle(Exception e) {
-			log.error(e.getMessage(), e);
-			return null;
+		public RT handle(Object[] params, Throwable e) {
+			if (e instanceof WrappedException)
+				throw (WrappedException)e;
+			if (e instanceof Exception)
+				throw new WrappedException((Exception) e);
+			throw new Error(e);
 		}
 	};
 
-	public PolymorphicDispatcher(final String methodName, final Object... targets) {
-		this(methodName, Arrays.asList(targets));
+	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName, final Object singleTarget) {
+		return new PolymorphicDispatcher<T>(methodName, Collections.singletonList(singleTarget));
+	}
+	
+	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName,int min, int max, final Object singleTarget) {
+		return new PolymorphicDispatcher<T>(methodName,min, max, Collections.singletonList(singleTarget));
+	}
+	
+	public static <T> PolymorphicDispatcher<T> createForVarTarget(final String methodName, final Object... targets) {
+		return new PolymorphicDispatcher<T>(methodName, Arrays.asList(targets));
 	}
 
 	public PolymorphicDispatcher(final String methodName, final List<? extends Object> targets) {
@@ -103,6 +116,19 @@ public class PolymorphicDispatcher<RT> {
 		};
 		this.targets = targets;
 		this.comparator = new DefaultComparator(targets);
+	}
+	
+	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
+			final List<? extends Object> targets, ErrorHandler<RT> handler) {
+		this.methodFilter = new Filter<Method>() {
+			public boolean accept(Method param) {
+				return param.getName().equals(methodName) && param.getParameterTypes().length >= minParams
+				&& param.getParameterTypes().length <= maxParams;
+			}
+		};
+		this.targets = targets;
+		this.comparator = new DefaultComparator(targets);
+		this.handler = handler;
 	}
 
 	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter) {
@@ -179,21 +205,19 @@ public class PolymorphicDispatcher<RT> {
 				try {
 					methodDesc.method.setAccessible(true);
 					return (RT) methodDesc.method.invoke(methodDesc.target, params);
-				} catch (IllegalArgumentException e) {
-					return handler.handle(e);
-				} catch (IllegalAccessException e) {
-					return handler.handle(e);
 				} catch (InvocationTargetException e) {
-					return handler.handle(e);
-				} catch (RuntimeException e) {
-					return handler.handle(e);
+					return handler.handle(params,e.getTargetException());
+				} catch (IllegalArgumentException e) {
+					return handler.handle(params,e);
+				} catch (IllegalAccessException e) {
+					return handler.handle(params,e);
 				} finally {
 					if (!wasAccessible)
 						methodDesc.method.setAccessible(false);
 				}
 			}
 		}
-		return handler.handle(new NoSuchMethodException("Couldn't find appropriate method for objects "
+		return handler.handle(params, new NoSuchMethodException("Couldn't find appropriate method for objects "
 				+ Arrays.toString(params)));
 	}
 
