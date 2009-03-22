@@ -17,7 +17,8 @@ public interface ISemanticModelTransformer {
 
 	ContentOutlineNode transformSemanticModel(EObject semanticModel);
 
-	void transformSemanticNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
+	//TODO SE: this is never used, is it necessary?
+//	void transformSemanticNode(EObject semanticNode, ContentOutlineNode outlineParentNode);
 
 	void setSorted(boolean on);
 
