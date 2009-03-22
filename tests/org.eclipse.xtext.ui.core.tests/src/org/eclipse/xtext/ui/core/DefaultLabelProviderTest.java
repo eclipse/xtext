@@ -11,40 +11,43 @@ package org.eclipse.xtext.ui.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.swt.graphics.Image;
 
 import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class DefaultLabelProviderTest extends TestCase {
-	public void testSimpl() throws Exception {
+
+	public void testSimple() throws Exception {
 		final List<String> calls = new ArrayList<String>();
 		@SuppressWarnings("unused")
 		DefaultLabelProvider lp = new DefaultLabelProvider() {
-			
-			public String getTextFor(String object) {
+
+			public String text(String object) {
 				return object;
 			}
-			
-			public String getTextFor(Integer object) {
+
+			public String text(Integer object) {
 				return object.toString();
 			}
-			
-			public Image getImageFor(String obj) {
+
+			public Image image(String obj) {
 				calls.add(obj);
 				return null;
 			}
-			public Image getImageFor(Integer obj) {
+
+			public Image image(Integer obj) {
 				calls.add(obj.toString());
 				return null;
 			}
 		};
-		assertEquals("foo",lp.getText("foo"));
-		assertEquals("89",lp.getText(new Integer(89)));
-		
+		assertEquals("foo", lp.getText("foo"));
+		assertEquals("89", lp.getText(new Integer(89)));
+
 		assertTrue(calls.isEmpty());
 		lp.getImage(true);
 		assertTrue(calls.isEmpty());
@@ -52,6 +55,50 @@ public class DefaultLabelProviderTest extends TestCase {
 		assertTrue(calls.contains("String"));
 		lp.getImage(new Integer(45));
 		assertTrue(calls.contains("45"));
-		assertTrue(calls.size()==2);
+		assertTrue(calls.size() == 2);
+	}
+
+	public void testErrorHandling() throws Exception {
+		final List<String> calls = new ArrayList<String>();
+		@SuppressWarnings("unused")
+		DefaultLabelProvider lp = new DefaultLabelProvider() {
+
+			public String text(String object) {
+				throw new NullPointerException();
+			}
+
+			public String text(Integer object) {
+				throw new IllegalArgumentException();
+			}
+
+			public Image image(String obj) {
+				throw new NullPointerException();
+			}
+
+			public Image image(Integer obj) {
+				throw new NullPointerException();
+			}
+
+			public Image error_image(Object obj, NullPointerException ex) {
+				calls.add("error_" + obj.toString());
+				return null;
+			}
+		};
+		assertEquals("<unknown>", lp.getText("foo"));
+		try {
+			assertEquals("89", lp.getText(new Integer(89)));
+			fail();
+		} catch (WrappedException e) {
+			assertTrue(e.getCause() instanceof IllegalArgumentException);
+		}
+
+		assertTrue(calls.isEmpty());
+		lp.getImage(true);
+		assertTrue(calls.isEmpty());
+		lp.getImage("String");
+		assertTrue(calls.contains("error_String"));
+		lp.getImage(new Integer(45));
+		assertTrue(calls.contains("error_45"));
+		assertTrue(calls.size() == 2);
 	}
 }

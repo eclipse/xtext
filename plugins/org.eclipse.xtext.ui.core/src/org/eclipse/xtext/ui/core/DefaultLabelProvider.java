@@ -1,5 +1,8 @@
 package org.eclipse.xtext.ui.core;
 
+import java.util.Collections;
+
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -15,8 +18,23 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 public class DefaultLabelProvider extends LabelProvider {
 	
-	private PolymorphicDispatcher<String> getText = new PolymorphicDispatcher<String>("getTextFor",this);
-	private PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("getImageFor",this);
+	private PolymorphicDispatcher<String> getText = new PolymorphicDispatcher<String>("text",1,1,Collections.singletonList(this), 
+	new PolymorphicDispatcher.ErrorHandler<String>(){
+
+		private PolymorphicDispatcher<String> recoverText = new PolymorphicDispatcher<String>("error_text",2,2,Collections.singletonList(DefaultLabelProvider.this));
+		public String handle(Object[] params, Throwable e) {
+			return recoverText.invoke(params[0],e);
+		}
+	});
+	
+	private PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("image",1,1,Collections.singletonList(this), 
+	new PolymorphicDispatcher.ErrorHandler<Image>(){
+		
+		private PolymorphicDispatcher<Image> recoverImage = new PolymorphicDispatcher<Image>("error_image",2,2,Collections.singletonList(DefaultLabelProvider.this));
+		public Image handle(Object[] params, Throwable e) {
+			return recoverImage.invoke(params[0],e);
+		}
+	});
 	
 	@Override
 	public final String getText(Object element) {
@@ -28,7 +46,14 @@ public class DefaultLabelProvider extends LabelProvider {
 		return getImage.invoke(element);
 	}
 
-	public String getTextFor(Object object) {
+	public String error_text(Object object, Exception e) {
+		throw new WrappedException(e);
+	}
+	public String error_text(Object object, NullPointerException e) {
+		return text(object);
+	}
+	
+	public String text(Object object) {
 		if (object instanceof EObject) {
 			EObject eObject = (EObject) object;
 			EClass eClass = eObject.eClass();
@@ -45,7 +70,13 @@ public class DefaultLabelProvider extends LabelProvider {
 		return "<unknown>";
 	}
 	
-	public Image getImageFor(Object obj) {
+	public Image error_image(Object object, Exception e) {
+		throw new WrappedException(e);
+	}
+	public Image error_image(Object object, NullPointerException e) {
+		return image(object);
+	}
+	public Image image(Object obj) {
 		return null;
 	}
 
