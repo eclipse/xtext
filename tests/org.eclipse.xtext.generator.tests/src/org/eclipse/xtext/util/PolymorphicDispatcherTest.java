@@ -77,8 +77,12 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, list(o1));
-
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, list(o1),
+			new PolymorphicDispatcher.ErrorHandler<String>(){
+				public String handle(Object[] params, Throwable throwable) {
+					return null;
+				}
+			});
 		assertEquals("Object_3", dispatcher.invoke(new Integer(3)));
 		assertNull("Integer_3_4", dispatcher.invoke(new Long(3), 4));
 		assertEquals("Integer_3_4", dispatcher.invoke(new Integer(3), 4));
