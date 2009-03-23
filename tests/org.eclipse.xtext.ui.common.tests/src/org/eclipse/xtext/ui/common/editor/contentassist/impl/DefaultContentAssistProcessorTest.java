@@ -233,22 +233,22 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      */
     public void testCompleteParserRule_01() throws Exception {
-            newBuilder(getXtextGrammarSetup())
-                    .appendNl("grammar foo")
-                    .appendNl("generate foo \"foo\"")
-                    .appendNl("MyRule : 'foo' name=ID; ").assertText(
-                                    "ParserRule_Name", "terminal"
-                    );
+        newBuilder(getXtextGrammarSetup())
+                .appendNl("grammar foo")
+                .appendNl("generate foo \"foo\"")
+                .appendNl("MyRule : 'foo' name=ID; ").assertText(
+                                "ParserRule_Name", "terminal"
+                );
     }
     
     public void testCompleteParserRule_02() throws Exception {
-            newBuilder(getXtextGrammarSetup())
-                    .appendNl("grammar foo")
-                    .appendNl("generate foo \"foo\"")
-                    .appendNl("")
-                    .appendNl("MyRule : 'foo' name=ID; ").
-                    assertTextAtCursorPosition("MyRule",
-                    		"ParserRule_Name", "terminal");
+        newBuilder(getXtextGrammarSetup())
+                .appendNl("grammar foo")
+                .appendNl("generate foo \"foo\"")
+                .appendNl("")
+                .appendNl("MyRule : 'foo' name=ID; ")
+                .assertTextAtCursorPosition("MyRule",
+                		"ParserRule_Name", "terminal");
     }
     
     public void testCompleteParserRule_03() throws Exception {
@@ -256,9 +256,19 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
-                .appendNl(" MyRule : 'foo' name=ID; ").
-                assertTextAtCursorPosition(" MyRule",
+                .appendNl(" MyRule : 'foo' name=ID; ")
+                .assertTextAtCursorPosition(" MyRule",
                 		"ParserRule_Name", "terminal");
+    }
+    
+    public void _testCompleteGenerateKeyword() throws Exception {
+        newBuilder(getXtextGrammarSetup())
+                .appendNl("grammar foo")
+                .appendNl("generate foo \"foo\"")
+                .appendNl("")
+                .appendNl("MyRule : 'foo' name=ID; ")
+                .assertTextAtCursorPosition("generate", 3,
+                		"generate");
     }
 
     /**
@@ -280,8 +290,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
 
     public void testKeywordWithBackslashes() throws Exception {
-		newBuilder(getKeywordsLangSetup())
-			.assertText("foo\\bar", "foo\\", "\\bar", "\\");
+		newBuilder(getKeywordsLangSetup()).assertText("foo\\bar", "foo\\", "\\bar", "\\");
 	}
     
     public void testEnumCompletion_01() throws Exception {
