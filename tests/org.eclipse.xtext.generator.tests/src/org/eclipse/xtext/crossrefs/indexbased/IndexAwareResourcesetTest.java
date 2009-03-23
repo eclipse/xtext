@@ -39,9 +39,9 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 
 	public void testStuff() throws Exception {
 		IndexAwareResourceSet set = get(IndexAwareResourceSet.class);
+		set.setClasspathURIContext(IndexAwareResourcesetTest.class);
 		URI uri = URI.createURI("classpath:/" + getClass().getName().replace('.', '/')
 				+ ".importuritestlanguage");
-		System.out.println(uri);
 		set.getResource(uri, true);
 		Iterator<EObjectDescriptor> result = set.getStore().eObjectDAO().createQuery().executeListResult()
 				.iterator();
@@ -96,10 +96,7 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 			}
 		});
 	}
-
-	/**
-	 * @return
-	 */
+	
 	protected INameProvider getNameProvider() {
 		return this.nameProvider;
 	}
