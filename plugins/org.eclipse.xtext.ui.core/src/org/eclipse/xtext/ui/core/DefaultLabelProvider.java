@@ -18,23 +18,23 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
  */
 public class DefaultLabelProvider extends LabelProvider {
 	
-	private PolymorphicDispatcher<String> getText = new PolymorphicDispatcher<String>("text",1,1,Collections.singletonList(this), 
-	new PolymorphicDispatcher.ErrorHandler<String>(){
-
-		private PolymorphicDispatcher<String> recoverText = new PolymorphicDispatcher<String>("error_text",2,2,Collections.singletonList(DefaultLabelProvider.this));
-		public String handle(Object[] params, Throwable e) {
-			return recoverText.invoke(params[0],e);
-		}
-	});
+	private final PolymorphicDispatcher<String> getText = new PolymorphicDispatcher<String>("text",1,1,Collections.singletonList(this),
+		new PolymorphicDispatcher.ErrorHandler<String>(){
 	
-	private PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("image",1,1,Collections.singletonList(this), 
-	new PolymorphicDispatcher.ErrorHandler<Image>(){
-		
-		private PolymorphicDispatcher<Image> recoverImage = new PolymorphicDispatcher<Image>("error_image",2,2,Collections.singletonList(DefaultLabelProvider.this));
-		public Image handle(Object[] params, Throwable e) {
-			return recoverImage.invoke(params[0],e);
-		}
-	});
+			private final PolymorphicDispatcher<String> recoverText = new PolymorphicDispatcher<String>("error_text",2,2,Collections.singletonList(DefaultLabelProvider.this));
+				public String handle(Object[] params, Throwable e) {
+					return recoverText.invoke(params[0],e);
+				}
+		});
+	
+	private final PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("image",1,1,Collections.singletonList(this),
+		new PolymorphicDispatcher.ErrorHandler<Image>(){
+			
+			private final PolymorphicDispatcher<Image> recoverImage = new PolymorphicDispatcher<Image>("error_image",2,2,Collections.singletonList(DefaultLabelProvider.this));
+				public Image handle(Object[] params, Throwable e) {
+					return recoverImage.invoke(params[0],e);
+				}
+		});
 	
 	@Override
 	public final String getText(Object element) {
