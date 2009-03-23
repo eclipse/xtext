@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Descriptor;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.index.IIndexStore;
@@ -30,9 +31,9 @@ import com.google.inject.Inject;
  * 
  */
 public class IndexAwareResourceSet extends XtextResourceSet {
-	private IIndexStore store;
-	private IndexFeederImpl feeder;
-	private EmfResourceChangeListener listener;
+	private final IIndexStore store;
+	private final IndexFeederImpl feeder;
+	private final EmfResourceChangeListener listener;
 
 	public IIndexStore getStore() {
 		return store;
@@ -61,11 +62,19 @@ public class IndexAwareResourceSet extends XtextResourceSet {
 		
 		EcoreIndexFeederImpl ecoreFeeder = new EcoreIndexFeederImpl(store);
 		Registry reg = getPackageRegistry();
+		// XXX SZ: will not return null, however reg.entrySet does not provide all visible
+		// registry entries. Is there a way to enumerate them?
 		if (reg==null || reg.isEmpty())
 			reg = EPackage.Registry.INSTANCE;
 		Set<Entry<String,Object>> set = reg.entrySet();
 		for (Entry<String, Object> entry : set) {
-			ecoreFeeder.index((EPackage) entry.getValue(), false);
+			// TODO SZ: what about EPackage.Descriptor?
+			EPackage pack = null;
+			if (entry.getValue() instanceof EPackage.Descriptor) {
+				pack = ((Descriptor) entry.getValue()).getEPackage();
+			} else if (entry.getValue() instanceof EPackage)
+				pack = (EPackage) entry.getValue();
+			ecoreFeeder.index(pack, false);
 		}
 	}
 	
