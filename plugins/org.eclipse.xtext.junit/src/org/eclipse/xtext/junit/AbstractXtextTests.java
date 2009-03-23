@@ -61,6 +61,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	private Injector injector;
 	private HashMap<EPackage, Object> validatorReg;
 	private HashMap<String, Object> epackageReg;
+	private boolean canCreateInjector;
 
 	static {
 		//EMF Standalone setup
@@ -77,6 +78,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		canCreateInjector = true;
 		this.validatorReg = new HashMap<EPackage, Object>(EValidator.Registry.INSTANCE);
 		this.epackageReg = new HashMap<String, Object>(EPackage.Registry.INSTANCE);
 	}
@@ -100,15 +102,18 @@ public abstract class AbstractXtextTests extends TestCase {
 	 * call this to set the language class to be used in the current test.
 	 */
 	protected void with(Module ... modules) throws Exception {
+		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
 		injector = Guice.createInjector(modules);
 	}
 
 	protected void with(Class<? extends ISetup> setupClazz) throws Exception {
+		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
 		ISetup instance = setupClazz.newInstance();
 		injector = instance.createInjectorAndDoEMFRegistration();
 	}
 
 	public void with(ISetup setup) throws Exception {
+		assertTrue("super.setUp() has to be called before any injector is instantiated", canCreateInjector);
 		injector = setup.createInjectorAndDoEMFRegistration();
 	}
 
@@ -288,7 +293,7 @@ public abstract class AbstractXtextTests extends TestCase {
 				return model;
 			}
 		}
-		throw new IllegalStateException("May not happen, but helps to suppress false positivies in eclipse' control flow analysis.");
+		throw new IllegalStateException("May not happen, but helps to suppress false positives in eclipse' control flow analysis.");
 	}
 
 	public static final class Keys {
