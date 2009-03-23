@@ -71,7 +71,6 @@ public class JavaReflectiveMethodInvoker {
 
 	@SuppressWarnings("unchecked")
 	private final List<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
-		boolean wasAccessible = method.isAccessible();
 		try {
 			method.setAccessible(true);
 			return (List<ICompletionProposal>) method.invoke(target, args);
@@ -89,9 +88,6 @@ public class JavaReflectiveMethodInvoker {
 			if (targetEx instanceof Error)
 				throw (Error)targetEx;
 			throw new IllegalStateException("Unexpected exception thrown", targetEx);
-		}
-		finally {
-			method.setAccessible(wasAccessible);
 		}
 	}
 

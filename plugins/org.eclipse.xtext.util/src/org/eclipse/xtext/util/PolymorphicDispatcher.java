@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.WrappedException;
 public class PolymorphicDispatcher<RT> {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(PolymorphicDispatcher.class);
+	private static final Logger log = Logger.getLogger(PolymorphicDispatcher.class);
 	private final List<? extends Object> targets;
 	private final Filter<Method> methodFilter;
 	private final Comparator<MethodDesc> comparator;
@@ -82,11 +82,13 @@ public class PolymorphicDispatcher<RT> {
 
 	private ErrorHandler<RT> handler = new ErrorHandler<RT>() {
 		public RT handle(Object[] params, Throwable e) {
-			if (e instanceof WrappedException)
-				throw (WrappedException)e;
+			if (e instanceof RuntimeException)
+				throw (RuntimeException)e;
+			if (e instanceof Error)
+				throw (Error) e;
 			if (e instanceof Exception)
 				throw new WrappedException((Exception) e);
-			throw new Error(e);
+			throw new RuntimeException(e);
 		}
 	};
 
@@ -201,7 +203,6 @@ public class PolymorphicDispatcher<RT> {
 								+ next.method + " for params " + Arrays.toString(params));
 					}
 				}
-				boolean wasAccessible = methodDesc.method.isAccessible();
 				try {
 					methodDesc.method.setAccessible(true);
 					return (RT) methodDesc.method.invoke(methodDesc.target, params);
@@ -211,9 +212,6 @@ public class PolymorphicDispatcher<RT> {
 					return handler.handle(params,e);
 				} catch (IllegalAccessException e) {
 					return handler.handle(params,e);
-				} finally {
-					if (!wasAccessible)
-						methodDesc.method.setAccessible(false);
 				}
 			}
 		}

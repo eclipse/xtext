@@ -80,7 +80,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 				Check annotation = method.getAnnotation(Check.class);
 				if (!state.checkMode.shouldCheck(annotation.value()))
 					return;
-				boolean wasAccessible = method.isAccessible();
 				try {
 					state.currentMethod = method;
 					method.setAccessible(true);
@@ -101,9 +100,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 					if (!(targetException instanceof GuardException)
 							&& !(targetException instanceof NullPointerException))
 						throw new RuntimeException(targetException);
-				}
-				finally {
-					method.setAccessible(wasAccessible);
 				}
 			}
 			finally {
@@ -173,20 +169,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			instanceToUse = instance == null ? clazz.newInstance() : instance;
 		}
 		catch (Exception e) {
-			Constructor<? extends AbstractDeclarativeValidator> constr = null;
-			boolean wasAccessible = false;
 			try {
+				Constructor<? extends AbstractDeclarativeValidator> constr = null;
 				constr = clazz.getDeclaredConstructor();
-				wasAccessible = constr.isAccessible();
 				constr.setAccessible(true);
 				instanceToUse = constr.newInstance();
 			}
 			catch (Exception ex) {
 				return;
-			}
-			finally {
-				if (constr != null)
-					constr.setAccessible(wasAccessible);
 			}
 		}
 		Method[] methods = clazz.getDeclaredMethods();
