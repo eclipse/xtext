@@ -36,12 +36,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="«name».Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="«name».Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="«name»" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page

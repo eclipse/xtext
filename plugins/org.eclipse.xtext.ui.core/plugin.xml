@@ -45,6 +45,7 @@
          </with>
       </definition>
    </extension>
+   
    <extension
          point="org.eclipse.ui.menus">
         <menuContribution
@@ -92,6 +93,16 @@
             name="Validate">
       </command>
    </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+    <propertyTester
+      id="org.eclipse.xtext.ui.core.editor.XtextEditorPropertyTester"
+      type="org.eclipse.ui.IEditorPart"
+      namespace="org.eclipse.xtext.ui.core.editor.XtextEditor"
+      properties="languageName"
+      class="org.eclipse.xtext.ui.core.editor.XtextEditorPropertyTester">
+    </propertyTester>
+  </extension>
+
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
