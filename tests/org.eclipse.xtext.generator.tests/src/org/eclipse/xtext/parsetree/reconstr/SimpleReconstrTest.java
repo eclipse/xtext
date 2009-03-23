@@ -120,7 +120,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
-		with(SimpleReconstrTestLanguageStandaloneSetup.class);
 		super.setUp();
+		with(SimpleReconstrTestLanguageStandaloneSetup.class);
 	}
 }
