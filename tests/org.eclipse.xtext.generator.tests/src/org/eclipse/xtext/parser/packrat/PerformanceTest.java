@@ -30,6 +30,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		with(XtextTerminalsTestLanguageStandaloneSetup.class);
 		this.generatedWithTerminals = get(XtextTerminalsTestLanguagePackratParser.class);
 		StringBuilder modelBuilder = new StringBuilder("grammar a.bc.def.ghi with e.fh.ijk\n");
@@ -58,6 +59,7 @@ public class PerformanceTest extends AbstractGeneratorTest {
 		System.out.println("usage after:    " + (java.lang.Runtime.getRuntime().totalMemory() - java.lang.Runtime.getRuntime().freeMemory()));
 		System.out.println("duration:               " + (endTime - startTime) + " ms");
 		this.model = null;
+		super.tearDown();
 	}
 
 	private void doTest(AbstractPackratParser parser) {
