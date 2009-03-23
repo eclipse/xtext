@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.eclipse.emf.index
 Bundle-Version: 0.7.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport,
+ com.google.guice;resolution:=optional
 Export-Package: org.eclipse.emf.index,
  org.eclipse.emf.index.ecore,
  org.eclipse.emf.index.ecore.impl,
