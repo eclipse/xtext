@@ -20,20 +20,22 @@ public class DefaultLabelProvider extends LabelProvider {
 	
 	private final PolymorphicDispatcher<String> getText = new PolymorphicDispatcher<String>("text",1,1,Collections.singletonList(this),
 		new PolymorphicDispatcher.ErrorHandler<String>(){
-	
+			
 			private final PolymorphicDispatcher<String> recoverText = new PolymorphicDispatcher<String>("error_text",2,2,Collections.singletonList(DefaultLabelProvider.this));
-				public String handle(Object[] params, Throwable e) {
-					return recoverText.invoke(params[0],e);
-				}
+			
+			public String handle(Object[] params, Throwable e) {
+				return recoverText.invoke(params[0], e);
+			}
 		});
 	
 	private final PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("image",1,1,Collections.singletonList(this),
 		new PolymorphicDispatcher.ErrorHandler<Image>(){
 			
 			private final PolymorphicDispatcher<Image> recoverImage = new PolymorphicDispatcher<Image>("error_image",2,2,Collections.singletonList(DefaultLabelProvider.this));
-				public Image handle(Object[] params, Throwable e) {
-					return recoverImage.invoke(params[0],e);
-				}
+			
+			public Image handle(Object[] params, Throwable e) {
+				return recoverImage.invoke(params[0],e);
+			}
 		});
 	
 	@Override
@@ -49,6 +51,7 @@ public class DefaultLabelProvider extends LabelProvider {
 	public String error_text(Object object, Exception e) {
 		throw new WrappedException(e);
 	}
+	
 	public String error_text(Object object, NullPointerException e) {
 		return text(object);
 	}
