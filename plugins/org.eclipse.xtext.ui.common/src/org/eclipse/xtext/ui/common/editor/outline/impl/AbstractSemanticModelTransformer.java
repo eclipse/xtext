@@ -60,7 +60,8 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	}
 
 	private EObject[] sortChildren(EObject semanticNode) {
-		EObject[] result = getChildren(semanticNode).toArray(new EObject[semanticNode.eContents().size()]);
+		List<EObject> list = getChildren(semanticNode);
+		EObject[] result = list.toArray(new EObject[list.size()]);
 		if (sorted) {
 			Arrays.sort(result, new Comparator<EObject>() {
 				public int compare(EObject arg0, EObject arg1) {
