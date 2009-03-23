@@ -181,7 +181,9 @@ public class PolymorphicDispatcher<RT> {
 			if (getParameterTypes().length != param.length)
 				return false;
 			for (int i = 0; i < param.length; i++) {
-				if (!getParameterTypes()[i].isInstance(param[i]))
+				Object p = param[i];
+				Class<?> paramClass = p != null? p.getClass() : Object.class;
+				if (!(getParameterTypes()[i].isAssignableFrom(paramClass)))
 					return false;
 			}
 			return true;
