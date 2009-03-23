@@ -30,6 +30,7 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.validator.CheckMode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -60,6 +62,8 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private Provider<XtextDocumentProvider> documentProvider;
+	
+	private String languageName;
 
 	public XtextEditor() {
 		if (log.isDebugEnabled())
@@ -68,6 +72,15 @@ public class XtextEditor extends TextEditor {
 
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
+	}
+	
+	@Inject
+	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String name) {
+		this.languageName = name;
+	}
+	
+	public String getLanguageName() {
+		return languageName;
 	}
 
 	@Override
@@ -229,9 +242,6 @@ public class XtextEditor extends TextEditor {
 		doExpensiveValidation();
 	}
 
-	/**
-	 *
-	 */
 	private void doExpensiveValidation() {
 		new ValidationJob(this, CheckMode.NORMAL_AND_FAST).schedule();
 	}

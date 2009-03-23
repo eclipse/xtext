@@ -16,6 +16,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 public class TerminalsGrammarAccess implements IGrammarAccess {
 	
 	
+	
 	private TerminalRule tID;
 	private TerminalRule tINT;
 	private TerminalRule tSTRING;

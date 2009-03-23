@@ -41,12 +41,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.XtextGrammarTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.XtextGrammarTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.XtextGrammarTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -118,12 +129,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.ui.common.editor.contentassist.impl.TwoContextsTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -196,12 +218,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -273,12 +306,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -350,12 +394,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -427,12 +482,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.testlanguages.TreeTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.testlanguages.TreeTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
@@ -504,12 +570,23 @@
 			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="isActiveEditorAnInstanceOfXtextEditor">
+					definitionId="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 	</extension>
-	
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.enumrules.EnumRulesTestLanguage" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page

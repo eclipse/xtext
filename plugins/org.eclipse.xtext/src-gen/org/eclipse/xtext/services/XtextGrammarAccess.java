@@ -1509,6 +1509,7 @@ public class XtextGrammarAccess implements IGrammarAccess {
 		public RuleCall getLiteralKeywordParserRuleCall_1_1_0() { return cLiteralKeywordParserRuleCall_1_1_0; }
 	}
 	
+	
 	private GrammarElements pGrammar;
 	private GrammarIDElements pGrammarID;
 	private AbstractRuleElements pAbstractRule;

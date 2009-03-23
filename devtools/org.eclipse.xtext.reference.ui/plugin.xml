@@ -35,6 +35,30 @@
 			name="ReferenceGrammar Editor">
 		</editor>
 	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+      <definition id="org.eclipse.xtext.reference.ReferenceGrammar.Editor.opened">
+        	<and>
+        			<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+        			<with variable="activeEditor">
+			            <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+			            	value="org.eclipse.xtext.reference.ReferenceGrammar" 
+      						forcePluginActivation="true"/>
+         			</with>		
+			</and>
+      </definition>
+    </extension>
 	 <extension
 			point="org.eclipse.ui.preferencePages">
 		<page
