@@ -10,8 +10,8 @@ public class TransientValuesTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
-		with(TransientValuesTestStandaloneSetup.class);
 		super.setUp();
+		with(TransientValuesTestStandaloneSetup.class);
 	}
 
 	public void testRequired1() throws Exception {
