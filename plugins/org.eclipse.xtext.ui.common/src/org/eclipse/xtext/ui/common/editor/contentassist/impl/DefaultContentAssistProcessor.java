@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
+import static java.lang.Math.max;
+import static org.eclipse.xtext.parsetree.ParseTreeUtil.getCurrentOrFollowingNodeByOffset;
+import static org.eclipse.xtext.parsetree.ParseTreeUtil.getLastCompleteNodeByOffset;
 import static org.eclipse.xtext.util.CollectionUtils.addAllIfNotNull;
 import static org.eclipse.xtext.util.CollectionUtils.addIfNotNull;
 
@@ -37,7 +40,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
@@ -191,22 +193,26 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		IParseResult parseResult = resource.getParseResult();
 		Assert.isNotNull(parseResult);
 		CompositeNode rootNode = parseResult.getRootNode();
-		AbstractNode referenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-		AbstractNode nodeAtOffset = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
+		AbstractNode referenceNode = getLastCompleteNodeByOffset(rootNode, offset);
+		AbstractNode nodeAtOffset  = getCurrentOrFollowingNodeByOffset(rootNode, offset);
 
 		if (referenceNode.getOffset()+referenceNode.getLength() == offset) {
-			AbstractNode precedingReferenceNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode,Math.max(0, referenceNode.getOffset()));
+			AbstractNode precedingReferenceNode = getLastCompleteNodeByOffset(rootNode,max(0, referenceNode.getOffset()));
 			String matchingString = computeMatchString(referenceNode);
-			result.add(newCompletionProposal(matchingString, offset, rootNode, precedingReferenceNode));
+			result.add(newContentAssistContext(matchingString, offset, rootNode, precedingReferenceNode));
 			if (referenceNode.getGrammarElement() instanceof Keyword ||
 				referenceNode.getGrammarElement() instanceof CrossReference ||
 				(referenceNode.getGrammarElement() instanceof RuleCall &&
 				((RuleCall)referenceNode.getGrammarElement()).getRule() instanceof TerminalRule)) {
-				result.add(newCompletionProposal("", offset, rootNode, referenceNode));
+				result.add(newContentAssistContext("", offset, rootNode, referenceNode));
 			}
+		} else if (referenceNode == nodeAtOffset) {
+			AbstractNode precedingReferenceNode = getLastCompleteNodeByOffset(rootNode,max(0, referenceNode.getOffset()));
+			String matchingString = calculateMatchString(nodeAtOffset,text, offset);
+			result.add(newContentAssistContext(matchingString, offset, rootNode, precedingReferenceNode));
 		} else {
 			String matchingString = calculateMatchString(nodeAtOffset,text, offset);
-			result.add(newCompletionProposal(matchingString, offset, rootNode, referenceNode));
+			result.add(newContentAssistContext(matchingString, offset, rootNode, referenceNode));
 		}
 		
 		return result;
@@ -259,10 +265,10 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return matchString.toString();
 	}
 	
-	private ContentAssistContext newCompletionProposal(String matchingString, final int offset, CompositeNode rootNode,
+	private ContentAssistContext newContentAssistContext(String matchingString, final int offset, CompositeNode rootNode,
 			AbstractNode referenceNode) {
 		EObject model = NodeUtil.getNearestSemanticObject(referenceNode);
-		AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
+		AbstractNode node = getCurrentOrFollowingNodeByOffset(rootNode, offset);
 		return new ContentAssistContext(model, offset, matchingString, node, referenceNode, rootNode);
 	}
 	
