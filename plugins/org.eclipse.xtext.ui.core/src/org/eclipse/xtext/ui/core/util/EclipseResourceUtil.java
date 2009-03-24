@@ -44,7 +44,7 @@ import org.eclipse.ui.ide.IDE;
 /**
  * Represents a helper/util class to work with eclipse core resource
  * abstractions for workspace,project,files and directories. For the most part
- * this code was copied from the last version 4.3.x of openArchitectureWare.
+ * this code was copied from the last version (4.3.1) of openArchitectureWare.
  *
  * @author Michael Clay
  */
@@ -58,7 +58,7 @@ public class EclipseResourceUtil {
 			final List<IProject> referencedProjects, final Set<String> requiredBundles,
 			final List<String> exportedPackages, final List<String> importedPackages,
 			final String activatorClassName,
-			final IProgressMonitor progressMonitor,	final Shell theShell) {
+			final IProgressMonitor progressMonitor,	final Shell theShell,String[] projectNatures) {
 		IProject project = null;
 		try {
 			progressMonitor.beginTask("", 10);
@@ -99,7 +99,7 @@ public class EclipseResourceUtil {
 				}
 			}
 
-			projectDescription.setNatureIds(new String[] { JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature" });
+			projectDescription.setNatureIds(projectNatures);
 
 			final ICommand java = projectDescription.newCommand();
 			java.setBuilderName(JavaCore.BUILDER_ID);
