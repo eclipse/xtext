@@ -76,8 +76,6 @@ public final class ParseTreeUtil {
                     CompositeNode rootNode, AbstractNode lastCompleteNode, int offset) {
             Set<AbstractElement> abstractElementSet = new HashSet<AbstractElement>();
             AbstractElement grammarElement = getGrammarElementFromNode(lastCompleteNode);
-            if (lastCompleteNode.getOffset() + lastCompleteNode.getLength() > offset)
-            	abstractElementSet.add(grammarElement);
             abstractElementSet.addAll(backtrackAlternativeAssignments(lastCompleteNode, grammarElement));
             abstractElementSet.addAll(calculatePossibleElementSet(lastCompleteNode,null));
             return abstractElementSet;
@@ -134,8 +132,9 @@ public final class ParseTreeUtil {
 				AbstractNode abstractNode = (AbstractNode) eObject;
 				if (abstractNode.getOffset() >= offsetPosition ) {
 					break;
-				} else if (abstractNode.getGrammarElement() instanceof AbstractElement ||
-						   abstractNode.getGrammarElement() instanceof ParserRule) {
+				} else if ((abstractNode instanceof LeafNode || null == result) &&
+						   (abstractNode.getGrammarElement() instanceof AbstractElement ||
+					    	abstractNode.getGrammarElement() instanceof ParserRule)) {
 					result = abstractNode;
 				}
 			}
