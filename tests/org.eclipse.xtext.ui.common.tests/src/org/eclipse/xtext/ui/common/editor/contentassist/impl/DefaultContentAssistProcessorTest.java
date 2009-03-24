@@ -248,7 +248,11 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .appendNl("")
                 .appendNl("MyRule : 'foo' name=ID; ")
                 .assertTextAtCursorPosition("MyRule",
-                		"ParserRule_Name", "terminal");
+                		"ParserRule_Name",
+                		"terminal",
+                		"as",
+                        "generate",
+                        "import");
     }
     
     public void testCompleteParserRule_03() throws Exception {
@@ -258,7 +262,11 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .appendNl("")
                 .appendNl(" MyRule : 'foo' name=ID; ")
                 .assertTextAtCursorPosition(" MyRule",
-                		"ParserRule_Name", "terminal");
+                		"ParserRule_Name", 
+                		"terminal",
+                		"as",
+                        "generate",
+                        "import");
     }
     
     public void _testCompleteGenerateKeyword() throws Exception {
@@ -269,6 +277,65 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .appendNl("MyRule : 'foo' name=ID; ")
                 .assertTextAtCursorPosition("generate", 3,
                 		"generate");
+    }
+
+    public void testCompleteImportAndGenerateRule() throws Exception {
+        newBuilder(getXtextGrammarSetup())
+        .appendNl("grammar foo")
+        .appendNl("generate foo \"foo\"")
+        .appendNl("")
+        .appendNl("R1 : (attr+=R2)*;")
+        .appendNl("R2 : (attr=INT)? prop=R3;")
+        .assertTextAtCursorPosition("R1",
+                        "ParserRule_Name",
+                        "as",
+                        "generate",
+                        "import",
+                        "terminal"
+        );
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
+     */
+    public void testCompleteRuleCallWithSpace() throws Exception {
+        newBuilder(getXtextGrammarSetup())
+        .appendNl("grammar foo")
+        .appendNl("generate foo \"foo\"")
+        .appendNl("R1 : (attr+=R2)*;")
+        .appendNl("R2 : (attr=INT)? prop=R3;")
+        .append("R3: attr+= ").assertText(
+                        "R1",
+                        "R2",
+                        "R3",
+                        "\"Keyword_Value\"",
+                        "(",
+                        "["
+        );
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
+     */
+    public void testCompleteAbstractRuleCallWithSpace() throws Exception {
+        newBuilder(getContentAssistGrammarSetup())
+        .appendNl("abstract rules")
+        .appendNl("R1 ();")
+        .append("R2 rule : ").assertText(
+                        "R1",
+                        "R2"
+        );
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269649
+     */
+    public void testCompletionOnGenerateKeyword() throws Exception {
+        newBuilder(getXtextGrammarSetup())
+        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+        .appendNl("generate meta \"url\"")
+        .appendNl("Rule: name=ID;")
+        .assertTextAtCursorPosition("generate", 3,"generate");
     }
 
     /**
