@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.internal.xtend.type.impl.java.JavaMetaModel;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
@@ -32,9 +33,17 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
 import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
-
+/**
+ * XtextProjectCreator handles the actual creation of the new Xtext project.
+ * 
+ * @author Michael Clay - Initial contribution and API
+ */
 public class XtextProjectCreator extends DefaultProjectCreator {
 
+	private static final String[] PROJECT_NATURES = new String[] { 
+			JavaCore.NATURE_ID, 
+			"org.eclipse.pde.PluginNature",
+			"org.eclipse.xtend.shared.ui.xtendXPandNature"};
 	// some constants
 	private static final String SRC_GEN_ROOT = "src-gen";
 	private static final String SRC_ROOT = "src";
@@ -120,7 +129,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 			final IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Creating dsl projects " + projectName, 3);
 		final IProject dslProject = EclipseResourceUtil.createProject(projectName,
-				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, null, null, monitor, null);
+				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, null, null, monitor, 
+				null,PROJECT_NATURES);
 
 		if (dslProject == null) {
 			return null;
