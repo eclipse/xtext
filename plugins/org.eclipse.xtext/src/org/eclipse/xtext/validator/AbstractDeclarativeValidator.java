@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -345,7 +346,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		private final int severity;
 
 		public List<Diagnostic> getChildren() {
-			return null;
+			return Collections.emptyList();
 		}
 
 		public int getCode() {
