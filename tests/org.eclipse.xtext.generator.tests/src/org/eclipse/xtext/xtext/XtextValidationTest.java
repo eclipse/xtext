@@ -53,7 +53,8 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		Diagnostic child = diag.getChildren().get(0);
 		assertNotNull("child", child);
 		assertEquals("child.isWarning", child.getSeverity(), Diagnostic.WARNING);
-		assertNull("child.children", child.getChildren());
+		assertNotNull("child.children", child.getChildren());
+		assertTrue("child.children.isEmpty", child.getChildren().isEmpty());
 		assertEquals("child.data[0]", reference, child.getData().get(0));
 		assertEquals("child.data[1]", XtextPackage.CROSS_REFERENCE__TERMINAL, child.getData().get(1));
 		assertEquals(child.getData().toString(), 2, child.getData().size());
