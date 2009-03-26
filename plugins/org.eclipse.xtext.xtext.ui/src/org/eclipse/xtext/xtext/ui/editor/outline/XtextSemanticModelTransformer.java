@@ -36,7 +36,6 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTrans
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
-import org.eclipse.xtext.xtext.ui.Activator;
 
 import com.google.inject.Inject;
 
@@ -169,7 +168,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseGrammar(Grammar object) {
 					outlineNode.setLabel("grammar " + GrammarUtil.getLanguageId(object));
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/language.gif"));
 					return outlineNode;
 				}
 
@@ -177,7 +175,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				public ContentOutlineNode caseGeneratedMetamodel(org.eclipse.xtext.GeneratedMetamodel object) {
 					outlineNode.setLabel("generate " + object.getName()
 							+ (!Strings.isEmpty(object.getAlias()) ? " as " + object.getAlias() : ""));
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/export.gif"));
 					return outlineNode;
 				}
 
@@ -196,7 +193,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 						label = " " + UNKNOWN;
 					}
 					outlineNode.setLabel("import" + label);
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/import.gif"));
 					return outlineNode;
 				}
 
@@ -285,7 +281,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseAbstractRule(org.eclipse.xtext.AbstractRule object) {
 					outlineNode.setLabel(object.getName());
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/rule.gif"));
 					return outlineNode;
 				}
 
@@ -294,7 +289,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 					outlineNode.setLabel(getLabel(ruleCall));
 					// TODO show another icon, if unresolved
 					// TODO how to show text in another color?
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/rule.gif"));
 					return outlineNode;
 				}
 
@@ -339,7 +333,6 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				@Override
 				public ContentOutlineNode caseKeyword(Keyword object) {
 					outlineNode.setLabel("'" + object.getValue() + "'");
-					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/keyword.gif"));
 					return outlineNode;
 				}
 				

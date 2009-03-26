@@ -5,6 +5,7 @@
 package org.eclipse.xtext.xtext.ui.internal;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
@@ -30,9 +31,17 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		
-		injectors.put("org.eclipse.xtext.Xtext",Guice.createInjector(new org.eclipse.xtext.XtextRuntimeModule(), new org.eclipse.xtext.XtextUiModule()));
+		injectors.put("org.eclipse.xtext.Xtext", Guice.createInjector(
+				new org.eclipse.xtext.XtextRuntimeModule(), 
+				new org.eclipse.xtext.XtextUiModule(),
+				new UIPluginModule(this)
+		));
 		
-		injectors.put("org.eclipse.xtext.common.Terminals",Guice.createInjector(new org.eclipse.xtext.common.TerminalsRuntimeModule(), new org.eclipse.xtext.common.TerminalsUiModule()));
+		injectors.put("org.eclipse.xtext.common.Terminals", Guice.createInjector(
+				new org.eclipse.xtext.common.TerminalsRuntimeModule(),
+				new org.eclipse.xtext.common.TerminalsUiModule(),
+				new UIPluginModule(this)		
+		));
 		
 	}
 	

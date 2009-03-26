@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.core;
 
 import java.util.Collections;
@@ -12,9 +19,12 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Peter Friese - Implementation
+ * @author Sebastian Zarnekow
  */
 public class DefaultLabelProvider extends LabelProvider {
 	
@@ -28,15 +38,18 @@ public class DefaultLabelProvider extends LabelProvider {
 			}
 		});
 	
-	private final PolymorphicDispatcher<Image> getImage = new PolymorphicDispatcher<Image>("image",1,1,Collections.singletonList(this),
-		new PolymorphicDispatcher.ErrorHandler<Image>(){
+	private final PolymorphicDispatcher<String> getImage = new PolymorphicDispatcher<String>("image",1,1,Collections.singletonList(this),
+		new PolymorphicDispatcher.ErrorHandler<String>(){
 			
-			private final PolymorphicDispatcher<Image> recoverImage = new PolymorphicDispatcher<Image>("error_image",2,2,Collections.singletonList(DefaultLabelProvider.this));
+			private final PolymorphicDispatcher<String> recoverImage = new PolymorphicDispatcher<String>("error_image",2,2,Collections.singletonList(DefaultLabelProvider.this));
 			
-			public Image handle(Object[] params, Throwable e) {
+			public String handle(Object[] params, Throwable e) {
 				return recoverImage.invoke(params[0],e);
 			}
 		});
+	
+	@Inject
+	private IImageHelper imageHelper;
 	
 	@Override
 	public final String getText(Object element) {
@@ -45,7 +58,8 @@ public class DefaultLabelProvider extends LabelProvider {
 	
 	@Override
 	public final Image getImage(Object element) {
-		return getImage.invoke(element);
+		String imageName = getImage.invoke(element);
+		return imageHelper.getImage(imageName);
 	}
 
 	public String error_text(Object object, Exception e) {
@@ -73,13 +87,13 @@ public class DefaultLabelProvider extends LabelProvider {
 		return "<unknown>";
 	}
 	
-	public Image error_image(Object object, Exception e) {
+	public String error_image(Object object, Exception e) {
 		throw new WrappedException(e);
 	}
-	public Image error_image(Object object, NullPointerException e) {
+	public String error_image(Object object, NullPointerException e) {
 		return image(object);
 	}
-	public Image image(Object obj) {
+	public String image(Object obj) {
 		return null;
 	}
 
@@ -102,4 +116,5 @@ public class DefaultLabelProvider extends LabelProvider {
 		}
 		return result;
 	}
+	
 }
