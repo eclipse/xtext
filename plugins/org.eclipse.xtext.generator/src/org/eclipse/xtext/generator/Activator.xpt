@@ -9,6 +9,8 @@
  */
 package «activatorName.toJavaPackage()»;
 
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -35,12 +37,20 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		«FOREACH this AS grammar»
-		injectors.put("«grammar.name»",Guice.createInjector(new «guiceModuleRt(grammar)»(), new «guiceModuleUi(grammar)»()));
+		injectors.put("«grammar.name»", Guice.createInjector(
+			new «guiceModuleRt(grammar)»(), 
+			new «guiceModuleUi(grammar)»(),
+			createUIPluginModule()
+		));
 		«ENDFOREACH»
 	}
 	
 	public static «activatorName.toSimpleName()» getInstance() {
 		return INSTANCE;
+	}
+	
+	protected UIPluginModule createUIPluginModule() {
+		return new UIPluginModule(this);
 	}
 	
 }
