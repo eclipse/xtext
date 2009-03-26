@@ -18,7 +18,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.Range;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.DefaultDamagerRepairerAdapter;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
@@ -27,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextDamagerRepairer extends DefaultDamagerRepairerAdapter {
+public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 
 	@Inject
 	public XtextDamagerRepairer(ITokenScanner scanner) {

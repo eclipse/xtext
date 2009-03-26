@@ -5,23 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core;
+package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.ITokenScanner;
-import org.eclipse.xtext.ui.core.editor.IDamagerRepairer;
-
-import com.google.inject.Inject;
 
 /**
+ * Base class for damager / repairer implementations. Inherits everything from a default implementation.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultDamagerRepairerAdapter extends DefaultDamagerRepairer implements IDamagerRepairer {
+public abstract class AbstractDamagerRepairer extends DefaultDamagerRepairer implements IDamagerRepairer {
 
-	@Inject
-	public DefaultDamagerRepairerAdapter(ITokenScanner scanner) {
+	protected AbstractDamagerRepairer(ITokenScanner scanner) {
 		super(scanner);
 	}
 
