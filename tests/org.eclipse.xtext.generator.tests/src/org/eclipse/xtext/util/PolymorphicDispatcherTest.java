@@ -32,9 +32,18 @@ public class PolymorphicDispatcherTest extends TestCase {
 	}
 
 	public void testSimple() throws Exception {
-		Object o1 = new Object() {
+		Object first = new SuperClass() {
 			String label(Integer i) {
-				return "Integer_" + i;
+				return "Integer_first_" + i;
+			}
+
+			String label(BigInteger i) {
+				return "BigInteger_" + i;
+			}
+		};
+		Object second = new Object() {
+			String label(Integer i) {
+				return "Integer_second_" + i;
 			}
 
 			String label(Number i) {
@@ -45,19 +54,9 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		Object o2 = new SuperClass() {
-			String label(Integer i) {
-				return "Integer2_" + i;
-			}
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(first, second));
 
-			String label(BigInteger i) {
-				return "BigInteger_" + i;
-			}
-		};
-
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(o1, o2));
-
-		assertEquals("Integer2_3", dispatcher.invoke(new Integer(3)));
+		assertEquals("Integer_first_3", dispatcher.invoke(new Integer(3)));
 		assertEquals("Number_from_superclass_3", dispatcher.invoke(new Long(3)));
 		assertEquals("BigInteger_3", dispatcher.invoke(BigInteger.valueOf(3)));
 		assertEquals("Object_foo", dispatcher.invoke("foo"));
