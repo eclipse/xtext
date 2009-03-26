@@ -57,6 +57,8 @@ public class PolymorphicDispatcher<RT> {
 				Class<?> class1 = paramTypes1.get(i);
 				Class<?> class2 = paramTypes2.get(i);
 
+				if (class1.equals(class2))
+					continue;
 				if (class1.isAssignableFrom(class2))
 					return 1;
 				if (class2.isAssignableFrom(class1))

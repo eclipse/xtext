@@ -22,6 +22,7 @@ public class AllUITests {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui.core.tests");
 		// $JUnit-BEGIN$
 		suite.addTestSuite(ReplaceRegionTest.class);
+		suite.addTestSuite(org.eclipse.xtext.ui.core.DefaultLabelProviderTest.class);
 		// $JUnit-END$
 		return suite;
 	}

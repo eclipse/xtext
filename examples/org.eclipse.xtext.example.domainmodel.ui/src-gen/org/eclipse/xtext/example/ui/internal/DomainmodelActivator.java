@@ -4,6 +4,8 @@
  */
 package org.eclipse.xtext.example.ui.internal;
 
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -30,12 +32,20 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		
-		injectors.put("org.eclipse.xtext.example.Domainmodel",Guice.createInjector(new org.eclipse.xtext.example.DomainmodelRuntimeModule(), new org.eclipse.xtext.example.DomainmodelUiModule()));
+		injectors.put("org.eclipse.xtext.example.Domainmodel", Guice.createInjector(
+			new org.eclipse.xtext.example.DomainmodelRuntimeModule(), 
+			new org.eclipse.xtext.example.DomainmodelUiModule(),
+			createUIPluginModule()
+		));
 		
 	}
 	
 	public static DomainmodelActivator getInstance() {
 		return INSTANCE;
+	}
+	
+	protected UIPluginModule createUIPluginModule() {
+		return new UIPluginModule(this);
 	}
 	
 }

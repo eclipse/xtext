@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.swt.graphics.Image;
 
 import junit.framework.TestCase;
 
@@ -26,7 +25,10 @@ public class DefaultLabelProviderTest extends TestCase {
 		final List<String> calls = new ArrayList<String>();
 		@SuppressWarnings("unused")
 		DefaultLabelProvider lp = new DefaultLabelProvider() {
-
+			{
+				setImageHelper(new IImageHelper.NullImageHelper());
+			}
+			
 			public String text(String object) {
 				return object;
 			}
@@ -35,12 +37,12 @@ public class DefaultLabelProviderTest extends TestCase {
 				return object.toString();
 			}
 
-			public Image image(String obj) {
+			public String image(String obj) {
 				calls.add(obj);
 				return null;
 			}
 
-			public Image image(Integer obj) {
+			public String image(Integer obj) {
 				calls.add(obj.toString());
 				return null;
 			}
@@ -62,6 +64,9 @@ public class DefaultLabelProviderTest extends TestCase {
 		final List<String> calls = new ArrayList<String>();
 		@SuppressWarnings("unused")
 		DefaultLabelProvider lp = new DefaultLabelProvider() {
+			{
+				setImageHelper(new IImageHelper.NullImageHelper());
+			}
 
 			public String text(String object) {
 				throw new NullPointerException();
@@ -71,15 +76,16 @@ public class DefaultLabelProviderTest extends TestCase {
 				throw new IllegalArgumentException();
 			}
 
-			public Image image(String obj) {
+			public String image(String obj) {
 				throw new NullPointerException();
 			}
 
-			public Image image(Integer obj) {
+			public String image(Integer obj) {
 				throw new NullPointerException();
 			}
 
-			public Image error_image(Object obj, NullPointerException ex) {
+			@Override
+			public String error_image(Object obj, NullPointerException ex) {
 				calls.add("error_" + obj.toString());
 				return null;
 			}

@@ -59,7 +59,7 @@ public class DefaultLabelProvider extends LabelProvider {
 	@Override
 	public final Image getImage(Object element) {
 		String imageName = getImage.invoke(element);
-		return imageHelper.getImage(imageName);
+		return getImageHelper().getImage(imageName);
 	}
 
 	public String error_text(Object object, Exception e) {
@@ -115,6 +115,14 @@ public class DefaultLabelProvider extends LabelProvider {
 			}
 		}
 		return result;
+	}
+
+	public void setImageHelper(IImageHelper imageHelper) {
+		this.imageHelper = imageHelper;
+	}
+
+	public IImageHelper getImageHelper() {
+		return imageHelper;
 	}
 	
 }
