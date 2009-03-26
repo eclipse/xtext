@@ -4,6 +4,8 @@
  */
 package org.eclipse.xtext.ui.integration;
 
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -30,12 +32,20 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		
-		injectors.put("org.eclipse.xtext.ui.integration.TestLanguage",Guice.createInjector(new org.eclipse.xtext.ui.integration.TestLanguageRuntimeModule(), new org.eclipse.xtext.ui.integration.TestLanguageUiModule()));
+		injectors.put("org.eclipse.xtext.ui.integration.TestLanguage", Guice.createInjector(
+			new org.eclipse.xtext.ui.integration.TestLanguageRuntimeModule(), 
+			new org.eclipse.xtext.ui.integration.TestLanguageUiModule(),
+			createUIPluginModule()
+		));
 		
 	}
 	
 	public static Activator getInstance() {
 		return INSTANCE;
+	}
+	
+	protected UIPluginModule createUIPluginModule() {
+		return new UIPluginModule(this);
 	}
 	
 }
