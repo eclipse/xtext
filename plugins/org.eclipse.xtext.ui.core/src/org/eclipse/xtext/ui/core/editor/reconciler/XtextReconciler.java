@@ -97,7 +97,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		isInstalled = false;
 		documentListener = new DocumentListener();
 		pendingReplaceRegionLock = new Object();
-		setDelay(750);
+		setDelay(500);
 		setReconcilingStrategy(strategy);
 	}
 
