@@ -248,7 +248,7 @@ public class Strings {
 	/**
 	 * Copied from {@link java.util.Properties}
 	 */
-	private static char toHex(int nibble) {
+	public static char toHex(int nibble) {
 		return hexDigit[(nibble & 0xF)];
 	}
 
