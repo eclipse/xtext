@@ -204,15 +204,17 @@ public class NodeUtil {
 		EObject element = NodeUtil.getNearestSemanticObject(node);
 		if (ele.equals(element)) {
 			EObject grammarElement = node.getGrammarElement();
-			Assignment ass = GrammarUtil.containingAssignment(grammarElement);
-			if (ass != null && ass.getFeature().equals(structuralFeature.getName())) {
-				result.add(node);
-			} else {
-				if (node instanceof CompositeNode) {
-					CompositeNode cn = (CompositeNode) node;
-					// check whether it's the same element
-					for (AbstractNode abstractNode : cn.getChildren()) {
-						result.addAll(findNodesForFeature(ele, abstractNode, structuralFeature));
+			if (grammarElement != null) { // error node?
+				Assignment ass = GrammarUtil.containingAssignment(grammarElement);
+				if (ass != null && ass.getFeature().equals(structuralFeature.getName())) {
+					result.add(node);
+				} else {
+					if (node instanceof CompositeNode) {
+						CompositeNode cn = (CompositeNode) node;
+						// check whether it's the same element
+						for (AbstractNode abstractNode : cn.getChildren()) {
+							result.addAll(findNodesForFeature(ele, abstractNode, structuralFeature));
+						}
 					}
 				}
 			}
