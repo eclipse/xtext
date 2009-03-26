@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.common.service;
 
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -24,6 +25,9 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.core.editor.IDamagerRepairer;
+import org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer;
+import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -68,6 +72,14 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
 		return DefaultHyperlinkDetector.class;
+	}
+	
+	public Class<? extends IReconciler> bindIReconciler() {
+		return XtextReconciler.class;
+	}
+	
+	public Class<? extends IDamagerRepairer> bindIDamagerRepairer() {
+		return XtextDamagerRepairer.class;
 	}
 	
 }

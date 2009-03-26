@@ -25,6 +25,8 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 
+import com.google.inject.Inject;
+
 /**
  * Standard JFace Reconcilers, e.g. the MonoReconciler, convert an replace event
  * into a delete and an insert DirtyRegion. This leads to significant overhead,
@@ -87,6 +89,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 	}
 
+	@Inject
 	public XtextReconciler(XtextDocumentReconcileStrategy strategy) {
 		super("XtextReconcilerJob");
 		setPriority(Job.SHORT);

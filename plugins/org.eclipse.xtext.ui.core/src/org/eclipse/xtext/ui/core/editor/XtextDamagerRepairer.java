@@ -12,21 +12,24 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.Range;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.core.DefaultDamagerRepairerAdapter;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextDamagerRepairer extends DefaultDamagerRepairer {
+public class XtextDamagerRepairer extends DefaultDamagerRepairerAdapter {
 
+	@Inject
 	public XtextDamagerRepairer(ITokenScanner scanner) {
 		super(scanner);
 	}
