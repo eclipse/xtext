@@ -18,6 +18,8 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -112,6 +114,11 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				}
 
 				@Override
+				public Boolean caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
+					return false;
+				}
+				
+				@Override
 				public Boolean defaultCase(EObject object) {
 					return true;
 				}
@@ -136,6 +143,13 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				if (object.getTerminal() instanceof Alternatives)
 					return getChildren(object.getTerminal());
 				return super.caseCrossReference(object);
+			}
+
+			@Override
+			public List<EObject> caseEnumRule(EnumRule object) {
+				if (object.getAlternatives() instanceof Alternatives)
+					return getChildren(object.getAlternatives());
+				return super.caseEnumRule(object);
 			}
 
 			@Override
@@ -314,6 +328,34 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 				public ContentOutlineNode caseKeyword(Keyword object) {
 					outlineNode.setLabel("'" + object.getValue() + "'");
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/keyword.gif"));
+					return outlineNode;
+				}
+				
+				private String getLiteralName(EnumLiteralDeclaration declaration) {
+					if (declaration.getEnumLiteral() != null) {
+						return declaration.getEnumLiteral().getName();
+					}
+					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(declaration);
+					String literalName = UNKNOWN;
+					if (nodeAdapter != null) {
+						List<LeafNode> leafs = nodeAdapter.getParserNode().getLeafNodes();
+						for (LeafNode leaf : leafs) {
+							if (!leaf.isHidden()) {
+								literalName = leaf.getText();
+								break;
+							}
+						}
+					}
+					return literalName;
+				}
+
+				@Override
+				public ContentOutlineNode caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
+					String literalName = getLiteralName(object);
+					// TODO change color when literal could not be resolved
+					Keyword kw = object.getLiteral();
+					String kwValue = kw == null ? "" : " = '" + kw.getValue() + "'";
+					outlineNode.setLabel(literalName + kwValue);
 					return outlineNode;
 				}
 
