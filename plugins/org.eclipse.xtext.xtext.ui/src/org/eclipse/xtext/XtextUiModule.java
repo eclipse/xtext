@@ -3,6 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
@@ -34,6 +35,11 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtextLocationInFileProvider.class;
+	}
+	
+	@Override
+	public Class<? extends ILabelProvider> bindILabelProvider() {
+		return XtextLabelProvider.class;
 	}
 	
 }
