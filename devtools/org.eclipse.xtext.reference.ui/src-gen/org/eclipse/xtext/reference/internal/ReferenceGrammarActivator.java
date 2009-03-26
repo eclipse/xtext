@@ -4,6 +4,8 @@
  */
 package org.eclipse.xtext.reference.internal;
 
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -30,12 +32,20 @@ public class ReferenceGrammarActivator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		
-		injectors.put("org.eclipse.xtext.reference.ReferenceGrammar",Guice.createInjector(new org.eclipse.xtext.reference.ReferenceGrammarRuntimeModule(), new org.eclipse.xtext.reference.ReferenceGrammarUiModule()));
+		injectors.put("org.eclipse.xtext.reference.ReferenceGrammar", Guice.createInjector(
+			new org.eclipse.xtext.reference.ReferenceGrammarRuntimeModule(), 
+			new org.eclipse.xtext.reference.ReferenceGrammarUiModule(),
+			createUIPluginModule()
+		));
 		
 	}
 	
 	public static ReferenceGrammarActivator getInstance() {
 		return INSTANCE;
+	}
+	
+	protected UIPluginModule createUIPluginModule() {
+		return new UIPluginModule(this);
 	}
 	
 }

@@ -4,6 +4,8 @@
  */
 package org.eclipse.xtext.example.internal;
 
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -30,12 +32,20 @@ public class FowlerDslActivator extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		
-		injectors.put("org.eclipse.xtext.example.FowlerDsl",Guice.createInjector(new org.eclipse.xtext.example.FowlerDslRuntimeModule(), new org.eclipse.xtext.example.FowlerDslUiModule()));
+		injectors.put("org.eclipse.xtext.example.FowlerDsl", Guice.createInjector(
+			new org.eclipse.xtext.example.FowlerDslRuntimeModule(), 
+			new org.eclipse.xtext.example.FowlerDslUiModule(),
+			createUIPluginModule()
+		));
 		
 	}
 	
 	public static FowlerDslActivator getInstance() {
 		return INSTANCE;
+	}
+	
+	protected UIPluginModule createUIPluginModule() {
+		return new UIPluginModule(this);
 	}
 	
 }
