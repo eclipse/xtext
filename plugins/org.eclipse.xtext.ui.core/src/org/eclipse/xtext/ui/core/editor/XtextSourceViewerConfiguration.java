@@ -14,25 +14,25 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
-import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
-import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
-import org.eclipse.xtext.ui.core.editor.reconciler.XtextDocumentReconcileStrategy;
-import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
 	@Inject(optional = true)
 	private IContentAssistProcessor contentAssistProcessor;
 
-	@Inject(optional = true)
-	private ITokenScanner tokenScanner;
-
 	@Inject
 	private IHyperlinkDetector detector;
+	
+	@Inject
+	private Provider<IReconciler> reconcilerProvider;
+
+	@Inject(optional = true)
+	private Provider<IDamagerRepairer> damagerRepairerProvider;
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -46,19 +46,17 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		XtextDocumentReconcileStrategy strategy = new XtextDocumentReconcileStrategy();
-		XtextReconciler xtextReconciler = new XtextReconciler(strategy);
-		xtextReconciler.setDelay(500);
-		return xtextReconciler;
+		IReconciler reconciler = reconcilerProvider.get();
+		return reconciler;
 	}
 
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
-		if (tokenScanner != null) {
+		if (damagerRepairerProvider != null) {
 			PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
-			DefaultDamagerRepairer defDR = new XtextDamagerRepairer(tokenScanner);
-			reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
-			reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
+			IDamagerRepairer defDR = damagerRepairerProvider.get();
+			reconciler.setRepairer(defDR.getRepairer(), IDocument.DEFAULT_CONTENT_TYPE);
+			reconciler.setDamager(defDR.getDamager(), IDocument.DEFAULT_CONTENT_TYPE);
 			return reconciler;
 		}
 		return super.getPresentationReconciler(sourceViewer);
