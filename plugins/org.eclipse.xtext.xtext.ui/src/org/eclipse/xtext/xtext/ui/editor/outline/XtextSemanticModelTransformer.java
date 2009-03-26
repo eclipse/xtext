@@ -183,7 +183,19 @@ public class XtextSemanticModelTransformer extends DefaultSemanticModelTransform
 
 				@Override
 				public ContentOutlineNode caseReferencedMetamodel(org.eclipse.xtext.ReferencedMetamodel object) {
-					outlineNode.setLabel("import " + object.getAlias());
+					String label = "";
+					if (object.getAlias() != null)
+						label = " " + object.getAlias();
+					if (object.getEPackage() != null) {
+						if (label.length() == 0)
+							label = " " + object.getEPackage().getName();
+						else
+							label = " " + object.getEPackage().getName() + " as" + label;
+					}
+					if (label.length() == 0) {
+						label = " " + UNKNOWN;
+					}
+					outlineNode.setLabel("import" + label);
 					outlineNode.setImageDescriptor(Activator.getImageDescriptor("icons/import.gif"));
 					return outlineNode;
 				}
