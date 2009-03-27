@@ -39,7 +39,6 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parser.PartialParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.PartialParsingPerformanceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.PartialParsingPointerTest.class);
-		suite.addTestSuite(org.eclipse.xtext.parser.TerminalRuleToLexerBodyTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextGrammarComparingTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextParserBugsTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parser.XtextParserTest.class);
