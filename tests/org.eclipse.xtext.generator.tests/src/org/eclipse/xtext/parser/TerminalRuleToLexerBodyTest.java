@@ -13,12 +13,13 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 
-import de.itemis.xtext.antlr.TerminalRuleToLexerBody;
+//import de.itemis.xtext.antlr.TerminalRuleToLexerBody;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * TODO reactivate testcase and move to test plugin, that is not hosted at eclipse
  */
-public class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
+public abstract class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
 
 	private Grammar grammar;
 	private TerminalRule adaString;
@@ -39,15 +40,15 @@ public class TerminalRuleToLexerBodyTest extends AbstractXtextTests {
 		workaroundString = (TerminalRule) GrammarUtil.findRuleForName(grammar, "WORKAROUND_STRING");
 	}
 	
-	public void testToLexerBody_01() {
-		String ada = TerminalRuleToLexerBody.toLexerBody(adaString);
-		String expectation = "'\"' (~('\"')|'\"\"')* '\"'"; // '"' (~('"')|'""')* '"'
-		assertEquals(expectation, ada);
-	}
-	
-	public void testToLexerBody_02() {
-		String workaround = TerminalRuleToLexerBody.toLexerBody(workaroundString);
-		String expectation = "'\"' (~('\"')|'\"' '\"')* '\"'"; // '"' (~('"')|'"' '"')* '"'
-		assertEquals(expectation, workaround);
-	}
+//	public void testToLexerBody_01() {
+//		String ada = TerminalRuleToLexerBody.toLexerBody(adaString);
+//		String expectation = "'\"' (~('\"')|'\"\"')* '\"'"; // '"' (~('"')|'""')* '"'
+//		assertEquals(expectation, ada);
+//	}
+//
+//	public void testToLexerBody_02() {
+//		String workaround = TerminalRuleToLexerBody.toLexerBody(workaroundString);
+//		String expectation = "'\"' (~('\"')|'\"' '\"')* '\"'"; // '"' (~('"')|'"' '"')* '"'
+//		assertEquals(expectation, workaround);
+//	}
 }
