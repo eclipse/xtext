@@ -86,7 +86,7 @@ public class Linker extends AbstractLinker {
 	}
 
 	protected boolean canSetDefaultValues(EReference ref) {
-		return !ref.isContainment() && !ref.isContainer();
+		return !ref.isContainment() && !ref.isContainer() && !ref.isUnsettable();
 	}
 
 	protected final void setDefaultValue(EObject obj, EReference ref, IDiagnosticProducer producer) {

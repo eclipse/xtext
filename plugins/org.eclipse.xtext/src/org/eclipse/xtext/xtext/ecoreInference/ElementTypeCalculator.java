@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.resource.metamodel;
+package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.HashSet;
 import java.util.Set;

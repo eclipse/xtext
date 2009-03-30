@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor;
-import org.eclipse.xtext.resource.metamodel.TransformationErrorCode;
-import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.xtext.ecoreInference.ErrorAcceptor;
+import org.eclipse.xtext.xtext.ecoreInference.TransformationErrorCode;
+import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

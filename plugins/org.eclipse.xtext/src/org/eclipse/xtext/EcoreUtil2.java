@@ -357,7 +357,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	/**
-	 * In addition to {@link org.eclipse.xtext.resource.metamodel.EClassifierInfos#getAllEClassInfos()} this implementation can
+	 * In addition to {@link org.eclipse.xtext.xtext.ecoreInference.EClassifierInfos#getAllEClassInfos()} this implementation can
 	 * deal with cycles in type hierarchy
 	 */
 	public static Collection<EClass> getAllSuperTypes(EClass eClass) {

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.resource.metamodel;
+package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.EcoreUtil2.FindResult;
-import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
+import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
