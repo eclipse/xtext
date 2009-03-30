@@ -18,7 +18,7 @@ import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.enumrules.enums.ExistingEnum;
-import org.eclipse.xtext.resource.metamodel.TransformationDiagnostic;
+import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnostic;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

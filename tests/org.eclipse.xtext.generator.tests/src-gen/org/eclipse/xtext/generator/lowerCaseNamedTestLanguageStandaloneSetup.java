@@ -27,7 +27,7 @@ public class lowerCaseNamedTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.generator.LowerCaseNamedTestLanguageRuntimeModule());
+		return Guice.createInjector(new org.eclipse.xtext.generator.lowerCaseNamedTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {

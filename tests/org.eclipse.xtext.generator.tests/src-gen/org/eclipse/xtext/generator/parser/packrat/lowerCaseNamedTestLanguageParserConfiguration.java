@@ -6,10 +6,10 @@ package org.eclipse.xtext.generator.parser.packrat;
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 
-import org.eclipse.xtext.generator.services.LowerCaseNamedTestLanguageGrammarAccess;
+import org.eclipse.xtext.generator.services.lowerCaseNamedTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
-import org.eclipse.xtext.generator.parser.packrat.consumers.LowerCaseNamedTestLanguageModelConsumer;
+import org.eclipse.xtext.generator.parser.packrat.consumers.lowerCaseNamedTestLanguageModelConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -21,23 +21,23 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class lowerCaseNamedTestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
-    private LowerCaseNamedTestLanguageModelConsumer modelConsumer;
+    private lowerCaseNamedTestLanguageModelConsumer modelConsumer;
 
-	private LowerCaseNamedTestLanguageGrammarAccess grammarAccess;
+	private lowerCaseNamedTestLanguageGrammarAccess grammarAccess;
 
-	public lowerCaseNamedTestLanguageParserConfiguration(IInternalParserConfiguration configuration, LowerCaseNamedTestLanguageGrammarAccess grammarAccess) {
+	public lowerCaseNamedTestLanguageParserConfiguration(IInternalParserConfiguration configuration, lowerCaseNamedTestLanguageGrammarAccess grammarAccess) {
 		super(configuration);
 		this.grammarAccess = grammarAccess;
 		this.terminalsConfiguration = new TerminalsParserConfiguration(configuration, null);
 	}
 
-	public LowerCaseNamedTestLanguageModelConsumer getRootConsumer() {
+	public lowerCaseNamedTestLanguageModelConsumer getRootConsumer() {
 		return modelConsumer;
 	} 
 
 	public void createNonTerminalConsumers() {
 		getTerminalsConfiguration().createNonTerminalConsumers();
-		modelConsumer = new LowerCaseNamedTestLanguageModelConsumer(
+		modelConsumer = new lowerCaseNamedTestLanguageModelConsumer(
     		this, null
     	);
 	}
@@ -68,7 +68,7 @@ public class lowerCaseNamedTestLanguageParserConfiguration extends AbstractParse
 		return terminalsConfiguration;
 	} 
 	
-    public LowerCaseNamedTestLanguageModelConsumer getModelConsumer() {
+    public lowerCaseNamedTestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
     }
 

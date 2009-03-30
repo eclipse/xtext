@@ -19,10 +19,10 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 
 public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);

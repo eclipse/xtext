@@ -39,37 +39,36 @@ import com.google.inject.Provider;
 public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 
 	public void testStuff() throws Exception {
-		//TODO activate when Index  and Xtext separates between loading, linking and indexing of crossreferences
 		
-//		IndexAwareResourceSet set = get(IndexAwareResourceSet.class);
-//		URI uri = URI.createURI("classpath:/" + IndexAwareResourcesetTest.class.getName().replace('.', '/')
-//				+ ".importuritestlanguage");
-//		System.out.println(uri);
-//		set.getResource(uri, true);
-//		set.getResource(URI.createURI("classpath:/" + getClass().getName().replace('.', '/')
-//				+ ".importuritestlanguage"), true);
-//		Iterator<EObjectDescriptor> result = set.getStore().eObjectDAO().createQuery().executeListResult()
-//				.iterator();
-//		List<String> names = new ArrayList<String>();
-//		while (result.hasNext()) {
-//			EObjectDescriptor next = result.next();
-//			if (next.getName().equals("D")) {
-//				Type obj = (Type) set.getEObject(next.getFragmentURI(), true);
-//				assertEquals("A", obj.getExtends().getName());
-//			}
-//			names.add(next.getName());
-//		}
-//		assertTrue(names.contains("A"));
-//		assertTrue(names.contains("B"));
-//		assertTrue(names.contains("C"));
-//		assertTrue(names.contains("D"));
-//		assertEquals(4,names.size());
-//		
-//		Iterator<ECrossReferenceDescriptor> crossRefs = set.getStore().eCrossReferenceDAO().createQuery().executeListResult().iterator();
-//		crossRefs.next();
-//		crossRefs.next();
-//		crossRefs.next();
-//		assertFalse(crossRefs.hasNext());
+		IndexAwareResourceSet set = get(IndexAwareResourceSet.class);
+		URI uri = URI.createURI("classpath:/" + IndexAwareResourcesetTest.class.getName().replace('.', '/')
+				+ ".importuritestlanguage");
+		System.out.println(uri);
+		set.getResource(uri, true);
+		set.getResource(URI.createURI("classpath:/" + getClass().getName().replace('.', '/')
+				+ ".importuritestlanguage"), true);
+		Iterator<EObjectDescriptor> result = set.getStore().eObjectDAO().createQuery().executeListResult()
+				.iterator();
+		List<String> names = new ArrayList<String>();
+		while (result.hasNext()) {
+			EObjectDescriptor next = result.next();
+			if (next.getName().equals("D")) {
+				Type obj = (Type) set.getEObject(next.getFragmentURI(), true);
+				assertEquals("A", obj.getExtends().getName());
+			}
+			names.add(next.getName());
+		}
+		assertTrue(names.contains("A"));
+		assertTrue(names.contains("B"));
+		assertTrue(names.contains("C"));
+		assertTrue(names.contains("D"));
+		assertEquals(4,names.size());
+		
+		Iterator<ECrossReferenceDescriptor> crossRefs = set.getStore().eCrossReferenceDAO().createQuery().executeListResult().iterator();
+		crossRefs.next();
+		crossRefs.next();
+		crossRefs.next();
+		assertFalse(crossRefs.hasNext());
 	}
 
 	private INameProvider nameProvider = new AbstractDeclarativeNameProvider() {

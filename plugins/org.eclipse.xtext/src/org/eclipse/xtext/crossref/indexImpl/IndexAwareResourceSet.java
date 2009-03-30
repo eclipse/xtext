@@ -8,14 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.indexImpl;
 
-import java.util.Set;
-import java.util.Map.Entry;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Descriptor;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
@@ -40,7 +35,7 @@ public class IndexAwareResourceSet extends XtextResourceSet {
 	}
 
 	@Inject
-	public IndexAwareResourceSet(IIndexStore store, final INameProvider nameProvider) {
+	public IndexAwareResourceSet(IIndexStore store, final INameProvider nameProvider, final EPackage.Registry registry) {
 		this.store = store;
 		this.feeder = new IndexFeederImpl(store);
 		this.listener = new DefaultEmfResourceChangeListenerImpl() {
@@ -61,19 +56,9 @@ public class IndexAwareResourceSet extends XtextResourceSet {
 		};
 		
 		EcoreIndexFeederImpl ecoreFeeder = new EcoreIndexFeederImpl(store);
-		Registry reg = getPackageRegistry();
-		// XXX SZ: will not return null, however reg.entrySet does not provide all visible
-		// registry entries. Is there a way to enumerate them?
-		if (reg==null || reg.isEmpty())
-			reg = EPackage.Registry.INSTANCE;
-		Set<Entry<String,Object>> set = reg.entrySet();
-		for (Entry<String, Object> entry : set) {
-			// TODO SZ: what about EPackage.Descriptor?
-			EPackage pack = null;
-			if (entry.getValue() instanceof EPackage.Descriptor) {
-				pack = ((Descriptor) entry.getValue()).getEPackage();
-			} else if (entry.getValue() instanceof EPackage)
-				pack = (EPackage) entry.getValue();
+		
+		for (String nsURI : registry.keySet()) {
+			EPackage pack = registry.getEPackage(nsURI);
 			ecoreFeeder.index(pack, false);
 		}
 	}

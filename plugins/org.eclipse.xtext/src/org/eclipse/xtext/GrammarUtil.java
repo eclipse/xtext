@@ -51,14 +51,14 @@ public class GrammarUtil {
 		if (Strings.isEmpty(g.getName()))
 			return null;
 		String[] splitted = g.getName().split("\\.");
-		return Strings.toFirstUpper(splitted[splitted.length - 1]);
+		return splitted[splitted.length - 1];
 	}
 
 	public static String getNamespace(Grammar g) {
 		if (Strings.isEmpty(g.getName()))
 			return null;
 		String[] splitted = g.getName().split("\\.");
-		return Strings.concat(".", Arrays.asList(splitted), 1).toLowerCase();
+		return Strings.concat(".", Arrays.asList(splitted), 1);
 	}
 
 	public static Grammar getGrammar(EObject grammarElement) {
