@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.resource.metamodel;
+package org.eclipse.xtext.xtext.ecoreInference;
 
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
@@ -23,7 +23,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
+import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo;
+import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfos;
+import org.eclipse.xtext.xtext.ecoreInference.ErrorAcceptor;
+import org.eclipse.xtext.xtext.ecoreInference.TransformationErrorCode;
+import org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelper;
+import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
 
 /**
  * @author Heiko Behrens - Initial contribution and API

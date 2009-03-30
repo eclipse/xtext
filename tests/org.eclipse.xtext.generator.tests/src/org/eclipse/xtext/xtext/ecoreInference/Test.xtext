@@ -1,6 +1,6 @@
-grammar org.eclipse.xtext.resource.metamodel.Test with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.xtext.ecoreInference.Test with org.eclipse.xtext.common.Terminals
 generate root "http://root"
-import "classpath:/org/eclipse/xtext/resource/metamodel/test.ecore" as test
+import "classpath:/org/eclipse/xtext/xtext/ecoreInference/test.ecore" as test
 
 Root :
 	optional=Optional

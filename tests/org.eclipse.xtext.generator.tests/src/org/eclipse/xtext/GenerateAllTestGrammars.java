@@ -33,7 +33,6 @@ import org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest;
-import org.eclipse.xtext.resource.metamodel.MultiValueFeatureTestLanguage;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
@@ -46,6 +45,7 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage;
 import org.eclipse.xtext.testlanguages.TestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 import org.eclipse.xtext.valueconverter.Bug250313;
+import org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTestLanguage;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
