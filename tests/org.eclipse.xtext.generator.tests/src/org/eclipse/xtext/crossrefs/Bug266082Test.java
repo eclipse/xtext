@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
@@ -38,6 +39,7 @@ public class Bug266082Test extends AbstractXtextTests {
 		resourceSet.setClasspathURIContext(getClass().getClassLoader());
 		URI uri = URI.createURI("classpath:/org/eclipse/xtext/crossrefs/01.importuritestlanguage");
 		Resource res = resourceSet.getResource(uri, true);
+		EcoreUtil.resolveAll(res);
 		assertNotNull("res", res);
 		assertFalse(res.getErrors().toString(), res.getErrors().isEmpty());
 	}
@@ -127,6 +129,7 @@ public class Bug266082Test extends AbstractXtextTests {
 
 		});
 		Resource res = resourceSet.getResource(URI.createURI("file:/1.importuritestlanguage"), true);
+		EcoreUtil.resolveAll(res);
 		assertEquals(res.getErrors().toString(), 1, res.getErrors().size());
 	}
 
@@ -136,6 +139,7 @@ public class Bug266082Test extends AbstractXtextTests {
 		URI uri = URI.createURI("classpath:/org/eclipse/xtext/crossrefs/03.importuritestlanguage");
 		Resource res = resourceSet.getResource(uri, true);
 		assertNotNull("res", res);
+		EcoreUtil.resolveAll(res);
 		assertFalse(res.getErrors().toString(), res.getErrors().isEmpty());
 	}
 
@@ -145,6 +149,7 @@ public class Bug266082Test extends AbstractXtextTests {
 		URI uri = URI.createURI("classpath:/org/eclipse/xtext/crossrefs/04.importuritestlanguage");
 		Resource res = resourceSet.getResource(uri, true);
 		assertNotNull("res", res);
+		EcoreUtil.resolveAll(res);
 		assertFalse(res.getErrors().toString(), res.getErrors().isEmpty());
 	}
 
