@@ -11,7 +11,6 @@ import static org.eclipse.xtext.util.CollectionUtils.*;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -44,7 +43,7 @@ public class CrossrefTest extends AbstractXtextTests {
 
 	public void testUnsupportedOperationException() {
 		try {
-			getScopeProvider().getScope(null, (EClass) null);
+			getScopeProvider().getScope(null, (EReference) null);
 			fail("Expected: UnsupportedOperationException");
 		} catch(UnsupportedOperationException e) {
 			// expected

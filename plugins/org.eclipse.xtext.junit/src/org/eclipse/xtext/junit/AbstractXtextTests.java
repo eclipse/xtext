@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
@@ -193,6 +194,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
 		rs.getResources().add(resource);
 		resource.load(in, null);
+		EcoreUtil.resolveAll(resource);
 
 		for(Diagnostic d: resource.getErrors()) {
 			System.out.println("Resource Error: "+d);

@@ -33,8 +33,64 @@ public class PolymorphicDispatcher<RT> {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
+	 *
 	 */
-	private final class DefaultComparator implements Comparator<MethodDesc> {
+	static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
+		public RT handle(Object[] params, Throwable e) {
+			if (e instanceof RuntimeException)
+				throw (RuntimeException)e;
+			if (e instanceof Error)
+				throw (Error) e;
+			if (e instanceof Exception)
+				throw new WrappedException((Exception) e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 *
+	 */
+	static class MethodNameFilter implements Filter<Method> {
+		/**
+		 * 
+		 */
+		private final int maxParams;
+		/**
+		 * 
+		 */
+		private final String methodName;
+		/**
+		 * 
+		 */
+		private final int minParams;
+
+		/**
+		 * @param methodName
+		 * @param minParams
+		 * @param maxParams
+		 */
+		private MethodNameFilter(String methodName, int minParams, int maxParams) {
+			this.maxParams = maxParams;
+			this.methodName = methodName;
+			this.minParams = minParams;
+		}
+
+		public boolean accept(Method param) {
+			return param.getName().equals(methodName) && param.getParameterTypes().length >= minParams
+					&& param.getParameterTypes().length <= maxParams;
+		}
+
+		@Override
+		public String toString() {
+			return "'"+methodName+"'";
+		}
+	}
+
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	private static class DefaultComparator implements Comparator<MethodDesc> {
 
 		private final List<? extends Object> targets;
 
@@ -82,17 +138,7 @@ public class PolymorphicDispatcher<RT> {
 		P handle(Object[] params, Throwable throwable);
 	}
 
-	private ErrorHandler<RT> handler = new ErrorHandler<RT>() {
-		public RT handle(Object[] params, Throwable e) {
-			if (e instanceof RuntimeException)
-				throw (RuntimeException)e;
-			if (e instanceof Error)
-				throw (Error) e;
-			if (e instanceof Exception)
-				throw new WrappedException((Exception) e);
-			throw new RuntimeException(e);
-		}
-	};
+	private final ErrorHandler<RT> handler;
 
 	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName, final Object singleTarget) {
 		return new PolymorphicDispatcher<T>(methodName, Collections.singletonList(singleTarget));
@@ -112,33 +158,16 @@ public class PolymorphicDispatcher<RT> {
 
 	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
 			final List<? extends Object> targets) {
-		this.methodFilter = new Filter<Method>() {
-			public boolean accept(Method param) {
-				return param.getName().equals(methodName) && param.getParameterTypes().length >= minParams
-						&& param.getParameterTypes().length <= maxParams;
-			}
-		};
-		this.targets = targets;
-		this.comparator = new DefaultComparator(targets);
+		this(methodName, minParams,maxParams,targets,new DefaultErrorHandler<RT>());
 	}
 	
 	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
 			final List<? extends Object> targets, ErrorHandler<RT> handler) {
-		this.methodFilter = new Filter<Method>() {
-			public boolean accept(Method param) {
-				return param.getName().equals(methodName) && param.getParameterTypes().length >= minParams
-				&& param.getParameterTypes().length <= maxParams;
-			}
-		};
-		this.targets = targets;
-		this.comparator = new DefaultComparator(targets);
-		this.handler = handler;
+		this(targets, new MethodNameFilter(methodName, minParams, maxParams), new DefaultComparator(targets), handler);
 	}
 
 	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter) {
-		this.targets = targets;
-		this.methodFilter = methodFilter;
-		this.comparator = new DefaultComparator(targets);
+		this(targets, methodFilter, new DefaultComparator(targets), new DefaultErrorHandler<RT>());
 	}
 	
 	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter,
@@ -219,7 +248,7 @@ public class PolymorphicDispatcher<RT> {
 				}
 			}
 		}
-		return handler.handle(params, new NoSuchMethodException("Couldn't find appropriate method for objects "
+		return handler.handle(params, new NoSuchMethodException("Couldn't find method '"+methodFilter.toString()+"' for objects "
 				+ Arrays.toString(params)));
 	}
 
