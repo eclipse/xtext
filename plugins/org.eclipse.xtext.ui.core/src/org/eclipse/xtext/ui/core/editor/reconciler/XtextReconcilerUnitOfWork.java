@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.core.editor.reconciler;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.resource.XtextResource;
@@ -53,6 +54,7 @@ class XtextReconcilerUnitOfWork implements UnitOfWork<Void> {
 
 			resource.update(replaceRegionToBeProcessed.getOffset(), replaceRegionToBeProcessed.getLength(),
 					replaceRegionToBeProcessed.getText());
+			EcoreUtil.resolveAll(resource);
 		}
 		catch (Throwable t) {
 			if (log.isDebugEnabled())
