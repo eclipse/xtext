@@ -14,6 +14,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://eclipse.org/xtext/lazyLinkingTestLanguage" 
+       class = "org.eclipse.xtext.crossrefs.lazy.lazyLinking.LazyLinkingPackage"
+       genModel = "org/eclipse/xtext/crossrefs/lazy/LazyLinkingTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://eclipse.org/xtext/importUriTestLanguage" 
        class = "org.eclipse.xtext.crossrefs.importedURI.ImportedURIPackage"
        genModel = "org/eclipse/xtext/crossrefs/ImportUriTestLanguage.genmodel" /> 
