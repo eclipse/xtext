@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
-import org.eclipse.xtext.crossref.impl.Linker;
+import org.eclipse.xtext.crossref.lazy.LazyLinker;
+import org.eclipse.xtext.crossref.lazy.LazyLinkingResource;
 import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -28,6 +30,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerial
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 
 import com.google.inject.Binder;
@@ -45,6 +48,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public EValidator.Registry bindEValidatorRegistry() {
 		return EValidator.Registry.INSTANCE;
+	}
+	
+	public EPackage.Registry bindEPackageRegistry() {
+		return EPackage.Registry.INSTANCE;
 	}
 
 	public Class<? extends IFragmentProvider> bindIFragmentProvider() {
@@ -76,7 +83,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends org.eclipse.xtext.crossref.ILinker> bindILinker() {
-		return Linker.class;
+		return LazyLinker.class;
 	}
 
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
@@ -101,6 +108,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
 		return org.eclipse.xtext.parser.DefaultEcoreElementFactory.class;
+	}
+	
+	public Class<? extends XtextResource> bindXtextResource() {
+		return LazyLinkingResource.class;
 	}
 	
 }

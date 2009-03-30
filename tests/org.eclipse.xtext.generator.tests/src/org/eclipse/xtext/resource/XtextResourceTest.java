@@ -9,6 +9,7 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.crossref.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
@@ -114,6 +115,7 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 	public void testErrorMarkers() throws Exception {
 		String model = "spielplatz 1 {kind(B 1) erwachsener(E 1) familie(F E E B, C)}";
 		resource.update(0, 0, model);
+		EcoreUtil.resolveAll(resource);
 		assertEquals(1, resource.getErrors().size());
 		XtextLinkingDiagnostic diag = (XtextLinkingDiagnostic) resource.getErrors().get(0);
 		assertEquals(model.indexOf("C)"), diag.getOffset());

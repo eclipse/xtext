@@ -37,6 +37,11 @@ public class SimpleNestedScope extends AbstractScope {
 		this(outer);
 		this.elements = elements;
 	}
+	
+	public SimpleNestedScope(Iterable<IScopedElement> elements) {
+		this(IScope.NULLSCOPE);
+		this.elements = elements;
+	}
 
 	public final Iterable<IScopedElement> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();

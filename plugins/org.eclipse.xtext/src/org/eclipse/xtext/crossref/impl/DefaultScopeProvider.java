@@ -67,7 +67,8 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 		return new DefaultScope(resource, type);
 	}
 
-	public IScope getScope(EObject context, EClass type) {
+	public IScope getScope(EObject context, EReference reference) {
+		EClass type = (EClass) reference.getEType();
 		return cache.get(Tuples.create(context.eResource(), type != null ? type : context.eClass().eClass()));
 	}
 

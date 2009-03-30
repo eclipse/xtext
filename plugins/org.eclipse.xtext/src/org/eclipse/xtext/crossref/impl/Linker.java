@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.crossref.lazy.LazyLinker;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -33,7 +34,10 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated - use {@link LazyLinker}
  */
+@Deprecated
 public class Linker extends AbstractLinker {
 
 	private static Logger log = Logger.getLogger(Linker.class);

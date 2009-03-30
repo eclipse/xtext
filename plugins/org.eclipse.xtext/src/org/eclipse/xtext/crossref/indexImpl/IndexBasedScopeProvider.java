@@ -13,6 +13,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EObjectDescriptor;
@@ -40,7 +41,8 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		this.index = index;
 	}
 
-	public IScope getScope(EObject context, EClass type) {
+	public IScope getScope(EObject context, EReference ref) {
+		EClass type = (EClass) ref.getEType();
 		Resource eResource = context.eResource();
 		Iterable<IScopedElement> iterable = getElements(eResource.getURI().toPlatformString(true), type);
 		TreeIterator<EObject> eAllContents = EcoreUtil.getRootContainer(context).eAllContents();

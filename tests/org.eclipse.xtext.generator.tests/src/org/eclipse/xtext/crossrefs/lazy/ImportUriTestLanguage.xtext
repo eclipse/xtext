@@ -5,14 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.impl;
+grammar org.eclipse.xtext.crossrefs.lazy.LazyLinkingTestLanguage with org.eclipse.xtext.common.Terminals
 
-import org.eclipse.xtext.crossref.IScopeProvider;
+generate lazyLinking "http://eclipse.org/xtext/lazyLinkingTestLanguage"
 
-/**
- * @author Heiko Behrens - Initial contribution and API
- * @author Sebastian Zarnekow
- */
-public abstract class AbstractScopeProvider implements IScopeProvider {
-
-}
+Model : 
+	types+=Type*;
+	
+Type :
+	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])? '{'
+		(properties+=Property)* 
+	'}';
+	
+Property :
+	type=[Type] name=ID;

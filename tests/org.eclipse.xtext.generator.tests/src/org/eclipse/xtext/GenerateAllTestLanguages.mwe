@@ -19,6 +19,9 @@
 		<language uri="classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/crossrefs/lazy/ImportUriTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
