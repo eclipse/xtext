@@ -1,0 +1,36 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+package org.eclipse.xtext.crossrefs.lazy;
+
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.crossref.IScope;
+import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.crossref.impl.DeclarativeScopeProvider;
+import org.eclipse.xtext.crossref.impl.ScopedElement;
+import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
+import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property;
+import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Type;
+import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Function;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ *
+ */
+public class LazyLinkingTestLanguageScopeProvider extends DeclarativeScopeProvider {
+	
+	public IScope scope_Property(Type t, EReference ref) {
+		return new SimpleNestedScope(CollectionUtils.map(t.getExtends().getProperties(), new Function<Property, IScopedElement>(){
+		
+			public IScopedElement exec(Property param) {
+				return ScopedElement.create(param.getName(), param);
+			}
+		}));
+	}
+}
