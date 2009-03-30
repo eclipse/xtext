@@ -109,7 +109,7 @@ public class LazyLinker extends AbstractLinker {
 		EObject proxy = eType.getEPackage().getEFactoryInstance().create(eType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
 		if (eRef.isMany()) {
-			((EList<EObject>) obj.eGet(eRef)).add(proxy);
+			((EList<EObject>) obj.eGet(eRef, false)).add(proxy);
 		} else {
 			obj.eSet(eRef, proxy);
 		}
