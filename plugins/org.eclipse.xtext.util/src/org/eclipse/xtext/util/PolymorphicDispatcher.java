@@ -248,8 +248,7 @@ public class PolymorphicDispatcher<RT> {
 				}
 			}
 		}
-		return handler.handle(params, new NoSuchMethodException("Couldn't find method '"+methodFilter.toString()+"' for objects "
-				+ Arrays.toString(params)));
+		return handler.handle(params, new NoSuchMethodException(methodFilter, params));
 	}
 
 	private List<MethodDesc> cachedDescriptors;
@@ -272,5 +271,22 @@ public class PolymorphicDispatcher<RT> {
 		}
 		Collections.sort(cachedDescriptors, comparator);
 		return cachedDescriptors;
+	}
+
+	private static class NoSuchMethodException extends java.lang.NoSuchMethodException {
+
+		private Filter<Method> methodFilter;
+		private Object[] params;
+
+		public NoSuchMethodException(Filter<Method> methodFilter, Object[] params) {
+			this.methodFilter = methodFilter;
+			this.params = params;
+		}
+
+		@Override
+		public String getMessage() {
+			return "Couldn't find method '"+methodFilter.toString()+"' for objects "
+			+ Arrays.toString(params);
+		}
 	}
 }
