@@ -72,7 +72,7 @@ public class LazyLinker extends AbstractLinker {
 	}
 
 	protected void clearReference(EObject obj, EReference ref) {
-		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived())
+		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived() && ref.isChangeable())
 			obj.eUnset(ref);
 	}
 
