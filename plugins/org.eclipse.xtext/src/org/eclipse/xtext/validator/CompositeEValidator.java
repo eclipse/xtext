@@ -51,7 +51,14 @@ public class CompositeEValidator implements EValidator {
 
 	public CompositeEValidator() {
 		contents = new LinkedHashSet<EValidatorEqualitySupport>();
-		this.contents.add(new EValidatorEqualitySupport(new EObjectValidator()));
+		this.contents.add(new EValidatorEqualitySupport(new EObjectValidator(){
+			@Override
+			public boolean validate_EveryProxyResolves(EObject eObject, DiagnosticChain diagnostics,
+					Map<Object, Object> context) {
+				// don't check, we have our own implementation, which creates nicer messages
+				return true;
+			}
+		}));
 	}
 
 	public CompositeEValidator(EValidator validator) {
