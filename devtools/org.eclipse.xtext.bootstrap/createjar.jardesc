@@ -11,25 +11,18 @@
 </sealing>
 </manifest>
 <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+<javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/emf-gen"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.parser"/>
 <file path="/org.eclipse.xtext.ui.generator/.project"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.grammarAccess"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/src"/>
+<javaElement handleIdentifier="=de.itemis.xtext.antlr/src"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.ui.common/src&lt;org.eclipse.xtext.ui.common.editor.contentassist{IProposalProvider.java"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.ui.generator/src"/>
 <file path="/org.eclipse.xtext.ui.generator/build.properties"/>
 <file path="/org.eclipse.xtext.ui.generator/.classpath"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.scoping"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.resourceFactory"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.validator"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/src"/>
-<javaElement handleIdentifier="=de.itemis.xtext.antlr/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.ecore"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src&lt;org.eclipse.xtext.generator.parseTreeConstructor"/>
 </selectedElements>
 <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
 </jardesc>
