@@ -68,7 +68,7 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.uml2,org.eclipse.xtend.typesystem.uml2"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.uml2.ui,org.eclipse.xtend.typesystem.uml2.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.xsd,org.eclipse.xtend.typesystem.xsd"/>
-<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.xsd.tests,org.eclipse.xtend.typesystem.xsd.tests"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/tests/org.eclipse.xtend.typesystem.xsd.tests,org.eclipse.xtend.typesystem.xsd.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.typesystem.xsd.ui,org.eclipse.xtend.typesystem.xsd.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.ui,org.eclipse.xtend.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend.util.stdlib,org.eclipse.xtend.util.stdlib"/>
@@ -178,7 +178,6 @@
 </workingSets>
 <workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="Xpand" name="Xpand">
 <item elementID="=org.eclipse.xtend.typesystem.uml2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.xsd.tests" type="4"/>
 <item elementID="=org.eclipse.xpand.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtend" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2t.minimal" type="4"/>
@@ -195,6 +194,7 @@
 <item elementID="=org.eclipse.xtend.typesystem.emf" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2t.genmodel" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xpand.examples.xsd.m2m.news2xhtml" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtend.typesystem.xsd.tests" type="4"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xpand UI" name="Xpand UI">
 <item elementID="=org.eclipse.xtend.check.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
