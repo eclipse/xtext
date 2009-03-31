@@ -67,6 +67,11 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 			};
 		}
 
+		@ValueConverter(rule = "STRING_OR_QID")
+		public IValueConverter<String> stringOrQid() {
+			return STRING();
+		}
+		
 		@ValueConverter(rule = "Bag")
 		public IValueConverter<Boolean> bag() {
 			return negatedBooleanConverter("bag");
