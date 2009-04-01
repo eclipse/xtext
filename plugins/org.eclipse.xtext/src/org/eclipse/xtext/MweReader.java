@@ -64,7 +64,7 @@ public class MweReader extends AbstractWorkflowComponent2 {
 		Resource resource = set.getResource(URI.createURI(uri), true);
 		EObject value = resource.getContents().get(0);
 		ctx.set(outputSlot, value);
-		registerIssues(resource,issues);
+		registerIssues(set,issues);
 
 		if (validate) {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(value, getContext());
@@ -72,15 +72,21 @@ public class MweReader extends AbstractWorkflowComponent2 {
 		}
 	}
 
-	/**
-	 * @param resource
-	 */
+	private void registerIssues(XtextResourceSet set, Issues issues) {
+		for(Resource res: set.getResources())
+			registerIssues(res, issues);
+	}
+
+	private String getIssueMessage(Resource res, Resource.Diagnostic diagnostic) {
+		return String.format("%s(%d): %s", res.getURI().toString(), diagnostic.getLine(), diagnostic.getMessage());
+	}
+
 	private void registerIssues(Resource resource, Issues issues) {
 		for (Resource.Diagnostic diagnostic : resource.getErrors()) {
-			issues.addError(this,diagnostic.toString());
+			issues.addError(this, getIssueMessage(resource, diagnostic));
 		}
 		for (Resource.Diagnostic diagnostic : resource.getWarnings()) {
-			issues.addWarning(this,diagnostic.toString());
+			issues.addWarning(this,getIssueMessage(resource, diagnostic));
 		}
 	}
 
