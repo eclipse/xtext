@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %bundleName
+Bundle-SymbolicName: com.google.collect
+Bundle-Version: 0.8.0.qualifier
+Bundle-Vendor: %bundleVendor
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.google.common.base,
+ com.google.common.collect
