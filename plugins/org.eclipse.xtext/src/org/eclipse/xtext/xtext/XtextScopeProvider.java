@@ -25,13 +25,11 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -67,7 +65,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 				} else {
 					return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 				}
-			} else if (context instanceof CrossReference || context instanceof ParserRule) {
+			} else {
 				return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 			}
 			return IScope.NULLSCOPE;
@@ -76,7 +74,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			if (context instanceof EnumLiteralDeclaration) {
 				final EnumLiteralDeclaration decl = (EnumLiteralDeclaration) context;
 				final EnumRule rule = GrammarUtil.containingEnumRule(decl);
-				if (rule.getType() != null && rule.getType().getClassifier() != null) {
+				if (rule.getType() != null && rule.getType().getClassifier() != null && rule.getType().getClassifier() instanceof EEnum) {
 					return createEnumLiteralsScope((EEnum) rule.getType().getClassifier());
 				}
 				return IScope.NULLSCOPE;
