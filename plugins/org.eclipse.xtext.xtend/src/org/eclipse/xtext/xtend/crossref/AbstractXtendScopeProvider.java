@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend.crossref;
 
-import static org.eclipse.xtext.util.CollectionUtils.*;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,8 +19,10 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
-import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.xtend.AbstractXtendService;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -38,15 +38,15 @@ public abstract class AbstractXtendScopeProvider extends AbstractXtendService im
 			List<IScopedElement> scopedElements = invokeExtension(extensionName(context, reference), Collections
 					.singletonList(context));
 			final Collection<String> names = new HashSet<String>(scopedElements.size());
-			return new SimpleNestedScope(list(filter(scopedElements, new Filter<IScopedElement>() {
-				public boolean accept(IScopedElement param) {
+			return new SimpleNestedScope(Iterables.filter(scopedElements, new Predicate<IScopedElement>() {
+				public boolean apply(IScopedElement param) {
 					boolean result = reference.getEReferenceType().isSuperTypeOf(param.element().eClass());
 					if (result) {
 						result = names.add(param.name());
 					}
 					return result;
 				}
-			})));
+			}));
 		}
 		catch (Throwable e) {
 			log.error("Error invoking scope extension", e);

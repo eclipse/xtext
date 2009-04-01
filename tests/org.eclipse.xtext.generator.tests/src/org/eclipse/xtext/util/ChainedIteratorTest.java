@@ -7,43 +7,41 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 
-import org.eclipse.xtext.util.ChainedIterator;
+import com.google.common.base.Join;
+import com.google.common.collect.Iterators;
 
 import junit.framework.TestCase;
 
 public class ChainedIteratorTest extends TestCase {
 	
+	@SuppressWarnings("unchecked")
 	public void testSimple() throws Exception {
-		ChainedIterator<String> iter = new ChainedIterator<String>(new ChainedIterator<String>(iter("a","b"),iter("c")),iter("d"));
-		assertEquals("abcd",concat(iter));
+		Iterator<String> iter = Iterators.concat(iter("a","b"), iter("c"), iter("d"));
+		assertEquals("abcd", Join.join("", iter));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void testSecondArgNull() throws Exception {
-		ChainedIterator<String> iter = new ChainedIterator<String>(new ChainedIterator<String>(iter("a","b"),null),null);
-		assertEquals("ab",concat(iter));
+		try {
+			Iterators.concat(iter("a","b"), null, null);
+			fail("NPE expected.");
+		} catch(NullPointerException ex) {
+			// expected
+		}
 	}
 	
 	public void testFirstArgNull() throws Exception {
 		try {
-			new ChainedIterator<String>(null, Collections.<String>emptyList().iterator());
+			Iterators.concat(null, iter("a","b"));
 			fail("nullpointer exception expected");
 		} catch (NullPointerException npe){
 			//expected
 		}
 	}
 	
-	private String concat(Iterator<String> iter) {
-		String r = "";
-		while (iter.hasNext())
-			r+=iter.next();
-		return r;
-	}
-
 	private Iterator<String> iter(String ... elements) {
-		return Arrays.asList(elements).iterator();
+		return Iterators.forArray(elements, 0, elements.length);
 	}
 }
