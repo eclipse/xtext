@@ -8,14 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import static org.eclipse.xtext.util.CollectionUtils.list;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import junit.framework.TestCase;
 
@@ -54,7 +55,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(first, second));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first, second));
 
 		assertEquals("Integer_first_3", dispatcher.invoke(new Integer(3)));
 		assertEquals("Number_from_superclass_3", dispatcher.invoke(new Long(3)));
@@ -76,7 +77,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, list(o1),
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, Lists.newArrayList(o1),
 			new PolymorphicDispatcher.ErrorHandler<String>(){
 				public String handle(Object[] params, Throwable throwable) {
 					return null;
@@ -100,7 +101,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return Comparable.class.getSimpleName();
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(o1));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1));
 		try {
 			dispatcher.invoke("string");
 			fail("exception expected, due to ambigous methods");
@@ -119,7 +120,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Number_" + n;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", list(o1));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1));
 		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
 		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
 	}
@@ -139,8 +140,8 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Number_" + n;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>(list(o1), new Filter<Method>() {
-			public boolean accept(Method param) {
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>(Lists.newArrayList(o1), new Predicate<Method>() {
+			public boolean apply(Method param) {
 				return ( (param.getName().equals("label")) || (param.getAnnotation(TestLabelAnnotation.class) != null));
 			}
 		});

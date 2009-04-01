@@ -13,10 +13,11 @@ import java.util.Iterator;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parser.AbstractParserComparingTest;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,10 +25,10 @@ import org.eclipse.xtext.util.Tuples;
 public class EpatchComparingTest extends AbstractParserComparingTest {
 
 	@Override
-	protected Iterable<Pair<String, String>> getAllModels() {
+	protected Iterator<Pair<String, String>> getAllModels() {
 		Iterator<String> resources = getAllEpatchTestcases();
-		return CollectionUtils.map(resources, new Function<String, Pair<String, String>>() {
-			public Pair<String, String> exec(String filename) {
+		return Iterators.transform(resources, new Function<String, Pair<String, String>>() {
+			public Pair<String, String> apply(String filename) {
 				String model;
 				try {
 					model = readFileIntoString(filename);

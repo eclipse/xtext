@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammarinheritance;
 
-import static org.eclipse.xtext.util.CollectionUtils.map;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,7 +21,9 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.Function;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 public class InheritanceTest extends AbstractGeneratorTest {
 
@@ -52,8 +52,8 @@ public class InheritanceTest extends AbstractGeneratorTest {
 		assertEquals("AType2", clazz.getName());
 		assertEquals(2, clazz.getESuperTypes().size());
 		Set<String> expectedNames = new HashSet<String>(Arrays.asList(new String[]{"AType", "RootRule"}));
-		Iterator<String> iter = map(clazz.getESuperTypes(), new Function<EClass, String>(){
-			public String exec(EClass param) {
+		Iterator<String> iter = Iterables.transform(clazz.getESuperTypes(), new Function<EClass, String>(){
+			public String apply(EClass param) {
 				return param.getName();
 			}
 		}).iterator();

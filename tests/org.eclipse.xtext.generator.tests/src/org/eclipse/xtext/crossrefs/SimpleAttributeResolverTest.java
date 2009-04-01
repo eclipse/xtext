@@ -26,10 +26,10 @@ public class SimpleAttributeResolverTest extends TestCase {
 
 	private EcoreFactory factory;
 	
-	private SimpleAttributeResolver<String> nameResolver;
+	private SimpleAttributeResolver<EObject, String> nameResolver;
 	
 	@SuppressWarnings("unchecked")
-	private SimpleAttributeResolver<EList> superClassResolver;
+	private SimpleAttributeResolver<EObject, EList> superClassResolver;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -69,7 +69,7 @@ public class SimpleAttributeResolverTest extends TestCase {
 		EClass clazzNoMatch = factory.createEClass();
 		clazzMatch.setName("ClassName");
 		clazzNoMatch.setName("NoMatchClassName");
-		Iterable<EObject> res = nameResolver.getMatches(Arrays.asList(clazzMatch, clazzNoMatch), "ClassName");
+		Iterable<EObject> res = nameResolver.getMatches(Arrays.<EObject>asList(clazzMatch, clazzNoMatch), "ClassName");
 		assertNotNull("res", res);
 		Iterator<EObject> iter = res.iterator();
 		assertTrue(iter.hasNext());
