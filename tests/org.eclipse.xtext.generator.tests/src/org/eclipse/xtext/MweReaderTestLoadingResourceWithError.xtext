@@ -1,0 +1,8 @@
+grammar org.eclipse.xtext.MweReaderTestLoadingResourceWithError
+	with org.eclipse.xtext.MweReaderTestResourceWithError
+//	with org.eclipse.xtext.common.Terminals
+
+generate Model "model/model"
+
+Model: 
+	value = InvalidMain;
