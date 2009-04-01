@@ -10,8 +10,8 @@ package org.eclipse.xtext.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import org.eclipse.xtext.util.Function;
-import org.eclipse.xtext.util.MappingIterator;
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
 
 import junit.framework.TestCase;
 
@@ -20,7 +20,7 @@ import junit.framework.TestCase;
  */
 public class MappingIteratorTest extends TestCase implements Function<String, String> {
 
-	public String exec(String param) {
+	public String apply(String param) {
 		return param + "->" + param;
 	}
 	
@@ -46,7 +46,7 @@ public class MappingIteratorTest extends TestCase implements Function<String, St
 	
 	public void testNullIter() {
 		try {
-			new MappingIterator<String, String>(null, this);
+			Iterators.transform(null, this);
 			fail("NPE expected");
 		} catch(NullPointerException e) {
 			// expected
@@ -55,14 +55,14 @@ public class MappingIteratorTest extends TestCase implements Function<String, St
 	
 	public void testNullFunction() {
 		try {
-			new MappingIterator<String, String>(createMappingIterator("a"), null);
+			Iterators.transform(createMappingIterator("a"), null);
 		} catch(NullPointerException e) {
 			// expected
 		}
 	}
 	
 	private Iterator<String> createMappingIterator(String ...strings) {
-		return new MappingIterator<String, String>(Arrays.asList(strings).iterator(), this);
+		return Iterators.transform(Arrays.asList(strings).iterator(), this);
 	}
 
 }

@@ -9,15 +9,17 @@ package org.eclipse.xtext.parser;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,10 +27,10 @@ import org.eclipse.xtext.util.Tuples;
 public class XtextGrammarComparingTest extends AbstractParserComparingTest {
 
 	@Override
-	protected Iterable<Pair<String, String>> getAllModels() {
+	protected Iterator<Pair<String, String>> getAllModels() {
 		List<Class<?>> classes = Arrays.asList(GenerateAllTestGrammars.getTestGrammarClasses());
-		return CollectionUtils.map(classes, new Function<Class<?>, Pair<String, String>>() {
-			public Pair<String, String> exec(Class<?> param) {
+		return Iterators.transform(classes.iterator(), new Function<Class<?>, Pair<String, String>>() {
+			public Pair<String, String> apply(Class<?> param) {
 				String filename = GenerateAllTestGrammars.getGrammarFileName(param);
 				String model;
 				try {

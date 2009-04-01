@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
@@ -43,7 +45,7 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 	protected abstract IParser createFirstParser();
 	protected abstract IParser createSecondParser();
 
-	protected abstract Iterable<Pair<String, String>> getAllModels();
+	protected abstract Iterator<Pair<String, String>> getAllModels();
 
 	public void testCompareAllModels() throws Exception {
 		final Wrapper<String> modelName = Wrapper.forType(String.class);
@@ -53,7 +55,9 @@ public abstract class AbstractParserComparingTest extends AbstractGeneratorTest 
 				return modelName.get() + " - " + super.getErrorMessage();
 			}
 		};
-		for(Pair<String, String> pair: getAllModels()) {
+		Iterator<Pair<String, String>> iter = getAllModels();
+		while(iter.hasNext()) {
+			Pair<String, String> pair = iter.next();
 			String model = pair.getSecond();
 			modelName.set(pair.getFirst() + "(" + getFirstParserName() + " / " + getSecondParserName() + ")");
 			try {

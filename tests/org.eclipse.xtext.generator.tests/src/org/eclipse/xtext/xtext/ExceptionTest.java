@@ -8,12 +8,11 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Filter;
+
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -69,7 +68,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 
 	private void assertNoException(String model) throws Exception {
 		Resource r = getResourceFromString(model);
-		Iterable<Diagnostic> filtered =	CollectionUtils.filter(r.getErrors(), Filter.Util.<Diagnostic>instanceOf(ExceptionDiagnostic.class));
+		Iterable<ExceptionDiagnostic> filtered = Iterables.filter(r.getErrors(), ExceptionDiagnostic.class);
 		assertNotNull(filtered);
 		assertFalse(filtered.iterator().hasNext());
 	}

@@ -12,15 +12,15 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.FilteringIterator;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
 
 import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FilteringIteratorTest extends TestCase implements Filter<String> {
+public class FilteringIteratorTest extends TestCase implements Predicate<String> {
 
 	private String matchMe;
 
@@ -33,17 +33,17 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		list = new ArrayList<String>();
 	}
 
-	public boolean accept(String param) {
+	public boolean apply(String param) {
 		return param.equals(matchMe);
 	}
 
 	public void testEmptyList() {
-		Iterator<String> iter = new FilteringIterator<String>(list, this);
+		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		assertFalse(iter.hasNext());
 	}
 
 	public void testConcurrentModificationException() {
-		Iterator<String> iter = new FilteringIterator<String>(list, this);
+		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		list.add("null");
 		try {
 			iter.hasNext();
@@ -54,7 +54,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 
 	public void testRemove() {
 		list.add(matchMe);
-		Iterator<String> iter = new FilteringIterator<String>(list, this);
+		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		iter.next();
 		try {
 			iter.remove();
@@ -67,7 +67,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		list.add("null");
 		list.add(matchMe);
 		list.add("null");
-		Iterator<String> iter = new FilteringIterator<String>(list, this);
+		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		assertTrue(iter.hasNext());
 		assertTrue(iter.hasNext());
 		assertEquals(matchMe, iter.next());
@@ -79,7 +79,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		list.add(matchMe);
 		list.add("null");
 		list.add(matchMe);
-		Iterator<String> iter = new FilteringIterator<String>(list, this);
+		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		assertTrue(iter.hasNext());
 		assertEquals(matchMe, iter.next());
 		assertTrue(iter.hasNext());
@@ -92,7 +92,7 @@ public class FilteringIteratorTest extends TestCase implements Filter<String> {
 		list.add(matchMe);
 		list.add("null");
 		list.add(matchMe);
-		Iterator<String> iter = new FilteringIterator<String>(list, this);
+		Iterator<String> iter = Iterators.filter(list.iterator(), this);
 		assertEquals(matchMe, iter.next());
 		assertEquals(matchMe, iter.next());
 		assertFalse(iter.hasNext());

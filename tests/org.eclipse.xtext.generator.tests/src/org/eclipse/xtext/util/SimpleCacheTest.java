@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
+
+import com.google.common.base.Function;
 
 import junit.framework.TestCase;
 
@@ -30,7 +31,7 @@ public class SimpleCacheTest extends TestCase implements Function<String, String
 		callCount = 0;
 	}
 
-	public String exec(String param) {
+	public String apply(String param) {
 		assertEquals(expectedParam, param);
 		callCount++;
 		return param + param;
