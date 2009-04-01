@@ -10,6 +10,8 @@ package org.eclipse.xtext.util;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import com.google.common.base.Function;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -29,7 +31,7 @@ public class SimpleCache<Key, Value> {
 	public Value get(Key k) {
 		Value result = content.get(k);
 		if (result == null && !content.containsKey(k)) {
-			result = f.exec(k);
+			result = f.apply(k);
 			content.put(k, result);
 		}
 		return result;

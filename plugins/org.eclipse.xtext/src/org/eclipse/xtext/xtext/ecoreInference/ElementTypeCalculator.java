@@ -22,9 +22,10 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -98,7 +99,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 		return doSwitch(object.getType());
 	}
 
-	public EClassifier exec(AbstractElement param) {
+	public EClassifier apply(AbstractElement param) {
 		return doSwitch(param);
 	}
 }

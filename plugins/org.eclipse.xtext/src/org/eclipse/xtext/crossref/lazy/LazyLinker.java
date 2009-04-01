@@ -40,7 +40,7 @@ import com.google.inject.Inject;
 public class LazyLinker extends AbstractLinker {
 
 	private final URIFragmentEncoder encoder;
-	private Registry registry;
+	private final Registry registry;
 
 	@Inject
 	public LazyLinker(URIFragmentEncoder encoder, EPackage.Registry registry) {
@@ -54,7 +54,7 @@ public class LazyLinker extends AbstractLinker {
 		installProxies(model, producer);
 		TreeIterator<EObject> iterator = model.eAllContents();
 		while (iterator.hasNext()) {
-			EObject eObject = (EObject) iterator.next();
+			EObject eObject = iterator.next();
 			installProxies(eObject, producer);
 		}
 	}

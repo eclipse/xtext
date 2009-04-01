@@ -39,9 +39,10 @@ import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.ScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -85,8 +86,8 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	private IScope createEnumLiteralsScope(EEnum eEnum) {
 		return new SimpleScope(IScope.NULLSCOPE,
-				CollectionUtils.map(eEnum.getELiterals(), new Function<EEnumLiteral, IScopedElement>() {
-					public IScopedElement exec(EEnumLiteral param) {
+				Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IScopedElement>() {
+					public IScopedElement apply(EEnumLiteral param) {
 						return ScopedElement.create(param.getName(), param);
 					}
 				}));
@@ -94,8 +95,8 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	private SimpleScope createClassifierScope(Iterable<EClassifier> classifiers) {
 		return new SimpleScope(IScope.NULLSCOPE,
-				CollectionUtils.map(classifiers, new Function<EClassifier, IScopedElement>() {
-					public IScopedElement exec(EClassifier param) {
+				Iterables.transform(classifiers, new Function<EClassifier, IScopedElement>() {
+					public IScopedElement apply(EClassifier param) {
 						return ScopedElement.create(param.getName(), param);
 					}
 				}));
@@ -105,7 +106,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		final Collection<EClassifier> allClassifiers = new ArrayList<EClassifier>();
 		for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
 			if (decl.getEPackage() != null)
-				CollectionUtils.addAll(allClassifiers, decl.getEPackage().getEClassifiers());
+				allClassifiers.addAll(decl.getEPackage().getEClassifiers());
 		}
 		return createClassifierScope(allClassifiers);
 	}
@@ -152,7 +153,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		return new SimpleCachingScope(parent, grammar.eResource(), type) {
 			@Override
 			protected Iterator<EObject> getRelevantContent(Resource resource) {
-				return CollectionUtils.join(Collections.singleton(grammar).iterator(), EcoreUtil.<EObject>getAllContents(grammar, true)).iterator();
+				return Iterators.concat(Collections.singleton(grammar).iterator(), EcoreUtil.<EObject>getAllContents(grammar, true));
 			}
 		};
 	}

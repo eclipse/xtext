@@ -9,17 +9,11 @@ package org.eclipse.xtext.generator.parser;
 
 import static org.eclipse.xtext.GrammarUtil.getName;
 import static org.eclipse.xtext.GrammarUtil.getNamespace;
-import static org.eclipse.xtext.util.CollectionUtils.filter;
-import static org.eclipse.xtext.util.CollectionUtils.indexes;
-import static org.eclipse.xtext.util.CollectionUtils.list;
-import static org.eclipse.xtext.util.CollectionUtils.map;
-import static org.eclipse.xtext.util.CollectionUtils.next;
-import static org.eclipse.xtext.util.CollectionUtils.nextOrNull;
-import static org.eclipse.xtext.util.CollectionUtils.typeFilter;
-import static org.eclipse.xtext.util.CollectionUtils.unique;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -38,10 +32,13 @@ import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.matching.StringWithOffset;
 import org.eclipse.xtext.parser.packrat.tokens.IParsedTokenAcceptor;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * Various utilities for the parser generator.
@@ -207,7 +204,8 @@ public final class PackratParserGenUtil {
 	}
 
 	private static String getElementIndex(AbstractElement element, EObject parent) {
-		return '$' + Integer.toString(next(indexes(EcoreUtil.getAllContents(parent, true), Filter.Util.<Object>same(element))));
+		List<EObject> elements = EcoreUtil2.eAllContentsAsList(parent);
+		return '$' + Integer.toString(elements.indexOf(element));
 	}
 
 	public static String getDelimiterFieldName(AbstractElement element) {
@@ -223,9 +221,9 @@ public final class PackratParserGenUtil {
 		return getFieldName(element.eClass().getName(), getElementIndex(element, GrammarUtil.getGrammar(element)) + "$Delimiter");
 	}
 
-	public static Iterable<Keyword> getConflictingKeywords(final TerminalRule rule, final Iterable<Keyword> allKeywords) {
-		return CollectionUtils.filter(allKeywords, new Filter<Keyword>() {
-			public boolean accept(Keyword param) {
+	public static Iterator<Keyword> getConflictingKeywords(final TerminalRule rule, final Iterator<Keyword> allKeywords) {
+		return Iterators.filter(allKeywords, new Predicate<Keyword>() {
+			public boolean apply(Keyword param) {
 				final ParserRule containerRule = EcoreUtil2.getContainerOfType(param, ParserRule.class);
 				if (containerRule == null)
 					return false;
@@ -258,42 +256,42 @@ public final class PackratParserGenUtil {
 	}
 
 	private static List<String> getConflictingKeywordsImpl(final Grammar grammar, TerminalRule rule) {
-		final Iterable<Keyword> conflictingKeywords = getConflictingKeywords(rule, typeFilter(
+		final Iterator<Keyword> conflictingKeywords = getConflictingKeywords(rule, Iterators.filter(
 				EcoreUtil.getAllContents(grammar, true), Keyword.class));
-		return list(unique(map(conflictingKeywords, new Function<Keyword, String>() {
-			public String exec(Keyword param) {
+		Set<String> res = Sets.newLinkedHashSet();
+		Iterators.addAll(res, Iterators.transform(conflictingKeywords, new Function<Keyword, String>() {
+			public String apply(Keyword param) {
 				return param.getValue();
 			}
-		})));
+		}));
+		return Lists.newArrayList(res);
 	}
 
 	// TODO think about super grammar
 	public static AbstractElement findFirstWithSameConflicts(final AbstractElement element, final Grammar grammar) {
 		final List<String> conflicting = getConflictingKeywords(element, grammar);
-		AbstractElement result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class), new Filter<AbstractElement>() {
-			public boolean accept(AbstractElement param) {
-				final List<String> otherConflicting = getConflictingKeywords(param, grammar);
-				return otherConflicting != null && otherConflicting.equals(conflicting);
-			}
-		}));
-		if (result == null)
-			return element;
+		AbstractElement result = Iterators.getOnlyElement(Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class),
+			new Predicate<AbstractElement>() {
+				public boolean apply(AbstractElement param) {
+					final List<String> otherConflicting = getConflictingKeywords(param, grammar);
+					return otherConflicting != null && otherConflicting.equals(conflicting);
+				}
+			}), element);
 		return result;
 	}
 
 	// TODO think about super grammar
 	public static Keyword findFirstKeywordWithSameConflicts(final Keyword element, final Grammar grammar) {
 		final List<AbstractRule> conflicting = getConflictingLexerRules(element, grammar);
-		Keyword result = nextOrNull(filter(typeFilter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Filter<Keyword>() {
-			public boolean accept(Keyword param) {
-				if (GrammarUtil.containingParserRule(param) == null)
-					return false;
-				final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
-				return otherConflicting != null && otherConflicting.equals(conflicting);
-			}
-		}));
-		if (result == null)
-			return element;
+		Keyword result = Iterators.getOnlyElement(Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class),
+				new Predicate<Keyword>() {
+					public boolean apply(Keyword param) {
+						if (GrammarUtil.containingParserRule(param) == null)
+							return false;
+						final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
+						return otherConflicting != null && otherConflicting.equals(conflicting);
+					}
+				}), element);
 		return result;
 	}
 

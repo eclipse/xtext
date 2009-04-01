@@ -17,7 +17,7 @@ import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
  */
 public class DefaultNameProvider extends AbstractNameProvider {
 	
-	private final SimpleAttributeResolver<String> nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
+	private final SimpleAttributeResolver<EObject, String> nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
 
 	public String getGlobalName(EObject obj) {
 		return nameResolver.getValue(obj);

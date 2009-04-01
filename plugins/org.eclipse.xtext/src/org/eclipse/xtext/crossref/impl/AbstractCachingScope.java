@@ -21,8 +21,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Filter;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -66,9 +67,9 @@ public abstract class AbstractCachingScope extends SimpleNestedScope {
 		this.elements = producer.getProducedElements();
 	}
 
-	protected abstract void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer);
+	protected abstract void initElements(SimpleAttributeResolver<EObject, String> resolver, ScopedElementProducer producer);
 
-	protected void initElements(SimpleAttributeResolver<String> resolver, Resource resource,
+	protected void initElements(SimpleAttributeResolver<EObject, String> resolver, Resource resource,
 			ScopedElementProducer producer) {
 		final Iterator<? extends EObject> iterator = getRelevantContent(resource);
 		while (iterator.hasNext()) {
@@ -102,8 +103,8 @@ public abstract class AbstractCachingScope extends SimpleNestedScope {
 	}
 
 	protected Iterable<IScopedElement> filter(final Iterable<IScopedElement> elements, final EClass type) {
-		return CollectionUtils.filter(elements.iterator(), new Filter<IScopedElement>() {
-			public boolean accept(IScopedElement param) {
+		return Iterables.filter(elements, new Predicate<IScopedElement>() {
+			public boolean apply(IScopedElement param) {
 				return type == null || EcoreUtil2.isAssignableFrom(type, param.element());
 			}
 		});
@@ -142,7 +143,7 @@ public abstract class AbstractCachingScope extends SimpleNestedScope {
 		}
 
 		public Iterable<IScopedElement> getProducedElements() {
-			return CollectionUtils.flatten(elements.values());
+			return Iterables.concat(elements.values());
 		}
 	}
 

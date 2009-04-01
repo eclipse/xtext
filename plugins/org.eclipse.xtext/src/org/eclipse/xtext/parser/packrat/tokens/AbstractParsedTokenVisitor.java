@@ -95,8 +95,9 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 		visitParsedToken(token);
 	}
 
-	public void exec(AbstractParsedToken param) {
+	public Void apply(AbstractParsedToken param) {
 		param.accept(this);
+		return null;
 	}
 
 	public void visitParsedEnumLiteral(ParsedEnumLiteral token) {

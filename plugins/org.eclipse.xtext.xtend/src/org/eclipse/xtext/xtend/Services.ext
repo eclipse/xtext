@@ -29,6 +29,6 @@ List[emf::EObject] allElements(emf::EObject this) :
 IScope getScope(IScopeProvider this, Object obj, Object ref) :
 	JAVA org.eclipse.xtext.xtend.contentassist.ContentAssistHelper.getScope(org.eclipse.xtext.crossref.IScopeProvider, java.lang.Object, java.lang.Object);
 	
-List toList(Iterable i):
-	JAVA org.eclipse.xtext.util.CollectionUtils.list(java.lang.Iterable);
+List toList(Iterable this):
+	JAVA com.google.common.^collect.Lists.newArrayList(java.lang.Iterable);
 

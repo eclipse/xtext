@@ -19,7 +19,7 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 
 	public static final String IMPORT_URI = "importURI";
 
-	private final SimpleAttributeResolver<String> resolver;
+	private final SimpleAttributeResolver<EObject, String> resolver;
 
 	public ImportUriValidator() {
 		resolver = SimpleAttributeResolver.newResolver(String.class, IMPORT_URI);

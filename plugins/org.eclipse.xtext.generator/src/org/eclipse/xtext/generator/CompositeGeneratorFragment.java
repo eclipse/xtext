@@ -21,7 +21,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.util.Function;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -84,28 +85,28 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 	public String[] getExportedPackagesRt(final Grammar grammar) {
 		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>(){
 
-			public String[] exec(IGeneratorFragment param) {
+			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesRt(grammar);
 			}});
 	}
 	
 	public String[] getExportedPackagesUi(final Grammar grammar) {
 		return internalGetExportedPackages(grammar, new Function<IGeneratorFragment, String[]>(){
-			public String[] exec(IGeneratorFragment param) {
+			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesUi(grammar);
 			}});
 	}
 	
 	public Map<BindKey, BindValue> getGuiceBindingsRt(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Map<BindKey,BindValue>>(){
-			public Map<BindKey, BindValue> exec(IGeneratorFragment param) {
+			public Map<BindKey, BindValue> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsRt(grammar);
 			}});
 	}
 	
 	public Map<BindKey, BindValue> getGuiceBindingsUi(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Map<BindKey,BindValue>>(){
-			public Map<BindKey, BindValue> exec(IGeneratorFragment param) {
+			public Map<BindKey, BindValue> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsUi(grammar);
 			}});
 	}
@@ -114,7 +115,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 	private String[] internalGetExportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
-			String[] exportedPackagesRt = func.exec(f);
+			String[] exportedPackagesRt = func.apply(f);
 			if (exportedPackagesRt != null)
 				all.addAll(Arrays.asList(exportedPackagesRt));
 		}
@@ -125,7 +126,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		Map<BindKey, BindValue> bindings = new LinkedHashMap<BindKey, BindValue>();
 		Map<BindKey, Class<? extends IGeneratorFragment>> contributedBy = new HashMap<BindKey, Class<? extends IGeneratorFragment>>();
 		for (IGeneratorFragment module : fragments) {
-			Map<BindKey, BindValue> temp =func.exec(module);
+			Map<BindKey, BindValue> temp =func.apply(module);
 			if (temp != null) {
 				for (Map.Entry<BindKey, BindValue> entry : temp.entrySet()) {
 					if (!contributedBy.containsKey(entry.getKey())) {

@@ -20,9 +20,10 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);
@@ -72,8 +73,8 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		EObject element = r.getParseResult().getRootASTElement();
 		Grammar g = (Grammar) element;
-		List<AbstractMetamodelDeclaration> mms = CollectionUtils.list(
-				CollectionUtils.filter(g.getMetamodelDeclarations(), Filter.Util.<AbstractMetamodelDeclaration>instanceOf(GeneratedMetamodel.class)));
+		List<AbstractMetamodelDeclaration> mms = Lists.<AbstractMetamodelDeclaration>newArrayList(
+				Iterables.filter(g.getMetamodelDeclarations(), GeneratedMetamodel.class));
 		assertNotNull(mms);
 		assertEquals(1, mms.size());
 	}

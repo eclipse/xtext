@@ -10,8 +10,6 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 import static java.lang.Math.max;
 import static org.eclipse.xtext.parsetree.ParseTreeUtil.getCurrentOrFollowingNodeByOffset;
 import static org.eclipse.xtext.parsetree.ParseTreeUtil.getLastCompleteNodeByOffset;
-import static org.eclipse.xtext.util.CollectionUtils.addAllIfNotNull;
-import static org.eclipse.xtext.util.CollectionUtils.addIfNotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +46,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistPr
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -136,6 +136,11 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return completionProposalList;
 	}
 
+	private <T> void addAllIfNotNull(List<T> completionProposalList,
+			List<? extends T> proposals) {
+		Iterables.addAll(completionProposalList, Iterables.filter(proposals, Predicates.notNull()));
+	}
+	
 	protected List<TemplateContextType> collectTemplateContextTypes(List<AbstractElement> computeProposalElements,
 			IContentAssistContext contentAssistContext) {
 		List<TemplateContextType> templateContextTypes = new ArrayList<TemplateContextType>();
@@ -162,6 +167,12 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return templateContextTypes;
 	}
+	
+	private <T> void addIfNotNull(List<T> result, T obj) {
+		if (obj != null)
+			result.add(obj);
+	}
+	
 	/**
 	 * Adds templates to the list of proposals,
 	 *

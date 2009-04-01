@@ -31,13 +31,14 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
 import org.eclipse.xtext.validator.CheckType;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -82,18 +83,18 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		guard(declaration.getEPackage().getNsURI() != null);
 
 		Grammar grammar = GrammarUtil.getGrammar(declaration);
-		Iterable<String> nsUris = CollectionUtils.map(grammar.getMetamodelDeclarations(), new Function<AbstractMetamodelDeclaration, String>() {
-			public String exec(AbstractMetamodelDeclaration param) {
+		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(), new Function<AbstractMetamodelDeclaration, String>() {
+			public String apply(AbstractMetamodelDeclaration param) {
 				if (param.getEPackage() != null)
 					return param.getEPackage().getNsURI();
 				return null;
 			}
 		});
-		int count = CollectionUtils.count(nsUris, new Filter<String>() {
-			public boolean accept(String param) {
+		int count = Iterables.size(Iterables.filter(nsUris, new Predicate<String>() {
+			public boolean apply(String param) {
 				return declaration.getEPackage().getNsURI().equals(param);
 			}
-		});
+		}));
 		assertTrue("EPackage with ns-uri '"+ declaration.getEPackage().getNsURI() + "' is used twice.",
 			XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, count == 1);
 	}

@@ -20,6 +20,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 
+import com.google.common.base.Predicate;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -28,7 +30,7 @@ public class PolymorphicDispatcher<RT> {
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(PolymorphicDispatcher.class);
 	private final List<? extends Object> targets;
-	private final Filter<Method> methodFilter;
+	private final Predicate<Method> methodFilter;
 	private final Comparator<MethodDesc> comparator;
 
 	/**
@@ -51,7 +53,7 @@ public class PolymorphicDispatcher<RT> {
 	 * @author Sven Efftinge - Initial contribution and API
 	 *
 	 */
-	static class MethodNameFilter implements Filter<Method> {
+	static class MethodNameFilter implements Predicate<Method> {
 		/**
 		 * 
 		 */
@@ -75,8 +77,8 @@ public class PolymorphicDispatcher<RT> {
 			this.methodName = methodName;
 			this.minParams = minParams;
 		}
-
-		public boolean accept(Method param) {
+		
+		public boolean apply(Method param) {
 			return param.getName().equals(methodName) && param.getParameterTypes().length >= minParams
 					&& param.getParameterTypes().length <= maxParams;
 		}
@@ -166,11 +168,11 @@ public class PolymorphicDispatcher<RT> {
 		this(targets, new MethodNameFilter(methodName, minParams, maxParams), new DefaultComparator(targets), handler);
 	}
 
-	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter) {
+	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter) {
 		this(targets, methodFilter, new DefaultComparator(targets), new DefaultErrorHandler<RT>());
 	}
 	
-	public PolymorphicDispatcher(final List<? extends Object> targets, Filter<Method> methodFilter,
+	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter,
 			Comparator<MethodDesc> comparator, ErrorHandler<RT> handler) {
 		this.targets = targets;
 		this.methodFilter = methodFilter;
@@ -262,7 +264,7 @@ public class PolymorphicDispatcher<RT> {
 			while (current != Object.class) {
 				Method[] methods = current.getDeclaredMethods();
 				for (Method method : methods) {
-					if (methodFilter.accept(method)) {
+					if (methodFilter.apply(method)) {
 						cachedDescriptors.add(new MethodDesc(target, method));
 					}
 				}
@@ -275,10 +277,11 @@ public class PolymorphicDispatcher<RT> {
 
 	private static class NoSuchMethodException extends java.lang.NoSuchMethodException {
 
-		private Filter<Method> methodFilter;
-		private Object[] params;
+		private static final long serialVersionUID = 1L;
+		private final Predicate<Method> methodFilter;
+		private final Object[] params;
 
-		public NoSuchMethodException(Filter<Method> methodFilter, Object[] params) {
+		public NoSuchMethodException(Predicate<Method> methodFilter, Object[] params) {
 			this.methodFilter = methodFilter;
 			this.params = params;
 		}

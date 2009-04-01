@@ -8,14 +8,16 @@
 package org.eclipse.xtext.valueconverter;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parser.AbstractParserComparingTest;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -67,12 +69,12 @@ public class ParserComparingTest extends AbstractParserComparingTest {
 	}
 
 	@Override
-	protected Iterable<Pair<String, String>> getAllModels() {
-		return CollectionUtils.map(Arrays.asList(testModels), new Function<String, Pair<String, String>>(){
-			public Pair<String, String> exec(String param) {
+	protected Iterator<Pair<String, String>> getAllModels() {
+		return Iterables.transform(Arrays.asList(testModels), new Function<String, Pair<String, String>>(){
+			public Pair<String, String> apply(String param) {
 				return Tuples.create(param, param);
 			}
-		});
+		}).iterator();
 	}
 
 	@Override
