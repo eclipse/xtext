@@ -270,20 +270,22 @@ public final class PackratParserGenUtil {
 	// TODO think about super grammar
 	public static AbstractElement findFirstWithSameConflicts(final AbstractElement element, final Grammar grammar) {
 		final List<String> conflicting = getConflictingKeywords(element, grammar);
-		AbstractElement result = Iterators.getOnlyElement(Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class),
+		AbstractElement result = Iterators.getOnlyElement(
+				Iterators.limit(Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class),
 			new Predicate<AbstractElement>() {
 				public boolean apply(AbstractElement param) {
 					final List<String> otherConflicting = getConflictingKeywords(param, grammar);
 					return otherConflicting != null && otherConflicting.equals(conflicting);
 				}
-			}), element);
+			}), 1), element);
 		return result;
 	}
 
 	// TODO think about super grammar
 	public static Keyword findFirstKeywordWithSameConflicts(final Keyword element, final Grammar grammar) {
 		final List<AbstractRule> conflicting = getConflictingLexerRules(element, grammar);
-		Keyword result = Iterators.getOnlyElement(Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class),
+		Keyword result = Iterators.getOnlyElement(
+				Iterators.limit(Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class),
 				new Predicate<Keyword>() {
 					public boolean apply(Keyword param) {
 						if (GrammarUtil.containingParserRule(param) == null)
@@ -291,7 +293,7 @@ public final class PackratParserGenUtil {
 						final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
 						return otherConflicting != null && otherConflicting.equals(conflicting);
 					}
-				}), element);
+				}), 1), element);
 		return result;
 	}
 
