@@ -18,6 +18,9 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
+import org.eclipse.xtext.XtextRuntimeModule;
+import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.XtextUiModule;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule;
@@ -54,11 +57,20 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 		};
 	}
 
-	private ISetup getXtextGrammarSetup() {
+	private ISetup getXtextGrammarTestSetup() {
 		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUiModule());
+			}
+		};
+	}
+	
+	private ISetup getXtextSetup() {
+		return new XtextStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule());
 			}
 		};
 	}
@@ -196,7 +208,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 
 
 	public void testCompleteRuleCall() throws Exception {
-		newBuilder(getXtextGrammarSetup())
+		newBuilder(getXtextGrammarTestSetup())
 			.appendNl("grammar foo")
 			.appendNl("generate foo \"foo\"")
 			.appendNl("R1 : (attr+=R2)*;")
@@ -233,7 +245,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      */
     public void testCompleteParserRule_01() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("MyRule : 'foo' name=ID; ").assertText(
@@ -242,7 +254,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
     
     public void testCompleteParserRule_02() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
@@ -256,7 +268,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
     
     public void testCompleteParserRule_03() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
@@ -270,7 +282,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
     
     public void _testCompleteGenerateKeyword() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
@@ -280,7 +292,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
 
     public void testCompleteImportAndGenerateRule() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
         .appendNl("grammar foo")
         .appendNl("generate foo \"foo\"")
         .appendNl("")
@@ -299,7 +311,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
      */
     public void testCompleteRuleCallWithSpace() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
         .appendNl("grammar foo")
         .appendNl("generate foo \"foo\"")
         .appendNl("R1 : (attr+=R2)*;")
@@ -331,7 +343,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269649
      */
     public void testCompletionOnGenerateKeyword() throws Exception {
-        newBuilder(getXtextGrammarSetup())
+        newBuilder(getXtextGrammarTestSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate meta \"url\"")
         .appendNl("Rule: name=ID;")
@@ -346,7 +358,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=267582
      */
     public void testCompleteAssignmentWithBacktracking() throws Exception {
-    	newBuilder(getXtextGrammarSetup())
+    	newBuilder(getXtextGrammarTestSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate foo \"foo\"")
         .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=",
@@ -354,6 +366,36 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
         .appendNl(";")
         .append("terminal Other_Id").assertText(":","returns");
 
+    }
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
+     * @throws Exception
+     */
+    public void testCompleteTypeRefReturnForEnumRule() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("enum NewEnum returns").assertText(
+                                "Class", "Import","Model","NewEnum"
+                );
+    }
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
+     * @throws Exception
+     */
+	public void testCompleteTypeRefReturnForParserRule() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("NewType returns").assertText(
+                                "Class", "Import","Model","NewType"
+                );
+    }
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
+     * @throws Exception
+     */
+    public void testCompleteTypeRefReturnForTerminalRule() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("terminal NewType returns").assertText(
+                                "Class", "Import","Model"
+                );
     }
 
     public void testKeywordWithBackslashes() throws Exception {
@@ -400,5 +442,19 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 		with(standAloneSetup);
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
 	}
+
+	private ContentAssistProcessorTestBuilder doTestCompleteTypeRefSetup() throws Exception {
+		return newBuilder(getXtextSetup())
+        .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+        .appendNl("import \"http://www.eclipse.org/emf/2003/Change\"")
+        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
+        .appendNl("Model :")
+        .appendNl("(imports+=Import)*")
+        .appendNl("(elements+=Class)*;")
+        .appendNl("Import :")
+        .appendNl("'import' importURI=STRING;")
+        .appendNl("Class :")
+        .appendNl("'class' name=ID ('extends' references=[Class])?;");
+}
 
 }
