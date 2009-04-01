@@ -47,10 +47,7 @@ public class ExceptionTest extends AbstractGeneratorTest {
 	        "Keyword : \n" +
 	        "   value=STRING \n" +
 	        ";\n";
-		Resource r = getResourceFromString(model);
-		Iterable<Diagnostic> filtered =	CollectionUtils.filter(r.getErrors(), Filter.Util.<Diagnostic>instanceOf(ExceptionDiagnostic.class));
-		assertNotNull(filtered);
-		assertFalse(filtered.iterator().hasNext());
+		assertNoException(model);
 	}
 
 	public void testFirstAssignmentWithoutLeftSide() throws Exception {
@@ -58,6 +55,19 @@ public class ExceptionTest extends AbstractGeneratorTest {
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
             "generate test \"test\"\n" +
             "Numbers: =INT n2=INT ;";
+		assertNoException(model);
+	}
+	
+	public void testBug_270773() throws Exception {
+		String model =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore\n" +
+            "generate test \"test\"\n" +
+            "enum Foo returns ecore::EString: Zonk ;";
+		assertNoException(model);
+	}
+
+	private void assertNoException(String model) throws Exception {
 		Resource r = getResourceFromString(model);
 		Iterable<Diagnostic> filtered =	CollectionUtils.filter(r.getErrors(), Filter.Util.<Diagnostic>instanceOf(ExceptionDiagnostic.class));
 		assertNotNull(filtered);
