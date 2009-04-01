@@ -26,8 +26,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
+
+import com.google.common.base.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -193,7 +194,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	private final SimpleCache<Class<?>, List<MethodWrapper>> methodsForType = new SimpleCache<Class<?>, List<MethodWrapper>>(
 			new Function<Class<?>, List<MethodWrapper>>() {
-				public List<MethodWrapper> exec(Class<?> param) {
+				public List<MethodWrapper> apply(Class<?> param) {
 					List<MethodWrapper> result = new ArrayList<MethodWrapper>();
 					for (MethodWrapper mw : checkMethods) {
 						if (mw.isMatching(param))

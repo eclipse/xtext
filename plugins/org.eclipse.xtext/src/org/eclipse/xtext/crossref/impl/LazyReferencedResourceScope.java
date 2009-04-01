@@ -8,6 +8,7 @@
 package org.eclipse.xtext.crossref.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.crossref.IScope;
 
@@ -28,7 +29,7 @@ public class LazyReferencedResourceScope extends AbstractCachingScope {
 	}
 
 	@Override
-	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
+	protected void initElements(SimpleAttributeResolver<EObject, String> resolver, ScopedElementProducer producer) {
 		final Resource resource = ImportUriUtil.getResource(context, uri);
 		if (resource != null)
 			initElements(resolver, resource, producer);

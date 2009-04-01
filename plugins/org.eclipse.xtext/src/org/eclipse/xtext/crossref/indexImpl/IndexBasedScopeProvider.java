@@ -24,9 +24,9 @@ import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.AbstractScopeProvider;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -55,13 +55,14 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		eClassQuery.resource().uri(uri);
 		eClassQuery.eClass().name(eClazz.getName()).ePackage().nsURI(eClazz.getEPackage().getNsURI());
 		final Iterable<EObjectDescriptor> iter = eClassQuery.executeListResult();
-		return CollectionUtils.map(iter, new Function<EObjectDescriptor, IScopedElement>(){
-			public IScopedElement exec(EObjectDescriptor param) {
+		return Iterables.transform(iter, new Function<EObjectDescriptor, IScopedElement>(){
+			public IScopedElement apply(EObjectDescriptor param) {
 				return new IndexBasedScopedElement(param);
 			}});
 	}
 
-	private final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importURI");
+	private final SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importURI");
+	
 	/**
 	 * @param context
 	 * @param reference

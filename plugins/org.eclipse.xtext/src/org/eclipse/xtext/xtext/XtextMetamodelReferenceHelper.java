@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import static org.eclipse.xtext.util.CollectionUtils.addAll;
-import static org.eclipse.xtext.util.CollectionUtils.filter;
-import static org.eclipse.xtext.util.CollectionUtils.map;
-import static org.eclipse.xtext.util.CollectionUtils.switchContent;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,9 +20,11 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -90,9 +87,9 @@ class XtextMetamodelReferenceHelper {
 	private static void filterExactMatches(final String alias,
 			final List<AbstractMetamodelDeclaration> importedMetamodels,
 			final List<AbstractMetamodelDeclaration> exactMatches) {
-		addAll(exactMatches, filter(importedMetamodels,
-				new Filter<AbstractMetamodelDeclaration>() {
-					public boolean accept(AbstractMetamodelDeclaration param) {
+		Iterables.addAll(exactMatches, Iterables.filter(importedMetamodels,
+				new Predicate<AbstractMetamodelDeclaration>() {
+					public boolean apply(AbstractMetamodelDeclaration param) {
 						return alias.equals(param.getAlias());
 					}
 				}));
@@ -101,19 +98,21 @@ class XtextMetamodelReferenceHelper {
 	private static void filterMetamodelsInScope(final String alias, IScope scope,
 			final List<AbstractMetamodelDeclaration> generatedMetamodels,
 			final List<AbstractMetamodelDeclaration> importedMetamodels) {
-		switchContent(filter(map(scope.getAllContents(), new Function<IScopedElement, AbstractMetamodelDeclaration>() {
-			public AbstractMetamodelDeclaration exec(IScopedElement param) {
+		Iterable<AbstractMetamodelDeclaration> all = Iterables.filter(Iterables.transform(scope.getAllContents(), new Function<IScopedElement, AbstractMetamodelDeclaration>() {
+			public AbstractMetamodelDeclaration apply(IScopedElement param) {
 				return (AbstractMetamodelDeclaration) param.element();
 			}
-		}), new Filter<AbstractMetamodelDeclaration>() {
-			public boolean accept(AbstractMetamodelDeclaration param) {
+		}), new Predicate<AbstractMetamodelDeclaration>() {
+			public boolean apply(AbstractMetamodelDeclaration param) {
 				return metamodelAliasMatches(param, alias);
 			}
-		}), generatedMetamodels, importedMetamodels, new Filter<AbstractMetamodelDeclaration>() {
-			public boolean accept(AbstractMetamodelDeclaration param) {
-				return param instanceof GeneratedMetamodel;
-			}
 		});
+		for(AbstractMetamodelDeclaration decl: all) {
+			if (decl instanceof GeneratedMetamodel)
+				generatedMetamodels.add(decl);
+			else
+				importedMetamodels.add(decl);
+		}
 	}
 
 	private static boolean metamodelAliasMatches(AbstractMetamodelDeclaration metamodelDeclaration, String text) {

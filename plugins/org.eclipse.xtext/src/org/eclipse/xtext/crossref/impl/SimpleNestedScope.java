@@ -7,18 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import static org.eclipse.xtext.util.CollectionUtils.filter;
-import static org.eclipse.xtext.util.CollectionUtils.join;
-import static org.eclipse.xtext.util.CollectionUtils.each;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.Function;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -45,12 +43,13 @@ public class SimpleNestedScope extends AbstractScope {
 
 	public final Iterable<IScopedElement> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
-		return join(each(getContents(), new Function.WithoutResult<IScopedElement>() {
-			public void exec(IScopedElement param) {
+		return Iterables.concat(Iterables.transform(getContents(), new Function<IScopedElement, IScopedElement>() {
+			public IScopedElement apply(IScopedElement param) {
 				identifiers.add(param.name());
+				return param;
 			}
-		}), filter(getOuterScope().getAllContents(), new Filter<IScopedElement>() {
-			public boolean accept(IScopedElement param) {
+		}), Iterables.filter(getOuterScope().getAllContents(), new Predicate<IScopedElement>() {
+			public boolean apply(IScopedElement param) {
 				return !identifiers.contains(param.name());
 			}
 		}));

@@ -49,7 +49,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private static Logger log = Logger.getLogger(XtextLinkingService.class);
 
-	private final SimpleAttributeResolver<String> aliasResolver;
+	private final SimpleAttributeResolver<EObject, String> aliasResolver;
 
 	@Inject
 	private IValueConverterService valueConverterService;

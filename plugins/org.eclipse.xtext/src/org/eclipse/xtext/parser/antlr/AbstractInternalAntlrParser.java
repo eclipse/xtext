@@ -42,8 +42,10 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.util.MultiMap;
 import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimaps;
 
 /**
  * TODO Javadoc
@@ -62,7 +64,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	private final Map<String, AbstractRule> allRules;
 
-	private final MultiMap<Token, CompositeNode> deferredLookaheadMap = new MultiMap<Token, CompositeNode>();
+	private final ListMultimap<Token, CompositeNode> deferredLookaheadMap = Multimaps.newArrayListMultimap();
 	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
 
 	protected AbstractInternalAntlrParser(TokenStream input) {
@@ -360,7 +362,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		for (CompositeNode nodeDecidingOnToken : nodesDecidingOnToken) {
 			nodeDecidingOnToken.getLookaheadLeafNodes().add(leafNode);
 		}
-		deferredLookaheadMap.remove(token);
+		deferredLookaheadMap.removeAll(token);
 		token2NodeMap.put(token, leafNode);
 	}
 

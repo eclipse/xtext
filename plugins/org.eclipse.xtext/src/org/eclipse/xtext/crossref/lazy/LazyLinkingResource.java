@@ -23,13 +23,12 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class LazyLinkingResource extends XtextResource {
-	private Logger log = Logger.getLogger(LazyLinkingResource.class);
+	private final Logger log = Logger.getLogger(LazyLinkingResource.class);
 
 	public ILinkingService linkingService;
-	private URIFragmentEncoder encoder;
+	private final URIFragmentEncoder encoder;
 
 	@Inject
 	public LazyLinkingResource(ILinkingService crossLinkResolver, URIFragmentEncoder encoder) {

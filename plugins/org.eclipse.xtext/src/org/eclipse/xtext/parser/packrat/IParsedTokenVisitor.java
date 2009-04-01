@@ -23,14 +23,15 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.PlaceholderToken;
-import org.eclipse.xtext.util.Function;
+
+import com.google.common.base.Function;
 
 /**
  * Interface for ParsedTokenVisitor.
  * It is not intended to be implemented by clients. Use AbstractParsedTokenVisitor instead.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IParsedTokenVisitor extends Function.WithoutResult<AbstractParsedToken> {
+public interface IParsedTokenVisitor extends Function<AbstractParsedToken, Void> {
 
 	void visitAbstractParsedToken(AbstractParsedToken token);
 

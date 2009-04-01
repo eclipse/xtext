@@ -15,15 +15,16 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SimpleAttributeResolver<T> {
+public class SimpleAttributeResolver<K extends EObject, T> {
 
 	private final SimpleCache<EClass, EAttribute> attributeCache;
 
@@ -33,8 +34,8 @@ public class SimpleAttributeResolver<T> {
 
 	private final Adapter discardingAdapter;
 
-	public static <T> SimpleAttributeResolver<T> newResolver(final Class<T> type, final String attributeName) {
-		return new SimpleAttributeResolver<T>(type, attributeName);
+	public static <K extends EObject, T> SimpleAttributeResolver<K, T> newResolver(final Class<T> type, final String attributeName) {
+		return new SimpleAttributeResolver<K, T>(type, attributeName);
 	}
 
 	public EAttribute getAttribute(EObject object) {
@@ -45,7 +46,7 @@ public class SimpleAttributeResolver<T> {
 		this.attributeName = attributeName;
 		this.discardingAdapter = new DiscardingAdapter();
 		attributeCache = new SimpleCache<EClass, EAttribute>(new Function<EClass, EAttribute>() {
-			public EAttribute exec(EClass param) {
+			public EAttribute apply(EClass param) {
 				final EStructuralFeature structuralFeature = param.getEStructuralFeature(attributeName);
 				if (structuralFeature != null && structuralFeature instanceof EAttribute && !structuralFeature.isMany()) {
 					if (type.isAssignableFrom(structuralFeature.getEType().getInstanceClass())) {
@@ -57,7 +58,7 @@ public class SimpleAttributeResolver<T> {
 		});
 		valueCache = new SimpleCache<EObject, T>(new Function<EObject, T>() {
 			@SuppressWarnings("unchecked")
-			public T exec(EObject param) {
+			public T apply(EObject param) {
 				final EStructuralFeature feature = attributeCache.get(param.eClass());
 				if (feature != null) {
 					param.eAdapters().add(discardingAdapter);
@@ -67,13 +68,13 @@ public class SimpleAttributeResolver<T> {
 		});
 	}
 
-	public T getValue(EObject object) {
+	public T getValue(K object) {
 		return valueCache.get(object);
 	}
 
-	public Iterable<EObject> getMatches(Iterable<? extends EObject> candidates, final T value) {
-		return CollectionUtils.filter(candidates.iterator(), new Filter<EObject>() {
-			public boolean accept(EObject param) {
+	public Iterable<K> getMatches(Iterable<K> candidates, final T value) {
+		return Iterables.filter(candidates, new Predicate<K>() {
+			public boolean apply(K param) {
 				final T candidateValue = getValue(param);
 				return value.equals(candidateValue);
 			}

@@ -11,8 +11,9 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
-import org.eclipse.xtext.util.CollectionUtils;
-import org.eclipse.xtext.util.Function;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,8 +21,8 @@ import org.eclipse.xtext.util.Function;
 class StringScope extends SimpleNestedScope {
 
 	public StringScope(IScope parentScope, Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
-		super(parentScope, CollectionUtils.map(content, new Function<Object, IScopedElement>() {
-			public IScopedElement exec(Object param) {
+		super(parentScope, Iterables.transform(content, new Function<Object, IScopedElement>() {
+			public IScopedElement apply(Object param) {
 				return new StringScopeElement(valueConverterService.toString(param, "STRING"));
 			}
 		}));

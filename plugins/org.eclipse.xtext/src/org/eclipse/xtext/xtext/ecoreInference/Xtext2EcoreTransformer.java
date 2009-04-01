@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import static org.eclipse.xtext.util.CollectionUtils.*;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -58,10 +56,12 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -108,13 +108,13 @@ public class Xtext2EcoreTransformer {
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 		if (resourceSet == null)
 			throw new NullPointerException("resourceSet may not be null");
-		addAll(result, filter(map(filter(grammar.getMetamodelDeclarations(),
-				Filter.Util.<AbstractMetamodelDeclaration> instanceOf(GeneratedMetamodel.class)),
+		Iterables.addAll(result, Iterables.filter(Iterables.transform(
+				Iterables.filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class),
 				new Function<AbstractMetamodelDeclaration, EPackage>() {
-			public EPackage exec(AbstractMetamodelDeclaration param) {
-				return param.getEPackage();
-			}
-		}), Filter.Util.<EPackage> notNull()));
+					public EPackage apply(AbstractMetamodelDeclaration param) {
+						return param.getEPackage();
+					}
+				}), Predicates.notNull()));
 		return getPackagesSortedByName(result);
 	}
 

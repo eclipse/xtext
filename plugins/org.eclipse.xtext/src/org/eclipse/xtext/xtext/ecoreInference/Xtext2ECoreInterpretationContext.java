@@ -23,8 +23,9 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.common.base.Function;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -124,7 +125,7 @@ public class Xtext2ECoreInterpretationContext {
 
 
 	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
-		final EClassifier result = classifierCalculator.exec(terminal);
+		final EClassifier result = classifierCalculator.apply(terminal);
 		if (result == null) {
 			final NodeAdapter adapter = NodeUtil.getNodeAdapter(terminal);
 			if (adapter != null) {

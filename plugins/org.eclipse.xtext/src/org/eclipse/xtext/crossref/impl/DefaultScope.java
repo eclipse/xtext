@@ -27,11 +27,11 @@ public class DefaultScope extends SimpleCachingScope {
 		this(resource, type, SimpleAttributeResolver.newResolver(String.class, ImportUriValidator.IMPORT_URI));
 	}
 	
-	public DefaultScope(Resource resource, EClass type, SimpleAttributeResolver<String> importResolver) {
+	public DefaultScope(Resource resource, EClass type, SimpleAttributeResolver<EObject, String> importResolver) {
 		super(createParent(resource.getAllContents(), type, resource, importResolver), resource, type);
 	}
 
-	private static IScope createParent(Iterator<EObject> iter, EClass type, Resource resource, SimpleAttributeResolver<String> importResolver) {
+	private static IScope createParent(Iterator<EObject> iter, EClass type, Resource resource, SimpleAttributeResolver<EObject, String> importResolver) {
 		final Set<String> uniqueImportURIs = new HashSet<String>(10);
 		final List<String> orderedImportURIs = new ArrayList<String>(10);
 		while (iter.hasNext()) {

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.crossref.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.crossref.IScope;
 
@@ -26,7 +27,7 @@ public class SimpleCachingScope extends AbstractCachingScope {
 	}
 
 	@Override
-	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
+	protected void initElements(SimpleAttributeResolver<EObject, String> resolver, ScopedElementProducer producer) {
 		// should never be called
 		throw new UnsupportedOperationException();
 	}
