@@ -43,6 +43,10 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 
 	public IScope getScope(EObject context, EReference ref) {
 		EClass type = (EClass) ref.getEType();
+		return getScope(context, type);
+	}
+	
+	public IScope getScope(EObject context, EClass type) {
 		Resource eResource = context.eResource();
 		Iterable<IScopedElement> iterable = getElements(eResource.getURI().toPlatformString(true), type);
 		TreeIterator<EObject> eAllContents = EcoreUtil.getRootContainer(context).eAllContents();

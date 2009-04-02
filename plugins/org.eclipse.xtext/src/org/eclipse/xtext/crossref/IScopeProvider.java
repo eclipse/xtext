@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Stable;
@@ -35,14 +36,13 @@ public interface IScopeProvider {
 	 */
 	public IScope getScope(EObject context, EReference reference);
 
-//TODO remove this
-//	/**
-//	 * Returns a scope for a given context. The scope contains any visible, type-compatible
-//	 * element.
-//	 * @param context the element from which an element shall be referenced
-//	 * @param type the (super)type of the elements.
-//	 * @return {@link IScope} representing the inner most {@link IScope} for the
-//	 *         passed context and type.
-//	 */
-//	public IScope getScope(EObject context, EClass type);
+	/**
+	 * Returns a scope for a given context. The scope contains any visible, type-compatible
+	 * element.
+	 * @param context the element from which an element shall be referenced
+	 * @param type the (super)type of the elements.
+	 * @return {@link IScope} representing the inner most {@link IScope} for the
+	 *         passed context and type.
+	 */
+	public IScope getScope(EObject context, EClass type);
 }
