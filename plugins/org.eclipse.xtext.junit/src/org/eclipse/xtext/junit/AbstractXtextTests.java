@@ -30,6 +30,7 @@ import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -140,6 +141,10 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	protected IPackratParser getPackratParser() {
 		return injector.getInstance(IPackratParser.class);
+	}
+	
+	protected ILinkingService getLinkingService() {
+		return injector.getInstance(ILinkingService.class);
 	}
 
 	protected IAstFactory getASTFactory() {
