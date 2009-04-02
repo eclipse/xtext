@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend.scoping;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
@@ -86,18 +87,47 @@ public class XtendScopeProvider extends AbstractXtendService implements IScopePr
 		}
 		return null;
 	}
+	
+	public IScope getScope(EObject context, final EClass type) {
+		try {
+			while (true) {
+				Object result = null;
+				try {
+					String extensionName = extensionName(context, type);
+					result = invokeExtension(extensionName, Lists.newArrayList(context, type));
+				} catch (NoSuchExtensionException e) {
+					// ignore
+				}
+				if (result != null)
+					return (IScope) result;
+				if (context.eContainer() != null) {
+					return getScope(context.eContainer(), type);
+				} else {
+					computeDefaultScope(context, type);
+				}
+			}
+		} catch (Throwable e) {
+			log.error("Error invoking scope extension", e);
+		}
+		return null;
+	}
 
-	/**
-	 * 
-	 */
 	protected IScope computeDefaultScope(EObject ctx, EReference reference) {
 		return this.defaultScopeProvider.getScope(ctx, reference);
 	}
-
-	private String extensionName(EObject context, EReference reference) {
-		return SCOPE_EXTENSION_PREFIX + reference.getEType().getName();
+	
+	protected IScope computeDefaultScope(EObject ctx, EClass type) {
+		return this.defaultScopeProvider.getScope(ctx, type);
 	}
 
+	private String extensionName(EObject context, EReference reference) {
+		return extensionName(context, reference.getEReferenceType());
+	}
+
+	private String extensionName(EObject context, EClass type) {
+		return SCOPE_EXTENSION_PREFIX + type.getName();
+	}
+	
 	@Override
 	protected String getMasterXtendFileName() {
 		return extensionFile;

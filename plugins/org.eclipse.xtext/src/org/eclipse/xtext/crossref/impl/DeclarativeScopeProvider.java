@@ -11,6 +11,7 @@ package org.eclipse.xtext.crossref.impl;
 import java.util.Collections;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
@@ -39,7 +40,7 @@ public class DeclarativeScopeProvider extends AbstractScopeProvider {
 			EReference reference = (EReference) params[1];
 			if (object.eContainer()==null) {
 				if (log.isInfoEnabled())
-					log.info(throwable.getMessage());
+					log.info(throwable.getMessage(), throwable);
 				return genericFallBack.getScope(object, reference);
 			}
 			return DeclarativeScopeProvider.this.getScope(object.eContainer(), reference);
@@ -57,6 +58,12 @@ public class DeclarativeScopeProvider extends AbstractScopeProvider {
 		String methodName = "scope_"+reference.getEType().getName();
 		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(methodName, 2, 2, Collections.singletonList(this), handler);
 		return scope.invoke(context, reference);
+	}
+	
+	public final IScope getScope(EObject context, EClass type) {
+		String methodName = "scope_"+type.getName();
+		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(methodName, 2, 2, Collections.singletonList(this), handler);
+		return scope.invoke(context, type);
 	}
 
 }
