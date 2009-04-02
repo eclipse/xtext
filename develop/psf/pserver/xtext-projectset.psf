@@ -2,6 +2,7 @@
 <psf version="2.0">
 <provider id="org.eclipse.team.cvs.core.cvsnature">
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.guice,com.google.guice"/>
+<project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/com.google.collect,com.google.collect"/>
 <project reference="1.0,:pserver:anonymous@architecturware.cvs.sourceforge.net:/cvsroot/architecturware,xtext_external/de.itemis.xtext.antlr,de.itemis.xtext.antlr"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/develop,develop"/>
 <project reference="1.0,:pserver:anonymous@dev.eclipse.org:/cvsroot/tools,org.eclipse.orbit/javax.xml,javax.xml,v1_3_4"/>
@@ -214,6 +215,7 @@
 <item elementID="=org.antlr.runtime" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=de.itemis.xtext.antlr" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=com.google.guice" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=com.google.collect" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Core" name="Xtext Core">
 <item elementID="=org.eclipse.xtext.generator.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
