@@ -274,7 +274,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .appendNl("")
                 .appendNl(" MyRule : 'foo' name=ID; ")
                 .assertTextAtCursorPosition(" MyRule",
-                		"ParserRule_Name", 
+                		"ParserRule_Name",
                 		"terminal",
                 		"as",
                         "generate",
@@ -367,36 +367,36 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
         .append("terminal Other_Id").assertText(":","returns");
 
     }
-//TODO    /**
-//     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
-//     * @throws Exception
-//     */
-//    public void testCompleteTypeRefReturnForEnumRule() throws Exception {
-//        doTestCompleteTypeRefSetup()
-//                .appendNl("enum NewEnum returns ").assertText(
-//                                "Class", "Import","Model","NewEnum"
-//                );
-//    }
-//    /**
-//     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
-//     * @throws Exception
-//     */
-//	public void testCompleteTypeRefReturnForParserRule() throws Exception {
-//        doTestCompleteTypeRefSetup()
-//                .appendNl("NewType returns ").assertText(
-//                                "Class", "Import","Model","NewType"
-//                );
-//    }
-//    /**
-//     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
-//     * @throws Exception
-//     */
-//    public void testCompleteTypeRefReturnForTerminalRule() throws Exception {
-//        doTestCompleteTypeRefSetup()
-//                .appendNl("terminal NewType returns ").assertText(
-//                                "Class", "Import","Model"
-//                );
-//    }
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
+     * @throws Exception
+     */
+    public void testCompleteTypeRefReturnForEnumRule() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("enum NewEnum returns").assertText(
+                                "Class", "Import","Model","NewEnum"
+                );
+    }
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
+     * @throws Exception
+     */
+	public void testCompleteTypeRefReturnForParserRule() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("NewType returns").assertText(
+                                "Class", "Import","Model","NewType"
+                );
+    }
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
+     * @throws Exception
+     */
+    public void testCompleteTypeRefReturnForTerminalRule() throws Exception {
+        doTestCompleteTypeRefSetup()
+                .appendNl("terminal NewType returns").assertText(
+                                "Class", "Import","Model"
+                );
+    }
 
     public void testKeywordWithBackslashes() throws Exception {
 		newBuilder(getKeywordsLangSetup()).assertText("foo\\bar", "foo\\", "\\bar", "\\");
@@ -446,7 +446,6 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	private ContentAssistProcessorTestBuilder doTestCompleteTypeRefSetup() throws Exception {
 		return newBuilder(getXtextSetup())
         .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
-        .appendNl("import \"http://www.eclipse.org/emf/2003/Change\"")
         .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
         .appendNl("Model :")
         .appendNl("(imports+=Import)*")
@@ -455,6 +454,6 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
         .appendNl("'import' importURI=STRING;")
         .appendNl("Class :")
         .appendNl("'class' name=ID ('extends' references=[Class])?;");
-}
+	}
 
 }
