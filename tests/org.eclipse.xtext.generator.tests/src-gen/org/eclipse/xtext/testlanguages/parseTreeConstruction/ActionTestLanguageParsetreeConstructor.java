@@ -150,7 +150,7 @@ protected class Model_1_1_Assignment_right extends AssignmentToken  {
 		if((value = current.getConsumable("right",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("right");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
 				Solution s = new Child_Assignment_name(param, this).firstSolution();
@@ -194,7 +194,7 @@ protected class Child_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);

@@ -50,7 +50,7 @@ protected class Start_Assignment_featureA extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("featureA",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("featureA");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0();
 			return new Solution(obj);

@@ -112,7 +112,7 @@ protected class Spielplatz_1_Assignment_groesse extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("groesse",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -137,7 +137,7 @@ protected class Spielplatz_2_Assignment_beschreibung extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("beschreibung",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -198,7 +198,7 @@ protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
 		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) {
 				Solution s = new Kind_Group(param, this).firstSolution();
@@ -231,7 +231,7 @@ protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
 		if((value = current.getConsumable("erzieher",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("erzieher");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) {
 				Solution s = new Erwachsener_Group(param, this).firstSolution();
@@ -264,7 +264,7 @@ protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
 		if((value = current.getConsumable("spielzeuge",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) {
 				Solution s = new Spielzeug_Group(param, this).firstSolution();
@@ -297,7 +297,7 @@ protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
 		if((value = current.getConsumable("familie",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("familie");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) {
 				Solution s = new Familie_Group(param, this).firstSolution();
@@ -489,7 +489,7 @@ protected class Kind_2_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -514,7 +514,7 @@ protected class Kind_3_Assignment_age extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0();
 			return new Solution(obj);
@@ -626,7 +626,7 @@ protected class Erwachsener_2_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -651,7 +651,7 @@ protected class Erwachsener_3_Assignment_age extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0();
 			return new Solution(obj);
@@ -763,7 +763,7 @@ protected class Spielzeug_2_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -789,7 +789,7 @@ protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
 		if((value = current.getConsumable("farbe",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("farbe");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) {
 				Solution s = new Farbe_Alternatives(param, this).firstSolution();
@@ -1003,18 +1003,18 @@ protected class Familie_2_Assignment_name extends AssignmentToken  {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 
-		if("keyword".equals(value)) { // xtext::Keyword
+		if("keyword".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0();
 			return new Solution(obj);
 		}
 
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1();
 			return new Solution(obj);
 		}
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2();
 			return new Solution(obj);
@@ -1039,7 +1039,7 @@ protected class Familie_3_Assignment_mutter extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("mutter",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mutter");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -1067,7 +1067,7 @@ protected class Familie_4_Assignment_vater extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("vater",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vater");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -1095,7 +1095,7 @@ protected class Familie_5_Assignment_kinder extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -1163,7 +1163,7 @@ protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("kinder",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;

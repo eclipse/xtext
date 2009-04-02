@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContext;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -22,15 +23,11 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractXtendService {
 
-	protected ExecutionContext ctx;
+	protected ExecutionContextAware ctx;
 
 	@Inject
-	public void setExecutionContext(ExecutionContext ctx) {
+	public void setExecutionContextAware(ExecutionContextAware ctx) {
 		this.ctx = ctx;
-	}
-
-	protected ExecutionContext createExecutionContext() {
-		return ctx;
 	}
 
 	/**
@@ -42,19 +39,23 @@ public abstract class AbstractXtendService {
 	protected abstract String getMasterXtendFileName();
 
 	@SuppressWarnings("unchecked")
-	protected <T> T invokeExtension(String extensionName, List<?> parameterValues)
+	protected <T> T invokeExtension(final String extensionName, final List<?> parameterValues)
 			throws AbstractXtendExecutionException {
-		ExecutionContext executionContext = createExecutionContext();
-		XtendFacade facade = XtendFacade.create(executionContext, getMasterXtendFileName());
-		if (!facade.hasExtension(extensionName, parameterValues)) {
-			throw new NoSuchExtensionException(extensionName, parameterValues);
-		}
-		Object resultObject = facade.call(extensionName, parameterValues);
-		try {
-			return (T) resultObject;
-		} catch (ClassCastException e) {
-			throw new IllegalReturnTypeException(extensionName, parameterValues, e);
-		}
+		return ctx.exec(new Function<ExecutionContext,T>(){
+
+			public T apply(ExecutionContext ctx) {
+				XtendFacade facade = XtendFacade.create(ctx, getMasterXtendFileName());
+				if (!facade.hasExtension(extensionName, parameterValues)) {
+					throw new NoSuchExtensionException(extensionName, parameterValues);
+				}
+				Object resultObject = facade.call(extensionName, parameterValues);
+				try {
+					return (T) resultObject;
+				} catch (ClassCastException e) {
+					throw new IllegalReturnTypeException(extensionName, parameterValues, e);
+				}
+			}});
+		
 	}
 
 	public String toXtendFQName(String fqName) {

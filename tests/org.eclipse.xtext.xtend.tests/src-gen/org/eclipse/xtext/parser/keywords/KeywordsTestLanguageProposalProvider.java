@@ -16,5 +16,4 @@ public class KeywordsTestLanguageProposalProvider extends AbstractXtendProposalP
 		return "org::eclipse::xtext::parser::keywords::KeywordsTestLanguageProposalProvider";	
 	}
 	
-	
 }

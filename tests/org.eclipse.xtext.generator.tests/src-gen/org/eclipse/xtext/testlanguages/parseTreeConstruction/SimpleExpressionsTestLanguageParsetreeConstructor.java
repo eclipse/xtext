@@ -154,7 +154,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 		if((value = current.getConsumable("expressions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("expressions");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAdditionRule().getType().getClassifier())) {
 				Solution s = new Addition_Group(param, this).firstSolution();
@@ -301,14 +301,14 @@ protected class Addition_1_1_Assignment_operator extends AssignmentToken  {
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 
-		if("+".equals(value)) { // xtext::Keyword
+		if("+".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0();
 			return new Solution(obj);
 		}
 
 
-		if("-".equals(value)) { // xtext::Keyword
+		if("-".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1();
 			return new Solution(obj);
@@ -335,7 +335,7 @@ protected class Addition_1_2_Assignment_values extends AssignmentToken  {
 		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getMultiplicationRule().getType().getClassifier())) {
 				Solution s = new Multiplication_Group(param, this).firstSolution();
@@ -482,14 +482,14 @@ protected class Multiplication_1_1_Assignment_operator extends AssignmentToken  
 		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 
-		if("*".equals(value)) { // xtext::Keyword
+		if("*".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0();
 			return new Solution(obj);
 		}
 
 
-		if("/".equals(value)) { // xtext::Keyword
+		if("/".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1();
 			return new Solution(obj);
@@ -516,7 +516,7 @@ protected class Multiplication_1_2_Assignment_values extends AssignmentToken  {
 		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
@@ -632,7 +632,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);

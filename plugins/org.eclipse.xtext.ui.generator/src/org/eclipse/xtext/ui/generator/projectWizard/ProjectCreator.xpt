@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»

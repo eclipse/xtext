@@ -57,7 +57,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 		if((value = current.getConsumable("contents",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("contents");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) {
 				Solution s = new Alts_Alternatives(param, this).firstSolution();
@@ -233,7 +233,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 
-		if("a".equals(value)) { // xtext::Keyword
+		if("a".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead0Access().getXAKeyword_1_0();
 			return new Solution(obj);
@@ -319,7 +319,7 @@ protected class LookAhead1_1_Assignment_y extends AssignmentToken  {
 		if((value = current.getConsumable("y",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) {
 				Solution s = new LookAhead2_Group(param, this).firstSolution();
@@ -352,7 +352,7 @@ protected class LookAhead1_2_Assignment_x extends AssignmentToken  {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 
-		if("b".equals(value)) { // xtext::Keyword
+		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead1Access().getXBKeyword_2_0();
 			return new Solution(obj);
@@ -379,7 +379,7 @@ protected class LookAhead1_3_Assignment_x extends AssignmentToken  {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 
-		if("d".equals(value)) { // xtext::Keyword
+		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead1Access().getXDKeyword_3_0();
 			return new Solution(obj);
@@ -466,7 +466,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
 
-		if("foo".equals(value)) { // xtext::Keyword
+		if("foo".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0();
 			return new Solution(obj);
@@ -493,7 +493,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
 
-		if("bar".equals(value)) { // xtext::Keyword
+		if("bar".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0();
 			return new Solution(obj);
@@ -604,7 +604,7 @@ protected class LookAhead3_2_Assignment_x extends AssignmentToken  {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 
-		if("b".equals(value)) { // xtext::Keyword
+		if("b".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead3Access().getXBKeyword_2_0();
 			return new Solution(obj);
@@ -631,7 +631,7 @@ protected class LookAhead3_3_Assignment_z extends AssignmentToken  {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) {
 				Solution s = new LookAhead4_Alternatives(param, this).firstSolution();
@@ -696,7 +696,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 
-		if("c".equals(value)) { // xtext::Keyword
+		if("c".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead4Access().getXCKeyword_0_0();
 			return new Solution(obj);
@@ -723,7 +723,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 
-		if("d".equals(value)) { // xtext::Keyword
+		if("d".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getLookAhead4Access().getXDKeyword_1_0();
 			return new Solution(obj);

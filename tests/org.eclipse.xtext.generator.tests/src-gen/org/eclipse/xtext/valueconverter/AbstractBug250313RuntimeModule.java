@@ -38,24 +38,24 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 		return org.eclipse.xtext.valueconverter.parseTreeConstruction.Bug250313ParsetreeConstructor.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.valueconverter.Bug250313CheckValidator> bindBug250313CheckValidator() {
-		return org.eclipse.xtext.valueconverter.Bug250313CheckValidator.class;
 	}
 
 	
 	public java.lang.ClassLoader bindClassLoader() {
 		return getClass().getClassLoader();
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.valueconverter.Bug250313CheckValidator> bindBug250313CheckValidator() {
+		return org.eclipse.xtext.valueconverter.Bug250313CheckValidator.class;
 	}
 
 	

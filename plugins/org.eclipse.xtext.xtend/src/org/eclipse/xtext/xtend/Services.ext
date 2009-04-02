@@ -8,7 +8,10 @@
 
 import org::eclipse::xtext;
 import org::eclipse::xtext::crossref;
+import org::eclipse::emf::ecore;
 import java::lang;
+
+extension org::eclipse::xtext::EcoreUtils;
 
 IGrammarAccess grammarAccess():
 	GLOBALVAR grammarAccess;
@@ -16,11 +19,11 @@ IGrammarAccess grammarAccess():
 IScopeProvider scopeProvider():
 	GLOBALVAR scopeProvider;
 
-List[emf::EObject] allRootElements(emf::EObject this) :
+List[EObject] allRootElements(EObject this) :
 	JAVA org.eclipse.xtext.xtend.ServiceHelper.allRootElements(org.eclipse.emf.ecore.EObject);
 
-List[emf::EObject] allElements(emf::EObject this) :
-	allRootElements().eAllContents.flatten();
+List[EObject] allElements(EObject this) :
+	allRootElements().allContents().flatten();
 
 /**
  *  We have conflicting metamodels for ecore - Java and EmfRegistry, so we use this 

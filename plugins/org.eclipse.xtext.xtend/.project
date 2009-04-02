@@ -21,12 +21,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.xtend.shared.ui.xtendBuilder</name>
+			<name>org.openarchitectureware.base.oawBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.openarchitectureware.base.oawBuilder</name>
+			<name>org.eclipse.xtend.shared.ui.xtendBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -34,7 +34,7 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclipse.xtend.shared.ui.xtendXPandNature</nature>
 		<nature>org.openarchitectureware.base.oawNature</nature>
+		<nature>org.eclipse.xtend.shared.ui.xtendXPandNature</nature>
 	</natures>
 </projectDescription>

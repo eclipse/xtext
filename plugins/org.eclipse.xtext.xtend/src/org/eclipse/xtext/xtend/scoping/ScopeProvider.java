@@ -4,23 +4,22 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
-package org.eclipse.xtext.xtend.crossref;
+package org.eclipse.xtext.xtend.scoping;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 
 /**
- * @author Jan Köhnlein - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
+ *
  */
-public class AllTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.xtend.crossref");
-		//$JUnit-BEGIN$
-		suite.addTestSuite(CrossrefTest.class);
-		//$JUnit-END$
-		return suite;
+public class ScopeProvider {
+	public static List<EObject> eAllContents(Resource res) {
+		return EcoreUtil2.eAllContentsAsList(res);
 	}
-
 }

@@ -38,24 +38,24 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 		return org.eclipse.xtext.testlanguages.parseTreeConstruction.TreeTestLanguageParsetreeConstructor.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.TreeTestLanguageCheckValidator> bindTreeTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.TreeTestLanguageCheckValidator.class;
 	}
 
 	
 	public java.lang.ClassLoader bindClassLoader() {
 		return getClass().getClassLoader();
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.testlanguages.TreeTestLanguageCheckValidator> bindTreeTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.TreeTestLanguageCheckValidator.class;
 	}
 
 	
@@ -81,11 +81,6 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 	
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtext.crossref.IScopeProvider> bindIScopeProvider() {
-		return org.eclipse.xtext.testlanguages.TreeTestLanguageScopeProvider.class;
 	}
 
 }

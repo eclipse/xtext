@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -30,10 +29,9 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.util.Strings;
@@ -230,8 +228,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 				EClass eClass = (EClass) containingParserRule.getType().getClassifier();
 				EReference ref = GrammarUtil.getReference(crossReference,eClass);
 				String trimmedPrefix = contentAssistContext.getMatchString().trim();
-				Iterable<IScopedElement> candidates = scopeProvider.getScope(contentAssistContext.getModel(), ref)
-						.getAllContents();
+				IScope scope = scopeProvider.getScope(contentAssistContext.getModel(), ref);
+				Iterable<IScopedElement> candidates = scope.getAllContents();
 				for (IScopedElement candidate : candidates) {
 					if (candidate.name() != null && isCandidateMatchingPrefix(contentAssistContext
 									.getModel(), ref, candidate, trimmedPrefix)) {

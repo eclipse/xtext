@@ -16,5 +16,4 @@ public class ContentAssistTestLanguageProposalProvider extends AbstractXtendProp
 		return "org::eclipse::xtext::testlanguages::ContentAssistTestLanguageProposalProvider";	
 	}
 	
-	
 }

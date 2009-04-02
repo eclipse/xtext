@@ -198,7 +198,7 @@ protected class Line_0_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLineAccess().getTypeIDTerminalRuleCall_0_0();
 			return new Solution(obj);
@@ -223,7 +223,7 @@ protected class Line_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLineAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -312,7 +312,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 		if((value = current.getConsumable("items",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				Solution s = new Line_Group(param, this).firstSolution();
@@ -437,7 +437,7 @@ protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
 		if((value = current.getConsumable("sub",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) {
 				Solution s = new TestIndentation_Group(param, this).firstSolution();
@@ -470,7 +470,7 @@ protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
 		if((value = current.getConsumable("items",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
 				Solution s = new Line_Group(param, this).firstSolution();

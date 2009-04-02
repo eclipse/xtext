@@ -4,16 +4,19 @@
 
 package org.eclipse.xtext.parser.keywords;
 
-import org.eclipse.xtext.xtend.crossref.AbstractXtendScopeProvider;
+import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
+import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+
+import com.google.inject.Inject;
 
 /**
  * An {@link IScopeProvider} that calls Xtend extensions.
  */
-public class KeywordsTestLanguageScopeProvider extends AbstractXtendScopeProvider {
+public class KeywordsTestLanguageScopeProvider extends XtendScopeProvider {
 
-	@Override
-	protected String getMasterXtendFileName() {
-		return "org::eclipse::xtext::parser::keywords::KeywordsTestLanguageScopeProvider";	
+	@Inject
+	protected KeywordsTestLanguageScopeProvider(DefaultScopeProvider scopeProvider) {
+		super("org::eclipse::xtext::parser::keywords::KeywordsTestLanguageScopeProvider",scopeProvider);	
 	}
 	
 }

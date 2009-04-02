@@ -272,7 +272,7 @@ protected class Op_1_0_2_Assignment_addOperands extends AssignmentToken  {
 		if((value = current.getConsumable("addOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("addOperands");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
@@ -372,7 +372,7 @@ protected class Op_1_1_2_Assignment_minusOperands extends AssignmentToken  {
 		if((value = current.getConsumable("minusOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("minusOperands");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
 				Solution s = new Term_Alternatives(param, this).firstSolution();
@@ -489,7 +489,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);
@@ -605,7 +605,7 @@ protected class Parens_3_Assignment_em extends AssignmentToken  {
 		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
 
-		if("!".equals(value)) { // xtext::Keyword
+		if("!".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0();
 			return new Solution(obj);
@@ -714,7 +714,7 @@ protected class TrickyA_2_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyAAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -887,7 +887,7 @@ protected class TrickyA_4_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyAAccess().getNameSTRINGTerminalRuleCall_4_0();
 			return new Solution(obj);
@@ -923,7 +923,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyA1Access().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);
@@ -1030,7 +1030,7 @@ protected class TrickyB_1_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyBAccess().getNameIDTerminalRuleCall_1_0_0();
 			return new Solution(obj);
@@ -1055,7 +1055,7 @@ protected class TrickyB_1_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyBAccess().getTypeINTTerminalRuleCall_1_1_0();
 			return new Solution(obj);
@@ -1081,7 +1081,7 @@ protected class TrickyB_2_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyBAccess().getTypeINTTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -1169,7 +1169,7 @@ protected class TrickyC_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyCAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -1474,7 +1474,7 @@ protected class TrickyD_1_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyDAccess().getNameINTTerminalRuleCall_1_0_0();
 			return new Solution(obj);
@@ -1499,7 +1499,7 @@ protected class TrickyD_1_1_Assignment_foo extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyDAccess().getFooSTRINGTerminalRuleCall_1_1_0();
 			return new Solution(obj);
@@ -1524,7 +1524,7 @@ protected class TrickyD_1_2_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyDAccess().getTypeIDTerminalRuleCall_1_2_0();
 			return new Solution(obj);
@@ -1578,7 +1578,7 @@ protected class TrickyD_2_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyDAccess().getNameINTTerminalRuleCall_2_0_0();
 			return new Solution(obj);
@@ -1603,7 +1603,7 @@ protected class TrickyD_2_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyDAccess().getTypeIDTerminalRuleCall_2_1_0();
 			return new Solution(obj);
@@ -1629,7 +1629,7 @@ protected class TrickyD_3_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyDAccess().getTypeIDTerminalRuleCall_3_0();
 			return new Solution(obj);
@@ -1745,7 +1745,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyEAccess().getNameINTTerminalRuleCall_1_0_0();
 			return new Solution(obj);
@@ -1770,7 +1770,7 @@ protected class TrickyE_1_1_Assignment_foo extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyEAccess().getFooSTRINGTerminalRuleCall_1_1_0();
 			return new Solution(obj);
@@ -1795,7 +1795,7 @@ protected class TrickyE_1_2_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyEAccess().getTypeIDTerminalRuleCall_1_2_0();
 			return new Solution(obj);
@@ -1861,7 +1861,7 @@ protected class TrickyE_3_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyEAccess().getNameINTTerminalRuleCall_3_0_0();
 			return new Solution(obj);
@@ -1886,7 +1886,7 @@ protected class TrickyE_3_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyEAccess().getTypeIDTerminalRuleCall_3_1_0();
 			return new Solution(obj);
@@ -1995,7 +1995,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyFAccess().getNameIDTerminalRuleCall_1_0_0();
 			return new Solution(obj);
@@ -2020,7 +2020,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyFAccess().getTypeINTTerminalRuleCall_1_1_0();
 			return new Solution(obj);
@@ -2067,7 +2067,7 @@ protected class TrickyF_2_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyFAccess().getNameIDTerminalRuleCall_2_0_0();
 			return new Solution(obj);
@@ -2092,7 +2092,7 @@ protected class TrickyF_2_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyFAccess().getTypeINTTerminalRuleCall_2_1_0();
 			return new Solution(obj);
@@ -2170,7 +2170,7 @@ protected class TrickyG_1_Assignment_tree extends AssignmentToken  {
 		if((value = current.getConsumable("tree",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("tree");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrickyG1Rule().getType().getClassifier())) {
 				Solution s = new TrickyG1_Group(param, this).firstSolution();
@@ -2286,7 +2286,7 @@ protected class TrickyG1_1_0_Assignment_vals extends AssignmentToken  {
 		if((value = current.getConsumable("vals",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vals");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrickyG2Rule().getType().getClassifier())) {
 				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
@@ -2359,7 +2359,7 @@ protected class TrickyG1_1_1_1_Assignment_vals extends AssignmentToken  {
 		if((value = current.getConsumable("vals",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vals");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTrickyG2Rule().getType().getClassifier())) {
 				Solution s = new TrickyG2_Alternatives(param, this).firstSolution();
@@ -2457,7 +2457,7 @@ protected class TrickyG2_1_Assignment_val extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("val",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("val");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTrickyG2Access().getValINTTerminalRuleCall_1_0();
 			return new Solution(obj);

@@ -38,24 +38,24 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.crossrefs.parseTreeConstruction.LangATestLanguageParsetreeConstructor.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.crossrefs.LangATestLanguageCheckValidator> bindLangATestLanguageCheckValidator() {
-		return org.eclipse.xtext.crossrefs.LangATestLanguageCheckValidator.class;
 	}
 
 	
 	public java.lang.ClassLoader bindClassLoader() {
 		return getClass().getClassLoader();
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.crossrefs.LangATestLanguageCheckValidator> bindLangATestLanguageCheckValidator() {
+		return org.eclipse.xtext.crossrefs.LangATestLanguageCheckValidator.class;
 	}
 
 	

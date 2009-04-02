@@ -16,20 +16,20 @@ import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class CheckValidatorTest extends AbstractXtextTests {
-	
+
 	public void testErrorValidation() throws Exception {
 		with(new TreeTestLanguageStandaloneSetup());
 		EObject model = getModel("foo ('A') { a('A'){}; b('A'){}; c('A'){}; d('A'){}; e('A'){}; };");
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(model);
 		assertEquals(diagnostic.toString(), 1, diagnostic.getChildren().size());
 		diagnostic = diagnostic.getChildren().get(0);
-		assertEquals("children",diagnostic.getData().get(1));
+		assertEquals("children", diagnostic.getData().get(1));
 		assertTrue(diagnostic.getSeverity() == Diagnostic.ERROR);
 	}
-	
+
 	public void testWarningValidation() throws Exception {
 		with(new TreeTestLanguageStandaloneSetup());
 		EObject model = getModel("foo ('A') { a('A'){}; b('A'){}; c('A'){}; };");

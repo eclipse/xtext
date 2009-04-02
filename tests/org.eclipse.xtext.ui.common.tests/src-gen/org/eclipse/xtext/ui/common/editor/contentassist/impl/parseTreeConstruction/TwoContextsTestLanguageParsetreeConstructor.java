@@ -52,7 +52,7 @@ protected class MainModel_Assignment_elements extends AssignmentToken  {
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier())) {
 				Solution s = new AnElement_Group(param, this).firstSolution();
@@ -126,7 +126,7 @@ protected class AnElement_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0();
 			return new Solution(obj);
@@ -191,7 +191,7 @@ protected class AnElement_1_1_Assignment_referred extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("referred",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referred");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;

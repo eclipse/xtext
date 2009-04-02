@@ -16,5 +16,4 @@ public class TreeTestLanguageProposalProvider extends AbstractXtendProposalProvi
 		return "org::eclipse::xtext::testlanguages::TreeTestLanguageProposalProvider";	
 	}
 	
-	
 }

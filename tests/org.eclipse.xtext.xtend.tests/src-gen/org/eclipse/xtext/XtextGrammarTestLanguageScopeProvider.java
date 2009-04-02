@@ -4,16 +4,19 @@
 
 package org.eclipse.xtext;
 
-import org.eclipse.xtext.xtend.crossref.AbstractXtendScopeProvider;
+import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
+import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+
+import com.google.inject.Inject;
 
 /**
  * An {@link IScopeProvider} that calls Xtend extensions.
  */
-public class XtextGrammarTestLanguageScopeProvider extends AbstractXtendScopeProvider {
+public class XtextGrammarTestLanguageScopeProvider extends XtendScopeProvider {
 
-	@Override
-	protected String getMasterXtendFileName() {
-		return "org::eclipse::xtext::XtextGrammarTestLanguageScopeProvider";	
+	@Inject
+	protected XtextGrammarTestLanguageScopeProvider(DefaultScopeProvider scopeProvider) {
+		super("org::eclipse::xtext::XtextGrammarTestLanguageScopeProvider",scopeProvider);	
 	}
 	
 }

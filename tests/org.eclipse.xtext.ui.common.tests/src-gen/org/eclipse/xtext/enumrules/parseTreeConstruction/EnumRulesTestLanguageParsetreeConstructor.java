@@ -115,7 +115,7 @@ protected class Model_0_1_Assignment_existing extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("existing",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("existing");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0();
 			return new Solution(obj);
@@ -180,7 +180,7 @@ protected class Model_0_2_1_Assignment_generated extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("generated",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("generated");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0();
 			return new Solution(obj);
@@ -247,7 +247,7 @@ protected class Model_1_1_Assignment_generated extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("generated",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("generated");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0();
 			return new Solution(obj);

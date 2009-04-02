@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class AbstractXtendExecutionException extends Exception {
+public abstract class AbstractXtendExecutionException extends RuntimeException {
 
 	private static final long serialVersionUID = -222589135594914255L;
 

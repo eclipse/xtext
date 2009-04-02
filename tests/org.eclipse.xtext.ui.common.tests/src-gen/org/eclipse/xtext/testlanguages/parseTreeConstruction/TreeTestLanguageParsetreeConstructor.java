@@ -52,7 +52,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNodeRule().getType().getClassifier())) {
 				Solution s = new Node_Group(param, this).firstSolution();
@@ -142,7 +142,7 @@ protected class Node_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0();
 			return new Solution(obj);
@@ -179,7 +179,7 @@ protected class Node_2_Assignment_attrib extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("attrib",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("attrib");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -229,7 +229,7 @@ protected class Node_5_Assignment_children extends AssignmentToken  {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNodeRule().getType().getClassifier())) {
 				Solution s = new Node_Group(param, this).firstSolution();
