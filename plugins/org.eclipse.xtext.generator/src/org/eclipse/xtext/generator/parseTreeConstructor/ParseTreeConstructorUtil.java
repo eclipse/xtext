@@ -63,7 +63,9 @@ public class ParseTreeConstructorUtil {
 			r = ((RuleCall) ele).getRule().getName();
 		else if (ele instanceof Action) {
 			Action a = (Action) ele;
-			r = a.getType().getClassifier().getName() + "_" + a.getFeature();
+			r = a.getType().getClassifier().getName();
+			if(a.getFeature() != null && !"".equals(a.getFeature()))
+				r += "_" + a.getFeature();
 		}
 		r = toIDString(r);
 		if (r.equals(""))
