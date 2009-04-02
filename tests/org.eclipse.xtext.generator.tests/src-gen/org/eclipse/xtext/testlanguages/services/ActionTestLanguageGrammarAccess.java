@@ -22,7 +22,7 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cChildParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cParentleftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cParentLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cRightChildParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
@@ -40,7 +40,7 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Parent.left=current}
-		public Action getParentleftAction_1_0() { return cParentleftAction_1_0; }
+		public Action getParentLeftAction_1_0() { return cParentLeftAction_1_0; }
 
 		//right=Child
 		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
@@ -146,7 +146,8 @@ public class ActionTestLanguageGrammarAccess implements IGrammarAccess {
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

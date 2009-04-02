@@ -162,7 +162,8 @@ public class InheritanceTestLanguageGrammarAccess implements IGrammarAccess {
 		return gaBaseInheritanceTestLanguage.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaBaseInheritanceTestLanguage.getANY_OTHERRule();
 	} 

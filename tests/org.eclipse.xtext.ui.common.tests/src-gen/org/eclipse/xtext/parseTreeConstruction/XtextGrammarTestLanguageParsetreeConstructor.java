@@ -1702,12 +1702,12 @@ protected class Alternatives_1_0_Action_Alternatives_groups extends ActionToken 
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getAlternativesAccess().getAlternativesgroupsAction_1_0();
+		return grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -1886,12 +1886,12 @@ protected class Group_1_0_Action_Group_tokens extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getGroupAccess().getGrouptokensAction_1_0();
+		return grammarAccess.getGroupAccess().getGroupTokensAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getGroupAccess().getGrouptokensAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("tokens", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("tokens")) return null;
@@ -2976,12 +2976,12 @@ protected class AssignableAlternatives_1_0_Action_Alternatives_groups extends Ac
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getAssignableAlternativesAccess().getAlternativesgroupsAction_1_0();
+		return grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -3518,12 +3518,12 @@ protected class CrossReferenceableAlternatives_1_0_Action_Alternatives_groups ex
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesgroupsAction_1_0();
+		return grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -4012,12 +4012,12 @@ protected class TerminalAlternatives_1_0_Action_Alternatives_groups extends Acti
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTerminalAlternativesAccess().getAlternativesgroupsAction_1_0();
+		return grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("groups", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("groups")) return null;
@@ -4196,12 +4196,12 @@ protected class TerminalGroup_1_0_Action_Group_tokens extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTerminalGroupAccess().getGrouptokensAction_1_0();
+		return grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalGroupAccess().getGrouptokensAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("tokens", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("tokens")) return null;
@@ -4832,7 +4832,7 @@ protected class Wildcard_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new Wildcard_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Wildcard_0_Action_Wildcard_null(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new Wildcard_0_Action_Wildcard(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
@@ -4845,24 +4845,22 @@ protected class Wildcard_Group extends GroupToken {
 }
 
 // {Wildcard}
-protected class Wildcard_0_Action_Wildcard_null extends ActionToken  {
+protected class Wildcard_0_Action_Wildcard extends ActionToken  {
 
-	public Wildcard_0_Action_Wildcard_null(IInstanceDescription curr, AbstractToken pred) {
+	public Wildcard_0_Action_Wildcard(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getWildcardAccess().getWildcardnullAction_0();
+		return grammarAccess.getWildcardAccess().getWildcardAction_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getWildcardAccess().getWildcardnullAction_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("", false);
-		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("")) return null;
-		return new Solution(getDescr((EObject)val));
+		if(!current.isInstanceOf(grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return new Solution(current);
 	}
 }
 
@@ -4978,12 +4976,12 @@ protected class CharacterRange_1_0_Action_CharacterRange_left extends ActionToke
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getCharacterRangeAccess().getCharacterRangeleftAction_1_0();
+		return grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getCharacterRangeAccess().getCharacterRangeleftAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("left", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("left")) return null;

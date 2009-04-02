@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getModelAccess().getParentleftAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getModelAccess().getParentLeftAction_1_0().getType().getClassifier());
         try {
         	factory.set(temp, "left", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -99,7 +99,7 @@ ruleModel returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getParentleftAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getParentLeftAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 

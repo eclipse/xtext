@@ -148,7 +148,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:93:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "expressions", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -156,7 +156,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -307,7 +307,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:160:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -315,7 +315,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getOpValuesAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -524,7 +524,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.g:255:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -532,7 +532,7 @@ public class InternalSimpleExpressionsTestLanguageParser extends AbstractInterna
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 

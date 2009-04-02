@@ -131,7 +131,7 @@ public final class SimpleReconstrTestLanguageOpConsumer extends NonTerminalConsu
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTermParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getOpvaluesAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getOpValuesAction_1_0());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.getValuesAssignment_1_1());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getValuesTermParserRuleCall_1_1_0());
 	}

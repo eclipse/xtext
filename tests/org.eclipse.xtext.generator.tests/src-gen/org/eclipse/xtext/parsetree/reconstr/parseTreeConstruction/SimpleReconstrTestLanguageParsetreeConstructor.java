@@ -128,12 +128,12 @@ protected class Op_1_0_Action_Op_values extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getOpAccess().getOpvaluesAction_1_0();
+		return grammarAccess.getOpAccess().getOpValuesAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getOpAccess().getOpvaluesAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;

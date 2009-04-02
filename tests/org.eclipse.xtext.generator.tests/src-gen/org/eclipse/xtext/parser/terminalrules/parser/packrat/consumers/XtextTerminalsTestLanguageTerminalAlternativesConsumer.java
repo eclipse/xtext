@@ -165,7 +165,7 @@ public final class XtextTerminalsTestLanguageTerminalAlternativesConsumer extend
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTerminalGroupParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesgroupsAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesGroupsAction_1_0());
 		group$6$Consumer = new Group$6$Consumer(rule.getGroup_1_1());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.getVerticalLineKeyword_1_1_0());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.getGroupsAssignment_1_1_1());

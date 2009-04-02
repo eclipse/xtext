@@ -86,7 +86,7 @@ public final class XtextGrammarTestLanguageWildcardConsumer extends NonTerminalC
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
-		action$2$Consumer = new Action$2$Consumer(rule.getWildcardnullAction_0());
+		action$2$Consumer = new Action$2$Consumer(rule.getWildcardAction_0());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.getFullStopKeyword_1());
 	}
 	

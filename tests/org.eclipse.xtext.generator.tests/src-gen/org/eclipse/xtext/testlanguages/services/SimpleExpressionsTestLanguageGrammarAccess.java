@@ -22,7 +22,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cSequenceexpressionsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cSequenceExpressionsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cExpressionsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cExpressionsAdditionParserRuleCall_1_1_0 = (RuleCall)cExpressionsAssignment_1_1.eContents().get(0);
 		
@@ -40,7 +40,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Sequence.expressions+=current}
-		public Action getSequenceexpressionsAction_1_0() { return cSequenceexpressionsAction_1_0; }
+		public Action getSequenceExpressionsAction_1_0() { return cSequenceExpressionsAction_1_0; }
 
 		//expressions+=Addition
 		public Assignment getExpressionsAssignment_1_1() { return cExpressionsAssignment_1_1; }
@@ -54,7 +54,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplicationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cOpvaluesAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cOpValuesAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final Alternatives cOperatorAlternatives_1_1_0 = (Alternatives)cOperatorAssignment_1_1.eContents().get(0);
 		private final Keyword cOperatorPlusSignKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
@@ -76,7 +76,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
-		public Action getOpvaluesAction_1_0() { return cOpvaluesAction_1_0; }
+		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 
 		//operator=( "+" | "-" )
 		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
@@ -102,7 +102,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cOpvaluesAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cOpValuesAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final Alternatives cOperatorAlternatives_1_1_0 = (Alternatives)cOperatorAssignment_1_1.eContents().get(0);
 		private final Keyword cOperatorAsteriskKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
@@ -124,7 +124,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
-		public Action getOpvaluesAction_1_0() { return cOpvaluesAction_1_0; }
+		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 
 		//operator=( "*" | "/" )
 		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
@@ -330,7 +330,8 @@ public class SimpleExpressionsTestLanguageGrammarAccess implements IGrammarAcces
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

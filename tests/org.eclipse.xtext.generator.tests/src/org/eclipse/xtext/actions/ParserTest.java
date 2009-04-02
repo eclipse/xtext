@@ -117,7 +117,7 @@ public abstract class ParserTest extends AbstractXtextTests {
 		assertNotNull("adapter", adapter);
 		CompositeNode node = adapter.getParserNode();
 		assertNotNull("node", node);
-		assertEquals("node.grammarElement", grammarAccess.getModelAccess().getParentleftAction_1_0(), node.getGrammarElement());
+		assertEquals("node.grammarElement", grammarAccess.getModelAccess().getParentLeftAction_1_0(), node.getGrammarElement());
 		assertEquals(node.getChildren().toString(), 2, node.getChildren().size());
 		CompositeNode firstChildNode = (CompositeNode) node.getChildren().get(0);
 		assertEquals("firstChildNode.grammarElement", grammarAccess.getModelRule(), firstChildNode.getGrammarElement());
@@ -142,7 +142,7 @@ public abstract class ParserTest extends AbstractXtextTests {
 
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
 		assertNotNull("rootNode", rootNode);
-		assertEquals("rootNode.grammarElement", grammarAccess.getModelAccess().getParentleftAction_1_0(), rootNode.getGrammarElement());
+		assertEquals("rootNode.grammarElement", grammarAccess.getModelAccess().getParentLeftAction_1_0(), rootNode.getGrammarElement());
 		assertEquals(node, rootNode);
 	}
 

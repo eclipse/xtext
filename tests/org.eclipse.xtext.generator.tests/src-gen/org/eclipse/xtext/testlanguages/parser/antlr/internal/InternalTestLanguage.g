@@ -243,7 +243,7 @@ ruleReducibleRule returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getReducibleRuleAccess().getReducibleCompositeactionFeatureAction_2_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier());
         try {
         	factory.add(temp, "actionFeature", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -251,7 +251,7 @@ ruleReducibleRule returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getReducibleRuleAccess().getReducibleCompositeactionFeatureAction_2_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 

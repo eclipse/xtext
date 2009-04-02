@@ -276,10 +276,10 @@ public final class ComplexReconstrTestLanguageTrickyAConsumer extends NonTermina
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_2_0());
 		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.getAlternatives_3());
 		group$7$Consumer = new Group$7$Consumer(rule.getGroup_3_0());
-		action$8$Consumer = new Action$8$Consumer(rule.getTypeBxAction_3_0_0());
+		action$8$Consumer = new Action$8$Consumer(rule.getTypeBXAction_3_0_0());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.getXKeyword_3_0_1());
 		group$11$Consumer = new Group$11$Consumer(rule.getGroup_3_1());
-		action$12$Consumer = new Action$12$Consumer(rule.getTypeCxAction_3_1_0());
+		action$12$Consumer = new Action$12$Consumer(rule.getTypeCXAction_3_1_0());
 		keyword$14$Consumer = new Keyword$14$Consumer(rule.getYKeyword_3_1_1());
 		assignment$15$Consumer = new Assignment$15$Consumer(rule.getNameAssignment_4());
 		ruleCall$16$Consumer = new RuleCall$16$Consumer(rule.getNameSTRINGTerminalRuleCall_4_0());

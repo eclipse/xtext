@@ -244,12 +244,12 @@ public final class ComplexReconstrTestLanguageOpConsumer extends NonTerminalCons
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTermParserRuleCall_0());
 		alternatives$3$Consumer = new Alternatives$3$Consumer(rule.getAlternatives_1());
 		group$4$Consumer = new Group$4$Consumer(rule.getGroup_1_0());
-		action$5$Consumer = new Action$5$Consumer(rule.getAddaddOperandsAction_1_0_0());
+		action$5$Consumer = new Action$5$Consumer(rule.getAddAddOperandsAction_1_0_0());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.getPlusSignKeyword_1_0_1());
 		assignment$8$Consumer = new Assignment$8$Consumer(rule.getAddOperandsAssignment_1_0_2());
 		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getAddOperandsTermParserRuleCall_1_0_2_0());
 		group$10$Consumer = new Group$10$Consumer(rule.getGroup_1_1());
-		action$11$Consumer = new Action$11$Consumer(rule.getMinusminusOperandsAction_1_1_0());
+		action$11$Consumer = new Action$11$Consumer(rule.getMinusMinusOperandsAction_1_1_0());
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.getHyphenMinusKeyword_1_1_1());
 		assignment$14$Consumer = new Assignment$14$Consumer(rule.getMinusOperandsAssignment_1_1_2());
 		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getMinusOperandsTermParserRuleCall_1_1_2_0());

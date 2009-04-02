@@ -17,7 +17,8 @@ extension org::eclipse::xtend::util::stdlib::io;
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
  * 
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
- */ 
+ */
+	 
 List[ICompletionProposal] completeGrammar_Name(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("completeGrammar_Name feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
