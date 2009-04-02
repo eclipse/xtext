@@ -5,8 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-import xtext;
-import emf;
+import org::eclipse::xtext;
+import org::eclipse::emf::ecore;
 
 /**
  * @author Moritz Eysholdt
@@ -186,16 +186,16 @@ String getClassName(EObject obj):
 	
 Grammar usedGrammar(AbstractRule rule, Grammar parent):
 	parent.usedGrammars.selectFirst(g|g.allRules().contains(rule));
-	
+
 String loadElementParentStatement(AbstractElement ele):
-	if (AbstractElement.isInstance(ele.eContainer)) then
-		((AbstractElement)ele.eContainer).gaElementAccessorLocalVarName() 
+	if (AbstractElement.isInstance(ele.eContainer())) then
+		((AbstractElement)ele.eContainer()).gaElementAccessorLocalVarName() 
 	else "rule";
 
 String loadElementStatement(AbstractElement ele):
 	"(" + ele.getClassName() + ")" + 
 	ele.loadElementParentStatement() + 
-	".eContents().get("+ele.eContainer.eContents.indexOf(ele)+")";
+	".eContents().get("+ele.eContainer().eContents().indexOf(ele)+")";
 
 	
 	

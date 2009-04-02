@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
@@ -22,7 +22,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
   «FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS p-»
     <package 
-       uri = "«p.ePackage.nsURI»" 
+       uri = "«p.EPackage.nsURI»" 
        class = "«basePackage».«p.name».«p.name.toFirstUpper()»Package"
        genModel = "«name.asPath() + ".genmodel"»" /> 
 	«ENDFOREACH»
@@ -36,8 +36,8 @@
 
 «DEFINE addToStandaloneSetup(String basePackage) FOR Grammar-»
 	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS mmd-»
-	if (!EPackage.Registry.INSTANCE.containsKey("«mmd.ePackage.nsURI»")) {
-		EPackage.Registry.INSTANCE.put("«mmd.ePackage.nsURI»", «basePackage».«mmd.name».«mmd.name.toFirstUpper()»Package.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("«mmd.EPackage.nsURI»")) {
+		EPackage.Registry.INSTANCE.put("«mmd.EPackage.nsURI»", «basePackage».«mmd.name».«mmd.name.toFirstUpper()»Package.eINSTANCE);
 	}
 	«ENDFOREACH-»
 «ENDDEFINE»

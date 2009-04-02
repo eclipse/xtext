@@ -16,7 +16,7 @@
  */
  «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»

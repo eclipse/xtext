@@ -9,13 +9,12 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
-«IMPORT xtextgen»
-«IMPORT emf»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::parseTreeConstructor::ParseTreeConstructor»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 
@@ -77,7 +76,7 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 	}
 	
 	@Override
-	public «metaType.simpleName()» getGrammarElement() {
+	public «getJavaTypeName().toSimpleName()» getGrammarElement() {
 		return grammarAccess.«gaRuleElementAccessor()»;
 	}
 «ENDDEFINE»

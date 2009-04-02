@@ -12,7 +12,7 @@ import org.eclipse.xtext.generator.BindValue;
 public class XtendScopingFragment extends AbstractGeneratorFragment {
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		return new String[] {"org.eclipse.xtend","org.eclipse.xtend.typesystem.emf","org.eclipse.xtext.xtend"};
+		return new String[] {"org.eclipse.xtend","org.eclipse.xtext.xtend"};
 	}
 	
 	@Override

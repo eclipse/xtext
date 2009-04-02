@@ -6,15 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-import xtext;
-import xtextgen;
-import predicate;
-import emf;
-import oaw;
+import org::eclipse::xtext;
+import org::eclipse::emf::ecore;
 
 extension org::eclipse::xtext::GrammarUtil reexport;
 extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess;
 extension org::eclipse::xtext::generator::Naming;
+extension org::eclipse::xtext::EcoreUtils;
 
 cached String getParserClassName(Grammar this) :
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getGeneratedParser(org.eclipse.xtext.Grammar);
@@ -116,8 +114,8 @@ List[AbstractElement] flattendAlternativesElements(AbstractElement this):
 	{this};
 	
 cached List[AbstractElement] allDelimited(AbstractRule this):
-	containedRuleCalls().select(e|e.rule.metaType==TerminalRule).
-		union(eAllContents.typeSelect(Keyword))
+	containedRuleCalls().select(e|TerminalRule.isInstance(e.rule)).
+		union(allContents().typeSelect(Keyword))
 	.toSet().sortBy(e|e.globalDelimiterFieldName());
 	
 cached List[AbstractRule] allCalledRules(AbstractRule this):

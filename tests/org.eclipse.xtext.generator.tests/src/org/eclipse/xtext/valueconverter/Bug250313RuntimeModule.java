@@ -10,17 +10,10 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
-import com.google.inject.Binder;
-
 /**
  * used to register components to be used at runtime.
  */
 public class Bug250313RuntimeModule extends AbstractBug250313RuntimeModule {
-
-	@Override
-	public void configure(Binder binder) {
-		super.configure(binder);
-	}
 
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {

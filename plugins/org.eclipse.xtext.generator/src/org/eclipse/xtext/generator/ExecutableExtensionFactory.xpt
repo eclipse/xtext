@@ -1,4 +1,4 @@
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 	

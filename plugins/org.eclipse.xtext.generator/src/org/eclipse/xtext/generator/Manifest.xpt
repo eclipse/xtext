@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «DEFINE file(String symbolicName, String version, Set[String] exportedPackages, Set[String] requiredBundles, String activator) FOR String-»
 Manifest-Version: 1.0

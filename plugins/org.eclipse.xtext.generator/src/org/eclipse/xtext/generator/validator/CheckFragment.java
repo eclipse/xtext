@@ -31,17 +31,18 @@ public class CheckFragment extends AbstractGeneratorFragment {
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return new String[]{
-			"org.eclipse.xtend","org.eclipse.xtend.typesystem.emf","org.eclipse.xtext.xtend"
+			"org.eclipse.xtend","org.eclipse.xtext.xtend"
 		};
 	}
 
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToTypeSingleton(ExecutionContext.class.getName(), "org.eclipse.xtext.xtend.InjectableExecutionContext")
-			.addTypeToTypeSingleton(ResourceManager.class.getName(), "org.eclipse.xtext.xtend.InjectableResourceManager")
+		BindFactory addTypeToInstance = new BindFactory()
+			.addTypeToType(ExecutionContext.class.getName(), "org.eclipse.xtext.xtend.InjectableExecutionContext")
+			.addTypeToType(ResourceManager.class.getName(), "org.eclipse.xtext.xtend.InjectableResourceManager")
+			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()");
+		return addTypeToInstance
 			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar),getCheckValidatorName(grammar))
-			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
 			.getBindings();
 	}
 

@@ -9,8 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
-«IMPORT xtextgen»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::Naming»
@@ -241,12 +240,12 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 */
 package «getDelimiterClassName().toJavaPackage()»;
 
-«IF allParserRules().allDelimited().exists(e|e.metaType==Keyword)-»
+«IF allParserRules().allDelimited().exists(e|Keyword.isInstance(e))-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 «ENDIF-»
-«IF allParserRules().allDelimited().exists(e|e.metaType==RuleCall || e.metaType == CrossReference)-»
+«IF allParserRules().allDelimited().exists(e|RuleCall.isInstance(e) || CrossReference.isInstance(e))-»
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
-«IF !allParserRules().allDelimited().select(e|e.metaType==RuleCall || e.metaType == CrossReference).conflictingKeywords(this).isEmpty-»
+«IF !allParserRules().allDelimited().select(e|RuleCall.isInstance(e) || CrossReference.isInstance(e)).conflictingKeywords(this).isEmpty-»
 import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 «ENDIF-»
 «ENDIF-»

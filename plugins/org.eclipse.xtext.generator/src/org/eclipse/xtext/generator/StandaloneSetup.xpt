@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
@@ -37,7 +37,7 @@ public class «setup().toSimpleName()» implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
 		«FOREACH usedGrammars AS usedGrammar-»
-		«usedGrammar.setup()».doSetup();
+		«((Grammar)usedGrammar).setup()».doSetup();
 		«ENDFOREACH-»
 		«IF usedGrammars.isEmpty-»
 		// register default ePackages
