@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «DEFINE pre FOR List[Grammar]-»
 <?xml version="1.0" encoding="UTF-8"?>

@@ -7,9 +7,9 @@
 *
 *******************************************************************************/
 
-import ecore;
-import xtext;
-import xtextutil; 
+import org::eclipse::emf::ecore;
+import org::eclipse::xtext;
+import org::eclipse::xtextutil; 
 
 extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::GrammarUtil;
@@ -23,4 +23,4 @@ context GeneratedMetamodel ERROR "Duplicate aliases are only allowed for referen
 	containingGrammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == alias).size == 1;
 
 context AbstractRule ERROR "Name must be unique" :
-	containingGrammar().rules.select(p | p.name == name).size==1;
+	containingGrammar().rules.select(p | ((ParserRule)p).name == name).size==1;

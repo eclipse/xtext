@@ -115,7 +115,7 @@ protected class Statemachine_1_Assignment_events extends AssignmentToken  {
 		if((value = current.getConsumable("events",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("events");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) {
 				Solution s = new Event_Group(param, this).firstSolution();
@@ -172,7 +172,7 @@ protected class Statemachine_4_Assignment_commands extends AssignmentToken  {
 		if((value = current.getConsumable("commands",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("commands");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) {
 				Solution s = new Command_Group(param, this).firstSolution();
@@ -217,7 +217,7 @@ protected class Statemachine_6_Assignment_states extends AssignmentToken  {
 		if((value = current.getConsumable("states",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("states");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) {
 				Solution s = new State_Group(param, this).firstSolution();
@@ -293,7 +293,7 @@ protected class Event_0_Assignment_resetting extends AssignmentToken  {
 		if((value = current.getConsumable("resetting",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getEventAccess().getResettingResettingKeyword_0_0();
 			return new Solution(obj);
@@ -319,7 +319,7 @@ protected class Event_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEventAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -344,7 +344,7 @@ protected class Event_2_Assignment_code extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEventAccess().getCodeIDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -408,7 +408,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0();
 			return new Solution(obj);
@@ -433,7 +433,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -521,7 +521,7 @@ protected class State_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -606,7 +606,7 @@ protected class State_2_2_Assignment_actions extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("actions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actions");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateAccess().getActionsCommandCrossReference_2_2_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -648,7 +648,7 @@ protected class State_3_Assignment_transitions extends AssignmentToken  {
 		if((value = current.getConsumable("transitions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transitions");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) {
 				Solution s = new Transition_Group(param, this).firstSolution();
@@ -735,7 +735,7 @@ protected class Transition_0_Assignment_event extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("event",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("event");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionAccess().getEventEventCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -775,7 +775,7 @@ protected class Transition_2_Assignment_state extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("state",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("state");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionAccess().getStateStateCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CR;

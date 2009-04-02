@@ -19,5 +19,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.check,
  org.eclipse.xtext.xtend,
  org.eclipse.xtext.xtend.contentassist,
- org.eclipse.xtext.xtend.crossref
+ org.eclipse.xtext.xtend.scoping
 Bundle-Vendor: Eclipse Modeling Project

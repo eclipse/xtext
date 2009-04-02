@@ -8,9 +8,10 @@
 *******************************************************************************/
 
 import ecore;
-import xtext;
+import org::eclipse::xtext;
 
 extension org::eclipse::xtext::GrammarUtil reexport;
+extension org::eclipse::xtext::EcoreUtils;
 
 // ***********************************************************************************
 // Shortcuts
@@ -23,8 +24,8 @@ EnumRule calledEnumRule(RuleCall this) :
 		
 boolean isKeywordAssignment(Assignment a) :
 	Keyword.isInstance(a.terminal) || 
-	a.eAllContents.forAll(e | !(RuleCall.isInstance(e)));
-	
+	a.allContents().forAll(e | !(RuleCall.isInstance(e)));
+
 boolean isRuleAssignment(Assignment a) :
 	RuleCall.isInstance(a.terminal);
 
@@ -46,9 +47,11 @@ boolean isQualified(String name) :
 	name.contains("::")
 ;
 
+/*TODO remove me, don't use me 
 String getTypeName(String fqn) :
 	isQualified(fqn) ? fqn.split("::").last() : fqn
 ;
+*/
 
 String getAlias(String fqn) :
 	isQualified(fqn) ? fqn.split("::").first() : null

@@ -10,6 +10,8 @@ package org.eclipse.xtext.xtend.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.xtext.xtend.crossref.XtendScopeProviderTest;
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
@@ -18,8 +20,8 @@ public class PluginTestSuite {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.xtend.tests");
 		//$JUnit-BEGIN$
-		suite.addTest(org.eclipse.xtext.xtend.contentassist.AllTests.suite());
-		suite.addTest(org.eclipse.xtext.xtend.crossref.AllTests.suite());		
+//		suite.addTestSuite(DefaultXtendContentAssistProcessorTest.class);
+		suite.addTestSuite(XtendScopeProviderTest.class);
 		//$JUnit-END$
 		return suite;
 	}

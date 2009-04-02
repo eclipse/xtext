@@ -53,7 +53,7 @@ protected class Model_Assignment_types extends AssignmentToken  {
 		if((value = current.getConsumable("types",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) {
 				Solution s = new Type_Group(param, this).firstSolution();
@@ -155,7 +155,7 @@ protected class Type_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -228,7 +228,7 @@ protected class Type_2_1_Assignment_extends extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("extends",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -268,7 +268,7 @@ protected class Type_2_3_Assignment_parentId extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("parentId",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("parentId");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeAccess().getParentIdPropertyCrossReference_2_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -345,7 +345,7 @@ protected class Type_3_1_Assignment_parentId extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("parentId",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("parentId");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeAccess().getParentIdPropertyCrossReference_3_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -385,7 +385,7 @@ protected class Type_3_3_Assignment_extends extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("extends",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -427,7 +427,7 @@ protected class Type_5_Assignment_properties extends AssignmentToken  {
 		if((value = current.getConsumable("properties",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("properties");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getPropertyRule().getType().getClassifier())) {
 				Solution s = new Property_Group(param, this).firstSolution();
@@ -510,7 +510,7 @@ protected class Property_0_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getPropertyAccess().getTypeTypeCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -538,7 +538,7 @@ protected class Property_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);

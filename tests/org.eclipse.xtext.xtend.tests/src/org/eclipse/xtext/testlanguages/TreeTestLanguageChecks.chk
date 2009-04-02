@@ -1,4 +1,4 @@
-import treeTestLanguage;
+import org::eclipse::xtext::testlanguages::treeTestLanguage;
 /*
  * this check file is used to specify constraints for the derived metamodels
  * example:

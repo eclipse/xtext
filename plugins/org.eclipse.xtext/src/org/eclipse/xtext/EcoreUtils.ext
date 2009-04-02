@@ -1,0 +1,10 @@
+import org::eclipse::emf::ecore;
+
+List[EObject] allContents(EObject obj) :
+	JAVA org.eclipse.xtext.EcoreUtil2.eAllContentsAsList(org.eclipse.emf.ecore.EObject);
+	
+String getJavaTypeName(EObject obj) :
+	obj.metaType.name.
+	replaceAll("::impl","").
+	replaceAll("::",".").
+	replaceAll("Impl","");

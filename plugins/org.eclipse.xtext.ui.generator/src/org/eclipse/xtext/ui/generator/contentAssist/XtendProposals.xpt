@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::Naming»
@@ -28,17 +28,13 @@
 «fileHeader()»
 */
 
-import xtext;
+import org::eclipse::xtext;
 
 import org::eclipse::emf::ecore;
 import org::eclipse::jface::text::contentassist;
 import org::eclipse::xtext::crossref;
 import org::eclipse::xtext::ui::common::editor::contentassist;
 import org::eclipse::xtext::ui::common::xtend::contentassist;
-
-«FOREACH metamodelDeclarations AS mm-»
-import «mm.ePackage.name»;
-«ENDFOREACH-»
 
 extension org::eclipse::xtext::xtend::contentassist::ContentAssist reexport;
 extension org::eclipse::xtend::util::stdlib::io;
@@ -53,7 +49,7 @@ extension org::eclipse::xtend::util::stdlib::io;
 		LET getFqFeatureName(assignment) AS fqnFeatureName»«
 			IF !processedFqnFeatureNames.contains(fqnFeatureName)»«
 				processedFqnFeatureNames.add(fqnFeatureName)->""»	 
-List[ICompletionProposal] complete«fqnFeatureName»(emf::EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] complete«fqnFeatureName»(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
 	debug("complete«fqnFeatureName» feature '" + assignment.feature + "' terminal '"
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->«
@@ -75,7 +71,7 @@ List[ICompletionProposal] complete«fqnFeatureName»(emf::EObject model, Assignmen
 		LET getFqFeatureName(parserRule) AS fqnFeatureName»«
 			IF !processedFqnFeatureNames.contains(fqnFeatureName)»«
 				processedFqnFeatureNames.add(fqnFeatureName)->""»	 	  
-List[ICompletionProposal] complete«fqnFeatureName»(emf::EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] complete«fqnFeatureName»(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 «			ENDIF»«
 		ENDLET»«
@@ -102,16 +98,12 @@ ENDLET»
 «fileHeader()»
 */
 
-import xtext;
+import org::eclipse::xtext;
 
 import org::eclipse::jface::text::contentassist;
 import org::eclipse::xtext::crossref;
 import org::eclipse::xtext::ui::common::editor::contentassist;
 import org::eclipse::xtext::ui::common::xtend::contentassist;
-
-«FOREACH metamodelDeclarations AS mm-»
-import «mm.ePackage.name»;
-«ENDFOREACH-»
 
 extension «getGenProposalProvider().replaceAll('\\.','::')» reexport;
 
@@ -140,7 +132,6 @@ public class «getProposalProvider().toSimpleName()» extends AbstractXtendProposa
 	protected String getMasterXtendFileName() {
 		return "«getProposalProvider().replaceAll('\\.','::')»";	
 	}
-	
 	
 }
 «ENDFILE»

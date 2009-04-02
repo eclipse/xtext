@@ -81,7 +81,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
 				Solution s = new Import_Group(param, this).firstSolution();
@@ -114,7 +114,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 		if((value = current.getConsumable("types",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) {
 				Solution s = new Type_Group(param, this).firstSolution();
@@ -197,7 +197,7 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("uri",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("uri");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getImportAccess().getUriSTRINGTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -281,7 +281,7 @@ protected class Type_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -318,7 +318,7 @@ protected class Type_3_Assignment_extends extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("extends",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;

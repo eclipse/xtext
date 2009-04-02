@@ -38,24 +38,24 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.ComplexReconstrTestLanguageParsetreeConstructor.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageCheckValidator> bindComplexReconstrTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageCheckValidator.class;
 	}
 
 	
 	public java.lang.ClassLoader bindClassLoader() {
 		return getClass().getClassLoader();
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageCheckValidator> bindComplexReconstrTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageCheckValidator.class;
 	}
 
 	

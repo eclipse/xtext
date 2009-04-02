@@ -2,7 +2,7 @@
 Generated with Xtext
 */
 
-import xtext;
+import org::eclipse::xtext;
 
 import org::eclipse::jface::text::contentassist;
 import org::eclipse::xtext::crossref;

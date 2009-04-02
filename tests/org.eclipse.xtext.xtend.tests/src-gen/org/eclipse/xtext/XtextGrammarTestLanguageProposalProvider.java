@@ -16,5 +16,4 @@ public class XtextGrammarTestLanguageProposalProvider extends AbstractXtendPropo
 		return "org::eclipse::xtext::XtextGrammarTestLanguageProposalProvider";	
 	}
 	
-	
 }

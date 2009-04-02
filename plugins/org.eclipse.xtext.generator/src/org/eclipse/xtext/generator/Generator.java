@@ -140,13 +140,13 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
-		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
-			@Override
-			protected EPackage[] allPackages() {
-				return new EPackage[] { XtextPackage.eINSTANCE, EcorePackage.eINSTANCE };
-			}
-		};
-		execCtx.registerMetaModel(metamodel);
+//		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
+//			@Override
+//			protected EPackage[] allPackages() {
+//				return new EPackage[] { XtextPackage.eINSTANCE, EcorePackage.eINSTANCE };
+//			}
+//		};
+//		execCtx.registerMetaModel(metamodel);
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
 		return execCtx;
 	}

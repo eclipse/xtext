@@ -1,4 +1,4 @@
-import referenceGrammar;
+import org::eclipse::xtext::reference::referenceGrammar;
 /*
  * this check file is used to specify constraints for the derived metamodels
  * example:

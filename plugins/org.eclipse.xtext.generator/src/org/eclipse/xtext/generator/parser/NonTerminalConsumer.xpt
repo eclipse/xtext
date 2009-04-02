@@ -9,12 +9,12 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
-«IMPORT xtextgen»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::parser::PackratParserGen»
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::EcoreUtils»
 
 «DEFINE root FOR Grammar»
 «EXPAND nonTerminalConsumer FOREACH rules.typeSelect(ParserRule)»
@@ -31,21 +31,21 @@ package «this.consumerPackageName()»;
 import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
-«FOREACH eAllContents.typeSelect(AbstractElement).collect(e|e.metaType.name).toSet().sortBy(e|e) AS name-»
-import org.eclipse.xtext.«getTypeName(name)»;
+«FOREACH allContents().typeSelect(AbstractElement).collect(e|getJavaTypeName(e)).toSet().sortBy(e|e) AS name-»
+import «name»;
 «ENDFOREACH-»
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
-«IF eAllContents.typeSelect(RuleCall).exists(e|e.rule.metaType != TerminalRule)-»
+«IF allContents().typeSelect(RuleCall).exists(e|!TerminalRule.isInstance(e.rule))-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 «ENDIF-»
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
-«IF allDelimited().exists(e|e.metaType == Keyword)-»
+«IF allDelimited().exists(e|Keyword.isInstance(e))-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 «ENDIF-»
-«IF allDelimited().exists(e|e.metaType == RuleCall)-»
+«IF allDelimited().exists(e|RuleCall.isInstance(e))-»
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 «ENDIF-»
 
@@ -344,8 +344,8 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 
 	protected class «consumerFieldName().toFirstUpper()» extends «EXPAND parentConsumerClassName-» {
 		
-		protected «consumerFieldName().toFirstUpper()»(final «getTypeName(metaType.name)» «getTypeName(metaType.name).toFirstLower()») {
-			super(«getTypeName(metaType.name).toFirstLower()»);
+		protected «consumerFieldName().toFirstUpper()»(final «getJavaTypeName(this).toSimpleName()» «getJavaTypeName(this).toSimpleName().toFirstLower()») {
+			super(«getJavaTypeName(this).toSimpleName().toFirstLower()»);
 		}
 		
 «ENDDEFINE»
@@ -359,7 +359,7 @@ Loop«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE parentConsumerClassNameImpl FOR AbstractElement-»
-ElementConsumer<«getTypeName(metaType.name)»>«ENDDEFINE»
+ElementConsumer<«getJavaTypeName(this).toSimpleName()»>«ENDDEFINE»
 
 «DEFINE parentConsumerClassNameImpl FOR Alternatives-»
 AlternativesConsumer«ENDDEFINE»
@@ -553,7 +553,7 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE acceptConsumers(Alternatives start) FOR Alternatives-»
 «FOREACH groups AS g-»
-«IF g.metaType == Alternatives && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
+«IF Alternatives.isInstance(g) && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
 «EXPAND acceptConsumers(start) FOR (Alternatives) g-»
 «ELSE-»
 			acceptor.accept(«g.consumerFieldName()»);
@@ -567,7 +567,7 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE acceptConsumers(Group start) FOR Group-»
 «FOREACH tokens AS token-»
-«IF token.metaType == Group && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
+«IF Group.isInstance(token) && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
 «EXPAND acceptConsumers(start) FOR (Group)token-»
 «ELSE-»
 			acceptor.accept(«token.consumerFieldName()»);

@@ -4,16 +4,19 @@
 
 package org.eclipse.xtext.testlanguages;
 
-import org.eclipse.xtext.xtend.crossref.AbstractXtendScopeProvider;
+import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
+import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+
+import com.google.inject.Inject;
 
 /**
  * An {@link IScopeProvider} that calls Xtend extensions.
  */
-public class ContentAssistTestLanguageScopeProvider extends AbstractXtendScopeProvider {
+public class ContentAssistTestLanguageScopeProvider extends XtendScopeProvider {
 
-	@Override
-	protected String getMasterXtendFileName() {
-		return "org::eclipse::xtext::testlanguages::ContentAssistTestLanguageScopeProvider";	
+	@Inject
+	protected ContentAssistTestLanguageScopeProvider(DefaultScopeProvider scopeProvider) {
+		super("org::eclipse::xtext::testlanguages::ContentAssistTestLanguageScopeProvider",scopeProvider);	
 	}
 	
 }

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-import xtext;
+import org::eclipse::xtext;
 
 String guiceModuleRtGenerated(Grammar g) : 
 	JAVA org.eclipse.xtext.generator.Naming.guiceModuleRtGenerated(org.eclipse.xtext.Grammar);

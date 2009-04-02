@@ -38,24 +38,24 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.parser.terminalrules.parseTreeConstruction.TerminalRulesTestLanguageParsetreeConstructor.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageCheckValidator> bindTerminalRulesTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageCheckValidator.class;
 	}
 
 	
 	public java.lang.ClassLoader bindClassLoader() {
 		return getClass().getClassLoader();
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageCheckValidator> bindTerminalRulesTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageCheckValidator.class;
 	}
 
 	

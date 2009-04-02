@@ -224,7 +224,7 @@ protected class ConcreteParserRule_1_Assignment_magicNumber extends AssignmentTo
 	protected Solution createSolution() {
 		if((value = current.getConsumable("magicNumber",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("magicNumber");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getConcreteParserRuleAccess().getMagicNumberREALTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -262,7 +262,7 @@ protected class ConcreteParserRule_3_Assignment_elements extends AssignmentToken
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritedParserRuleRule().getType().getClassifier())) {
 				Solution s = new InheritedParserRule_Group(param, this).firstSolution();
@@ -345,7 +345,7 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -382,7 +382,7 @@ protected class CallOverridenParserRule_Assignment_call extends AssignmentToken 
 		if((value = current.getConsumable("call",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("call");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractCallOverridenParserRuleRule().getType().getClassifier())) {
 				Solution s = new AbstractCallOverridenParserRule_Group(param, this).firstSolution();
@@ -472,7 +472,7 @@ protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRule2Access().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -509,7 +509,7 @@ protected class OverridableParserRule2_3_Assignment_age extends AssignmentToken 
 	protected Solution createSolution() {
 		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRule2Access().getAgeINTTerminalRuleCall_3_0();
 			return new Solution(obj);
@@ -682,7 +682,7 @@ protected class Subrule1_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule1Access().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -707,7 +707,7 @@ protected class Subrule1_2_Assignment_sub1 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("sub1",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub1");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule1Access().getSub1IDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -787,7 +787,7 @@ protected class Subrule2_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule2Access().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -812,7 +812,7 @@ protected class Subrule2_2_Assignment_sub2 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("sub2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub2");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule2Access().getSub2STRINGTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -892,7 +892,7 @@ protected class Subrule3_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule3Access().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -917,7 +917,7 @@ protected class Subrule3_2_Assignment_sub1 extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("sub1",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub1");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubrule3Access().getSub1INTTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -954,7 +954,7 @@ protected class CallExtendedParserRule_Assignment_call extends AssignmentToken  
 		if((value = current.getConsumable("call",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("call");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractCallExtendedParserRuleRule().getType().getClassifier())) {
 				Solution s = new AbstractCallExtendedParserRule_Group(param, this).firstSolution();
@@ -1036,7 +1036,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -1113,7 +1113,7 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) {
 				Solution s = new OverridableParserRule_Group(param, this).firstSolution();
@@ -1197,7 +1197,7 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) {
 				Solution s = new ExtendableParserRule_Alternatives(param, this).firstSolution();

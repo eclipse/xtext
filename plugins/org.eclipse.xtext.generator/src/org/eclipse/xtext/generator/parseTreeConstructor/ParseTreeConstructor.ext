@@ -6,11 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-import xtext;
-import xtextgen;
-import predicate;
-import emf;
-import oaw;
+import org::eclipse::xtext;
 
 extension org::eclipse::xtext::GrammarUtil; 
 
@@ -35,7 +31,7 @@ boolean isOptional(String cardinality):
 boolean isMulti(String cardinality):
 	cardinality == '*' || cardinality == '+';
 	
-String simpleName(Type type):
-	type.name.split("::").last();
+//String simpleName(Type type):
+//	type.name.split("::").last();
 
 	

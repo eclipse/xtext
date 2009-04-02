@@ -55,7 +55,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 		if((value = current.getConsumable("multiFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiFeature");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) {
 				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
@@ -214,7 +214,7 @@ protected class ChoiceRule_1_Assignment_optionalKeyword extends AssignmentToken 
 		if((value = current.getConsumable("optionalKeyword",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0();
 			return new Solution(obj);
@@ -240,7 +240,7 @@ protected class ChoiceRule_2_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0();
 			return new Solution(obj);
@@ -391,7 +391,7 @@ protected class ReducibleRule_2_1_Assignment_actionFeature extends AssignmentTok
 		if((value = current.getConsumable("actionFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actionFeature");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) {
 				Solution s = new TerminalRule_Assignment_stringFeature(param, this).firstSolution();
@@ -435,7 +435,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("stringFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0();
 			return new Solution(obj);

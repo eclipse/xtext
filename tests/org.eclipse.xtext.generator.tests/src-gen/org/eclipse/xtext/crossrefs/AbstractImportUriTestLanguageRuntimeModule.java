@@ -38,24 +38,24 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 		return org.eclipse.xtext.crossrefs.parseTreeConstruction.ImportUriTestLanguageParsetreeConstructor.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
 		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
 	}
 
-	@org.eclipse.xtext.service.SingletonBinding
+	
 	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
 		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.crossrefs.ImportUriTestLanguageCheckValidator> bindImportUriTestLanguageCheckValidator() {
-		return org.eclipse.xtext.crossrefs.ImportUriTestLanguageCheckValidator.class;
 	}
 
 	
 	public java.lang.ClassLoader bindClassLoader() {
 		return getClass().getClassLoader();
+	}
+
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)
+	public Class<? extends org.eclipse.xtext.crossrefs.ImportUriTestLanguageCheckValidator> bindImportUriTestLanguageCheckValidator() {
+		return org.eclipse.xtext.crossrefs.ImportUriTestLanguageCheckValidator.class;
 	}
 
 	

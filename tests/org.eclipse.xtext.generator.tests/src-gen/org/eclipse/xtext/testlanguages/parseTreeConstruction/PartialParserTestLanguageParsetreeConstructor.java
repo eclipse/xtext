@@ -111,7 +111,7 @@ protected class SomeContainer_1_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSomeContainerAccess().getNameIDTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -170,7 +170,7 @@ protected class SomeContainer_3_0_Assignment_nested extends AssignmentToken  {
 		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNestedRule().getType().getClassifier())) {
 				Solution s = new Nested_Group(param, this).firstSolution();
@@ -203,7 +203,7 @@ protected class SomeContainer_3_1_Assignment_content extends AssignmentToken  {
 		if((value = current.getConsumable("content",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("content");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getContentRule().getType().getClassifier())) {
 				Solution s = new Content_Alternatives(param, this).firstSolution();
@@ -320,7 +320,7 @@ protected class Nested_2_Assignment_nested extends AssignmentToken  {
 		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSomeContainerRule().getType().getClassifier())) {
 				Solution s = new SomeContainer_Group(param, this).firstSolution();
@@ -512,7 +512,7 @@ protected class Children_2_Assignment_children extends AssignmentToken  {
 		if((value = current.getConsumable("children",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
 				Solution s = new Child_Group(param, this).firstSolution();
@@ -585,7 +585,7 @@ protected class Children_3_1_Assignment_children extends AssignmentToken  {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
 				Solution s = new Child_Group(param, this).firstSolution();
@@ -718,7 +718,7 @@ protected class Child_3_Assignment_value extends AssignmentToken  {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNamedRule().getType().getClassifier())) {
 				Solution s = new Named_Assignment_name(param, this).firstSolution();
@@ -834,7 +834,7 @@ protected class AbstractChildren_2_Assignment_abstractChildren extends Assignmen
 		if((value = current.getConsumable("abstractChildren",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractChildren");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractChildRule().getType().getClassifier())) {
 				Solution s = new AbstractChild_Alternatives(param, this).firstSolution();
@@ -1042,7 +1042,7 @@ protected class FirstConcrete_3_Assignment_value extends AssignmentToken  {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNamedRule().getType().getClassifier())) {
 				Solution s = new Named_Assignment_name(param, this).firstSolution();
@@ -1074,7 +1074,7 @@ protected class FirstConcrete_4_Assignment_referencedContainer extends Assignmen
 	protected Solution createSolution() {
 		if((value = current.getConsumable("referencedContainer",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referencedContainer");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFirstConcreteAccess().getReferencedContainerSomeContainerCrossReference_4_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -1222,7 +1222,7 @@ protected class SecondConcrete_4_Assignment_value extends AssignmentToken  {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNamedRule().getType().getClassifier())) {
 				Solution s = new Named_Assignment_name(param, this).firstSolution();
@@ -1254,7 +1254,7 @@ protected class SecondConcrete_5_Assignment_referencedChildren extends Assignmen
 	protected Solution createSolution() {
 		if((value = current.getConsumable("referencedChildren",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referencedChildren");
-		if(value instanceof EObject) { // xtext::CrossReference
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSecondConcreteAccess().getReferencedChildrenChildCrossReference_5_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
@@ -1305,7 +1305,7 @@ protected class Named_Assignment_name extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getNamedAccess().getNameIDTerminalRuleCall_0();
 			return new Solution(obj);

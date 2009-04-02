@@ -6,10 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-import xtext;
-import ecore;
+import org::eclipse::xtext;
+import org::eclipse::emf::ecore;
 
 extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::EcoreUtils;
 
 String xtendGenScopeProvider(Grammar this):
 	getNamespace() + ".Gen" + getName() + "ScopeProvider";
@@ -24,13 +25,13 @@ String javaXtendScopeProvider(Grammar this):
 	getId() + "ScopeProvider";
 
 List[CrossReference] allCrossReferences(Grammar this) :
-	eAllContents.typeSelect(CrossReference);
+	allContents().typeSelect(CrossReference);
 	
-Collection[ecore::EReference] eReferencesFromCrossRefs(Grammar this):
+Collection[EReference] eReferencesFromCrossRefs(Grammar this):
 	allCrossReferences().eReference().toSet();
 
 String qualifiedXtendName(Grammar this, EClassifier eClass) :
-	metamodelDeclarations.select(m|m.ePackage==eClass.ePackage).first().aliasPrefix() + eClass.name;
+	metamodelDeclarations.select(m|m.EPackage== eClass.EPackage).first().aliasPrefix() + eClass.name;
 	
 String aliasPrefix(AbstractMetamodelDeclaration this) :
 	alias == null ? "" : alias + "::";

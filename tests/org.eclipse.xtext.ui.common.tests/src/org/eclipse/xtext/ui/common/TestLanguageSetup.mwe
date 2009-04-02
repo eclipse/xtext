@@ -10,7 +10,6 @@
 		fileExtensions="${file.extensions}"/>
 	<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
-	<fragment class="org.eclipse.xtext.generator.scoping.XtendScopingFragment"/>
 	<fragment file="org/eclipse/xtext/ui/generator/StandardUiFragments.mwe"
 			  inheritAll="true"/>
 </config>

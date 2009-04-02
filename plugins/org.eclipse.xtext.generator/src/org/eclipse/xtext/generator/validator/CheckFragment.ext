@@ -1,4 +1,4 @@
-import xtext;
+import org::eclipse::xtext;
 
 String getCheckValidatorName(Grammar g) :
  	JAVA org.eclipse.xtext.generator.validator.CheckFragment.getCheckValidatorName(org.eclipse.xtext.Grammar);

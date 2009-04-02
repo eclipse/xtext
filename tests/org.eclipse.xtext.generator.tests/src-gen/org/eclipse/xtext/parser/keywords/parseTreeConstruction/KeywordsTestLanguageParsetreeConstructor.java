@@ -74,7 +74,7 @@ protected class Model_0_Assignment_first extends AssignmentToken  {
 		if((value = current.getConsumable("first",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("first");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0();
 			return new Solution(obj);
@@ -101,7 +101,7 @@ protected class Model_1_Assignment_second extends AssignmentToken  {
 		if((value = current.getConsumable("second",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("second");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getSecondFooKeyword_1_0();
 			return new Solution(obj);
@@ -128,7 +128,7 @@ protected class Model_2_Assignment_third extends AssignmentToken  {
 		if((value = current.getConsumable("third",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("third");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getThirdBarKeyword_2_0();
 			return new Solution(obj);
@@ -155,7 +155,7 @@ protected class Model_3_Assignment_forth extends AssignmentToken  {
 		if((value = current.getConsumable("forth",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("forth");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0();
 			return new Solution(obj);

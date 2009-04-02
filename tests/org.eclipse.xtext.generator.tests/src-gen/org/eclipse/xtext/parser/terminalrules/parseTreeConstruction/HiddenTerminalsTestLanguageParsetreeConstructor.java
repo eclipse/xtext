@@ -245,7 +245,7 @@ protected class WithoutHiddens_1_Assignment_spaces extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -282,7 +282,7 @@ protected class WithoutHiddens_3_Assignment_spaces extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0();
 			return new Solution(obj);
@@ -308,7 +308,7 @@ protected class WithoutHiddens_4_Assignment_valid extends AssignmentToken  {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0();
 			return new Solution(obj);
@@ -402,7 +402,7 @@ protected class WithHiddens_2_Assignment_valid extends AssignmentToken  {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0();
 			return new Solution(obj);
@@ -520,7 +520,7 @@ protected class OverridingHiddens_3_Assignment_called extends AssignmentToken  {
 		if((value = current.getConsumable("called",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("called");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) {
 				Solution s = new OverridingHiddensCall_Group(param, this).firstSolution();
@@ -565,7 +565,7 @@ protected class OverridingHiddens_5_Assignment_valid extends AssignmentToken  {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0();
 			return new Solution(obj);
@@ -646,7 +646,7 @@ protected class OverridingHiddensCall_1_Assignment_spaces extends AssignmentToke
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spaces",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -672,7 +672,7 @@ protected class OverridingHiddensCall_2_Assignment_valid extends AssignmentToken
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0();
 			return new Solution(obj);
@@ -811,7 +811,7 @@ protected class InheritingHiddens_3_0_Assignment_called extends AssignmentToken 
 		if((value = current.getConsumable("called",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("called");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
@@ -844,7 +844,7 @@ protected class InheritingHiddens_3_1_Assignment_hidingCalled extends Assignment
 		if((value = current.getConsumable("hidingCalled",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("hidingCalled");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) {
 				Solution s = new HidingHiddens_Group(param, this).firstSolution();
@@ -890,7 +890,7 @@ protected class InheritingHiddens_5_Assignment_valid extends AssignmentToken  {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0();
 			return new Solution(obj);
@@ -968,7 +968,7 @@ protected class DatatypeHiddens_1_Assignment_valid extends AssignmentToken  {
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0();
 			return new Solution(obj);
@@ -1050,7 +1050,7 @@ protected class HidingHiddens_1_Assignment_space extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("space",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("space");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0();
 			return new Solution(obj);
@@ -1076,7 +1076,7 @@ protected class HidingHiddens_2_Assignment_called extends AssignmentToken  {
 		if((value = current.getConsumable("called",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("called");
 
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
 				Solution s = new InheritingHiddensCall_Group(param, this).firstSolution();
@@ -1160,7 +1160,7 @@ protected class InheritingHiddensCall_1_Assignment_valid extends AssignmentToken
 		if((value = current.getConsumable("valid",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
 
-		if(Boolean.TRUE.equals(value)) { // xtext::Keyword
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0();
 			return new Solution(obj);

@@ -115,7 +115,7 @@ protected class Model_0_1_Assignment_foo extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0();
 			return new Solution(obj);
@@ -180,7 +180,7 @@ protected class Model_0_2_1_Assignment_bar extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("bar",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("bar");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0();
 			return new Solution(obj);
@@ -247,7 +247,7 @@ protected class Model_1_1_Assignment_bar extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("bar",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("bar");
-		if(Boolean.TRUE.booleanValue()) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0();
 			return new Solution(obj);

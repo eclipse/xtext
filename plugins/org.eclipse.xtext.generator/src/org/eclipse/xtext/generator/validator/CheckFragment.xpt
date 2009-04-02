@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT org::eclipse::xtext»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
@@ -18,9 +18,6 @@
 «DEFINE generate(List[String] packageQNames) FOR Grammar»
 
 «FILE this.name.asPath()+"Checks.chk" SRC-»
-«FOREACH allMetamodelDeclarations().ePackage AS pack»
-import «pack.name»;
-«ENDFOREACH»
 /*
  * this check file is used to specify constraints for the derived metamodels
  * example:

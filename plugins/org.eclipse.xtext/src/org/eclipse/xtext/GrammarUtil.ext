@@ -7,12 +7,12 @@
 *
 *******************************************************************************/
 
-import ecore;
-import xtext;
+import org::eclipse::emf::ecore;
+import org::eclipse::xtext;
 
 extension org::eclipse::xtext::Extensions reexport;
 
-String getFragment(emf::EObject object) :
+String getFragment(org::eclipse::emf::ecore::EObject object) :
 	JAVA org.eclipse.xtext.EcoreUtil2.getURIFragment(org.eclipse.emf.ecore.EObject);
 	
 String getId(Grammar g) :
@@ -30,22 +30,22 @@ String getClasspathRelativePathToXmi(Grammar g) :
 // ***********************************************************************************
 // Containers
 
-Grammar containingGrammar(emf::EObject e) :
+Grammar containingGrammar(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.getGrammar(org.eclipse.emf.ecore.EObject); 
 
-AbstractRule containingRule(emf::EObject e) :
+AbstractRule containingRule(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingRule(org.eclipse.emf.ecore.EObject);
 	
-ParserRule containingParserRule(emf::EObject e) :
+ParserRule containingParserRule(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingParserRule(org.eclipse.emf.ecore.EObject);
 	
-EnumRule containingEnumRule(emf::EObject e) :
+EnumRule containingEnumRule(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingEnumRule(org.eclipse.emf.ecore.EObject);
 	 
-Assignment containingAssignment(emf::EObject e) :
+Assignment containingAssignment(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
 
-Group containingGroup(emf::EObject e) :
+Group containingGroup(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingGroup(org.eclipse.emf.ecore.EObject);
 	
 List[AbstractElement] elementsBeforeThisInContainingGroup(AbstractElement e) :
@@ -54,26 +54,26 @@ List[AbstractElement] elementsBeforeThisInContainingGroup(AbstractElement e) :
 // ***********************************************************************************
 // Containment
 
-List[Action] containedActions(emf::EObject o) :
+List[Action] containedActions(org::eclipse::emf::ecore::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedActions(org.eclipse.emf.ecore.EObject);
 
-List[RuleCall] containedRuleCalls(emf::EObject o) :
+List[RuleCall] containedRuleCalls(org::eclipse::emf::ecore::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedRuleCalls(org.eclipse.emf.ecore.EObject);
 
-List[Assignment] containedAssignments(emf::EObject o) :
+List[Assignment] containedAssignments(org::eclipse::emf::ecore::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedAssignments(org.eclipse.emf.ecore.EObject);
 	
-List[Keyword] containedKeywords(emf::EObject o) :
+List[Keyword] containedKeywords(org::eclipse::emf::ecore::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedKeywords(org.eclipse.emf.ecore.EObject);
 	
-List[AbstractElement] containedAbstractElements(emf::EObject o) :
+List[AbstractElement] containedAbstractElements(org::eclipse::emf::ecore::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedAbstractElements(org.eclipse.emf.ecore.EObject);
 
 
 // ***********************************************************************************
 // Shortcuts
 	
-Boolean isAssigned(emf::EObject this) : 
+Boolean isAssigned(org::eclipse::emf::ecore::EObject this) : 
 	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);
 	
 Boolean isDatatypeRule(ParserRule this) : 
@@ -94,7 +94,7 @@ List[AbstractMetamodelDeclaration] allMetamodelDeclarations(Grammar this) :
 List[AbstractRule] allRules(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allRules(org.eclipse.xtext.Grammar);
 	
-ecore::EReference eReference(CrossReference this) :
+EReference eReference(CrossReference this) :
 	JAVA org.eclipse.xtext.GrammarUtil.getReference(org.eclipse.xtext.CrossReference);
 
 Boolean isMultipleCardinality(AbstractElement e) :

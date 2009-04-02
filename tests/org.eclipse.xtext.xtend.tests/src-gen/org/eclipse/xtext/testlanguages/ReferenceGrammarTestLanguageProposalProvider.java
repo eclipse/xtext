@@ -16,5 +16,4 @@ public class ReferenceGrammarTestLanguageProposalProvider extends AbstractXtendP
 		return "org::eclipse::xtext::testlanguages::ReferenceGrammarTestLanguageProposalProvider";	
 	}
 	
-	
 }
