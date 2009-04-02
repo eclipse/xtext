@@ -21,11 +21,19 @@ import org.eclipse.xtext.util.StringInputStream;
  *
  */
 public class BasicLazyLinkingTest extends AbstractXtextTests {
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(new LazyLinkingTestLanguageStandaloneSetup());
+	}
 	
 	public void testLazyLinking() throws Exception {
-		with(new LazyLinkingTestLanguageStandaloneSetup());
 		XtextResource resource = getResource(new StringInputStream("type A extends B.id{} type B { A id}"));
-		
+		doTest(resource);
+	}
+	
+	private void doTest(XtextResource resource) {
 		assertTrue(resource instanceof LazyLinkingResource);
 		
 		Model model = (Model) resource.getContents().get(0);
@@ -35,32 +43,16 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		Property parentId = typeA.getParentId();
 		assertEquals(typeB.getProperties().get(0),parentId);
 	}
-	
+
 	public void testRecursion() throws Exception {
-		with(new LazyLinkingTestLanguageStandaloneSetup());
 		XtextResource resource = getResource(new StringInputStream("type A extends B.a { B b } type B extends A.b { A a}"));
 		
-		assertTrue(resource instanceof LazyLinkingResource);
-		
-		Model model = (Model) resource.getContents().get(0);
-		Type typeA = model.getTypes().get(0);
-		Type typeB = model.getTypes().get(1);
-		
-		Property parentId = typeA.getParentId();
-		assertEquals(typeB.getProperties().get(0),parentId);
+		doTest(resource);
 	}
 	
 	public void testBackwardDependency() throws Exception {
-		with(new LazyLinkingTestLanguageStandaloneSetup());
 		XtextResource resource = getResource(new StringInputStream("type A for a in B { B b } type B for b in A { A a}"));
 		
-		assertTrue(resource instanceof LazyLinkingResource);
-		
-		Model model = (Model) resource.getContents().get(0);
-		Type typeA = model.getTypes().get(0);
-		Type typeB = model.getTypes().get(1);
-		
-		Property parentId = typeA.getParentId();
-		assertEquals(typeB.getProperties().get(0),parentId);
+		doTest(resource);
 	}
 }
