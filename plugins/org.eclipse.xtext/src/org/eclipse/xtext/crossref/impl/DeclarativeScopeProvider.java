@@ -22,14 +22,12 @@ import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import com.google.inject.Inject;
 
 /**
- * 
  * A declarative scope provider allowing to specify
  * scoping by declaration of methods of the following signature
  * 
  * IScope scope_[ReturnTypeName](MyType context, EReference reference)
  * 
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class DeclarativeScopeProvider extends AbstractScopeProvider {
 	private final static Logger log = Logger.getLogger(DeclarativeScopeProvider.class);
@@ -40,7 +38,7 @@ public class DeclarativeScopeProvider extends AbstractScopeProvider {
 			EReference reference = (EReference) params[1];
 			if (object.eContainer()==null) {
 				if (log.isInfoEnabled())
-					log.info(throwable.getMessage(), throwable);
+					log.info(throwable.getMessage());
 				return genericFallBack.getScope(object, reference);
 			}
 			return DeclarativeScopeProvider.this.getScope(object.eContainer(), reference);

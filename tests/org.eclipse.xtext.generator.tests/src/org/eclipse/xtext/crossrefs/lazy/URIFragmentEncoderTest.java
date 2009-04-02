@@ -42,10 +42,24 @@ public class URIFragmentEncoderTest extends TestCase {
 		
 	}
 	
-	URIFragmentEncoder encoder = new URIFragmentEncoder();
+	private URIFragmentEncoder encoder;
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		encoder = new URIFragmentEncoder();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		encoder = null;
+		super.tearDown();
+	}
 	
 	private AbstractNode find(AbstractNode parent, AbstractNode toFind) {
-		String string = encoder.getRelativePath(parent, toFind).toString();
+		StringBuilder builder = new StringBuilder();
+		encoder.getRelativePath(builder, parent, toFind);
+		String string = builder.toString();
 		return encoder.getNode(parent, string);
 	}
 }

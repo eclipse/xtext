@@ -33,11 +33,8 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * 
- * @deprecated - use {@link org.eclipse.xtext.crossref.lazy.LazyLinker}
  */
-@Deprecated
-public class Linker extends AbstractLinker {
+public class Linker extends AbstractCleaningLinker {
 
 	private static Logger log = Logger.getLogger(Linker.class);
 
@@ -66,26 +63,15 @@ public class Linker extends AbstractLinker {
 		return new LinkingDiagnosticProducer(consumer);
 	}
 
-	protected void clearReferences(EObject obj) {
-		for(EReference ref: obj.eClass().getEAllReferences())
-			clearReference(obj, ref);
-	}
-
-	protected void clearReference(EObject obj, EReference ref) {
-		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived() && ref.isChangeable())
-			obj.eUnset(ref);
-	}
-
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for(EReference ref: obj.eClass().getEAllReferences())
 			if (canSetDefaultValues(ref) && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
-				producer.setTarget(obj, ref);
 				setDefaultValue(obj, ref, producer);
 			}
 	}
 
 	protected boolean canSetDefaultValues(EReference ref) {
-		return !ref.isContainment() && !ref.isContainer() && !ref.isUnsettable();
+		return !ref.isContainment() && !ref.isContainer() && ref.isChangeable();
 	}
 
 	protected final void setDefaultValue(EObject obj, EReference ref, IDiagnosticProducer producer) {
@@ -171,9 +157,9 @@ public class Linker extends AbstractLinker {
 		this.linkingService = linkingService;
 	}
 
-	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
+	@Override
+	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
 		final IDiagnosticProducer producer = createDiagnosticProducer(consumer);
-		clearAllReferences(model);
 		ensureModelLinked(model, producer);
 	}
 
@@ -182,13 +168,6 @@ public class Linker extends AbstractLinker {
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
-	}
-
-	private void clearAllReferences(EObject model) {
-		clearReferences(model);
-		final Iterator<EObject> iter = model.eAllContents();
-		while (iter.hasNext())
-			clearReferences(iter.next());
 	}
 
 }

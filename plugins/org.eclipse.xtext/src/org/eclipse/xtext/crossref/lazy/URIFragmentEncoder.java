@@ -24,6 +24,7 @@ import org.eclipse.xtext.util.Tuples;
  * 
  */
 public class URIFragmentEncoder {
+	
 	private static final String XTEXT_LINK = "xtextLink_";
 	private static final String SEP = "::";
 
@@ -37,11 +38,11 @@ public class URIFragmentEncoder {
 	 * @return
 	 */
 	public String encode(EObject obj, EReference ref, AbstractNode node) {
-		String fragment = XTEXT_LINK + SEP;
-		fragment += obj.eResource().getURIFragment(obj) + SEP;
-		fragment += EcoreUtil.getURI(ref) + SEP;
-		fragment += getRelativePath(NodeUtil.getNodeAdapter(obj).getParserNode(), node);
-		return fragment;
+		StringBuilder fragment = new StringBuilder(40).append(XTEXT_LINK).append(SEP);
+		fragment.append(obj.eResource().getURIFragment(obj)).append(SEP);
+		fragment.append(EcoreUtil.getURI(ref)).append(SEP);
+		getRelativePath(fragment, NodeUtil.getNodeAdapter(obj).getParserNode(), node);
+		return fragment.toString();
 	}
 
 	/**
@@ -62,28 +63,28 @@ public class URIFragmentEncoder {
 	/**
 	 * ONLY public to be testable
 	 */
-	public StringBuffer getRelativePath(AbstractNode parserNode, AbstractNode node) {
+	public void getRelativePath(StringBuilder result, AbstractNode parserNode, AbstractNode node) {
 		if (parserNode == node)
-			return new StringBuffer();
-		StringBuffer buff = getRelativePath(parserNode, node.getParent());
-		buff.append("/").append(node.getParent().getChildren().indexOf(node));
-		return buff;
+			return;
+		getRelativePath(result, parserNode, node.getParent());
+		result.append("/").append(node.getParent().getChildren().indexOf(node));
 	}
 
 	/**
 	 * ONLY public to be testable
 	 */
-	public AbstractNode getNode(AbstractNode node, String path) {
-		String[] split = path.split("/");
+	public AbstractNode getNode(final AbstractNode node, String path) {
+		final String[] split = path.split("/");
+		AbstractNode result = node;
 		for (String string : split) {
 			if (string.trim().length() > 0) {
-				Integer integer = Integer.valueOf(string);
-				if (integer >= 0) {
-					node = ((CompositeNode) node).getChildren().get(integer);
+				int index = Integer.parseInt(string);
+				if (index >= 0) {
+					result = ((CompositeNode) result).getChildren().get(index);
 				}
 			}
 		}
-		return node;
+		return result;
 	}
 
 	public boolean isCrossLinkFragment(Resource res, String s) {

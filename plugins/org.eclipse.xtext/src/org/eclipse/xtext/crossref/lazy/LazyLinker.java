@@ -4,11 +4,8 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.crossref.lazy;
-
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -22,7 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.impl.AbstractLinker;
+import org.eclipse.xtext.crossref.impl.AbstractCleaningLinker;
 import org.eclipse.xtext.crossref.impl.LinkingDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
@@ -35,9 +32,8 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
-public class LazyLinker extends AbstractLinker {
+public class LazyLinker extends AbstractCleaningLinker {
 
 	private final URIFragmentEncoder encoder;
 	private final Registry registry;
@@ -48,9 +44,9 @@ public class LazyLinker extends AbstractLinker {
 		this.registry = registry;
 	}
 
-	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
+	@Override
+	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
 		LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
-		clearAllReferences(model);
 		installProxies(model, producer);
 		TreeIterator<EObject> iterator = model.eAllContents();
 		while (iterator.hasNext()) {
@@ -59,23 +55,6 @@ public class LazyLinker extends AbstractLinker {
 		}
 	}
 	
-	private void clearAllReferences(EObject model) {
-		clearReferences(model);
-		final Iterator<EObject> iter = model.eAllContents();
-		while (iter.hasNext())
-			clearReferences(iter.next());
-	}
-	
-	protected void clearReferences(EObject obj) {
-		for(EReference ref: obj.eClass().getEAllReferences())
-			clearReference(obj, ref);
-	}
-
-	protected void clearReference(EObject obj, EReference ref) {
-		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived() && ref.isChangeable())
-			obj.eUnset(ref);
-	}
-
 	protected void installProxies(EObject obj, IDiagnosticProducer producer) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
@@ -95,11 +74,6 @@ public class LazyLinker extends AbstractLinker {
 		}
 	}
 
-	/**
-	 * @param obj
-	 * @param abstractNode
-	 * @param eRef
-	 */
 	@SuppressWarnings("unchecked")
 	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
 		URI uri = obj.eResource().getURI();
@@ -115,9 +89,6 @@ public class LazyLinker extends AbstractLinker {
 		}
 	}
 
-	/**
-	 * @param eType
-	 */
 	private EClass findInstantiableCompatible(EClass eType) {
 		if (!isInstantiatableSubType(eType,eType)) {
 			// check local Package
