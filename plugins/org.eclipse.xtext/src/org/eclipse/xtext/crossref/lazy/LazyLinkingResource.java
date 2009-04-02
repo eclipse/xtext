@@ -25,9 +25,10 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class LazyLinkingResource extends XtextResource {
-	private final Logger log = Logger.getLogger(LazyLinkingResource.class);
+	
+	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
 
-	public ILinkingService linkingService;
+	private final ILinkingService linkingService;
 	private final URIFragmentEncoder encoder;
 
 	@Inject
@@ -54,8 +55,8 @@ public class LazyLinkingResource extends XtextResource {
 							+ uriFragment);
 				return linkedObjects.get(0);
 			}
-		} catch (RuntimeException e) {
-			log.error(e.getMessage(),e);
+		} catch (RuntimeException e) { // XXX: why do we catch any runtime exception?
+			log.error(e.getMessage(), e);
 		}
 		return super.getEObject(uriFragment);
 	}

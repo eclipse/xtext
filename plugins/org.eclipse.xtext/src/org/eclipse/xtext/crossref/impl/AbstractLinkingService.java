@@ -10,12 +10,9 @@ package org.eclipse.xtext.crossref.impl;
 
 import org.eclipse.xtext.crossref.ILinkingService;
 
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public abstract class AbstractLinkingService implements ILinkingService {
-
 
 }

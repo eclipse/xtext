@@ -12,8 +12,7 @@ import org.eclipse.xtext.crossref.ILinker;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public abstract class AbstractLinker implements ILinker {
-
+	
 }

@@ -105,7 +105,6 @@ public class XtextLinker extends Linker {
 				return (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() &&
 						((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel);
 			}
-
 		};
 	}
 
