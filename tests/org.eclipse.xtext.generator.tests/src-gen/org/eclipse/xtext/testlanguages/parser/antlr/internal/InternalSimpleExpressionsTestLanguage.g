@@ -91,7 +91,7 @@ ruleSequence returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier());
         try {
         	factory.add(temp, "expressions", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -99,7 +99,7 @@ ruleSequence returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -158,7 +158,7 @@ ruleAddition returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -166,7 +166,7 @@ ruleAddition returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getAdditionAccess().getOpValuesAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -253,7 +253,7 @@ ruleMultiplication returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier());
         try {
         	factory.add(temp, "values", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -261,7 +261,7 @@ ruleMultiplication returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 

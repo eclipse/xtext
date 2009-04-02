@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.grammarAccess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,37 +42,40 @@ public class GrammarAccessUtil {
 		final ArrayList<String> result = new ArrayList<String>();
 		AbstractElement container = element;
 		while (container != null) {
-			String s = getSingleElementDescription(container);
-			if (s != null)
-				result.add(0, s);
-			container = container.eContainer() instanceof AbstractElement ?
-					(AbstractElement) container.eContainer() : null;
+			result.addAll(0, getSingleElementDescription(container));
+			container = container.eContainer() instanceof AbstractElement ? (AbstractElement) container
+					.eContainer()
+					: null;
 		}
 		return result;
 	}
 
-	private static String getSingleElementDescription(AbstractElement ele) {
+	private static List<String> getSingleElementDescription(AbstractElement ele) {
 		if (ele instanceof Keyword)
-			return ((Keyword) ele).getValue();
+			return Collections.singletonList(((Keyword) ele).getValue());
 		else if (ele instanceof Assignment)
-			return ((Assignment) ele).getFeature();
+			return Collections.singletonList(((Assignment) ele).getFeature());
 		else if (ele instanceof RuleCall)
-			return ((RuleCall) ele).getRule().getName();
+			return Collections.singletonList(((RuleCall) ele).getRule()
+					.getName());
 		else if (ele instanceof Action) {
 			Action a = (Action) ele;
-			return (a.getType() != null && a.getType().getClassifier() != null ? a
-					.getType().getClassifier().getName()
-					: "")
-					+ a.getFeature();
+			ArrayList<String> r = new ArrayList<String>();
+			if (a.getType() != null && a.getType().getClassifier() != null)
+				r.add(a.getType().getClassifier().getName());
+			if (a.getFeature() != null && !"".equals(a.getFeature()))
+				r.add(a.getFeature());
+			return r;
 		} else if (ele instanceof CrossReference) {
 			CrossReference cr = (CrossReference) ele;
 			if (cr.getType() != null && cr.getType().getClassifier() != null)
-				return cr.getType().getClassifier().getName();
+				return Collections.singletonList(cr.getType().getClassifier()
+						.getName());
 		} else if (ele instanceof EnumLiteralDeclaration) {
 			EnumLiteralDeclaration decl = (EnumLiteralDeclaration) ele;
-			return decl.getEnumLiteral().getName();
+			return Collections.singletonList(decl.getEnumLiteral().getName());
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	private static SerializerUtil xtextSerializer = Guice.createInjector(
@@ -149,8 +153,12 @@ public class GrammarAccessUtil {
 		boolean start = isFirst, up = true;
 		StringBuffer r = new StringBuffer();
 		for (char c : text.toCharArray()) {
-			boolean valid = c!='$' /* special case: don't use dollar sign, since antlr uses them as variable prefix */
-				&& (start ? Character.isJavaIdentifierStart(c) : Character.isJavaIdentifierPart(c));
+			boolean valid = c != '$' /*
+									 * special case: don't use dollar sign,
+									 * since antlr uses them as variable prefix
+									 */
+					&& (start ? Character.isJavaIdentifierStart(c) : Character
+							.isJavaIdentifierPart(c));
 			if (valid) {
 				if (start)
 					r.append(uppercaseFirst ? Character.toUpperCase(c)

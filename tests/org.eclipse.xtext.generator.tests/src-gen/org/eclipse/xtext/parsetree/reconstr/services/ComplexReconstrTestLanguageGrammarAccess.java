@@ -43,12 +43,12 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Action cAddaddOperandsAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
+		private final Action cAddAddOperandsAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
 		private final Keyword cPlusSignKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
 		private final Assignment cAddOperandsAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
 		private final RuleCall cAddOperandsTermParserRuleCall_1_0_2_0 = (RuleCall)cAddOperandsAssignment_1_0_2.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
-		private final Action cMinusminusOperandsAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
+		private final Action cMinusMinusOperandsAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
 		private final Keyword cHyphenMinusKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
 		private final Assignment cMinusOperandsAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
 		private final RuleCall cMinusOperandsTermParserRuleCall_1_1_2_0 = (RuleCall)cMinusOperandsAssignment_1_1_2.eContents().get(0);
@@ -70,7 +70,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//{Add.addOperands+=current}
-		public Action getAddaddOperandsAction_1_0_0() { return cAddaddOperandsAction_1_0_0; }
+		public Action getAddAddOperandsAction_1_0_0() { return cAddAddOperandsAction_1_0_0; }
 
 		//"+"
 		public Keyword getPlusSignKeyword_1_0_1() { return cPlusSignKeyword_1_0_1; }
@@ -85,7 +85,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//{Minus.minusOperands+=current}
-		public Action getMinusminusOperandsAction_1_1_0() { return cMinusminusOperandsAction_1_1_0; }
+		public Action getMinusMinusOperandsAction_1_1_0() { return cMinusMinusOperandsAction_1_1_0; }
 
 		//"-"
 		public Keyword getHyphenMinusKeyword_1_1_1() { return cHyphenMinusKeyword_1_1_1; }
@@ -174,10 +174,10 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
 		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
-		private final Action cTypeBxAction_3_0_0 = (Action)cGroup_3_0.eContents().get(0);
+		private final Action cTypeBXAction_3_0_0 = (Action)cGroup_3_0.eContents().get(0);
 		private final Keyword cXKeyword_3_0_1 = (Keyword)cGroup_3_0.eContents().get(1);
 		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
-		private final Action cTypeCxAction_3_1_0 = (Action)cGroup_3_1.eContents().get(0);
+		private final Action cTypeCXAction_3_1_0 = (Action)cGroup_3_1.eContents().get(0);
 		private final Keyword cYKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
 		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cNameSTRINGTerminalRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
@@ -208,7 +208,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_3_0() { return cGroup_3_0; }
 
 		//{TypeB.x=current}
-		public Action getTypeBxAction_3_0_0() { return cTypeBxAction_3_0_0; }
+		public Action getTypeBXAction_3_0_0() { return cTypeBXAction_3_0_0; }
 
 		//"x"
 		public Keyword getXKeyword_3_0_1() { return cXKeyword_3_0_1; }
@@ -217,7 +217,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//{TypeC.x=current}
-		public Action getTypeCxAction_3_1_0() { return cTypeCxAction_3_1_0; }
+		public Action getTypeCXAction_3_1_0() { return cTypeCXAction_3_1_0; }
 
 		//"y"
 		public Keyword getYKeyword_3_1_1() { return cYKeyword_3_1_1; }
@@ -296,13 +296,13 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Action cC1xAction_2_0 = (Action)cGroup_2.eContents().get(0);
+		private final Action cC1XAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Keyword cXKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Action cC2yAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Action cC2YAction_3_0 = (Action)cGroup_3.eContents().get(0);
 		private final Keyword cYKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Action cC3zAction_4_0 = (Action)cGroup_4.eContents().get(0);
+		private final Action cC3ZAction_4_0 = (Action)cGroup_4.eContents().get(0);
 		private final Keyword cZKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		
 		//TrickyC:
@@ -325,7 +325,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{C1.x=current}
-		public Action getC1xAction_2_0() { return cC1xAction_2_0; }
+		public Action getC1XAction_2_0() { return cC1XAction_2_0; }
 
 		//"x"
 		public Keyword getXKeyword_2_1() { return cXKeyword_2_1; }
@@ -334,7 +334,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_3() { return cGroup_3; }
 
 		//{C2.y=current}
-		public Action getC2yAction_3_0() { return cC2yAction_3_0; }
+		public Action getC2YAction_3_0() { return cC2YAction_3_0; }
 
 		//"y"
 		public Keyword getYKeyword_3_1() { return cYKeyword_3_1; }
@@ -343,7 +343,7 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		public Group getGroup_4() { return cGroup_4; }
 
 		//{C3.z=current}
-		public Action getC3zAction_4_0() { return cC3zAction_4_0; }
+		public Action getC3ZAction_4_0() { return cC3ZAction_4_0; }
 
 		//"z"
 		public Keyword getZKeyword_4_1() { return cZKeyword_4_1; }
@@ -865,7 +865,8 @@ public class ComplexReconstrTestLanguageGrammarAccess implements IGrammarAccess 
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

@@ -124,12 +124,12 @@ protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0();
+		return grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getSequenceAccess().getSequenceexpressionsAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("expressions", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("expressions")) return null;
@@ -271,12 +271,12 @@ protected class Addition_1_0_Action_Op_values extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getAdditionAccess().getOpvaluesAction_1_0();
+		return grammarAccess.getAdditionAccess().getOpValuesAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getAdditionAccess().getOpvaluesAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getAdditionAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;
@@ -452,12 +452,12 @@ protected class Multiplication_1_0_Action_Op_values extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0();
+		return grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getMultiplicationAccess().getOpvaluesAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("values", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("values")) return null;

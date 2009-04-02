@@ -91,7 +91,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cReducibleKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cTerminalRuleParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Action cReducibleCompositeactionFeatureAction_2_0 = (Action)cGroup_2.eContents().get(0);
+		private final Action cReducibleCompositeActionFeatureAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Assignment cActionFeatureAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cActionFeatureTerminalRuleParserRuleCall_2_1_0 = (RuleCall)cActionFeatureAssignment_2_1.eContents().get(0);
 		
@@ -112,7 +112,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{ReducibleComposite.actionFeature+=current}
-		public Action getReducibleCompositeactionFeatureAction_2_0() { return cReducibleCompositeactionFeatureAction_2_0; }
+		public Action getReducibleCompositeActionFeatureAction_2_0() { return cReducibleCompositeActionFeatureAction_2_0; }
 
 		//actionFeature+=TerminalRule
 		public Assignment getActionFeatureAssignment_2_1() { return cActionFeatureAssignment_2_1; }
@@ -251,7 +251,8 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

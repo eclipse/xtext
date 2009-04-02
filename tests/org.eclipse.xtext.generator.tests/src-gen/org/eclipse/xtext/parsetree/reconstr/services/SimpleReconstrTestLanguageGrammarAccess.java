@@ -22,7 +22,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cOpvaluesAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cOpValuesAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cValuesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cValuesTermParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
 		
@@ -40,7 +40,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
-		public Action getOpvaluesAction_1_0() { return cOpvaluesAction_1_0; }
+		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 
 		//values+=Term
 		public Assignment getValuesAssignment_1_1() { return cValuesAssignment_1_1; }
@@ -538,7 +538,8 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

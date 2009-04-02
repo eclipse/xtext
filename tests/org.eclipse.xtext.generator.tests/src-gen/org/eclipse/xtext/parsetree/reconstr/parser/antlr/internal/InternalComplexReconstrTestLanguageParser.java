@@ -280,7 +280,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:133:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.getOpAccess().getAddaddOperandsAction_1_0_0().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "addOperands", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -288,7 +288,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.getOpAccess().getAddaddOperandsAction_1_0_0(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -343,7 +343,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:175:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.getOpAccess().getMinusminusOperandsAction_1_1_0().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "minusOperands", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -351,7 +351,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.getOpAccess().getMinusminusOperandsAction_1_1_0(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 

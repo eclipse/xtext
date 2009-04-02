@@ -230,12 +230,12 @@ protected class Op_1_0_0_Action_Add_addOperands extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getOpAccess().getAddaddOperandsAction_1_0_0();
+		return grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getOpAccess().getAddaddOperandsAction_1_0_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getOpAccess().getAddAddOperandsAction_1_0_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("addOperands", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("addOperands")) return null;
@@ -330,12 +330,12 @@ protected class Op_1_1_0_Action_Minus_minusOperands extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getOpAccess().getMinusminusOperandsAction_1_1_0();
+		return grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getOpAccess().getMinusminusOperandsAction_1_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getOpAccess().getMinusMinusOperandsAction_1_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("minusOperands", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("minusOperands")) return null;
@@ -781,12 +781,12 @@ protected class TrickyA_3_0_0_Action_TypeB_x extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTrickyAAccess().getTypeBxAction_3_0_0();
+		return grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTrickyAAccess().getTypeBxAction_3_0_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTrickyAAccess().getTypeBXAction_3_0_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -844,12 +844,12 @@ protected class TrickyA_3_1_0_Action_TypeC_x extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTrickyAAccess().getTypeCxAction_3_1_0();
+		return grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTrickyAAccess().getTypeCxAction_3_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTrickyAAccess().getTypeCXAction_3_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -1215,12 +1215,12 @@ protected class TrickyC_2_0_Action_C1_x extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTrickyCAccess().getC1xAction_2_0();
+		return grammarAccess.getTrickyCAccess().getC1XAction_2_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC1xAction_2_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC1XAction_2_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("x", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("x")) return null;
@@ -1278,12 +1278,12 @@ protected class TrickyC_3_0_Action_C2_y extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTrickyCAccess().getC2yAction_3_0();
+		return grammarAccess.getTrickyCAccess().getC2YAction_3_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC2yAction_3_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC2YAction_3_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("y", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("y")) return null;
@@ -1341,12 +1341,12 @@ protected class TrickyC_4_0_Action_C3_z extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTrickyCAccess().getC3zAction_4_0();
+		return grammarAccess.getTrickyCAccess().getC3ZAction_4_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC3zAction_4_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getTrickyCAccess().getC3ZAction_4_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("z", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("z")) return null;

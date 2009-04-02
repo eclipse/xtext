@@ -268,6 +268,14 @@ protected class «elementMethodName()» extends ActionToken  {
 
 «EXPAND constructor-»
 	
+«IF feature == null || feature == ""-»
+	@Override
+	protected Solution createSolution() {
+		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return new Solution(current);
+	}
+«ELSE-»
 	@Override
 	protected Solution createSolution() {
 		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
@@ -276,6 +284,7 @@ protected class «elementMethodName()» extends ActionToken  {
 		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;
 		return new Solution(getDescr((EObject)val));
 	}
+«ENDIF-»	
 }
 «ENDDEFINE»
 

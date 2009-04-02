@@ -361,12 +361,12 @@ protected class ReducibleRule_2_0_Action_ReducibleComposite_actionFeature extend
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getReducibleRuleAccess().getReducibleCompositeactionFeatureAction_2_0();
+		return grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getReducibleRuleAccess().getReducibleCompositeactionFeatureAction_2_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("actionFeature", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("actionFeature")) return null;

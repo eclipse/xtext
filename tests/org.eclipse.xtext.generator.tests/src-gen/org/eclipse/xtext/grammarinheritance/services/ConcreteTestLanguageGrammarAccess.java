@@ -436,7 +436,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return getInheritedParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@ec4d16 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@2eb8e3 (name: OverridableParserRule) (definesHiddenTokens: false)
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@1aea0e (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@b25809 (name: OverridableParserRule) (definesHiddenTokens: false)
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
 	}
@@ -445,7 +445,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@f30d89 (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@f7ced8 (name: ExtendableParserRule) (definesHiddenTokens: false)
+	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@4fc11d (cardinality: null) Target:org.eclipse.xtext.impl.ParserRuleImpl@d22f35 (name: ExtendableParserRule) (definesHiddenTokens: false)
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
 	}
@@ -496,7 +496,8 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		return gaAbstractTestLanguage.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaAbstractTestLanguage.getANY_OTHERRule();
 	} 

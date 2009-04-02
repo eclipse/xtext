@@ -1695,7 +1695,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:790:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "groups", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -1703,7 +1703,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getAlternativesAccess().getAlternativesgroupsAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -1879,7 +1879,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:861:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getGroupAccess().getGrouptokensAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "tokens", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -1887,7 +1887,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getGroupAccess().getGrouptokensAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getGroupAccess().getGroupTokensAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -3419,7 +3419,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1470:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getAssignableAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "groups", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -3427,7 +3427,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getAssignableAlternativesAccess().getAlternativesgroupsAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -4005,7 +4005,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1704:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "groups", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -4013,7 +4013,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesgroupsAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -4467,7 +4467,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1912:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getTerminalAlternativesAccess().getAlternativesgroupsAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "groups", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -4475,7 +4475,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalAlternativesAccess().getAlternativesgroupsAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -4651,7 +4651,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1983:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getTerminalGroupAccess().getGrouptokensAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "tokens", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -4659,7 +4659,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalGroupAccess().getGrouptokensAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -5598,10 +5598,10 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2345:5: 
             {
              
-                    temp=factory.create(grammarAccess.getWildcardAccess().getWildcardnullAction_0().getType().getClassifier());
+                    temp=factory.create(grammarAccess.getWildcardAccess().getWildcardAction_0().getType().getClassifier());
                     current = temp; 
                     temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getWildcardAccess().getWildcardnullAction_0(), currentNode.getParent());
+                    CompositeNode newNode = createCompositeNode(grammarAccess.getWildcardAccess().getWildcardAction_0(), currentNode.getParent());
                 newNode.getChildren().add(currentNode);
                 moveLookaheadInfo(currentNode, newNode);
                 currentNode = newNode; 
@@ -5716,7 +5716,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2390:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getCharacterRangeAccess().getCharacterRangeleftAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier());
                             try {
                             	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -5724,7 +5724,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getCharacterRangeAccess().getCharacterRangeleftAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -6056,7 +6056,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2560:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getEnumLiteralsAccess().getAlternativesgroupsAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
                             try {
                             	factory.add(temp, "groups", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -6064,7 +6064,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getEnumLiteralsAccess().getAlternativesgroupsAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 

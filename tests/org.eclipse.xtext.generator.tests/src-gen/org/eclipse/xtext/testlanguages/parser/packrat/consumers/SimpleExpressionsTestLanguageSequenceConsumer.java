@@ -131,7 +131,7 @@ public final class SimpleExpressionsTestLanguageSequenceConsumer extends NonTerm
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAdditionParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getSequenceexpressionsAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getSequenceExpressionsAction_1_0());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.getExpressionsAssignment_1_1());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getExpressionsAdditionParserRuleCall_1_1_0());
 	}

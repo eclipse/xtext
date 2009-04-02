@@ -148,7 +148,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSimpleReconstrTestLanguage.g:93:5: 
             	    {
             	     
-            	            temp=factory.create(grammarAccess.getOpAccess().getOpvaluesAction_1_0().getType().getClassifier());
+            	            temp=factory.create(grammarAccess.getOpAccess().getOpValuesAction_1_0().getType().getClassifier());
             	            try {
             	            	factory.add(temp, "values", current, null /*ParserRule*/, currentNode);
             	            } catch(ValueConverterException vce) {
@@ -156,7 +156,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	            }
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode(grammarAccess.getOpAccess().getOpvaluesAction_1_0(), currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode(grammarAccess.getOpAccess().getOpValuesAction_1_0(), currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 

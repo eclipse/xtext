@@ -255,13 +255,13 @@ public final class ComplexReconstrTestLanguageTrickyCConsumer extends NonTermina
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameIDTerminalRuleCall_1_0());
 		group$5$Consumer = new Group$5$Consumer(rule.getGroup_2());
-		action$6$Consumer = new Action$6$Consumer(rule.getC1xAction_2_0());
+		action$6$Consumer = new Action$6$Consumer(rule.getC1XAction_2_0());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.getXKeyword_2_1());
 		group$9$Consumer = new Group$9$Consumer(rule.getGroup_3());
-		action$10$Consumer = new Action$10$Consumer(rule.getC2yAction_3_0());
+		action$10$Consumer = new Action$10$Consumer(rule.getC2YAction_3_0());
 		keyword$12$Consumer = new Keyword$12$Consumer(rule.getYKeyword_3_1());
 		group$13$Consumer = new Group$13$Consumer(rule.getGroup_4());
-		action$14$Consumer = new Action$14$Consumer(rule.getC3zAction_4_0());
+		action$14$Consumer = new Action$14$Consumer(rule.getC3ZAction_4_0());
 		keyword$16$Consumer = new Keyword$16$Consumer(rule.getZKeyword_4_1());
 	}
 	

@@ -144,7 +144,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:93:5: 
                     {
                      
-                            temp=factory.create(grammarAccess.getModelAccess().getParentleftAction_1_0().getType().getClassifier());
+                            temp=factory.create(grammarAccess.getModelAccess().getParentLeftAction_1_0().getType().getClassifier());
                             try {
                             	factory.set(temp, "left", current, null /*ParserRule*/, currentNode);
                             } catch(ValueConverterException vce) {
@@ -152,7 +152,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                             }
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getParentleftAction_1_0(), currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode(grammarAccess.getModelAccess().getParentLeftAction_1_0(), currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 

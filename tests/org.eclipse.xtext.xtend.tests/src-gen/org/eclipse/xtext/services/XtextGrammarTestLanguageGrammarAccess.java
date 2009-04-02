@@ -474,7 +474,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cGroupParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAlternativesgroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -494,7 +494,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.groups+=current}
-		public Action getAlternativesgroupsAction_1_0() { return cAlternativesgroupsAction_1_0; }
+		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 
 		//("|" groups+=Group)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -514,7 +514,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAbstractTokenParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cGrouptokensAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cGroupTokensAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cTokensAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cTokensAbstractTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
@@ -532,7 +532,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Group.tokens+=current}
-		public Action getGrouptokensAction_1_0() { return cGrouptokensAction_1_0; }
+		public Action getGroupTokensAction_1_0() { return cGroupTokensAction_1_0; }
 
 		//(tokens+=AbstractToken)+
 		public Assignment getTokensAssignment_1_1() { return cTokensAssignment_1_1; }
@@ -834,7 +834,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAssignableTerminalParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAlternativesgroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -854,7 +854,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.groups+=current}
-		public Action getAlternativesgroupsAction_1_0() { return cAlternativesgroupsAction_1_0; }
+		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 
 		//("|" groups+=AssignableTerminal)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -966,7 +966,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCrossReferenceableTerminalParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAlternativesgroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -986,7 +986,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.groups+=current}
-		public Action getAlternativesgroupsAction_1_0() { return cAlternativesgroupsAction_1_0; }
+		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 
 		//("|" groups+=CrossReferenceableTerminal)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -1086,7 +1086,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTerminalGroupParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAlternativesgroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -1106,7 +1106,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.groups+=current}
-		public Action getAlternativesgroupsAction_1_0() { return cAlternativesgroupsAction_1_0; }
+		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 
 		//("|" groups+=TerminalGroup)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
@@ -1126,7 +1126,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTerminalTokenParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cGrouptokensAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cGroupTokensAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cTokensAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cTokensTerminalTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
@@ -1144,7 +1144,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Group.tokens+=current}
-		public Action getGrouptokensAction_1_0() { return cGrouptokensAction_1_0; }
+		public Action getGroupTokensAction_1_0() { return cGroupTokensAction_1_0; }
 
 		//(tokens+=TerminalToken)+
 		public Assignment getTokensAssignment_1_1() { return cTokensAssignment_1_1; }
@@ -1316,7 +1316,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 	public class WildcardElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Wildcard");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cWildcardnullAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cWildcardAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Wildcard:
@@ -1327,7 +1327,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup() { return cGroup; }
 
 		//{Wildcard}
-		public Action getWildcardnullAction_0() { return cWildcardnullAction_0; }
+		public Action getWildcardAction_0() { return cWildcardAction_0; }
 
 		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
@@ -1338,7 +1338,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cKeywordParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cCharacterRangeleftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cCharacterRangeLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cFullStopFullStopKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightKeywordParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
@@ -1357,7 +1357,7 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{CharacterRange.left=current}
-		public Action getCharacterRangeleftAction_1_0() { return cCharacterRangeleftAction_1_0; }
+		public Action getCharacterRangeLeftAction_1_0() { return cCharacterRangeLeftAction_1_0; }
 
 		//".."
 		public Keyword getFullStopFullStopKeyword_1_1() { return cFullStopFullStopKeyword_1_1; }
@@ -1824,7 +1824,8 @@ public class XtextGrammarTestLanguageGrammarAccess implements IGrammarAccess {
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

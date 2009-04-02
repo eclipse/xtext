@@ -198,7 +198,7 @@ public final class SimpleExpressionsTestLanguageMultiplicationConsumer extends N
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTermParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getOpvaluesAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getOpValuesAction_1_0());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.getOperatorAssignment_1_1());
 		alternatives$7$Consumer = new Alternatives$7$Consumer(rule.getOperatorAlternatives_1_1_0());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.getOperatorAsteriskKeyword_1_1_0_0());

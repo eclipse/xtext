@@ -351,7 +351,8 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		return gaTerminals.getWSRule();
 	} 
 
-	//org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Serialization of TerminalRule failed.
+	//terminal ANY_OTHER:
+	//  .;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
 	} 

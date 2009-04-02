@@ -120,12 +120,12 @@ protected class Model_1_0_Action_Parent_left extends ActionToken  {
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getModelAccess().getParentleftAction_1_0();
+		return grammarAccess.getModelAccess().getParentLeftAction_1_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if(!current.isInstanceOf(grammarAccess.getModelAccess().getParentleftAction_1_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getModelAccess().getParentLeftAction_1_0().getType().getClassifier())) return null;
 		Object val = current.getConsumable("left", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("left")) return null;

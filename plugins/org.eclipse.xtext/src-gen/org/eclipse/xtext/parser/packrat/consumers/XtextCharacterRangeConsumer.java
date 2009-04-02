@@ -151,7 +151,7 @@ public final class XtextCharacterRangeConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getKeywordParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getCharacterRangeleftAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getCharacterRangeLeftAction_1_0());
 		keyword$6$Consumer = new Keyword$6$Consumer(rule.getFullStopFullStopKeyword_1_1());
 		assignment$7$Consumer = new Assignment$7$Consumer(rule.getRightAssignment_1_2());
 		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getRightKeywordParserRuleCall_1_2_0());
