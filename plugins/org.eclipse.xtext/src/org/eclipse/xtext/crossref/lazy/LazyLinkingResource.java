@@ -53,6 +53,9 @@ public class LazyLinkingResource extends XtextResource {
 				if (linkedObjects.size() > 1)
 					throw new IllegalStateException("linkingService returned more than one object for fragment "
 							+ uriFragment);
+				// remove previously added error markers, since everything should be fine now
+				XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
+				getErrors().remove(diag);
 				return linkedObjects.get(0);
 			}
 		} catch (RuntimeException e) { // XXX: why do we catch any runtime exception?
