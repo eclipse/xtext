@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -30,18 +32,31 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProvider {
+
 	private final static Logger log = Logger.getLogger(AbstractDeclarativeScopeProvider.class);
 	
-	private final ErrorHandler<IScope> handler = new ErrorHandler<IScope>() {
+	private final ErrorHandler<IScope> refErrorHandler = new ErrorHandler<IScope>() {
 		public IScope handle(Object[] params, Throwable throwable) {
 			EObject object = (EObject) params[0];
 			EReference reference = (EReference) params[1];
 			if (object.eContainer()==null) {
-				if (log.isInfoEnabled())
-					log.info(throwable.getMessage());
+				if (log.isTraceEnabled())
+					log.trace(throwable.getMessage());
 				return genericFallBack.getScope(object, reference);
 			}
 			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), reference);
+		}};
+		
+	private final ErrorHandler<IScope> typeErrorHandler = new ErrorHandler<IScope>() {
+		public IScope handle(Object[] params, Throwable throwable) {
+			EObject object = (EObject) params[0];
+			EClass type = (EClass) params[1];
+			if (object.eContainer()==null) {
+				if (log.isTraceEnabled())
+					log.trace(throwable.getMessage());
+				return genericFallBack.getScope(object, type);
+			}
+			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), type);
 		}};
 		
 	
@@ -51,16 +66,25 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 	public void setGenericFallBack(DefaultScopeProvider defaultScopeProvider) {
 		this.genericFallBack = defaultScopeProvider;
 	}
+	
+	protected Predicate<Method> getPredicate(EObject context, EClass type) {
+		String methodName = "scope_"+type.getName();
+		return PolymorphicDispatcher.Predicates.forName(methodName, 2);
+	}
+	
+	protected Predicate<Method> getPredicate(EObject context, EReference reference) {
+		return getPredicate(context, reference.getEReferenceType());
+	}
 
 	public final IScope getScope(EObject context, EReference reference) {
-		String methodName = "scope_"+reference.getEType().getName();
-		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(methodName, 2, 2, Collections.singletonList(this), handler);
+		final Predicate<Method> predicate = getPredicate(context, reference);
+		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate, refErrorHandler);
 		return scope.invoke(context, reference);
 	}
 	
 	public final IScope getScope(EObject context, EClass type) {
-		String methodName = "scope_"+type.getName();
-		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(methodName, 2, 2, Collections.singletonList(this), handler);
+		final Predicate<Method> predicate = getPredicate(context, type);
+		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate, typeErrorHandler);
 		return scope.invoke(context, type);
 	}
 
