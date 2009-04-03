@@ -53,7 +53,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class XtextLinker extends Linker {
 
 	private static Logger log = Logger.getLogger(XtextLinker.class);
