@@ -35,7 +35,6 @@ public class PolymorphicDispatcher<RT> {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 *
 	 */
 	static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
 		public RT handle(Object[] params, Throwable e) {
@@ -51,27 +50,15 @@ public class PolymorphicDispatcher<RT> {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 *
 	 */
 	static class MethodNameFilter implements Predicate<Method> {
-		/**
-		 * 
-		 */
+
 		private final int maxParams;
-		/**
-		 * 
-		 */
+
 		private final String methodName;
-		/**
-		 * 
-		 */
+
 		private final int minParams;
 
-		/**
-		 * @param methodName
-		 * @param minParams
-		 * @param maxParams
-		 */
 		private MethodNameFilter(String methodName, int minParams, int maxParams) {
 			this.maxParams = maxParams;
 			this.methodName = methodName;
@@ -87,6 +74,18 @@ public class PolymorphicDispatcher<RT> {
 		public String toString() {
 			return "'"+methodName+"'";
 		}
+	}
+	
+	public static class Predicates {
+	
+		public static Predicate<Method> forName(String name) {
+			return new MethodNameFilter(name, 1, 1);
+		}
+		
+		public static Predicate<Method> forName(String name, int params) {
+			return new MethodNameFilter(name, params, params);
+		}
+	
 	}
 
 	/**
@@ -172,6 +171,11 @@ public class PolymorphicDispatcher<RT> {
 		this(targets, methodFilter, new DefaultComparator(targets), new DefaultErrorHandler<RT>());
 	}
 	
+	public PolymorphicDispatcher(List<? extends Object> targets,
+			Predicate<Method> predicate, ErrorHandler<RT> errorHandler) {
+		this(targets, predicate, new DefaultComparator(targets), errorHandler);
+	}
+	
 	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter,
 			Comparator<MethodDesc> comparator, ErrorHandler<RT> handler) {
 		this.targets = targets;
@@ -206,10 +210,6 @@ public class PolymorphicDispatcher<RT> {
 			return target;
 		}
 
-		/**
-		 * @param param
-		 * @return
-		 */
 		public boolean isInvokeable(Object[] param) {
 			if (getParameterTypes().length != param.length)
 				return false;
