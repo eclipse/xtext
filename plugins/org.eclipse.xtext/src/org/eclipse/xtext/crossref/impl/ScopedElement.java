@@ -31,9 +31,9 @@ public class ScopedElement extends AbstractScopedElement {
 		this.additionalInformation = additionalInformation;
 	}
 
-	private String name;
-	private EObject element;
-	private Object additionalInformation;
+	private final String name;
+	private final EObject element;
+	private final Object additionalInformation;
 
 	public Object additionalInformation() {
 		return additionalInformation;

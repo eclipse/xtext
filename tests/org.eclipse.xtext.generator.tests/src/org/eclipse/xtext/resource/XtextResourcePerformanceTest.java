@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 

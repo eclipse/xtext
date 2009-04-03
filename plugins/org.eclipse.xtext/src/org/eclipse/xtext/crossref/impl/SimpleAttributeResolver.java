@@ -24,7 +24,9 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SimpleAttributeResolver<K extends EObject, T> {
+public class SimpleAttributeResolver<K extends EObject, T> implements Function<K, T>{
+	
+	public final static SimpleAttributeResolver<EObject, String> NAME_RESOLVER = newResolver(String.class, "name");
 
 	private final SimpleCache<EClass, EAttribute> attributeCache;
 
@@ -38,7 +40,7 @@ public class SimpleAttributeResolver<K extends EObject, T> {
 		return new SimpleAttributeResolver<K, T>(type, attributeName);
 	}
 
-	public EAttribute getAttribute(EObject object) {
+	public EAttribute getAttribute(final EObject object) {
 		return attributeCache.get(object.eClass());
 	}
 
@@ -68,11 +70,11 @@ public class SimpleAttributeResolver<K extends EObject, T> {
 		});
 	}
 
-	public T getValue(K object) {
+	public T getValue(final K object) {
 		return valueCache.get(object);
 	}
 
-	public Iterable<K> getMatches(Iterable<K> candidates, final T value) {
+	public Iterable<K> getMatches(final Iterable<K> candidates, final T value) {
 		return Iterables.filter(candidates, new Predicate<K>() {
 			public boolean apply(K param) {
 				final T candidateValue = getValue(param);
@@ -87,11 +89,11 @@ public class SimpleAttributeResolver<K extends EObject, T> {
 			return null;
 		}
 
-		public boolean isAdapterForType(Object type) {
+		public boolean isAdapterForType(final Object type) {
 			return type instanceof EObject;
 		}
 
-		public void notifyChanged(Notification notification) {
+		public void notifyChanged(final Notification notification) {
 			if (!notification.isTouch() && Notification.SET == notification.getEventType()) {
 				final Object feature = notification.getFeature();
 				if (feature != null) {
@@ -104,9 +106,13 @@ public class SimpleAttributeResolver<K extends EObject, T> {
 			}
 		}
 
-		public void setTarget(Notifier newTarget) {
+		public void setTarget(final Notifier newTarget) {
 			// nothing to do
 		}
+	}
+
+	public T apply(final K from) {
+		return getValue(from);
 	}
 
 }

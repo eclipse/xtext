@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
+import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -18,7 +18,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class StringScope extends SimpleNestedScope {
+class StringScope extends SimpleScope {
 
 	public StringScope(IScope parentScope, Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
 		super(parentScope, Iterables.transform(content, new Function<Object, IScopedElement>() {

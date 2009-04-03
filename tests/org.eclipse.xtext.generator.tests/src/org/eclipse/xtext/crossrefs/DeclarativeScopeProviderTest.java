@@ -8,13 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossrefs;
 
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.impl.DeclarativeScopeProvider;
-import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
+import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.crossref.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import junit.framework.TestCase;
 
@@ -25,8 +28,8 @@ import junit.framework.TestCase;
 public class DeclarativeScopeProviderTest extends TestCase {
 	@SuppressWarnings("unused")
 	public void testSimple() throws Exception {
-		final IScope a =  new SimpleNestedScope(IScope.NULLSCOPE);
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
 			}
@@ -38,10 +41,10 @@ public class DeclarativeScopeProviderTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	public void testNested() throws Exception {
-		final IScope a =  new SimpleNestedScope(IScope.NULLSCOPE);
-		final IScope b =  new SimpleNestedScope(IScope.NULLSCOPE);
+		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
+		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClass clazz, EReference ref) {
 				return a;
 			}
@@ -57,11 +60,11 @@ public class DeclarativeScopeProviderTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	public void testPolymorphic() throws Exception {
-		final IScope a =  new SimpleNestedScope(IScope.NULLSCOPE);
-		final IScope b =  new SimpleNestedScope(IScope.NULLSCOPE);
-		final IScope c =  new SimpleNestedScope(IScope.NULLSCOPE);
+		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
+		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
+		final IScope c =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		
-		DeclarativeScopeProvider provider = new DeclarativeScopeProvider() {
+		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
 			private IScope scope_EClass(EClassifier clazz, EReference ref) {
 				return a;
 			}
