@@ -153,7 +153,7 @@ public interface LazyLinkingPackage extends EPackage
   int PROPERTY = 2;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' reference.
+   * The feature id for the '<em><b>Type</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -266,10 +266,10 @@ public interface LazyLinkingPackage extends EPackage
   EClass getProperty();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property#getType <em>Type</em>}'.
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Type</em>'.
+   * @return the meta object for the reference list '<em>Type</em>'.
    * @see org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property#getType()
    * @see #getProperty()
    * @generated
@@ -381,7 +381,7 @@ public interface LazyLinkingPackage extends EPackage
     EClass PROPERTY = eINSTANCE.getProperty();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Type</b></em>' reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

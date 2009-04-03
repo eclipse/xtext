@@ -292,7 +292,7 @@ ruleProperty returns [EObject current=null]
 
 		// TODO assign feature to currentNode
 	
-)(	
+)+(	
 	
 	    lv_name_1=	RULE_ID
 	{
@@ -312,7 +312,11 @@ ruleProperty returns [EObject current=null]
 	        }
 	    }
 	
-));
+)';' 
+    {
+        createLeafNode(grammarAccess.getPropertyAccess().getSemicolonKeyword_2(), null); 
+    }
+);
 
 
 

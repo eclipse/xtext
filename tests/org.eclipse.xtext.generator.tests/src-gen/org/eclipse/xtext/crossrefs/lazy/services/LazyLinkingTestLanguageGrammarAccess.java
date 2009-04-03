@@ -153,15 +153,16 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTypeTypeIDTerminalRuleCall_0_0_1 = (RuleCall)cTypeTypeCrossReference_0_0.eContents().get(1);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Property:
-		//  type=[Type] name=ID;
+		//  (type+=[Type])+ name=ID ";";
 		public ParserRule getRule() { return rule; }
 
-		//type=[Type] name=ID
+		//(type+=[Type])+ name=ID ";"
 		public Group getGroup() { return cGroup; }
 
-		//type=[Type]
+		//(type+=[Type])+
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
 		//[Type]
@@ -175,6 +176,9 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	
 	
@@ -224,7 +228,7 @@ public class LazyLinkingTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Property:
-	//  type=[Type] name=ID;
+	//  (type+=[Type])+ name=ID ";";
 	public PropertyElements getPropertyAccess() {
 		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
 	}

@@ -5,6 +5,8 @@
  */
 package org.eclipse.xtext.crossrefs.lazy.lazyLinking;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -27,30 +29,20 @@ import org.eclipse.emf.ecore.EObject;
 public interface Property extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Type</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.xtext.crossrefs.lazy.lazyLinking.Type}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * If the meaning of the '<em>Type</em>' reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(Type)
+   * @return the value of the '<em>Type</em>' reference list.
    * @see org.eclipse.xtext.crossrefs.lazy.lazyLinking.LazyLinkingPackage#getProperty_Type()
    * @model
    * @generated
    */
-  Type getType();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property#getType <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(Type value);
+  EList<Type> getType();
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
