@@ -11,9 +11,9 @@ package org.eclipse.xtext.crossrefs.lazy;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.crossref.impl.DeclarativeScopeProvider;
+import org.eclipse.xtext.crossref.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.crossref.impl.ScopedElement;
-import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
+import org.eclipse.xtext.crossref.impl.SimpleScope;
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property;
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Type;
 
@@ -24,10 +24,10 @@ import com.google.common.collect.Iterables;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class LazyLinkingTestLanguageScopeProvider extends DeclarativeScopeProvider {
+public class LazyLinkingTestLanguageScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	public IScope scope_Property(Type t, EReference ref) {
-		return new SimpleNestedScope(Iterables.transform(t.getExtends().getProperties(), new Function<Property, IScopedElement>(){
+		return new SimpleScope(Iterables.transform(t.getExtends().getProperties(), new Function<Property, IScopedElement>(){
 			public IScopedElement apply(Property param) {
 				return ScopedElement.create(param.getName(), param);
 			}
