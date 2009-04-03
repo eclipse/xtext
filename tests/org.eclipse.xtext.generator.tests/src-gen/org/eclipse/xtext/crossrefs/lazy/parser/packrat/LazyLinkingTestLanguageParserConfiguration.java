@@ -90,6 +90,7 @@ public class LazyLinkingTestLanguageParserConfiguration extends AbstractParserCo
 		getTypeConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.crossrefs.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 		getTypeConsumer().setRuleCall$21$Delimiter(org.eclipse.xtext.crossrefs.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 		getTypeConsumer().setRuleCall$26$Delimiter(org.eclipse.xtext.crossrefs.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
+		getPropertyConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.crossrefs.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.keyword$17$Delimiter);
 		getPropertyConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.crossrefs.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 		getPropertyConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.crossrefs.lazy.parser.packrat.LazyLinkingTestLanguageDelimiters.ruleCall$10$Delimiter);
 	}

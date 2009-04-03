@@ -462,11 +462,11 @@ protected class Type_6_Keyword extends KeywordToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   type=[Type] name=ID;
+ *   (type+=[Type])+ name=ID ";";
  *
  **/
 
-// type=[Type] name=ID
+// (type+=[Type])+ name=ID ";"
 protected class Property_Group extends GroupToken {
 	
 	public Property_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -480,25 +480,29 @@ protected class Property_Group extends GroupToken {
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new Property_1_Assignment_name(current, this).firstSolution();
+		Solution s1 = new Property_2_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new Property_0_Assignment_type(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
+			Solution s2 = new Property_1_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			while(s2 != null) {
+				Solution s3 = new Property_0_Assignment_type(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				if(s3 != null) {
+					last = s3.getPredecessor();
+					return s3;
+				} else {
+					s2 = s2.getPredecessor().nextSolution(this,s2);
+				}
 			}
+			s1 = s1.getPredecessor().nextSolution(this,s1);
 		}
 		return null;
 	}
 }
 
-// type=[Type]
+// (type+=[Type])+
 protected class Property_0_Assignment_type extends AssignmentToken  {
 	
 	public Property_0_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+		super(curr, pred, IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
@@ -545,6 +549,18 @@ protected class Property_1_Assignment_name extends AssignmentToken  {
 		}
 		return null;
 	}
+}
+
+// ";"
+protected class Property_2_Keyword extends KeywordToken  {
+	
+	public Property_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getPropertyAccess().getSemicolonKeyword_2();
+	}	
 }
 
 

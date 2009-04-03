@@ -14,19 +14,20 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
     public static final int T11=11;
-    public static final int T15=15;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int T17=17;
     public static final int T12=12;
-    public static final int Tokens=18;
+    public static final int T13=13;
+    public static final int T18=18;
+    public static final int RULE_WS=9;
+    public static final int T15=15;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
+    public static final int T17=17;
+    public static final int Tokens=19;
     public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T13=13;
     public InternalLazyLinkingTestLanguageLexer() {;} 
     public InternalLazyLinkingTestLanguageLexer(CharStream input) {
         super(input);
@@ -163,14 +164,32 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     }
     // $ANTLR end T17
 
+    // $ANTLR start T18
+    public final void mT18() throws RecognitionException {
+        try {
+            int _type = T18;
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:17:5: ( ';' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:17:7: ';'
+            {
+            match(';'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T18
+
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:321:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:321:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:321:11: ( '^' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -179,7 +198,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:321:11: '^'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:11: '^'
                     {
                     match('^'); 
 
@@ -198,7 +217,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:321:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -246,10 +265,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:323:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:323:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:323:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -263,7 +282,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:323:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -293,10 +312,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -308,16 +327,16 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("325:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("329:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -333,7 +352,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -350,7 +369,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -376,10 +395,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -395,7 +414,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -412,7 +431,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:325:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -454,12 +473,12 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -484,7 +503,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:327:52: .
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:52: .
             	    {
             	    matchAny(); 
 
@@ -512,12 +531,12 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -530,7 +549,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -551,7 +570,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -560,9 +579,9 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -571,7 +590,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:329:41: '\\r'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:41: '\\r'
                             {
                             match('\r'); 
 
@@ -601,10 +620,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:335:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:335:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:331:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:335:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -657,8 +676,8 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:16: ( . )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:333:18: .
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:337:16: ( . )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:337:18: .
             {
             matchAny(); 
 
@@ -672,81 +691,81 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=14;
+        // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=15;
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='t') ) {
             int LA12_1 = input.LA(2);
 
             if ( (LA12_1=='y') ) {
-                int LA12_16 = input.LA(3);
+                int LA12_17 = input.LA(3);
 
-                if ( (LA12_16=='p') ) {
-                    int LA12_29 = input.LA(4);
+                if ( (LA12_17=='p') ) {
+                    int LA12_31 = input.LA(4);
 
-                    if ( (LA12_29=='e') ) {
-                        int LA12_33 = input.LA(5);
+                    if ( (LA12_31=='e') ) {
+                        int LA12_35 = input.LA(5);
 
-                        if ( ((LA12_33>='0' && LA12_33<='9')||(LA12_33>='A' && LA12_33<='Z')||LA12_33=='_'||(LA12_33>='a' && LA12_33<='z')) ) {
-                            alt12=8;
+                        if ( ((LA12_35>='0' && LA12_35<='9')||(LA12_35>='A' && LA12_35<='Z')||LA12_35=='_'||(LA12_35>='a' && LA12_35<='z')) ) {
+                            alt12=9;
                         }
                         else {
                             alt12=1;}
                     }
                     else {
-                        alt12=8;}
+                        alt12=9;}
                 }
                 else {
-                    alt12=8;}
+                    alt12=9;}
             }
             else {
-                alt12=8;}
+                alt12=9;}
         }
         else if ( (LA12_0=='e') ) {
             int LA12_2 = input.LA(2);
 
             if ( (LA12_2=='x') ) {
-                int LA12_18 = input.LA(3);
+                int LA12_19 = input.LA(3);
 
-                if ( (LA12_18=='t') ) {
-                    int LA12_30 = input.LA(4);
+                if ( (LA12_19=='t') ) {
+                    int LA12_32 = input.LA(4);
 
-                    if ( (LA12_30=='e') ) {
-                        int LA12_34 = input.LA(5);
+                    if ( (LA12_32=='e') ) {
+                        int LA12_36 = input.LA(5);
 
-                        if ( (LA12_34=='n') ) {
-                            int LA12_37 = input.LA(6);
+                        if ( (LA12_36=='n') ) {
+                            int LA12_39 = input.LA(6);
 
-                            if ( (LA12_37=='d') ) {
-                                int LA12_38 = input.LA(7);
+                            if ( (LA12_39=='d') ) {
+                                int LA12_40 = input.LA(7);
 
-                                if ( (LA12_38=='s') ) {
-                                    int LA12_39 = input.LA(8);
+                                if ( (LA12_40=='s') ) {
+                                    int LA12_41 = input.LA(8);
 
-                                    if ( ((LA12_39>='0' && LA12_39<='9')||(LA12_39>='A' && LA12_39<='Z')||LA12_39=='_'||(LA12_39>='a' && LA12_39<='z')) ) {
-                                        alt12=8;
+                                    if ( ((LA12_41>='0' && LA12_41<='9')||(LA12_41>='A' && LA12_41<='Z')||LA12_41=='_'||(LA12_41>='a' && LA12_41<='z')) ) {
+                                        alt12=9;
                                     }
                                     else {
                                         alt12=2;}
                                 }
                                 else {
-                                    alt12=8;}
+                                    alt12=9;}
                             }
                             else {
-                                alt12=8;}
+                                alt12=9;}
                         }
                         else {
-                            alt12=8;}
+                            alt12=9;}
                     }
                     else {
-                        alt12=8;}
+                        alt12=9;}
                 }
                 else {
-                    alt12=8;}
+                    alt12=9;}
             }
             else {
-                alt12=8;}
+                alt12=9;}
         }
         else if ( (LA12_0=='.') ) {
             alt12=3;
@@ -755,37 +774,37 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             int LA12_4 = input.LA(2);
 
             if ( (LA12_4=='o') ) {
-                int LA12_20 = input.LA(3);
+                int LA12_21 = input.LA(3);
 
-                if ( (LA12_20=='r') ) {
-                    int LA12_31 = input.LA(4);
+                if ( (LA12_21=='r') ) {
+                    int LA12_33 = input.LA(4);
 
-                    if ( ((LA12_31>='0' && LA12_31<='9')||(LA12_31>='A' && LA12_31<='Z')||LA12_31=='_'||(LA12_31>='a' && LA12_31<='z')) ) {
-                        alt12=8;
+                    if ( ((LA12_33>='0' && LA12_33<='9')||(LA12_33>='A' && LA12_33<='Z')||LA12_33=='_'||(LA12_33>='a' && LA12_33<='z')) ) {
+                        alt12=9;
                     }
                     else {
                         alt12=4;}
                 }
                 else {
-                    alt12=8;}
+                    alt12=9;}
             }
             else {
-                alt12=8;}
+                alt12=9;}
         }
         else if ( (LA12_0=='i') ) {
             int LA12_5 = input.LA(2);
 
             if ( (LA12_5=='n') ) {
-                int LA12_21 = input.LA(3);
+                int LA12_22 = input.LA(3);
 
-                if ( ((LA12_21>='0' && LA12_21<='9')||(LA12_21>='A' && LA12_21<='Z')||LA12_21=='_'||(LA12_21>='a' && LA12_21<='z')) ) {
-                    alt12=8;
+                if ( ((LA12_22>='0' && LA12_22<='9')||(LA12_22>='A' && LA12_22<='Z')||LA12_22=='_'||(LA12_22>='a' && LA12_22<='z')) ) {
+                    alt12=9;
                 }
                 else {
                     alt12=5;}
             }
             else {
-                alt12=8;}
+                alt12=9;}
         }
         else if ( (LA12_0=='{') ) {
             alt12=6;
@@ -793,64 +812,67 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         else if ( (LA12_0=='}') ) {
             alt12=7;
         }
-        else if ( (LA12_0=='^') ) {
-            int LA12_8 = input.LA(2);
-
-            if ( ((LA12_8>='A' && LA12_8<='Z')||LA12_8=='_'||(LA12_8>='a' && LA12_8<='z')) ) {
-                alt12=8;
-            }
-            else {
-                alt12=14;}
-        }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='s')||(LA12_0>='u' && LA12_0<='z')) ) {
+        else if ( (LA12_0==';') ) {
             alt12=8;
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=9;
-        }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_11 = input.LA(2);
+        else if ( (LA12_0=='^') ) {
+            int LA12_9 = input.LA(2);
 
-            if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFE')) ) {
-                alt12=10;
+            if ( ((LA12_9>='A' && LA12_9<='Z')||LA12_9=='_'||(LA12_9>='a' && LA12_9<='z')) ) {
+                alt12=9;
             }
             else {
-                alt12=14;}
+                alt12=15;}
         }
-        else if ( (LA12_0=='\'') ) {
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='s')||(LA12_0>='u' && LA12_0<='z')) ) {
+            alt12=9;
+        }
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+            alt12=10;
+        }
+        else if ( (LA12_0=='\"') ) {
             int LA12_12 = input.LA(2);
 
             if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
-                alt12=10;
+                alt12=11;
             }
             else {
-                alt12=14;}
+                alt12=15;}
+        }
+        else if ( (LA12_0=='\'') ) {
+            int LA12_13 = input.LA(2);
+
+            if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFE')) ) {
+                alt12=11;
+            }
+            else {
+                alt12=15;}
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
             case '/':
                 {
-                alt12=12;
+                alt12=13;
                 }
                 break;
             case '*':
                 {
-                alt12=11;
+                alt12=12;
                 }
                 break;
             default:
-                alt12=14;}
+                alt12=15;}
 
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=13;
-        }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
             alt12=14;
+        }
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||LA12_0==':'||(LA12_0>='<' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
+            alt12=15;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
@@ -905,49 +927,56 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:38: RULE_ID
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:38: T18
+                {
+                mT18(); 
+
+                }
+                break;
+            case 9 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:42: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 9 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:46: RULE_INT
+            case 10 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:50: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 10 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:55: RULE_STRING
+            case 11 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:59: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 11 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:67: RULE_ML_COMMENT
+            case 12 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:71: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 12 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:83: RULE_SL_COMMENT
+            case 13 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:87: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 13 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:99: RULE_WS
+            case 14 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:103: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 14 :
-                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:107: RULE_ANY_OTHER
+            case 15 :
+                // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/crossrefs/lazy/parser/antlr/internal/InternalLazyLinkingTestLanguage.g:1:111: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

@@ -73,11 +73,11 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@d37c1a (cardinality: null) Target:org.eclipse.xtext.impl.TerminalRuleImpl@900445 (name: STRING)
+ * org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@2238e8 (cardinality: null) Target:org.eclipse.xtext.impl.TerminalRuleImpl@1e86da (name: STRING)
  *
  **/
 
-// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@d37c1a (cardinality: null) Target:org.eclipse.xtext.impl.TerminalRuleImpl@900445 (name: STRING)
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@2238e8 (cardinality: null) Target:org.eclipse.xtext.impl.TerminalRuleImpl@1e86da (name: STRING)
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -130,7 +130,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
-// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@d37c1a (cardinality: null) Target:org.eclipse.xtext.impl.TerminalRuleImpl@900445 (name: STRING)
+// org.eclipse.xtext.parsetree.reconstr.XtextSerializationException: Error serializing CrossRefs: Unable to create a string represenation for reference 'AbstractRule' using org.eclipse.xtext.xtext.XtextLinkingService EReference: rule Context:org.eclipse.xtext.impl.RuleCallImpl@2238e8 (cardinality: null) Target:org.eclipse.xtext.impl.TerminalRuleImpl@1e86da (name: STRING)
 protected class Element_1_Assignment_h extends AssignmentToken  {
 	
 	public Element_1_Assignment_h(IInstanceDescription curr, AbstractToken pred) {

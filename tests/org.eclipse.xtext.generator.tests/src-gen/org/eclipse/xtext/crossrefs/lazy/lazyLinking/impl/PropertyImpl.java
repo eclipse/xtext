@@ -5,13 +5,18 @@
  */
 package org.eclipse.xtext.crossrefs.lazy.lazyLinking.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property;
@@ -34,14 +39,14 @@ import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Type;
 public class PropertyImpl extends MinimalEObjectImpl.Container implements Property
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected EList<Type> type;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -89,42 +94,13 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getType()
+  public EList<Type> getType()
   {
-    if (type != null && type.eIsProxy())
+    if (type == null)
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LazyLinkingPackage.PROPERTY__TYPE, oldType, type));
-      }
+      type = new EObjectResolvingEList<Type>(Type.class, this, LazyLinkingPackage.PROPERTY__TYPE);
     }
     return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Type basicGetType()
-  {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(Type newType)
-  {
-    Type oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LazyLinkingPackage.PROPERTY__TYPE, oldType, type));
   }
 
   /**
@@ -161,8 +137,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
     switch (featureID)
     {
       case LazyLinkingPackage.PROPERTY__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+        return getType();
       case LazyLinkingPackage.PROPERTY__NAME:
         return getName();
     }
@@ -174,13 +149,15 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case LazyLinkingPackage.PROPERTY__TYPE:
-        setType((Type)newValue);
+        getType().clear();
+        getType().addAll((Collection<? extends Type>)newValue);
         return;
       case LazyLinkingPackage.PROPERTY__NAME:
         setName((String)newValue);
@@ -200,7 +177,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
     switch (featureID)
     {
       case LazyLinkingPackage.PROPERTY__TYPE:
-        setType((Type)null);
+        getType().clear();
         return;
       case LazyLinkingPackage.PROPERTY__NAME:
         setName(NAME_EDEFAULT);
@@ -220,7 +197,7 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
     switch (featureID)
     {
       case LazyLinkingPackage.PROPERTY__TYPE:
-        return type != null;
+        return type != null && !type.isEmpty();
       case LazyLinkingPackage.PROPERTY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }

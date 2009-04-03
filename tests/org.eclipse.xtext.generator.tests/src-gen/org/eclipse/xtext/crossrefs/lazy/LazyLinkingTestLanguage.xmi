@@ -73,7 +73,7 @@
         <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/lazyLinkingTestLanguage#//Property"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Assignment" feature="type" operator="=">
+        <tokens xsi:type="xtext:Assignment" cardinality="+" feature="type" operator="+=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/0/@metamodelDeclarations.0">
               <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/lazyLinkingTestLanguage#//Type"/>
@@ -84,6 +84,7 @@
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
+        <tokens xsi:type="xtext:Keyword" value=";"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

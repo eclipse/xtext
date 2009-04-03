@@ -9,12 +9,14 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
+import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.crossrefs.lazy.services.LazyLinkingTestLanguageGrammarAccess.PropertyElements;
@@ -35,6 +37,10 @@ public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalCo
 
 	private IElementConsumer ruleCall$7$Consumer;
 
+	private IElementConsumer keyword$8$Consumer;
+
+	private ICharacterClass keyword$8$Delimiter;
+
 	private ISequenceMatcher ruleCall$5$Delimiter;
 
 	private ISequenceMatcher ruleCall$7$Delimiter;
@@ -49,10 +55,11 @@ public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalCo
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(assignment$2$Consumer);
 			acceptor.accept(assignment$6$Consumer);
+			acceptor.accept(keyword$8$Consumer);
 		}
 	}
 
-	protected class Assignment$2$Consumer extends AssignmentConsumer {
+	protected class Assignment$2$Consumer extends MandatoryLoopAssignmentConsumer {
 		
 		protected Assignment$2$Consumer(final Assignment assignment) {
 			super(assignment);
@@ -72,7 +79,7 @@ public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalCo
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "type", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
+			return consumeTerminal(idConsumer, "type", true, false, getElement(), getRuleCall$5$Delimiter(), optional);
 		}
 	}
 
@@ -100,8 +107,21 @@ public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalCo
 		}
 	}
 
+	protected class Keyword$8$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$8$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$8$Delimiter(), optional);
+		}
+	}
+
 	public LazyLinkingTestLanguagePropertyConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
@@ -123,6 +143,7 @@ public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalCo
 		crossReference$3$Consumer = new CrossReference$3$Consumer(rule.getTypeTypeCrossReference_0_0());
 		assignment$6$Consumer = new Assignment$6$Consumer(rule.getNameAssignment_1());
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getNameIDTerminalRuleCall_1_0());
+		keyword$8$Consumer = new Keyword$8$Consumer(rule.getSemicolonKeyword_2());
 	}
 	
 	@Override
@@ -137,6 +158,14 @@ public final class LazyLinkingTestLanguagePropertyConsumer extends NonTerminalCo
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$5$Delimiter() {
