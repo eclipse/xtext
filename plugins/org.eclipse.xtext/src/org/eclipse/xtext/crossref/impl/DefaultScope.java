@@ -18,33 +18,44 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.crossref.IScope;
 
+import com.google.common.base.Function;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultScope extends SimpleCachingScope {
+public class DefaultScope extends SimpleScope {
 
 	public DefaultScope(Resource resource, EClass type) {
-		this(resource, type, SimpleAttributeResolver.newResolver(String.class, ImportUriValidator.IMPORT_URI));
+		this(resource, type, ImportUriValidator.IMPORT_RESOLVER, SimpleAttributeResolver.NAME_RESOLVER);
 	}
 	
-	public DefaultScope(Resource resource, EClass type, SimpleAttributeResolver<EObject, String> importResolver) {
-		super(createParent(resource.getAllContents(), type, resource, importResolver), resource, type);
+	public DefaultScope(Resource resource, EClass type, Function<EObject, String> importResolver, Function<EObject, String> nameResolver) {
+		super(createParent(resource.getAllContents(), type, resource, importResolver, nameResolver), ScopedElements.allInResource(resource,type,nameResolver));
 	}
 
-	private static IScope createParent(Iterator<EObject> iter, EClass type, Resource resource, SimpleAttributeResolver<EObject, String> importResolver) {
+
+	private static IScope createParent(Iterator<EObject> iter, EClass type, Resource resource, Function<EObject, String> importResolver, Function<EObject, String> nameResolver) {
 		final Set<String> uniqueImportURIs = new HashSet<String>(10);
 		final List<String> orderedImportURIs = new ArrayList<String>(10);
 		while (iter.hasNext()) {
 			EObject object = iter.next();
-			String uri = importResolver.getValue(object);
+			String uri = importResolver.apply(object);
 			if (uri != null && uniqueImportURIs.add(uri) && ImportUriUtil.isValid(object, uri)) {
 				orderedImportURIs.add(uri);
 			}
 		}
 		IScope result = IScope.NULLSCOPE;
 		for(int i = orderedImportURIs.size() - 1; i >= 0; i--) {
-			result = new LazyReferencedResourceScope(result, type, resource, orderedImportURIs.get(i));
+			result = new LazyReferencedResourceScope(result, type, resource, orderedImportURIs.get(i), nameResolver);
 		}
 		return result;
+	}
+	
+	static class LazyReferencedResourceScope extends SimpleScope {
+
+		public LazyReferencedResourceScope(IScope parent, EClass type, Resource context, String uri, Function<EObject, String> nameFunc) {
+			super(parent, ScopedElements.allInResource(ImportUriUtil.getResource(context, uri), type, nameFunc));
+		}
+
 	}
 }

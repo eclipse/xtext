@@ -23,7 +23,7 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.AbstractScopeProvider;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.crossref.impl.SimpleNestedScope;
+import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -51,7 +51,7 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 		Iterable<IScopedElement> iterable = getElements(eResource.getURI().toPlatformString(true), type);
 		TreeIterator<EObject> eAllContents = EcoreUtil.getRootContainer(context).eAllContents();
 			
-		return new SimpleNestedScope(createOuter(eAllContents, type), iterable);
+		return new SimpleScope(createOuter(eAllContents, type), iterable);
 	}
 
 	private Iterable<IScopedElement> getElements(String uri, EClass eClazz) {
@@ -78,7 +78,7 @@ public class IndexBasedScopeProvider extends AbstractScopeProvider {
 			String uri = importResolver.getValue(object);
 			if (uri != null) {
 				Iterable<IScopedElement> elements = getElements(uri, type);
-				return new SimpleNestedScope(createOuter(iter, type), elements);
+				return new SimpleScope(createOuter(iter, type), elements);
 			}
 		}
 		return IScope.NULLSCOPE;

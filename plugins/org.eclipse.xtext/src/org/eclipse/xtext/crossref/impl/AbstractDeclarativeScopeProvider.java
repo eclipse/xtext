@@ -29,8 +29,8 @@ import com.google.inject.Inject;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DeclarativeScopeProvider extends AbstractScopeProvider {
-	private final static Logger log = Logger.getLogger(DeclarativeScopeProvider.class);
+public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProvider {
+	private final static Logger log = Logger.getLogger(AbstractDeclarativeScopeProvider.class);
 	
 	private final ErrorHandler<IScope> handler = new ErrorHandler<IScope>() {
 		public IScope handle(Object[] params, Throwable throwable) {
@@ -41,7 +41,7 @@ public class DeclarativeScopeProvider extends AbstractScopeProvider {
 					log.info(throwable.getMessage());
 				return genericFallBack.getScope(object, reference);
 			}
-			return DeclarativeScopeProvider.this.getScope(object.eContainer(), reference);
+			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), reference);
 		}};
 		
 	

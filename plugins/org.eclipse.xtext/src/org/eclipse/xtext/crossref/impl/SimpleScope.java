@@ -11,12 +11,29 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class SimpleScope extends SimpleNestedScope {
+public class SimpleScope extends AbstractScope {
+	
+	private final IScope outer;
 
-	public SimpleScope(IScope parent, Iterable<IScopedElement> elements) {
-		super(parent, elements);
+	private final Iterable<IScopedElement> elements;
+
+	public SimpleScope(final IScope outer, final Iterable<IScopedElement> elements) {
+		this.outer = outer;
+		this.elements = elements;
+	}
+	
+	public SimpleScope(final Iterable<IScopedElement> elements) {
+		this(IScope.NULLSCOPE, elements);
+	}
+
+	public IScope getOuterScope() {
+		return outer;
+	}
+
+	public Iterable<IScopedElement> getContents() {
+		return elements;
 	}
 
 }

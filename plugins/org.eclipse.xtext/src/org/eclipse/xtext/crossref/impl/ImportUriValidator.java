@@ -17,17 +17,21 @@ import org.eclipse.xtext.validator.CheckType;
  */
 public class ImportUriValidator extends AbstractDeclarativeValidator {
 
-	public static final String IMPORT_URI = "importURI";
-
-	private final SimpleAttributeResolver<EObject, String> resolver;
+	public final static SimpleAttributeResolver<EObject, String> IMPORT_RESOLVER = SimpleAttributeResolver.newResolver(String.class, "importURI");
+	
+	private SimpleAttributeResolver<EObject, String> resolver;
 
 	public ImportUriValidator() {
-		resolver = SimpleAttributeResolver.newResolver(String.class, IMPORT_URI);
+		resolver = IMPORT_RESOLVER;
+	}
+	
+	public ImportUriValidator(SimpleAttributeResolver<EObject, String> resolver) {
+		this.resolver = resolver;
 	}
 
 	@Check(value=CheckType.FAST)
 	public void checkImportUriIsValid(EObject object) {
-		String importURI = resolver.getValue(object);
+		String importURI = resolver.apply(object);
 		if (importURI != null && !ImportUriUtil.isValid(object, importURI)) {
 			error("Imported resource could not be found.", resolver.getAttribute(object).getFeatureID());
 		}

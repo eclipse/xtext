@@ -53,6 +53,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XtextLinker extends Linker {
 
 	private static Logger log = Logger.getLogger(XtextLinker.class);
@@ -105,6 +106,7 @@ public class XtextLinker extends Linker {
 				return (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() &&
 						((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel);
 			}
+
 		};
 	}
 

@@ -9,8 +9,6 @@ package org.eclipse.xtext.xtext;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -23,9 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -37,12 +33,12 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.ScopedElement;
-import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
+import org.eclipse.xtext.crossref.impl.ScopedElements;
+import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
 /**
@@ -126,20 +122,12 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		if (EcorePackage.Literals.EPACKAGE == type) {
 			return createEPackageScope(grammar);
 		} else if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
-			return new SimpleCachingScope(IScope.NULLSCOPE, grammar.eResource(), type, false) {
-				@Override
-				protected Iterator<AbstractMetamodelDeclaration> getRelevantContent(Resource resource) {
-					return grammar.getMetamodelDeclarations().iterator();
-				}
-
-				@Override
-				protected String getNameFeature(EClass type) {
-					if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
-						return XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_Alias().getName();
-					}
-					return super.getNameFeature(type);
-				}
-			};
+			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
+					new Function<AbstractMetamodelDeclaration,IScopedElement>(){
+						public IScopedElement apply(AbstractMetamodelDeclaration from) {
+							return ScopedElement.create(from.getAlias(), from);
+						}
+					}));
 		}
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
 		IScope current = IScope.NULLSCOPE;
@@ -150,12 +138,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	}
 
 	protected IScope createScope(final Grammar grammar, EClass type, IScope parent) {
-		return new SimpleCachingScope(parent, grammar.eResource(), type) {
-			@Override
-			protected Iterator<EObject> getRelevantContent(Resource resource) {
-				return Iterators.concat(Collections.singleton(grammar).iterator(), EcoreUtil.<EObject>getAllContents(grammar, true));
-			}
-		};
+		return new SimpleScope(parent, ScopedElements.allInResource(grammar.eResource(), type, SimpleAttributeResolver.NAME_RESOLVER));
 	}
 
 	private List<Grammar> getAllGrammars(Grammar grammar) {
@@ -173,23 +156,12 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	}
 
 	private IScope createEPackageScope(final Grammar grammar, IScope parent) {
-		return new SimpleCachingScope(parent, grammar.eResource(), EcorePackage.Literals.EPACKAGE) {
-			@Override
-			protected Iterator<EPackage> getRelevantContent(Resource resource) {
-				return EcoreUtil2.collect(grammar.getMetamodelDeclarations(), XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, EPackage.class).iterator();
+		return new SimpleScope(parent, Iterables.transform(grammar.getMetamodelDeclarations(),
+				new Function<AbstractMetamodelDeclaration,IScopedElement>(){
+			public IScopedElement apply(AbstractMetamodelDeclaration from) {
+				return ScopedElement.create(from.getEPackage().getNsURI(), from.getEPackage());
 			}
-
-			@Override
-			protected String convertValue(String value, EObject object) {
-				return valueConverterService.toString(value, "STRING");
-			}
-
-			@Override
-			protected String getNameFeature(EClass type) {
-				return EcorePackage.Literals.EPACKAGE__NS_URI.getName();
-			}
-
-		};
+		}));
 	}
 
 	private IScope createEPackageScope(final Grammar grammar) {
