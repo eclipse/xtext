@@ -31,7 +31,7 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 
 	protected abstract void doLinkModel(EObject model,	IDiagnosticConsumer diagnosticsConsumer);
 
-	private void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
+	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		clearAllReferences(model);
 	}
 
