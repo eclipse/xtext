@@ -18,4 +18,4 @@ Type :
 	'}';
 	
 Property :
-	type=[Type] name=ID;
+	(type+=[Type])+ name=ID ';';

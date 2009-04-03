@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.lazy;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -83,7 +84,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		EObject proxy = eType.getEPackage().getEFactoryInstance().create(eType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
 		if (eRef.isMany()) {
-			((EList<EObject>) obj.eGet(eRef, false)).add(proxy);
+			((BasicEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
 		} else {
 			obj.eSet(eRef, proxy);
 		}

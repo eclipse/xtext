@@ -8,12 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossrefs.lazy;
 
+import java.io.InputStream;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.crossref.lazy.LazyLinkingResource;
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Model;
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Property;
 import org.eclipse.xtext.crossrefs.lazy.lazyLinking.Type;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -54,5 +61,45 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		XtextResource resource = getResource(new StringInputStream("type A for a in B { B b } type B for b in A { A a}"));
 		
 		doTest(resource);
+	}
+	
+	public void testLazyMultiRef() throws Exception {
+		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B a}"));
+		Model m = (Model) resource.getContents().get(0);
+		Type t2 = m.getTypes().get(1);
+		
+		Property property = t2.getProperties().get(0);
+		EList<Type> types = property.getType();
+		assertTrue(((InternalEObject)((BasicEList<Type>)types).basicGet(0)).eIsProxy());
+		assertTrue(((InternalEObject)((BasicEList<Type>)types).basicGet(0)).eIsProxy());
+		assertFalse(((InternalEObject)types.get(0)).eIsProxy());
+		assertFalse(((InternalEObject)types.get(1)).eIsProxy());
+	}
+	
+	public void testLazyMultiRefDuplicates() throws Exception {
+		XtextResource resource = getResource(new StringInputStream("type A {} type B { A B A a}"));
+		Model m = (Model) resource.getContents().get(0);
+		Type t1 = m.getTypes().get(0);
+		Type t2 = m.getTypes().get(1);
+		
+		Property property = t2.getProperties().get(0);
+		EList<Type> types = property.getType();
+		assertEquals(t1, types.get(0));
+		assertEquals(t2, types.get(1));
+		assertEquals(t1, types.get(2));
+		
+		assertEquals(t1, types.get(0));
+		assertEquals(t2, types.get(1));
+		assertEquals(t1, types.get(2));
+	}
+	
+	@Override
+	public XtextResource getResource(InputStream in) throws Exception {
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		rs.setClasspathURIContext(getClass());
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
+		rs.getResources().add(resource);
+		resource.load(in, null);
+		return resource;
 	}
 }
