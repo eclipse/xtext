@@ -8,10 +8,10 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
-import org.eclipse.xtext.xtext.ui.editor.outline.FilteringXtextOutlinePage;
-import org.eclipse.xtext.xtext.ui.editor.outline.XtextSemanticModelTransformer;
-import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
+import org.eclipse.xtext.xtext.ui.editor.outline.FilteringXtextOutlinePage;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
+import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 /**
  * used to register components to be used within the IDE.
@@ -20,7 +20,7 @@ public class XtextUiModule extends AbstractXtextUiModule {
 
 	@Override
 	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return XtextSemanticModelTransformer.class;
+		return XtextDeclarativeModelTransformer.class;
 	}
 	
 	@Override
