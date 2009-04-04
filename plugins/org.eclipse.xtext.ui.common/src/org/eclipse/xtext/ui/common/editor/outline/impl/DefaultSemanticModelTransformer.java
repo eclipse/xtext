@@ -61,27 +61,26 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	protected boolean doSortChildren(EObject semanticNode) {
 		return false;
 	}
-
-	@Override
-	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
+	
+	protected ContentOutlineNode newOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode outlineNode = new ContentOutlineNode();
-
+		
 		outlineNode.setLabel(getText(semanticNode));
 		Image image = getImage(semanticNode);
 		if (image != null) {
 			outlineNode.setImage(image);
 		}
-
+		
 		Region location = locationProvider.getLocation(semanticNode);
 		outlineNode.setSelectionOffset(location.getOffset());
 		outlineNode.setSelectionLength(location.getLength());
-
+		
 		// link with parent
 		if (outlineParentNode != null) {
 			outlineParentNode.getChildren().add(outlineNode);
 			outlineNode.setParent(outlineParentNode);
 		}
-
+		
 		/*
 		 * This adapter will be added to the semantic node in order to later be
 		 * able to get the corresponding ContentOutlineNode. This is needed e.g.
@@ -97,10 +96,15 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		 *         approach if we run into memory problems.
 		 */
 		ContentOutlineNodeAdapter outlineAdapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
-				.adapt(semanticNode, ContentOutlineNode.class);
+		.adapt(semanticNode, ContentOutlineNode.class);
 		outlineAdapter.setContentOutlineNode(outlineNode);
-
+		
 		return outlineNode;
+	}
+
+	@Override
+	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
+		return newOutlineNode(semanticNode, outlineParentNode);
 	}
 
 }

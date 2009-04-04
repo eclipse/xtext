@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -27,12 +28,20 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractSemanticModelTransformer implements ISemanticModelTransformer {
 
+	public static final String INVISIBLE_ROOT_NODE = "Invisible Root Node";
+	public static final List<EObject> NO_CHILDREN = new ArrayList<EObject>();
+	public static final ContentOutlineNode HIDDEN_NODE = new ContentOutlineNode() {
+		public String getLabel() {
+			return "hidden node";
+		};
+	};
+	
 	private boolean sorted = false;
 	private HashMap<Class, IOutlineFilter> filters;
 
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
-		outlineModel.setLabel("Invisible Root Node");
+		outlineModel.setLabel(INVISIBLE_ROOT_NODE);
 
 		transformSemanticNode(semanticModel, outlineModel);
 		return outlineModel;
@@ -44,6 +53,9 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			outlineNode = createOutlineNode(semanticNode, outlineParentNode);
 		}
 		else {
+			outlineNode = outlineParentNode;
+		}
+		if (outlineNode == HIDDEN_NODE) {
 			outlineNode = outlineParentNode;
 		}
 		transformSemanticChildNodes(semanticNode, outlineNode);
@@ -60,7 +72,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	}
 
 	private EObject[] sortChildren(EObject semanticNode) {
-		List<EObject> list = getChildren(semanticNode);
+		List<EObject> list = getChildNodes(semanticNode);
 		EObject[] result = list.toArray(new EObject[list.size()]);
 		if (sorted) {
 			Arrays.sort(result, new Comparator<EObject>() {
@@ -72,6 +84,10 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			});
 		}
 		return result;
+	}
+
+	protected List<EObject> getChildNodes(EObject semanticNode) {
+		return getChildren(semanticNode);
 	}
 
 	protected List<EObject> getChildren(EObject semanticNode) {
@@ -133,7 +149,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	}
 
 	public Image getImage(EObject object) {
-		return labelProvider.getImage(object);
+		return null;
 	}
 
 }
