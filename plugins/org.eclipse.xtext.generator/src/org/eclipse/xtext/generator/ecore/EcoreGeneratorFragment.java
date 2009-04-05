@@ -90,16 +90,18 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		super.generate(grammar, ctx);
 		List<GeneratedMetamodel> list = typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		List<EPackage> packs = collect(list, GENERATED_METAMODEL__EPACKAGE, EPackage.class);
-		String javaPath, xmiPath;
-		if(javaModelDirectory == null || "".equals(javaModelDirectory))
-			javaPath = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
-		else
-			javaPath = javaModelDirectory;
-		if(xmiModelDirectory == null || "".equals(xmiModelDirectory))
-			xmiPath = javaPath + "/" + grammar.getName().substring(0, grammar.getName().lastIndexOf('.')).replace('.', '/');
-		else
-			xmiPath = xmiModelDirectory;
-		generateEcoreJavaClasses(packs, getBasePackage(grammar), javaPath, xmiPath, grammar);
+		if (!packs.isEmpty()){
+			String javaPath, xmiPath;
+			if(javaModelDirectory == null || "".equals(javaModelDirectory))
+				javaPath = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
+			else
+				javaPath = javaModelDirectory;
+			if(xmiModelDirectory == null || "".equals(xmiModelDirectory))
+				xmiPath = javaPath + "/" + grammar.getName().substring(0, grammar.getName().lastIndexOf('.')).replace('.', '/');
+			else
+				xmiPath = xmiModelDirectory;
+			generateEcoreJavaClasses(packs, getBasePackage(grammar), javaPath, xmiPath, grammar);
+		}
 	}
 
 	private String urisString;
