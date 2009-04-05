@@ -149,7 +149,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	}
 
 	public Image getImage(EObject object) {
-		return null;
+		return labelProvider.getImage(object);
 	}
 
 }
