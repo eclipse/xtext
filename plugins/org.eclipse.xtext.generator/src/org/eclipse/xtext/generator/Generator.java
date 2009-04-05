@@ -8,7 +8,8 @@
 
 package org.eclipse.xtext.generator;
 
-import static org.eclipse.xtext.generator.Naming.*;
+import static org.eclipse.xtext.generator.Naming.asPath;
+import static org.eclipse.xtext.generator.Naming.setup;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,8 +26,6 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
@@ -37,10 +36,8 @@ import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 
 /**
@@ -172,8 +169,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private void generatePluginXmlRt(List<LanguageConfig> configs, XpandExecutionContext ctx) {
 		String filePath = fileExists(ctx, "plugin.xml", PLUGIN_RT) ? "plugin.xml_gen" : "plugin.xml";
 		deleteFile(ctx, filePath, PLUGIN_RT);
+		ctx.getOutput().openFile(filePath, PLUGIN_RT);
 		try {
-			ctx.getOutput().openFile(filePath, PLUGIN_RT);
 			XpandFacade facade = XpandFacade.create(ctx);
 			List<Grammar> grammars = getGrammars(configs);
 			facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
@@ -204,8 +201,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (isUi() && !isMergedProjects()) {
 			String filePath = fileExists(ctx, "plugin.xml", PLUGIN_UI) ? "plugin.xml_gen" : "plugin.xml";
 			deleteFile(ctx, filePath, PLUGIN_UI);
+			ctx.getOutput().openFile(filePath, PLUGIN_UI);
 			try {
-				ctx.getOutput().openFile(filePath, PLUGIN_UI);
 				XpandFacade facade = XpandFacade.create(ctx);
 				List<Grammar> grammars = getGrammars(configs);
 				facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
@@ -220,8 +217,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
+		ctx.getOutput().openFile(asPath(setup(config.getGrammar())) + ".java", SRC_GEN);
 		try {
-			ctx.getOutput().openFile(asPath(setup(config.getGrammar())) + ".java", SRC_GEN);
 			XpandFacade facade = XpandFacade.create(ctx);
 			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar());
 			config.addToStandaloneSetup(config.getGrammar(), ctx);
@@ -283,10 +280,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 			String path = ctx.getOutput().getOutlet(PLUGIN_RT).getPath() + "/" + manifestPath;
 			mergeManifest(getProjectNameRt(), path, exported, requiredBundles, activator);
 		} else {
+			manifestPath = manifestPath + "_gen";
+			deleteFile(ctx, manifestPath, PLUGIN_RT);
+			ctx.getOutput().openFile(manifestPath, PLUGIN_RT);
 			try {
-				manifestPath = manifestPath + "_gen";
-				deleteFile(ctx, manifestPath, PLUGIN_RT);
-				ctx.getOutput().openFile(manifestPath, PLUGIN_RT);
 				XpandFacade facade = XpandFacade.create(ctx);
 				generateManifest(facade, getProjectNameRt(), getProjectNameRt(), getBundleVersion(), exported,
 						requiredBundles, activator);
@@ -351,10 +348,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 				String path = ctx.getOutput().getOutlet(PLUGIN_UI).getPath() + "/" + manifestPath;
 				mergeManifest(getProjectNameUi(), path, exported, requiredBundles, getActivator());
 			} else {
+				manifestPath = manifestPath + "_gen";
+				deleteFile(ctx, manifestPath, PLUGIN_UI);
+				ctx.getOutput().openFile(manifestPath, PLUGIN_UI);
 				try {
-					manifestPath = manifestPath + "_gen";
-					deleteFile(ctx, manifestPath, PLUGIN_UI);
-					ctx.getOutput().openFile(manifestPath, PLUGIN_UI);
 					XpandFacade facade = XpandFacade.create(ctx);
 					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported,
 							requiredBundles, getActivator());
