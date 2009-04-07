@@ -35,13 +35,13 @@ public interface EcoredslFactory extends EFactory
   EcoreDsl createEcoreDsl();
 
   /**
-   * Returns a new object of class '<em>Import Statement Decl</em>'.
+   * Returns a new object of class '<em>Referenced Metamodel</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Import Statement Decl</em>'.
+   * @return a new object of class '<em>Referenced Metamodel</em>'.
    * @generated
    */
-  ImportStatementDecl createImportStatementDecl();
+  ReferencedMetamodel createReferencedMetamodel();
 
   /**
    * Returns the package supported by this factory.

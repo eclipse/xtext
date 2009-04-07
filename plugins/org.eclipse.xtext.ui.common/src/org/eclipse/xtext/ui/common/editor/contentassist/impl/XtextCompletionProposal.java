@@ -31,14 +31,16 @@ public class XtextCompletionProposal implements ICompletionProposal {
 	private int nodeTotalOffset;
 	private int nodeTotalLength;
 	private String matchString;
+	private Image image;
 
 	public XtextCompletionProposal(AbstractElement abstractElement, String displayString,
-			IContentAssistContext contentAssistContext) {
+			IContentAssistContext contentAssistContext, Image image) {
 		this.text = displayString;
 		this.offset = contentAssistContext.getOffSet();
 		this.nodeTotalOffset = contentAssistContext.getNode().getTotalOffset();
 		this.nodeTotalLength = contentAssistContext.getNode().getTotalLength();
 		this.matchString = contentAssistContext.getMatchString();
+		this.image = image;
 	}
 
 	public void apply(IDocument document) {
@@ -69,7 +71,7 @@ public class XtextCompletionProposal implements ICompletionProposal {
 	}
 
 	public Image getImage() {
-		return null;
+		return this.image;
 	}
 
 	public Point getSelection(IDocument document) {

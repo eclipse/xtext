@@ -42,15 +42,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class «getGenProposalProvider().toSimpleName()» extends AbstractJavaProposalProvider {
-	//TODO remove this from template
-	private static final String UI_PLUGIN_ID  = "ERROR_REMOVE_ME_FROM_TEMPLATE";
 	
-	@Override
-	protected String getPluginId() {
-		return UI_PLUGIN_ID;
-	}
-	
-	«LET {} AS processedFqnFeatureNames»
+	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
 			«LET getFqFeatureName(assignment) AS fqnFeatureName»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
@@ -78,7 +71,7 @@ public class «getGenProposalProvider().toSimpleName()» extends AbstractJavaPropo
   	  «ENDFOREACH-»
     
   	  «FOREACH getParserRulesWithType() AS parserRule-»
-			«LET getFqFeatureName(parserRule) AS fqnFeatureName»
+			«LET getFqFeatureName(parserRule) AS fqnFeatureName-»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
 	public List<? extends ICompletionProposal> complete«fqnFeatureName»(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
@@ -92,13 +85,6 @@ public class «getGenProposalProvider().toSimpleName()» extends AbstractJavaPropo
 			«ENDLET-»
     	«ENDFOREACH-»
 	«ENDLET-»
-    
-    @Override
-	protected String getDefaultImageFilePath() {
-		return "icons/editor.gif";
-	}
-
-
 }
 «ENDFILE»
 

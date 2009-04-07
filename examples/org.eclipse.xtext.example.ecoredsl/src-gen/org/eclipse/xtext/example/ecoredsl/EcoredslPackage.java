@@ -70,13 +70,13 @@ public interface EcoredslPackage extends EPackage
   int ECORE_DSL = 0;
 
   /**
-   * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Metamodel Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ECORE_DSL__IMPORTS = 0;
+  int ECORE_DSL__METAMODEL_DECLARATIONS = 0;
 
   /**
    * The feature id for the '<em><b>Package</b></em>' containment reference.
@@ -97,14 +97,14 @@ public interface EcoredslPackage extends EPackage
   int ECORE_DSL_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.ecoredsl.impl.ImportStatementDeclImpl <em>Import Statement Decl</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.ecoredsl.impl.ReferencedMetamodelImpl <em>Referenced Metamodel</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.ecoredsl.impl.ImportStatementDeclImpl
-   * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getImportStatementDecl()
+   * @see org.eclipse.xtext.example.ecoredsl.impl.ReferencedMetamodelImpl
+   * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getReferencedMetamodel()
    * @generated
    */
-  int IMPORT_STATEMENT_DECL = 1;
+  int REFERENCED_METAMODEL = 1;
 
   /**
    * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -113,25 +113,25 @@ public interface EcoredslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IMPORT_STATEMENT_DECL__ALIAS = 0;
+  int REFERENCED_METAMODEL__ALIAS = 0;
 
   /**
-   * The feature id for the '<em><b>Import URI</b></em>' attribute.
+   * The feature id for the '<em><b>EPackage</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT_STATEMENT_DECL__IMPORT_URI = 1;
+  int REFERENCED_METAMODEL__EPACKAGE = 1;
 
   /**
-   * The number of structural features of the '<em>Import Statement Decl</em>' class.
+   * The number of structural features of the '<em>Referenced Metamodel</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT_STATEMENT_DECL_FEATURE_COUNT = 2;
+  int REFERENCED_METAMODEL_FEATURE_COUNT = 2;
 
 
   /**
@@ -145,15 +145,15 @@ public interface EcoredslPackage extends EPackage
   EClass getEcoreDsl();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl#getImports <em>Imports</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl#getMetamodelDeclarations <em>Metamodel Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Imports</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.EcoreDsl#getImports()
+   * @return the meta object for the containment reference list '<em>Metamodel Declarations</em>'.
+   * @see org.eclipse.xtext.example.ecoredsl.EcoreDsl#getMetamodelDeclarations()
    * @see #getEcoreDsl()
    * @generated
    */
-  EReference getEcoreDsl_Imports();
+  EReference getEcoreDsl_MetamodelDeclarations();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl#getPackage <em>Package</em>}'.
@@ -167,36 +167,36 @@ public interface EcoredslPackage extends EPackage
   EReference getEcoreDsl_Package();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.ecoredsl.ImportStatementDecl <em>Import Statement Decl</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel <em>Referenced Metamodel</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Import Statement Decl</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.ImportStatementDecl
+   * @return the meta object for class '<em>Referenced Metamodel</em>'.
+   * @see org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel
    * @generated
    */
-  EClass getImportStatementDecl();
+  EClass getReferencedMetamodel();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.ecoredsl.ImportStatementDecl#getAlias <em>Alias</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel#getAlias <em>Alias</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Alias</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.ImportStatementDecl#getAlias()
-   * @see #getImportStatementDecl()
+   * @see org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel#getAlias()
+   * @see #getReferencedMetamodel()
    * @generated
    */
-  EAttribute getImportStatementDecl_Alias();
+  EAttribute getReferencedMetamodel_Alias();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.ecoredsl.ImportStatementDecl#getImportURI <em>Import URI</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel#getEPackage <em>EPackage</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Import URI</em>'.
-   * @see org.eclipse.xtext.example.ecoredsl.ImportStatementDecl#getImportURI()
-   * @see #getImportStatementDecl()
+   * @return the meta object for the reference '<em>EPackage</em>'.
+   * @see org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel#getEPackage()
+   * @see #getReferencedMetamodel()
    * @generated
    */
-  EAttribute getImportStatementDecl_ImportURI();
+  EReference getReferencedMetamodel_EPackage();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -232,12 +232,12 @@ public interface EcoredslPackage extends EPackage
     EClass ECORE_DSL = eINSTANCE.getEcoreDsl();
 
     /**
-     * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Metamodel Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ECORE_DSL__IMPORTS = eINSTANCE.getEcoreDsl_Imports();
+    EReference ECORE_DSL__METAMODEL_DECLARATIONS = eINSTANCE.getEcoreDsl_MetamodelDeclarations();
 
     /**
      * The meta object literal for the '<em><b>Package</b></em>' containment reference feature.
@@ -248,14 +248,14 @@ public interface EcoredslPackage extends EPackage
     EReference ECORE_DSL__PACKAGE = eINSTANCE.getEcoreDsl_Package();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.ecoredsl.impl.ImportStatementDeclImpl <em>Import Statement Decl</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.ecoredsl.impl.ReferencedMetamodelImpl <em>Referenced Metamodel</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.ecoredsl.impl.ImportStatementDeclImpl
-     * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getImportStatementDecl()
+     * @see org.eclipse.xtext.example.ecoredsl.impl.ReferencedMetamodelImpl
+     * @see org.eclipse.xtext.example.ecoredsl.impl.EcoredslPackageImpl#getReferencedMetamodel()
      * @generated
      */
-    EClass IMPORT_STATEMENT_DECL = eINSTANCE.getImportStatementDecl();
+    EClass REFERENCED_METAMODEL = eINSTANCE.getReferencedMetamodel();
 
     /**
      * The meta object literal for the '<em><b>Alias</b></em>' attribute feature.
@@ -263,15 +263,15 @@ public interface EcoredslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute IMPORT_STATEMENT_DECL__ALIAS = eINSTANCE.getImportStatementDecl_Alias();
+    EAttribute REFERENCED_METAMODEL__ALIAS = eINSTANCE.getReferencedMetamodel_Alias();
 
     /**
-     * The meta object literal for the '<em><b>Import URI</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>EPackage</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute IMPORT_STATEMENT_DECL__IMPORT_URI = eINSTANCE.getImportStatementDecl_ImportURI();
+    EReference REFERENCED_METAMODEL__EPACKAGE = eINSTANCE.getReferencedMetamodel_EPackage();
 
   }
 

@@ -13,12 +13,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -44,19 +49,20 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractJavaProposalProvider implements IProposalProvider {
 	// constants
-	// protected static final String LEXER_RULE_ID = "ID";
 	protected static final String LEXER_RULE_INT = "INT";
 	protected static final String LEXER_RULE_STRING = "STRING";
-
 	// logger available to subclasses
 	protected final static Logger logger = Logger.getLogger(IProposalProvider.class);
 	@Inject
 	protected IScopeProvider scopeProvider;
-
-	protected JavaReflectiveMethodInvoker invoker;
-
+	@Inject(optional=true)
+	protected AdapterFactory adapterFactory;
+	//  @Inject(optional=true) does not work due to some plugin visibility quirks
+	protected AdapterFactoryLabelProvider adapterFactoryLabelProvider;
+	protected JavaReflectiveMethodInvoker methodInvoker;
+	
 	protected AbstractJavaProposalProvider() {
-		invoker = new JavaReflectiveMethodInvoker(this);
+		this.methodInvoker = new JavaReflectiveMethodInvoker(this);
 	}
 	/**
 	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword,
@@ -68,8 +74,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			logger.debug("completeKeyword '" + keyword.getValue()+ "' for model '" + contentAssistContext.getModel()
 				+ "' and prefix '"+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(keyword,
-				keyword.getValue(), contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(keyword,keyword.getValue(), contentAssistContext));
 	}
 
 	/**
@@ -111,20 +116,31 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 						IContentAssistContext.class), Arrays.asList(contentAssistContext.getModel(), assignment,contentAssistContext));
 	}
 
+
 	/**
-	 * @return a new <code>XtextCompletionProposal</code> for the given text and
-	 *         offset.
+	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(
-			AbstractElement abstractElement, String displayString,
+	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,
 			IContentAssistContext contentAssistContext) {
-		return new XtextCompletionProposal(abstractElement, displayString,contentAssistContext);
+		return createCompletionProposal(abstractElement, displayString,contentAssistContext,getAdapterFactoryLabelProvider().getImage(abstractElement));
 	}
 
+	/**
+	 * @param abstractElement the {@link AbstractElement} which is used to create the proposals
+	 * @param displayString the string that is already entered by the user prior to requesting content assist
+	 * @param contentAssistContext the commonly used set of attributes related to the current content assist request
+	 * @param image the {@link Image} for the {@link ICompletionProposal}
+	 * @return a new <code>XtextCompletionProposal</code> for the given text and offset.
+	 */
+	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,
+			IContentAssistContext contentAssistContext, Image image) {
+		return new XtextCompletionProposal(abstractElement, displayString,contentAssistContext,image);
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected List<? extends ICompletionProposal> invokeMethod(String methodName, List<Class<?>> parameterTypes,
 			List<?> parameterValues) {
-		return (List<? extends ICompletionProposal>) invoker.invoke(methodName, parameterTypes, parameterValues);
+		return (List<? extends ICompletionProposal>) methodInvoker.invoke(methodName, parameterTypes, parameterValues);
 	}
 
 	/**
@@ -159,13 +175,9 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 *
 	 * This implementation returns an empty list by default.
 	 *
-	 * @param lexerRule
-	 *            the 'called' LexerRule instance
-	 * @param ruleCall
-	 *            the ruleCall for the provided lexerRule
-	 * @param offset
-	 *            an offset within the document for which completions should be
-	 *            computed
+	 * @param terminalRule the 'called' {@link TerminalRule} instance
+	 * @param ruleCall the ruleCall for the provided lexerRule
+	 * @param offset an offset within the document for which completions should be computed
 	 * @return a computed list of <code>ICompletionProposal</code> for the given
 	 *         <code>LexerRule</code>
 	 */
@@ -174,24 +186,6 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			IContentAssistContext contentAssistContext) {
 		return Collections.emptyList();
 	}
-
-	/**
-	 * @return the id of the plug-in containing the image files;
-	 *         <code>null </code> is returned if the plug-in does not exist
-	 */
-	protected abstract String getPluginId();
-
-	/**
-	 * Returns the the relative path of the default image file, relative to the
-	 * root of the containing plug-in; the path must be legal The image would
-	 * typically be shown to the left of the <code>ICompletionProposal</code>
-	 * display string.
-	 *
-	 * @return the image file path of the default image to be shown or
-	 *         <code>null</code> if no image is desired
-	 * @see #getPluginId()
-	 */
-	protected abstract String getDefaultImageFilePath();
 
 	/*
 	 * (non-Javadoc)
@@ -221,9 +215,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	protected List<? extends ICompletionProposal> lookupCrossReference(
 			CrossReference crossReference,IContentAssistContext contentAssistContext) {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
-		if (scopeProvider != null) {
-			ParserRule containingParserRule = GrammarUtil
-					.containingParserRule(crossReference);
+		if (null!= scopeProvider) {
+			ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
 				EClass eClass = (EClass) containingParserRule.getType().getClassifier();
 				EReference ref = GrammarUtil.getReference(crossReference,eClass);
@@ -231,10 +224,10 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 				IScope scope = scopeProvider.getScope(contentAssistContext.getModel(), ref);
 				Iterable<IScopedElement> candidates = scope.getAllContents();
 				for (IScopedElement candidate : candidates) {
-					if (candidate.name() != null && isCandidateMatchingPrefix(contentAssistContext
+					if (null != candidate.name() && isCandidateMatchingPrefix(contentAssistContext
 									.getModel(), ref, candidate, trimmedPrefix)) {
 						completionProposalList.add(createCompletionProposal(crossReference, candidate.name(),
-								contentAssistContext));
+								contentAssistContext,getAdapterFactoryLabelProvider().getImage(candidate.element())));
 					}
 				}
 			}
@@ -243,6 +236,34 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		return completionProposalList;
 	}
 
+	/**
+	 * @return an adapter factory that yield adapters that implement the various item label provider interfaces.
+	 * @see AdapterFactory
+	 */
+	protected AdapterFactory getAdapterFactory() {
+		if (null == this.adapterFactory) {
+			ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
+					ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+			composedAdapterFactory
+					.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+			this.adapterFactory = composedAdapterFactory;
+		}
+		return this.adapterFactory;
+	}
+
+	/**
+	 * @return an instance that wraps the given {@link #getAdapterFactory()} to delegates its JFace provider 
+	 * 	interfaces to corresponding adapter-implemented item provider interfaces
+	 * @see AdapterFactoryLabelProvider
+	 */
+	protected AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
+		if (null == this.adapterFactoryLabelProvider) {
+			this.adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
+					getAdapterFactory());
+		}
+		return this.adapterFactoryLabelProvider;
+	}
+	
 	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref,
 			IScopedElement candidate, String prefix) {
 		if (candidate.name() == null)

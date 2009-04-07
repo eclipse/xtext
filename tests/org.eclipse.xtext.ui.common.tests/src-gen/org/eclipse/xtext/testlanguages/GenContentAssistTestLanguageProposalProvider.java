@@ -23,16 +23,7 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class GenContentAssistTestLanguageProposalProvider extends AbstractJavaProposalProvider {
-	//TODO remove this from template
-	private static final String UI_PLUGIN_ID  = "ERROR_REMOVE_ME_FROM_TEMPLATE";
 	
-	@Override
-	protected String getPluginId() {
-		return UI_PLUGIN_ID;
-	}
-	
-	
-			
 	public List<? extends ICompletionProposal> completeStart_Rules(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeStart_Rules feature '" + assignment.getFeature() + "' terminal '"
@@ -96,14 +87,4 @@ public class GenContentAssistTestLanguageProposalProvider extends AbstractJavaPr
 		return Collections.emptyList();
 	}
 			
-			
-			
-			
-    
-    @Override
-	protected String getDefaultImageFilePath() {
-		return "icons/editor.gif";
-	}
-
-
 }

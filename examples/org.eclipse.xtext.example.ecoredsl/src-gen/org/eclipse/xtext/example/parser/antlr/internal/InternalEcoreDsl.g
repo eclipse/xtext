@@ -84,9 +84,9 @@ ruleEcoreDsl returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getEcoreDslAccess().getImportsImportStatementDeclParserRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0(), currentNode); 
 	    }
-	    lv_imports_0=ruleImportStatementDecl 
+	    lv_metamodelDeclarations_0=ruleReferencedMetamodel 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEcoreDslRule().getType().getClassifier());
@@ -94,7 +94,7 @@ ruleEcoreDsl returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		add($current, "imports", lv_imports_0, "ImportStatementDecl", currentNode);
+	       		add($current, "metamodelDeclarations", lv_metamodelDeclarations_0, "ReferencedMetamodel", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -128,16 +128,16 @@ ruleEcoreDsl returns [EObject current=null]
 
 
 
-// Entry rule entryRuleImportStatementDecl
-entryRuleImportStatementDecl returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getImportStatementDeclRule(), currentNode); }
-	 iv_ruleImportStatementDecl=ruleImportStatementDecl 
-	 { $current=$iv_ruleImportStatementDecl.current; } 
+// Entry rule entryRuleReferencedMetamodel
+entryRuleReferencedMetamodel returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getReferencedMetamodelRule(), currentNode); }
+	 iv_ruleReferencedMetamodel=ruleReferencedMetamodel 
+	 { $current=$iv_ruleReferencedMetamodel.current; } 
 	 EOF 
 ;
 
-// Rule ImportStatementDecl
-ruleImportStatementDecl returns [EObject current=null] 
+// Rule ReferencedMetamodel
+ruleReferencedMetamodel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -145,18 +145,18 @@ ruleImportStatementDecl returns [EObject current=null]
     }:
 ('import' 
     {
-        createLeafNode(grammarAccess.getImportStatementDeclAccess().getImportKeyword_0(), null); 
+        createLeafNode(grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0(), null); 
     }
 ((	
 	
 	    lv_alias_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.getImportStatementDeclAccess().getAliasIDTerminalRuleCall_1_0_0(), "alias"); 
+		createLeafNode(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0(), "alias"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getImportStatementDeclRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getReferencedMetamodelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -169,31 +169,27 @@ ruleImportStatementDecl returns [EObject current=null]
 	
 )'=' 
     {
-        createLeafNode(grammarAccess.getImportStatementDeclAccess().getEqualsSignKeyword_1_1(), null); 
+        createLeafNode(grammarAccess.getReferencedMetamodelAccess().getEqualsSignKeyword_1_1(), null); 
     }
 )?(	
 	
-	    lv_importURI_3=	RULE_STRING
-	{
-		createLeafNode(grammarAccess.getImportStatementDeclAccess().getImportURISTRINGTerminalRuleCall_2_0(), "importURI"); 
-	}
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getImportStatementDeclRule().getType().getClassifier());
+		
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getReferencedMetamodelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        try {
-	       		set($current, "importURI", lv_importURI_3, "STRING", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
+        }
+	RULE_STRING
+	{
+		createLeafNode(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_2_0(), "ePackage"); 
+	}
+
+		// TODO assign feature to currentNode
 	
 )';' 
     {
-        createLeafNode(grammarAccess.getImportStatementDeclAccess().getSemicolonKeyword_3(), null); 
+        createLeafNode(grammarAccess.getReferencedMetamodelAccess().getSemicolonKeyword_3(), null); 
     }
 );
 

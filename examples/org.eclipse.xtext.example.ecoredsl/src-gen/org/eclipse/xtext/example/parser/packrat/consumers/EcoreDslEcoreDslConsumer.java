@@ -24,7 +24,7 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 
 	private INonTerminalConsumer ePackageDeclConsumer;
 
-	private INonTerminalConsumer importStatementDeclConsumer;
+	private INonTerminalConsumer referencedMetamodelConsumer;
 
 	private IElementConsumer group$1$Consumer;
 
@@ -69,7 +69,7 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(importStatementDeclConsumer, "imports", true, false, false, getElement(), optional);
+			return consumeNonTerminal(referencedMetamodelConsumer, "metamodelDeclarations", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -114,8 +114,8 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		this.rule = rule;
 		
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
-		assignment$2$Consumer = new Assignment$2$Consumer(rule.getImportsAssignment_0());
-		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getImportsImportStatementDeclParserRuleCall_0_0());
+		assignment$2$Consumer = new Assignment$2$Consumer(rule.getMetamodelDeclarationsAssignment_0());
+		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0());
 		assignment$4$Consumer = new Assignment$4$Consumer(rule.getPackageAssignment_1());
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getPackageEPackageDeclParserRuleCall_1_0());
 	}
@@ -134,8 +134,8 @@ public final class EcoreDslEcoreDslConsumer extends NonTerminalConsumer {
 		this.ePackageDeclConsumer = ePackageDeclConsumer;
 	}
 	
-	public void setImportStatementDeclConsumer(INonTerminalConsumer importStatementDeclConsumer) {
-		this.importStatementDeclConsumer = importStatementDeclConsumer;
+	public void setReferencedMetamodelConsumer(INonTerminalConsumer referencedMetamodelConsumer) {
+		this.referencedMetamodelConsumer = referencedMetamodelConsumer;
 	}
 	
 }

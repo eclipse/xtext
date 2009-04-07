@@ -102,10 +102,10 @@ public class EcoredslSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case EcoredslPackage.IMPORT_STATEMENT_DECL:
+      case EcoredslPackage.REFERENCED_METAMODEL:
       {
-        ImportStatementDecl importStatementDecl = (ImportStatementDecl)theEObject;
-        T result = caseImportStatementDecl(importStatementDecl);
+        ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel)theEObject;
+        T result = caseReferencedMetamodel(referencedMetamodel);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -130,17 +130,17 @@ public class EcoredslSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Import Statement Decl</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Referenced Metamodel</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Import Statement Decl</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Referenced Metamodel</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseImportStatementDecl(ImportStatementDecl object)
+  public T caseReferencedMetamodel(ReferencedMetamodel object)
   {
     return null;
   }

@@ -10,7 +10,7 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEcoreDslConsumer;
-import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslImportStatementDeclConsumer;
+import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslReferencedMetamodelConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEPackageDeclConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslSubEPackageDeclConsumer;
 import org.eclipse.xtext.example.parser.packrat.consumers.EcoreDslEClassifierDeclConsumer;
@@ -48,7 +48,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private EcoreDslEcoreDslConsumer ecoreDslConsumer;
-    private EcoreDslImportStatementDeclConsumer importStatementDeclConsumer;
+    private EcoreDslReferencedMetamodelConsumer referencedMetamodelConsumer;
     private EcoreDslEPackageDeclConsumer ePackageDeclConsumer;
     private EcoreDslSubEPackageDeclConsumer subEPackageDeclConsumer;
     private EcoreDslEClassifierDeclConsumer eClassifierDeclConsumer;
@@ -92,7 +92,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		ecoreDslConsumer = new EcoreDslEcoreDslConsumer(
     		this, null
     	);
-		importStatementDeclConsumer = new EcoreDslImportStatementDeclConsumer(
+		referencedMetamodelConsumer = new EcoreDslReferencedMetamodelConsumer(
     		this, null
     	);
 		ePackageDeclConsumer = new EcoreDslEPackageDeclConsumer(
@@ -170,7 +170,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getEcoreDslConsumer().setRule(grammarAccess.getEcoreDslAccess());
-		getImportStatementDeclConsumer().setRule(grammarAccess.getImportStatementDeclAccess());
+		getReferencedMetamodelConsumer().setRule(grammarAccess.getReferencedMetamodelAccess());
 		getEPackageDeclConsumer().setRule(grammarAccess.getEPackageDeclAccess());
 		getSubEPackageDeclConsumer().setRule(grammarAccess.getSubEPackageDeclAccess());
 		getEClassifierDeclConsumer().setRule(grammarAccess.getEClassifierDeclAccess());
@@ -206,10 +206,10 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 
 
 		getEcoreDslConsumer().setEPackageDeclConsumer(getEPackageDeclConsumer());
-		getEcoreDslConsumer().setImportStatementDeclConsumer(getImportStatementDeclConsumer());
+		getEcoreDslConsumer().setReferencedMetamodelConsumer(getReferencedMetamodelConsumer());
 
-		getImportStatementDeclConsumer().setIdConsumer(getIdConsumer());
-		getImportStatementDeclConsumer().setStringConsumer(getStringConsumer());
+		getReferencedMetamodelConsumer().setIdConsumer(getIdConsumer());
+		getReferencedMetamodelConsumer().setStringConsumer(getStringConsumer());
 
 		getEPackageDeclConsumer().setEAnnotationDeclConsumer(getEAnnotationDeclConsumer());
 		getEPackageDeclConsumer().setEClassifierDeclConsumer(getEClassifierDeclConsumer());
@@ -303,11 +303,11 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 
 		getSintConsumer().setIntConsumer(getIntConsumer());
 
-		getImportStatementDeclConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
-		getImportStatementDeclConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getImportStatementDeclConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getImportStatementDeclConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
-		getImportStatementDeclConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
+		getReferencedMetamodelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getEPackageDeclConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getEPackageDeclConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getEPackageDeclConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
@@ -315,7 +315,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getEPackageDeclConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEPackageDeclConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEPackageDeclConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getEPackageDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getEPackageDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getSubEPackageDeclConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getSubEPackageDeclConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getSubEPackageDeclConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
@@ -323,7 +323,7 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getEDataTypeDeclConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getEDataTypeDeclConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEDataTypeDeclConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getEDataTypeDeclConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getEDataTypeDeclConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getEDataTypeDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
 		getEAnnotationDeclConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEAnnotationDeclConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
@@ -352,12 +352,12 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getEAttributeDeclConsumer().setKeyword$32$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEAttributeDeclConsumer().setKeyword$36$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEAttributeDeclConsumer().setKeyword$39$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getEAttributeDeclConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$150$Delimiter);
-		getEAttributeDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$152$Delimiter);
-		getEAttributeDeclConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
-		getEAttributeDeclConsumer().setRuleCall$27$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getEAttributeDeclConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$152$Delimiter);
+		getEAttributeDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$154$Delimiter);
+		getEAttributeDeclConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
+		getEAttributeDeclConsumer().setRuleCall$27$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getEAttributeDeclConsumer().setRuleCall$34$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
-		getEAttributeDeclConsumer().setRuleCall$38$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getEAttributeDeclConsumer().setRuleCall$38$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getEReferenceDeclConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getEReferenceDeclConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getEReferenceDeclConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
@@ -369,11 +369,11 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getEReferenceDeclConsumer().setKeyword$35$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEReferenceDeclConsumer().setKeyword$37$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEReferenceDeclConsumer().setKeyword$44$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getEReferenceDeclConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
-		getEReferenceDeclConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$150$Delimiter);
-		getEReferenceDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$152$Delimiter);
-		getEReferenceDeclConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
-		getEReferenceDeclConsumer().setRuleCall$30$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getEReferenceDeclConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
+		getEReferenceDeclConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$152$Delimiter);
+		getEReferenceDeclConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$154$Delimiter);
+		getEReferenceDeclConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
+		getEReferenceDeclConsumer().setRuleCall$30$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getEReferenceDeclConsumer().setRuleCall$41$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
 		getEReferenceDeclConsumer().setRuleCall$43$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
 		getEEnumDeclConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
@@ -383,8 +383,8 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getEEnumLiteralDeclConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEEnumLiteralDeclConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getEEnumLiteralDeclConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
-		getEEnumLiteralDeclConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
-		getEEnumLiteralDeclConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getEEnumLiteralDeclConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
+		getEEnumLiteralDeclConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getETypeParameterDeclConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$12$Delimiter);
 		getETypeParameterDeclConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
 		getEGenericTypeReferenceDeclConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
@@ -419,14 +419,14 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
 		getEParameterDeclConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
 		getMapEntryConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getMapEntryConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
-		getMapEntryConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getMapEntryConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getQidConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getQidConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
 		getQidConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
 		getQidConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$15$Delimiter);
-		getStringOrQidConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getStringOrQidConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 		getSintConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.keyword$16$Delimiter);
-		getSintConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$18$Delimiter);
+		getSintConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.example.parser.packrat.EcoreDslDelimiters.ruleCall$20$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -437,8 +437,8 @@ public class EcoreDslParserConfiguration extends AbstractParserConfiguration {
     	return ecoreDslConsumer;
     }
 
-    public EcoreDslImportStatementDeclConsumer getImportStatementDeclConsumer() {
-    	return importStatementDeclConsumer;
+    public EcoreDslReferencedMetamodelConsumer getReferencedMetamodelConsumer() {
+    	return referencedMetamodelConsumer;
     }
 
     public EcoreDslEPackageDeclConsumer getEPackageDeclConsumer() {

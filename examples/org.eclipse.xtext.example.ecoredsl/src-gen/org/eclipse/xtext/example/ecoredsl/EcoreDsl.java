@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.ecoredsl.EcoreDsl#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
@@ -30,20 +30,20 @@ import org.eclipse.emf.ecore.EPackage;
 public interface EcoreDsl extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.example.ecoredsl.ImportStatementDecl}.
+   * Returns the value of the '<em><b>Metamodel Declarations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Metamodel Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Imports</em>' containment reference list.
-   * @see org.eclipse.xtext.example.ecoredsl.EcoredslPackage#getEcoreDsl_Imports()
+   * @return the value of the '<em>Metamodel Declarations</em>' containment reference list.
+   * @see org.eclipse.xtext.example.ecoredsl.EcoredslPackage#getEcoreDsl_MetamodelDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<ImportStatementDecl> getImports();
+  EList<ReferencedMetamodel> getMetamodelDeclarations();
 
   /**
    * Returns the value of the '<em><b>Package</b></em>' containment reference.

@@ -68,7 +68,7 @@ public class EcoredslFactoryImpl extends EFactoryImpl implements EcoredslFactory
     switch (eClass.getClassifierID())
     {
       case EcoredslPackage.ECORE_DSL: return createEcoreDsl();
-      case EcoredslPackage.IMPORT_STATEMENT_DECL: return createImportStatementDecl();
+      case EcoredslPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -90,10 +90,10 @@ public class EcoredslFactoryImpl extends EFactoryImpl implements EcoredslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportStatementDecl createImportStatementDecl()
+  public ReferencedMetamodel createReferencedMetamodel()
   {
-    ImportStatementDeclImpl importStatementDecl = new ImportStatementDeclImpl();
-    return importStatementDecl;
+    ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
+    return referencedMetamodel;
   }
 
   /**

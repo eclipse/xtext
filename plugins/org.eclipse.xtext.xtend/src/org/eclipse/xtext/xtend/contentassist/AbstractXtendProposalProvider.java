@@ -70,7 +70,7 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 					+ "' and prefix '" + contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections
-				.singletonList(new XtextCompletionProposal(keyword, keyword.getValue(), contentAssistContext));
+				.singletonList(new XtextCompletionProposal(keyword, keyword.getValue(), contentAssistContext,null));
 	}
 
 	/**
@@ -149,19 +149,6 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 	protected List<? extends ICompletionProposal> completeTerminalRuleRuleCall(TerminalRule lexerRule, RuleCall ruleCall,
 			IContentAssistContext contentAssistContext) {
 		return invokeExtension("complete" + lexerRule.getName(), Arrays.asList(ruleCall, contentAssistContext));
-	}
-
-	/**
-	 * Returns the the relative path of the default image file, relative to the
-	 * root of the containing plug-in; the path must be legal The image would
-	 * typically be shown to the left of the <code>ICompletionProposal</code>
-	 * display string.
-	 * 
-	 * @return the image file path of the default image to be shown or <code>null</code> if no image is desired
-	 * @see #getPluginId()
-	 */
-	protected String getDefaultImageFilePath() {
-		return "icons/editor.gif";
 	}
 
 	/*
