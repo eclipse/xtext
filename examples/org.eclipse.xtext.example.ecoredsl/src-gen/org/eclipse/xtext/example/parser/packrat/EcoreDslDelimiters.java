@@ -26,12 +26,12 @@ public final class EcoreDslDelimiters {
 	public static final ISequenceMatcher ruleCall$15$Delimiter = new SetBasedKeywordMatcher(
 		"import", "package", "nsURI", "nsPrefix", "datatype", "abstract", "interface", "class", "extends", "ID", "volatile", "transient", "unsettable", "derived", "attr", "val", "ref", "enum", "super", "bag", "random", "op", "void", "throws");
 
-	public static final ISequenceMatcher ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-
-	public static final ISequenceMatcher ruleCall$150$Delimiter = new SetBasedKeywordMatcher(
-		"bag");
+	public static final ISequenceMatcher ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 	public static final ISequenceMatcher ruleCall$152$Delimiter = new SetBasedKeywordMatcher(
+		"bag");
+
+	public static final ISequenceMatcher ruleCall$154$Delimiter = new SetBasedKeywordMatcher(
 		"random");
 
 }

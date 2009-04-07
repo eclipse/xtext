@@ -12,7 +12,7 @@
         <classifier xsi:type="ecore:EClass" href="http://example.xtext.org/EcoreDsl#//EcoreDsl"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
+        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="metamodelDeclarations" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
         <tokens xsi:type="xtext:Assignment" feature="package" operator="=">
@@ -20,9 +20,9 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="ImportStatementDecl">
+    <rules xsi:type="xtext:ParserRule" name="ReferencedMetamodel">
       <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://example.xtext.org/EcoreDsl#//ImportStatementDecl"/>
+        <classifier xsi:type="ecore:EClass" href="http://example.xtext.org/EcoreDsl#//ReferencedMetamodel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="import"/>
@@ -32,8 +32,13 @@
           </tokens>
           <tokens xsi:type="xtext:Keyword" value="="/>
         </tokens>
-        <tokens xsi:type="xtext:Assignment" feature="importURI" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+        <tokens xsi:type="xtext:Assignment" feature="ePackage" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+          </terminal>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value=";"/>
       </alternatives>

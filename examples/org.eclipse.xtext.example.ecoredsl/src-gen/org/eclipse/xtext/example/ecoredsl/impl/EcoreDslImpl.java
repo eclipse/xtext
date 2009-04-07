@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
-import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
+import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.ecoredsl.impl.EcoreDslImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.ecoredsl.impl.EcoreDslImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.ecoredsl.impl.EcoreDslImpl#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
@@ -43,14 +43,14 @@ import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
 public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreDsl
 {
   /**
-   * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+   * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImports()
+   * @see #getMetamodelDeclarations()
    * @generated
    * @ordered
    */
-  protected EList<ImportStatementDecl> imports;
+  protected EList<ReferencedMetamodel> metamodelDeclarations;
 
   /**
    * The cached value of the '{@link #getPackage() <em>Package</em>}' containment reference.
@@ -88,13 +88,13 @@ public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreD
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ImportStatementDecl> getImports()
+  public EList<ReferencedMetamodel> getMetamodelDeclarations()
   {
-    if (imports == null)
+    if (metamodelDeclarations == null)
     {
-      imports = new EObjectContainmentEList<ImportStatementDecl>(ImportStatementDecl.class, this, EcoredslPackage.ECORE_DSL__IMPORTS);
+      metamodelDeclarations = new EObjectContainmentEList<ReferencedMetamodel>(ReferencedMetamodel.class, this, EcoredslPackage.ECORE_DSL__METAMODEL_DECLARATIONS);
     }
-    return imports;
+    return metamodelDeclarations;
   }
 
   /**
@@ -155,8 +155,8 @@ public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreD
   {
     switch (featureID)
     {
-      case EcoredslPackage.ECORE_DSL__IMPORTS:
-        return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
+      case EcoredslPackage.ECORE_DSL__METAMODEL_DECLARATIONS:
+        return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
       case EcoredslPackage.ECORE_DSL__PACKAGE:
         return basicSetPackage(null, msgs);
     }
@@ -173,8 +173,8 @@ public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreD
   {
     switch (featureID)
     {
-      case EcoredslPackage.ECORE_DSL__IMPORTS:
-        return getImports();
+      case EcoredslPackage.ECORE_DSL__METAMODEL_DECLARATIONS:
+        return getMetamodelDeclarations();
       case EcoredslPackage.ECORE_DSL__PACKAGE:
         return getPackage();
     }
@@ -192,9 +192,9 @@ public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreD
   {
     switch (featureID)
     {
-      case EcoredslPackage.ECORE_DSL__IMPORTS:
-        getImports().clear();
-        getImports().addAll((Collection<? extends ImportStatementDecl>)newValue);
+      case EcoredslPackage.ECORE_DSL__METAMODEL_DECLARATIONS:
+        getMetamodelDeclarations().clear();
+        getMetamodelDeclarations().addAll((Collection<? extends ReferencedMetamodel>)newValue);
         return;
       case EcoredslPackage.ECORE_DSL__PACKAGE:
         setPackage((EPackage)newValue);
@@ -213,8 +213,8 @@ public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreD
   {
     switch (featureID)
     {
-      case EcoredslPackage.ECORE_DSL__IMPORTS:
-        getImports().clear();
+      case EcoredslPackage.ECORE_DSL__METAMODEL_DECLARATIONS:
+        getMetamodelDeclarations().clear();
         return;
       case EcoredslPackage.ECORE_DSL__PACKAGE:
         setPackage((EPackage)null);
@@ -233,8 +233,8 @@ public class EcoreDslImpl extends MinimalEObjectImpl.Container implements EcoreD
   {
     switch (featureID)
     {
-      case EcoredslPackage.ECORE_DSL__IMPORTS:
-        return imports != null && !imports.isEmpty();
+      case EcoredslPackage.ECORE_DSL__METAMODEL_DECLARATIONS:
+        return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
       case EcoredslPackage.ECORE_DSL__PACKAGE:
         return package_ != null;
     }

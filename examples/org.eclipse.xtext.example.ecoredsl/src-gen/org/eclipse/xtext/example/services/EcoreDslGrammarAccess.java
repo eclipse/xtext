@@ -20,23 +20,23 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	public class EcoreDslElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EcoreDsl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cImportsImportStatementDeclParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
+		private final Assignment cMetamodelDeclarationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0 = (RuleCall)cMetamodelDeclarationsAssignment_0.eContents().get(0);
 		private final Assignment cPackageAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cPackageEPackageDeclParserRuleCall_1_0 = (RuleCall)cPackageAssignment_1.eContents().get(0);
 		
 		//EcoreDsl:
-		//  (imports+=ImportStatementDecl)* package=EPackageDecl;
+		//  (metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl;
 		public ParserRule getRule() { return rule; }
 
-		//(imports+=ImportStatementDecl)* package=EPackageDecl
+		//(metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl
 		public Group getGroup() { return cGroup; }
 
-		//(imports+=ImportStatementDecl)*
-		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
+		//(metamodelDeclarations+=ReferencedMetamodel)*
+		public Assignment getMetamodelDeclarationsAssignment_0() { return cMetamodelDeclarationsAssignment_0; }
 
-		//ImportStatementDecl
-		public RuleCall getImportsImportStatementDeclParserRuleCall_0_0() { return cImportsImportStatementDeclParserRuleCall_0_0; }
+		//ReferencedMetamodel
+		public RuleCall getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0() { return cMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0; }
 
 		//package=EPackageDecl
 		public Assignment getPackageAssignment_1() { return cPackageAssignment_1; }
@@ -45,23 +45,24 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		public RuleCall getPackageEPackageDeclParserRuleCall_1_0() { return cPackageEPackageDeclParserRuleCall_1_0; }
 	}
 
-	public class ImportStatementDeclElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImportStatementDecl");
+	public class ReferencedMetamodelElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReferencedMetamodel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Assignment cAliasAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cAliasIDTerminalRuleCall_1_0_0 = (RuleCall)cAliasAssignment_1_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cImportURIAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
+		private final Assignment cEPackageAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cEPackageEPackageCrossReference_2_0 = (CrossReference)cEPackageAssignment_2.eContents().get(0);
+		private final RuleCall cEPackageEPackageSTRINGTerminalRuleCall_2_0_1 = (RuleCall)cEPackageEPackageCrossReference_2_0.eContents().get(1);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//ImportStatementDecl:
-		//  "import" (alias=ID "=")? importURI=STRING ";";
+		//ReferencedMetamodel:
+		//  "import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";";
 		public ParserRule getRule() { return rule; }
 
-		//"import" (alias=ID "=")? importURI=STRING ";"
+		//"import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";"
 		public Group getGroup() { return cGroup; }
 
 		//"import"
@@ -79,11 +80,14 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		//"="
 		public Keyword getEqualsSignKeyword_1_1() { return cEqualsSignKeyword_1_1; }
 
-		//importURI=STRING
-		public Assignment getImportURIAssignment_2() { return cImportURIAssignment_2; }
+		//ePackage=[ecore::EPackage|STRING]
+		public Assignment getEPackageAssignment_2() { return cEPackageAssignment_2; }
+
+		//[ecore::EPackage|STRING]
+		public CrossReference getEPackageEPackageCrossReference_2_0() { return cEPackageEPackageCrossReference_2_0; }
 
 		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_2_0() { return cImportURISTRINGTerminalRuleCall_2_0; }
+		public RuleCall getEPackageEPackageSTRINGTerminalRuleCall_2_0_1() { return cEPackageEPackageSTRINGTerminalRuleCall_2_0_1; }
 
 		//";"
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
@@ -1591,7 +1595,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 	
 	
 	private EcoreDslElements pEcoreDsl;
-	private ImportStatementDeclElements pImportStatementDecl;
+	private ReferencedMetamodelElements pReferencedMetamodel;
 	private EPackageDeclElements pEPackageDecl;
 	private SubEPackageDeclElements pSubEPackageDecl;
 	private EClassifierDeclElements pEClassifierDecl;
@@ -1640,7 +1644,7 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 
 	
 	//EcoreDsl:
-	//  (imports+=ImportStatementDecl)* package=EPackageDecl;
+	//  (metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl;
 	public EcoreDslElements getEcoreDslAccess() {
 		return (pEcoreDsl != null) ? pEcoreDsl : (pEcoreDsl = new EcoreDslElements());
 	}
@@ -1649,14 +1653,14 @@ public class EcoreDslGrammarAccess implements IGrammarAccess {
 		return getEcoreDslAccess().getRule();
 	}
 
-	//ImportStatementDecl:
-	//  "import" (alias=ID "=")? importURI=STRING ";";
-	public ImportStatementDeclElements getImportStatementDeclAccess() {
-		return (pImportStatementDecl != null) ? pImportStatementDecl : (pImportStatementDecl = new ImportStatementDeclElements());
+	//ReferencedMetamodel:
+	//  "import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";";
+	public ReferencedMetamodelElements getReferencedMetamodelAccess() {
+		return (pReferencedMetamodel != null) ? pReferencedMetamodel : (pReferencedMetamodel = new ReferencedMetamodelElements());
 	}
 	
-	public ParserRule getImportStatementDeclRule() {
-		return getImportStatementDeclAccess().getRule();
+	public ParserRule getReferencedMetamodelRule() {
+		return getReferencedMetamodelAccess().getRule();
 	}
 
 	//EPackageDecl returns ecore::EPackage:

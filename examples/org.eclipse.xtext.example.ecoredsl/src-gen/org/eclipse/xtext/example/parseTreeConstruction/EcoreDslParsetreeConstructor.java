@@ -23,7 +23,7 @@ public class EcoreDslParsetreeConstructor extends AbstractParseTreeConstructor {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf(grammarAccess.getEcoreDslRule().getType().getClassifier()) && (s = new EcoreDsl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getImportStatementDeclRule().getType().getClassifier()) && (s = new ImportStatementDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier()) && (s = new ReferencedMetamodel_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.getEPackageDeclRule().getType().getClassifier()) && (s = new EPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.getSubEPackageDeclRule().getType().getClassifier()) && (s = new SubEPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
 		if(inst.isInstanceOf(grammarAccess.getEClassifierDeclRule().getType().getClassifier()) && (s = new EClassifierDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
@@ -48,11 +48,11 @@ public class EcoreDslParsetreeConstructor extends AbstractParseTreeConstructor {
 /************ begin Rule EcoreDsl ****************
  *
  * EcoreDsl:
- *   (imports+=ImportStatementDecl)* package=EPackageDecl;
+ *   (metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl;
  *
  **/
 
-// (imports+=ImportStatementDecl)* package=EPackageDecl
+// (metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl
 protected class EcoreDsl_Group extends GroupToken {
 	
 	public EcoreDsl_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -68,7 +68,7 @@ protected class EcoreDsl_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new EcoreDsl_1_Assignment_package(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new EcoreDsl_0_Assignment_imports(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new EcoreDsl_0_Assignment_metamodelDeclarations(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
@@ -80,27 +80,27 @@ protected class EcoreDsl_Group extends GroupToken {
 	}
 }
 
-// (imports+=ImportStatementDecl)*
-protected class EcoreDsl_0_Assignment_imports extends AssignmentToken  {
+// (metamodelDeclarations+=ReferencedMetamodel)*
+protected class EcoreDsl_0_Assignment_metamodelDeclarations extends AssignmentToken  {
 	
-	public EcoreDsl_0_Assignment_imports(IInstanceDescription curr, AbstractToken pred) {
+	public EcoreDsl_0_Assignment_metamodelDeclarations(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getEcoreDslAccess().getImportsAssignment_0();
+		return grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsAssignment_0();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("imports");
+		if((value = current.getConsumable("metamodelDeclarations",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("metamodelDeclarations");
 
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getImportStatementDeclRule().getType().getClassifier())) {
-				Solution s = new ImportStatementDecl_Group(param, this).firstSolution();
+			if(param.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) {
+				Solution s = new ReferencedMetamodel_Group(param, this).firstSolution();
 				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -150,34 +150,34 @@ protected class EcoreDsl_1_Assignment_package extends AssignmentToken  {
 /************ end Rule EcoreDsl ****************/
 
 
-/************ begin Rule ImportStatementDecl ****************
+/************ begin Rule ReferencedMetamodel ****************
  *
- * ImportStatementDecl:
- *   "import" (alias=ID "=")? importURI=STRING ";";
+ * ReferencedMetamodel:
+ *   "import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";";
  *
  **/
 
-// "import" (alias=ID "=")? importURI=STRING ";"
-protected class ImportStatementDecl_Group extends GroupToken {
+// "import" (alias=ID "=")? ePackage=[ecore::EPackage|STRING] ";"
+protected class ReferencedMetamodel_Group extends GroupToken {
 	
-	public ImportStatementDecl_Group(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getGroup();
+		return grammarAccess.getReferencedMetamodelAccess().getGroup();
 	}
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new ImportStatementDecl_3_Keyword(current, this).firstSolution();
+		Solution s1 = new ReferencedMetamodel_3_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ImportStatementDecl_2_Assignment_importURI(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new ReferencedMetamodel_2_Assignment_ePackage(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			while(s2 != null) {
-				Solution s3 = new ImportStatementDecl_1_Group(s2.getCurrent(), s2.getPredecessor()).firstSolution();
+				Solution s3 = new ReferencedMetamodel_1_Group(s2.getCurrent(), s2.getPredecessor()).firstSolution();
 				while(s3 != null) {
-					Solution s4 = new ImportStatementDecl_0_Keyword_import(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					Solution s4 = new ReferencedMetamodel_0_Keyword_import(s3.getCurrent(), s3.getPredecessor()).firstSolution();
 					if(s4 != null) {
 						last = s4.getPredecessor();
 						return s4;
@@ -194,34 +194,34 @@ protected class ImportStatementDecl_Group extends GroupToken {
 }
 
 // "import"
-protected class ImportStatementDecl_0_Keyword_import extends KeywordToken  {
+protected class ReferencedMetamodel_0_Keyword_import extends KeywordToken  {
 	
-	public ImportStatementDecl_0_Keyword_import(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_0_Keyword_import(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getImportKeyword_0();
+		return grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0();
 	}	
 }
 
 // (alias=ID "=")?
-protected class ImportStatementDecl_1_Group extends GroupToken {
+protected class ReferencedMetamodel_1_Group extends GroupToken {
 	
-	public ImportStatementDecl_1_Group(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getGroup_1();
+		return grammarAccess.getReferencedMetamodelAccess().getGroup_1();
 	}
 
 	@Override
 	protected Solution createSolution() {	
-		Solution s1 = new ImportStatementDecl_1_1_Keyword(current, this).firstSolution();
+		Solution s1 = new ReferencedMetamodel_1_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new ImportStatementDecl_1_0_Assignment_alias(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new ReferencedMetamodel_1_0_Assignment_alias(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 != null) {
 				last = s2.getPredecessor();
 				return s2;
@@ -234,15 +234,15 @@ protected class ImportStatementDecl_1_Group extends GroupToken {
 }
 
 // alias=ID
-protected class ImportStatementDecl_1_0_Assignment_alias extends AssignmentToken  {
+protected class ReferencedMetamodel_1_0_Assignment_alias extends AssignmentToken  {
 	
-	public ImportStatementDecl_1_0_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_1_0_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getAliasAssignment_1_0();
+		return grammarAccess.getReferencedMetamodelAccess().getAliasAssignment_1_0();
 	}
 	
 	@Override
@@ -251,7 +251,7 @@ protected class ImportStatementDecl_1_0_Assignment_alias extends AssignmentToken
 		IInstanceDescription obj = current.cloneAndConsume("alias");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.getImportStatementDeclAccess().getAliasIDTerminalRuleCall_1_0_0();
+			element = grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0();
 			return new Solution(obj);
 		}
 		return null;
@@ -259,57 +259,60 @@ protected class ImportStatementDecl_1_0_Assignment_alias extends AssignmentToken
 }
 
 // "="
-protected class ImportStatementDecl_1_1_Keyword extends KeywordToken  {
+protected class ReferencedMetamodel_1_1_Keyword extends KeywordToken  {
 	
-	public ImportStatementDecl_1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_1_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getEqualsSignKeyword_1_1();
+		return grammarAccess.getReferencedMetamodelAccess().getEqualsSignKeyword_1_1();
 	}	
 }
 
 
-// importURI=STRING
-protected class ImportStatementDecl_2_Assignment_importURI extends AssignmentToken  {
+// ePackage=[ecore::EPackage|STRING]
+protected class ReferencedMetamodel_2_Assignment_ePackage extends AssignmentToken  {
 	
-	public ImportStatementDecl_2_Assignment_importURI(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_2_Assignment_ePackage(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getImportURIAssignment_2();
+		return grammarAccess.getReferencedMetamodelAccess().getEPackageAssignment_2();
 	}
 	
 	@Override
 	protected Solution createSolution() {
-		if((value = current.getConsumable("importURI",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("importURI");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.getImportStatementDeclAccess().getImportURISTRINGTerminalRuleCall_2_0();
-			return new Solution(obj);
+		if((value = current.getConsumable("ePackage",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ePackage");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_2_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_2_0(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
 }
 
 // ";"
-protected class ImportStatementDecl_3_Keyword extends KeywordToken  {
+protected class ReferencedMetamodel_3_Keyword extends KeywordToken  {
 	
-	public ImportStatementDecl_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
+	public ReferencedMetamodel_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getImportStatementDeclAccess().getSemicolonKeyword_3();
+		return grammarAccess.getReferencedMetamodelAccess().getSemicolonKeyword_3();
 	}	
 }
 
 
-/************ end Rule ImportStatementDecl ****************/
+/************ end Rule ReferencedMetamodel ****************/
 
 
 /************ begin Rule EPackageDecl ****************

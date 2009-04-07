@@ -18,12 +18,13 @@ import org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextCompletionProp
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Michael Clay
  */
 public class ContentAssistHelper {
 
 	public static ICompletionProposal newProposal(AbstractElement element, String text,
 			IContentAssistContext contentAssistContext) {
-		return new XtextCompletionProposal(element, text, contentAssistContext);
+		return new XtextCompletionProposal(element, text, contentAssistContext,null);
 	}
 
 	public static IScope getScope(IScopeProvider scopeProvider, Object context, Object reference) {

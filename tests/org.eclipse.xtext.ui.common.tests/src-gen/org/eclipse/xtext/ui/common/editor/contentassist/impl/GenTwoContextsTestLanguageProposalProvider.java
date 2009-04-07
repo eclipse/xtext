@@ -11,9 +11,8 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
@@ -23,15 +22,6 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class GenTwoContextsTestLanguageProposalProvider extends AbstractJavaProposalProvider {
-	//TODO remove this from template
-	private static final String UI_PLUGIN_ID  = "ERROR_REMOVE_ME_FROM_TEMPLATE";
-	
-	@Override
-	protected String getPluginId() {
-		return UI_PLUGIN_ID;
-	}
-	
-	
 			
 	public List<? extends ICompletionProposal> completeMainModel_Elements(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -69,11 +59,4 @@ public class GenTwoContextsTestLanguageProposalProvider extends AbstractJavaProp
 		return Collections.emptyList();
 	}
 			
-    
-    @Override
-	protected String getDefaultImageFilePath() {
-		return "icons/editor.gif";
-	}
-
-
 }

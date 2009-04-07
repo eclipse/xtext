@@ -23,19 +23,11 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
-	//TODO remove this from template
-	private static final String UI_PLUGIN_ID  = "ERROR_REMOVE_ME_FROM_TEMPLATE";
-	
-	@Override
-	protected String getPluginId() {
-		return UI_PLUGIN_ID;
-	}
-	
 	
 			
-	public List<? extends ICompletionProposal> completeEcoreDsl_Imports(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEcoreDsl_MetamodelDeclarations(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeEcoreDsl_Imports feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeEcoreDsl_MetamodelDeclarations feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
@@ -51,22 +43,22 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		return Collections.emptyList();
 	}
 			
-	public List<? extends ICompletionProposal> completeImportStatementDecl_Alias(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeReferencedMetamodel_Alias(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeImportStatementDecl_Alias feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeReferencedMetamodel_Alias feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "ImportStatementDecl_Alias", contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(assignment, "ReferencedMetamodel_Alias", contentAssistContext));
 	}
 			
-	public List<? extends ICompletionProposal> completeImportStatementDecl_ImportURI(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeReferencedMetamodel_EPackage(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeImportStatementDecl_ImportURI feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeReferencedMetamodel_EPackage feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, "\"ImportStatementDecl_ImportURI\"", contentAssistContext));		
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
 			
 	public List<? extends ICompletionProposal> completeEPackageDecl_EAnnotations(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -833,7 +825,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment, "\"MapEntry_Value\"", contentAssistContext));		
 	}
     
-			
 	public List<? extends ICompletionProposal> complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -841,8 +832,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
-			
 	public List<? extends ICompletionProposal> completeEcore_EPackage(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EPackage '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -850,8 +839,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
-			
 	public List<? extends ICompletionProposal> completeEcore_EClassifier(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EClassifier '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -859,7 +846,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EDataType(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EDataType '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -867,7 +853,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EAnnotation(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EAnnotation '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -875,7 +860,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EClass(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EClass '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -883,7 +867,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EStructuralFeature(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EStructuralFeature '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -891,7 +874,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EAttribute(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EAttribute '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -899,7 +881,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EReference(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EReference '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -907,7 +888,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EEnum(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EEnum '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -915,7 +895,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EEnumLiteral(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EEnumLiteral '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -923,7 +902,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_ETypeParameter(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_ETypeParameter '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -931,7 +909,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EGenericType(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EGenericType '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -939,8 +916,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
-			
 	public List<? extends ICompletionProposal> completeEcore_EOperation(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EOperation '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -948,7 +923,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EParameter(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EParameter '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -956,7 +930,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EStringToStringMapEntry(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EStringToStringMapEntry '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -964,7 +937,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
 	public List<? extends ICompletionProposal> completeEcore_EString(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EString '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -972,8 +944,6 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-			
-			
 	public List<? extends ICompletionProposal> completeEcore_EInt(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EInt '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -981,11 +951,5 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-    
-    @Override
-	protected String getDefaultImageFilePath() {
-		return "icons/editor.gif";
-	}
-
 
 }

@@ -5,19 +5,19 @@
     <genClasses>
       <ecoreClass href="EcoreDsl.ecore#//EcoreDsl"/>
       <genFeatures property="None" children="true" createChild="true">
-        <ecoreFeature xsi:type="ecore:EReference" href="EcoreDsl.ecore#//EcoreDsl/imports"/>
+        <ecoreFeature xsi:type="ecore:EReference" href="EcoreDsl.ecore#//EcoreDsl/metamodelDeclarations"/>
       </genFeatures>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="EcoreDsl.ecore#//EcoreDsl/package"/>
       </genFeatures>
     </genClasses>
     <genClasses>
-      <ecoreClass href="EcoreDsl.ecore#//ImportStatementDecl"/>
+      <ecoreClass href="EcoreDsl.ecore#//ReferencedMetamodel"/>
       <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="EcoreDsl.ecore#//ImportStatementDecl/alias"/>
+        <ecoreFeature xsi:type="ecore:EAttribute" href="EcoreDsl.ecore#//ReferencedMetamodel/alias"/>
       </genFeatures>
-      <genFeatures createChild="false">
-        <ecoreFeature xsi:type="ecore:EAttribute" href="EcoreDsl.ecore#//ImportStatementDecl/importURI"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true">
+        <ecoreFeature xsi:type="ecore:EReference" href="EcoreDsl.ecore#//ReferencedMetamodel/ePackage"/>
       </genFeatures>
     </genClasses>
   </genPackages>

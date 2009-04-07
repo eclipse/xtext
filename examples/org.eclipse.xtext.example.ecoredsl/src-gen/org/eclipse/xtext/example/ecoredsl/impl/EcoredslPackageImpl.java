@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.EcoredslFactory;
 import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
-import org.eclipse.xtext.example.ecoredsl.ImportStatementDecl;
+import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass importStatementDeclEClass = null;
+  private EClass referencedMetamodelEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -124,7 +124,7 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEcoreDsl_Imports()
+  public EReference getEcoreDsl_MetamodelDeclarations()
   {
     return (EReference)ecoreDslEClass.getEStructuralFeatures().get(0);
   }
@@ -144,9 +144,9 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImportStatementDecl()
+  public EClass getReferencedMetamodel()
   {
-    return importStatementDeclEClass;
+    return referencedMetamodelEClass;
   }
 
   /**
@@ -154,9 +154,9 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImportStatementDecl_Alias()
+  public EAttribute getReferencedMetamodel_Alias()
   {
-    return (EAttribute)importStatementDeclEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)referencedMetamodelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -164,9 +164,9 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImportStatementDecl_ImportURI()
+  public EReference getReferencedMetamodel_EPackage()
   {
-    return (EAttribute)importStatementDeclEClass.getEStructuralFeatures().get(1);
+    return (EReference)referencedMetamodelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -200,12 +200,12 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
 
     // Create classes and their features
     ecoreDslEClass = createEClass(ECORE_DSL);
-    createEReference(ecoreDslEClass, ECORE_DSL__IMPORTS);
+    createEReference(ecoreDslEClass, ECORE_DSL__METAMODEL_DECLARATIONS);
     createEReference(ecoreDslEClass, ECORE_DSL__PACKAGE);
 
-    importStatementDeclEClass = createEClass(IMPORT_STATEMENT_DECL);
-    createEAttribute(importStatementDeclEClass, IMPORT_STATEMENT_DECL__ALIAS);
-    createEAttribute(importStatementDeclEClass, IMPORT_STATEMENT_DECL__IMPORT_URI);
+    referencedMetamodelEClass = createEClass(REFERENCED_METAMODEL);
+    createEAttribute(referencedMetamodelEClass, REFERENCED_METAMODEL__ALIAS);
+    createEReference(referencedMetamodelEClass, REFERENCED_METAMODEL__EPACKAGE);
   }
 
   /**
@@ -240,12 +240,12 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(ecoreDslEClass, EcoreDsl.class, "EcoreDsl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEcoreDsl_Imports(), this.getImportStatementDecl(), null, "imports", null, 0, -1, EcoreDsl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEcoreDsl_MetamodelDeclarations(), this.getReferencedMetamodel(), null, "metamodelDeclarations", null, 0, -1, EcoreDsl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEcoreDsl_Package(), ecorePackage.getEPackage(), null, "package", null, 0, 1, EcoreDsl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(importStatementDeclEClass, ImportStatementDecl.class, "ImportStatementDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getImportStatementDecl_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, ImportStatementDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getImportStatementDecl_ImportURI(), ecorePackage.getEString(), "importURI", null, 0, 1, ImportStatementDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(referencedMetamodelEClass, ReferencedMetamodel.class, "ReferencedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getReferencedMetamodel_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, ReferencedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReferencedMetamodel_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, ReferencedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

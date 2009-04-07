@@ -83,9 +83,9 @@ public class EcoredslAdapterFactory extends AdapterFactoryImpl
         return createEcoreDslAdapter();
       }
       @Override
-      public Adapter caseImportStatementDecl(ImportStatementDecl object)
+      public Adapter caseReferencedMetamodel(ReferencedMetamodel object)
       {
-        return createImportStatementDeclAdapter();
+        return createReferencedMetamodelAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -125,16 +125,16 @@ public class EcoredslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.ecoredsl.ImportStatementDecl <em>Import Statement Decl</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel <em>Referenced Metamodel</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.example.ecoredsl.ImportStatementDecl
+   * @see org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel
    * @generated
    */
-  public Adapter createImportStatementDeclAdapter()
+  public Adapter createReferencedMetamodelAdapter()
   {
     return null;
   }

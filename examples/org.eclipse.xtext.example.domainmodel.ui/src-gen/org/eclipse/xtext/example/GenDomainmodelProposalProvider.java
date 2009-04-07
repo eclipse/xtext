@@ -23,14 +23,6 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider {
-	//TODO remove this from template
-	private static final String UI_PLUGIN_ID  = "ERROR_REMOVE_ME_FROM_TEMPLATE";
-	
-	@Override
-	protected String getPluginId() {
-		return UI_PLUGIN_ID;
-	}
-	
 	
 			
 	public List<? extends ICompletionProposal> completeFile_Imports(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
@@ -214,7 +206,6 @@ public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
     
-			
 	public List<? extends ICompletionProposal> complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -222,21 +213,6 @@ public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider
 		}
 		return Collections.emptyList();
 	}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 	public List<? extends ICompletionProposal> completeEcore_EString(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeEcore_EString '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
@@ -244,11 +220,4 @@ public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider
 		}
 		return Collections.emptyList();
 	}
-    
-    @Override
-	protected String getDefaultImageFilePath() {
-		return "icons/editor.gif";
-	}
-
-
 }
