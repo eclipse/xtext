@@ -6,13 +6,15 @@ package org.eclipse.xtext.testlanguages;
 import java.util.Collections;
 import java.util.List;
 
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
@@ -59,13 +61,18 @@ public class GenTreeTestLanguageProposalProvider extends AbstractJavaProposalPro
 		return Collections.emptyList();
 	}
     
-			
-	public List<? extends ICompletionProposal> complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeModel(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeModel '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();
 	}
-
+	public List<? extends ICompletionProposal> completeNode(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeNode '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
 }

@@ -9,17 +9,19 @@ package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
 /**
- * Calls methods on a target object reflectively. Caches resolved methods in a map.
+ * Calls methods on a target object or collection reflectively. Caches resolved methods in a map.
  *
  * @author Jan K&ouml;hnlein - Initial contribution and API
  * @author Michael Clay
@@ -27,7 +29,7 @@ import org.eclipse.xtext.util.Tuples;
  */
 public class JavaReflectiveMethodInvoker {
 
-	private final Map<Pair<String, ? extends Class<?>>, Method> methodLookupMap = new HashMap<Pair<String, ? extends Class<?>>, Method>();
+	private final Map<Triple<? extends Class<?>,String, ? extends Class<?>>, Method> methodLookupMap = new HashMap<Triple<? extends Class<?>,String, ? extends Class<?>>, Method>();
 
 	private final Object target;
 
@@ -36,17 +38,29 @@ public class JavaReflectiveMethodInvoker {
 	}
 
 	public Object invoke(String methodName, java.util.List<Class<?>> parameterTypes, java.util.List<?> parameterValues) {
-		Method method = findMethod(target.getClass(), methodName, parameterTypes.toArray(new Class[] {}));
+		Object invocationResult = null;
+		if (target instanceof Collection<?>) {
+			for (Iterator<?> iterator = ((Collection<?>)target).iterator(); null == invocationResult && iterator.hasNext();) {
+				invocationResult = doInvoke(iterator.next(),methodName, parameterTypes, parameterValues);
+			}
+		} else {
+			invocationResult = doInvoke(target,methodName, parameterTypes, parameterValues);
+		} 
+		return invocationResult;
+	}
+
+	private Object doInvoke(Object invocationTarget,String methodName, java.util.List<Class<?>> parameterTypes, java.util.List<?> parameterValues) {
+		Method method = findMethod(invocationTarget.getClass(), methodName, parameterTypes.toArray(new Class[] {}));
 		if (method == null) {
 			return null;
 		}
-		return invokeMethod(method, target, parameterValues.toArray(new Object[] {}));
+		return invokeMethod(method, invocationTarget, parameterValues.toArray(new Object[] {}));
 	}
 
 	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
 		Assert.isNotNull(clazz, "Class must not be null");
 		Assert.isNotNull(name, "Method name must not be null");
-		Pair<String, ? extends Class<?>>  methodKey = Tuples.pair(name, (paramTypes == null || paramTypes.length == 0) ? null
+		Triple<? extends Class<?>,String, ? extends Class<?>>  methodKey = Tuples.create(clazz,name, (paramTypes == null || paramTypes.length == 0) ? null
 				: paramTypes[0]);
 		Method result = methodLookupMap.get(methodKey);
 		if (result != null)

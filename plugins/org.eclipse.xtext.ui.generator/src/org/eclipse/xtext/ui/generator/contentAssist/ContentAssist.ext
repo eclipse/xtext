@@ -21,7 +21,7 @@ String getFqFeatureName(Assignment this):
 	containingParserRule().name.toFirstUpper()+"_"+feature.toFirstUpper();
 	
 String getFqFeatureName(ParserRule this):
-	type.metamodel.alias.toFirstUpper()+"_"+type.classifier.name.toFirstUpper();
+	(null!=type.metamodel.alias ? type.metamodel.alias.toFirstUpper()+"_" : "")+type.classifier.name.toFirstUpper();
 	
 List[ParserRule] getParserRulesWithType(Grammar grammar) :
 	grammar.allParserRules().select(parserRule|parserRule.type!=null);

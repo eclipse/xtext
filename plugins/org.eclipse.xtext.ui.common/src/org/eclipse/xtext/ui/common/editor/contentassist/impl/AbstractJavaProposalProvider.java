@@ -60,10 +60,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	//  @Inject(optional=true) does not work due to some plugin visibility quirks
 	protected AdapterFactoryLabelProvider adapterFactoryLabelProvider;
 	protected JavaReflectiveMethodInvoker methodInvoker;
+	protected List<IProposalProvider> proposalProviders;
 	
-	protected AbstractJavaProposalProvider() {
-		this.methodInvoker = new JavaReflectiveMethodInvoker(this);
-	}
 	/**
 	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword,
 	 *      IContentAssistContext)
@@ -93,7 +91,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			return completeTerminalRuleRuleCall((TerminalRule) calledRule, ruleCall,contentAssistContext);
 		} else if (calledRule.getType() != null) {
 			TypeRef typeRef = calledRule.getType();
-			return invokeMethod("complete"+ Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
+			return invokeMethod("complete"+ ( null!=typeRef.getMetamodel().getAlias() ? Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_" : "" )
 							+ Strings.toFirstUpper(typeRef.getClassifier().getName()),
 							Arrays.<Class<?>> asList(EObject.class, RuleCall.class,contentAssistContext.getModel() == null ? 
 							EObject.class : contentAssistContext.getModel().getClass(),
@@ -122,7 +120,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 */
 	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,
 			IContentAssistContext contentAssistContext) {
-		return createCompletionProposal(abstractElement, displayString,contentAssistContext,getAdapterFactoryLabelProvider().getImage(abstractElement));
+		return createCompletionProposal(abstractElement, displayString,contentAssistContext,getImage(abstractElement));
 	}
 
 	/**
@@ -137,12 +135,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		return new XtextCompletionProposal(abstractElement, displayString,contentAssistContext,image);
 	}
 	
-	@SuppressWarnings("unchecked")
-	protected List<? extends ICompletionProposal> invokeMethod(String methodName, List<Class<?>> parameterTypes,
-			List<?> parameterValues) {
-		return (List<? extends ICompletionProposal>) methodInvoker.invoke(methodName, parameterTypes, parameterValues);
-	}
-
+	
 	/**
 	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(Keyword,
 	 *      IContentAssistContext)
@@ -227,7 +220,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 					if (null != candidate.name() && isCandidateMatchingPrefix(contentAssistContext
 									.getModel(), ref, candidate, trimmedPrefix)) {
 						completionProposalList.add(createCompletionProposal(crossReference, candidate.name(),
-								contentAssistContext,getAdapterFactoryLabelProvider().getImage(candidate.element())));
+								contentAssistContext,getImage(candidate.element())));
 					}
 				}
 			}
@@ -236,6 +229,29 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		return completionProposalList;
 	}
 
+	/**
+     * Returns the image for the label of the given element. 
+     *
+     * @param element the element for which to provide the label image
+     * @return the image used to label the element, or <code>null</code> if there is no image for the given object
+     */
+	protected Image getImage(EObject eObject) {
+		return getAdapterFactoryLabelProvider().getImage(eObject);
+	}
+	
+	/**
+	 * @return an instance that wraps the given {@link #getAdapterFactory()} to delegates its JFace provider 
+	 * 	interfaces to corresponding adapter-implemented item provider interfaces
+	 * @see AdapterFactoryLabelProvider
+	 */
+	protected AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
+		if (null == this.adapterFactoryLabelProvider) {
+			this.adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
+					getAdapterFactory());
+		}
+		return this.adapterFactoryLabelProvider;
+	}
+	
 	/**
 	 * @return an adapter factory that yield adapters that implement the various item label provider interfaces.
 	 * @see AdapterFactory
@@ -250,20 +266,33 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 		}
 		return this.adapterFactory;
 	}
-
-	/**
-	 * @return an instance that wraps the given {@link #getAdapterFactory()} to delegates its JFace provider 
-	 * 	interfaces to corresponding adapter-implemented item provider interfaces
-	 * @see AdapterFactoryLabelProvider
-	 */
-	protected AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
-		if (null == this.adapterFactoryLabelProvider) {
-			this.adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-					getAdapterFactory());
-		}
-		return this.adapterFactoryLabelProvider;
+	
+	@SuppressWarnings("unchecked")
+	protected List<? extends ICompletionProposal> invokeMethod(String methodName, List<Class<?>> parameterTypes,
+			List<?> parameterValues) {
+		return (List<? extends ICompletionProposal>) getMethodInvoker().invoke(methodName, parameterTypes, parameterValues);
 	}
 	
+	protected JavaReflectiveMethodInvoker getMethodInvoker() {
+		if (null==this.methodInvoker) {
+			this.methodInvoker = new JavaReflectiveMethodInvoker(getAllProposalProviders());
+		}
+		return this.methodInvoker;
+	}
+	
+	public List<IProposalProvider> getAllProposalProviders() {
+		if (null==this.proposalProviders) {
+			this.proposalProviders = new ArrayList<IProposalProvider>();
+			this.proposalProviders.add(this);
+			this.proposalProviders.addAll(getReferencedProposalProviders());
+		}
+		return this.proposalProviders;
+	}
+	
+	protected List<IProposalProvider> getReferencedProposalProviders() {
+		return Collections.emptyList();
+	}
+
 	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref,
 			IScopedElement candidate, String prefix) {
 		if (candidate.name() == null)
