@@ -19,8 +19,7 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
-		addField(new LabelFieldEditor("General settings for " + getLanguageName()
-				+ " language.\nThe best language in the whole world!", getFieldEditorParent()));
+		addField(new LabelFieldEditor("General settings.", getFieldEditorParent()));
 		addField(new StringFieldEditor("testFeld", "Languagewide setting", getFieldEditorParent()));
 	}
 
