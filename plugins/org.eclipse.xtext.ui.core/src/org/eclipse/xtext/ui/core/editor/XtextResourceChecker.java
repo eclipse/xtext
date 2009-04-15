@@ -120,14 +120,16 @@ public class XtextResourceChecker {
 		try {
 			// Syntactical errors
 			// Collect EMF Resource Diagnostics
-			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic error : resource.getErrors())
-				markers.add(markerFromXtextResourceDiagnostic(error, IMarker.SEVERITY_ERROR));
+			for(int i = 0 ; i < resource.getErrors().size(); i++) {
+				markers.add(markerFromXtextResourceDiagnostic(resource.getErrors().get(i), IMarker.SEVERITY_ERROR));
+			}
 
 			if (monitor.isCanceled())
 				return null;
 
-			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic warning : resource.getWarnings())
-				markers.add(markerFromXtextResourceDiagnostic(warning, IMarker.SEVERITY_WARNING));
+			for(int i = 0 ; i < resource.getWarnings().size(); i++) {
+				markers.add(markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), IMarker.SEVERITY_WARNING));
+			}
 
 			if (monitor.isCanceled())
 				return null;
