@@ -19,18 +19,19 @@ import com.google.inject.Binder;
  */
 public class UIPluginModule extends AbstractGenericModule {
 
-	private AbstractUIPlugin plugin;
+	private final AbstractUIPlugin plugin;
 
 	public UIPluginModule(AbstractUIPlugin plugin) {
 		this.plugin = plugin;
 	}
 	
+	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(AbstractUIPlugin.class).toInstance(plugin);
 	}
 
 	public Class<? extends IImageHelper> bindIImageHelper() {
-		return PluginImageHelper.class;		
+		return PluginImageHelper.class;
 	}
 }

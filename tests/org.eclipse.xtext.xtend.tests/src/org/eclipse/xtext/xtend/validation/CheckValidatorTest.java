@@ -16,7 +16,6 @@ import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class CheckValidatorTest extends AbstractXtextTests {
 

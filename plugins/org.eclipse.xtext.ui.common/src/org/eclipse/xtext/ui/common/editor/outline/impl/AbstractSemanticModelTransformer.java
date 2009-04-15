@@ -31,13 +31,14 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	public static final String INVISIBLE_ROOT_NODE = "Invisible Root Node";
 	public static final List<EObject> NO_CHILDREN = new ArrayList<EObject>();
 	public static final ContentOutlineNode HIDDEN_NODE = new ContentOutlineNode() {
+		@Override
 		public String getLabel() {
 			return "hidden node";
-		};
+		}
 	};
 	
 	private boolean sorted = false;
-	private HashMap<Class, IOutlineFilter> filters;
+	private HashMap<Class<?>, IOutlineFilter> filters;
 
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
@@ -100,7 +101,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	public void enableFilter(IOutlineFilter filterSpec) {
 		if (filters == null) {
-			filters = new HashMap<Class, IOutlineFilter>();
+			filters = new HashMap<Class<?>, IOutlineFilter>();
 		}
 		filters.put(filterSpec.getClass(), filterSpec);
 	}
@@ -115,18 +116,14 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		if (filters != null) {
 			return filters.containsKey(filterSpec.getClass());
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
-	public boolean isFilterActive(Class clazz) {
+	public boolean isFilterActive(Class<?> clazz) {
 		if (filters != null) {
 			return filters.containsKey(clazz);
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	protected abstract boolean doSortChildren(EObject semanticNode);
