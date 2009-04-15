@@ -13,31 +13,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
-import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.XtextGrammarTestLanguageUiModule;
-import org.eclipse.xtext.XtextRuntimeModule;
-import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.XtextUiModule;
-import org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule;
-import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
-import org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageRuntimeModule;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageStandaloneSetup;
-import org.eclipse.xtext.parser.keywords.KeywordsTestLanguageUiModule;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageRuntimeModule;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
 
 /**
  * Unit test for class <code>DefaultContentAssistProcessor</code>. Reused by Xtend implementation.
@@ -46,65 +23,27 @@ import com.google.inject.Injector;
  * @author Jan Koehnlein
  * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
  */
-public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
+public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTests {
 
-	private ISetup getRefGrammarSetup() {
-		return new ReferenceGrammarTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUiModule());
-			}
-		};
+	private IContentAssistProcessorTestSetup setup;
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		setup = createSetup();
 	}
 
-	private ISetup getXtextGrammarTestSetup() {
-		return new XtextGrammarTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUiModule());
-			}
-		};
+	protected abstract IContentAssistProcessorTestSetup createSetup();
+	
+	@Override
+	protected void tearDown() throws Exception {
+		setup = null;
+		super.tearDown();
 	}
 	
-	private ISetup getXtextSetup() {
-		return new XtextStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule());
-			}
-		};
-	}
-
-	private ISetup getContentAssistGrammarSetup() {
-		return new ContentAssistTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule());
-			}
-		};
-	}
-
-	private ISetup getKeywordsLangSetup() {
-		return new KeywordsTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUiModule());
-			}
-		};
-	}
-	
-	private ISetup getEnumsLangSetup() {
-		return new EnumRulesTestLanguageStandaloneSetup() {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new EnumRulesTestLanguageRuntimeModule(), new EnumRulesTestLanguageUiModule());
-			}
-		};
-	}
-
 	public void testComputePrefix() throws Exception {
 		String model = "spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ";
-		newBuilder(getRefGrammarSetup())
+		newBuilder(setup.getRefGrammarSetup())
 		.append(model+" familie( dfv(").assertMatchString("(").reset()
 		.append(model+" familie( dfv").assertMatchString("dfv").reset()
 		.append(model+" familie( dfv_").assertMatchString("dfv_").reset()
@@ -113,7 +52,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	}
 
 	public void testComputeCompletionProposalsCount() throws Exception {
-		newBuilder(getRefGrammarSetup()).assertCount(1)
+		newBuilder(setup.getRefGrammarSetup()).assertCount(1)
 			.append("spielplatz ").assertCount(1)
 			.append("1 ").assertCount(2)
 			.append("\"JUNIT\" ").assertCount(1)
@@ -125,7 +64,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	}
 
 	public void testComputeCompletionProposalsText() throws Exception {
-		newBuilder(getRefGrammarSetup()).assertText("spielplatz")
+		newBuilder(setup.getRefGrammarSetup()).assertText("spielplatz")
 			.applyText().assertText("1")
 			.applyText().assertText("\"Spielplatz_Beschreibung\"","{")
 			.applyText().assertText("{")
@@ -152,13 +91,13 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	}
 
 	public void testBetweenContext() throws Exception {
-		newBuilder(getRefGrammarSetup())
+		newBuilder(setup.getRefGrammarSetup())
 		.append("spielplatz 1 \"1\" {kind")
 		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","}");
 	}
 
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
-		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
+		ContentAssistProcessorTestBuilder builder = newBuilder(setup.getRefGrammarSetup());
 		builder = builder.append("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ");
 		builder.append(" KI").assertText("kind");
 		builder.append(" ER").assertText("erwachsener");
@@ -208,7 +147,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 
 
 	public void testCompleteRuleCall() throws Exception {
-		newBuilder(getXtextGrammarTestSetup())
+		newBuilder(setup.getXtextGrammarTestSetup())
 			.appendNl("grammar foo")
 			.appendNl("generate foo \"foo\"")
 			.appendNl("R1 : (attr+=R2)*;")
@@ -224,7 +163,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	}
 	
 	public void testCompleteAbstractRuleCall() throws Exception {
-		newBuilder(getContentAssistGrammarSetup())
+		newBuilder(setup.getContentAssistGrammarSetup())
 			.appendNl("abstract rules")
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
@@ -234,7 +173,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	}
 
 	public void testDefaultRule() throws Exception {
-		ContentAssistProcessorTestBuilder builder = newBuilder(getRefGrammarSetup());
+		ContentAssistProcessorTestBuilder builder = newBuilder(setup.getRefGrammarSetup());
 		builder.assertText("spielplatz");
 		builder.append(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
 			.assertTextAtCursorPosition(1, "spielplatz");
@@ -245,16 +184,16 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=260825
      */
     public void testCompleteParserRule_01() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("MyRule : 'foo' name=ID; ").assertText(
-                                "ParserRule_Name", "terminal"
+                                "ParserRule_Name", "terminal", "enum"
                 );
     }
     
     public void testCompleteParserRule_02() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
@@ -262,13 +201,14 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .assertTextAtCursorPosition("MyRule",
                 		"ParserRule_Name",
                 		"terminal",
+                		"enum",
                 		"as",
                         "generate",
                         "import");
     }
     
     public void testCompleteParserRule_03() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
@@ -276,13 +216,14 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                 .assertTextAtCursorPosition(" MyRule",
                 		"ParserRule_Name",
                 		"terminal",
+                		"enum",
                 		"as",
                         "generate",
                         "import");
     }
     
     public void _testCompleteGenerateKeyword() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("")
@@ -292,7 +233,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
 
     public void testCompleteImportAndGenerateRule() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
         .appendNl("grammar foo")
         .appendNl("generate foo \"foo\"")
         .appendNl("")
@@ -303,7 +244,8 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
                         "as",
                         "generate",
                         "import",
-                        "terminal"
+                        "terminal",
+                        "enum"
         );
     }
     
@@ -311,7 +253,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
      */
     public void testCompleteRuleCallWithSpace() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
         .appendNl("grammar foo")
         .appendNl("generate foo \"foo\"")
         .appendNl("R1 : (attr+=R2)*;")
@@ -330,7 +272,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269593
      */
     public void testCompleteAbstractRuleCallWithSpace() throws Exception {
-        newBuilder(getContentAssistGrammarSetup())
+        newBuilder(setup.getContentAssistGrammarSetup())
         .appendNl("abstract rules")
         .appendNl("R1 ();")
         .append("R2 rule : ").assertText(
@@ -343,7 +285,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269649
      */
     public void testCompletionOnGenerateKeyword() throws Exception {
-        newBuilder(getXtextGrammarTestSetup())
+        newBuilder(setup.getXtextGrammarTestSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate meta \"url\"")
         .appendNl("Rule: name=ID;")
@@ -358,7 +300,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=267582
      */
     public void testCompleteAssignmentWithBacktracking() throws Exception {
-    	newBuilder(getXtextGrammarTestSetup())
+    	newBuilder(setup.getXtextGrammarTestSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate foo \"foo\"")
         .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=",
@@ -399,43 +341,52 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
     }
 
     public void testKeywordWithBackslashes() throws Exception {
-		newBuilder(getKeywordsLangSetup()).assertText("foo\\bar", "foo\\", "\\bar", "\\");
+		newBuilder(setup.getKeywordsLangSetup()).assertText("foo\\bar", "foo\\", "\\bar", "\\");
 	}
     
     public void testEnumCompletion_01() throws Exception {
-    	newBuilder(getEnumsLangSetup()).assertText("existing", "generated");
+    	newBuilder(setup.getEnumsLangSetup()).assertText("existing", "generated");
     }
     
     public void testEnumCompletion_02() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append("exi").assertText("existing");
+    	newBuilder(setup.getEnumsLangSetup()).append("exi").assertText("existing");
     }
     
     public void testEnumCompletion_03() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append(" ").assertText("existing", "generated");
+    	newBuilder(setup.getEnumsLangSetup()).append(" ").assertText("existing", "generated");
     }
     
     public void testEnumCompletion_04() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden");
+    	newBuilder(setup.getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden");
     }
     
     public void testEnumCompletion_05() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append("existing ").assertText("SameName", "DifferentLiteral", "overridden");
+    	newBuilder(setup.getEnumsLangSetup()).append("existing ").assertText("SameName", "DifferentLiteral", "overridden");
     }
     
     public void testEnumCompletion_06() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append("existing Same").assertText("SameName");
+    	newBuilder(setup.getEnumsLangSetup()).append("existing Same").assertText("SameName");
     }
     
     public void testEnumCompletion_07() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append("generated SameName").assertTextAtCursorPosition(0, "existing", "generated");
+    	newBuilder(setup.getEnumsLangSetup()).append("generated SameName").assertTextAtCursorPosition(0, "existing", "generated");
     }
     
     public void testEnumCompletion_08() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append(" generated SameName").assertTextAtCursorPosition(0, "existing", "generated");
+    	newBuilder(setup.getEnumsLangSetup()).append(" generated SameName").assertTextAtCursorPosition(0, "existing", "generated");
     }
     
     public void testEnumCompletion_09() throws Exception {
-    	newBuilder(getEnumsLangSetup()).append(" generated SameName").assertTextAtCursorPosition(2, "generated");
+    	newBuilder(setup.getEnumsLangSetup()).append(" generated SameName").assertTextAtCursorPosition(2, "generated");
+    }
+    
+    public void testEnumCompletion_10() throws Exception {
+    	newBuilder(setup.getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'")
+	        .appendNl("enum ExistingEnum:")
+	        .assertText("SameName", "DifferentName", "OverriddenLiteral");
     }
     
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
@@ -444,7 +395,7 @@ public class DefaultContentAssistProcessorTest extends AbstractXtextTests {
 	}
 
 	private ContentAssistProcessorTestBuilder doTestCompleteTypeRefSetup() throws Exception {
-		return newBuilder(getXtextSetup())
+		return newBuilder(setup.getXtextSetup())
         .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
         .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
         .appendNl("Model :")
