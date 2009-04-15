@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.service;
 
+import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.reconciler.IReconciler;
@@ -25,6 +28,8 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.core.InjectableAdapterFactory;
+import org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.core.editor.IDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
@@ -80,6 +85,18 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends IDamagerRepairer> bindIDamagerRepairer() {
 		return XtextDamagerRepairer.class;
+	}
+	
+	public Class<? extends AdapterFactory> bindAdapterFactory() {
+		return InjectableAdapterFactory.class;
+	}
+	
+	public Class<? extends AdapterFactoryLabelProvider> bindAdapterFactoryLabelProvider() {
+		return InjectableAdapterFactoryLabelProvider.class;
+	}
+	
+	public ComposedAdapterFactory.Descriptor.Registry bindComposedAdapterFactoryDescriptorRegistry() {
+		return ComposedAdapterFactory.Descriptor.Registry.INSTANCE;
 	}
 	
 }

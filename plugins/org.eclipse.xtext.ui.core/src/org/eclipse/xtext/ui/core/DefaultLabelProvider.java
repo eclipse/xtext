@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -51,14 +52,19 @@ public class DefaultLabelProvider extends LabelProvider {
 	@Inject
 	private IImageHelper imageHelper;
 	
+	@Inject
+	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
+	
 	@Override
-	public final String getText(Object element) {
+	public String getText(Object element) {
 		return getText.invoke(element);
 	}
 	
 	@Override
-	public final Image getImage(Object element) {
+	public Image getImage(Object element) {
 		String imageName = getImage.invoke(element);
+		if (imageName == null && adapterFactoryLabelProvider != null)
+			return adapterFactoryLabelProvider.getImage(element);
 		return getImageHelper().getImage(imageName);
 	}
 
@@ -123,6 +129,14 @@ public class DefaultLabelProvider extends LabelProvider {
 
 	public IImageHelper getImageHelper() {
 		return imageHelper;
+	}
+
+	public AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
+		return adapterFactoryLabelProvider;
+	}
+
+	public void setAdapterFactoryLabelProvider(AdapterFactoryLabelProvider adapterFactoryLabelProvider) {
+		this.adapterFactoryLabelProvider = adapterFactoryLabelProvider;
 	}
 	
 }
