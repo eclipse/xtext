@@ -62,6 +62,12 @@ public class XtendTestsActivator extends AbstractUIPlugin {
 			createUIPluginModule()
 		));
 		
+		injectors.put("org.eclipse.xtext.enumrules.EnumRulesTestLanguage", Guice.createInjector(
+			new org.eclipse.xtext.enumrules.EnumRulesTestLanguageRuntimeModule(), 
+			new org.eclipse.xtext.enumrules.EnumRulesTestLanguageUiModule(),
+			createUIPluginModule()
+		));
+		
 	}
 	
 	public static XtendTestsActivator getInstance() {

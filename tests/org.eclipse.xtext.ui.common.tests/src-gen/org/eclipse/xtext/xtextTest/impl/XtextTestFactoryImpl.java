@@ -85,6 +85,8 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
       case XtextTestPackage.NEGATED_TOKEN: return createNegatedToken();
       case XtextTestPackage.UNTIL_TOKEN: return createUntilToken();
       case XtextTestPackage.WILDCARD: return createWildcard();
+      case XtextTestPackage.ENUM_RULE: return createEnumRule();
+      case XtextTestPackage.ENUM_LITERAL_DECLARATION: return createEnumLiteralDeclaration();
       case XtextTestPackage.ALTERNATIVES: return createAlternatives();
       case XtextTestPackage.GROUP: return createGroup();
       case XtextTestPackage.CHARACTER_RANGE: return createCharacterRange();
@@ -289,6 +291,28 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumRule createEnumRule()
+  {
+    EnumRuleImpl enumRule = new EnumRuleImpl();
+    return enumRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumLiteralDeclaration createEnumLiteralDeclaration()
+  {
+    EnumLiteralDeclarationImpl enumLiteralDeclaration = new EnumLiteralDeclarationImpl();
+    return enumLiteralDeclaration;
   }
 
   /**

@@ -185,12 +185,13 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cParserRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTerminalRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cEnumRuleParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//AbstractRule:
-		//  ParserRule|TerminalRule;
+		//  ParserRule|TerminalRule|EnumRule;
 		public ParserRule getRule() { return rule; }
 
-		//ParserRule|TerminalRule
+		//ParserRule|TerminalRule|EnumRule
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ParserRule
@@ -198,6 +199,9 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//TerminalRule
 		public RuleCall getTerminalRuleParserRuleCall_1() { return cTerminalRuleParserRuleCall_1; }
+
+		//EnumRule
+		public RuleCall getEnumRuleParserRuleCall_2() { return cEnumRuleParserRuleCall_2; }
 	}
 
 	public class AbstractMetamodelDeclarationElements implements IParserRuleAccess {
@@ -1367,6 +1371,142 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//Keyword
 		public RuleCall getRightKeywordParserRuleCall_1_2_0() { return cRightKeywordParserRuleCall_1_2_0; }
 	}
+
+	public class EnumRuleElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumRule");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEnumKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cReturnsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cTypeTypeRefParserRuleCall_2_1_0 = (RuleCall)cTypeAssignment_2_1.eContents().get(0);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cAlternativesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cAlternativesEnumLiteralsParserRuleCall_4_0 = (RuleCall)cAlternativesAssignment_4.eContents().get(0);
+		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//EnumRule:
+		//  "enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
+		public ParserRule getRule() { return rule; }
+
+		//"enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";"
+		public Group getGroup() { return cGroup; }
+
+		//"enum"
+		public Keyword getEnumKeyword_0() { return cEnumKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//("returns" type=TypeRef)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"returns"
+		public Keyword getReturnsKeyword_2_0() { return cReturnsKeyword_2_0; }
+
+		//type=TypeRef
+		public Assignment getTypeAssignment_2_1() { return cTypeAssignment_2_1; }
+
+		//TypeRef
+		public RuleCall getTypeTypeRefParserRuleCall_2_1_0() { return cTypeTypeRefParserRuleCall_2_1_0; }
+
+		//":"
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
+
+		//alternatives=EnumLiterals
+		public Assignment getAlternativesAssignment_4() { return cAlternativesAssignment_4; }
+
+		//EnumLiterals
+		public RuleCall getAlternativesEnumLiteralsParserRuleCall_4_0() { return cAlternativesEnumLiteralsParserRuleCall_4_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+	}
+
+	public class EnumLiteralsElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumLiterals");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cEnumLiteralDeclarationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
+		
+		//EnumLiterals returns AbstractElement:
+		//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+		public ParserRule getRule() { return rule; }
+
+		//EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+		public Group getGroup() { return cGroup; }
+
+		//EnumLiteralDeclaration
+		public RuleCall getEnumLiteralDeclarationParserRuleCall_0() { return cEnumLiteralDeclarationParserRuleCall_0; }
+
+		//({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Alternatives.groups+=current}
+		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
+
+		//("|" groups+=EnumLiteralDeclaration)+
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"|"
+		public Keyword getVerticalLineKeyword_1_1_0() { return cVerticalLineKeyword_1_1_0; }
+
+		//groups+=EnumLiteralDeclaration
+		public Assignment getGroupsAssignment_1_1_1() { return cGroupsAssignment_1_1_1; }
+
+		//EnumLiteralDeclaration
+		public RuleCall getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0() { return cGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0; }
+	}
+
+	public class EnumLiteralDeclarationElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumLiteralDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cEnumLiteralAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cEnumLiteralEEnumLiteralCrossReference_0_0 = (CrossReference)cEnumLiteralAssignment_0.eContents().get(0);
+		private final RuleCall cEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1 = (RuleCall)cEnumLiteralEEnumLiteralCrossReference_0_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cLiteralAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cLiteralKeywordParserRuleCall_1_1_0 = (RuleCall)cLiteralAssignment_1_1.eContents().get(0);
+		
+		//EnumLiteralDeclaration:
+		//  enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
+		public ParserRule getRule() { return rule; }
+
+		//enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?
+		public Group getGroup() { return cGroup; }
+
+		//enumLiteral=[ecore::EEnumLiteral]
+		public Assignment getEnumLiteralAssignment_0() { return cEnumLiteralAssignment_0; }
+
+		//[ecore::EEnumLiteral]
+		public CrossReference getEnumLiteralEEnumLiteralCrossReference_0_0() { return cEnumLiteralEEnumLiteralCrossReference_0_0; }
+
+		//ID
+		public RuleCall getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1() { return cEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1; }
+
+		//("=" literal=Keyword)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_1_0() { return cEqualsSignKeyword_1_0; }
+
+		//literal=Keyword
+		public Assignment getLiteralAssignment_1_1() { return cLiteralAssignment_1_1; }
+
+		//Keyword
+		public RuleCall getLiteralKeywordParserRuleCall_1_1_0() { return cLiteralKeywordParserRuleCall_1_1_0; }
+	}
 	
 	
 	private GrammarElements pGrammar;
@@ -1405,6 +1545,9 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	private UntilTokenElements pUntilToken;
 	private WildcardElements pWildcard;
 	private CharacterRangeElements pCharacterRange;
+	private EnumRuleElements pEnumRule;
+	private EnumLiteralsElements pEnumLiterals;
+	private EnumLiteralDeclarationElements pEnumLiteralDeclaration;
 	private TerminalRule tID;
 	private TerminalRule tINT;
 	private TerminalRule tSTRING;
@@ -1447,7 +1590,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractRule:
-	//  ParserRule|TerminalRule;
+	//  ParserRule|TerminalRule|EnumRule;
 	public AbstractRuleElements getAbstractRuleAccess() {
 		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
 	}
@@ -1784,6 +1927,36 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getCharacterRangeRule() {
 		return getCharacterRangeAccess().getRule();
+	}
+
+	//EnumRule:
+	//  "enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
+	public EnumRuleElements getEnumRuleAccess() {
+		return (pEnumRule != null) ? pEnumRule : (pEnumRule = new EnumRuleElements());
+	}
+	
+	public ParserRule getEnumRuleRule() {
+		return getEnumRuleAccess().getRule();
+	}
+
+	//EnumLiterals returns AbstractElement:
+	//  EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+	public EnumLiteralsElements getEnumLiteralsAccess() {
+		return (pEnumLiterals != null) ? pEnumLiterals : (pEnumLiterals = new EnumLiteralsElements());
+	}
+	
+	public ParserRule getEnumLiteralsRule() {
+		return getEnumLiteralsAccess().getRule();
+	}
+
+	//EnumLiteralDeclaration:
+	//  enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
+	public EnumLiteralDeclarationElements getEnumLiteralDeclarationAccess() {
+		return (pEnumLiteralDeclaration != null) ? pEnumLiteralDeclaration : (pEnumLiteralDeclaration = new EnumLiteralDeclarationElements());
+	}
+	
+	public ParserRule getEnumLiteralDeclarationRule() {
+		return getEnumLiteralDeclarationAccess().getRule();
 	}
 
 	//terminal ID:

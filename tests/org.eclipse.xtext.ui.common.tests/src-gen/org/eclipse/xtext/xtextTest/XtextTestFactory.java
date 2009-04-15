@@ -188,6 +188,24 @@ public interface XtextTestFactory extends EFactory
   Wildcard createWildcard();
 
   /**
+   * Returns a new object of class '<em>Enum Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enum Rule</em>'.
+   * @generated
+   */
+  EnumRule createEnumRule();
+
+  /**
+   * Returns a new object of class '<em>Enum Literal Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enum Literal Declaration</em>'.
+   * @generated
+   */
+  EnumLiteralDeclaration createEnumLiteralDeclaration();
+
+  /**
    * Returns a new object of class '<em>Alternatives</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

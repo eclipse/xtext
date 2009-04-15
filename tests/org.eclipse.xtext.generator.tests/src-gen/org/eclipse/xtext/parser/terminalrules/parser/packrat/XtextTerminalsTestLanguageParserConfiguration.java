@@ -44,6 +44,9 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageUntilTokenConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageWildcardConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageCharacterRangeConsumer;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageEnumRuleConsumer;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageEnumLiteralsConsumer;
+import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageEnumLiteralDeclarationConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageIDConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageINTConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageSTRINGConsumer;
@@ -90,6 +93,9 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     private XtextTerminalsTestLanguageUntilTokenConsumer untilTokenConsumer;
     private XtextTerminalsTestLanguageWildcardConsumer wildcardConsumer;
     private XtextTerminalsTestLanguageCharacterRangeConsumer characterRangeConsumer;
+    private XtextTerminalsTestLanguageEnumRuleConsumer enumRuleConsumer;
+    private XtextTerminalsTestLanguageEnumLiteralsConsumer enumLiteralsConsumer;
+    private XtextTerminalsTestLanguageEnumLiteralDeclarationConsumer enumLiteralDeclarationConsumer;
     private XtextTerminalsTestLanguageIDConsumer idConsumer;
     private XtextTerminalsTestLanguageINTConsumer intConsumer;
     private XtextTerminalsTestLanguageSTRINGConsumer stringConsumer;
@@ -218,6 +224,15 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		characterRangeConsumer = new XtextTerminalsTestLanguageCharacterRangeConsumer(
     		this, null
     	);
+		enumRuleConsumer = new XtextTerminalsTestLanguageEnumRuleConsumer(
+    		this, null
+    	);
+		enumLiteralsConsumer = new XtextTerminalsTestLanguageEnumLiteralsConsumer(
+    		this, null
+    	);
+		enumLiteralDeclarationConsumer = new XtextTerminalsTestLanguageEnumLiteralDeclarationConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -269,6 +284,9 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getUntilTokenConsumer().setRule(grammarAccess.getUntilTokenAccess());
 		getWildcardConsumer().setRule(grammarAccess.getWildcardAccess());
 		getCharacterRangeConsumer().setRule(grammarAccess.getCharacterRangeAccess());
+		getEnumRuleConsumer().setRule(grammarAccess.getEnumRuleAccess());
+		getEnumLiteralsConsumer().setRule(grammarAccess.getEnumLiteralsAccess());
+		getEnumLiteralDeclarationConsumer().setRule(grammarAccess.getEnumLiteralDeclarationAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -285,6 +303,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 
 		getGrammarIdConsumer().setIdConsumer(getIdConsumer());
 
+		getAbstractRuleConsumer().setEnumRuleConsumer(getEnumRuleConsumer());
 		getAbstractRuleConsumer().setParserRuleConsumer(getParserRuleConsumer());
 		getAbstractRuleConsumer().setTerminalRuleConsumer(getTerminalRuleConsumer());
 
@@ -376,6 +395,15 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 
 		getCharacterRangeConsumer().setKeywordConsumer(getKeywordConsumer());
 
+		getEnumRuleConsumer().setEnumLiteralsConsumer(getEnumLiteralsConsumer());
+		getEnumRuleConsumer().setIdConsumer(getIdConsumer());
+		getEnumRuleConsumer().setTypeRefConsumer(getTypeRefConsumer());
+
+		getEnumLiteralsConsumer().setEnumLiteralDeclarationConsumer(getEnumLiteralDeclarationConsumer());
+
+		getEnumLiteralDeclarationConsumer().setIdConsumer(getIdConsumer());
+		getEnumLiteralDeclarationConsumer().setKeywordConsumer(getKeywordConsumer());
+
 		getGrammarConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getGrammarConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
 		getGrammarConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
@@ -391,11 +419,11 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getGeneratedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
 		getGeneratedMetamodelConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
-		getGeneratedMetamodelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$66$Delimiter);
+		getGeneratedMetamodelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$67$Delimiter);
 		getGeneratedMetamodelConsumer().setRuleCall$12$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
 		getReferencedMetamodelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
-		getReferencedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$66$Delimiter);
+		getReferencedMetamodelConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$67$Delimiter);
 		getReferencedMetamodelConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
 		getParserRuleConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getParserRuleConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
@@ -421,7 +449,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getActionConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
 		getActionConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getActionConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
-		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$66$Delimiter);
+		getKeywordConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$67$Delimiter);
 		getRuleCallConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
 		getAssignmentConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getAssignmentConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
@@ -453,6 +481,14 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getUntilTokenConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getWildcardConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getCharacterRangeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
+		getEnumRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
+		getEnumRuleConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
+		getEnumRuleConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
+		getEnumRuleConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
+		getEnumRuleConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
+		getEnumLiteralsConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
+		getEnumLiteralDeclarationConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
+		getEnumLiteralDeclarationConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.ruleCall$28$Delimiter);
 	}
 	
     public XtextTerminalsTestLanguageGrammarConsumer getGrammarConsumer() {
@@ -597,6 +633,18 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 
     public XtextTerminalsTestLanguageCharacterRangeConsumer getCharacterRangeConsumer() {
     	return characterRangeConsumer;
+    }
+
+    public XtextTerminalsTestLanguageEnumRuleConsumer getEnumRuleConsumer() {
+    	return enumRuleConsumer;
+    }
+
+    public XtextTerminalsTestLanguageEnumLiteralsConsumer getEnumLiteralsConsumer() {
+    	return enumLiteralsConsumer;
+    }
+
+    public XtextTerminalsTestLanguageEnumLiteralDeclarationConsumer getEnumLiteralDeclarationConsumer() {
+    	return enumLiteralDeclarationConsumer;
     }
 
     public XtextTerminalsTestLanguageIDConsumer getIdConsumer() {

@@ -21,6 +21,8 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 
 	private AbstractRuleElements rule;	
 
+	private INonTerminalConsumer enumRuleConsumer;
+
 	private INonTerminalConsumer parserRuleConsumer;
 
 	private INonTerminalConsumer terminalRuleConsumer;
@@ -30,6 +32,8 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 	private IElementConsumer ruleCall$2$Consumer;
 
 	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -41,6 +45,7 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
 		}
 	}
 
@@ -68,6 +73,18 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		}
 	}
 
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(enumRuleConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public XtextTerminalsTestLanguageAbstractRuleConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -87,6 +104,7 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getParserRuleParserRuleCall_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getTerminalRuleParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getEnumRuleParserRuleCall_2());
 	}
 	
 	@Override
@@ -97,6 +115,10 @@ public final class XtextTerminalsTestLanguageAbstractRuleConsumer extends NonTer
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setEnumRuleConsumer(INonTerminalConsumer enumRuleConsumer) {
+		this.enumRuleConsumer = enumRuleConsumer;
 	}
 	
 	public void setParserRuleConsumer(INonTerminalConsumer parserRuleConsumer) {

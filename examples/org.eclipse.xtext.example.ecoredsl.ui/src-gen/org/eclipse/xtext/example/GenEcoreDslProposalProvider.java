@@ -6,6 +6,7 @@ package org.eclipse.xtext.example;
 import java.util.Collections;
 import java.util.List;
 
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
@@ -23,7 +24,6 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
-	
 			
 	public List<? extends ICompletionProposal> completeEcoreDsl_MetamodelDeclarations(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -825,9 +825,16 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment, "\"MapEntry_Value\"", contentAssistContext));		
 	}
     
-	public List<? extends ICompletionProposal> complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeEcoreDsl(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeEcoreDsl '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeReferencedMetamodel(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeReferencedMetamodel '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();
@@ -951,5 +958,4 @@ public class GenEcoreDslProposalProvider extends AbstractJavaProposalProvider {
 		}
 		return Collections.emptyList();
 	}
-
 }

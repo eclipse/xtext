@@ -24,8 +24,8 @@ public final class XtextTerminalsTestLanguageDelimiters {
 	);
 
 	public static final ISequenceMatcher ruleCall$28$Delimiter = new SetBasedKeywordMatcher(
-		"grammar", "with", "hidden", "generate", "as", "import", "returns", "current", "terminal");
+		"grammar", "with", "hidden", "generate", "as", "import", "returns", "current", "terminal", "enum");
 
-	public static final ISequenceMatcher ruleCall$66$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$67$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

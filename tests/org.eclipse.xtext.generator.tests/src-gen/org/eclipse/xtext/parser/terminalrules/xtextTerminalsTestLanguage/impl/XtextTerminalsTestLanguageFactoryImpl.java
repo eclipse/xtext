@@ -85,6 +85,8 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
       case XtextTerminalsTestLanguagePackage.NEGATED_TOKEN: return createNegatedToken();
       case XtextTerminalsTestLanguagePackage.UNTIL_TOKEN: return createUntilToken();
       case XtextTerminalsTestLanguagePackage.WILDCARD: return createWildcard();
+      case XtextTerminalsTestLanguagePackage.ENUM_RULE: return createEnumRule();
+      case XtextTerminalsTestLanguagePackage.ENUM_LITERAL_DECLARATION: return createEnumLiteralDeclaration();
       case XtextTerminalsTestLanguagePackage.ALTERNATIVES: return createAlternatives();
       case XtextTerminalsTestLanguagePackage.GROUP: return createGroup();
       case XtextTerminalsTestLanguagePackage.CHARACTER_RANGE: return createCharacterRange();
@@ -289,6 +291,28 @@ public class XtextTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumRule createEnumRule()
+  {
+    EnumRuleImpl enumRule = new EnumRuleImpl();
+    return enumRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnumLiteralDeclaration createEnumLiteralDeclaration()
+  {
+    EnumLiteralDeclarationImpl enumLiteralDeclaration = new EnumLiteralDeclarationImpl();
+    return enumLiteralDeclaration;
   }
 
   /**
