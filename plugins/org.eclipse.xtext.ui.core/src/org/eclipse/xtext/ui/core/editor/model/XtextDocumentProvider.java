@@ -57,6 +57,8 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			this.document = document;
 		}
 
+		// XXX: Is this a potential dead lock? A UoW tries to spawn another one for
+		// another document. This one may try to lock the first one ...
 		public void resourceChanged(final IResourceChangeEvent event) {
 
 			final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor(document);
@@ -116,7 +118,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 						}
 					});
 					return Status.OK_STATUS;
-				}}.schedule();
+				}}.schedule(); // do we need to lock the workspace?
 			}
 		}
 	}
@@ -140,7 +142,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			int flags = delta.getFlags();
 			if ((kind == IResourceDelta.REMOVED ||
 					(kind == IResourceDelta.CHANGED && ((IResourceDelta.CONTENT & flags) != 0)))
-					&& document.isReferenced(res)) {
+					&& document.isReferenced(res)) { // this should be a UoW as we access the resource
 				deltas.add(delta);
 			}
 			return true;
