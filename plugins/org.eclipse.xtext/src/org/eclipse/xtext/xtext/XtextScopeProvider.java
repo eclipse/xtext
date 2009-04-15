@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -68,14 +67,12 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			return IScope.NULLSCOPE;
 		}
 		if (reference == XtextPackage.eINSTANCE.getEnumLiteralDeclaration_EnumLiteral()) {
-			if (context instanceof EnumLiteralDeclaration) {
-				final EnumLiteralDeclaration decl = (EnumLiteralDeclaration) context;
-				final EnumRule rule = GrammarUtil.containingEnumRule(decl);
-				if (rule.getType() != null && rule.getType().getClassifier() != null && rule.getType().getClassifier() instanceof EEnum) {
-					return createEnumLiteralsScope((EEnum) rule.getType().getClassifier());
-				}
-				return IScope.NULLSCOPE;
+			final EnumRule rule = GrammarUtil.containingEnumRule(context);
+			if (rule.getType() != null && rule.getType().getClassifier() != null && rule.getType().getClassifier() instanceof EEnum) {
+				return createEnumLiteralsScope((EEnum) rule.getType().getClassifier());
 			}
+			return IScope.NULLSCOPE;
+			
 		}
 		return super.getScope(context, reference);
 	}

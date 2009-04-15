@@ -20,7 +20,7 @@ public class PluginTestSuite {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.xtend.tests");
 		//$JUnit-BEGIN$
-//		suite.addTestSuite(DefaultXtendContentAssistProcessorTest.class);
+//		suite.addTestSuite(XtendContentAssistProcessorTest.class);
 		suite.addTestSuite(XtendScopeProviderTest.class);
 		//$JUnit-END$
 		return suite;
