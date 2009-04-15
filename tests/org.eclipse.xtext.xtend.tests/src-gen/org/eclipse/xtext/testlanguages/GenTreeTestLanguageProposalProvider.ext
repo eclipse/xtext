@@ -43,7 +43,10 @@ List[ICompletionProposal] completeNode_Children(EObject model, Assignment assign
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 	  
-List[ICompletionProposal] complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] completeModel(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeNode(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*

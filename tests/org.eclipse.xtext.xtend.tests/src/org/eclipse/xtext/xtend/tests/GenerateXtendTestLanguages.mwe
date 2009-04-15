@@ -5,6 +5,8 @@
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
 	
+	<property name="enums.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"/>
+	
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>
 		<pathUiProject value="${runtimeProject}"/>
@@ -25,6 +27,9 @@
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/xtend/tests/XtendSetup.mwe"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/xtend/tests/XtendSetup.mwe" genmodels="${enums.genmodel}"/>
 		</language>
 	</component>
 </workflow>

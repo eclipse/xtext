@@ -43,7 +43,7 @@ List[ICompletionProposal] completeModel_Forth(EObject model, Assignment assignme
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
 	 	  
-List[ICompletionProposal] complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] completeModel(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*

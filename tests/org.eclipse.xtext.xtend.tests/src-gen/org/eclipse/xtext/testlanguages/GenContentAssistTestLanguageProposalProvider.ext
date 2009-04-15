@@ -55,7 +55,19 @@ List[ICompletionProposal] completeAbstractRuleCall_Rule(EObject model, Assignmen
 					+ contentAssistContext.matchString.trim() + "'") ->
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 	 	  
-List[ICompletionProposal] complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] completeStart(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAbstractRule(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeFirstAbstractRuleChild(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeSecondAbstractRuleChild(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAbstractRuleCall(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*

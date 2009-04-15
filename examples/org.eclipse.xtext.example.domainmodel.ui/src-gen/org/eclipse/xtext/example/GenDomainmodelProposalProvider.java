@@ -6,6 +6,7 @@ package org.eclipse.xtext.example;
 import java.util.Collections;
 import java.util.List;
 
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
@@ -23,7 +24,6 @@ import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
  * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider {
-	
 			
 	public List<? extends ICompletionProposal> completeFile_Imports(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -206,9 +206,107 @@ public class GenDomainmodelProposalProvider extends AbstractJavaProposalProvider
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 	}
     
-	public List<? extends ICompletionProposal> complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+	public List<? extends ICompletionProposal> completeFile(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeFile '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeImport(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeImport '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeNamedElement(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeNamedElement '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completePackage(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completePackage '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeType(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeType '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeDataType(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeDataType '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeEntity(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeEntity '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeFeature(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeFeature '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeStructuralFeature(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeStructuralFeature '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeAttribute(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeAttribute '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeReference(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeReference '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeOperation(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeOperation '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeParameter(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeParameter '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeTypedElement(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTypedElement '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+		}
+		return Collections.emptyList();
+	}
+	public List<? extends ICompletionProposal> completeTypeRef(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeTypeRef '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();

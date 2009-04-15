@@ -273,11 +273,104 @@ List[ICompletionProposal] completeCharacterRange_Right(EObject model, Assignment
 					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
 					+ contentAssistContext.matchString.trim() + "'") ->
 	{};
+	 
+List[ICompletionProposal] completeEnumRule_Name(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEnumRule_Name feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+    { newProposal(assignment, "EnumRule_Name", contentAssistContext) };
+	 
+List[ICompletionProposal] completeEnumRule_Type(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEnumRule_Type feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeEnumRule_Alternatives(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEnumRule_Alternatives feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeEnumLiterals_Groups(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEnumLiterals_Groups feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
+	 
+List[ICompletionProposal] completeEnumLiteralDeclaration_EnumLiteral(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEnumLiteralDeclaration_EnumLiteral feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
+	 
+List[ICompletionProposal] completeEnumLiteralDeclaration_Literal(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) :
+	debug("completeEnumLiteralDeclaration_Literal feature '" + assignment.feature + "' terminal '"
+					+ assignment.terminal + "' cardinality '" + assignment.cardinality + "' and prefix '"
+					+ contentAssistContext.matchString.trim() + "'") ->
+	{};
 	 	  
-List[ICompletionProposal] complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] completeGrammar(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 	 	  
 List[ICompletionProposal] completeEcore_EString(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAbstractRule(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAbstractMetamodelDeclaration(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeGeneratedMetamodel(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeReferencedMetamodel(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeParserRule(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeTypeRef(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAbstractElement(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAction(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeKeyword(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeRuleCall(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAssignment(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeCrossReference(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeTerminalRule(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeAbstractNegatedToken(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeNegatedToken(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeUntilToken(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeWildcard(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeEnumRule(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeEnumLiteralDeclaration(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*

@@ -116,7 +116,25 @@ List[ICompletionProposal] completeFamilie_Kinder(EObject model, Assignment assig
 	lookupCrossReference(((CrossReference)assignment.terminal), contentAssistContext);
 
 	 	  
-List[ICompletionProposal] complete(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+List[ICompletionProposal] completeSpielplatz(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completePerson(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeKind(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeErwachsener(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeSpielzeug(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeFarbe(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
+	{};
+	 	  
+List[ICompletionProposal] completeFamilie(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) :
 	{};
 
 /*
