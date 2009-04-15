@@ -100,8 +100,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		resource.setValidationDisabled(file == null);
 	}
 
+	// XXX why is this one not called inside an readOnly action???
 	public boolean isReferenced(IResource anIResource) {
-		if (!(anIResource instanceof IFile))
+		if (!(anIResource instanceof IFile) || resource == null || resource.getResourceSet() == null)
 			return false;
 		EList<Resource> resources = resource.getResourceSet().getResources();
 		final Map<String, Resource> uriToRes = new HashMap<String, Resource>();
