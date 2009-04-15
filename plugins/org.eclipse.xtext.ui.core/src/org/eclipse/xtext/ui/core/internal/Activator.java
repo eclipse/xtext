@@ -51,6 +51,7 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 	}
 
+	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
@@ -65,6 +66,7 @@ public class Activator extends AbstractUIPlugin {
 		plugin = activator;
 	}
 
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		if (log.isDebugEnabled())
 			log.debug("Stopping Xtext UI bundle.");

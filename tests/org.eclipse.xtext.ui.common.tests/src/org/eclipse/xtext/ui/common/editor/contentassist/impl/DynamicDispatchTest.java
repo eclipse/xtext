@@ -45,6 +45,7 @@ public class DynamicDispatchTest extends TestCase{
 			return OBJECT;
 		}
 
+		@SuppressWarnings("unused")
 		protected List<ICompletionProposal> foo(String s) {
 			return STRING;
 		}

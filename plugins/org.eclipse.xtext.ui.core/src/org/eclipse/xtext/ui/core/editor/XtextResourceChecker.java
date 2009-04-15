@@ -33,11 +33,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- *
  */
 public class XtextResourceChecker {
 
@@ -49,7 +47,6 @@ public class XtextResourceChecker {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 *
 	 */
 	public static final class AddMarkersOperation extends WorkspaceModifyOperation {
 		/**
@@ -60,10 +57,6 @@ public class XtextResourceChecker {
 		private final String markerId;
 		private final boolean deleteMarkers;
 
-		/**
-		 * @param rule
-		 * @param issues
-		 */
 		public AddMarkersOperation(ISchedulingRule rule, List<Map<String, Object>> issues, IFile file, String markerId,
 				boolean deleteMarkers) {
 			super(rule);

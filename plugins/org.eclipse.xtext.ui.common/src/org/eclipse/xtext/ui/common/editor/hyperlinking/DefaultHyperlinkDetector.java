@@ -17,7 +17,6 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;

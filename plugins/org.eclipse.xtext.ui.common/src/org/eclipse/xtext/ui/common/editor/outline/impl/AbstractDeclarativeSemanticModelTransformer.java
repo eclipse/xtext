@@ -28,14 +28,14 @@ import com.google.inject.Inject;
  */
 public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemanticModelTransformer {
 
-	private PolymorphicDispatcher<ContentOutlineNode> createNode = new PolymorphicDispatcher<ContentOutlineNode>(Lists
+	private final PolymorphicDispatcher<ContentOutlineNode> createNode = new PolymorphicDispatcher<ContentOutlineNode>(Lists
 			.newArrayList(this), new Predicate<Method>() {
 		public boolean apply(Method param) {
 			return ((param.getName().equals("createNode")) || (param.getAnnotation(CreateNode.class) != null));
 		}
 	});
 
-	private PolymorphicDispatcher<List<EObject>> getChildren = new PolymorphicDispatcher<List<EObject>>(Lists
+	private final PolymorphicDispatcher<List<EObject>> getChildren = new PolymorphicDispatcher<List<EObject>>(Lists
 			.newArrayList(this), new Predicate<Method>() {
 		public boolean apply(Method param) {
 			return ((param.getName().equals("getChildren")) || (param.getAnnotation(GetChildren.class) != null));
@@ -62,6 +62,7 @@ public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemantic
 		return getChildren.invoke(semanticNode);
 	}
 
+	@Override
 	protected List<EObject> getChildren(EObject semanticNode) {
 		return semanticNode.eContents();
 	}

@@ -47,6 +47,7 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 	
 	protected abstract IProjectInfo getProjectInfo();
 
+	@Override
 	public boolean performFinish() {
 		final IProjectInfo projectInfo = getProjectInfo();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
