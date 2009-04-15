@@ -36,9 +36,8 @@ public class PluginImageHelper implements IImageHelper {
 	@Named("org.eclipse.xtext.ui.core.PluginImageHelper.notFound")
 	private String notFound = "notFound.gif";
 	
-	public Image getImage(String imgname) {
-		if (imgname == null)
-			imgname = defaultImage;
+	public Image getImage(String imageName) {
+		String imgname = imageName == null ? defaultImage : imageName;
 		if (imgname != null) {
 			Image result = null;
 			URL imgUrl = getPlugin().getBundle().getEntry(getPathSuffix() + imgname);
@@ -53,10 +52,9 @@ public class PluginImageHelper implements IImageHelper {
 					}
 				}
 				return result;
-			} else {
-				if (!imgname.equals(notFound)) {
-					return getImage(notFound);
-				}
+			}
+			if (!imgname.equals(notFound)) {
+				return getImage(notFound);
 			}
 		}
 		return null;
@@ -85,4 +83,13 @@ public class PluginImageHelper implements IImageHelper {
 	public String getNotFound() {
 		return notFound;
 	}
+
+	public String getDefaultImage() {
+		return defaultImage;
+	}
+
+	public void setDefaultImage(String defaultImage) {
+		this.defaultImage = defaultImage;
+	}
+	
 }

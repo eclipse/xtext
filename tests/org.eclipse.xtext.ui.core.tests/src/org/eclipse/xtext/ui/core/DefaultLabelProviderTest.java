@@ -11,13 +11,12 @@ package org.eclipse.xtext.ui.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.WrappedException;
-
 import junit.framework.TestCase;
+
+import org.eclipse.emf.common.util.WrappedException;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class DefaultLabelProviderTest extends TestCase {
 

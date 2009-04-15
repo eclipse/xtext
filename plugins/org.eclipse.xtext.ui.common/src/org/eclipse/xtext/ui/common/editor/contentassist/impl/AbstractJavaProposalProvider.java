@@ -13,16 +13,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -53,12 +50,13 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	protected static final String LEXER_RULE_STRING = "STRING";
 	// logger available to subclasses
 	protected final static Logger logger = Logger.getLogger(IProposalProvider.class);
+	
 	@Inject
 	protected IScopeProvider scopeProvider;
-	@Inject(optional=true)
-	protected AdapterFactory adapterFactory;
-	//  @Inject(optional=true) does not work due to some plugin visibility quirks
-	protected AdapterFactoryLabelProvider adapterFactoryLabelProvider;
+	
+	@Inject
+	protected ILabelProvider labelProvider;
+	
 	protected JavaReflectiveMethodInvoker methodInvoker;
 	protected List<IProposalProvider> proposalProviders;
 	
@@ -93,7 +91,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			TypeRef typeRef = calledRule.getType();
 			return invokeMethod("complete"+ ( null!=typeRef.getMetamodel().getAlias() ? Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_" : "" )
 							+ Strings.toFirstUpper(typeRef.getClassifier().getName()),
-							Arrays.<Class<?>> asList(EObject.class, RuleCall.class,contentAssistContext.getModel() == null ? 
+							Arrays.<Class<?>> asList(EObject.class, RuleCall.class,contentAssistContext.getModel() == null ?
 							EObject.class : contentAssistContext.getModel().getClass(),
 							IContentAssistContext.class), Arrays.asList(
 									contentAssistContext.getModel(),ruleCall,contentAssistContext));
@@ -109,7 +107,7 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 			Assignment assignment, IContentAssistContext contentAssistContext) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 		// TODO : Better call completeRuleCall ?
-		return invokeMethod("complete"+ Strings.toFirstUpper(parserRule.getName()) + "_"+ 
+		return invokeMethod("complete"+ Strings.toFirstUpper(parserRule.getName()) + "_"+
 					Strings.toFirstUpper(assignment.getFeature()), Arrays.<Class<?>> asList(EObject.class, Assignment.class,
 						IContentAssistContext.class), Arrays.asList(contentAssistContext.getModel(), assignment,contentAssistContext));
 	}
@@ -120,7 +118,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 	 */
 	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,
 			IContentAssistContext contentAssistContext) {
-		return createCompletionProposal(abstractElement, displayString,contentAssistContext,getImage(abstractElement));
+		return createCompletionProposal(abstractElement, displayString, contentAssistContext,
+				getImage(abstractElement));
 	}
 
 	/**
@@ -220,51 +219,22 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 					if (null != candidate.name() && isCandidateMatchingPrefix(contentAssistContext
 									.getModel(), ref, candidate, trimmedPrefix)) {
 						completionProposalList.add(createCompletionProposal(crossReference, candidate.name(),
-								contentAssistContext,getImage(candidate.element())));
+								contentAssistContext, getImage(candidate.element())));
 					}
 				}
 			}
 		}
-
 		return completionProposalList;
 	}
-
+	
 	/**
-     * Returns the image for the label of the given element. 
+     * Returns the image for the label of the given element.
      *
      * @param element the element for which to provide the label image
      * @return the image used to label the element, or <code>null</code> if there is no image for the given object
      */
 	protected Image getImage(EObject eObject) {
-		return getAdapterFactoryLabelProvider().getImage(eObject);
-	}
-	
-	/**
-	 * @return an instance that wraps the given {@link #getAdapterFactory()} to delegates its JFace provider 
-	 * 	interfaces to corresponding adapter-implemented item provider interfaces
-	 * @see AdapterFactoryLabelProvider
-	 */
-	protected AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
-		if (null == this.adapterFactoryLabelProvider) {
-			this.adapterFactoryLabelProvider = new AdapterFactoryLabelProvider(
-					getAdapterFactory());
-		}
-		return this.adapterFactoryLabelProvider;
-	}
-	
-	/**
-	 * @return an adapter factory that yield adapters that implement the various item label provider interfaces.
-	 * @see AdapterFactory
-	 */
-	protected AdapterFactory getAdapterFactory() {
-		if (null == this.adapterFactory) {
-			ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
-					ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-			composedAdapterFactory
-					.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-			this.adapterFactory = composedAdapterFactory;
-		}
-		return this.adapterFactory;
+		return labelProvider.getImage(eObject);
 	}
 	
 	@SuppressWarnings("unchecked")
