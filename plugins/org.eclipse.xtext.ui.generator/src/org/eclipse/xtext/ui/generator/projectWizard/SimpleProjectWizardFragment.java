@@ -16,38 +16,42 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
-	
+
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[] { 
 				"org.eclipse.ui", 
 				"org.eclipse.core.runtime", 
 				"org.eclipse.core.resources",
-				"org.eclipse.ui.ide" };
+				"org.eclipse.ui.ide" 
+				};
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.singletonList((Object) getGeneratorProjectName(grammar));
 	}
 
-	/**
-	 * @return
-	 */
 	private String getGeneratorProjectName(Grammar g) {
-		if (generatorProjectName!=null)
+		if (generatorProjectName != null) {
 			return generatorProjectName;
-		throw new IllegalStateException(getClass().getName()+" : The property 'generatorProjectName' is mandatory but has not been configured.");
+		}
+		else {
+			throw new IllegalStateException(getClass().getName()
+					+ " : The property 'generatorProjectName' is mandatory but has not been configured.");
+		}
 	}
-	
+
 	private String generatorProjectName;
-	
-	public void setGeneratorProjetName(String generatorProjetName) {
-		if ("".equals(generatorProjetName.trim()))
+
+	public void setGeneratorProjectName(String generatorProjetName) {
+		if ("".equals(generatorProjectName.trim())) {
 			return;
-		this.generatorProjectName = generatorProjetName;
+		}
+		else {
+			this.generatorProjectName = generatorProjetName;
+		}
 	}
 }
