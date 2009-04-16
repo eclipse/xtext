@@ -60,11 +60,14 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 			outlineModel = document.readOnly(new UnitOfWork<ContentOutlineNode>() {
 				public ContentOutlineNode exec(XtextResource resource) throws Exception {
 					EObject semanticModelRoot = resource.getParseResult().getRootASTElement();
-					if (semanticModelRoot != null)
+					if (semanticModelRoot != null) {
 						return transformSemanticModelToOutlineModel(semanticModelRoot);
-					ContentOutlineNode errorNode = new ContentOutlineNode();
-					errorNode.setLabel("Error: No model available.");
-					return errorNode;
+					}
+					else {
+						ContentOutlineNode errorNode = new ContentOutlineNode();
+						errorNode.setLabel("Error: No model available.");
+						return errorNode;
+					}
 				}
 			});
 		}
@@ -86,10 +89,11 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 
 	public void updateChildCount(Object element, int currentChildCount) {
 		int length = 0;
-		if (outlineModel != null) { // happens, when tree was disposed.
+		if (outlineModel != null) { // happens when tree had been disposed.
 			if (element instanceof IXtextDocument) {
 				length = outlineModel.getChildren().size();
-			} else if (element instanceof ContentOutlineNode) {
+			}
+			else if (element instanceof ContentOutlineNode) {
 				ContentOutlineNode node = (ContentOutlineNode) element;
 				length = node.getChildren().size();
 			}
