@@ -34,6 +34,14 @@ public class XtextResourceSet extends ResourceSetImpl {
     private URI resolveClasspathURI(URI uri) {
         return getClasspathUriResolver().resolve(getClasspathURIContext(), uri);
     }
+    
+    public void addLoadOption(Object key, Object value) {
+    	getLoadOptions().put(key, value);
+    }
+    
+    public void removeLoadOption(Object key) {
+    	getLoadOptions().remove(key);
+    }
 
     @Override
     public URIConverter getURIConverter() {

@@ -20,6 +20,7 @@ import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Injector;
@@ -61,6 +62,7 @@ public class MweReader extends AbstractWorkflowComponent2 {
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
+		set.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = set.getResource(URI.createURI(uri), true);
 		EObject value = resource.getContents().get(0);
 		ctx.set(outputSlot, value);

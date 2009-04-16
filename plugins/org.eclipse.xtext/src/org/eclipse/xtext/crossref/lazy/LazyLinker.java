@@ -79,7 +79,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
 		URI uri = obj.eResource().getURI();
 		URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
-		EClass eType = (EClass) eRef.getEType();
+		EClass eType = eRef.getEReferenceType();
 		eType = findInstantiableCompatible(eType);
 		EObject proxy = eType.getEPackage().getEFactoryInstance().create(eType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
