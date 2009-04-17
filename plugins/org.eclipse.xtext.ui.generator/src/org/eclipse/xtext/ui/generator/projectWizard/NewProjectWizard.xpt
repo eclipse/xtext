@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::ui::generator::projectWizard::Extensions»
 
 «DEFINE root FOR Grammar»
-«FILE projectWizardClassName().asPath()+".java" UI_SRC_GEN-»
+«FILE projectWizardClassName().asPath()+".java" SRC_GEN_UI-»
 package «projectWizardClassName().toJavaPackage()»;
 
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;

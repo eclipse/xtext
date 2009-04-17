@@ -10,9 +10,14 @@ package org.eclipse.xtext.ui.generator.projectWizard;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.BindKey;
+import org.eclipse.xtext.generator.BindValue;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,14 +26,22 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { 
-				"org.eclipse.ui", 
-				"org.eclipse.core.runtime", 
+		return new String[] {
+				"org.eclipse.ui",
+				"org.eclipse.core.runtime",
 				"org.eclipse.core.resources",
-				"org.eclipse.ui.ide" 
-				};
+				"org.eclipse.ui.ide"
+			};
 	}
 
+	@Override
+	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
+		return new BindFactory()
+			.addTypeToType("org.eclipse.xtext.ui.core.wizard.IProjectCreator",
+						GrammarUtil.getNamespace(grammar)+".ui.wizard." + GrammarUtil.getName(grammar) + "ProjectCreator")
+			.getBindings();
+	}
+	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.singletonList((Object) getGeneratorProjectName(grammar));
@@ -38,20 +51,16 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		if (generatorProjectName != null) {
 			return generatorProjectName;
 		}
-		else {
-			throw new IllegalStateException(getClass().getName()
-					+ " : The property 'generatorProjectName' is mandatory but has not been configured.");
-		}
+		throw new IllegalStateException(getClass().getName()
+				+ " : The property 'generatorProjectName' is mandatory but has not been configured.");
 	}
 
 	private String generatorProjectName;
 
-	public void setGeneratorProjectName(String generatorProjetName) {
-		if ("".equals(generatorProjectName.trim())) {
+	public void setGeneratorProjectName(String generatorProjectName) {
+		if (generatorProjectName == null || "".equals(generatorProjectName.trim())) {
 			return;
 		}
-		else {
-			this.generatorProjectName = generatorProjetName;
-		}
+		this.generatorProjectName = generatorProjectName.trim();
 	}
 }
