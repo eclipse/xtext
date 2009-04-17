@@ -16,8 +16,8 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE root(String generatorProjectName) FOR Grammar»
-«FILE projectCreatorClassName().asPath()+".java" UI_SRC_GEN-»
-package «projectCreatorClassName().toJavaPackage()».wizard;
+«FILE projectCreatorClassName().asPath()+".java" SRC_GEN_UI-»
+package «projectCreatorClassName().toJavaPackage()»;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -43,8 +43,9 @@ public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCr
 	private final List<String> SRC_FOLDER_LIST = Collections
 			.unmodifiableList(Arrays.asList(SRC_ROOT, SRC_GEN_ROOT));
 
-	protected «projectInfoClassName()» getProjectInfo() {
-		return («projectCreatorClassName()») getProjectInfo();
+	@Override
+	protected «projectInfoClassName().toSimpleName()» getProjectInfo() {
+		return («projectInfoClassName().toSimpleName()») super.getProjectInfo();
 	}
 
 	@Override
@@ -68,7 +69,8 @@ public class «projectCreatorClassName().toSimpleName()» extends DefaultProjectCr
 						"org.eclipse.emf.codegen.ecore;resolution:=optional",
 						"org.eclipse.xtend.util.stdlib",
 						DSL_GENERATOR_PROJECT_NAME)), null, null, null,
-				monitor, null);
+				monitor, null,
+				new String[] {"org.eclipse.jdt.core.javanature", "org.eclipse.pde.PluginNature"});
 
 		if (dslProject == null) {
 			return;
