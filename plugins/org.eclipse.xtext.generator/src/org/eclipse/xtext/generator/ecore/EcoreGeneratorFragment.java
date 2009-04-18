@@ -155,9 +155,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		genModel.initialize(packs2);
 		genModel.setModelDirectory(javaPath);
 		genModel.setModelName(modelName);
-
-		// genModel.setModelDirectory(modelProjectName);
-
+		
 		genModel.setValidateModel(false);
 		genModel.setForceOverwrite(true);
 		genModel.setCanGenerate(true);
@@ -171,6 +169,10 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		genModel.getUsedGenPackages().addAll(getUsedGenPackages());
 
+		if(javaEditDirectory != null) {
+			genModel.setEditDirectory(javaEditDirectory);
+		}
+		
 //		List<EPackage> missingPackages = genModel.getMissingPackages();
 //		if (!missingPackages.isEmpty()) {
 //			StringBuffer buff = new StringBuffer();
@@ -282,7 +284,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	private String javaModelDirectory = null;
 	
 	private String xmiModelDirectory = null;
-	
+
+	private String javaEditDirectory = null;
+
 	public void setJavaModelDirectory(String dir) {
 		javaModelDirectory = dir;
 	}
@@ -291,6 +295,10 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		xmiModelDirectory = dir;
 	}
 
+	public void setJavaEditDirectory(String dir) {
+		javaEditDirectory = dir;
+	}
+	
 	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
 		return getBasePackage(g) + "." +pack.getName() +"."+ Strings.toFirstUpper(pack.getName())
 				+ "Package";
