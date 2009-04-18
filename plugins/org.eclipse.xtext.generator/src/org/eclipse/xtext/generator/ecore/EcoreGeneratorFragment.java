@@ -142,8 +142,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		ResourceSet rs = new ResourceSetImpl();
 		Resource res2;
 		Resource res;
+		String modelName = grammar.getName().substring(grammar.getName().lastIndexOf('.') + 1);
 		try {
-			String prefix = new File(xmiPath).getCanonicalPath() + "/" + grammar.getName().substring(grammar.getName().lastIndexOf('.') + 1);
+			String prefix = new File(xmiPath).getCanonicalPath() + "/" + modelName;
 			res2 = rs.createResource(URI.createFileURI(prefix + ".ecore"));
 			res = rs.createResource(URI.createFileURI(prefix + ".genmodel"));
 		} catch (IOException e1) {
@@ -153,6 +154,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		GenModel genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
 		genModel.initialize(packs2);
 		genModel.setModelDirectory(javaPath);
+		genModel.setModelName(modelName);
 
 		// genModel.setModelDirectory(modelProjectName);
 
