@@ -41,7 +41,7 @@ public class Linker extends AbstractCleaningLinker {
 	@Inject
 	private ILinkingService linkingService;
 
-	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {
+	public void ensureLinked(EObject rootModel, EObject obj, IDiagnosticProducer producer) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return;
@@ -52,21 +52,21 @@ public class Linker extends AbstractCleaningLinker {
 			if (abstractNode.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
 				producer.setNode(abstractNode);
-				ensureIsLinked(obj, abstractNode, ref, handledReferences, producer);
+				ensureIsLinked(rootModel, obj, abstractNode, ref, handledReferences, producer);
 			}
 		}
 		producer.setNode(node);
-		setDefaultValues(obj, handledReferences, producer);
+		setDefaultValues(rootModel, obj, handledReferences, producer);
 	}
 
 	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {
 		return new LinkingDiagnosticProducer(consumer);
 	}
 
-	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
+	private void setDefaultValues(EObject rootModel, EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for(EReference ref: obj.eClass().getEAllReferences())
 			if (canSetDefaultValues(ref) && !references.contains(ref) && !obj.eIsSet(ref) && !ref.isDerived()) {
-				setDefaultValue(obj, ref, producer);
+				setDefaultValue(rootModel, obj, ref, producer);
 			}
 	}
 
@@ -74,21 +74,21 @@ public class Linker extends AbstractCleaningLinker {
 		return !ref.isContainment() && !ref.isContainer() && ref.isChangeable();
 	}
 
-	protected final void setDefaultValue(EObject obj, EReference ref, IDiagnosticProducer producer) {
+	protected final void setDefaultValue(EObject rootModel, EObject obj, EReference ref, IDiagnosticProducer producer) {
 		producer.setTarget(obj, ref);
-		setDefaultValueImpl(obj, ref, producer);
+		setDefaultValueImpl(rootModel, obj, ref, producer);
 	}
 
-	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
+	protected void setDefaultValueImpl(EObject rootModel, EObject obj, EReference ref, IDiagnosticProducer producer) {
 		// may be overridden by clients
 	}
 
-	protected void beforeEnsureIsLinked(EObject obj, EReference ref, IDiagnosticProducer producer) {
+	protected void beforeEnsureIsLinked(EObject rootModel, EObject obj, EReference ref, IDiagnosticProducer producer) {
 		// may be overridden by clients
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void ensureIsLinked(EObject obj, AbstractNode node, CrossReference ref,
+	protected void ensureIsLinked(EObject rootModel, EObject obj, AbstractNode node, CrossReference ref,
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		if (eRef == null) {
@@ -96,10 +96,10 @@ public class Linker extends AbstractCleaningLinker {
 			return;
 		}
 		handledReferences.add(eRef);
-		beforeEnsureIsLinked(obj, eRef, producer);
+		beforeEnsureIsLinked(rootModel, obj, eRef, producer);
 		producer.setTarget(obj, eRef);
 		try {
-			final List<EObject> links = getLinkedObject(obj, eRef, node);
+			final List<EObject> links = getLinkedObject(rootModel, obj, eRef, node);
 			if (links == null || links.isEmpty()) {
 				if (!isNullValidResult(obj, eRef, node))
 					producer.addDiagnostic("Cannot resolve reference to '" + node.serialize() + "'");
@@ -141,8 +141,8 @@ public class Linker extends AbstractCleaningLinker {
 		}
 	}
 
-	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node) throws IllegalNodeException {
-		return linkingService.getLinkedObjects(obj, eRef, node);
+	protected List<EObject> getLinkedObject(EObject rootModel, EObject obj, EReference eRef, AbstractNode node) throws IllegalNodeException {
+		return linkingService.getLinkedObjects(rootModel, obj, eRef, node);
 	}
 
 	protected boolean isNullValidResult(EObject obj, EReference eRef, AbstractNode node) {
@@ -164,10 +164,10 @@ public class Linker extends AbstractCleaningLinker {
 	}
 
 	protected void ensureModelLinked(EObject model, final IDiagnosticProducer producer) {
-		ensureLinked(model, producer);
+		ensureLinked(model, model, producer);
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
-			ensureLinked(allContents.next(), producer);
+			ensureLinked(model, allContents.next(), producer);
 	}
 
 }

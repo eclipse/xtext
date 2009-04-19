@@ -183,7 +183,7 @@ public abstract class AbstractParseTreeConstructor implements
 		private String dsl(AbstractToken ele) {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			try {
-				tokenSerializer.serialize(ele, out);
+				tokenSerializer.serialize(ele, rootObject, out);
 			} catch (Throwable e) {
 				e.printStackTrace();
 				return "Error: " + e.getMessage();

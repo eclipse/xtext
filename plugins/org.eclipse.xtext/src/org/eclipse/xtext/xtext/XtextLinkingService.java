@@ -60,16 +60,16 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 
 	@Override
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
+	public List<EObject> getLinkedObjects(EObject rootModel, EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
 		if (ref == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
 			return getUsedGrammar((Grammar) context, node);
 		if (ref == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
-			return getLinkedMetaModel((TypeRef)context, ref, (LeafNode) node);
+			return getLinkedMetaModel((Grammar) rootModel, (TypeRef)context, ref, (LeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof GeneratedMetamodel)
 			return createPackage((GeneratedMetamodel) context, (LeafNode) node);
 		if (ref == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && context instanceof ReferencedMetamodel)
 			return getPackage((ReferencedMetamodel)context, (LeafNode) node);
-		return super.getLinkedObjects(context, ref, node);
+		return super.getLinkedObjects(rootModel, context, ref, node);
 	}
 
 	private List<EObject> getUsedGrammar(Grammar grammar, AbstractNode node) {
@@ -196,17 +196,17 @@ public class XtextLinkingService extends DefaultLinkingService {
 		return false;
 	}
 
-	private List<EObject> getLinkedMetaModel(TypeRef context, EReference ref, LeafNode text) throws IllegalNodeException {
+	private List<EObject> getLinkedMetaModel(Grammar root, TypeRef context, EReference ref, LeafNode text) throws IllegalNodeException {
 		final CompositeNode parentNode = text.getParent();
 		for(int i = parentNode.getChildren().size() - 1; i >= 0; i-- ) {
 			AbstractNode child = parentNode.getChildren().get(i);
 			if (child instanceof LeafNode) {
 				LeafNode leaf = (LeafNode) child;
 				if (text == leaf)
-					return super.getLinkedObjects(context, ref, text);
+					return super.getLinkedObjects(root, context, ref, text);
 				if (!(leaf.getGrammarElement() instanceof Keyword) && !leaf.isHidden()) {
 					return XtextMetamodelReferenceHelper.findBestMetamodelForType(
-							context, text.getText(), leaf.getText(), getScope(context, ref));
+							context, text.getText(), leaf.getText(), getScope(root, context, ref));
 				}
 			}
 		}
@@ -214,14 +214,14 @@ public class XtextLinkingService extends DefaultLinkingService {
 	}
 
 	@Override
-	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
+	protected String getUnconvertedLinkText(EObject rootModel, EObject object, EReference reference, EObject context) {
 		if (reference == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
 			return ((Grammar) object).getName();
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
 			return aliasResolver.getValue(object);
 		if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage())
 			return ((EPackage) object).getNsURI();
-		return super.getUnconvertedLinkText(object, reference, context);
+		return super.getUnconvertedLinkText(rootModel, object, reference, context);
 	}
 
 }

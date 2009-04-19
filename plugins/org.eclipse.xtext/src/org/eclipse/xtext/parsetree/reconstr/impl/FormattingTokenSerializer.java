@@ -10,6 +10,7 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
@@ -61,10 +62,10 @@ public abstract class FormattingTokenSerializer extends DefaultTokenSerializer {
 	}
 
 	@Override
-	public void serialize(IAbstractToken firstToken, OutputStream out)
+	public void serialize(IAbstractToken firstToken, EObject rootModel, OutputStream out)
 			throws IOException {
 		formatter = config.run();
-		super.serialize(firstToken, out);
+		super.serialize(firstToken, rootModel, out);
 		formatter = null;
 	}
 

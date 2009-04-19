@@ -44,6 +44,8 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 
 	protected OutputStream out;
 
+	private EObject rootModel;
+
 	/**
 	 * @throws IOException
 	 */
@@ -78,7 +80,7 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 	protected void elementCrossRef(IInstanceDescription current,
 			CrossReference call, EObject value) throws IOException {
 		beforeElement(current, call);
-		append(crossRefSerializer.serializeCrossRef(current, call, value));
+		append(crossRefSerializer.serializeCrossRef(current, rootModel, call, value));
 		afterElement(current, call);
 	}
 
@@ -115,14 +117,18 @@ public class DefaultTokenSerializer extends AbstractTokenSerializer {
 		afterElement(current, call);
 	}
 
-	@Override
-	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
+	public void serialize(IAbstractToken firstToken, EObject rootModel, OutputStream out) throws IOException {
 		outputHasStarted = false;
 		this.out = out;
-		for (IAbstractToken t = firstToken; t != null; t = t.getNext()) {
-			beforeToken(t);
-			token(t);
-			afterToken(t);
+		this.rootModel = rootModel;
+		try {
+			for (IAbstractToken t = firstToken; t != null; t = t.getNext()) {
+				beforeToken(t);
+				token(t);
+				afterToken(t);
+			}
+		} finally {
+			this.rootModel = null;
 		}
 	}
 
