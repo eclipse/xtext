@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
@@ -31,9 +32,9 @@ public class WhitespacePreservingTokenSerializer extends DefaultTokenSerializer 
 	private int lastLeaf = -1;
 
 	@Override
-	public void serialize(IAbstractToken firstToken, OutputStream out) throws IOException {
+	public void serialize(IAbstractToken firstToken, EObject rootModel, OutputStream out) throws IOException {
 		beginSerialize();
-		super.serialize(firstToken, out);
+		super.serialize(firstToken, rootModel, out);
 		endSerialize();
 	}
 

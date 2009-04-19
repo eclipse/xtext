@@ -57,7 +57,7 @@ public class HyperlinkHelper {
 		Assert.isNotNull(parseResult);
 		AbstractNode abstractNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), offset);
 		final Wrapper<Region> location = Wrapper.wrap(new Region(abstractNode.getOffset(), abstractNode.getLength()));
-		List<EObject> crossLinkedEObjects = findCrossLinkedEObject(abstractNode, location);
+		List<EObject> crossLinkedEObjects = findCrossLinkedEObject(resource.getContents().get(0), abstractNode, location);
 		if (crossLinkedEObjects.isEmpty())
 			return null;
 		final URIConverter uriConverter = resource.getResourceSet().getURIConverter();
@@ -75,7 +75,7 @@ public class HyperlinkHelper {
 
 	public OpenDeclarationAction getOpenDeclarationAction(XtextResource resource, int offset) {
 		AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(resource.getParseResult().getRootNode(), offset);
-		List<EObject> crossLinkedEObject = findCrossLinkedEObject(node, null);
+		List<EObject> crossLinkedEObject = findCrossLinkedEObject(resource.getContents().get(0), node, null);
 		if (crossLinkedEObject.isEmpty())
 			return null;
 		final URI uri = EcoreUtil.getURI(crossLinkedEObject.get(0));
@@ -83,7 +83,7 @@ public class HyperlinkHelper {
 		return new OpenDeclarationAction(normalized, locationProvider);
 	}
 
-	protected List<EObject> findCrossLinkedEObject(AbstractNode node, Wrapper<Region> location) {
+	protected List<EObject> findCrossLinkedEObject(EObject rootModel, AbstractNode node, Wrapper<Region> location) {
 		AbstractNode nodeToCheck = node;
 		while(nodeToCheck != null && !(nodeToCheck.getGrammarElement() instanceof Assignment)) {
 			if (nodeToCheck.getGrammarElement() instanceof CrossReference) {
@@ -93,7 +93,7 @@ public class HyperlinkHelper {
 				try {
 					if (location != null)
 						location.set(new Region(nodeToCheck.getOffset(), nodeToCheck.getLength()));
-					return linkingService.getLinkedObjects(semanticModel, eReference, nodeToCheck);
+					return linkingService.getLinkedObjects(rootModel, semanticModel, eReference, nodeToCheck);
 				} catch (IllegalNodeException ex) {
 					return Collections.emptyList();
 				}

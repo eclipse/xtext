@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.crossref.IScope;
@@ -30,7 +31,8 @@ public class ContentAssistHelper {
 	public static IScope getScope(IScopeProvider scopeProvider, Object context, Object reference) {
 		if (reference == null)
 			return null;
-		IScope scope = scopeProvider.getScope((EObject) context, (EReference) reference);
+		EObject eContext = (EObject) context;
+		IScope scope = scopeProvider.getScope(EcoreUtil.getRootContainer(eContext), eContext, (EReference) reference);
 		return scope;
 	}
 }

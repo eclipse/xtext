@@ -40,11 +40,11 @@ public class EcoreDslLinkingService extends DefaultLinkingService {
 	private IValueConverterService valueConverterService;
 
 	@Override
-	public List<EObject> getLinkedObjects(EObject context, EReference ref,
+	public List<EObject> getLinkedObjects(EObject rootModel, EObject context, EReference ref,
 			AbstractNode node) throws IllegalNodeException {
 		if (ref == EcoredslPackage.eINSTANCE.getReferencedMetamodel_EPackage())
 			return getPackage((ReferencedMetamodel) context, (LeafNode) node);
-		return super.getLinkedObjects(context, ref, node);
+		return super.getLinkedObjects(rootModel, context, ref, node);
 	}
 
 	private List<EObject> getPackage(ReferencedMetamodel context, LeafNode text) {

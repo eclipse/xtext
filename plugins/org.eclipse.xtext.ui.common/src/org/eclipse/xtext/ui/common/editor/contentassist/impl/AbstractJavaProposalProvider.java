@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -213,7 +214,8 @@ public abstract class AbstractJavaProposalProvider implements IProposalProvider 
 				EClass eClass = (EClass) containingParserRule.getType().getClassifier();
 				EReference ref = GrammarUtil.getReference(crossReference,eClass);
 				String trimmedPrefix = contentAssistContext.getMatchString().trim();
-				IScope scope = scopeProvider.getScope(contentAssistContext.getModel(), ref);
+				EObject context = contentAssistContext.getModel();
+				IScope scope = scopeProvider.getScope(EcoreUtil.getRootContainer(context), context, ref);
 				Iterable<IScopedElement> candidates = scope.getAllContents();
 				for (IScopedElement candidate : candidates) {
 					if (null != candidate.name() && isCandidateMatchingPrefix(contentAssistContext

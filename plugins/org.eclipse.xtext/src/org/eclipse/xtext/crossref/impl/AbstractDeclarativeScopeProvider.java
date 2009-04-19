@@ -27,7 +27,7 @@ import com.google.inject.Inject;
  * A declarative scope provider allowing to specify
  * scoping by declaration of methods of the following signature
  * 
- * IScope scope_[ReturnTypeName](MyType context, EReference reference)
+ * IScope scope_[ReturnTypeName](MyRootType rootModel, MyType context, EReference reference)
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -37,26 +37,28 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 	
 	private final ErrorHandler<IScope> refErrorHandler = new ErrorHandler<IScope>() {
 		public IScope handle(Object[] params, Throwable throwable) {
-			EObject object = (EObject) params[0];
-			EReference reference = (EReference) params[1];
-			if (object.eContainer()==null) {
+			EObject rootModel = (EObject) params[0];
+			EObject context = (EObject) params[1];
+			EReference reference = (EReference) params[2];
+			if (context.eContainer()==null) {
 				if (log.isTraceEnabled())
 					log.trace(throwable.getMessage());
-				return genericFallBack.getScope(object, reference);
+				return genericFallBack.getScope(rootModel, context, reference);
 			}
-			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), reference);
+			return AbstractDeclarativeScopeProvider.this.getScope(rootModel, context.eContainer(), reference);
 		}};
 		
 	private final ErrorHandler<IScope> typeErrorHandler = new ErrorHandler<IScope>() {
 		public IScope handle(Object[] params, Throwable throwable) {
-			EObject object = (EObject) params[0];
-			EClass type = (EClass) params[1];
-			if (object.eContainer()==null) {
+			EObject rootModel = (EObject) params[0];
+			EObject context = (EObject) params[1];
+			EClass type = (EClass) params[2];
+			if (context.eContainer()==null) {
 				if (log.isTraceEnabled())
 					log.trace(throwable.getMessage());
-				return genericFallBack.getScope(object, type);
+				return genericFallBack.getScope(rootModel, context, type);
 			}
-			return AbstractDeclarativeScopeProvider.this.getScope(object.eContainer(), type);
+			return AbstractDeclarativeScopeProvider.this.getScope(rootModel, context.eContainer(), type);
 		}};
 		
 	
@@ -67,25 +69,25 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		this.genericFallBack = defaultScopeProvider;
 	}
 	
-	protected Predicate<Method> getPredicate(EObject context, EClass type) {
+	protected Predicate<Method> getPredicate(EObject rootModel, EObject context, EClass type) {
 		String methodName = "scope_"+type.getName();
-		return PolymorphicDispatcher.Predicates.forName(methodName, 2);
+		return PolymorphicDispatcher.Predicates.forName(methodName, 3);
 	}
 	
-	protected Predicate<Method> getPredicate(EObject context, EReference reference) {
-		return getPredicate(context, reference.getEReferenceType());
+	protected Predicate<Method> getPredicate(EObject rootModel, EObject context, EReference reference) {
+		return getPredicate(rootModel, context, reference.getEReferenceType());
 	}
 
-	public final IScope getScope(EObject context, EReference reference) {
-		final Predicate<Method> predicate = getPredicate(context, reference);
+	public IScope getScope(EObject rootModel, EObject context, EReference reference) {
+		final Predicate<Method> predicate = getPredicate(rootModel, context, reference);
 		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate, refErrorHandler);
-		return scope.invoke(context, reference);
+		return scope.invoke(rootModel, context, reference);
 	}
 	
-	public final IScope getScope(EObject context, EClass type) {
-		final Predicate<Method> predicate = getPredicate(context, type);
+	public IScope getScope(EObject rootModel, EObject context, EClass type) {
+		final Predicate<Method> predicate = getPredicate(rootModel, context, type);
 		final PolymorphicDispatcher<IScope> scope = new PolymorphicDispatcher<IScope>(Collections.singletonList(this), predicate, typeErrorHandler);
-		return scope.invoke(context, type);
+		return scope.invoke(rootModel, context, type);
 	}
 
 }

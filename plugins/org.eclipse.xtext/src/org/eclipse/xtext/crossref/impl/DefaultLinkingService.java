@@ -47,21 +47,21 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	@Inject
 	private IValueConverterService valueConverter;
 
-	protected IScope getScope(EObject context, EReference reference) {
+	protected IScope getScope(EObject rootModel, EObject context, EReference reference) {
 		if (scopeProvider == null)
 			throw new IllegalStateException("scopeProvider must not be null.");
-		return scopeProvider.getScope(context, reference);
+		return scopeProvider.getScope(rootModel, context, reference);
 	}
 
 	/**
 	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed {@link LeafNode}
 	 */
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
+	public List<EObject> getLinkedObjects(EObject rootModel, EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
 		final EClass requiredType = ref.getEReferenceType();
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
-		final IScope scope = getScope(context, ref);
+		final IScope scope = getScope(rootModel, context, ref);
 		final Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
 		final String s = getCrossRefNodeAsString(node);
 		if (s != null) {
@@ -123,13 +123,13 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	 * @return the name of the first {@link IScopedElement} returned from the
 	 * injected {@link IScopeProvider} for the passed object {@link EObject}
 	 */
-	public String getLinkText(EObject object, EReference reference, EObject context) {
-		String unconverted = getUnconvertedLinkText(object, reference, context);
+	public String getLinkText(EObject rootModel, EObject object, EReference reference, EObject context) {
+		String unconverted = getUnconvertedLinkText(rootModel, object, reference, context);
 		return getConvertedValue(unconverted, object, reference, context);
 	}
 
-	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
-		IScope scope = scopeProvider.getScope(context, reference);
+	protected String getUnconvertedLinkText(EObject rootModel, EObject object, EReference reference, EObject context) {
+		IScope scope = getScope(rootModel, context, reference);
 		if (scope == null)
 			return null;
 		IScopedElement scopedElement = scope.getScopedElement(object);
