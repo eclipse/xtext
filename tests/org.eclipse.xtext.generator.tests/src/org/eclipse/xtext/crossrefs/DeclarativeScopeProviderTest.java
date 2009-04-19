@@ -13,6 +13,7 @@ import java.util.Collections;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -37,13 +38,13 @@ public class DeclarativeScopeProviderTest extends TestCase {
 	public void testSimple() throws Exception {
 		final IScope a =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EClass clazz, EReference ref) {
 				return a;
 			}
 		};
 		
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
-		assertEquals(a,provider.getScope(details, details));
+		assertEquals(a,provider.getScope(details.eClass().getEPackage(), details, details));
 	}
 	
 	@SuppressWarnings("unused")
@@ -52,17 +53,17 @@ public class DeclarativeScopeProviderTest extends TestCase {
 		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EClass clazz, EReference ref) {
 				return a;
 			}
-			private IScope scope_EClass(EReference ctx, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EReference ctx, EReference ref) {
 				return b;
 			}
 		};
 		
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
-		assertEquals(b,provider.getScope(details, details));
-		assertEquals(a,provider.getScope(details.getEContainingClass(), details));
+		assertEquals(b,provider.getScope(details.eClass().getEPackage(), details, details));
+		assertEquals(a,provider.getScope(details.eClass().getEPackage(), details.getEContainingClass(), details));
 	}
 	
 	@SuppressWarnings("unused")
@@ -72,22 +73,22 @@ public class DeclarativeScopeProviderTest extends TestCase {
 		final IScope c =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClassifier clazz, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EClassifier clazz, EReference ref) {
 				return a;
 			}
 			
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EClass clazz, EReference ref) {
 				return c;
 			}
 			
-			private IScope scope_EClass(EReference ctx, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EReference ctx, EReference ref) {
 				return b;
 			}
 		};
 		
 		EReference details = EcorePackage.eINSTANCE.getEClass_ESuperTypes();
-		assertEquals(b,provider.getScope(details, details));
-		assertEquals(c,provider.getScope(details.getEContainingClass(), details));
+		assertEquals(b,provider.getScope(details.eClass().getEPackage(), details, details));
+		assertEquals(c,provider.getScope(details.eClass().getEPackage(), details.getEContainingClass(), details));
 	}
 	
 	@SuppressWarnings("unused")
@@ -96,15 +97,15 @@ public class DeclarativeScopeProviderTest extends TestCase {
 		final IScope b =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		final IScope c =  new SimpleScope(IScope.NULLSCOPE, Collections.<IScopedElement>emptySet());
 		AbstractDeclarativeScopeProvider provider = new AbstractDeclarativeScopeProvider() {
-			private IScope scope_EClass(EClassifier clazz, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EClassifier clazz, EReference ref) {
 				return a;
 			}
 			
-			private IScope scope_EClass(EClass clazz, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EClass clazz, EReference ref) {
 				return c;
 			}
 			
-			private IScope scope_EClass(EReference ctx, EReference ref) {
+			private IScope scope_EClass(EPackage rootModel, EReference ctx, EReference ref) {
 				return b;
 			}
 		};
@@ -115,6 +116,6 @@ public class DeclarativeScopeProviderTest extends TestCase {
 		resourceSet.getResources().add(res);
 		EReference details = (EReference) EcoreUtil.copy(EcorePackage.eINSTANCE.getEClass_ESuperTypes());
 		res.getContents().add(details);
-		assertNotNull(provider.getScope(details, details.eClass()));
+		assertNotNull(provider.getScope(details, details, details.eClass()));
 	}
 }

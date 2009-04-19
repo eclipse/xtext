@@ -18,11 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
-import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 import com.google.common.base.Function;
@@ -65,14 +62,5 @@ public class InheritanceTest extends AbstractGeneratorTest {
 			assertTrue("name = '" + name + "'", expectedNames.remove(name));
 		}
 		assertTrue(expectedNames.toString(), expectedNames.isEmpty());
-	}
-	
-	//see https://bugs.eclipse.org/bugs/show_bug.cgi?id=270963
-	public void _testScoping() {
-		ILinkingService l = getLinkingService();
-		ConcreteTestLanguageGrammarAccess ga = (ConcreteTestLanguageGrammarAccess) getGrammarAccess();
-		RuleCall rc = ga.getAbstractCallOverridenParserRuleAccess().getElementsOverridableParserRuleParserRuleCall_1_0();
-		String ref = l.getLinkText(rc.getRule(), rc.eContainmentFeature(), rc);
-		assertNotNull(ref);
 	}
 }

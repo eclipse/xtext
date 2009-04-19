@@ -28,14 +28,14 @@ import com.google.inject.name.Named;
  * 
  * IScope scope_<ExpectedTypeName>(<MyContextType> ctx, EReference ref) : ...
  * 
- * Where 
+ * Where
  * 1) ExpectedTypeName refers to ref.getEType().getName() and
  * 2) MyContextType refers to the type (or any super type) of the source element.
  * 
  * If no such declaration can be found it will sitch the ctx to ctx.eContainer and try again.
  * Example:
- * If you have Classes containing Features which have a cross reference to a Class. 
- * The implementation will first look for 
+ * If you have Classes containing Features which have a cross reference to a Class.
+ * The implementation will first look for
  * 
  * IScope scope_Class(Feature ctx,EReference ref) : ...
  * 
@@ -50,9 +50,9 @@ import com.google.inject.name.Named;
 public class XtendScopeProvider extends AbstractXtendService implements IScopeProvider {
 	public final static String EXTENSION_FILE = "ScopeExtensions";
 
-	private String extensionFile;
+	private final String extensionFile;
 
-	private DefaultScopeProvider defaultScopeProvider;
+	private final DefaultScopeProvider defaultScopeProvider;
 
 	@Inject
 	public XtendScopeProvider(@Named(EXTENSION_FILE) String name, DefaultScopeProvider defaultScopeProvider) {
@@ -64,23 +64,22 @@ public class XtendScopeProvider extends AbstractXtendService implements IScopePr
 
 	private static final String SCOPE_EXTENSION_PREFIX = "scope_";
 
-	public IScope getScope(EObject context, final EReference reference) {
+	public IScope getScope(EObject rootModel, EObject context, final EReference reference) {
 		try {
 			while (true) {
 				Object result = null;
 				try {
 					String extensionName = extensionName(context, reference);
-					result = invokeExtension(extensionName, Lists.newArrayList(context, reference));
+					result = invokeExtension(extensionName, Lists.newArrayList(rootModel, context, reference));
 				} catch (NoSuchExtensionException e) {
 					// ignore
 				}
 				if (result != null)
 					return (IScope) result;
 				if (context.eContainer() != null) {
-					return getScope(context.eContainer(), reference);
-				} else {
-					computeDefaultScope(context, reference);
+					return getScope(rootModel, context.eContainer(), reference);
 				}
+				computeDefaultScope(rootModel, context, reference);
 			}
 		} catch (Throwable e) {
 			log.error("Error invoking scope extension", e);
@@ -88,23 +87,22 @@ public class XtendScopeProvider extends AbstractXtendService implements IScopePr
 		return null;
 	}
 	
-	public IScope getScope(EObject context, final EClass type) {
+	public IScope getScope(EObject rootModel, EObject context, final EClass type) {
 		try {
 			while (true) {
 				Object result = null;
 				try {
 					String extensionName = extensionName(context, type);
-					result = invokeExtension(extensionName, Lists.newArrayList(context, type));
+					result = invokeExtension(extensionName, Lists.newArrayList(rootModel, context, type));
 				} catch (NoSuchExtensionException e) {
 					// ignore
 				}
 				if (result != null)
 					return (IScope) result;
 				if (context.eContainer() != null) {
-					return getScope(context.eContainer(), type);
-				} else {
-					computeDefaultScope(context, type);
+					return getScope(rootModel, context.eContainer(), type);
 				}
+				computeDefaultScope(rootModel, context, type);
 			}
 		} catch (Throwable e) {
 			log.error("Error invoking scope extension", e);
@@ -112,12 +110,12 @@ public class XtendScopeProvider extends AbstractXtendService implements IScopePr
 		return null;
 	}
 
-	protected IScope computeDefaultScope(EObject ctx, EReference reference) {
-		return this.defaultScopeProvider.getScope(ctx, reference);
+	protected IScope computeDefaultScope(EObject rootModel, EObject ctx, EReference reference) {
+		return this.defaultScopeProvider.getScope(rootModel, ctx, reference);
 	}
 	
-	protected IScope computeDefaultScope(EObject ctx, EClass type) {
-		return this.defaultScopeProvider.getScope(ctx, type);
+	protected IScope computeDefaultScope(EObject rootModel, EObject ctx, EClass type) {
+		return this.defaultScopeProvider.getScope(rootModel, ctx, type);
 	}
 
 	private String extensionName(EObject context, EReference reference) {
