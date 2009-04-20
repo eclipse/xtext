@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -221,6 +222,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 			return aliasResolver.getValue(object);
 		if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage())
 			return ((EPackage) object).getNsURI();
+		if (object instanceof AbstractRule)
+			return ((AbstractRule) object).getName();
 		return super.getUnconvertedLinkText(object, reference, context);
 	}
 
