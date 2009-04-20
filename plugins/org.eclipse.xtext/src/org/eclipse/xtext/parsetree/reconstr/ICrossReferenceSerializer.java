@@ -29,7 +29,7 @@ public interface ICrossReferenceSerializer {
 	 *            the referenced object
 	 * @return A string representing a reference the target object.
 	 */
-	public String serializeCrossRef(IInstanceDescription container, EObject rootModel,
+	public String serializeCrossRef(IInstanceDescription container,
 			CrossReference grammarElement, EObject target);
 
 }

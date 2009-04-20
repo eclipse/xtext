@@ -49,7 +49,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	private IValueConverterService valueConverterService;
 
 	@Override
-	public IScope getScope(EObject rootModel, EObject context, EReference reference) {
+	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XtextPackage.eINSTANCE.getTypeRef_Classifier()) {
 			if (context instanceof TypeRef) {
 				final TypeRef typeRef = (TypeRef) context;
@@ -59,10 +59,10 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 					if (pack != null)
 						return createClassifierScope(pack.getEClassifiers());
 				} else {
-					return createReferencedPackagesScope((Grammar) rootModel);
+					return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 				}
 			} else {
-				return createReferencedPackagesScope((Grammar) rootModel);
+				return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 			}
 			return IScope.NULLSCOPE;
 		}
@@ -74,7 +74,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 			return IScope.NULLSCOPE;
 			
 		}
-		return super.getScope(rootModel, context, reference);
+		return super.getScope(context, reference);
 	}
 
 	private IScope createEnumLiteralsScope(EEnum eEnum) {
@@ -105,13 +105,14 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	}
 
 	@Override
-	protected IScope createScope(EObject rootModel, Resource resource, EClass type) {
+	protected IScope createScope(Resource resource, EClass type) {
 		if (resource.getContents().size() < 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
 					+ resource.getContents().size() + " but expected: >= 1");
-		if (!(rootModel instanceof Grammar))
-			throw new IllegalArgumentException("Expected: rootModel instanceof Grammar, but was: " + rootModel);
-		return createScope((Grammar) rootModel, type);
+		final EObject firstContent = resource.getContents().get(0);
+		if (!(firstContent instanceof Grammar))
+			throw new IllegalArgumentException("resource does not contain a grammar, but: " + firstContent);
+		return createScope((Grammar) firstContent, type);
 	}
 
 	protected IScope createScope(final Grammar grammar, EClass type) {

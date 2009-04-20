@@ -48,15 +48,15 @@ public class LazyLinker extends AbstractCleaningLinker {
 	@Override
 	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
 		LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
-		installProxies(model, model, producer);
+		installProxies(model, producer);
 		TreeIterator<EObject> iterator = model.eAllContents();
 		while (iterator.hasNext()) {
 			EObject eObject = iterator.next();
-			installProxies(model, eObject, producer);
+			installProxies(eObject, producer);
 		}
 	}
 	
-	protected void installProxies(EObject rootModel, EObject obj, IDiagnosticProducer producer) {
+	protected void installProxies(EObject obj, IDiagnosticProducer producer) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return;
@@ -70,15 +70,15 @@ public class LazyLinker extends AbstractCleaningLinker {
 				if (eRef == null) {
 					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
 				}
-				createAndSetProxy(rootModel, obj, abstractNode, eRef);
+				createAndSetProxy(obj, abstractNode, eRef);
 			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void createAndSetProxy(EObject rootModel, EObject obj, AbstractNode abstractNode, EReference eRef) {
+	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
 		URI uri = obj.eResource().getURI();
-		URI encodedLink = uri.appendFragment(encoder.encode(rootModel, obj, eRef, abstractNode));
+		URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
 		EClass eType = eRef.getEReferenceType();
 		eType = findInstantiableCompatible(eType);
 		EObject proxy = eType.getEPackage().getEFactoryInstance().create(eType);

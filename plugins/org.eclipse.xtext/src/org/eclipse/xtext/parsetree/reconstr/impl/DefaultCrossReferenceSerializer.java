@@ -26,12 +26,13 @@ public class DefaultCrossReferenceSerializer extends
 	@Inject
 	private ILinkingService linkingService;
 
-	public String serializeCrossRef(IInstanceDescription container, EObject rootModel,
+	@Override
+	public String serializeCrossRef(IInstanceDescription container,
 			CrossReference grammarElement, EObject target) {
 		final EObject context = container.getDelegate();
 		final EReference ref = GrammarUtil.getReference(grammarElement, context
 				.eClass());
-		final String text = linkingService.getLinkText(rootModel, target, ref, context);
+		final String text = linkingService.getLinkText(target, ref, context);
 		if (text == null)
 			throw new XtextSerializationException(
 					container,

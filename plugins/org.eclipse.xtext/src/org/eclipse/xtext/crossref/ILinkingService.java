@@ -28,7 +28,7 @@ public interface ILinkingService {
 	 * given context. But does not set the references or modifies the passed
 	 * information somehow
 	 */
-	List<EObject> getLinkedObjects(EObject rootModel, EObject context, EReference reference, AbstractNode node)
+	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
 			throws IllegalNodeException;
 
 	/**
@@ -40,5 +40,5 @@ public interface ILinkingService {
 	 * @param context
 	 * @return the text representation.
 	 */
-	String getLinkText(EObject rootModel, EObject object, EReference reference, EObject context);
+	String getLinkText(EObject object, EReference reference, EObject context);
 }

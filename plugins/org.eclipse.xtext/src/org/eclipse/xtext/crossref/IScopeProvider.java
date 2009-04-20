@@ -34,7 +34,7 @@ public interface IScopeProvider {
 	 * @return {@link IScope} representing the inner most {@link IScope} for the
 	 *         passed context and reference.
 	 */
-	public IScope getScope(EObject rootModel, EObject context, EReference reference);
+	public IScope getScope(EObject context, EReference reference);
 
 	/**
 	 * Returns a scope for a given context. The scope contains any visible, type-compatible
@@ -44,5 +44,5 @@ public interface IScopeProvider {
 	 * @return {@link IScope} representing the inner most {@link IScope} for the
 	 *         passed context and type.
 	 */
-	public IScope getScope(EObject rootModel, EObject context, EClass type);
+	public IScope getScope(EObject context, EClass type);
 }
