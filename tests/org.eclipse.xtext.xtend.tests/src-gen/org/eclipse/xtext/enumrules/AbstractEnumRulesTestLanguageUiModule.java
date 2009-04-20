@@ -11,16 +11,13 @@ import org.eclipse.xtext.ui.common.service.DefaultUIModule;
  */
 public abstract class AbstractEnumRulesTestLanguageUiModule extends DefaultUIModule {
 	
-	// foo
 	
 	
-	@Override
 	public Class<? extends org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer> bindITokenColorer() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.CommonAntlrTokenColorer.class;
 	}
 
 	
-	@Override
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;
 	}
