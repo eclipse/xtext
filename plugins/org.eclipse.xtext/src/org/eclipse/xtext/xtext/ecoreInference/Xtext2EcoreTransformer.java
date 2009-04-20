@@ -360,13 +360,14 @@ public class Xtext2EcoreTransformer {
 					AbstractRule calledRule = object.getRule();
 					// do not throw an exception for missing rules, these have been
 					// announced during the first iteration
-					if (calledRule != null)
+					if (calledRule != null && calledRule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) calledRule)) {
 						try {
 							return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), object);
 						}
 						catch (TransformationException e) {
 							reportError(e);
 						}
+					}
 				}
 				return context;
 			}
@@ -572,6 +573,13 @@ public class Xtext2EcoreTransformer {
 
 					return new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
 							"Cannot find called rule.", ruleCall);
+				}
+				if (calledRule instanceof TerminalRule ||
+						calledRule instanceof ParserRule && (GrammarUtil.isDatatypeRule((ParserRule) calledRule)))
+					return null;
+				if (calledRule instanceof EnumRule) {
+					return new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
+							"Cannot call enum rule without assignment.", ruleCall);
 				}
 				final TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
 				try {
