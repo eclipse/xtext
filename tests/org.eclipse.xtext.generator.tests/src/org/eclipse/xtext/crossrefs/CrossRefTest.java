@@ -47,7 +47,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EReference ref = GrammarUtil.getReference(xref, context.eClass());
 
-		assertEquals(1, linkingService.getLinkedObjects(model, context, ref, leaf).size());
+		assertEquals(1, linkingService.getLinkedObjects(context, ref, leaf).size());
 	}
 
 }
