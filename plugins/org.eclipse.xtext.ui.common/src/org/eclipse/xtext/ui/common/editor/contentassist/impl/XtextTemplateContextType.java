@@ -62,9 +62,8 @@ public class XtextTemplateContextType extends TemplateContextType {
 
 			EReference reference = getReference(classReferencePair[0], classReferencePair[1], getGrammar(xtextTemplateContext));
 
-			EObject eContext = xtextTemplateContext.getContentAssistContext().getModel();
 			Iterable<IScopedElement> linkingCandidates = xtextTemplateContext.getScopeProvider()
-					.getScope(EcoreUtil.getRootContainer(eContext), eContext, reference).getAllContents();
+					.getScope(xtextTemplateContext.getContentAssistContext().getModel(), reference).getAllContents();
 
 			List<String> names = new ArrayList<String>();
 

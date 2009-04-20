@@ -27,12 +27,12 @@ public class EcoreDslLinker extends Linker {
 	protected final Logger logger = Logger.getLogger(getClass());
 	
 	@Override
-	protected void setDefaultValueImpl(EObject rootModel, EObject obj, EReference ref, IDiagnosticProducer producer) {
+	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		//hack: ePackage always needs an eFactoryInstance (gets cleared in #clearReferences?)
 		if (ref.getName().equalsIgnoreCase("eFactoryInstance")) {
 			((EPackage) obj).setEFactoryInstance(EcoreFactory.eINSTANCE.createEFactory());
 		}
-		super.setDefaultValueImpl(rootModel, obj, ref, producer);
+		super.setDefaultValueImpl(obj, ref, producer);
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public class EcoreDslLinker extends Linker {
 		// hack: exceptions when eType, eExceptions are null
 		for (EReference ref : allReferences) {
 			try {
-				if (ref.isContainment() ||
-				    ref.isContainer()   ||
+				if (ref.isContainment() || 
+				    ref.isContainer()   || 
 				    ref.isDerived() 	|| obj.eGet(ref) == null || ref.getName() == null
 						|| (obj instanceof ETypedElement && ref.getName().equalsIgnoreCase("eType"))
 						|| (obj instanceof ETypedElement && ref.getName().equalsIgnoreCase("eExceptions"))) {
