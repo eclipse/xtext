@@ -159,12 +159,12 @@ protected class «elementMethodName()» extends RuleCallToken {
 	
 	@Override
 	protected Solution createSolution() {
-«IF calledParserRule() != null-»
+«IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) return null;
 		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
-		// FIXME: lexer rule call
+		// FIXME: terminal or datatype rule call
 		return null;
 «ENDIF-»
 	}

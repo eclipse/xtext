@@ -130,6 +130,9 @@
 		<language uri="classpath:/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 	</component>
 	
 	
