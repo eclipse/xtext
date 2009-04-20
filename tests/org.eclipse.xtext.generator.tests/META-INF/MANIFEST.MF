@@ -150,5 +150,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.xtext.ecoreInference.parser.packrat,
  org.eclipse.xtext.xtext.ecoreInference.parser.packrat.consumers,
  org.eclipse.xtext.xtext.ecoreInference.parseTreeConstruction,
- org.eclipse.xtext.xtext.ecoreInference.parser.antlr
+ org.eclipse.xtext.xtext.ecoreInference.parser.antlr,
+ org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage
 

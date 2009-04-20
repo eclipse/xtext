@@ -84,7 +84,7 @@ public class MultiValueFeatureTestLanguagePackageImpl extends EPackageImpl imple
     if (isInited) return (MultiValueFeatureTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(MultiValueFeatureTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    MultiValueFeatureTestLanguagePackageImpl theMultiValueFeatureTestLanguagePackage = (MultiValueFeatureTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof MultiValueFeatureTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new MultiValueFeatureTestLanguagePackageImpl());
+    MultiValueFeatureTestLanguagePackageImpl theMultiValueFeatureTestLanguagePackage = (MultiValueFeatureTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof MultiValueFeatureTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new MultiValueFeatureTestLanguagePackageImpl());
 
     isInited = true;
 
