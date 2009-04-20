@@ -73,7 +73,7 @@ public class EcoreDslScopeProvider extends DefaultScopeProvider {
 
 	private IScope createEPackageScope(final EcoreDsl ecoreDsl) {
 		IScope current = new SimpleScope(IScope.NULLSCOPE, Iterables.transform(
-				EPackage.Registry.INSTANCE.values(),
+				Iterables.filter(EPackage.Registry.INSTANCE.values(), EPackage.class),
 				new Function<Object, IScopedElement>() {
 					public IScopedElement apply(Object param) {
 						return ScopedElement.create(valueConverterService.toString(((EPackage) param)
