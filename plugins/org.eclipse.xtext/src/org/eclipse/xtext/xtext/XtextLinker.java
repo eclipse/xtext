@@ -115,12 +115,12 @@ public class XtextLinker extends Linker {
 	}
 
 	@Override
-	protected void setDefaultValueImpl(EObject rootModel, EObject obj, EReference ref, IDiagnosticProducer producer) {
+	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		if (XtextPackage.eINSTANCE.getTypeRef_Metamodel() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
 			final String typeRefName = GrammarUtil.getTypeRefName(typeRef);
 			final List<EObject> metamodels = XtextMetamodelReferenceHelper.findBestMetamodelForType(
-					typeRef, "", typeRefName, scopeProvider.getScope(rootModel, typeRef, ref));
+					typeRef, "", typeRefName, scopeProvider.getScope(typeRef, ref));
 			if (metamodels.isEmpty() || metamodels.size() > 1)
 				producer.addDiagnostic("Cannot find meta model for type '" + typeRefName + "'");
 			else
@@ -135,18 +135,18 @@ public class XtextLinker extends Linker {
 				((CrossReference)obj).setTerminal(call);
 			}
 		} else {
-			super.setDefaultValueImpl(rootModel, obj, ref, producer);
+			super.setDefaultValueImpl(obj, ref, producer);
 		}
 	}
 
 	@Override
-	protected void beforeEnsureIsLinked(EObject rootModel, EObject obj, EReference ref, IDiagnosticProducer producer) {
+	protected void beforeEnsureIsLinked(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		if (XtextPackage.eINSTANCE.getTypeRef_Classifier() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
 			if (typeRef.getMetamodel() == null)
-				setDefaultValue(rootModel, obj, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), producer);
+				setDefaultValue(obj, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), producer);
 		} else
-			super.beforeEnsureIsLinked(rootModel, obj, ref, producer);
+			super.beforeEnsureIsLinked(obj, ref, producer);
 	}
 
 	protected Xtext2EcoreTransformer createTransformer(Grammar grammar, IDiagnosticConsumer consumer) {

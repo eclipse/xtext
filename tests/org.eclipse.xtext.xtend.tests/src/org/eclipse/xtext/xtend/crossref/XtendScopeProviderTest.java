@@ -33,7 +33,6 @@ import com.google.inject.Provider;
 public class XtendScopeProviderTest extends TestCase {
 	
 	private XtendScopeProvider scopeProvider;
-	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -53,7 +52,7 @@ public class XtendScopeProviderTest extends TestCase {
 		
 		EcorePackage p = EcorePackage.eINSTANCE;
 		EReference reference = p.getEClass_EAllSuperTypes();
-		IScope scope = scopeProvider.getScope(p, p, reference);
+		IScope scope = scopeProvider.getScope(p, reference);
 		Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
 		int i = 0;
 		while(iterator.hasNext()) {
@@ -68,7 +67,7 @@ public class XtendScopeProviderTest extends TestCase {
 	public void testSimple2() throws Exception {
 		EcorePackage p = EcorePackage.eINSTANCE;
 		EReference reference = p.getEClass_EAllSuperTypes();
-		IScope scope = scopeProvider.getScope(p, reference, reference);
+		IScope scope = scopeProvider.getScope(reference, reference);
 		Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
 		IScopedElement element = iterator.next();
 		assertFalse(iterator.hasNext());

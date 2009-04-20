@@ -185,9 +185,8 @@ public class XtextResource extends ResourceImpl {
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
-		EObject rootModel = contents.get(0);
-		IAbstractToken tokenList = parseTreeConstructor.serialize(rootModel);
-		tokenSerializer.serialize(tokenList, rootModel, outputStream);
+		IAbstractToken tokenList = parseTreeConstructor.serialize(contents.get(0));
+		tokenSerializer.serialize(tokenList, outputStream);
 	}
 
 	/**

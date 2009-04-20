@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,36 +27,6 @@ public class URIFragmentEncoder {
 	
 	private static final String XTEXT_LINK = "xtextLink_";
 	private static final String SEP = "::";
-	
-	public static class Data {
-		private final EObject rootModel;
-		private final EObject context;
-		private final EReference reference;
-		private final AbstractNode node;
-		
-		public Data(EObject rootModel, EObject context, EReference reference, AbstractNode node) {
-			this.rootModel = rootModel;
-			this.context = context;
-			this.reference = reference;
-			this.node = node;
-		}
-
-		public EObject getRootModel() {
-			return rootModel;
-		}
-
-		public EObject getContext() {
-			return context;
-		}
-
-		public EReference getReference() {
-			return reference;
-		}
-
-		public AbstractNode getNode() {
-			return node;
-		}
-	}
 
 	/**
 	 * encodes the given three parameters into a string, so that they can be
@@ -65,12 +37,11 @@ public class URIFragmentEncoder {
 	 * @param node
 	 * @return
 	 */
-	public String encode(EObject rootModel, EObject context, EReference ref, AbstractNode node) {
+	public String encode(EObject obj, EReference ref, AbstractNode node) {
 		StringBuilder fragment = new StringBuilder(40).append(XTEXT_LINK).append(SEP);
-		fragment.append(rootModel.eResource().getURIFragment(rootModel)).append(SEP);
-		fragment.append(context.eResource().getURIFragment(context)).append(SEP);
+		fragment.append(obj.eResource().getURIFragment(obj)).append(SEP);
 		fragment.append(EcoreUtil.getURI(ref)).append(SEP);
-		getRelativePath(fragment, NodeUtil.getNodeAdapter(context).getParserNode(), node);
+		getRelativePath(fragment, NodeUtil.getNodeAdapter(obj).getParserNode(), node);
 		return fragment.toString();
 	}
 
@@ -81,13 +52,12 @@ public class URIFragmentEncoder {
 	 * @param uriFragment
 	 * @return
 	 */
-	public Data decode(Resource res, String uriFragment) {
+	public Triple<EObject, EReference, AbstractNode> decode(Resource res, String uriFragment) {
 		String[] split = uriFragment.split(SEP);
-		EObject rootModel = res.getEObject(split[1]);
-		EObject context = res.getEObject(split[2]);
-		EReference ref = (EReference) res.getResourceSet().getEObject(URI.createURI(split[3]), true);
-		AbstractNode node = getNode(NodeUtil.getNodeAdapter(context).getParserNode(), split[4]);
-		return new Data(rootModel, context, ref, node);
+		EObject source = res.getEObject(split[1]);
+		EReference ref = (EReference) res.getResourceSet().getEObject(URI.createURI(split[2]), true);
+		AbstractNode text = getNode(NodeUtil.getNodeAdapter(source).getParserNode(), split[3]);
+		return Tuples.create(source, ref, text);
 	}
 
 	/**

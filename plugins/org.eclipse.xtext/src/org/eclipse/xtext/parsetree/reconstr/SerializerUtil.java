@@ -13,8 +13,8 @@ import com.google.inject.Inject;
  */
 public class SerializerUtil {
 	
-	private final IParseTreeConstructor parseTreeReconstructor;
-	private final ITokenSerializer tokenSerializer;
+	private IParseTreeConstructor parseTreeReconstructor;
+	private ITokenSerializer tokenSerializer;
 
 	@Inject
 	public SerializerUtil(IParseTreeConstructor ptc, ITokenSerializer tokenserializer) {
@@ -24,7 +24,7 @@ public class SerializerUtil {
 	
 	public void serialize(EObject obj, OutputStream out)
 			throws IOException {
-		tokenSerializer.serialize(parseTreeReconstructor.serialize(obj), obj, out);
+		tokenSerializer.serialize(parseTreeReconstructor.serialize(obj), out);
 	}
 
 	public String serialize(EObject obj) {

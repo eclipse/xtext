@@ -15,10 +15,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.impl.XtextLinkingDiagnostic;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.Triple;
 
 import com.google.inject.Inject;
 
@@ -49,10 +52,11 @@ public class LazyLinkingResource extends XtextResource {
 	public EObject getEObject(String uriFragment) {
 		try {
 			if (encoder.isCrossLinkFragment(this, uriFragment)) {
-				URIFragmentEncoder.Data data = encoder.decode(this, uriFragment);
-				List<EObject> linkedObjects = linkingService.getLinkedObjects(data.getRootModel(), data.getContext(), data.getReference(), data.getNode());
+				Triple<EObject, EReference, AbstractNode> triple = encoder.decode(this, uriFragment);
+				List<EObject> linkedObjects = linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(),
+						triple.getThird());
 				if (linkedObjects.isEmpty()) {
-					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(data.getNode(), "Couldn't resolve reference to "+data.getReference().getEType().getName());
+					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
 					if (!getErrors().contains(diag))
 						getErrors().add(diag);
 					return null;
@@ -61,14 +65,14 @@ public class LazyLinkingResource extends XtextResource {
 					throw new IllegalStateException("linkingService returned more than one object for fragment "
 							+ uriFragment);
 				EObject result = linkedObjects.get(0);
-				if (!data.getReference().getEReferenceType().isSuperTypeOf(result.eClass())) {
-					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(data.getNode(), "Couldn't resolve reference to "+data.getReference().getEType().getName());
+				if (!triple.getSecond().getEReferenceType().isSuperTypeOf(result.eClass())) {
+					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
 					if (!getErrors().contains(diag))
 						getErrors().add(diag);
 					return null;
 				}
 				// remove previously added error markers, since everything should be fine now
-				XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(data.getNode(), "Couldn't resolve reference to "+data.getReference().getEType().getName());
+				XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
 				getErrors().remove(diag);
 				return result;
 			}

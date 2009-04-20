@@ -22,7 +22,7 @@ import com.google.common.collect.Collections2;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class Scope extends AbstractScope {
+public class Scope extends AbstractScope implements IScope {
 	
 	private List<IScopedElement> elements;
 

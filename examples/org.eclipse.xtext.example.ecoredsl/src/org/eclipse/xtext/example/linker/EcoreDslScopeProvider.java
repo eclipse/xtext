@@ -40,17 +40,17 @@ public class EcoreDslScopeProvider extends DefaultScopeProvider {
 	private IValueConverterService valueConverterService;
 	
 	@Override
-	protected IScope createScope(EObject rootModel, Resource resource, EClass type) {
+	protected IScope createScope(Resource resource, EClass type) {
 		if (EcorePackage.Literals.EPACKAGE == type) {
 			EcoreDsl ecoreDsl = (EcoreDsl) resource.getResourceSet()
 					.getEObject(resource.getURI().appendFragment("/"), true);
 			return createEPackageScope(ecoreDsl);
 		}
-		return super.createScope(rootModel, resource, type);
+		return super.createScope(resource, type);
 	}
 
 	@Override
-	public IScope getScope(EObject rootModel, EObject context, EReference reference) {
+	public IScope getScope(EObject context, EReference reference) {
 		if (reference.getEType()
 				.equals(EcorePackage.eINSTANCE.getEClassifier())) {
 			EcoreDsl ecoreDsl = (EcoreDsl) context.eResource().getResourceSet()
@@ -68,7 +68,7 @@ public class EcoreDslScopeProvider extends DefaultScopeProvider {
 			allClassifiers.addAll(ecoreDsl.getPackage().getEClassifiers());
 			return createClassifierScope(allClassifiers);
 		}
-		return super.getScope(rootModel, context, reference);
+		return super.getScope(context, reference);
 	}
 
 	private IScope createEPackageScope(final EcoreDsl ecoreDsl) {
