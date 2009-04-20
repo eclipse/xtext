@@ -84,7 +84,7 @@ public class KeywordsTestLanguagePackageImpl extends EPackageImpl implements Key
     if (isInited) return (KeywordsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(KeywordsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    KeywordsTestLanguagePackageImpl theKeywordsTestLanguagePackage = (KeywordsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof KeywordsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new KeywordsTestLanguagePackageImpl());
+    KeywordsTestLanguagePackageImpl theKeywordsTestLanguagePackage = (KeywordsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof KeywordsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new KeywordsTestLanguagePackageImpl());
 
     isInited = true;
 
