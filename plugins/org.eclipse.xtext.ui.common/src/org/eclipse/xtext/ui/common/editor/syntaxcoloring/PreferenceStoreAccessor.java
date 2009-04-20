@@ -108,19 +108,19 @@ public class PreferenceStoreAccessor {
 	}
 
 	public static String getTokenColorPreferenceKey(String tokenType) {
-		return tokenType + SEPARATOR + CommonPreferenceConstants.COLOR_SUFIX;
+		return tokenType + SEPARATOR + CommonPreferenceConstants.COLOR_SUFFIX;
 	}
 
 	public static String getTokenBackgroundColorPreferenceKey(String tokenType) {
-		return tokenType + SEPARATOR + BACKGROUNDCOLOR_SUFIX;
+		return tokenType + SEPARATOR + BACKGROUNDCOLOR_SUFFIX;
 	}
 
 	public static String getTokenFontPreferenceKey(String tokenType) {
-		return tokenType + SEPARATOR + FONT_SUFIX;
+		return tokenType + SEPARATOR + FONT_SUFFIX;
 	}
 
 	public static String getTokenStylePreferenceKey(String tokenType) {
-		return tokenType + SEPARATOR + STYLE_SUFIX;
+		return tokenType + SEPARATOR + STYLE_SUFFIX;
 	}
 
 	public static String syntaxColorerTag(String languageName) {
