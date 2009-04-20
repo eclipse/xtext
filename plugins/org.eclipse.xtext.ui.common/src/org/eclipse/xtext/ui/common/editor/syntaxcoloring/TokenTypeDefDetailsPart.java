@@ -31,14 +31,14 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 	protected void createFieldEditors() {
 		{
 			// Foreground
-			addField(new ColorFieldEditor(CommonPreferenceConstants.COLOR_SUFIX, "Color", getFieldEditorParent()));
+			addField(new ColorFieldEditor(CommonPreferenceConstants.COLOR_SUFFIX, "Color", getFieldEditorParent()));
 
 			// Background
-			addField(new ColorFieldEditor(CommonPreferenceConstants.BACKGROUNDCOLOR_SUFIX, "Background",
+			addField(new ColorFieldEditor(CommonPreferenceConstants.BACKGROUNDCOLOR_SUFFIX, "Background",
 					getFieldEditorParent()));
 			// Style
 			// TODO extract a FontStyleCheckBoxGroupFieldEditor
-			addField(new CheckBoxGroupFieldEditor(CommonPreferenceConstants.STYLE_SUFIX, "Style", 2, new String[][] {
+			addField(new CheckBoxGroupFieldEditor(CommonPreferenceConstants.STYLE_SUFFIX, "Style", 2, new String[][] {
 					{ "Italic", String.valueOf(SWT.ITALIC) }, { "Bold", String.valueOf(SWT.BOLD) },
 					{ "Underline", String.valueOf(TextAttribute.UNDERLINE) },
 					{ "Strike through", String.valueOf(TextAttribute.STRIKETHROUGH) }, }, getFieldEditorParent(), true) {
@@ -80,7 +80,7 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 				}
 			});
 			// Font
-			addField(new FontFieldEditor(CommonPreferenceConstants.FONT_SUFIX, "Font", getFieldEditorParent()));
+			addField(new FontFieldEditor(CommonPreferenceConstants.FONT_SUFFIX, "Font", getFieldEditorParent()));
 		}
 	}
 }
