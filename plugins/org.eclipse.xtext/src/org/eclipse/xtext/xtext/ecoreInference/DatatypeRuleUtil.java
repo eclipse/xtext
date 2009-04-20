@@ -111,7 +111,8 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 	public Boolean caseGroup(Group object) {
 		boolean result = true;
 		for(int i = 0; i < object.getTokens().size() && result; i++) {
-			result &= doSwitch(object.getTokens().get(i));
+			AbstractElement token = object.getTokens().get(i);
+			result &= doSwitch(token);
 		}
 		return result;
 	}
@@ -124,6 +125,11 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 	@Override
 	public Boolean caseTerminalRule(TerminalRule object) {
 		return Boolean.TRUE;
+	}
+	
+	@Override
+	public Boolean caseAbstractRule(AbstractRule object) {
+		return Boolean.FALSE;
 	}
 
 	@Override

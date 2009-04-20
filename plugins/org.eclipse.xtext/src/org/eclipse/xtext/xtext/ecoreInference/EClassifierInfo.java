@@ -206,7 +206,7 @@ public abstract class EClassifierInfo {
 		@Override
 		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
-			throw new UnsupportedOperationException("Cannot add feature " + featureName + " to simple datatype"
+			throw new UnsupportedOperationException("Cannot add feature " + featureName + " to simple datatype "
 					+ Strings.emptyIfNull(this.getEClassifier().getName()));
 		}
 

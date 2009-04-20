@@ -88,6 +88,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.ResourceTests.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelperTests.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.class);
+		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTest.class);
 		suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ExceptionTest.class);
