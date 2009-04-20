@@ -943,4 +943,67 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			fail(d.getMessage());
 		}
 	}
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=272566
+	 */
+	public void testBug_272566_1() throws Exception {
+		with(new XtextStandaloneSetup());
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Model:\n" +
+				"   test=Test\n" +
+				";\n" +
+				"\n" +
+				"Test:\n" +
+				"   \"keyword\" WS name=ID\n" +
+				";";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=272566
+	 */
+	public void testBug_272566_2() throws Exception {
+		with(new XtextStandaloneSetup());
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Model:\n" +
+				"   test=Test\n" +
+				";\n" +
+				"\n" +
+				"Test:\n" +
+				"   \"keyword\" FooBar name=ID\n" +
+				";\n" +
+				"FooBar:\n" +
+				"	'zonk' WS WS INT WS" +
+				";";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+	}
+	
+	/**
+	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=272566
+	 */
+	public void testBug_272566_3() throws Exception {
+		with(new XtextStandaloneSetup());
+		String grammar = "grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"Model:\n" +
+				"   test=Test\n" +
+				";\n" +
+				"\n" +
+				"Test:\n" +
+				"   \"keyword\" MyEnum name=ID\n" +
+				";\n" +
+				"enum MyEnum:\n" +
+				"	A | B" +
+				";";
+		XtextResource resource = getResourceFromString(grammar);
+		assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		for(Diagnostic d: resource.getErrors()) {
+			assertFalse(d instanceof ExceptionDiagnostic);
+		}
+	}
 }
