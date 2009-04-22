@@ -36,12 +36,14 @@ import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
+import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Michael Clay
  *
  *         The main xtext generator. Can be configured with
  *         {@link IGeneratorFragment} instances as well as with some properties
@@ -145,6 +147,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 //		};
 //		execCtx.registerMetaModel(metamodel);
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
+		// add default value for 'modelPluginID' for generated GenModel required for further .edit/.editor generation
+		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID",getProjectNameRt()));
 		return execCtx;
 	}
 
