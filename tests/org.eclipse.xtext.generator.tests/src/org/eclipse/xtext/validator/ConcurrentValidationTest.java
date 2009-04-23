@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.validator;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -68,12 +70,14 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 			//
 		}
 		assertNull(runnable.lastEx);
+		assertNull(runnable.lastError);
 	}
 
 	private class PoorMansValidationJob implements Runnable {
 
 		private final AbstractDeclarativeValidator validator;
 		private IllegalStateException lastEx;
+		private AssertionFailedError lastError;
 
 		private PoorMansValidationJob(AbstractDeclarativeValidator validator) {
 			this.validator = validator;
@@ -86,6 +90,8 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 				helper.assertMatch(diagnostics, 1, 3);
 			} catch(IllegalStateException e) {
 				lastEx = e;
+			} catch(AssertionFailedError error) {
+				lastError = error;
 			}
 		}
 	}

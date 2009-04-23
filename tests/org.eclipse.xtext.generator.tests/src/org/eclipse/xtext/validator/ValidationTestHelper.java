@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public class ValidationTestHelper {
 
 	public void assertMatch(TestChain chain, Integer... expectedFeatureIds) {
-		Assert.assertEquals(expectedFeatureIds.length, chain.integers.size());
 		List<Integer> asList = Arrays.asList(expectedFeatureIds);
+		Assert.assertEquals("expected : " + asList + " , but was " + chain.integers, expectedFeatureIds.length, chain.integers.size());
 		Assert.assertTrue("expected : " + asList + " , but was " + chain.integers, asList.containsAll(chain.integers));
 	}
 
