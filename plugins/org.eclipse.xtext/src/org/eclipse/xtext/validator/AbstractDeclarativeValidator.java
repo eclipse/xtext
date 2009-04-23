@@ -235,8 +235,9 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		if (checkMethods == null) {
 			synchronized(this) {
 				if (checkMethods == null) {
-					checkMethods = new HashSet<MethodWrapper>();
+					HashSet<MethodWrapper> checkMethods = new HashSet<MethodWrapper>();
 					checkMethods.addAll(collectMethods(getClass()));
+					this.checkMethods = checkMethods;
 				}
 			}
 		}
