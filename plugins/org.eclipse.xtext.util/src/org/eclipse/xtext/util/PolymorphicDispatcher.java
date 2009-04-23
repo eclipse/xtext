@@ -13,7 +13,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class PolymorphicDispatcher<RT> {
 	private static final Logger log = Logger.getLogger(PolymorphicDispatcher.class);
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
-	private final Comparator<MethodDesc> comparator;
+//	private final Comparator<MethodDesc> comparator;
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
@@ -48,6 +47,15 @@ public class PolymorphicDispatcher<RT> {
 		}
 	}
 
+	public static class NullErrorHandler<RT> implements ErrorHandler<RT> {
+		public static <RT> ErrorHandler<RT> get() {
+			return new NullErrorHandler<RT>();
+		}
+		public RT handle(Object[] params, Throwable throwable) {
+			// ignore
+			return null;
+		}
+	}
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
@@ -88,18 +96,89 @@ public class PolymorphicDispatcher<RT> {
 	
 	}
 
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	private static class DefaultComparator implements Comparator<MethodDesc> {
+	public static interface ErrorHandler<P> {
+		P handle(Object[] params, Throwable throwable);
+	}
 
-		private final List<? extends Object> targets;
+	private final ErrorHandler<RT> handler;
 
-		private DefaultComparator(List<? extends Object> targets) {
-			this.targets = targets;
+	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName, final Object singleTarget) {
+		return new PolymorphicDispatcher<T>(methodName, Collections.singletonList(singleTarget));
+	}
+	
+	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName,int min, int max, final Object singleTarget) {
+		return new PolymorphicDispatcher<T>(methodName,min, max, Collections.singletonList(singleTarget));
+	}
+	
+	public static <T> PolymorphicDispatcher<T> createForVarTarget(final String methodName, final Object... targets) {
+		return new PolymorphicDispatcher<T>(methodName, Arrays.asList(targets));
+	}
+
+	public PolymorphicDispatcher(final String methodName, final List<? extends Object> targets) {
+		this(methodName, 1, 1, targets);
+	}
+
+	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
+			final List<? extends Object> targets) {
+		this(methodName, minParams,maxParams,targets,new DefaultErrorHandler<RT>());
+	}
+	
+	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
+			final List<? extends Object> targets, ErrorHandler<RT> handler) {
+		this(targets, new MethodNameFilter(methodName, minParams, maxParams), handler);
+	}
+
+	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter) {
+		this(targets, methodFilter, new DefaultErrorHandler<RT>());
+	}
+	
+	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter, ErrorHandler<RT> handler) {
+		this.targets = targets;
+		this.methodFilter = methodFilter;
+		this.handler = handler;
+	}
+
+	protected class MethodDesc implements Comparable<MethodDesc>{
+		private final Object target;
+		private final Method method;
+
+		protected MethodDesc(Object target, Method method) {
+			super();
+			this.target = target;
+			this.method = method;
 		}
 
-		public int compare(MethodDesc o1, MethodDesc o2) {
+		public Class<?> getDeclaringClass() {
+			return method.getDeclaringClass();
+		}
+
+		public Class<?>[] getParameterTypes() {
+			return method.getParameterTypes();
+		}
+
+		public Method getMethod() {
+			return method;
+		}
+
+		public Object getTarget() {
+			return target;
+		}
+
+		public boolean isInvokeable(Object[] param) {
+			if (getParameterTypes().length != param.length)
+				return false;
+			for (int i = 0; i < param.length; i++) {
+				Object p = param[i];
+				Class<?> paramClass = p != null? p.getClass() : getDefaultClass(i);
+				if (!(getParameterTypes()[i].isAssignableFrom(paramClass)))
+					return false;
+			}
+			return true;
+		}
+
+		public int compareTo(MethodDesc o) {
+			MethodDesc o1 = this;
+			MethodDesc o2 = o;
 			List<Class<?>> paramTypes1 = Arrays.asList(o1.getParameterTypes());
 			List<Class<?>> paramTypes2 = Arrays.asList(o2.getParameterTypes());
 
@@ -134,93 +213,9 @@ public class PolymorphicDispatcher<RT> {
 			return ((Integer) targets.indexOf(o1.target)).compareTo(targets.indexOf(o2.target));
 		}
 	}
-
-	public static interface ErrorHandler<P> {
-		P handle(Object[] params, Throwable throwable);
-	}
-
-	private final ErrorHandler<RT> handler;
-
-	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName, final Object singleTarget) {
-		return new PolymorphicDispatcher<T>(methodName, Collections.singletonList(singleTarget));
-	}
 	
-	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName,int min, int max, final Object singleTarget) {
-		return new PolymorphicDispatcher<T>(methodName,min, max, Collections.singletonList(singleTarget));
-	}
-	
-	public static <T> PolymorphicDispatcher<T> createForVarTarget(final String methodName, final Object... targets) {
-		return new PolymorphicDispatcher<T>(methodName, Arrays.asList(targets));
-	}
-
-	public PolymorphicDispatcher(final String methodName, final List<? extends Object> targets) {
-		this(methodName, 1, 1, targets);
-	}
-
-	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
-			final List<? extends Object> targets) {
-		this(methodName, minParams,maxParams,targets,new DefaultErrorHandler<RT>());
-	}
-	
-	public PolymorphicDispatcher(final String methodName, final int minParams, final int maxParams,
-			final List<? extends Object> targets, ErrorHandler<RT> handler) {
-		this(targets, new MethodNameFilter(methodName, minParams, maxParams), new DefaultComparator(targets), handler);
-	}
-
-	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter) {
-		this(targets, methodFilter, new DefaultComparator(targets), new DefaultErrorHandler<RT>());
-	}
-	
-	public PolymorphicDispatcher(List<? extends Object> targets,
-			Predicate<Method> predicate, ErrorHandler<RT> errorHandler) {
-		this(targets, predicate, new DefaultComparator(targets), errorHandler);
-	}
-	
-	public PolymorphicDispatcher(final List<? extends Object> targets, Predicate<Method> methodFilter,
-			Comparator<MethodDesc> comparator, ErrorHandler<RT> handler) {
-		this.targets = targets;
-		this.methodFilter = methodFilter;
-		this.comparator = comparator;
-		this.handler = handler;
-	}
-
-	static class MethodDesc {
-		private final Object target;
-		private final Method method;
-
-		private MethodDesc(Object target, Method method) {
-			super();
-			this.target = target;
-			this.method = method;
-		}
-
-		public Class<?> getDeclaringClass() {
-			return method.getDeclaringClass();
-		}
-
-		public Class<?>[] getParameterTypes() {
-			return method.getParameterTypes();
-		}
-
-		public Method getMethod() {
-			return method;
-		}
-
-		public Object getTarget() {
-			return target;
-		}
-
-		public boolean isInvokeable(Object[] param) {
-			if (getParameterTypes().length != param.length)
-				return false;
-			for (int i = 0; i < param.length; i++) {
-				Object p = param[i];
-				Class<?> paramClass = p != null? p.getClass() : Object.class;
-				if (!(getParameterTypes()[i].isAssignableFrom(paramClass)))
-					return false;
-			}
-			return true;
-		}
+	public Class<?> getDefaultClass(int paramIndex) {
+		return Object.class;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -233,7 +228,7 @@ public class PolymorphicDispatcher<RT> {
 				// check if ambiguous
 				if (iterator.hasNext()) {
 					MethodDesc next = iterator.next();
-					if (comparator.compare(methodDesc, next) == 0 && next.isInvokeable(params)) {
+					if (methodDesc.compareTo(next) == 0 && next.isInvokeable(params)) {
 						throw new IllegalStateException("Ambiguous methods " + methodDesc.method + " and "
 								+ next.method + " for params " + Arrays.toString(params));
 					}
@@ -265,14 +260,18 @@ public class PolymorphicDispatcher<RT> {
 				Method[] methods = current.getDeclaredMethods();
 				for (Method method : methods) {
 					if (methodFilter.apply(method)) {
-						cachedDescriptors.add(new MethodDesc(target, method));
+						cachedDescriptors.add(createMethodDesc(target, method));
 					}
 				}
 				current = current.getSuperclass();
 			}
 		}
-		Collections.sort(cachedDescriptors, comparator);
+		Collections.sort(cachedDescriptors);
 		return cachedDescriptors;
+	}
+
+	protected MethodDesc createMethodDesc(Object target, Method method) {
+		return new MethodDesc(target, method);
 	}
 
 	private static class NoSuchMethodException extends java.lang.NoSuchMethodException {

@@ -14,7 +14,6 @@ import java.io.Reader;
 import org.eclipse.internal.xtend.expression.parser.SyntaxConstants;
 import org.eclipse.internal.xtend.util.Cache;
 import org.eclipse.xtend.expression.Resource;
-import org.eclipse.xtend.expression.ResourceManager;
 import org.eclipse.xtend.expression.ResourceManagerDefaultImpl;
 import org.eclipse.xtend.expression.ResourceParser;
 import org.eclipse.xtext.util.Pair;
@@ -26,19 +25,18 @@ import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 @Singleton
-public class InjectableResourceManager extends ResourceManagerDefaultImpl implements ResourceManager {
+public class InjectableResourceManager extends ResourceManagerDefaultImpl {
 	
-	private ClassLoader classLoader;
+	private final ClassLoader classLoader;
 
 	@Inject
 	public InjectableResourceManager(ClassLoader classLoader) {
 		this.classLoader = classLoader;
 	}
 
-	private Cache<Pair<String, String>, Resource> resourceCache = new Cache<Pair<String, String>, Resource>() {
+	private final Cache<Pair<String, String>, Resource> resourceCache = new Cache<Pair<String, String>, Resource>() {
 
 		@Override
 		protected Resource createNew(Pair<String, String> resourceName) {
@@ -48,19 +46,19 @@ public class InjectableResourceManager extends ResourceManagerDefaultImpl implem
 
 			if (in == null)
 				return null;
-			else {
-				Reader reader = createReader(in);
-				final ResourceParser parser = registeredParsers.get(resourceName.getSecond());
-				if (parser == null)
-					throw new RuntimeException("No Parser registered for extension '" + resourceName.getSecond()
-							+ "'! Known extensions are '" + registeredParsers.keySet() + "'");
-				final Resource res = parser.parse(reader, qualifiedResourceName);
-				res.setFullyQualifiedName(resourceName.getFirst());
-				return res;
-			}
+
+			Reader reader = createReader(in);
+			final ResourceParser parser = registeredParsers.get(resourceName.getSecond());
+			if (parser == null)
+				throw new RuntimeException("No Parser registered for extension '" + resourceName.getSecond()
+						+ "'! Known extensions are '" + registeredParsers.keySet() + "'");
+			final Resource res = parser.parse(reader, qualifiedResourceName);
+			res.setFullyQualifiedName(resourceName.getFirst());
+			return res;
 		}
 	};
 
+	@Override
 	public Resource loadResource(String fullyQualifiedName, String extension) {
 		return resourceCache.get(Tuples.pair(fullyQualifiedName,extension));
 	}
@@ -71,7 +69,8 @@ public class InjectableResourceManager extends ResourceManagerDefaultImpl implem
 
 	public final static String FILE_ENCODING = "fileEncoding";
 	
-	@Inject(optional=true) 
+	@Override
+	@Inject(optional=true)
 	public void setFileEncoding(@Named(FILE_ENCODING) String fileEncoding) {
 		super.setFileEncoding(fileEncoding);
 	}

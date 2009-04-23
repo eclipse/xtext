@@ -9,10 +9,6 @@ package org.eclipse.xtext.xtend;
 
 import java.util.List;
 
-import org.eclipse.xtend.XtendFacade;
-import org.eclipse.xtend.expression.ExecutionContext;
-
-import com.google.common.base.Function;
 import com.google.inject.Inject;
 
 /**
@@ -20,45 +16,26 @@ import com.google.inject.Inject;
  * variables in the execution context, making them accessible from within Xtend.
  * 
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public abstract class AbstractXtendService {
 
-	protected ExecutionContextAware ctx;
+	private XtendServiceHelper helper;
 
 	@Inject
-	public void setExecutionContextAware(ExecutionContextAware ctx) {
-		this.ctx = ctx;
+	public void setHelper(XtendServiceHelper helper) {
+		this.helper = helper;
+		helper.setMasterXtendFileName(getMasterXtendFileName());
 	}
-
-	/**
-	 * Returns the fully qualified name of the xtend file containing the
-	 * extensions to be called.
-	 * 
-	 * @return
-	 */
+	
 	protected abstract String getMasterXtendFileName();
 
-	@SuppressWarnings("unchecked")
-	protected <T> T invokeExtension(final String extensionName, final List<?> parameterValues)
-			throws AbstractXtendExecutionException {
-		return ctx.exec(new Function<ExecutionContext,T>(){
-
-			public T apply(ExecutionContext ctx) {
-				XtendFacade facade = XtendFacade.create(ctx, getMasterXtendFileName());
-				if (!facade.hasExtension(extensionName, parameterValues)) {
-					throw new NoSuchExtensionException(extensionName, parameterValues);
-				}
-				Object resultObject = facade.call(extensionName, parameterValues);
-				try {
-					return (T) resultObject;
-				} catch (ClassCastException e) {
-					throw new IllegalReturnTypeException(extensionName, parameterValues, e);
-				}
-			}});
-		
+	public XtendServiceHelper getHelper() {
+		return helper;
 	}
-
-	public String toXtendFQName(String fqName) {
-		return fqName.replaceAll("\\.", "::");
+	
+	protected <T> T invokeExtension(final String extensionName, final List<?> parameterValues)
+		throws AbstractXtendExecutionException {
+		return helper.invokeExtension(extensionName, parameterValues);
 	}
 }

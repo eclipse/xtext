@@ -17,9 +17,10 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateContentAssistProcessor;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistContextFactory;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistantFactory;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultFollowElementCalculator;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.common.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
@@ -32,6 +33,11 @@ import org.eclipse.xtext.ui.core.InjectableAdapterFactory;
 import org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.core.editor.IDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
+import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator;
+import org.eclipse.xtext.ui.core.editor.contentassist.ITemplateProposalProvider;
+import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
 
 /**
@@ -45,14 +51,6 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider> bindILazyTreeProvider() {
 		return org.eclipse.xtext.ui.common.editor.outline.impl.LazyTransformingTreeProvider.class;
-	}
-	
-	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
-		return DefaultContentAssistProcessor.class;
-	}
-	
-	public Class<? extends ITemplateContentAssistProcessor> bindITemplateContentAssistProcessor() {
-		return DefaultTemplateContentAssistProcessor.class;
 	}
 	
 	public Class<? extends ITokenColorer> bindITokenColorer() {
@@ -89,6 +87,26 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends AdapterFactory> bindAdapterFactory() {
 		return InjectableAdapterFactory.class;
+	}
+	
+	public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
+		return DefaultContentAssistantFactory.class;
+	}
+	
+	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
+		return XtextContentAssistProcessor.class;
+	}
+	
+	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
+		return DefaultTemplateProposalProvider.class;
+	}
+	
+	public Class<? extends ContentAssistContext.Factory> bindContentAssistContextFactory() {
+		return DefaultContentAssistContextFactory.class;
+	}
+	
+	public Class<? extends IFollowElementCalculator> bindIFollowElementCalculator() {
+		return DefaultFollowElementCalculator.class;
 	}
 	
 	public Class<? extends AdapterFactoryLabelProvider> bindAdapterFactoryLabelProvider() {

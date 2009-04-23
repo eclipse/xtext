@@ -1,22 +1,24 @@
 
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-import java.util.List;
-
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 
-public class TwoContextsTestLanguageProposalProvider extends org.eclipse.xtext.ui.common.editor.contentassist.impl.GenTwoContextsTestLanguageProposalProvider {
+import com.google.common.base.Predicate;
+
+
+public class TwoContextsTestLanguageProposalProvider extends org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractTwoContextsTestLanguageProposalProvider {
 
 	@Override
-	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
-			IContentAssistContext contentAssistContext) {
-		List<? extends ICompletionProposal> completeKeyword = super.completeKeyword(keyword, contentAssistContext);
-		for (ICompletionProposal iCompletionProposal : completeKeyword) {
-			if (!iCompletionProposal.getDisplayString().startsWith(contentAssistContext.getMatchString()))
-				throw new IllegalStateException("proposed element '"+iCompletionProposal.getDisplayString()+"' does not start with '"+ contentAssistContext.getMatchString()+"'");
-		}
-		return completeKeyword;
+	public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		super.completeKeyword(keyword, context, filter(acceptor, new Predicate<ICompletionProposal>() {
+			public boolean apply(ICompletionProposal input) {
+				if (!input.getDisplayString().startsWith(context.getPrefix()))
+					throw new IllegalStateException("proposed element '"+input.getDisplayString()+"' does not start with '"+ context.getPrefix()+"'");
+				return true;
+			}
+		}));
 	}
 }

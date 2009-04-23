@@ -15,95 +15,63 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate FOR Grammar»
+«DEFINE generate(Boolean inherit) FOR Grammar-»
 «FILE getGenProposalProvider().asPath()+".java" SRC_GEN_UI -»
 /*
 «fileHeader()»
 */
 package «getGenProposalProvider().toJavaPackage()»;
 
-«IF !usedGrammars.containedAssignments().isEmpty-»
-import java.util.ArrayList;
-«ENDIF-»
-import java.util.Collections;
-import java.util.List;
-
-
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
-
-«IF !usedGrammars.containedAssignments().isEmpty-»
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+«IF inherit && usedGrammars.size == 1-»
+import «usedGrammars.first().getProposalProvider()»;
+«ELSE-»
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaBasedContentProposalProvider;
 «ENDIF-»
+import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
- * Mehtods are dynamically dispatched on the first parameter, i.e., you can override them 
+ * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
- * 
- * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
-public class «getGenProposalProvider().toSimpleName()» extends AbstractJavaProposalProvider {
-	«IF !usedGrammars.containedAssignments().isEmpty-»
-	«FOREACH usedGrammars AS usedGrammar-»
-    @Inject(optional=true)
-    @Named("«usedGrammar.name»")
-    protected IProposalProvider «usedGrammar.name.toSimpleName().toFirstLower()»IProposalProvider;  
-    «ENDFOREACH-»
-
-    protected List<IProposalProvider> getReferencedProposalProviders() {
-       List<IProposalProvider> referencedProposalProviders = new ArrayList<IProposalProvider>();
-    «FOREACH usedGrammars AS usedGrammar-»
-        if («usedGrammar.name.toSimpleName().toFirstLower()»IProposalProvider instanceof AbstractJavaProposalProvider) {
-            referencedProposalProviders.addAll(((AbstractJavaProposalProvider) this.«usedGrammar.name.toSimpleName().toFirstLower()»IProposalProvider).getAllProposalProviders());
-        }    
-    «ENDFOREACH-»
-       return referencedProposalProviders;
-    }
-    «ENDIF-»	
+public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && usedGrammars.size == 1-»«usedGrammars.first().getProposalProvider().toSimpleName()»«ELSE-»AbstractJavaBasedContentProposalProvider«ENDIF-» {
+		
+	private final static Logger logger = Logger.getLogger(«getGenProposalProvider().toSimpleName()».class);
+	
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
-			«LET getFqFeatureName(assignment) AS fqnFeatureName»
+			«LET getFqFeatureName(assignment) AS fqnFeatureName-»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
-	public List<? extends ICompletionProposal> complete«fqnFeatureName»(EObject model, Assignment assignment, IContentAssistContext contentAssistContext) {
+	public void complete«fqnFeatureName»(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete«fqnFeatureName» feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim() + "'");
+					+ context.getPrefix() + "'");
 		}
-					«IF CrossReference.isInstance(assignment.terminal)-»
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
-					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" -»
-		return Collections.singletonList(createCompletionProposal(assignment, "«fqnFeatureName»", contentAssistContext));
-					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" -»
-		return Collections.singletonList(createCompletionProposal(assignment, "1", contentAssistContext));		
-					«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" -»
-		return Collections.singletonList(createCompletionProposal(assignment, "\"«fqnFeatureName»\"", contentAssistContext));		
-					«ELSE-»
-		return Collections.emptyList();
-					«ENDIF-»
+«EXPAND assignmentTerminal("assignment.getTerminal()") FOR assignment.terminal-»
 	}
 				«ENDIF-»
 			«ENDLET-»
   	  «ENDFOREACH-»
     
-  	  «FOREACH getParserRulesWithType() AS parserRule-»
-			«LET getFqFeatureName(parserRule) AS fqnFeatureName-»
+  	  «FOREACH rules AS rule-»
+			«LET getFqFeatureName(rule) AS fqnFeatureName-»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
-	public List<? extends ICompletionProposal> complete«fqnFeatureName»(EObject model, RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+	public void complete«fqnFeatureName»(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete«fqnFeatureName» '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
+					+ "' for model '" + context.getCurrentModel() + "' and prefix '" + context.getPrefix() + "'");
 		}
-		return Collections.emptyList();
+		// subclasses may override
 	}
 				«ENDIF-»
 			«ENDLET-»
@@ -112,7 +80,7 @@ public class «getGenProposalProvider().toSimpleName()» extends AbstractJavaPropo
 }
 «ENDFILE»
 
-«FILE getProposalProvider().asPath()+".java" SRC_UI»
+«FILE getProposalProvider().asPath()+".java" SRC_UI-»
 package «getProposalProvider().toJavaPackage()»;
 
 public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
@@ -121,8 +89,27 @@ public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvi
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«DEFINE assignmentTerminal(String accessor) FOR AbstractElement-»
+		// subclasses may override
+«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+«DEFINE assignmentTerminal(String accessor) FOR CrossReference-»
+		lookupCrossReference(((CrossReference)«accessor»), context, acceptor);
+«ENDDEFINE»
+
+«DEFINE assignmentTerminal(String accessor) FOR RuleCall-»
+		completeRuleCall(((RuleCall)«accessor»), context, acceptor);
+«ENDDEFINE»
+
+«DEFINE assignmentTerminal(String accessor) FOR Alternatives-»
+«FOREACH groups AS group ITERATOR iter-»
+«EXPAND assignmentTerminal("((Alternatives)" + accessor + ").getGroups().get(" + iter.counter0 + ")") FOR group-» 
+«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(Boolean inherit) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean inherit) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean inherit) FOR Grammar»«ENDDEFINE»

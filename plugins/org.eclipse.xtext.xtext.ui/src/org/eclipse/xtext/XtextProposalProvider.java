@@ -1,6 +1,6 @@
 
 package org.eclipse.xtext;
 
-public class XtextProposalProvider extends org.eclipse.xtext.GenXtextProposalProvider {
+public class XtextProposalProvider extends org.eclipse.xtext.AbstractXtextProposalProvider {
 
 }

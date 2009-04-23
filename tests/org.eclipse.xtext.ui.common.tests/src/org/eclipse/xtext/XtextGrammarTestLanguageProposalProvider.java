@@ -1,6 +1,6 @@
 
 package org.eclipse.xtext;
 
-public class XtextGrammarTestLanguageProposalProvider extends org.eclipse.xtext.GenXtextGrammarTestLanguageProposalProvider {
+public class XtextGrammarTestLanguageProposalProvider extends org.eclipse.xtext.AbstractXtextGrammarTestLanguageProposalProvider {
 
 }

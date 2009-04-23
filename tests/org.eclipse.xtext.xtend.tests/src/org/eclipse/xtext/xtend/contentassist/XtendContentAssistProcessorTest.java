@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xtend.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistProcessorTestSetup;
+import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -21,7 +21,7 @@ public abstract class XtendContentAssistProcessorTest extends AbstractContentAss
 	@Override
 	protected ContentAssistProcessorTestBuilder newBuilder(ISetup setup) throws Exception {
 		ContentAssistProcessorTestBuilder newBuilder = super.newBuilder(setup);
-		IProposalProvider proposalProvider = newBuilder.get(IProposalProvider.class);
+		IContentProposalProvider proposalProvider = newBuilder.get(IContentProposalProvider.class);
 		assertTrue(proposalProvider.toString(), proposalProvider instanceof AbstractXtendProposalProvider);
 		return newBuilder;
 	}

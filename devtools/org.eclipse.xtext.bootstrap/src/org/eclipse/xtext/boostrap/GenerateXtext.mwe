@@ -37,6 +37,8 @@
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>
 </workflow>

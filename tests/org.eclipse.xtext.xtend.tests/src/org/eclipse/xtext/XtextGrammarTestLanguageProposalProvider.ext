@@ -9,7 +9,7 @@ import org::eclipse::xtext::crossref;
 import org::eclipse::xtext::ui::common::editor::contentassist;
 import org::eclipse::xtext::ui::common::xtend::contentassist;
 
-extension org::eclipse::xtext::GenXtextGrammarTestLanguageProposalProvider reexport;
+extension org::eclipse::xtext::AbstractXtextGrammarTestLanguageProposalProvider reexport;
 
 /**
  * Override functions defined in org::eclipse::xtext::GenXtextGrammarTestLanguageProposalProvider here.

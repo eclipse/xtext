@@ -8,8 +8,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.ui.ide;bundle-version="3.4.0"
-Export-Package: org.eclipse.xtext.ui.common.editor.contentassist,
- org.eclipse.xtext.ui.common.editor.contentassist.impl,
+Export-Package: org.eclipse.xtext.ui.common.editor.contentassist.impl,
  org.eclipse.xtext.ui.common.editor.folding,
  org.eclipse.xtext.ui.common.editor.formatting,
  org.eclipse.xtext.ui.common.editor.hover,
@@ -22,7 +21,6 @@ Export-Package: org.eclipse.xtext.ui.common.editor.contentassist,
  org.eclipse.xtext.ui.common.editor.tasks,
  org.eclipse.xtext.ui.common.editor.tasks.dialogfields,
  org.eclipse.xtext.ui.common.service
-Import-Package: org.eclipse.ui.texteditor.templates
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-Activator: org.eclipse.xtext.ui.common.internal.Activator
 Bundle-ActivationPolicy: lazy

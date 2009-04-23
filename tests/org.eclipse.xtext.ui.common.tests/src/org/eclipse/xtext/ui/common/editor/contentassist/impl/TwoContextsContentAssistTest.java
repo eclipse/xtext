@@ -8,15 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-import java.util.List;
-
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -27,7 +27,7 @@ import com.google.inject.Injector;
 public class TwoContextsContentAssistTest extends AbstractXtextTests {
 
 	public void testTwoContexts() throws Exception {
-    	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "FooBar");
+    	newBuilder(getGrammarSetup()).append("Foo; FooBar; Bar refersTo Foo").assertText(";", "Foo", "FooBar");
     }
 
     /**
@@ -40,7 +40,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 				return Guice.createInjector(new TwoContextsTestLanguageRuntimeModule(), new TwoContextsTestLanguageUiModule(){
 
 					@Override
-					public Class<? extends IProposalProvider> bindIProposalProvider() {
+					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 						return TwoContextsTestLanguageTestProposals.class;
 					}
 				});
@@ -53,16 +53,16 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
 	}
 
-	public static class TwoContextsTestLanguageTestProposals extends org.eclipse.xtext.ui.common.editor.contentassist.impl.GenTwoContextsTestLanguageProposalProvider {
+	public static class TwoContextsTestLanguageTestProposals extends org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractTwoContextsTestLanguageProposalProvider {
 		@Override
-		public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
-				IContentAssistContext contentAssistContext) {
-			List<? extends ICompletionProposal> completeKeyword = super.completeKeyword(keyword, contentAssistContext);
-			for (ICompletionProposal iCompletionProposal : completeKeyword) {
-				if (!iCompletionProposal.getDisplayString().startsWith(contentAssistContext.getMatchString()))
-					throw new IllegalStateException("proposed element '"+iCompletionProposal.getDisplayString()+"' does not start with '"+ contentAssistContext.getMatchString()+"'");
-			}
-			return completeKeyword;
+		public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+			super.completeKeyword(keyword, context, filter(acceptor, new Predicate<ICompletionProposal>() {
+				public boolean apply(ICompletionProposal input) {
+					if (!input.getDisplayString().startsWith(context.getPrefix()))
+						throw new IllegalStateException("proposed element '"+input.getDisplayString()+"' does not start with '"+ context.getPrefix()+"'");
+					return true;
+				}
+			}));
 		}
 	}
 }

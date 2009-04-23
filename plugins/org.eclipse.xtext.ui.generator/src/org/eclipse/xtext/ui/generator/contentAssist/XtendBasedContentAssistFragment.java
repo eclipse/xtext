@@ -7,14 +7,14 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
 
 public class XtendBasedContentAssistFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IProposalProvider.class.getName(), grammar.getName()+"ProposalProvider")
+			.addTypeToType(IContentProposalProvider.class.getName(), grammar.getName()+"ProposalProvider")
 			.getBindings();
 	}
 	

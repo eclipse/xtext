@@ -12,4 +12,9 @@ import org.eclipse.xtext.ui.common.service.DefaultUIModule;
 public abstract class AbstractTerminalsUiModule extends DefaultUIModule {
 	
 	
+	
+	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
+		return org.eclipse.xtext.common.TerminalsProposalProvider.class;
+	}
+
 }

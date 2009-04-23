@@ -8,29 +8,25 @@
 package org.eclipse.xtext.xtend.contentassist;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.text.templates.Template;
-import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaProposalProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.ProposalFilterSorterUtil;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextCompletionProposal;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractContentProposalProvider;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xtend.AbstractXtendService;
+import org.eclipse.xtext.xtend.AbstractXtendExecutionException;
 import org.eclipse.xtext.xtend.NoSuchExtensionException;
+import org.eclipse.xtext.xtend.XtendServiceHelper;
+
+import com.google.inject.Inject;
 
 /**
  * Super class for <code>IProposalProvider</code> implementations that call
@@ -55,63 +51,28 @@ import org.eclipse.xtext.xtend.NoSuchExtensionException;
  * @see IProposalProvider
  * @see AbstractJavaProposalProvider
  */
-public abstract class AbstractXtendProposalProvider extends AbstractXtendService implements IProposalProvider {
+public abstract class AbstractXtendProposalProvider extends AbstractContentProposalProvider {
 
-	protected final Logger logger = Logger.getLogger(IProposalProvider.class);
+	private static final Logger logger = Logger.getLogger(AbstractXtendProposalProvider.class);
 
-	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(Keyword,
-	 *      IContentAssistContext)
-	 */
-	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword,
-			IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeKeyword '" + keyword.getValue() + "' for model '" + contentAssistContext.getModel()
-					+ "' and prefix '" + contentAssistContext.getMatchString().trim() + "'");
-		}
-		return Collections
-				.singletonList(new XtextCompletionProposal(keyword, keyword.getValue(), contentAssistContext,null));
+	private XtendServiceHelper helper;
+
+	@Inject
+	public void setHelper(XtendServiceHelper helper) {
+		this.setHelper(helper);
+		helper.setMasterXtendFileName(getMasterXtendFileName());
 	}
+	
+	protected abstract String getMasterXtendFileName();
 
-	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeRuleCall(RuleCall,
-	 *      IContentAssistContext)
-	 */
-	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall,
-			IContentAssistContext contentAssistContext) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeRuleCall '" + ruleCall.getRule().getName() + "' cardinality '"
-					+ ruleCall.getCardinality() + "' for model '" + contentAssistContext.getModel() + "' and prefix '"
-					+ contentAssistContext.getMatchString().trim().trim() + "'");
-		}
-		AbstractRule calledRule = ruleCall.getRule();
-		if (calledRule instanceof TerminalRule) {
-			return completeTerminalRuleRuleCall((TerminalRule) calledRule, ruleCall, contentAssistContext);
-		}
-		else if (calledRule.getType() != null) {
-			TypeRef typeRef = calledRule.getType();
-			return invokeExtension("complete" + Strings.toFirstUpper(typeRef.getMetamodel().getAlias()) + "_"
-					+ Strings.toFirstUpper(typeRef.getClassifier().getName()), Arrays.asList(contentAssistContext
-					.getModel(), ruleCall, contentAssistContext));
-		}
-		return Collections.emptyList();
+	public XtendServiceHelper getHelper() {
+		return helper;
 	}
-
-	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeAssignment(Assignment,
-	 *      IContentAssistContext)
-	 */
-	public List<? extends ICompletionProposal> completeAssignment(Assignment assignment,
-			IContentAssistContext contentAssistContext) {
-		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
-		return invokeExtension("complete" + Strings.toFirstUpper(parserRule.getName()) + "_"
-				+ Strings.toFirstUpper(assignment.getFeature()), Arrays.asList(contentAssistContext.getModel(),
-				assignment, contentAssistContext));
-	}
-
-	protected List<? extends ICompletionProposal> invokeExtension(String extensionName, List<?> parameterValues) {
+	
+	protected List<ICompletionProposal> invokeExtension(final String extensionName, final List<?> parameterValues)
+		throws AbstractXtendExecutionException {
 		try {
-			List<ICompletionProposal> proposals = super.invokeExtension(extensionName, parameterValues);
+			List<ICompletionProposal> proposals = helper.invokeExtension(extensionName, parameterValues);
 			return proposals;
 		}
 		catch (NoSuchExtensionException nsee) {
@@ -123,48 +84,39 @@ public abstract class AbstractXtendProposalProvider extends AbstractXtendService
 		return null;
 	}
 
-	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(Keyword,
-	 *      IContentAssistContext)
-	 */
-	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
-		return null;
+	@Override
+	public void completeAssignment(Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
+		String extensionName = "complete" + Strings.toFirstUpper(parserRule.getName()) + "_"
+			+ Strings.toFirstUpper(assignment.getFeature());
+		List<ICompletionProposal> proposals =  invokeExtension(extensionName, Arrays.asList(context.getCurrentModel(),
+				assignment, context));
+		addProposals(acceptor, proposals);
 	}
 
-	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(RuleCall,
-	 *      IContentAssistContext)
-	 */
-	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
-		return null;
+	@Override
+	public void completeKeyword(Keyword keyword, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ICompletionProposal proposal = ContentAssistHelper.newProposal(keyword, keyword.getValue(), context);
+		acceptor.accept(proposal);
 	}
 
-	/**
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplates(String)
-	 */
-	public Template[] getTemplates(String contextTypeId) {
-		return new Template[] {};
+	@Override
+	public void completeRuleCall(RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		AbstractRule calledRule = ruleCall.getRule();
+		String extensionName = "complete_" + calledRule.getName();
+		
+		List<ICompletionProposal> proposals = invokeExtension(extensionName, Arrays.asList(context.getCurrentModel(), ruleCall, context));
+		addProposals(acceptor, proposals);
 	}
 
-	protected List<? extends ICompletionProposal> completeTerminalRuleRuleCall(TerminalRule lexerRule, RuleCall ruleCall,
-			IContentAssistContext contentAssistContext) {
-		return invokeExtension("complete" + lexerRule.getName(), Arrays.asList(ruleCall, contentAssistContext));
+	private void addProposals(ICompletionProposalAcceptor acceptor, List<ICompletionProposal> proposals) {
+		if (proposals != null) {
+			for(ICompletionProposal proposal: proposals) {
+				if (!acceptor.canAcceptMoreProposals())
+					return;
+				acceptor.accept(proposal);
+			}
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#filter(java.util.List, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
-	 */
-	public List<? extends ICompletionProposal> filter(List<ICompletionProposal> completionProposalList,
-			IContentAssistContext contentAssistContext) {
-		return ProposalFilterSorterUtil.filter(completionProposalList, contentAssistContext);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#sort(java.util.List)
-	 */
-	public List<? extends ICompletionProposal> sort(List<ICompletionProposal> completionProposalList) {
-		return ProposalFilterSorterUtil.sort(completionProposalList);
-	}
 }
