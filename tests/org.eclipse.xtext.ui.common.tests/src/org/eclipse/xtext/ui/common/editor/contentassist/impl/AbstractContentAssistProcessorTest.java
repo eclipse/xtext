@@ -54,31 +54,31 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	public void testComputeCompletionProposalsCount() throws Exception {
 		newBuilder(setup.getRefGrammarSetup()).assertCount(1)
 			.append("spielplatz ").assertCount(1)
-			.append("1 ").assertCount(2)
+			.append("1 ").assertCount(3)
 			.append("\"JUNIT\" ").assertCount(1)
 			.append("{ ").assertCount(5)
 			.append("kind ").assertCount(1)
 			.append("(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ").assertCount(2)
 			.append("e1 ").assertCount(2)
-			.append("e2").assertCount(1);
+			.append("e2").assertCount(2);
 	}
 
 	public void testComputeCompletionProposalsText() throws Exception {
 		newBuilder(setup.getRefGrammarSetup()).assertText("spielplatz")
-			.applyText().assertText("1")
-			.applyText().assertText("\"Spielplatz_Beschreibung\"","{")
+			.applyText().assertText("1 - Groesse")
+			.applyText().assertText("\"Beschreibung\"", "'Beschreibung'", "{")
 			.applyText().assertText("{")
 			.applyText().assertText("erwachsener", "familie", "spielzeug", "kind", "}")
 			.append("erwachsener ").assertText("(")
-			.applyText().assertText("Erwachsener_Name")
-			.append("e1 ").assertText("1")
+			.applyText().assertText("Name")
+			.append("e1 ").assertText("1 - Age")
 			.applyText().assertText(")")
 			.applyText().append("erwachsener (e2 0) kind ").assertText("(")
-			.applyText().assertText("Kind_Name")
-			.append("k1 ").assertText("1")
+			.applyText().assertText("Name")
+			.append("k1 ").assertText("1 - Age")
 			.applyText().assertText(")")
 			.applyText().append("kind (k2 0) familie ").assertText("(")
-			.applyText().assertText("keyword")
+			.applyText().assertText("keyword", "'Name'", "\"Name\"", "Name")
 			.append("keyword ").assertText("e1","e2")
 			.applyText().assertText("e1","e2")
 			.append("e2 ").assertText("k1","k2")
@@ -86,14 +86,12 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 			.append("1 ").assertText(",",")")
 			.append("k2 ").assertText(",",")")
 		;
-
-
 	}
 
 	public void testBetweenContext() throws Exception {
 		newBuilder(setup.getRefGrammarSetup())
 		.append("spielplatz 1 \"1\" {kind")
-		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","}");
+		.assertTextAtCursorPosition(18,"kind","erwachsener","spielzeug","familie","{", "}");
 	}
 
 	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
@@ -103,13 +101,13 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 		builder.append(" ER").assertText("erwachsener");
 		builder.append(" SP").assertText("spielzeug");
 		builder.append(" FA").assertText("familie");
-		builder.append(" familie ( KEY").assertText("keyword","e1","e2");
-		builder.append(" familie ( K").assertText("keyword","e1","e2");
+		builder.append(" familie ( KEY").assertText("keyword", "e1", "e2");
+		builder.append(" familie ( K").assertText("keyword", "e1", "e2");
 		builder.append(" familie ( keyword E").assertText("e1", "e2");
-		builder.append(" familie ( keyword e1 E").assertText("e1", "e2","k1","k2");
+		builder.append(" familie ( keyword e1 E").assertText("e1", "e2", "k1", "k2");
 		builder.append(" familie ( keyword e1 e2 K").assertText("k1", "k2", ",", ")");
 		builder.append(" familie ( keyword e1 e2 k1,K").assertText("k1", "k2",",", ")");
-		builder.append(" familie ( keyword e1 e2 k1,k2").assertText(",", ")");
+		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
 	}
 
 	/**
@@ -156,9 +154,11 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 					"R1",
 					"R2",
 					"R3",
-					"\"Keyword_Value\"",
+					"\"Value\"",
+					"'Value'",
 					"(",
-					"["
+					"[",
+					"+=" // current node is always a suggestion
 			);
 	}
 	
@@ -168,7 +168,8 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
 					"R1",
-					"R2"
+					"R2",
+					":" // current is always a suggestion
 			);
 	}
 
@@ -188,7 +189,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
                 .appendNl("grammar foo")
                 .appendNl("generate foo \"foo\"")
                 .appendNl("MyRule : 'foo' name=ID; ").assertText(
-                                "ParserRule_Name", "terminal", "enum"
+                                "Name", "terminal", "enum"
                 );
     }
     
@@ -199,7 +200,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
                 .appendNl("")
                 .appendNl("MyRule : 'foo' name=ID; ")
                 .assertTextAtCursorPosition("MyRule",
-                		"ParserRule_Name",
+                		"Name",
                 		"terminal",
                 		"enum",
                 		"as",
@@ -214,7 +215,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
                 .appendNl("")
                 .appendNl(" MyRule : 'foo' name=ID; ")
                 .assertTextAtCursorPosition(" MyRule",
-                		"ParserRule_Name",
+                		"Name",
                 		"terminal",
                 		"enum",
                 		"as",
@@ -240,7 +241,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
         .appendNl("R1 : (attr+=R2)*;")
         .appendNl("R2 : (attr=INT)? prop=R3;")
         .assertTextAtCursorPosition("R1",
-                        "ParserRule_Name",
+                        "Name",
                         "as",
                         "generate",
                         "import",
@@ -262,7 +263,8 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
                         "R1",
                         "R2",
                         "R3",
-                        "\"Keyword_Value\"",
+                        "\"Value\"",
+                        "'Value'",
                         "(",
                         "["
         );
@@ -303,8 +305,20 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     	newBuilder(setup.getXtextGrammarTestSetup())
         .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
         .appendNl("generate foo \"foo\"")
-        .append("MyRule : 'foo' name").assertText("\"Keyword_Value\"", "(", "*", "+", "+=", ";", "=", "?", "?=",
-        		"Assignment_Feature", "MyRule",  "{")
+        .append("MyRule : 'foo' name").assertText(
+        		"\"Value\"",
+        		"'Value'",
+        		"(",
+        		"*",
+        		"+",
+        		"+=",
+        		";",
+        		"=",
+        		"?",
+        		"?=",
+        		"Feature",
+        		"MyRule",
+        		"{")
         .appendNl(";")
         .append("terminal Other_Id").assertText(":","returns");
 
@@ -357,7 +371,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     }
     
     public void testEnumCompletion_04() throws Exception {
-    	newBuilder(setup.getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden");
+    	newBuilder(setup.getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden", "existing");
     }
     
     public void testEnumCompletion_05() throws Exception {

@@ -9,6 +9,7 @@
 package org.eclipse.xtext.example;
 
 import org.eclipse.xtext.example.editor.outline.EcoreSemanticModelTransformer;
+import org.eclipse.xtext.ui.core.editor.contentassist.ITemplateProposalProvider;
 
 /**
  * used to manually extend and modify configuration for components used within
@@ -18,11 +19,13 @@ import org.eclipse.xtext.example.editor.outline.EcoreSemanticModelTransformer;
  */
 public class EcoreDslUiModule extends AbstractEcoreDslUiModule {
 
-	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
-		return org.eclipse.xtext.example.EcoreDslProposalProvider.class;
-	}
-	
+	@Override
 	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return EcoreSemanticModelTransformer.class;
+	}
+	
+	@Override
+	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
+		return EcoreDslTemplateProposalProvider.class;
 	}
 }

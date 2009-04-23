@@ -15,16 +15,14 @@ getProposalProvider(Grammar grammar) :
 	grammar.name + "ProposalProvider";
 
 getGenProposalProvider(Grammar grammar) :
-	grammar.name.toJavaPackage() + ".Gen" + grammar.name.toSimpleName() + "ProposalProvider";
+	grammar.name.toJavaPackage() + ".Abstract" + grammar.name.toSimpleName() + "ProposalProvider";
 
 String getFqFeatureName(Assignment this):
 	containingParserRule().name.toFirstUpper()+"_"+feature.toFirstUpper();
 	
-String getFqFeatureName(ParserRule this):
-	(null!=type.metamodel.alias ? type.metamodel.alias.toFirstUpper()+"_" : "")+type.classifier.name.toFirstUpper();
-	
-List[ParserRule] getParserRulesWithType(Grammar grammar) :
-	grammar.allParserRules().select(parserRule|parserRule.type!=null);
+String getFqFeatureName(AbstractRule this):
+	"_" + name;
+
 	
 
 	

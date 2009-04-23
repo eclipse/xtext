@@ -27,9 +27,4 @@ public abstract class AbstractEnumRulesTestLanguageUiModule extends DefaultUIMod
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenStyleProvider.class;
 	}
 
-	
-	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
-		return org.eclipse.xtext.enumrules.EnumRulesTestLanguageProposalProvider.class;
-	}
-
 }

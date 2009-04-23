@@ -28,7 +28,7 @@ public abstract class AbstractKeywordsTestLanguageUiModule extends DefaultUIModu
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider> bindIProposalProvider() {
+	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.parser.keywords.KeywordsTestLanguageProposalProvider.class;
 	}
 

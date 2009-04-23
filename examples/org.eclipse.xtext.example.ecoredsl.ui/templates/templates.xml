@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
 	<template name="empty Package" description="template for an empty EPackage"
-		id="org.eclipse.xtext.ecore.dsl.ui.templates.EPackageDecl"
-		context="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EPackageDecl"
+		id="org.eclipse.xtext.ecoredsl.ui.templates.EPackageDecl"
+		context="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EPackageDecl"
 		enabled="true">package ${name} nsURI="${nsURI}" nsPrefix=${nsPrefix} {
     ${cursor}  
 }</template>
     <template name="empty EClass" description="template for an empty EClass"
-        id="org.eclipse.xtext.ecore.dsl.ui.templates.EClassDecl"
-        context="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EClassDecl"
+        id="org.eclipse.xtext.ecoredsl.ui.templates.EClassDecl"
+        context="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EClassDecl"
         enabled="true">class ${name} {
     ${cursor}  
     }</template>
     <template name="empty EDataTypeDecl" description="template for an empty EDataTypeDecl"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.EDataTypeDecl"
-            context="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EDataTypeDecl"
+            id="org.eclipse.xtext.ecoredsl.ui.templates.EDataTypeDecl"
+            context="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EDataTypeDecl"
             enabled="true">datatype ${name} {
         ${cursor}  
     }</template>
     <template name="empty EEnumDecl" description="template for an empty EEnumDecl"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.EEnumDecl"
-            context="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EEnumDecl"
+            id="org.eclipse.xtext.ecoredsl.ui.templates.EEnumDecl"
+            context="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EEnumDecl"
             enabled="true">enum ${name} {
             ${NAME1}=${VALUE1};  
             ${NAME2}=${VALUE2};  
@@ -28,7 +28,7 @@
             ${cursor} 
     }</template>
     <template name="empty EAttributeDecl" description="template for an empty EAttributeDecl"
-            id="org.eclipse.xtext.ecore.dsl.ui.templates.EAttributeDecl"
-            context="org.eclipse.xtext.ecore.dsl.ui.templates.contextType.EAttributeDecl"
+            id="org.eclipse.xtext.ecoredsl.ui.templates.EAttributeDecl"
+            context="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EAttributeDecl"
             enabled="true">attr ${state:CrossReference('EGenericTypeReferenceDecl.eClassifier')} ${name};</template>
 </templates>

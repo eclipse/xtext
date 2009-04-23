@@ -23,6 +23,7 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15";visibility:=reex
 Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
 Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor,
+ org.eclipse.xtext.ui.core.editor.contentassist,
  org.eclipse.xtext.ui.core.editor.handler,
  org.eclipse.xtext.ui.core.editor.model,
  org.eclipse.xtext.ui.core.editor.preferences,

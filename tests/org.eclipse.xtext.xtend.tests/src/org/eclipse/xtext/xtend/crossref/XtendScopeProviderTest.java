@@ -22,6 +22,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.xtend.ExecutionContextAware;
+import org.eclipse.xtext.xtend.XtendServiceHelper;
 import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
 
 import com.google.inject.Provider;
@@ -33,11 +34,13 @@ import com.google.inject.Provider;
 public class XtendScopeProviderTest extends TestCase {
 	
 	private XtendScopeProvider scopeProvider;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		scopeProvider = new XtendScopeProvider(getClass().getName().replace(".","::"),null);
-		scopeProvider.setExecutionContextAware(new ExecutionContextAware(new Provider<ExecutionContext>(){
+		XtendServiceHelper helper = new XtendServiceHelper();
+		helper.setExecutionContextAware(new ExecutionContextAware(new Provider<ExecutionContext>(){
 
 			public ExecutionContext get() {
 				ExecutionContextImpl impl = new ExecutionContextImpl();
@@ -46,6 +49,7 @@ public class XtendScopeProviderTest extends TestCase {
 			}
 			
 		}));
+		scopeProvider.setHelper(helper);
 	}
 
 	public void testSimple() throws Exception {

@@ -12,22 +12,22 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.DocumentTemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 
 /**
- * Represents an extended version of class {@link DocumentTemplateContext} to provide additional Xtext related 
+ * Represents an extended version of class {@link DocumentTemplateContext} to provide additional Xtext related
  * information and services for resolving a <code>Template</code>.
  * 
  * @author Michael Clay - Initial contribution and API
  */
 public class XtextTemplateContext extends DocumentTemplateContext {
 
-	private IContentAssistContext contentAssistContext;
-
-	private IScopeProvider scopeProvider;
+	private final ContentAssistContext contentAssistContext;
+	
+	private final IScopeProvider scopeProvider;
 
 	public XtextTemplateContext(TemplateContextType type, IDocument document, Position position,
-			IContentAssistContext contentAssistContext, IScopeProvider scopeProvider) {
+			ContentAssistContext contentAssistContext, IScopeProvider scopeProvider) {
 		super(type, document, position);
 		this.contentAssistContext = contentAssistContext;
 		this.scopeProvider = scopeProvider;
@@ -36,7 +36,7 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 	/**
 	 * @return the contentAssistContext
 	 */
-	public IContentAssistContext getContentAssistContext() {
+	public ContentAssistContext getContentAssistContext() {
 		return contentAssistContext;
 	}
 

@@ -6,8 +6,6 @@ import java.util.List;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ContentAssistant;
-import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
@@ -16,15 +14,16 @@ import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
+import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
-	@Inject(optional = true)
-	private IContentAssistProcessor contentAssistProcessor;
-
+	@Inject
+	private IContentAssistantFactory contentAssistantFactory;
+	
 	@Inject
 	private IHyperlinkDetector detector;
 	
@@ -36,12 +35,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-		ContentAssistant contentAssistant = new ContentAssistant();
-		if (contentAssistProcessor != null) {
-			contentAssistant.setContentAssistProcessor(contentAssistProcessor,
-					IDocument.DEFAULT_CONTENT_TYPE);
-		}
-		return contentAssistant;
+		return contentAssistantFactory.createConfiguredAssistant(this, sourceViewer);
 	}
 
 	@Override

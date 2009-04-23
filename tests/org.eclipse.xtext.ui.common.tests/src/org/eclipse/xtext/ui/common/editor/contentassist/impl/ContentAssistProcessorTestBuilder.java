@@ -13,29 +13,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import junit.framework.Assert;
 
-import org.easymock.EasyMock;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.util.StringInputStream;
@@ -50,7 +48,6 @@ import org.eclipse.xtext.util.Strings;
 public class ContentAssistProcessorTestBuilder {
 
 	private final IContentAssistProcessor contentAssistProcessor;
-	private final ITextViewer textViewerMock;
 	private String model;
 	private int cursorPosition;
 	private final ISetup setupClazz;
@@ -61,7 +58,6 @@ public class ContentAssistProcessorTestBuilder {
 		this.tests = tests;
 		tests.with(setupClazz);
 		this.contentAssistProcessor = tests.get(IContentAssistProcessor.class);
-		this.textViewerMock = EasyMock.createMock(ITextViewer.class);
 	}
 
 	public ContentAssistProcessorTestBuilder reset() throws Exception {
@@ -94,7 +90,12 @@ public class ContentAssistProcessorTestBuilder {
 	}
 
 	public ContentAssistProcessorTestBuilder applyText(int index, boolean appendSpace) throws Exception {
-		ContentAssistProcessorTestBuilder ret = append(computeCompletionProposals(getModel(), this.cursorPosition)[index].getDisplayString());
+		ICompletionProposal proposal = computeCompletionProposals(getModel(), this.cursorPosition)[index];
+		String text = proposal.getDisplayString();
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			text = ((ConfigurableCompletionProposal) proposal).getReplacementString();
+		}
+		ContentAssistProcessorTestBuilder ret = append(text);
 		if (appendSpace) {
 			return ret.append(" ");
 		}
@@ -127,14 +128,19 @@ public class ContentAssistProcessorTestBuilder {
 		ICompletionProposal[] computeCompletionProposals = computeCompletionProposals(currentModelToParse,
 				cursorPosition);
 
+		if (computeCompletionProposals == null)
+			computeCompletionProposals = new ICompletionProposal[0];
+
+		String expectation = Strings.concat(", ", Arrays.asList(expectedText));
 		Assert.assertEquals("expect " + expectedText.length + " CompletionProposal item for model '"
-				+ currentModelToParse + "': expectation was:\n" + Strings.concat(", ", Arrays.asList(expectedText))
+				+ currentModelToParse + "': expectation was:\n" + expectation
 				+ "\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
 				expectedText.length, computeCompletionProposals.length);
 
+		
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
-			Assert.assertTrue("expect completionProposal text '" + completionProposal.getDisplayString() + "', but got " +
+			Assert.assertTrue("expect completionProposal text '" + expectation + "', but got " +
 					Strings.concat(", ", toString(computeCompletionProposals)),
 					Arrays.asList(expectedText).contains(completionProposal.getDisplayString()));
 		}
@@ -145,17 +151,23 @@ public class ContentAssistProcessorTestBuilder {
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
 			throws Exception {
 		String currentModelToParse = getModel();
-		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
-		List<IContentAssistContext> contentAssistContextList = new DefaultContentAssistProcessor() {
+		ITextViewer textViewer = new MockableTextViewer() {
 			@Override
-			public List<IContentAssistContext> createContextList(XtextResource resource, String text, final int offset) {
-				return super.createContextList(xtextResource, text, offset);
+			public ISelectionProvider getSelectionProvider() {
+				return new MockableSelectionProvider() {
+					@Override
+					public ISelection getSelection() {
+						return TextSelection.emptySelection();
+					}
+				};
 			}
-		}.createContextList(xtextResource, currentModelToParse,cursorPosition);
-
-		for (IContentAssistContext contentAssistContext : contentAssistContextList) {
-			Assert.assertEquals(matchString, contentAssistContext.getMatchString());
-			break;
+		};
+		final XtextResource xtextResource = tests.getResource(new StringInputStream(currentModelToParse));
+		ContentAssistContext.Factory factory = tests.get(ContentAssistContext.Factory.class);
+		ContentAssistContext[] contexts = factory.create(textViewer, currentModelToParse.length(), xtextResource);
+		for(ContentAssistContext context: contexts) {
+			Assert.assertTrue("matchString = '" + matchString + "', actual: '" + context.getPrefix() + "'",
+					"".equals(context.getPrefix()) || matchString.equals(context.getPrefix()));
 		}
 		return this;
 	}
@@ -165,6 +177,8 @@ public class ContentAssistProcessorTestBuilder {
 	}
 
 	private List<String> toString(ICompletionProposal[] proposals) {
+		if (proposals == null)
+			return Collections.emptyList();
 		List<String> res = new ArrayList<String>(proposals.length);
 		for (ICompletionProposal proposal : proposals) {
 			res.add(proposal.getDisplayString());
@@ -227,11 +241,23 @@ public class ContentAssistProcessorTestBuilder {
 	}
 
 	private ITextViewer resetTextViewerMock(final String currentModelToParse, final IXtextDocument xtextDocument) {
-		EasyMock.reset(textViewerMock);
-		expect(textViewerMock.getDocument()).andReturn(xtextDocument);
-		expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(currentModelToParse)).times(2);
-		replay(textViewerMock);
-		return textViewerMock;
+		ITextViewer result = new MockableTextViewer() {
+			@Override
+			public IDocument getDocument() {
+				return xtextDocument;
+			}
+			
+			@Override
+			public ISelectionProvider getSelectionProvider() {
+				return new MockableSelectionProvider() {
+					@Override
+					public ISelection getSelection() {
+						return TextSelection.emptySelection();
+					}
+				};
+			}
+		};
+		return result;
 	}
 
 	private ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
@@ -239,25 +265,6 @@ public class ContentAssistProcessorTestBuilder {
 		builder.model = model;
 		builder.cursorPosition = offset;
 		return builder;
-	}
-
-	private StyledText newStyledTextWidgetMock(final String testDslModel) {
-		return new StyledText(new Shell(), SWT.NONE) {
-			@Override
-			public int getCharCount() {
-				return testDslModel.length();
-			}
-
-			@Override
-			public String getText(int start, int end) {
-				return testDslModel.substring(start, end + 1);
-			}
-
-			@Override
-			public String getText() {
-				return testDslModel;
-			}
-		};
 	}
 
 	public <T> T get(Class<T> clazz) {
