@@ -54,7 +54,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	public void testComputeCompletionProposalsCount() throws Exception {
 		newBuilder(setup.getRefGrammarSetup()).assertCount(1)
 			.append("spielplatz ").assertCount(1)
-			.append("1 ").assertCount(3)
+			.append("1 ").assertCount(2)
 			.append("\"JUNIT\" ").assertCount(1)
 			.append("{ ").assertCount(5)
 			.append("kind ").assertCount(1)
@@ -65,20 +65,20 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 
 	public void testComputeCompletionProposalsText() throws Exception {
 		newBuilder(setup.getRefGrammarSetup()).assertText("spielplatz")
-			.applyText().assertText("1 - Groesse")
-			.applyText().assertText("\"Beschreibung\"", "'Beschreibung'", "{")
+			.applyText().assertText("1")
+			.applyText().assertText("\"Beschreibung\"", "{")
 			.applyText().assertText("{")
 			.applyText().assertText("erwachsener", "familie", "spielzeug", "kind", "}")
 			.append("erwachsener ").assertText("(")
 			.applyText().assertText("Name")
-			.append("e1 ").assertText("1 - Age")
+			.append("e1 ").assertText("1")
 			.applyText().assertText(")")
 			.applyText().append("erwachsener (e2 0) kind ").assertText("(")
 			.applyText().assertText("Name")
-			.append("k1 ").assertText("1 - Age")
+			.append("k1 ").assertText("1")
 			.applyText().assertText(")")
 			.applyText().append("kind (k2 0) familie ").assertText("(")
-			.applyText().assertText("keyword", "'Name'", "\"Name\"", "Name")
+			.applyText().assertText("keyword", "\"Name\"", "Name")
 			.append("keyword ").assertText("e1","e2")
 			.applyText().assertText("e1","e2")
 			.append("e2 ").assertText("k1","k2")
@@ -155,7 +155,6 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 					"R2",
 					"R3",
 					"\"Value\"",
-					"'Value'",
 					"(",
 					"[",
 					"+=" // current node is always a suggestion
@@ -264,7 +263,6 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
                         "R2",
                         "R3",
                         "\"Value\"",
-                        "'Value'",
                         "(",
                         "["
         );
@@ -307,7 +305,6 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
         .appendNl("generate foo \"foo\"")
         .append("MyRule : 'foo' name").assertText(
         		"\"Value\"",
-        		"'Value'",
         		"(",
         		"*",
         		"+",
