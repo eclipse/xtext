@@ -104,15 +104,22 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
+	protected ICompletionProposal createCompletionProposal(EObject element, String name, String displayName, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(name, displayName, getImage(element), contentAssistContext);
+	}
+	
+	/**
+	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
+	 */
 	protected ICompletionProposal createCompletionProposal(IScopedElement element, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(element.element(), element.name(), prefix, contentAssistContext);
+		return createCompletionProposal(element.element(), element.name(), element.name(), prefix, contentAssistContext);
 	}
 
 	/**
 	 * @see #createCompletionProposal(AbstractElement, String, IContentAssistContext, Image)
 	 */
-	protected ICompletionProposal createCompletionProposal(EObject element, String name, String prefix, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(name, name, getImage(element), prefix, contentAssistContext);
+	protected ICompletionProposal createCompletionProposal(EObject element, String name, String displayName, String prefix, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(name, displayName, getImage(element), prefix, contentAssistContext);
 	}
 	
 	/**

@@ -140,9 +140,12 @@ public class ContentAssistProcessorTestBuilder {
 		
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
+			String proposedText = completionProposal.getDisplayString();
+			if (completionProposal instanceof ConfigurableCompletionProposal)
+				proposedText = ((ConfigurableCompletionProposal) completionProposal).getReplacementString();
 			Assert.assertTrue("expect completionProposal text '" + expectation + "', but got " +
 					Strings.concat(", ", toString(computeCompletionProposals)),
-					Arrays.asList(expectedText).contains(completionProposal.getDisplayString()));
+					Arrays.asList(expectedText).contains(proposedText));
 		}
 
 		return this;
@@ -181,7 +184,10 @@ public class ContentAssistProcessorTestBuilder {
 			return Collections.emptyList();
 		List<String> res = new ArrayList<String>(proposals.length);
 		for (ICompletionProposal proposal : proposals) {
-			res.add(proposal.getDisplayString());
+			String proposedText = proposal.getDisplayString();
+			if (proposal instanceof ConfigurableCompletionProposal)
+				proposedText = ((ConfigurableCompletionProposal) proposal).getReplacementString();
+			res.add(proposedText);
 		}
 		return res;
 	}
