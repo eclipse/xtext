@@ -63,6 +63,27 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Object_foo", dispatcher.invoke("foo"));
 	}
 
+	public void testMixedTypes() throws Exception {
+		Object o1 = new Object() {
+
+			String label(Number i) {
+				return "Number_" + i;
+			}
+
+			String label(String i) {
+				return "String_" + i;
+			}
+
+			String label(Integer i) {
+				return "Integer_" + i;
+			}
+
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1));
+
+		assertEquals("Integer_3", dispatcher.invoke(new Integer(3)));
+	}
+
 	public void testDifferentParamLength() throws Exception {
 		Object o1 = new Object() {
 			String label(Integer i, Object stuff) {
@@ -90,7 +111,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Number_3_foo", dispatcher.invoke(BigInteger.valueOf(3), "foo"));
 	}
 
-	public void testAmbigous() throws Exception {
+	public void testAmbiguous() throws Exception {
 		Object o1 = new Object() {
 
 			String label(CharSequence i) {
@@ -104,7 +125,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(o1));
 		try {
 			dispatcher.invoke("string");
-			fail("exception expected, due to ambigous methods");
+			fail("exception expected, due to ambiguous methods");
 		} catch (IllegalStateException e) {
 			// ignore
 		}
@@ -149,4 +170,5 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
 		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
 	}
+
 }
