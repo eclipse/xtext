@@ -79,8 +79,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 				.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		Set<String> exportedPackages = new LinkedHashSet<String>();
 		for (GeneratedMetamodel generatedMetamodel : typeSelect) {
-			exportedPackages.add(Strings.skipLastToken(getGeneratedEPackageName(grammar, generatedMetamodel
-					.getEPackage()), "."));
+			final String modelPackage = Strings.skipLastToken(getGeneratedEPackageName(grammar, generatedMetamodel
+					.getEPackage()), ".");
+			exportedPackages.add(modelPackage);
+			exportedPackages.add(modelPackage + ".impl");
+			exportedPackages.add(modelPackage + ".util");
 		}
 		return exportedPackages.toArray(new String[exportedPackages.size()]);
 	}
