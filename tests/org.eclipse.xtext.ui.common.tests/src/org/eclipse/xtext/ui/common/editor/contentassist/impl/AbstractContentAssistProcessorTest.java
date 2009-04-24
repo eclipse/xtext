@@ -291,6 +291,28 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
         .appendNl("Rule: name=ID;")
         .assertTextAtCursorPosition("generate", 3,"generate");
     }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269680
+     */
+    public void testCompletionOnDatatypeReference_01() throws Exception {
+        newBuilder(setup.getXtextSetup())
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate meta \"url\"")
+	        .appendNl("Rule: name=ID;")
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 2, "org.eclipse.xtext.common.Terminals");
+    }
+    
+    /**
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=269680
+     */
+    public void testCompletionOnDatatypeReference_02() throws Exception {
+        newBuilder(setup.getXtextSetup())
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate meta \"url\"")
+	        .appendNl("Rule: name=ID;")
+	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.common.Terminals");
+    }
 
     /**
      * regression test for:

@@ -17,7 +17,9 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.parser.IParseResult;
@@ -62,9 +64,10 @@ public class DefaultContentAssistContextFactory implements ContentAssistContext.
 		
 		CompositeNode rootNode = parseResult.getRootNode();
 		AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, fixedOffset);
+		lastCompleteNode = getContainingDatatypeRuleNode(lastCompleteNode);
 		EObject currentModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
 		AbstractNode currentNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, fixedOffset);
-		
+		currentNode = getContainingDatatypeRuleNode(currentNode);
 		if (lastCompleteNode.getOffset()+lastCompleteNode.getLength() == fixedOffset) {
 			AbstractNode precedingLastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, Math.max(0, lastCompleteNode.getOffset()));
 			String prefix = getPrefix(lastCompleteNode, fixedOffset);
@@ -86,6 +89,20 @@ public class DefaultContentAssistContextFactory implements ContentAssistContext.
 		}
 		
 		return result.toArray(new ContentAssistContext[result.size()]);
+	}
+
+	public AbstractNode getContainingDatatypeRuleNode(AbstractNode node) {
+		AbstractNode result = node;
+		EObject grammarElement = result.getGrammarElement();
+		if (grammarElement != null) {
+			ParserRule parserRule = GrammarUtil.containingParserRule(grammarElement);
+			while(parserRule != null && GrammarUtil.isDatatypeRule(parserRule)) {
+				result = result.getParent();
+				grammarElement = result.getGrammarElement();
+				parserRule = GrammarUtil.containingParserRule(grammarElement);
+			}
+		}
+		return result;
 	}
 
 	public ContentAssistContext createContext(ITextViewer viewer, int offset, IParseResult parseResult, CompositeNode rootNode,
@@ -113,21 +130,22 @@ public class DefaultContentAssistContextFactory implements ContentAssistContext.
 		return context;
 	}
 	
-	public String getPrefix(AbstractNode currentNode, int offset) {
-		if (currentNode instanceof LeafNode) {
-			if (((LeafNode) currentNode).isHidden())
+	public String getPrefix(AbstractNode prefixNode, int offset) {
+		if (prefixNode instanceof LeafNode) {
+			if (((LeafNode) prefixNode).isHidden())
 				return "";
-			return getNodeText(currentNode, offset);
+			return getNodeText(prefixNode, offset);
 		}
-		StringBuilder result = new StringBuilder(currentNode.getTotalLength());
-		doComputePrefix((CompositeNode) currentNode, result, offset);
+		StringBuilder result = new StringBuilder(prefixNode.getTotalLength());
+		doComputePrefix((CompositeNode) prefixNode, result, offset);
 		return result.toString();
 	}
 
 	public String getNodeText(AbstractNode currentNode, int offset) {
 		int startOffset = currentNode.getOffset();
 		String text = ((LeafNode) currentNode).getText();
-		String result = text.substring(0, offset - startOffset);
+		int length = offset - startOffset;
+		String result = length > text.length() ? text : text.substring(0, length);
 		return result;
 	}
 	
