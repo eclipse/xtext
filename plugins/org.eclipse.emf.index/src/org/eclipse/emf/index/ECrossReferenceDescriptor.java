@@ -8,8 +8,8 @@ t * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
 
 package org.eclipse.emf.index;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 
 /**
  * 
@@ -24,30 +24,52 @@ public interface ECrossReferenceDescriptor {
 		
 		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(EObject target);
 	
-		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReference(EObjectDescriptor sourceDescriptor, EReference reference);
+		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(URI sourceURI);
 		
-		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(EObjectDescriptor sourceDescriptor);
-		
-		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(EObjectDescriptor targetDescriptor);
+		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(URI targetURI);
 	}
 
 	public interface Query extends IGenericQuery<ECrossReferenceDescriptor> {
-		EObjectDescriptor.Query source();
 		
-		Query source(EObjectDescriptor sourceDescriptor);
+		Query sourceFragment(String pattern);
 		
-		EObjectDescriptor.Query target();
+		Query sourceResource(ResourceDescriptor sourceResourceDescriptor);
 		
-		Query target(EObjectDescriptor targetDescriptor);
+		ResourceDescriptor.Query sourceResource();
+		
+		Query targetFragment(String pattern);
+		
+		Query targetResource(ResourceDescriptor targetResourceDescriptor);
+
+		ResourceDescriptor.Query targetResource();
 
 		Query referenceName(String pattern);
+		
+		Query index(int index);
 	}
 
-	EObjectDescriptor getSource();
+	String getSourceFragment();
+	
+	String getTargetFragment();
+	
+	ResourceDescriptor getSourceResourceDescriptor();
+
+	ResourceDescriptor getTargetResourceDescriptor();
+	
+	int getIndex();
 	
 	String getReferenceName();
 
-	EObjectDescriptor getTarget();
+	/**
+	 * Derived
+	 * @return
+	 */
+	URI getSourceURI();
+
+	/**
+	 * Derived
+	 * @return
+	 */
+	URI getTargetURI();
 	
-	int getIndex();
 }

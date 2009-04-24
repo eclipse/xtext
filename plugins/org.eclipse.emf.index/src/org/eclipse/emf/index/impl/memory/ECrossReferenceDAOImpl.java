@@ -11,12 +11,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
-import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
 
 /**
@@ -25,21 +25,21 @@ import org.eclipse.emf.index.impl.DefaultQueryTool;
 public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDescriptor> implements
 		ECrossReferenceDescriptor.DAO {
 
-	protected InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor> sourceScope;
-	protected InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor> targetScope;
+	protected InverseReferenceCache<ResourceDescriptor, ECrossReferenceDescriptor> sourceResourceScope;
+	protected InverseReferenceCache<ResourceDescriptor, ECrossReferenceDescriptor> targetResourceScope;
 
 	public ECrossReferenceDAOImpl(IIndexStore indexStore) {
 		super(indexStore);
-		sourceScope = new InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor>() {
+		sourceResourceScope = new InverseReferenceCache<ResourceDescriptor, ECrossReferenceDescriptor>(){
 			@Override
-			protected List<EObjectDescriptor> targets(ECrossReferenceDescriptor source) {
-				return Collections.singletonList(source.getSource());
+			protected List<ResourceDescriptor> targets(ECrossReferenceDescriptor source) {
+				return Collections.singletonList(source.getSourceResourceDescriptor());
 			}
 		};
-		targetScope = new InverseReferenceCache<EObjectDescriptor, ECrossReferenceDescriptor>() {
+		targetResourceScope = new InverseReferenceCache<ResourceDescriptor, ECrossReferenceDescriptor>(){
 			@Override
-			protected List<EObjectDescriptor> targets(ECrossReferenceDescriptor source) {
-				return Collections.singletonList(source.getTarget());
+			protected List<ResourceDescriptor> targets(ECrossReferenceDescriptor source) {
+				return Collections.singletonList(source.getTargetResourceDescriptor());
 			}
 		};
 	}
@@ -47,17 +47,17 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 	@Override
 	public void store(ECrossReferenceDescriptor element) {
 		super.store(element);
-		sourceScope.put(element);
-		targetScope.put(element);
+		sourceResourceScope.put(element);
+		targetResourceScope.put(element);
 	}
 
 	@Override
 	public void delete(ECrossReferenceDescriptor element) {
 		super.delete(element);
-		sourceScope.remove(element);
-		targetScope.remove(element);
+		sourceResourceScope.remove(element);
+		targetResourceScope.remove(element);
 	}
-	
+
 	@Override
 	protected boolean doModify(ECrossReferenceDescriptor element, ECrossReferenceDescriptor newValues) {
 		throw new UnsupportedOperationException();
@@ -67,78 +67,95 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 		return new CrossRefQuery();
 	}
 
-	public ECrossReferenceDescriptor.Query createQueryCrossReference(EObjectDescriptor sourceDescriptor,
-			EReference eReference) {
-		return DefaultQueryTool.createQueryCrossReference(this, sourceDescriptor, eReference);
-	}
-
 	public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(EObject target) {
 		return DefaultQueryTool.createQueryECrossReferencesTo(this, target);
 	}
 
-	public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(EObjectDescriptor sourceDescriptor) {
-		return sourceScope.createQuery(sourceDescriptor);
+	public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(URI sourceURI) {
+		return DefaultQueryTool.createQueryCrossReferencesFrom(this, sourceURI);
 	}
 
-	public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(EObjectDescriptor targetDescriptor) {
-		return targetScope.createQuery(targetDescriptor);
+	public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(URI targetURI) {
+		return DefaultQueryTool.createQueryCrossReferencesTo(this, targetURI);
 	}
 
 	protected class CrossRefQuery extends BasicMemoryDAOImpl<ECrossReferenceDescriptor>.Query implements
 			ECrossReferenceDescriptor.Query {
 
-		private EObjectDescriptor.Query sourceQuery;
-		private EObjectDescriptor.Query targetQuery;
-		private EObjectDescriptor sourceDescriptor;
-		private EObjectDescriptor targetDescriptor;
+		private String sourceFragmentPattern;
+		private String targetFragmentPattern;
+		private ResourceDescriptor sourceResourceDescriptor;
+		private ResourceDescriptor targetResourceDescriptor;
+		private ResourceDescriptor.Query sourceResourceQuery;
+		private ResourceDescriptor.Query targetResourceQuery;
 		private String referenceNamePattern;
+		private int index;
 
-		public EObjectDescriptor.Query source() {
-			if (sourceDescriptor != null) {
-				throw new IllegalStateException("SourceQuery already configured");
-			}
-			sourceQuery = indexStore.eObjectDAO().createQuery();
-			return sourceQuery;
+		public CrossRefQuery sourceFragment(String pattern) {
+			sourceFragmentPattern = pattern;
+			return this;
 		}
-
-		public CrossRefQuery source(EObjectDescriptor sourceDescriptor) {
-			if (sourceQuery != null) {
-				throw new IllegalStateException("SourceQuery already configured");
-			}
-			this.sourceDescriptor = sourceDescriptor;
+		
+		public CrossRefQuery targetFragment(String pattern) {
+			targetFragmentPattern = pattern;
 			return this;
 		}
 
-		public EObjectDescriptor.Query target() {
-			if (targetDescriptor != null) {
-				throw new IllegalStateException("TargetQuery already configured");
+		public ResourceDescriptor.Query sourceResource() {
+			if (sourceResourceDescriptor != null) {
+				throw new IllegalStateException("SourceQuery already configured");
 			}
-			targetQuery = indexStore.eObjectDAO().createQuery();
-			return targetQuery;
+			sourceResourceQuery = indexStore.resourceDAO().createQuery();
+			return sourceResourceQuery;
 		}
-
-		public CrossRefQuery target(EObjectDescriptor targetDescriptor) {
-			if (targetQuery != null) {
+		
+		public ResourceDescriptor.Query targetResource() {
+			if (targetResourceDescriptor != null) {
 				throw new IllegalStateException("TargetQuery already configured");
 			}
-			this.targetDescriptor = targetDescriptor;
+			targetResourceQuery = indexStore.resourceDAO().createQuery();
+			return targetResourceQuery;
+		}
+		
+		public CrossRefQuery sourceResource(ResourceDescriptor sourceResourceDescriptor) {
+			if(sourceResourceQuery != null) {
+				throw new IllegalStateException("SourceQuery already configured");				
+			}
+			this.sourceResourceDescriptor = sourceResourceDescriptor;
+			return this;
+		}
+		
+		public CrossRefQuery targetResource(ResourceDescriptor targetResourceDescriptor) {
+			if(targetResourceQuery != null) {
+				throw new IllegalStateException("TargetQuery already configured");				
+			}
+			this.targetResourceDescriptor = targetResourceDescriptor;
 			return this;
 		}
 
-		public ECrossReferenceDescriptor.Query referenceName(String pattern) {
+		public CrossRefQuery referenceName(String pattern) {
 			referenceNamePattern = pattern;
 			return this;
 		}
 
+		public CrossRefQuery index(int index) {
+			this.index = index;
+			return this;
+		}
+
 		protected boolean matches(ECrossReferenceDescriptor crossRefDescriptor) {
-			return matchesGlobbing(crossRefDescriptor.getReferenceName(), referenceNamePattern);
+			return matchesGlobbing(crossRefDescriptor.getReferenceName(), referenceNamePattern)
+					&& matchesGlobbing(crossRefDescriptor.getSourceFragment(), sourceFragmentPattern)
+					&& matchesGlobbing(crossRefDescriptor.getTargetFragment(), targetFragmentPattern)
+					&& (index != ECrossReferenceDescriptor.NO_INDEX && index == crossRefDescriptor.getIndex());
 		}
 
 		@Override
 		protected Collection<ECrossReferenceDescriptor> scope() {
-			Collection<ECrossReferenceDescriptor> eCrossReferencesBySource = sourceScope.lookup(sourceDescriptor, sourceQuery);
-			Collection<ECrossReferenceDescriptor> eCrossReferencesByTarget = targetScope.lookup(targetDescriptor, targetQuery);
-			Collection<ECrossReferenceDescriptor> mergedScopes = mergeScopes(eCrossReferencesBySource, eCrossReferencesByTarget);
+			Collection<ECrossReferenceDescriptor> eCrossReferencesBySourceResource = sourceResourceScope.lookup(sourceResourceDescriptor, sourceResourceQuery);
+			Collection<ECrossReferenceDescriptor> eCrossReferencesByTargetResource = targetResourceScope.lookup(targetResourceDescriptor, targetResourceQuery);
+			Collection<ECrossReferenceDescriptor> mergedScopes = mergeScopes(eCrossReferencesBySourceResource,
+					eCrossReferencesByTargetResource);
 			return mergedScopes == null ? super.scope() : mergedScopes;
 		}
 	}

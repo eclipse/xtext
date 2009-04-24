@@ -89,14 +89,14 @@ public class IntegrationTests extends TestCase {
 		assertEquals(4, superClasses.length);
 
 		Query crossRefQuery = index.eCrossReferenceDAO().createQuery();
-		crossRefQuery.target().name("Feature");
+		crossRefQuery.targetFragment("//Feature");
 		Iterable<ECrossReferenceDescriptor> crossRefDescriptors = crossRefQuery.executeListResult();
 		assertNotNull(crossRefDescriptors);
 		assertTrue(crossRefDescriptors.iterator().hasNext());
 		for (ECrossReferenceDescriptor crossRefDescriptor : crossRefDescriptors) {
-			EObject source = resourceSet.getEObject(crossRefDescriptor.getSource().getFragmentURI(), false);
+			EObject source = resourceSet.getEObject(crossRefDescriptor.getSourceURI(), false);
 			assertNotNull(source);
-			EObject target = resourceSet.getEObject(crossRefDescriptor.getTarget().getFragmentURI(), false);
+			EObject target = resourceSet.getEObject(crossRefDescriptor.getTargetURI(), false);
 			EStructuralFeature structuralFeature = source.eClass().getEStructuralFeature(
 					crossRefDescriptor.getReferenceName());
 			assertTrue(structuralFeature instanceof EReference);

@@ -62,9 +62,17 @@ public interface EObjectDescriptor {
 
 	String getFragment();
 
-	URI getFragmentURI();
-
-	String getUserData(String key);
-	
 	Map<String, String> getUserData();
+
+	/**
+	 * Derived
+	 * @return
+	 */
+	URI getFragmentURI();
+	
+	/**
+	 * Derived
+	 * @return
+	 */
+	String getUserData(String key);
 }

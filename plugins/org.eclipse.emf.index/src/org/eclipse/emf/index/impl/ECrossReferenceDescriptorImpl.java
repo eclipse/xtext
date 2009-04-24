@@ -7,43 +7,66 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
-import org.eclipse.emf.index.EObjectDescriptor;
+import org.eclipse.emf.index.ResourceDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class ECrossReferenceDescriptorImpl implements ECrossReferenceDescriptor {
 
-	private EObjectDescriptor source;
+	private ResourceDescriptor sourceResourceDescriptor;
+	private String sourceFragment;
 	private String referenceName;
-	private EObjectDescriptor target;
 	private int index;
+	private ResourceDescriptor targetResourceDescriptor;
+	private String targetFragment;
 
-	public ECrossReferenceDescriptorImpl(EObjectDescriptor source, String referenceName, EObjectDescriptor target) {
-		this(source, referenceName, target, NO_INDEX);
+	public ECrossReferenceDescriptorImpl(ResourceDescriptor sourceResourceDescriptor, String sourceFragment,
+			String referenceName, ResourceDescriptor targetResourceDescriptor, String targetFragment) {
+		this(sourceResourceDescriptor, sourceFragment, referenceName, NO_INDEX, targetResourceDescriptor, targetFragment);
 	}
 
-	public ECrossReferenceDescriptorImpl(EObjectDescriptor source, String referenceName, EObjectDescriptor target, int index) {
+	public ECrossReferenceDescriptorImpl(ResourceDescriptor sourceResourceDescriptor, String sourceFragment,
+			String referenceName, int index, ResourceDescriptor targetResourceDescriptor, String targetFragment) {
 		super();
-		this.source = source;
+		this.sourceResourceDescriptor = sourceResourceDescriptor;
+		this.sourceFragment = sourceFragment;
 		this.referenceName = referenceName;
-		this.target = target;
+		this.targetResourceDescriptor = targetResourceDescriptor;
+		this.targetFragment = targetFragment;
 		this.index = index;
 	}
 
-	public EObjectDescriptor getSource() {
-		return source;
+	public ResourceDescriptor getSourceResourceDescriptor() {
+		return sourceResourceDescriptor;
+	}
+
+	public String getSourceFragment() {
+		return sourceFragment;
+	}
+
+	public ResourceDescriptor getTargetResourceDescriptor() {
+		return targetResourceDescriptor;
+	}
+
+	public String getTargetFragment() {
+		return targetFragment;
+	}
+
+	public URI getSourceURI() {
+		return URI.createURI(sourceResourceDescriptor.getURI() + "#" + sourceFragment);
 	}
 
 	public String getReferenceName() {
 		return referenceName;
 	}
 
-	public EObjectDescriptor getTarget() {
-		return target;
+	public URI getTargetURI() {
+		return URI.createURI(targetResourceDescriptor.getURI() + "#" + targetFragment);
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -52,11 +75,15 @@ public class ECrossReferenceDescriptorImpl implements ECrossReferenceDescriptor 
 	public String toString() {
 		StringBuilder b = new StringBuilder();
 		b.append("(");
-		b.append(source);
+		b.append(sourceResourceDescriptor.getURI());
+		b.append("#");
+		b.append(sourceFragment);
 		b.append(" --");
 		b.append(referenceName);
 		b.append("--> ");
-		b.append(target);
+		b.append(targetResourceDescriptor.getURI());
+		b.append("#");
+		b.append(targetFragment);
 		b.append(")");
 		return b.toString();
 	}
@@ -65,16 +92,21 @@ public class ECrossReferenceDescriptorImpl implements ECrossReferenceDescriptor 
 	public boolean equals(Object obj) {
 		if (obj instanceof ECrossReferenceDescriptor) {
 			ECrossReferenceDescriptor crossRef = (ECrossReferenceDescriptor) obj;
-			return crossRef.hashCode() == hashCode() && this.source.equals(crossRef.getSource())
-					&& this.referenceName.equals(crossRef.getReferenceName())
-					&& this.target.equals(crossRef.getTarget());
+			return crossRef.hashCode() == hashCode() 
+				&& this.sourceFragment.equals(crossRef.getSourceFragment())
+				&& this.targetFragment.equals(crossRef.getTargetFragment())
+				&& this.sourceResourceDescriptor.equals(crossRef.getSourceResourceDescriptor())
+				&& this.targetResourceDescriptor.equals(crossRef.getTargetResourceDescriptor())
+				&& this.referenceName.equals(crossRef.getReferenceName())
+				&& this.index == crossRef.getIndex();
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return referenceName.hashCode() + 31 * source.hashCode() + 67 * target.hashCode();
+		return referenceName.hashCode() + 7 * sourceFragment.hashCode() + 31 * targetFragment.hashCode() +
+			53 * sourceResourceDescriptor.hashCode() + 89 * targetResourceDescriptor.hashCode();
 	}
 
 }
