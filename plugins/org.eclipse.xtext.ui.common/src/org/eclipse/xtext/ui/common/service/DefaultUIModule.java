@@ -17,6 +17,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultCompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistContextFactory;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultFollowElementCalculator;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.core.editor.IDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator;
 import org.eclipse.xtext.ui.core.editor.contentassist.ITemplateProposalProvider;
@@ -103,6 +105,10 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends ContentAssistContext.Factory> bindContentAssistContextFactory() {
 		return DefaultContentAssistContextFactory.class;
+	}
+	
+	public Class<? extends ICompletionProposalPostProcessor> bindICompletionProposalPostProcessor() {
+		return DefaultCompletionProposalPostProcessor.class;
 	}
 	
 	public Class<? extends IFollowElementCalculator> bindIFollowElementCalculator() {

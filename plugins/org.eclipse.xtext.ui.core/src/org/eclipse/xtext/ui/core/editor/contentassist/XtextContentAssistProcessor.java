@@ -56,6 +56,9 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	@Inject
 	private ICompletionProposalComparator completionProposalComparator;
 	
+	@Inject
+	private ICompletionProposalPostProcessor completionProposalPostProcessor;
+	
 	@Inject(optional = true)
 	@Named(value=COMPLETION_AUTO_ACTIVATION_CHARS)
 	private String completionProposalAutoActivationCharacters = null;
@@ -75,6 +78,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		IXtextDocument document = (IXtextDocument) viewer.getDocument();
 		ICompletionProposal[] result = document.readOnly(createCompletionProposalComputer(viewer, offset));
 		Arrays.sort(result, completionProposalComparator);
+		result = completionProposalPostProcessor.postProcess(result);
 		return result;
 	}
 
@@ -170,6 +174,14 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		IContextInformationAcceptor.Delegate result = contextInformationAcceptorProvider.get();
 		result.setDelegate(delegate);
 		return result;
+	}
+
+	public void setCompletionProposalPostProcessor(ICompletionProposalPostProcessor completionProposalPostProcessor) {
+		this.completionProposalPostProcessor = completionProposalPostProcessor;
+	}
+
+	public ICompletionProposalPostProcessor getCompletionProposalPostProcessor() {
+		return completionProposalPostProcessor;
 	}
 
 }
