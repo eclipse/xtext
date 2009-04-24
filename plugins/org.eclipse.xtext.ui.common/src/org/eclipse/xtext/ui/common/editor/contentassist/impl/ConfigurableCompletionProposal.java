@@ -256,6 +256,7 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 	}
 	
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
+		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
 		apply(viewer.getDocument());
 	}
 
