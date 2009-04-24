@@ -27,4 +27,9 @@ public abstract class AbstractXtextGrammarTestLanguageUiModule extends DefaultUI
 		return org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AntlrTokenStyleProvider.class;
 	}
 
+	
+	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
+		return org.eclipse.xtext.XtextGrammarTestLanguageProposalProvider.class;
+	}
+
 }
