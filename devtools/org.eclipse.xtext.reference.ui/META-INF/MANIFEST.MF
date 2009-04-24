@@ -6,7 +6,6 @@ Bundle-Version: 0.7.0.qualifier
 Require-Bundle: org.eclipse.xtext.reference,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.xtext.ui,
  org.eclipse.xtext.xtend;bundle-version="0.7.0";resolution:=optional,
  org.eclipse.ui.editors,
  org.eclipse.ui

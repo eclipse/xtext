@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.eclipse.xtext.example.ecoredsl.ui;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.4.0",
  org.eclipse.ui,
  org.eclipse.core.expressions;bundle-version="3.4.0",
