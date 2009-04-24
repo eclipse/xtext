@@ -177,6 +177,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			int replacementOffset, int replacementLength, ContentAssistContext context) {
 		ConfigurableCompletionProposal result = new ConfigurableCompletionProposal(name, replacementOffset, replacementLength, name.length(), image, displayString, null, null);
 		result.setMatcher(context.getMatcher());
+		result.setReplaceContextLength(context.getCurrentNode().getLength());
 		return result;
 	}
 	

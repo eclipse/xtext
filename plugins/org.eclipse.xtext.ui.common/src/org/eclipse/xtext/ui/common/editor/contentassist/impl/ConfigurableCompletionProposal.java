@@ -176,6 +176,7 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 	private ITextViewer viewer;
 	private char[] exitChars;
 	private PrefixMatcher matcher;
+	private int replaceContextLength;
 	
 	public boolean isAutoInsertable() {
 		return autoInsertable;
@@ -257,18 +258,48 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 	
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
 		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
+		boolean replaceRight = (stateMask & SWT.CTRL) != 0;
+		if (replaceRight) {
+			setReplacementLength(getReplaceContextLength());
+		}
 		apply(viewer.getDocument());
+	}
+	
+	private Point rememberedSelection;
+	
+	private void updateSelection(ITextViewer viewer) {
+		rememberedSelection = viewer.getSelectedRange();
+		int offset = rememberedSelection.x;
+		int length= getReplaceContextLength() - (offset - getReplacementOffset());
+		
+		viewer.setSelectedRange(offset, length);
+	}
+	
+	private void restoreSelection(ITextViewer viewer) {
+		if (rememberedSelection != null)
+			viewer.setSelectedRange(rememberedSelection.x, rememberedSelection.y);
 	}
 
 	public void selected(ITextViewer viewer, boolean smartToggle) {
-		// TODO implement highlighting depending on smartToggle
+		if (smartToggle)
+			updateSelection(viewer);
+		else {
+			restoreSelection(viewer);
+			rememberedSelection= null;
+		}
 	}
 
 	public void unselected(ITextViewer viewer) {
-		// TODO implement highlighting depending on smartToggle
+		restoreSelection(viewer);
+		rememberedSelection= null;
 	}
 
 	public boolean validate(IDocument document, int offset, DocumentEvent event) {
+		if (event != null) {
+			int oldReplaceContextLength = getReplaceContextLength();
+			int diff = event.getText().length() - event.getLength();
+			setReplaceContextLength(oldReplaceContextLength + diff);
+		}
 		try {
 			String prefix = document.get(replacementOffset, offset - replacementOffset);
 			return matcher.isCandidateMatchingPrefix(replacementString, prefix);
@@ -285,6 +316,14 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 
 	public PrefixMatcher getMatcher() {
 		return matcher;
+	}
+	
+	public void setReplaceContextLength(int replaceContextLength) {
+		this.replaceContextLength = replaceContextLength;
+	}
+
+	public int getReplaceContextLength() {
+		return replaceContextLength;
 	}
 	
 	// copied from AbstractJavaCompletionProposal
@@ -346,5 +385,5 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 		}
 
 	}
-	
+
 }
