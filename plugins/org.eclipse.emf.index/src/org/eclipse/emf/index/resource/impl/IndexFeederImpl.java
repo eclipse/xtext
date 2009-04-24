@@ -18,10 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IIndexStore;
@@ -48,6 +50,7 @@ public class IndexFeederImpl implements IndexFeeder {
 	private MultiMap<EObject, ECrossReferenceData> crossRefDataCache = new MultiMap<EObject, ECrossReferenceData>();
 
 	private Map<Resource, ResourceDescriptor> resourceDescCache = new HashMap<Resource, ResourceDescriptor>();
+	private Map<URI, ResourceDescriptor> resourceDescCacheUri = new HashMap<URI, ResourceDescriptor>();
 	private Map<EObject, EObjectDescriptor> eObjectDescCache = new HashMap<EObject, EObjectDescriptor>();
 
 	private List<EObjectDescriptor> allExistingEObjectDescs = new ArrayList<EObjectDescriptor>();
@@ -123,13 +126,18 @@ public class IndexFeederImpl implements IndexFeeder {
 						.createQueryEObjectsInResource(existingResourceDesc).executeListResult());
 				addAllIfNotNull(allExistingEObjectDescs, existingEObjectsInResource);
 				index.resourceDAO().modify(existingResourceDesc, newResourceDescriptor);
-				resourceDescCache.put(resource, existingResourceDesc);
+				putResourceDescriptor(resource, existingResourceDesc);
 			}
 			else {
 				index.resourceDAO().store(newResourceDescriptor);
-				resourceDescCache.put(resource, newResourceDescriptor);
+				putResourceDescriptor(resource, newResourceDescriptor);
 			}
 		}
+	}
+	
+	private void putResourceDescriptor(Resource resource, ResourceDescriptor resourceDescriptor ) {
+		resourceDescCache.put(resource, resourceDescriptor);
+		resourceDescCacheUri.put(resource.getURI(), resourceDescriptor);
 	}
 
 	private void commitEObjectDescriptors() {
@@ -137,7 +145,13 @@ public class IndexFeederImpl implements IndexFeeder {
 			EObject eObject = eObjectEntry.getKey();
 			EObjectData data = eObjectEntry.getValue();
 			Resource resource = eObject.eResource();
-			ResourceDescriptor resourceDesc = findResourceDescriptor(resource);
+			ResourceDescriptor resourceDesc = null;
+			
+			if ( /* resource has not been unloaded */ resource != null ) {
+				resourceDesc = findResourceDescriptor(resource);
+			} else /* resource unloaded, use URI */ {
+				resourceDesc = findResourceDescriptor( EcoreUtil.getURI(eObject).trimFragment());
+			}
 			EClassDescriptor eClassDescriptor = index.eClassDAO().createQueryEClass(eObject.eClass())
 					.executeSingleResult();
 			EObjectDescriptor newEObjectDesc = new EObjectDescriptorImpl(resourceDesc, data.fragment, data.name,
@@ -236,6 +250,11 @@ public class IndexFeederImpl implements IndexFeeder {
 		}
 		return resourceDescriptor;
 	}
+	
+	private	ResourceDescriptor findResourceDescriptor(URI uri) {
+		
+		return resourceDescCacheUri.get(uri);
+	}
 
 	private void assertTransactionStarted() {
 		if (!isTransactionStarted)
@@ -248,6 +267,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		crossRefDataCache.clear();
 
 		resourceDescCache.clear();
+		resourceDescCacheUri.clear();
 		eObjectDescCache.clear();
 		allExistingEObjectDescs.clear();
 		allExistingECrossRefDescs.clear();
