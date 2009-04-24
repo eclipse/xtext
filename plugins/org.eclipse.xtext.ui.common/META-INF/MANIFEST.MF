@@ -20,7 +20,8 @@ Export-Package: org.eclipse.xtext.ui.common.editor.contentassist.impl,
  org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr,
  org.eclipse.xtext.ui.common.editor.tasks,
  org.eclipse.xtext.ui.common.editor.tasks.dialogfields,
- org.eclipse.xtext.ui.common.service
+ org.eclipse.xtext.ui.common.service,
+ org.eclipse.xtext.common
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-Activator: org.eclipse.xtext.ui.common.internal.Activator
 Bundle-ActivationPolicy: lazy

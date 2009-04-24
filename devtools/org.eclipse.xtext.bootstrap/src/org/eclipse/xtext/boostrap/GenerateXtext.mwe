@@ -1,12 +1,15 @@
 <workflow>
 	<property name="runtimeProjectName" value="org.eclipse.xtext"/>
 	<property name="uiProjectName" value="org.eclipse.xtext.xtext.ui"/>
+	<property name="commonUiProjectName" value="org.eclipse.xtext.ui.common"/>
 	<property name="runtimeProject" value="../${runtimeProjectName}"/>
 	<property name="uiProject" value="../${uiProjectName}"/>
+	<property name="commonUiProject" value="../${commonUiProjectName}"/>
 	<property name="file.extensions" value="xtext,xtext2"/>
 	
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${uiProject}/src-gen"/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${commonUiProject}/src-gen"/>
 		
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>
@@ -31,6 +34,13 @@
 			  fileExtensions="${file.extensions}"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
+	</component>
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${commonUiProject}"/>
+		<projectNameRt value="${runtimeProjectName}"/>
+		<projectNameUi value="${commonUiProjectName}"/>
+				
 		<language uri="classpath:/org/eclipse/xtext/common/Terminals.xtext">
 			<fragment class="org.eclipse.xtext.generator.BasicRuntimeFragment"/>
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
@@ -41,4 +51,6 @@
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 	</component>
+	
+
 </workflow>

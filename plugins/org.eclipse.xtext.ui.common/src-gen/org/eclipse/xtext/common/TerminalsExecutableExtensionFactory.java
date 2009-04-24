@@ -32,10 +32,10 @@ public class TerminalsExecutableExtensionFactory implements IExecutableExtension
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getBundle();
+		Bundle bundle = org.eclipse.xtext.common.internal.TerminalsActivator.getInstance().getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
-			return org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getInjector("org.eclipse.xtext.common.Terminals").getInstance(class1);
+			return org.eclipse.xtext.common.internal.TerminalsActivator.getInstance().getInjector("org.eclipse.xtext.common.Terminals").getInstance(class1);
 		}
 		catch (Exception e) {
 			log.error(e);
