@@ -168,7 +168,7 @@ public class PolymorphicDispatcher<RT> {
 			return target;
 		}
 
-		public boolean isInvokeable(Class<?>[] paramTypes) {
+		public boolean isInvokeable(final Class<?>[] paramTypes) {
 			if (getParameterTypes().length != paramTypes.length)
 				return false;
 			for (int i = 0; i < paramTypes.length; i++) {
@@ -186,8 +186,8 @@ public class PolymorphicDispatcher<RT> {
 	}
 
 	private int compare(MethodDesc o1, MethodDesc o2) {
-		List<Class<?>> paramTypes1 = Arrays.asList(o1.getParameterTypes());
-		List<Class<?>> paramTypes2 = Arrays.asList(o2.getParameterTypes());
+		final List<Class<?>> paramTypes1 = Arrays.asList(o1.getParameterTypes());
+		final List<Class<?>> paramTypes2 = Arrays.asList(o2.getParameterTypes());
 
 		// sort by number of parameters
 		if (paramTypes1.size() > paramTypes2.size())
@@ -197,8 +197,8 @@ public class PolymorphicDispatcher<RT> {
 
 		// sort by parameter types from left to right
 		for (int i = 0; i < paramTypes1.size(); i++) {
-			Class<?> class1 = paramTypes1.get(i);
-			Class<?> class2 = paramTypes2.get(i);
+			final Class<?> class1 = paramTypes1.get(i);
+			final Class<?> class2 = paramTypes2.get(i);
 
 			if (class1.equals(class2))
 				continue;
@@ -217,7 +217,7 @@ public class PolymorphicDispatcher<RT> {
 		}
 
 		// sort by target
-		int compareTo = ((Integer) targets.indexOf(o2.target)).compareTo(targets.indexOf(o1.target));
+		final int compareTo = ((Integer) targets.indexOf(o2.target)).compareTo(targets.indexOf(o1.target));
 		return compareTo;
 	}
 
