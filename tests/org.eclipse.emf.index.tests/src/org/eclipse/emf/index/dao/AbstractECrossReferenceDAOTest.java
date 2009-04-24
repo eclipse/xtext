@@ -36,13 +36,13 @@ public abstract class AbstractECrossReferenceDAOTest extends AbstractDAOTest {
 	 */
 	@Override
 	protected abstract ResourceDescriptor.DAO createResourceDAO();
-	
+
 	/**
 	 * To test a specific implementation, override this method.
 	 */
 	@Override
 	protected abstract EObjectDescriptor.DAO createEObjectDAO();
-	
+
 	/**
 	 * To test a specific implementation, override this method.
 	 */
@@ -59,81 +59,44 @@ public abstract class AbstractECrossReferenceDAOTest extends AbstractDAOTest {
 	}
 
 	public void testGenericQueries() throws Exception {
-		ECrossReferenceDescriptor.Query query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
+		ECrossReferenceDescriptor.Query query = indexStore.eCrossReferenceDAO().createQuery().referenceName(
+				ECROSS_REFERENCE_NAME);
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
 
-		query = indexStore.eCrossReferenceDAO().createQuery().source(eObjectDescriptor);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query.source(eObjectDescriptor).referenceName(ECROSS_REFERENCE_NAME);
+		query = indexStore.eCrossReferenceDAO().createQuery().sourceFragment(eObjectDescriptor.getFragment())
+				.sourceResource(resourceDescriptor);
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
 
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.source().name(EOBJECT_NAME);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.source().fragment(EOBJECT_FRAGMENT);
+		query.sourceFragment(eObjectDescriptor.getFragment()).sourceResource(resourceDescriptor).referenceName(
+				ECROSS_REFERENCE_NAME);
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
 
 		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.source().eClass(eClassDescriptor);
+		query.sourceFragment(EOBJECT_FRAGMENT);
+		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
+
+		query = indexStore.eCrossReferenceDAO().createQuery().targetFragment(eObjectDescriptor.getFragment())
+				.targetResource(resourceDescriptor);
+		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
+
+		query.targetFragment(eObjectDescriptor.getFragment()).targetResource(resourceDescriptor).referenceName(
+				ECROSS_REFERENCE_NAME);
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
 
 		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.source().eClass().name(ECLASS_NAME);
+		query.targetFragment(EOBJECT_FRAGMENT);
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
 
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.source().eClass().ePackage(ePackageDescriptor);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.source().eClass().ePackage().nsURI(EPACKAGE_NS_URI);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query = indexStore.eCrossReferenceDAO().createQuery().target(eObjectDescriptor);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query.target(eObjectDescriptor).referenceName(ECROSS_REFERENCE_NAME);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.target().name(EOBJECT_NAME);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.target().fragment(EOBJECT_FRAGMENT);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.target().eClass(eClassDescriptor);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.target().eClass().name(ECLASS_NAME);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.target().eClass().ePackage(ePackageDescriptor);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query = indexStore.eCrossReferenceDAO().createQuery().referenceName(ECROSS_REFERENCE_NAME);
-		query.target().eClass().ePackage().nsURI(EPACKAGE_NS_URI);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
 	}
 
 	public void testNonGenericQueries() {
-		IGenericQuery<ECrossReferenceDescriptor> query = indexStore.eCrossReferenceDAO().createQueryCrossReference(eObjectDescriptor, eReference);
+		IGenericQuery<ECrossReferenceDescriptor> query = indexStore.eCrossReferenceDAO()
+				.createQueryCrossReferencesFrom(eObjectDescriptor.getFragmentURI());
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query = indexStore.eCrossReferenceDAO().createQueryCrossReferencesFrom(eObjectDescriptor);
+
+		query = indexStore.eCrossReferenceDAO().createQueryCrossReferencesTo(eObjectDescriptor.getFragmentURI());
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
-		query = indexStore.eCrossReferenceDAO().createQueryCrossReferencesTo(eObjectDescriptor);
-		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
-		
+
 		query = indexStore.eCrossReferenceDAO().createQueryCrossReferencesTo(eObject);
 		genericQuerySingleResultTest(indexStore.eCrossReferenceDAO(), eCrossReferenceDescriptor, query);
 	}

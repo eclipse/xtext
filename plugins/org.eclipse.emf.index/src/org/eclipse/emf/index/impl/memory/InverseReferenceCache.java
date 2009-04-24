@@ -23,26 +23,26 @@ import org.eclipse.emf.index.util.CollectionUtils;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
+public abstract class InverseReferenceCache<TargetType, SourceDescType> {
 
-	private Map<TargetDesc, Set<SourceDesc>> resultMap = new HashMap<TargetDesc, Set<SourceDesc>>();
+	private Map<TargetType, Set<SourceDescType>> resultMap = new HashMap<TargetType, Set<SourceDescType>>();
 
-	public void put(SourceDesc sourceDescriptor) {
-		List<TargetDesc> targetDescriptors = targets(sourceDescriptor);
-		for (TargetDesc targetDescriptor : targetDescriptors) {
-			Set<SourceDesc> sources = resultMap.get(targetDescriptor);
+	public void put(SourceDescType sourceDescriptor) {
+		List<TargetType> targetDescriptors = targets(sourceDescriptor);
+		for (TargetType targetDescriptor : targetDescriptors) {
+			Set<SourceDescType> sources = resultMap.get(targetDescriptor);
 			if (sources == null) {
-				sources = new HashSet<SourceDesc>();
+				sources = new HashSet<SourceDescType>();
 				resultMap.put(targetDescriptor, sources);
 			}
 			sources.add(sourceDescriptor);
 		}
 	}
 
-	public void remove(SourceDesc sourceDescriptor) {
-		List<TargetDesc> targetDescriptors = targets(sourceDescriptor);
-		for (TargetDesc targetDescriptor : targetDescriptors) {
-			Set<SourceDesc> sources = resultMap.get(targetDescriptor);
+	public void remove(SourceDescType sourceDescriptor) {
+		List<TargetType> targetDescriptors = targets(sourceDescriptor);
+		for (TargetType targetDescriptor : targetDescriptors) {
+			Set<SourceDescType> sources = resultMap.get(targetDescriptor);
 			if (sources != null) {
 				sources.remove(sourceDescriptor);
 				if (sources.isEmpty()) {
@@ -52,14 +52,14 @@ public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
 		}
 	}
 
-	protected abstract List<TargetDesc> targets(SourceDesc source);
+	protected abstract List<TargetType> targets(SourceDescType source);
 
-	public Collection<SourceDesc> lookup(TargetDesc targetDescriptor) {
+	public Collection<SourceDescType> lookup(TargetType targetDescriptor) {
 		return resultMap.get(targetDescriptor);
 	}
 
-	public Collection<SourceDesc> lookup(TargetDesc parentScopeDescriptor, IGenericQuery<TargetDesc> parentScopeQuery) {
-		Collection<SourceDesc> queryScope = null;
+	public Collection<SourceDescType> lookup(TargetType parentScopeDescriptor, IGenericQuery<TargetType> parentScopeQuery) {
+		Collection<SourceDescType> queryScope = null;
 		boolean isScopeDefined = false;
 		if (parentScopeDescriptor != null) {
 			queryScope = lookup(parentScopeDescriptor);
@@ -67,34 +67,34 @@ public abstract class InverseReferenceCache<TargetDesc, SourceDesc> {
 		}
 		if (parentScopeQuery != null) {
 			isScopeDefined = true;
-			Iterable<TargetDesc> parentScopes = parentScopeQuery.executeListResult();
+			Iterable<TargetType> parentScopes = parentScopeQuery.executeListResult();
 			if (parentScopes != null) {
-				for (TargetDesc parentScope : parentScopes) {
+				for (TargetType parentScope : parentScopes) {
 					queryScope = union(queryScope, lookup(parentScope));
 				}
 			}
 		}
-		return (isScopeDefined && queryScope == null) ? Collections.<SourceDesc> emptyList() : queryScope;
+		return (isScopeDefined && queryScope == null) ? Collections.<SourceDescType> emptyList() : queryScope;
 	}
-
-	public IGenericQuery<SourceDesc> createQuery(TargetDesc targetDescriptor) {
+	
+	public IGenericQuery<SourceDescType> createQuery(TargetType targetDescriptor) {
 		return new Query(targetDescriptor);
 	}
 
-	protected class Query implements IGenericQuery<SourceDesc> {
+	protected class Query implements IGenericQuery<SourceDescType> {
 
-		private TargetDesc target;
+		private TargetType target;
 
-		protected Query(TargetDesc target) {
+		protected Query(TargetType target) {
 			this.target = target;
 		}
 
-		public Collection<SourceDesc> executeListResult() {
+		public Collection<SourceDescType> executeListResult() {
 			return CollectionUtils.copyOrNull(lookup(target));
 		}
 
-		public SourceDesc executeSingleResult() {
-			Collection<SourceDesc> result = lookup(target);
+		public SourceDescType executeSingleResult() {
+			Collection<SourceDescType> result = lookup(target);
 			if (result != null && !result.isEmpty()) {
 				return result.iterator().next();
 			}

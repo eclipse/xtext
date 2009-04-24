@@ -171,16 +171,32 @@ public interface MockDescriptors {
 			return ECROSS_REFERENCE_NAME;
 		}
 
-		public EObjectDescriptor getSource() {
-			return eObjectDescriptor;
+		public String getSourceFragment() {
+			return EOBJECT_FRAGMENT;
 		}
 
-		public EObjectDescriptor getTarget() {
-			return eObjectDescriptor;
+		public String getTargetFragment() {
+			return EOBJECT_FRAGMENT;
 		}
 
 		public int getIndex() {
 			return 0;
+		}
+
+		public ResourceDescriptor getSourceResourceDescriptor() {
+			return resourceDescriptor;
+		}
+
+		public URI getSourceURI() {
+			return eObjectDescriptor.getFragmentURI();
+		}
+
+		public ResourceDescriptor getTargetResourceDescriptor() {
+			return resourceDescriptor;
+		}
+
+		public URI getTargetURI() {
+			return eObjectDescriptor.getFragmentURI();
 		}
 
 	};

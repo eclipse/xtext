@@ -16,10 +16,12 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.impl.Logger;
 import org.eclipse.emf.index.resource.EmfResourceChangeListener;
@@ -39,12 +41,38 @@ public class DefaultEmfResourceChangeListenerImpl implements EmfResourceChangeLi
 				if (isIndexElement(element)) {
 					feeder.createEObjectDescriptor(element, getEObjectName(element), getEObjectDisplayName(element),
 							getEObjectUserData(element));
-					for (EReference eReference : element.eClass().getEAllReferences()) {
-						if (isIndexReference(eReference, element)) {
-							feeder.createECrossReferenceDescriptor(element, eReference);
+					URI sourceURI = EcoreUtil.getURI(element);
+					if (sourceURI != null) {
+						for (EReference eReference : element.eClass().getEAllReferences()) {
+							String eReferenceName = eReference.getName();
+							if (isIndexReference(eReference, element)) {
+								if (eReference.isMany()) {
+									List<?> targets = (List<?>) ((InternalEObject) element).eGet(eReference, false);
+									for (int index = 0; index < targets.size(); ++index) {
+										Object target = targets.get(index);
+										createECrossReferenceDescriptor(feeder, sourceURI, eReferenceName, index,
+												target);
+									}
+								}
+								else {
+									Object target = ((InternalEObject) element).eGet(eReference, false);
+									createECrossReferenceDescriptor(feeder, sourceURI, eReferenceName,
+											ECrossReferenceDescriptor.NO_INDEX, target);
+								}
+							}
 						}
 					}
 				}
+			}
+		}
+	}
+
+	private void createECrossReferenceDescriptor(IndexFeeder feeder, URI sourceURI, String eReferenceName, int index,
+			Object target) {
+		if (target instanceof EObject) {
+			URI targetURI = EcoreUtil.getURI((EObject) target);
+			if (targetURI != null) {
+				feeder.createECrossReferenceDescriptor(sourceURI, eReferenceName, index, targetURI);
 			}
 		}
 	}

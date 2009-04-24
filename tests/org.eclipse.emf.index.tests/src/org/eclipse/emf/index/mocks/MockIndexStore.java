@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
@@ -66,20 +65,14 @@ public class MockIndexStore extends BasicIndexStore {
 				return new MockQuery<ECrossReferenceDescriptor>();
 			}
 
-			public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReference(
-					org.eclipse.emf.index.EObjectDescriptor sourceDescriptor, EReference reference) {
-				return new MockQuery<ECrossReferenceDescriptor>();
-			}
-
-			public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(
-					EObjectDescriptor sourceDescriptor) {
+			public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(URI sourceUri) {
 				return null;
 			}
 
-			public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(
-					EObjectDescriptor targetDescriptor) {
+			public IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(URI targetUri) {
 				return null;
 			}
+
 		};
 	}
 

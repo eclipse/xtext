@@ -9,8 +9,8 @@ package org.eclipse.emf.index.resource;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
@@ -21,5 +21,6 @@ public interface IndexFeeder {
 	
 	void createEObjectDescriptor(EObject object, String name, String displayName, Map<String,String> userData);
 	
-	void createECrossReferenceDescriptor(EObject owner, EReference eReference);
+	void createECrossReferenceDescriptor(URI source, String eReferenceName, int index, URI target);
+	
 }
