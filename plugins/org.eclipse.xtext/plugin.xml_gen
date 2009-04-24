@@ -3,14 +3,5 @@
 
 <plugin>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2008/Xtext" 
-       class = "org.eclipse.xtext.XtextPackage"
-       genModel = "org/eclipse/xtext/Xtext.genmodel" /> 
-	
-  </extension>
-
-
 
 </plugin>
