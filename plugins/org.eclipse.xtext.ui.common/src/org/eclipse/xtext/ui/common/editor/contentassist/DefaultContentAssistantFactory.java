@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
@@ -24,6 +25,9 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 
 	@Inject(optional = true)
 	private IContentAssistProcessor contentAssistProcessor;
+	
+	@Inject(optional=true)
+	private IDialogSettings dialogSettings;
 	
 	public IContentAssistant createConfiguredAssistant(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
@@ -50,6 +54,12 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 		setAutoInsert(assistant);
 		setContentAssistProcessor(assistant);
 		setInformationControlCreator(assistant, configuration, sourceViewer);
+		setDialogSettings(assistant);
+	}
+
+	private void setDialogSettings(ContentAssistant assistant) {
+		if (dialogSettings != null)
+			assistant.setRestoreCompletionProposalSize(dialogSettings);
 	}
 	
 	private void setInformationControlCreator(ContentAssistant assistant, SourceViewerConfiguration configuration,
@@ -65,6 +75,14 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	protected void setContentAssistProcessor(ContentAssistant assistant) {
 		if (contentAssistProcessor != null)
 			assistant.setContentAssistProcessor(contentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
+	}
+
+	public void setDialogSettings(IDialogSettings dialogSettings) {
+		this.dialogSettings = dialogSettings;
+	}
+
+	public IDialogSettings getDialogSettings() {
+		return dialogSettings;
 	}
 
 }
