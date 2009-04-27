@@ -89,7 +89,7 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 		private ResourceDescriptor.Query sourceResourceQuery;
 		private ResourceDescriptor.Query targetResourceQuery;
 		private String referenceNamePattern;
-		private int index;
+		private int index  = ECrossReferenceDescriptor.NO_INDEX;
 
 		public CrossRefQuery sourceFragment(String pattern) {
 			sourceFragmentPattern = pattern;
@@ -147,7 +147,7 @@ public class ECrossReferenceDAOImpl extends BasicMemoryDAOImpl<ECrossReferenceDe
 			return matchesGlobbing(crossRefDescriptor.getReferenceName(), referenceNamePattern)
 					&& matchesGlobbing(crossRefDescriptor.getSourceFragment(), sourceFragmentPattern)
 					&& matchesGlobbing(crossRefDescriptor.getTargetFragment(), targetFragmentPattern)
-					&& (index != ECrossReferenceDescriptor.NO_INDEX && index == crossRefDescriptor.getIndex());
+					&& (index == ECrossReferenceDescriptor.NO_INDEX || index == crossRefDescriptor.getIndex());
 		}
 
 		@Override
