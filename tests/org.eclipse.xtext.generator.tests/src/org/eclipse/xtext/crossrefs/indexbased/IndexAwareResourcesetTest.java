@@ -31,32 +31,36 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
- * TODO this test fails with NoClassDefFound for a guice class, when
- *      executed as plugin test
+ * @author Sven Efftinge - Initial contribution and API TODO this test fails with NoClassDefFound for a guice class,
+ *         when executed as plugin test
  */
 public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 
 	public void testStuff() throws Exception {
 		IndexAwareResourceSet set = get(IndexAwareResourceSet.class);
 		set.setClasspathURIContext(IndexAwareResourcesetTest.class);
-		URI uri = URI.createURI("classpath:/" + getClass().getName().replace('.', '/')
-				+ ".importuritestlanguage");
+		URI uri = URI.createURI("classpath:/" + getClass().getName().replace('.', '/') + ".importuritestlanguage");
 		set.getResource(uri, true);
-		Iterator<EObjectDescriptor> result = set.getStore().eObjectDAO().createQuery().executeListResult()
-				.iterator();
+		Iterable<EObjectDescriptor> query = set.getStore().eObjectDAO().createQuery().executeListResult();
+		Iterator<EObjectDescriptor> result = query.iterator();
 		List<String> names = new ArrayList<String>();
 		names.add(result.next().getName());
 		names.add(result.next().getName());
 		assertFalse(result.hasNext());
-		
+
 		assertTrue(names.contains("A"));
 		assertTrue(names.contains("B"));
+
+		result = query.iterator();
+		List<URI> uris = new ArrayList<URI>();
+		uris.add(result.next().getFragmentURI());
+		uris.add(result.next().getFragmentURI());
 		
-		Iterator<ECrossReferenceDescriptor> iter = set.getStore().eCrossReferenceDAO().createQuery().executeListResult().iterator();
+		Iterator<ECrossReferenceDescriptor> iter = set.getStore().eCrossReferenceDAO().createQuery()
+				.executeListResult().iterator();
 		ECrossReferenceDescriptor next = iter.next();
-		assertEquals("B",next.getSource().getName());
-		assertEquals("A",next.getTarget().getName());
+		assertTrue(uris.contains(next.getSourceURI()));
+		assertTrue(uris.contains(next.getTargetURI()));
 	}
 
 	private final INameProvider nameProvider = new AbstractDeclarativeNameProvider() {
@@ -78,14 +82,13 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 					@Override
 					public void configure(Binder binder) {
 						super.configure(binder);
-						binder.bind(INameProvider.class).toProvider(
-								new Provider<? extends INameProvider>() {
+						binder.bind(INameProvider.class).toProvider(new Provider<? extends INameProvider>() {
 
-									public INameProvider get() {
-										return IndexAwareResourcesetTest.this.getNameProvider();
-									}
+							public INameProvider get() {
+								return IndexAwareResourcesetTest.this.getNameProvider();
+							}
 
-								});
+						});
 					}
 
 					@SuppressWarnings("unused")
@@ -96,7 +99,7 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 			}
 		});
 	}
-	
+
 	protected INameProvider getNameProvider() {
 		return this.nameProvider;
 	}
