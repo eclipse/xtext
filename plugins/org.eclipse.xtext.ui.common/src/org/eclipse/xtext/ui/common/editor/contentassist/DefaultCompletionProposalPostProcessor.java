@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.contentassist.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalPostProcessor;

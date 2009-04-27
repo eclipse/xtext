@@ -46,13 +46,11 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 	private Region replaceRegion;
 	private PrefixMatcher matcher;
 	private final List<AbstractElement> firstSetGrammarElements;
-	private final List<AbstractElement> followSetGrammarElements;
 	
 	@Inject
 	public ContentAssistContext() {
 		super();
 		firstSetGrammarElements = new ArrayList<AbstractElement>();
-		followSetGrammarElements = new ArrayList<AbstractElement>();
 	}
 
 	public String getPrefix() {
@@ -107,19 +105,10 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		return (IXtextDocument) viewer.getDocument();
 	}
 	
-	public void accept(AbstractElement element, IFollowElementCalculator.SetKind kind) {
-		if (element == null || kind == null)
-			throw new NullPointerException("element or kind was null. element: '" + element + "' kind: '" + kind + "'");
-		switch (kind) {
-			case FirstSet:
-				getFirstSetGrammarElements().add(element);
-				break;
-			case FollowSet:
-				getFollowSetGrammarElements().add(element);
-				break;
-			default:
-				throw new IllegalArgumentException("Unexpected kind: '" + kind + "'");
-		}
+	public void accept(AbstractElement element) {
+		if (element == null)
+			throw new NullPointerException("element may not be null");
+		getFirstSetGrammarElements().add(element);
 	}
 
 	public void setLastCompleteNode(AbstractNode lastCompleteNode) {
@@ -156,10 +145,6 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 
 	public List<AbstractElement> getFirstSetGrammarElements() {
 		return firstSetGrammarElements;
-	}
-
-	public List<AbstractElement> getFollowSetGrammarElements() {
-		return followSetGrammarElements;
 	}
 
 	public void setMatcher(PrefixMatcher matcher) {

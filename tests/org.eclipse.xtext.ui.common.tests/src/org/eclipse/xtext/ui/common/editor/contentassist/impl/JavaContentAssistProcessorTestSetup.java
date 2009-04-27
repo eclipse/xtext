@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
+import org.eclipse.xtext.ui.core.SimpleLabelProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -57,7 +59,12 @@ public class JavaContentAssistProcessorTestSetup implements IContentAssistProces
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule());
+				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule() {
+					@Override
+					public Class<? extends ILabelProvider> bindILabelProvider() {
+						return SimpleLabelProvider.class;
+					}
+				});
 			}
 		};
 	}

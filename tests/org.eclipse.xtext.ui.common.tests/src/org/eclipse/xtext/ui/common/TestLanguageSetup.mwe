@@ -12,4 +12,5 @@
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
 	<fragment file="org/eclipse/xtext/ui/generator/StandardUiFragments.mwe"
 			  inheritAll="true"/>
+	<fragment class="org.eclipse.xtext.ui.common.SimpleLabelProviderFragment"/>
 </config>

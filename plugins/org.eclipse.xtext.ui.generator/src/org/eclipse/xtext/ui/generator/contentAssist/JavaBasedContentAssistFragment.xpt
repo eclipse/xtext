@@ -31,7 +31,7 @@ import org.eclipse.xtext.RuleCall;
 «IF inherit && usedGrammars.size == 1-»
 import «usedGrammars.first().getProposalProvider()»;
 «ELSE-»
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaBasedContentProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 «ENDIF-»
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;

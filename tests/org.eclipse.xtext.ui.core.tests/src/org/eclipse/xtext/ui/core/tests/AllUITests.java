@@ -23,6 +23,8 @@ public class AllUITests {
 		// $JUnit-BEGIN$
 		suite.addTestSuite(ReplaceRegionTest.class);
 		suite.addTestSuite(org.eclipse.xtext.ui.core.DefaultLabelProviderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.CamelCasePrefixMatcherTest.class);
+		suite.addTestSuite(org.eclipse.xtext.ui.core.editor.contentassist.IgnoreCasePrefixMatcherTest.class);
 		// $JUnit-END$
 		return suite;
 	}

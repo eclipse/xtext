@@ -28,8 +28,18 @@ public abstract class AbstractTreeTestLanguageUiModule extends DefaultUIModule {
 	}
 
 	
+	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalConflictHelper> bindIProposalConflictHelper() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.antlr.AntlrProposalConflictHelper.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.testlanguages.TreeTestLanguageProposalProvider.class;
+	}
+
+	
+	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
+		return org.eclipse.xtext.ui.core.SimpleLabelProvider.class;
 	}
 
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.contentassist.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import java.util.Set;
 
@@ -59,9 +59,9 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 			this.decorated = decorated;
 		}
 		
-		public void accept(AbstractElement element, SetKind kind) {
+		public void accept(AbstractElement element) {
 			if (element != null)
-				decorated.accept(element, kind);
+				decorated.accept(element);
 		}
 		
 	}
@@ -85,7 +85,7 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		@Override
 		public ElementSwitch caseEnumLiteralDeclaration(EnumLiteralDeclaration object) {
 			doSwitch(object.getLiteral());
-			acceptor.accept(object, SetKind.FirstSet);
+			acceptor.accept(object);
 			return this;
 		}
 
@@ -101,7 +101,7 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		
 		@Override
 		public ElementSwitch caseAssignment(Assignment assignment) {
-			acceptor.accept(assignment, SetKind.FirstSet);
+			acceptor.accept(assignment);
 			doSwitch(assignment.getTerminal());
 			return this;
 		}
@@ -136,7 +136,7 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		
 		@Override
 		public ElementSwitch caseKeyword(Keyword object) {
-			acceptor.accept(object, SetKind.FirstSet);
+			acceptor.accept(object);
 			return this;
 		}
 

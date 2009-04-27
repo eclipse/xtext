@@ -5,41 +5,52 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.common.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.util.Strings;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TerminalsProposalProvider extends org.eclipse.xtext.common.AbstractTerminalsProposalProvider {
 
-	@Inject
-	private IValueConverterService valueConverter;
-	
 	@Override
 	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (doCreateIdProposals()) {
-			String feature = getAssignedFeature(ruleCall);
-			String proposalText = feature != null ? feature : Strings.toFirstUpper(ruleCall.getRule().getName().toLowerCase());
-			String displayText = proposalText;
-			if (feature != null)
-				displayText = proposalText + " - " + ruleCall.getRule().getName();
-			proposalText = valueConverter.toString(proposalText, ruleCall.getRule().getName());
-			ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
-			if (proposal instanceof ConfigurableCompletionProposal) {
-				ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
-				configurable.setSelectionStart(configurable.getReplacementOffset());
-				configurable.setSelectionLength(proposalText.length());
-				configurable.setAutoInsertable(false);
-				configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+			final PrefixMatcher oldMatcher = context.getMatcher();
+			try {
+				PrefixMatcher newMatcher = new PrefixMatcher() {
+					@Override
+					public boolean isCandidateMatchingPrefix(String name, String prefix) {
+						String strippedName = name;
+						if (name.startsWith("^") && !prefix.startsWith("^")) {
+							strippedName = name.substring(1);
+						}
+						return oldMatcher.isCandidateMatchingPrefix(strippedName, prefix);
+					}
+				};
+				context.setMatcher(newMatcher);
+				String feature = getAssignedFeature(ruleCall);
+				String proposalText = feature != null ? feature : Strings.toFirstUpper(ruleCall.getRule().getName().toLowerCase());
+				String displayText = proposalText;
+				if (feature != null)
+					displayText = proposalText + " - " + ruleCall.getRule().getName();
+				proposalText = getValueConverter().toString(proposalText, ruleCall.getRule().getName());
+				ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+				if (proposal instanceof ConfigurableCompletionProposal) {
+					ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
+					configurable.setSelectionStart(configurable.getReplacementOffset());
+					configurable.setSelectionLength(proposalText.length());
+					configurable.setAutoInsertable(false);
+					configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+				}
+				acceptor.accept(proposal);
+			} finally {
+				context.setMatcher(oldMatcher);
 			}
-			acceptor.accept(proposal);
 		}
 	}
 	
@@ -66,7 +77,7 @@ public class TerminalsProposalProvider extends org.eclipse.xtext.common.Abstract
 	private void createStringProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor,
 			String feature, RuleCall ruleCall) {
 		String proposalText = feature != null ? feature : Strings.toFirstUpper(ruleCall.getRule().getName().toLowerCase());
-		proposalText = valueConverter.toString(proposalText, ruleCall.getRule().getName());
+		proposalText = getValueConverter().toString(proposalText, ruleCall.getRule().getName());
 		String displayText = proposalText;
 		if (feature != null)
 			displayText = displayText + " - " + ruleCall.getRule().getName();
@@ -112,7 +123,7 @@ public class TerminalsProposalProvider extends org.eclipse.xtext.common.Abstract
 	
 	private void createIntProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor,
 			RuleCall ruleCall, String feature,	int i) {
-		String proposalText = valueConverter.toString(i, ruleCall.getRule().getName());
+		String proposalText = getValueConverter().toString(i, ruleCall.getRule().getName());
 		String displayText = proposalText + " - " + ruleCall.getRule().getName();
 		if (feature != null)
 			displayText = proposalText + " - " + feature;
@@ -127,11 +138,4 @@ public class TerminalsProposalProvider extends org.eclipse.xtext.common.Abstract
 		acceptor.accept(proposal);
 	}
 
-	public void setValueConverter(IValueConverterService valueConverter) {
-		this.valueConverter = valueConverter;
-	}
-
-	public IValueConverterService getValueConverter() {
-		return valueConverter;
-	}
 }

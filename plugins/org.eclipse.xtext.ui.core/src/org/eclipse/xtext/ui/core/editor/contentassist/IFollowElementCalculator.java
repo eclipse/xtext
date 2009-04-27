@@ -20,12 +20,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
  */
 public interface IFollowElementCalculator {
 	
-	enum SetKind {
-		FirstSet, FollowSet
-	}
-	
 	interface IFollowElementAcceptor {
-		void accept(AbstractElement element, SetKind kind);
+		void accept(AbstractElement element);
 	}
 	
 	/**

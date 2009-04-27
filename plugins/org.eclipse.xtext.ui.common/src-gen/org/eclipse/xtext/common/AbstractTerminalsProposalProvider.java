@@ -9,7 +9,7 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractJavaBasedContentProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 
