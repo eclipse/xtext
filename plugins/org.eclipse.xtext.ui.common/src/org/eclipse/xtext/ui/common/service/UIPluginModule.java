@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.service;
 
+import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.core.IImageHelper;
@@ -29,6 +30,7 @@ public class UIPluginModule extends AbstractGenericModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(AbstractUIPlugin.class).toInstance(plugin);
+		binder.bind(IDialogSettings.class).toInstance(plugin.getDialogSettings());
 	}
 
 	public Class<? extends IImageHelper> bindIImageHelper() {
