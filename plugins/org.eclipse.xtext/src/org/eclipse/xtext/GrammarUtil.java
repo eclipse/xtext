@@ -239,6 +239,13 @@ public class GrammarUtil {
 				kws.add(keyword.getValue());
 			}
 		}
+		List<EnumRule> enumRules = allEnumRules(g);
+		for (EnumRule enumRule : enumRules) {
+			List<Keyword> list = typeSelect(eAllContentsAsList(enumRule), Keyword.class);
+			for (Keyword keyword : list) {
+				kws.add(keyword.getValue());
+			}
+		}
 		return kws;
 	}
 
