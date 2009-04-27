@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
@@ -20,16 +19,16 @@ import com.google.common.collect.Iterables;
  */
 class StringScope extends SimpleScope {
 
-	public StringScope(IScope parentScope, Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
-		super(parentScope, Iterables.transform(content, new Function<Object, IScopedElement>() {
-			public IScopedElement apply(Object param) {
-				return new StringScopeElement(valueConverterService.toString(param, "STRING"));
+	public StringScope(IScope parentScope, Iterable<? extends String> content) {
+		super(parentScope, Iterables.transform(content, new Function<String, IScopedElement>() {
+			public IScopedElement apply(String param) {
+				return new StringScopeElement(param);
 			}
 		}));
 	}
 
-	public StringScope(Iterable<? extends Object> content, final IValueConverterService valueConverterService) {
-		this(IScope.NULLSCOPE, content, valueConverterService);
+	public StringScope(Iterable<? extends String> content) {
+		this(IScope.NULLSCOPE, content);
 	}
 
 }

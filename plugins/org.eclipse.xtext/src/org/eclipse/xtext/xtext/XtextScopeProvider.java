@@ -27,7 +27,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
@@ -38,15 +37,11 @@ import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextScopeProvider extends DefaultScopeProvider {
-
-	@Inject
-	private IValueConverterService valueConverterService;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -163,7 +158,7 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	private IScope createEPackageScope(final Grammar grammar) {
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
-		IScope current = new StringScope(EPackage.Registry.INSTANCE.keySet(), valueConverterService);
+		IScope current = new StringScope(EPackage.Registry.INSTANCE.keySet());
 		for (int i = allGrammars.size() - 1; i >= 0; i--) {
 			current = createEPackageScope(allGrammars.get(i), current);
 		}
