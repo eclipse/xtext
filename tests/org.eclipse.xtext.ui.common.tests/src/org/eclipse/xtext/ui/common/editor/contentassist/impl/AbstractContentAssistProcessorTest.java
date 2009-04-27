@@ -60,7 +60,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 			.append("kind ").assertCount(1)
 			.append("(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ").assertCount(2)
 			.append("e1 ").assertCount(2)
-			.append("e2").assertCount(2);
+			.append("e2").assertCount(1);
 	}
 
 	public void testComputeCompletionProposalsText() throws Exception {
@@ -101,10 +101,10 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 		builder.append(" ER").assertText("erwachsener");
 		builder.append(" SP").assertText("spielzeug");
 		builder.append(" FA").assertText("familie");
-		builder.append(" familie ( KEY").assertText("keyword", "e1", "e2");
-		builder.append(" familie ( K").assertText("keyword", "e1", "e2");
+		builder.append(" familie ( KEY").assertText("keyword");
+		builder.append(" familie ( K").assertText("keyword");
 		builder.append(" familie ( keyword E").assertText("e1", "e2");
-		builder.append(" familie ( keyword e1 E").assertText("e1", "e2", "k1", "k2");
+		builder.append(" familie ( keyword e1 E").assertText("e1", "e2");
 		builder.append(" familie ( keyword e1 e2 K").assertText("k1", "k2", ",", ")");
 		builder.append(" familie ( keyword e1 e2 k1,K").assertText("k1", "k2",",", ")");
 		builder.append(" familie ( keyword e1 e2 k1,k2").assertText("k2", ",", ")");
@@ -335,11 +335,9 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
         		"=",
         		"?",
         		"?=",
-        		"Feature",
-        		"MyRule",
         		"{")
         .appendNl(";")
-        .append("terminal Other_Id").assertText(":","returns");
+        .append("terminal Other_Id").assertText(":");
 
     }
     /**
@@ -390,7 +388,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
     }
     
     public void testEnumCompletion_04() throws Exception {
-    	newBuilder(setup.getEnumsLangSetup()).append("existing").assertText("SameName", "DifferentLiteral", "overridden", "existing");
+    	newBuilder(setup.getEnumsLangSetup()).append("existing").assertText("existing");
     }
     
     public void testEnumCompletion_05() throws Exception {

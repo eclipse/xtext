@@ -28,6 +28,11 @@ public abstract class AbstractContentAssistTestLanguageUiModule extends DefaultU
 	}
 
 	
+	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.IProposalConflictHelper> bindIProposalConflictHelper() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.antlr.AntlrProposalConflictHelper.class;
+	}
+
+	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.testlanguages.ContentAssistTestLanguageProposalProvider.class;
 	}

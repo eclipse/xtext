@@ -17,11 +17,13 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultCompletionProposalPostProcessor;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistContextFactory;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistantFactory;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultFollowElementCalculator;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.DefaultCompletionProposalPostProcessor;
+import org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistContextFactory;
+import org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistantFactory;
+import org.eclipse.xtext.ui.common.editor.contentassist.DefaultFollowElementCalculator;
+import org.eclipse.xtext.ui.common.editor.contentassist.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalConflictHelper;
+import org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelper;
 import org.eclipse.xtext.ui.common.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
@@ -113,6 +115,10 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends IFollowElementCalculator> bindIFollowElementCalculator() {
 		return DefaultFollowElementCalculator.class;
+	}
+	
+	public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
+		return ProposalConflictHelper.NullHelper.class;
 	}
 	
 	public Class<? extends AdapterFactoryLabelProvider> bindAdapterFactoryLabelProvider() {

@@ -11,7 +11,7 @@ import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 
 /**
