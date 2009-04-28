@@ -24,6 +24,7 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+import org.eclipse.xtext.crossref.impl.ImportUriResolver;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import junit.framework.TestCase;
@@ -109,6 +110,7 @@ public class DeclarativeScopeProviderTest extends TestCase {
 			}
 		};
 		DefaultScopeProvider defaultScopeProvider = new DefaultScopeProvider();
+		defaultScopeProvider.setImportUriResolver(new ImportUriResolver());
 		provider.setGenericFallBack(defaultScopeProvider);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource res = new XMIResourceFactoryImpl().createResource(URI.createURI("test.uri"));
