@@ -24,10 +24,10 @@ import com.google.inject.Inject;
 public abstract class AbstractInjectableValidator implements EValidator {
 
 	@Inject
-	public void register(EValidator.Registry registry) {
+	public void register(EValidatorRegistrar registrar) {
 		List<? extends EPackage> packages = getEPackages();
 		for (EPackage ePackage : packages) {
-			CompositeEValidator.register(ePackage, this, registry);
+			registrar.register(ePackage, this);
 		}
 	}
 
