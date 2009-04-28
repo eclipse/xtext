@@ -16,7 +16,7 @@
 		<language uri="classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/impl/TwoContextsTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/ui/common/editor/contentassist/TwoContextsTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/common/TestLanguageSetup.mwe"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">

@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend.contentassist;
+package org.eclipse.xtext.ui.common.editor.contentassist;
 
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
@@ -26,7 +27,7 @@ import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
-import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistProcessorTestSetup;
+import org.eclipse.xtext.ui.core.SimpleLabelProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -34,7 +35,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtendContentAssistProcessorTestSetup implements IContentAssistProcessorTestSetup {
+public class JavaContentAssistProcessorTestSetup implements IContentAssistProcessorTestSetup {
 
 	public ISetup getRefGrammarSetup() {
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
@@ -58,7 +59,12 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule());
+				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule() {
+					@Override
+					public Class<? extends ILabelProvider> bindILabelProvider() {
+						return SimpleLabelProvider.class;
+					}
+				});
 			}
 		};
 	}
@@ -89,6 +95,5 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 			}
 		};
 	}
-
-
+	
 }

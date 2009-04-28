@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xtend.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.AbstractContentAssistProcessorTest;
-import org.eclipse.xtext.ui.common.editor.contentassist.impl.IContentAssistProcessorTestSetup;
+import org.eclipse.xtext.ui.common.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistProcessorTestSetup;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
 
 /**
