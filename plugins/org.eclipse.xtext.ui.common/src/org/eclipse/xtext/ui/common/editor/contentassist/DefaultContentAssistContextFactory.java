@@ -73,10 +73,11 @@ public class DefaultContentAssistContextFactory implements ContentAssistContext.
 			String prefix = getPrefix(lastCompleteNode, fixedOffset);
 			result.add(createContext(viewer, fixedOffset, parseResult, rootNode, precedingLastCompleteNode, currentModel, lastCompleteNode, prefix));
 			
-			if (lastCompleteNode.getGrammarElement() instanceof Keyword ||
-					lastCompleteNode.getGrammarElement() instanceof CrossReference ||
+			if (lastCompleteNode.getGrammarElement() != null &&
+				(lastCompleteNode.getGrammarElement() instanceof Keyword ||
+				 lastCompleteNode.getGrammarElement() instanceof CrossReference ||
 				(lastCompleteNode.getGrammarElement() instanceof RuleCall &&
-				((RuleCall)lastCompleteNode.getGrammarElement()).getRule() instanceof TerminalRule)) {
+				((RuleCall)lastCompleteNode.getGrammarElement()).getRule() instanceof TerminalRule))) {
 				result.add(createContext(viewer, fixedOffset, parseResult, rootNode, lastCompleteNode, currentModel, currentNode, ""));
 			}
 		} else if (lastCompleteNode == currentNode) {

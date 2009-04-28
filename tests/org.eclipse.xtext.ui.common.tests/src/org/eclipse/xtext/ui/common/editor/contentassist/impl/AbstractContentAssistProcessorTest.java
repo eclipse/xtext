@@ -1,10 +1,4 @@
 /*******************************************************************************
- * __  ___            _
- * \ \/ / |_ _____  __ |_
- *  \  /| __/ _ \ \/ / __|
- *  /  \| |_  __/>  <| |_
- * /_/\_\\__\___/_/\_\\__|
- *
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -312,6 +306,33 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	        .appendNl("generate meta \"url\"")
 	        .appendNl("Rule: name=ID;")
 	        .assertTextAtCursorPosition("org.eclipse.xtext", 5, "org.eclipse.xtext.common.Terminals");
+    }
+    
+    public void testCompletionOnSyntaxError_01() throws Exception {
+        newBuilder(setup.getXtextSetup())
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate foo 'bar'")
+	        .appendNl("grammarA: child=Rule;")
+	        .appendNl("Rule: call=grammar")
+	        .assertTextAtCursorPosition("=grammar", "=grammar".length(), "grammarA");
+    }
+    
+    public void testCompletionOnSyntaxError_02() throws Exception {
+        newBuilder(setup.getXtextSetup())
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate foo 'bar'")
+	        .appendNl("grammarA: child=Rule;")
+	        .append("Rule: call=grammar")
+	        .assertText("grammarA");
+    }
+    
+    public void testCompletionOnSyntaxError_03() throws Exception {
+        newBuilder(setup.getXtextSetup())
+	        .appendNl("grammar foo with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate foo 'bar'")
+	        .appendNl("grammarA: child=Rule;")
+	        .appendNl("Rule: call=grammar;")
+	        .assertTextAtCursorPosition("grammar;", "grammar".length(), "grammarA");
     }
 
     /**
