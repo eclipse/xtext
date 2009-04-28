@@ -338,8 +338,6 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkEnumLiteralIsValid(EnumLiteralDeclaration decl) {
-		EnumRule rule = GrammarUtil.containingEnumRule(decl);
-		guard(rule.getType().getMetamodel() instanceof GeneratedMetamodel);
 		if("".equals(decl.getLiteral().getValue()))
 			error("Enum literal must not be an empty string.", XtextPackage.ENUM_LITERAL_DECLARATION__LITERAL);
 	}
