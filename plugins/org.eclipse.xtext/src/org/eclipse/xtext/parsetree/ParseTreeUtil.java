@@ -76,7 +76,8 @@ public final class ParseTreeUtil {
                     CompositeNode rootNode, AbstractNode lastCompleteNode, int offset) {
             Set<AbstractElement> abstractElementSet = new HashSet<AbstractElement>();
             AbstractElement grammarElement = getGrammarElementFromNode(lastCompleteNode);
-            abstractElementSet.addAll(backtrackAlternativeAssignments(lastCompleteNode, grammarElement));
+            if (grammarElement != null)
+            	abstractElementSet.addAll(backtrackAlternativeAssignments(lastCompleteNode, grammarElement));
             abstractElementSet.addAll(calculatePossibleElementSet(lastCompleteNode,null));
             return abstractElementSet;
     }
@@ -133,7 +134,8 @@ public final class ParseTreeUtil {
 				if (abstractNode.getOffset() >= offsetPosition ) {
 					break;
 				} else if ((abstractNode instanceof LeafNode || null == result) &&
-						   (abstractNode.getGrammarElement() instanceof AbstractElement ||
+						   (abstractNode.getGrammarElement() == null ||
+						    abstractNode.getGrammarElement() instanceof AbstractElement ||
 					    	abstractNode.getGrammarElement() instanceof ParserRule)) {
 					result = abstractNode;
 				}
@@ -269,15 +271,16 @@ public final class ParseTreeUtil {
 
 		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
 		AbstractNode contextNode = node;
-		AbstractElement initialgrammarElement = abstractElement != null ?
+		AbstractElement initialGrammarElement = abstractElement != null ?
 				abstractElement:
 				getGrammarElementFromNode(node);
-		if (initialgrammarElement.eContainer() instanceof ParserRule
-				&& isDefaultRule((ParserRule) getGrammarElementFromNode(contextNode).eContainer())) {
-			elementSet.add(initialgrammarElement);
+		if (initialGrammarElement != null
+				&& initialGrammarElement.eContainer() instanceof ParserRule
+				&& isDefaultRule((ParserRule) initialGrammarElement.eContainer())) {
+			elementSet.add(initialGrammarElement);
 		} else if (contextNode.getGrammarElement() instanceof RuleCall &&
 				(!(((RuleCall) contextNode.getGrammarElement()).getRule() instanceof TerminalRule))) {
-			elementSet.add(initialgrammarElement);
+			elementSet.add(initialGrammarElement);
 		} else {
 			for (; contextNode != null; contextNode = contextNode.getParent()) {
 				for (EObject grammarElementObject = null != abstractElement ? abstractElement
