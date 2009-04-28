@@ -25,8 +25,8 @@ import com.google.common.base.Function;
  */
 public class DefaultScope extends SimpleScope {
 
-	public DefaultScope(Resource resource, EClass type) {
-		this(resource, type, ImportUriValidator.IMPORT_RESOLVER, SimpleAttributeResolver.NAME_RESOLVER);
+	public DefaultScope(Resource resource, EClass type, ImportUriResolver resolver) {
+		this(resource, type, resolver, SimpleAttributeResolver.NAME_RESOLVER);
 	}
 	
 	public DefaultScope(Resource resource, EClass type, Function<EObject, String> importResolver, Function<EObject, String> nameResolver) {
