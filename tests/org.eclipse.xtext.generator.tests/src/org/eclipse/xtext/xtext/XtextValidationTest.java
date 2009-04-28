@@ -106,4 +106,19 @@ public class XtextValidationTest extends AbstractGeneratorTest {
 		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
 	}
 	
+	public void testEnumWithEmptyLiteral() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/validation/literal/2'\n" +
+				"Model: enumValue=GeneratedEnum;\n" +
+				"enum GeneratedEnum: NoLiteral | ValidLiteral='literal' | EmptyLiteral='';");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+
 }
