@@ -22,6 +22,7 @@ import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -51,6 +52,9 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 			}
 		}
 	};
+	
+	@Inject
+	private ImportUriResolver importUriResolver;
 
 	//TODO SimpleCache uses WeakHashMap, since the pairs are never referenced from somewhere else, GC will clean them up ASAP.
 	// this might result in no caching at all, depending on how often the GC is triggered
@@ -65,7 +69,7 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 			});
 
 	protected IScope createScope(Resource resource, EClass type) {
-		return new DefaultScope(resource, type);
+		return new DefaultScope(resource, type, getImportUriResolver());
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
@@ -78,6 +82,14 @@ public class DefaultScopeProvider extends AbstractScopeProvider {
 	public IScope getScope(EObject context, EClass type) {
 		EClass typeToUse = type != null ? type : context.eClass();
 		return cache.get(Tuples.create(context.eResource(), typeToUse));
+	}
+
+	public void setImportUriResolver(ImportUriResolver importUriResolver) {
+		this.importUriResolver = importUriResolver;
+	}
+
+	public ImportUriResolver getImportUriResolver() {
+		return importUriResolver;
 	}
 
 }

@@ -12,29 +12,30 @@ import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
 import org.eclipse.xtext.validator.CheckType;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ImportUriValidator extends AbstractDeclarativeValidator {
 
-	public final static SimpleAttributeResolver<EObject, String> IMPORT_RESOLVER = SimpleAttributeResolver.newResolver(String.class, "importURI");
-	
-	private SimpleAttributeResolver<EObject, String> resolver;
-
-	public ImportUriValidator() {
-		resolver = IMPORT_RESOLVER;
-	}
-	
-	public ImportUriValidator(SimpleAttributeResolver<EObject, String> resolver) {
-		this.resolver = resolver;
-	}
+	@Inject
+	private ImportUriResolver resolver;
 
 	@Check(value=CheckType.FAST)
 	public void checkImportUriIsValid(EObject object) {
-		String importURI = resolver.apply(object);
+		String importURI = getResolver().resolve(object);
 		if (importURI != null && !ImportUriUtil.isValid(object, importURI)) {
-			error("Imported resource could not be found.", resolver.getAttribute(object).getFeatureID());
+			error("Imported resource could not be found.", getResolver().getAttribute(object).getFeatureID());
 		}
+	}
+
+	public void setResolver(ImportUriResolver resolver) {
+		this.resolver = resolver;
+	}
+
+	public ImportUriResolver getResolver() {
+		return resolver;
 	}
 
 }

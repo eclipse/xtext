@@ -29,6 +29,7 @@ import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -119,6 +120,8 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	private volatile HashSet<MethodWrapper> checkMethods = null;
 
+	private Injector injector;
+	
 	public AbstractDeclarativeValidator() {
 		this.state = new ThreadLocal<State>();
 	}
@@ -168,7 +171,13 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			return;
 		AbstractDeclarativeValidator instanceToUse;
 		try {
-			instanceToUse = instance == null ? clazz.newInstance() : instance;
+			instanceToUse = instance;
+			if (instanceToUse == null) {
+				if (injector == null)
+					instanceToUse = clazz.newInstance();
+				else
+					instanceToUse = injector.getInstance(clazz);
+			}
 		}
 		catch (Exception e) {
 			try {
@@ -330,6 +339,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	protected void checkDone() {
 		throw new GuardException();
+	}
+
+	public void setInjector(Injector injector) {
+		this.injector = injector;
+	}
+
+	public Injector getInjector() {
+		return injector;
 	}
 
 	static class DiagnosticImpl implements Diagnostic {
