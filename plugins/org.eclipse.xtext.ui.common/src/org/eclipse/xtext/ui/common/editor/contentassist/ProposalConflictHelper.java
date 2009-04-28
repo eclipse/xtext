@@ -25,23 +25,23 @@ public abstract class ProposalConflictHelper implements IProposalConflictHelper 
 		if (nodeEnd < replaceRegion.getOffset())
 			return false;
 		
-		return existsConflict(proposal, lastCompleteNode, replaceRegion.getOffset());
+		return existsConflict(lastCompleteNode, replaceRegion.getOffset(), proposal);
 	}
 	
-	public abstract boolean existsConflict(String proposal, String lastCompleteText);
+	public abstract boolean existsConflict(String lastCompleteText, String proposal);
 
-	public boolean existsConflict(String proposal, AbstractNode lastCompleteNode, int offset) {
+	public boolean existsConflict(AbstractNode lastCompleteNode, int offset, String proposal) {
 		String lastCompleteText = lastCompleteNode.serialize();
 		lastCompleteText = lastCompleteText.substring(0, offset - lastCompleteNode.getTotalOffset());
 		if (Strings.isEmpty(lastCompleteText))
 			return false;
-		return existsConflict(proposal, lastCompleteText);
+		return existsConflict(lastCompleteText, proposal);
 	}
 	
 	public static class NullHelper extends ProposalConflictHelper {
 
 		@Override
-		public boolean existsConflict(String proposal, String lastCompleteText) {
+		public boolean existsConflict(String lastCompleteText, String proposal) {
 			return false;
 		}
 		

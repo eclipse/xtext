@@ -36,6 +36,7 @@ import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
@@ -148,8 +149,12 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 	}
 
 	private IScope createEPackageScope(final Grammar grammar, IScope parent) {
-		return new SimpleScope(parent, Iterables.transform(grammar.getMetamodelDeclarations(),
-				new Function<AbstractMetamodelDeclaration,IScopedElement>(){
+		return new SimpleScope(parent, Iterables.transform(Iterables.filter(grammar.getMetamodelDeclarations(),
+				new Predicate<AbstractMetamodelDeclaration>() {
+					public boolean apply(AbstractMetamodelDeclaration input) {
+						return input.getEPackage() != null;
+					}
+				}), new Function<AbstractMetamodelDeclaration, IScopedElement>() {
 			public IScopedElement apply(AbstractMetamodelDeclaration from) {
 				return ScopedElement.create(from.getEPackage().getNsURI(), from.getEPackage());
 			}

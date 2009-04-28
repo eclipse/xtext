@@ -21,35 +21,75 @@ import com.google.inject.Inject;
 public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 
 	@Inject
-	private Lexer lexer;
-	
-	public void setLexer(Lexer lexer) {
-		this.lexer = lexer;
-	}
+	private Lexer proposalLexer;
 
-	public Lexer getLexer() {
-		return lexer;
-	}
+	@Inject
+	private Lexer lastCompleteLexer;
+	
+	@Inject
+	private Lexer combinedLexer;
 
 	@Override
-	public boolean existsConflict(String proposal, String lastCompleteText) {
-		String combinedText = lastCompleteText.concat(proposal);
-		CharStream stream = new ANTLRStringStream(combinedText);
-		lexer.setCharStream(stream);
-
-		String[] expectedTexts = new String[] { lastCompleteText, proposal };
-		for(String expected: expectedTexts) {
-			Token nextToken = lexer.nextToken();
-			if (nextToken.equals(Token.EOF_TOKEN))
-				return true;
-			String tokenText = nextToken.getText();
-			if (!expected.equals(tokenText))
-				return true;
-		}
-		Token lastToken = lexer.nextToken();
+	public boolean existsConflict(String lastCompleteText, String proposal) {
+		initLexer(lastCompleteText, proposal);
+		if (!equalTokenSequence(lastCompleteLexer, combinedLexer))
+			return true;
+		if (!equalTokenSequence(proposalLexer, combinedLexer))
+			return true;
+		Token lastToken = proposalLexer.nextToken();
 		if (!lastToken.equals(Token.EOF_TOKEN))
 			return true;
 		return false;
 	}
+
+	protected boolean equalTokenSequence(Lexer first, Lexer second) {
+		Token token = null;
+		while(!(token = first.nextToken()).equals(Token.EOF_TOKEN)) {
+			Token otherToken = second.nextToken();
+			if (otherToken.equals(Token.EOF_TOKEN)) {
+				return false;
+			}
+			if (!token.getText().equals(otherToken.getText())) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
+	protected void initLexer(String lastCompleteText, String proposal) {
+		String combinedText = lastCompleteText.concat(proposal);
+		initLexer(combinedText, combinedLexer);
+		initLexer(lastCompleteText, lastCompleteLexer);
+		initLexer(proposal, proposalLexer);
+	}
+
+	protected void initLexer(String text, Lexer lexer) {
+		CharStream stream = new ANTLRStringStream(text);
+		lexer.setCharStream(stream);
+	}
+
+	public Lexer getProposalLexer() {
+		return proposalLexer;
+	}
+
+	public void setProposalLexer(Lexer proposalLexer) {
+		this.proposalLexer = proposalLexer;
+	}
+
+	public Lexer getCombinedLexer() {
+		return combinedLexer;
+	}
+
+	public void setCombinedLexer(Lexer combinedLexer) {
+		this.combinedLexer = combinedLexer;
+	}
+
+	public void setLastCompleteLexer(Lexer lastCompleteLexer) {
+		this.lastCompleteLexer = lastCompleteLexer;
+	}
+
+	public Lexer getLastCompleteLexer() {
+		return lastCompleteLexer;
+	}
+
 }
