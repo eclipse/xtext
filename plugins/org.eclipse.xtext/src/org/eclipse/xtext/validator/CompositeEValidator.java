@@ -18,78 +18,81 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class CompositeEValidator implements EValidator {
 
-	private final Set<EValidatorEqualitySupport> contents;
+	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validator.CompositeEValidator.USE_EOBJECT_VALIDATOR";
+	
+	private Set<EValidatorEqualitySupport> contents;
+	
+	@Inject(optional=true)
+	@Named(value=USE_EOBJECT_VALIDATOR)
+	private boolean useEObjectValidator = true;
 
-	private static class EValidatorEqualitySupport {
-		private final EValidator delegate;
-
-		public EValidatorEqualitySupport(EValidator delegate) {
-			this.delegate = delegate;
-		}
+	@Inject
+	private Provider<EValidatorEqualitySupport> equalitySupportProvider;
+	
+	public static class EValidatorEqualitySupport {
+		private EValidator delegate;
 
 		@Override
 		public boolean equals(Object obj) {
 			return obj != null
-					&& ((EValidatorEqualitySupport) obj).delegate.getClass().getName().equals(
-							delegate.getClass().getName());
+					&& ((EValidatorEqualitySupport) obj).getDelegate().getClass().getName().equals(
+							getDelegate().getClass().getName());
 		}
 
 		@Override
 		public int hashCode() {
-			return delegate.getClass().getName().hashCode();
+			return getDelegate().getClass().getName().hashCode();
+		}
+
+		public void setDelegate(EValidator delegate) {
+			this.delegate = delegate;
+		}
+
+		public EValidator getDelegate() {
+			return delegate;
 		}
 	}
 
-	public CompositeEValidator() {
-		contents = new LinkedHashSet<EValidatorEqualitySupport>();
-		this.contents.add(new EValidatorEqualitySupport(new EObjectValidator(){
-			@Override
-			public boolean validate_EveryProxyResolves(EObject eObject, DiagnosticChain diagnostics,
-					Map<Object, Object> context) {
-				// don't check, we have our own implementation, which creates nicer messages
-				return true;
-			}
-		}));
-	}
-
-	public CompositeEValidator(EValidator validator) {
-		this();
-		addValidator(validator);
-	}
-
-	public static void register(EPackage pack, EValidator val, EValidator.Registry registry) {
-		EValidator validator = registry.getEValidator(pack);
-		if (validator == null) {
-			validator = new CompositeEValidator();
+	protected void initDefaults() {
+		if (isUseEObjectValidator()) {
+	 		this.addValidator(new EObjectValidator(){
+				@Override
+				public boolean validate_EveryProxyResolves(EObject eObject, DiagnosticChain diagnostics,
+						Map<Object, Object> context) {
+					// don't check, we have our own implementation, which creates nicer messages
+					return true;
+				}
+			});
 		}
-		else if (!(validator instanceof CompositeEValidator)) {
-			validator = new CompositeEValidator(validator);
-		}
-		((CompositeEValidator) validator).addValidator(val);
-		registry.put(pack, validator);
 	}
 
 	public void addValidator(EValidator validator) {
 		if (validator instanceof CompositeEValidator)
-			contents.addAll(((CompositeEValidator) validator).contents);
-		else
-			this.contents.add(new EValidatorEqualitySupport(validator));
+			getContents().addAll(((CompositeEValidator) validator).getContents());
+		else {
+			EValidatorEqualitySupport equalitySupport = equalitySupportProvider.get();
+			equalitySupport.setDelegate(validator);
+			this.getContents().add(equalitySupport);
+		}
 	}
 
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidatorEqualitySupport val : contents) {
+		for (EValidatorEqualitySupport val : getContents()) {
 			try {
-				result = result && val.delegate.validate(eObject, diagnostics, context);
+				result = result && val.getDelegate().validate(eObject, diagnostics, context);
 			}
 			catch (Exception e) {
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
@@ -100,9 +103,9 @@ public class CompositeEValidator implements EValidator {
 
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidatorEqualitySupport val : contents) {
+		for (EValidatorEqualitySupport val : getContents()) {
 			try {
-				result = result && val.delegate.validate(eClass, eObject, diagnostics, context);
+				result = result && val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
 			catch (Exception e) {
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
@@ -113,9 +116,9 @@ public class CompositeEValidator implements EValidator {
 
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (EValidatorEqualitySupport val : contents) {
+		for (EValidatorEqualitySupport val : getContents()) {
 			try {
-				result = result && val.delegate.validate(eDataType, value, diagnostics, context);
+				result = result && val.getDelegate().validate(eDataType, value, diagnostics, context);
 			}
 			catch (Exception e) {
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eDataType, e));
@@ -128,4 +131,29 @@ public class CompositeEValidator implements EValidator {
 		return new BasicDiagnostic(Diagnostic.ERROR, source.toString(), 0, message, new Object[] { t });
 
 	}
+
+	public boolean isUseEObjectValidator() {
+		return useEObjectValidator;
+	}
+	
+	public void setUseEObjectValidator(boolean useEObjectValidator) {
+		this.useEObjectValidator = useEObjectValidator;
+	}
+
+	public Set<EValidatorEqualitySupport> getContents() {
+		if (contents == null) {
+			contents = new LinkedHashSet<EValidatorEqualitySupport>();
+			initDefaults();
+		}
+		return contents;
+	}
+
+	public void setEqualitySupportProvider(Provider<EValidatorEqualitySupport> equalitySupportProvider) {
+		this.equalitySupportProvider = equalitySupportProvider;
+	}
+
+	public Provider<EValidatorEqualitySupport> getEqualitySupportProvider() {
+		return equalitySupportProvider;
+	}
+
 }
