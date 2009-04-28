@@ -281,37 +281,36 @@ public final class ParseTreeUtil {
 		} else if (contextNode.getGrammarElement() instanceof RuleCall &&
 				(!(((RuleCall) contextNode.getGrammarElement()).getRule() instanceof TerminalRule))) {
 			elementSet.add(initialGrammarElement);
-		} else {
-			for (; contextNode != null; contextNode = contextNode.getParent()) {
-				for (EObject grammarElementObject = null != abstractElement ? abstractElement
-						: getGrammarElementFromNode(contextNode); grammarElementObject instanceof AbstractElement
-						&& !(grammarElementObject instanceof Action); grammarElementObject = grammarElementObject
-						.eContainer()) {
+		}
+		for (; contextNode != null; contextNode = contextNode.getParent()) {
+			for (EObject grammarElementObject = null != abstractElement ? abstractElement
+					: getGrammarElementFromNode(contextNode); grammarElementObject instanceof AbstractElement
+					&& !(grammarElementObject instanceof Action); grammarElementObject = grammarElementObject
+					.eContainer()) {
 
-					AbstractElement grammarElement = (AbstractElement) grammarElementObject;
-					if (grammarElement.eContainer() instanceof Group) {
-						EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
-						int indexOf = contents.indexOf(grammarElement) + 1;
-						int size = contents.size();
-						if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
-							elementSet.add(grammarElement);
-						}
-						AbstractElement last = GrammarUtil.isAnyCardinality(grammarElement) || indexOf == size ? grammarElement
-								: contents.get(indexOf++);
-						while (GrammarUtil.isOptionalCardinality(last) && indexOf < size) {
-							elementSet.add(last);
-							last = indexOf < size ? contents.get(indexOf++) : last;
-						}
-						if (last != grammarElement || GrammarUtil.isAnyCardinality(last)) {
-							elementSet.add(last);
-						}
-						if (last != grammarElement && !GrammarUtil.isOptionalCardinality(last)) {
-							return elementSet;
-						}
-					}
-					else if (GrammarUtil.isMultipleCardinality(grammarElement)) {
+				AbstractElement grammarElement = (AbstractElement) grammarElementObject;
+				if (grammarElement.eContainer() instanceof Group) {
+					EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
+					int indexOf = contents.indexOf(grammarElement) + 1;
+					int size = contents.size();
+					if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
 						elementSet.add(grammarElement);
 					}
+					AbstractElement last = GrammarUtil.isAnyCardinality(grammarElement) || indexOf == size ? grammarElement
+							: contents.get(indexOf++);
+					while (GrammarUtil.isOptionalCardinality(last) && indexOf < size) {
+						elementSet.add(last);
+						last = indexOf < size ? contents.get(indexOf++) : last;
+					}
+					if (last != grammarElement || GrammarUtil.isAnyCardinality(last)) {
+						elementSet.add(last);
+					}
+					if (last != grammarElement && !GrammarUtil.isOptionalCardinality(last)) {
+						return elementSet;
+					}
+				}
+				else if (GrammarUtil.isMultipleCardinality(grammarElement)) {
+					elementSet.add(grammarElement);
 				}
 			}
 		}
