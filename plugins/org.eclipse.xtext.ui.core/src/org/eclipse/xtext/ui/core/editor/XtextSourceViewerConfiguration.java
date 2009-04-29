@@ -7,6 +7,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
+import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
@@ -23,10 +24,10 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject
 	private IContentAssistantFactory contentAssistantFactory;
-	
+
 	@Inject
 	private IHyperlinkDetector detector;
-	
+
 	@Inject
 	private Provider<IReconciler> reconcilerProvider;
 
@@ -82,4 +83,18 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		return detectors.toArray(new IHyperlinkDetector[detectors.size()]);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.text.source.SourceViewerConfiguration#getContentFormatter
+	 * (org.eclipse.jface.text.source.ISourceViewer)
+	 */
+	@Override
+	public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
+		// TODO add formatter here, consider to use
+		// org.eclipse.jface.text.formatter.ContentFormatter with custom
+		// strategy
+		return super.getContentFormatter(sourceViewer);
+	}
 }

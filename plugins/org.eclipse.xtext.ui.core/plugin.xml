@@ -92,6 +92,12 @@
             id="org.eclipse.xtext.ui.editor.validate"
             name="Validate">
       </command>
+		<command
+            name="Format"
+            description="Format text"
+            categoryId="org.eclipse.ui.category.textEditor"
+            id="org.eclipse.xtext.ui.FormatAction">
+      </command>
    </extension>
    <extension point="org.eclipse.core.expressions.propertyTesters">
     <propertyTester
@@ -102,7 +108,13 @@
       class="org.eclipse.xtext.ui.core.editor.XtextEditorPropertyTester">
     </propertyTester>
   </extension>
-
+ <extension
+         point="org.eclipse.ui.bindings">
+		<key sequence="M1+M2+F"
+            contextId="org.eclipse.ui.textEditorScope"
+            commandId="org.eclipse.xtext.ui.FormatAction"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+             </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
