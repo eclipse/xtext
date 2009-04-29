@@ -62,7 +62,7 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private Provider<XtextDocumentProvider> documentProvider;
-	
+
 	private String languageName;
 
 	public XtextEditor() {
@@ -73,12 +73,12 @@ public class XtextEditor extends TextEditor {
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
 	}
-	
+
 	@Inject
 	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String name) {
 		this.languageName = name;
 	}
-	
+
 	public String getLanguageName() {
 		return languageName;
 	}
@@ -151,9 +151,9 @@ public class XtextEditor extends TextEditor {
 	@Override
 	protected void createActions() {
 		super.createActions();
-		Action action = null;
 		if (getSourceViewerConfiguration().getContentFormatter(getSourceViewer()) != null) {
-			action = new TextOperationAction(XtextUIMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
+			Action action = new TextOperationAction(XtextUIMessages.getResourceBundle(),
+					"Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
 			action.setActionDefinitionId(Activator.PLUGIN_ID + ".FormatAction");
 			setAction("Format", action); //$NON-NLS-1$
 			markAsStateDependentAction("Format", true); //$NON-NLS-1$
