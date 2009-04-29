@@ -177,6 +177,7 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 	private char[] exitChars;
 	private PrefixMatcher matcher;
 	private int replaceContextLength;
+	private int priority;
 	
 	public boolean isAutoInsertable() {
 		return autoInsertable;
@@ -324,6 +325,14 @@ public class ConfigurableCompletionProposal implements ICompletionProposal, ICom
 
 	public int getReplaceContextLength() {
 		return replaceContextLength;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public int getPriority() {
+		return priority;
 	}
 	
 	// copied from AbstractJavaCompletionProposal
