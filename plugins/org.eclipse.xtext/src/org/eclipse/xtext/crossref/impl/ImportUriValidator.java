@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validator.Check;
 import org.eclipse.xtext.validator.CheckType;
@@ -30,6 +34,11 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+	@Override
+	protected List<? extends EPackage> getEPackages() {
+		return Collections.emptyList();
+	}
+	
 	public void setResolver(ImportUriResolver resolver) {
 		this.resolver = resolver;
 	}

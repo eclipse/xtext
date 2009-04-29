@@ -29,6 +29,7 @@ import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -120,6 +121,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	private volatile HashSet<MethodWrapper> checkMethods = null;
 
+	@Inject
 	private Injector injector;
 	
 	public AbstractDeclarativeValidator() {
