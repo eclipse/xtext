@@ -32,6 +32,8 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.util.PolymorphicDispatcher.NullErrorHandler;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -44,7 +46,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	private final static Logger logger = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
 	
 	@Inject
-	protected IScopeProvider scopeProvider;
+	private IScopeProvider scopeProvider;
 	
 	private final Map<String, PolymorphicDispatcher<Void>> dispatchers;
 
@@ -91,23 +93,42 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	 */
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		if (scopeProvider != null) {
-			ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
-			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
-				EClass eClass = (EClass) containingParserRule.getType().getClassifier();
-				EReference ref = GrammarUtil.getReference(crossReference, eClass);
-				IScope scope = scopeProvider.getScope(contentAssistContext.getCurrentModel(), ref);
-				Iterable<IScopedElement> candidates = scope.getAllContents();
-				for (IScopedElement candidate: candidates) {
-					if (!acceptor.canAcceptMoreProposals())
-						return;
-					if (crossReference.getTerminal() instanceof RuleCall) {
-						String ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
-						String proposal = getValueConverter().toString(candidate.name(), ruleName);
-						acceptor.accept(createCompletionProposal(candidate.element(), proposal, candidate.name(), contentAssistContext));
-					} else {
-						acceptor.accept(createCompletionProposal(candidate,	contentAssistContext));
-					}
+		lookupCrossReference(crossReference, contentAssistContext, acceptor, Predicates.<IScopedElement>alwaysTrue());
+	}
+	
+	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter) {
+		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
+		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
+			EClass eClass = (EClass) containingParserRule.getType().getClassifier();
+			EReference ref = GrammarUtil.getReference(crossReference, eClass);
+			lookupCrossReference(crossReference, ref, contentAssistContext,	acceptor, filter);
+		}
+	}
+
+	protected void lookupCrossReference(CrossReference crossReference,
+			EReference reference, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter) {
+		String ruleName = null;
+		if (crossReference.getTerminal() instanceof RuleCall) {
+			ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
+		}
+		lookupCrossReference(contentAssistContext.getCurrentModel(), reference, ruleName, contentAssistContext, acceptor, filter);
+	}
+	
+	protected void lookupCrossReference(EObject model, EReference reference, String ruleName, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor, Predicate<IScopedElement> filter) {
+		IScope scope = getScopeProvider().getScope(model, reference);
+		Iterable<IScopedElement> candidates = scope.getAllContents();
+		for (IScopedElement candidate: candidates) {
+			if (!acceptor.canAcceptMoreProposals())
+				return;
+			if (filter.apply(candidate)) {
+				if (ruleName != null) {
+					String proposal = getValueConverter().toString(candidate.name(), ruleName);
+					acceptor.accept(createCompletionProposal(candidate.element(), proposal, candidate.name(), contentAssistContext));
+				} else {
+					acceptor.accept(createCompletionProposal(candidate,	contentAssistContext));
 				}
 			}
 		}
@@ -131,6 +152,14 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		System.arraycopy(params, 0, paramAsArray, 0, params.length);
 		paramAsArray[params.length] = acceptor;
 		dispatcher.invoke(paramAsArray);
+	}
+
+	public void setScopeProvider(IScopeProvider scopeProvider) {
+		this.scopeProvider = scopeProvider;
+	}
+
+	public IScopeProvider getScopeProvider() {
+		return scopeProvider;
 	}
 
 }
