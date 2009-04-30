@@ -94,6 +94,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	}
 
+	@Inject
+	protected ITokenSerializer tokenSerializer;
+
 	public abstract class AbstractToken implements IAbstractToken {
 
 		public class Solution {
@@ -171,14 +174,13 @@ public abstract class AbstractParseTreeConstructor implements
 		protected abstract Solution createSolution();
 
 		protected String depth(AbstractToken ele) {
+			if (ele == null)
+				return "";
 			StringBuffer b = new StringBuffer();
 			for (AbstractToken t = ele.predecessor; t != null; t = t.predecessor)
 				b.append(" ");
 			return b.toString();
 		}
-
-		@Inject
-		protected ITokenSerializer tokenSerializer;
 
 		private String dsl(AbstractToken ele) {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -190,6 +192,15 @@ public abstract class AbstractParseTreeConstructor implements
 			}
 			return out.toString();
 		}
+
+//		protected Object text = new Object() {
+
+//			@Override
+//			public String toString() {
+//				return dsl(AbstractToken.this);
+//			}
+
+//		};
 
 		public Solution firstSolution() {
 			if (log.isTraceEnabled())
@@ -266,9 +277,11 @@ public abstract class AbstractParseTreeConstructor implements
 
 		public Solution nextSolution(AbstractToken limit, Solution last) {
 			if (log.isTraceEnabled())
-				log.trace("--" + depth(limit)
-						+ limit.getClass().getSimpleName()
-						+ " -> nextSolution()");
+				log.trace("--"
+						+ depth(limit)
+						+ ((limit == null) ? "root" : limit.getClass()
+								.getSimpleName()) + " -> nextSolution() -> "
+						+ dsl(this));
 			AbstractToken t = this;
 			while (t != null && t != limit) {
 				Solution s;
@@ -299,8 +312,8 @@ public abstract class AbstractParseTreeConstructor implements
 			if (log.isTraceEnabled())
 				log.trace("-- " + depth(this) + getClass().getSimpleName()
 						+ " -> nextSolution() -> not found");
-			if (t == null)
-				throw new IllegalStateException("Bug found");
+			// if (t == null)
+			// throw new IllegalStateException("Bug found");
 			return null;
 		}
 	}

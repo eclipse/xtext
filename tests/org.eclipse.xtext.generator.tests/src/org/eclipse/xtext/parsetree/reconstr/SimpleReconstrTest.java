@@ -17,7 +17,8 @@ import org.eclipse.xtext.util.EmfFormatter;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
 
-	private static final Logger logger = Logger.getLogger(SimpleReconstrTest.class);
+	private static final Logger logger = Logger
+			.getLogger(SimpleReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -44,7 +45,8 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		if (logger.isTraceEnabled()) {
 			logger.trace(EmfFormatter.objToStr(result));
 			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
-			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
+			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)
+					.getLeafNodes()));
 		}
 		return serialize(result);
 	}
@@ -101,12 +103,72 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		assertEquals(model, parseAndSerialize(model));
 	}
 
+	public void _testSimpleTransient101() throws Exception {
+		String model = "#5 0";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient102() throws Exception {
+		String model = "#5 1";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient103() throws Exception {
+		String model = "#5 *";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient104() throws Exception {
+		String model = "#5 *, 0";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient105() throws Exception {
+		String model = "#5 *, 1";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient106() throws Exception {
+		String model = "#5 *, *";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testSimpleTransient107() throws Exception {
+		String model = "#5 0, 0";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testSimpleTransient108() throws Exception {
+		String model = "#5 0, 1";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient109() throws Exception {
+		String model = "#5 0, *";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testSimpleTransient110() throws Exception {
+		String model = "#5 1, 0";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testSimpleTransient111() throws Exception {
+		String model = "#5 1, 1";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void _testSimpleTransient112() throws Exception {
+		String model = "#5 1, *";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
 	// FIXME: this depends on
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=250313
-	// public void testSimpleAlternativeAssignment2() throws Exception {
-	// String model = "#2 'str'";
-	// assertEquals(model, parseAndSerialize(model));
-	// }
+	public void testSimpleAlternativeAssignment2() throws Exception {
+		String model = "#2 \"str\"";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	public void testCrossRef() throws Exception {
 		String model = "type A extends B type B extends A";
