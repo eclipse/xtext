@@ -21,10 +21,24 @@ public class ImportUriTestLanguageParsetreeConstructor extends AbstractParseTree
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getMainRule().getType().getClassifier()) && (s = new Main_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier()) && (s = new Import_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier()) && (s = new Type_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getMainRule().getType().getClassifier())) {
+			final AbstractToken t = new Main_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
+			final AbstractToken t = new Import_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) {
+			final AbstractToken t = new Type_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

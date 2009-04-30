@@ -13,15 +13,15 @@ public final class SimpleReconstrTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ISequenceMatcher ruleCall$24$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$25$Delimiter = new SetBasedKeywordMatcher(
 		"type", "extends", "mykeyword1", "mykeyword2", "myoption", "kw");
 
-	public static final ICharacterClass keyword$28$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$29$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$37$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$38$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$55$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$56$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),

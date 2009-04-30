@@ -21,12 +21,36 @@ public class ContentAssistTestLanguageParsetreeConstructor extends AbstractParse
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier()) && (s = new Start_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier()) && (s = new FirstAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier()) && (s = new SecondAbstractRuleChild_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractRuleCallRule().getType().getClassifier()) && (s = new AbstractRuleCall_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier())) {
+			final AbstractToken t = new Start_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractRule_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getFirstAbstractRuleChildRule().getType().getClassifier())) {
+			final AbstractToken t = new FirstAbstractRuleChild_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getSecondAbstractRuleChildRule().getType().getClassifier())) {
+			final AbstractToken t = new SecondAbstractRuleChild_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractRuleCallRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractRuleCall_Assignment_rule(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

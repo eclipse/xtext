@@ -21,26 +21,120 @@ public class EcoreDslParsetreeConstructor extends AbstractParseTreeConstructor {
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getEcoreDslRule().getType().getClassifier()) && (s = new EcoreDsl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier()) && (s = new ReferencedMetamodel_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEPackageDeclRule().getType().getClassifier()) && (s = new EPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getSubEPackageDeclRule().getType().getClassifier()) && (s = new SubEPackageDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEClassifierDeclRule().getType().getClassifier()) && (s = new EClassifierDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEDataTypeDeclRule().getType().getClassifier()) && (s = new EDataTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEAnnotationDeclRule().getType().getClassifier()) && (s = new EAnnotationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEClassDeclRule().getType().getClassifier()) && (s = new EClassDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEStructuralFeatureDeclRule().getType().getClassifier()) && (s = new EStructuralFeatureDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEAttributeDeclRule().getType().getClassifier()) && (s = new EAttributeDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEReferenceDeclRule().getType().getClassifier()) && (s = new EReferenceDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEEnumDeclRule().getType().getClassifier()) && (s = new EEnumDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier()) && (s = new EEnumLiteralDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getETypeParameterDeclRule().getType().getClassifier()) && (s = new ETypeParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier()) && (s = new EGenericTypeReferenceDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier()) && (s = new EGenericTypeDecl_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEOperationDeclRule().getType().getClassifier()) && (s = new EOperationDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEParameterDeclRule().getType().getClassifier()) && (s = new EParameterDecl_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getMapEntryRule().getType().getClassifier()) && (s = new MapEntry_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEcoreDslRule().getType().getClassifier())) {
+			final AbstractToken t = new EcoreDsl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) {
+			final AbstractToken t = new ReferencedMetamodel_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEPackageDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EPackageDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getSubEPackageDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new SubEPackageDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEClassifierDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EClassifierDecl_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEDataTypeDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EDataTypeDecl_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEAnnotationDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EAnnotationDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEClassDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EClassDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEStructuralFeatureDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EStructuralFeatureDecl_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEAttributeDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EAttributeDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEReferenceDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EReferenceDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEEnumDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EEnumDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EEnumLiteralDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getETypeParameterDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new ETypeParameterDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EGenericTypeReferenceDecl_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EGenericTypeDecl_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEOperationDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EOperationDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEParameterDeclRule().getType().getClassifier())) {
+			final AbstractToken t = new EParameterDecl_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getMapEntryRule().getType().getClassifier())) {
+			final AbstractToken t = new MapEntry_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

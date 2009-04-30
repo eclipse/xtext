@@ -149,7 +149,7 @@ public class HiddenTerminalsTestLanguagePackageImpl extends EPackageImpl impleme
     if (isInited) return (HiddenTerminalsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(HiddenTerminalsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    HiddenTerminalsTestLanguagePackageImpl theHiddenTerminalsTestLanguagePackage = (HiddenTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof HiddenTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new HiddenTerminalsTestLanguagePackageImpl());
+    HiddenTerminalsTestLanguagePackageImpl theHiddenTerminalsTestLanguagePackage = (HiddenTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof HiddenTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new HiddenTerminalsTestLanguagePackageImpl());
 
     isInited = true;
 

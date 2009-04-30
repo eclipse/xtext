@@ -93,7 +93,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (DatatypeRulesTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(DatatypeRulesTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    DatatypeRulesTestLanguagePackageImpl theDatatypeRulesTestLanguagePackage = (DatatypeRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DatatypeRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DatatypeRulesTestLanguagePackageImpl());
+    DatatypeRulesTestLanguagePackageImpl theDatatypeRulesTestLanguagePackage = (DatatypeRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof DatatypeRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new DatatypeRulesTestLanguagePackageImpl());
 
     isInited = true;
 

@@ -16,12 +16,12 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class SerializationBug269362Test extends AbstractXtextTests {
+public class SerializationBug269362Test extends AbstractXtextTests {
 
 	private XtextResource resource;
 	private XtextResourceSet resourceSet;
 	private Model model;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -29,18 +29,16 @@ public abstract class SerializationBug269362Test extends AbstractXtextTests {
 		resourceSet = get(XtextResourceSet.class);
 		resource = get(XtextResource.class);
 		resourceSet.getResources().add(resource);
-		model = SerializationBug269362TestLanguageFactory.eINSTANCE.createModel();
+		model = SerializationBug269362TestLanguageFactory.eINSTANCE
+				.createModel();
 		resource.getContents().add(model);
 	}
-	
-	/**
-	 * TODO fix me!
-	 */
-	public void _testSerialize_01() throws Exception {
+
+	public void testSerialize_01() throws Exception {
 		model.setBar("bar");
 		model.setFoo("foo");
 		String result = serialize(model);
-		assertEquals("foo foo bar bar", result);
+		assertEquals("foo ^foo bar ^bar", result);
 	}
-	
+
 }

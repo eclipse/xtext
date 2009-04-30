@@ -32,7 +32,10 @@ public class ReferenceGrammarExecutableExtensionFactory implements IExecutableEx
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.reference.internal.ReferenceGrammarActivator.getInstance().getBundle();
+		org.eclipse.xtext.reference.internal.ReferenceGrammarActivator instance = org.eclipse.xtext.reference.internal.ReferenceGrammarActivator.getInstance();
+		if (instance == null)
+			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
+		Bundle bundle = instance.getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
 			return org.eclipse.xtext.reference.internal.ReferenceGrammarActivator.getInstance().getInjector("org.eclipse.xtext.reference.ReferenceGrammar").getInstance(class1);

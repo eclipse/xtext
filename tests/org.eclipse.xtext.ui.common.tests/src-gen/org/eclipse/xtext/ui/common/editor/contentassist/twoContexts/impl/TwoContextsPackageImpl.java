@@ -93,7 +93,7 @@ public class TwoContextsPackageImpl extends EPackageImpl implements TwoContextsP
     if (isInited) return (TwoContextsPackage)EPackage.Registry.INSTANCE.getEPackage(TwoContextsPackage.eNS_URI);
 
     // Obtain or create and register package
-    TwoContextsPackageImpl theTwoContextsPackage = (TwoContextsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TwoContextsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TwoContextsPackageImpl());
+    TwoContextsPackageImpl theTwoContextsPackage = (TwoContextsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TwoContextsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TwoContextsPackageImpl());
 
     isInited = true;
 

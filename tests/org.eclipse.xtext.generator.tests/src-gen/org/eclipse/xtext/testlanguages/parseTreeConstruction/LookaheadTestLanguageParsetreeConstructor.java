@@ -21,14 +21,48 @@ public class LookaheadTestLanguageParsetreeConstructor extends AbstractParseTree
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getEntryRule().getType().getClassifier()) && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier()) && (s = new Alts_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier()) && (s = new LookAhead0_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier()) && (s = new LookAhead1_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier()) && (s = new LookAhead2_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier()) && (s = new LookAhead3_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier()) && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEntryRule().getType().getClassifier())) {
+			final AbstractToken t = new Entry_Assignment_contents(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAltsRule().getType().getClassifier())) {
+			final AbstractToken t = new Alts_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getLookAhead0Rule().getType().getClassifier())) {
+			final AbstractToken t = new LookAhead0_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getLookAhead1Rule().getType().getClassifier())) {
+			final AbstractToken t = new LookAhead1_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getLookAhead2Rule().getType().getClassifier())) {
+			final AbstractToken t = new LookAhead2_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getLookAhead3Rule().getType().getClassifier())) {
+			final AbstractToken t = new LookAhead3_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getLookAhead4Rule().getType().getClassifier())) {
+			final AbstractToken t = new LookAhead4_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

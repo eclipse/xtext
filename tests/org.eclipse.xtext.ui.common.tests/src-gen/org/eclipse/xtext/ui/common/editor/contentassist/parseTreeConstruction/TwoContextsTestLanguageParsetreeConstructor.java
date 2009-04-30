@@ -21,9 +21,18 @@ public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTr
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getMainModelRule().getType().getClassifier()) && (s = new MainModel_Assignment_elements(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier()) && (s = new AnElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getMainModelRule().getType().getClassifier())) {
+			final AbstractToken t = new MainModel_Assignment_elements(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier())) {
+			final AbstractToken t = new AnElement_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

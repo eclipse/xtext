@@ -21,9 +21,18 @@ public class ActionTestLanguageParsetreeConstructor extends AbstractParseTreeCon
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier()) && (s = new Child_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
+			final AbstractToken t = new Model_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getChildRule().getType().getClassifier())) {
+			final AbstractToken t = new Child_Assignment_name(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

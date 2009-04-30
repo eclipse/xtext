@@ -21,12 +21,36 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getEntryRuleRule().getType().getClassifier()) && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier()) && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier()) && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier()) && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEntryRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new EntryRule_Assignment_multiFeature(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractRule_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getChoiceRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new ChoiceRule_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getReducibleRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new ReducibleRule_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new TerminalRule_Assignment_stringFeature(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

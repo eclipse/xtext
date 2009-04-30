@@ -135,7 +135,7 @@ public class ReferenceGrammarPackageImpl extends EPackageImpl implements Referen
     if (isInited) return (ReferenceGrammarPackage)EPackage.Registry.INSTANCE.getEPackage(ReferenceGrammarPackage.eNS_URI);
 
     // Obtain or create and register package
-    ReferenceGrammarPackageImpl theReferenceGrammarPackage = (ReferenceGrammarPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ReferenceGrammarPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ReferenceGrammarPackageImpl());
+    ReferenceGrammarPackageImpl theReferenceGrammarPackage = (ReferenceGrammarPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ReferenceGrammarPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ReferenceGrammarPackageImpl());
 
     isInited = true;
 

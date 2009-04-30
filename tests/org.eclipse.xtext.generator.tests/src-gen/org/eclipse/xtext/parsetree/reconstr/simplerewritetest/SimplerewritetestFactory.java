@@ -98,6 +98,15 @@ public interface SimplerewritetestFactory extends EFactory
   Boolean createBoolean();
 
   /**
+   * Returns a new object of class '<em>Transient1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transient1</em>'.
+   * @generated
+   */
+  Transient1 createTransient1();
+
+  /**
    * Returns a new object of class '<em>Op</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

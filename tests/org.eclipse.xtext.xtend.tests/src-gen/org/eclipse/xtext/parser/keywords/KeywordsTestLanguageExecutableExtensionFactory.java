@@ -32,7 +32,10 @@ public class KeywordsTestLanguageExecutableExtensionFactory implements IExecutab
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.xtend.XtendTestsActivator.getInstance().getBundle();
+		org.eclipse.xtext.xtend.XtendTestsActivator instance = org.eclipse.xtext.xtend.XtendTestsActivator.getInstance();
+		if (instance == null)
+			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
+		Bundle bundle = instance.getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
 			return org.eclipse.xtext.xtend.XtendTestsActivator.getInstance().getInjector("org.eclipse.xtext.parser.keywords.KeywordsTestLanguage").getInstance(class1);

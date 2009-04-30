@@ -20,6 +20,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestFactory;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
 
@@ -92,6 +93,13 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass transient1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass opEClass = null;
 
   /**
@@ -148,7 +156,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     if (isInited) return (SimplerewritetestPackage)EPackage.Registry.INSTANCE.getEPackage(SimplerewritetestPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimplerewritetestPackageImpl theSimplerewritetestPackage = (SimplerewritetestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimplerewritetestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimplerewritetestPackageImpl());
+    SimplerewritetestPackageImpl theSimplerewritetestPackage = (SimplerewritetestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimplerewritetestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimplerewritetestPackageImpl());
 
     isInited = true;
 
@@ -379,6 +387,56 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTransient1()
+  {
+    return transient1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransient1_PrecStar()
+  {
+    return (EAttribute)transient1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransient1_Prec()
+  {
+    return (EAttribute)transient1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransient1_ScaleStar()
+  {
+    return (EAttribute)transient1EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransient1_Scale()
+  {
+    return (EAttribute)transient1EClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOp()
   {
     return opEClass;
@@ -453,6 +511,12 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     createEAttribute(booleanEClass, BOOLEAN__BOOL);
     createEAttribute(booleanEClass, BOOLEAN__VALUE);
 
+    transient1EClass = createEClass(TRANSIENT1);
+    createEAttribute(transient1EClass, TRANSIENT1__PREC_STAR);
+    createEAttribute(transient1EClass, TRANSIENT1__PREC);
+    createEAttribute(transient1EClass, TRANSIENT1__SCALE_STAR);
+    createEAttribute(transient1EClass, TRANSIENT1__SCALE);
+
     opEClass = createEClass(OP);
     createEReference(opEClass, OP__VALUES);
   }
@@ -493,6 +557,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     ref2EClass.getESuperTypes().add(this.getExpression());
     spareEClass.getESuperTypes().add(this.getExpression());
     booleanEClass.getESuperTypes().add(this.getExpression());
+    transient1EClass.getESuperTypes().add(this.getExpression());
     opEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -524,6 +589,12 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     initEClass(booleanEClass, org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean.class, "Boolean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBoolean_Bool(), ecorePackage.getEBoolean(), "bool", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBoolean_Value(), ecorePackage.getEString(), "value", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(transient1EClass, Transient1.class, "Transient1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTransient1_PrecStar(), ecorePackage.getEBoolean(), "precStar", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransient1_Prec(), ecorePackage.getEInt(), "prec", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransient1_ScaleStar(), ecorePackage.getEBoolean(), "scaleStar", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransient1_Scale(), ecorePackage.getEInt(), "scale", null, 0, 1, Transient1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(opEClass, Op.class, "Op", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOp_Values(), this.getExpression(), null, "values", null, 0, -1, Op.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

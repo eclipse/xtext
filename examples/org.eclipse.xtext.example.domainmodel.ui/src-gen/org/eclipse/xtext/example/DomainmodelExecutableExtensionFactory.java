@@ -32,7 +32,10 @@ public class DomainmodelExecutableExtensionFactory implements IExecutableExtensi
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.example.ui.internal.DomainmodelActivator.getInstance().getBundle();
+		org.eclipse.xtext.example.ui.internal.DomainmodelActivator instance = org.eclipse.xtext.example.ui.internal.DomainmodelActivator.getInstance();
+		if (instance == null)
+			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
+		Bundle bundle = instance.getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
 			return org.eclipse.xtext.example.ui.internal.DomainmodelActivator.getInstance().getInjector("org.eclipse.xtext.example.Domainmodel").getInstance(class1);

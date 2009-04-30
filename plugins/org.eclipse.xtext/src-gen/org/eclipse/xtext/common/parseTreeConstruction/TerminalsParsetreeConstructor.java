@@ -21,7 +21,6 @@ public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor 
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
 		return null;
 	}
 	

@@ -93,7 +93,7 @@ public class EcoredslPackageImpl extends EPackageImpl implements EcoredslPackage
     if (isInited) return (EcoredslPackage)EPackage.Registry.INSTANCE.getEPackage(EcoredslPackage.eNS_URI);
 
     // Obtain or create and register package
-    EcoredslPackageImpl theEcoredslPackage = (EcoredslPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EcoredslPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EcoredslPackageImpl());
+    EcoredslPackageImpl theEcoredslPackage = (EcoredslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EcoredslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EcoredslPackageImpl());
 
     isInited = true;
 

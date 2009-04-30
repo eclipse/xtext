@@ -226,6 +226,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_Boolean_7.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTermAccess().getTransient1ParserRuleCall_8(), currentNode); 
+    }
+    this_Transient1_8=ruleTransient1
+    { 
+        $current = $this_Transient1_8.current; 
+        currentNode = currentNode.getParent();
+    }
 );
 
 
@@ -739,6 +749,119 @@ ruleBoolean returns [EObject current=null]
 	    }
 	
 ));
+
+
+
+
+
+// Entry rule entryRuleTransient1
+entryRuleTransient1 returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getTransient1Rule(), currentNode); }
+	 iv_ruleTransient1=ruleTransient1 
+	 { $current=$iv_ruleTransient1.current; } 
+	 EOF 
+;
+
+// Rule Transient1
+ruleTransient1 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('#5' 
+    {
+        createLeafNode(grammarAccess.getTransient1Access().getNumberSignDigitFiveKeyword_0(), null); 
+    }
+((	
+	
+	    lv_precStar_1='*' 
+    {
+        createLeafNode(grammarAccess.getTransient1Access().getPrecStarAsteriskKeyword_1_0_0(), "precStar"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransient1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "precStar", true, "*", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)
+    |(	
+	
+	    lv_prec_2=	RULE_INT
+	{
+		createLeafNode(grammarAccess.getTransient1Access().getPrecINTTerminalRuleCall_1_1_0(), "prec"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransient1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "prec", lv_prec_2, "INT", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))(',' 
+    {
+        createLeafNode(grammarAccess.getTransient1Access().getCommaKeyword_2_0(), null); 
+    }
+((	
+	
+	    lv_scaleStar_4='*' 
+    {
+        createLeafNode(grammarAccess.getTransient1Access().getScaleStarAsteriskKeyword_2_1_0_0(), "scaleStar"); 
+    }
+
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransient1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "scaleStar", true, "*", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)
+    |(	
+	
+	    lv_scale_5=	RULE_INT
+	{
+		createLeafNode(grammarAccess.getTransient1Access().getScaleINTTerminalRuleCall_2_1_1_0(), "scale"); 
+	}
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransient1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "scale", lv_scale_5, "INT", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+)))?);
 
 
 

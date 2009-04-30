@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleRecon
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageRef2Consumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageSpareConsumer;
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageBooleanConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.SimpleReconstrTestLanguageTransient1Consumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -40,6 +41,7 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
     private SimpleReconstrTestLanguageRef2Consumer ref2Consumer;
     private SimpleReconstrTestLanguageSpareConsumer spareConsumer;
     private SimpleReconstrTestLanguageBooleanConsumer booleanConsumer;
+    private SimpleReconstrTestLanguageTransient1Consumer transient1Consumer;
 
 	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
 
@@ -85,6 +87,9 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		booleanConsumer = new SimpleReconstrTestLanguageBooleanConsumer(
     		this, null
     	);
+		transient1Consumer = new SimpleReconstrTestLanguageTransient1Consumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -104,6 +109,7 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		getRef2Consumer().setRule(grammarAccess.getRef2Access());
 		getSpareConsumer().setRule(grammarAccess.getSpareAccess());
 		getBooleanConsumer().setRule(grammarAccess.getBooleanAccess());
+		getTransient1Consumer().setRule(grammarAccess.getTransient1Access());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -121,6 +127,7 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 		getTermConsumer().setParensConsumer(getParensConsumer());
 		getTermConsumer().setRef2Consumer(getRef2Consumer());
 		getTermConsumer().setSpareConsumer(getSpareConsumer());
+		getTermConsumer().setTransient1Consumer(getTransient1Consumer());
 		getTermConsumer().setTwoNumbersConsumer(getTwoNumbersConsumer());
 		getTermConsumer().setTypeConsumer(getTypeConsumer());
 
@@ -140,33 +147,41 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 
 		getBooleanConsumer().setIdConsumer(getIdConsumer());
 
-		getAtomConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getParensConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getParensConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getParensConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getTwoNumbersConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getTwoNumbersConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$37$Delimiter);
-		getTwoNumbersConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$37$Delimiter);
-		getTwoNumbersConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$37$Delimiter);
-		getManyStringsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getManyStringsConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$37$Delimiter);
-		getManyStringsConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$37$Delimiter);
-		getTypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$55$Delimiter);
-		getTypeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$55$Delimiter);
-		getTypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getTypeConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getRef2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getRef2Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$55$Delimiter);
-		getRef2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$55$Delimiter);
-		getRef2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$37$Delimiter);
-		getSpareConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getSpareConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getSpareConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getSpareConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$24$Delimiter);
-		getBooleanConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$28$Delimiter);
-		getBooleanConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$55$Delimiter);
-		getBooleanConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$55$Delimiter);
-		getBooleanConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$24$Delimiter);
+		getTransient1Consumer().setIntConsumer(getIntConsumer());
+
+		getAtomConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getParensConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getParensConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getParensConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getTwoNumbersConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getTwoNumbersConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getTwoNumbersConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getTwoNumbersConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getManyStringsConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getManyStringsConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getManyStringsConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getTypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$56$Delimiter);
+		getTypeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$56$Delimiter);
+		getTypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getTypeConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getRef2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getRef2Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$56$Delimiter);
+		getRef2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$56$Delimiter);
+		getRef2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getSpareConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getSpareConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getSpareConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getSpareConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getBooleanConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getBooleanConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$56$Delimiter);
+		getBooleanConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$56$Delimiter);
+		getBooleanConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$25$Delimiter);
+		getTransient1Consumer().setKeyword$9$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getTransient1Consumer().setKeyword$12$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getTransient1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getTransient1Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.keyword$29$Delimiter);
+		getTransient1Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
+		getTransient1Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.SimpleReconstrTestLanguageDelimiters.ruleCall$38$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -211,6 +226,10 @@ public class SimpleReconstrTestLanguageParserConfiguration extends AbstractParse
 
     public SimpleReconstrTestLanguageBooleanConsumer getBooleanConsumer() {
     	return booleanConsumer;
+    }
+
+    public SimpleReconstrTestLanguageTransient1Consumer getTransient1Consumer() {
+    	return transient1Consumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

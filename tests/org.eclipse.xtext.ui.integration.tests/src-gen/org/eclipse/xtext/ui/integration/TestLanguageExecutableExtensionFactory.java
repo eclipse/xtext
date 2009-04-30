@@ -32,7 +32,10 @@ public class TestLanguageExecutableExtensionFactory implements IExecutableExtens
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.ui.integration.Activator.getInstance().getBundle();
+		org.eclipse.xtext.ui.integration.Activator instance = org.eclipse.xtext.ui.integration.Activator.getInstance();
+		if (instance == null)
+			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
+		Bundle bundle = instance.getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
 			return org.eclipse.xtext.ui.integration.Activator.getInstance().getInjector("org.eclipse.xtext.ui.integration.TestLanguage").getInstance(class1);

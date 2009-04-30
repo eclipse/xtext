@@ -21,6 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestFactory;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
 
@@ -84,6 +85,7 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
       case SimplerewritetestPackage.REF2: return createRef2();
       case SimplerewritetestPackage.SPARE: return createSpare();
       case SimplerewritetestPackage.BOOLEAN: return createBoolean();
+      case SimplerewritetestPackage.TRANSIENT1: return createTransient1();
       case SimplerewritetestPackage.OP: return createOp();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -176,6 +178,17 @@ public class SimplerewritetestFactoryImpl extends EFactoryImpl implements Simple
   {
     BooleanImpl boolean_ = new BooleanImpl();
     return boolean_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Transient1 createTransient1()
+  {
+    Transient1Impl transient1 = new Transient1Impl();
+    return transient1;
   }
 
   /**

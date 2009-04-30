@@ -21,32 +21,156 @@ public class EpatchTestLanguageParsetreeConstructor extends AbstractParseTreeCon
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getEPatchRule().getType().getClassifier()) && (s = new EPatch_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier()) && (s = new Import_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getModelImportRule().getType().getClassifier()) && (s = new ModelImport_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getResourceImportRule().getType().getClassifier()) && (s = new ResourceImport_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEPackageImportRule().getType().getClassifier()) && (s = new EPackageImport_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getJavaImportRule().getType().getClassifier()) && (s = new JavaImport_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getExtensionImportRule().getType().getClassifier()) && (s = new ExtensionImport_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getNamedResourceRule().getType().getClassifier()) && (s = new NamedResource_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getNamedObjectRule().getType().getClassifier()) && (s = new NamedObject_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getObjectRefRule().getType().getClassifier()) && (s = new ObjectRef_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier()) && (s = new Assignment_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier()) && (s = new BiSingleAssignment_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getBiListAssignmentRule().getType().getClassifier()) && (s = new BiListAssignment_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier()) && (s = new MonoSingleAssignment_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getMonoListAssignmentRule().getType().getClassifier()) && (s = new MonoListAssignment_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAssignmentValueRule().getType().getClassifier()) && (s = new AssignmentValue_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier()) && (s = new ListAssignmentValue_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier()) && (s = new SingleAssignmentValue_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier()) && (s = new CreatedObject_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getObjectNewRule().getType().getClassifier()) && (s = new ObjectNew_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getObjectCopyRule().getType().getClassifier()) && (s = new ObjectCopy_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getMigrationRule().getType().getClassifier()) && (s = new Migration_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier()) && (s = new Executable_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getJavaExecutableRule().getType().getClassifier()) && (s = new JavaExecutable_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getExpressionExecutableRule().getType().getClassifier()) && (s = new ExpressionExecutable_Assignment_exprstr(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getEPatchRule().getType().getClassifier())) {
+			final AbstractToken t = new EPatch_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) {
+			final AbstractToken t = new Import_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getModelImportRule().getType().getClassifier())) {
+			final AbstractToken t = new ModelImport_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getResourceImportRule().getType().getClassifier())) {
+			final AbstractToken t = new ResourceImport_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEPackageImportRule().getType().getClassifier())) {
+			final AbstractToken t = new EPackageImport_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getJavaImportRule().getType().getClassifier())) {
+			final AbstractToken t = new JavaImport_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getExtensionImportRule().getType().getClassifier())) {
+			final AbstractToken t = new ExtensionImport_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getNamedResourceRule().getType().getClassifier())) {
+			final AbstractToken t = new NamedResource_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getNamedObjectRule().getType().getClassifier())) {
+			final AbstractToken t = new NamedObject_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getObjectRefRule().getType().getClassifier())) {
+			final AbstractToken t = new ObjectRef_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier())) {
+			final AbstractToken t = new Assignment_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getBiSingleAssignmentRule().getType().getClassifier())) {
+			final AbstractToken t = new BiSingleAssignment_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getBiListAssignmentRule().getType().getClassifier())) {
+			final AbstractToken t = new BiListAssignment_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getMonoSingleAssignmentRule().getType().getClassifier())) {
+			final AbstractToken t = new MonoSingleAssignment_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getMonoListAssignmentRule().getType().getClassifier())) {
+			final AbstractToken t = new MonoListAssignment_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAssignmentValueRule().getType().getClassifier())) {
+			final AbstractToken t = new AssignmentValue_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getListAssignmentValueRule().getType().getClassifier())) {
+			final AbstractToken t = new ListAssignmentValue_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getSingleAssignmentValueRule().getType().getClassifier())) {
+			final AbstractToken t = new SingleAssignmentValue_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getCreatedObjectRule().getType().getClassifier())) {
+			final AbstractToken t = new CreatedObject_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getObjectNewRule().getType().getClassifier())) {
+			final AbstractToken t = new ObjectNew_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getObjectCopyRule().getType().getClassifier())) {
+			final AbstractToken t = new ObjectCopy_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getMigrationRule().getType().getClassifier())) {
+			final AbstractToken t = new Migration_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getExecutableRule().getType().getClassifier())) {
+			final AbstractToken t = new Executable_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getJavaExecutableRule().getType().getClassifier())) {
+			final AbstractToken t = new JavaExecutable_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getExpressionExecutableRule().getType().getClassifier())) {
+			final AbstractToken t = new ExpressionExecutable_Assignment_exprstr(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

@@ -66,6 +66,21 @@
       </genFeatures>
     </genClasses>
     <genClasses>
+      <ecoreClass href="SimpleReconstrTestLanguage.ecore#//Transient1"/>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SimpleReconstrTestLanguage.ecore#//Transient1/precStar"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SimpleReconstrTestLanguage.ecore#//Transient1/prec"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SimpleReconstrTestLanguage.ecore#//Transient1/scaleStar"/>
+      </genFeatures>
+      <genFeatures createChild="false">
+        <ecoreFeature xsi:type="ecore:EAttribute" href="SimpleReconstrTestLanguage.ecore#//Transient1/scale"/>
+      </genFeatures>
+    </genClasses>
+    <genClasses>
       <ecoreClass href="SimpleReconstrTestLanguage.ecore#//Op"/>
       <genFeatures property="None" children="true" createChild="true">
         <ecoreFeature xsi:type="ecore:EReference" href="SimpleReconstrTestLanguage.ecore#//Op/values"/>

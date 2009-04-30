@@ -43,10 +43,14 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
 «FOREACH allParserRules() AS pr-»
 «IF !pr.isDatatypeRule()-»
-		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getType().getClassifier()) && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getType().getClassifier())) {
+			final AbstractToken t = new «pr.alternatives.elementMethodName()»(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 «ENDIF-»
 «ENDFOREACH-»		
 		return null;

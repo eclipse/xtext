@@ -33,6 +33,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer spareConsumer;
 
+	private INonTerminalConsumer transient1Consumer;
+
 	private INonTerminalConsumer twoNumbersConsumer;
 
 	private INonTerminalConsumer typeConsumer;
@@ -55,6 +57,8 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$9$Consumer;
 
+	private IElementConsumer ruleCall$10$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -71,6 +75,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 			acceptor.accept(ruleCall$7$Consumer);
 			acceptor.accept(ruleCall$8$Consumer);
 			acceptor.accept(ruleCall$9$Consumer);
+			acceptor.accept(ruleCall$10$Consumer);
 		}
 	}
 
@@ -170,6 +175,18 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		}
 	}
 
+	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(transient1Consumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public SimpleReconstrTestLanguageTermConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -195,6 +212,7 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getRef2ParserRuleCall_5());
 		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getSpareParserRuleCall_6());
 		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getBooleanParserRuleCall_7());
+		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getTransient1ParserRuleCall_8());
 	}
 	
 	@Override
@@ -229,6 +247,10 @@ public final class SimpleReconstrTestLanguageTermConsumer extends NonTerminalCon
 	
 	public void setSpareConsumer(INonTerminalConsumer spareConsumer) {
 		this.spareConsumer = spareConsumer;
+	}
+	
+	public void setTransient1Consumer(INonTerminalConsumer transient1Consumer) {
+		this.transient1Consumer = transient1Consumer;
 	}
 	
 	public void setTwoNumbersConsumer(INonTerminalConsumer twoNumbersConsumer) {

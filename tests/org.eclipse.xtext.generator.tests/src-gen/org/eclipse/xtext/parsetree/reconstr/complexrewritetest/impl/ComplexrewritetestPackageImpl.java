@@ -234,7 +234,7 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     if (isInited) return (ComplexrewritetestPackage)EPackage.Registry.INSTANCE.getEPackage(ComplexrewritetestPackage.eNS_URI);
 
     // Obtain or create and register package
-    ComplexrewritetestPackageImpl theComplexrewritetestPackage = (ComplexrewritetestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ComplexrewritetestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ComplexrewritetestPackageImpl());
+    ComplexrewritetestPackageImpl theComplexrewritetestPackage = (ComplexrewritetestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ComplexrewritetestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ComplexrewritetestPackageImpl());
 
     isInited = true;
 

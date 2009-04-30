@@ -392,6 +392,70 @@ public interface SimplerewritetestPackage extends EPackage
   int BOOLEAN_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl <em>Transient1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTransient1()
+   * @generated
+   */
+  int TRANSIENT1 = 8;
+
+  /**
+   * The feature id for the '<em><b>Em</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT1__EM = EXPRESSION__EM;
+
+  /**
+   * The feature id for the '<em><b>Prec Star</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT1__PREC_STAR = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Prec</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT1__PREC = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Scale Star</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT1__SCALE_STAR = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Scale</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT1__SCALE = EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Transient1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT1_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -399,7 +463,7 @@ public interface SimplerewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getOp()
    * @generated
    */
-  int OP = 8;
+  int OP = 9;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -653,6 +717,60 @@ public interface SimplerewritetestPackage extends EPackage
   EAttribute getBoolean_Value();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1 <em>Transient1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transient1</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1
+   * @generated
+   */
+  EClass getTransient1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#isPrecStar <em>Prec Star</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Prec Star</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#isPrecStar()
+   * @see #getTransient1()
+   * @generated
+   */
+  EAttribute getTransient1_PrecStar();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#getPrec <em>Prec</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Prec</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#getPrec()
+   * @see #getTransient1()
+   * @generated
+   */
+  EAttribute getTransient1_Prec();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#isScaleStar <em>Scale Star</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Scale Star</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#isScaleStar()
+   * @see #getTransient1()
+   * @generated
+   */
+  EAttribute getTransient1_ScaleStar();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#getScale <em>Scale</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Scale</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1#getScale()
+   * @see #getTransient1()
+   * @generated
+   */
+  EAttribute getTransient1_Scale();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -879,6 +997,48 @@ public interface SimplerewritetestPackage extends EPackage
      * @generated
      */
     EAttribute BOOLEAN__VALUE = eINSTANCE.getBoolean_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl <em>Transient1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Transient1Impl
+     * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SimplerewritetestPackageImpl#getTransient1()
+     * @generated
+     */
+    EClass TRANSIENT1 = eINSTANCE.getTransient1();
+
+    /**
+     * The meta object literal for the '<em><b>Prec Star</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT1__PREC_STAR = eINSTANCE.getTransient1_PrecStar();
+
+    /**
+     * The meta object literal for the '<em><b>Prec</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT1__PREC = eINSTANCE.getTransient1_Prec();
+
+    /**
+     * The meta object literal for the '<em><b>Scale Star</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT1__SCALE_STAR = eINSTANCE.getTransient1_ScaleStar();
+
+    /**
+     * The meta object literal for the '<em><b>Scale</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT1__SCALE = eINSTANCE.getTransient1_Scale();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.OpImpl <em>Op</em>}' class.

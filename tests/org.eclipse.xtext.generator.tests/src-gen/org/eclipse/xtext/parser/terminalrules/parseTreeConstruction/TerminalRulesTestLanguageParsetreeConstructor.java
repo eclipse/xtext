@@ -21,8 +21,12 @@ public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParse
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
+			final AbstractToken t = new Model_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

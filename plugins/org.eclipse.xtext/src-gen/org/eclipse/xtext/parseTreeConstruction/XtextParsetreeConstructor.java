@@ -21,45 +21,234 @@ public class XtextParsetreeConstructor extends AbstractParseTreeConstructor {
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getGrammarRule().getType().getClassifier()) && (s = new Grammar_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier()) && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractMetamodelDeclarationRule().getType().getClassifier()) && (s = new AbstractMetamodelDeclaration_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getGeneratedMetamodelRule().getType().getClassifier()) && (s = new GeneratedMetamodel_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier()) && (s = new ReferencedMetamodel_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getParserRuleRule().getType().getClassifier()) && (s = new ParserRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier()) && (s = new TypeRef_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAlternativesRule().getType().getClassifier()) && (s = new Alternatives_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier()) && (s = new Group_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier()) && (s = new AbstractToken_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractTokenWithCardinalityRule().getType().getClassifier()) && (s = new AbstractTokenWithCardinality_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getActionRule().getType().getClassifier()) && (s = new Action_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractTerminalRule().getType().getClassifier()) && (s = new AbstractTerminal_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier()) && (s = new Keyword_Assignment_value(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier()) && (s = new RuleCall_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier()) && (s = new Assignment_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier()) && (s = new AssignableTerminal_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getParenthesizedAssignableElementRule().getType().getClassifier()) && (s = new ParenthesizedAssignableElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAssignableAlternativesRule().getType().getClassifier()) && (s = new AssignableAlternatives_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getCrossReferenceRule().getType().getClassifier()) && (s = new CrossReference_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier()) && (s = new CrossReferenceableTerminal_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier()) && (s = new ParenthesizedCrossReferenceableElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier()) && (s = new CrossReferenceableAlternatives_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getParenthesizedElementRule().getType().getClassifier()) && (s = new ParenthesizedElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier()) && (s = new TerminalRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier()) && (s = new TerminalAlternatives_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier()) && (s = new TerminalGroup_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier()) && (s = new TerminalToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier()) && (s = new TerminalTokenElement_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getParenthesizedTerminalElementRule().getType().getClassifier()) && (s = new ParenthesizedTerminalElement_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getAbstractNegatedTokenRule().getType().getClassifier()) && (s = new AbstractNegatedToken_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getNegatedTokenRule().getType().getClassifier()) && (s = new NegatedToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getUntilTokenRule().getType().getClassifier()) && (s = new UntilToken_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getWildcardRule().getType().getClassifier()) && (s = new Wildcard_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getCharacterRangeRule().getType().getClassifier()) && (s = new CharacterRange_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier()) && (s = new EnumRule_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier()) && (s = new EnumLiterals_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier()) && (s = new EnumLiteralDeclaration_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getGrammarRule().getType().getClassifier())) {
+			final AbstractToken t = new Grammar_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractRule_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractMetamodelDeclarationRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractMetamodelDeclaration_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getGeneratedMetamodelRule().getType().getClassifier())) {
+			final AbstractToken t = new GeneratedMetamodel_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) {
+			final AbstractToken t = new ReferencedMetamodel_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getParserRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new ParserRule_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTypeRefRule().getType().getClassifier())) {
+			final AbstractToken t = new TypeRef_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAlternativesRule().getType().getClassifier())) {
+			final AbstractToken t = new Alternatives_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) {
+			final AbstractToken t = new Group_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractToken_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractTokenWithCardinalityRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractTokenWithCardinality_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getActionRule().getType().getClassifier())) {
+			final AbstractToken t = new Action_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractTerminalRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractTerminal_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getKeywordRule().getType().getClassifier())) {
+			final AbstractToken t = new Keyword_Assignment_value(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getRuleCallRule().getType().getClassifier())) {
+			final AbstractToken t = new RuleCall_Assignment_rule(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAssignmentRule().getType().getClassifier())) {
+			final AbstractToken t = new Assignment_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) {
+			final AbstractToken t = new AssignableTerminal_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getParenthesizedAssignableElementRule().getType().getClassifier())) {
+			final AbstractToken t = new ParenthesizedAssignableElement_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAssignableAlternativesRule().getType().getClassifier())) {
+			final AbstractToken t = new AssignableAlternatives_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getCrossReferenceRule().getType().getClassifier())) {
+			final AbstractToken t = new CrossReference_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) {
+			final AbstractToken t = new CrossReferenceableTerminal_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier())) {
+			final AbstractToken t = new ParenthesizedCrossReferenceableElement_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier())) {
+			final AbstractToken t = new CrossReferenceableAlternatives_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getParenthesizedElementRule().getType().getClassifier())) {
+			final AbstractToken t = new ParenthesizedElement_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTerminalRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new TerminalRule_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTerminalAlternativesRule().getType().getClassifier())) {
+			final AbstractToken t = new TerminalAlternatives_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier())) {
+			final AbstractToken t = new TerminalGroup_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier())) {
+			final AbstractToken t = new TerminalToken_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getTerminalTokenElementRule().getType().getClassifier())) {
+			final AbstractToken t = new TerminalTokenElement_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getParenthesizedTerminalElementRule().getType().getClassifier())) {
+			final AbstractToken t = new ParenthesizedTerminalElement_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getAbstractNegatedTokenRule().getType().getClassifier())) {
+			final AbstractToken t = new AbstractNegatedToken_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getNegatedTokenRule().getType().getClassifier())) {
+			final AbstractToken t = new NegatedToken_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getUntilTokenRule().getType().getClassifier())) {
+			final AbstractToken t = new UntilToken_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getWildcardRule().getType().getClassifier())) {
+			final AbstractToken t = new Wildcard_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getCharacterRangeRule().getType().getClassifier())) {
+			final AbstractToken t = new CharacterRange_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEnumRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new EnumRule_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEnumLiteralsRule().getType().getClassifier())) {
+			final AbstractToken t = new EnumLiterals_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) {
+			final AbstractToken t = new EnumLiteralDeclaration_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

@@ -17,6 +17,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
 
@@ -166,6 +167,14 @@ public class SimplerewritetestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimplerewritetestPackage.TRANSIENT1:
+      {
+        Transient1 transient1 = (Transient1)theEObject;
+        T result = caseTransient1(transient1);
+        if (result == null) result = caseExpression(transient1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SimplerewritetestPackage.OP:
       {
         Op op = (Op)theEObject;
@@ -302,6 +311,22 @@ public class SimplerewritetestSwitch<T>
    * @generated
    */
   public T caseBoolean(org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transient1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transient1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransient1(Transient1 object)
   {
     return null;
   }
