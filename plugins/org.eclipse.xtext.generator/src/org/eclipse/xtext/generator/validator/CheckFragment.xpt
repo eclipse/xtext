@@ -17,12 +17,49 @@
 
 «DEFINE generate(List[String] packageQNames) FOR Grammar»
 
+«FILE this.name.asPath()+"FastChecks.chk" SRC-»
+/*
+ * This check file is used to specify inexpensive constraints for the
+ * derived metamodels. They will be executed by the editor when the
+ * user opens a file and whenever the user changes its content.
+ * At generation time they will be executed as well.
+ *  
+ * Example:
+ *
+ * import myDsl;
+ *
+ * context Class WARNING "Name should start with a capital" :
+ *    name.toFirstUpper() == name;
+ */
+«ENDFILE»
+
 «FILE this.name.asPath()+"Checks.chk" SRC-»
 /*
- * this check file is used to specify constraints for the derived metamodels
- * example:
- * context Entity WARNING "Entity names should start with a capital" :
+ * This check file is used to specify constraints for the derived metamodels.
+ * They will be executed by the editor when the user saves a file.
+ * At generation time they will be executed as well.
+ *
+ * Example:
+ *
+ * import myDsl;
+ *
+ * context Class WARNING "Name should start with a capital" :
  *    name.toFirstUpper() == name;
+ */
+«ENDFILE»
+
+«FILE this.name.asPath()+"ExpensiveChecks.chk" SRC-»
+/*
+ * This check file is used to specify expensive constraints for the derived
+ * metamodels. They will only be executed when triggered explicitly or
+ * at generation time.
+ *
+ * import myDsl;
+ *
+ * extension org::xtext::example::MyExtensions; 
+ *
+ * context Model ERROR "Inconsistent Model" :
+ *    invariantThatIsComplexToCheck();
  */
 «ENDFILE»
 
@@ -37,7 +74,13 @@ import org.eclipse.xtext.validator.CheckType;
 public class «getCheckValidatorName().toSimpleName()» extends org.eclipse.xtext.check.AbstractCheckValidator {
 
 	public «getCheckValidatorName().toSimpleName()»() {
-		addCheckFile("«(name+"Checks").replaceAll("\\.","::")»", CheckType.FAST);
+		configure();
+	}
+	
+	protected void configure() {
+		addCheckFile("«(name+"FastChecks").replaceAll("\\.","::")»", CheckType.FAST);
+		addCheckFile("«(name+"Checks").replaceAll("\\.","::")»", CheckType.NORMAL);
+		addCheckFile("«(name+"ExpensiveChecks").replaceAll("\\.","::")»", CheckType.EXPENSIVE);
 	}
 	
 	@Override
