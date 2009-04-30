@@ -14,7 +14,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1;
 	
 Atom: 
 	name=ID;
@@ -40,4 +40,5 @@ Spare:
 Boolean:
 	'#4' bool?='myoption'? 'kw' value=ID; 
 
-
+Transient1: 
+	'#5' (precStar?='*'|prec=INT) (',' (scaleStar?='*'|scale=INT))?;
