@@ -101,7 +101,7 @@ public class ImportedURIPackageImpl extends EPackageImpl implements ImportedURIP
     if (isInited) return (ImportedURIPackage)EPackage.Registry.INSTANCE.getEPackage(ImportedURIPackage.eNS_URI);
 
     // Obtain or create and register package
-    ImportedURIPackageImpl theImportedURIPackage = (ImportedURIPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImportedURIPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImportedURIPackageImpl());
+    ImportedURIPackageImpl theImportedURIPackage = (ImportedURIPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ImportedURIPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ImportedURIPackageImpl());
 
     isInited = true;
 

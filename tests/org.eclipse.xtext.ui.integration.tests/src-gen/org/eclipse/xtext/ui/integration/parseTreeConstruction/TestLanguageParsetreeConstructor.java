@@ -21,9 +21,18 @@ public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstruct
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getFileRule().getType().getClassifier()) && (s = new File_Assignment_stuff(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getStuffRule().getType().getClassifier()) && (s = new Stuff_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getFileRule().getType().getClassifier())) {
+			final AbstractToken t = new File_Assignment_stuff(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getStuffRule().getType().getClassifier())) {
+			final AbstractToken t = new Stuff_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

@@ -35,6 +35,7 @@
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -155,6 +156,33 @@
         <tokens xsi:type="xtext:Keyword" value="kw"/>
         <tokens xsi:type="xtext:Assignment" feature="value" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Transient1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://simple/rewrite/test#//Transient1"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="#5"/>
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Assignment" feature="precStar" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="*"/>
+          </groups>
+          <groups xsi:type="xtext:Assignment" feature="prec" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </groups>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" value=","/>
+          <tokens xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Assignment" feature="scaleStar" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="*"/>
+            </groups>
+            <groups xsi:type="xtext:Assignment" feature="scale" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+            </groups>
+          </tokens>
         </tokens>
       </alternatives>
     </rules>

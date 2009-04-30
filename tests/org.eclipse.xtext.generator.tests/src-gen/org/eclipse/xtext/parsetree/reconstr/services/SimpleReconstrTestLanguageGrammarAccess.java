@@ -60,12 +60,13 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cRef2ParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cSpareParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cBooleanParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cTransient1ParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
 		//Term returns Expression:
-		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean;
+		//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1;
 		public ParserRule getRule() { return rule; }
 
-		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean
+		//Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Atom
@@ -91,6 +92,9 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 
 		//Boolean
 		public RuleCall getBooleanParserRuleCall_7() { return cBooleanParserRuleCall_7; }
+
+		//Transient1
+		public RuleCall getTransient1ParserRuleCall_8() { return cTransient1ParserRuleCall_8; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -368,6 +372,70 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_3_0() { return cValueIDTerminalRuleCall_3_0; }
 	}
+
+	public class Transient1Elements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transient1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cPrecStarAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cPrecStarAsteriskKeyword_1_0_0 = (Keyword)cPrecStarAssignment_1_0.eContents().get(0);
+		private final Assignment cPrecAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cPrecINTTerminalRuleCall_1_1_0 = (RuleCall)cPrecAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Alternatives cAlternatives_2_1 = (Alternatives)cGroup_2.eContents().get(1);
+		private final Assignment cScaleStarAssignment_2_1_0 = (Assignment)cAlternatives_2_1.eContents().get(0);
+		private final Keyword cScaleStarAsteriskKeyword_2_1_0_0 = (Keyword)cScaleStarAssignment_2_1_0.eContents().get(0);
+		private final Assignment cScaleAssignment_2_1_1 = (Assignment)cAlternatives_2_1.eContents().get(1);
+		private final RuleCall cScaleINTTerminalRuleCall_2_1_1_0 = (RuleCall)cScaleAssignment_2_1_1.eContents().get(0);
+		
+		//Transient1:
+		//  "#5" (precStar?="*"|prec=INT) ("," (scaleStar?="*"|scale=INT))?;
+		public ParserRule getRule() { return rule; }
+
+		//"#5" (precStar?="*"|prec=INT) ("," (scaleStar?="*"|scale=INT))?
+		public Group getGroup() { return cGroup; }
+
+		//"#5"
+		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
+
+		//precStar?="*"|prec=INT
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//precStar?="*"
+		public Assignment getPrecStarAssignment_1_0() { return cPrecStarAssignment_1_0; }
+
+		//"*"
+		public Keyword getPrecStarAsteriskKeyword_1_0_0() { return cPrecStarAsteriskKeyword_1_0_0; }
+
+		//prec=INT
+		public Assignment getPrecAssignment_1_1() { return cPrecAssignment_1_1; }
+
+		//INT
+		public RuleCall getPrecINTTerminalRuleCall_1_1_0() { return cPrecINTTerminalRuleCall_1_1_0; }
+
+		//("," (scaleStar?="*"|scale=INT))?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//","
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+
+		//scaleStar?="*"|scale=INT
+		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
+
+		//scaleStar?="*"
+		public Assignment getScaleStarAssignment_2_1_0() { return cScaleStarAssignment_2_1_0; }
+
+		//"*"
+		public Keyword getScaleStarAsteriskKeyword_2_1_0_0() { return cScaleStarAsteriskKeyword_2_1_0_0; }
+
+		//scale=INT
+		public Assignment getScaleAssignment_2_1_1() { return cScaleAssignment_2_1_1; }
+
+		//INT
+		public RuleCall getScaleINTTerminalRuleCall_2_1_1_0() { return cScaleINTTerminalRuleCall_2_1_1_0; }
+	}
 	
 	
 	private OpElements pOp;
@@ -380,6 +448,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	private Ref2Elements pRef2;
 	private SpareElements pSpare;
 	private BooleanElements pBoolean;
+	private Transient1Elements pTransient1;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -413,7 +482,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Term returns Expression:
-	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean;
+	//  Atom|TwoNumbers|ManyStrings|Parens|Type|Ref2|Spare|Boolean|Transient1;
 	public TermElements getTermAccess() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	}
@@ -500,6 +569,16 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getBooleanRule() {
 		return getBooleanAccess().getRule();
+	}
+
+	//Transient1:
+	//  "#5" (precStar?="*"|prec=INT) ("," (scaleStar?="*"|scale=INT))?;
+	public Transient1Elements getTransient1Access() {
+		return (pTransient1 != null) ? pTransient1 : (pTransient1 = new Transient1Elements());
+	}
+	
+	public ParserRule getTransient1Rule() {
+		return getTransient1Access().getRule();
 	}
 
 	//terminal ID:

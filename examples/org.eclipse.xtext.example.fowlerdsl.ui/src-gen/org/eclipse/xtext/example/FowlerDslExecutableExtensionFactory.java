@@ -32,7 +32,10 @@ public class FowlerDslExecutableExtensionFactory implements IExecutableExtension
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.example.internal.FowlerDslActivator.getInstance().getBundle();
+		org.eclipse.xtext.example.internal.FowlerDslActivator instance = org.eclipse.xtext.example.internal.FowlerDslActivator.getInstance();
+		if (instance == null)
+			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
+		Bundle bundle = instance.getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
 			return org.eclipse.xtext.example.internal.FowlerDslActivator.getInstance().getInjector("org.eclipse.xtext.example.FowlerDsl").getInstance(class1);

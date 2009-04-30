@@ -95,7 +95,7 @@ public class InheritanceTestPackageImpl extends EPackageImpl implements Inherita
     if (isInited) return (InheritanceTestPackage)EPackage.Registry.INSTANCE.getEPackage(InheritanceTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    InheritanceTestPackageImpl theInheritanceTestPackage = (InheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof InheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new InheritanceTestPackageImpl());
+    InheritanceTestPackageImpl theInheritanceTestPackage = (InheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof InheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new InheritanceTestPackageImpl());
 
     isInited = true;
 

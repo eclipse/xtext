@@ -21,10 +21,24 @@ public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseT
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier()) && (s = new Foo_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier()) && (s = new NameRef_Assignment_rule(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier()) && (s = new MyRule_Assignment_name(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) {
+			final AbstractToken t = new Foo_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) {
+			final AbstractToken t = new NameRef_Assignment_rule(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier())) {
+			final AbstractToken t = new MyRule_Assignment_name(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	

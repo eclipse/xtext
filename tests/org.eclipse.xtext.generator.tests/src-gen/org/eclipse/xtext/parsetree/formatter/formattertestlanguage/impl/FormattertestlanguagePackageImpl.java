@@ -109,7 +109,7 @@ public class FormattertestlanguagePackageImpl extends EPackageImpl implements Fo
     if (isInited) return (FormattertestlanguagePackage)EPackage.Registry.INSTANCE.getEPackage(FormattertestlanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    FormattertestlanguagePackageImpl theFormattertestlanguagePackage = (FormattertestlanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FormattertestlanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FormattertestlanguagePackageImpl());
+    FormattertestlanguagePackageImpl theFormattertestlanguagePackage = (FormattertestlanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof FormattertestlanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new FormattertestlanguagePackageImpl());
 
     isInited = true;
 

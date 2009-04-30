@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Op;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Ref2;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
+import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Type;
 
@@ -124,6 +125,11 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBoolean(org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Boolean object)
       {
         return createBooleanAdapter();
+      }
+      @Override
+      public Adapter caseTransient1(Transient1 object)
+      {
+        return createTransient1Adapter();
       }
       @Override
       public Adapter caseOp(Op object)
@@ -268,6 +274,21 @@ public class SimplerewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBooleanAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1 <em>Transient1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1
+   * @generated
+   */
+  public Adapter createTransient1Adapter()
   {
     return null;
   }

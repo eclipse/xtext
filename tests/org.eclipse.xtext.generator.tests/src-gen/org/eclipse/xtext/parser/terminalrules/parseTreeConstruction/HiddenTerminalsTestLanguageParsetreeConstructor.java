@@ -21,16 +21,60 @@ public class HiddenTerminalsTestLanguageParsetreeConstructor extends AbstractPar
 	@Override
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
-		Solution s;
-		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier()) && (s = new Model_Alternatives(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getWithoutHiddensRule().getType().getClassifier()) && (s = new WithoutHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getWithHiddensRule().getType().getClassifier()) && (s = new WithHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getOverridingHiddensRule().getType().getClassifier()) && (s = new OverridingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier()) && (s = new OverridingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getInheritingHiddensRule().getType().getClassifier()) && (s = new InheritingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getDatatypeHiddensRule().getType().getClassifier()) && (s = new DatatypeHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier()) && (s = new HidingHiddens_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
-		if(inst.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier()) && (s = new InheritingHiddensCall_Group(inst, null).firstSolution()) != null && isConsumed(s,null)) return s;
+		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
+			final AbstractToken t = new Model_Alternatives(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getWithoutHiddensRule().getType().getClassifier())) {
+			final AbstractToken t = new WithoutHiddens_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getWithHiddensRule().getType().getClassifier())) {
+			final AbstractToken t = new WithHiddens_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getOverridingHiddensRule().getType().getClassifier())) {
+			final AbstractToken t = new OverridingHiddens_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getOverridingHiddensCallRule().getType().getClassifier())) {
+			final AbstractToken t = new OverridingHiddensCall_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getInheritingHiddensRule().getType().getClassifier())) {
+			final AbstractToken t = new InheritingHiddens_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getDatatypeHiddensRule().getType().getClassifier())) {
+			final AbstractToken t = new DatatypeHiddens_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getHidingHiddensRule().getType().getClassifier())) {
+			final AbstractToken t = new HidingHiddens_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
+		if(inst.isInstanceOf(grammarAccess.getInheritingHiddensCallRule().getType().getClassifier())) {
+			final AbstractToken t = new InheritingHiddensCall_Group(inst, null);
+			Solution s = t.firstSolution();
+			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
+			if(s != null) return s;
+		}
 		return null;
 	}
 	
