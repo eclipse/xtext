@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
 import java.util.LinkedList;
@@ -16,10 +23,14 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
+import org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
 	@Inject
@@ -33,6 +44,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject(optional = true)
 	private Provider<IDamagerRepairer> damagerRepairerProvider;
+	
+	@Inject(optional=true)
+	private IContentFormatterFactory contentFormatterFactory;
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -83,18 +97,10 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		return detectors.toArray(new IHyperlinkDetector[detectors.size()]);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.source.SourceViewerConfiguration#getContentFormatter
-	 * (org.eclipse.jface.text.source.ISourceViewer)
-	 */
 	@Override
 	public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
-		// TODO add formatter here, consider to use
-		// org.eclipse.jface.text.formatter.ContentFormatter with custom
-		// strategy
+		if (contentFormatterFactory != null)
+			return contentFormatterFactory.createConfiguredFormatter(this, sourceViewer);
 		return super.getContentFormatter(sourceViewer);
 	}
 }
