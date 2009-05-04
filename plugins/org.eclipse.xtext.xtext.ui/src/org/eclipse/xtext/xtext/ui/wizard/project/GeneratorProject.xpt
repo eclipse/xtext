@@ -19,33 +19,44 @@
 /*
  * This is an example model
  */
- 
-class A extends B
+datatype String;
 
-class B
+class Leaf extends Composable {
+  attr name: String;
+}
+
+class Composite extends Composable {
+  ref content: Composable;
+}
+
+class Composable {
+}
 «ENDFILE»
 
 «FILE "templates/Extensions.ext"-»
 import «languageNameAbbreviation.toFirstLower()»;
 
-referencedBy(Class this) :
-	this.eRootContainer.eAllContents.typeSelect(Class).select(e|e.references == this).name.toString(",");
+listSubclasses(Class this) :
+	let subclasses = this.eRootContainer.eAllContents.typeSelect(Class).select(e|e.superClass == this).name:
+		switch (subclasses.size) { 
+			case 0: "no subclasses"
+			case 1: "subclass: " + subclasses.toString(", ")
+			default: subclasses.size.toString() + " subclasses: " + subclasses.toString(", ")
+		};
 «ENDFILE»
 
 «FILE "templates/Template.xpt"-»
 «OP()»IMPORT «languageNameAbbreviation.toFirstLower()»«CL()»;
 
-
 «OP()»EXTENSION templates::Extensions«CL()»
 
-«OP()»DEFINE main FOR Model«CL()»
- «OP()»FILE "output.txt"-«CL()»
-  «OP()»FOREACH this.elements AS e«CL()»
-   «OP()»e.name«CL()» («OP()»e.metaType«CL()») «OP()»e.referencedBy()«CL()»
-  «OP()»ENDFOREACH-«CL()»
- «OP()»ENDFILE«CL()»
+«OP()»DEFINE main FOR Model-«CL()»
+«OP()»FILE "output.txt"-«CL()»
+«OP()»FOREACH this.elements.typeSelect(Class).sortBy(e|e.name) AS e-«CL()»
+«OP()»e.name«CL()» has «OP()»e.listSubclasses()«CL()».
+«OP()»ENDFOREACH-«CL()»
+«OP()»ENDFILE-«CL()»
 «OP()»ENDDEFINE«CL()»
-
 «ENDFILE»
 
 «FILE "workflow/"+languageNameAbbreviation+"Generator.mwe"-»
