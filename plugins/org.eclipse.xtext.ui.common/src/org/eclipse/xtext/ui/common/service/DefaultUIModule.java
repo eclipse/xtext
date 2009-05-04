@@ -14,6 +14,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
 import org.eclipse.xtext.ui.common.editor.templates.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateStore;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
@@ -110,6 +112,10 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends TemplateStore> bindTemplateStore() {
 		return XtextTemplateStore.class;
+	}
+	
+	public Class<? extends ContextTypeRegistry> bindContextTypeRegistry() {
+		return XtextTemplateContextTypeRegistry.class;
 	}
 	
 	public Class<? extends ContentAssistContext.Factory> bindContentAssistContextFactory() {
