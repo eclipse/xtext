@@ -64,16 +64,16 @@
 		<page
 			class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.reference.ReferenceGrammar"
-			name="ReferenceGrammar">
+			name="ReferenceGrammar" category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.reference.ui.keyword_ReferenceGrammar">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.reference.ReferenceGrammar"
-			class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.reference.ReferenceGrammar.editor"
-			name="Editor">
+			class="org.eclipse.xtext.reference.ReferenceGrammarExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.reference.ReferenceGrammar.coloring"
+			name="Syntax Coloring">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>

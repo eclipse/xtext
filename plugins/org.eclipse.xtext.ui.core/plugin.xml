@@ -12,6 +12,14 @@
             label="Syntax">
       </keyword>
    </extension>
+   <extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+          class="org.eclipse.xtext.ui.core.editor.preferences.EmptyPreferencePage"
+          id="org.eclipse.xtext.languages"
+          name="Xtext Languages">
+		</page>
+	</extension>
   <extension
          point="org.eclipse.ui.handlers">
       <handler

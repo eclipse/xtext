@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.contentassist;
+package org.eclipse.xtext.ui.common.editor.templates;
 
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.Template;
@@ -30,8 +30,16 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractTemplateProposalProvider implements ITemplateProposalProvider {
 
-	@Inject
 	private IScopeProvider scopeProvider;
+	
+	@Inject
+	public void setScopeProvider(IScopeProvider scopeProvider) {
+		this.scopeProvider = scopeProvider;
+	}
+
+	public IScopeProvider getScopeProvider() {
+		return scopeProvider;
+	}
 	
 	public static class NullSafeTemplateAcceptor extends ITemplateAcceptor.Delegate {
 		
@@ -99,12 +107,5 @@ public abstract class AbstractTemplateProposalProvider implements ITemplatePropo
 
 	protected abstract TemplateContextType[] getContextTypes(ContentAssistContext context);
 
-	public void setScopeProvider(IScopeProvider scopeProvider) {
-		this.scopeProvider = scopeProvider;
-	}
-
-	public IScopeProvider getScopeProvider() {
-		return scopeProvider;
-	}
 
 }

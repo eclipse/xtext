@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.preferences;
 
-import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.LabelFieldEditor;
 
 /**
@@ -20,12 +19,6 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	@Override
 	protected void createFieldEditors() {
 		addField(new LabelFieldEditor("General settings.", getFieldEditorParent()));
-		addField(new StringFieldEditor("testFeld", "Languagewide setting", getFieldEditorParent()));
-	}
-
-	@Override
-	protected String qualifiedName() {
-		return getLanguageName();
 	}
 
 }

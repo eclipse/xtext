@@ -8,22 +8,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.preferences;
 
-import org.eclipse.xtext.ui.core.editor.preferences.fields.LabelFieldEditor;
+import org.eclipse.jface.preference.PreferencePage;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
- * 
+ * @author Sven Efftinge - Initial contribution and API
+ *
  */
-public class EditorPreferencePage extends AbstractPreferencePage {
+public class EmptyPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 
 	@Override
-	protected void createFieldEditors() {
-		addField(new LabelFieldEditor(getLanguageName() + " Editor preferences.\nThis is the best " + getLanguageName()
-				+ " Editor in the whole world!", getFieldEditorParent()));
+	protected Control createContents(Composite parent) {
+		return new Composite(parent, SWT.NULL);
 	}
 
-	@Override
-	protected String qualifiedName() {
-		return PreferenceConstants.EDITOR_NODE_NAME;
+	public void init(IWorkbench workbench) {
+		
 	}
+
 }

@@ -84,13 +84,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		return project != null;
 	}
 
-	/**
-	 * @return prefix for preference keys
-	 */
-	abstract protected String qualifiedName();
-
 	public AbstractPreferencePage() {
-
 		super(GRID);
 	}
 
@@ -189,6 +183,13 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	protected String getLanguageName() {
 		return this.languageName;
+	}
+	
+	/**
+	 * @return prefix for preference keys
+	 */
+	protected String qualifiedName() {
+		return languageName;
 	}
 
 	/*

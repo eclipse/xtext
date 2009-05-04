@@ -7,18 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.ui.core.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
-
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -28,29 +21,8 @@ public abstract class AbstractTokenScanner implements ITokenScanner {
 
 	private final PreferenceStoreAccessor preferenceStoreAccessor;
 
-	protected AbstractTokenScanner(
-			final @Named(Constants.LANGUAGE_NAME) String languageName,
-			final Provider<SyntaxColoringPreferencePage> preferencePageProvider,
-			final PreferenceStoreAccessor accessor) {
+	protected AbstractTokenScanner(final PreferenceStoreAccessor accessor) {
 		this.preferenceStoreAccessor = accessor;
-		// XXX LITTLE HACK, adding PrefPage on the fly
-		String preferencePagePathSeparator = "/";
-		String parentPreferencePagePath = languageName + preferencePagePathSeparator + languageName
-				+ PreferenceConstants.SEPARATOR + PreferenceConstants.EDITOR_NODE_NAME;
-		String syntaxColorerPrefPageTag = PreferenceStoreAccessor.syntaxColorerTag(languageName);
-		String preferencePagePath = parentPreferencePagePath + preferencePagePathSeparator + syntaxColorerPrefPageTag;
-		if (PlatformUI.getWorkbench().getPreferenceManager().find(preferencePagePath) == null) {
-			PreferenceNode node = new PreferenceNode(syntaxColorerPrefPageTag, "Syntax Colorer", null, null) {
-				@Override
-				public void createPage() {
-					SyntaxColoringPreferencePage page = preferencePageProvider.get();
-					page.setTitle(getLabelText());
-					setPage(page);
-				}
-			};
-			PlatformUI.getWorkbench().getPreferenceManager().addTo(parentPreferencePagePath, node);
-		}
-		// TODO redraw/revalidate editor's StyledText control
 	}
 
 	protected TextAttribute createTextAttribute(ITokenStyle tokenStyle) {

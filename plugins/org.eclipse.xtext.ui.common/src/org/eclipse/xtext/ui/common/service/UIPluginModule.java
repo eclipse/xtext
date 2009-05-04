@@ -8,6 +8,8 @@
 package org.eclipse.xtext.ui.common.service;
 
 import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.core.IImageHelper;
@@ -36,4 +38,13 @@ public class UIPluginModule extends AbstractGenericModule {
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return PluginImageHelper.class;
 	}
+	
+	public IPreferenceStore bindIPreferenceStore() {
+		return plugin.getPreferenceStore();
+	}
+	
+	public ContextTypeRegistry bindContextTypeRegistry() {
+		return new ContextTypeRegistry();
+	}
+
 }

@@ -54,16 +54,17 @@
 		<page
 			class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.example.FowlerDsl"
-			name="FowlerDsl">
+			name="FowlerDsl"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.example.ui.keyword_FowlerDsl">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.example.FowlerDsl"
-			class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.example.FowlerDsl.editor"
-			name="Editor">
+			class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.example.FowlerDsl.coloring"
+			name="Syntax Coloring">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>

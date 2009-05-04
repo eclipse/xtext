@@ -53,20 +53,29 @@
 		<page
 			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.example.EcoreDsl"
-			name="EcoreDsl">
+			name="EcoreDsl" category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.example.ui.keyword_EcoreDsl">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.example.EcoreDsl"
-			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.example.EcoreDsl.editor"
-			name="Editor">
+			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.example.EcoreDsl.coloring"
+			name="Syntax Coloring">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
+		<!--<page
+			category="org.eclipse.xtext.example.EcoreDsl"
+			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.example.EcoreDsl.templates"
+			name="Templates">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>-->
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
@@ -82,23 +91,23 @@
    
    <extension point="org.eclipse.ui.editors.templates">
         <contextType name="EPackageDecl"
-            class="org.eclipse.xtext.ui.common.editor.contentassist.XtextTemplateContextType"
+            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
             id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EPackageDecl">
         </contextType>
         <contextType name="EClassDecl"
-            class="org.eclipse.xtext.ui.common.editor.contentassist.XtextTemplateContextType"
+            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
             id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EClassDecl">
         </contextType>
         <contextType name="EDataTypeDecl"
-            class="org.eclipse.xtext.ui.common.editor.contentassist.XtextTemplateContextType"
+            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
             id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EDataTypeDecl">
         </contextType>
         <contextType name="EEnumDecl"
-            class="org.eclipse.xtext.ui.common.editor.contentassist.XtextTemplateContextType"
+            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
             id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EEnumDecl">
         </contextType>
         <contextType name="EAttributeDecl"
-            class="org.eclipse.xtext.ui.common.editor.contentassist.XtextTemplateContextType"
+            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
             id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EAttributeDecl">
         </contextType>
         <include file="templates/templates.xml" /> 
