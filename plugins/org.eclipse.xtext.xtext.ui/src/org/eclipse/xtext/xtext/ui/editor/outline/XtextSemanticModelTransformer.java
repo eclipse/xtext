@@ -11,7 +11,6 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -33,11 +32,8 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
-
-import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -45,11 +41,6 @@ import com.google.inject.Inject;
 public class XtextSemanticModelTransformer extends DefaultSemanticModelTransformer {
 
 	private static final String UNKNOWN = "<unknown>";
-
-	@Inject
-	public XtextSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
-		super(locationProvider, labelProvider);
-	}
 
 	@Override
 	public boolean consumeSemanticNode(EObject semanticNode) {
