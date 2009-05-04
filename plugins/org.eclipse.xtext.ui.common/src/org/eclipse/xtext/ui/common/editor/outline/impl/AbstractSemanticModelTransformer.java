@@ -137,7 +137,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	protected ILabelProvider labelProvider;
 
 	@Inject
-	public AbstractSemanticModelTransformer(ILabelProvider labelProvider) {
+	public void setLabelProvider(ILabelProvider labelProvider) {
 		this.labelProvider = labelProvider;
 	}
 

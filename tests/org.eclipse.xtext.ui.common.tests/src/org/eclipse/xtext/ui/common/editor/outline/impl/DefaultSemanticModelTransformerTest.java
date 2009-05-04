@@ -31,7 +31,10 @@ public class DefaultSemanticModelTransformerTest extends AbstractXtextTests {
 	}
 
 	protected DefaultSemanticModelTransformer getSemanticModelTransformer() {
-		return new DefaultSemanticModelTransformer(new DefaultLocationInFileProvider(), new DefaultLabelProvider());
+		DefaultSemanticModelTransformer tr = new DefaultSemanticModelTransformer();
+		tr.setLabelProvider(new DefaultLabelProvider());
+		tr.setLocationProvider(new DefaultLocationInFileProvider());
+		return tr;
 	}
 
 	public void testNullSafety() {

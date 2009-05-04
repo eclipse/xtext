@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.common.editor.outline.impl;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
@@ -25,14 +24,13 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 
 	final static Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
 
-	private final ILocationInFileProvider locationProvider;
+	private ILocationInFileProvider locationProvider;
 
 	@Inject
-	public DefaultSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
-		super(labelProvider);
+	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
 	}
-
+	
 	@Override
 	public boolean consumeSemanticNode(EObject semanticNode) {
 		if (semanticNode != null) {

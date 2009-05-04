@@ -52,8 +52,9 @@ public class TestTransformerHelper {
 	
 	public static class TestTransformerWithNamingConvention extends AbstractDeclarativeSemanticModelTransformer {
 		
-		public TestTransformerWithNamingConvention() {
-			super(myLocationProvider, myLabelProvider);
+		{
+			setLocationProvider(myLocationProvider);
+			setLabelProvider(myLabelProvider);
 		}
 		
 		/**
@@ -90,9 +91,9 @@ public class TestTransformerHelper {
 	}
 	
 	public static class TestTransformerWithAnnotations extends AbstractDeclarativeSemanticModelTransformer {
-		
-		public TestTransformerWithAnnotations() {
-			super(myLocationProvider, myLabelProvider);
+		{
+			setLocationProvider(myLocationProvider);
+			setLabelProvider(myLabelProvider);
 		}
 		
 		/**
