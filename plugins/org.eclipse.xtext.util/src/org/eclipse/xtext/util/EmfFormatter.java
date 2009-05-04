@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.WrappedException;
@@ -164,5 +165,21 @@ public class EmfFormatter {
 			buf.append(r.getURIFragment(target));
 		else
 			buf.append(r.getURI().toString()).append(r.getURIFragment(target));
+	}
+
+	/**
+	 * @param firstSetGrammarElements
+	 * @param object
+	 * @return
+	 */
+	public static String listToStr(List<? extends EObject> elements) {
+		StringBuffer buff = new StringBuffer();
+		for (int i = 0; i < elements.size(); i++) {
+			EObject obj = elements.get(i);
+			buff.append(objToStr(obj));
+			if (i<elements.size()-1)
+				buff.append(",\n");
+		}
+		return buff.toString();
 	}
 }
