@@ -63,16 +63,17 @@
 		<page
 			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.ui.integration.TestLanguage"
-			name="TestLanguage">
+			name="TestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.ui.integration.ui.keyword_TestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.ui.integration.TestLanguage"
-			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.ui.integration.TestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.ui.integration.TestLanguage.coloring"
+			name="Syntax Coloring">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>

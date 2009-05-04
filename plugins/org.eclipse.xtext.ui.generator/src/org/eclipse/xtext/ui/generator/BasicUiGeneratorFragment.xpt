@@ -58,16 +58,17 @@
 		<page
 			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="«name»"
-			name="«name.toSimpleName()»">
+			name="«name.toSimpleName()»"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»">
 			</keywordReference>
 		</page>
 		<page
 			category="«name»"
-			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="«name».editor"
-			name="Editor">
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="«name».coloring"
+			name="Syntax Coloring">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>

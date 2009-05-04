@@ -82,7 +82,7 @@ public class XtextEditor extends TextEditor {
 	public String getLanguageName() {
 		return languageName;
 	}
-
+	
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
 		if (log.isDebugEnabled()) {
@@ -103,11 +103,9 @@ public class XtextEditor extends TextEditor {
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 
-		// create chained pref. store
-		IPreferenceStore store = new ChainedPreferenceStore(new IPreferenceStore[] {
-				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() });
-		setPreferenceStore(store);
-
+		setPreferenceStore(new ChainedPreferenceStore(new IPreferenceStore[] {
+				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() }));
+		
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the source viewer yet (it will be created later).
 

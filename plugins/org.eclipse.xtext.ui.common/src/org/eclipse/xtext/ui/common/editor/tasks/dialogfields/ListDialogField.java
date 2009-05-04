@@ -917,10 +917,6 @@ public class ListDialogField extends DialogField {
 			// will never happen
 		}
 
-		public boolean isDeleted(Object element) {
-			return false;
-		}
-
 		public void dispose() {
 		}
 

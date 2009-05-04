@@ -14,6 +14,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.AbstractGenericModule;
@@ -21,7 +22,6 @@ import org.eclipse.xtext.ui.common.editor.contentassist.DefaultCompletionProposa
 import org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistContextFactory;
 import org.eclipse.xtext.ui.common.editor.contentassist.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.common.editor.contentassist.DefaultFollowElementCalculator;
-import org.eclipse.xtext.ui.common.editor.contentassist.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelper;
 import org.eclipse.xtext.ui.common.editor.hyperlinking.DefaultHyperlinkDetector;
@@ -29,6 +29,8 @@ import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.ITokenColorer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
+import org.eclipse.xtext.ui.common.editor.templates.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateStore;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
@@ -48,6 +50,7 @@ import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
  * @author Heiko Behrens - Initial contribution and API
  */
 public abstract class DefaultUIModule extends AbstractGenericModule {
+	
 
 	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer.class;
@@ -103,6 +106,10 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
 		return DefaultTemplateProposalProvider.class;
+	}
+	
+	public Class<? extends TemplateStore> bindTemplateStore() {
+		return XtextTemplateStore.class;
 	}
 	
 	public Class<? extends ContentAssistContext.Factory> bindContentAssistContextFactory() {

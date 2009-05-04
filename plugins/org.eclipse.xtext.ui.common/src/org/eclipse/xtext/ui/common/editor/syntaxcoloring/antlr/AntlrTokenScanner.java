@@ -13,15 +13,11 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.AbstractTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.PreferenceStoreAccessor;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * Default implementation for the ITokenScanner. Uses an AntLR based
@@ -32,12 +28,10 @@ public class AntlrTokenScanner extends AbstractTokenScanner {
 
 	@Inject
 	public AntlrTokenScanner(
-			final @Named(Constants.LANGUAGE_NAME) String languageName,
-			final Provider<SyntaxColoringPreferencePage> preferencePageProvider,
 			final PreferenceStoreAccessor accessor,
 			final ITokenColorer tokenColorer,
 			final Lexer lexer) {
-		super(languageName, preferencePageProvider, accessor);
+		super(accessor);
 		this.tokenColorer = tokenColorer;
 		this.lexer = lexer;
 	}

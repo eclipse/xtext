@@ -13,7 +13,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.example.EcoreDslActivator;
-import org.eclipse.xtext.ui.common.editor.contentassist.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.common.editor.templates.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 
 /**
