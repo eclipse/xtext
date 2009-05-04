@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.xtext.enumrules.EnumRulesTestLanguageCheckValidator;
+import org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator;
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
