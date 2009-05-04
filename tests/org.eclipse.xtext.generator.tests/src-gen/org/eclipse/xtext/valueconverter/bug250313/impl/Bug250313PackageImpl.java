@@ -109,7 +109,7 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
     if (isInited) return (Bug250313Package)EPackage.Registry.INSTANCE.getEPackage(Bug250313Package.eNS_URI);
 
     // Obtain or create and register package
-    Bug250313PackageImpl theBug250313Package = (Bug250313PackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof Bug250313PackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new Bug250313PackageImpl());
+    Bug250313PackageImpl theBug250313Package = (Bug250313PackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug250313PackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug250313PackageImpl());
 
     isInited = true;
 

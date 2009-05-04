@@ -156,7 +156,7 @@ public class SimplerewritetestPackageImpl extends EPackageImpl implements Simple
     if (isInited) return (SimplerewritetestPackage)EPackage.Registry.INSTANCE.getEPackage(SimplerewritetestPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimplerewritetestPackageImpl theSimplerewritetestPackage = (SimplerewritetestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimplerewritetestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimplerewritetestPackageImpl());
+    SimplerewritetestPackageImpl theSimplerewritetestPackage = (SimplerewritetestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimplerewritetestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimplerewritetestPackageImpl());
 
     isInited = true;
 

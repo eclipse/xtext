@@ -84,7 +84,7 @@ public class LowerCaseNamedTestLanguagePackageImpl extends EPackageImpl implemen
     if (isInited) return (LowerCaseNamedTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LowerCaseNamedTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    LowerCaseNamedTestLanguagePackageImpl theLowerCaseNamedTestLanguagePackage = (LowerCaseNamedTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LowerCaseNamedTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LowerCaseNamedTestLanguagePackageImpl());
+    LowerCaseNamedTestLanguagePackageImpl theLowerCaseNamedTestLanguagePackage = (LowerCaseNamedTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LowerCaseNamedTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LowerCaseNamedTestLanguagePackageImpl());
 
     isInited = true;
 

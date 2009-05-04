@@ -87,7 +87,7 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
     if (isInited) return (AnotherSimpleTestPackage)EPackage.Registry.INSTANCE.getEPackage(AnotherSimpleTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    AnotherSimpleTestPackageImpl theAnotherSimpleTestPackage = (AnotherSimpleTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof AnotherSimpleTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new AnotherSimpleTestPackageImpl());
+    AnotherSimpleTestPackageImpl theAnotherSimpleTestPackage = (AnotherSimpleTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof AnotherSimpleTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new AnotherSimpleTestPackageImpl());
 
     isInited = true;
 

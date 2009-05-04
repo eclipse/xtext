@@ -93,7 +93,7 @@ public class LexerLangPackageImpl extends EPackageImpl implements LexerLangPacka
     if (isInited) return (LexerLangPackage)EPackage.Registry.INSTANCE.getEPackage(LexerLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    LexerLangPackageImpl theLexerLangPackage = (LexerLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LexerLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LexerLangPackageImpl());
+    LexerLangPackageImpl theLexerLangPackage = (LexerLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LexerLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LexerLangPackageImpl());
 
     isInited = true;
 

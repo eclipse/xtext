@@ -245,7 +245,7 @@ public class EpatchTestLanguagePackageImpl extends EPackageImpl implements Epatc
     if (isInited) return (EpatchTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EpatchTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EpatchTestLanguagePackageImpl theEpatchTestLanguagePackage = (EpatchTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EpatchTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EpatchTestLanguagePackageImpl());
+    EpatchTestLanguagePackageImpl theEpatchTestLanguagePackage = (EpatchTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EpatchTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EpatchTestLanguagePackageImpl());
 
     isInited = true;
 

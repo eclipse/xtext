@@ -54,8 +54,8 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.crossrefs.ImportUriTestLanguageCheckValidator> bindImportUriTestLanguageCheckValidator() {
-		return org.eclipse.xtext.crossrefs.ImportUriTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.crossrefs.validation.ImportUriTestLanguageCheckValidator> bindImportUriTestLanguageCheckValidator() {
+		return org.eclipse.xtext.crossrefs.validation.ImportUriTestLanguageCheckValidator.class;
 	}
 
 	

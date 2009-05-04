@@ -54,8 +54,8 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends Defa
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguageCheckValidator> bindMetamodelRefTestLanguageCheckValidator() {
-		return org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.metamodelreferencing.tests.validation.MetamodelRefTestLanguageCheckValidator> bindMetamodelRefTestLanguageCheckValidator() {
+		return org.eclipse.xtext.metamodelreferencing.tests.validation.MetamodelRefTestLanguageCheckValidator.class;
 	}
 
 	

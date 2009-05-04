@@ -54,8 +54,8 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends D
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageCheckValidator> bindBaseInheritanceTestLanguageCheckValidator() {
-		return org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.grammarinheritance.validation.BaseInheritanceTestLanguageCheckValidator> bindBaseInheritanceTestLanguageCheckValidator() {
+		return org.eclipse.xtext.grammarinheritance.validation.BaseInheritanceTestLanguageCheckValidator.class;
 	}
 
 	

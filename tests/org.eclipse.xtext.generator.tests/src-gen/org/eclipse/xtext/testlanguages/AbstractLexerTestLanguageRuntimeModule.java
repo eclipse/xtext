@@ -54,8 +54,8 @@ public abstract class AbstractLexerTestLanguageRuntimeModule extends DefaultRunt
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.LexerTestLanguageCheckValidator> bindLexerTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.LexerTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.LexerTestLanguageCheckValidator> bindLexerTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.LexerTestLanguageCheckValidator.class;
 	}
 
 	

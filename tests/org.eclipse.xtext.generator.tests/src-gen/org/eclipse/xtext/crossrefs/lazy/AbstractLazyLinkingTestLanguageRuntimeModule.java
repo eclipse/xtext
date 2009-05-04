@@ -54,8 +54,8 @@ public abstract class AbstractLazyLinkingTestLanguageRuntimeModule extends Defau
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.crossrefs.lazy.LazyLinkingTestLanguageCheckValidator> bindLazyLinkingTestLanguageCheckValidator() {
-		return org.eclipse.xtext.crossrefs.lazy.LazyLinkingTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.crossrefs.lazy.validation.LazyLinkingTestLanguageCheckValidator> bindLazyLinkingTestLanguageCheckValidator() {
+		return org.eclipse.xtext.crossrefs.lazy.validation.LazyLinkingTestLanguageCheckValidator.class;
 	}
 
 	

@@ -54,8 +54,8 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends Default
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.FowlerDslTestLanguageCheckValidator> bindFowlerDslTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.FowlerDslTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.FowlerDslTestLanguageCheckValidator> bindFowlerDslTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.FowlerDslTestLanguageCheckValidator.class;
 	}
 
 	

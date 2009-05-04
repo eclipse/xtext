@@ -54,8 +54,8 @@ public abstract class AbstractlowerCaseNamedTestLanguageRuntimeModule extends De
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.generator.lowerCaseNamedTestLanguageCheckValidator> bindlowerCaseNamedTestLanguageCheckValidator() {
-		return org.eclipse.xtext.generator.lowerCaseNamedTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.generator.validation.lowerCaseNamedTestLanguageCheckValidator> bindlowerCaseNamedTestLanguageCheckValidator() {
+		return org.eclipse.xtext.generator.validation.lowerCaseNamedTestLanguageCheckValidator.class;
 	}
 
 	

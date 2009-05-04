@@ -54,8 +54,8 @@ public abstract class AbstractSerializationBug269362TestLanguageRuntimeModule ex
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.SerializationBug269362TestLanguageCheckValidator> bindSerializationBug269362TestLanguageCheckValidator() {
-		return org.eclipse.xtext.parsetree.reconstr.SerializationBug269362TestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.validation.SerializationBug269362TestLanguageCheckValidator> bindSerializationBug269362TestLanguageCheckValidator() {
+		return org.eclipse.xtext.parsetree.reconstr.validation.SerializationBug269362TestLanguageCheckValidator.class;
 	}
 
 	

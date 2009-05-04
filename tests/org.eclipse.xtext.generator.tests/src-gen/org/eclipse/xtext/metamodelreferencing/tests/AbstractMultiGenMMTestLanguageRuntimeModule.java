@@ -54,8 +54,8 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageCheckValidator> bindMultiGenMMTestLanguageCheckValidator() {
-		return org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.metamodelreferencing.tests.validation.MultiGenMMTestLanguageCheckValidator> bindMultiGenMMTestLanguageCheckValidator() {
+		return org.eclipse.xtext.metamodelreferencing.tests.validation.MultiGenMMTestLanguageCheckValidator.class;
 	}
 
 	

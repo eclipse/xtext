@@ -54,8 +54,8 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguageCheckValidator> bindDatatypeRulesTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parser.datatyperules.validation.DatatypeRulesTestLanguageCheckValidator> bindDatatypeRulesTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.datatyperules.validation.DatatypeRulesTestLanguageCheckValidator.class;
 	}
 
 	

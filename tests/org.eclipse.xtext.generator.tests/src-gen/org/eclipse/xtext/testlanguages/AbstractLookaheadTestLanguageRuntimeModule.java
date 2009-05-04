@@ -54,8 +54,8 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends Default
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.LookaheadTestLanguageCheckValidator> bindLookaheadTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.LookaheadTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.LookaheadTestLanguageCheckValidator> bindLookaheadTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.LookaheadTestLanguageCheckValidator.class;
 	}
 
 	

@@ -54,8 +54,8 @@ public abstract class AbstractEpatchTestLanguageRuntimeModule extends DefaultRun
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.epatch.EpatchTestLanguageCheckValidator> bindEpatchTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.epatch.EpatchTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parser.epatch.validation.EpatchTestLanguageCheckValidator> bindEpatchTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.epatch.validation.EpatchTestLanguageCheckValidator.class;
 	}
 
 	

@@ -95,7 +95,7 @@ public class EnumRulesTestLanguagePackageImpl extends EPackageImpl implements En
     if (isInited) return (EnumRulesTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EnumRulesTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EnumRulesTestLanguagePackageImpl theEnumRulesTestLanguagePackage = (EnumRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EnumRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EnumRulesTestLanguagePackageImpl());
+    EnumRulesTestLanguagePackageImpl theEnumRulesTestLanguagePackage = (EnumRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EnumRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EnumRulesTestLanguagePackageImpl());
 
     isInited = true;
 

@@ -54,8 +54,8 @@ public abstract class AbstractTransientValuesTestRuntimeModule extends DefaultRu
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parsetree.transientvalues.TransientValuesTestCheckValidator> bindTransientValuesTestCheckValidator() {
-		return org.eclipse.xtext.parsetree.transientvalues.TransientValuesTestCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parsetree.transientvalues.validation.TransientValuesTestCheckValidator> bindTransientValuesTestCheckValidator() {
+		return org.eclipse.xtext.parsetree.transientvalues.validation.TransientValuesTestCheckValidator.class;
 	}
 
 	

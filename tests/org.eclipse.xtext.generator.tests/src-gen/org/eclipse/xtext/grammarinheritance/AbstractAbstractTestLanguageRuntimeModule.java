@@ -54,8 +54,8 @@ public abstract class AbstractAbstractTestLanguageRuntimeModule extends DefaultR
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.grammarinheritance.AbstractTestLanguageCheckValidator> bindAbstractTestLanguageCheckValidator() {
-		return org.eclipse.xtext.grammarinheritance.AbstractTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.grammarinheritance.validation.AbstractTestLanguageCheckValidator> bindAbstractTestLanguageCheckValidator() {
+		return org.eclipse.xtext.grammarinheritance.validation.AbstractTestLanguageCheckValidator.class;
 	}
 
 }
