@@ -8,17 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.example;
 
-import java.io.IOException;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
-import org.eclipse.jface.text.templates.persistence.TemplateStore;
-import org.eclipse.ui.editors.text.templates.ContributionContextTypeRegistry;
-import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -35,29 +30,10 @@ public class EcoreDslActivator extends org.eclipse.xtext.example.internal.EcoreD
 	
 	private static final String RESOURCE_NAME = PLUGIN_ID + ".messages";
 
-
-	/** Key to store our templates. */
-	private static final String TEMPLATES_KEY = PLUGIN_ID + ".templates";
-
-	public static final String PREFIX = EcoreDslActivator.PLUGIN_ID + ".templates.contextType.";
-
-	public static final String EPACKAGE = PREFIX + "EPackageDecl";
-	public static final String ECLASS = PREFIX + "EClassDecl";
-	public static final String EDATATYPEDECL = PREFIX + "EDataTypeDecl";
-	public static final String EENUMDECL = PREFIX + "EEnumDecl";
-	public static final String EATTRIBUTEDECL = PREFIX + "EAttributeDecl";
-	
-	
-	public static final String[] TEMPLATES = new String[] {
-		EPACKAGE,ECLASS,EDATATYPEDECL,EENUMDECL,EATTRIBUTEDECL
-		
-	};
 	// The shared instance
 	private static EcoreDslActivator plugin;
 
 	private ResourceBundle resourceBundle;
-	private ContextTypeRegistry contextTypeRegistry;
-	private TemplateStore templateStore;
 
 	/**
 	 * The constructor
@@ -113,40 +89,6 @@ public class EcoreDslActivator extends org.eclipse.xtext.example.internal.EcoreD
 		plugin = activator;
 	}
 
-	/**
-	 * Returns the template context type registry for the Ecore-Dsl editor.
-	 * 
-	 * @return the template context type registry for the Ecore-Dsl  editor
-	 */
-	public ContextTypeRegistry getTemplateContextRegistry() {
-		if (contextTypeRegistry == null) {
-			ContributionContextTypeRegistry registry = new ContributionContextTypeRegistry();
-			for (int i = 0; i < TEMPLATES.length; i++) {
-				registry.addContextType(TEMPLATES[i]);
-			}
-			contextTypeRegistry = registry;
-		}
-		return contextTypeRegistry;
-	}
-
-	/**
-	 * Returns the template store for the Ecore-Dsl  editor.
-	 * 
-	 * @return the template store for the Ecore-Dsl  editor
-	 */
-	public TemplateStore getTemplateStore() {
-		if (templateStore == null) {
-			templateStore = new ContributionTemplateStore(getTemplateContextRegistry(), getPreferenceStore(),
-					TEMPLATES_KEY);
-			try {
-				templateStore.load();
-			}
-			catch (IOException e) {
-				logger.error(e);
-			}
-		}
-		return templateStore;
-	}
 	
 	public static void log(IStatus status) {
 		getDefault().getLog().log(status);

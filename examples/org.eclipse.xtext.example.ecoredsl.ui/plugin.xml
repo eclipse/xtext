@@ -67,7 +67,7 @@
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
-		<!--<page
+		<page
 			category="org.eclipse.xtext.example.EcoreDsl"
 			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
 			id="org.eclipse.xtext.example.EcoreDsl.templates"
@@ -75,7 +75,7 @@
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
-		</page>-->
+		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
@@ -89,29 +89,6 @@
 		</keyword>
 	</extension>
    
-   <extension point="org.eclipse.ui.editors.templates">
-        <contextType name="EPackageDecl"
-            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EPackageDecl">
-        </contextType>
-        <contextType name="EClassDecl"
-            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EClassDecl">
-        </contextType>
-        <contextType name="EDataTypeDecl"
-            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EDataTypeDecl">
-        </contextType>
-        <contextType name="EEnumDecl"
-            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EEnumDecl">
-        </contextType>
-        <contextType name="EAttributeDecl"
-            class="org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType"
-            id="org.eclipse.xtext.ecoredsl.ui.templates.contextType.EAttributeDecl">
-        </contextType>
-        <include file="templates/templates.xml" /> 
-    </extension>
     <extension
          point="org.eclipse.ui.commands">
          <command
