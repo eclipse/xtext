@@ -21,9 +21,8 @@ import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
 public class EPackageRegistryIndexFeeder {
 
 	/**
-	 * There will be a scalability issue with this implementation, as it
-	 * resolves all descriptors in the registry, thus instantiates all
-	 * registered EPackages.
+	 * There will be a scalability issue with this implementation, as it resolves all descriptors in the registry, thus
+	 * instantiates all registered EPackages.
 	 * 
 	 * @param indexStore
 	 */
@@ -33,12 +32,17 @@ public class EPackageRegistryIndexFeeder {
 			List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
 			for (String nsURI : nsURIs) {
 				hasChanged = false;
-				EPackageDescriptor storedEPackages = indexStore.ePackageDAO().createQuery().nsURI(nsURI)
-						.executeSingleResult();
-				if (storedEPackages == null) {
-					hasChanged = true;
-					EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
-					indexFeeder.index(ePackage, true);
+				try {
+					EPackageDescriptor storedEPackages = indexStore.ePackageDAO().createQuery().nsURI(nsURI)
+							.executeSingleResult();
+					if (storedEPackages == null) {
+						hasChanged = true;
+						EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
+						indexFeeder.index(ePackage, true);
+					}
+				}
+				catch (Exception exc) {
+					exc.printStackTrace();
 				}
 			}
 		}
