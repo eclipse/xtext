@@ -1,11 +1,4 @@
-/*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
-package org.eclipse.xtext;
+package org.eclipse.xtext.contentassist;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -19,14 +12,15 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
-public class XtextProposalProvider extends org.eclipse.xtext.AbstractXtextProposalProvider {
-
+public class XtextProposalProvider extends org.eclipse.xtext.contentassist.AbstractXtextProposalProvider {
+	
 	@Override
 	public void completeGrammar_Name(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
