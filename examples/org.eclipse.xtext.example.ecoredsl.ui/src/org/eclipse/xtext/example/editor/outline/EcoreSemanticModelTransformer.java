@@ -11,23 +11,14 @@ package org.eclipse.xtext.example.editor.outline;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformer;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-
-import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
 public class EcoreSemanticModelTransformer extends DefaultSemanticModelTransformer {
 	
-	@Inject
-	public EcoreSemanticModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
-		super(locationProvider,labelProvider);
-	}
-
 	private AdapterFactoryLabelProvider provider = new AdapterFactoryLabelProvider(new EcoreItemProviderAdapterFactory());
 	
 	@Override

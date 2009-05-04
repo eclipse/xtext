@@ -12,16 +12,13 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.CreateNode;
 import org.eclipse.xtext.ui.common.editor.outline.GetChildren;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -41,12 +38,6 @@ public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemantic
 			return ((param.getName().equals("getChildren")) || (param.getAnnotation(GetChildren.class) != null));
 		}
 	});
-
-	@Inject
-	public AbstractDeclarativeSemanticModelTransformer(ILocationInFileProvider locationProvider,
-			ILabelProvider labelProvider) {
-		super(locationProvider, labelProvider);
-	}
 
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {

@@ -11,7 +11,6 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -36,10 +35,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.impl.AbstractDeclarativeSemanticModelTransformer;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.util.Strings;
-
-import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -47,11 +43,6 @@ import com.google.inject.Inject;
 public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanticModelTransformer {
 
 	private static final String UNKNOWN = "<unknown>";
-
-	@Inject
-	public XtextDeclarativeModelTransformer(ILocationInFileProvider locationProvider, ILabelProvider labelProvider) {
-		super(locationProvider, labelProvider);
-	}
 
 	public ContentOutlineNode createNode(Grammar object, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode outlineNode = super.newOutlineNode(object, outlineParentNode);
