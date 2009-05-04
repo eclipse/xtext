@@ -101,7 +101,7 @@ public class LangATestLanguagePackageImpl extends EPackageImpl implements LangAT
     if (isInited) return (LangATestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LangATestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    LangATestLanguagePackageImpl theLangATestLanguagePackage = (LangATestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LangATestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LangATestLanguagePackageImpl());
+    LangATestLanguagePackageImpl theLangATestLanguagePackage = (LangATestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LangATestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LangATestLanguagePackageImpl());
 
     isInited = true;
 

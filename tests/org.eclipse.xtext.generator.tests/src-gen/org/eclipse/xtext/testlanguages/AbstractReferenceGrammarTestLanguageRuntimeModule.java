@@ -54,8 +54,8 @@ public abstract class AbstractReferenceGrammarTestLanguageRuntimeModule extends 
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageCheckValidator> bindReferenceGrammarTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.ReferenceGrammarTestLanguageCheckValidator> bindReferenceGrammarTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.ReferenceGrammarTestLanguageCheckValidator.class;
 	}
 
 	

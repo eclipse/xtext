@@ -54,8 +54,8 @@ public abstract class AbstractPartialParserTestLanguageRuntimeModule extends Def
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.PartialParserTestLanguageCheckValidator> bindPartialParserTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.PartialParserTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.PartialParserTestLanguageCheckValidator> bindPartialParserTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.PartialParserTestLanguageCheckValidator.class;
 	}
 
 	

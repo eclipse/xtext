@@ -54,8 +54,8 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageCheckValidator> bindTerminalRulesTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parser.terminalrules.validation.TerminalRulesTestLanguageCheckValidator> bindTerminalRulesTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.terminalrules.validation.TerminalRulesTestLanguageCheckValidator.class;
 	}
 
 	

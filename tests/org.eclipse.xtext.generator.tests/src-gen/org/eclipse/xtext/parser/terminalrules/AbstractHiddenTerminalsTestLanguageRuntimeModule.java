@@ -54,8 +54,8 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguageCheckValidator> bindHiddenTerminalsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parser.terminalrules.validation.HiddenTerminalsTestLanguageCheckValidator> bindHiddenTerminalsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.terminalrules.validation.HiddenTerminalsTestLanguageCheckValidator.class;
 	}
 
 	

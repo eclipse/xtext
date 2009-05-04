@@ -54,8 +54,8 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageCheckValidator> bindComplexReconstrTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.validation.ComplexReconstrTestLanguageCheckValidator> bindComplexReconstrTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parsetree.reconstr.validation.ComplexReconstrTestLanguageCheckValidator.class;
 	}
 
 	

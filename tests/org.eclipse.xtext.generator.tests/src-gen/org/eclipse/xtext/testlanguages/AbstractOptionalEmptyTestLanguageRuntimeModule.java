@@ -54,8 +54,8 @@ public abstract class AbstractOptionalEmptyTestLanguageRuntimeModule extends Def
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageCheckValidator> bindOptionalEmptyTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.OptionalEmptyTestLanguageCheckValidator> bindOptionalEmptyTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.OptionalEmptyTestLanguageCheckValidator.class;
 	}
 
 	

@@ -261,7 +261,7 @@ public class XtextTerminalsTestLanguagePackageImpl extends EPackageImpl implemen
     if (isInited) return (XtextTerminalsTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(XtextTerminalsTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    XtextTerminalsTestLanguagePackageImpl theXtextTerminalsTestLanguagePackage = (XtextTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof XtextTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new XtextTerminalsTestLanguagePackageImpl());
+    XtextTerminalsTestLanguagePackageImpl theXtextTerminalsTestLanguagePackage = (XtextTerminalsTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XtextTerminalsTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XtextTerminalsTestLanguagePackageImpl());
 
     isInited = true;
 

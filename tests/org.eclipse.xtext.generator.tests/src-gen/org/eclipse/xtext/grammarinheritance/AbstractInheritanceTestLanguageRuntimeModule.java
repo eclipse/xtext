@@ -54,8 +54,8 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends Defau
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.grammarinheritance.InheritanceTestLanguageCheckValidator> bindInheritanceTestLanguageCheckValidator() {
-		return org.eclipse.xtext.grammarinheritance.InheritanceTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.grammarinheritance.validation.InheritanceTestLanguageCheckValidator> bindInheritanceTestLanguageCheckValidator() {
+		return org.eclipse.xtext.grammarinheritance.validation.InheritanceTestLanguageCheckValidator.class;
 	}
 
 	

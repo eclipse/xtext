@@ -54,8 +54,8 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.valueconverter.Bug250313CheckValidator> bindBug250313CheckValidator() {
-		return org.eclipse.xtext.valueconverter.Bug250313CheckValidator.class;
+	public Class<? extends org.eclipse.xtext.valueconverter.validation.Bug250313CheckValidator> bindBug250313CheckValidator() {
+		return org.eclipse.xtext.valueconverter.validation.Bug250313CheckValidator.class;
 	}
 
 	

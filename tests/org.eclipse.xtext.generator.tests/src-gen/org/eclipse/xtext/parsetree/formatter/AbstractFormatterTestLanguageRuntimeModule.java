@@ -54,8 +54,8 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends Default
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parsetree.formatter.FormatterTestLanguageCheckValidator> bindFormatterTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parsetree.formatter.FormatterTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parsetree.formatter.validation.FormatterTestLanguageCheckValidator> bindFormatterTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parsetree.formatter.validation.FormatterTestLanguageCheckValidator.class;
 	}
 
 	

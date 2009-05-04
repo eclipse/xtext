@@ -54,8 +54,8 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTestLanguageCheckValidator> bindMultiValueFeatureTestLanguageCheckValidator() {
-		return org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.xtext.ecoreInference.validation.MultiValueFeatureTestLanguageCheckValidator> bindMultiValueFeatureTestLanguageCheckValidator() {
+		return org.eclipse.xtext.xtext.ecoreInference.validation.MultiValueFeatureTestLanguageCheckValidator.class;
 	}
 
 	

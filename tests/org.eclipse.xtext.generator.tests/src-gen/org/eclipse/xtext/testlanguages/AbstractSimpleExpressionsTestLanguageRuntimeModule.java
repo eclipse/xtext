@@ -54,8 +54,8 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageCheckValidator> bindSimpleExpressionsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.SimpleExpressionsTestLanguageCheckValidator> bindSimpleExpressionsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.SimpleExpressionsTestLanguageCheckValidator.class;
 	}
 
 	

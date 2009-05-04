@@ -93,7 +93,7 @@ public class OptionalEmptyPackageImpl extends EPackageImpl implements OptionalEm
     if (isInited) return (OptionalEmptyPackage)EPackage.Registry.INSTANCE.getEPackage(OptionalEmptyPackage.eNS_URI);
 
     // Obtain or create and register package
-    OptionalEmptyPackageImpl theOptionalEmptyPackage = (OptionalEmptyPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof OptionalEmptyPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new OptionalEmptyPackageImpl());
+    OptionalEmptyPackageImpl theOptionalEmptyPackage = (OptionalEmptyPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OptionalEmptyPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OptionalEmptyPackageImpl());
 
     isInited = true;
 

@@ -54,8 +54,8 @@ public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extend
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguageCheckValidator> bindUnassignedRuleCallTestLanguageCheckValidator() {
-		return org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.xtext.ecoreInference.validation.UnassignedRuleCallTestLanguageCheckValidator> bindUnassignedRuleCallTestLanguageCheckValidator() {
+		return org.eclipse.xtext.xtext.ecoreInference.validation.UnassignedRuleCallTestLanguageCheckValidator.class;
 	}
 
 	
