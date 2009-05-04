@@ -13,4 +13,5 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
-Export-Package: org.eclipse.xtext.reference
+Export-Package: org.eclipse.xtext.reference,
+ org.eclipse.xtext.reference.contentassist

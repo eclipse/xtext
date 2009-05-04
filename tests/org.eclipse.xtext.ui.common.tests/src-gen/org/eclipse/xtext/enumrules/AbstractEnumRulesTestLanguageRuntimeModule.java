@@ -54,8 +54,8 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends Default
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.enumrules.EnumRulesTestLanguageCheckValidator> bindEnumRulesTestLanguageCheckValidator() {
-		return org.eclipse.xtext.enumrules.EnumRulesTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator> bindEnumRulesTestLanguageCheckValidator() {
+		return org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidator.class;
 	}
 
 	

@@ -34,7 +34,7 @@ public abstract class AbstractTestLanguageUiModule extends DefaultUIModule {
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.ui.integration.TestLanguageProposalProvider.class;
+		return org.eclipse.xtext.ui.integration.contentassist.TestLanguageProposalProvider.class;
 	}
 
 }

@@ -54,8 +54,8 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.example.DomainmodelCheckValidator> bindDomainmodelCheckValidator() {
-		return org.eclipse.xtext.example.DomainmodelCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.example.validation.DomainmodelCheckValidator> bindDomainmodelCheckValidator() {
+		return org.eclipse.xtext.example.validation.DomainmodelCheckValidator.class;
 	}
 
 	

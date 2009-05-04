@@ -34,7 +34,7 @@ public abstract class AbstractEcoreDslUiModule extends DefaultUIModule {
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.example.EcoreDslProposalProvider.class;
+		return org.eclipse.xtext.example.contentassist.EcoreDslProposalProvider.class;
 	}
 
 }

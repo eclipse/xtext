@@ -3,6 +3,7 @@ package org.eclipse.xtext.ui.generator.contentAssist;
 import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
@@ -14,7 +15,8 @@ public class XtendBasedContentAssistFragment extends AbstractGeneratorFragment {
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IContentProposalProvider.class.getName(), grammar.getName()+"ProposalProvider")
+			.addTypeToType(IContentProposalProvider.class.getName(), 
+					GrammarUtil.getNamespace(grammar) + ".contentassist." + GrammarUtil.getName(grammar) + "ProposalProvider")
 			.getBindings();
 	}
 	

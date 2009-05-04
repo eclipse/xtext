@@ -17,7 +17,8 @@ Export-Package: ReferenceModel,
  org.eclipse.xtext.reference.referenceGrammar.util,
  org.eclipse.xtext.reference.services,
  org.eclipse.xtext.reference.parser.antlr,
- org.eclipse.xtext.reference.referenceGrammar.impl
+ org.eclipse.xtext.reference.referenceGrammar.impl,
+ org.eclipse.xtext.reference.validation
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtext,
  org.eclipse.xtext.generator,

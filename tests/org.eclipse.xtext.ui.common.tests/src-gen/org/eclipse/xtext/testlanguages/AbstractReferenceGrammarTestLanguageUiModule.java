@@ -34,7 +34,7 @@ public abstract class AbstractReferenceGrammarTestLanguageUiModule extends Defau
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageProposalProvider.class;
+		return org.eclipse.xtext.testlanguages.contentassist.ReferenceGrammarTestLanguageProposalProvider.class;
 	}
 
 	

@@ -19,7 +19,8 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IContentProposalProvider.class.getName(), grammar.getName()+"ProposalProvider")
+			.addTypeToType(IContentProposalProvider.class.getName(),
+					GrammarUtil.getNamespace(grammar) + ".contentassist." + GrammarUtil.getName(grammar) + "ProposalProvider")
 			.getBindings();
 	}
 	
@@ -34,7 +35,7 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return new String[] {
-			GrammarUtil.getNamespace(grammar)
+			GrammarUtil.getNamespace(grammar) + ".contentassist"
 		};
 	}
 	

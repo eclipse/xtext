@@ -54,8 +54,8 @@ public abstract class AbstractReferenceGrammarRuntimeModule extends DefaultRunti
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.reference.ReferenceGrammarCheckValidator> bindReferenceGrammarCheckValidator() {
-		return org.eclipse.xtext.reference.ReferenceGrammarCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.reference.validation.ReferenceGrammarCheckValidator> bindReferenceGrammarCheckValidator() {
+		return org.eclipse.xtext.reference.validation.ReferenceGrammarCheckValidator.class;
 	}
 
 	

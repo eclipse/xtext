@@ -85,5 +85,16 @@ Export-Package: org.eclipse.xtext.ui.common,
  org.eclipse.xtext.ui.common.editor.contentassist.parser.packrat,
  org.eclipse.xtext.ui.common.editor.contentassist.parser.packrat.consumers,
  org.eclipse.xtext.ui.common.editor.contentassist.parseTreeConstruction,
- org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr
+ org.eclipse.xtext.ui.common.editor.contentassist.parser.antlr,
+ org.eclipse.xtext.contentassist,
+ org.eclipse.xtext.ui.common.editor.contentassist.contentassist,
+ org.eclipse.xtext.parser.keywords.contentassist,
+ org.eclipse.xtext.testlanguages.contentassist,
+ org.eclipse.xtext.enumrules.contentassist,
+ org.eclipse.xtext.validation,
+ org.eclipse.xtext.ui.common.editor.contentassist.validation,
+ org.eclipse.xtext.grammarinheritance.validation,
+ org.eclipse.xtext.parser.keywords.validation,
+ org.eclipse.xtext.testlanguages.validation,
+ org.eclipse.xtext.enumrules.validation
 

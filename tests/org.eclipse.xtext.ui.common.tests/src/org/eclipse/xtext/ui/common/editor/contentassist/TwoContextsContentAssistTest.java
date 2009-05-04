@@ -53,7 +53,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 		return new ContentAssistProcessorTestBuilder(standAloneSetup, this);
 	}
 
-	public static class TwoContextsTestLanguageTestProposals extends org.eclipse.xtext.ui.common.editor.contentassist.AbstractTwoContextsTestLanguageProposalProvider {
+	public static class TwoContextsTestLanguageTestProposals extends org.eclipse.xtext.ui.common.editor.contentassist.contentassist.AbstractTwoContextsTestLanguageProposalProvider {
 		@Override
 		public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 			super.completeKeyword(keyword, context, filter(acceptor, new Predicate<ICompletionProposal>() {

@@ -9,7 +9,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAccepto
 import com.google.common.base.Predicate;
 
 
-public class TwoContextsTestLanguageProposalProvider extends org.eclipse.xtext.ui.common.editor.contentassist.AbstractTwoContextsTestLanguageProposalProvider {
+public class TwoContextsTestLanguageProposalProvider extends org.eclipse.xtext.ui.common.editor.contentassist.contentassist.AbstractTwoContextsTestLanguageProposalProvider {
 
 	@Override
 	public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

@@ -117,7 +117,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (ContentAssistTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(ContentAssistTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    ContentAssistTestLanguagePackageImpl theContentAssistTestLanguagePackage = (ContentAssistTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ContentAssistTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ContentAssistTestLanguagePackageImpl());
+    ContentAssistTestLanguagePackageImpl theContentAssistTestLanguagePackage = (ContentAssistTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContentAssistTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ContentAssistTestLanguagePackageImpl());
 
     isInited = true;
 

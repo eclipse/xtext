@@ -3,6 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example;
 
+import org.eclipse.xtext.example.contentassist.FowlerDslTemplateProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ITemplateProposalProvider;
 
 /**
