@@ -34,7 +34,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUIModule {
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.example.DomainmodelProposalProvider.class;
+		return org.eclipse.xtext.example.contentassist.DomainmodelProposalProvider.class;
 	}
 
 }

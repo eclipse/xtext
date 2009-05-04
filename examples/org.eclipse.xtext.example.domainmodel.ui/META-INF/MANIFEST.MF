@@ -13,6 +13,6 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.ui.editors,
  org.eclipse.xtext.xtend;bundle-version="0.7.0";resolution:=optional,
  org.eclipse.ui
-Export-Package: org.eclipse.xtext.example
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.contentassist
 Bundle-Activator: org.eclipse.xtext.example.ui.internal.DomainmodelActivator
-

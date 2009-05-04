@@ -34,6 +34,15 @@ public class CheckFragment extends AbstractGeneratorFragment {
 			"org.eclipse.xtend","org.eclipse.xtext.xtend"
 		};
 	}
+	
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return new String[]{ getValidationPackage(grammar) };
+	}
+
+	public static String getValidationPackage(Grammar grammar) {
+		return GrammarUtil.getNamespace(grammar) + ".validation";
+	}
 
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
@@ -42,7 +51,7 @@ public class CheckFragment extends AbstractGeneratorFragment {
 			.addTypeToType(ResourceManager.class.getName(), "org.eclipse.xtext.xtend.InjectableResourceManager")
 			.addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()");
 		return addTypeToInstance
-			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar),getCheckValidatorName(grammar))
+			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar), getCheckValidatorName(grammar))
 			.getBindings();
 	}
 
@@ -57,7 +66,7 @@ public class CheckFragment extends AbstractGeneratorFragment {
 	}
 
 	public static String getCheckValidatorName(Grammar g) {
-		return g.getName()+"CheckValidator";
+		return GrammarUtil.getNamespace(g) + ".validation." + GrammarUtil.getName(g) + "CheckValidator";
 	}
 
 	private String basePackage = null;

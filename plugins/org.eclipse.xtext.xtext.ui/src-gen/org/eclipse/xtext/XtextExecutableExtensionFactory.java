@@ -32,7 +32,10 @@ public class XtextExecutableExtensionFactory implements IExecutableExtensionFact
 	}
 	
 	public Object create() throws CoreException {
-		Bundle bundle = org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getBundle();
+		org.eclipse.xtext.xtext.ui.internal.Activator instance = org.eclipse.xtext.xtext.ui.internal.Activator.getInstance();
+		if (instance == null)
+			throw new IllegalStateException("The bundle has not yet been activated. Make sure the Manifest.MF contains 'Bundle-ActivationPolicy: lazy'.");
+		Bundle bundle = instance.getBundle();
 		try {
 			Class<?> class1 = bundle.loadClass(clazzName);
 			return org.eclipse.xtext.xtext.ui.internal.Activator.getInstance().getInjector("org.eclipse.xtext.Xtext").getInstance(class1);

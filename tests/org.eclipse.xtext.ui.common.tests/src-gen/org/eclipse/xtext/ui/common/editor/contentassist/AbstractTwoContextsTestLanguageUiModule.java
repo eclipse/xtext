@@ -34,7 +34,7 @@ public abstract class AbstractTwoContextsTestLanguageUiModule extends DefaultUIM
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageProposalProvider.class;
+		return org.eclipse.xtext.ui.common.editor.contentassist.contentassist.TwoContextsTestLanguageProposalProvider.class;
 	}
 
 	

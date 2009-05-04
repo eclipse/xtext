@@ -54,8 +54,8 @@ public abstract class AbstractTwoContextsTestLanguageRuntimeModule extends Defau
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageCheckValidator> bindTwoContextsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.validation.TwoContextsTestLanguageCheckValidator> bindTwoContextsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.ui.common.editor.contentassist.validation.TwoContextsTestLanguageCheckValidator.class;
 	}
 
 	

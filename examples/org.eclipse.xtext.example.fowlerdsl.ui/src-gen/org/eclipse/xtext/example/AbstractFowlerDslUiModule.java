@@ -34,7 +34,7 @@ public abstract class AbstractFowlerDslUiModule extends DefaultUIModule {
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.example.FowlerDslProposalProvider.class;
+		return org.eclipse.xtext.example.contentassist.FowlerDslProposalProvider.class;
 	}
 
 }

@@ -54,8 +54,8 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.ui.integration.TestLanguageCheckValidator> bindTestLanguageCheckValidator() {
-		return org.eclipse.xtext.ui.integration.TestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator> bindTestLanguageCheckValidator() {
+		return org.eclipse.xtext.ui.integration.validation.TestLanguageCheckValidator.class;
 	}
 
 	

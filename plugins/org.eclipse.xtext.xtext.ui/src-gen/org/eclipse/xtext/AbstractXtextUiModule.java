@@ -34,7 +34,7 @@ public abstract class AbstractXtextUiModule extends DefaultUIModule {
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.XtextProposalProvider.class;
+		return org.eclipse.xtext.contentassist.XtextProposalProvider.class;
 	}
 
 }

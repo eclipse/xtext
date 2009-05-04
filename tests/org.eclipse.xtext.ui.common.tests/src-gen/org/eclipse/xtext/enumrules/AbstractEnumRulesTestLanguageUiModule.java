@@ -34,7 +34,7 @@ public abstract class AbstractEnumRulesTestLanguageUiModule extends DefaultUIMod
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.enumrules.EnumRulesTestLanguageProposalProvider.class;
+		return org.eclipse.xtext.enumrules.contentassist.EnumRulesTestLanguageProposalProvider.class;
 	}
 
 	

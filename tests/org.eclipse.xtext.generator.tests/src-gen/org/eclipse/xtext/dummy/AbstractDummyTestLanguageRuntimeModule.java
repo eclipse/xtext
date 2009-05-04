@@ -54,8 +54,8 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.dummy.DummyTestLanguageCheckValidator> bindDummyTestLanguageCheckValidator() {
-		return org.eclipse.xtext.dummy.DummyTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.dummy.validation.DummyTestLanguageCheckValidator> bindDummyTestLanguageCheckValidator() {
+		return org.eclipse.xtext.dummy.validation.DummyTestLanguageCheckValidator.class;
 	}
 
 	

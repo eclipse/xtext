@@ -22,7 +22,8 @@ Export-Package: org.eclipse.xtext.ui.common.editor.contentassist,
  org.eclipse.xtext.ui.common.editor.tasks,
  org.eclipse.xtext.ui.common.editor.tasks.dialogfields,
  org.eclipse.xtext.ui.common.service,
- org.eclipse.xtext.common
+ org.eclipse.xtext.common,
+ org.eclipse.xtext.common.contentassist
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-Activator: org.eclipse.xtext.ui.common.internal.Activator
 Bundle-ActivationPolicy: lazy

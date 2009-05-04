@@ -64,5 +64,9 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.testlanguages.treeTestLanguage.impl,
  org.eclipse.xtext.testlanguages.treeTestLanguage.util,
  org.eclipse.xtext.enumrules.enumRulesTestLanguage.impl,
- org.eclipse.xtext.enumrules.enumRulesTestLanguage.util
+ org.eclipse.xtext.enumrules.enumRulesTestLanguage.util,
+ org.eclipse.xtext.validation,
+ org.eclipse.xtext.parser.keywords.validation,
+ org.eclipse.xtext.testlanguages.validation,
+ org.eclipse.xtext.enumrules.validation
 Bundle-Activator: org.eclipse.xtext.xtend.XtendTestsActivator

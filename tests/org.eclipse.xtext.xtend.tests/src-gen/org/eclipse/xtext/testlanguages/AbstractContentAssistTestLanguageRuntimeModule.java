@@ -54,8 +54,8 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.ContentAssistTestLanguageCheckValidator> bindContentAssistTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.ContentAssistTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.ContentAssistTestLanguageCheckValidator> bindContentAssistTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.ContentAssistTestLanguageCheckValidator.class;
 	}
 
 	

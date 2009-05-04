@@ -54,8 +54,8 @@ public abstract class AbstractEcoreDslRuntimeModule extends DefaultRuntimeModule
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.example.EcoreDslCheckValidator> bindEcoreDslCheckValidator() {
-		return org.eclipse.xtext.example.EcoreDslCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.example.validation.EcoreDslCheckValidator> bindEcoreDslCheckValidator() {
+		return org.eclipse.xtext.example.validation.EcoreDslCheckValidator.class;
 	}
 
 	

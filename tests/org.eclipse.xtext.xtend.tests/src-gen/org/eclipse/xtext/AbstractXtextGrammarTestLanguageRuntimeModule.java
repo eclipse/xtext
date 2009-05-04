@@ -54,8 +54,8 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.XtextGrammarTestLanguageCheckValidator> bindXtextGrammarTestLanguageCheckValidator() {
-		return org.eclipse.xtext.XtextGrammarTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.validation.XtextGrammarTestLanguageCheckValidator> bindXtextGrammarTestLanguageCheckValidator() {
+		return org.eclipse.xtext.validation.XtextGrammarTestLanguageCheckValidator.class;
 	}
 
 	

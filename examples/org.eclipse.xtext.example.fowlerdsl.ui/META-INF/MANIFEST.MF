@@ -6,7 +6,8 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-Version: 0.7.0.qualifier
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j,org.eclipse.xtext.service.ui,org.eclipse.xtext.service
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.example
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.contentassist
 Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,

@@ -54,8 +54,8 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.keywords.KeywordsTestLanguageCheckValidator> bindKeywordsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.keywords.KeywordsTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.parser.keywords.validation.KeywordsTestLanguageCheckValidator> bindKeywordsTestLanguageCheckValidator() {
+		return org.eclipse.xtext.parser.keywords.validation.KeywordsTestLanguageCheckValidator.class;
 	}
 
 	

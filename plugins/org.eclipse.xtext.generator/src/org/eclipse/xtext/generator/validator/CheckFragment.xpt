@@ -17,7 +17,7 @@
 
 «DEFINE generate(List[String] packageQNames) FOR Grammar»
 
-«FILE this.name.asPath()+"FastChecks.chk" SRC-»
+«FILE validationPackage().asPath() + "/" + getName() + "FastChecks.chk" SRC-»
 /*
  * This check file is used to specify inexpensive constraints for the
  * derived metamodels. They will be executed by the editor when the
@@ -33,7 +33,7 @@
  */
 «ENDFILE»
 
-«FILE this.name.asPath()+"Checks.chk" SRC-»
+«FILE validationPackage().asPath() + "/" + getName() + "Checks.chk" SRC-»
 /*
  * This check file is used to specify constraints for the derived metamodels.
  * They will be executed by the editor when the user saves a file.
@@ -48,7 +48,7 @@
  */
 «ENDFILE»
 
-«FILE this.name.asPath()+"ExpensiveChecks.chk" SRC-»
+«FILE validationPackage().asPath() + "/" + getName() + "ExpensiveChecks.chk" SRC-»
 /*
  * This check file is used to specify expensive constraints for the derived
  * metamodels. They will only be executed when triggered explicitly or
@@ -78,17 +78,17 @@ public class «getCheckValidatorName().toSimpleName()» extends org.eclipse.xtext.
 	}
 	
 	protected void configure() {
-		addCheckFile("«(name+"FastChecks").replaceAll("\\.","::")»", CheckType.FAST);
-		addCheckFile("«(name+"Checks").replaceAll("\\.","::")»", CheckType.NORMAL);
-		addCheckFile("«(name+"ExpensiveChecks").replaceAll("\\.","::")»", CheckType.EXPENSIVE);
+		addCheckFile("«(validationPackage().asPath() + "/" + getName() +"FastChecks").replaceAll("/","::")»", CheckType.FAST);
+		addCheckFile("«(validationPackage().asPath() + "/" + getName() +"Checks").replaceAll("/","::")»", CheckType.NORMAL);
+		addCheckFile("«(validationPackage().asPath() + "/" + getName() +"ExpensiveChecks").replaceAll("/","::")»", CheckType.EXPENSIVE);
 	}
 	
 	@Override
 	protected List<? extends EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
-	    «FOREACH packageQNames AS e»
+	    «FOREACH packageQNames AS e-»
 	    result.add(«e».eINSTANCE);
-	    «ENDFOREACH»
+	    «ENDFOREACH-»
 		return result;
 	}
 	

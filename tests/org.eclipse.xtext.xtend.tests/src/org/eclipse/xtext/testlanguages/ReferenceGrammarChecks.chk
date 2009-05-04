@@ -1,8 +1,0 @@
-import org::eclipse::xtext::reference::referenceGrammar;
-/*
- * this check file is used to specify constraints for the derived metamodels
- * example:
- * context Entity WARNING "Entity names should start with a capital" :
- *    name.toFirstUpper() == name;
- */
-context Spielplatz#beschreibung ERROR beschreibung : false;

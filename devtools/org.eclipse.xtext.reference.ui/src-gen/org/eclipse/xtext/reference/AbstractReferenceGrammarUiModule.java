@@ -34,7 +34,7 @@ public abstract class AbstractReferenceGrammarUiModule extends DefaultUIModule {
 
 	
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.reference.ReferenceGrammarProposalProvider.class;
+		return org.eclipse.xtext.reference.contentassist.ReferenceGrammarProposalProvider.class;
 	}
 
 }

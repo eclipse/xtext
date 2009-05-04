@@ -54,8 +54,8 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.testlanguages.TreeTestLanguageCheckValidator> bindTreeTestLanguageCheckValidator() {
-		return org.eclipse.xtext.testlanguages.TreeTestLanguageCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.testlanguages.validation.TreeTestLanguageCheckValidator> bindTreeTestLanguageCheckValidator() {
+		return org.eclipse.xtext.testlanguages.validation.TreeTestLanguageCheckValidator.class;
 	}
 
 	

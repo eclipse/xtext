@@ -261,7 +261,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     if (isInited) return (XtextTestPackage)EPackage.Registry.INSTANCE.getEPackage(XtextTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    XtextTestPackageImpl theXtextTestPackage = (XtextTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof XtextTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new XtextTestPackageImpl());
+    XtextTestPackageImpl theXtextTestPackage = (XtextTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof XtextTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new XtextTestPackageImpl());
 
     isInited = true;
 

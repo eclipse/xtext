@@ -54,8 +54,8 @@ public abstract class AbstractFowlerDslRuntimeModule extends DefaultRuntimeModul
 	}
 
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.example.FowlerDslCheckValidator> bindFowlerDslCheckValidator() {
-		return org.eclipse.xtext.example.FowlerDslCheckValidator.class;
+	public Class<? extends org.eclipse.xtext.example.validation.FowlerDslCheckValidator> bindFowlerDslCheckValidator() {
+		return org.eclipse.xtext.example.validation.FowlerDslCheckValidator.class;
 	}
 
 	

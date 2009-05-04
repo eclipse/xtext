@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.example;
 
+import org.eclipse.xtext.example.contentassist.EcoreDslTemplateProposalProvider;
 import org.eclipse.xtext.example.editor.outline.EcoreSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.editor.contentassist.ITemplateProposalProvider;
 
