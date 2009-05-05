@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AmetamodelPackageImpl.java,v 1.1 2009/02/18 19:45:07 sefftinge Exp $
+ * $Id: AmetamodelPackageImpl.java,v 1.2 2009/05/05 15:32:30 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.ametamodel.impl;
 
@@ -10,9 +10,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.xtext.grammarinheritance.ametamodel.AModel;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelFactory;

@@ -39,26 +39,6 @@ public abstract class AbstractSerializationBug269362TestLanguageRuntimeModule ex
 	}
 
 	
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.validation.SerializationBug269362TestLanguageCheckValidator> bindSerializationBug269362TestLanguageCheckValidator() {
-		return org.eclipse.xtext.parsetree.reconstr.validation.SerializationBug269362TestLanguageCheckValidator.class;
-	}
-
-	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.SerializationBug269362TestLanguageParser.class;
 	}

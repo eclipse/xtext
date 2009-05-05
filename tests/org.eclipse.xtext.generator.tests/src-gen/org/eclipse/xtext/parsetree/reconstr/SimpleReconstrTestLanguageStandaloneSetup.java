@@ -34,7 +34,6 @@ public class SimpleReconstrTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/rewrite/test")) {
 		EPackage.Registry.INSTANCE.put("http://simple/rewrite/test", org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage.eINSTANCE);
 	}
-	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simplereconstrtestlanguage", resourceFactory);

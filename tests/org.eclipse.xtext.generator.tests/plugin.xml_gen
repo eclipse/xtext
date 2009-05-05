@@ -15,8 +15,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/lazyLinkingTestLanguage" 
-       class = "org.eclipse.xtext.crossrefs.lazy.lazyLinking.LazyLinkingPackage"
-       genModel = "org/eclipse/xtext/crossrefs/lazy/LazyLinkingTestLanguage.genmodel" /> 
+       class = "org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage"
+       genModel = "org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -24,8 +24,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/importUriTestLanguage" 
-       class = "org.eclipse.xtext.crossrefs.importedURI.ImportedURIPackage"
-       genModel = "org/eclipse/xtext/crossrefs/ImportUriTestLanguage.genmodel" /> 
+       class = "org.eclipse.xtext.linking.importedURI.ImportedURIPackage"
+       genModel = "org/eclipse/xtext/linking/ImportUriTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -33,8 +33,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/langATestLanguage" 
-       class = "org.eclipse.xtext.crossrefs.langATestLanguage.LangATestLanguagePackage"
-       genModel = "org/eclipse/xtext/crossrefs/LangATestLanguage.genmodel" /> 
+       class = "org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage"
+       genModel = "org/eclipse/xtext/linking/LangATestLanguage.genmodel" /> 
 	
   </extension>
 

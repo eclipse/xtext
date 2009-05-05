@@ -39,26 +39,6 @@ public abstract class AbstractlowerCaseNamedTestLanguageRuntimeModule extends De
 	}
 
 	
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.generator.validation.lowerCaseNamedTestLanguageCheckValidator> bindlowerCaseNamedTestLanguageCheckValidator() {
-		return org.eclipse.xtext.generator.validation.lowerCaseNamedTestLanguageCheckValidator.class;
-	}
-
-	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.generator.parser.antlr.lowerCaseNamedTestLanguageParser.class;
 	}

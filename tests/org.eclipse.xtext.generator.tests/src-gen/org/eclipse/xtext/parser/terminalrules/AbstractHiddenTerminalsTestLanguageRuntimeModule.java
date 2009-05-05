@@ -39,26 +39,6 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 	}
 
 	
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.terminalrules.validation.HiddenTerminalsTestLanguageCheckValidator> bindHiddenTerminalsTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.terminalrules.validation.HiddenTerminalsTestLanguageCheckValidator.class;
-	}
-
-	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.terminalrules.parser.antlr.HiddenTerminalsTestLanguageParser.class;
 	}

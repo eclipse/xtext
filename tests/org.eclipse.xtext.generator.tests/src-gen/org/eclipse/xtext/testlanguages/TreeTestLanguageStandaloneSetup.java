@@ -34,7 +34,6 @@ public class TreeTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage")) {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage", org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage.eINSTANCE);
 	}
-	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("treetestlanguage", resourceFactory);

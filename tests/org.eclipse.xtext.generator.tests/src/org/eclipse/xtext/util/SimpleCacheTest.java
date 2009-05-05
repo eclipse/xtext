@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import org.eclipse.xtext.util.SimpleCache;
+import junit.framework.TestCase;
 
 import com.google.common.base.Function;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

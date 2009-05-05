@@ -34,7 +34,6 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://holla")) {
 		EPackage.Registry.INSTANCE.put("http://holla", org.eclipse.xtext.grammarinheritance.foo.FooPackage.eINSTANCE);
 	}
-	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("concretetestlanguage", resourceFactory);

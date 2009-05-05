@@ -39,26 +39,6 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 	}
 
 	
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.parser.datatyperules.validation.DatatypeRulesTestLanguageCheckValidator> bindDatatypeRulesTestLanguageCheckValidator() {
-		return org.eclipse.xtext.parser.datatyperules.validation.DatatypeRulesTestLanguageCheckValidator.class;
-	}
-
-	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.datatyperules.parser.antlr.DatatypeRulesTestLanguageParser.class;
 	}

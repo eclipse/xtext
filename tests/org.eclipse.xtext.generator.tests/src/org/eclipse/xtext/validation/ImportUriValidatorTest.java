@@ -14,13 +14,10 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.crossrefs.ImportUriTestLanguageRuntimeModule;
-import org.eclipse.xtext.crossrefs.ImportUriTestLanguageStandaloneSetup;
-import org.eclipse.xtext.crossrefs.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
-import org.eclipse.xtext.validation.ComposedChecks;
-import org.eclipse.xtext.validation.ImportUriValidator;
+import org.eclipse.xtext.linking.ImportUriTestLanguageRuntimeModule;
+import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
+import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -38,14 +35,14 @@ public class ImportUriValidatorTest extends AbstractXtextTests {
 	}
 	
 	public void testValidURI() throws Exception {
-		String model = "import 'classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xtext'";
+		String model = "import 'classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext'";
 		Resource resource = getResourceFromString(model);
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertEquals(Diagnostic.OK, diagnostics.getSeverity());
 	}
 	
 	public void testInvalidURI() throws Exception {
-		String model = "import 'classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.unknown'";
+		String model = "import 'classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.unknown'";
 		Resource resource = getResourceFromString(model);
 		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertEquals(Diagnostic.ERROR, diagnostics.getSeverity());

@@ -12,10 +12,10 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

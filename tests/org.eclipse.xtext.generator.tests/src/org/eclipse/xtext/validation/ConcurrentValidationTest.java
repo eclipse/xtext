@@ -12,7 +12,6 @@ import junit.framework.AssertionFailedError;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 
 /**

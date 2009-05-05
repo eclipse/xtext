@@ -13,10 +13,6 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
-import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 
 /**

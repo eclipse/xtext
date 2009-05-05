@@ -17,9 +17,6 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
-import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.validation.ComposedChecks;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

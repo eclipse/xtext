@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsFactoryImpl.java,v 1.1 2009/03/18 16:58:43 szarnekow Exp $
+ * $Id: EnumsFactoryImpl.java,v 1.2 2009/05/05 15:32:34 sefftinge Exp $
  */
 package org.eclipse.xtext.enumrules.enums.impl;
 
@@ -10,12 +10,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.xtext.enumrules.enums.*;
+import org.eclipse.xtext.enumrules.enums.EnumsFactory;
+import org.eclipse.xtext.enumrules.enums.EnumsPackage;
+import org.eclipse.xtext.enumrules.enums.ExistingEnum;
 
 /**
  * <!-- begin-user-doc -->

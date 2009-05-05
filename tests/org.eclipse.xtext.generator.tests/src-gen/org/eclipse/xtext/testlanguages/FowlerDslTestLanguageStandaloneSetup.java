@@ -34,7 +34,6 @@ public class FowlerDslTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDslTestLanguage")) {
 		EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDslTestLanguage", org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage.eINSTANCE);
 	}
-	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsltestlanguage", resourceFactory);

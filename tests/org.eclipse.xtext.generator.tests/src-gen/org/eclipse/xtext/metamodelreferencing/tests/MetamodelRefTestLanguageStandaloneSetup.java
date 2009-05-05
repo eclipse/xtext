@@ -34,7 +34,6 @@ public class MetamodelRefTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/AnotherSimpleTest")) {
 		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/AnotherSimpleTest", org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage.eINSTANCE);
 	}
-	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", resourceFactory);

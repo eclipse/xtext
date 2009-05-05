@@ -39,26 +39,6 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	}
 
 	
-	public Class<? extends org.eclipse.xtend.expression.ExecutionContext> bindExecutionContext() {
-		return org.eclipse.xtext.xtend.InjectableExecutionContext.class;
-	}
-
-	
-	public Class<? extends org.eclipse.xtend.expression.ResourceManager> bindResourceManager() {
-		return org.eclipse.xtext.xtend.InjectableResourceManager.class;
-	}
-
-	
-	public java.lang.ClassLoader bindClassLoader() {
-		return getClass().getClassLoader();
-	}
-
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)
-	public Class<? extends org.eclipse.xtext.grammarinheritance.validation.ConcreteTestLanguageCheckValidator> bindConcreteTestLanguageCheckValidator() {
-		return org.eclipse.xtext.grammarinheritance.validation.ConcreteTestLanguageCheckValidator.class;
-	}
-
-	
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.ConcreteTestLanguageParser.class;
 	}
