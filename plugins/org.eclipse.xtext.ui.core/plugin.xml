@@ -100,11 +100,17 @@
             id="org.eclipse.xtext.ui.editor.validate"
             name="Validate">
       </command>
-		<command
+	  <command
             name="Format"
             description="Format text"
             categoryId="org.eclipse.ui.category.textEditor"
             id="org.eclipse.xtext.ui.FormatAction">
+      </command>
+      <command
+            name="Toggle Comment"
+            description="Toggle comment"
+            categoryId="org.eclipse.ui.category.textEditor"
+            id="org.eclipse.xtext.ui.ToggleCommentAction">
       </command>
    </extension>
    <extension point="org.eclipse.core.expressions.propertyTesters">
@@ -122,7 +128,19 @@
             contextId="org.eclipse.ui.textEditorScope"
             commandId="org.eclipse.xtext.ui.FormatAction"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
-             </extension>
+        <key sequence="M1+7"
+            contextId="org.eclipse.ui.textEditorScope"
+            commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+        <key sequence="M1+/"
+            contextId="org.eclipse.ui.textEditorScope"
+            commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+        <key sequence="M1+M2+C"
+            contextId="org.eclipse.ui.textEditorScope"
+            commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+  </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
