@@ -63,16 +63,26 @@
 		<page
 			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.XtextGrammarTestLanguage"
-			name="XtextGrammarTestLanguage">
+			name="XtextGrammarTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.ui.keyword_XtextGrammarTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.XtextGrammarTestLanguage"
-			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.XtextGrammarTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.XtextGrammarTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.XtextGrammarTestLanguage"
+			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.XtextGrammarTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -151,16 +161,26 @@
 		<page
 			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage"
-			name="TwoContextsTestLanguage">
+			name="TwoContextsTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.ui.common.editor.contentassist.ui.keyword_TwoContextsTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage"
-			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -178,6 +198,7 @@
 		</keyword>
 	</extension>
 	
+
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -239,16 +260,26 @@
 		<page
 			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
-			name="KeywordsTestLanguage">
+			name="KeywordsTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.parser.keywords.ui.keyword_KeywordsTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
-			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
+			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -327,16 +358,26 @@
 		<page
 			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
-			name="ContentAssistTestLanguage">
+			name="ContentAssistTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.testlanguages.ui.keyword_ContentAssistTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -415,16 +456,26 @@
 		<page
 			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
-			name="ReferenceGrammarTestLanguage">
+			name="ReferenceGrammarTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.testlanguages.ui.keyword_ReferenceGrammarTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -503,16 +554,26 @@
 		<page
 			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-			name="TreeTestLanguage">
+			name="TreeTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.testlanguages.ui.keyword_TreeTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
-			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -591,16 +652,26 @@
 		<page
 			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
-			name="EnumRulesTestLanguage">
+			name="EnumRulesTestLanguage"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.enumrules.ui.keyword_EnumRulesTestLanguage">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
-			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.editor"
-			name="Editor">
+			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
+			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
