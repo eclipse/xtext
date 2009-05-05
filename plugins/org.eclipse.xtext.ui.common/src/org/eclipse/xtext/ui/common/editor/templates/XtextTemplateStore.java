@@ -33,7 +33,7 @@ import com.google.inject.name.Named;
 public class XtextTemplateStore extends TemplateStore {
 
 	private final static Logger log = Logger.getLogger(XtextTemplateStore.class);
-	private URL res;
+	private final URL res;
 
 	@Inject
 	public XtextTemplateStore(ContextTypeRegistry registry, IPreferenceStore store, @Named(Constants.LANGUAGE_NAME) String key,
