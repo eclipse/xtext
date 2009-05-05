@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.crossref.impl.ImportUriResolver;
-import org.eclipse.xtext.crossref.impl.ImportUriUtil;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.scoping.impl.ImportUriUtil;
 
 import com.google.inject.Inject;
 

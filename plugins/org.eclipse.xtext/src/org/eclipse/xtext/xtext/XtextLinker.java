@@ -37,14 +37,14 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.crossref.impl.Linker;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 

@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.crossref.impl.SimpleScope;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;

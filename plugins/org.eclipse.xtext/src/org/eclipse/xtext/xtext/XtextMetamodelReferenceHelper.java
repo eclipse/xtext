@@ -18,8 +18,8 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;

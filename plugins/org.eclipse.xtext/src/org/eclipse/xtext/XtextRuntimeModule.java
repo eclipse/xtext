@@ -9,11 +9,11 @@
 package org.eclipse.xtext;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.crossref.ILinker;
-import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextScopeProvider;

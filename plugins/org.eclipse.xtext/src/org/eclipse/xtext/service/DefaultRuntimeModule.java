@@ -10,12 +10,10 @@ package org.eclipse.xtext.service;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
-import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
-import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
-import org.eclipse.xtext.crossref.lazy.LazyLinker;
-import org.eclipse.xtext.crossref.lazy.LazyLinkingResource;
+import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.impl.DefaultLinkingService;
+import org.eclipse.xtext.linking.lazy.LazyLinker;
+import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -32,6 +30,8 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
 
 import com.google.inject.Binder;
 
@@ -82,7 +82,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultScopeProvider.class;
 	}
 
-	public Class<? extends org.eclipse.xtext.crossref.ILinker> bindILinker() {
+	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
 		return LazyLinker.class;
 	}
 

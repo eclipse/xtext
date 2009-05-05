@@ -24,8 +24,8 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
