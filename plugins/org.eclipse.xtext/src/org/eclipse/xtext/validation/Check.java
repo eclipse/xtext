@@ -5,8 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validator;
+package org.eclipse.xtext.validation;
 
-@SuppressWarnings("serial")
-class GuardException extends RuntimeException {
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.METHOD})
+public @interface Check {
+	CheckType value() default CheckType.FAST;
 }

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.validator;
+package org.eclipse.xtext.validation;
 
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -30,7 +30,7 @@ import com.google.inject.name.Named;
  */
 public class CompositeEValidator implements EValidator {
 
-	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validator.CompositeEValidator.USE_EOBJECT_VALIDATOR";
+	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR";
 	
 	private Set<EValidatorEqualitySupport> contents;
 	

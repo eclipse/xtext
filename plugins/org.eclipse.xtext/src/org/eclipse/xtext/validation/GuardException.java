@@ -5,19 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
+package org.eclipse.xtext.validation;
 
-package org.eclipse.xtext.validator;
-
-/**
- * @author Sven Efftinge - Initial contribution and API
- *
- */
-public enum CheckType {
-	
-	FAST,
-	
-	NORMAL,
-	
-	EXPENSIVE; 
-	
+@SuppressWarnings("serial")
+class GuardException extends RuntimeException {
 }
