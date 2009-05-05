@@ -78,6 +78,15 @@
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
+		<page
+			category="org.eclipse.xtext.XtextGrammarTestLanguage"
+			class="org.eclipse.xtext.XtextGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.XtextGrammarTestLanguage.templates"
+			name="Templates">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
@@ -163,6 +172,15 @@
 			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage.coloring"
 			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -257,6 +275,15 @@
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
+		<page
+			category="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage"
+			class="org.eclipse.xtext.parser.keywords.KeywordsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.templates"
+			name="Templates">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
@@ -342,6 +369,15 @@
 			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.coloring"
 			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage"
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
@@ -435,6 +471,15 @@
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
+		<page
+			category="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage"
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.templates"
+			name="Templates">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
@@ -524,6 +569,15 @@
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
+		<page
+			category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+			class="org.eclipse.xtext.testlanguages.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.testlanguages.TreeTestLanguage.templates"
+			name="Templates">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
@@ -609,6 +663,15 @@
 			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
 			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.coloring"
 			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.enumrules.EnumRulesTestLanguage"
+			class="org.eclipse.xtext.enumrules.EnumRulesTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.enumrules.EnumRulesTestLanguage.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>

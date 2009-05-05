@@ -11,10 +11,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.crossref.impl.ImportUriValidator;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
-import org.eclipse.xtext.validator.ComposedChecks;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.ComposedChecks;
+import org.eclipse.xtext.validation.ImportUriValidator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

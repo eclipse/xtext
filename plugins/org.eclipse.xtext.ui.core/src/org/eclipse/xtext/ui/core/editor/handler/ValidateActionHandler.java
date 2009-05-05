@@ -14,7 +14,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
-import org.eclipse.xtext.validator.CheckMode;
+import org.eclipse.xtext.validation.CheckMode;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
