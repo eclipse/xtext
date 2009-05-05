@@ -30,6 +30,10 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 	
 	@Inject
 	public XtextTemplateContextTypeRegistry(IGrammarAccess grammarAccess, Provider<XtextTemplateContextType> ctxTypeProvider) {
+		registerContextTypes(grammarAccess, ctxTypeProvider);
+	}
+
+	protected void registerContextTypes(IGrammarAccess grammarAccess, Provider<XtextTemplateContextType> ctxTypeProvider) {
 		List<ParserRule> parserRules = GrammarUtil.allParserRules(grammarAccess.getGrammar());
 		for (ParserRule parserRule : parserRules) {
 			XtextTemplateContextType type = ctxTypeProvider.get();
@@ -50,11 +54,11 @@ public class XtextTemplateContextTypeRegistry extends ContextTypeRegistry {
 		}
 	}
 	
-	public static String getId(Keyword k) {
+	public String getId(Keyword k) {
 		return GrammarUtil.getGrammar(k).getName()+".kw_"+k.getValue();
 	}
 
-	public static String getId(ParserRule parserRule) {
+	public String getId(ParserRule parserRule) {
 		return GrammarUtil.getGrammar(parserRule).getName()+"."+parserRule.getName();
 	}
 }

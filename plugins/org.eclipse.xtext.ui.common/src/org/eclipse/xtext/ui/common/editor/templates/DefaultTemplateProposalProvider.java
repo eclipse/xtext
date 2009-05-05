@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -44,11 +43,11 @@ import com.google.inject.Singleton;
 public class DefaultTemplateProposalProvider extends AbstractTemplateProposalProvider {
 
 	private TemplateStore templateStore;
-	private ContextTypeRegistry registry;
+	private XtextTemplateContextTypeRegistry registry;
 	private Image image;
 	
 	@Inject
-	public DefaultTemplateProposalProvider(TemplateStore templateStore, ContextTypeRegistry registry) {
+	public DefaultTemplateProposalProvider(TemplateStore templateStore, XtextTemplateContextTypeRegistry registry) {
 		this.templateStore = templateStore;
 		this.registry = registry;
 	}
@@ -96,7 +95,7 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 			
 			public Object caseRuleCall(RuleCall object) {
 				if (object.getRule() instanceof ParserRule) {
-					result.add(registry.getContextType(XtextTemplateContextTypeRegistry.getId((ParserRule) object.getRule())));
+					result.add(registry.getContextType(registry.getId((ParserRule) object.getRule())));
 				}
 				doSwitch(object.getRule().getAlternatives());
 				return null;
@@ -104,7 +103,7 @@ public class DefaultTemplateProposalProvider extends AbstractTemplateProposalPro
 			
 			@Override
 			public Object caseKeyword(Keyword object) {
-				result.add(registry.getContextType(XtextTemplateContextTypeRegistry.getId(object)));
+				result.add(registry.getContextType(registry.getId(object)));
 				return null;
 			}
 		};
