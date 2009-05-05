@@ -6,27 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.generator.validator;
+package org.eclipse.xtext.generator.validation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend.expression.ExecutionContext;
 import org.eclipse.xtend.expression.ResourceManager;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
-import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
-public class CheckFragment extends AbstractGeneratorFragment {
+/**
+ * {@link IGeneratorFragment} to generate a check based validity checker for a given grammar. 
+ * 
+ * @author Michael Clay
+ */
+public class CheckFragment extends AbstractValidatorFragment {
 
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
@@ -35,15 +33,6 @@ public class CheckFragment extends AbstractGeneratorFragment {
 		};
 	}
 	
-	@Override
-	public String[] getExportedPackagesRt(Grammar grammar) {
-		return new String[]{ getValidationPackage(grammar) };
-	}
-
-	public static String getValidationPackage(Grammar grammar) {
-		return GrammarUtil.getNamespace(grammar) + ".validation";
-	}
-
 	@Override
 	public Map<BindKey, BindValue> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory addTypeToInstance = new BindFactory()
@@ -54,37 +43,8 @@ public class CheckFragment extends AbstractGeneratorFragment {
 			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar), getCheckValidatorName(grammar))
 			.getBindings();
 	}
-
-	@Override
-	protected List<Object> getParameters(Grammar grammar) {
-		List<String> packageQNames = new ArrayList<String>();
-		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(),GeneratedMetamodel.class);
-		for (GeneratedMetamodel generatedMetamodel : list) {
-			packageQNames.add(getGeneratedEPackageName(grammar, generatedMetamodel.getEPackage()));
-		}
-		return Collections.singletonList((Object)packageQNames);
-	}
-
+	
 	public static String getCheckValidatorName(Grammar g) {
 		return GrammarUtil.getNamespace(g) + ".validation." + GrammarUtil.getName(g) + "CheckValidator";
-	}
-
-	private String basePackage = null;
-
-	public void setBasePackage(String basePackage) {
-		if ("".equals(basePackage.trim()))
-			return;
-		this.basePackage = basePackage;
-	}
-
-	public String getBasePackage(Grammar g) {
-		if (basePackage==null)
-			return GrammarUtil.getNamespace(g);
-		return basePackage;
-	}
-
-	public String getGeneratedEPackageName(Grammar g, EPackage pack) {
-		return getBasePackage(g) + "." +pack.getName() +"."+ Strings.toFirstUpper(pack.getName())
-				+ "Package";
 	}
 }

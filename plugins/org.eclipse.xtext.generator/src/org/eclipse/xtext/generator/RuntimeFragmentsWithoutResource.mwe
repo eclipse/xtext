@@ -8,5 +8,5 @@
 	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genmodels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
 	<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
-	<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
+	<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
 </compose>

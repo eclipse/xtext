@@ -13,7 +13,7 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
-«EXTENSION org::eclipse::xtext::generator::validator::CheckFragment»
+«EXTENSION org::eclipse::xtext::generator::validation::CheckFragment»
 
 «DEFINE generate(List[String] packageQNames) FOR Grammar»
 
@@ -69,7 +69,7 @@ package «getCheckValidatorName().toJavaPackage()»;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validator.CheckType;
+import org.eclipse.xtext.validation.CheckType;
 
 public class «getCheckValidatorName().toSimpleName()» extends org.eclipse.xtext.check.AbstractCheckValidator {
 
