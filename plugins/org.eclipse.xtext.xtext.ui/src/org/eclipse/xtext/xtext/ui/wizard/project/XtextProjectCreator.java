@@ -40,8 +40,8 @@ import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
  */
 public class XtextProjectCreator extends DefaultProjectCreator {
 
-	private static final String[] PROJECT_NATURES = new String[] { 
-			JavaCore.NATURE_ID, 
+	private static final String[] PROJECT_NATURES = new String[] {
+			JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature",
 			"org.eclipse.xtend.shared.ui.xtendXPandNature"};
 	// some constants
@@ -129,7 +129,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 			final IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Creating dsl projects " + projectName, 3);
 		final IProject dslProject = EclipseResourceUtil.createProject(projectName,
-				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, null, null, monitor, 
+				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, null, null, monitor,
 				null,PROJECT_NATURES);
 
 		if (dslProject == null) {
@@ -143,6 +143,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				.toOSString()));
 
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
+		execCtx.setFileEncoding("ISO-8859-1");
 		execCtx.registerMetaModel(new JavaMetaModel());
 
 		// generate generator and activator for dsl and dsl.ui project
