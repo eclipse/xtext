@@ -3,11 +3,11 @@ package org.eclipse.xtext.generator.scoping;
 import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 public class XtendScopingFragment extends AbstractGeneratorFragment {
 	@Override
