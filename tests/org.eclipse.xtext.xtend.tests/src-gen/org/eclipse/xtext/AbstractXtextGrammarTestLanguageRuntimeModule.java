@@ -84,7 +84,7 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.crossref.IScopeProvider> bindIScopeProvider() {
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.XtextGrammarTestLanguageScopeProvider.class;
 	}
 

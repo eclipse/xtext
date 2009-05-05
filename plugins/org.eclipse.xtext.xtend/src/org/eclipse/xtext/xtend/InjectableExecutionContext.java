@@ -21,7 +21,7 @@ import org.eclipse.xtend.expression.TypeSystemImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

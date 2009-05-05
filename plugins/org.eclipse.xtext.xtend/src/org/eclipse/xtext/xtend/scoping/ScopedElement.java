@@ -9,7 +9,7 @@
 package org.eclipse.xtext.xtend.scoping;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.scoping.IScopedElement;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

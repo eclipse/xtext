@@ -20,8 +20,8 @@ import org.eclipse.jface.text.templates.TemplateVariableResolver;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
 
 /**
  * @author Michael Clay - Initial contribution and API

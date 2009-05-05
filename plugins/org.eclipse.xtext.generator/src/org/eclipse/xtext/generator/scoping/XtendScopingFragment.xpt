@@ -34,7 +34,7 @@
 */
 
 import org::eclipse::xtext;
-import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::scoping;
 import org::eclipse::jface::text::contentassist;
 
 /**
@@ -54,7 +54,7 @@ import org::eclipse::jface::text::contentassist;
 package «javaXtendScopeProvider().toJavaPackage()»;
 
 import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
-import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
 
 import com.google.inject.Inject;
 

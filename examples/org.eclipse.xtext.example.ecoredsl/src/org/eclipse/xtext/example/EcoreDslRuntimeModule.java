@@ -12,14 +12,14 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.example.conversion.EcoreDslConverters;
 import org.eclipse.xtext.example.linker.EcoreDslLinker;
 import org.eclipse.xtext.example.linker.EcoreDslLinkingService;
 import org.eclipse.xtext.example.linker.EcoreDslScopeProvider;
+import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 /**
  * Used to register components to be used within the IDE.
@@ -32,7 +32,7 @@ public class EcoreDslRuntimeModule extends AbstractEcoreDslRuntimeModule {
 	protected final Logger logger = Logger.getLogger(getClass());
 	
 	@Override
-	public Class<? extends org.eclipse.xtext.crossref.ILinker> bindILinker() {
+	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
 		return EcoreDslLinker.class;
 	}
 	

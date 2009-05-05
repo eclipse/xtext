@@ -5,7 +5,7 @@
 package org.eclipse.xtext.enumrules;
 
 import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
-import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
 
 import com.google.inject.Inject;
 

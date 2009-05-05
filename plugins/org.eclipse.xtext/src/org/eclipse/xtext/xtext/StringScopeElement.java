@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.scoping.IScopedElement;
 
 public class StringScopeElement implements IScopedElement {
 

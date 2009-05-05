@@ -7,7 +7,7 @@
  *******************************************************************************/
 
 import org::eclipse::xtext;
-import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::scoping;
 import org::eclipse::xtext::xtend::scoping;
 import org::eclipse::emf::ecore;
 import org::eclipse::emf::ecore::resource;

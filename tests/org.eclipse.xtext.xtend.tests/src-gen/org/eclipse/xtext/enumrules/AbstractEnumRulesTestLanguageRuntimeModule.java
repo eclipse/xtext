@@ -84,7 +84,7 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends Default
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.crossref.IScopeProvider> bindIScopeProvider() {
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.enumrules.EnumRulesTestLanguageScopeProvider.class;
 	}
 

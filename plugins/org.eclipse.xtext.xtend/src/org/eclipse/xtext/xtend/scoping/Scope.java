@@ -11,9 +11,9 @@ package org.eclipse.xtext.xtend.scoping;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.crossref.impl.AbstractScope;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
+import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
