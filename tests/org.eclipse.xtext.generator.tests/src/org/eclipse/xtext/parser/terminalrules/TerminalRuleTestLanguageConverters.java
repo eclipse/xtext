@@ -12,7 +12,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
-import org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService;
+import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TerminalRuleTestLanguageConverters extends AbstractAnnotationBasedValueConverterService {
+public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValueConverterService {
 
 	// copied from Common.Terminals but without rule for int
 	private Grammar g;

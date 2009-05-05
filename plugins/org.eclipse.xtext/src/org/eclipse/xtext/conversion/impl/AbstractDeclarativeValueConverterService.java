@@ -24,9 +24,9 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  *
  */
 @Stable(since="0.7.0")
-public class AbstractAnnotationBasedValueConverterService extends AbstractValueConverterService {
+public class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
 	
-	private static Logger log = Logger.getLogger(AbstractAnnotationBasedValueConverterService.class);
+	private static Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);
 
 	public final String toString(Object value, String lexerRule) {
 		return getConverter(lexerRule).toString(value);
