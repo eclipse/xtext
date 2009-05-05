@@ -4,7 +4,7 @@ package org.eclipse.xtext.example.validation;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validator.CheckType;
+import org.eclipse.xtext.validation.CheckType;
 
 public class DomainmodelCheckValidator extends org.eclipse.xtext.check.AbstractCheckValidator {
 

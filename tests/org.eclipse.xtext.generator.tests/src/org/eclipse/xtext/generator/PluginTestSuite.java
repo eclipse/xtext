@@ -89,11 +89,11 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelperTests.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTest.class);
-		suite.addTestSuite(org.eclipse.xtext.validator.AbstractDeclarativeValidatorTest.class);
-		suite.addTestSuite(org.eclipse.xtext.validator.ConcurrentValidationTest.class);
-		suite.addTestSuite(org.eclipse.xtext.validator.CompositeValidatorTest.WithEObjectValidator.class);
-		suite.addTestSuite(org.eclipse.xtext.validator.CompositeValidatorTest.WithoutEObjectValidator.class);
-		suite.addTestSuite(org.eclipse.xtext.validator.ImportUriValidatorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.validation.AbstractDeclarativeValidatorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.validation.ConcurrentValidationTest.class);
+		suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorTest.WithEObjectValidator.class);
+		suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorTest.WithoutEObjectValidator.class);
+		suite.addTestSuite(org.eclipse.xtext.validation.ImportUriValidatorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ExceptionTest.class);

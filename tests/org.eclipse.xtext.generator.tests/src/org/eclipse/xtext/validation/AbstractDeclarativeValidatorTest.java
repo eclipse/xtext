@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validator;
+package org.eclipse.xtext.validation;
 
 import java.util.HashMap;
 
@@ -13,7 +13,11 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.validator.ValidationTestHelper.TestChain;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

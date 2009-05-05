@@ -57,8 +57,13 @@ projectName=«this.projectName»
 			<!-- the serialization component -->
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 			
-			<!-- a check based validation component -->
-			<fragment class="org.eclipse.xtext.generator.validator.CheckFragment"/>
+			<!-- a check based validation component 
+			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
+			-->
+			<!-- a java based validation component -->
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
+                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
+            </fragment>
 			
 			<!-- a custom ResourceFactory for use with EMF -->
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 

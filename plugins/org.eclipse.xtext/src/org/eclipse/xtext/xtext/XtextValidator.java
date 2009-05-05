@@ -32,9 +32,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.util.XtextSwitch;
-import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
-import org.eclipse.xtext.validator.Check;
-import org.eclipse.xtext.validator.CheckType;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

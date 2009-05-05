@@ -1,0 +1,7 @@
+import org::eclipse::xtext;
+
+String getCheckValidatorName(Grammar g) :
+ 	JAVA org.eclipse.xtext.generator.validation.CheckFragment.getCheckValidatorName(org.eclipse.xtext.Grammar);
+ 	
+String validationPackage(Grammar this) :
+    JAVA org.eclipse.xtext.generator.validation.AbstractValidatorFragment.getValidationPackage(org.eclipse.xtext.Grammar);

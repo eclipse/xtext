@@ -39,7 +39,7 @@ import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
-import org.eclipse.xtext.validator.CheckMode;
+import org.eclipse.xtext.validation.CheckMode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -37,7 +37,7 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.internal.Activator;
-import org.eclipse.xtext.validator.CheckMode;
+import org.eclipse.xtext.validation.CheckMode;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -5,16 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.impl;
+package org.eclipse.xtext.validation;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validator.AbstractDeclarativeValidator;
-import org.eclipse.xtext.validator.Check;
-import org.eclipse.xtext.validator.CheckType;
+import org.eclipse.xtext.crossref.impl.ImportUriResolver;
+import org.eclipse.xtext.crossref.impl.ImportUriUtil;
 
 import com.google.inject.Inject;
 

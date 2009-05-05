@@ -62,16 +62,26 @@
 		<page
 			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
 			id="org.eclipse.xtext.Xtext"
-			name="Xtext">
+			name="Xtext"
+			category="org.eclipse.xtext.languages">
 			<keywordReference
 				id="org.eclipse.xtext.ui.keyword_Xtext">
 			</keywordReference>
 		</page>
 		<page
 			category="org.eclipse.xtext.Xtext"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage"
-			id="org.eclipse.xtext.Xtext.editor"
-			name="Editor">
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.eclipse.xtext.Xtext.coloring"
+			name="Syntax Coloring">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
+		<page
+			category="org.eclipse.xtext.Xtext"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.Xtext.templates"
+			name="Templates">
 			<keywordReference 
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>

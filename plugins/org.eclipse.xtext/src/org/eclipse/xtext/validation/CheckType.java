@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package org.eclipse.xtext.validator;
+package org.eclipse.xtext.validation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

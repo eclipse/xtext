@@ -1,29 +1,19 @@
-«REM»
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-«ENDREM»
+package org.eclipse.xtext.validation;
 
-«IMPORT org::eclipse::xtext»
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-
-«DEFINE generate FOR Grammar»
-«ENDDEFINE»
-
-
-«DEFINE addToPluginXmlRt FOR Grammar»
-«ENDDEFINE»
-
-
-«DEFINE addToPluginXmlUi FOR Grammar»
-«ENDDEFINE»
-
-
-«DEFINE addToStandaloneSetup FOR Grammar»
-«ENDDEFINE»
-
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.METHOD})
+public @interface Check {
+	CheckType value() default CheckType.FAST;
+}

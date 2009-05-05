@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
-import org.eclipse.xtext.validator.CheckMode;
+import org.eclipse.xtext.validation.CheckMode;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

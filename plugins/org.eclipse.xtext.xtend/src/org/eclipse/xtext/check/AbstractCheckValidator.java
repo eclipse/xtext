@@ -21,9 +21,9 @@ import org.eclipse.emf.mwe.core.issues.IssuesImpl;
 import org.eclipse.emf.mwe.core.issues.MWEDiagnostic;
 import org.eclipse.xtend.check.CheckFacade;
 import org.eclipse.xtend.expression.ExecutionContext;
-import org.eclipse.xtext.validator.AbstractInjectableValidator;
-import org.eclipse.xtext.validator.CheckMode;
-import org.eclipse.xtext.validator.CheckType;
+import org.eclipse.xtext.validation.AbstractInjectableValidator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.CheckType;
 
 import com.google.inject.Inject;
 

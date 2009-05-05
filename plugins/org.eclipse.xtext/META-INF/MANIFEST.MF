@@ -38,7 +38,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.service,
  org.eclipse.xtext.services,
  org.eclipse.xtext.util,
- org.eclipse.xtext.validator,
+ org.eclipse.xtext.validation,
  org.eclipse.xtext.xtext,
  org.eclipse.xtext.xtext.ecoreInference
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",

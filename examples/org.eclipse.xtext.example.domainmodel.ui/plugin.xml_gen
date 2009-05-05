@@ -69,6 +69,15 @@
 				id="org.eclipse.xtext.keyword.editor">
 			</keywordReference>
 		</page>
+		<page
+			category="org.eclipse.xtext.example.Domainmodel"
+			class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+			id="org.eclipse.xtext.example.Domainmodel.templates"
+			name="Templates">
+			<keywordReference 
+				id="org.eclipse.xtext.keyword.editor">
+			</keywordReference>
+		</page>
 	</extension>
 	<extension
 		point="org.eclipse.ui.keywords">
