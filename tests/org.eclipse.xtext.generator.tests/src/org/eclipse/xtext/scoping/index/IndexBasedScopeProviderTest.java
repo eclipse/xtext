@@ -41,6 +41,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 	public void testStuff() throws Exception {
 		
 		IndexAwareResourceSet set = get(IndexAwareResourceSet.class);
+		set.setClasspathURIContext(getClass());
 		URI uri = URI.createURI("classpath:/" + IndexAwareResourcesetTest.class.getName().replace('.', '/')
 				+ ".importuritestlanguage");
 		System.out.println(uri);

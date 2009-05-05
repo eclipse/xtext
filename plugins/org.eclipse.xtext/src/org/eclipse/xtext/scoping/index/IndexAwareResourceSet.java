@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.index;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -57,7 +60,8 @@ public class IndexAwareResourceSet extends XtextResourceSet {
 		
 		EcoreIndexFeederImpl ecoreFeeder = new EcoreIndexFeederImpl(store);
 		
-		for (String nsURI : registry.keySet()) {
+		Collection<String> keys = new ArrayList<String>(registry.keySet());
+		for (String nsURI : keys) {
 			EPackage pack = registry.getEPackage(nsURI);
 			ecoreFeeder.index(pack, false);
 		}
