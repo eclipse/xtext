@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AmetamodelSwitch.java,v 1.1 2009/02/18 19:43:23 sefftinge Exp $
+ * $Id: AmetamodelSwitch.java,v 1.2 2009/05/05 15:32:36 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.ametamodel.util;
 
@@ -10,8 +10,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.xtext.grammarinheritance.ametamodel.*;
+import org.eclipse.xtext.grammarinheritance.ametamodel.AModel;
+import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
+import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
 /**
  * <!-- begin-user-doc -->

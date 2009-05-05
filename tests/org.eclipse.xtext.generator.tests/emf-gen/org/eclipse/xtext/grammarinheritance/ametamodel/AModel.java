@@ -2,12 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AModel.java,v 1.1 2009/02/18 19:45:51 sefftinge Exp $
+ * $Id: AModel.java,v 1.2 2009/05/05 15:32:35 sefftinge Exp $
  */
 package org.eclipse.xtext.grammarinheritance.ametamodel;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

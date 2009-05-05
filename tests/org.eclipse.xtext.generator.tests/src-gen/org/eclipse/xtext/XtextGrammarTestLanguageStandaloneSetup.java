@@ -34,7 +34,6 @@ public class XtextGrammarTestLanguageStandaloneSetup implements ISetup {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/Test/XtextTest")) {
 		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/Test/XtextTest", org.eclipse.xtext.xtextTest.XtextTestPackage.eINSTANCE);
 	}
-	//TODO registration of EValidators should be added here, too
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtextgrammartestlanguage", resourceFactory);

@@ -18,9 +18,9 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.XtextGrammarTest.class);
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Packrat.class);
-		suite.addTestSuite(org.eclipse.xtext.crossrefs.CrossRefTest.class);
-		suite.addTestSuite(org.eclipse.xtext.crossrefs.DefaultScopeProviderTest.class);
-		suite.addTestSuite(org.eclipse.xtext.crossrefs.LinkingErrorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
+		suite.addTestSuite(org.eclipse.xtext.scoping.DefaultScopeProviderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.GrammarParserTest.class);

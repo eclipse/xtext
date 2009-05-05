@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import junit.framework.TestCase;
+
 import org.antlr.runtime.CommonToken;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.parser.impl.DatatypeRuleToken;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
