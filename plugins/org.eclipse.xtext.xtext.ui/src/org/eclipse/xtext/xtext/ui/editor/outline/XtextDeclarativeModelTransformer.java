@@ -25,6 +25,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NegatedToken;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
@@ -166,12 +167,13 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 
 	public ContentOutlineNode createNode(RuleCall object, ContentOutlineNode outlineParentNode) {
 		return HIDDEN_NODE;
-		
-//		ContentOutlineNode outlineNode = newOutlineNode(object, outlineParentNode);
-//		outlineNode.setLabel(getLabel(object));
-//		// TODO show another icon, if unresolved
-//		// TODO how to show text in another color?
-//		return outlineNode;
+
+		// ContentOutlineNode outlineNode = newOutlineNode(object,
+		// outlineParentNode);
+		// outlineNode.setLabel(getLabel(object));
+		// // TODO show another icon, if unresolved
+		// // TODO how to show text in another color?
+		// return outlineNode;
 	}
 
 	public ContentOutlineNode createNode(org.eclipse.xtext.Alternatives object, ContentOutlineNode outlineParentNode) {
@@ -249,11 +251,11 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 	public ContentOutlineNode createNode(Group object, ContentOutlineNode outlineParentNode) {
 		return HIDDEN_NODE;
 	}
-	
+
 	public ContentOutlineNode createNode(TypeRef object, ContentOutlineNode outlineParentNode) {
 		return HIDDEN_NODE;
 	}
-	
+
 	public List<EObject> getChildren(Assignment object) {
 		if (object.getTerminal() instanceof Alternatives || object.getTerminal() instanceof CrossReference) {
 			return getChildren(object.getTerminal());
@@ -274,7 +276,7 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 		}
 		return NO_CHILDREN;
 	}
-	
+
 	public List<EObject> getChildren(CharacterRange object) {
 		return NO_CHILDREN;
 	}
@@ -287,4 +289,13 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 		return NO_CHILDREN;
 	}
 	
+	public List<EObject> getChildren(ParserRule object) {
+		if (isFilterActive(ParserRulesOutlineFilter.class)) {
+			return NO_CHILDREN;
+		}
+		else {
+			return super.getChildren(object);
+		}
+	}
+
 }
