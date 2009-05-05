@@ -12,7 +12,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
-import org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService;
+import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 /**
  * Simple converters for Strings, Integers and IDs.
  */
-public class DefaultTerminalConverters extends AbstractAnnotationBasedValueConverterService {
+public class DefaultTerminalConverters extends AbstractDeclarativeValueConverterService {
 
 	private Grammar grammar;
 	
