@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validator;
+package org.eclipse.xtext.validation;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,7 +21,9 @@ import org.eclipse.xtext.enumrules.validation.EnumRulesTestLanguageCheckValidato
 import org.eclipse.xtext.enumrules.EnumRulesTestLanguageStandaloneSetup;
 import org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.validator.CompositeEValidator.EValidatorEqualitySupport;
+import org.eclipse.xtext.validation.AbstractInjectableValidator;
+import org.eclipse.xtext.validation.CompositeEValidator;
+import org.eclipse.xtext.validation.CompositeEValidator.EValidatorEqualitySupport;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;

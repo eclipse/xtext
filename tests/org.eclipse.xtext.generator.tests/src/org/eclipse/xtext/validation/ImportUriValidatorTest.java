@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validator;
+package org.eclipse.xtext.validation;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,11 +14,13 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.crossref.impl.ImportUriValidator;
 import org.eclipse.xtext.crossrefs.ImportUriTestLanguageRuntimeModule;
 import org.eclipse.xtext.crossrefs.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.crossrefs.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.ComposedChecks;
+import org.eclipse.xtext.validation.ImportUriValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
