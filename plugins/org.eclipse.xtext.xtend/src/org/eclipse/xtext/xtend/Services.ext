@@ -7,7 +7,7 @@
  *******************************************************************************/
 
 import org::eclipse::xtext;
-import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::scoping;
 import org::eclipse::emf::ecore;
 import java::lang;
 
@@ -30,7 +30,7 @@ List[EObject] allElements(EObject this) :
  *	Java hack to do the conversion. 
  */
 IScope getScope(IScopeProvider this, Object obj, Object ref) :
-	JAVA org.eclipse.xtext.xtend.contentassist.ContentAssistHelper.getScope(org.eclipse.xtext.crossref.IScopeProvider, java.lang.Object, java.lang.Object);
+	JAVA org.eclipse.xtext.xtend.contentassist.ContentAssistHelper.getScope(org.eclipse.xtext.scoping.IScopeProvider, java.lang.Object, java.lang.Object);
 	
 List toList(Iterable this):
 	JAVA com.google.common.^collect.Lists.newArrayList(java.lang.Iterable);

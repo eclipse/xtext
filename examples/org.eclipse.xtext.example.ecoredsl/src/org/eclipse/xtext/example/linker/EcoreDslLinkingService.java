@@ -20,10 +20,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.crossref.impl.DefaultLinkingService;
-import org.eclipse.xtext.crossref.impl.IllegalNodeException;
 import org.eclipse.xtext.example.ecoredsl.EcoredslPackage;
 import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
+import org.eclipse.xtext.linking.impl.DefaultLinkingService;
+import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 

@@ -11,9 +11,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultScopeProvider;
 import org.eclipse.xtext.xtend.AbstractXtendService;
 import org.eclipse.xtext.xtend.NoSuchExtensionException;
 

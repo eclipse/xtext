@@ -1,5 +1,5 @@
 import org::eclipse::emf::ecore;
-import org::eclipse::xtext::crossref;
+import org::eclipse::xtext::scoping;
 import org::eclipse::xtext::xtend::scoping;
 
 extension org::eclipse::xtext::xtend::scoping::ScopeProvider;

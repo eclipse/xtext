@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtend.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.eclipse.xtext.xtend.crossref.XtendScopeProviderTest;
+import org.eclipse.xtext.xtend.scoping.XtendScopeProviderTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

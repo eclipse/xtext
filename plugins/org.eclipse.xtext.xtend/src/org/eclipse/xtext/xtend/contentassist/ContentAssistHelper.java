@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 
 /**

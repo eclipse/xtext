@@ -84,7 +84,7 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.crossref.IScopeProvider> bindIScopeProvider() {
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.testlanguages.ContentAssistTestLanguageScopeProvider.class;
 	}
 

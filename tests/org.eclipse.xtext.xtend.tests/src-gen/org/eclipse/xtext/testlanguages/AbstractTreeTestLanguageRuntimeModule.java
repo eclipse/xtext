@@ -84,7 +84,7 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 	}
 
 	
-	public Class<? extends org.eclipse.xtext.crossref.IScopeProvider> bindIScopeProvider() {
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.testlanguages.TreeTestLanguageScopeProvider.class;
 	}
 

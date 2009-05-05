@@ -31,7 +31,9 @@ end</template>
 	<template name="transition" description="event transition"
 		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.transition"
 		context="org.eclipse.xtext.example.FowlerDsl.Transition"
-		enabled="true">${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')}</template>
+		enabled="true">
+		${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')}
+	</template>
 	
 	<template name="event" description="event definition"
 		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.event"

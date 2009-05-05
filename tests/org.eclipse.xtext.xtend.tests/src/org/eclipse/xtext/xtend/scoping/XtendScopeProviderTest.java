@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.xtend.crossref;
+package org.eclipse.xtext.xtend.scoping;
 
 import java.util.Iterator;
 
@@ -19,8 +19,8 @@ import org.eclipse.internal.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtend.expression.ExecutionContext;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.crossref.IScope;
-import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopedElement;
 import org.eclipse.xtext.xtend.ExecutionContextAware;
 import org.eclipse.xtext.xtend.XtendServiceHelper;
 import org.eclipse.xtext.xtend.scoping.XtendScopeProvider;
