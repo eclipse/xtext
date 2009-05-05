@@ -12,7 +12,10 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.xtext.ui.common.editor.contentassist.JavaContentAssistProcessorTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelperTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsContentAssistTest;
 import org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest;
+import org.eclipse.xtext.ui.common.editor.outline.impl.AbstractDeclarativeSemanticModelTransformerTest;
 import org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest;
 
 /**
@@ -25,9 +28,11 @@ public class AllTests {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui.common.tests");
 		// $JUnit-BEGIN$
 		suite.addTestSuite(JavaContentAssistProcessorTest.class);
-		suite.addTestSuite(DefaultSemanticModelTransformerTest.class);
+		suite.addTestSuite(TwoContextsContentAssistTest.class);
 		suite.addTestSuite(HyperlinkHelperTest.class);
-		suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelperTest.Antlr.class);
+		suite.addTestSuite(ProposalConflictHelperTest.Antlr.class);
+		suite.addTestSuite(DefaultSemanticModelTransformerTest.class);
+		suite.addTestSuite(AbstractDeclarativeSemanticModelTransformerTest.class);
 		// $JUnit-END$
 		return suite;
 	}

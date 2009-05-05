@@ -27,6 +27,8 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageRuntimeModule
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistProcessorTestSetup;
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.xtend.tests.Activator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -40,7 +42,8 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new ReferenceGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUiModule());
+				return Guice.createInjector(new ReferenceGrammarTestLanguageRuntimeModule(), new ReferenceGrammarTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}
@@ -49,7 +52,8 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUiModule());
+				return Guice.createInjector(new XtextGrammarTestLanguageRuntimeModule(), new XtextGrammarTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}
@@ -58,7 +62,8 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule());
+				return Guice.createInjector(new XtextRuntimeModule(), new XtextUiModule(),
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}
@@ -67,7 +72,8 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule());
+				return Guice.createInjector(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}
@@ -76,7 +82,8 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new KeywordsTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUiModule());
+				return Guice.createInjector(new KeywordsTestLanguageRuntimeModule(), new KeywordsTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}
@@ -85,7 +92,8 @@ public class XtendContentAssistProcessorTestSetup implements IContentAssistProce
 		return new EnumRulesTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new EnumRulesTestLanguageRuntimeModule(), new EnumRulesTestLanguageUiModule());
+				return Guice.createInjector(new EnumRulesTestLanguageRuntimeModule(), new EnumRulesTestLanguageUiModule(),
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}

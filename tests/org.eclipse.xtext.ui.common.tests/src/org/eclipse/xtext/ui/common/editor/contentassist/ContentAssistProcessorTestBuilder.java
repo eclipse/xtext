@@ -237,10 +237,12 @@ public class ContentAssistProcessorTestBuilder {
 
 					@SuppressWarnings("unchecked")
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-						if (args[0] instanceof UnitOfWork)
+						if (args!=null && args[0] instanceof UnitOfWork)
 							return ((UnitOfWork<XtextResource>) args[0]).exec(xtextResource);
 						if (method.getName().equals("get"))
 							return model;
+						if (method.getName().equals("getLength"))
+							return Integer.MAX_VALUE;
 						throw new UnsupportedOperationException("The test mock IXtextDocument does not support the operation "+method);
 					}
 				});

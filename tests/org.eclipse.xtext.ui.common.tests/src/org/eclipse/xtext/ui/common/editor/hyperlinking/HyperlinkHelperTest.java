@@ -17,6 +17,8 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.common.tests.Activator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -30,7 +32,8 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XtextRuntimeModule(), new org.eclipse.xtext.XtextUiModule());
+				return Guice.createInjector(new XtextRuntimeModule(), new org.eclipse.xtext.XtextUiModule(),
+						new UIPluginModule(Activator.getInstance()));
 			}
 		};
 	}
