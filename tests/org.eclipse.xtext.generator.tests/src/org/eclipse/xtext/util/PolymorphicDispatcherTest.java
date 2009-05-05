@@ -15,10 +15,10 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
 
+import junit.framework.TestCase;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

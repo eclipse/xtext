@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.tests;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
+import static junit.framework.Assert.*;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -2,10 +2,6 @@ package org.eclipse.xtext.util;
 
 import java.util.HashSet;
 
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
-
 import junit.framework.TestCase;
 
 public class TuplesTest extends TestCase {
