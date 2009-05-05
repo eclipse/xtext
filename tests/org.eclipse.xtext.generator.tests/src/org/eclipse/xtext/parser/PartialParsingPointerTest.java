@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import static org.eclipse.xtext.parsetree.NodeUtil.dumpCompositeNodes;
+import static org.eclipse.xtext.parsetree.NodeUtil.*;
 
 import java.util.List;
 

@@ -16,10 +16,10 @@ import java.util.LinkedHashSet;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import junit.framework.TestCase;
+
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Wrapper;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

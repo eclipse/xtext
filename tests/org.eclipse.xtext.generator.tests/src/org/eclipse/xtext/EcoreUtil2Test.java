@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import static org.eclipse.xtext.EcoreUtil2.*;
+
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -17,8 +19,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-
-import static org.eclipse.xtext.EcoreUtil2.*;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */

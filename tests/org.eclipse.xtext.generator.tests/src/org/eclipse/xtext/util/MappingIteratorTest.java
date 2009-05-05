@@ -10,10 +10,10 @@ package org.eclipse.xtext.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import junit.framework.TestCase;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Iterators;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

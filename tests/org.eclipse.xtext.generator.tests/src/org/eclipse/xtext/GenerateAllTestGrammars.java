@@ -14,13 +14,13 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.mwe.core.WorkflowFacade;
-import org.eclipse.xtext.crossrefs.ImportUriTestLanguage;
-import org.eclipse.xtext.crossrefs.LangATestLanguage;
 import org.eclipse.xtext.dummy.DummyTestLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
 import org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage;
+import org.eclipse.xtext.linking.ImportUriTestLanguage;
+import org.eclipse.xtext.linking.LangATestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage;
 import org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage;
