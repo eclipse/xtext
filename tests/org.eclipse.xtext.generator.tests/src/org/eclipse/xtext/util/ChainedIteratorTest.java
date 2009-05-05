@@ -9,10 +9,10 @@ package org.eclipse.xtext.util;
 
 import java.util.Iterator;
 
+import junit.framework.TestCase;
+
 import com.google.common.base.Join;
 import com.google.common.collect.Iterators;
-
-import junit.framework.TestCase;
 
 public class ChainedIteratorTest extends TestCase {
 	

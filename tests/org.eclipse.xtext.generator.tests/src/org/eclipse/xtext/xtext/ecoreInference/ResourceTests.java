@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.crossrefs.LangATestLanguageStandaloneSetup;
+import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**

@@ -1,5 +1,5 @@
 <workflow>
-	<property name="standardFragments" value="org/eclipse/xtext/generator/StandardRuntimeFragments.mwe"/>
+	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
 	<property name="projectName" value="org.eclipse.xtext.generator.tests"/>
 	<property name="runtimeProject" value="../${projectName}"/>
 	
@@ -19,20 +19,21 @@
 		<language uri="classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/crossrefs/lazy/ImportUriTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/linking/lazy/ImportUriTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/crossrefs/ImportUriTestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		<language uri="classpath:/org/eclipse/xtext/crossrefs/LangATestLanguage.xtext">
+		<language uri="classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext">
-			<fragment file="${standardFragments}" genmodels="${enums.genmodel}"/>
+			<fragment file="${standardFragments}" genModels="${enums.genmodel}"/>
+			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
@@ -45,15 +46,15 @@
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext">
 			<fragment file="${standardFragments}"
-			   genmodels="${ametamodel.genmodel}"/>
+			   genModels="${ametamodel.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext">
 			<fragment file="${standardFragments}"
-				genmodels="${baseinheritance.genmodel}"/>
+				genModels="${baseinheritance.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xtext">
 			<fragment file="${standardFragments}"
-				genmodels="${xtext.genmodel}"/>
+				genModels="${xtext.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
