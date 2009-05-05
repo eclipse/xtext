@@ -24,6 +24,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory;
+import org.eclipse.xtext.ui.core.editor.toggleComments.ISingleLineCommentHelper;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -47,6 +48,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	
 	@Inject(optional=true)
 	private IContentFormatterFactory contentFormatterFactory;
+	
+	@Inject(optional=true)
+	private ISingleLineCommentHelper singleLineCommentHelper;
 
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
@@ -102,5 +106,20 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		if (contentFormatterFactory != null)
 			return contentFormatterFactory.createConfiguredFormatter(this, sourceViewer);
 		return super.getContentFormatter(sourceViewer);
+	}
+	
+	@Override
+	public String[] getDefaultPrefixes(ISourceViewer sourceViewer, String contentType) {
+		if (singleLineCommentHelper != null)
+			return singleLineCommentHelper.getDefaultPrefixes(sourceViewer, contentType);
+		return super.getDefaultPrefixes(sourceViewer, contentType);
+	}
+
+	public void setSingleLineCommentHelper(ISingleLineCommentHelper singleLineCommentHelper) {
+		this.singleLineCommentHelper = singleLineCommentHelper;
+	}
+
+	public ISingleLineCommentHelper getSingleLineCommentHelper() {
+		return singleLineCommentHelper;
 	}
 }

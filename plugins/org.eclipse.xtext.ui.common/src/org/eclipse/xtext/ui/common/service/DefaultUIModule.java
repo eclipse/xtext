@@ -33,6 +33,7 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.NullTokenColorer;
 import org.eclipse.xtext.ui.common.editor.templates.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateStore;
+import org.eclipse.xtext.ui.common.editor.toggleComments.DefaultSingleLineCommentHelper;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.IFollowElementCalculator;
 import org.eclipse.xtext.ui.core.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
+import org.eclipse.xtext.ui.core.editor.toggleComments.ISingleLineCommentHelper;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -142,4 +144,7 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 		return ComposedAdapterFactory.Descriptor.Registry.INSTANCE;
 	}
 	
+	public Class<? extends ISingleLineCommentHelper> bindISingleLineCommentHelper() {
+		return DefaultSingleLineCommentHelper.class;
+	}
 }

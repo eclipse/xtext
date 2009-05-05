@@ -16,6 +16,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.core.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.core.editor.utils.ValidationJob;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -157,12 +159,25 @@ public class XtextEditor extends TextEditor {
 			markAsStateDependentAction("Format", true); //$NON-NLS-1$
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
+		
+		ToggleSLCommentAction action= new ToggleSLCommentAction(XtextUIMessages.getResourceBundle(), "ToggleComment.", this); //$NON-NLS-1$
+		action.setActionDefinitionId(Activator.PLUGIN_ID + ".ToggleCommentAction");
+		setAction("ToggleComment", action); //$NON-NLS-1$
+		markAsStateDependentAction("ToggleComment", true); //$NON-NLS-1$
+		markAsSelectionDependentAction("ToggleComment", true);
+		configureToggleCommentAction(action);
 
 		// Creates an build-in "click an ruler annotation, marks corresponding
 		// text" - action
 		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
 		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
+	}
+	
+	private void configureToggleCommentAction(ToggleSLCommentAction action) {
+		ISourceViewer sourceViewer= getSourceViewer();
+		SourceViewerConfiguration configuration= getSourceViewerConfiguration();
+		((ToggleSLCommentAction)action).configure(sourceViewer, configuration);
 	}
 
 	/**
