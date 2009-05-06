@@ -47,6 +47,8 @@ public class MweReader extends AbstractWorkflowComponent2 {
 
 	private String uri = null;
 
+	private Object classpathURIContext;
+
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
@@ -62,6 +64,7 @@ public class MweReader extends AbstractWorkflowComponent2 {
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
+		set.setClasspathURIContext(getClasspathURIContext());
 		set.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = set.getResource(URI.createURI(uri), true);
 		EObject value = resource.getContents().get(0);
@@ -91,6 +94,14 @@ public class MweReader extends AbstractWorkflowComponent2 {
 			issues.addWarning(this,getIssueMessage(resource, diagnostic));
 		}
 	}
+	
+	public Object getClasspathURIContext() {
+        return classpathURIContext;
+    }
+
+    public void setClasspathURIContext(Object classpathURIContext) {
+        this.classpathURIContext = classpathURIContext;
+    }
 
 	/**
 	 * @return
