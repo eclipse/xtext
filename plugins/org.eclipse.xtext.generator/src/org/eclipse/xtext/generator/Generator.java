@@ -102,8 +102,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 	}
 
+	
 	private String pathRtProject = ".";
 	private String pathUiProject = null;
+	private String srcPath = "/src";
+	private String srcGenPath = "/src-gen";
 
 	public String getPathRtProject() {
 		return pathRtProject;
@@ -121,21 +124,37 @@ public class Generator extends AbstractWorkflowComponent2 {
 		this.pathUiProject = pathUiProject;
 	}
 
+	public String getSrcPath() {
+		return srcPath;
+	}
+
+	public void setSrcPath(String srcPath) {
+		this.srcPath = srcPath;
+	}
+
+	public String getSrcGenPath() {
+		return srcGenPath;
+	}
+
+	public void setSrcGenPath(String srcGenPath) {
+		this.srcGenPath = srcGenPath;
+	}
+
 	private XpandExecutionContext createExecutionContext() {
 		// configure outlets
 		OutputImpl output = new OutputImpl();
 
 		output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_RT, false, getPathRtProject()));
-		output.addOutlet(new Outlet(false, getEncoding(), SRC, false, getPathRtProject() + "/src"));
-		output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN, true, getPathRtProject() + "/src-gen"));
+		output.addOutlet(new Outlet(false, getEncoding(), SRC, false, getPathRtProject() + getSrcPath()));
+		output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN, true, getPathRtProject() + getSrcGenPath()));
 		if (isUi()) {
 			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathUiProject()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + "/src"));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathUiProject() + "/src-gen"));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + getSrcPath()));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathUiProject() + getSrcGenPath()));
 		} else {
 			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + "/src"));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + "/src-gen"));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
+			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcPath()));
 		}
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
@@ -432,4 +451,5 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return activator;
 	}
 
+	
 }
