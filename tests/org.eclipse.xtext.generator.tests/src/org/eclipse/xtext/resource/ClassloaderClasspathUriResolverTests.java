@@ -22,15 +22,24 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 public class ClassloaderClasspathUriResolverTests extends TestCase {
 	private ClassloaderClasspathUriResolver _resolver;
-	private ClassLoader _classLoader;
+//	private ClassLoader _classLoader;
+//	private ClassLoader originalContextClassLoader;
 
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		_resolver = new ClassloaderClasspathUriResolver();
-		_classLoader = getClass().getClassLoader();
-		Thread.currentThread().setContextClassLoader(_classLoader);
+//		_classLoader = getClass().getClassLoader();
+//		originalContextClassLoader = Thread.currentThread().getContextClassLoader();
+//		Thread.currentThread().setContextClassLoader(_classLoader);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", new XMIResourceFactoryImpl());
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+//		Thread.currentThread().setContextClassLoader(originalContextClassLoader);
+		super.tearDown();
 	}
 
 	public void testClasspathUriForFile() {
@@ -69,7 +78,7 @@ public class ClassloaderClasspathUriResolverTests extends TestCase {
 
 	private void normalizeUriAndLoadResource(URI classpathUri,
 			String expectedUri) {
-		URI normalizedUri = _resolver.resolve(_classLoader, classpathUri);
+		URI normalizedUri = _resolver.resolve(getClass().getClassLoader(), classpathUri);
 		assertEquals(expectedUri, normalizedUri.toString());
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(normalizedUri, true);
