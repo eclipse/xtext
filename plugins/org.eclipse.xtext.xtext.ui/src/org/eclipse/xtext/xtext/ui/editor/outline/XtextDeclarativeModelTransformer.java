@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.NegatedToken;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
@@ -159,7 +161,7 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 		return outlineNode;
 	}
 
-	public ContentOutlineNode createNode(org.eclipse.xtext.AbstractRule object, ContentOutlineNode outlineParentNode) {
+	public ContentOutlineNode createNode(AbstractRule object, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode outlineNode = super.newOutlineNode(object, outlineParentNode);
 		outlineNode.setLabel(object.getName());
 		return outlineNode;
@@ -176,7 +178,7 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 		// return outlineNode;
 	}
 
-	public ContentOutlineNode createNode(org.eclipse.xtext.Alternatives object, ContentOutlineNode outlineParentNode) {
+	public ContentOutlineNode createNode(Alternatives object, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode outlineNode = newOutlineNode(object, outlineParentNode);
 		outlineNode.setLabel("|");
 		return outlineNode;
@@ -271,12 +273,22 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 	}
 
 	public List<EObject> getChildren(EnumRule object) {
+		if (isFilterActive(ParserRulesOutlineFilter.class)) {
+			return NO_CHILDREN;
+		}
 		if (object.getAlternatives() instanceof Alternatives) {
 			return getChildren(object.getAlternatives());
 		}
 		return NO_CHILDREN;
 	}
 
+	public List<EObject> getChildren(TerminalRule object) {
+		if (isFilterActive(ParserRulesOutlineFilter.class)) {
+			return NO_CHILDREN;
+		}
+		return super.getChildren(object);
+	}
+	
 	public List<EObject> getChildren(CharacterRange object) {
 		return NO_CHILDREN;
 	}
@@ -293,9 +305,7 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 		if (isFilterActive(ParserRulesOutlineFilter.class)) {
 			return NO_CHILDREN;
 		}
-		else {
-			return super.getChildren(object);
-		}
+		return super.getChildren(object);
 	}
 
 }

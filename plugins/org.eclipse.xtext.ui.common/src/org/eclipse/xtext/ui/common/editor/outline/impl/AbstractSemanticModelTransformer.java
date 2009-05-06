@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 public abstract class AbstractSemanticModelTransformer implements ISemanticModelTransformer {
 
 	public static final String INVISIBLE_ROOT_NODE = "Invisible Root Node";
-	public static final List<EObject> NO_CHILDREN = new ArrayList<EObject>();
+	public static final List<EObject> NO_CHILDREN = Collections.emptyList();
 	public static final ContentOutlineNode HIDDEN_NODE = new ContentOutlineNode() {
 		@Override
 		public String getLabel() {
