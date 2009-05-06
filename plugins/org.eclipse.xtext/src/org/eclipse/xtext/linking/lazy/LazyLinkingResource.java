@@ -32,15 +32,12 @@ public class LazyLinkingResource extends XtextResource {
 	
 	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
 
-	private final ILinkingService linkingService;
-	private final LazyURIEncoder encoder;
-
 	@Inject
-	public LazyLinkingResource(ILinkingService crossLinkResolver, LazyURIEncoder encoder) {
-		this.linkingService = crossLinkResolver;
-		this.encoder = encoder;
-	}
+	private ILinkingService linkingService;
 	
+	@Inject
+	private LazyURIEncoder encoder;
+
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		super.doLoad(inputStream, options);
@@ -51,9 +48,9 @@ public class LazyLinkingResource extends XtextResource {
 	@Override
 	public EObject getEObject(String uriFragment) {
 		try {
-			if (encoder.isCrossLinkFragment(this, uriFragment)) {
-				Triple<EObject, EReference, AbstractNode> triple = encoder.decode(this, uriFragment);
-				List<EObject> linkedObjects = linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(),
+			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
+				Triple<EObject, EReference, AbstractNode> triple = getEncoder().decode(this, uriFragment);
+				List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), triple.getSecond(),
 						triple.getThird());
 				if (linkedObjects.isEmpty()) {
 					XtextLinkingDiagnostic diag = new XtextLinkingDiagnostic(triple.getThird(), "Couldn't resolve reference to "+triple.getSecond().getEType().getName());
@@ -80,5 +77,21 @@ public class LazyLinkingResource extends XtextResource {
 			log.error(e.getMessage(), e);
 		}
 		return super.getEObject(uriFragment);
+	}
+
+	public void setLinkingService(ILinkingService linkingService) {
+		this.linkingService = linkingService;
+	}
+
+	public ILinkingService getLinkingService() {
+		return linkingService;
+	}
+
+	public void setEncoder(LazyURIEncoder encoder) {
+		this.encoder = encoder;
+	}
+
+	public LazyURIEncoder getEncoder() {
+		return encoder;
 	}
 }
