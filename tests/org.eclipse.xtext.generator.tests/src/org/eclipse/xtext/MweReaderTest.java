@@ -23,6 +23,7 @@ public class MweReaderTest extends TestCase {
 
 	public void testSimple() throws Exception {
 		MweReader reader = new MweReader();
+		reader.setClasspathURIContext(getClass());
 		reader.setRegister(new XtextStandaloneSetup());
 		reader.setUri("classpath:/"+getClass().getName().replace('.', '/')+".xtext");
 		WorkflowContextDefaultImpl ctx = new WorkflowContextDefaultImpl();
@@ -36,6 +37,7 @@ public class MweReaderTest extends TestCase {
 
 	public void testMissingRegistration() throws Exception {
 		MweReader reader = new MweReader();
+		reader.setClasspathURIContext(getClass());
 //		reader.setRegister(new XtextStandaloneSetup());
 		reader.setUri("classpath:/"+getClass().getName().replace('.', '/')+".xtext");
 		IssuesImpl issues = new IssuesImpl();
@@ -45,6 +47,7 @@ public class MweReaderTest extends TestCase {
 
 	public void testMissingUri() throws Exception {
 		MweReader reader = new MweReader();
+		reader.setClasspathURIContext(getClass());
 		reader.setRegister(new XtextStandaloneSetup());
 //		reader.setUri("classpath:/"+getClass().getName().replace('.', '/')+".xtext");
 		IssuesImpl issues = new IssuesImpl();
@@ -54,6 +57,7 @@ public class MweReaderTest extends TestCase {
 	
 	public void testIssuesInOtherResource() throws Exception {
 		MweReader reader = new MweReader();
+		reader.setClasspathURIContext(getClass());
 		reader.setRegister(new XtextStandaloneSetup());
 		final String errorURI = "classpath:/"+(getClass().getName()+"ResourceWithError").replace('.', '/')+".xtext";
 		final String loadingURI = "classpath:/"+(getClass().getName()+"LoadingResourceWithError").replace('.', '/')+".xtext";
