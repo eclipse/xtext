@@ -36,14 +36,11 @@ import com.google.inject.Inject;
  */
 public class LazyLinker extends AbstractCleaningLinker {
 
-	private final LazyURIEncoder encoder;
-	private final Registry registry;
-
 	@Inject
-	public LazyLinker(LazyURIEncoder encoder, EPackage.Registry registry) {
-		this.encoder = encoder;
-		this.registry = registry;
-	}
+	private LazyURIEncoder encoder;
+	
+	@Inject
+	private Registry registry;
 
 	@Override
 	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
@@ -78,7 +75,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	@SuppressWarnings("unchecked")
 	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
 		URI uri = obj.eResource().getURI();
-		URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
+		URI encodedLink = uri.appendFragment(getEncoder().encode(obj, eRef, abstractNode));
 		EClass eType = eRef.getEReferenceType();
 		eType = findInstantiableCompatible(eType);
 		EObject proxy = eType.getEPackage().getEFactoryInstance().create(eType);
@@ -98,10 +95,10 @@ public class LazyLinker extends AbstractCleaningLinker {
 			if (eClass!=null)
 				return eClass;
 			// check registry
-			for (String nsURI : registry.keySet()) {
+			for (String nsURI : getRegistry().keySet()) {
 				if (nsURI.equals(ePackage.getNsURI())) // avoid double check of local EPackage
 					continue;
-				EClass class1 = findSubTypeInEPackage(registry.getEPackage(nsURI),eType);
+				EClass class1 = findSubTypeInEPackage(getRegistry().getEPackage(nsURI),eType);
 				if (class1!=null)
 					return class1;
 			}
@@ -123,6 +120,22 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	private boolean isInstantiatableSubType(EClass c, EClass superType) {
 		return !c.isAbstract() && !c.isInterface() && superType.isSuperTypeOf(c);
+	}
+
+	public LazyURIEncoder getEncoder() {
+		return encoder;
+	}
+
+	public Registry getRegistry() {
+		return registry;
+	}
+
+	public void setRegistry(Registry registry) {
+		this.registry = registry;
+	}
+
+	public void setEncoder(LazyURIEncoder encoder) {
+		this.encoder = encoder;
 	}
 
 }
