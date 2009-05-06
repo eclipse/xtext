@@ -19,7 +19,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
-		suite.addTestSuite(org.eclipse.xtext.scoping.DefaultScopeProviderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.lazy.URIFragmentEncoderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Packrat.class);
@@ -28,6 +28,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.generator.ManifestMergerTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.resource.ResourceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.InheritanceTest.class);
+		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.Bug265111Test.class);
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
 		suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.lexer.LexerSLComment.class);
@@ -72,6 +73,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parsetree.LengthOffsetLineTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.NodeContentAdapterTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.NodeModelTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.NodeUtilTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.ParseTreeUtilTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.SerializeTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class);
@@ -84,11 +86,17 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
+		suite.addTestSuite(org.eclipse.xtext.resource.ClassloaderClasspathUriResolverTests.class);
+		suite.addTestSuite(org.eclipse.xtext.service.AbstractGenericModuleTest.class);
+		suite.addTestSuite(org.eclipse.xtext.scoping.DefaultScopeProviderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.scoping.DeclarativeScopeProviderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.scoping.index.IndexBasedScopeProviderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.ResourceTests.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelperTests.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTest.class);
+		suite.addTestSuite(org.eclipse.xtext.util.SimpleCacheTest.class);
 		suite.addTestSuite(org.eclipse.xtext.validation.AbstractDeclarativeValidatorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.validation.ConcurrentValidationTest.class);
 		suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorTest.WithEObjectValidator.class);
