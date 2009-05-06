@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -21,6 +22,8 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTests {
 
 	private IContentAssistProcessorTestSetup setup;
+	
+	private static final Logger logger = Logger.getLogger(AbstractContentAssistProcessorTest.class);
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -37,6 +40,13 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 	}
 	
 	public void testComputePrefix() throws Exception {
+		try {
+			// .... nasty evil hack
+			newBuilder(setup.getRefGrammarSetup());
+		} catch(Throwable t) {
+			logger.error(t.getMessage(), t);
+		}
+		
 		String model = "spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ";
 		newBuilder(setup.getRefGrammarSetup())
 		.append(model+" familie( dfv(").assertMatchString("(").reset()
