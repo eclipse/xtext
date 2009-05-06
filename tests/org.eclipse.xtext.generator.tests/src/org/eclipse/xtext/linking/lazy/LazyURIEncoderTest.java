@@ -19,7 +19,7 @@ import org.eclipse.xtext.parsetree.ParsetreeFactory;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class URIFragmentEncoderTest extends TestCase {
+public class LazyURIEncoderTest extends TestCase {
 	
 	public void testNodePath() throws Exception {
 		ParsetreeFactory f = ParsetreeFactory.eINSTANCE;
@@ -38,7 +38,6 @@ public class URIFragmentEncoderTest extends TestCase {
 		assertEquals(n2, find(n,n2));
 		assertEquals(l1, find(n,l1));
 		assertEquals(l2, find(n,l2));
-		
 	}
 	
 	private LazyURIEncoder encoder;
