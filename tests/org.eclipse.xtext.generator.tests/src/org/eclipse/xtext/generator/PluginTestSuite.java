@@ -19,7 +19,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
-		suite.addTestSuite(org.eclipse.xtext.linking.lazy.URIFragmentEncoderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyURIEncoderTest.class);
 		suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Packrat.class);
