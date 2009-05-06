@@ -44,6 +44,7 @@ public abstract class CompositeValidatorTest extends AbstractXtextTests {
 		super.setUp();
 		with(createStandaloneSetup());
 		registry = get(EValidator.Registry.class);
+		registry.clear();
 		pack = get(EnumRulesTestLanguagePackage.class);
 		first = get(First.class);
 		second = get(Second.class);
