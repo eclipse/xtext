@@ -59,6 +59,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/EnumAndReferenceTest" 
+       class = "org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage"
+       genModel = "org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage" 
        class = "org.eclipse.xtext.generator.generatorTestLanguage.GeneratorTestLanguagePackage"
        genModel = "org/eclipse/xtext/generator/GeneratorTestLanguage.genmodel" /> 
