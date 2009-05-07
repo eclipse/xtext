@@ -1,14 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.enumrules;
 
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
-public class EnumAndReferenceTest extends AbstractXtextTests {
+public abstract class EnumAndReferenceTest extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 
@@ -41,10 +48,23 @@ public class EnumAndReferenceTest extends AbstractXtextTests {
 		
 		CompositeNode node = nodeAdapter.getParserNode();
 		assertNotNull(node);
-		//System.out.println(node.getChildren().size());
-		AbstractNode firstChild = node.getChildren().get(0);
-		//System.out.println(firstChild);
-		assertTrue(node.getChildren().size() > 1);
+		assertTrue(node.getChildren().size() == 7); // 3 hidden WS + 4 visible LeafNodes
+	}
+	
+	public static class Antlr extends EnumAndReferenceTest {
+		
+		@Override
+		protected IParser getParser() {
+			return getAntlrParser();
+		}
+	}
+	
+	public static class Packrat extends EnumAndReferenceTest {
+		
+		@Override
+		protected IParser getParser() {
+			return getPackratParser();
+		}
 	}
 	
 }

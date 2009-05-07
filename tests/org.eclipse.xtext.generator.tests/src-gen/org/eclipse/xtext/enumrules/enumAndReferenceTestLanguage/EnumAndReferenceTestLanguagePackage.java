@@ -71,13 +71,22 @@ public interface EnumAndReferenceTestLanguagePackage extends EPackage
   int ENTITY_WITH_ENUM_AND_REFERENCE = 0;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY_WITH_ENUM_AND_REFERENCE__TYPE = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_WITH_ENUM_AND_REFERENCE__NAME = 0;
+  int ENTITY_WITH_ENUM_AND_REFERENCE__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -86,7 +95,7 @@ public interface EnumAndReferenceTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_WITH_ENUM_AND_REFERENCE__REF = 1;
+  int ENTITY_WITH_ENUM_AND_REFERENCE__REF = 2;
 
   /**
    * The number of structural features of the '<em>Entity With Enum And Reference</em>' class.
@@ -95,7 +104,7 @@ public interface EnumAndReferenceTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_WITH_ENUM_AND_REFERENCE_FEATURE_COUNT = 2;
+  int ENTITY_WITH_ENUM_AND_REFERENCE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.KindOfKeyword <em>Kind Of Keyword</em>}' enum.
@@ -117,6 +126,17 @@ public interface EnumAndReferenceTestLanguagePackage extends EPackage
    * @generated
    */
   EClass getEntityWithEnumAndReference();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference#getType()
+   * @see #getEntityWithEnumAndReference()
+   * @generated
+   */
+  EAttribute getEntityWithEnumAndReference_Type();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference#getName <em>Name</em>}'.
@@ -182,6 +202,14 @@ public interface EnumAndReferenceTestLanguagePackage extends EPackage
      * @generated
      */
     EClass ENTITY_WITH_ENUM_AND_REFERENCE = eINSTANCE.getEntityWithEnumAndReference();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENTITY_WITH_ENUM_AND_REFERENCE__TYPE = eINSTANCE.getEntityWithEnumAndReference_Type();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

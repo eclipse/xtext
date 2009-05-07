@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EntityWithEnumAndReference;
 import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage;
+import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.KindOfKeyword;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +24,7 @@ import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReference
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getRef <em>Ref</em>}</li>
  * </ul>
@@ -32,6 +34,26 @@ import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReference
  */
 public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container implements EntityWithEnumAndReference
 {
+  /**
+   * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected static final KindOfKeyword TYPE_EDEFAULT = KindOfKeyword.KIND_OF_KEYWORD;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected KindOfKeyword type = TYPE_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -81,6 +103,29 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
   protected EClass eStaticClass()
   {
     return EnumAndReferenceTestLanguagePackage.Literals.ENTITY_WITH_ENUM_AND_REFERENCE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KindOfKeyword getType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(KindOfKeyword newType)
+  {
+    KindOfKeyword oldType = type;
+    type = newType == null ? TYPE_EDEFAULT : newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__TYPE, oldType, type));
   }
 
   /**
@@ -159,6 +204,8 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
   {
     switch (featureID)
     {
+      case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__TYPE:
+        return getType();
       case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__NAME:
         return getName();
       case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__REF:
@@ -178,6 +225,9 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
   {
     switch (featureID)
     {
+      case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__TYPE:
+        setType((KindOfKeyword)newValue);
+        return;
       case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__NAME:
         setName((String)newValue);
         return;
@@ -198,6 +248,9 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
   {
     switch (featureID)
     {
+      case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__TYPE:
+        setType(TYPE_EDEFAULT);
+        return;
       case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -218,6 +271,8 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
   {
     switch (featureID)
     {
+      case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__TYPE:
+        return type != TYPE_EDEFAULT;
       case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE__REF:
@@ -237,7 +292,9 @@ public class EntityWithEnumAndReferenceImpl extends MinimalEObjectImpl.Container
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (type: ");
+    result.append(type);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

@@ -34,11 +34,11 @@ public class EnumAndReferenceTestLanguageParsetreeConstructor extends AbstractPa
 /************ begin Rule EntityWithEnumAndReference ****************
  *
  * EntityWithEnumAndReference:
- *   "kindOfKeyword" name=ID "reference" ref=[EntityWithEnumAndReference];
+ *   type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
  *
  **/
 
-// "kindOfKeyword" name=ID "reference" ref=[EntityWithEnumAndReference]
+// type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
 protected class EntityWithEnumAndReference_Group extends GroupToken {
 	
 	public EntityWithEnumAndReference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -58,7 +58,7 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 			while(s2 != null) {
 				Solution s3 = new EntityWithEnumAndReference_1_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
 				while(s3 != null) {
-					Solution s4 = new EntityWithEnumAndReference_0_Keyword_kindOfKeyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
+					Solution s4 = new EntityWithEnumAndReference_0_Assignment_type(s3.getCurrent(), s3.getPredecessor()).firstSolution();
 					if(s4 != null) {
 						last = s4.getPredecessor();
 						return s4;
@@ -74,16 +74,29 @@ protected class EntityWithEnumAndReference_Group extends GroupToken {
 	}
 }
 
-// "kindOfKeyword"
-protected class EntityWithEnumAndReference_0_Keyword_kindOfKeyword extends KeywordToken  {
+// type=KindOfKeyword
+protected class EntityWithEnumAndReference_0_Assignment_type extends AssignmentToken  {
 	
-	public EntityWithEnumAndReference_0_Keyword_kindOfKeyword(IInstanceDescription curr, AbstractToken pred) {
+	public EntityWithEnumAndReference_0_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getEntityWithEnumAndReferenceAccess().getKindOfKeywordKeyword_0();
-	}	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeAssignment_0();
+	}
+	
+	@Override
+	protected Solution createSolution() {
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("type");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.ERC;
+			element = grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0();
+			return new Solution(obj);
+		}
+		return null;
+	}
 }
 
 // name=ID

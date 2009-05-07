@@ -125,7 +125,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEntityWithEnumAndReference_Name()
+  public EAttribute getEntityWithEnumAndReference_Type()
   {
     return (EAttribute)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(0);
   }
@@ -135,9 +135,19 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getEntityWithEnumAndReference_Name()
+  {
+    return (EAttribute)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getEntityWithEnumAndReference_Ref()
   {
-    return (EReference)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(1);
+    return (EReference)entityWithEnumAndReferenceEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -181,6 +191,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
 
     // Create classes and their features
     entityWithEnumAndReferenceEClass = createEClass(ENTITY_WITH_ENUM_AND_REFERENCE);
+    createEAttribute(entityWithEnumAndReferenceEClass, ENTITY_WITH_ENUM_AND_REFERENCE__TYPE);
     createEAttribute(entityWithEnumAndReferenceEClass, ENTITY_WITH_ENUM_AND_REFERENCE__NAME);
     createEReference(entityWithEnumAndReferenceEClass, ENTITY_WITH_ENUM_AND_REFERENCE__REF);
 
@@ -220,6 +231,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
 
     // Initialize classes and features; add operations and parameters
     initEClass(entityWithEnumAndReferenceEClass, EntityWithEnumAndReference.class, "EntityWithEnumAndReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEntityWithEnumAndReference_Type(), this.getKindOfKeyword(), "type", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEntityWithEnumAndReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEntityWithEnumAndReference_Ref(), this.getEntityWithEnumAndReference(), null, "ref", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

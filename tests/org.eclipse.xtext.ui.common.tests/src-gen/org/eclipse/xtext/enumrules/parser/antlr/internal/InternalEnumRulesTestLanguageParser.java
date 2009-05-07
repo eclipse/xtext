@@ -158,7 +158,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
                     	        try {
@@ -199,7 +199,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
                             	        if (current==null) {
                             	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                            	            associateNodeWithAstElement(currentNode, current);
+                            	            associateNodeWithAstElement(currentNode.getParent(), current);
                             	        }
                             	        
                             	        try {
@@ -247,7 +247,7 @@ public class InternalEnumRulesTestLanguageParser extends AbstractInternalAntlrPa
 
                     	        if (current==null) {
                     	            current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        
                     	        try {
