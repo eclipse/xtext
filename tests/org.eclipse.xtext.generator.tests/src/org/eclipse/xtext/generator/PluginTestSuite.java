@@ -23,6 +23,7 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Packrat.class);
+		suite.addTestSuite(org.eclipse.xtext.enumrules.EnumAndReferenceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.GrammarParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.ParserTest.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.LargeMetamodelTest.class);
