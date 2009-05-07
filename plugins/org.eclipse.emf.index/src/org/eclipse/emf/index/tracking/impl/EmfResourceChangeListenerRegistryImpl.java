@@ -1,15 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+s * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.resource.impl;
+package org.eclipse.emf.index.tracking.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.index.resource.EmfResourceChangeListener;
+import org.eclipse.emf.index.tracking.EmfResourceChangeListener;
 import org.eclipse.emf.index.util.MultiMap;
 
 /**

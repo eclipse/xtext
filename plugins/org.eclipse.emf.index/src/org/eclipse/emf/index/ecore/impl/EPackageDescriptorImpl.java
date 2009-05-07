@@ -15,13 +15,15 @@ import org.eclipse.emf.index.ecore.EPackageDescriptor;
  */
 public class EPackageDescriptorImpl implements EPackageDescriptor {
 
+	private static final long serialVersionUID = -1515497757095678663L;
+
 	private long indexingDate;
 
 	private String nsURI;
 
 	private String name;
 	
-	private EPackage instance;
+	private transient EPackage instance;
 
 	protected EPackageDescriptorImpl(EPackage ePackage, long indexingDate) {
 		this.instance = ePackage;

@@ -13,7 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.index.ECrossReferenceDescriptor;
+import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
@@ -29,6 +29,9 @@ public interface MockDescriptors {
 	public static final String EPACKAGE_NS_URI = "http://www.eclipse.org/emft/emfindex/test";
 
 	public static final EPackageDescriptor ePackageDescriptor = new EPackageDescriptor() {
+
+		private static final long serialVersionUID = -8319081858704627304L;
+
 		public String getNsURI() {
 			return EPACKAGE_NS_URI;
 		}
@@ -49,6 +52,9 @@ public interface MockDescriptors {
 	public static final String SUPER_ECLASS_NAME = "SuperTestEClass";
 
 	public static final EClassDescriptor superClassDescriptor = new EClassDescriptor() {
+
+		private static final long serialVersionUID = 4637438945378827431L;
+
 		public String getDisplayName() {
 			return SUPER_ECLASS_NAME;
 		}
@@ -73,6 +79,9 @@ public interface MockDescriptors {
 	public static final String ECLASS_NAME = "TestEClass";
 
 	public static final EClassDescriptor eClassDescriptor = new EClassDescriptor() {
+
+		private static final long serialVersionUID = -5409945758036893934L;
+
 		public String getDisplayName() {
 			return ECLASS_NAME;
 		}
@@ -97,6 +106,8 @@ public interface MockDescriptors {
 	public static final String RESOURCE_URI = "http://www.eclipse.org/emft/emfindex/test";
 
 	public static final ResourceDescriptor resourceDescriptor = new ResourceDescriptor() {
+
+		private static final long serialVersionUID = 3428062491611406998L;
 
 		public long getIndexingDate() {
 			return System.currentTimeMillis();
@@ -124,6 +135,8 @@ public interface MockDescriptors {
 	public static final String USER_DATA_KEY = "someKey";
 
 	public static final EObjectDescriptor eObjectDescriptor = new EObjectDescriptor() {
+
+		private static final long serialVersionUID = 9196198411930423964L;
 
 		public String getDisplayName() {
 			return EOBJECT_NAME;
@@ -165,7 +178,9 @@ public interface MockDescriptors {
 
 	public static final String ECROSS_REFERENCE_NAME = "someReference";
 
-	public static final ECrossReferenceDescriptor eCrossReferenceDescriptor = new ECrossReferenceDescriptor() {
+	public static final EReferenceDescriptor eReferenceDescriptor = new EReferenceDescriptor() {
+
+		private static final long serialVersionUID = 7536329101355343725L;
 
 		public String getReferenceName() {
 			return ECROSS_REFERENCE_NAME;

@@ -16,14 +16,14 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class IndexFacade {
 
-	private IIndexStore store;
+	private IndexStore store;
 
-	public IndexFacade(IIndexStore store) {
+	public IndexFacade(IndexStore store) {
 		this.store = store;
 	}
 
-	public Iterable<ECrossReferenceDescriptor> findReferencesTo(EObject target) {
-		return store.eCrossReferenceDAO().createQueryCrossReferencesTo(target).executeListResult();
+	public Iterable<EReferenceDescriptor> findReferencesTo(EObject target) {
+		return store.eReferenceDAO().createQueryEReferencesTo(target).executeListResult();
 	}
 
 	public Iterable<EObjectDescriptor> findInstances(EClass eClass) {

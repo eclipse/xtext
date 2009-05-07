@@ -1,10 +1,5 @@
 Performance Tests
 
-Persistence
-
-Queries
-- use iterables for results 
-
 Locking 
 
 Resource URI conversion
@@ -14,10 +9,9 @@ Resource URI conversion
  
  ==================
  
- - Events in index store
-   - batching
-   
 - Index consistency:
-	- delete dangling elements
 	- fire events
  
+- Think about IndexFeederStrategy that is not a ResourceChangeListener
+ 
+ - throw some indexing exceptions or delete class

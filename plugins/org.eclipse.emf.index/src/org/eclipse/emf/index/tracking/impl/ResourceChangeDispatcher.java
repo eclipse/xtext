@@ -5,32 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.resource.impl;
+package org.eclipse.emf.index.tracking.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.resource.EmfResourceChangeListener;
+import org.eclipse.emf.index.resource.IndexFeeder;
+import org.eclipse.emf.index.tracking.EmfResourceChangeListener;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class IndexBuilderImpl {
+public class ResourceChangeDispatcher {
+	
+	private IndexFeeder indexFeeder;
 
-	private IIndexStore indexStore;
+	private EmfResourceChangeListener.Registry listenerRegistry;
 
-	private IndexFeederImpl indexFeeder;
-
-	private EmfResourceChangeListener.Registry listenerRegistry = new EmfResourceChangeListenerRegistryImpl();
-
-	public IndexBuilderImpl(IIndexStore indexStore) {
-		this.indexStore = indexStore;
-		indexFeeder = new IndexFeederImpl(indexStore);
-	}
-
-	public IndexBuilderImpl() {
-		this(IIndexStore.INSTANCE);
+	@Inject
+	public ResourceChangeDispatcher(IndexFeeder indexFeeder, EmfResourceChangeListener.Registry listenerRegistry) {
+		this.indexFeeder = indexFeeder;
+		this.listenerRegistry = listenerRegistry;
 	}
 
 	public EmfResourceChangeListener.Registry getListenerRegistry() {
@@ -43,16 +40,23 @@ public class IndexBuilderImpl {
 		if (resourceChangeListeners != null) {
 			for (EmfResourceChangeListener resourceChangeListener : resourceChangeListeners) {
 				synchronized (indexFeeder) {
-					indexFeeder.begin();
-					resourceChangeListener.resourceChanged(resourceURI, indexStore, indexFeeder);
-					indexFeeder.commit();
+					resourceChangeListener.resourceChanged(resourceURI, indexFeeder);
 				}
 			}
 		}
 	}
 
-	public void resourceDeleted(URI resource) {
-		// TODO: implement
+	public void resourceDeleted(URI resourceURI) {
+		String fileExtension = resourceURI.fileExtension();
+		Collection<EmfResourceChangeListener> resourceChangeListeners = listenerRegistry.getListenersFor(fileExtension);
+		if (resourceChangeListeners != null) {
+			for (EmfResourceChangeListener resourceChangeListener : resourceChangeListeners) {
+				synchronized (indexFeeder) {
+					resourceChangeListener.resourceDeleted(resourceURI, indexFeeder);
+					indexFeeder.commit();
+				}
+			}
+		}
 	}
 
 }

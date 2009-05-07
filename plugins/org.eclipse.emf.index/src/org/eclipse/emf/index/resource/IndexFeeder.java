@@ -14,13 +14,25 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 /**
+ * The write interface to the index. Creates descriptors and keeps the index consistent, e.g. free of dangling
+ * references. Write operations take the form of transactions. Each transaction starts with a call to {@link #begin()}
+ * followed by several calls to the <code>createXDescriptor</code> methods. The transaction is finished by calling
+ * {@link #commit()}.
+ * 
+ * The indexFeeder implementation is currently NOT thread safe.
+ * 
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface IndexFeeder {
-	void createResourceDescriptor(Resource resource, Map<String,String> userData);
-	
-	void createEObjectDescriptor(EObject object, String name, String displayName, Map<String,String> userData);
-	
-	void createECrossReferenceDescriptor(URI source, String eReferenceName, int index, URI target);
-	
+
+	void begin();
+
+	void createResourceDescriptor(Resource resource, Map<String, String> userData);
+
+	void createEObjectDescriptor(EObject object, String name, String displayName, Map<String, String> userData);
+
+	void createEReferenceDescriptor(URI source, String eReferenceName, int index, URI target);
+
+	void commit();
+
 }

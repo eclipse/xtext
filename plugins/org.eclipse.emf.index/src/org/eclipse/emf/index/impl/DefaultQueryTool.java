@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.index.ECrossReferenceDescriptor;
+import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
 import org.eclipse.emf.index.ResourceDescriptor;
-import org.eclipse.emf.index.ECrossReferenceDescriptor.Query;
+import org.eclipse.emf.index.EReferenceDescriptor.Query;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 
@@ -54,15 +54,15 @@ public class DefaultQueryTool {
 		return null;
 	}
 
-	public static ECrossReferenceDescriptor.Query createQueryECrossReferencesTo(ECrossReferenceDescriptor.DAO dao,
+	public static EReferenceDescriptor.Query createQueryEReferencesTo(EReferenceDescriptor.DAO dao,
 			EObject target) {
 		Resource resource = target.eResource();
 		if(resource != null) {
 			String targetFragment = resource.getURIFragment(target);
 			if(targetFragment != null) {
-				Query crossRefQuery = dao.createQuery().targetFragment(targetFragment);
-				crossRefQuery.targetResource().uri(resource.getURI().toString());
-				return crossRefQuery;
+				Query eReferenceQuery = dao.createQuery().targetFragment(targetFragment);
+				eReferenceQuery.targetResource().uri(resource.getURI().toString());
+				return eReferenceQuery;
 			}
 		}
 		return null;
@@ -85,15 +85,15 @@ public class DefaultQueryTool {
 		return dao.createQuery().ePackage(ePackageDescriptor);
 	}
 
-	public static IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(
-			ECrossReferenceDescriptor.DAO dao, URI sourceURI) {
+	public static IGenericQuery<EReferenceDescriptor> createQueryEReferencesFrom(
+			EReferenceDescriptor.DAO dao, URI sourceURI) {
 		Query query = dao.createQuery().sourceFragment(sourceURI.fragment());
 		query.sourceResource().uri(sourceURI.trimFragment().toString());
 		return query;
 	}
 
-	public static IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(
-			ECrossReferenceDescriptor.DAO dao, URI targetURI) {
+	public static IGenericQuery<EReferenceDescriptor> createQueryEReferencesTo(
+			EReferenceDescriptor.DAO dao, URI targetURI) {
 		Query query = dao.createQuery().targetFragment(targetURI.fragment());
 		query.targetResource().uri(targetURI.trimFragment().toString());
 		return query;

@@ -5,27 +5,32 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.dao.memory;
+package org.eclipse.emf.index;
 
-import org.eclipse.emf.index.dao.AbstractEClassDAOTest;
+import java.io.IOException;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
-import org.eclipse.emf.index.impl.memory.EClassDAOImpl;
-import org.eclipse.emf.index.impl.memory.EPackageDAOImpl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EClassDAOTest extends AbstractEClassDAOTest {
+public interface IPersistableIndexStore extends IndexStore {
 
-	@Override
-	protected EPackageDescriptor.DAO createEPackageDAO() {
-		return new EPackageDAOImpl(indexStore);
-	}
+	void load(InputStream inputStream) throws IOException, ClassNotFoundException, ClassCastException;
 
-	@Override
-	protected EClassDescriptor.DAO createEClassDAO() {
-		return new EClassDAOImpl(indexStore);
-	}
-	
+	void save(OutputStream outputStream) throws IOException;
+
+	public EClassDescriptor.DAO eClassDAO();
+
+	public ResourceDescriptor.DAO resourceDAO();
+
+	public EObjectDescriptor.DAO eObjectDAO();
+
+	public EReferenceDescriptor.DAO eReferenceDAO();
+
+	public EPackageDescriptor.DAO ePackageDAO();
 }

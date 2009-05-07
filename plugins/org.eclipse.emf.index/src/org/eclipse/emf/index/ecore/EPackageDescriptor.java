@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ecore;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -18,7 +19,7 @@ import org.eclipse.emf.index.IGenericQuery;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface EPackageDescriptor {
+public interface EPackageDescriptor extends Serializable {
 	
 	static final long NEVER = Long.MIN_VALUE;
 

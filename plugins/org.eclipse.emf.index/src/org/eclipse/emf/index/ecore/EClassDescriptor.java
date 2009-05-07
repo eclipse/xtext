@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ecore;
 
+import java.io.Serializable;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.index.IDAO;
 import org.eclipse.emf.index.IGenericQuery;
@@ -16,7 +18,7 @@ import org.eclipse.emf.index.IGenericQuery;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface EClassDescriptor {
+public interface EClassDescriptor extends Serializable {
 
 	public interface DAO extends IDAO<EClassDescriptor> {
 		Query createQuery();

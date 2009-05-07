@@ -16,13 +16,7 @@ import org.eclipse.emf.index.ResourceDescriptor;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class AbstractResourceDAOTest extends AbstractDAOTest {
-
-	/**
-	 * To test a specific implementation, override this method.
-	 */
-	@Override
-	protected abstract ResourceDescriptor.DAO createResourceDAO();
+public class ResourceDAOTest extends AbstractDAOTest {
 
 	public void testGenericQueries() throws Exception {
 		ResourceDescriptor.Query query = indexStore.resourceDAO().createQuery().uri(RESOURCE_URI);

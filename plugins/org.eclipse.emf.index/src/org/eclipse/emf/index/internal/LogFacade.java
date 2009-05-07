@@ -5,21 +5,31 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.impl;
+package org.eclipse.emf.index.internal;
 
 /**
+ * Allows logging in as plug-in as well as in standalone mode.
+ * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class Logger {
+public class LogFacade {
 
 	public static final void logError(String message, Throwable t) {
-		// TODO: Activator
-		System.err.println(message);
-		t.printStackTrace();
+		try {
+			EmfIndexPlugin.logError(message, t);
+		}
+		catch (Throwable ignore) {
+			System.err.println(message);
+			t.printStackTrace();
+		}
 	}
 
 	public static final void logError(String message) {
-		// TODO: Activator
-		System.err.println(message);
+		try {
+			EmfIndexPlugin.logError(message);
+		}
+		catch (Throwable ignore) {
+			System.err.println(message);
+		}
 	}
 }

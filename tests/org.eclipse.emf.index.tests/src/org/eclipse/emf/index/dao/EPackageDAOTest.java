@@ -15,13 +15,7 @@ import org.eclipse.emf.index.ecore.EPackageDescriptor;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class AbstractEPackageDAOTest extends AbstractDAOTest {
-
-	/**
-	 * To test a specific implementation, override this method.
-	 */
-	@Override
-	protected abstract EPackageDescriptor.DAO createEPackageDAO();
+public class EPackageDAOTest extends AbstractDAOTest {
 
 	public void testGenericQueries() throws Exception {
 		EPackageDescriptor.Query query = indexStore.ePackageDAO().createQuery().nsURI(EPACKAGE_NS_URI);

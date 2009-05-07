@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -19,7 +20,7 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface EObjectDescriptor {
+public interface EObjectDescriptor extends Serializable {
 
 	public interface DAO extends IDAO<EObjectDescriptor> {
 		Query createQuery();

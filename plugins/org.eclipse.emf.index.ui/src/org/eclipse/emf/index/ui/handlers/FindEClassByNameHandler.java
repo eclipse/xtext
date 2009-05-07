@@ -10,21 +10,28 @@ package org.eclipse.emf.index.ui.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ui.dialog.FindEClassbyName;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class FindEClassByNameHandler extends AbstractHandler {
 
-	public FindEClassByNameHandler() {
+	private IndexStore index;
+
+	@Inject
+	public FindEClassByNameHandler(IndexStore index) {
+		this.index = index;
 	}
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		FindEClassbyName findEClassbyName = new FindEClassbyName(window.getShell());
+		FindEClassbyName findEClassbyName = new FindEClassbyName(window.getShell(), index);
 		findEClassbyName.setBlockOnOpen(true);
 		findEClassbyName.open();
 		return null;

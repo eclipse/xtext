@@ -33,7 +33,7 @@
             nameFilter="*"
             objectClass="org.eclipse.core.resources.IProject">
          <action
-               class="org.eclipse.emf.index.ui.builder.ToggleNatureAction"
+               class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.ToggleNatureAction"
                enablesFor="+"
                id="org.eclipse.emf.index.ui.addRemoveNatureAction"
                label="Add/Remove EMF Index Nature"
@@ -67,7 +67,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.emf.index.ui.handlers.FindEClassByNameHandler"
+            class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.handlers.FindEClassByNameHandler"
             commandId="org.eclipse.emf.index.ui.commands.sampleCommand">
       </handler>
    </extension>
@@ -111,7 +111,7 @@
    <extension
          point="org.eclipse.ui.startup">
       <startup
-            class="org.eclipse.emf.index.ui.builder.IndexBuildTrigger">
+            class="org.eclipse.emf.index.ui.GuiceExecutableExtensionFactory:org.eclipse.emf.index.ui.builder.IndexBuildTrigger">
       </startup>
    </extension>
 

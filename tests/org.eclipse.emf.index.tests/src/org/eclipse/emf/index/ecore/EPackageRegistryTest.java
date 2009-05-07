@@ -5,26 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index;
+package org.eclipse.emf.index.ecore;
 
 import java.util.Iterator;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.index.ecore.EClassDescriptor;
-import org.eclipse.emf.index.ecore.EPackageDescriptor;
-import org.eclipse.emf.index.ecore.impl.EPackageRegistryIndexFeeder;
+import org.eclipse.emf.index.IndexStore;
+import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
+import org.eclipse.emf.index.guice.AbstractEmfIndexTest;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EPackageRegistryTest extends TestCase {
+public class EPackageRegistryTest extends AbstractEmfIndexTest {
 
+	@Inject
+	private IndexStore indexStore;
+	
 	public void testRegistry() throws Exception {
 		EcorePackage.eINSTANCE.eClass();
-		IIndexStore indexStore = IIndexStore.INSTANCE;
-		EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(indexStore);
+		EcoreIndexFeederImpl ecoreIndexFeeder = new EcoreIndexFeederImpl(indexStore);
+		ecoreIndexFeeder.feedEPackagesFromRegistry();
 		Iterable<EPackageDescriptor> ePackageDescriptors = indexStore.ePackageDAO().createQueryEPackage(EcorePackage.eINSTANCE).executeListResult();
 		assertNotNull(ePackageDescriptors);
 		Iterator<EPackageDescriptor> ePackageIterator = ePackageDescriptors.iterator();

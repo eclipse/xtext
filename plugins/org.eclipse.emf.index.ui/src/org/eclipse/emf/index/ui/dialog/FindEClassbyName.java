@@ -9,7 +9,7 @@ package org.eclipse.emf.index.ui.dialog;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.util.PreloadingListIterator;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -37,12 +37,13 @@ public class FindEClassbyName extends ListDialog {
 
 	protected Text searchControl;
 
-	protected IIndexStore index = IIndexStore.INSTANCE;
+	protected IndexStore index;
 
 	private Label messageLabel;
 
-	public FindEClassbyName(Shell parent) {
+	public FindEClassbyName(Shell parent, IndexStore index) {
 		super(parent);
+		this.index = index;
 		setTitle("Find EClass");
 		setMessage("Enter name of EClass (use * for wildcard)");
 		setAddCancelButton(false);

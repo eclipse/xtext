@@ -19,21 +19,24 @@ import java.util.Map.Entry;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
-import org.eclipse.emf.index.impl.Logger;
+import org.eclipse.emf.index.internal.LogFacade;
 import org.eclipse.emf.index.util.MultiMap;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class EcoreIndexFeederImpl implements EcoreIndexFeeder {
 
-	private IIndexStore index;
+	private IndexStore index;
 
-	public EcoreIndexFeederImpl(IIndexStore index) {
+	@Inject
+	public EcoreIndexFeederImpl(IndexStore index) {
 		this.index = index;
 	}
 
@@ -50,6 +53,33 @@ public class EcoreIndexFeederImpl implements EcoreIndexFeeder {
 		return typeDescriptors;
 	}
 
+	/**
+	 * There will be a scalability issue with this implementation, as it resolves all descriptors in the registry, thus
+	 * instantiates all registered EPackages.
+	 * 
+	 * @param indexStore
+	 */
+	public void feedEPackagesFromRegistry() {
+		List<String> processedNsURIs = new ArrayList<String>();
+		for (boolean hasChanged = true; hasChanged;) {
+			List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
+			for (String nsURI : nsURIs) {
+				hasChanged = false;
+				try {
+					if (!processedNsURIs.contains(nsURI)) {
+						hasChanged = true;
+						processedNsURIs.add(nsURI);
+						EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
+						index(ePackage, true);
+					}
+				}
+				catch (Exception exc) {
+					LogFacade.logError("Error indexin EPackages from registry", exc);
+				}
+			}
+		}
+	}
+	
 	protected EPackageDescriptor internalIndexEPackage(EPackage ePackage) {
 		EPackageDescriptor ePackageDescriptor = index.ePackageDAO().createQueryEPackage(ePackage).executeSingleResult();
 		if (ePackageDescriptor == null) {
@@ -84,7 +114,7 @@ public class EcoreIndexFeederImpl implements EcoreIndexFeeder {
 					superClassDescriptors.add(superClassDescriptor);
 				}
 				else {
-					Logger.logError("Cannot index superclass " + danglingSuperClass.getName());
+					LogFacade.logError("Cannot index superclass " + danglingSuperClass.getName());
 				}
 			}
 			if (isSuperClassesAdded) {
@@ -142,7 +172,7 @@ public class EcoreIndexFeederImpl implements EcoreIndexFeeder {
 		}
 		EPackage ePackage = eClass.getEPackage();
 		if (ePackage == null) {
-			Logger.logError("EClass " + eClass.getName() + " does not have a package");
+			LogFacade.logError("EClass " + eClass.getName() + " does not have a package");
 			return null;
 		}
 		else {

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface ResourceDescriptor {
+public interface ResourceDescriptor extends Serializable {
 	
 	static final long NEVER = Long.MIN_VALUE;
 	
