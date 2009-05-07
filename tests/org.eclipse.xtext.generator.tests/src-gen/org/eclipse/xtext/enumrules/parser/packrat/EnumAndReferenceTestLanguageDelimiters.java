@@ -14,14 +14,14 @@ public final class EnumAndReferenceTestLanguageDelimiters {
 	}
 	
     // TODO: remove hardcoded character class from template
-	public static final ICharacterClass keyword$4$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$8$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$6$Delimiter = new SetBasedKeywordMatcher(
-		"kindOfKeyword", "reference");
+	public static final ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
+		"reference");
 
 }

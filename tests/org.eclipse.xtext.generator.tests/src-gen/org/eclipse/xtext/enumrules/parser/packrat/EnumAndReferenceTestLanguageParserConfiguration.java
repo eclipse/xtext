@@ -64,11 +64,11 @@ public class EnumAndReferenceTestLanguageParserConfiguration extends AbstractPar
 
 
 		getEntityWithEnumAndReferenceConsumer().setIdConsumer(getIdConsumer());
+		getEntityWithEnumAndReferenceConsumer().setKindOfKeywordConsumer(getKindOfKeywordConsumer());
 
-		getEntityWithEnumAndReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.keyword$4$Delimiter);
-		getEntityWithEnumAndReferenceConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.keyword$4$Delimiter);
-		getEntityWithEnumAndReferenceConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.ruleCall$6$Delimiter);
-		getEntityWithEnumAndReferenceConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getEntityWithEnumAndReferenceConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.keyword$8$Delimiter);
+		getEntityWithEnumAndReferenceConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.ruleCall$7$Delimiter);
+		getEntityWithEnumAndReferenceConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.enumrules.parser.packrat.EnumAndReferenceTestLanguageDelimiters.ruleCall$7$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

@@ -20,7 +20,8 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 	public class EntityWithEnumAndReferenceElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntityWithEnumAndReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cKindOfKeywordKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTypeKindOfKeywordEnumRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cReferenceKeyword_2 = (Keyword)cGroup.eContents().get(2);
@@ -29,14 +30,17 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 		private final RuleCall cRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEntityWithEnumAndReferenceCrossReference_3_0.eContents().get(1);
 		
 		//EntityWithEnumAndReference:
-		//  "kindOfKeyword" name=ID "reference" ref=[EntityWithEnumAndReference];
+		//  type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
 		public ParserRule getRule() { return rule; }
 
-		//"kindOfKeyword" name=ID "reference" ref=[EntityWithEnumAndReference]
+		//type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
 		public Group getGroup() { return cGroup; }
 
-		//"kindOfKeyword"
-		public Keyword getKindOfKeywordKeyword_0() { return cKindOfKeywordKeyword_0; }
+		//type=KindOfKeyword
+		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+
+		//KindOfKeyword
+		public RuleCall getTypeKindOfKeywordEnumRuleCall_0_0() { return cTypeKindOfKeywordEnumRuleCall_0_0; }
 
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -110,7 +114,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess implements IGrammarAccess
 
 	
 	//EntityWithEnumAndReference:
-	//  "kindOfKeyword" name=ID "reference" ref=[EntityWithEnumAndReference];
+	//  type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
 	public EntityWithEnumAndReferenceElements getEntityWithEnumAndReferenceAccess() {
 		return (pEntityWithEnumAndReference != null) ? pEntityWithEnumAndReference : (pEntityWithEnumAndReference = new EntityWithEnumAndReferenceElements());
 	}

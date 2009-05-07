@@ -9,7 +9,9 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/EnumAndReferenceTest#//EntityWithEnumAndReference"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="kindOfKeyword"/>
+        <tokens xsi:type="xtext:Assignment" feature="type" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+        </tokens>
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>

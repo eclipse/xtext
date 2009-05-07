@@ -81,11 +81,28 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('kindOfKeyword' 
-    {
-        createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getKindOfKeywordKeyword_0(), null); 
-    }
-(	
+((	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), currentNode); 
+	    }
+	    lv_type_0=ruleKindOfKeyword 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "type", lv_type_0, "KindOfKeyword", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)(	
 	
 	    lv_name_1=	RULE_ID
 	{
@@ -130,6 +147,25 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 
 
 
+
+// Rule KindOfKeyword
+ruleKindOfKeyword returns [Enumerator current=null] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	'kindOfKeyword' 
+	{
+        $current = grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0(), null); 
+    }
+)
+    |(	'anotherEnumLiteral' 
+	{
+        $current = grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1(), null); 
+    }
+));
 
 
 
