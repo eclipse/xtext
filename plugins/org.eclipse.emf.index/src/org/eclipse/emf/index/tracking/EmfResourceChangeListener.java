@@ -5,21 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.resource;
+package org.eclipse.emf.index.tracking;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.resource.IndexFeeder;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface EmfResourceChangeListener {
 
-	void resourceChanged(URI resourceURI, IIndexStore store, IndexFeeder indexFeeder);
+	void resourceChanged(URI resourceURI, IndexFeeder indexFeeder);
 	
-	interface Registry {
+	void resourceDeleted(URI resourceURI, IndexFeeder indexFeeder);
+	
+	public interface Registry {
 		void registerListener(String fileExtension, EmfResourceChangeListener listener);
 
 		void deregisterListeners(String fileExtension, EmfResourceChangeListener listener);

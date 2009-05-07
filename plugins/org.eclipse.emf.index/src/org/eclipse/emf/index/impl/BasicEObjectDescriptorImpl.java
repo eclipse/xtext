@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.emf.index.impl;
 import static org.eclipse.emf.index.util.CollectionUtils.equalsNullSafe;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
@@ -17,7 +18,9 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
  */
 public abstract class BasicEObjectDescriptorImpl implements EObjectDescriptor {
 
-	private URI cachedFragmentURI;
+	private static final long serialVersionUID = 5006367856591582998L;
+
+	private transient URI cachedFragmentURI;
 
 	protected String name;
 

@@ -21,13 +21,13 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.resource.impl.IndexBuilderImpl;
+import org.eclipse.emf.index.tracking.impl.ResourceChangeDispatcher;
 import org.eclipse.emf.index.ui.internal.EmfIndexUIPlugin;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -37,11 +37,19 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 	public static final String BUILDER_ID = "org.eclipse.emf.index.ui.emfIndexBuilder";
 
 	private static final String MARKER_TYPE = "org.eclipse.emf.index.ui.emfIndexProblem";
+	
+	@Inject
+	private ResourceChangeDispatcher resourceChangeDispatcher;
 
-	private IIndexStore index = IIndexStore.INSTANCE;
-
-	private IndexBuilderImpl indexBuilder = new IndexBuilderImpl(index);
-
+	public EmfIndexProjectBuilder() {
+		// TODO: for some reason the IExecutableExtensionFactory does not work for this builder
+		// try again with 3.5 M7 and file bug
+		Injector injector = EmfIndexUIPlugin.getDefault().getInjector();
+		synchronized (injector) {
+			injector.injectMembers(this);
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD) {
@@ -69,6 +77,7 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 			});
 		}
 		catch (CoreException e) {
+			EmfIndexUIPlugin.logError("Error during full build", e);
 		}
 	}
 
@@ -101,18 +110,16 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 					Resource.Factory emfResourceFactory = Resource.Factory.Registry.INSTANCE.getFactory(resourceURI);
 					if (emfResourceFactory != null) {
 						if (isDeleted)
-							indexBuilder.resourceDeleted(resourceURI);
+							resourceChangeDispatcher.resourceDeleted(resourceURI);
 						else
-							indexBuilder.resourceChanged(resourceURI);
+							resourceChangeDispatcher.resourceChanged(resourceURI);
 						return true;
 					}
 				}
 			}
 			catch (Exception e) {
 				addMarker(file, e.getMessage(), 0, IMarker.SEVERITY_ERROR);
-				EmfIndexUIPlugin.getDefault().getLog().log(
-						new Status(IStatus.ERROR, EmfIndexUIPlugin.PLUGIN_ID, "Cannot index resource "
-								+ resource.getFullPath().toString(), e));
+				EmfIndexUIPlugin.logError("Cannot index resource " + resource.getFullPath().toString(), e);
 			}
 		}
 		return false;
@@ -129,6 +136,7 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 			marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
 		}
 		catch (CoreException e) {
+			EmfIndexUIPlugin.logError("Error adding marker", e);
 		}
 	}
 
@@ -137,6 +145,8 @@ public class EmfIndexProjectBuilder extends IncrementalProjectBuilder {
 			file.deleteMarkers(MARKER_TYPE, false, IResource.DEPTH_ZERO);
 		}
 		catch (CoreException ce) {
+			EmfIndexUIPlugin.logError("Error deleting marker", ce);
 		}
 	}
+
 }

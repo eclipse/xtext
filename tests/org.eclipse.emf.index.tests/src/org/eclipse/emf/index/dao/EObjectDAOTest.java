@@ -9,39 +9,12 @@ package org.eclipse.emf.index.dao;
 
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.ResourceDescriptor;
-import org.eclipse.emf.index.ecore.EClassDescriptor;
-import org.eclipse.emf.index.ecore.EPackageDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class AbstractEObjectDAOTest extends AbstractDAOTest {
+public class EObjectDAOTest extends AbstractDAOTest {
 
-	/**
-	 * To test a specific implementation, override this method.
-	 */
-	@Override
-	protected abstract EPackageDescriptor.DAO createEPackageDAO();
-
-	/**
-	 * To test a specific implementation, override this method.
-	 */
-	@Override
-	protected abstract EClassDescriptor.DAO createEClassDAO();
-
-	/**
-	 * To test a specific implementation, override this method.
-	 */
-	@Override
-	protected abstract ResourceDescriptor.DAO createResourceDAO();
-	
-	/**
-	 * To test a specific implementation, override this method.
-	 */
-	@Override
-	protected abstract EObjectDescriptor.DAO createEObjectDAO();
-	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

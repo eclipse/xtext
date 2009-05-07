@@ -12,3 +12,8 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: itemis AG
+Export-Package: org.eclipse.emf.index.ui,
+ org.eclipse.emf.index.ui.builder,
+ org.eclipse.emf.index.ui.dialog,
+ org.eclipse.emf.index.ui.handlers,
+ org.eclipse.emf.index.ui.internal

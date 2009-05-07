@@ -5,17 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.impl;
+package org.eclipse.emf.index.resource;
 
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.impl.memory.InMemoryIndex;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
+ * Interface to index a specific resource. Implementing classes should traverse the resource and call the
+ * {@link IndexFeeder} to store the desired descriptors in the index.
+ * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class IndexStoreFactory {
-	
-	public static final IIndexStore createIndexStore() {
-		return new InMemoryIndex();
-	}
+public interface ResourceIndexer {
+
+	void resourceChanged(Resource resource, IndexFeeder feeder);
+
+	void resourceDeleted(URI resourceURI, IndexFeeder feeder);
+
 }

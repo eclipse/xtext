@@ -17,4 +17,6 @@ import org.eclipse.emf.ecore.EPackage;
 public interface EcoreIndexFeeder {
 
 	List<EClassDescriptor> index(EPackage ePackage, boolean isRecurseSubpackages);
+	
+	void feedEPackagesFromRegistry();
 }

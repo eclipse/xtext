@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.index.EObjectDescriptor;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
@@ -32,11 +32,28 @@ import org.eclipse.emf.index.impl.EObjectDescriptorImpl;
  */
 public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implements EObjectDescriptor.DAO {
 
-	protected InverseReferenceCache<ResourceDescriptor, EObjectDescriptor> resourceScope;
-	protected InverseReferenceCache<EClassDescriptor, EObjectDescriptor> eClassScope;
+	private static final long serialVersionUID = -3733063632994588281L;
 
-	public EObjectDAOImpl(IIndexStore indexStore) {
-		super(indexStore);
+	protected transient InverseReferenceCache<ResourceDescriptor, EObjectDescriptor> resourceScope;
+	protected transient InverseReferenceCache<EClassDescriptor, EObjectDescriptor> eClassScope;
+
+	@Override
+	public void store(EObjectDescriptor element) {
+		super.store(element);
+		resourceScope.put(element);
+		eClassScope.put(element);
+	}
+
+	@Override
+	public void delete(EObjectDescriptor element) {
+		super.delete(element);
+		resourceScope.remove(element);
+		eClassScope.remove(element);
+	}
+
+	@Override
+	public void initialize(IndexStore indexStore) {
+		super.initialize(indexStore);
 		resourceScope = new InverseReferenceCache<ResourceDescriptor, EObjectDescriptor>() {
 			@Override
 			protected List<ResourceDescriptor> targets(EObjectDescriptor source) {
@@ -54,27 +71,17 @@ public class EObjectDAOImpl extends BasicMemoryDAOImpl<EObjectDescriptor> implem
 				return classes;
 			}
 		};
-	}
-
-	@Override
-	public void store(EObjectDescriptor element) {
-		super.store(element);
-		resourceScope.put(element);
-		eClassScope.put(element);
-	}
-
-	@Override
-	public void delete(EObjectDescriptor element) {
-		super.delete(element);
-		resourceScope.remove(element);
-		eClassScope.remove(element);
+		for (EObjectDescriptor eObjectDescriptor : store) {
+			resourceScope.put(eObjectDescriptor);
+			eClassScope.put(eObjectDescriptor);
+		}
 	}
 
 	@Override
 	protected boolean doModify(EObjectDescriptor element, EObjectDescriptor newValues) {
 		return ((EObjectDescriptorImpl) element).copyDetails(newValues);
 	}
-	
+
 	public EObjectDescriptor.Query createQuery() {
 		return new ElementQuery();
 	}

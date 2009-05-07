@@ -15,7 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
@@ -25,32 +25,18 @@ import org.eclipse.emf.index.impl.DefaultQueryTool;
  */
 public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implements EClassDescriptor.DAO {
 
-	protected InverseReferenceCache<EPackageDescriptor, EClassDescriptor> ePackageScope;
-	protected InverseReferenceCache<EClassDescriptor, EClassDescriptor> superClassScope;
-	
-	public EClassDAOImpl(IIndexStore indexStore) {
-		super(indexStore);
-		ePackageScope = new InverseReferenceCache<EPackageDescriptor, EClassDescriptor>(){
-			@Override
-			protected List<EPackageDescriptor> targets(EClassDescriptor source) {
-				return Collections.singletonList(source.getEPackageDescriptor());
-			}
-		};
-		superClassScope = new InverseReferenceCache<EClassDescriptor, EClassDescriptor>(){
-			@Override
-			protected List<EClassDescriptor> targets(EClassDescriptor source) {
-				return source.getSuperClasses() != null ? Arrays.asList(source.getSuperClasses()) : new ArrayList<EClassDescriptor>(0);
-			}
-		};
-	}
-	
+	private static final long serialVersionUID = -1180283728678782547L;
+
+	protected transient InverseReferenceCache<EPackageDescriptor, EClassDescriptor> ePackageScope;
+	protected transient InverseReferenceCache<EClassDescriptor, EClassDescriptor> superClassScope;
+
 	@Override
 	public void store(EClassDescriptor element) {
 		super.store(element);
 		ePackageScope.put(element);
 		superClassScope.put(element);
 	}
-	
+
 	@Override
 	public void delete(EClassDescriptor element) {
 		super.delete(element);
@@ -61,6 +47,28 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 	@Override
 	protected boolean doModify(EClassDescriptor element, EClassDescriptor newValues) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void initialize(IndexStore indexStore) {
+		super.initialize(indexStore);
+		ePackageScope = new InverseReferenceCache<EPackageDescriptor, EClassDescriptor>() {
+			@Override
+			protected List<EPackageDescriptor> targets(EClassDescriptor source) {
+				return Collections.singletonList(source.getEPackageDescriptor());
+			}
+		};
+		superClassScope = new InverseReferenceCache<EClassDescriptor, EClassDescriptor>() {
+			@Override
+			protected List<EClassDescriptor> targets(EClassDescriptor source) {
+				return source.getSuperClasses() != null ? Arrays.asList(source.getSuperClasses())
+						: new ArrayList<EClassDescriptor>(0);
+			}
+		};
+		for(EClassDescriptor eClassDescriptor:store) {
+			ePackageScope.put(eClassDescriptor);
+			superClassScope.put(eClassDescriptor);
+		}
 	}
 	
 	public EClassDescriptor.Query createQuery() {
@@ -74,7 +82,7 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 	public IGenericQuery<EClassDescriptor> createQueryEClassesInPackage(EPackageDescriptor ePackageDescriptor) {
 		return ePackageScope.createQuery(ePackageDescriptor);
 	}
-	
+
 	protected class EClassQuery extends BasicMemoryDAOImpl<EClassDescriptor>.Query implements EClassDescriptor.Query {
 
 		private String namePattern;
@@ -89,7 +97,7 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		}
 
 		public EClassQuery ePackage(EPackageDescriptor ePackageDescriptor) {
-			if(ePackageQuery != null) {
+			if (ePackageQuery != null) {
 				throw new IllegalStateException("EPackageScope already configured");
 			}
 			this.ePackageDescriptor = ePackageDescriptor;
@@ -97,7 +105,7 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		}
 
 		public EPackageDescriptor.Query ePackage() {
-			if(ePackageDescriptor != null) {
+			if (ePackageDescriptor != null) {
 				throw new IllegalStateException("EPackageScope already configured");
 			}
 			ePackageQuery = indexStore.ePackageDAO().createQuery();
@@ -105,18 +113,18 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		}
 
 		public EClassDescriptor.Query superClass() {
-			if(superClassDescriptor != null) {
+			if (superClassDescriptor != null) {
 				throw new IllegalStateException("ESuperClassScope already configured");
 			}
-			superClassQuery = indexStore.eClassDAO().createQuery(); 
+			superClassQuery = indexStore.eClassDAO().createQuery();
 			return superClassQuery;
 		}
-		
+
 		public EClassDescriptor.Query superClass(EClassDescriptor eClassDescriptor) {
-			if(superClassQuery != null) {
+			if (superClassQuery != null) {
 				throw new IllegalStateException("ESuperClassScope already configured");
 			}
-			superClassDescriptor = eClassDescriptor; 
+			superClassDescriptor = eClassDescriptor;
 			return this;
 		}
 
@@ -128,10 +136,11 @@ public class EClassDAOImpl extends BasicMemoryDAOImpl<EClassDescriptor> implemen
 		@Override
 		protected Collection<EClassDescriptor> scope() {
 			Collection<EClassDescriptor> eClassesByEPackage = ePackageScope.lookup(ePackageDescriptor, ePackageQuery);
-			Collection<EClassDescriptor> eClassesBySuperClass = superClassScope.lookup(superClassDescriptor, superClassQuery);
+			Collection<EClassDescriptor> eClassesBySuperClass = superClassScope.lookup(superClassDescriptor,
+					superClassQuery);
 			Collection<EClassDescriptor> mergedScopes = mergeScopes(eClassesByEPackage, eClassesBySuperClass);
 			return (mergedScopes == null) ? super.scope() : mergedScopes;
 		}
-
 	}
+	
 }

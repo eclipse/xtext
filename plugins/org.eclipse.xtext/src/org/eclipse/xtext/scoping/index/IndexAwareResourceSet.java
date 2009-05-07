@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.ecore.impl.EcoreIndexFeederImpl;
-import org.eclipse.emf.index.resource.EmfResourceChangeListener;
-import org.eclipse.emf.index.resource.impl.DefaultEmfResourceChangeListenerImpl;
-import org.eclipse.emf.index.resource.impl.IndexFeederImpl;
+import org.eclipse.emf.index.IndexStore;
+import org.eclipse.emf.index.ecore.EcoreIndexFeeder;
+import org.eclipse.emf.index.resource.IndexFeeder;
+import org.eclipse.emf.index.resource.impl.ResourceIndexerImpl;
+import org.eclipse.emf.index.tracking.impl.IndexingResourceChangeListener;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
@@ -29,24 +29,17 @@ import com.google.inject.Inject;
  * 
  */
 public class IndexAwareResourceSet extends XtextResourceSet {
-	private final IIndexStore store;
-	private final IndexFeederImpl feeder;
-	private final EmfResourceChangeListener listener;
-
-	public IIndexStore getStore() {
-		return store;
-	}
+	private final IndexStore store;
+	private final IndexFeeder feeder;
+	private final IndexingResourceChangeListener listener;
 
 	@Inject
-	public IndexAwareResourceSet(IIndexStore store, final INameProvider nameProvider, final EPackage.Registry registry) {
+	public IndexAwareResourceSet(final IndexStore store, final INameProvider nameProvider,
+			final EPackage.Registry registry, final IndexFeeder indexFeeder, final EcoreIndexFeeder ecoreIndexFeeder) {
 		this.store = store;
-		this.feeder = new IndexFeederImpl(store);
-		this.listener = new DefaultEmfResourceChangeListenerImpl() {
-			@Override
-			protected Resource loadResource(URI resourceUri) {
-				return IndexAwareResourceSet.this.getResource(resourceUri, true);
-			}
+		this.feeder = indexFeeder;
 
+		this.listener = new IndexingResourceChangeListener(new ResourceIndexerImpl() {
 			@Override
 			protected String getEObjectName(EObject eObject) {
 				return nameProvider.getGlobalName(eObject);
@@ -56,35 +49,32 @@ public class IndexAwareResourceSet extends XtextResourceSet {
 			protected boolean isIndexElement(EObject element) {
 				return nameProvider.getGlobalName(element) != null;
 			}
+		}) {
+			@Override
+			protected Resource loadResource(URI resourceUri) {
+				return IndexAwareResourceSet.this.getResource(resourceUri, true);
+			}
 		};
-		
-		EcoreIndexFeederImpl ecoreFeeder = new EcoreIndexFeederImpl(store);
-		
+
 		Collection<String> keys = new ArrayList<String>(registry.keySet());
 		for (String nsURI : keys) {
 			EPackage pack = registry.getEPackage(nsURI);
-			ecoreFeeder.index(pack, false);
+			ecoreIndexFeeder.index(pack, false);
 		}
 	}
-	
+
 	@Override
 	public Resource createResource(URI uri, String contentType) {
 		try {
 			return super.createResource(uri, contentType);
-		} finally {
-			indexResource(uri);
+		}
+		finally {
+			listener.resourceChanged(uri, feeder);
 		}
 	}
 
-	/**
-	 * @param uri
-	 */
-	private void indexResource(URI uri) {
-		try {
-			feeder.begin();
-			listener.resourceChanged(uri, store, feeder);
-		} finally {
-			feeder.commit();
-		}
+	public IndexStore getStore() {
+		return store;
 	}
+	
 }

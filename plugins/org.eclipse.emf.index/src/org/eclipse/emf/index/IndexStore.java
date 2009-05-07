@@ -11,14 +11,11 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.event.IndexChangeEvent;
 import org.eclipse.emf.index.event.IndexChangeListener;
-import org.eclipse.emf.index.impl.IndexStoreFactory;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface IIndexStore {
-
-	static final IIndexStore INSTANCE = IndexStoreFactory.createIndexStore();
+public interface IndexStore {
 
 	EPackageDescriptor.DAO ePackageDAO();
 
@@ -28,20 +25,19 @@ public interface IIndexStore {
 
 	EObjectDescriptor.DAO eObjectDAO();
 
-	ECrossReferenceDescriptor.DAO eCrossReferenceDAO();
-
-	void beginTransaction();
-
-	void endTransaction();
+	EReferenceDescriptor.DAO eReferenceDAO();
 
 	void addIndexChangeListener(IndexChangeListener listener);
 
 	void removeIndexChangeListener(IndexChangeListener listener);
 
-	/**
-	 * Should be called by DAOs only.
-	 * 
-	 * @param event
+	/*
+	 * The following methods should be called by DAOs only.
+	 * TODO: consider moving them to a separate interface
 	 */
 	void fireIndexChangedEvent(IndexChangeEvent event);
+
+	void beginTransaction();
+	
+	void endTransaction();
 }

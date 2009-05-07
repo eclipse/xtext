@@ -16,78 +16,73 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.index.ECrossReferenceDescriptor;
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.impl.Logger;
-import org.eclipse.emf.index.resource.EmfResourceChangeListener;
+import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.resource.IndexFeeder;
+import org.eclipse.emf.index.resource.ResourceIndexer;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class DefaultEmfResourceChangeListenerImpl implements EmfResourceChangeListener {
+public class ResourceIndexerImpl implements ResourceIndexer {
 
-	public void resourceChanged(URI resourceURI, IIndexStore store, IndexFeeder feeder) {
-		Resource resource = loadResource(resourceURI);
+	public void resourceChanged(Resource resource, IndexFeeder feeder) {
 		if (resource != null) {
+			feeder.begin();
+			ResourceSet resourceSet = resource.getResourceSet();
+			URIConverter uriConverter = (resourceSet != null) ? resourceSet.getURIConverter() : URIConverter.INSTANCE; 
 			feeder.createResourceDescriptor(resource, getResourceUserData(resource));
 			for (Iterator<EObject> i = EcoreUtil.getAllProperContents(resource, false); i.hasNext();) {
 				EObject element = i.next();
 				if (isIndexElement(element)) {
 					feeder.createEObjectDescriptor(element, getEObjectName(element), getEObjectDisplayName(element),
 							getEObjectUserData(element));
-					URI sourceURI = EcoreUtil.getURI(element);
+					URI sourceURI = uriConverter.normalize(EcoreUtil.getURI(element));
 					if (sourceURI != null) {
 						for (EReference eReference : element.eClass().getEAllReferences()) {
 							String eReferenceName = eReference.getName();
 							if (isIndexReference(eReference, element)) {
 								if (eReference.isMany()) {
-									List<?> targets = (List<?>) ((InternalEObject) element).eGet(eReference, false);
+									List<?> targets = (List<?>) element.eGet(eReference, false);
 									for (int index = 0; index < targets.size(); ++index) {
 										Object target = targets.get(index);
-										createECrossReferenceDescriptor(feeder, sourceURI, eReferenceName, index,
+										createEReferenceDescriptor(feeder, uriConverter, sourceURI, eReferenceName, index,
 												target);
 									}
 								}
 								else {
-									Object target = ((InternalEObject) element).eGet(eReference, false);
-									createECrossReferenceDescriptor(feeder, sourceURI, eReferenceName,
-											ECrossReferenceDescriptor.NO_INDEX, target);
+									Object target = element.eGet(eReference, false);
+									createEReferenceDescriptor(feeder, uriConverter, sourceURI, eReferenceName,
+											EReferenceDescriptor.NO_INDEX, target);
 								}
 							}
 						}
 					}
 				}
 			}
+			feeder.commit();
 		}
 	}
+	
+	public void resourceDeleted(URI resourceUri, IndexFeeder feeder) {
+		feeder.begin();
+		// TODO: implement
+		feeder.commit();
+	}
 
-	private void createECrossReferenceDescriptor(IndexFeeder feeder, URI sourceURI, String eReferenceName, int index,
+	protected void createEReferenceDescriptor(IndexFeeder feeder, URIConverter uriConverter, URI sourceURI, String eReferenceName, int index,
 			Object target) {
 		if (target instanceof EObject) {
-			URI targetURI = EcoreUtil.getURI((EObject) target);
+			URI targetURI = uriConverter.normalize(EcoreUtil.getURI((EObject) target));
 			if (targetURI != null) {
-				feeder.createECrossReferenceDescriptor(sourceURI, eReferenceName, index, targetURI);
+				feeder.createEReferenceDescriptor(sourceURI, eReferenceName, index, targetURI);
 			}
 		}
 	}
-
-	protected Resource loadResource(URI resourceURI) {
-		try {
-			ResourceSet resourceSet = new ResourceSetImpl();
-			return resourceSet.getResource(resourceURI, true);
-		}
-		catch (Exception exc) {
-			Logger.logError("Error loading resource", exc);
-			return null;
-		}
-	}
-
+	
 	protected Map<String, String> getResourceUserData(Resource resource) {
 		return null;
 	}
@@ -128,4 +123,5 @@ public class DefaultEmfResourceChangeListenerImpl implements EmfResourceChangeLi
 	protected boolean isIndexReference(EReference eReference, EObject element) {
 		return !eReference.isContainment() && !eReference.isDerived() && element.eIsSet(eReference);
 	}
+
 }

@@ -22,36 +22,39 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.index.ECrossReferenceDescriptor;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.EReferenceDescriptor;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.ecore.EClassDescriptor;
-import org.eclipse.emf.index.impl.ECrossReferenceDescriptorImpl;
 import org.eclipse.emf.index.impl.EObjectDescriptorImpl;
+import org.eclipse.emf.index.impl.EReferenceDescriptorImpl;
 import org.eclipse.emf.index.impl.ResourceDescriptorImpl;
 import org.eclipse.emf.index.resource.IndexFeeder;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class IndexFeederImpl implements IndexFeeder {
 
-	private IIndexStore index;
+	private IndexStore index;
 
 	private boolean isTransactionStarted;
 
 	private Map<Resource, ResourceData> resourceDataCache = new HashMap<Resource, ResourceData>();
 	private Map<EObject, EObjectData> eObjectDataCache = new HashMap<EObject, EObjectData>();
-	private List<ECrossReferenceData> crossRefCache = new ArrayList<ECrossReferenceData>();
+	private List<EReferenceData> eReferenceCache = new ArrayList<EReferenceData>();
 
 	private Map<URI, ResourceDescriptor> resourceDescCacheUri = new HashMap<URI, ResourceDescriptor>();
 	private Map<EObject, EObjectDescriptor> eObjectDescCache = new HashMap<EObject, EObjectDescriptor>();
 
 	private List<EObjectDescriptor> allExistingEObjectDescs = new ArrayList<EObjectDescriptor>();
-	private List<ECrossReferenceDescriptor> allExistingECrossRefDescs = new ArrayList<ECrossReferenceDescriptor>();
+	private List<EReferenceDescriptor> allExistingEReferenceDescs = new ArrayList<EReferenceDescriptor>();
 
-	public IndexFeederImpl(IIndexStore indexStore) {
+	@Inject
+	public IndexFeederImpl(IndexStore indexStore) {
 		this.index = indexStore;
 		isTransactionStarted = false;
 	}
@@ -83,15 +86,15 @@ public class IndexFeederImpl implements IndexFeeder {
 		}
 	}
 
-	public void createECrossReferenceDescriptor(URI sourceURI, String eReferenceName, int index, URI targetURI) {
+	public void createEReferenceDescriptor(URI sourceURI, String eReferenceName, int index, URI targetURI) {
 		assertTransactionStarted();
 		if (sourceURI != null && eReferenceName != null && targetURI != null) {
-			ECrossReferenceData eCrossReferenceData = new ECrossReferenceData();
-			eCrossReferenceData.sourceURI = sourceURI;
-			eCrossReferenceData.targetURI = targetURI;
-			eCrossReferenceData.eReferenceName = eReferenceName;
-			eCrossReferenceData.index = index;
-			crossRefCache.add(eCrossReferenceData);
+			EReferenceData eReferenceData = new EReferenceData();
+			eReferenceData.sourceURI = sourceURI;
+			eReferenceData.targetURI = targetURI;
+			eReferenceData.eReferenceName = eReferenceName;
+			eReferenceData.index = index;
+			eReferenceCache.add(eReferenceData);
 		}
 	}
 
@@ -100,7 +103,7 @@ public class IndexFeederImpl implements IndexFeeder {
 			synchronized (index) {
 				commitResourceDescriptors();
 				commitEObjectDescriptors();
-				commitECrossReferenceDescriptors();
+				commitEReferenceDescriptors();
 				cleanUpStaleDescriptors();
 			}
 		}
@@ -110,7 +113,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		}
 	}
 
-	private void commitResourceDescriptors() {
+	public void commitResourceDescriptors() {
 		for (Entry<Resource, ResourceData> resourceEntry : resourceDataCache.entrySet()) {
 			Resource resource = resourceEntry.getKey();
 			ResourceData data = resourceEntry.getValue();
@@ -136,7 +139,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		resourceDescCacheUri.put(resource.getURI(), resourceDescriptor);
 	}
 
-	private void commitEObjectDescriptors() {
+	public void commitEObjectDescriptors() {
 		for (Entry<EObject, EObjectData> eObjectEntry : eObjectDataCache.entrySet()) {
 			EObject eObject = eObjectEntry.getKey();
 			EObjectData data = eObjectEntry.getValue();
@@ -155,9 +158,9 @@ public class IndexFeederImpl implements IndexFeeder {
 					data.displayName, eClassDescriptor, data.userData);
 			EObjectDescriptor existingEObjectDesc = findEquivalent(allExistingEObjectDescs, newEObjectDesc);
 			if (existingEObjectDesc != null) {
-				Collection<ECrossReferenceDescriptor> existingECrossRefDescsFrom = toList(index.eCrossReferenceDAO()
-						.createQueryCrossReferencesFrom(existingEObjectDesc.getFragmentURI()).executeListResult());
-				addAllIfNotNull(allExistingECrossRefDescs, existingECrossRefDescsFrom);
+				Collection<EReferenceDescriptor> existingEReferenceDescsFrom = toList(index.eReferenceDAO()
+						.createQueryEReferencesFrom(existingEObjectDesc.getFragmentURI()).executeListResult());
+				addAllIfNotNull(allExistingEReferenceDescs, existingEReferenceDescsFrom);
 				index.eObjectDAO().modify(existingEObjectDesc, newEObjectDesc);
 				allExistingEObjectDescs.remove(existingEObjectDesc);
 				eObjectDescCache.put(eObject, existingEObjectDesc);
@@ -169,25 +172,31 @@ public class IndexFeederImpl implements IndexFeeder {
 		}
 	}
 
-	private void commitECrossReferenceDescriptors() {
-		for (ECrossReferenceData data : crossRefCache) {
+	public void commitEReferenceDescriptors() {
+		for (EReferenceData data : eReferenceCache) {
 			ResourceDescriptor sourceResourceDescriptor = findResourceDescriptor(data.sourceURI.trimFragment());
 			ResourceDescriptor targetResourceDescriptor = findResourceDescriptor(data.targetURI.trimFragment());
-			ECrossReferenceDescriptor eCrossReferenceDesc = new ECrossReferenceDescriptorImpl(sourceResourceDescriptor,
-					data.sourceURI.fragment(), data.eReferenceName, data.index, targetResourceDescriptor,
-					data.targetURI.fragment());
-			if (!allExistingECrossRefDescs.remove(eCrossReferenceDesc)) {
-				index.eCrossReferenceDAO().store(eCrossReferenceDesc);
+			EReferenceDescriptor eReferenceDesc = new EReferenceDescriptorImpl(sourceResourceDescriptor, data.sourceURI
+					.fragment(), data.eReferenceName, data.index, targetResourceDescriptor, data.targetURI.fragment());
+			if (!allExistingEReferenceDescs.remove(eReferenceDesc)) {
+				index.eReferenceDAO().store(eReferenceDesc);
 			}
 		}
 	}
 
-	private void cleanUpStaleDescriptors() {
+	public void cleanUpStaleDescriptors() {
 		for (EObjectDescriptor eObjectDesc : allExistingEObjectDescs) {
 			index.eObjectDAO().delete(eObjectDesc);
+			String fragment = eObjectDesc.getFragment();
+			ResourceDescriptor resourceDescriptor = eObjectDesc.getResourceDescriptor();
+			Iterable<EReferenceDescriptor> danglingEReferences = index.eReferenceDAO().createQuery().sourceFragment(
+					fragment).sourceResource(resourceDescriptor).executeListResult();
+			for (EReferenceDescriptor danglingEReference : danglingEReferences) {
+				index.eReferenceDAO().delete(danglingEReference);
+			}
 		}
-		for (ECrossReferenceDescriptor eCrossReferenceDesc : allExistingECrossRefDescs) {
-			index.eCrossReferenceDAO().delete(eCrossReferenceDesc);
+		for (EReferenceDescriptor eReferenceDesc : allExistingEReferenceDescs) {
+			index.eReferenceDAO().delete(eReferenceDesc);
 		}
 	}
 
@@ -197,8 +206,7 @@ public class IndexFeederImpl implements IndexFeeder {
 			String uriAsString = uri.toString();
 			resourceDescriptor = index.resourceDAO().createQuery().uri(uriAsString).executeSingleResult();
 			if (resourceDescriptor == null) {
-				resourceDescriptor = new ResourceDescriptorImpl(uriAsString, ResourceDescriptor.NEVER,
-						null);
+				resourceDescriptor = new ResourceDescriptorImpl(uriAsString, ResourceDescriptor.NEVER, null);
 				index.resourceDAO().store(resourceDescriptor);
 			}
 		}
@@ -210,14 +218,14 @@ public class IndexFeederImpl implements IndexFeeder {
 			throw new IllegalStateException("Not in transaction");
 	}
 
-	private void clearAllCaches() {
+	public void clearAllCaches() {
 		resourceDataCache.clear();
 		eObjectDataCache.clear();
-		crossRefCache.clear();
+		eReferenceCache.clear();
 		resourceDescCacheUri.clear();
 		eObjectDescCache.clear();
 		allExistingEObjectDescs.clear();
-		allExistingECrossRefDescs.clear();
+		allExistingEReferenceDescs.clear();
 	}
 
 	private static class ResourceData {
@@ -233,7 +241,7 @@ public class IndexFeederImpl implements IndexFeeder {
 		Map<String, String> userData;
 	}
 
-	private static class ECrossReferenceData {
+	private static class EReferenceData {
 		URI sourceURI;
 		URI targetURI;
 		String eReferenceName;

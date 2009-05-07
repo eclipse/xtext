@@ -20,6 +20,8 @@ import org.eclipse.emf.index.ecore.EClassDescriptor;
  */
 public class EObjectDescriptorImpl extends BasicEObjectDescriptorImpl {
 
+	private static final long serialVersionUID = -8283957734898241601L;
+
 	private Map<String, String> userData;
 
 	public EObjectDescriptorImpl(ResourceDescriptor resourceDescriptor, String fragment, String name,

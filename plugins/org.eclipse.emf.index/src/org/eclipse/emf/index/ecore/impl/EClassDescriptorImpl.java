@@ -17,13 +17,15 @@ import org.eclipse.emf.index.ecore.EPackageDescriptor;
  */
 public class EClassDescriptorImpl implements EClassDescriptor {
 
+	private static final long serialVersionUID = -539765698962357965L;
+
 	private EPackageDescriptor ePackageDescriptor;
 
 	private String name;
 
 	private EClassDescriptor[] superClassDescriptors;
 	
-	private EClass instance;
+	private transient EClass instance;
 
 	public EClassDescriptorImpl(EClass eClass, EPackageDescriptor ePackageDescriptor,
 			EClassDescriptor[] superClassDescriptors) {

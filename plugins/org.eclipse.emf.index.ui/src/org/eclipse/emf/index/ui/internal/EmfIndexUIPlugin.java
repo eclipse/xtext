@@ -7,10 +7,16 @@
  *******************************************************************************/
 package org.eclipse.emf.index.ui.internal;
 
-import org.eclipse.emf.index.IIndexStore;
-import org.eclipse.emf.index.ecore.impl.EPackageRegistryIndexFeeder;
+import java.io.File;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.index.ui.EmfIndexUIModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -20,14 +26,17 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "org.eclipse.emf.index.ui";
 
 	private static EmfIndexUIPlugin plugin;
-	
+
+	private volatile Injector injector;
+
 	public EmfIndexUIPlugin() {
 	}
 
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		// TODO: make the module configurable
+		injector = Guice.createInjector(new EmfIndexUIModule());
 		plugin = this;
-		EPackageRegistryIndexFeeder.feedEPackagesFromRegistry(IIndexStore.INSTANCE);
 	}
 
 	public void stop(BundleContext context) throws Exception {
@@ -39,4 +48,15 @@ public class EmfIndexUIPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	public static void logError(String message, Throwable t) {
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, message, t));
+	}
+
+	public static File getIndexFile() {
+		return new File(getDefault().getStateLocation().toFile(), "emf_index.bin");
+	}
+
+	public Injector getInjector() {
+		return injector;
+	}
 }

@@ -18,6 +18,8 @@ import org.eclipse.emf.index.ResourceDescriptor;
  */
 public class ResourceDescriptorImpl implements ResourceDescriptor {
 
+	private static final long serialVersionUID = 4559062618979870492L;
+
 	protected long indexingDate;
 	protected String uri;
 	protected Map<String, String> userData;

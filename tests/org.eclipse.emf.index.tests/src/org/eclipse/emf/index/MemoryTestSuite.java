@@ -5,20 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.emf.index.dao.memory;
+package org.eclipse.emf.index;
 
-import org.eclipse.emf.index.dao.AbstractEPackageDAOTest;
-import org.eclipse.emf.index.ecore.EPackageDescriptor.DAO;
-import org.eclipse.emf.index.impl.memory.EPackageDAOImpl;
+import junit.framework.TestSuite;
+
+import org.eclipse.emf.index.guice.AbstractEmfIndexTestSuite;
+import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class EPackageDAOTest extends AbstractEPackageDAOTest {
+public class MemoryTestSuite extends AbstractEmfIndexTestSuite {
 
-	@Override
-	protected DAO createEPackageDAO() {
-		return new EPackageDAOImpl(indexStore);
+	public MemoryTestSuite() {
+		super(new EmfIndexDefaultModule());
 	}
 	
+	public static TestSuite suite() {
+		return new MemoryTestSuite();
+	}
 }

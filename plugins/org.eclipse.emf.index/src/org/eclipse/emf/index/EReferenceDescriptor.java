@@ -8,28 +8,29 @@ t * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
 
 package org.eclipse.emf.index;
 
+import java.io.Serializable;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * 
  * @author Jan Köhnlein - Initial contribution and API
  */
-public interface ECrossReferenceDescriptor {
+public interface EReferenceDescriptor extends Serializable {
 
 	static final int NO_INDEX = -1;
 	
-	public interface DAO extends IDAO<ECrossReferenceDescriptor>{
+	public interface DAO extends IDAO<EReferenceDescriptor>{
 		Query createQuery();
 		
-		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(EObject target);
+		IGenericQuery<EReferenceDescriptor> createQueryEReferencesTo(EObject target);
 	
-		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesFrom(URI sourceURI);
+		IGenericQuery<EReferenceDescriptor> createQueryEReferencesFrom(URI sourceURI);
 		
-		IGenericQuery<ECrossReferenceDescriptor> createQueryCrossReferencesTo(URI targetURI);
+		IGenericQuery<EReferenceDescriptor> createQueryEReferencesTo(URI targetURI);
 	}
 
-	public interface Query extends IGenericQuery<ECrossReferenceDescriptor> {
+	public interface Query extends IGenericQuery<EReferenceDescriptor> {
 		
 		Query sourceFragment(String pattern);
 		

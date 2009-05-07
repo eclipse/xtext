@@ -8,13 +8,15 @@
 package org.eclipse.emf.index.impl;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.index.ECrossReferenceDescriptor;
+import org.eclipse.emf.index.EReferenceDescriptor;
 import org.eclipse.emf.index.ResourceDescriptor;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class ECrossReferenceDescriptorImpl implements ECrossReferenceDescriptor {
+public class EReferenceDescriptorImpl implements EReferenceDescriptor {
+
+	private static final long serialVersionUID = -9111865497767470045L;
 
 	private ResourceDescriptor sourceResourceDescriptor;
 	private String sourceFragment;
@@ -23,12 +25,12 @@ public class ECrossReferenceDescriptorImpl implements ECrossReferenceDescriptor 
 	private ResourceDescriptor targetResourceDescriptor;
 	private String targetFragment;
 
-	public ECrossReferenceDescriptorImpl(ResourceDescriptor sourceResourceDescriptor, String sourceFragment,
+	public EReferenceDescriptorImpl(ResourceDescriptor sourceResourceDescriptor, String sourceFragment,
 			String referenceName, ResourceDescriptor targetResourceDescriptor, String targetFragment) {
 		this(sourceResourceDescriptor, sourceFragment, referenceName, NO_INDEX, targetResourceDescriptor, targetFragment);
 	}
 
-	public ECrossReferenceDescriptorImpl(ResourceDescriptor sourceResourceDescriptor, String sourceFragment,
+	public EReferenceDescriptorImpl(ResourceDescriptor sourceResourceDescriptor, String sourceFragment,
 			String referenceName, int index, ResourceDescriptor targetResourceDescriptor, String targetFragment) {
 		super();
 		this.sourceResourceDescriptor = sourceResourceDescriptor;
@@ -90,15 +92,15 @@ public class ECrossReferenceDescriptorImpl implements ECrossReferenceDescriptor 
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof ECrossReferenceDescriptor) {
-			ECrossReferenceDescriptor crossRef = (ECrossReferenceDescriptor) obj;
-			return crossRef.hashCode() == hashCode() 
-				&& this.sourceFragment.equals(crossRef.getSourceFragment())
-				&& this.targetFragment.equals(crossRef.getTargetFragment())
-				&& this.sourceResourceDescriptor.equals(crossRef.getSourceResourceDescriptor())
-				&& this.targetResourceDescriptor.equals(crossRef.getTargetResourceDescriptor())
-				&& this.referenceName.equals(crossRef.getReferenceName())
-				&& this.index == crossRef.getIndex();
+		if (obj instanceof EReferenceDescriptor) {
+			EReferenceDescriptor eReferenceDescriptor = (EReferenceDescriptor) obj;
+			return eReferenceDescriptor.hashCode() == hashCode() 
+				&& this.sourceFragment.equals(eReferenceDescriptor.getSourceFragment())
+				&& this.targetFragment.equals(eReferenceDescriptor.getTargetFragment())
+				&& this.sourceResourceDescriptor.equals(eReferenceDescriptor.getSourceResourceDescriptor())
+				&& this.targetResourceDescriptor.equals(eReferenceDescriptor.getTargetResourceDescriptor())
+				&& this.referenceName.equals(eReferenceDescriptor.getReferenceName())
+				&& this.index == eReferenceDescriptor.getIndex();
 		}
 		return false;
 	}

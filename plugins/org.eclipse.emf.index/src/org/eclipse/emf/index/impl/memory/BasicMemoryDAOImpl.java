@@ -9,6 +9,9 @@ package org.eclipse.emf.index.impl.memory;
 
 import static org.eclipse.emf.index.util.CollectionUtils.isNotEmpty;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,21 +20,25 @@ import java.util.Set;
 
 import org.eclipse.emf.index.IDAO;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.event.IndexChangeEvent;
 import org.eclipse.emf.index.event.impl.IndexChangeEventImpl;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
+public abstract class BasicMemoryDAOImpl<T extends Serializable> implements IDAO<T>, Serializable {
+
+	private static final long serialVersionUID = -5346820953902280859L;
 
 	protected Set<T> store;
 
-	protected IIndexStore indexStore;
+	/**
+	 * The index store is not injected but set through {@link #initialize(IndexStore)} to avoid dependency circle.
+	 */
+	protected transient IndexStore indexStore;
 
-	protected BasicMemoryDAOImpl(IIndexStore indexStore) {
-		this.indexStore = indexStore;
+	protected BasicMemoryDAOImpl() {
 		this.store = new HashSet<T>();
 	}
 
@@ -48,6 +55,10 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
 	public void modify(T element, T newValues) {
 		if (doModify(element, newValues))
 			indexStore.fireIndexChangedEvent(new IndexChangeEventImpl(element, IndexChangeEvent.Type.MODIFIED));
+	}
+
+	public void initialize(IndexStore indexStore) {
+		this.indexStore = indexStore;
 	}
 
 	protected abstract boolean doModify(T element, T newValues);
@@ -77,8 +88,7 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
 		protected abstract boolean matches(T object);
 
 		/**
-		 * @return an empty list if the scope is specified but empty null it the
-		 *         scope is unspecified
+		 * @return an empty list if the scope is specified but empty null it the scope is unspecified
 		 */
 		protected Collection<T> scope() {
 			return store;
@@ -129,4 +139,12 @@ public abstract class BasicMemoryDAOImpl<T> implements IDAO<T> {
 			return scope1;
 		}
 	}
+
+	public void save(ObjectOutputStream out) throws IOException {
+		out.writeInt(store.size());
+		for (T descriptor : store) {
+			out.writeObject(descriptor);
+		}
+	}
+
 }

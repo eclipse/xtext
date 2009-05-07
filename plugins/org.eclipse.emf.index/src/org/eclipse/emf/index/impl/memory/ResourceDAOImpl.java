@@ -10,7 +10,6 @@ package org.eclipse.emf.index.impl.memory;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ResourceDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
 import org.eclipse.emf.index.impl.ResourceDescriptorImpl;
@@ -20,10 +19,8 @@ import org.eclipse.emf.index.impl.ResourceDescriptorImpl;
  */
 public class ResourceDAOImpl extends BasicMemoryDAOImpl<ResourceDescriptor> implements ResourceDescriptor.DAO {
 
-	public ResourceDAOImpl(IIndexStore indexStore) {
-		super(indexStore);
-	}
-	
+	private static final long serialVersionUID = -1273324973049478671L;
+
 	@Override
 	protected boolean doModify(ResourceDescriptor element, ResourceDescriptor newValues) {
 		return ((ResourceDescriptorImpl) element).copyDetails(newValues);

@@ -11,15 +11,12 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.index.IGenericQuery;
-import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.ecore.EPackageDescriptor;
 import org.eclipse.emf.index.impl.DefaultQueryTool;
 
 public class EPackageDAOImpl extends BasicMemoryDAOImpl<EPackageDescriptor> implements EPackageDescriptor.DAO {
 
-	public EPackageDAOImpl(IIndexStore indexStore) {
-		super(indexStore);
-	}
+	private static final long serialVersionUID = -1607118599703893607L;
 
 	@Override
 	protected boolean doModify(EPackageDescriptor element, EPackageDescriptor newValues) {
