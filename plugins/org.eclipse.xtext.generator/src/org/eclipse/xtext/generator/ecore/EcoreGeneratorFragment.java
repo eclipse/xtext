@@ -214,14 +214,18 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 							public Adapter createGenEnumAdapter() {
 								return new GenEnumGeneratorAdapter(this) {
 									@Override
-									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath),
-												" * $Id" + "$");
+									protected URI toURI(String pathName) {
+										return EcoreGeneratorFragment.this.toURI(pathName);
+									}
+									
+									@Override
+									protected URI toPlatformResourceURI(URI uri) {
+										return EcoreGeneratorFragment.this.toPlatformResourceURI(uri);
 									}
 
 									@Override
-									protected URI toURI(String pathName) {
-										return URI.createFileURI(javaPath);
+									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
+										return EcoreGeneratorFragment.this.createOutputStream(super.createOutputStream(workspacePath));
 									}
 								};
 							}
@@ -230,14 +234,18 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 							public Adapter createGenClassAdapter() {
 								return new GenClassGeneratorAdapter(this) {
 									@Override
-									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath),
-												" * $Id" + "$");
+									protected URI toURI(String pathName) {
+										return EcoreGeneratorFragment.this.toURI(pathName);
+									}
+									
+									@Override
+									protected URI toPlatformResourceURI(URI uri) {
+										return EcoreGeneratorFragment.this.toPlatformResourceURI(uri);
 									}
 
 									@Override
-									protected URI toURI(String pathName) {
-										return URI.createFileURI(javaPath);
+									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
+										return EcoreGeneratorFragment.this.createOutputStream(super.createOutputStream(workspacePath));
 									}
 								};
 							}
@@ -247,13 +255,17 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 								return new GenPackageGeneratorAdapter(this) {
 									@Override
 									protected URI toURI(String pathName) {
-										return URI.createFileURI(javaPath);
+										return EcoreGeneratorFragment.this.toURI(pathName);
+									}
+									
+									@Override
+									protected URI toPlatformResourceURI(URI uri) {
+										return EcoreGeneratorFragment.this.toPlatformResourceURI(uri);
 									}
 
 									@Override
 									protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-										return new LineFilterOutputStream(getURIConverter().createOutputStream(workspacePath),
-												" * $Id" + "$");
+										return EcoreGeneratorFragment.this.createOutputStream(super.createOutputStream(workspacePath));
 									}
 
 								};
@@ -269,6 +281,23 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			log.info(diagnostic);
 	}
 	
+	public URI toURI(String pathName) {
+		try {
+			String path = new File(pathName).getCanonicalPath();
+			return URI.createFileURI(path);
+		} catch (IOException ex) {
+			return URI.createFileURI(pathName);
+		}
+	}
+	
+	public URI toPlatformResourceURI(URI uri) {
+		// we use file URIs instead
+		return uri;
+	}
+
+	public OutputStream createOutputStream(OutputStream stream) throws Exception {
+		return new LineFilterOutputStream(stream, " * $Id" + "$");
+	}
 	
 	private String basePackage = null;
 	
