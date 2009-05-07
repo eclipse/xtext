@@ -14,17 +14,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.EObjectDescriptor.Query;
-import org.eclipse.emf.index.impl.memory.InMemoryIndex;
+import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
 import org.eclipse.xtext.linking.ImportUriTestLanguageRuntimeModule;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.Type;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.index.AbstractDeclarativeNameProvider;
-import org.eclipse.xtext.scoping.index.INameProvider;
-import org.eclipse.xtext.scoping.index.IndexAwareResourceSet;
-import org.eclipse.xtext.scoping.index.IndexBasedScopeProvider;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 import com.google.inject.Binder;
@@ -49,7 +45,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 		set.getResource(URI.createURI("classpath:/" + getClass().getName().replace('.', '/')
 				+ ".importuritestlanguage"), true);
 		
-		IIndexStore store = set.getStore();
+		IndexStore store = set.getStore();
 		Query createQuery = store.eObjectDAO().createQuery();
 		Iterator<EObjectDescriptor> result = createQuery.executeListResult().iterator();
 		List<String> names = new ArrayList<String>();
@@ -102,7 +98,7 @@ public class IndexBasedScopeProviderTest extends AbstractGeneratorTest {
 									}
 
 								});
-						binder.bind(IIndexStore.class).toInstance(new InMemoryIndex());
+						new EmfIndexDefaultModule().configure(binder);
 					}
 
 					@Override

@@ -14,16 +14,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.IIndexStore;
 import org.eclipse.emf.index.EObjectDescriptor.DAO;
 import org.eclipse.emf.index.EObjectDescriptor.Query;
-import org.eclipse.emf.index.impl.memory.InMemoryIndex;
+import org.eclipse.emf.index.impl.memory.EmfIndexDefaultModule;
 import org.eclipse.xtext.linking.ImportUriTestLanguageRuntimeModule;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.Type;
-import org.eclipse.xtext.scoping.index.AbstractDeclarativeNameProvider;
-import org.eclipse.xtext.scoping.index.INameProvider;
-import org.eclipse.xtext.scoping.index.IndexAwareResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 import com.google.inject.Binder;
@@ -92,11 +88,7 @@ public class IndexAwareResourcesetTest extends AbstractGeneratorTest {
 							}
 
 						});
-					}
-
-					@SuppressWarnings("unused")
-					public Class<? extends IIndexStore> bindIIndexStore() {
-						return InMemoryIndex.class;
+						new EmfIndexDefaultModule().configure(binder);
 					}
 				});
 			}
