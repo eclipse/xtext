@@ -18,9 +18,6 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.XtextGrammarTest.class);
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.actions.ParserTest.Packrat.class);
-		suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
-		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyURIEncoderTest.class);
-		suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Antlr.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.Packrat.class);
 		suite.addTestSuite(org.eclipse.xtext.enumrules.EnumAndReferenceTest.Antlr.class);
@@ -35,6 +32,11 @@ public class PluginTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
 		suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.lexer.LexerSLComment.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.lazy.BasicLazyLinkingTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyURIEncoderTest.class);
+		suite.addTestSuite(org.eclipse.xtext.linking.lazy.LazyLinkerTest.class);
 		suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest.class);
 		suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);

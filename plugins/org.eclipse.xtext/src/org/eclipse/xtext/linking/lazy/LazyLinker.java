@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -16,8 +18,10 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -29,6 +33,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
 
 /**
@@ -38,22 +44,25 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	@Inject
 	private LazyURIEncoder encoder;
-	
+
 	@Inject
 	private Registry registry;
 
 	@Override
 	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
+		Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink = Multimaps.newArrayListMultimap();
 		LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
-		installProxies(model, producer);
+		installProxies(model, producer, settingsToLink);
 		TreeIterator<EObject> iterator = model.eAllContents();
 		while (iterator.hasNext()) {
 			EObject eObject = iterator.next();
-			installProxies(eObject, producer);
+			installProxies(eObject, producer, settingsToLink);
 		}
+		installQueuedLinks(settingsToLink);
+		settingsToLink = null;
 	}
-	
-	protected void installProxies(EObject obj, IDiagnosticProducer producer) {
+
+	protected void installProxies(EObject obj, IDiagnosticProducer producer, Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return;
@@ -67,39 +76,72 @@ public class LazyLinker extends AbstractCleaningLinker {
 				if (eRef == null) {
 					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
 				}
-				createAndSetProxy(obj, abstractNode, eRef);
+				if (!eRef.isResolveProxies()) {
+					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
+					settingsToLink.put(setting, abstractNode);
+				}
+				else {
+					createAndSetProxy(obj, abstractNode, eRef);
+				}
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void installQueuedLinks(Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink) {
+		for (EStructuralFeature.Setting setting : settingsToLink.keySet()) {
+			final EObject eObject = setting.getEObject();
+			final EReference eRef = (EReference) setting.getEStructuralFeature();
+			final Collection<AbstractNode> nodes = settingsToLink.get(setting);
+			if (setting.getEStructuralFeature().isMany()) {
+				EList<EObject> list = (EList<EObject>) setting.get(false);
+				for (AbstractNode node : nodes) {
+					final EObject proxy = createProxy(eObject, node, eRef);
+					list.add(EcoreUtil.resolve(proxy, eObject));
+				}
+			}
+			else {
+				final AbstractNode node = nodes.iterator().next();
+				final EObject proxy = createProxy(eObject, node, eRef);
+				setting.set(EcoreUtil.resolve(proxy, eObject));
 			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
-		URI uri = obj.eResource().getURI();
-		URI encodedLink = uri.appendFragment(getEncoder().encode(obj, eRef, abstractNode));
-		EClass eType = eRef.getEReferenceType();
-		eType = findInstantiableCompatible(eType);
-		EObject proxy = eType.getEPackage().getEFactoryInstance().create(eType);
-		((InternalEObject) proxy).eSetProxyURI(encodedLink);
+		final EObject proxy = createProxy(obj, abstractNode, eRef);
 		if (eRef.isMany()) {
 			((BasicEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
-		} else {
+		}
+		else {
 			obj.eSet(eRef, proxy);
 		}
 	}
 
+	protected EObject createProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
+		final URI uri = obj.eResource().getURI();
+		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
+		EClass eType = eRef.getEReferenceType();
+		eType = findInstantiableCompatible(eType);
+		final EObject proxy = EcoreUtil.create(eType);
+		((InternalEObject) proxy).eSetProxyURI(encodedLink);
+		return proxy;
+	}
+
 	private EClass findInstantiableCompatible(EClass eType) {
-		if (!isInstantiatableSubType(eType,eType)) {
+		if (!isInstantiatableSubType(eType, eType)) {
 			// check local Package
 			EPackage ePackage = eType.getEPackage();
 			EClass eClass = findSubTypeInEPackage(ePackage, eType);
-			if (eClass!=null)
+			if (eClass != null)
 				return eClass;
 			// check registry
 			for (String nsURI : getRegistry().keySet()) {
 				if (nsURI.equals(ePackage.getNsURI())) // avoid double check of local EPackage
 					continue;
-				EClass class1 = findSubTypeInEPackage(getRegistry().getEPackage(nsURI),eType);
-				if (class1!=null)
+				EClass class1 = findSubTypeInEPackage(getRegistry().getEPackage(nsURI), eType);
+				if (class1 != null)
 					return class1;
 			}
 		}
