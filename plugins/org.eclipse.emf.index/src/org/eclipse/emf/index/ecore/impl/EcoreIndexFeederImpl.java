@@ -63,8 +63,8 @@ public class EcoreIndexFeederImpl implements EcoreIndexFeeder {
 		List<String> processedNsURIs = new ArrayList<String>();
 		for (boolean hasChanged = true; hasChanged;) {
 			List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
+			hasChanged = false;
 			for (String nsURI : nsURIs) {
-				hasChanged = false;
 				try {
 					if (!processedNsURIs.contains(nsURI)) {
 						hasChanged = true;
