@@ -11,15 +11,7 @@ grammar org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage with org.eclips
 generate enumAndReferenceTestLanguage "http://www.eclipse.org/2009/tmf/xtext/EnumAndReferenceTest"
  
 EntityWithEnumAndReference:
-	// replacing literal with enum assignment causes
-	// org.eclipse.xtext.enumrules.EnumAndReferenceTest
-	// to fail
-	  
-	'kindOfKeyword'
-	// type=KindOfKeyword
-	
-	name=ID
-	'reference' ref=[EntityWithEnumAndReference];
+	type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
 
 enum KindOfKeyword:
 	kindOfKeyword | anotherEnumLiteral;
