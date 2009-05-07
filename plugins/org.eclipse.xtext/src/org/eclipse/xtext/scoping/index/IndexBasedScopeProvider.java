@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.index.EObjectDescriptor;
-import org.eclipse.emf.index.IIndexStore;
+import org.eclipse.emf.index.IndexStore;
 import org.eclipse.emf.index.EObjectDescriptor.Query;
 import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.scoping.IScope;
@@ -34,10 +34,10 @@ import com.google.inject.Inject;
  */
 public class IndexBasedScopeProvider extends AbstractScopeProvider {
 	
-	private final IIndexStore index;
+	private final IndexStore index;
 	
 	@Inject
-	public IndexBasedScopeProvider(IIndexStore index) {
+	public IndexBasedScopeProvider(IndexStore index) {
 		this.index = index;
 	}
 
