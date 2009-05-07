@@ -231,7 +231,12 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.linking.langATestLanguage,
  org.eclipse.xtext.linking.langATestLanguage.impl,
  org.eclipse.xtext.linking.langATestLanguage.util,
+ org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage,
+ org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl,
+ org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.util,
  org.eclipse.xtext.generator.generatorTestLanguage,
  org.eclipse.xtext.generator.generatorTestLanguage.impl,
- org.eclipse.xtext.generator.generatorTestLanguage.util
-
+ org.eclipse.xtext.generator.generatorTestLanguage.util,
+ org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage,
+ org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl,
+ org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.util
