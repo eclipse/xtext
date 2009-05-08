@@ -17,10 +17,9 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
- * {@link IGeneratorFragment} to generate a check based validity checker for a given grammar. 
+ * {@link IGeneratorFragment} to generate a check based validity checker for a given grammar.
  * 
  * @author Michael Clay
  */
