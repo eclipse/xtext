@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.generator.validation;
 
 import java.util.ArrayList;
@@ -12,10 +20,9 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
-import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
- * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar. 
+ * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar.
  * 
  * @author Michael Clay - Initial contribution and API
  */
@@ -23,12 +30,13 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 	
 	private static Logger log = Logger.getLogger(JavaValidatorFragment.class);
 	
-	private List<String> composedChecks = new ArrayList<String>();
+	private final List<String> composedChecks = new ArrayList<String>();
 	
 	public void addComposedCheck(String composedCheckValidator) {
 		this.composedChecks.add(composedCheckValidator);
 	}
 	
+	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (log.isInfoEnabled())
 			log.info("executing generate for "+getClass().getName());
