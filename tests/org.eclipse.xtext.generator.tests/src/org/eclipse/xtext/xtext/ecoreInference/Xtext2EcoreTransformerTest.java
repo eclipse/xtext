@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractRule;
@@ -89,7 +90,8 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	@Override
 	public XtextResource getResource(InputStream in) throws Exception {
-		ResourceSet rs = get(XtextResourceSet.class);
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel.test"));
 		rs.getResources().add(resource);
 		XtextLinker linker = new XtextLinker() {
@@ -1006,4 +1008,17 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			assertFalse(d instanceof ExceptionDiagnostic);
 		}
 	}
+	
+	public void testInheritFromEObject() throws Exception {
+		String grammar = 
+				" grammar test with org.eclipse.xtext.common.Terminals" +
+				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				" import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/test.ecore' as test " +
+				" A returns ecore::EObject: B | C; " +
+				" B returns test::Optional: 'b' optionalString=STRING; " +
+				" C returns test::Mandatory: 'c' mandatoryString=STRING; ";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().isEmpty());
+	}
+
 }
