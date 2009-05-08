@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.util.Strings;
 
@@ -52,7 +53,7 @@ public abstract class EClassifierInfo {
 	}
 
 	public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
-		return getEClassifier().equals(subTypeInfo.getEClassifier());
+		return getEClassifier().equals(subTypeInfo.getEClassifier()) || (getEClassifier() == EcorePackage.Literals.EOBJECT);
 	}
 
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
