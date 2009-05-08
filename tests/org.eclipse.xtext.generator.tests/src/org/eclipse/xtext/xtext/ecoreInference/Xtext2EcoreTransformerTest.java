@@ -1009,8 +1009,8 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		}
 	}
 	
-	public void testInheritFromEObject() throws Exception {
-		String grammar = 
+	public void testInheritFromEObject_01() throws Exception {
+		String grammar =
 				" grammar test with org.eclipse.xtext.common.Terminals" +
 				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
 				" import 'classpath:/org/eclipse/xtext/xtext/ecoreInference/test.ecore' as test " +
@@ -1019,6 +1019,15 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 				" C returns test::Mandatory: 'c' mandatoryString=STRING; ";
 		XtextResource resource = getResourceFromString(grammar);
 		assertTrue(resource.getErrors().isEmpty());
+	}
+	
+	public void testInheritFromEObject_02() throws Exception {
+		String grammar =
+				" grammar test with org.eclipse.xtext.common.Terminals" +
+				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				" Object returns ecore::EObject: {ecore::EInt}; ";
+		XtextResource resource = getResourceFromString(grammar);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 
 }
