@@ -53,7 +53,7 @@ public abstract class EClassifierInfo {
 	}
 
 	public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
-		return getEClassifier().equals(subTypeInfo.getEClassifier()) || (getEClassifier() == EcorePackage.Literals.EOBJECT);
+		return getEClassifier().equals(subTypeInfo.getEClassifier());
 	}
 
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
@@ -70,7 +70,8 @@ public abstract class EClassifierInfo {
 		@Override
 		public boolean isAssignableFrom(EClassifierInfo subTypeInfo) {
 			return super.isAssignableFrom(subTypeInfo) || (subTypeInfo instanceof EClassInfo)
-					&& getEClass().isSuperTypeOf((EClass) subTypeInfo.getEClassifier());
+					&& (getEClass().isSuperTypeOf((EClass) subTypeInfo.getEClassifier())
+							|| EcorePackage.Literals.EOBJECT == getEClass());
 		}
 
 		@Override
