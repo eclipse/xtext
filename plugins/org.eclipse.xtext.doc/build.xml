@@ -1,0 +1,197 @@
+<!--
+	Some of the code below is
+	(c) Chris Aniszczyk <caniszczyk@gmail.com>
+    (c) Lawrence Mandel <lmandel@ca.ibm.com>
+    (c) Peter Friese <peter.friese@itemis.com>
+-->
+<project name="how-to-use-wikitext" default="build-doc" basedir=".">
+	
+	<!--
+		Global vars
+	-->
+	<property name="document.name" value="xtext"/>
+	<property name="document.stylesheet" value="styles/article.xsl"/>
+	<property name="document.pdf.stylesheet" value="styles/fopdf.xsl"/>
+	
+	<property name="build.dir" value="build" />
+	<property name="download.dir" value="${java.io.tmpdir}${file.separator}downloads"/>
+	
+	<!--  
+		WikiText Toolchain 
+	-->
+	<property name="wikitext.url" value="http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/mylyn/update/weekly/mylyn-wikitext-standalone-latest.zip"/>
+	<property name="wikitext.dir" value="${download.dir}${file.separator}wikitext"/>
+
+	<target name="check-wikitext">
+		<available file="${download.dir}${file.separator}wikitext.zip" property="hasWikiText"/>
+	</target>
+	
+	<target name="get-wikitext" description="Downloads WikiText" depends="check-wikitext" unless="hasWikiText">
+		<echo>Downloading WikiText...</echo>
+		<get dest="${download.dir}${file.separator}wikitext.zip" src="${wikitext.url}"/>
+		<unzip src="${download.dir}${file.separator}wikitext.zip" dest="${wikitext.dir}">
+			<patternset includes="**/*.jar"/>
+			<mapper type="flatten"/>
+		</unzip>
+	</target>
+	
+	<target name="install-wikitext" depends="get-wikitext">
+		<taskdef resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties">
+			<classpath>
+				<fileset dir="${wikitext.dir}">
+					<include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
+				</fileset>
+			</classpath>
+		</taskdef>
+	</target>
+	
+	<target name="assemble">
+		<loadfile srcfile="doc/${document.name}-index.txt" property="inputfiles">
+		  <filterchain>
+			<tokenfilter>
+			    <replacestring from="\n" to=","/>
+			</tokenfilter>
+		  </filterchain>
+		</loadfile>
+		<concat destfile="${build.dir}${file.separator}${document.name}.textile" append="false" fixlastline="yes">
+			<filelist dir="doc" files="${inputfiles}"/>
+		</concat>
+	</target>
+	
+	<target name="wikitext2pdf" depends="assemble" description="Generate PDF from textile">
+		<wikitext-to-pdf markupLanguage="Textile">
+			<fileset dir="${build.dir}">
+	 			<include name="${document.name}.textile"/>
+			</fileset>
+		</wikitext-to-pdf>
+	</target>
+	
+	<target name="wikitext2docbook" depends="assemble" description="Generate DocBook from textile">
+		<wikitext-to-docbook markupLanguage="Textile">
+			<fileset dir="${build.dir}">
+	 			<include name="${document.name}.textile"/>
+			</fileset>
+		</wikitext-to-docbook>
+	 </target>
+	
+	<!--
+		DocBook Toolchain
+	-->
+	<property name="docbook.version" value="1.73.2" />
+	<property name="docbook.dir" value="${download.dir}${file.separator}docbook-xsl-${docbook.version}"/>
+	<property name="docbookxsl.url" value="http://internap.dl.sourceforge.net/sourceforge/docbook/docbook-xsl-${docbook.version}.zip"/>
+	<property name="fop.dir" value="${download.dir}${file.separator}fop-0.95"/>
+	<property name="fop.url" value="http://mirrorspace.org/apache/xmlgraphics/fop/binaries/fop-0.95-bin.zip"/>
+	<property name="jai.dir" value="ENTER_JAI_DIRECTORY"/>
+	
+    <macrodef name="docbook2pdf">
+        <attribute name="source"/>
+    	<attribute name="target"/>
+        <sequential>
+        	<taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
+        		<classpath>
+        			<pathelement location="${fop.dir}${file.separator}build${file.separator}fop.jar" />
+        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}avalon-framework-4.2.0.jar" />
+        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}commons-logging-1.0.4.jar" />
+        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}commons-io-1.3.1.jar" />
+        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}batik-all-1.7.jar" />
+        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}xmlgraphics-commons-1.3.1.jar" />
+        			<pathelement location="${jai.dir}${file.separator}lib${file.separator}jai_core.jar" />
+        			<pathelement location="${jai.dir}${file.separator}lib${file.separator}jai_codec.jar" />
+        		</classpath>
+        	</taskdef>
+        	<fop 
+        		format="application/pdf" 
+        		fofile="@{source}" 
+        		outfile="@{target}"
+        		messagelevel="info"/>
+        </sequential>
+    </macrodef>
+
+	<target name="init">
+		<mkdir dir="${download.dir}"/>
+		<mkdir dir="${build.dir}"/>
+	</target>
+	
+	<target name="build-doc" depends="init, install-wikitext, get-docbook-xsl, get-fop">
+		<echo>Building Output...</echo>
+		<antcall target="wikitext2docbook"/>
+		<antcall target="docbook2html"/>
+		<antcall target="docbook2pdf"/>
+		<!--
+		<antcall target="dist"/>
+		-->
+	</target>
+		
+	<target name="check-docbook">
+		<available file="${download.dir}${file.separator}docbook.zip" property="hasDocbook"/>
+	</target>
+	
+	<target name="check-fop">
+		<available file="${download.dir}${file.separator}fop.zip" property="hasFOP"/>
+	</target>
+		
+	<target name="get-docbook-xsl" description="Downloads docbook xsl" depends="check-docbook" unless="hasDocbook">
+		<echo>Downloading DocBook XSL...</echo>
+		<get dest="${download.dir}${file.separator}docbook.zip" src="${docbookxsl.url}"/>
+		<unzip src="${download.dir}${file.separator}docbook.zip" dest="${download.dir}"/>
+	</target>
+	
+	<target name="get-fop" description="Downloads FOP" depends="check-fop" unless="hasFOP">
+		<echo>Downloading FOP...</echo>
+		<get dest="${download.dir}${file.separator}fop.zip" src="${fop.url}"/>
+		<unzip src="${download.dir}${file.separator}fop.zip" dest="${download.dir}"/>
+	</target>
+	
+	<target name="docbook2html">
+		<echo>Converting article to HTML...</echo>
+		<delete file="${build.dir}${file.separator}${document.name}.html"/>
+		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${build.dir}${file.separator}${document.name}.html" style="${document.stylesheet}">
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
+				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
+			</factory>
+			<xmlcatalog>
+				<entity 
+					publicId="docbook.xsl"
+					location="${docbook.dir}${file.separator}html${file.separator}docbook.xsl"/>
+			</xmlcatalog>
+			<param name="header.rule" expression="1" />
+			<param name="admon.graphics.extension" expression=".gif"/>
+			<param name="admon.textlabel" expression="0"/>
+			<param name="ulink.target" expression="_new"/>
+		</xslt>
+	</target>
+	
+	<target name="docbook2pdf">
+		<echo>Converting article to PDF...</echo>
+
+		<delete file="${build.dir}${file.separator}${document.name}.pdf"/>
+		<delete file="${build.dir}${file.separator}${document.name}.fo"/>
+		<xslt in="${build.dir}${file.separator}${document.name}.xml" extension="xml" out="${build.dir}${file.separator}${document.name}.fo" style="${document.pdf.stylesheet}">
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl">
+				<attribute name="http://xml.apache.org/xalan/features/optimize" value="true"/>
+			</factory>
+			<xmlcatalog>
+				<entity 
+					publicId="docbook.xsl"
+					location="${docbook.dir}${file.separator}fo${file.separator}docbook.xsl"/>
+			</xmlcatalog>
+			<param name="generate.toc" expression="book toc" />
+			<param name="show.comments" expression="0" />
+			<param name="header.rule" expression="1" />
+			<param name="admon.graphics.extension" expression=".gif"/>
+			<param name="admon.textlabel" expression="0"/>
+			<param name="admon.graphics" expression="1"/>
+		</xslt>
+
+		<docbook2pdf 
+			source="${build.dir}${file.separator}${document.name}.fo"
+			target="${build.dir}${file.separator}${document.name}.pdf"/>
+		
+		<!-- Remove the resulting formatting object. This object isn't necessary in the
+		     result of this build. -->
+		<delete file="${build.dir}${file.separator}${document.name}.fo" />
+	</target>
+	
+	
+</project>
