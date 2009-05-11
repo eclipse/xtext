@@ -20,7 +20,7 @@ public final class GeneratorTestLanguageRule211Consumer extends NonTerminalConsu
 
 	private Rule211Elements rule;	
 
-	private INonTerminalConsumer ruleConsumer;
+	private INonTerminalConsumer ruleBConsumer;
 
 	private IElementConsumer ruleCall$1$Consumer;
 
@@ -32,7 +32,7 @@ public final class GeneratorTestLanguageRule211Consumer extends NonTerminalConsu
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(ruleConsumer, null, false, false, false, getElement(), optional);
+			return consumeNonTerminal(ruleBConsumer, null, false, false, false, getElement(), optional);
 		}
 	}
 
@@ -52,7 +52,7 @@ public final class GeneratorTestLanguageRule211Consumer extends NonTerminalConsu
 	public void setRule(Rule211Elements rule) {
 		this.rule = rule;
 		
-		ruleCall$1$Consumer = new RuleCall$1$Consumer(rule.getRuleParserRuleCall());
+		ruleCall$1$Consumer = new RuleCall$1$Consumer(rule.getRuleBParserRuleCall());
 	}
 	
 	@Override
@@ -65,8 +65,8 @@ public final class GeneratorTestLanguageRule211Consumer extends NonTerminalConsu
 		return getGrammarElement().getType().getClassifier();
 	}
 	
-	public void setRuleConsumer(INonTerminalConsumer ruleConsumer) {
-		this.ruleConsumer = ruleConsumer;
+	public void setRuleBConsumer(INonTerminalConsumer ruleBConsumer) {
+		this.ruleBConsumer = ruleBConsumer;
 	}
 	
 }

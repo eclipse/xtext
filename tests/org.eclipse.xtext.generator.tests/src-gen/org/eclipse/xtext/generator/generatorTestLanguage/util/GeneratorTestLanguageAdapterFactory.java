@@ -83,6 +83,11 @@ public class GeneratorTestLanguageAdapterFactory extends AdapterFactoryImpl
         return createRuleAdapter();
       }
       @Override
+      public Adapter caseRuleB(RuleB object)
+      {
+        return createRuleBAdapter();
+      }
+      @Override
       public Adapter caseRule1(Rule1 object)
       {
         return createRule1Adapter();
@@ -1365,6 +1370,21 @@ public class GeneratorTestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRuleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.generatorTestLanguage.RuleB <em>Rule B</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.generatorTestLanguage.RuleB
+   * @generated
+   */
+  public Adapter createRuleBAdapter()
   {
     return null;
   }

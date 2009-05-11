@@ -109,7 +109,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
     if (isInited) return (SimpleExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(SimpleExpressionsPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimpleExpressionsPackageImpl theSimpleExpressionsPackage = (SimpleExpressionsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimpleExpressionsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimpleExpressionsPackageImpl());
+    SimpleExpressionsPackageImpl theSimpleExpressionsPackage = (SimpleExpressionsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimpleExpressionsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimpleExpressionsPackageImpl());
 
     isInited = true;
 

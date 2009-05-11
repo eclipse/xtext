@@ -10,6 +10,7 @@ import org.eclipse.xtext.generator.services.GeneratorTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.generator.parser.packrat.consumers.GeneratorTestLanguageRuleConsumer;
+import org.eclipse.xtext.generator.parser.packrat.consumers.GeneratorTestLanguageRuleBConsumer;
 import org.eclipse.xtext.generator.parser.packrat.consumers.GeneratorTestLanguageRule1Consumer;
 import org.eclipse.xtext.generator.parser.packrat.consumers.GeneratorTestLanguageRule2Consumer;
 import org.eclipse.xtext.generator.parser.packrat.consumers.GeneratorTestLanguageRule3Consumer;
@@ -272,6 +273,7 @@ public class GeneratorTestLanguageParserConfiguration extends AbstractParserConf
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private GeneratorTestLanguageRuleConsumer ruleConsumer;
+    private GeneratorTestLanguageRuleBConsumer ruleBConsumer;
     private GeneratorTestLanguageRule1Consumer rule1Consumer;
     private GeneratorTestLanguageRule2Consumer rule2Consumer;
     private GeneratorTestLanguageRule3Consumer rule3Consumer;
@@ -538,6 +540,9 @@ public class GeneratorTestLanguageParserConfiguration extends AbstractParserConf
 	public void createNonTerminalConsumers() {
 		getTerminalsConfiguration().createNonTerminalConsumers();
 		ruleConsumer = new GeneratorTestLanguageRuleConsumer(
+    		this, null
+    	);
+		ruleBConsumer = new GeneratorTestLanguageRuleBConsumer(
     		this, null
     	);
 		rule1Consumer = new GeneratorTestLanguageRule1Consumer(
@@ -1300,6 +1305,7 @@ public class GeneratorTestLanguageParserConfiguration extends AbstractParserConf
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getRuleConsumer().setRule(grammarAccess.getRuleAccess());
+		getRuleBConsumer().setRule(grammarAccess.getRuleBAccess());
 		getRule1Consumer().setRule(grammarAccess.getRule1Access());
 		getRule2Consumer().setRule(grammarAccess.getRule2Access());
 		getRule3Consumer().setRule(grammarAccess.getRule3Access());
@@ -1807,259 +1813,260 @@ public class GeneratorTestLanguageParserConfiguration extends AbstractParserConf
 
 		getRule124Consumer().setRuleConsumer(getRuleConsumer());
 
-		getRule125Consumer().setRuleConsumer(getRuleConsumer());
+		getRule125Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule126Consumer().setRuleConsumer(getRuleConsumer());
+		getRule126Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule127Consumer().setRuleConsumer(getRuleConsumer());
+		getRule127Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule128Consumer().setRuleConsumer(getRuleConsumer());
+		getRule128Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule129Consumer().setRuleConsumer(getRuleConsumer());
+		getRule129Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule130Consumer().setRuleConsumer(getRuleConsumer());
+		getRule130Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule131Consumer().setRuleConsumer(getRuleConsumer());
+		getRule131Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule132Consumer().setRuleConsumer(getRuleConsumer());
+		getRule132Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule133Consumer().setRuleConsumer(getRuleConsumer());
+		getRule133Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule134Consumer().setRuleConsumer(getRuleConsumer());
+		getRule134Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule135Consumer().setRuleConsumer(getRuleConsumer());
+		getRule135Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule136Consumer().setRuleConsumer(getRuleConsumer());
+		getRule136Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule137Consumer().setRuleConsumer(getRuleConsumer());
+		getRule137Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule138Consumer().setRuleConsumer(getRuleConsumer());
+		getRule138Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule139Consumer().setRuleConsumer(getRuleConsumer());
+		getRule139Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule140Consumer().setRuleConsumer(getRuleConsumer());
+		getRule140Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule141Consumer().setRuleConsumer(getRuleConsumer());
+		getRule141Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule142Consumer().setRuleConsumer(getRuleConsumer());
+		getRule142Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule143Consumer().setRuleConsumer(getRuleConsumer());
+		getRule143Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule144Consumer().setRuleConsumer(getRuleConsumer());
+		getRule144Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule145Consumer().setRuleConsumer(getRuleConsumer());
+		getRule145Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule146Consumer().setRuleConsumer(getRuleConsumer());
+		getRule146Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule147Consumer().setRuleConsumer(getRuleConsumer());
+		getRule147Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule148Consumer().setRuleConsumer(getRuleConsumer());
+		getRule148Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule149Consumer().setRuleConsumer(getRuleConsumer());
+		getRule149Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule150Consumer().setRuleConsumer(getRuleConsumer());
+		getRule150Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule151Consumer().setRuleConsumer(getRuleConsumer());
+		getRule151Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule152Consumer().setRuleConsumer(getRuleConsumer());
+		getRule152Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule153Consumer().setRuleConsumer(getRuleConsumer());
+		getRule153Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule154Consumer().setRuleConsumer(getRuleConsumer());
+		getRule154Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule155Consumer().setRuleConsumer(getRuleConsumer());
+		getRule155Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule156Consumer().setRuleConsumer(getRuleConsumer());
+		getRule156Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule157Consumer().setRuleConsumer(getRuleConsumer());
+		getRule157Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule158Consumer().setRuleConsumer(getRuleConsumer());
+		getRule158Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule159Consumer().setRuleConsumer(getRuleConsumer());
+		getRule159Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule160Consumer().setRuleConsumer(getRuleConsumer());
+		getRule160Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule161Consumer().setRuleConsumer(getRuleConsumer());
+		getRule161Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule162Consumer().setRuleConsumer(getRuleConsumer());
+		getRule162Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule163Consumer().setRuleConsumer(getRuleConsumer());
+		getRule163Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule164Consumer().setRuleConsumer(getRuleConsumer());
+		getRule164Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule165Consumer().setRuleConsumer(getRuleConsumer());
+		getRule165Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule166Consumer().setRuleConsumer(getRuleConsumer());
+		getRule166Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule167Consumer().setRuleConsumer(getRuleConsumer());
+		getRule167Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule168Consumer().setRuleConsumer(getRuleConsumer());
+		getRule168Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule169Consumer().setRuleConsumer(getRuleConsumer());
+		getRule169Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule170Consumer().setRuleConsumer(getRuleConsumer());
+		getRule170Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule171Consumer().setRuleConsumer(getRuleConsumer());
+		getRule171Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule172Consumer().setRuleConsumer(getRuleConsumer());
+		getRule172Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule173Consumer().setRuleConsumer(getRuleConsumer());
+		getRule173Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule174Consumer().setRuleConsumer(getRuleConsumer());
+		getRule174Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule175Consumer().setRuleConsumer(getRuleConsumer());
+		getRule175Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule176Consumer().setRuleConsumer(getRuleConsumer());
+		getRule176Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule177Consumer().setRuleConsumer(getRuleConsumer());
+		getRule177Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule178Consumer().setRuleConsumer(getRuleConsumer());
+		getRule178Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule179Consumer().setRuleConsumer(getRuleConsumer());
+		getRule179Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule180Consumer().setRuleConsumer(getRuleConsumer());
+		getRule180Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule181Consumer().setRuleConsumer(getRuleConsumer());
+		getRule181Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule182Consumer().setRuleConsumer(getRuleConsumer());
+		getRule182Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule183Consumer().setRuleConsumer(getRuleConsumer());
+		getRule183Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule184Consumer().setRuleConsumer(getRuleConsumer());
+		getRule184Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule185Consumer().setRuleConsumer(getRuleConsumer());
+		getRule185Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule186Consumer().setRuleConsumer(getRuleConsumer());
+		getRule186Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule187Consumer().setRuleConsumer(getRuleConsumer());
+		getRule187Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule188Consumer().setRuleConsumer(getRuleConsumer());
+		getRule188Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule189Consumer().setRuleConsumer(getRuleConsumer());
+		getRule189Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule190Consumer().setRuleConsumer(getRuleConsumer());
+		getRule190Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule191Consumer().setRuleConsumer(getRuleConsumer());
+		getRule191Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule192Consumer().setRuleConsumer(getRuleConsumer());
+		getRule192Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule193Consumer().setRuleConsumer(getRuleConsumer());
+		getRule193Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule194Consumer().setRuleConsumer(getRuleConsumer());
+		getRule194Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule195Consumer().setRuleConsumer(getRuleConsumer());
+		getRule195Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule196Consumer().setRuleConsumer(getRuleConsumer());
+		getRule196Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule197Consumer().setRuleConsumer(getRuleConsumer());
+		getRule197Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule198Consumer().setRuleConsumer(getRuleConsumer());
+		getRule198Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule199Consumer().setRuleConsumer(getRuleConsumer());
+		getRule199Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule200Consumer().setRuleConsumer(getRuleConsumer());
+		getRule200Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule201Consumer().setRuleConsumer(getRuleConsumer());
+		getRule201Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule202Consumer().setRuleConsumer(getRuleConsumer());
+		getRule202Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule203Consumer().setRuleConsumer(getRuleConsumer());
+		getRule203Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule204Consumer().setRuleConsumer(getRuleConsumer());
+		getRule204Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule205Consumer().setRuleConsumer(getRuleConsumer());
+		getRule205Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule206Consumer().setRuleConsumer(getRuleConsumer());
+		getRule206Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule207Consumer().setRuleConsumer(getRuleConsumer());
+		getRule207Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule208Consumer().setRuleConsumer(getRuleConsumer());
+		getRule208Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule209Consumer().setRuleConsumer(getRuleConsumer());
+		getRule209Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule210Consumer().setRuleConsumer(getRuleConsumer());
+		getRule210Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule211Consumer().setRuleConsumer(getRuleConsumer());
+		getRule211Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule212Consumer().setRuleConsumer(getRuleConsumer());
+		getRule212Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule213Consumer().setRuleConsumer(getRuleConsumer());
+		getRule213Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule214Consumer().setRuleConsumer(getRuleConsumer());
+		getRule214Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule215Consumer().setRuleConsumer(getRuleConsumer());
+		getRule215Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule216Consumer().setRuleConsumer(getRuleConsumer());
+		getRule216Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule217Consumer().setRuleConsumer(getRuleConsumer());
+		getRule217Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule218Consumer().setRuleConsumer(getRuleConsumer());
+		getRule218Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule219Consumer().setRuleConsumer(getRuleConsumer());
+		getRule219Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule220Consumer().setRuleConsumer(getRuleConsumer());
+		getRule220Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule221Consumer().setRuleConsumer(getRuleConsumer());
+		getRule221Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule222Consumer().setRuleConsumer(getRuleConsumer());
+		getRule222Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule223Consumer().setRuleConsumer(getRuleConsumer());
+		getRule223Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule224Consumer().setRuleConsumer(getRuleConsumer());
+		getRule224Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule225Consumer().setRuleConsumer(getRuleConsumer());
+		getRule225Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule226Consumer().setRuleConsumer(getRuleConsumer());
+		getRule226Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule227Consumer().setRuleConsumer(getRuleConsumer());
+		getRule227Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule228Consumer().setRuleConsumer(getRuleConsumer());
+		getRule228Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule229Consumer().setRuleConsumer(getRuleConsumer());
+		getRule229Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule230Consumer().setRuleConsumer(getRuleConsumer());
+		getRule230Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule231Consumer().setRuleConsumer(getRuleConsumer());
+		getRule231Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule232Consumer().setRuleConsumer(getRuleConsumer());
+		getRule232Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule233Consumer().setRuleConsumer(getRuleConsumer());
+		getRule233Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule234Consumer().setRuleConsumer(getRuleConsumer());
+		getRule234Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule235Consumer().setRuleConsumer(getRuleConsumer());
+		getRule235Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule236Consumer().setRuleConsumer(getRuleConsumer());
+		getRule236Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule237Consumer().setRuleConsumer(getRuleConsumer());
+		getRule237Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule238Consumer().setRuleConsumer(getRuleConsumer());
+		getRule238Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule239Consumer().setRuleConsumer(getRuleConsumer());
+		getRule239Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule240Consumer().setRuleConsumer(getRuleConsumer());
+		getRule240Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule241Consumer().setRuleConsumer(getRuleConsumer());
+		getRule241Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule242Consumer().setRuleConsumer(getRuleConsumer());
+		getRule242Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule243Consumer().setRuleConsumer(getRuleConsumer());
+		getRule243Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule244Consumer().setRuleConsumer(getRuleConsumer());
+		getRule244Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule245Consumer().setRuleConsumer(getRuleConsumer());
+		getRule245Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule246Consumer().setRuleConsumer(getRuleConsumer());
+		getRule246Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule247Consumer().setRuleConsumer(getRuleConsumer());
+		getRule247Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule248Consumer().setRuleConsumer(getRuleConsumer());
+		getRule248Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule249Consumer().setRuleConsumer(getRuleConsumer());
+		getRule249Consumer().setRuleBConsumer(getRuleBConsumer());
 
-		getRule250Consumer().setRuleConsumer(getRuleConsumer());
+		getRule250Consumer().setRuleBConsumer(getRuleBConsumer());
 
 		getRuleConsumer().setKeyword$1$Delimiter(org.eclipse.xtext.generator.parser.packrat.GeneratorTestLanguageDelimiters.keyword$3$Delimiter);
+		getRuleBConsumer().setKeyword$1$Delimiter(org.eclipse.xtext.generator.parser.packrat.GeneratorTestLanguageDelimiters.keyword$3$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -2068,6 +2075,10 @@ public class GeneratorTestLanguageParserConfiguration extends AbstractParserConf
 	
     public GeneratorTestLanguageRuleConsumer getRuleConsumer() {
     	return ruleConsumer;
+    }
+
+    public GeneratorTestLanguageRuleBConsumer getRuleBConsumer() {
+    	return ruleBConsumer;
     }
 
     public GeneratorTestLanguageRule1Consumer getRule1Consumer() {

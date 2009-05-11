@@ -93,7 +93,7 @@ public class UnassignedRuleCallTestLanguagePackageImpl extends EPackageImpl impl
     if (isInited) return (UnassignedRuleCallTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(UnassignedRuleCallTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    UnassignedRuleCallTestLanguagePackageImpl theUnassignedRuleCallTestLanguagePackage = (UnassignedRuleCallTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof UnassignedRuleCallTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new UnassignedRuleCallTestLanguagePackageImpl());
+    UnassignedRuleCallTestLanguagePackageImpl theUnassignedRuleCallTestLanguagePackage = (UnassignedRuleCallTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof UnassignedRuleCallTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new UnassignedRuleCallTestLanguagePackageImpl());
 
     isInited = true;
 

@@ -6,6 +6,9 @@
       <ecoreClass href="GeneratorTestLanguage.ecore#//Rule"/>
     </genClasses>
     <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//RuleB"/>
+    </genClasses>
+    <genClasses>
       <ecoreClass href="GeneratorTestLanguage.ecore#//Rule1"/>
     </genClasses>
     <genClasses>

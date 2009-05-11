@@ -108,7 +108,7 @@ public class TransientvaluestestPackageImpl extends EPackageImpl implements Tran
     if (isInited) return (TransientvaluestestPackage)EPackage.Registry.INSTANCE.getEPackage(TransientvaluestestPackage.eNS_URI);
 
     // Obtain or create and register package
-    TransientvaluestestPackageImpl theTransientvaluestestPackage = (TransientvaluestestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TransientvaluestestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TransientvaluestestPackageImpl());
+    TransientvaluestestPackageImpl theTransientvaluestestPackage = (TransientvaluestestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TransientvaluestestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TransientvaluestestPackageImpl());
 
     isInited = true;
 
