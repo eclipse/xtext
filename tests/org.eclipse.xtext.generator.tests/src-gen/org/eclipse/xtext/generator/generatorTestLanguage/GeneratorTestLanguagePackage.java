@@ -65,7 +65,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule1()
    * @generated
    */
-  int RULE1 = 1;
+  int RULE1 = 2;
 
   /**
    * The number of structural features of the '<em>Rule1</em>' class.
@@ -96,6 +96,44 @@ public interface GeneratorTestLanguagePackage extends EPackage
   int RULE_FEATURE_COUNT = RULE1_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.generatorTestLanguage.impl.Rule125Impl <em>Rule125</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.Rule125Impl
+   * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule125()
+   * @generated
+   */
+  int RULE125 = 126;
+
+  /**
+   * The number of structural features of the '<em>Rule125</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE125_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.generatorTestLanguage.impl.RuleBImpl <em>Rule B</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.RuleBImpl
+   * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRuleB()
+   * @generated
+   */
+  int RULE_B = 1;
+
+  /**
+   * The number of structural features of the '<em>Rule B</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_B_FEATURE_COUNT = RULE125_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.generatorTestLanguage.impl.Rule2Impl <em>Rule2</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -103,7 +141,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule2()
    * @generated
    */
-  int RULE2 = 2;
+  int RULE2 = 3;
 
   /**
    * The number of structural features of the '<em>Rule2</em>' class.
@@ -122,7 +160,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule3()
    * @generated
    */
-  int RULE3 = 3;
+  int RULE3 = 4;
 
   /**
    * The number of structural features of the '<em>Rule3</em>' class.
@@ -141,7 +179,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule4()
    * @generated
    */
-  int RULE4 = 4;
+  int RULE4 = 5;
 
   /**
    * The number of structural features of the '<em>Rule4</em>' class.
@@ -160,7 +198,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule5()
    * @generated
    */
-  int RULE5 = 5;
+  int RULE5 = 6;
 
   /**
    * The number of structural features of the '<em>Rule5</em>' class.
@@ -179,7 +217,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule6()
    * @generated
    */
-  int RULE6 = 6;
+  int RULE6 = 7;
 
   /**
    * The number of structural features of the '<em>Rule6</em>' class.
@@ -198,7 +236,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule7()
    * @generated
    */
-  int RULE7 = 7;
+  int RULE7 = 8;
 
   /**
    * The number of structural features of the '<em>Rule7</em>' class.
@@ -217,7 +255,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule8()
    * @generated
    */
-  int RULE8 = 8;
+  int RULE8 = 9;
 
   /**
    * The number of structural features of the '<em>Rule8</em>' class.
@@ -236,7 +274,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule9()
    * @generated
    */
-  int RULE9 = 9;
+  int RULE9 = 10;
 
   /**
    * The number of structural features of the '<em>Rule9</em>' class.
@@ -255,7 +293,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule10()
    * @generated
    */
-  int RULE10 = 10;
+  int RULE10 = 11;
 
   /**
    * The number of structural features of the '<em>Rule10</em>' class.
@@ -274,7 +312,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule11()
    * @generated
    */
-  int RULE11 = 11;
+  int RULE11 = 12;
 
   /**
    * The number of structural features of the '<em>Rule11</em>' class.
@@ -293,7 +331,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule12()
    * @generated
    */
-  int RULE12 = 12;
+  int RULE12 = 13;
 
   /**
    * The number of structural features of the '<em>Rule12</em>' class.
@@ -312,7 +350,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule13()
    * @generated
    */
-  int RULE13 = 13;
+  int RULE13 = 14;
 
   /**
    * The number of structural features of the '<em>Rule13</em>' class.
@@ -331,7 +369,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule14()
    * @generated
    */
-  int RULE14 = 14;
+  int RULE14 = 15;
 
   /**
    * The number of structural features of the '<em>Rule14</em>' class.
@@ -350,7 +388,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule15()
    * @generated
    */
-  int RULE15 = 15;
+  int RULE15 = 16;
 
   /**
    * The number of structural features of the '<em>Rule15</em>' class.
@@ -369,7 +407,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule16()
    * @generated
    */
-  int RULE16 = 16;
+  int RULE16 = 17;
 
   /**
    * The number of structural features of the '<em>Rule16</em>' class.
@@ -388,7 +426,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule17()
    * @generated
    */
-  int RULE17 = 17;
+  int RULE17 = 18;
 
   /**
    * The number of structural features of the '<em>Rule17</em>' class.
@@ -407,7 +445,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule18()
    * @generated
    */
-  int RULE18 = 18;
+  int RULE18 = 19;
 
   /**
    * The number of structural features of the '<em>Rule18</em>' class.
@@ -426,7 +464,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule19()
    * @generated
    */
-  int RULE19 = 19;
+  int RULE19 = 20;
 
   /**
    * The number of structural features of the '<em>Rule19</em>' class.
@@ -445,7 +483,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule20()
    * @generated
    */
-  int RULE20 = 20;
+  int RULE20 = 21;
 
   /**
    * The number of structural features of the '<em>Rule20</em>' class.
@@ -464,7 +502,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule21()
    * @generated
    */
-  int RULE21 = 21;
+  int RULE21 = 22;
 
   /**
    * The number of structural features of the '<em>Rule21</em>' class.
@@ -483,7 +521,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule22()
    * @generated
    */
-  int RULE22 = 22;
+  int RULE22 = 23;
 
   /**
    * The number of structural features of the '<em>Rule22</em>' class.
@@ -502,7 +540,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule23()
    * @generated
    */
-  int RULE23 = 23;
+  int RULE23 = 24;
 
   /**
    * The number of structural features of the '<em>Rule23</em>' class.
@@ -521,7 +559,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule24()
    * @generated
    */
-  int RULE24 = 24;
+  int RULE24 = 25;
 
   /**
    * The number of structural features of the '<em>Rule24</em>' class.
@@ -540,7 +578,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule25()
    * @generated
    */
-  int RULE25 = 25;
+  int RULE25 = 26;
 
   /**
    * The number of structural features of the '<em>Rule25</em>' class.
@@ -559,7 +597,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule26()
    * @generated
    */
-  int RULE26 = 26;
+  int RULE26 = 27;
 
   /**
    * The number of structural features of the '<em>Rule26</em>' class.
@@ -578,7 +616,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule27()
    * @generated
    */
-  int RULE27 = 27;
+  int RULE27 = 28;
 
   /**
    * The number of structural features of the '<em>Rule27</em>' class.
@@ -597,7 +635,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule28()
    * @generated
    */
-  int RULE28 = 28;
+  int RULE28 = 29;
 
   /**
    * The number of structural features of the '<em>Rule28</em>' class.
@@ -616,7 +654,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule29()
    * @generated
    */
-  int RULE29 = 29;
+  int RULE29 = 30;
 
   /**
    * The number of structural features of the '<em>Rule29</em>' class.
@@ -635,7 +673,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule30()
    * @generated
    */
-  int RULE30 = 30;
+  int RULE30 = 31;
 
   /**
    * The number of structural features of the '<em>Rule30</em>' class.
@@ -654,7 +692,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule31()
    * @generated
    */
-  int RULE31 = 31;
+  int RULE31 = 32;
 
   /**
    * The number of structural features of the '<em>Rule31</em>' class.
@@ -673,7 +711,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule32()
    * @generated
    */
-  int RULE32 = 32;
+  int RULE32 = 33;
 
   /**
    * The number of structural features of the '<em>Rule32</em>' class.
@@ -692,7 +730,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule33()
    * @generated
    */
-  int RULE33 = 33;
+  int RULE33 = 34;
 
   /**
    * The number of structural features of the '<em>Rule33</em>' class.
@@ -711,7 +749,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule34()
    * @generated
    */
-  int RULE34 = 34;
+  int RULE34 = 35;
 
   /**
    * The number of structural features of the '<em>Rule34</em>' class.
@@ -730,7 +768,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule35()
    * @generated
    */
-  int RULE35 = 35;
+  int RULE35 = 36;
 
   /**
    * The number of structural features of the '<em>Rule35</em>' class.
@@ -749,7 +787,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule36()
    * @generated
    */
-  int RULE36 = 36;
+  int RULE36 = 37;
 
   /**
    * The number of structural features of the '<em>Rule36</em>' class.
@@ -768,7 +806,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule37()
    * @generated
    */
-  int RULE37 = 37;
+  int RULE37 = 38;
 
   /**
    * The number of structural features of the '<em>Rule37</em>' class.
@@ -787,7 +825,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule38()
    * @generated
    */
-  int RULE38 = 38;
+  int RULE38 = 39;
 
   /**
    * The number of structural features of the '<em>Rule38</em>' class.
@@ -806,7 +844,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule39()
    * @generated
    */
-  int RULE39 = 39;
+  int RULE39 = 40;
 
   /**
    * The number of structural features of the '<em>Rule39</em>' class.
@@ -825,7 +863,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule40()
    * @generated
    */
-  int RULE40 = 40;
+  int RULE40 = 41;
 
   /**
    * The number of structural features of the '<em>Rule40</em>' class.
@@ -844,7 +882,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule41()
    * @generated
    */
-  int RULE41 = 41;
+  int RULE41 = 42;
 
   /**
    * The number of structural features of the '<em>Rule41</em>' class.
@@ -863,7 +901,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule42()
    * @generated
    */
-  int RULE42 = 42;
+  int RULE42 = 43;
 
   /**
    * The number of structural features of the '<em>Rule42</em>' class.
@@ -882,7 +920,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule43()
    * @generated
    */
-  int RULE43 = 43;
+  int RULE43 = 44;
 
   /**
    * The number of structural features of the '<em>Rule43</em>' class.
@@ -901,7 +939,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule44()
    * @generated
    */
-  int RULE44 = 44;
+  int RULE44 = 45;
 
   /**
    * The number of structural features of the '<em>Rule44</em>' class.
@@ -920,7 +958,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule45()
    * @generated
    */
-  int RULE45 = 45;
+  int RULE45 = 46;
 
   /**
    * The number of structural features of the '<em>Rule45</em>' class.
@@ -939,7 +977,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule46()
    * @generated
    */
-  int RULE46 = 46;
+  int RULE46 = 47;
 
   /**
    * The number of structural features of the '<em>Rule46</em>' class.
@@ -958,7 +996,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule47()
    * @generated
    */
-  int RULE47 = 47;
+  int RULE47 = 48;
 
   /**
    * The number of structural features of the '<em>Rule47</em>' class.
@@ -977,7 +1015,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule48()
    * @generated
    */
-  int RULE48 = 48;
+  int RULE48 = 49;
 
   /**
    * The number of structural features of the '<em>Rule48</em>' class.
@@ -996,7 +1034,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule49()
    * @generated
    */
-  int RULE49 = 49;
+  int RULE49 = 50;
 
   /**
    * The number of structural features of the '<em>Rule49</em>' class.
@@ -1015,7 +1053,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule50()
    * @generated
    */
-  int RULE50 = 50;
+  int RULE50 = 51;
 
   /**
    * The number of structural features of the '<em>Rule50</em>' class.
@@ -1034,7 +1072,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule51()
    * @generated
    */
-  int RULE51 = 51;
+  int RULE51 = 52;
 
   /**
    * The number of structural features of the '<em>Rule51</em>' class.
@@ -1053,7 +1091,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule52()
    * @generated
    */
-  int RULE52 = 52;
+  int RULE52 = 53;
 
   /**
    * The number of structural features of the '<em>Rule52</em>' class.
@@ -1072,7 +1110,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule53()
    * @generated
    */
-  int RULE53 = 53;
+  int RULE53 = 54;
 
   /**
    * The number of structural features of the '<em>Rule53</em>' class.
@@ -1091,7 +1129,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule54()
    * @generated
    */
-  int RULE54 = 54;
+  int RULE54 = 55;
 
   /**
    * The number of structural features of the '<em>Rule54</em>' class.
@@ -1110,7 +1148,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule55()
    * @generated
    */
-  int RULE55 = 55;
+  int RULE55 = 56;
 
   /**
    * The number of structural features of the '<em>Rule55</em>' class.
@@ -1129,7 +1167,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule56()
    * @generated
    */
-  int RULE56 = 56;
+  int RULE56 = 57;
 
   /**
    * The number of structural features of the '<em>Rule56</em>' class.
@@ -1148,7 +1186,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule57()
    * @generated
    */
-  int RULE57 = 57;
+  int RULE57 = 58;
 
   /**
    * The number of structural features of the '<em>Rule57</em>' class.
@@ -1167,7 +1205,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule58()
    * @generated
    */
-  int RULE58 = 58;
+  int RULE58 = 59;
 
   /**
    * The number of structural features of the '<em>Rule58</em>' class.
@@ -1186,7 +1224,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule59()
    * @generated
    */
-  int RULE59 = 59;
+  int RULE59 = 60;
 
   /**
    * The number of structural features of the '<em>Rule59</em>' class.
@@ -1205,7 +1243,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule60()
    * @generated
    */
-  int RULE60 = 60;
+  int RULE60 = 61;
 
   /**
    * The number of structural features of the '<em>Rule60</em>' class.
@@ -1224,7 +1262,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule61()
    * @generated
    */
-  int RULE61 = 61;
+  int RULE61 = 62;
 
   /**
    * The number of structural features of the '<em>Rule61</em>' class.
@@ -1243,7 +1281,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule62()
    * @generated
    */
-  int RULE62 = 62;
+  int RULE62 = 63;
 
   /**
    * The number of structural features of the '<em>Rule62</em>' class.
@@ -1262,7 +1300,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule63()
    * @generated
    */
-  int RULE63 = 63;
+  int RULE63 = 64;
 
   /**
    * The number of structural features of the '<em>Rule63</em>' class.
@@ -1281,7 +1319,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule64()
    * @generated
    */
-  int RULE64 = 64;
+  int RULE64 = 65;
 
   /**
    * The number of structural features of the '<em>Rule64</em>' class.
@@ -1300,7 +1338,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule65()
    * @generated
    */
-  int RULE65 = 65;
+  int RULE65 = 66;
 
   /**
    * The number of structural features of the '<em>Rule65</em>' class.
@@ -1319,7 +1357,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule66()
    * @generated
    */
-  int RULE66 = 66;
+  int RULE66 = 67;
 
   /**
    * The number of structural features of the '<em>Rule66</em>' class.
@@ -1338,7 +1376,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule67()
    * @generated
    */
-  int RULE67 = 67;
+  int RULE67 = 68;
 
   /**
    * The number of structural features of the '<em>Rule67</em>' class.
@@ -1357,7 +1395,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule68()
    * @generated
    */
-  int RULE68 = 68;
+  int RULE68 = 69;
 
   /**
    * The number of structural features of the '<em>Rule68</em>' class.
@@ -1376,7 +1414,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule69()
    * @generated
    */
-  int RULE69 = 69;
+  int RULE69 = 70;
 
   /**
    * The number of structural features of the '<em>Rule69</em>' class.
@@ -1395,7 +1433,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule70()
    * @generated
    */
-  int RULE70 = 70;
+  int RULE70 = 71;
 
   /**
    * The number of structural features of the '<em>Rule70</em>' class.
@@ -1414,7 +1452,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule71()
    * @generated
    */
-  int RULE71 = 71;
+  int RULE71 = 72;
 
   /**
    * The number of structural features of the '<em>Rule71</em>' class.
@@ -1433,7 +1471,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule72()
    * @generated
    */
-  int RULE72 = 72;
+  int RULE72 = 73;
 
   /**
    * The number of structural features of the '<em>Rule72</em>' class.
@@ -1452,7 +1490,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule73()
    * @generated
    */
-  int RULE73 = 73;
+  int RULE73 = 74;
 
   /**
    * The number of structural features of the '<em>Rule73</em>' class.
@@ -1471,7 +1509,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule74()
    * @generated
    */
-  int RULE74 = 74;
+  int RULE74 = 75;
 
   /**
    * The number of structural features of the '<em>Rule74</em>' class.
@@ -1490,7 +1528,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule75()
    * @generated
    */
-  int RULE75 = 75;
+  int RULE75 = 76;
 
   /**
    * The number of structural features of the '<em>Rule75</em>' class.
@@ -1509,7 +1547,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule76()
    * @generated
    */
-  int RULE76 = 76;
+  int RULE76 = 77;
 
   /**
    * The number of structural features of the '<em>Rule76</em>' class.
@@ -1528,7 +1566,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule77()
    * @generated
    */
-  int RULE77 = 77;
+  int RULE77 = 78;
 
   /**
    * The number of structural features of the '<em>Rule77</em>' class.
@@ -1547,7 +1585,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule78()
    * @generated
    */
-  int RULE78 = 78;
+  int RULE78 = 79;
 
   /**
    * The number of structural features of the '<em>Rule78</em>' class.
@@ -1566,7 +1604,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule79()
    * @generated
    */
-  int RULE79 = 79;
+  int RULE79 = 80;
 
   /**
    * The number of structural features of the '<em>Rule79</em>' class.
@@ -1585,7 +1623,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule80()
    * @generated
    */
-  int RULE80 = 80;
+  int RULE80 = 81;
 
   /**
    * The number of structural features of the '<em>Rule80</em>' class.
@@ -1604,7 +1642,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule81()
    * @generated
    */
-  int RULE81 = 81;
+  int RULE81 = 82;
 
   /**
    * The number of structural features of the '<em>Rule81</em>' class.
@@ -1623,7 +1661,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule82()
    * @generated
    */
-  int RULE82 = 82;
+  int RULE82 = 83;
 
   /**
    * The number of structural features of the '<em>Rule82</em>' class.
@@ -1642,7 +1680,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule83()
    * @generated
    */
-  int RULE83 = 83;
+  int RULE83 = 84;
 
   /**
    * The number of structural features of the '<em>Rule83</em>' class.
@@ -1661,7 +1699,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule84()
    * @generated
    */
-  int RULE84 = 84;
+  int RULE84 = 85;
 
   /**
    * The number of structural features of the '<em>Rule84</em>' class.
@@ -1680,7 +1718,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule85()
    * @generated
    */
-  int RULE85 = 85;
+  int RULE85 = 86;
 
   /**
    * The number of structural features of the '<em>Rule85</em>' class.
@@ -1699,7 +1737,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule86()
    * @generated
    */
-  int RULE86 = 86;
+  int RULE86 = 87;
 
   /**
    * The number of structural features of the '<em>Rule86</em>' class.
@@ -1718,7 +1756,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule87()
    * @generated
    */
-  int RULE87 = 87;
+  int RULE87 = 88;
 
   /**
    * The number of structural features of the '<em>Rule87</em>' class.
@@ -1737,7 +1775,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule88()
    * @generated
    */
-  int RULE88 = 88;
+  int RULE88 = 89;
 
   /**
    * The number of structural features of the '<em>Rule88</em>' class.
@@ -1756,7 +1794,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule89()
    * @generated
    */
-  int RULE89 = 89;
+  int RULE89 = 90;
 
   /**
    * The number of structural features of the '<em>Rule89</em>' class.
@@ -1775,7 +1813,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule90()
    * @generated
    */
-  int RULE90 = 90;
+  int RULE90 = 91;
 
   /**
    * The number of structural features of the '<em>Rule90</em>' class.
@@ -1794,7 +1832,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule91()
    * @generated
    */
-  int RULE91 = 91;
+  int RULE91 = 92;
 
   /**
    * The number of structural features of the '<em>Rule91</em>' class.
@@ -1813,7 +1851,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule92()
    * @generated
    */
-  int RULE92 = 92;
+  int RULE92 = 93;
 
   /**
    * The number of structural features of the '<em>Rule92</em>' class.
@@ -1832,7 +1870,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule93()
    * @generated
    */
-  int RULE93 = 93;
+  int RULE93 = 94;
 
   /**
    * The number of structural features of the '<em>Rule93</em>' class.
@@ -1851,7 +1889,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule94()
    * @generated
    */
-  int RULE94 = 94;
+  int RULE94 = 95;
 
   /**
    * The number of structural features of the '<em>Rule94</em>' class.
@@ -1870,7 +1908,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule95()
    * @generated
    */
-  int RULE95 = 95;
+  int RULE95 = 96;
 
   /**
    * The number of structural features of the '<em>Rule95</em>' class.
@@ -1889,7 +1927,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule96()
    * @generated
    */
-  int RULE96 = 96;
+  int RULE96 = 97;
 
   /**
    * The number of structural features of the '<em>Rule96</em>' class.
@@ -1908,7 +1946,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule97()
    * @generated
    */
-  int RULE97 = 97;
+  int RULE97 = 98;
 
   /**
    * The number of structural features of the '<em>Rule97</em>' class.
@@ -1927,7 +1965,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule98()
    * @generated
    */
-  int RULE98 = 98;
+  int RULE98 = 99;
 
   /**
    * The number of structural features of the '<em>Rule98</em>' class.
@@ -1946,7 +1984,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule99()
    * @generated
    */
-  int RULE99 = 99;
+  int RULE99 = 100;
 
   /**
    * The number of structural features of the '<em>Rule99</em>' class.
@@ -1965,7 +2003,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule100()
    * @generated
    */
-  int RULE100 = 100;
+  int RULE100 = 101;
 
   /**
    * The number of structural features of the '<em>Rule100</em>' class.
@@ -1984,7 +2022,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule101()
    * @generated
    */
-  int RULE101 = 101;
+  int RULE101 = 102;
 
   /**
    * The number of structural features of the '<em>Rule101</em>' class.
@@ -2003,7 +2041,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule102()
    * @generated
    */
-  int RULE102 = 102;
+  int RULE102 = 103;
 
   /**
    * The number of structural features of the '<em>Rule102</em>' class.
@@ -2022,7 +2060,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule103()
    * @generated
    */
-  int RULE103 = 103;
+  int RULE103 = 104;
 
   /**
    * The number of structural features of the '<em>Rule103</em>' class.
@@ -2041,7 +2079,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule104()
    * @generated
    */
-  int RULE104 = 104;
+  int RULE104 = 105;
 
   /**
    * The number of structural features of the '<em>Rule104</em>' class.
@@ -2060,7 +2098,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule105()
    * @generated
    */
-  int RULE105 = 105;
+  int RULE105 = 106;
 
   /**
    * The number of structural features of the '<em>Rule105</em>' class.
@@ -2079,7 +2117,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule106()
    * @generated
    */
-  int RULE106 = 106;
+  int RULE106 = 107;
 
   /**
    * The number of structural features of the '<em>Rule106</em>' class.
@@ -2098,7 +2136,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule107()
    * @generated
    */
-  int RULE107 = 107;
+  int RULE107 = 108;
 
   /**
    * The number of structural features of the '<em>Rule107</em>' class.
@@ -2117,7 +2155,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule108()
    * @generated
    */
-  int RULE108 = 108;
+  int RULE108 = 109;
 
   /**
    * The number of structural features of the '<em>Rule108</em>' class.
@@ -2136,7 +2174,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule109()
    * @generated
    */
-  int RULE109 = 109;
+  int RULE109 = 110;
 
   /**
    * The number of structural features of the '<em>Rule109</em>' class.
@@ -2155,7 +2193,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule110()
    * @generated
    */
-  int RULE110 = 110;
+  int RULE110 = 111;
 
   /**
    * The number of structural features of the '<em>Rule110</em>' class.
@@ -2174,7 +2212,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule111()
    * @generated
    */
-  int RULE111 = 111;
+  int RULE111 = 112;
 
   /**
    * The number of structural features of the '<em>Rule111</em>' class.
@@ -2193,7 +2231,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule112()
    * @generated
    */
-  int RULE112 = 112;
+  int RULE112 = 113;
 
   /**
    * The number of structural features of the '<em>Rule112</em>' class.
@@ -2212,7 +2250,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule113()
    * @generated
    */
-  int RULE113 = 113;
+  int RULE113 = 114;
 
   /**
    * The number of structural features of the '<em>Rule113</em>' class.
@@ -2231,7 +2269,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule114()
    * @generated
    */
-  int RULE114 = 114;
+  int RULE114 = 115;
 
   /**
    * The number of structural features of the '<em>Rule114</em>' class.
@@ -2250,7 +2288,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule115()
    * @generated
    */
-  int RULE115 = 115;
+  int RULE115 = 116;
 
   /**
    * The number of structural features of the '<em>Rule115</em>' class.
@@ -2269,7 +2307,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule116()
    * @generated
    */
-  int RULE116 = 116;
+  int RULE116 = 117;
 
   /**
    * The number of structural features of the '<em>Rule116</em>' class.
@@ -2288,7 +2326,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule117()
    * @generated
    */
-  int RULE117 = 117;
+  int RULE117 = 118;
 
   /**
    * The number of structural features of the '<em>Rule117</em>' class.
@@ -2307,7 +2345,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule118()
    * @generated
    */
-  int RULE118 = 118;
+  int RULE118 = 119;
 
   /**
    * The number of structural features of the '<em>Rule118</em>' class.
@@ -2326,7 +2364,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule119()
    * @generated
    */
-  int RULE119 = 119;
+  int RULE119 = 120;
 
   /**
    * The number of structural features of the '<em>Rule119</em>' class.
@@ -2345,7 +2383,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule120()
    * @generated
    */
-  int RULE120 = 120;
+  int RULE120 = 121;
 
   /**
    * The number of structural features of the '<em>Rule120</em>' class.
@@ -2364,7 +2402,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule121()
    * @generated
    */
-  int RULE121 = 121;
+  int RULE121 = 122;
 
   /**
    * The number of structural features of the '<em>Rule121</em>' class.
@@ -2383,7 +2421,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule122()
    * @generated
    */
-  int RULE122 = 122;
+  int RULE122 = 123;
 
   /**
    * The number of structural features of the '<em>Rule122</em>' class.
@@ -2402,7 +2440,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule123()
    * @generated
    */
-  int RULE123 = 123;
+  int RULE123 = 124;
 
   /**
    * The number of structural features of the '<em>Rule123</em>' class.
@@ -2421,7 +2459,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule124()
    * @generated
    */
-  int RULE124 = 124;
+  int RULE124 = 125;
 
   /**
    * The number of structural features of the '<em>Rule124</em>' class.
@@ -2433,25 +2471,6 @@ public interface GeneratorTestLanguagePackage extends EPackage
   int RULE124_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.generator.generatorTestLanguage.impl.Rule125Impl <em>Rule125</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.Rule125Impl
-   * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule125()
-   * @generated
-   */
-  int RULE125 = 125;
-
-  /**
-   * The number of structural features of the '<em>Rule125</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RULE125_FEATURE_COUNT = 0;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.generatorTestLanguage.impl.Rule126Impl <em>Rule126</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2459,7 +2478,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule126()
    * @generated
    */
-  int RULE126 = 126;
+  int RULE126 = 127;
 
   /**
    * The number of structural features of the '<em>Rule126</em>' class.
@@ -2478,7 +2497,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule127()
    * @generated
    */
-  int RULE127 = 127;
+  int RULE127 = 128;
 
   /**
    * The number of structural features of the '<em>Rule127</em>' class.
@@ -2497,7 +2516,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule128()
    * @generated
    */
-  int RULE128 = 128;
+  int RULE128 = 129;
 
   /**
    * The number of structural features of the '<em>Rule128</em>' class.
@@ -2516,7 +2535,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule129()
    * @generated
    */
-  int RULE129 = 129;
+  int RULE129 = 130;
 
   /**
    * The number of structural features of the '<em>Rule129</em>' class.
@@ -2535,7 +2554,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule130()
    * @generated
    */
-  int RULE130 = 130;
+  int RULE130 = 131;
 
   /**
    * The number of structural features of the '<em>Rule130</em>' class.
@@ -2554,7 +2573,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule131()
    * @generated
    */
-  int RULE131 = 131;
+  int RULE131 = 132;
 
   /**
    * The number of structural features of the '<em>Rule131</em>' class.
@@ -2573,7 +2592,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule132()
    * @generated
    */
-  int RULE132 = 132;
+  int RULE132 = 133;
 
   /**
    * The number of structural features of the '<em>Rule132</em>' class.
@@ -2592,7 +2611,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule133()
    * @generated
    */
-  int RULE133 = 133;
+  int RULE133 = 134;
 
   /**
    * The number of structural features of the '<em>Rule133</em>' class.
@@ -2611,7 +2630,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule134()
    * @generated
    */
-  int RULE134 = 134;
+  int RULE134 = 135;
 
   /**
    * The number of structural features of the '<em>Rule134</em>' class.
@@ -2630,7 +2649,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule135()
    * @generated
    */
-  int RULE135 = 135;
+  int RULE135 = 136;
 
   /**
    * The number of structural features of the '<em>Rule135</em>' class.
@@ -2649,7 +2668,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule136()
    * @generated
    */
-  int RULE136 = 136;
+  int RULE136 = 137;
 
   /**
    * The number of structural features of the '<em>Rule136</em>' class.
@@ -2668,7 +2687,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule137()
    * @generated
    */
-  int RULE137 = 137;
+  int RULE137 = 138;
 
   /**
    * The number of structural features of the '<em>Rule137</em>' class.
@@ -2687,7 +2706,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule138()
    * @generated
    */
-  int RULE138 = 138;
+  int RULE138 = 139;
 
   /**
    * The number of structural features of the '<em>Rule138</em>' class.
@@ -2706,7 +2725,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule139()
    * @generated
    */
-  int RULE139 = 139;
+  int RULE139 = 140;
 
   /**
    * The number of structural features of the '<em>Rule139</em>' class.
@@ -2725,7 +2744,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule140()
    * @generated
    */
-  int RULE140 = 140;
+  int RULE140 = 141;
 
   /**
    * The number of structural features of the '<em>Rule140</em>' class.
@@ -2744,7 +2763,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule141()
    * @generated
    */
-  int RULE141 = 141;
+  int RULE141 = 142;
 
   /**
    * The number of structural features of the '<em>Rule141</em>' class.
@@ -2763,7 +2782,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule142()
    * @generated
    */
-  int RULE142 = 142;
+  int RULE142 = 143;
 
   /**
    * The number of structural features of the '<em>Rule142</em>' class.
@@ -2782,7 +2801,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule143()
    * @generated
    */
-  int RULE143 = 143;
+  int RULE143 = 144;
 
   /**
    * The number of structural features of the '<em>Rule143</em>' class.
@@ -2801,7 +2820,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule144()
    * @generated
    */
-  int RULE144 = 144;
+  int RULE144 = 145;
 
   /**
    * The number of structural features of the '<em>Rule144</em>' class.
@@ -2820,7 +2839,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule145()
    * @generated
    */
-  int RULE145 = 145;
+  int RULE145 = 146;
 
   /**
    * The number of structural features of the '<em>Rule145</em>' class.
@@ -2839,7 +2858,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule146()
    * @generated
    */
-  int RULE146 = 146;
+  int RULE146 = 147;
 
   /**
    * The number of structural features of the '<em>Rule146</em>' class.
@@ -2858,7 +2877,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule147()
    * @generated
    */
-  int RULE147 = 147;
+  int RULE147 = 148;
 
   /**
    * The number of structural features of the '<em>Rule147</em>' class.
@@ -2877,7 +2896,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule148()
    * @generated
    */
-  int RULE148 = 148;
+  int RULE148 = 149;
 
   /**
    * The number of structural features of the '<em>Rule148</em>' class.
@@ -2896,7 +2915,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule149()
    * @generated
    */
-  int RULE149 = 149;
+  int RULE149 = 150;
 
   /**
    * The number of structural features of the '<em>Rule149</em>' class.
@@ -2915,7 +2934,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule150()
    * @generated
    */
-  int RULE150 = 150;
+  int RULE150 = 151;
 
   /**
    * The number of structural features of the '<em>Rule150</em>' class.
@@ -2934,7 +2953,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule151()
    * @generated
    */
-  int RULE151 = 151;
+  int RULE151 = 152;
 
   /**
    * The number of structural features of the '<em>Rule151</em>' class.
@@ -2953,7 +2972,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule152()
    * @generated
    */
-  int RULE152 = 152;
+  int RULE152 = 153;
 
   /**
    * The number of structural features of the '<em>Rule152</em>' class.
@@ -2972,7 +2991,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule153()
    * @generated
    */
-  int RULE153 = 153;
+  int RULE153 = 154;
 
   /**
    * The number of structural features of the '<em>Rule153</em>' class.
@@ -2991,7 +3010,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule154()
    * @generated
    */
-  int RULE154 = 154;
+  int RULE154 = 155;
 
   /**
    * The number of structural features of the '<em>Rule154</em>' class.
@@ -3010,7 +3029,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule155()
    * @generated
    */
-  int RULE155 = 155;
+  int RULE155 = 156;
 
   /**
    * The number of structural features of the '<em>Rule155</em>' class.
@@ -3029,7 +3048,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule156()
    * @generated
    */
-  int RULE156 = 156;
+  int RULE156 = 157;
 
   /**
    * The number of structural features of the '<em>Rule156</em>' class.
@@ -3048,7 +3067,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule157()
    * @generated
    */
-  int RULE157 = 157;
+  int RULE157 = 158;
 
   /**
    * The number of structural features of the '<em>Rule157</em>' class.
@@ -3067,7 +3086,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule158()
    * @generated
    */
-  int RULE158 = 158;
+  int RULE158 = 159;
 
   /**
    * The number of structural features of the '<em>Rule158</em>' class.
@@ -3086,7 +3105,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule159()
    * @generated
    */
-  int RULE159 = 159;
+  int RULE159 = 160;
 
   /**
    * The number of structural features of the '<em>Rule159</em>' class.
@@ -3105,7 +3124,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule160()
    * @generated
    */
-  int RULE160 = 160;
+  int RULE160 = 161;
 
   /**
    * The number of structural features of the '<em>Rule160</em>' class.
@@ -3124,7 +3143,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule161()
    * @generated
    */
-  int RULE161 = 161;
+  int RULE161 = 162;
 
   /**
    * The number of structural features of the '<em>Rule161</em>' class.
@@ -3143,7 +3162,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule162()
    * @generated
    */
-  int RULE162 = 162;
+  int RULE162 = 163;
 
   /**
    * The number of structural features of the '<em>Rule162</em>' class.
@@ -3162,7 +3181,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule163()
    * @generated
    */
-  int RULE163 = 163;
+  int RULE163 = 164;
 
   /**
    * The number of structural features of the '<em>Rule163</em>' class.
@@ -3181,7 +3200,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule164()
    * @generated
    */
-  int RULE164 = 164;
+  int RULE164 = 165;
 
   /**
    * The number of structural features of the '<em>Rule164</em>' class.
@@ -3200,7 +3219,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule165()
    * @generated
    */
-  int RULE165 = 165;
+  int RULE165 = 166;
 
   /**
    * The number of structural features of the '<em>Rule165</em>' class.
@@ -3219,7 +3238,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule166()
    * @generated
    */
-  int RULE166 = 166;
+  int RULE166 = 167;
 
   /**
    * The number of structural features of the '<em>Rule166</em>' class.
@@ -3238,7 +3257,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule167()
    * @generated
    */
-  int RULE167 = 167;
+  int RULE167 = 168;
 
   /**
    * The number of structural features of the '<em>Rule167</em>' class.
@@ -3257,7 +3276,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule168()
    * @generated
    */
-  int RULE168 = 168;
+  int RULE168 = 169;
 
   /**
    * The number of structural features of the '<em>Rule168</em>' class.
@@ -3276,7 +3295,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule169()
    * @generated
    */
-  int RULE169 = 169;
+  int RULE169 = 170;
 
   /**
    * The number of structural features of the '<em>Rule169</em>' class.
@@ -3295,7 +3314,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule170()
    * @generated
    */
-  int RULE170 = 170;
+  int RULE170 = 171;
 
   /**
    * The number of structural features of the '<em>Rule170</em>' class.
@@ -3314,7 +3333,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule171()
    * @generated
    */
-  int RULE171 = 171;
+  int RULE171 = 172;
 
   /**
    * The number of structural features of the '<em>Rule171</em>' class.
@@ -3333,7 +3352,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule172()
    * @generated
    */
-  int RULE172 = 172;
+  int RULE172 = 173;
 
   /**
    * The number of structural features of the '<em>Rule172</em>' class.
@@ -3352,7 +3371,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule173()
    * @generated
    */
-  int RULE173 = 173;
+  int RULE173 = 174;
 
   /**
    * The number of structural features of the '<em>Rule173</em>' class.
@@ -3371,7 +3390,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule174()
    * @generated
    */
-  int RULE174 = 174;
+  int RULE174 = 175;
 
   /**
    * The number of structural features of the '<em>Rule174</em>' class.
@@ -3390,7 +3409,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule175()
    * @generated
    */
-  int RULE175 = 175;
+  int RULE175 = 176;
 
   /**
    * The number of structural features of the '<em>Rule175</em>' class.
@@ -3409,7 +3428,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule176()
    * @generated
    */
-  int RULE176 = 176;
+  int RULE176 = 177;
 
   /**
    * The number of structural features of the '<em>Rule176</em>' class.
@@ -3428,7 +3447,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule177()
    * @generated
    */
-  int RULE177 = 177;
+  int RULE177 = 178;
 
   /**
    * The number of structural features of the '<em>Rule177</em>' class.
@@ -3447,7 +3466,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule178()
    * @generated
    */
-  int RULE178 = 178;
+  int RULE178 = 179;
 
   /**
    * The number of structural features of the '<em>Rule178</em>' class.
@@ -3466,7 +3485,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule179()
    * @generated
    */
-  int RULE179 = 179;
+  int RULE179 = 180;
 
   /**
    * The number of structural features of the '<em>Rule179</em>' class.
@@ -3485,7 +3504,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule180()
    * @generated
    */
-  int RULE180 = 180;
+  int RULE180 = 181;
 
   /**
    * The number of structural features of the '<em>Rule180</em>' class.
@@ -3504,7 +3523,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule181()
    * @generated
    */
-  int RULE181 = 181;
+  int RULE181 = 182;
 
   /**
    * The number of structural features of the '<em>Rule181</em>' class.
@@ -3523,7 +3542,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule182()
    * @generated
    */
-  int RULE182 = 182;
+  int RULE182 = 183;
 
   /**
    * The number of structural features of the '<em>Rule182</em>' class.
@@ -3542,7 +3561,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule183()
    * @generated
    */
-  int RULE183 = 183;
+  int RULE183 = 184;
 
   /**
    * The number of structural features of the '<em>Rule183</em>' class.
@@ -3561,7 +3580,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule184()
    * @generated
    */
-  int RULE184 = 184;
+  int RULE184 = 185;
 
   /**
    * The number of structural features of the '<em>Rule184</em>' class.
@@ -3580,7 +3599,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule185()
    * @generated
    */
-  int RULE185 = 185;
+  int RULE185 = 186;
 
   /**
    * The number of structural features of the '<em>Rule185</em>' class.
@@ -3599,7 +3618,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule186()
    * @generated
    */
-  int RULE186 = 186;
+  int RULE186 = 187;
 
   /**
    * The number of structural features of the '<em>Rule186</em>' class.
@@ -3618,7 +3637,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule187()
    * @generated
    */
-  int RULE187 = 187;
+  int RULE187 = 188;
 
   /**
    * The number of structural features of the '<em>Rule187</em>' class.
@@ -3637,7 +3656,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule188()
    * @generated
    */
-  int RULE188 = 188;
+  int RULE188 = 189;
 
   /**
    * The number of structural features of the '<em>Rule188</em>' class.
@@ -3656,7 +3675,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule189()
    * @generated
    */
-  int RULE189 = 189;
+  int RULE189 = 190;
 
   /**
    * The number of structural features of the '<em>Rule189</em>' class.
@@ -3675,7 +3694,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule190()
    * @generated
    */
-  int RULE190 = 190;
+  int RULE190 = 191;
 
   /**
    * The number of structural features of the '<em>Rule190</em>' class.
@@ -3694,7 +3713,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule191()
    * @generated
    */
-  int RULE191 = 191;
+  int RULE191 = 192;
 
   /**
    * The number of structural features of the '<em>Rule191</em>' class.
@@ -3713,7 +3732,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule192()
    * @generated
    */
-  int RULE192 = 192;
+  int RULE192 = 193;
 
   /**
    * The number of structural features of the '<em>Rule192</em>' class.
@@ -3732,7 +3751,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule193()
    * @generated
    */
-  int RULE193 = 193;
+  int RULE193 = 194;
 
   /**
    * The number of structural features of the '<em>Rule193</em>' class.
@@ -3751,7 +3770,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule194()
    * @generated
    */
-  int RULE194 = 194;
+  int RULE194 = 195;
 
   /**
    * The number of structural features of the '<em>Rule194</em>' class.
@@ -3770,7 +3789,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule195()
    * @generated
    */
-  int RULE195 = 195;
+  int RULE195 = 196;
 
   /**
    * The number of structural features of the '<em>Rule195</em>' class.
@@ -3789,7 +3808,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule196()
    * @generated
    */
-  int RULE196 = 196;
+  int RULE196 = 197;
 
   /**
    * The number of structural features of the '<em>Rule196</em>' class.
@@ -3808,7 +3827,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule197()
    * @generated
    */
-  int RULE197 = 197;
+  int RULE197 = 198;
 
   /**
    * The number of structural features of the '<em>Rule197</em>' class.
@@ -3827,7 +3846,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule198()
    * @generated
    */
-  int RULE198 = 198;
+  int RULE198 = 199;
 
   /**
    * The number of structural features of the '<em>Rule198</em>' class.
@@ -3846,7 +3865,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule199()
    * @generated
    */
-  int RULE199 = 199;
+  int RULE199 = 200;
 
   /**
    * The number of structural features of the '<em>Rule199</em>' class.
@@ -3865,7 +3884,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule200()
    * @generated
    */
-  int RULE200 = 200;
+  int RULE200 = 201;
 
   /**
    * The number of structural features of the '<em>Rule200</em>' class.
@@ -3884,7 +3903,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule201()
    * @generated
    */
-  int RULE201 = 201;
+  int RULE201 = 202;
 
   /**
    * The number of structural features of the '<em>Rule201</em>' class.
@@ -3903,7 +3922,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule202()
    * @generated
    */
-  int RULE202 = 202;
+  int RULE202 = 203;
 
   /**
    * The number of structural features of the '<em>Rule202</em>' class.
@@ -3922,7 +3941,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule203()
    * @generated
    */
-  int RULE203 = 203;
+  int RULE203 = 204;
 
   /**
    * The number of structural features of the '<em>Rule203</em>' class.
@@ -3941,7 +3960,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule204()
    * @generated
    */
-  int RULE204 = 204;
+  int RULE204 = 205;
 
   /**
    * The number of structural features of the '<em>Rule204</em>' class.
@@ -3960,7 +3979,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule205()
    * @generated
    */
-  int RULE205 = 205;
+  int RULE205 = 206;
 
   /**
    * The number of structural features of the '<em>Rule205</em>' class.
@@ -3979,7 +3998,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule206()
    * @generated
    */
-  int RULE206 = 206;
+  int RULE206 = 207;
 
   /**
    * The number of structural features of the '<em>Rule206</em>' class.
@@ -3998,7 +4017,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule207()
    * @generated
    */
-  int RULE207 = 207;
+  int RULE207 = 208;
 
   /**
    * The number of structural features of the '<em>Rule207</em>' class.
@@ -4017,7 +4036,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule208()
    * @generated
    */
-  int RULE208 = 208;
+  int RULE208 = 209;
 
   /**
    * The number of structural features of the '<em>Rule208</em>' class.
@@ -4036,7 +4055,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule209()
    * @generated
    */
-  int RULE209 = 209;
+  int RULE209 = 210;
 
   /**
    * The number of structural features of the '<em>Rule209</em>' class.
@@ -4055,7 +4074,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule210()
    * @generated
    */
-  int RULE210 = 210;
+  int RULE210 = 211;
 
   /**
    * The number of structural features of the '<em>Rule210</em>' class.
@@ -4074,7 +4093,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule211()
    * @generated
    */
-  int RULE211 = 211;
+  int RULE211 = 212;
 
   /**
    * The number of structural features of the '<em>Rule211</em>' class.
@@ -4093,7 +4112,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule212()
    * @generated
    */
-  int RULE212 = 212;
+  int RULE212 = 213;
 
   /**
    * The number of structural features of the '<em>Rule212</em>' class.
@@ -4112,7 +4131,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule213()
    * @generated
    */
-  int RULE213 = 213;
+  int RULE213 = 214;
 
   /**
    * The number of structural features of the '<em>Rule213</em>' class.
@@ -4131,7 +4150,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule214()
    * @generated
    */
-  int RULE214 = 214;
+  int RULE214 = 215;
 
   /**
    * The number of structural features of the '<em>Rule214</em>' class.
@@ -4150,7 +4169,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule215()
    * @generated
    */
-  int RULE215 = 215;
+  int RULE215 = 216;
 
   /**
    * The number of structural features of the '<em>Rule215</em>' class.
@@ -4169,7 +4188,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule216()
    * @generated
    */
-  int RULE216 = 216;
+  int RULE216 = 217;
 
   /**
    * The number of structural features of the '<em>Rule216</em>' class.
@@ -4188,7 +4207,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule217()
    * @generated
    */
-  int RULE217 = 217;
+  int RULE217 = 218;
 
   /**
    * The number of structural features of the '<em>Rule217</em>' class.
@@ -4207,7 +4226,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule218()
    * @generated
    */
-  int RULE218 = 218;
+  int RULE218 = 219;
 
   /**
    * The number of structural features of the '<em>Rule218</em>' class.
@@ -4226,7 +4245,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule219()
    * @generated
    */
-  int RULE219 = 219;
+  int RULE219 = 220;
 
   /**
    * The number of structural features of the '<em>Rule219</em>' class.
@@ -4245,7 +4264,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule220()
    * @generated
    */
-  int RULE220 = 220;
+  int RULE220 = 221;
 
   /**
    * The number of structural features of the '<em>Rule220</em>' class.
@@ -4264,7 +4283,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule221()
    * @generated
    */
-  int RULE221 = 221;
+  int RULE221 = 222;
 
   /**
    * The number of structural features of the '<em>Rule221</em>' class.
@@ -4283,7 +4302,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule222()
    * @generated
    */
-  int RULE222 = 222;
+  int RULE222 = 223;
 
   /**
    * The number of structural features of the '<em>Rule222</em>' class.
@@ -4302,7 +4321,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule223()
    * @generated
    */
-  int RULE223 = 223;
+  int RULE223 = 224;
 
   /**
    * The number of structural features of the '<em>Rule223</em>' class.
@@ -4321,7 +4340,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule224()
    * @generated
    */
-  int RULE224 = 224;
+  int RULE224 = 225;
 
   /**
    * The number of structural features of the '<em>Rule224</em>' class.
@@ -4340,7 +4359,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule225()
    * @generated
    */
-  int RULE225 = 225;
+  int RULE225 = 226;
 
   /**
    * The number of structural features of the '<em>Rule225</em>' class.
@@ -4359,7 +4378,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule226()
    * @generated
    */
-  int RULE226 = 226;
+  int RULE226 = 227;
 
   /**
    * The number of structural features of the '<em>Rule226</em>' class.
@@ -4378,7 +4397,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule227()
    * @generated
    */
-  int RULE227 = 227;
+  int RULE227 = 228;
 
   /**
    * The number of structural features of the '<em>Rule227</em>' class.
@@ -4397,7 +4416,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule228()
    * @generated
    */
-  int RULE228 = 228;
+  int RULE228 = 229;
 
   /**
    * The number of structural features of the '<em>Rule228</em>' class.
@@ -4416,7 +4435,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule229()
    * @generated
    */
-  int RULE229 = 229;
+  int RULE229 = 230;
 
   /**
    * The number of structural features of the '<em>Rule229</em>' class.
@@ -4435,7 +4454,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule230()
    * @generated
    */
-  int RULE230 = 230;
+  int RULE230 = 231;
 
   /**
    * The number of structural features of the '<em>Rule230</em>' class.
@@ -4454,7 +4473,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule231()
    * @generated
    */
-  int RULE231 = 231;
+  int RULE231 = 232;
 
   /**
    * The number of structural features of the '<em>Rule231</em>' class.
@@ -4473,7 +4492,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule232()
    * @generated
    */
-  int RULE232 = 232;
+  int RULE232 = 233;
 
   /**
    * The number of structural features of the '<em>Rule232</em>' class.
@@ -4492,7 +4511,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule233()
    * @generated
    */
-  int RULE233 = 233;
+  int RULE233 = 234;
 
   /**
    * The number of structural features of the '<em>Rule233</em>' class.
@@ -4511,7 +4530,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule234()
    * @generated
    */
-  int RULE234 = 234;
+  int RULE234 = 235;
 
   /**
    * The number of structural features of the '<em>Rule234</em>' class.
@@ -4530,7 +4549,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule235()
    * @generated
    */
-  int RULE235 = 235;
+  int RULE235 = 236;
 
   /**
    * The number of structural features of the '<em>Rule235</em>' class.
@@ -4549,7 +4568,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule236()
    * @generated
    */
-  int RULE236 = 236;
+  int RULE236 = 237;
 
   /**
    * The number of structural features of the '<em>Rule236</em>' class.
@@ -4568,7 +4587,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule237()
    * @generated
    */
-  int RULE237 = 237;
+  int RULE237 = 238;
 
   /**
    * The number of structural features of the '<em>Rule237</em>' class.
@@ -4587,7 +4606,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule238()
    * @generated
    */
-  int RULE238 = 238;
+  int RULE238 = 239;
 
   /**
    * The number of structural features of the '<em>Rule238</em>' class.
@@ -4606,7 +4625,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule239()
    * @generated
    */
-  int RULE239 = 239;
+  int RULE239 = 240;
 
   /**
    * The number of structural features of the '<em>Rule239</em>' class.
@@ -4625,7 +4644,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule240()
    * @generated
    */
-  int RULE240 = 240;
+  int RULE240 = 241;
 
   /**
    * The number of structural features of the '<em>Rule240</em>' class.
@@ -4644,7 +4663,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule241()
    * @generated
    */
-  int RULE241 = 241;
+  int RULE241 = 242;
 
   /**
    * The number of structural features of the '<em>Rule241</em>' class.
@@ -4663,7 +4682,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule242()
    * @generated
    */
-  int RULE242 = 242;
+  int RULE242 = 243;
 
   /**
    * The number of structural features of the '<em>Rule242</em>' class.
@@ -4682,7 +4701,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule243()
    * @generated
    */
-  int RULE243 = 243;
+  int RULE243 = 244;
 
   /**
    * The number of structural features of the '<em>Rule243</em>' class.
@@ -4701,7 +4720,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule244()
    * @generated
    */
-  int RULE244 = 244;
+  int RULE244 = 245;
 
   /**
    * The number of structural features of the '<em>Rule244</em>' class.
@@ -4720,7 +4739,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule245()
    * @generated
    */
-  int RULE245 = 245;
+  int RULE245 = 246;
 
   /**
    * The number of structural features of the '<em>Rule245</em>' class.
@@ -4739,7 +4758,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule246()
    * @generated
    */
-  int RULE246 = 246;
+  int RULE246 = 247;
 
   /**
    * The number of structural features of the '<em>Rule246</em>' class.
@@ -4758,7 +4777,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule247()
    * @generated
    */
-  int RULE247 = 247;
+  int RULE247 = 248;
 
   /**
    * The number of structural features of the '<em>Rule247</em>' class.
@@ -4777,7 +4796,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule248()
    * @generated
    */
-  int RULE248 = 248;
+  int RULE248 = 249;
 
   /**
    * The number of structural features of the '<em>Rule248</em>' class.
@@ -4796,7 +4815,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule249()
    * @generated
    */
-  int RULE249 = 249;
+  int RULE249 = 250;
 
   /**
    * The number of structural features of the '<em>Rule249</em>' class.
@@ -4815,7 +4834,7 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.generator.generatorTestLanguage.impl.GeneratorTestLanguagePackageImpl#getRule250()
    * @generated
    */
-  int RULE250 = 250;
+  int RULE250 = 251;
 
   /**
    * The number of structural features of the '<em>Rule250</em>' class.
@@ -4836,6 +4855,16 @@ public interface GeneratorTestLanguagePackage extends EPackage
    * @generated
    */
   EClass getRule();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.generatorTestLanguage.RuleB <em>Rule B</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule B</em>'.
+   * @see org.eclipse.xtext.generator.generatorTestLanguage.RuleB
+   * @generated
+   */
+  EClass getRuleB();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.generatorTestLanguage.Rule1 <em>Rule1</em>}'.

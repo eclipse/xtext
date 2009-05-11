@@ -68,6 +68,7 @@ public class GeneratorTestLanguageFactoryImpl extends EFactoryImpl implements Ge
     switch (eClass.getClassifierID())
     {
       case GeneratorTestLanguagePackage.RULE: return createRule();
+      case GeneratorTestLanguagePackage.RULE_B: return createRuleB();
       case GeneratorTestLanguagePackage.RULE1: return createRule1();
       case GeneratorTestLanguagePackage.RULE2: return createRule2();
       case GeneratorTestLanguagePackage.RULE3: return createRule3();
@@ -332,6 +333,17 @@ public class GeneratorTestLanguageFactoryImpl extends EFactoryImpl implements Ge
   {
     RuleImpl rule = new RuleImpl();
     return rule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuleB createRuleB()
+  {
+    RuleBImpl ruleB = new RuleBImpl();
+    return ruleB;
   }
 
   /**

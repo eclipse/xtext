@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class InternalGeneratorTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'x'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'x'", "'y'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
@@ -133,10 +133,82 @@ public class InternalGeneratorTestLanguageParser extends AbstractInternalAntlrPa
     // $ANTLR end ruleRule
 
 
+    // $ANTLR start entryRuleRuleB
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalGeneratorTestLanguage.g:94:1: entryRuleRuleB returns [EObject current=null] : iv_ruleRuleB= ruleRuleB EOF ;
+    public final EObject entryRuleRuleB() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleRuleB = null;
+
+
+        try {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalGeneratorTestLanguage.g:94:47: (iv_ruleRuleB= ruleRuleB EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalGeneratorTestLanguage.g:95:2: iv_ruleRuleB= ruleRuleB EOF
+            {
+             currentNode = createCompositeNode(grammarAccess.getRuleBRule(), currentNode); 
+            pushFollow(FOLLOW_ruleRuleB_in_entryRuleRuleB146);
+            iv_ruleRuleB=ruleRuleB();
+            _fsp--;
+
+             current =iv_ruleRuleB; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRuleB156); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleRuleB
+
+
+    // $ANTLR start ruleRuleB
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalGeneratorTestLanguage.g:102:1: ruleRuleB returns [EObject current=null] : 'y' ;
+    public final EObject ruleRuleB() throws RecognitionException {
+        EObject current = null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
+        try {
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalGeneratorTestLanguage.g:107:6: ( 'y' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/parser/antlr/internal/InternalGeneratorTestLanguage.g:108:1: 'y'
+            {
+            match(input,12,FOLLOW_12_in_ruleRuleB189); 
+
+                    createLeafNode(grammarAccess.getRuleBAccess().getYKeyword(), null); 
+                
+
+            }
+
+             resetLookahead(); 
+                	lastConsumedNode = currentNode;
+                
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleRuleB
+
+
  
 
     public static final BitSet FOLLOW_ruleRule_in_entryRuleRule71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRule81 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleRule114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRuleB_in_entryRuleRuleB146 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRuleB156 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleRuleB189 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -52,6 +52,13 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass ruleBEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass rule1EClass = null;
 
   /**
@@ -1849,7 +1856,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
     if (isInited) return (GeneratorTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    GeneratorTestLanguagePackageImpl theGeneratorTestLanguagePackage = (GeneratorTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GeneratorTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new GeneratorTestLanguagePackageImpl());
+    GeneratorTestLanguagePackageImpl theGeneratorTestLanguagePackage = (GeneratorTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof GeneratorTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new GeneratorTestLanguagePackageImpl());
 
     isInited = true;
 
@@ -1884,11 +1891,25 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getRuleB()
+  {
+    if (ruleBEClass == null)
+    {
+      ruleBEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(1);
+    }
+    return ruleBEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getRule1()
   {
     if (rule1EClass == null)
     {
-      rule1EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(1);
+      rule1EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(2);
     }
     return rule1EClass;
   }
@@ -1902,7 +1923,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule2EClass == null)
     {
-      rule2EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(2);
+      rule2EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(3);
     }
     return rule2EClass;
   }
@@ -1916,7 +1937,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule3EClass == null)
     {
-      rule3EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(3);
+      rule3EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(4);
     }
     return rule3EClass;
   }
@@ -1930,7 +1951,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule4EClass == null)
     {
-      rule4EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(4);
+      rule4EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(5);
     }
     return rule4EClass;
   }
@@ -1944,7 +1965,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule5EClass == null)
     {
-      rule5EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(5);
+      rule5EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(6);
     }
     return rule5EClass;
   }
@@ -1958,7 +1979,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule6EClass == null)
     {
-      rule6EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(6);
+      rule6EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(7);
     }
     return rule6EClass;
   }
@@ -1972,7 +1993,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule7EClass == null)
     {
-      rule7EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(7);
+      rule7EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(8);
     }
     return rule7EClass;
   }
@@ -1986,7 +2007,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule8EClass == null)
     {
-      rule8EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(8);
+      rule8EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(9);
     }
     return rule8EClass;
   }
@@ -2000,7 +2021,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule9EClass == null)
     {
-      rule9EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(9);
+      rule9EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(10);
     }
     return rule9EClass;
   }
@@ -2014,7 +2035,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule10EClass == null)
     {
-      rule10EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(10);
+      rule10EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(11);
     }
     return rule10EClass;
   }
@@ -2028,7 +2049,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule11EClass == null)
     {
-      rule11EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(11);
+      rule11EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(12);
     }
     return rule11EClass;
   }
@@ -2042,7 +2063,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule12EClass == null)
     {
-      rule12EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(12);
+      rule12EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(13);
     }
     return rule12EClass;
   }
@@ -2056,7 +2077,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule13EClass == null)
     {
-      rule13EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(13);
+      rule13EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(14);
     }
     return rule13EClass;
   }
@@ -2070,7 +2091,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule14EClass == null)
     {
-      rule14EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(14);
+      rule14EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(15);
     }
     return rule14EClass;
   }
@@ -2084,7 +2105,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule15EClass == null)
     {
-      rule15EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(15);
+      rule15EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(16);
     }
     return rule15EClass;
   }
@@ -2098,7 +2119,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule16EClass == null)
     {
-      rule16EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(16);
+      rule16EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(17);
     }
     return rule16EClass;
   }
@@ -2112,7 +2133,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule17EClass == null)
     {
-      rule17EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(17);
+      rule17EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(18);
     }
     return rule17EClass;
   }
@@ -2126,7 +2147,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule18EClass == null)
     {
-      rule18EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(18);
+      rule18EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(19);
     }
     return rule18EClass;
   }
@@ -2140,7 +2161,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule19EClass == null)
     {
-      rule19EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(19);
+      rule19EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(20);
     }
     return rule19EClass;
   }
@@ -2154,7 +2175,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule20EClass == null)
     {
-      rule20EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(20);
+      rule20EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(21);
     }
     return rule20EClass;
   }
@@ -2168,7 +2189,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule21EClass == null)
     {
-      rule21EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(21);
+      rule21EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(22);
     }
     return rule21EClass;
   }
@@ -2182,7 +2203,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule22EClass == null)
     {
-      rule22EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(22);
+      rule22EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(23);
     }
     return rule22EClass;
   }
@@ -2196,7 +2217,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule23EClass == null)
     {
-      rule23EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(23);
+      rule23EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(24);
     }
     return rule23EClass;
   }
@@ -2210,7 +2231,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule24EClass == null)
     {
-      rule24EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(24);
+      rule24EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(25);
     }
     return rule24EClass;
   }
@@ -2224,7 +2245,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule25EClass == null)
     {
-      rule25EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(25);
+      rule25EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(26);
     }
     return rule25EClass;
   }
@@ -2238,7 +2259,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule26EClass == null)
     {
-      rule26EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(26);
+      rule26EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(27);
     }
     return rule26EClass;
   }
@@ -2252,7 +2273,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule27EClass == null)
     {
-      rule27EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(27);
+      rule27EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(28);
     }
     return rule27EClass;
   }
@@ -2266,7 +2287,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule28EClass == null)
     {
-      rule28EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(28);
+      rule28EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(29);
     }
     return rule28EClass;
   }
@@ -2280,7 +2301,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule29EClass == null)
     {
-      rule29EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(29);
+      rule29EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(30);
     }
     return rule29EClass;
   }
@@ -2294,7 +2315,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule30EClass == null)
     {
-      rule30EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(30);
+      rule30EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(31);
     }
     return rule30EClass;
   }
@@ -2308,7 +2329,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule31EClass == null)
     {
-      rule31EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(31);
+      rule31EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(32);
     }
     return rule31EClass;
   }
@@ -2322,7 +2343,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule32EClass == null)
     {
-      rule32EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(32);
+      rule32EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(33);
     }
     return rule32EClass;
   }
@@ -2336,7 +2357,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule33EClass == null)
     {
-      rule33EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(33);
+      rule33EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(34);
     }
     return rule33EClass;
   }
@@ -2350,7 +2371,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule34EClass == null)
     {
-      rule34EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(34);
+      rule34EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(35);
     }
     return rule34EClass;
   }
@@ -2364,7 +2385,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule35EClass == null)
     {
-      rule35EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(35);
+      rule35EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(36);
     }
     return rule35EClass;
   }
@@ -2378,7 +2399,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule36EClass == null)
     {
-      rule36EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(36);
+      rule36EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(37);
     }
     return rule36EClass;
   }
@@ -2392,7 +2413,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule37EClass == null)
     {
-      rule37EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(37);
+      rule37EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(38);
     }
     return rule37EClass;
   }
@@ -2406,7 +2427,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule38EClass == null)
     {
-      rule38EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(38);
+      rule38EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(39);
     }
     return rule38EClass;
   }
@@ -2420,7 +2441,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule39EClass == null)
     {
-      rule39EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(39);
+      rule39EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(40);
     }
     return rule39EClass;
   }
@@ -2434,7 +2455,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule40EClass == null)
     {
-      rule40EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(40);
+      rule40EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(41);
     }
     return rule40EClass;
   }
@@ -2448,7 +2469,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule41EClass == null)
     {
-      rule41EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(41);
+      rule41EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(42);
     }
     return rule41EClass;
   }
@@ -2462,7 +2483,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule42EClass == null)
     {
-      rule42EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(42);
+      rule42EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(43);
     }
     return rule42EClass;
   }
@@ -2476,7 +2497,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule43EClass == null)
     {
-      rule43EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(43);
+      rule43EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(44);
     }
     return rule43EClass;
   }
@@ -2490,7 +2511,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule44EClass == null)
     {
-      rule44EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(44);
+      rule44EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(45);
     }
     return rule44EClass;
   }
@@ -2504,7 +2525,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule45EClass == null)
     {
-      rule45EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(45);
+      rule45EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(46);
     }
     return rule45EClass;
   }
@@ -2518,7 +2539,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule46EClass == null)
     {
-      rule46EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(46);
+      rule46EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(47);
     }
     return rule46EClass;
   }
@@ -2532,7 +2553,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule47EClass == null)
     {
-      rule47EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(47);
+      rule47EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(48);
     }
     return rule47EClass;
   }
@@ -2546,7 +2567,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule48EClass == null)
     {
-      rule48EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(48);
+      rule48EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(49);
     }
     return rule48EClass;
   }
@@ -2560,7 +2581,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule49EClass == null)
     {
-      rule49EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(49);
+      rule49EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(50);
     }
     return rule49EClass;
   }
@@ -2574,7 +2595,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule50EClass == null)
     {
-      rule50EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(50);
+      rule50EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(51);
     }
     return rule50EClass;
   }
@@ -2588,7 +2609,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule51EClass == null)
     {
-      rule51EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(51);
+      rule51EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(52);
     }
     return rule51EClass;
   }
@@ -2602,7 +2623,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule52EClass == null)
     {
-      rule52EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(52);
+      rule52EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(53);
     }
     return rule52EClass;
   }
@@ -2616,7 +2637,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule53EClass == null)
     {
-      rule53EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(53);
+      rule53EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(54);
     }
     return rule53EClass;
   }
@@ -2630,7 +2651,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule54EClass == null)
     {
-      rule54EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(54);
+      rule54EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(55);
     }
     return rule54EClass;
   }
@@ -2644,7 +2665,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule55EClass == null)
     {
-      rule55EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(55);
+      rule55EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(56);
     }
     return rule55EClass;
   }
@@ -2658,7 +2679,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule56EClass == null)
     {
-      rule56EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(56);
+      rule56EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(57);
     }
     return rule56EClass;
   }
@@ -2672,7 +2693,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule57EClass == null)
     {
-      rule57EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(57);
+      rule57EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(58);
     }
     return rule57EClass;
   }
@@ -2686,7 +2707,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule58EClass == null)
     {
-      rule58EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(58);
+      rule58EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(59);
     }
     return rule58EClass;
   }
@@ -2700,7 +2721,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule59EClass == null)
     {
-      rule59EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(59);
+      rule59EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(60);
     }
     return rule59EClass;
   }
@@ -2714,7 +2735,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule60EClass == null)
     {
-      rule60EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(60);
+      rule60EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(61);
     }
     return rule60EClass;
   }
@@ -2728,7 +2749,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule61EClass == null)
     {
-      rule61EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(61);
+      rule61EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(62);
     }
     return rule61EClass;
   }
@@ -2742,7 +2763,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule62EClass == null)
     {
-      rule62EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(62);
+      rule62EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(63);
     }
     return rule62EClass;
   }
@@ -2756,7 +2777,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule63EClass == null)
     {
-      rule63EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(63);
+      rule63EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(64);
     }
     return rule63EClass;
   }
@@ -2770,7 +2791,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule64EClass == null)
     {
-      rule64EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(64);
+      rule64EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(65);
     }
     return rule64EClass;
   }
@@ -2784,7 +2805,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule65EClass == null)
     {
-      rule65EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(65);
+      rule65EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(66);
     }
     return rule65EClass;
   }
@@ -2798,7 +2819,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule66EClass == null)
     {
-      rule66EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(66);
+      rule66EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(67);
     }
     return rule66EClass;
   }
@@ -2812,7 +2833,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule67EClass == null)
     {
-      rule67EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(67);
+      rule67EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(68);
     }
     return rule67EClass;
   }
@@ -2826,7 +2847,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule68EClass == null)
     {
-      rule68EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(68);
+      rule68EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(69);
     }
     return rule68EClass;
   }
@@ -2840,7 +2861,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule69EClass == null)
     {
-      rule69EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(69);
+      rule69EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(70);
     }
     return rule69EClass;
   }
@@ -2854,7 +2875,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule70EClass == null)
     {
-      rule70EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(70);
+      rule70EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(71);
     }
     return rule70EClass;
   }
@@ -2868,7 +2889,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule71EClass == null)
     {
-      rule71EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(71);
+      rule71EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(72);
     }
     return rule71EClass;
   }
@@ -2882,7 +2903,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule72EClass == null)
     {
-      rule72EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(72);
+      rule72EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(73);
     }
     return rule72EClass;
   }
@@ -2896,7 +2917,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule73EClass == null)
     {
-      rule73EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(73);
+      rule73EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(74);
     }
     return rule73EClass;
   }
@@ -2910,7 +2931,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule74EClass == null)
     {
-      rule74EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(74);
+      rule74EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(75);
     }
     return rule74EClass;
   }
@@ -2924,7 +2945,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule75EClass == null)
     {
-      rule75EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(75);
+      rule75EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(76);
     }
     return rule75EClass;
   }
@@ -2938,7 +2959,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule76EClass == null)
     {
-      rule76EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(76);
+      rule76EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(77);
     }
     return rule76EClass;
   }
@@ -2952,7 +2973,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule77EClass == null)
     {
-      rule77EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(77);
+      rule77EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(78);
     }
     return rule77EClass;
   }
@@ -2966,7 +2987,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule78EClass == null)
     {
-      rule78EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(78);
+      rule78EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(79);
     }
     return rule78EClass;
   }
@@ -2980,7 +3001,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule79EClass == null)
     {
-      rule79EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(79);
+      rule79EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(80);
     }
     return rule79EClass;
   }
@@ -2994,7 +3015,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule80EClass == null)
     {
-      rule80EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(80);
+      rule80EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(81);
     }
     return rule80EClass;
   }
@@ -3008,7 +3029,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule81EClass == null)
     {
-      rule81EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(81);
+      rule81EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(82);
     }
     return rule81EClass;
   }
@@ -3022,7 +3043,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule82EClass == null)
     {
-      rule82EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(82);
+      rule82EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(83);
     }
     return rule82EClass;
   }
@@ -3036,7 +3057,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule83EClass == null)
     {
-      rule83EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(83);
+      rule83EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(84);
     }
     return rule83EClass;
   }
@@ -3050,7 +3071,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule84EClass == null)
     {
-      rule84EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(84);
+      rule84EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(85);
     }
     return rule84EClass;
   }
@@ -3064,7 +3085,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule85EClass == null)
     {
-      rule85EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(85);
+      rule85EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(86);
     }
     return rule85EClass;
   }
@@ -3078,7 +3099,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule86EClass == null)
     {
-      rule86EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(86);
+      rule86EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(87);
     }
     return rule86EClass;
   }
@@ -3092,7 +3113,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule87EClass == null)
     {
-      rule87EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(87);
+      rule87EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(88);
     }
     return rule87EClass;
   }
@@ -3106,7 +3127,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule88EClass == null)
     {
-      rule88EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(88);
+      rule88EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(89);
     }
     return rule88EClass;
   }
@@ -3120,7 +3141,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule89EClass == null)
     {
-      rule89EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(89);
+      rule89EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(90);
     }
     return rule89EClass;
   }
@@ -3134,7 +3155,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule90EClass == null)
     {
-      rule90EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(90);
+      rule90EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(91);
     }
     return rule90EClass;
   }
@@ -3148,7 +3169,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule91EClass == null)
     {
-      rule91EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(91);
+      rule91EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(92);
     }
     return rule91EClass;
   }
@@ -3162,7 +3183,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule92EClass == null)
     {
-      rule92EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(92);
+      rule92EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(93);
     }
     return rule92EClass;
   }
@@ -3176,7 +3197,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule93EClass == null)
     {
-      rule93EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(93);
+      rule93EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(94);
     }
     return rule93EClass;
   }
@@ -3190,7 +3211,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule94EClass == null)
     {
-      rule94EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(94);
+      rule94EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(95);
     }
     return rule94EClass;
   }
@@ -3204,7 +3225,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule95EClass == null)
     {
-      rule95EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(95);
+      rule95EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(96);
     }
     return rule95EClass;
   }
@@ -3218,7 +3239,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule96EClass == null)
     {
-      rule96EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(96);
+      rule96EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(97);
     }
     return rule96EClass;
   }
@@ -3232,7 +3253,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule97EClass == null)
     {
-      rule97EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(97);
+      rule97EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(98);
     }
     return rule97EClass;
   }
@@ -3246,7 +3267,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule98EClass == null)
     {
-      rule98EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(98);
+      rule98EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(99);
     }
     return rule98EClass;
   }
@@ -3260,7 +3281,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule99EClass == null)
     {
-      rule99EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(99);
+      rule99EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(100);
     }
     return rule99EClass;
   }
@@ -3274,7 +3295,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule100EClass == null)
     {
-      rule100EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(100);
+      rule100EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(101);
     }
     return rule100EClass;
   }
@@ -3288,7 +3309,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule101EClass == null)
     {
-      rule101EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(101);
+      rule101EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(102);
     }
     return rule101EClass;
   }
@@ -3302,7 +3323,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule102EClass == null)
     {
-      rule102EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(102);
+      rule102EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(103);
     }
     return rule102EClass;
   }
@@ -3316,7 +3337,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule103EClass == null)
     {
-      rule103EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(103);
+      rule103EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(104);
     }
     return rule103EClass;
   }
@@ -3330,7 +3351,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule104EClass == null)
     {
-      rule104EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(104);
+      rule104EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(105);
     }
     return rule104EClass;
   }
@@ -3344,7 +3365,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule105EClass == null)
     {
-      rule105EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(105);
+      rule105EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(106);
     }
     return rule105EClass;
   }
@@ -3358,7 +3379,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule106EClass == null)
     {
-      rule106EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(106);
+      rule106EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(107);
     }
     return rule106EClass;
   }
@@ -3372,7 +3393,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule107EClass == null)
     {
-      rule107EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(107);
+      rule107EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(108);
     }
     return rule107EClass;
   }
@@ -3386,7 +3407,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule108EClass == null)
     {
-      rule108EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(108);
+      rule108EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(109);
     }
     return rule108EClass;
   }
@@ -3400,7 +3421,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule109EClass == null)
     {
-      rule109EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(109);
+      rule109EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(110);
     }
     return rule109EClass;
   }
@@ -3414,7 +3435,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule110EClass == null)
     {
-      rule110EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(110);
+      rule110EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(111);
     }
     return rule110EClass;
   }
@@ -3428,7 +3449,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule111EClass == null)
     {
-      rule111EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(111);
+      rule111EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(112);
     }
     return rule111EClass;
   }
@@ -3442,7 +3463,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule112EClass == null)
     {
-      rule112EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(112);
+      rule112EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(113);
     }
     return rule112EClass;
   }
@@ -3456,7 +3477,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule113EClass == null)
     {
-      rule113EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(113);
+      rule113EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(114);
     }
     return rule113EClass;
   }
@@ -3470,7 +3491,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule114EClass == null)
     {
-      rule114EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(114);
+      rule114EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(115);
     }
     return rule114EClass;
   }
@@ -3484,7 +3505,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule115EClass == null)
     {
-      rule115EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(115);
+      rule115EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(116);
     }
     return rule115EClass;
   }
@@ -3498,7 +3519,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule116EClass == null)
     {
-      rule116EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(116);
+      rule116EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(117);
     }
     return rule116EClass;
   }
@@ -3512,7 +3533,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule117EClass == null)
     {
-      rule117EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(117);
+      rule117EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(118);
     }
     return rule117EClass;
   }
@@ -3526,7 +3547,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule118EClass == null)
     {
-      rule118EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(118);
+      rule118EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(119);
     }
     return rule118EClass;
   }
@@ -3540,7 +3561,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule119EClass == null)
     {
-      rule119EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(119);
+      rule119EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(120);
     }
     return rule119EClass;
   }
@@ -3554,7 +3575,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule120EClass == null)
     {
-      rule120EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(120);
+      rule120EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(121);
     }
     return rule120EClass;
   }
@@ -3568,7 +3589,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule121EClass == null)
     {
-      rule121EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(121);
+      rule121EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(122);
     }
     return rule121EClass;
   }
@@ -3582,7 +3603,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule122EClass == null)
     {
-      rule122EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(122);
+      rule122EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(123);
     }
     return rule122EClass;
   }
@@ -3596,7 +3617,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule123EClass == null)
     {
-      rule123EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(123);
+      rule123EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(124);
     }
     return rule123EClass;
   }
@@ -3610,7 +3631,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule124EClass == null)
     {
-      rule124EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(124);
+      rule124EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(125);
     }
     return rule124EClass;
   }
@@ -3624,7 +3645,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule125EClass == null)
     {
-      rule125EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(125);
+      rule125EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(126);
     }
     return rule125EClass;
   }
@@ -3638,7 +3659,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule126EClass == null)
     {
-      rule126EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(126);
+      rule126EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(127);
     }
     return rule126EClass;
   }
@@ -3652,7 +3673,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule127EClass == null)
     {
-      rule127EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(127);
+      rule127EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(128);
     }
     return rule127EClass;
   }
@@ -3666,7 +3687,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule128EClass == null)
     {
-      rule128EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(128);
+      rule128EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(129);
     }
     return rule128EClass;
   }
@@ -3680,7 +3701,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule129EClass == null)
     {
-      rule129EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(129);
+      rule129EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(130);
     }
     return rule129EClass;
   }
@@ -3694,7 +3715,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule130EClass == null)
     {
-      rule130EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(130);
+      rule130EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(131);
     }
     return rule130EClass;
   }
@@ -3708,7 +3729,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule131EClass == null)
     {
-      rule131EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(131);
+      rule131EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(132);
     }
     return rule131EClass;
   }
@@ -3722,7 +3743,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule132EClass == null)
     {
-      rule132EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(132);
+      rule132EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(133);
     }
     return rule132EClass;
   }
@@ -3736,7 +3757,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule133EClass == null)
     {
-      rule133EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(133);
+      rule133EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(134);
     }
     return rule133EClass;
   }
@@ -3750,7 +3771,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule134EClass == null)
     {
-      rule134EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(134);
+      rule134EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(135);
     }
     return rule134EClass;
   }
@@ -3764,7 +3785,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule135EClass == null)
     {
-      rule135EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(135);
+      rule135EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(136);
     }
     return rule135EClass;
   }
@@ -3778,7 +3799,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule136EClass == null)
     {
-      rule136EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(136);
+      rule136EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(137);
     }
     return rule136EClass;
   }
@@ -3792,7 +3813,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule137EClass == null)
     {
-      rule137EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(137);
+      rule137EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(138);
     }
     return rule137EClass;
   }
@@ -3806,7 +3827,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule138EClass == null)
     {
-      rule138EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(138);
+      rule138EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(139);
     }
     return rule138EClass;
   }
@@ -3820,7 +3841,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule139EClass == null)
     {
-      rule139EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(139);
+      rule139EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(140);
     }
     return rule139EClass;
   }
@@ -3834,7 +3855,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule140EClass == null)
     {
-      rule140EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(140);
+      rule140EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(141);
     }
     return rule140EClass;
   }
@@ -3848,7 +3869,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule141EClass == null)
     {
-      rule141EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(141);
+      rule141EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(142);
     }
     return rule141EClass;
   }
@@ -3862,7 +3883,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule142EClass == null)
     {
-      rule142EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(142);
+      rule142EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(143);
     }
     return rule142EClass;
   }
@@ -3876,7 +3897,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule143EClass == null)
     {
-      rule143EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(143);
+      rule143EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(144);
     }
     return rule143EClass;
   }
@@ -3890,7 +3911,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule144EClass == null)
     {
-      rule144EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(144);
+      rule144EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(145);
     }
     return rule144EClass;
   }
@@ -3904,7 +3925,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule145EClass == null)
     {
-      rule145EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(145);
+      rule145EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(146);
     }
     return rule145EClass;
   }
@@ -3918,7 +3939,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule146EClass == null)
     {
-      rule146EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(146);
+      rule146EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(147);
     }
     return rule146EClass;
   }
@@ -3932,7 +3953,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule147EClass == null)
     {
-      rule147EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(147);
+      rule147EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(148);
     }
     return rule147EClass;
   }
@@ -3946,7 +3967,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule148EClass == null)
     {
-      rule148EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(148);
+      rule148EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(149);
     }
     return rule148EClass;
   }
@@ -3960,7 +3981,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule149EClass == null)
     {
-      rule149EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(149);
+      rule149EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(150);
     }
     return rule149EClass;
   }
@@ -3974,7 +3995,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule150EClass == null)
     {
-      rule150EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(150);
+      rule150EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(151);
     }
     return rule150EClass;
   }
@@ -3988,7 +4009,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule151EClass == null)
     {
-      rule151EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(151);
+      rule151EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(152);
     }
     return rule151EClass;
   }
@@ -4002,7 +4023,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule152EClass == null)
     {
-      rule152EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(152);
+      rule152EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(153);
     }
     return rule152EClass;
   }
@@ -4016,7 +4037,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule153EClass == null)
     {
-      rule153EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(153);
+      rule153EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(154);
     }
     return rule153EClass;
   }
@@ -4030,7 +4051,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule154EClass == null)
     {
-      rule154EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(154);
+      rule154EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(155);
     }
     return rule154EClass;
   }
@@ -4044,7 +4065,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule155EClass == null)
     {
-      rule155EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(155);
+      rule155EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(156);
     }
     return rule155EClass;
   }
@@ -4058,7 +4079,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule156EClass == null)
     {
-      rule156EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(156);
+      rule156EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(157);
     }
     return rule156EClass;
   }
@@ -4072,7 +4093,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule157EClass == null)
     {
-      rule157EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(157);
+      rule157EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(158);
     }
     return rule157EClass;
   }
@@ -4086,7 +4107,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule158EClass == null)
     {
-      rule158EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(158);
+      rule158EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(159);
     }
     return rule158EClass;
   }
@@ -4100,7 +4121,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule159EClass == null)
     {
-      rule159EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(159);
+      rule159EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(160);
     }
     return rule159EClass;
   }
@@ -4114,7 +4135,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule160EClass == null)
     {
-      rule160EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(160);
+      rule160EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(161);
     }
     return rule160EClass;
   }
@@ -4128,7 +4149,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule161EClass == null)
     {
-      rule161EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(161);
+      rule161EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(162);
     }
     return rule161EClass;
   }
@@ -4142,7 +4163,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule162EClass == null)
     {
-      rule162EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(162);
+      rule162EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(163);
     }
     return rule162EClass;
   }
@@ -4156,7 +4177,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule163EClass == null)
     {
-      rule163EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(163);
+      rule163EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(164);
     }
     return rule163EClass;
   }
@@ -4170,7 +4191,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule164EClass == null)
     {
-      rule164EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(164);
+      rule164EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(165);
     }
     return rule164EClass;
   }
@@ -4184,7 +4205,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule165EClass == null)
     {
-      rule165EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(165);
+      rule165EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(166);
     }
     return rule165EClass;
   }
@@ -4198,7 +4219,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule166EClass == null)
     {
-      rule166EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(166);
+      rule166EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(167);
     }
     return rule166EClass;
   }
@@ -4212,7 +4233,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule167EClass == null)
     {
-      rule167EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(167);
+      rule167EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(168);
     }
     return rule167EClass;
   }
@@ -4226,7 +4247,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule168EClass == null)
     {
-      rule168EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(168);
+      rule168EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(169);
     }
     return rule168EClass;
   }
@@ -4240,7 +4261,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule169EClass == null)
     {
-      rule169EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(169);
+      rule169EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(170);
     }
     return rule169EClass;
   }
@@ -4254,7 +4275,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule170EClass == null)
     {
-      rule170EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(170);
+      rule170EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(171);
     }
     return rule170EClass;
   }
@@ -4268,7 +4289,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule171EClass == null)
     {
-      rule171EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(171);
+      rule171EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(172);
     }
     return rule171EClass;
   }
@@ -4282,7 +4303,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule172EClass == null)
     {
-      rule172EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(172);
+      rule172EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(173);
     }
     return rule172EClass;
   }
@@ -4296,7 +4317,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule173EClass == null)
     {
-      rule173EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(173);
+      rule173EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(174);
     }
     return rule173EClass;
   }
@@ -4310,7 +4331,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule174EClass == null)
     {
-      rule174EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(174);
+      rule174EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(175);
     }
     return rule174EClass;
   }
@@ -4324,7 +4345,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule175EClass == null)
     {
-      rule175EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(175);
+      rule175EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(176);
     }
     return rule175EClass;
   }
@@ -4338,7 +4359,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule176EClass == null)
     {
-      rule176EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(176);
+      rule176EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(177);
     }
     return rule176EClass;
   }
@@ -4352,7 +4373,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule177EClass == null)
     {
-      rule177EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(177);
+      rule177EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(178);
     }
     return rule177EClass;
   }
@@ -4366,7 +4387,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule178EClass == null)
     {
-      rule178EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(178);
+      rule178EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(179);
     }
     return rule178EClass;
   }
@@ -4380,7 +4401,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule179EClass == null)
     {
-      rule179EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(179);
+      rule179EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(180);
     }
     return rule179EClass;
   }
@@ -4394,7 +4415,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule180EClass == null)
     {
-      rule180EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(180);
+      rule180EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(181);
     }
     return rule180EClass;
   }
@@ -4408,7 +4429,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule181EClass == null)
     {
-      rule181EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(181);
+      rule181EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(182);
     }
     return rule181EClass;
   }
@@ -4422,7 +4443,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule182EClass == null)
     {
-      rule182EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(182);
+      rule182EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(183);
     }
     return rule182EClass;
   }
@@ -4436,7 +4457,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule183EClass == null)
     {
-      rule183EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(183);
+      rule183EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(184);
     }
     return rule183EClass;
   }
@@ -4450,7 +4471,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule184EClass == null)
     {
-      rule184EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(184);
+      rule184EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(185);
     }
     return rule184EClass;
   }
@@ -4464,7 +4485,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule185EClass == null)
     {
-      rule185EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(185);
+      rule185EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(186);
     }
     return rule185EClass;
   }
@@ -4478,7 +4499,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule186EClass == null)
     {
-      rule186EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(186);
+      rule186EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(187);
     }
     return rule186EClass;
   }
@@ -4492,7 +4513,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule187EClass == null)
     {
-      rule187EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(187);
+      rule187EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(188);
     }
     return rule187EClass;
   }
@@ -4506,7 +4527,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule188EClass == null)
     {
-      rule188EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(188);
+      rule188EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(189);
     }
     return rule188EClass;
   }
@@ -4520,7 +4541,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule189EClass == null)
     {
-      rule189EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(189);
+      rule189EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(190);
     }
     return rule189EClass;
   }
@@ -4534,7 +4555,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule190EClass == null)
     {
-      rule190EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(190);
+      rule190EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(191);
     }
     return rule190EClass;
   }
@@ -4548,7 +4569,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule191EClass == null)
     {
-      rule191EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(191);
+      rule191EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(192);
     }
     return rule191EClass;
   }
@@ -4562,7 +4583,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule192EClass == null)
     {
-      rule192EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(192);
+      rule192EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(193);
     }
     return rule192EClass;
   }
@@ -4576,7 +4597,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule193EClass == null)
     {
-      rule193EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(193);
+      rule193EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(194);
     }
     return rule193EClass;
   }
@@ -4590,7 +4611,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule194EClass == null)
     {
-      rule194EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(194);
+      rule194EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(195);
     }
     return rule194EClass;
   }
@@ -4604,7 +4625,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule195EClass == null)
     {
-      rule195EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(195);
+      rule195EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(196);
     }
     return rule195EClass;
   }
@@ -4618,7 +4639,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule196EClass == null)
     {
-      rule196EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(196);
+      rule196EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(197);
     }
     return rule196EClass;
   }
@@ -4632,7 +4653,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule197EClass == null)
     {
-      rule197EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(197);
+      rule197EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(198);
     }
     return rule197EClass;
   }
@@ -4646,7 +4667,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule198EClass == null)
     {
-      rule198EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(198);
+      rule198EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(199);
     }
     return rule198EClass;
   }
@@ -4660,7 +4681,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule199EClass == null)
     {
-      rule199EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(199);
+      rule199EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(200);
     }
     return rule199EClass;
   }
@@ -4674,7 +4695,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule200EClass == null)
     {
-      rule200EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(200);
+      rule200EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(201);
     }
     return rule200EClass;
   }
@@ -4688,7 +4709,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule201EClass == null)
     {
-      rule201EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(201);
+      rule201EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(202);
     }
     return rule201EClass;
   }
@@ -4702,7 +4723,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule202EClass == null)
     {
-      rule202EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(202);
+      rule202EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(203);
     }
     return rule202EClass;
   }
@@ -4716,7 +4737,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule203EClass == null)
     {
-      rule203EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(203);
+      rule203EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(204);
     }
     return rule203EClass;
   }
@@ -4730,7 +4751,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule204EClass == null)
     {
-      rule204EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(204);
+      rule204EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(205);
     }
     return rule204EClass;
   }
@@ -4744,7 +4765,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule205EClass == null)
     {
-      rule205EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(205);
+      rule205EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(206);
     }
     return rule205EClass;
   }
@@ -4758,7 +4779,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule206EClass == null)
     {
-      rule206EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(206);
+      rule206EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(207);
     }
     return rule206EClass;
   }
@@ -4772,7 +4793,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule207EClass == null)
     {
-      rule207EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(207);
+      rule207EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(208);
     }
     return rule207EClass;
   }
@@ -4786,7 +4807,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule208EClass == null)
     {
-      rule208EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(208);
+      rule208EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(209);
     }
     return rule208EClass;
   }
@@ -4800,7 +4821,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule209EClass == null)
     {
-      rule209EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(209);
+      rule209EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(210);
     }
     return rule209EClass;
   }
@@ -4814,7 +4835,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule210EClass == null)
     {
-      rule210EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(210);
+      rule210EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(211);
     }
     return rule210EClass;
   }
@@ -4828,7 +4849,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule211EClass == null)
     {
-      rule211EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(211);
+      rule211EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(212);
     }
     return rule211EClass;
   }
@@ -4842,7 +4863,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule212EClass == null)
     {
-      rule212EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(212);
+      rule212EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(213);
     }
     return rule212EClass;
   }
@@ -4856,7 +4877,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule213EClass == null)
     {
-      rule213EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(213);
+      rule213EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(214);
     }
     return rule213EClass;
   }
@@ -4870,7 +4891,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule214EClass == null)
     {
-      rule214EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(214);
+      rule214EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(215);
     }
     return rule214EClass;
   }
@@ -4884,7 +4905,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule215EClass == null)
     {
-      rule215EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(215);
+      rule215EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(216);
     }
     return rule215EClass;
   }
@@ -4898,7 +4919,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule216EClass == null)
     {
-      rule216EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(216);
+      rule216EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(217);
     }
     return rule216EClass;
   }
@@ -4912,7 +4933,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule217EClass == null)
     {
-      rule217EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(217);
+      rule217EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(218);
     }
     return rule217EClass;
   }
@@ -4926,7 +4947,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule218EClass == null)
     {
-      rule218EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(218);
+      rule218EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(219);
     }
     return rule218EClass;
   }
@@ -4940,7 +4961,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule219EClass == null)
     {
-      rule219EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(219);
+      rule219EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(220);
     }
     return rule219EClass;
   }
@@ -4954,7 +4975,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule220EClass == null)
     {
-      rule220EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(220);
+      rule220EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(221);
     }
     return rule220EClass;
   }
@@ -4968,7 +4989,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule221EClass == null)
     {
-      rule221EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(221);
+      rule221EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(222);
     }
     return rule221EClass;
   }
@@ -4982,7 +5003,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule222EClass == null)
     {
-      rule222EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(222);
+      rule222EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(223);
     }
     return rule222EClass;
   }
@@ -4996,7 +5017,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule223EClass == null)
     {
-      rule223EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(223);
+      rule223EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(224);
     }
     return rule223EClass;
   }
@@ -5010,7 +5031,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule224EClass == null)
     {
-      rule224EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(224);
+      rule224EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(225);
     }
     return rule224EClass;
   }
@@ -5024,7 +5045,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule225EClass == null)
     {
-      rule225EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(225);
+      rule225EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(226);
     }
     return rule225EClass;
   }
@@ -5038,7 +5059,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule226EClass == null)
     {
-      rule226EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(226);
+      rule226EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(227);
     }
     return rule226EClass;
   }
@@ -5052,7 +5073,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule227EClass == null)
     {
-      rule227EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(227);
+      rule227EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(228);
     }
     return rule227EClass;
   }
@@ -5066,7 +5087,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule228EClass == null)
     {
-      rule228EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(228);
+      rule228EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(229);
     }
     return rule228EClass;
   }
@@ -5080,7 +5101,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule229EClass == null)
     {
-      rule229EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(229);
+      rule229EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(230);
     }
     return rule229EClass;
   }
@@ -5094,7 +5115,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule230EClass == null)
     {
-      rule230EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(230);
+      rule230EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(231);
     }
     return rule230EClass;
   }
@@ -5108,7 +5129,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule231EClass == null)
     {
-      rule231EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(231);
+      rule231EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(232);
     }
     return rule231EClass;
   }
@@ -5122,7 +5143,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule232EClass == null)
     {
-      rule232EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(232);
+      rule232EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(233);
     }
     return rule232EClass;
   }
@@ -5136,7 +5157,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule233EClass == null)
     {
-      rule233EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(233);
+      rule233EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(234);
     }
     return rule233EClass;
   }
@@ -5150,7 +5171,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule234EClass == null)
     {
-      rule234EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(234);
+      rule234EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(235);
     }
     return rule234EClass;
   }
@@ -5164,7 +5185,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule235EClass == null)
     {
-      rule235EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(235);
+      rule235EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(236);
     }
     return rule235EClass;
   }
@@ -5178,7 +5199,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule236EClass == null)
     {
-      rule236EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(236);
+      rule236EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(237);
     }
     return rule236EClass;
   }
@@ -5192,7 +5213,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule237EClass == null)
     {
-      rule237EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(237);
+      rule237EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(238);
     }
     return rule237EClass;
   }
@@ -5206,7 +5227,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule238EClass == null)
     {
-      rule238EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(238);
+      rule238EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(239);
     }
     return rule238EClass;
   }
@@ -5220,7 +5241,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule239EClass == null)
     {
-      rule239EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(239);
+      rule239EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(240);
     }
     return rule239EClass;
   }
@@ -5234,7 +5255,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule240EClass == null)
     {
-      rule240EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(240);
+      rule240EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(241);
     }
     return rule240EClass;
   }
@@ -5248,7 +5269,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule241EClass == null)
     {
-      rule241EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(241);
+      rule241EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(242);
     }
     return rule241EClass;
   }
@@ -5262,7 +5283,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule242EClass == null)
     {
-      rule242EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(242);
+      rule242EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(243);
     }
     return rule242EClass;
   }
@@ -5276,7 +5297,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule243EClass == null)
     {
-      rule243EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(243);
+      rule243EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(244);
     }
     return rule243EClass;
   }
@@ -5290,7 +5311,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule244EClass == null)
     {
-      rule244EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(244);
+      rule244EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(245);
     }
     return rule244EClass;
   }
@@ -5304,7 +5325,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule245EClass == null)
     {
-      rule245EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(245);
+      rule245EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(246);
     }
     return rule245EClass;
   }
@@ -5318,7 +5339,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule246EClass == null)
     {
-      rule246EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(246);
+      rule246EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(247);
     }
     return rule246EClass;
   }
@@ -5332,7 +5353,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule247EClass == null)
     {
-      rule247EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(247);
+      rule247EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(248);
     }
     return rule247EClass;
   }
@@ -5346,7 +5367,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule248EClass == null)
     {
-      rule248EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(248);
+      rule248EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(249);
     }
     return rule248EClass;
   }
@@ -5360,7 +5381,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule249EClass == null)
     {
-      rule249EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(249);
+      rule249EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(250);
     }
     return rule249EClass;
   }
@@ -5374,7 +5395,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
   {
     if (rule250EClass == null)
     {
-      rule250EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(250);
+      rule250EClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI).getEClassifiers().get(251);
     }
     return rule250EClass;
   }

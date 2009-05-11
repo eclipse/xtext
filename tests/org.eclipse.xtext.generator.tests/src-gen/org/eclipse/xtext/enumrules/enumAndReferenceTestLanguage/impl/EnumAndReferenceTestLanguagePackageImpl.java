@@ -94,7 +94,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
     if (isInited) return (EnumAndReferenceTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(EnumAndReferenceTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    EnumAndReferenceTestLanguagePackageImpl theEnumAndReferenceTestLanguagePackage = (EnumAndReferenceTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EnumAndReferenceTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EnumAndReferenceTestLanguagePackageImpl());
+    EnumAndReferenceTestLanguagePackageImpl theEnumAndReferenceTestLanguagePackage = (EnumAndReferenceTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof EnumAndReferenceTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new EnumAndReferenceTestLanguagePackageImpl());
 
     isInited = true;
 

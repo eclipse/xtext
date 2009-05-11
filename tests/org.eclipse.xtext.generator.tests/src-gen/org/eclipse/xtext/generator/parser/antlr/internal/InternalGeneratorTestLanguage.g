@@ -90,6 +90,31 @@ ruleRule returns [EObject current=null]
 
 
 
+// Entry rule entryRuleRuleB
+entryRuleRuleB returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getRuleBRule(), currentNode); }
+	 iv_ruleRuleB=ruleRuleB 
+	 { $current=$iv_ruleRuleB.current; } 
+	 EOF 
+;
+
+// Rule RuleB
+ruleRuleB returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+'y' 
+    {
+        createLeafNode(grammarAccess.getRuleBAccess().getYKeyword(), null); 
+    }
+;
+
+
+
+
+
 
 
 

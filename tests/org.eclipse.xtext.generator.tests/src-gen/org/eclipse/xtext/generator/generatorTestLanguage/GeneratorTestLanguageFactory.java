@@ -35,6 +35,15 @@ public interface GeneratorTestLanguageFactory extends EFactory
   Rule createRule();
 
   /**
+   * Returns a new object of class '<em>Rule B</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rule B</em>'.
+   * @generated
+   */
+  RuleB createRuleB();
+
+  /**
    * Returns a new object of class '<em>Rule1</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
