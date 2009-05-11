@@ -157,7 +157,7 @@ public class PartialParserTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (PartialParserTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(PartialParserTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    PartialParserTestLanguagePackageImpl thePartialParserTestLanguagePackage = (PartialParserTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof PartialParserTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new PartialParserTestLanguagePackageImpl());
+    PartialParserTestLanguagePackageImpl thePartialParserTestLanguagePackage = (PartialParserTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PartialParserTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PartialParserTestLanguagePackageImpl());
 
     isInited = true;
 

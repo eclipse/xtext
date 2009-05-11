@@ -31,12 +31,11 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.common.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 
@@ -237,8 +236,8 @@ public class ContentAssistProcessorTestBuilder {
 
 					@SuppressWarnings("unchecked")
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-						if (args!=null && args[0] instanceof UnitOfWork)
-							return ((UnitOfWork<XtextResource>) args[0]).exec(xtextResource);
+						if (args!=null && args[0] instanceof IUnitOfWork)
+							return ((IUnitOfWork<?,XtextResource>) args[0]).exec(xtextResource);
 						if (method.getName().equals("get"))
 							return model;
 						if (method.getName().equals("getLength"))

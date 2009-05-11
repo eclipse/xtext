@@ -8,18 +8,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.model;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.xtext.concurrent.IEObjectHandle;
+import org.eclipse.xtext.concurrent.IStateAccess;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Sebastian Zarnekow
+ * @author Sven Efftinge
  */
-public interface IXtextDocument extends IDocument {
+public interface IXtextDocument extends IDocument, IStateAccess<XtextResource> {
 
-	public <T> T readOnly(UnitOfWork<T> work);
-
-	public <T> T modify(UnitOfWork<T> work);
-	
 	public <T> T getAdapter(Class<T> adapterType);
+	
+	/**
+	 * If you want to hold a reference to an EObject outside a {@link IUnitOfWork}, you should
+	 * create a handle using this method.
+	 * 
+	 * @param <T> - the EObject
+	 * @return - the handle
+	 */
+	public <T extends EObject> IEObjectHandle<T> createHandle(T obj);
 
 	public void addModelListener(IXtextModelListener listener);
 

@@ -18,11 +18,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 
 /**
@@ -86,7 +86,7 @@ public final class ValidationJob extends Job {
 			log.debug("Aborting Xtext Validation with CheckMode: " + checkMode + " because file does not exist.");
 			return Status.OK_STATUS;
 		}
-		final List<Map<String, Object>> issues = xtextDocument.readOnly(new UnitOfWork<List<Map<String, Object>>>() {
+		final List<Map<String, Object>> issues = xtextDocument.readOnly(new IUnitOfWork<List<Map<String, Object>>, XtextResource>() {
 			public List<Map<String, Object>> exec(XtextResource resource) throws Exception {
 				return XtextResourceChecker.check(resource, Collections.singletonMap(CheckMode.KEY, checkMode), monitor);
 			}

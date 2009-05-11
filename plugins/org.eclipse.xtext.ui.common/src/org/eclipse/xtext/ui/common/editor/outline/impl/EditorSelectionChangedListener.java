@@ -12,13 +12,13 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
  * This listener listens to selections in the text editor and will update the
@@ -38,8 +38,8 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 
 			final ITextSelection textSel = (ITextSelection) selection;
 
-			getDocument().readOnly(new UnitOfWork<Void>() {
-				public Void exec(XtextResource resource) throws Exception {
+			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				public void process(XtextResource resource) throws Exception {
 					IParseResult parseResult = resource.getParseResult();
 					Assert.isNotNull(parseResult);
 					CompositeNode rootNode = parseResult.getRootNode();
@@ -50,8 +50,6 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 					
 					// Synchronize the outline page
 					outlinePage.synchronizeOutlinePage(node);
-
-					return null;
 				}
 			});
 

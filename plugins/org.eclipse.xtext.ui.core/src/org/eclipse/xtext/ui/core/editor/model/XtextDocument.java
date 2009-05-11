@@ -10,8 +10,6 @@ package org.eclipse.xtext.ui.core.editor.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -26,6 +24,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -33,6 +32,9 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
+import org.eclipse.xtext.concurrent.IEObjectHandle;
+import org.eclipse.xtext.concurrent.IStateAccess;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
@@ -122,52 +124,22 @@ public class XtextDocument extends Document implements IXtextDocument {
 			return create;
 		return null;
 	}
+	
+	private final XtextDocumentLocker stateAccess = new XtextDocumentLocker();
 
-	private final ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
-	private final Lock writeLock = rwLock.writeLock();
-	private final Lock readLock = rwLock.readLock();
-
-	public <T> T readOnly(UnitOfWork<T> work) {
-		readLock.lock();
-		try {
-			if (resource != null) {
-				updateContentBeforeRead();
-				T exec = work.exec(resource);
-				ensureThatStateIsNotReturned(exec, work);
-				return exec;
-			}
-			return null;
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new WrappedException(e);
-		} finally {
-			readLock.unlock();
-		}
+	public <T> T readOnly(IUnitOfWork<T,XtextResource> work) {
+		return stateAccess.readOnly(work);
 	}
 
-	public <T> T modify(UnitOfWork<T> work) {
-		writeLock.lock();
+	public <T> T modify(IUnitOfWork<T,XtextResource> work) {
 		try {
-			if (resource != null) {
-				T exec = work.exec(resource);
-				ensureThatStateIsNotReturned(exec, work);
-				notifyModelListeners(resource);
-				// TODO track modifications and serialize back to the text buffer
-				return exec;
-			}
-			return null;
-		} catch (RuntimeException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new WrappedException(e);
+			return stateAccess.modify(work);
 		} finally {
-			writeLock.unlock();
 			checkAndUpdateMarkers();
 		}
 	}
 
-	private void ensureThatStateIsNotReturned(Object exec, UnitOfWork<?> uow) {
+	private void ensureThatStateIsNotReturned(Object exec, IUnitOfWork<?,XtextResource> uow) {
 		// TODO activate
 		// if (exec instanceof EObject) {
 		// if (((EObject) exec).eResource() == resource
@@ -208,15 +180,35 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	private <T> void updateContentBeforeRead() {
 		Object[] listeners = xtextDocumentObservers.getListeners();
-		Processor processor = new LockAwareProcessor();
 		for (int i = 0; i < listeners.length; i++) {
-			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(processor);
+			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(stateAccess);
 		}
 	}
 
-	class LockAwareProcessor implements Processor {
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 *
+	 */
+	private final class XtextDocumentLocker extends IStateAccess.AbstractImpl<XtextResource> implements Processor {
+		@Override
+		protected XtextResource getState() {
+			return resource;
+		}
 
-		public <T> T process(UnitOfWork<T> transaction) {
+		protected void beforeReadOnly(XtextResource res, org.eclipse.xtext.concurrent.IUnitOfWork<?,XtextResource> work) {
+			updateContentBeforeRead();
+		}
+
+		protected void afterReadOnly(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?,XtextResource> work) {
+			ensureThatStateIsNotReturned(result, work);
+		}
+
+		protected void afterModify(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?,XtextResource> work) {
+			ensureThatStateIsNotReturned(result, work);
+			notifyModelListeners(resource);
+		}
+
+		public <T> T process(IUnitOfWork<T, XtextResource> transaction) {
 			if (transaction != null) {
 				readLock.unlock();
 				writeLock.lock();
@@ -229,7 +221,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 			}
 			return null;
 		}
-
 	}
 
 	@SuppressWarnings("unused")
@@ -254,5 +245,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 		return null;
 	}
-
+	
+	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {
+		return new IEObjectHandle.DefaultImpl<T>(obj, this);
+	}
+	
 }

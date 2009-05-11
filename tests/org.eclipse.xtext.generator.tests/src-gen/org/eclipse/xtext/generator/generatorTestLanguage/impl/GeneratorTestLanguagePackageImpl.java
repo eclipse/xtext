@@ -1856,7 +1856,7 @@ public class GeneratorTestLanguagePackageImpl extends EPackageImpl implements Ge
     if (isInited) return (GeneratorTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(GeneratorTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    GeneratorTestLanguagePackageImpl theGeneratorTestLanguagePackage = (GeneratorTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof GeneratorTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new GeneratorTestLanguagePackageImpl());
+    GeneratorTestLanguagePackageImpl theGeneratorTestLanguagePackage = (GeneratorTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GeneratorTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new GeneratorTestLanguagePackageImpl());
 
     isInited = true;
 

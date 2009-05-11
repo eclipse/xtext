@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.integration.editor;
 
-import static org.eclipse.xtext.ui.integration.util.ResourceUtil.createFile;
-import static org.eclipse.xtext.ui.integration.util.ResourceUtil.createProject;
+import static org.eclipse.xtext.ui.integration.util.ResourceUtil.*;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -19,10 +18,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.integration.TestLanguage;
 import org.eclipse.xtext.ui.integration.XtextUIIntegrationTestsPlugin;
@@ -57,12 +56,11 @@ public class EditorTest extends AbstractEditorTest {
 		XtextEditor openedEditor = openEditor(file);
 		assertNotNull(openedEditor);
 		IXtextDocument document = openedEditor.getDocument();
-		document.readOnly(new UnitOfWork<Object>() {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
-			public Object exec(XtextResource resource) throws Exception {
+			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				assertTrue(resource.getContents().isEmpty());
-				return null;
 			}
 		});
 		openedEditor.close(false);
@@ -79,29 +77,27 @@ public class EditorTest extends AbstractEditorTest {
 		XtextDocument document = (XtextDocument) openEditor.getDocument();
 		
 		Display.getDefault().readAndDispatch();
-		document.readOnly(new UnitOfWork<Object>() {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
-			public Object exec(XtextResource resource) throws Exception {
+			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
 				EObject object = contents.get(0);
 				assertEquals(2, object.eContents().size());
-				return null;
 			}
 		});
 		document.replace(23, 3, "honolulu");
 		logger.debug("Waiting for reconciler...");
 		sleep(3000);
-		document.readOnly(new UnitOfWork<Object>() {
-			
-			public Object exec(XtextResource resource) throws Exception {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+
+			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
 				EObject object = contents.get(0);
 				assertEquals(2, object.eContents().size());
 				EObject object2 = object.eContents().get(0);
 				assertEquals("honolulu",object2.eGet(object2.eClass().getEStructuralFeature("name")));
-				return null;
 			}
 		});
 		openEditor.doSave(null);
@@ -119,22 +115,21 @@ public class EditorTest extends AbstractEditorTest {
 		XtextDocument document = (XtextDocument) openEditor.getDocument();
 		
 		Display.getDefault().readAndDispatch();
-		document.readOnly(new UnitOfWork<Object>() {
-	
-			public Object exec(XtextResource resource) throws Exception {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+
+			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
 				EObject object = contents.get(0);
 				assertEquals(2, object.eContents().size());
-				return null;
 			}
 		});
 		document.replace(36, 0, "a");
 		logger.debug("Waiting for reconciler...");
 		sleep(3000);
-		document.readOnly(new UnitOfWork<Object>() {
-			
-			public Object exec(XtextResource resource) throws Exception {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+
+			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
 				
@@ -148,7 +143,6 @@ public class EditorTest extends AbstractEditorTest {
 				Object name = object3.eGet(object3.eClass().getEStructuralFeature("name"));
 				assertEquals("bara", name);
 				
-				return null;
 			}
 		});
 		openEditor.doSave(null);

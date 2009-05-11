@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.integration.editor.outline;
 
-import static org.eclipse.xtext.ui.integration.util.ResourceUtil.createFile;
-import static org.eclipse.xtext.ui.integration.util.ResourceUtil.createProject;
+import static org.eclipse.xtext.ui.integration.util.ResourceUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -23,6 +22,7 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -34,7 +34,6 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapter
 import org.eclipse.xtext.ui.common.editor.outline.impl.ContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.impl.LinkingHelper;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.integration.editor.AbstractEditorTest;
 
@@ -200,7 +199,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		int offset = selection.getOffset();
 		System.out.println("OFFSET: " + offset);
 
-		CompositeNode rootNode = document.readOnly(new UnitOfWork<CompositeNode>() {
+		CompositeNode rootNode = document.readOnly(new IUnitOfWork<CompositeNode, XtextResource>() {
 			public CompositeNode exec(XtextResource resource) throws Exception {
 				IParseResult parseResult = resource.getParseResult();
 				Assert.isNotNull(parseResult);
@@ -224,7 +223,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		return outlinePage;
 	}
 
-	private class SyncEditorToOutlineAndCheckSelection implements UnitOfWork<Boolean> {
+	private class SyncEditorToOutlineAndCheckSelection implements IUnitOfWork<Boolean, XtextResource> {
 		private final IContentOutlinePage outlinePage;
 		private final XtextEditor editor;
 		private final int length;

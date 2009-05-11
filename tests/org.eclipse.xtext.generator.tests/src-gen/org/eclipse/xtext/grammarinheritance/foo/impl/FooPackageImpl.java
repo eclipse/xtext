@@ -143,7 +143,7 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
     if (isInited) return (FooPackage)EPackage.Registry.INSTANCE.getEPackage(FooPackage.eNS_URI);
 
     // Obtain or create and register package
-    FooPackageImpl theFooPackage = (FooPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof FooPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new FooPackageImpl());
+    FooPackageImpl theFooPackage = (FooPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FooPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FooPackageImpl());
 
     isInited = true;
 

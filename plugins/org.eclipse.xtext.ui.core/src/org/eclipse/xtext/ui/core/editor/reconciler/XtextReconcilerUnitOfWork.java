@@ -11,13 +11,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class XtextReconcilerUnitOfWork implements UnitOfWork<Void> {
+class XtextReconcilerUnitOfWork extends IUnitOfWork.Void<XtextResource> {
 
 	private static final Logger log = Logger.getLogger(XtextReconcilerUnitOfWork.class);
 
@@ -35,12 +35,8 @@ class XtextReconcilerUnitOfWork implements UnitOfWork<Void> {
 		this.region = region;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.core.editor.model.UnitOfWork#exec(org.eclipse.xtext.resource.XtextResource)
-	 */
-	public Void exec(XtextResource resource) throws Exception {
+	@Override
+	public void process(XtextResource resource) throws Exception {
 		if (log.isDebugEnabled())
 			log.debug("Preparing reconciliation.");
 		try {
@@ -61,6 +57,5 @@ class XtextReconcilerUnitOfWork implements UnitOfWork<Void> {
 				log.debug("Partial parsing failed. Performing full reparse", t);
 			resource.reparse(document.get());
 		}
-		return null;
 	}
 }

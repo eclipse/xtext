@@ -18,16 +18,16 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.IOutlineFilter;
 import org.eclipse.xtext.ui.common.editor.outline.IFilterableContentProvider;
 import org.eclipse.xtext.ui.common.editor.outline.ILazyTreeProvider;
+import org.eclipse.xtext.ui.common.editor.outline.IOutlineFilter;
 import org.eclipse.xtext.ui.common.editor.outline.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.common.editor.outline.ISortableContentProvider;
 import org.eclipse.xtext.ui.common.internal.Activator;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 import com.google.inject.Inject;
@@ -57,7 +57,7 @@ public class LazyTransformingTreeProvider extends LabelProvider implements ILazy
 
 		if (newInput instanceof XtextDocument) {
 			XtextDocument document = (XtextDocument) newInput;
-			outlineModel = document.readOnly(new UnitOfWork<ContentOutlineNode>() {
+			outlineModel = document.readOnly(new IUnitOfWork<ContentOutlineNode, XtextResource>() {
 				public ContentOutlineNode exec(XtextResource resource) throws Exception {
 					EObject semanticModelRoot = resource.getParseResult().getRootASTElement();
 					if (semanticModelRoot != null) {

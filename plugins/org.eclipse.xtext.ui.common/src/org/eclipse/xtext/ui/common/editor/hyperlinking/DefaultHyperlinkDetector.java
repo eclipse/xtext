@@ -17,10 +17,11 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 import com.google.inject.Inject;
 
@@ -48,7 +49,7 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlinkDetector#detectHyperlinks(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion, boolean)
 	 */
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
-		return ((IXtextDocument)textViewer.getDocument()).readOnly(new UnitOfWork<IHyperlink[]>() {
+		return ((IXtextDocument)textViewer.getDocument()).readOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
 				return helper.createHyperlinksByOffset(resource, region.getOffset(), canShowMultipleHyperlinks);
 			}
@@ -59,11 +60,10 @@ public class DefaultHyperlinkDetector extends org.eclipse.core.commands.Abstract
 		XtextEditor activeEditor = (XtextEditor) HandlerUtil.getActiveEditor(event);
 		final IXtextDocument document = activeEditor.getDocument();
 		final int offset = ((StyledText) activeEditor.getAdapter(Control.class)).getCaretOffset();
-		document.readOnly(new UnitOfWork<Object>() {
-			public Void exec(XtextResource resource) throws Exception {
+		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			public void process(XtextResource resource) throws Exception {
 				OpenDeclarationAction action = helper.getOpenDeclarationAction(resource, offset);
 				action.run();
-				return null;
 			}
 		});
 		return this;
