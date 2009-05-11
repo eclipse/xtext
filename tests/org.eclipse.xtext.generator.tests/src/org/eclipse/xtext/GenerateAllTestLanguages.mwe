@@ -38,7 +38,9 @@
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		
+		<language uri="classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/generator/lowerCaseNamedTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
