@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.Inject;
@@ -71,9 +72,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			new Job("updating resourceset"){
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					document.modify(new UnitOfWork<Object>() {
+					document.modify(new IUnitOfWork.Void<XtextResource>() {
 
-						public Object exec(XtextResource arg) throws Exception {
+						public void process(XtextResource arg) throws Exception {
 							for (IResourceDelta delta : visitor.deltas) {
 								IResource res = delta.getResource();
 								String string = res.getFullPath().lastSegment();
@@ -84,10 +85,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 										switch (delta.getKind()) {
 										case IResourceDelta.REMOVED:
 											// UNLOAD
-											document.modify(new UnitOfWork<Void>() {
-												public Void exec(XtextResource arg) throws Exception {
+											document.modify(new IUnitOfWork.Void<XtextResource>() {
+												public void process(XtextResource arg) throws Exception {
 													emfResource.unload();
-													return null;
 												}
 											});
 											if (emfResource.getResourceSet() != null)
@@ -95,15 +95,14 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 											break;
 										case IResourceDelta.CHANGED:
 											// RELOAD
-											document.modify(new UnitOfWork<Void>() {
-												public Void exec(XtextResource arg) throws Exception {
+											document.modify(new IUnitOfWork.Void<XtextResource>() {
+												public void process(XtextResource arg) throws Exception {
 													emfResource.unload();
 													try {
 														emfResource.load(null);
 													} catch (IOException e) {
 														log.error(e.getMessage(), e);
 													}
-													return null;
 												}
 											});
 											break;
@@ -114,7 +113,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 								}
 							}
 							arg.reparse(document.get());
-							return null;
 						}
 					});
 					return Status.OK_STATUS;

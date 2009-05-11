@@ -84,7 +84,7 @@ public class BaseInheritanceTestPackageImpl extends EPackageImpl implements Base
     if (isInited) return (BaseInheritanceTestPackage)EPackage.Registry.INSTANCE.getEPackage(BaseInheritanceTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    BaseInheritanceTestPackageImpl theBaseInheritanceTestPackage = (BaseInheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof BaseInheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new BaseInheritanceTestPackageImpl());
+    BaseInheritanceTestPackageImpl theBaseInheritanceTestPackage = (BaseInheritanceTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof BaseInheritanceTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new BaseInheritanceTestPackageImpl());
 
     isInited = true;
 

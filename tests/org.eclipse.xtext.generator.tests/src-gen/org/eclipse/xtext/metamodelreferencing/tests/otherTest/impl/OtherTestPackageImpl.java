@@ -88,7 +88,7 @@ public class OtherTestPackageImpl extends EPackageImpl implements OtherTestPacka
     if (isInited) return (OtherTestPackage)EPackage.Registry.INSTANCE.getEPackage(OtherTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new OtherTestPackageImpl());
+    OtherTestPackageImpl theOtherTestPackage = (OtherTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OtherTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OtherTestPackageImpl());
 
     isInited = true;
 

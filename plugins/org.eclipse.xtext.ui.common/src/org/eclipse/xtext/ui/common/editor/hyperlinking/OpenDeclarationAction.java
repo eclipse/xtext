@@ -21,13 +21,13 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.editor.ReadonlyArchiveStorage;
 import org.eclipse.xtext.ui.core.editor.ReadonlyFileStorage;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
  * This action opens a <code>XtextEditor</code> on a selected <code>CrossReference</code> element.
@@ -94,12 +94,11 @@ public class OpenDeclarationAction extends Action {
 		if (openEditor != null && openEditor instanceof XtextEditor) {
 			final XtextEditor edit = (XtextEditor) openEditor;
 			if (uri.fragment()!=null) {
-				edit.getDocument().readOnly(new UnitOfWork<Object>(){
-				public Object exec(XtextResource resource) throws Exception {
+				edit.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>(){
+				public void process(XtextResource resource) throws Exception {
 					EObject object = resource.getEObject(uri.fragment());
 					Region region = locationProvider.getLocation(object);
 					edit.selectAndReveal(region.getOffset(),region.getLength());
-					return null;
 				}});
 			}
 		} else if (openEditor instanceof ISelectionProvider) {

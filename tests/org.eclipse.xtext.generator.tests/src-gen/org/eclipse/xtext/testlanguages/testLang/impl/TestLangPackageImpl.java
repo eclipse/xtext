@@ -125,7 +125,7 @@ public class TestLangPackageImpl extends EPackageImpl implements TestLangPackage
     if (isInited) return (TestLangPackage)EPackage.Registry.INSTANCE.getEPackage(TestLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    TestLangPackageImpl theTestLangPackage = (TestLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TestLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TestLangPackageImpl());
+    TestLangPackageImpl theTestLangPackage = (TestLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TestLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TestLangPackageImpl());
 
     isInited = true;
 

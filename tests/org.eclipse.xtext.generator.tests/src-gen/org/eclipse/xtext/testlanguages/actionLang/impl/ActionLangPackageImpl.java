@@ -101,7 +101,7 @@ public class ActionLangPackageImpl extends EPackageImpl implements ActionLangPac
     if (isInited) return (ActionLangPackage)EPackage.Registry.INSTANCE.getEPackage(ActionLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    ActionLangPackageImpl theActionLangPackage = (ActionLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ActionLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ActionLangPackageImpl());
+    ActionLangPackageImpl theActionLangPackage = (ActionLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ActionLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ActionLangPackageImpl());
 
     isInited = true;
 

@@ -13,12 +13,12 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.Range;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 import com.google.inject.Inject;
@@ -49,7 +49,7 @@ public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 		if (documentPartitioningChanged)
 			return partition;
 
-		IRegion result = getDocument().readOnly(new UnitOfWork<IRegion>(){
+		IRegion result = getDocument().readOnly(new IUnitOfWork<IRegion, XtextResource>(){
 			private final int offset = e.getOffset();
 			private final int endOffset = offset + e.getLength();
 

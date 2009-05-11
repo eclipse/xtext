@@ -19,10 +19,10 @@ import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 
 import com.google.inject.Inject;
@@ -138,8 +138,8 @@ public class XtextReconciler extends Job implements IReconciler {
 			((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			strategy.setDocument(document);
-			document.modify(new UnitOfWork<Object>() {
-				public Object exec(XtextResource resource) throws Exception {
+			document.modify(new IUnitOfWork.Void<XtextResource>() {
+				public void process(XtextResource resource) throws Exception {
 					try {
 						if (log.isDebugEnabled())
 							log.debug("XtextReconiler: Reparsing document.");
@@ -149,7 +149,6 @@ public class XtextReconciler extends Job implements IReconciler {
 						if (log.isDebugEnabled())
 							log.debug("Partial parsing failed. Performing full reparse", t);
 					}
-					return null;
 				}
 			});
 		}

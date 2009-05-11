@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.IPageSite;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.ToggleLinkWithEditorActio
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 
 import com.google.inject.Inject;
@@ -236,8 +236,8 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 	}
 
 	public void synchronizeOutlinePage() {
-		getDocument().readOnly(new UnitOfWork<Object>() {
-			public Object exec(XtextResource resource) throws Exception {
+		getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			public void process(XtextResource resource) throws Exception {
 				int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
 
 				IParseResult parseResult = resource.getParseResult();
@@ -245,7 +245,6 @@ public class XtextContentOutlinePage extends LazyVirtualContentOutlinePage imple
 				CompositeNode rootNode = parseResult.getRootNode();
 				AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, caretOffset);
 				synchronizeOutlinePage(currentNode);
-				return null;
 			}
 		});
 	}

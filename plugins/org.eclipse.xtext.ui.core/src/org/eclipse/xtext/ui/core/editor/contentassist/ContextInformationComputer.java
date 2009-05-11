@@ -12,13 +12,13 @@ import java.util.LinkedHashSet;
 
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.xtext.concurrent.IUnitOfWork;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class ContextInformationComputer implements UnitOfWork<IContextInformation[]>, IContextInformationAcceptor {
+public final class ContextInformationComputer implements IUnitOfWork<IContextInformation[], XtextResource>, IContextInformationAcceptor {
 
 	public interface State {
 		ContentAssistContext.Factory getContextFactory();
