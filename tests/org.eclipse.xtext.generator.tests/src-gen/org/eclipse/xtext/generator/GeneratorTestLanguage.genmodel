@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="ASCII"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="../org.eclipse.xtext.generator.tests/src-gen" forceOverwrite="true" modelName="GeneratorTestLanguage" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" bundleManifest="false" complianceLevel="5.0" copyrightFields="false">
+  <genPackages prefix="GeneratorTestLanguage" basePackage="org.eclipse.xtext.generator" disposableProviderFactory="true" loadInitialization="true" literalsInterface="false">
+    <ecorePackage href="GeneratorTestLanguage.ecore#/"/>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//RuleB"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule1"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule2"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule3"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule4"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule5"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule6"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule7"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule8"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule9"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule10"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule11"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule12"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule13"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule14"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule15"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule16"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule17"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule18"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule19"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule20"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule21"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule22"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule23"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule24"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule25"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule26"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule27"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule28"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule29"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule30"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule31"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule32"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule33"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule34"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule35"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule36"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule37"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule38"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule39"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule40"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule41"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule42"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule43"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule44"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule45"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule46"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule47"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule48"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule49"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule50"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule51"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule52"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule53"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule54"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule55"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule56"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule57"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule58"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule59"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule60"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule61"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule62"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule63"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule64"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule65"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule66"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule67"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule68"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule69"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule70"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule71"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule72"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule73"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule74"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule75"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule76"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule77"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule78"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule79"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule80"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule81"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule82"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule83"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule84"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule85"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule86"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule87"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule88"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule89"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule90"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule91"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule92"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule93"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule94"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule95"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule96"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule97"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule98"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule99"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule100"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule101"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule102"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule103"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule104"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule105"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule106"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule107"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule108"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule109"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule110"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule111"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule112"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule113"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule114"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule115"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule116"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule117"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule118"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule119"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule120"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule121"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule122"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule123"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule124"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule125"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule126"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule127"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule128"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule129"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule130"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule131"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule132"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule133"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule134"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule135"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule136"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule137"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule138"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule139"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule140"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule141"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule142"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule143"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule144"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule145"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule146"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule147"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule148"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule149"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule150"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule151"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule152"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule153"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule154"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule155"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule156"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule157"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule158"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule159"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule160"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule161"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule162"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule163"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule164"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule165"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule166"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule167"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule168"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule169"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule170"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule171"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule172"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule173"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule174"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule175"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule176"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule177"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule178"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule179"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule180"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule181"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule182"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule183"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule184"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule185"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule186"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule187"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule188"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule189"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule190"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule191"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule192"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule193"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule194"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule195"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule196"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule197"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule198"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule199"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule200"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule201"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule202"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule203"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule204"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule205"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule206"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule207"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule208"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule209"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule210"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule211"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule212"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule213"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule214"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule215"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule216"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule217"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule218"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule219"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule220"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule221"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule222"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule223"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule224"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule225"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule226"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule227"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule228"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule229"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule230"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule231"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule232"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule233"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule234"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule235"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule236"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule237"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule238"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule239"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule240"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule241"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule242"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule243"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule244"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule245"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule246"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule247"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule248"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule249"/>
+    </genClasses>
+    <genClasses>
+      <ecoreClass href="GeneratorTestLanguage.ecore#//Rule250"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

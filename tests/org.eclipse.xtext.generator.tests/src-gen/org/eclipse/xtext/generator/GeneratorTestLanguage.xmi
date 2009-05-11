@@ -1,0 +1,1671 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <xtext:Grammar name="org.eclipse.xtext.generator.GeneratorTestLanguage" usedGrammars="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="generatorTestLanguage">
+      <ePackage href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Rule">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule"/>
+      </type>
+      <alternatives xsi:type="xtext:Keyword" value="x"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="RuleB">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//RuleB"/>
+      </type>
+      <alternatives xsi:type="xtext:Keyword" value="y"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule1"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule2"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule3">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule3"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule4">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule4"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule5">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule5"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule6">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule6"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule7">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule7"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule8">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule8"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule9">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule9"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule10">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule10"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule11">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule11"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule12">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule12"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule13">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule13"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule14">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule14"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule15">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule15"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule16">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule16"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule17">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule17"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule18">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule18"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule19">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule19"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule20">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule20"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule21">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule21"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule22">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule22"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule23">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule23"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule24">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule24"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule25">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule25"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule26">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule26"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule27">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule27"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule28">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule28"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule29">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule29"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule30">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule30"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule31">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule31"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule32">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule32"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule33">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule33"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule34">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule34"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule35">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule35"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule36">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule36"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule37">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule37"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule38">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule38"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule39">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule39"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule40">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule40"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule41">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule41"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule42">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule42"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule43">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule43"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule44">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule44"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule45">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule45"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule46">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule46"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule47">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule47"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule48">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule48"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule49">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule49"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule50">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule50"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule51">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule51"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule52">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule52"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule53">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule53"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule54">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule54"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule55">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule55"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule56">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule56"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule57">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule57"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule58">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule58"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule59">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule59"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule60">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule60"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule61">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule61"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule62">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule62"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule63">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule63"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule64">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule64"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule65">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule65"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule66">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule66"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule67">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule67"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule68">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule68"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule69">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule69"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule70">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule70"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule71">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule71"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule72">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule72"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule73">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule73"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule74">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule74"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule75">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule75"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule76">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule76"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule77">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule77"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule78">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule78"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule79">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule79"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule80">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule80"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule81">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule81"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule82">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule82"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule83">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule83"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule84">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule84"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule85">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule85"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule86">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule86"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule87">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule87"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule88">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule88"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule89">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule89"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule90">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule90"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule91">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule91"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule92">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule92"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule93">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule93"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule94">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule94"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule95">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule95"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule96">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule96"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule97">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule97"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule98">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule98"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule99">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule99"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule100">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule100"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule101">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule101"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule102">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule102"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule103">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule103"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule104">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule104"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule105">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule105"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule106">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule106"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule107">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule107"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule108">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule108"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule109">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule109"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule110">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule110"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule111">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule111"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule112">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule112"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule113">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule113"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule114">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule114"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule115">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule115"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule116">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule116"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule117">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule117"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule118">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule118"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule119">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule119"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule120">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule120"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule121">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule121"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule122">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule122"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule123">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule123"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule124">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule124"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule125">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule125"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule126">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule126"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule127">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule127"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule128">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule128"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule129">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule129"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule130">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule130"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule131">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule131"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule132">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule132"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule133">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule133"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule134">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule134"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule135">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule135"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule136">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule136"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule137">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule137"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule138">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule138"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule139">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule139"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule140">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule140"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule141">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule141"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule142">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule142"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule143">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule143"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule144">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule144"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule145">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule145"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule146">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule146"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule147">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule147"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule148">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule148"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule149">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule149"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule150">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule150"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule151">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule151"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule152">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule152"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule153">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule153"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule154">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule154"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule155">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule155"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule156">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule156"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule157">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule157"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule158">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule158"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule159">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule159"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule160">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule160"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule161">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule161"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule162">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule162"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule163">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule163"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule164">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule164"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule165">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule165"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule166">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule166"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule167">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule167"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule168">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule168"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule169">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule169"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule170">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule170"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule171">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule171"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule172">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule172"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule173">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule173"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule174">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule174"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule175">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule175"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule176">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule176"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule177">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule177"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule178">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule178"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule179">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule179"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule180">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule180"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule181">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule181"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule182">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule182"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule183">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule183"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule184">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule184"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule185">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule185"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule186">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule186"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule187">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule187"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule188">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule188"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule189">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule189"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule190">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule190"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule191">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule191"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule192">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule192"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule193">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule193"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule194">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule194"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule195">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule195"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule196">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule196"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule197">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule197"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule198">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule198"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule199">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule199"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule200">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule200"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule201">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule201"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule202">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule202"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule203">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule203"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule204">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule204"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule205">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule205"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule206">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule206"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule207">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule207"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule208">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule208"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule209">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule209"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule210">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule210"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule211">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule211"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule212">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule212"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule213">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule213"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule214">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule214"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule215">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule215"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule216">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule216"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule217">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule217"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule218">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule218"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule219">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule219"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule220">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule220"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule221">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule221"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule222">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule222"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule223">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule223"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule224">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule224"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule225">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule225"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule226">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule226"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule227">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule227"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule228">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule228"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule229">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule229"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule230">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule230"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule231">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule231"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule232">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule232"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule233">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule233"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule234">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule234"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule235">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule235"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule236">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule236"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule237">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule237"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule238">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule238"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule239">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule239"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule240">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule240"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule241">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule241"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule242">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule242"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule243">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule243"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule244">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule244"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule245">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule245"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule246">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule246"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule247">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule247"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule248">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule248"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule249">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule249"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Rule250">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/GeneratorTestLanguage#//Rule250"/>
+      </type>
+      <alternatives xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+    </rules>
+  </xtext:Grammar>
+  <xtext:Grammar name="org.eclipse.xtext.common.Terminals" definesHiddenTokens="true" hiddenTokens="/1/@rules.5 /1/@rules.3 /1/@rules.4">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:TerminalRule" name="ID">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="a"/>
+            <right value="z"/>
+          </groups>
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="A"/>
+            <right value="Z"/>
+          </groups>
+          <groups xsi:type="xtext:Keyword" value="_"/>
+        </tokens>
+        <tokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="a"/>
+            <right value="z"/>
+          </groups>
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="A"/>
+            <right value="Z"/>
+          </groups>
+          <groups xsi:type="xtext:Keyword" value="_"/>
+          <groups xsi:type="xtext:CharacterRange">
+            <left value="0"/>
+            <right value="9"/>
+          </groups>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="INT">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </type>
+      <alternatives xsi:type="xtext:CharacterRange" cardinality="+">
+        <left value="0"/>
+        <right value="9"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="STRING">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Group">
+          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
+          <tokens xsi:type="xtext:Alternatives" cardinality="*">
+            <groups xsi:type="xtext:Group">
+              <tokens xsi:type="xtext:Keyword" value="\"/>
+              <tokens xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:Keyword" value="b"/>
+                <groups xsi:type="xtext:Keyword" value="t"/>
+                <groups xsi:type="xtext:Keyword" value="n"/>
+                <groups xsi:type="xtext:Keyword" value="f"/>
+                <groups xsi:type="xtext:Keyword" value="r"/>
+                <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                <groups xsi:type="xtext:Keyword" value="'"/>
+                <groups xsi:type="xtext:Keyword" value="\"/>
+              </tokens>
+            </groups>
+            <groups xsi:type="xtext:NegatedToken">
+              <terminal xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:Keyword" value="\"/>
+                <groups xsi:type="xtext:Keyword" value="&quot;"/>
+              </terminal>
+            </groups>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
+        </groups>
+        <groups xsi:type="xtext:Group">
+          <tokens xsi:type="xtext:Keyword" value="'"/>
+          <tokens xsi:type="xtext:Alternatives" cardinality="*">
+            <groups xsi:type="xtext:Group">
+              <tokens xsi:type="xtext:Keyword" value="\"/>
+              <tokens xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:Keyword" value="b"/>
+                <groups xsi:type="xtext:Keyword" value="t"/>
+                <groups xsi:type="xtext:Keyword" value="n"/>
+                <groups xsi:type="xtext:Keyword" value="f"/>
+                <groups xsi:type="xtext:Keyword" value="r"/>
+                <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                <groups xsi:type="xtext:Keyword" value="'"/>
+                <groups xsi:type="xtext:Keyword" value="\"/>
+              </tokens>
+            </groups>
+            <groups xsi:type="xtext:NegatedToken">
+              <terminal xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:Keyword" value="\"/>
+                <groups xsi:type="xtext:Keyword" value="'"/>
+              </terminal>
+            </groups>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="'"/>
+        </groups>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="/*"/>
+        <tokens xsi:type="xtext:UntilToken">
+          <terminal xsi:type="xtext:Keyword" value="*/"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" value="//"/>
+        <tokens xsi:type="xtext:NegatedToken" cardinality="*">
+          <terminal xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+            <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+          </terminal>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+          <tokens xsi:type="xtext:Keyword" value="&#xA;"/>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="WS">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives" cardinality="+">
+        <groups xsi:type="xtext:Keyword" value=" "/>
+        <groups xsi:type="xtext:Keyword" value="&#x9;"/>
+        <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+        <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Wildcard"/>
+    </rules>
+  </xtext:Grammar>
+</xmi:XMI>
