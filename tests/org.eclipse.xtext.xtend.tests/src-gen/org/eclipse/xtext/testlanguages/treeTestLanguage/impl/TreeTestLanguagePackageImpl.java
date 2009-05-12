@@ -93,7 +93,7 @@ public class TreeTestLanguagePackageImpl extends EPackageImpl implements TreeTes
     if (isInited) return (TreeTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(TreeTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    TreeTestLanguagePackageImpl theTreeTestLanguagePackage = (TreeTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TreeTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TreeTestLanguagePackageImpl());
+    TreeTestLanguagePackageImpl theTreeTestLanguagePackage = (TreeTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TreeTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TreeTestLanguagePackageImpl());
 
     isInited = true;
 

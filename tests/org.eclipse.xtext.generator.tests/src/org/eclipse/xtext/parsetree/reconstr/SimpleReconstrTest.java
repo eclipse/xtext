@@ -103,32 +103,35 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		assertEquals(model, parseAndSerialize(model));
 	}
 
+	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
 	public void _testSimpleTransient101() throws Exception {
 		String model = "#5 0";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
+	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
 	public void _testSimpleTransient102() throws Exception {
 		String model = "#5 1";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
+	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
 	public void _testSimpleTransient103() throws Exception {
 		String model = "#5 *";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void _testSimpleTransient104() throws Exception {
+	public void testSimpleTransient104() throws Exception {
 		String model = "#5 *, 0";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void _testSimpleTransient105() throws Exception {
+	public void testSimpleTransient105() throws Exception {
 		String model = "#5 *, 1";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void _testSimpleTransient106() throws Exception {
+	public void testSimpleTransient106() throws Exception {
 		String model = "#5 *, *";
 		assertEquals(model, parseAndSerialize(model));
 	}
@@ -143,7 +146,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void _testSimpleTransient109() throws Exception {
+	public void testSimpleTransient109() throws Exception {
 		String model = "#5 0, *";
 		assertEquals(model, parseAndSerialize(model));
 	}
@@ -158,7 +161,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		assertEquals(model, parseAndSerialize(model));
 	}
 
-	public void _testSimpleTransient112() throws Exception {
+	public void testSimpleTransient112() throws Exception {
 		String model = "#5 1, *";
 		assertEquals(model, parseAndSerialize(model));
 	}

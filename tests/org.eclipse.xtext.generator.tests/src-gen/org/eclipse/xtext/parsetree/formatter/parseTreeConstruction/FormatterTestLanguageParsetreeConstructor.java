@@ -3,50 +3,43 @@
 */
 package org.eclipse.xtext.parsetree.formatter.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private FormatterTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) {
-			final AbstractToken t = new Root_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
-			final AbstractToken t = new Line_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier())) {
-			final AbstractToken t = new TestLinewrap_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) {
-			final AbstractToken t = new TestIndentation_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public FormatterTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_Group(this, this, 0, inst);
+			case 1: return new Line_Group(this, this, 1, inst);
+			case 2: return new TestLinewrap_Group(this, this, 2, inst);
+			case 3: return new TestIndentation_Group(this, this, 3, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Root ****************
@@ -59,102 +52,134 @@ public class FormatterTestLanguageParsetreeConstructor extends AbstractParseTree
 // "test" (TestLinewrap|TestIndentation)
 protected class Root_Group extends GroupToken {
 	
-	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getRootAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Root_1_Alternatives(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Root_0_Keyword_test(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "test"
-protected class Root_0_Keyword_test extends KeywordToken  {
+protected class Root_TestKeyword_0 extends KeywordToken  {
 	
-	public Root_0_Keyword_test(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // TestLinewrap|TestIndentation
-protected class Root_1_Alternatives extends AlternativesToken {
+protected class Root_Alternatives_1 extends AlternativesToken {
 
-	public Root_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_Alternatives_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getRootAccess().getAlternatives_1();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new Root_1_0_RuleCall_TestLinewrap(current, this);
-			case 1: return new Root_1_1_RuleCall_TestIndentation(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_TestLinewrapParserRuleCall_1_0(parent, this, 0, inst);
+			case 1: return new Root_TestIndentationParserRuleCall_1_1(parent, this, 1, inst);
 			default: return null;
-		}
-	}
+		}	
+	}	
+		
 }
 
 // TestLinewrap
-protected class Root_1_0_RuleCall_TestLinewrap extends RuleCallToken {
+protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 	
-	public Root_1_0_RuleCall_TestLinewrap(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestLinewrapParserRuleCall_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestLinewrap_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestLinewrap_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier())) return null;
-		return new TestLinewrap_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			default: return null;
+		}	
+	}	
 }
 
 // TestIndentation
-protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
+protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 	
-	public Root_1_1_RuleCall_TestIndentation(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestIndentationParserRuleCall_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestIndentation_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) return null;
-		return new TestIndentation_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -172,95 +197,111 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 // type+=ID name+=ID ";"
 protected class Line_Group extends GroupToken {
 	
-	public Line_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Line_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getLineAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Line_2_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Line_1_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Line_0_Assignment_type(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				if(s3 != null) {
-					last = s3.getPredecessor();
-					return s3;
-				} else {
-					s2 = s2.getPredecessor().nextSolution(this,s2);
-				}
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Line_SemicolonKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // type+=ID
-protected class Line_0_Assignment_type extends AssignmentToken  {
+protected class Line_TypeAssignment_0 extends AssignmentToken  {
 	
-	public Line_0_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Line_TypeAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getLineAccess().getTypeAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLineAccess().getTypeIDTerminalRuleCall_0_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // name+=ID
-protected class Line_1_Assignment_name extends AssignmentToken  {
+protected class Line_NameAssignment_1 extends AssignmentToken  {
 	
-	public Line_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Line_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getLineAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Line_TypeAssignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getLineAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // ";"
-protected class Line_2_Keyword extends KeywordToken  {
+protected class Line_SemicolonKeyword_2 extends KeywordToken  {
 	
-	public Line_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Line_SemicolonKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getLineAccess().getSemicolonKeyword_2();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Line_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -277,74 +318,91 @@ protected class Line_2_Keyword extends KeywordToken  {
 // "linewrap" (items+=Line)*
 protected class TestLinewrap_Group extends GroupToken {
 	
-	public TestLinewrap_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestLinewrap_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTestLinewrapAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new TestLinewrap_1_Assignment_items(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new TestLinewrap_0_Keyword_linewrap(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestLinewrap_ItemsAssignment_1(parent, this, 0, inst);
+			case 1: return new TestLinewrap_LinewrapKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "linewrap"
-protected class TestLinewrap_0_Keyword_linewrap extends KeywordToken  {
+protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 	
-	public TestLinewrap_0_Keyword_linewrap(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestLinewrap_LinewrapKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // (items+=Line)*
-protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
+protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 	
-	public TestLinewrap_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public TestLinewrap_ItemsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestLinewrapAccess().getItemsAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("items",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("items");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Line_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("items",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("items");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
-				Solution s = new Line_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new TestLinewrap_ItemsAssignment_1(parent, next, 0, consumed);
+			case 1: return new TestLinewrap_LinewrapKeyword_0(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -361,161 +419,194 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 // "indentation" "{" (sub+=TestIndentation|items+=Line)* "}"
 protected class TestIndentation_Group extends GroupToken {
 	
-	public TestIndentation_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestIndentation_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new TestIndentation_3_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new TestIndentation_2_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new TestIndentation_1_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new TestIndentation_0_Keyword_indentation(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					if(s4 != null) {
-						last = s4.getPredecessor();
-						return s4;
-					} else {
-						s3 = s3.getPredecessor().nextSolution(this,s3);
-					}
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_RightCurlyBracketKeyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "indentation"
-protected class TestIndentation_0_Keyword_indentation extends KeywordToken  {
+protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 	
-	public TestIndentation_0_Keyword_indentation(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestIndentation_IndentationKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getIndentationKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // "{"
-protected class TestIndentation_1_Keyword extends KeywordToken  {
+protected class TestIndentation_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
-	public TestIndentation_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestIndentation_LeftCurlyBracketKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_IndentationKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // (sub+=TestIndentation|items+=Line)*
-protected class TestIndentation_2_Alternatives extends AlternativesToken {
+protected class TestIndentation_Alternatives_2 extends AlternativesToken {
 
-	public TestIndentation_2_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public TestIndentation_Alternatives_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getAlternatives_2();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new TestIndentation_2_0_Assignment_sub(current, this);
-			case 1: return new TestIndentation_2_1_Assignment_items(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_SubAssignment_2_0(parent, this, 0, inst);
+			case 1: return new TestIndentation_ItemsAssignment_2_1(parent, this, 1, inst);
 			default: return null;
-		}
-	}
+		}	
+	}	
+		
 }
 
 // sub+=TestIndentation
-protected class TestIndentation_2_0_Assignment_sub extends AssignmentToken  {
+protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
 	
-	public TestIndentation_2_0_Assignment_sub(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestIndentation_SubAssignment_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getSubAssignment_2_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("sub",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("sub");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("sub",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("sub");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) {
-				Solution s = new TestIndentation_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new TestIndentation_Alternatives_2(parent, next, 0, consumed);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // items+=Line
-protected class TestIndentation_2_1_Assignment_items extends AssignmentToken  {
+protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 	
-	public TestIndentation_2_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestIndentation_ItemsAssignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getItemsAssignment_2_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("items",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("items");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Line_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("items",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("items");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) {
-				Solution s = new Line_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new TestIndentation_Alternatives_2(parent, next, 0, consumed);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
 // "}"
-protected class TestIndentation_3_Keyword extends KeywordToken  {
+protected class TestIndentation_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
-	public TestIndentation_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestIndentation_RightCurlyBracketKeyword_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_3();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestIndentation_Alternatives_2(parent, this, 0, inst);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
