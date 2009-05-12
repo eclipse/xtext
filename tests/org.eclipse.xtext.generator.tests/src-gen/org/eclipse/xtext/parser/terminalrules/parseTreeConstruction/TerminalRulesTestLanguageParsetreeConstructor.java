@@ -3,32 +3,40 @@
 */
 package org.eclipse.xtext.parser.terminalrules.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
-			final AbstractToken t = new Model_Alternatives(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public TerminalRulesTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Model ****************
@@ -41,202 +49,276 @@ public class TerminalRulesTestLanguageParsetreeConstructor extends AbstractParse
 // idValue=ID|intValue=INT|stringValue=STRING|mlCommentValue=ML_COMMENT|slCommentValue=SL_COMMENT|wsValue=WS|anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
-	public Model_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new Model_0_Assignment_idValue(current, this);
-			case 1: return new Model_1_Assignment_intValue(current, this);
-			case 2: return new Model_2_Assignment_stringValue(current, this);
-			case 3: return new Model_3_Assignment_mlCommentValue(current, this);
-			case 4: return new Model_4_Assignment_slCommentValue(current, this);
-			case 5: return new Model_5_Assignment_wsValue(current, this);
-			case 6: return new Model_6_Assignment_anyValue(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_IdValueAssignment_0(parent, this, 0, inst);
+			case 1: return new Model_IntValueAssignment_1(parent, this, 1, inst);
+			case 2: return new Model_StringValueAssignment_2(parent, this, 2, inst);
+			case 3: return new Model_MlCommentValueAssignment_3(parent, this, 3, inst);
+			case 4: return new Model_SlCommentValueAssignment_4(parent, this, 4, inst);
+			case 5: return new Model_WsValueAssignment_5(parent, this, 5, inst);
+			case 6: return new Model_AnyValueAssignment_6(parent, this, 6, inst);
 			default: return null;
-		}
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // idValue=ID
-protected class Model_0_Assignment_idValue extends AssignmentToken  {
+protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 	
-	public Model_0_Assignment_idValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_IdValueAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getIdValueAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("idValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("idValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // intValue=INT
-protected class Model_1_Assignment_intValue extends AssignmentToken  {
+protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 	
-	public Model_1_Assignment_intValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_IntValueAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getIntValueAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("intValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("intValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // stringValue=STRING
-protected class Model_2_Assignment_stringValue extends AssignmentToken  {
+protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 	
-	public Model_2_Assignment_stringValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_StringValueAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getStringValueAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("stringValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("stringValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // mlCommentValue=ML_COMMENT
-protected class Model_3_Assignment_mlCommentValue extends AssignmentToken  {
+protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 	
-	public Model_3_Assignment_mlCommentValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_MlCommentValueAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getMlCommentValueAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("mlCommentValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("mlCommentValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // slCommentValue=SL_COMMENT
-protected class Model_4_Assignment_slCommentValue extends AssignmentToken  {
+protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 	
-	public Model_4_Assignment_slCommentValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_SlCommentValueAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getSlCommentValueAssignment_4();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("slCommentValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("slCommentValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // wsValue=WS
-protected class Model_5_Assignment_wsValue extends AssignmentToken  {
+protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 	
-	public Model_5_Assignment_wsValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_WsValueAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getWsValueAssignment_5();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("wsValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("wsValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // anyValue=ANY_OTHER
-protected class Model_6_Assignment_anyValue extends AssignmentToken  {
+protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 	
-	public Model_6_Assignment_anyValue(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_AnyValueAssignment_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getAnyValueAssignment_6();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("anyValue",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("anyValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 

@@ -3,32 +3,40 @@
 */
 package org.eclipse.xtext.grammarinheritance.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class BaseInheritanceTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class BaseInheritanceTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) {
-			final AbstractToken t = new Model_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public BaseInheritanceTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Model ****************
@@ -41,66 +49,80 @@ public class BaseInheritanceTestLanguageParsetreeConstructor extends AbstractPar
 // "model" name=ID
 protected class Model_Group extends GroupToken {
 	
-	public Model_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getModelAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Model_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Model_0_Keyword_model(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "model"
-protected class Model_0_Keyword_model extends KeywordToken  {
+protected class Model_ModelKeyword_0 extends KeywordToken  {
 	
-	public Model_0_Keyword_model(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_ModelKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getModelAccess().getModelKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=ID
-protected class Model_1_Assignment_name extends AssignmentToken  {
+protected class Model_NameAssignment_1 extends AssignmentToken  {
 	
-	public Model_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Model_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getModelAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_ModelKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 

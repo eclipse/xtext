@@ -28,7 +28,9 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
  */
 public class InstanceDescription implements IInstanceDescription {
 
-	private final AbstractParseTreeConstructor astSer;
+	// private final AbstractParseTreeConstructor astSer;
+
+	private final ITransientValueService tv;
 
 	private final EObject described;
 
@@ -36,21 +38,20 @@ public class InstanceDescription implements IInstanceDescription {
 
 	private final int[] next;
 
-	public InstanceDescription(AbstractParseTreeConstructor astSerializer,
-			EObject desc) {
+	public InstanceDescription(ITransientValueService t, EObject desc) {
 		described = desc;
-		astSer = astSerializer;
+		tv = t;
 		EList<EStructuralFeature> features = described.eClass()
 				.getEAllStructuralFeatures();
 		next = new int[features.size()];
 		for (int id = 0; id < features.size(); id++) {
 			EStructuralFeature f = features.get(id);
-			if (f.isMany() && astSer.getTVService().isMixedList(desc, f)) {
+			if (f.isMany() && tv.isMixedList(desc, f)) {
 				if (multiFeatures == null)
 					multiFeatures = new BitSet();
 				multiFeatures.set(f.getFeatureID());
 				next[id] = firstID(f);
-			} else if (!astSer.getTVService().isTransient(described, f, -1)) {
+			} else if (!tv.isTransient(described, f, -1)) {
 				next[id] = firstID(f);
 			} else
 				next[id] = -1;
@@ -59,11 +60,10 @@ public class InstanceDescription implements IInstanceDescription {
 		// System.out.println("x");
 	}
 
-	private InstanceDescription(
-			AbstractParseTreeConstructor abstractInternalParseTreeConstructor,
-			EObject described, int[] next, BitSet multi) {
+	private InstanceDescription(ITransientValueService tv, EObject described,
+			int[] next, BitSet multi) {
 		super();
-		this.astSer = abstractInternalParseTreeConstructor;
+		this.tv = tv;
 		this.described = described;
 		this.next = next;
 		this.multiFeatures = multi;
@@ -74,7 +74,7 @@ public class InstanceDescription implements IInstanceDescription {
 		int[] con = new int[next.length];
 		System.arraycopy(next, 0, con, 0, next.length);
 		con[f.getFeatureID()] = nextID(f, con[f.getFeatureID()]);
-		return new InstanceDescription(astSer, described, con, multiFeatures);
+		return new InstanceDescription(tv, described, con, multiFeatures);
 	}
 
 	private int firstID(EStructuralFeature f) {
@@ -142,10 +142,10 @@ public class InstanceDescription implements IInstanceDescription {
 
 	private int nextID(EStructuralFeature f, int lastId) {
 		int myLastId = lastId;
-		if (f.isMany() && multiFeatures != null	&& multiFeatures.get(f.getFeatureID())) {
+		if (f.isMany() && multiFeatures != null
+				&& multiFeatures.get(f.getFeatureID())) {
 			myLastId--;
-			ITransientValueService ts = astSer.getTVService();
-			while (myLastId >= 0 && ts.isTransient(described, f, myLastId))
+			while (myLastId >= 0 && tv.isTransient(described, f, myLastId))
 				myLastId--;
 			return myLastId;
 		}

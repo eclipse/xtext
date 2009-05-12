@@ -3,44 +3,42 @@
 */
 package org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) {
-			final AbstractToken t = new Foo_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) {
-			final AbstractToken t = new NameRef_Assignment_rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new MyRule_Assignment_name(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public MetamodelRefTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Foo_Group(this, this, 0, inst);
+			case 1: return new NameRef_RuleAssignment(this, this, 1, inst);
+			case 2: return new MyRule_NameAssignment(this, this, 2, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Foo ****************
@@ -53,87 +51,102 @@ public class MetamodelRefTestLanguageParsetreeConstructor extends AbstractParseT
 // name=ID (nameRefs+=NameRef)*
 protected class Foo_Group extends GroupToken {
 	
-	public Foo_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Foo_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getFooAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Foo_1_Assignment_nameRefs(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Foo_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Foo_NameRefsAssignment_1(parent, this, 0, inst);
+			case 1: return new Foo_NameAssignment_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // name=ID
-protected class Foo_0_Assignment_name extends AssignmentToken  {
+protected class Foo_NameAssignment_0 extends AssignmentToken  {
 	
-	public Foo_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Foo_NameAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFooAccess().getNameAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // (nameRefs+=NameRef)*
-protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
+protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 	
-	public Foo_1_Assignment_nameRefs(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public Foo_NameRefsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFooAccess().getNameRefsAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("nameRefs",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("nameRefs");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NameRef_RuleAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("nameRefs",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("nameRefs");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) {
-				Solution s = new NameRef_Assignment_rule(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Foo_NameRefsAssignment_1(parent, next, 0, consumed);
+			case 1: return new Foo_NameAssignment_0(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -148,31 +161,42 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
  **/
 
 // rule=[xtext::ParserRule]
-protected class NameRef_Assignment_rule extends AssignmentToken  {
+protected class NameRef_RuleAssignment extends AssignmentToken  {
 	
-	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public NameRef_RuleAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getNameRefAccess().getRuleAssignment();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) return null;
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("rule",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 /************ end Rule NameRef ****************/
@@ -186,28 +210,39 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
  **/
 
 // name=ID
-protected class MyRule_Assignment_name extends AssignmentToken  {
+protected class MyRule_NameAssignment extends AssignmentToken  {
 	
-	public MyRule_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public MyRule_NameAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMyRuleAccess().getNameAssignment();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier())) return null;
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMyRuleAccess().getNameIDTerminalRuleCall_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 /************ end Rule MyRule ****************/

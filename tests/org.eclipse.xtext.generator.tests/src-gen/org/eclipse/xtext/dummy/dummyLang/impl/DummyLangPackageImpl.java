@@ -93,7 +93,7 @@ public class DummyLangPackageImpl extends EPackageImpl implements DummyLangPacka
     if (isInited) return (DummyLangPackage)EPackage.Registry.INSTANCE.getEPackage(DummyLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    DummyLangPackageImpl theDummyLangPackage = (DummyLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DummyLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DummyLangPackageImpl());
+    DummyLangPackageImpl theDummyLangPackage = (DummyLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof DummyLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new DummyLangPackageImpl());
 
     isInited = true;
 

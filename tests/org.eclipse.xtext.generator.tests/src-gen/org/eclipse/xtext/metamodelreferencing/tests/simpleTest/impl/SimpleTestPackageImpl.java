@@ -89,7 +89,7 @@ public class SimpleTestPackageImpl extends EPackageImpl implements SimpleTestPac
     if (isInited) return (SimpleTestPackage)EPackage.Registry.INSTANCE.getEPackage(SimpleTestPackage.eNS_URI);
 
     // Obtain or create and register package
-    SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimpleTestPackageImpl());
+    SimpleTestPackageImpl theSimpleTestPackage = (SimpleTestPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SimpleTestPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SimpleTestPackageImpl());
 
     isInited = true;
 

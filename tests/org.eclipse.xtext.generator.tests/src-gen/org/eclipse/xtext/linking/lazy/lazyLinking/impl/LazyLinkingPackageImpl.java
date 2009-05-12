@@ -101,7 +101,7 @@ public class LazyLinkingPackageImpl extends EPackageImpl implements LazyLinkingP
     if (isInited) return (LazyLinkingPackage)EPackage.Registry.INSTANCE.getEPackage(LazyLinkingPackage.eNS_URI);
 
     // Obtain or create and register package
-    LazyLinkingPackageImpl theLazyLinkingPackage = (LazyLinkingPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LazyLinkingPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LazyLinkingPackageImpl());
+    LazyLinkingPackageImpl theLazyLinkingPackage = (LazyLinkingPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LazyLinkingPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LazyLinkingPackageImpl());
 
     isInited = true;
 

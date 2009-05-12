@@ -3,50 +3,43 @@
 */
 package org.eclipse.xtext.parsetree.transientvalues.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeConstructor {
+public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private TransientValuesTestGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) {
-			final AbstractToken t = new Root_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) {
-			final AbstractToken t = new TestRequired_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) {
-			final AbstractToken t = new TestOptional_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) {
-			final AbstractToken t = new TestList_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public TransientValuesTestGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_Group(this, this, 0, inst);
+			case 1: return new TestRequired_Group(this, this, 1, inst);
+			case 2: return new TestOptional_Group(this, this, 2, inst);
+			case 3: return new TestList_Group(this, this, 3, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Root ****************
@@ -59,123 +52,167 @@ public class TransientValuesTestParsetreeConstructor extends AbstractParseTreeCo
 // "test" (TestRequired|TestOptional|TestList)
 protected class Root_Group extends GroupToken {
 	
-	public Root_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getRootAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Root_1_Alternatives(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Root_0_Keyword_test(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "test"
-protected class Root_0_Keyword_test extends KeywordToken  {
+protected class Root_TestKeyword_0 extends KeywordToken  {
 	
-	public Root_0_Keyword_test(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // TestRequired|TestOptional|TestList
-protected class Root_1_Alternatives extends AlternativesToken {
+protected class Root_Alternatives_1 extends AlternativesToken {
 
-	public Root_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_Alternatives_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getRootAccess().getAlternatives_1();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new Root_1_0_RuleCall_TestRequired(current, this);
-			case 1: return new Root_1_1_RuleCall_TestOptional(current, this);
-			case 2: return new Root_1_2_RuleCall_TestList(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_TestRequiredParserRuleCall_1_0(parent, this, 0, inst);
+			case 1: return new Root_TestOptionalParserRuleCall_1_1(parent, this, 1, inst);
+			case 2: return new Root_TestListParserRuleCall_1_2(parent, this, 2, inst);
 			default: return null;
-		}
-	}
+		}	
+	}	
+		
 }
 
 // TestRequired
-protected class Root_1_0_RuleCall_TestRequired extends RuleCallToken {
+protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 	
-	public Root_1_0_RuleCall_TestRequired(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestRequiredParserRuleCall_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestRequired_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestRequired_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
-		return new TestRequired_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			default: return null;
+		}	
+	}	
 }
 
 // TestOptional
-protected class Root_1_1_RuleCall_TestOptional extends RuleCallToken {
+protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 	
-	public Root_1_1_RuleCall_TestOptional(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestOptionalParserRuleCall_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestOptional_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestOptional_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
-		return new TestOptional_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			default: return null;
+		}	
+	}	
 }
 
 // TestList
-protected class Root_1_2_RuleCall_TestList extends RuleCallToken {
+protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 	
-	public Root_1_2_RuleCall_TestList(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Root_TestListParserRuleCall_1_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRootAccess().getTestListParserRuleCall_1_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestList_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(TestList_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
-		return new TestList_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -193,95 +230,111 @@ protected class Root_1_2_RuleCall_TestList extends RuleCallToken {
 // "required" required1=INT required2=INT
 protected class TestRequired_Group extends GroupToken {
 	
-	public TestRequired_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestRequired_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTestRequiredAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new TestRequired_2_Assignment_required2(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new TestRequired_1_Assignment_required1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new TestRequired_0_Keyword_required(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				if(s3 != null) {
-					last = s3.getPredecessor();
-					return s3;
-				} else {
-					s2 = s2.getPredecessor().nextSolution(this,s2);
-				}
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestRequired_Required2Assignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "required"
-protected class TestRequired_0_Keyword_required extends KeywordToken  {
+protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 	
-	public TestRequired_0_Keyword_required(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestRequired_RequiredKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestRequiredAccess().getRequiredKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // required1=INT
-protected class TestRequired_1_Assignment_required1 extends AssignmentToken  {
+protected class TestRequired_Required1Assignment_1 extends AssignmentToken  {
 	
-	public TestRequired_1_Assignment_required1(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestRequired_Required1Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestRequiredAccess().getRequired1Assignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("required1",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestRequired_RequiredKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("required1",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("required1");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // required2=INT
-protected class TestRequired_2_Assignment_required2 extends AssignmentToken  {
+protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 	
-	public TestRequired_2_Assignment_required2(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestRequired_Required2Assignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestRequiredAccess().getRequired2Assignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("required2",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestRequired_Required1Assignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("required2",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("required2");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -298,135 +351,154 @@ protected class TestRequired_2_Assignment_required2 extends AssignmentToken  {
 // "optional" (opt1=INT)? (":" opt2=INT)?
 protected class TestOptional_Group extends GroupToken {
 	
-	public TestOptional_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestOptional_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTestOptionalAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new TestOptional_2_Group(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new TestOptional_1_Assignment_opt1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new TestOptional_0_Keyword_optional(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				if(s3 != null) {
-					last = s3.getPredecessor();
-					return s3;
-				} else {
-					s2 = s2.getPredecessor().nextSolution(this,s2);
-				}
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestOptional_Group_2(parent, this, 0, inst);
+			case 1: return new TestOptional_Opt1Assignment_1(parent, this, 1, inst);
+			case 2: return new TestOptional_OptionalKeyword_0(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "optional"
-protected class TestOptional_0_Keyword_optional extends KeywordToken  {
+protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 	
-	public TestOptional_0_Keyword_optional(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestOptional_OptionalKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestOptionalAccess().getOptionalKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // (opt1=INT)?
-protected class TestOptional_1_Assignment_opt1 extends AssignmentToken  {
+protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 	
-	public TestOptional_1_Assignment_opt1(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public TestOptional_Opt1Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestOptionalAccess().getOpt1Assignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("opt1",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestOptional_OptionalKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("opt1",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("opt1");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // (":" opt2=INT)?
-protected class TestOptional_2_Group extends GroupToken {
+protected class TestOptional_Group_2 extends GroupToken {
 	
-	public TestOptional_2_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public TestOptional_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTestOptionalAccess().getGroup_2();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new TestOptional_2_1_Assignment_opt2(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new TestOptional_2_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
-	}
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestOptional_Opt2Assignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
 }
 
 // ":"
-protected class TestOptional_2_0_Keyword extends KeywordToken  {
+protected class TestOptional_ColonKeyword_2_0 extends KeywordToken  {
 	
-	public TestOptional_2_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestOptional_ColonKeyword_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestOptionalAccess().getColonKeyword_2_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestOptional_Opt1Assignment_1(parent, this, 0, inst);
+			case 1: return new TestOptional_OptionalKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // opt2=INT
-protected class TestOptional_2_1_Assignment_opt2 extends AssignmentToken  {
+protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 	
-	public TestOptional_2_1_Assignment_opt2(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestOptional_Opt2Assignment_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestOptionalAccess().getOpt2Assignment_2_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("opt2",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestOptional_ColonKeyword_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("opt2",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("opt2");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -444,66 +516,82 @@ protected class TestOptional_2_1_Assignment_opt2 extends AssignmentToken  {
 // "list" (item+=INT)*
 protected class TestList_Group extends GroupToken {
 	
-	public TestList_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestList_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTestListAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new TestList_1_Assignment_item(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new TestList_0_Keyword_list(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestList_ItemAssignment_1(parent, this, 0, inst);
+			case 1: return new TestList_ListKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "list"
-protected class TestList_0_Keyword_list extends KeywordToken  {
+protected class TestList_ListKeyword_0 extends KeywordToken  {
 	
-	public TestList_0_Keyword_list(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public TestList_ListKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTestListAccess().getListKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // (item+=INT)*
-protected class TestList_1_Assignment_item extends AssignmentToken  {
+protected class TestList_ItemAssignment_1 extends AssignmentToken  {
 	
-	public TestList_1_Assignment_item(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public TestList_ItemAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTestListAccess().getItemAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("item",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TestList_ItemAssignment_1(parent, this, 0, inst);
+			case 1: return new TestList_ListKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("item",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("item");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 

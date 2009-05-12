@@ -133,7 +133,7 @@ public class LookaheadLangPackageImpl extends EPackageImpl implements LookaheadL
     if (isInited) return (LookaheadLangPackage)EPackage.Registry.INSTANCE.getEPackage(LookaheadLangPackage.eNS_URI);
 
     // Obtain or create and register package
-    LookaheadLangPackageImpl theLookaheadLangPackage = (LookaheadLangPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof LookaheadLangPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new LookaheadLangPackageImpl());
+    LookaheadLangPackageImpl theLookaheadLangPackage = (LookaheadLangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LookaheadLangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LookaheadLangPackageImpl());
 
     isInited = true;
 

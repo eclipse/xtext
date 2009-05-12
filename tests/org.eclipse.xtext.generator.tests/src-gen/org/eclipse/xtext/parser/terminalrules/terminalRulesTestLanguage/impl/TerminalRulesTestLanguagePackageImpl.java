@@ -84,7 +84,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
     if (isInited) return (TerminalRulesTestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(TerminalRulesTestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    TerminalRulesTestLanguagePackageImpl theTerminalRulesTestLanguagePackage = (TerminalRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TerminalRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new TerminalRulesTestLanguagePackageImpl());
+    TerminalRulesTestLanguagePackageImpl theTerminalRulesTestLanguagePackage = (TerminalRulesTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof TerminalRulesTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new TerminalRulesTestLanguagePackageImpl());
 
     isInited = true;
 

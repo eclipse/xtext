@@ -117,7 +117,7 @@ public class FowlerdslPackageImpl extends EPackageImpl implements FowlerdslPacka
     if (isInited) return (FowlerdslPackage)EPackage.Registry.INSTANCE.getEPackage(FowlerdslPackage.eNS_URI);
 
     // Obtain or create and register package
-    FowlerdslPackageImpl theFowlerdslPackage = (FowlerdslPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FowlerdslPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FowlerdslPackageImpl());
+    FowlerdslPackageImpl theFowlerdslPackage = (FowlerdslPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof FowlerdslPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new FowlerdslPackageImpl());
 
     isInited = true;
 

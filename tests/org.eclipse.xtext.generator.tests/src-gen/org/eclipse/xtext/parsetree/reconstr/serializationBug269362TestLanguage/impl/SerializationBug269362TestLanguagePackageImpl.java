@@ -84,7 +84,7 @@ public class SerializationBug269362TestLanguagePackageImpl extends EPackageImpl 
     if (isInited) return (SerializationBug269362TestLanguagePackage)EPackage.Registry.INSTANCE.getEPackage(SerializationBug269362TestLanguagePackage.eNS_URI);
 
     // Obtain or create and register package
-    SerializationBug269362TestLanguagePackageImpl theSerializationBug269362TestLanguagePackage = (SerializationBug269362TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SerializationBug269362TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SerializationBug269362TestLanguagePackageImpl());
+    SerializationBug269362TestLanguagePackageImpl theSerializationBug269362TestLanguagePackage = (SerializationBug269362TestLanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof SerializationBug269362TestLanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new SerializationBug269362TestLanguagePackageImpl());
 
     isInited = true;
 

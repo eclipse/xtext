@@ -3,62 +3,45 @@
 */
 package org.eclipse.xtext.grammarinheritance.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class AbstractTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class AbstractTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private AbstractTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getInheritedParserRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new InheritedParserRule_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getAbstractCallOverridenParserRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new AbstractCallOverridenParserRule_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new OverridableParserRule_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getOverridableParserRule2Rule().getType().getClassifier())) {
-			final AbstractToken t = new OverridableParserRule2_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getAbstractCallExtendedParserRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new AbstractCallExtendedParserRule_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new ExtendableParserRule_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public AbstractTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new InheritedParserRule_Group(this, this, 0, inst);
+			case 1: return new AbstractCallOverridenParserRule_Group(this, this, 1, inst);
+			case 2: return new OverridableParserRule_Group(this, this, 2, inst);
+			case 3: return new OverridableParserRule2_Group(this, this, 3, inst);
+			case 4: return new AbstractCallExtendedParserRule_Group(this, this, 4, inst);
+			case 5: return new ExtendableParserRule_Group(this, this, 5, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule InheritedParserRule ****************
@@ -71,66 +54,80 @@ public class AbstractTestLanguageParsetreeConstructor extends AbstractParseTreeC
 // "element" name=ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
-	public InheritedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public InheritedParserRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getInheritedParserRuleAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new InheritedParserRule_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new InheritedParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new InheritedParserRule_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getInheritedParserRuleRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "element"
-protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
+protected class InheritedParserRule_ElementKeyword_0 extends KeywordToken  {
 	
-	public InheritedParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public InheritedParserRule_ElementKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=ID
-protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
+protected class InheritedParserRule_NameAssignment_1 extends AssignmentToken  {
 	
-	public InheritedParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public InheritedParserRule_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getInheritedParserRuleAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new InheritedParserRule_ElementKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -147,74 +144,91 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 // "overridemodel" (elements+=OverridableParserRule)*
 protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	
-	public AbstractCallOverridenParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AbstractCallOverridenParserRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAbstractCallOverridenParserRuleAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new AbstractCallOverridenParserRule_1_Assignment_elements(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new AbstractCallOverridenParserRule_0_Keyword_overridemodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AbstractCallOverridenParserRule_ElementsAssignment_1(parent, this, 0, inst);
+			case 1: return new AbstractCallOverridenParserRule_OverridemodelKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAbstractCallOverridenParserRuleRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "overridemodel"
-protected class AbstractCallOverridenParserRule_0_Keyword_overridemodel extends KeywordToken  {
+protected class AbstractCallOverridenParserRule_OverridemodelKeyword_0 extends KeywordToken  {
 	
-	public AbstractCallOverridenParserRule_0_Keyword_overridemodel(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AbstractCallOverridenParserRule_OverridemodelKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAbstractCallOverridenParserRuleAccess().getOverridemodelKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // (elements+=OverridableParserRule)*
-protected class AbstractCallOverridenParserRule_1_Assignment_elements extends AssignmentToken  {
+protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends AssignmentToken  {
 	
-	public AbstractCallOverridenParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public AbstractCallOverridenParserRule_ElementsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAbstractCallOverridenParserRuleAccess().getElementsAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("elements");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new OverridableParserRule_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) {
-				Solution s = new OverridableParserRule_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new AbstractCallOverridenParserRule_ElementsAssignment_1(parent, next, 0, consumed);
+			case 1: return new AbstractCallOverridenParserRule_OverridemodelKeyword_0(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -231,66 +245,80 @@ protected class AbstractCallOverridenParserRule_1_Assignment_elements extends As
 // "element" name=ID
 protected class OverridableParserRule_Group extends GroupToken {
 	
-	public OverridableParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public OverridableParserRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getOverridableParserRuleAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new OverridableParserRule_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new OverridableParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new OverridableParserRule_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getOverridableParserRuleRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "element"
-protected class OverridableParserRule_0_Keyword_element extends KeywordToken  {
+protected class OverridableParserRule_ElementKeyword_0 extends KeywordToken  {
 	
-	public OverridableParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public OverridableParserRule_ElementKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=ID
-protected class OverridableParserRule_1_Assignment_name extends AssignmentToken  {
+protected class OverridableParserRule_NameAssignment_1 extends AssignmentToken  {
 	
-	public OverridableParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public OverridableParserRule_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getOverridableParserRuleAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new OverridableParserRule_ElementKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -307,66 +335,80 @@ protected class OverridableParserRule_1_Assignment_name extends AssignmentToken 
 // "other element" name=STRING
 protected class OverridableParserRule2_Group extends GroupToken {
 	
-	public OverridableParserRule2_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public OverridableParserRule2_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getOverridableParserRule2Access().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new OverridableParserRule2_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new OverridableParserRule2_0_Keyword_otherelement(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new OverridableParserRule2_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getOverridableParserRule2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "other element"
-protected class OverridableParserRule2_0_Keyword_otherelement extends KeywordToken  {
+protected class OverridableParserRule2_OtherElementKeyword_0 extends KeywordToken  {
 	
-	public OverridableParserRule2_0_Keyword_otherelement(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public OverridableParserRule2_OtherElementKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getOverridableParserRule2Access().getOtherElementKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=STRING
-protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken  {
+protected class OverridableParserRule2_NameAssignment_1 extends AssignmentToken  {
 	
-	public OverridableParserRule2_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public OverridableParserRule2_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getOverridableParserRule2Access().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new OverridableParserRule2_OtherElementKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridableParserRule2Access().getNameSTRINGTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -383,74 +425,91 @@ protected class OverridableParserRule2_1_Assignment_name extends AssignmentToken
 // "extendedmodel" (elements+=ExtendableParserRule)*
 protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	
-	public AbstractCallExtendedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AbstractCallExtendedParserRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAbstractCallExtendedParserRuleAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new AbstractCallExtendedParserRule_1_Assignment_elements(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new AbstractCallExtendedParserRule_0_Keyword_extendedmodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AbstractCallExtendedParserRule_ElementsAssignment_1(parent, this, 0, inst);
+			case 1: return new AbstractCallExtendedParserRule_ExtendedmodelKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAbstractCallExtendedParserRuleRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "extendedmodel"
-protected class AbstractCallExtendedParserRule_0_Keyword_extendedmodel extends KeywordToken  {
+protected class AbstractCallExtendedParserRule_ExtendedmodelKeyword_0 extends KeywordToken  {
 	
-	public AbstractCallExtendedParserRule_0_Keyword_extendedmodel(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AbstractCallExtendedParserRule_ExtendedmodelKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAbstractCallExtendedParserRuleAccess().getExtendedmodelKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // (elements+=ExtendableParserRule)*
-protected class AbstractCallExtendedParserRule_1_Assignment_elements extends AssignmentToken  {
+protected class AbstractCallExtendedParserRule_ElementsAssignment_1 extends AssignmentToken  {
 	
-	public AbstractCallExtendedParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public AbstractCallExtendedParserRule_ElementsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAbstractCallExtendedParserRuleAccess().getElementsAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("elements");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ExtendableParserRule_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) {
-				Solution s = new ExtendableParserRule_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new AbstractCallExtendedParserRule_ElementsAssignment_1(parent, next, 0, consumed);
+			case 1: return new AbstractCallExtendedParserRule_ExtendedmodelKeyword_0(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -467,66 +526,80 @@ protected class AbstractCallExtendedParserRule_1_Assignment_elements extends Ass
 // "element" name=ID
 protected class ExtendableParserRule_Group extends GroupToken {
 	
-	public ExtendableParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public ExtendableParserRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getExtendableParserRuleAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new ExtendableParserRule_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new ExtendableParserRule_0_Keyword_element(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ExtendableParserRule_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getExtendableParserRuleRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "element"
-protected class ExtendableParserRule_0_Keyword_element extends KeywordToken  {
+protected class ExtendableParserRule_ElementKeyword_0 extends KeywordToken  {
 	
-	public ExtendableParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public ExtendableParserRule_ElementKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=ID
-protected class ExtendableParserRule_1_Assignment_name extends AssignmentToken  {
+protected class ExtendableParserRule_NameAssignment_1 extends AssignmentToken  {
 	
-	public ExtendableParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public ExtendableParserRule_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getExtendableParserRuleAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ExtendableParserRule_ElementKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 

@@ -3,1538 +3,291 @@
 */
 package org.eclipse.xtext.generator.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.generator.services.GeneratorTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class GeneratorTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class GeneratorTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private GeneratorTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new Rule_Keyword_x(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) {
-			final AbstractToken t = new RuleB_Keyword_y(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule1Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule1_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule2Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule2_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule3Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule3_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule4Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule4_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule5Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule5_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule6Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule6_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule7Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule7_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule8Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule8_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule9Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule9_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule10Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule10_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule11Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule11_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule12Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule12_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule13Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule13_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule14Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule14_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule15Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule15_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule16Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule16_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule17Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule17_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule18Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule18_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule19Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule19_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule20Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule20_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule21Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule21_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule22Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule22_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule23Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule23_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule24Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule24_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule25Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule25_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule26Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule26_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule27Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule27_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule28Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule28_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule29Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule29_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule30Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule30_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule31Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule31_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule32Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule32_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule33Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule33_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule34Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule34_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule35Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule35_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule36Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule36_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule37Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule37_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule38Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule38_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule39Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule39_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule40Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule40_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule41Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule41_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule42Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule42_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule43Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule43_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule44Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule44_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule45Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule45_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule46Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule46_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule47Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule47_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule48Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule48_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule49Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule49_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule50Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule50_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule51Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule51_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule52Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule52_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule53Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule53_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule54Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule54_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule55Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule55_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule56Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule56_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule57Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule57_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule58Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule58_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule59Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule59_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule60Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule60_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule61Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule61_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule62Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule62_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule63Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule63_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule64Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule64_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule65Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule65_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule66Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule66_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule67Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule67_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule68Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule68_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule69Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule69_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule70Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule70_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule71Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule71_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule72Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule72_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule73Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule73_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule74Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule74_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule75Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule75_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule76Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule76_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule77Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule77_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule78Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule78_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule79Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule79_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule80Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule80_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule81Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule81_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule82Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule82_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule83Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule83_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule84Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule84_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule85Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule85_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule86Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule86_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule87Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule87_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule88Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule88_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule89Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule89_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule90Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule90_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule91Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule91_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule92Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule92_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule93Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule93_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule94Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule94_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule95Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule95_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule96Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule96_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule97Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule97_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule98Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule98_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule99Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule99_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule100Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule100_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule101Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule101_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule102Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule102_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule103Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule103_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule104Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule104_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule105Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule105_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule106Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule106_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule107Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule107_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule108Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule108_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule109Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule109_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule110Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule110_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule111Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule111_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule112Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule112_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule113Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule113_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule114Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule114_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule115Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule115_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule116Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule116_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule117Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule117_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule118Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule118_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule119Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule119_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule120Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule120_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule121Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule121_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule122Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule122_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule123Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule123_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule124Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule124_RuleCall_Rule(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule125Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule125_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule126Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule126_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule127Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule127_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule128Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule128_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule129Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule129_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule130Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule130_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule131Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule131_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule132Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule132_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule133Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule133_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule134Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule134_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule135Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule135_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule136Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule136_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule137Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule137_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule138Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule138_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule139Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule139_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule140Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule140_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule141Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule141_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule142Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule142_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule143Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule143_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule144Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule144_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule145Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule145_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule146Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule146_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule147Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule147_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule148Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule148_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule149Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule149_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule150Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule150_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule151Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule151_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule152Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule152_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule153Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule153_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule154Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule154_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule155Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule155_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule156Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule156_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule157Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule157_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule158Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule158_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule159Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule159_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule160Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule160_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule161Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule161_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule162Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule162_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule163Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule163_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule164Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule164_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule165Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule165_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule166Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule166_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule167Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule167_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule168Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule168_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule169Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule169_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule170Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule170_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule171Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule171_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule172Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule172_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule173Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule173_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule174Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule174_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule175Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule175_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule176Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule176_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule177Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule177_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule178Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule178_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule179Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule179_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule180Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule180_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule181Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule181_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule182Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule182_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule183Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule183_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule184Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule184_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule185Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule185_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule186Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule186_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule187Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule187_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule188Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule188_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule189Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule189_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule190Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule190_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule191Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule191_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule192Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule192_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule193Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule193_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule194Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule194_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule195Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule195_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule196Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule196_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule197Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule197_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule198Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule198_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule199Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule199_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule200Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule200_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule201Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule201_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule202Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule202_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule203Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule203_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule204Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule204_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule205Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule205_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule206Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule206_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule207Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule207_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule208Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule208_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule209Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule209_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule210Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule210_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule211Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule211_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule212Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule212_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule213Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule213_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule214Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule214_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule215Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule215_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule216Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule216_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule217Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule217_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule218Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule218_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule219Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule219_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule220Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule220_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule221Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule221_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule222Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule222_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule223Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule223_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule224Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule224_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule225Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule225_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule226Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule226_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule227Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule227_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule228Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule228_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule229Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule229_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule230Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule230_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule231Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule231_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule232Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule232_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule233Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule233_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule234Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule234_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule235Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule235_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule236Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule236_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule237Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule237_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule238Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule238_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule239Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule239_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule240Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule240_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule241Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule241_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule242Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule242_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule243Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule243_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule244Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule244_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule245Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule245_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule246Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule246_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule247Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule247_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule248Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule248_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule249Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule249_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getRule250Rule().getType().getClassifier())) {
-			final AbstractToken t = new Rule250_RuleCall_RuleB(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public GeneratorTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			case 1: return new RuleB_YKeyword(this, this, 1, inst);
+			case 2: return new Rule1_RuleParserRuleCall(this, this, 2, inst);
+			case 3: return new Rule2_RuleParserRuleCall(this, this, 3, inst);
+			case 4: return new Rule3_RuleParserRuleCall(this, this, 4, inst);
+			case 5: return new Rule4_RuleParserRuleCall(this, this, 5, inst);
+			case 6: return new Rule5_RuleParserRuleCall(this, this, 6, inst);
+			case 7: return new Rule6_RuleParserRuleCall(this, this, 7, inst);
+			case 8: return new Rule7_RuleParserRuleCall(this, this, 8, inst);
+			case 9: return new Rule8_RuleParserRuleCall(this, this, 9, inst);
+			case 10: return new Rule9_RuleParserRuleCall(this, this, 10, inst);
+			case 11: return new Rule10_RuleParserRuleCall(this, this, 11, inst);
+			case 12: return new Rule11_RuleParserRuleCall(this, this, 12, inst);
+			case 13: return new Rule12_RuleParserRuleCall(this, this, 13, inst);
+			case 14: return new Rule13_RuleParserRuleCall(this, this, 14, inst);
+			case 15: return new Rule14_RuleParserRuleCall(this, this, 15, inst);
+			case 16: return new Rule15_RuleParserRuleCall(this, this, 16, inst);
+			case 17: return new Rule16_RuleParserRuleCall(this, this, 17, inst);
+			case 18: return new Rule17_RuleParserRuleCall(this, this, 18, inst);
+			case 19: return new Rule18_RuleParserRuleCall(this, this, 19, inst);
+			case 20: return new Rule19_RuleParserRuleCall(this, this, 20, inst);
+			case 21: return new Rule20_RuleParserRuleCall(this, this, 21, inst);
+			case 22: return new Rule21_RuleParserRuleCall(this, this, 22, inst);
+			case 23: return new Rule22_RuleParserRuleCall(this, this, 23, inst);
+			case 24: return new Rule23_RuleParserRuleCall(this, this, 24, inst);
+			case 25: return new Rule24_RuleParserRuleCall(this, this, 25, inst);
+			case 26: return new Rule25_RuleParserRuleCall(this, this, 26, inst);
+			case 27: return new Rule26_RuleParserRuleCall(this, this, 27, inst);
+			case 28: return new Rule27_RuleParserRuleCall(this, this, 28, inst);
+			case 29: return new Rule28_RuleParserRuleCall(this, this, 29, inst);
+			case 30: return new Rule29_RuleParserRuleCall(this, this, 30, inst);
+			case 31: return new Rule30_RuleParserRuleCall(this, this, 31, inst);
+			case 32: return new Rule31_RuleParserRuleCall(this, this, 32, inst);
+			case 33: return new Rule32_RuleParserRuleCall(this, this, 33, inst);
+			case 34: return new Rule33_RuleParserRuleCall(this, this, 34, inst);
+			case 35: return new Rule34_RuleParserRuleCall(this, this, 35, inst);
+			case 36: return new Rule35_RuleParserRuleCall(this, this, 36, inst);
+			case 37: return new Rule36_RuleParserRuleCall(this, this, 37, inst);
+			case 38: return new Rule37_RuleParserRuleCall(this, this, 38, inst);
+			case 39: return new Rule38_RuleParserRuleCall(this, this, 39, inst);
+			case 40: return new Rule39_RuleParserRuleCall(this, this, 40, inst);
+			case 41: return new Rule40_RuleParserRuleCall(this, this, 41, inst);
+			case 42: return new Rule41_RuleParserRuleCall(this, this, 42, inst);
+			case 43: return new Rule42_RuleParserRuleCall(this, this, 43, inst);
+			case 44: return new Rule43_RuleParserRuleCall(this, this, 44, inst);
+			case 45: return new Rule44_RuleParserRuleCall(this, this, 45, inst);
+			case 46: return new Rule45_RuleParserRuleCall(this, this, 46, inst);
+			case 47: return new Rule46_RuleParserRuleCall(this, this, 47, inst);
+			case 48: return new Rule47_RuleParserRuleCall(this, this, 48, inst);
+			case 49: return new Rule48_RuleParserRuleCall(this, this, 49, inst);
+			case 50: return new Rule49_RuleParserRuleCall(this, this, 50, inst);
+			case 51: return new Rule50_RuleParserRuleCall(this, this, 51, inst);
+			case 52: return new Rule51_RuleParserRuleCall(this, this, 52, inst);
+			case 53: return new Rule52_RuleParserRuleCall(this, this, 53, inst);
+			case 54: return new Rule53_RuleParserRuleCall(this, this, 54, inst);
+			case 55: return new Rule54_RuleParserRuleCall(this, this, 55, inst);
+			case 56: return new Rule55_RuleParserRuleCall(this, this, 56, inst);
+			case 57: return new Rule56_RuleParserRuleCall(this, this, 57, inst);
+			case 58: return new Rule57_RuleParserRuleCall(this, this, 58, inst);
+			case 59: return new Rule58_RuleParserRuleCall(this, this, 59, inst);
+			case 60: return new Rule59_RuleParserRuleCall(this, this, 60, inst);
+			case 61: return new Rule60_RuleParserRuleCall(this, this, 61, inst);
+			case 62: return new Rule61_RuleParserRuleCall(this, this, 62, inst);
+			case 63: return new Rule62_RuleParserRuleCall(this, this, 63, inst);
+			case 64: return new Rule63_RuleParserRuleCall(this, this, 64, inst);
+			case 65: return new Rule64_RuleParserRuleCall(this, this, 65, inst);
+			case 66: return new Rule65_RuleParserRuleCall(this, this, 66, inst);
+			case 67: return new Rule66_RuleParserRuleCall(this, this, 67, inst);
+			case 68: return new Rule67_RuleParserRuleCall(this, this, 68, inst);
+			case 69: return new Rule68_RuleParserRuleCall(this, this, 69, inst);
+			case 70: return new Rule69_RuleParserRuleCall(this, this, 70, inst);
+			case 71: return new Rule70_RuleParserRuleCall(this, this, 71, inst);
+			case 72: return new Rule71_RuleParserRuleCall(this, this, 72, inst);
+			case 73: return new Rule72_RuleParserRuleCall(this, this, 73, inst);
+			case 74: return new Rule73_RuleParserRuleCall(this, this, 74, inst);
+			case 75: return new Rule74_RuleParserRuleCall(this, this, 75, inst);
+			case 76: return new Rule75_RuleParserRuleCall(this, this, 76, inst);
+			case 77: return new Rule76_RuleParserRuleCall(this, this, 77, inst);
+			case 78: return new Rule77_RuleParserRuleCall(this, this, 78, inst);
+			case 79: return new Rule78_RuleParserRuleCall(this, this, 79, inst);
+			case 80: return new Rule79_RuleParserRuleCall(this, this, 80, inst);
+			case 81: return new Rule80_RuleParserRuleCall(this, this, 81, inst);
+			case 82: return new Rule81_RuleParserRuleCall(this, this, 82, inst);
+			case 83: return new Rule82_RuleParserRuleCall(this, this, 83, inst);
+			case 84: return new Rule83_RuleParserRuleCall(this, this, 84, inst);
+			case 85: return new Rule84_RuleParserRuleCall(this, this, 85, inst);
+			case 86: return new Rule85_RuleParserRuleCall(this, this, 86, inst);
+			case 87: return new Rule86_RuleParserRuleCall(this, this, 87, inst);
+			case 88: return new Rule87_RuleParserRuleCall(this, this, 88, inst);
+			case 89: return new Rule88_RuleParserRuleCall(this, this, 89, inst);
+			case 90: return new Rule89_RuleParserRuleCall(this, this, 90, inst);
+			case 91: return new Rule90_RuleParserRuleCall(this, this, 91, inst);
+			case 92: return new Rule91_RuleParserRuleCall(this, this, 92, inst);
+			case 93: return new Rule92_RuleParserRuleCall(this, this, 93, inst);
+			case 94: return new Rule93_RuleParserRuleCall(this, this, 94, inst);
+			case 95: return new Rule94_RuleParserRuleCall(this, this, 95, inst);
+			case 96: return new Rule95_RuleParserRuleCall(this, this, 96, inst);
+			case 97: return new Rule96_RuleParserRuleCall(this, this, 97, inst);
+			case 98: return new Rule97_RuleParserRuleCall(this, this, 98, inst);
+			case 99: return new Rule98_RuleParserRuleCall(this, this, 99, inst);
+			case 100: return new Rule99_RuleParserRuleCall(this, this, 100, inst);
+			case 101: return new Rule100_RuleParserRuleCall(this, this, 101, inst);
+			case 102: return new Rule101_RuleParserRuleCall(this, this, 102, inst);
+			case 103: return new Rule102_RuleParserRuleCall(this, this, 103, inst);
+			case 104: return new Rule103_RuleParserRuleCall(this, this, 104, inst);
+			case 105: return new Rule104_RuleParserRuleCall(this, this, 105, inst);
+			case 106: return new Rule105_RuleParserRuleCall(this, this, 106, inst);
+			case 107: return new Rule106_RuleParserRuleCall(this, this, 107, inst);
+			case 108: return new Rule107_RuleParserRuleCall(this, this, 108, inst);
+			case 109: return new Rule108_RuleParserRuleCall(this, this, 109, inst);
+			case 110: return new Rule109_RuleParserRuleCall(this, this, 110, inst);
+			case 111: return new Rule110_RuleParserRuleCall(this, this, 111, inst);
+			case 112: return new Rule111_RuleParserRuleCall(this, this, 112, inst);
+			case 113: return new Rule112_RuleParserRuleCall(this, this, 113, inst);
+			case 114: return new Rule113_RuleParserRuleCall(this, this, 114, inst);
+			case 115: return new Rule114_RuleParserRuleCall(this, this, 115, inst);
+			case 116: return new Rule115_RuleParserRuleCall(this, this, 116, inst);
+			case 117: return new Rule116_RuleParserRuleCall(this, this, 117, inst);
+			case 118: return new Rule117_RuleParserRuleCall(this, this, 118, inst);
+			case 119: return new Rule118_RuleParserRuleCall(this, this, 119, inst);
+			case 120: return new Rule119_RuleParserRuleCall(this, this, 120, inst);
+			case 121: return new Rule120_RuleParserRuleCall(this, this, 121, inst);
+			case 122: return new Rule121_RuleParserRuleCall(this, this, 122, inst);
+			case 123: return new Rule122_RuleParserRuleCall(this, this, 123, inst);
+			case 124: return new Rule123_RuleParserRuleCall(this, this, 124, inst);
+			case 125: return new Rule124_RuleParserRuleCall(this, this, 125, inst);
+			case 126: return new Rule125_RuleBParserRuleCall(this, this, 126, inst);
+			case 127: return new Rule126_RuleBParserRuleCall(this, this, 127, inst);
+			case 128: return new Rule127_RuleBParserRuleCall(this, this, 128, inst);
+			case 129: return new Rule128_RuleBParserRuleCall(this, this, 129, inst);
+			case 130: return new Rule129_RuleBParserRuleCall(this, this, 130, inst);
+			case 131: return new Rule130_RuleBParserRuleCall(this, this, 131, inst);
+			case 132: return new Rule131_RuleBParserRuleCall(this, this, 132, inst);
+			case 133: return new Rule132_RuleBParserRuleCall(this, this, 133, inst);
+			case 134: return new Rule133_RuleBParserRuleCall(this, this, 134, inst);
+			case 135: return new Rule134_RuleBParserRuleCall(this, this, 135, inst);
+			case 136: return new Rule135_RuleBParserRuleCall(this, this, 136, inst);
+			case 137: return new Rule136_RuleBParserRuleCall(this, this, 137, inst);
+			case 138: return new Rule137_RuleBParserRuleCall(this, this, 138, inst);
+			case 139: return new Rule138_RuleBParserRuleCall(this, this, 139, inst);
+			case 140: return new Rule139_RuleBParserRuleCall(this, this, 140, inst);
+			case 141: return new Rule140_RuleBParserRuleCall(this, this, 141, inst);
+			case 142: return new Rule141_RuleBParserRuleCall(this, this, 142, inst);
+			case 143: return new Rule142_RuleBParserRuleCall(this, this, 143, inst);
+			case 144: return new Rule143_RuleBParserRuleCall(this, this, 144, inst);
+			case 145: return new Rule144_RuleBParserRuleCall(this, this, 145, inst);
+			case 146: return new Rule145_RuleBParserRuleCall(this, this, 146, inst);
+			case 147: return new Rule146_RuleBParserRuleCall(this, this, 147, inst);
+			case 148: return new Rule147_RuleBParserRuleCall(this, this, 148, inst);
+			case 149: return new Rule148_RuleBParserRuleCall(this, this, 149, inst);
+			case 150: return new Rule149_RuleBParserRuleCall(this, this, 150, inst);
+			case 151: return new Rule150_RuleBParserRuleCall(this, this, 151, inst);
+			case 152: return new Rule151_RuleBParserRuleCall(this, this, 152, inst);
+			case 153: return new Rule152_RuleBParserRuleCall(this, this, 153, inst);
+			case 154: return new Rule153_RuleBParserRuleCall(this, this, 154, inst);
+			case 155: return new Rule154_RuleBParserRuleCall(this, this, 155, inst);
+			case 156: return new Rule155_RuleBParserRuleCall(this, this, 156, inst);
+			case 157: return new Rule156_RuleBParserRuleCall(this, this, 157, inst);
+			case 158: return new Rule157_RuleBParserRuleCall(this, this, 158, inst);
+			case 159: return new Rule158_RuleBParserRuleCall(this, this, 159, inst);
+			case 160: return new Rule159_RuleBParserRuleCall(this, this, 160, inst);
+			case 161: return new Rule160_RuleBParserRuleCall(this, this, 161, inst);
+			case 162: return new Rule161_RuleBParserRuleCall(this, this, 162, inst);
+			case 163: return new Rule162_RuleBParserRuleCall(this, this, 163, inst);
+			case 164: return new Rule163_RuleBParserRuleCall(this, this, 164, inst);
+			case 165: return new Rule164_RuleBParserRuleCall(this, this, 165, inst);
+			case 166: return new Rule165_RuleBParserRuleCall(this, this, 166, inst);
+			case 167: return new Rule166_RuleBParserRuleCall(this, this, 167, inst);
+			case 168: return new Rule167_RuleBParserRuleCall(this, this, 168, inst);
+			case 169: return new Rule168_RuleBParserRuleCall(this, this, 169, inst);
+			case 170: return new Rule169_RuleBParserRuleCall(this, this, 170, inst);
+			case 171: return new Rule170_RuleBParserRuleCall(this, this, 171, inst);
+			case 172: return new Rule171_RuleBParserRuleCall(this, this, 172, inst);
+			case 173: return new Rule172_RuleBParserRuleCall(this, this, 173, inst);
+			case 174: return new Rule173_RuleBParserRuleCall(this, this, 174, inst);
+			case 175: return new Rule174_RuleBParserRuleCall(this, this, 175, inst);
+			case 176: return new Rule175_RuleBParserRuleCall(this, this, 176, inst);
+			case 177: return new Rule176_RuleBParserRuleCall(this, this, 177, inst);
+			case 178: return new Rule177_RuleBParserRuleCall(this, this, 178, inst);
+			case 179: return new Rule178_RuleBParserRuleCall(this, this, 179, inst);
+			case 180: return new Rule179_RuleBParserRuleCall(this, this, 180, inst);
+			case 181: return new Rule180_RuleBParserRuleCall(this, this, 181, inst);
+			case 182: return new Rule181_RuleBParserRuleCall(this, this, 182, inst);
+			case 183: return new Rule182_RuleBParserRuleCall(this, this, 183, inst);
+			case 184: return new Rule183_RuleBParserRuleCall(this, this, 184, inst);
+			case 185: return new Rule184_RuleBParserRuleCall(this, this, 185, inst);
+			case 186: return new Rule185_RuleBParserRuleCall(this, this, 186, inst);
+			case 187: return new Rule186_RuleBParserRuleCall(this, this, 187, inst);
+			case 188: return new Rule187_RuleBParserRuleCall(this, this, 188, inst);
+			case 189: return new Rule188_RuleBParserRuleCall(this, this, 189, inst);
+			case 190: return new Rule189_RuleBParserRuleCall(this, this, 190, inst);
+			case 191: return new Rule190_RuleBParserRuleCall(this, this, 191, inst);
+			case 192: return new Rule191_RuleBParserRuleCall(this, this, 192, inst);
+			case 193: return new Rule192_RuleBParserRuleCall(this, this, 193, inst);
+			case 194: return new Rule193_RuleBParserRuleCall(this, this, 194, inst);
+			case 195: return new Rule194_RuleBParserRuleCall(this, this, 195, inst);
+			case 196: return new Rule195_RuleBParserRuleCall(this, this, 196, inst);
+			case 197: return new Rule196_RuleBParserRuleCall(this, this, 197, inst);
+			case 198: return new Rule197_RuleBParserRuleCall(this, this, 198, inst);
+			case 199: return new Rule198_RuleBParserRuleCall(this, this, 199, inst);
+			case 200: return new Rule199_RuleBParserRuleCall(this, this, 200, inst);
+			case 201: return new Rule200_RuleBParserRuleCall(this, this, 201, inst);
+			case 202: return new Rule201_RuleBParserRuleCall(this, this, 202, inst);
+			case 203: return new Rule202_RuleBParserRuleCall(this, this, 203, inst);
+			case 204: return new Rule203_RuleBParserRuleCall(this, this, 204, inst);
+			case 205: return new Rule204_RuleBParserRuleCall(this, this, 205, inst);
+			case 206: return new Rule205_RuleBParserRuleCall(this, this, 206, inst);
+			case 207: return new Rule206_RuleBParserRuleCall(this, this, 207, inst);
+			case 208: return new Rule207_RuleBParserRuleCall(this, this, 208, inst);
+			case 209: return new Rule208_RuleBParserRuleCall(this, this, 209, inst);
+			case 210: return new Rule209_RuleBParserRuleCall(this, this, 210, inst);
+			case 211: return new Rule210_RuleBParserRuleCall(this, this, 211, inst);
+			case 212: return new Rule211_RuleBParserRuleCall(this, this, 212, inst);
+			case 213: return new Rule212_RuleBParserRuleCall(this, this, 213, inst);
+			case 214: return new Rule213_RuleBParserRuleCall(this, this, 214, inst);
+			case 215: return new Rule214_RuleBParserRuleCall(this, this, 215, inst);
+			case 216: return new Rule215_RuleBParserRuleCall(this, this, 216, inst);
+			case 217: return new Rule216_RuleBParserRuleCall(this, this, 217, inst);
+			case 218: return new Rule217_RuleBParserRuleCall(this, this, 218, inst);
+			case 219: return new Rule218_RuleBParserRuleCall(this, this, 219, inst);
+			case 220: return new Rule219_RuleBParserRuleCall(this, this, 220, inst);
+			case 221: return new Rule220_RuleBParserRuleCall(this, this, 221, inst);
+			case 222: return new Rule221_RuleBParserRuleCall(this, this, 222, inst);
+			case 223: return new Rule222_RuleBParserRuleCall(this, this, 223, inst);
+			case 224: return new Rule223_RuleBParserRuleCall(this, this, 224, inst);
+			case 225: return new Rule224_RuleBParserRuleCall(this, this, 225, inst);
+			case 226: return new Rule225_RuleBParserRuleCall(this, this, 226, inst);
+			case 227: return new Rule226_RuleBParserRuleCall(this, this, 227, inst);
+			case 228: return new Rule227_RuleBParserRuleCall(this, this, 228, inst);
+			case 229: return new Rule228_RuleBParserRuleCall(this, this, 229, inst);
+			case 230: return new Rule229_RuleBParserRuleCall(this, this, 230, inst);
+			case 231: return new Rule230_RuleBParserRuleCall(this, this, 231, inst);
+			case 232: return new Rule231_RuleBParserRuleCall(this, this, 232, inst);
+			case 233: return new Rule232_RuleBParserRuleCall(this, this, 233, inst);
+			case 234: return new Rule233_RuleBParserRuleCall(this, this, 234, inst);
+			case 235: return new Rule234_RuleBParserRuleCall(this, this, 235, inst);
+			case 236: return new Rule235_RuleBParserRuleCall(this, this, 236, inst);
+			case 237: return new Rule236_RuleBParserRuleCall(this, this, 237, inst);
+			case 238: return new Rule237_RuleBParserRuleCall(this, this, 238, inst);
+			case 239: return new Rule238_RuleBParserRuleCall(this, this, 239, inst);
+			case 240: return new Rule239_RuleBParserRuleCall(this, this, 240, inst);
+			case 241: return new Rule240_RuleBParserRuleCall(this, this, 241, inst);
+			case 242: return new Rule241_RuleBParserRuleCall(this, this, 242, inst);
+			case 243: return new Rule242_RuleBParserRuleCall(this, this, 243, inst);
+			case 244: return new Rule243_RuleBParserRuleCall(this, this, 244, inst);
+			case 245: return new Rule244_RuleBParserRuleCall(this, this, 245, inst);
+			case 246: return new Rule245_RuleBParserRuleCall(this, this, 246, inst);
+			case 247: return new Rule246_RuleBParserRuleCall(this, this, 247, inst);
+			case 248: return new Rule247_RuleBParserRuleCall(this, this, 248, inst);
+			case 249: return new Rule248_RuleBParserRuleCall(this, this, 249, inst);
+			case 250: return new Rule249_RuleBParserRuleCall(this, this, 250, inst);
+			case 251: return new Rule250_RuleBParserRuleCall(this, this, 251, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Rule ****************
@@ -1545,15 +298,28 @@ public class GeneratorTestLanguageParsetreeConstructor extends AbstractParseTree
  **/
 
 // "x"
-protected class Rule_Keyword_x extends KeywordToken  {
+protected class Rule_XKeyword extends KeywordToken  {
 	
-	public Rule_Keyword_x(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule_XKeyword(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getRuleAccess().getXKeyword();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 /************ end Rule Rule ****************/
@@ -1567,15 +333,28 @@ protected class Rule_Keyword_x extends KeywordToken  {
  **/
 
 // "y"
-protected class RuleB_Keyword_y extends KeywordToken  {
+protected class RuleB_YKeyword extends KeywordToken  {
 	
-	public RuleB_Keyword_y(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public RuleB_YKeyword(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getRuleBAccess().getYKeyword();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 /************ end Rule RuleB ****************/
@@ -1589,23 +368,38 @@ protected class RuleB_Keyword_y extends KeywordToken  {
  **/
 
 // Rule
-protected class Rule1_RuleCall_Rule extends RuleCallToken {
+protected class Rule1_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule1_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule1_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule1Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule1 ****************/
@@ -1619,23 +413,38 @@ protected class Rule1_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule2_RuleCall_Rule extends RuleCallToken {
+protected class Rule2_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule2_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule2_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule2Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule2 ****************/
@@ -1649,23 +458,38 @@ protected class Rule2_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule3_RuleCall_Rule extends RuleCallToken {
+protected class Rule3_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule3_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule3_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule3Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule3Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule3 ****************/
@@ -1679,23 +503,38 @@ protected class Rule3_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule4_RuleCall_Rule extends RuleCallToken {
+protected class Rule4_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule4_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule4_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule4Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule4Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule4 ****************/
@@ -1709,23 +548,38 @@ protected class Rule4_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule5_RuleCall_Rule extends RuleCallToken {
+protected class Rule5_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule5_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule5_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule5Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule5Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule5 ****************/
@@ -1739,23 +593,38 @@ protected class Rule5_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule6_RuleCall_Rule extends RuleCallToken {
+protected class Rule6_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule6_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule6_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule6Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule6Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule6 ****************/
@@ -1769,23 +638,38 @@ protected class Rule6_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule7_RuleCall_Rule extends RuleCallToken {
+protected class Rule7_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule7_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule7_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule7Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule7Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule7 ****************/
@@ -1799,23 +683,38 @@ protected class Rule7_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule8_RuleCall_Rule extends RuleCallToken {
+protected class Rule8_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule8_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule8_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule8Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule8Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule8 ****************/
@@ -1829,23 +728,38 @@ protected class Rule8_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule9_RuleCall_Rule extends RuleCallToken {
+protected class Rule9_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule9_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule9_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule9Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule9Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule9 ****************/
@@ -1859,23 +773,38 @@ protected class Rule9_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule10_RuleCall_Rule extends RuleCallToken {
+protected class Rule10_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule10_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule10_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule10Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule10Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule10 ****************/
@@ -1889,23 +818,38 @@ protected class Rule10_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule11_RuleCall_Rule extends RuleCallToken {
+protected class Rule11_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule11_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule11_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule11Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule11Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule11 ****************/
@@ -1919,23 +863,38 @@ protected class Rule11_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule12_RuleCall_Rule extends RuleCallToken {
+protected class Rule12_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule12_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule12_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule12Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule12Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule12 ****************/
@@ -1949,23 +908,38 @@ protected class Rule12_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule13_RuleCall_Rule extends RuleCallToken {
+protected class Rule13_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule13_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule13_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule13Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule13Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule13 ****************/
@@ -1979,23 +953,38 @@ protected class Rule13_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule14_RuleCall_Rule extends RuleCallToken {
+protected class Rule14_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule14_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule14_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule14Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule14Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule14 ****************/
@@ -2009,23 +998,38 @@ protected class Rule14_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule15_RuleCall_Rule extends RuleCallToken {
+protected class Rule15_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule15_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule15_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule15Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule15Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule15 ****************/
@@ -2039,23 +1043,38 @@ protected class Rule15_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule16_RuleCall_Rule extends RuleCallToken {
+protected class Rule16_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule16_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule16_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule16Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule16Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule16 ****************/
@@ -2069,23 +1088,38 @@ protected class Rule16_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule17_RuleCall_Rule extends RuleCallToken {
+protected class Rule17_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule17_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule17_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule17Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule17Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule17 ****************/
@@ -2099,23 +1133,38 @@ protected class Rule17_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule18_RuleCall_Rule extends RuleCallToken {
+protected class Rule18_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule18_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule18_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule18Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule18Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule18 ****************/
@@ -2129,23 +1178,38 @@ protected class Rule18_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule19_RuleCall_Rule extends RuleCallToken {
+protected class Rule19_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule19_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule19_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule19Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule19Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule19 ****************/
@@ -2159,23 +1223,38 @@ protected class Rule19_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule20_RuleCall_Rule extends RuleCallToken {
+protected class Rule20_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule20_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule20_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule20Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule20Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule20 ****************/
@@ -2189,23 +1268,38 @@ protected class Rule20_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule21_RuleCall_Rule extends RuleCallToken {
+protected class Rule21_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule21_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule21_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule21Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule21Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule21 ****************/
@@ -2219,23 +1313,38 @@ protected class Rule21_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule22_RuleCall_Rule extends RuleCallToken {
+protected class Rule22_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule22_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule22_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule22Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule22Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule22 ****************/
@@ -2249,23 +1358,38 @@ protected class Rule22_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule23_RuleCall_Rule extends RuleCallToken {
+protected class Rule23_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule23_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule23_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule23Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule23Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule23 ****************/
@@ -2279,23 +1403,38 @@ protected class Rule23_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule24_RuleCall_Rule extends RuleCallToken {
+protected class Rule24_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule24_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule24_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule24Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule24Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule24 ****************/
@@ -2309,23 +1448,38 @@ protected class Rule24_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule25_RuleCall_Rule extends RuleCallToken {
+protected class Rule25_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule25_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule25_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule25Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule25Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule25 ****************/
@@ -2339,23 +1493,38 @@ protected class Rule25_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule26_RuleCall_Rule extends RuleCallToken {
+protected class Rule26_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule26_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule26_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule26Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule26Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule26 ****************/
@@ -2369,23 +1538,38 @@ protected class Rule26_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule27_RuleCall_Rule extends RuleCallToken {
+protected class Rule27_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule27_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule27_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule27Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule27Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule27 ****************/
@@ -2399,23 +1583,38 @@ protected class Rule27_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule28_RuleCall_Rule extends RuleCallToken {
+protected class Rule28_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule28_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule28_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule28Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule28Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule28 ****************/
@@ -2429,23 +1628,38 @@ protected class Rule28_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule29_RuleCall_Rule extends RuleCallToken {
+protected class Rule29_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule29_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule29_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule29Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule29Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule29 ****************/
@@ -2459,23 +1673,38 @@ protected class Rule29_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule30_RuleCall_Rule extends RuleCallToken {
+protected class Rule30_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule30_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule30_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule30Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule30Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule30 ****************/
@@ -2489,23 +1718,38 @@ protected class Rule30_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule31_RuleCall_Rule extends RuleCallToken {
+protected class Rule31_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule31_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule31_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule31Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule31Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule31 ****************/
@@ -2519,23 +1763,38 @@ protected class Rule31_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule32_RuleCall_Rule extends RuleCallToken {
+protected class Rule32_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule32_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule32_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule32Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule32Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule32 ****************/
@@ -2549,23 +1808,38 @@ protected class Rule32_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule33_RuleCall_Rule extends RuleCallToken {
+protected class Rule33_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule33_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule33_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule33Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule33Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule33 ****************/
@@ -2579,23 +1853,38 @@ protected class Rule33_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule34_RuleCall_Rule extends RuleCallToken {
+protected class Rule34_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule34_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule34_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule34Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule34Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule34 ****************/
@@ -2609,23 +1898,38 @@ protected class Rule34_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule35_RuleCall_Rule extends RuleCallToken {
+protected class Rule35_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule35_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule35_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule35Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule35Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule35 ****************/
@@ -2639,23 +1943,38 @@ protected class Rule35_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule36_RuleCall_Rule extends RuleCallToken {
+protected class Rule36_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule36_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule36_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule36Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule36Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule36 ****************/
@@ -2669,23 +1988,38 @@ protected class Rule36_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule37_RuleCall_Rule extends RuleCallToken {
+protected class Rule37_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule37_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule37_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule37Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule37Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule37 ****************/
@@ -2699,23 +2033,38 @@ protected class Rule37_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule38_RuleCall_Rule extends RuleCallToken {
+protected class Rule38_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule38_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule38_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule38Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule38Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule38 ****************/
@@ -2729,23 +2078,38 @@ protected class Rule38_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule39_RuleCall_Rule extends RuleCallToken {
+protected class Rule39_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule39_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule39_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule39Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule39Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule39 ****************/
@@ -2759,23 +2123,38 @@ protected class Rule39_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule40_RuleCall_Rule extends RuleCallToken {
+protected class Rule40_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule40_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule40_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule40Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule40Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule40 ****************/
@@ -2789,23 +2168,38 @@ protected class Rule40_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule41_RuleCall_Rule extends RuleCallToken {
+protected class Rule41_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule41_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule41_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule41Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule41Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule41 ****************/
@@ -2819,23 +2213,38 @@ protected class Rule41_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule42_RuleCall_Rule extends RuleCallToken {
+protected class Rule42_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule42_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule42_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule42Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule42Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule42 ****************/
@@ -2849,23 +2258,38 @@ protected class Rule42_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule43_RuleCall_Rule extends RuleCallToken {
+protected class Rule43_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule43_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule43_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule43Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule43Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule43 ****************/
@@ -2879,23 +2303,38 @@ protected class Rule43_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule44_RuleCall_Rule extends RuleCallToken {
+protected class Rule44_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule44_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule44_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule44Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule44Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule44 ****************/
@@ -2909,23 +2348,38 @@ protected class Rule44_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule45_RuleCall_Rule extends RuleCallToken {
+protected class Rule45_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule45_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule45_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule45Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule45Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule45 ****************/
@@ -2939,23 +2393,38 @@ protected class Rule45_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule46_RuleCall_Rule extends RuleCallToken {
+protected class Rule46_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule46_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule46_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule46Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule46Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule46 ****************/
@@ -2969,23 +2438,38 @@ protected class Rule46_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule47_RuleCall_Rule extends RuleCallToken {
+protected class Rule47_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule47_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule47_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule47Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule47Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule47 ****************/
@@ -2999,23 +2483,38 @@ protected class Rule47_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule48_RuleCall_Rule extends RuleCallToken {
+protected class Rule48_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule48_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule48_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule48Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule48Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule48 ****************/
@@ -3029,23 +2528,38 @@ protected class Rule48_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule49_RuleCall_Rule extends RuleCallToken {
+protected class Rule49_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule49_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule49_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule49Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule49Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule49 ****************/
@@ -3059,23 +2573,38 @@ protected class Rule49_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule50_RuleCall_Rule extends RuleCallToken {
+protected class Rule50_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule50_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule50_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule50Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule50Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule50 ****************/
@@ -3089,23 +2618,38 @@ protected class Rule50_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule51_RuleCall_Rule extends RuleCallToken {
+protected class Rule51_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule51_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule51_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule51Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule51Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule51 ****************/
@@ -3119,23 +2663,38 @@ protected class Rule51_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule52_RuleCall_Rule extends RuleCallToken {
+protected class Rule52_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule52_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule52_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule52Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule52Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule52 ****************/
@@ -3149,23 +2708,38 @@ protected class Rule52_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule53_RuleCall_Rule extends RuleCallToken {
+protected class Rule53_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule53_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule53_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule53Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule53Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule53 ****************/
@@ -3179,23 +2753,38 @@ protected class Rule53_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule54_RuleCall_Rule extends RuleCallToken {
+protected class Rule54_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule54_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule54_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule54Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule54Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule54 ****************/
@@ -3209,23 +2798,38 @@ protected class Rule54_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule55_RuleCall_Rule extends RuleCallToken {
+protected class Rule55_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule55_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule55_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule55Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule55Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule55 ****************/
@@ -3239,23 +2843,38 @@ protected class Rule55_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule56_RuleCall_Rule extends RuleCallToken {
+protected class Rule56_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule56_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule56_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule56Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule56Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule56 ****************/
@@ -3269,23 +2888,38 @@ protected class Rule56_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule57_RuleCall_Rule extends RuleCallToken {
+protected class Rule57_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule57_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule57_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule57Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule57Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule57 ****************/
@@ -3299,23 +2933,38 @@ protected class Rule57_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule58_RuleCall_Rule extends RuleCallToken {
+protected class Rule58_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule58_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule58_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule58Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule58Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule58 ****************/
@@ -3329,23 +2978,38 @@ protected class Rule58_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule59_RuleCall_Rule extends RuleCallToken {
+protected class Rule59_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule59_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule59_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule59Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule59Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule59 ****************/
@@ -3359,23 +3023,38 @@ protected class Rule59_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule60_RuleCall_Rule extends RuleCallToken {
+protected class Rule60_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule60_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule60_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule60Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule60Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule60 ****************/
@@ -3389,23 +3068,38 @@ protected class Rule60_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule61_RuleCall_Rule extends RuleCallToken {
+protected class Rule61_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule61_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule61_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule61Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule61Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule61 ****************/
@@ -3419,23 +3113,38 @@ protected class Rule61_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule62_RuleCall_Rule extends RuleCallToken {
+protected class Rule62_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule62_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule62_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule62Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule62Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule62 ****************/
@@ -3449,23 +3158,38 @@ protected class Rule62_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule63_RuleCall_Rule extends RuleCallToken {
+protected class Rule63_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule63_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule63_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule63Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule63Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule63 ****************/
@@ -3479,23 +3203,38 @@ protected class Rule63_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule64_RuleCall_Rule extends RuleCallToken {
+protected class Rule64_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule64_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule64_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule64Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule64Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule64 ****************/
@@ -3509,23 +3248,38 @@ protected class Rule64_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule65_RuleCall_Rule extends RuleCallToken {
+protected class Rule65_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule65_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule65_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule65Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule65Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule65 ****************/
@@ -3539,23 +3293,38 @@ protected class Rule65_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule66_RuleCall_Rule extends RuleCallToken {
+protected class Rule66_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule66_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule66_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule66Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule66Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule66 ****************/
@@ -3569,23 +3338,38 @@ protected class Rule66_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule67_RuleCall_Rule extends RuleCallToken {
+protected class Rule67_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule67_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule67_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule67Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule67Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule67 ****************/
@@ -3599,23 +3383,38 @@ protected class Rule67_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule68_RuleCall_Rule extends RuleCallToken {
+protected class Rule68_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule68_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule68_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule68Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule68Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule68 ****************/
@@ -3629,23 +3428,38 @@ protected class Rule68_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule69_RuleCall_Rule extends RuleCallToken {
+protected class Rule69_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule69_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule69_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule69Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule69Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule69 ****************/
@@ -3659,23 +3473,38 @@ protected class Rule69_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule70_RuleCall_Rule extends RuleCallToken {
+protected class Rule70_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule70_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule70_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule70Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule70Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule70 ****************/
@@ -3689,23 +3518,38 @@ protected class Rule70_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule71_RuleCall_Rule extends RuleCallToken {
+protected class Rule71_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule71_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule71_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule71Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule71Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule71 ****************/
@@ -3719,23 +3563,38 @@ protected class Rule71_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule72_RuleCall_Rule extends RuleCallToken {
+protected class Rule72_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule72_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule72_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule72Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule72Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule72 ****************/
@@ -3749,23 +3608,38 @@ protected class Rule72_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule73_RuleCall_Rule extends RuleCallToken {
+protected class Rule73_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule73_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule73_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule73Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule73Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule73 ****************/
@@ -3779,23 +3653,38 @@ protected class Rule73_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule74_RuleCall_Rule extends RuleCallToken {
+protected class Rule74_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule74_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule74_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule74Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule74Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule74 ****************/
@@ -3809,23 +3698,38 @@ protected class Rule74_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule75_RuleCall_Rule extends RuleCallToken {
+protected class Rule75_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule75_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule75_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule75Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule75Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule75 ****************/
@@ -3839,23 +3743,38 @@ protected class Rule75_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule76_RuleCall_Rule extends RuleCallToken {
+protected class Rule76_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule76_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule76_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule76Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule76Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule76 ****************/
@@ -3869,23 +3788,38 @@ protected class Rule76_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule77_RuleCall_Rule extends RuleCallToken {
+protected class Rule77_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule77_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule77_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule77Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule77Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule77 ****************/
@@ -3899,23 +3833,38 @@ protected class Rule77_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule78_RuleCall_Rule extends RuleCallToken {
+protected class Rule78_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule78_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule78_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule78Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule78Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule78 ****************/
@@ -3929,23 +3878,38 @@ protected class Rule78_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule79_RuleCall_Rule extends RuleCallToken {
+protected class Rule79_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule79_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule79_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule79Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule79Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule79 ****************/
@@ -3959,23 +3923,38 @@ protected class Rule79_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule80_RuleCall_Rule extends RuleCallToken {
+protected class Rule80_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule80_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule80_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule80Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule80Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule80 ****************/
@@ -3989,23 +3968,38 @@ protected class Rule80_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule81_RuleCall_Rule extends RuleCallToken {
+protected class Rule81_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule81_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule81_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule81Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule81Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule81 ****************/
@@ -4019,23 +4013,38 @@ protected class Rule81_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule82_RuleCall_Rule extends RuleCallToken {
+protected class Rule82_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule82_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule82_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule82Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule82Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule82 ****************/
@@ -4049,23 +4058,38 @@ protected class Rule82_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule83_RuleCall_Rule extends RuleCallToken {
+protected class Rule83_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule83_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule83_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule83Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule83Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule83 ****************/
@@ -4079,23 +4103,38 @@ protected class Rule83_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule84_RuleCall_Rule extends RuleCallToken {
+protected class Rule84_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule84_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule84_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule84Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule84Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule84 ****************/
@@ -4109,23 +4148,38 @@ protected class Rule84_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule85_RuleCall_Rule extends RuleCallToken {
+protected class Rule85_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule85_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule85_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule85Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule85Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule85 ****************/
@@ -4139,23 +4193,38 @@ protected class Rule85_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule86_RuleCall_Rule extends RuleCallToken {
+protected class Rule86_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule86_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule86_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule86Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule86Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule86 ****************/
@@ -4169,23 +4238,38 @@ protected class Rule86_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule87_RuleCall_Rule extends RuleCallToken {
+protected class Rule87_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule87_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule87_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule87Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule87Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule87 ****************/
@@ -4199,23 +4283,38 @@ protected class Rule87_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule88_RuleCall_Rule extends RuleCallToken {
+protected class Rule88_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule88_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule88_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule88Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule88Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule88 ****************/
@@ -4229,23 +4328,38 @@ protected class Rule88_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule89_RuleCall_Rule extends RuleCallToken {
+protected class Rule89_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule89_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule89_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule89Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule89Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule89 ****************/
@@ -4259,23 +4373,38 @@ protected class Rule89_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule90_RuleCall_Rule extends RuleCallToken {
+protected class Rule90_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule90_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule90_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule90Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule90Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule90 ****************/
@@ -4289,23 +4418,38 @@ protected class Rule90_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule91_RuleCall_Rule extends RuleCallToken {
+protected class Rule91_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule91_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule91_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule91Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule91Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule91 ****************/
@@ -4319,23 +4463,38 @@ protected class Rule91_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule92_RuleCall_Rule extends RuleCallToken {
+protected class Rule92_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule92_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule92_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule92Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule92Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule92 ****************/
@@ -4349,23 +4508,38 @@ protected class Rule92_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule93_RuleCall_Rule extends RuleCallToken {
+protected class Rule93_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule93_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule93_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule93Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule93Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule93 ****************/
@@ -4379,23 +4553,38 @@ protected class Rule93_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule94_RuleCall_Rule extends RuleCallToken {
+protected class Rule94_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule94_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule94_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule94Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule94Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule94 ****************/
@@ -4409,23 +4598,38 @@ protected class Rule94_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule95_RuleCall_Rule extends RuleCallToken {
+protected class Rule95_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule95_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule95_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule95Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule95Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule95 ****************/
@@ -4439,23 +4643,38 @@ protected class Rule95_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule96_RuleCall_Rule extends RuleCallToken {
+protected class Rule96_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule96_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule96_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule96Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule96Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule96 ****************/
@@ -4469,23 +4688,38 @@ protected class Rule96_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule97_RuleCall_Rule extends RuleCallToken {
+protected class Rule97_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule97_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule97_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule97Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule97Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule97 ****************/
@@ -4499,23 +4733,38 @@ protected class Rule97_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule98_RuleCall_Rule extends RuleCallToken {
+protected class Rule98_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule98_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule98_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule98Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule98Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule98 ****************/
@@ -4529,23 +4778,38 @@ protected class Rule98_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule99_RuleCall_Rule extends RuleCallToken {
+protected class Rule99_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule99_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule99_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule99Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule99Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule99 ****************/
@@ -4559,23 +4823,38 @@ protected class Rule99_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule100_RuleCall_Rule extends RuleCallToken {
+protected class Rule100_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule100_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule100_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule100Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule100Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule100 ****************/
@@ -4589,23 +4868,38 @@ protected class Rule100_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule101_RuleCall_Rule extends RuleCallToken {
+protected class Rule101_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule101_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule101_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule101Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule101Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule101 ****************/
@@ -4619,23 +4913,38 @@ protected class Rule101_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule102_RuleCall_Rule extends RuleCallToken {
+protected class Rule102_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule102_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule102_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule102Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule102Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule102 ****************/
@@ -4649,23 +4958,38 @@ protected class Rule102_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule103_RuleCall_Rule extends RuleCallToken {
+protected class Rule103_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule103_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule103_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule103Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule103Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule103 ****************/
@@ -4679,23 +5003,38 @@ protected class Rule103_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule104_RuleCall_Rule extends RuleCallToken {
+protected class Rule104_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule104_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule104_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule104Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule104Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule104 ****************/
@@ -4709,23 +5048,38 @@ protected class Rule104_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule105_RuleCall_Rule extends RuleCallToken {
+protected class Rule105_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule105_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule105_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule105Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule105Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule105 ****************/
@@ -4739,23 +5093,38 @@ protected class Rule105_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule106_RuleCall_Rule extends RuleCallToken {
+protected class Rule106_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule106_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule106_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule106Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule106Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule106 ****************/
@@ -4769,23 +5138,38 @@ protected class Rule106_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule107_RuleCall_Rule extends RuleCallToken {
+protected class Rule107_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule107_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule107_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule107Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule107Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule107 ****************/
@@ -4799,23 +5183,38 @@ protected class Rule107_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule108_RuleCall_Rule extends RuleCallToken {
+protected class Rule108_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule108_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule108_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule108Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule108Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule108 ****************/
@@ -4829,23 +5228,38 @@ protected class Rule108_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule109_RuleCall_Rule extends RuleCallToken {
+protected class Rule109_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule109_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule109_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule109Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule109Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule109 ****************/
@@ -4859,23 +5273,38 @@ protected class Rule109_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule110_RuleCall_Rule extends RuleCallToken {
+protected class Rule110_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule110_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule110_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule110Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule110Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule110 ****************/
@@ -4889,23 +5318,38 @@ protected class Rule110_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule111_RuleCall_Rule extends RuleCallToken {
+protected class Rule111_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule111_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule111_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule111Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule111Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule111 ****************/
@@ -4919,23 +5363,38 @@ protected class Rule111_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule112_RuleCall_Rule extends RuleCallToken {
+protected class Rule112_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule112_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule112_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule112Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule112Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule112 ****************/
@@ -4949,23 +5408,38 @@ protected class Rule112_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule113_RuleCall_Rule extends RuleCallToken {
+protected class Rule113_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule113_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule113_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule113Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule113Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule113 ****************/
@@ -4979,23 +5453,38 @@ protected class Rule113_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule114_RuleCall_Rule extends RuleCallToken {
+protected class Rule114_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule114_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule114_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule114Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule114Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule114 ****************/
@@ -5009,23 +5498,38 @@ protected class Rule114_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule115_RuleCall_Rule extends RuleCallToken {
+protected class Rule115_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule115_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule115_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule115Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule115Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule115 ****************/
@@ -5039,23 +5543,38 @@ protected class Rule115_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule116_RuleCall_Rule extends RuleCallToken {
+protected class Rule116_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule116_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule116_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule116Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule116Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule116 ****************/
@@ -5069,23 +5588,38 @@ protected class Rule116_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule117_RuleCall_Rule extends RuleCallToken {
+protected class Rule117_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule117_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule117_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule117Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule117Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule117 ****************/
@@ -5099,23 +5633,38 @@ protected class Rule117_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule118_RuleCall_Rule extends RuleCallToken {
+protected class Rule118_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule118_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule118_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule118Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule118Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule118 ****************/
@@ -5129,23 +5678,38 @@ protected class Rule118_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule119_RuleCall_Rule extends RuleCallToken {
+protected class Rule119_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule119_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule119_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule119Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule119Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule119 ****************/
@@ -5159,23 +5723,38 @@ protected class Rule119_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule120_RuleCall_Rule extends RuleCallToken {
+protected class Rule120_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule120_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule120_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule120Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule120Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule120 ****************/
@@ -5189,23 +5768,38 @@ protected class Rule120_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule121_RuleCall_Rule extends RuleCallToken {
+protected class Rule121_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule121_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule121_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule121Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule121Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule121 ****************/
@@ -5219,23 +5813,38 @@ protected class Rule121_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule122_RuleCall_Rule extends RuleCallToken {
+protected class Rule122_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule122_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule122_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule122Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule122Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule122 ****************/
@@ -5249,23 +5858,38 @@ protected class Rule122_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule123_RuleCall_Rule extends RuleCallToken {
+protected class Rule123_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule123_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule123_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule123Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule123Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule123 ****************/
@@ -5279,23 +5903,38 @@ protected class Rule123_RuleCall_Rule extends RuleCallToken {
  **/
 
 // Rule
-protected class Rule124_RuleCall_Rule extends RuleCallToken {
+protected class Rule124_RuleParserRuleCall extends RuleCallToken {
 	
-	public Rule124_RuleCall_Rule(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule124_RuleParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule124Access().getRuleParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(Rule_Keyword_x.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
-		return new Rule_Keyword_x(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Rule_XKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule124Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Rule_XKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule124 ****************/
@@ -5309,23 +5948,38 @@ protected class Rule124_RuleCall_Rule extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule125_RuleCall_RuleB extends RuleCallToken {
+protected class Rule125_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule125_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule125_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule125Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule125Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule125 ****************/
@@ -5339,23 +5993,38 @@ protected class Rule125_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule126_RuleCall_RuleB extends RuleCallToken {
+protected class Rule126_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule126_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule126_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule126Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule126Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule126 ****************/
@@ -5369,23 +6038,38 @@ protected class Rule126_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule127_RuleCall_RuleB extends RuleCallToken {
+protected class Rule127_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule127_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule127_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule127Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule127Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule127 ****************/
@@ -5399,23 +6083,38 @@ protected class Rule127_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule128_RuleCall_RuleB extends RuleCallToken {
+protected class Rule128_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule128_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule128_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule128Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule128Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule128 ****************/
@@ -5429,23 +6128,38 @@ protected class Rule128_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule129_RuleCall_RuleB extends RuleCallToken {
+protected class Rule129_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule129_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule129_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule129Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule129Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule129 ****************/
@@ -5459,23 +6173,38 @@ protected class Rule129_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule130_RuleCall_RuleB extends RuleCallToken {
+protected class Rule130_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule130_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule130_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule130Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule130Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule130 ****************/
@@ -5489,23 +6218,38 @@ protected class Rule130_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule131_RuleCall_RuleB extends RuleCallToken {
+protected class Rule131_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule131_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule131_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule131Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule131Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule131 ****************/
@@ -5519,23 +6263,38 @@ protected class Rule131_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule132_RuleCall_RuleB extends RuleCallToken {
+protected class Rule132_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule132_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule132_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule132Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule132Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule132 ****************/
@@ -5549,23 +6308,38 @@ protected class Rule132_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule133_RuleCall_RuleB extends RuleCallToken {
+protected class Rule133_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule133_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule133_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule133Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule133Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule133 ****************/
@@ -5579,23 +6353,38 @@ protected class Rule133_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule134_RuleCall_RuleB extends RuleCallToken {
+protected class Rule134_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule134_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule134_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule134Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule134Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule134 ****************/
@@ -5609,23 +6398,38 @@ protected class Rule134_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule135_RuleCall_RuleB extends RuleCallToken {
+protected class Rule135_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule135_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule135_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule135Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule135Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule135 ****************/
@@ -5639,23 +6443,38 @@ protected class Rule135_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule136_RuleCall_RuleB extends RuleCallToken {
+protected class Rule136_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule136_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule136_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule136Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule136Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule136 ****************/
@@ -5669,23 +6488,38 @@ protected class Rule136_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule137_RuleCall_RuleB extends RuleCallToken {
+protected class Rule137_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule137_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule137_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule137Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule137Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule137 ****************/
@@ -5699,23 +6533,38 @@ protected class Rule137_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule138_RuleCall_RuleB extends RuleCallToken {
+protected class Rule138_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule138_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule138_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule138Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule138Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule138 ****************/
@@ -5729,23 +6578,38 @@ protected class Rule138_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule139_RuleCall_RuleB extends RuleCallToken {
+protected class Rule139_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule139_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule139_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule139Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule139Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule139 ****************/
@@ -5759,23 +6623,38 @@ protected class Rule139_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule140_RuleCall_RuleB extends RuleCallToken {
+protected class Rule140_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule140_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule140_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule140Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule140Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule140 ****************/
@@ -5789,23 +6668,38 @@ protected class Rule140_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule141_RuleCall_RuleB extends RuleCallToken {
+protected class Rule141_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule141_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule141_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule141Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule141Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule141 ****************/
@@ -5819,23 +6713,38 @@ protected class Rule141_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule142_RuleCall_RuleB extends RuleCallToken {
+protected class Rule142_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule142_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule142_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule142Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule142Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule142 ****************/
@@ -5849,23 +6758,38 @@ protected class Rule142_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule143_RuleCall_RuleB extends RuleCallToken {
+protected class Rule143_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule143_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule143_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule143Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule143Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule143 ****************/
@@ -5879,23 +6803,38 @@ protected class Rule143_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule144_RuleCall_RuleB extends RuleCallToken {
+protected class Rule144_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule144_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule144_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule144Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule144Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule144 ****************/
@@ -5909,23 +6848,38 @@ protected class Rule144_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule145_RuleCall_RuleB extends RuleCallToken {
+protected class Rule145_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule145_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule145_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule145Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule145Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule145 ****************/
@@ -5939,23 +6893,38 @@ protected class Rule145_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule146_RuleCall_RuleB extends RuleCallToken {
+protected class Rule146_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule146_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule146_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule146Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule146Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule146 ****************/
@@ -5969,23 +6938,38 @@ protected class Rule146_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule147_RuleCall_RuleB extends RuleCallToken {
+protected class Rule147_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule147_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule147_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule147Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule147Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule147 ****************/
@@ -5999,23 +6983,38 @@ protected class Rule147_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule148_RuleCall_RuleB extends RuleCallToken {
+protected class Rule148_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule148_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule148_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule148Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule148Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule148 ****************/
@@ -6029,23 +7028,38 @@ protected class Rule148_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule149_RuleCall_RuleB extends RuleCallToken {
+protected class Rule149_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule149_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule149_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule149Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule149Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule149 ****************/
@@ -6059,23 +7073,38 @@ protected class Rule149_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule150_RuleCall_RuleB extends RuleCallToken {
+protected class Rule150_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule150_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule150_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule150Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule150Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule150 ****************/
@@ -6089,23 +7118,38 @@ protected class Rule150_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule151_RuleCall_RuleB extends RuleCallToken {
+protected class Rule151_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule151_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule151_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule151Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule151Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule151 ****************/
@@ -6119,23 +7163,38 @@ protected class Rule151_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule152_RuleCall_RuleB extends RuleCallToken {
+protected class Rule152_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule152_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule152_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule152Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule152Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule152 ****************/
@@ -6149,23 +7208,38 @@ protected class Rule152_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule153_RuleCall_RuleB extends RuleCallToken {
+protected class Rule153_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule153_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule153_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule153Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule153Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule153 ****************/
@@ -6179,23 +7253,38 @@ protected class Rule153_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule154_RuleCall_RuleB extends RuleCallToken {
+protected class Rule154_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule154_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule154_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule154Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule154Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule154 ****************/
@@ -6209,23 +7298,38 @@ protected class Rule154_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule155_RuleCall_RuleB extends RuleCallToken {
+protected class Rule155_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule155_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule155_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule155Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule155Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule155 ****************/
@@ -6239,23 +7343,38 @@ protected class Rule155_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule156_RuleCall_RuleB extends RuleCallToken {
+protected class Rule156_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule156_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule156_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule156Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule156Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule156 ****************/
@@ -6269,23 +7388,38 @@ protected class Rule156_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule157_RuleCall_RuleB extends RuleCallToken {
+protected class Rule157_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule157_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule157_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule157Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule157Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule157 ****************/
@@ -6299,23 +7433,38 @@ protected class Rule157_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule158_RuleCall_RuleB extends RuleCallToken {
+protected class Rule158_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule158_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule158_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule158Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule158Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule158 ****************/
@@ -6329,23 +7478,38 @@ protected class Rule158_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule159_RuleCall_RuleB extends RuleCallToken {
+protected class Rule159_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule159_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule159_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule159Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule159Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule159 ****************/
@@ -6359,23 +7523,38 @@ protected class Rule159_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule160_RuleCall_RuleB extends RuleCallToken {
+protected class Rule160_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule160_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule160_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule160Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule160Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule160 ****************/
@@ -6389,23 +7568,38 @@ protected class Rule160_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule161_RuleCall_RuleB extends RuleCallToken {
+protected class Rule161_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule161_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule161_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule161Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule161Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule161 ****************/
@@ -6419,23 +7613,38 @@ protected class Rule161_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule162_RuleCall_RuleB extends RuleCallToken {
+protected class Rule162_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule162_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule162_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule162Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule162Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule162 ****************/
@@ -6449,23 +7658,38 @@ protected class Rule162_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule163_RuleCall_RuleB extends RuleCallToken {
+protected class Rule163_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule163_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule163_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule163Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule163Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule163 ****************/
@@ -6479,23 +7703,38 @@ protected class Rule163_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule164_RuleCall_RuleB extends RuleCallToken {
+protected class Rule164_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule164_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule164_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule164Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule164Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule164 ****************/
@@ -6509,23 +7748,38 @@ protected class Rule164_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule165_RuleCall_RuleB extends RuleCallToken {
+protected class Rule165_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule165_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule165_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule165Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule165Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule165 ****************/
@@ -6539,23 +7793,38 @@ protected class Rule165_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule166_RuleCall_RuleB extends RuleCallToken {
+protected class Rule166_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule166_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule166_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule166Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule166Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule166 ****************/
@@ -6569,23 +7838,38 @@ protected class Rule166_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule167_RuleCall_RuleB extends RuleCallToken {
+protected class Rule167_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule167_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule167_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule167Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule167Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule167 ****************/
@@ -6599,23 +7883,38 @@ protected class Rule167_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule168_RuleCall_RuleB extends RuleCallToken {
+protected class Rule168_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule168_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule168_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule168Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule168Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule168 ****************/
@@ -6629,23 +7928,38 @@ protected class Rule168_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule169_RuleCall_RuleB extends RuleCallToken {
+protected class Rule169_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule169_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule169_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule169Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule169Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule169 ****************/
@@ -6659,23 +7973,38 @@ protected class Rule169_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule170_RuleCall_RuleB extends RuleCallToken {
+protected class Rule170_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule170_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule170_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule170Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule170Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule170 ****************/
@@ -6689,23 +8018,38 @@ protected class Rule170_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule171_RuleCall_RuleB extends RuleCallToken {
+protected class Rule171_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule171_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule171_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule171Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule171Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule171 ****************/
@@ -6719,23 +8063,38 @@ protected class Rule171_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule172_RuleCall_RuleB extends RuleCallToken {
+protected class Rule172_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule172_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule172_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule172Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule172Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule172 ****************/
@@ -6749,23 +8108,38 @@ protected class Rule172_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule173_RuleCall_RuleB extends RuleCallToken {
+protected class Rule173_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule173_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule173_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule173Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule173Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule173 ****************/
@@ -6779,23 +8153,38 @@ protected class Rule173_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule174_RuleCall_RuleB extends RuleCallToken {
+protected class Rule174_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule174_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule174_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule174Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule174Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule174 ****************/
@@ -6809,23 +8198,38 @@ protected class Rule174_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule175_RuleCall_RuleB extends RuleCallToken {
+protected class Rule175_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule175_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule175_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule175Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule175Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule175 ****************/
@@ -6839,23 +8243,38 @@ protected class Rule175_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule176_RuleCall_RuleB extends RuleCallToken {
+protected class Rule176_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule176_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule176_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule176Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule176Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule176 ****************/
@@ -6869,23 +8288,38 @@ protected class Rule176_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule177_RuleCall_RuleB extends RuleCallToken {
+protected class Rule177_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule177_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule177_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule177Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule177Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule177 ****************/
@@ -6899,23 +8333,38 @@ protected class Rule177_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule178_RuleCall_RuleB extends RuleCallToken {
+protected class Rule178_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule178_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule178_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule178Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule178Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule178 ****************/
@@ -6929,23 +8378,38 @@ protected class Rule178_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule179_RuleCall_RuleB extends RuleCallToken {
+protected class Rule179_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule179_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule179_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule179Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule179Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule179 ****************/
@@ -6959,23 +8423,38 @@ protected class Rule179_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule180_RuleCall_RuleB extends RuleCallToken {
+protected class Rule180_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule180_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule180_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule180Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule180Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule180 ****************/
@@ -6989,23 +8468,38 @@ protected class Rule180_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule181_RuleCall_RuleB extends RuleCallToken {
+protected class Rule181_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule181_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule181_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule181Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule181Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule181 ****************/
@@ -7019,23 +8513,38 @@ protected class Rule181_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule182_RuleCall_RuleB extends RuleCallToken {
+protected class Rule182_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule182_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule182_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule182Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule182Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule182 ****************/
@@ -7049,23 +8558,38 @@ protected class Rule182_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule183_RuleCall_RuleB extends RuleCallToken {
+protected class Rule183_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule183_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule183_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule183Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule183Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule183 ****************/
@@ -7079,23 +8603,38 @@ protected class Rule183_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule184_RuleCall_RuleB extends RuleCallToken {
+protected class Rule184_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule184_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule184_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule184Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule184Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule184 ****************/
@@ -7109,23 +8648,38 @@ protected class Rule184_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule185_RuleCall_RuleB extends RuleCallToken {
+protected class Rule185_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule185_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule185_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule185Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule185Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule185 ****************/
@@ -7139,23 +8693,38 @@ protected class Rule185_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule186_RuleCall_RuleB extends RuleCallToken {
+protected class Rule186_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule186_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule186_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule186Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule186Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule186 ****************/
@@ -7169,23 +8738,38 @@ protected class Rule186_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule187_RuleCall_RuleB extends RuleCallToken {
+protected class Rule187_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule187_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule187_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule187Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule187Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule187 ****************/
@@ -7199,23 +8783,38 @@ protected class Rule187_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule188_RuleCall_RuleB extends RuleCallToken {
+protected class Rule188_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule188_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule188_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule188Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule188Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule188 ****************/
@@ -7229,23 +8828,38 @@ protected class Rule188_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule189_RuleCall_RuleB extends RuleCallToken {
+protected class Rule189_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule189_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule189_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule189Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule189Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule189 ****************/
@@ -7259,23 +8873,38 @@ protected class Rule189_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule190_RuleCall_RuleB extends RuleCallToken {
+protected class Rule190_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule190_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule190_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule190Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule190Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule190 ****************/
@@ -7289,23 +8918,38 @@ protected class Rule190_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule191_RuleCall_RuleB extends RuleCallToken {
+protected class Rule191_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule191_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule191_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule191Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule191Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule191 ****************/
@@ -7319,23 +8963,38 @@ protected class Rule191_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule192_RuleCall_RuleB extends RuleCallToken {
+protected class Rule192_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule192_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule192_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule192Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule192Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule192 ****************/
@@ -7349,23 +9008,38 @@ protected class Rule192_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule193_RuleCall_RuleB extends RuleCallToken {
+protected class Rule193_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule193_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule193_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule193Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule193Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule193 ****************/
@@ -7379,23 +9053,38 @@ protected class Rule193_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule194_RuleCall_RuleB extends RuleCallToken {
+protected class Rule194_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule194_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule194_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule194Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule194Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule194 ****************/
@@ -7409,23 +9098,38 @@ protected class Rule194_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule195_RuleCall_RuleB extends RuleCallToken {
+protected class Rule195_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule195_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule195_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule195Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule195Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule195 ****************/
@@ -7439,23 +9143,38 @@ protected class Rule195_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule196_RuleCall_RuleB extends RuleCallToken {
+protected class Rule196_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule196_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule196_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule196Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule196Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule196 ****************/
@@ -7469,23 +9188,38 @@ protected class Rule196_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule197_RuleCall_RuleB extends RuleCallToken {
+protected class Rule197_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule197_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule197_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule197Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule197Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule197 ****************/
@@ -7499,23 +9233,38 @@ protected class Rule197_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule198_RuleCall_RuleB extends RuleCallToken {
+protected class Rule198_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule198_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule198_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule198Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule198Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule198 ****************/
@@ -7529,23 +9278,38 @@ protected class Rule198_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule199_RuleCall_RuleB extends RuleCallToken {
+protected class Rule199_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule199_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule199_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule199Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule199Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule199 ****************/
@@ -7559,23 +9323,38 @@ protected class Rule199_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule200_RuleCall_RuleB extends RuleCallToken {
+protected class Rule200_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule200_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule200_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule200Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule200Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule200 ****************/
@@ -7589,23 +9368,38 @@ protected class Rule200_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule201_RuleCall_RuleB extends RuleCallToken {
+protected class Rule201_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule201_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule201_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule201Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule201Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule201 ****************/
@@ -7619,23 +9413,38 @@ protected class Rule201_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule202_RuleCall_RuleB extends RuleCallToken {
+protected class Rule202_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule202_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule202_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule202Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule202Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule202 ****************/
@@ -7649,23 +9458,38 @@ protected class Rule202_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule203_RuleCall_RuleB extends RuleCallToken {
+protected class Rule203_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule203_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule203_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule203Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule203Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule203 ****************/
@@ -7679,23 +9503,38 @@ protected class Rule203_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule204_RuleCall_RuleB extends RuleCallToken {
+protected class Rule204_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule204_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule204_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule204Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule204Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule204 ****************/
@@ -7709,23 +9548,38 @@ protected class Rule204_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule205_RuleCall_RuleB extends RuleCallToken {
+protected class Rule205_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule205_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule205_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule205Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule205Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule205 ****************/
@@ -7739,23 +9593,38 @@ protected class Rule205_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule206_RuleCall_RuleB extends RuleCallToken {
+protected class Rule206_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule206_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule206_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule206Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule206Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule206 ****************/
@@ -7769,23 +9638,38 @@ protected class Rule206_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule207_RuleCall_RuleB extends RuleCallToken {
+protected class Rule207_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule207_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule207_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule207Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule207Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule207 ****************/
@@ -7799,23 +9683,38 @@ protected class Rule207_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule208_RuleCall_RuleB extends RuleCallToken {
+protected class Rule208_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule208_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule208_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule208Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule208Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule208 ****************/
@@ -7829,23 +9728,38 @@ protected class Rule208_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule209_RuleCall_RuleB extends RuleCallToken {
+protected class Rule209_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule209_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule209_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule209Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule209Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule209 ****************/
@@ -7859,23 +9773,38 @@ protected class Rule209_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule210_RuleCall_RuleB extends RuleCallToken {
+protected class Rule210_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule210_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule210_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule210Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule210Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule210 ****************/
@@ -7889,23 +9818,38 @@ protected class Rule210_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule211_RuleCall_RuleB extends RuleCallToken {
+protected class Rule211_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule211_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule211_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule211Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule211Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule211 ****************/
@@ -7919,23 +9863,38 @@ protected class Rule211_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule212_RuleCall_RuleB extends RuleCallToken {
+protected class Rule212_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule212_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule212_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule212Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule212Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule212 ****************/
@@ -7949,23 +9908,38 @@ protected class Rule212_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule213_RuleCall_RuleB extends RuleCallToken {
+protected class Rule213_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule213_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule213_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule213Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule213Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule213 ****************/
@@ -7979,23 +9953,38 @@ protected class Rule213_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule214_RuleCall_RuleB extends RuleCallToken {
+protected class Rule214_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule214_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule214_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule214Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule214Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule214 ****************/
@@ -8009,23 +9998,38 @@ protected class Rule214_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule215_RuleCall_RuleB extends RuleCallToken {
+protected class Rule215_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule215_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule215_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule215Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule215Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule215 ****************/
@@ -8039,23 +10043,38 @@ protected class Rule215_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule216_RuleCall_RuleB extends RuleCallToken {
+protected class Rule216_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule216_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule216_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule216Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule216Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule216 ****************/
@@ -8069,23 +10088,38 @@ protected class Rule216_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule217_RuleCall_RuleB extends RuleCallToken {
+protected class Rule217_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule217_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule217_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule217Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule217Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule217 ****************/
@@ -8099,23 +10133,38 @@ protected class Rule217_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule218_RuleCall_RuleB extends RuleCallToken {
+protected class Rule218_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule218_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule218_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule218Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule218Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule218 ****************/
@@ -8129,23 +10178,38 @@ protected class Rule218_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule219_RuleCall_RuleB extends RuleCallToken {
+protected class Rule219_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule219_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule219_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule219Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule219Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule219 ****************/
@@ -8159,23 +10223,38 @@ protected class Rule219_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule220_RuleCall_RuleB extends RuleCallToken {
+protected class Rule220_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule220_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule220_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule220Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule220Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule220 ****************/
@@ -8189,23 +10268,38 @@ protected class Rule220_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule221_RuleCall_RuleB extends RuleCallToken {
+protected class Rule221_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule221_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule221_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule221Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule221Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule221 ****************/
@@ -8219,23 +10313,38 @@ protected class Rule221_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule222_RuleCall_RuleB extends RuleCallToken {
+protected class Rule222_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule222_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule222_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule222Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule222Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule222 ****************/
@@ -8249,23 +10358,38 @@ protected class Rule222_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule223_RuleCall_RuleB extends RuleCallToken {
+protected class Rule223_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule223_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule223_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule223Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule223Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule223 ****************/
@@ -8279,23 +10403,38 @@ protected class Rule223_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule224_RuleCall_RuleB extends RuleCallToken {
+protected class Rule224_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule224_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule224_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule224Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule224Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule224 ****************/
@@ -8309,23 +10448,38 @@ protected class Rule224_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule225_RuleCall_RuleB extends RuleCallToken {
+protected class Rule225_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule225_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule225_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule225Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule225Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule225 ****************/
@@ -8339,23 +10493,38 @@ protected class Rule225_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule226_RuleCall_RuleB extends RuleCallToken {
+protected class Rule226_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule226_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule226_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule226Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule226Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule226 ****************/
@@ -8369,23 +10538,38 @@ protected class Rule226_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule227_RuleCall_RuleB extends RuleCallToken {
+protected class Rule227_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule227_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule227_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule227Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule227Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule227 ****************/
@@ -8399,23 +10583,38 @@ protected class Rule227_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule228_RuleCall_RuleB extends RuleCallToken {
+protected class Rule228_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule228_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule228_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule228Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule228Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule228 ****************/
@@ -8429,23 +10628,38 @@ protected class Rule228_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule229_RuleCall_RuleB extends RuleCallToken {
+protected class Rule229_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule229_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule229_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule229Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule229Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule229 ****************/
@@ -8459,23 +10673,38 @@ protected class Rule229_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule230_RuleCall_RuleB extends RuleCallToken {
+protected class Rule230_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule230_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule230_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule230Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule230Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule230 ****************/
@@ -8489,23 +10718,38 @@ protected class Rule230_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule231_RuleCall_RuleB extends RuleCallToken {
+protected class Rule231_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule231_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule231_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule231Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule231Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule231 ****************/
@@ -8519,23 +10763,38 @@ protected class Rule231_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule232_RuleCall_RuleB extends RuleCallToken {
+protected class Rule232_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule232_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule232_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule232Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule232Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule232 ****************/
@@ -8549,23 +10808,38 @@ protected class Rule232_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule233_RuleCall_RuleB extends RuleCallToken {
+protected class Rule233_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule233_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule233_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule233Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule233Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule233 ****************/
@@ -8579,23 +10853,38 @@ protected class Rule233_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule234_RuleCall_RuleB extends RuleCallToken {
+protected class Rule234_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule234_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule234_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule234Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule234Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule234 ****************/
@@ -8609,23 +10898,38 @@ protected class Rule234_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule235_RuleCall_RuleB extends RuleCallToken {
+protected class Rule235_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule235_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule235_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule235Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule235Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule235 ****************/
@@ -8639,23 +10943,38 @@ protected class Rule235_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule236_RuleCall_RuleB extends RuleCallToken {
+protected class Rule236_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule236_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule236_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule236Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule236Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule236 ****************/
@@ -8669,23 +10988,38 @@ protected class Rule236_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule237_RuleCall_RuleB extends RuleCallToken {
+protected class Rule237_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule237_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule237_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule237Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule237Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule237 ****************/
@@ -8699,23 +11033,38 @@ protected class Rule237_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule238_RuleCall_RuleB extends RuleCallToken {
+protected class Rule238_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule238_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule238_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule238Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule238Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule238 ****************/
@@ -8729,23 +11078,38 @@ protected class Rule238_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule239_RuleCall_RuleB extends RuleCallToken {
+protected class Rule239_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule239_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule239_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule239Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule239Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule239 ****************/
@@ -8759,23 +11123,38 @@ protected class Rule239_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule240_RuleCall_RuleB extends RuleCallToken {
+protected class Rule240_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule240_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule240_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule240Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule240Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule240 ****************/
@@ -8789,23 +11168,38 @@ protected class Rule240_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule241_RuleCall_RuleB extends RuleCallToken {
+protected class Rule241_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule241_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule241_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule241Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule241Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule241 ****************/
@@ -8819,23 +11213,38 @@ protected class Rule241_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule242_RuleCall_RuleB extends RuleCallToken {
+protected class Rule242_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule242_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule242_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule242Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule242Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule242 ****************/
@@ -8849,23 +11258,38 @@ protected class Rule242_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule243_RuleCall_RuleB extends RuleCallToken {
+protected class Rule243_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule243_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule243_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule243Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule243Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule243 ****************/
@@ -8879,23 +11303,38 @@ protected class Rule243_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule244_RuleCall_RuleB extends RuleCallToken {
+protected class Rule244_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule244_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule244_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule244Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule244Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule244 ****************/
@@ -8909,23 +11348,38 @@ protected class Rule244_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule245_RuleCall_RuleB extends RuleCallToken {
+protected class Rule245_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule245_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule245_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule245Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule245Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule245 ****************/
@@ -8939,23 +11393,38 @@ protected class Rule245_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule246_RuleCall_RuleB extends RuleCallToken {
+protected class Rule246_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule246_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule246_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule246Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule246Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule246 ****************/
@@ -8969,23 +11438,38 @@ protected class Rule246_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule247_RuleCall_RuleB extends RuleCallToken {
+protected class Rule247_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule247_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule247_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule247Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule247Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule247 ****************/
@@ -8999,23 +11483,38 @@ protected class Rule247_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule248_RuleCall_RuleB extends RuleCallToken {
+protected class Rule248_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule248_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule248_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule248Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule248Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule248 ****************/
@@ -9029,23 +11528,38 @@ protected class Rule248_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule249_RuleCall_RuleB extends RuleCallToken {
+protected class Rule249_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule249_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule249_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule249Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule249Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule249 ****************/
@@ -9059,23 +11573,38 @@ protected class Rule249_RuleCall_RuleB extends RuleCallToken {
  **/
 
 // RuleB
-protected class Rule250_RuleCall_RuleB extends RuleCallToken {
+protected class Rule250_RuleBParserRuleCall extends RuleCallToken {
 	
-	public Rule250_RuleCall_RuleB(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Rule250_RuleBParserRuleCall(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getRule250Access().getRuleBParserRuleCall();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if(checkForRecursion(RuleB_Keyword_y.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
-		return new RuleB_Keyword_y(current, this).firstSolution();
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RuleB_YKeyword(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRule250Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RuleB_YKeyword.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRuleBRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 /************ end Rule Rule250 ****************/

@@ -31,21 +31,25 @@ public interface IParseTreeConstructor {
 		public IInstanceDescription getCurrent();
 
 		public IAbstractToken getNext();
+		
+		// TODO: enable getters below
+
+		// public String getDiagnostic();
+
+		// public int getNo();
+
+		// public IAbstractToken2 getParent();
 	}
 
 	public interface IValueToken extends IAbstractToken {
 		public Object getValue();
 	}
 
-	public interface IContainmentToken extends IAbstractToken {
-		public IAbstractToken getLast();
-	}
-
 	public interface IActionToken extends IAbstractToken {
 		public Action getGrammarElement();
 	}
 
-	public interface IAlternativeesToken extends IContainmentToken {
+	public interface IAlternativeesToken extends IAbstractToken {
 		public Alternatives getGrammarElement();
 	}
 
@@ -61,10 +65,7 @@ public interface IParseTreeConstructor {
 		public AbstractElement getAssignmentElement();
 	}
 
-	// not needed, since cross references are only allowed within Assignments
-	// public interface ICrossReferenceToken{}
-
-	public interface IGroupToken extends IContainmentToken {
+	public interface IGroupToken extends IAbstractToken {
 		public Group getGrammarElement();
 	}
 

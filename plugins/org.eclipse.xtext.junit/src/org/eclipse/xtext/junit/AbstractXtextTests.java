@@ -9,9 +9,11 @@
 
 package org.eclipse.xtext.junit;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -27,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -40,7 +43,8 @@ import org.eclipse.xtext.parser.packrat.IPackratParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
-import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
+import org.eclipse.xtext.parsetree.reconstr.impl.TraceToDot;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -96,8 +100,28 @@ public abstract class AbstractXtextTests extends TestCase {
 		super.tearDown();
 	}
 
-	protected String serialize(EObject obj) {
-		return injector.getInstance(SerializerUtil.class).serialize(obj);
+	public void serialize(EObject obj, OutputStream out) throws IOException {
+		IAbstractToken token = getParseTreeConstructor().serialize(obj);
+		
+//		final String path = "tmp/";
+//		GrammarToDot gtd = new TraceToDot();
+//		try {
+//			gtd.draw(token, path + getClass().getSimpleName() +"-"+getName()+".pdf", "-v -T pdf");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		getTokenSerializer().serialize(token, out);
+	}
+	
+	public String serialize(EObject obj) {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		try {
+			serialize(obj, out);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return out.toString();
 	}
 
 	/**
