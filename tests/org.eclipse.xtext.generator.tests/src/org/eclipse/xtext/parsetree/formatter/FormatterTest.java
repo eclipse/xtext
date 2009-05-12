@@ -35,7 +35,7 @@ public class FormatterTest extends AbstractGeneratorTest {
 
 	public void testIndentation() throws Exception {
 		final String model = "test indentation { float val; indentation { int x; } double y; }";
-		final String expected = "test indentation {\n  indentation {\n    int x;\n  }\n  float val;\n  double y;\n}";
+		final String expected = "test indentation {\n  float val;\n  double y;\n  indentation {\n    int x;\n  }\n}";
 		EObject m = getModel(model);
 		// System.out.println(EmfFormater.objToStr(m, ""));
 		String res = serialize(m);

@@ -10,6 +10,7 @@
 «ENDREM»
 
 «IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::parsetree::reconstr::impl»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::parseTreeConstructor::ParseTreeConstructor»
@@ -25,36 +26,35 @@
 */
 package «getParseTreeConstructorName().toJavaPackage()»;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import «gaFQName()»;
 
 import com.google.inject.Inject;
 
-public class «getParseTreeConstructorName().toSimpleName()» extends AbstractParseTreeConstructor {
+public class «getParseTreeConstructorName().toSimpleName()» extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private «gaSimpleName()» grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-«FOREACH allParserRules() AS pr-»
-«IF !pr.isDatatypeRule()-»
-		if(inst.isInstanceOf(grammarAccess.«pr.gaRuleAccessor()».getType().getClassifier())) {
-			final AbstractToken t = new «pr.alternatives.elementMethodName()»(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-«ENDIF-»
-«ENDFOREACH-»		
-		return null;
+		
+	public «gaSimpleName()» getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+«EXPAND createFollowerMethod(false, "inst") FOR calcRootFollowers()-»
+}
 	
 «EXPAND rule FOREACH allParserRules()-»
 }
@@ -75,15 +75,56 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
-	public «elementMethodName()»(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, «IF !cardinality.isMulti()»!«ENDIF»IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
+	public «elementMethodName()»(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public «getJavaTypeName().toSimpleName()» getGrammarElement() {
 		return grammarAccess.«gaRuleElementAccessor()»;
 	}
+
+«EXPAND createFollowerMethod(false, "inst") FOR calcFollowers()-»
+		
+«IF calcFollowers().exists(e|e.ruleEnd) || isElementCallable()-»
+	public IInstanceDescription tryConsume() {
+«IF isElementCallable()-»
+		if(!current.isInstanceOf(grammarAccess.«containingRule().gaRuleAccessor()».getType().getClassifier())) return null;
+«ENDIF-»
+«IF calcFollowers().exists(e|e.ruleEnd)-»
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+«ELSE-»
+		return tryConsumeVal();
+«ENDIF-»
+	}
+«ENDIF-»
 «ENDDEFINE»
+
+
+
+«DEFINE createFollowerMethod(boolean parent, String currentName) FOR List[Follower]-»
+«IF size > 0-»
+«IF parent-»
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+«ELSE-»
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+«ENDIF-»
+		switch(index) {
+«FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
+			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», «parent ? "next" : "this"», «i.counter0», «currentName»);
+«ENDFOREACH-»
+«IF exists(e|e.ruleEnd)-»
+			default: return parent.createParentFollower(«parent ? "next" : "this"», index - «size - 1», «currentName»);
+«ELSE-»
+			default: return null;
+«ENDIF-»			
+		}	
+	}	
+«ENDIF-»
+«ENDDEFINE»
+
+
 
 «DEFINE element FOR AbstractElement»
 // FIXME: unhandled element «metaType.name» in «elementMethodName()»
@@ -101,34 +142,9 @@ public class «getParseTreeConstructorName().toSimpleName()» extends AbstractPars
 protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
-
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new «tokens.last().elementMethodName()»(current, this).firstSolution();
-«EXPAND groupItem(1,"		") FOR tokens.withoutLast().reverse().toList()-»
-		return null;
-	}
 }
 «EXPAND element FOREACH tokens»
 «ENDDEFINE»
-
-«DEFINE groupItem(int i, String s) FOR List[AbstractElement]-»
-«s»while(s«i» != null) {
-«s»	Solution s«i+1» = new «first().elementMethodName()»(s«i».getCurrent(), s«i».getPredecessor()).firstSolution();
-«IF size == 1-»
-«s»	if(s«i+1» != null) {
-«s»		last = s«i+1».getPredecessor();
-«s»		return s«i+1»;
-«s»	} else {
-«s»		s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
-«s»	}
-«ELSE-»
-«EXPAND groupItem(i+1,s+"	") FOR this.withoutFirst()-»
-«s»	s«i» = s«i».getPredecessor().nextSolution(this,s«i»);
-«ENDIF-»
-«s»}
-«ENDDEFINE»
-
 
 
 «REM» ************ Alternatives ************* «ENDREM»
@@ -138,15 +154,6 @@ protected class «elementMethodName()» extends GroupToken {
 protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
-
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-«FOREACH groups AS g ITERATOR i-»
-			case «i.counter0»: return new «g.elementMethodName()»(current, this);
-«ENDFOREACH-»
-			default: return null;
-		}
-	}
 }
 «EXPAND element FOREACH groups»
 «ENDDEFINE»
@@ -160,18 +167,17 @@ protected class «elementMethodName()» extends AlternativesToken {
 protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor-»
-	
-	@Override
-	protected Solution createSolution() {
+	protected IInstanceDescription tryConsumeVal() {
 «IF calledParserRule() != null && !calledParserRule().isDatatypeRule()-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) return null;
-		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
 		// FIXME: terminal or datatype rule call
-		return null;
 «ENDIF-»
+		return current;
 	}
+	
+«EXPAND createFollowerMethod(true, "inst") FOR calcParentFollowers()-»
 }
 «ENDDEFINE»
 
@@ -183,19 +189,19 @@ protected class «elementMethodName()» extends RuleCallToken {
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR Keyword-»
-«IF containingAssignment().operator == '?='»
+«IF containingAssignment().operator == '?='-»
 		if(Boolean.TRUE.equals(value)) { // «metaType.name»
 			type = AssignmentType.KW;
 			element = grammarAccess.«gaRuleElementAccessor()»;
-			return new Solution(obj);
+			return obj;
 		}
-«ELSE»
+«ELSE-»
 		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
 			type = AssignmentType.KW;
 			element = grammarAccess.«gaRuleElementAccessor()»;
-			return new Solution(obj);
+			return obj;
 		}
-«ENDIF»
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR CrossReference-»
@@ -204,43 +210,40 @@ protected class «elementMethodName()» extends RuleCallToken {
 			if(param.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.«gaRuleElementAccessor()»; 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR RuleCall-»
 «IF calledParserRule()!=null-»
-«IF !isDatatypeRule(calledParserRule())»
+«IF !isDatatypeRule(calledParserRule())-»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.«calledParserRule().gaRuleAccessor()».getType().getClassifier())) {
-				Solution s = new «calledParserRule().alternatives.elementMethodName()»(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-«ELSE»
+«ELSE-»
 		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
 			type = AssignmentType.PRC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
-			return new Solution(obj);
+			return obj;
 		}
-«ENDIF»
+«ENDIF-»
 «ELSEIF calledEnumRule()!=null-»
 		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
 			type = AssignmentType.ERC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
-			return new Solution(obj);
+			return obj;
 		}
 «ELSE-»
 		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
-			return new Solution(obj);
+			return obj;
 		}
 «ENDIF-»
 «ENDDEFINE»
@@ -250,15 +253,15 @@ protected class «elementMethodName()» extends RuleCallToken {
 «grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends AssignmentToken  {
 	
-«EXPAND constructor-»
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("«feature»",«IF !isAssignmentRequired()»!«ENDIF»IS_REQUIRED)) == null) return null;
+«EXPAND constructor-»	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("«feature»",«IF isAssignmentRequired()»true«ELSE»false«ENDIF»)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("«feature»");
 		«EXPAND assignmentCreate FOREACH getNestedElementsFromAssignment()-»
 		return null;
 	}
+
+«EXPAND createFollowerMethod(true, "consumed") FOR calcParentFollowers()-»
 }
 «ENDDEFINE»
 
@@ -273,20 +276,18 @@ protected class «elementMethodName()» extends ActionToken  {
 «EXPAND constructor-»
 	
 «IF feature == null || feature == ""-»
-	@Override
-	protected Solution createSolution() {
+	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
-		return new Solution(current);
+		return current;
 	}
 «ELSE-»
-	@Override
-	protected Solution createSolution() {
+	protected IInstanceDescription tryConsumeVal() {
 		if(!current.isInstanceOf(grammarAccess.«gaRuleElementAccessor()».getType().getClassifier())) return null;
 		Object val = current.getConsumable("«feature»", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;
-		return new Solution(getDescr((EObject)val));
+		return getDescr((EObject) val);
 	}
 «ENDIF-»	
 }
@@ -300,32 +301,8 @@ protected class «elementMethodName()» extends ActionToken  {
 «grammarFragmentToStr("// ")»
 protected class «elementMethodName()» extends KeywordToken  {
 	
-	public «elementMethodName()»(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.«gaRuleElementAccessor()»;
-	}	
-}
-«ENDDEFINE»
-
-
-«REM» ************ CrossReference ************* «ENDREM»
-
-«DEFINE element FOR CrossReference»
-«grammarFragmentToStr("// ")»
-protected class «elementMethodName()» extends AbstractToken  {
-
 «EXPAND constructor-»
-	
-	@Override
-	protected Solution createSolution() {
-		// FIXME: This class has been generated because there is an unassigned 
-		// CrossReference in your grammar. This means your grammar is invalid, 
-		// since CrossReferences are only allowed inside Assignments.
-		return null;
-	}
 }
 «ENDDEFINE»
+
 

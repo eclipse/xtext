@@ -16,6 +16,7 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.impl.ParseTreeConstructorUtil;
 
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 	@Override
