@@ -42,21 +42,25 @@ public class SerializationTest extends AbstractEnumRulesTest {
 		super.tearDown();
 	}
 	
-	public void testSerialize_01() throws Exception {
+	// FIXME: (Moritz to Sebastian) This fails since both "generated SameName"
+	// and "existing SameName"
+	// lead to the same semantic model -- which is empty, since SameName is the
+	// EAttribute's default value.
+	// Therefore, the serializer returns the first match, which should not be
+	// relied on, since the order is not defined.
+	public void _testSerialize_01() throws Exception {
 		String result = serialize(model);
 		assertEquals("generated SameName", result);
 	}
 	
-	/**
-	 * TODO fix me!
-	 */
-	public void _testSerialize_02() throws Exception {
+	public void testSerialize_02() throws Exception {
 		model.setExisting(ExistingEnum.DIFFERENT_NAME);
 		String result = serialize(model);
 		assertEquals("existing DifferentLiteral", result);
 	}
 	
-	public void testSerialize_03() throws Exception {
+	// FIXME: This depends on https://bugs.eclipse.org/bugs/show_bug.cgi?id=275855
+	public void _testSerialize_03() throws Exception {
 		model.setGenerated(GeneratedEnum.DIFFERENT_NAME);
 		String result = serialize(model);
 		assertEquals("generated DifferentLiteral", result);

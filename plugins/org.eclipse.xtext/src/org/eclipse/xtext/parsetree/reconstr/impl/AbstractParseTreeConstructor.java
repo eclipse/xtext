@@ -383,7 +383,7 @@ public abstract class AbstractParseTreeConstructor implements
 		protected AssignmentType type;
 
 		protected Object value;
-
+		
 		public AssignmentToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
@@ -492,7 +492,7 @@ public abstract class AbstractParseTreeConstructor implements
 	private ITransientValueService tvService;
 
 	protected final IInstanceDescription getDescr(EObject obj) {
-		return new InstanceDescription(this, obj);
+		return new InstanceDescription(tvService, obj);
 	}
 
 	protected final IInstanceDescription getDescr(IInstanceDescription obj) {
