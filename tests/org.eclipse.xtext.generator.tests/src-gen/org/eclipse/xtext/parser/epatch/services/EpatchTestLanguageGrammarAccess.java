@@ -33,10 +33,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//EPatch:
-		//  "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}";
+		//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}"
+		//"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"epatch"
@@ -51,19 +51,19 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(imports+=Import)*
+		//imports+=Import*
 		public Assignment getImportsAssignment_3() { return cImportsAssignment_3; }
 
 		//Import
 		public RuleCall getImportsImportParserRuleCall_3_0() { return cImportsImportParserRuleCall_3_0; }
 
-		//(resources+=NamedResource)*
+		//resources+=NamedResource*
 		public Assignment getResourcesAssignment_4() { return cResourcesAssignment_4; }
 
 		//NamedResource
 		public RuleCall getResourcesNamedResourceParserRuleCall_4_0() { return cResourcesNamedResourceParserRuleCall_4_0; }
 
-		//(objects+=ObjectRef)*
+		//objects+=ObjectRef*
 		public Assignment getObjectsAssignment_5() { return cObjectsAssignment_5; }
 
 		//ObjectRef
@@ -445,16 +445,16 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
 		
 		//ObjectRef:
-		//  "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+		//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//"object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
+		//"object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"object"
 		public Keyword getObjectKeyword_0() { return cObjectKeyword_0; }
 
-		//(name=ID)?
+		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
 		//ID
@@ -1217,10 +1217,10 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//CreatedObject:
-		//  (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?;
+		//  (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//(ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
+		//(ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
 		public Group getGroup() { return cGroup; }
 
 		//ObjectNew|ObjectCopy
@@ -1232,13 +1232,13 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//ObjectCopy
 		public RuleCall getObjectCopyParserRuleCall_0_1() { return cObjectCopyParserRuleCall_0_1; }
 
-		//(name=ID)?
+		//name=ID?
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?
+		//("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"{"
@@ -1259,7 +1259,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		//MonoListAssignment
 		public RuleCall getAssignmentsMonoListAssignmentParserRuleCall_2_1_1_0() { return cAssignmentsMonoListAssignmentParserRuleCall_2_1_1_0; }
 
-		//(leftMig=Migration)?
+		//leftMig=Migration?
 		public Assignment getLeftMigAssignment_2_2() { return cLeftMigAssignment_2_2; }
 
 		//Migration
@@ -1359,16 +1359,16 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Migration:
-		//  "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
+		//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//"migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
+		//"migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//"migrate"
 		public Keyword getMigrateKeyword_0() { return cMigrateKeyword_0; }
 
-		//(first=Executable)?
+		//first=Executable?
 		public Assignment getFirstAssignment_1() { return cFirstAssignment_1; }
 
 		//Executable
@@ -1523,7 +1523,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//EPatch:
-	//  "epatch" name=ID "{" (imports+=Import)* (resources+=NamedResource)* (objects+=ObjectRef)* "}";
+	//  "epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
 	public EPatchElements getEPatchAccess() {
 		return (pEPatch != null) ? pEPatch : (pEPatch = new EPatchElements());
 	}
@@ -1613,7 +1613,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ObjectRef:
-	//  "object" (name=ID)? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
+	//  "object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT|"left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment|assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
 	public ObjectRefElements getObjectRefAccess() {
 		return (pObjectRef != null) ? pObjectRef : (pObjectRef = new ObjectRefElements());
 	}
@@ -1703,7 +1703,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//CreatedObject:
-	//  (ObjectNew|ObjectCopy) (name=ID)? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ (leftMig=Migration)? "}")?;
+	//  (ObjectNew|ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+ leftMig=Migration? "}")?;
 	public CreatedObjectElements getCreatedObjectAccess() {
 		return (pCreatedObject != null) ? pCreatedObject : (pCreatedObject = new CreatedObjectElements());
 	}
@@ -1739,7 +1739,7 @@ public class EpatchTestLanguageGrammarAccess implements IGrammarAccess {
 	} 
 
 	//Migration:
-	//  "migrate" (first=Executable)? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
+	//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
 	public MigrationElements getMigrationAccess() {
 		return (pMigration != null) ? pMigration : (pMigration = new MigrationElements());
 	}

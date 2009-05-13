@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Main ****************
  *
  * Main:
- *   (imports+=Import)* (types+=Type)*;
+ *   imports+=Import* types+=Type*;
  *
  **/
 
-// (imports+=Import)* (types+=Type)*
+// imports+=Import* types+=Type*
 protected class Main_Group extends GroupToken {
 	
 	public Main_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -69,11 +69,12 @@ protected class Main_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMainRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (imports+=Import)*
+// imports+=Import*
 protected class Main_ImportsAssignment_0 extends AssignmentToken  {
 	
 	public Main_ImportsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -105,15 +106,16 @@ protected class Main_ImportsAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Main_ImportsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new Main_ImportsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
 
-// (types+=Type)*
+// types+=Type*
 protected class Main_TypesAssignment_1 extends AssignmentToken  {
 	
 	public Main_TypesAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -145,11 +147,12 @@ protected class Main_TypesAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Main_TypesAssignment_1(parent, next, 0, consumed);
-			case 1: return new Main_ImportsAssignment_0(parent, next, 1, consumed);
-			default: return parent.createParentFollower(next, index - 2, consumed);
+			case 0: return new Main_TypesAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new Main_ImportsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 2, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 2, consumed);
 		}	
 	}	
 }
@@ -185,6 +188,7 @@ protected class Import_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getImportRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -202,14 +206,14 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -275,6 +279,7 @@ protected class Type_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -292,14 +297,14 @@ protected class Type_TypeKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 

@@ -56,10 +56,10 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cElementsInheritedParserRuleParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		
 		//ConcreteParserRule:
-		//  "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
+		//  "model" magicNumber=REAL ":" elements+=InheritedParserRule*;
 		public ParserRule getRule() { return rule; }
 
-		//"model" magicNumber=REAL ":" (elements+=InheritedParserRule)*
+		//"model" magicNumber=REAL ":" elements+=InheritedParserRule*
 		public Group getGroup() { return cGroup; }
 
 		//"model"
@@ -74,7 +74,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//(elements+=InheritedParserRule)*
+		//elements+=InheritedParserRule*
 		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 
 		//InheritedParserRule
@@ -337,7 +337,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ConcreteParserRule:
-	//  "model" magicNumber=REAL ":" (elements+=InheritedParserRule)*;
+	//  "model" magicNumber=REAL ":" elements+=InheritedParserRule*;
 	public ConcreteParserRuleElements getConcreteParserRuleAccess() {
 		return (pConcreteParserRule != null) ? pConcreteParserRule : (pConcreteParserRule = new ConcreteParserRuleElements());
 	}
@@ -437,7 +437,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractCallOverridenParserRule returns mm::AModel:
-	//  "overridemodel" (elements+=OverridableParserRule)*;
+	//  "overridemodel" elements+=OverridableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
 	}
@@ -447,7 +447,7 @@ public class ConcreteTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractCallExtendedParserRule returns mm::AModel:
-	//  "extendedmodel" (elements+=ExtendableParserRule)*;
+	//  "extendedmodel" elements+=ExtendableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
 	}

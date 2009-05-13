@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Foo ****************
  *
  * Foo:
- *   name=ID (nameRefs+=NameRef)*;
+ *   name=ID nameRefs+=NameRef*;
  *
  **/
 
-// name=ID (nameRefs+=NameRef)*
+// name=ID nameRefs+=NameRef*
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -69,6 +69,7 @@ protected class Foo_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getFooRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -86,14 +87,14 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -108,7 +109,7 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// (nameRefs+=NameRef)*
+// nameRefs+=NameRef*
 protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 	
 	public Foo_NameRefsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -140,10 +141,10 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Foo_NameRefsAssignment_1(parent, next, 0, consumed);
-			case 1: return new Foo_NameAssignment_0(parent, next, 1, consumed);
+			case 0: return new Foo_NameRefsAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new Foo_NameAssignment_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -173,15 +174,15 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getNameRefRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("rule",true)) == null) return null;
@@ -222,15 +223,15 @@ protected class MyRule_NameAssignment extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMyRuleRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;

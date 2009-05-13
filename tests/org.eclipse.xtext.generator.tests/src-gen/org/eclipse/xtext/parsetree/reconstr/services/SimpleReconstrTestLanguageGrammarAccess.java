@@ -123,10 +123,10 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
 		//Parens returns Expression:
-		//  "(" Op ")" (em="!")?;
+		//  "(" Op ")" em="!"?;
 		public ParserRule getRule() { return rule; }
 
-		//"(" Op ")" (em="!")?
+		//"(" Op ")" em="!"?
 		public Group getGroup() { return cGroup; }
 
 		//"("
@@ -138,7 +138,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 
-		//(em="!")?
+		//em="!"?
 		public Assignment getEmAssignment_3() { return cEmAssignment_3; }
 
 		//"!"
@@ -199,16 +199,16 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cStr2STRINGTerminalRuleCall_2_0 = (RuleCall)cStr2Assignment_2.eContents().get(0);
 		
 		//ManyStrings:
-		//  "=" (str1+=STRING)* str2+=STRING;
+		//  "=" str1+=STRING* str2+=STRING;
 		public ParserRule getRule() { return rule; }
 
-		//"=" (str1+=STRING)* str2+=STRING
+		//"=" str1+=STRING* str2+=STRING
 		public Group getGroup() { return cGroup; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
 
-		//(str1+=STRING)*
+		//str1+=STRING*
 		public Assignment getStr1Assignment_1() { return cStr1Assignment_1; }
 
 		//STRING
@@ -348,16 +348,16 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cValueIDTerminalRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
 		
 		//Boolean:
-		//  "#4" (bool?="myoption")? "kw" value=ID;
+		//  "#4" bool?="myoption"? "kw" value=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"#4" (bool?="myoption")? "kw" value=ID
+		//"#4" bool?="myoption"? "kw" value=ID
 		public Group getGroup() { return cGroup; }
 
 		//"#4"
 		public Keyword getNumberSignDigitFourKeyword_0() { return cNumberSignDigitFourKeyword_0; }
 
-		//(bool?="myoption")?
+		//bool?="myoption"?
 		public Assignment getBoolAssignment_1() { return cBoolAssignment_1; }
 
 		//"myoption"
@@ -502,7 +502,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Parens returns Expression:
-	//  "(" Op ")" (em="!")?;
+	//  "(" Op ")" em="!"?;
 	public ParensElements getParensAccess() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	}
@@ -522,7 +522,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ManyStrings:
-	//  "=" (str1+=STRING)* str2+=STRING;
+	//  "=" str1+=STRING* str2+=STRING;
 	public ManyStringsElements getManyStringsAccess() {
 		return (pManyStrings != null) ? pManyStrings : (pManyStrings = new ManyStringsElements());
 	}
@@ -562,7 +562,7 @@ public class SimpleReconstrTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Boolean:
-	//  "#4" (bool?="myoption")? "kw" value=ID;
+	//  "#4" bool?="myoption"? "kw" value=ID;
 	public BooleanElements getBooleanAccess() {
 		return (pBoolean != null) ? pBoolean : (pBoolean = new BooleanElements());
 	}

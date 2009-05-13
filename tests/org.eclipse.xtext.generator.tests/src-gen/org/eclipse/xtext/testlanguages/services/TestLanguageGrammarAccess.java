@@ -23,10 +23,10 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cMultiFeatureAbstractRuleParserRuleCall_0 = (RuleCall)cMultiFeatureAssignment.eContents().get(0);
 		
 		//EntryRule returns Model:
-		//  (multiFeature+=AbstractRule)*;
+		//  multiFeature+=AbstractRule*;
 		public ParserRule getRule() { return rule; }
 
-		//(multiFeature+=AbstractRule)*
+		//multiFeature+=AbstractRule*
 		public Assignment getMultiFeatureAssignment() { return cMultiFeatureAssignment; }
 
 		//AbstractRule
@@ -63,16 +63,16 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ChoiceRule returns ChoiceElement:
-		//  "choice" (optionalKeyword?="optional")? name=ID;
+		//  "choice" optionalKeyword?="optional"? name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"choice" (optionalKeyword?="optional")? name=ID
+		//"choice" optionalKeyword?="optional"? name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"choice"
 		public Keyword getChoiceKeyword_0() { return cChoiceKeyword_0; }
 
-		//(optionalKeyword?="optional")?
+		//optionalKeyword?="optional"?
 		public Assignment getOptionalKeywordAssignment_1() { return cOptionalKeywordAssignment_1; }
 
 		//"optional"
@@ -166,7 +166,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//EntryRule returns Model:
-	//  (multiFeature+=AbstractRule)*;
+	//  multiFeature+=AbstractRule*;
 	public EntryRuleElements getEntryRuleAccess() {
 		return (pEntryRule != null) ? pEntryRule : (pEntryRule = new EntryRuleElements());
 	}
@@ -186,7 +186,7 @@ public class TestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//ChoiceRule returns ChoiceElement:
-	//  "choice" (optionalKeyword?="optional")? name=ID;
+	//  "choice" optionalKeyword?="optional"? name=ID;
 	public ChoiceRuleElements getChoiceRuleAccess() {
 		return (pChoiceRule != null) ? pChoiceRule : (pChoiceRule = new ChoiceRuleElements());
 	}

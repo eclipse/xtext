@@ -32,16 +32,16 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
 		//Statemachine:
-		//  "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*;
+		//  "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 		public ParserRule getRule() { return rule; }
 
-		//"events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*
+		//"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
 		public Group getGroup() { return cGroup; }
 
 		//"events"
 		public Keyword getEventsKeyword_0() { return cEventsKeyword_0; }
 
-		//(events+=Event)*
+		//events+=Event*
 		public Assignment getEventsAssignment_1() { return cEventsAssignment_1; }
 
 		//Event
@@ -53,7 +53,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		//"commands"
 		public Keyword getCommandsKeyword_3() { return cCommandsKeyword_3; }
 
-		//(commands+=Command)*
+		//commands+=Command*
 		public Assignment getCommandsAssignment_4() { return cCommandsAssignment_4; }
 
 		//Command
@@ -62,7 +62,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		//"end"
 		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
 
-		//(states+=State)*
+		//states+=State*
 		public Assignment getStatesAssignment_6() { return cStatesAssignment_6; }
 
 		//State
@@ -80,13 +80,13 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		private final RuleCall cCodeIDTerminalRuleCall_2_0 = (RuleCall)cCodeAssignment_2.eContents().get(0);
 		
 		//Event:
-		//  (resetting?="resetting")? name=ID code=ID;
+		//  resetting?="resetting"? name=ID code=ID;
 		public ParserRule getRule() { return rule; }
 
-		//(resetting?="resetting")? name=ID code=ID
+		//resetting?="resetting"? name=ID code=ID
 		public Group getGroup() { return cGroup; }
 
-		//(resetting?="resetting")?
+		//resetting?="resetting"?
 		public Assignment getResettingAssignment_0() { return cResettingAssignment_0; }
 
 		//"resetting"
@@ -151,10 +151,10 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//State:
-		//  "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end";
+		//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 		public ParserRule getRule() { return rule; }
 
-		//"state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end"
+		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 		public Group getGroup() { return cGroup; }
 
 		//"state"
@@ -166,7 +166,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("actions" "{" (actions+=[Command])+ "}")?
+		//("actions" "{" actions+=[Command]+ "}")?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"actions"
@@ -175,7 +175,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2_1() { return cLeftCurlyBracketKeyword_2_1; }
 
-		//(actions+=[Command])+
+		//actions+=[Command]+
 		public Assignment getActionsAssignment_2_2() { return cActionsAssignment_2_2; }
 
 		//[Command]
@@ -187,7 +187,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2_3() { return cRightCurlyBracketKeyword_2_3; }
 
-		//(transitions+=Transition)*
+		//transitions+=Transition*
 		public Assignment getTransitionsAssignment_3() { return cTransitionsAssignment_3; }
 
 		//Transition
@@ -266,7 +266,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 
 	
 	//Statemachine:
-	//  "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*;
+	//  "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
 	public StatemachineElements getStatemachineAccess() {
 		return (pStatemachine != null) ? pStatemachine : (pStatemachine = new StatemachineElements());
 	}
@@ -276,7 +276,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//Event:
-	//  (resetting?="resetting")? name=ID code=ID;
+	//  resetting?="resetting"? name=ID code=ID;
 	public EventElements getEventAccess() {
 		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	}
@@ -296,7 +296,7 @@ public class FowlerDslGrammarAccess implements IGrammarAccess {
 	}
 
 	//State:
-	//  "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end";
+	//  "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	}

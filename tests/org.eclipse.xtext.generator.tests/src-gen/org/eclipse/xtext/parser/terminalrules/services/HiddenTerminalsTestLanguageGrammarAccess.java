@@ -61,10 +61,10 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Keyword cValidSemicolonKeyword_4_0 = (Keyword)cValidAssignment_4.eContents().get(0);
 		
 		//WithoutHiddens:
-		//  "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
+		//  "without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		//"without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";"
+		//"without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
 		public Group getGroup() { return cGroup; }
 
 		//"without"
@@ -79,7 +79,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		//"hiddens"
 		public Keyword getHiddensKeyword_2() { return cHiddensKeyword_2; }
 
-		//(spaces+=WS)?
+		//spaces+=WS?
 		public Assignment getSpacesAssignment_3() { return cSpacesAssignment_3; }
 
 		//WS
@@ -174,16 +174,16 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 		private final Keyword cValidSemicolonKeyword_2_0 = (Keyword)cValidAssignment_2.eContents().get(0);
 		
 		//OverridingHiddensCall hidden ( ):
-		//  "call" (spaces+=WS)? valid?=";";
+		//  "call" spaces+=WS? valid?=";";
 		public ParserRule getRule() { return rule; }
 
-		//"call" (spaces+=WS)? valid?=";"
+		//"call" spaces+=WS? valid?=";"
 		public Group getGroup() { return cGroup; }
 
 		//"call"
 		public Keyword getCallKeyword_0() { return cCallKeyword_0; }
 
-		//(spaces+=WS)?
+		//spaces+=WS?
 		public Assignment getSpacesAssignment_1() { return cSpacesAssignment_1; }
 
 		//WS
@@ -392,7 +392,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//WithoutHiddens:
-	//  "without" spaces+=WS "hiddens" (spaces+=WS)? valid?=";";
+	//  "without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
 	public WithoutHiddensElements getWithoutHiddensAccess() {
 		return (pWithoutHiddens != null) ? pWithoutHiddens : (pWithoutHiddens = new WithoutHiddensElements());
 	}
@@ -422,7 +422,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess implements IGrammarAccess 
 	}
 
 	//OverridingHiddensCall hidden ( ):
-	//  "call" (spaces+=WS)? valid?=";";
+	//  "call" spaces+=WS? valid?=";";
 	public OverridingHiddensCallElements getOverridingHiddensCallAccess() {
 		return (pOverridingHiddensCall != null) ? pOverridingHiddensCall : (pOverridingHiddensCall = new OverridingHiddensCallElements());
 	}

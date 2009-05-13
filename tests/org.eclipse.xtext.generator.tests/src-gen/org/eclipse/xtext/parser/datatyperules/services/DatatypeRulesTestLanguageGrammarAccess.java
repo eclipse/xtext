@@ -23,10 +23,10 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cModelModelParserRuleCall_0 = (RuleCall)cModelAssignment.eContents().get(0);
 		
 		//CompositeModel:
-		//  (model+=Model)+;
+		//  model+=Model+;
 		public ParserRule getRule() { return rule; }
 
-		//(model+=Model)+
+		//model+=Model+
 		public Assignment getModelAssignment() { return cModelAssignment; }
 
 		//Model
@@ -268,7 +268,7 @@ public class DatatypeRulesTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//CompositeModel:
-	//  (model+=Model)+;
+	//  model+=Model+;
 	public CompositeModelElements getCompositeModelAccess() {
 		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
 	}

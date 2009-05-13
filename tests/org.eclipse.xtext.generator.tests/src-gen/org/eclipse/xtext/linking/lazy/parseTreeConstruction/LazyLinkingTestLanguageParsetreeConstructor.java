@@ -44,11 +44,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (types+=Type)*;
+ *   types+=Type*;
  *
  **/
 
-// (types+=Type)*
+// types+=Type*
 protected class Model_TypesAssignment extends AssignmentToken  {
 	
 	public Model_TypesAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -68,6 +68,7 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getModelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -84,10 +85,11 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Model_TypesAssignment(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new Model_TypesAssignment(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -98,11 +100,11 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" (properties+=Property)* "}";
+ *   "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}";
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" (properties+=Property)* "}"
+// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{" properties+=Property* "}"
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -122,6 +124,7 @@ protected class Type_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTypeRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -139,14 +142,14 @@ protected class Type_TypeKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -462,7 +465,7 @@ protected class Type_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 		
 }
 
-// (properties+=Property)*
+// properties+=Property*
 protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 	
 	public Type_PropertiesAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -494,10 +497,10 @@ protected class Type_PropertiesAssignment_5 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Type_PropertiesAssignment_5(parent, next, 0, consumed);
-			case 1: return new Type_LeftCurlyBracketKeyword_4(parent, next, 1, consumed);
+			case 0: return new Type_PropertiesAssignment_5(parent, next, actIndex, consumed);
+			case 1: return new Type_LeftCurlyBracketKeyword_4(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -531,11 +534,11 @@ protected class Type_RightCurlyBracketKeyword_6 extends KeywordToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- *   (type+=[Type])+ name=ID ";";
+ *   type+=[Type]+ name=ID ";";
  *
  **/
 
-// (type+=[Type])+ name=ID ";"
+// type+=[Type]+ name=ID ";"
 protected class Property_Group extends GroupToken {
 	
 	public Property_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -555,11 +558,12 @@ protected class Property_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getPropertyRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (type+=[Type])+
+// type+=[Type]+
 protected class Property_TypeAssignment_0 extends AssignmentToken  {
 	
 	public Property_TypeAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -573,14 +577,14 @@ protected class Property_TypeAssignment_0 extends AssignmentToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Property_TypeAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;

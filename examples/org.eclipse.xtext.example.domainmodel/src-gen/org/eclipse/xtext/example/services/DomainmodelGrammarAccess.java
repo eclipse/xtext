@@ -26,19 +26,19 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final RuleCall cNamedElementsNamedElementParserRuleCall_1_0 = (RuleCall)cNamedElementsAssignment_1.eContents().get(0);
 		
 		//File:
-		//  (imports+=Import)* (namedElements+=NamedElement)*;
+		//  imports+=Import* namedElements+=NamedElement*;
 		public ParserRule getRule() { return rule; }
 
-		//(imports+=Import)* (namedElements+=NamedElement)*
+		//imports+=Import* namedElements+=NamedElement*
 		public Group getGroup() { return cGroup; }
 
-		//(imports+=Import)*
+		//imports+=Import*
 		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
 
 		//Import
 		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
 
-		//(namedElements+=NamedElement)*
+		//namedElements+=NamedElement*
 		public Assignment getNamedElementsAssignment_1() { return cNamedElementsAssignment_1; }
 
 		//NamedElement
@@ -101,10 +101,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Package:
-		//  "package" name=QualifiedName "{" (namedElements+=NamedElement)* "}";
+		//  "package" name=QualifiedName "{" namedElements+=NamedElement* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"package" name=QualifiedName "{" (namedElements+=NamedElement)* "}"
+		//"package" name=QualifiedName "{" namedElements+=NamedElement* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"package"
@@ -119,7 +119,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(namedElements+=NamedElement)*
+		//namedElements+=NamedElement*
 		public Assignment getNamedElementsAssignment_3() { return cNamedElementsAssignment_3; }
 
 		//NamedElement
@@ -190,10 +190,10 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Entity:
-		//  "entity" name=ID ("extends" superType=[Entity])? "{" (features+=Feature)* "}";
+		//  "entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"entity" name=ID ("extends" superType=[Entity])? "{" (features+=Feature)* "}"
+		//"entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"entity"
@@ -223,7 +223,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//(features+=Feature)*
+		//features+=Feature*
 		public Assignment getFeaturesAssignment_4() { return cFeaturesAssignment_4; }
 
 		//Feature
@@ -573,7 +573,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 
 	
 	//File:
-	//  (imports+=Import)* (namedElements+=NamedElement)*;
+	//  imports+=Import* namedElements+=NamedElement*;
 	public FileElements getFileAccess() {
 		return (pFile != null) ? pFile : (pFile = new FileElements());
 	}
@@ -603,7 +603,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//Package:
-	//  "package" name=QualifiedName "{" (namedElements+=NamedElement)* "}";
+	//  "package" name=QualifiedName "{" namedElements+=NamedElement* "}";
 	public PackageElements getPackageAccess() {
 		return (pPackage != null) ? pPackage : (pPackage = new PackageElements());
 	}
@@ -633,7 +633,7 @@ public class DomainmodelGrammarAccess implements IGrammarAccess {
 	}
 
 	//Entity:
-	//  "entity" name=ID ("extends" superType=[Entity])? "{" (features+=Feature)* "}";
+	//  "entity" name=ID ("extends" superType=[Entity])? "{" features+=Feature* "}";
 	public EntityElements getEntityAccess() {
 		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
 	}

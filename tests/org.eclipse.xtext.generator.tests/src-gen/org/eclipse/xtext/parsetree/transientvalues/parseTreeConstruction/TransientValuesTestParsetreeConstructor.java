@@ -69,6 +69,7 @@ protected class Root_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -86,14 +87,14 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -143,9 +144,9 @@ protected class Root_TestRequiredParserRuleCall_1_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -175,9 +176,9 @@ protected class Root_TestOptionalParserRuleCall_1_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -207,9 +208,9 @@ protected class Root_TestListParserRuleCall_1_2 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -247,6 +248,7 @@ protected class TestRequired_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestRequiredRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -264,14 +266,14 @@ protected class TestRequired_RequiredKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -344,11 +346,11 @@ protected class TestRequired_Required2Assignment_2 extends AssignmentToken  {
 /************ begin Rule TestOptional ****************
  *
  * TestOptional:
- *   "optional" (opt1=INT)? (":" opt2=INT)?;
+ *   "optional" opt1=INT? (":" opt2=INT)?;
  *
  **/
 
-// "optional" (opt1=INT)? (":" opt2=INT)?
+// "optional" opt1=INT? (":" opt2=INT)?
 protected class TestOptional_Group extends GroupToken {
 	
 	public TestOptional_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -370,6 +372,7 @@ protected class TestOptional_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestOptionalRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -387,18 +390,18 @@ protected class TestOptional_OptionalKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (opt1=INT)?
+// opt1=INT?
 protected class TestOptional_Opt1Assignment_1 extends AssignmentToken  {
 	
 	public TestOptional_Opt1Assignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -509,11 +512,11 @@ protected class TestOptional_Opt2Assignment_2_1 extends AssignmentToken  {
 /************ begin Rule TestList ****************
  *
  * TestList:
- *   "list" (item+=INT)*;
+ *   "list" item+=INT*;
  *
  **/
 
-// "list" (item+=INT)*
+// "list" item+=INT*
 protected class TestList_Group extends GroupToken {
 	
 	public TestList_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -534,6 +537,7 @@ protected class TestList_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestListRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -551,18 +555,18 @@ protected class TestList_ListKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (item+=INT)*
+// item+=INT*
 protected class TestList_ItemAssignment_1 extends AssignmentToken  {
 	
 	public TestList_ItemAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {

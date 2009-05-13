@@ -69,6 +69,7 @@ protected class Root_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getRootRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -86,14 +87,14 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -142,9 +143,9 @@ protected class Root_TestLinewrapParserRuleCall_1_0 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -174,9 +175,9 @@ protected class Root_TestIndentationParserRuleCall_1_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new Root_TestKeyword_0(parent, next, 0, inst);
+			case 0: return new Root_TestKeyword_0(parent, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -214,6 +215,7 @@ protected class Line_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getLineRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -231,14 +233,14 @@ protected class Line_TypeAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
@@ -311,11 +313,11 @@ protected class Line_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule TestLinewrap ****************
  *
  * TestLinewrap:
- *   "linewrap" (items+=Line)*;
+ *   "linewrap" items+=Line*;
  *
  **/
 
-// "linewrap" (items+=Line)*
+// "linewrap" items+=Line*
 protected class TestLinewrap_Group extends GroupToken {
 	
 	public TestLinewrap_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -336,6 +338,7 @@ protected class TestLinewrap_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestLinewrapRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -353,18 +356,18 @@ protected class TestLinewrap_LinewrapKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
-// (items+=Line)*
+// items+=Line*
 protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 	
 	public TestLinewrap_ItemsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -396,10 +399,10 @@ protected class TestLinewrap_ItemsAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new TestLinewrap_ItemsAssignment_1(parent, next, 0, consumed);
-			case 1: return new TestLinewrap_LinewrapKeyword_0(parent, next, 1, consumed);
+			case 0: return new TestLinewrap_ItemsAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new TestLinewrap_LinewrapKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -436,6 +439,7 @@ protected class TestIndentation_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getTestIndentationRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -453,14 +457,14 @@ protected class TestIndentation_IndentationKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -537,10 +541,10 @@ protected class TestIndentation_SubAssignment_2_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new TestIndentation_Alternatives_2(parent, next, 0, consumed);
-			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, next, 1, consumed);
+			case 0: return new TestIndentation_Alternatives_2(parent, next, actIndex, consumed);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -578,10 +582,10 @@ protected class TestIndentation_ItemsAssignment_2_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new TestIndentation_Alternatives_2(parent, next, 0, consumed);
-			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, next, 1, consumed);
+			case 0: return new TestIndentation_Alternatives_2(parent, next, actIndex, consumed);
+			case 1: return new TestIndentation_LeftCurlyBracketKeyword_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

@@ -23,10 +23,10 @@ public class OptionalEmptyTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cChildGreetingParserRuleCall_0 = (RuleCall)cChildAssignment.eContents().get(0);
 		
 		//Model:
-		//  (child=Greeting)?;
+		//  child=Greeting?;
 		public ParserRule getRule() { return rule; }
 
-		//(child=Greeting)?
+		//child=Greeting?
 		public Assignment getChildAssignment() { return cChildAssignment; }
 
 		//Greeting
@@ -83,7 +83,7 @@ public class OptionalEmptyTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  (child=Greeting)?;
+	//  child=Greeting?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

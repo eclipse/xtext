@@ -23,10 +23,10 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cChildrenElementParserRuleCall_0 = (RuleCall)cChildrenAssignment.eContents().get(0);
 		
 		//Model:
-		//  (children+=Element)*;
+		//  children+=Element*;
 		public ParserRule getRule() { return rule; }
 
-		//(children+=Element)*
+		//children+=Element*
 		public Assignment getChildrenAssignment() { return cChildrenAssignment; }
 
 		//Element
@@ -88,7 +88,7 @@ public class LexerTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  (children+=Element)*;
+	//  children+=Element*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

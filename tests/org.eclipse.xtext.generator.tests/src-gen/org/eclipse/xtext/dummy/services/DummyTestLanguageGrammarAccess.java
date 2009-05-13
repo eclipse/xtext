@@ -23,10 +23,10 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Model:
-		//  (elements+=Element)*;
+		//  elements+=Element*;
 		public ParserRule getRule() { return rule; }
 
-		//(elements+=Element)*
+		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
 		//Element
@@ -46,13 +46,13 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Element:
-		//  (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
+		//  optional?="optional"? "element" name=ID descriptions+=STRING* ";";
 		public ParserRule getRule() { return rule; }
 
-		//(optional?="optional")? "element" name=ID (descriptions+=STRING)* ";"
+		//optional?="optional"? "element" name=ID descriptions+=STRING* ";"
 		public Group getGroup() { return cGroup; }
 
-		//(optional?="optional")?
+		//optional?="optional"?
 		public Assignment getOptionalAssignment_0() { return cOptionalAssignment_0; }
 
 		//"optional"
@@ -67,7 +67,7 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//(descriptions+=STRING)*
+		//descriptions+=STRING*
 		public Assignment getDescriptionsAssignment_3() { return cDescriptionsAssignment_3; }
 
 		//STRING
@@ -103,7 +103,7 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Model:
-	//  (elements+=Element)*;
+	//  elements+=Element*;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -113,7 +113,7 @@ public class DummyTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Element:
-	//  (optional?="optional")? "element" name=ID (descriptions+=STRING)* ";";
+	//  optional?="optional"? "element" name=ID descriptions+=STRING* ";";
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}

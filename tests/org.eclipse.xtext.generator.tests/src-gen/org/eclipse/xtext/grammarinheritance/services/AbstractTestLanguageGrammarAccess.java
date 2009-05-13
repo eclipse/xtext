@@ -49,16 +49,16 @@ public class AbstractTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cElementsOverridableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		//AbstractCallOverridenParserRule returns mm::AModel:
-		//  "overridemodel" (elements+=OverridableParserRule)*;
+		//  "overridemodel" elements+=OverridableParserRule*;
 		public ParserRule getRule() { return rule; }
 
-		//"overridemodel" (elements+=OverridableParserRule)*
+		//"overridemodel" elements+=OverridableParserRule*
 		public Group getGroup() { return cGroup; }
 
 		//"overridemodel"
 		public Keyword getOverridemodelKeyword_0() { return cOverridemodelKeyword_0; }
 
-		//(elements+=OverridableParserRule)*
+		//elements+=OverridableParserRule*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 
 		//OverridableParserRule
@@ -121,16 +121,16 @@ public class AbstractTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cElementsExtendableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		//AbstractCallExtendedParserRule returns mm::AModel:
-		//  "extendedmodel" (elements+=ExtendableParserRule)*;
+		//  "extendedmodel" elements+=ExtendableParserRule*;
 		public ParserRule getRule() { return rule; }
 
-		//"extendedmodel" (elements+=ExtendableParserRule)*
+		//"extendedmodel" elements+=ExtendableParserRule*
 		public Group getGroup() { return cGroup; }
 
 		//"extendedmodel"
 		public Keyword getExtendedmodelKeyword_0() { return cExtendedmodelKeyword_0; }
 
-		//(elements+=ExtendableParserRule)*
+		//elements+=ExtendableParserRule*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
 
 		//ExtendableParserRule
@@ -203,7 +203,7 @@ public class AbstractTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractCallOverridenParserRule returns mm::AModel:
-	//  "overridemodel" (elements+=OverridableParserRule)*;
+	//  "overridemodel" elements+=OverridableParserRule*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return (pAbstractCallOverridenParserRule != null) ? pAbstractCallOverridenParserRule : (pAbstractCallOverridenParserRule = new AbstractCallOverridenParserRuleElements());
 	}
@@ -233,7 +233,7 @@ public class AbstractTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractCallExtendedParserRule returns mm::AModel:
-	//  "extendedmodel" (elements+=ExtendableParserRule)*;
+	//  "extendedmodel" elements+=ExtendableParserRule*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return (pAbstractCallExtendedParserRule != null) ? pAbstractCallExtendedParserRule : (pAbstractCallExtendedParserRule = new AbstractCallExtendedParserRuleElements());
 	}

@@ -38,10 +38,10 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Spielplatz:
-		//  ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
+		//  ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
 		public ParserRule getRule() { return rule; }
 
-		//("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
+		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"spielplatz"
@@ -53,7 +53,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 		//INT
 		public RuleCall getGroesseINTTerminalRuleCall_1_0() { return cGroesseINTTerminalRuleCall_1_0; }
 
-		//(beschreibung=STRING)?
+		//beschreibung=STRING?
 		public Assignment getBeschreibungAssignment_2() { return cBeschreibungAssignment_2; }
 
 		//STRING
@@ -392,7 +392,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess implements IGrammarAccess
 
 	
 	//Spielplatz:
-	//  ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
+	//  ("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie)* "}")?;
 	public SpielplatzElements getSpielplatzAccess() {
 		return (pSpielplatz != null) ? pSpielplatz : (pSpielplatz = new SpielplatzElements());
 	}

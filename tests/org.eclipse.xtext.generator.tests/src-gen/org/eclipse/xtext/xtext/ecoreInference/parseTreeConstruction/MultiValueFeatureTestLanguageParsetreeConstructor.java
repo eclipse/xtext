@@ -42,11 +42,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Start ****************
  *
  * Start:
- *   (featureA+=ID)+;
+ *   featureA+=ID+;
  *
  **/
 
-// (featureA+=ID)+
+// featureA+=ID+
 protected class Start_FeatureAAssignment extends AssignmentToken  {
 	
 	public Start_FeatureAAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -60,15 +60,15 @@ protected class Start_FeatureAAssignment extends AssignmentToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Start_FeatureAAssignment(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getStartRule().getType().getClassifier())) return null;
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("featureA",true)) == null) return null;

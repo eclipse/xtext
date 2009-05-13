@@ -52,10 +52,10 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cRulesAbstractRuleParserRuleCall_5_0 = (RuleCall)cRulesAssignment_5.eContents().get(0);
 		
 		//Grammar:
-		//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+		//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
 		public ParserRule getRule() { return rule; }
 
-		//"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+
+		//"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+
 		public Group getGroup() { return cGroup; }
 
 		//"grammar"
@@ -139,13 +139,13 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//")"
 		public Keyword getRightParenthesisKeyword_3_3() { return cRightParenthesisKeyword_3_3; }
 
-		//(metamodelDeclarations+=AbstractMetamodelDeclaration)*
+		//metamodelDeclarations+=AbstractMetamodelDeclaration*
 		public Assignment getMetamodelDeclarationsAssignment_4() { return cMetamodelDeclarationsAssignment_4; }
 
 		//AbstractMetamodelDeclaration
 		public RuleCall getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0() { return cMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0; }
 
-		//(rules+=AbstractRule)+
+		//rules+=AbstractRule+
 		public Assignment getRulesAssignment_5() { return cRulesAssignment_5; }
 
 		//AbstractRule
@@ -522,22 +522,22 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTokensAbstractTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
 		//Group returns AbstractElement:
-		//  AbstractToken ({Group.tokens+=current} (tokens+=AbstractToken)+)?;
+		//  AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 		public ParserRule getRule() { return rule; }
 
-		//AbstractToken ({Group.tokens+=current} (tokens+=AbstractToken)+)?
+		//AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
 		public Group getGroup() { return cGroup; }
 
 		//AbstractToken
 		public RuleCall getAbstractTokenParserRuleCall_0() { return cAbstractTokenParserRuleCall_0; }
 
-		//({Group.tokens+=current} (tokens+=AbstractToken)+)?
+		//({Group.tokens+=current} tokens+=AbstractToken+)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Group.tokens+=current}
 		public Action getGroupTokensAction_1_0() { return cGroupTokensAction_1_0; }
 
-		//(tokens+=AbstractToken)+
+		//tokens+=AbstractToken+
 		public Assignment getTokensAssignment_1_1() { return cTokensAssignment_1_1; }
 
 		//AbstractToken
@@ -577,10 +577,10 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
 		//AbstractTokenWithCardinality returns AbstractElement:
-		//  (Assignment|AbstractTerminal) (cardinality=( "?" | "*" | "+" ))?;
+		//  (Assignment|AbstractTerminal) cardinality=( "?" | "*" | "+" )?;
 		public ParserRule getRule() { return rule; }
 
-		//(Assignment|AbstractTerminal) (cardinality=( "?" | "*" | "+" ))?
+		//(Assignment|AbstractTerminal) cardinality=( "?" | "*" | "+" )?
 		public Group getGroup() { return cGroup; }
 
 		//Assignment|AbstractTerminal
@@ -592,7 +592,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		//AbstractTerminal
 		public RuleCall getAbstractTerminalParserRuleCall_0_1() { return cAbstractTerminalParserRuleCall_0_1; }
 
-		//(cardinality=( "?" | "*" | "+" ))?
+		//cardinality=( "?" | "*" | "+" )?
 		public Assignment getCardinalityAssignment_1() { return cCardinalityAssignment_1; }
 
 		//"?"|"*"|"+"
@@ -1134,22 +1134,22 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final RuleCall cTokensTerminalTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
 		//TerminalGroup returns AbstractElement:
-		//  TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?;
+		//  TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 		public ParserRule getRule() { return rule; }
 
-		//TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?
+		//TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
 		public Group getGroup() { return cGroup; }
 
 		//TerminalToken
 		public RuleCall getTerminalTokenParserRuleCall_0() { return cTerminalTokenParserRuleCall_0; }
 
-		//({Group.tokens+=current} (tokens+=TerminalToken)+)?
+		//({Group.tokens+=current} tokens+=TerminalToken+)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Group.tokens+=current}
 		public Action getGroupTokensAction_1_0() { return cGroupTokensAction_1_0; }
 
-		//(tokens+=TerminalToken)+
+		//tokens+=TerminalToken+
 		public Assignment getTokensAssignment_1_1() { return cTokensAssignment_1_1; }
 
 		//TerminalToken
@@ -1167,16 +1167,16 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
 		//TerminalToken returns AbstractElement:
-		//  TerminalTokenElement (cardinality=( "?" | "*" | "+" ))?;
+		//  TerminalTokenElement cardinality=( "?" | "*" | "+" )?;
 		public ParserRule getRule() { return rule; }
 
-		//TerminalTokenElement (cardinality=( "?" | "*" | "+" ))?
+		//TerminalTokenElement cardinality=( "?" | "*" | "+" )?
 		public Group getGroup() { return cGroup; }
 
 		//TerminalTokenElement
 		public RuleCall getTerminalTokenElementParserRuleCall_0() { return cTerminalTokenElementParserRuleCall_0; }
 
-		//(cardinality=( "?" | "*" | "+" ))?
+		//cardinality=( "?" | "*" | "+" )?
 		public Assignment getCardinalityAssignment_1() { return cCardinalityAssignment_1; }
 
 		//"?"|"*"|"+"
@@ -1570,7 +1570,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 
 	
 	//Grammar:
-	//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? (metamodelDeclarations+=AbstractMetamodelDeclaration)* (rules+=AbstractRule)+;
+	//  "grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")? metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
 	public GrammarElements getGrammarAccess() {
 		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
 	}
@@ -1660,7 +1660,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//Group returns AbstractElement:
-	//  AbstractToken ({Group.tokens+=current} (tokens+=AbstractToken)+)?;
+	//  AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 	public GroupElements getGroupAccess() {
 		return (pGroup != null) ? pGroup : (pGroup = new GroupElements());
 	}
@@ -1680,7 +1680,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//AbstractTokenWithCardinality returns AbstractElement:
-	//  (Assignment|AbstractTerminal) (cardinality=( "?" | "*" | "+" ))?;
+	//  (Assignment|AbstractTerminal) cardinality=( "?" | "*" | "+" )?;
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
 		return (pAbstractTokenWithCardinality != null) ? pAbstractTokenWithCardinality : (pAbstractTokenWithCardinality = new AbstractTokenWithCardinalityElements());
 	}
@@ -1840,7 +1840,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//TerminalGroup returns AbstractElement:
-	//  TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?;
+	//  TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 	public TerminalGroupElements getTerminalGroupAccess() {
 		return (pTerminalGroup != null) ? pTerminalGroup : (pTerminalGroup = new TerminalGroupElements());
 	}
@@ -1850,7 +1850,7 @@ public class XtextTerminalsTestLanguageGrammarAccess implements IGrammarAccess {
 	}
 
 	//TerminalToken returns AbstractElement:
-	//  TerminalTokenElement (cardinality=( "?" | "*" | "+" ))?;
+	//  TerminalTokenElement cardinality=( "?" | "*" | "+" )?;
 	public TerminalTokenElements getTerminalTokenAccess() {
 		return (pTerminalToken != null) ? pTerminalToken : (pTerminalToken = new TerminalTokenElements());
 	}

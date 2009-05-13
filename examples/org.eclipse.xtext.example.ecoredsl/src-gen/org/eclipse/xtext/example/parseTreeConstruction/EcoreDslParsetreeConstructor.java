@@ -60,11 +60,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EcoreDsl ****************
  *
  * EcoreDsl:
- *   (metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl;
+ *   metamodelDeclarations+=ReferencedMetamodel* package=EPackageDecl;
  *
  **/
 
-// (metamodelDeclarations+=ReferencedMetamodel)* package=EPackageDecl
+// metamodelDeclarations+=ReferencedMetamodel* package=EPackageDecl
 protected class EcoreDsl_Group extends GroupToken {
 	
 	public EcoreDsl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -84,11 +84,12 @@ protected class EcoreDsl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEcoreDslRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (metamodelDeclarations+=ReferencedMetamodel)*
+// metamodelDeclarations+=ReferencedMetamodel*
 protected class EcoreDsl_MetamodelDeclarationsAssignment_0 extends AssignmentToken  {
 	
 	public EcoreDsl_MetamodelDeclarationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -120,10 +121,11 @@ protected class EcoreDsl_MetamodelDeclarationsAssignment_0 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EcoreDsl_MetamodelDeclarationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EcoreDsl_MetamodelDeclarationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -160,10 +162,11 @@ protected class EcoreDsl_PackageAssignment_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EcoreDsl_MetamodelDeclarationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EcoreDsl_MetamodelDeclarationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -199,6 +202,7 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getReferencedMetamodelRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -216,14 +220,14 @@ protected class ReferencedMetamodel_ImportKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -361,11 +365,11 @@ protected class ReferencedMetamodel_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule EPackageDecl ****************
  *
  * EPackageDecl returns ecore::EPackage:
- *   (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+ *   eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+// eAnnotations+=EAnnotationDecl* "package" name=QID "nsURI" "=" nsURI=STRING "nsPrefix" "=" nsPrefix=QID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
 protected class EPackageDecl_Group extends GroupToken {
 	
 	public EPackageDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -385,11 +389,12 @@ protected class EPackageDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEPackageDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EPackageDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EPackageDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -421,10 +426,11 @@ protected class EPackageDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EPackageDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EPackageDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -443,14 +449,14 @@ protected class EPackageDecl_PackageKeyword_1 extends KeywordToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EPackageDecl_EAnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -700,10 +706,10 @@ protected class EPackageDecl_ESubpackagesAssignment_10_0 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EPackageDecl_Alternatives_10(parent, next, 0, consumed);
-			case 1: return new EPackageDecl_LeftCurlyBracketKeyword_9(parent, next, 1, consumed);
+			case 0: return new EPackageDecl_Alternatives_10(parent, next, actIndex, consumed);
+			case 1: return new EPackageDecl_LeftCurlyBracketKeyword_9(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -741,10 +747,10 @@ protected class EPackageDecl_EClassifiersAssignment_10_1 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EPackageDecl_Alternatives_10(parent, next, 0, consumed);
-			case 1: return new EPackageDecl_LeftCurlyBracketKeyword_9(parent, next, 1, consumed);
+			case 0: return new EPackageDecl_Alternatives_10(parent, next, actIndex, consumed);
+			case 1: return new EPackageDecl_LeftCurlyBracketKeyword_9(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -779,11 +785,11 @@ protected class EPackageDecl_RightCurlyBracketKeyword_11 extends KeywordToken  {
 /************ begin Rule SubEPackageDecl ****************
  *
  * SubEPackageDecl returns ecore::EPackage:
- *   (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
+ *   eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
+// eAnnotations+=EAnnotationDecl* "package" name=ID "{" (eSubpackages+=SubEPackageDecl|eClassifiers+=EClassifierDecl)* "}"
 protected class SubEPackageDecl_Group extends GroupToken {
 	
 	public SubEPackageDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -803,11 +809,12 @@ protected class SubEPackageDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getSubEPackageDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class SubEPackageDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public SubEPackageDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -839,10 +846,11 @@ protected class SubEPackageDecl_EAnnotationsAssignment_0 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new SubEPackageDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new SubEPackageDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -861,14 +869,14 @@ protected class SubEPackageDecl_PackageKeyword_1 extends KeywordToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubEPackageDecl_EAnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -976,10 +984,10 @@ protected class SubEPackageDecl_ESubpackagesAssignment_4_0 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new SubEPackageDecl_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new SubEPackageDecl_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new SubEPackageDecl_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new SubEPackageDecl_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1017,10 +1025,10 @@ protected class SubEPackageDecl_EClassifiersAssignment_4_1 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new SubEPackageDecl_Alternatives_4(parent, next, 0, consumed);
-			case 1: return new SubEPackageDecl_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new SubEPackageDecl_Alternatives_4(parent, next, actIndex, consumed);
+			case 1: return new SubEPackageDecl_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1080,6 +1088,7 @@ protected class EClassifierDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEClassifierDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1108,9 +1117,10 @@ protected class EClassifierDecl_EClassDeclParserRuleCall_0 extends RuleCallToken
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -1139,9 +1149,10 @@ protected class EClassifierDecl_EDataTypeDeclParserRuleCall_1 extends RuleCallTo
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -1153,11 +1164,11 @@ protected class EClassifierDecl_EDataTypeDeclParserRuleCall_1 extends RuleCallTo
 /************ begin Rule EDataTypeDecl ****************
  *
  * EDataTypeDecl returns ecore::EDataType:
- *   (eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
+ *   eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl;
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
+// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")|EEnumDecl
 protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 
 	public EDataTypeDecl_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1178,11 +1189,12 @@ protected class EDataTypeDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEDataTypeDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)* (serializable=Serializable)? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
+// eAnnotations+=EAnnotationDecl* serializable=Serializable? ("datatype" name=ID ":" instanceClassName=STRING_OR_QID ";")
 protected class EDataTypeDecl_Group_0 extends GroupToken {
 	
 	public EDataTypeDecl_Group_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1202,7 +1214,7 @@ protected class EDataTypeDecl_Group_0 extends GroupToken {
 		
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EDataTypeDecl_EAnnotationsAssignment_0_0 extends AssignmentToken  {
 	
 	public EDataTypeDecl_EAnnotationsAssignment_0_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1234,15 +1246,16 @@ protected class EDataTypeDecl_EAnnotationsAssignment_0_0 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EDataTypeDecl_EAnnotationsAssignment_0_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EDataTypeDecl_EAnnotationsAssignment_0_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
 
-// (serializable=Serializable)?
+// serializable=Serializable?
 protected class EDataTypeDecl_SerializableAssignment_0_1 extends AssignmentToken  {
 	
 	public EDataTypeDecl_SerializableAssignment_0_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1256,14 +1269,14 @@ protected class EDataTypeDecl_SerializableAssignment_0_1 extends AssignmentToken
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EDataTypeDecl_EAnnotationsAssignment_0_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serializable",false)) == null) return null;
@@ -1313,14 +1326,14 @@ protected class EDataTypeDecl_DatatypeKeyword_0_2_0 extends KeywordToken  {
 		switch(index) {
 			case 0: return new EDataTypeDecl_SerializableAssignment_0_1(parent, this, 0, inst);
 			case 1: return new EDataTypeDecl_EAnnotationsAssignment_0_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1452,9 +1465,10 @@ protected class EDataTypeDecl_EEnumDeclParserRuleCall_1 extends RuleCallToken {
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -1491,6 +1505,7 @@ protected class EAnnotationDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEAnnotationDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -1508,14 +1523,14 @@ protected class EAnnotationDecl_CommercialAtKeyword_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -1622,9 +1637,9 @@ protected class EAnnotationDecl_DetailsAssignment_2_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EAnnotationDecl_LeftParenthesisKeyword_2_0(parent, next, 0, consumed);
+			case 0: return new EAnnotationDecl_LeftParenthesisKeyword_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1703,9 +1718,9 @@ protected class EAnnotationDecl_DetailsAssignment_2_2_1 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EAnnotationDecl_CommaKeyword_2_2_0(parent, next, 0, consumed);
+			case 0: return new EAnnotationDecl_CommaKeyword_2_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1741,11 +1756,11 @@ protected class EAnnotationDecl_RightParenthesisKeyword_2_3 extends KeywordToken
 /************ begin Rule EClassDecl ****************
  *
  * EClassDecl returns ecore::EClass:
- *   (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
+ *   eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* (abstract?="abstract")? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
+// eAnnotations+=EAnnotationDecl* abstract?="abstract"? (interface?="interface"|"class") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? ("extends" eGenericSuperTypes+=EGenericTypeReferenceDecl ("," eGenericSuperTypes+=EGenericTypeReferenceDecl)*)? (":" instanceClassName=STRING_OR_QID)? "{" (eStructuralFeatures+=EStructuralFeatureDecl|eOperations+=EOperationDecl)* "}"
 protected class EClassDecl_Group extends GroupToken {
 	
 	public EClassDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1765,11 +1780,12 @@ protected class EClassDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEClassDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EClassDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EClassDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1801,15 +1817,16 @@ protected class EClassDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EClassDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
 
-// (abstract?="abstract")?
+// abstract?="abstract"?
 protected class EClassDecl_AbstractAssignment_1 extends AssignmentToken  {
 	
 	public EClassDecl_AbstractAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -1823,14 +1840,14 @@ protected class EClassDecl_AbstractAssignment_1 extends AssignmentToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EClassDecl_EAnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("abstract",false)) == null) return null;
@@ -1881,14 +1898,14 @@ protected class EClassDecl_InterfaceAssignment_2_0 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EClassDecl_AbstractAssignment_1(parent, this, 0, inst);
 			case 1: return new EClassDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("interface",true)) == null) return null;
@@ -1918,14 +1935,14 @@ protected class EClassDecl_ClassKeyword_2_1 extends KeywordToken  {
 		switch(index) {
 			case 0: return new EClassDecl_AbstractAssignment_1(parent, this, 0, inst);
 			case 1: return new EClassDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -2033,9 +2050,9 @@ protected class EClassDecl_ETypeParametersAssignment_4_1 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_LessThanSignKeyword_4_0(parent, next, 0, consumed);
+			case 0: return new EClassDecl_LessThanSignKeyword_4_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2114,9 +2131,9 @@ protected class EClassDecl_ETypeParametersAssignment_4_2_1 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_CommaKeyword_4_2_0(parent, next, 0, consumed);
+			case 0: return new EClassDecl_CommaKeyword_4_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2219,9 +2236,9 @@ protected class EClassDecl_EGenericSuperTypesAssignment_5_1 extends AssignmentTo
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_ExtendsKeyword_5_0(parent, next, 0, consumed);
+			case 0: return new EClassDecl_ExtendsKeyword_5_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2300,9 +2317,9 @@ protected class EClassDecl_EGenericSuperTypesAssignment_5_2_1 extends Assignment
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_CommaKeyword_5_2_0(parent, next, 0, consumed);
+			case 0: return new EClassDecl_CommaKeyword_5_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2460,10 +2477,10 @@ protected class EClassDecl_EStructuralFeaturesAssignment_8_0 extends AssignmentT
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_Alternatives_8(parent, next, 0, consumed);
-			case 1: return new EClassDecl_LeftCurlyBracketKeyword_7(parent, next, 1, consumed);
+			case 0: return new EClassDecl_Alternatives_8(parent, next, actIndex, consumed);
+			case 1: return new EClassDecl_LeftCurlyBracketKeyword_7(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2501,10 +2518,10 @@ protected class EClassDecl_EOperationsAssignment_8_1 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EClassDecl_Alternatives_8(parent, next, 0, consumed);
-			case 1: return new EClassDecl_LeftCurlyBracketKeyword_7(parent, next, 1, consumed);
+			case 0: return new EClassDecl_Alternatives_8(parent, next, actIndex, consumed);
+			case 1: return new EClassDecl_LeftCurlyBracketKeyword_7(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -2564,6 +2581,7 @@ protected class EStructuralFeatureDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEStructuralFeatureDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -2592,9 +2610,10 @@ protected class EStructuralFeatureDecl_EAttributeDeclParserRuleCall_0 extends Ru
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -2623,9 +2642,10 @@ protected class EStructuralFeatureDecl_EReferenceDeclParserRuleCall_1 extends Ru
 		return current;
 	}
 	
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			default: return parent.createParentFollower(next, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 0, inst) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 0, inst);
 		}	
 	}	
 }
@@ -2637,11 +2657,11 @@ protected class EStructuralFeatureDecl_EReferenceDeclParserRuleCall_1 extends Ru
 /************ begin Rule EAttributeDecl ****************
  *
  * EAttributeDecl returns ecore::EAttribute:
- *   (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
+ *   eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
+// eAnnotations+=EAnnotationDecl* (iD?="ID"|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* "attr" eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? name=ID ("=" defaultValueLiteral=STRING)? ";"
 protected class EAttributeDecl_Group extends GroupToken {
 	
 	public EAttributeDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -2661,11 +2681,12 @@ protected class EAttributeDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEAttributeDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EAttributeDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EAttributeDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -2697,10 +2718,11 @@ protected class EAttributeDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EAttributeDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EAttributeDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -2747,14 +2769,14 @@ protected class EAttributeDecl_IDAssignment_1_0 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("iD",true)) == null) return null;
@@ -2784,14 +2806,14 @@ protected class EAttributeDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
@@ -2821,14 +2843,14 @@ protected class EAttributeDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
@@ -2858,14 +2880,14 @@ protected class EAttributeDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
@@ -2895,14 +2917,14 @@ protected class EAttributeDecl_VolatileAssignment_1_4 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("volatile",true)) == null) return null;
@@ -2932,14 +2954,14 @@ protected class EAttributeDecl_TransientAssignment_1_5 extends AssignmentToken  
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("transient",true)) == null) return null;
@@ -2969,14 +2991,14 @@ protected class EAttributeDecl_UnsettableAssignment_1_6 extends AssignmentToken 
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unsettable",true)) == null) return null;
@@ -3006,14 +3028,14 @@ protected class EAttributeDecl_DerivedAssignment_1_7 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("derived",true)) == null) return null;
@@ -3044,14 +3066,14 @@ protected class EAttributeDecl_AttrKeyword_2 extends KeywordToken  {
 		switch(index) {
 			case 0: return new EAttributeDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EAttributeDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -3087,9 +3109,9 @@ protected class EAttributeDecl_EGenericTypeAssignment_3 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EAttributeDecl_AttrKeyword_2(parent, next, 0, consumed);
+			case 0: return new EAttributeDecl_AttrKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3392,11 +3414,11 @@ protected class EAttributeDecl_SemicolonKeyword_7 extends KeywordToken  {
 /************ begin Rule EReferenceDecl ****************
  *
  * EReferenceDecl returns ecore::EReference:
- *   (eAnnotations+=EAnnotationDecl)* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
+ *   eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";"
+// eAnnotations+=EAnnotationDecl* (resolveProxies=Local|unique=Bag|ordered=Random|changeable=Readonly|volatile?="volatile"|transient?="transient"|unsettable?="unsettable"|derived?="derived")* (containment?="val"|"ref") eGenericType=EGenericTypeReferenceDecl ("[" lowerBound=INT (".." upperBound=SINT)? "]")? ("#" eOpposite=[ecore::EReference])? name=ID ";"
 protected class EReferenceDecl_Group extends GroupToken {
 	
 	public EReferenceDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -3416,11 +3438,12 @@ protected class EReferenceDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEReferenceDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EReferenceDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EReferenceDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -3452,10 +3475,11 @@ protected class EReferenceDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EReferenceDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EReferenceDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -3502,14 +3526,14 @@ protected class EReferenceDecl_ResolveProxiesAssignment_1_0 extends AssignmentTo
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resolveProxies",true)) == null) return null;
@@ -3539,14 +3563,14 @@ protected class EReferenceDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
@@ -3576,14 +3600,14 @@ protected class EReferenceDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
@@ -3613,14 +3637,14 @@ protected class EReferenceDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
@@ -3650,14 +3674,14 @@ protected class EReferenceDecl_VolatileAssignment_1_4 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("volatile",true)) == null) return null;
@@ -3687,14 +3711,14 @@ protected class EReferenceDecl_TransientAssignment_1_5 extends AssignmentToken  
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("transient",true)) == null) return null;
@@ -3724,14 +3748,14 @@ protected class EReferenceDecl_UnsettableAssignment_1_6 extends AssignmentToken 
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unsettable",true)) == null) return null;
@@ -3761,14 +3785,14 @@ protected class EReferenceDecl_DerivedAssignment_1_7 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("derived",true)) == null) return null;
@@ -3820,14 +3844,14 @@ protected class EReferenceDecl_ContainmentAssignment_2_0 extends AssignmentToken
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("containment",true)) == null) return null;
@@ -3857,14 +3881,14 @@ protected class EReferenceDecl_RefKeyword_2_1 extends KeywordToken  {
 		switch(index) {
 			case 0: return new EReferenceDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EReferenceDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -3901,9 +3925,9 @@ protected class EReferenceDecl_EGenericTypeAssignment_3 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EReferenceDecl_Alternatives_2(parent, next, 0, consumed);
+			case 0: return new EReferenceDecl_Alternatives_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -4210,11 +4234,11 @@ protected class EReferenceDecl_SemicolonKeyword_7 extends KeywordToken  {
 /************ begin Rule EEnumDecl ****************
  *
  * EEnumDecl returns ecore::EEnum:
- *   (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}";
+ *   eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+ "}";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* "enum" name=ID "{" (eLiterals+=EEnumLiteralDecl)+ "}"
+// eAnnotations+=EAnnotationDecl* "enum" name=ID "{" eLiterals+=EEnumLiteralDecl+ "}"
 protected class EEnumDecl_Group extends GroupToken {
 	
 	public EEnumDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -4234,11 +4258,12 @@ protected class EEnumDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEEnumDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EEnumDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EEnumDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -4270,10 +4295,11 @@ protected class EEnumDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EEnumDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EEnumDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -4292,14 +4318,14 @@ protected class EEnumDecl_EnumKeyword_1 extends KeywordToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EEnumDecl_EAnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -4354,7 +4380,7 @@ protected class EEnumDecl_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 		
 }
 
-// (eLiterals+=EEnumLiteralDecl)+
+// eLiterals+=EEnumLiteralDecl+
 protected class EEnumDecl_ELiteralsAssignment_4 extends AssignmentToken  {
 	
 	public EEnumDecl_ELiteralsAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -4386,10 +4412,10 @@ protected class EEnumDecl_ELiteralsAssignment_4 extends AssignmentToken  {
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EEnumDecl_ELiteralsAssignment_4(parent, next, 0, consumed);
-			case 1: return new EEnumDecl_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			case 0: return new EEnumDecl_ELiteralsAssignment_4(parent, next, actIndex, consumed);
+			case 1: return new EEnumDecl_LeftCurlyBracketKeyword_3(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -4422,11 +4448,11 @@ protected class EEnumDecl_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule EEnumLiteralDecl ****************
  *
  * EEnumLiteralDecl returns ecore::EEnumLiteral:
- *   (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";";
+ *   eAnnotations+=EAnnotationDecl* name=ID ("=" value=INT)? literal=STRING? ";";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* name=ID ("=" value=INT)? (literal=STRING)? ";"
+// eAnnotations+=EAnnotationDecl* name=ID ("=" value=INT)? literal=STRING? ";"
 protected class EEnumLiteralDecl_Group extends GroupToken {
 	
 	public EEnumLiteralDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -4446,11 +4472,12 @@ protected class EEnumLiteralDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEEnumLiteralDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EEnumLiteralDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EEnumLiteralDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -4482,10 +4509,11 @@ protected class EEnumLiteralDecl_EAnnotationsAssignment_0 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EEnumLiteralDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EEnumLiteralDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -4504,14 +4532,14 @@ protected class EEnumLiteralDecl_NameAssignment_1 extends AssignmentToken  {
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EEnumLiteralDecl_EAnnotationsAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index - 1, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 1, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 1, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -4598,7 +4626,7 @@ protected class EEnumLiteralDecl_ValueAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// (literal=STRING)?
+// literal=STRING?
 protected class EEnumLiteralDecl_LiteralAssignment_3 extends AssignmentToken  {
 	
 	public EEnumLiteralDecl_LiteralAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -4684,6 +4712,7 @@ protected class ETypeParameterDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getETypeParameterDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -4701,14 +4730,14 @@ protected class ETypeParameterDecl_NameAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
@@ -4795,9 +4824,9 @@ protected class ETypeParameterDecl_EBoundsAssignment_1_1 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new ETypeParameterDecl_ExtendsKeyword_1_0(parent, next, 0, consumed);
+			case 0: return new ETypeParameterDecl_ExtendsKeyword_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -4836,6 +4865,7 @@ protected class EGenericTypeReferenceDecl_Alternatives extends AlternativesToken
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEGenericTypeReferenceDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -4874,14 +4904,14 @@ protected class EGenericTypeReferenceDecl_EClassifierAssignment_0_0 extends Assi
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("eClassifier",true)) == null) return null;
@@ -4971,9 +5001,9 @@ protected class EGenericTypeReferenceDecl_ETypeArgumentsAssignment_0_1_1 extends
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EGenericTypeReferenceDecl_LessThanSignKeyword_0_1_0(parent, next, 0, consumed);
+			case 0: return new EGenericTypeReferenceDecl_LessThanSignKeyword_0_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5052,9 +5082,9 @@ protected class EGenericTypeReferenceDecl_ETypeArgumentsAssignment_0_1_2_1 exten
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EGenericTypeReferenceDecl_CommaKeyword_0_1_2_0(parent, next, 0, consumed);
+			case 0: return new EGenericTypeReferenceDecl_CommaKeyword_0_1_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5117,14 +5147,14 @@ protected class EGenericTypeReferenceDecl_NumberSignKeyword_1_0 extends KeywordT
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -5196,6 +5226,7 @@ protected class EGenericTypeDecl_Alternatives extends AlternativesToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEGenericTypeDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -5234,14 +5265,14 @@ protected class EGenericTypeDecl_EClassifierAssignment_0_0 extends AssignmentTok
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("eClassifier",true)) == null) return null;
@@ -5331,9 +5362,9 @@ protected class EGenericTypeDecl_ETypeArgumentsAssignment_0_1_1 extends Assignme
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EGenericTypeDecl_LessThanSignKeyword_0_1_0(parent, next, 0, consumed);
+			case 0: return new EGenericTypeDecl_LessThanSignKeyword_0_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5412,9 +5443,9 @@ protected class EGenericTypeDecl_ETypeArgumentsAssignment_0_1_2_1 extends Assign
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EGenericTypeDecl_CommaKeyword_0_1_2_0(parent, next, 0, consumed);
+			case 0: return new EGenericTypeDecl_CommaKeyword_0_1_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5477,14 +5508,14 @@ protected class EGenericTypeDecl_NumberSignKeyword_1_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -5556,14 +5587,14 @@ protected class EGenericTypeDecl_QuestionMarkKeyword_2_0 extends KeywordToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -5660,9 +5691,9 @@ protected class EGenericTypeDecl_EUpperBoundAssignment_2_1_0_1 extends Assignmen
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EGenericTypeDecl_ExtendsKeyword_2_1_0_0(parent, next, 0, consumed);
+			case 0: return new EGenericTypeDecl_ExtendsKeyword_2_1_0_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5741,9 +5772,9 @@ protected class EGenericTypeDecl_ELowerBoundAssignment_2_1_1_1 extends Assignmen
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EGenericTypeDecl_SuperKeyword_2_1_1_0(parent, next, 0, consumed);
+			case 0: return new EGenericTypeDecl_SuperKeyword_2_1_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -5759,11 +5790,11 @@ protected class EGenericTypeDecl_ELowerBoundAssignment_2_1_1_1 extends Assignmen
 /************ begin Rule EOperationDecl ****************
  *
  * EOperationDecl returns ecore::EOperation:
- *   (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
+ *   eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";";
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
+// eAnnotations+=EAnnotationDecl* (unique?="bag"|ordered?="random")* "op" (eGenericType=EGenericTypeReferenceDecl|"void") name=ID ("<" eTypeParameters+=ETypeParameterDecl ("," eTypeParameters+=ETypeParameterDecl)* ">")? "(" (eParameters+=EParameterDecl ("," eParameters+=EParameterDecl)*)? ")" ("throws" eGenericExceptions+=EGenericTypeReferenceDecl ("," eGenericExceptions+=EGenericTypeReferenceDecl)*)? ";"
 protected class EOperationDecl_Group extends GroupToken {
 	
 	public EOperationDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5783,11 +5814,12 @@ protected class EOperationDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEOperationDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EOperationDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EOperationDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -5819,10 +5851,11 @@ protected class EOperationDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EOperationDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -5863,14 +5896,14 @@ protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EOperationDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EOperationDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
@@ -5900,14 +5933,14 @@ protected class EOperationDecl_OrderedAssignment_1_1 extends AssignmentToken  {
 		switch(index) {
 			case 0: return new EOperationDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EOperationDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
@@ -5938,14 +5971,14 @@ protected class EOperationDecl_OpKeyword_2 extends KeywordToken  {
 		switch(index) {
 			case 0: return new EOperationDecl_Alternatives_1(parent, this, 0, inst);
 			case 1: return new EOperationDecl_EAnnotationsAssignment_0(parent, this, 1, inst);
-			default: return parent.createParentFollower(this, index - 2, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 2, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 2, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 }
 
@@ -6002,9 +6035,9 @@ protected class EOperationDecl_EGenericTypeAssignment_3_0 extends AssignmentToke
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_OpKeyword_2(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_OpKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6134,9 +6167,9 @@ protected class EOperationDecl_ETypeParametersAssignment_5_1 extends AssignmentT
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_LessThanSignKeyword_5_0(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_LessThanSignKeyword_5_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6215,9 +6248,9 @@ protected class EOperationDecl_ETypeParametersAssignment_5_2_1 extends Assignmen
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_CommaKeyword_5_2_0(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_CommaKeyword_5_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6320,9 +6353,9 @@ protected class EOperationDecl_EParametersAssignment_7_0 extends AssignmentToken
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_LeftParenthesisKeyword_6(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_LeftParenthesisKeyword_6(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6401,9 +6434,9 @@ protected class EOperationDecl_EParametersAssignment_7_1_1 extends AssignmentTok
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_CommaKeyword_7_1_0(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_CommaKeyword_7_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6505,9 +6538,9 @@ protected class EOperationDecl_EGenericExceptionsAssignment_9_1 extends Assignme
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_ThrowsKeyword_9_0(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_ThrowsKeyword_9_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6586,9 +6619,9 @@ protected class EOperationDecl_EGenericExceptionsAssignment_9_2_1 extends Assign
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EOperationDecl_CommaKeyword_9_2_0(parent, next, 0, consumed);
+			case 0: return new EOperationDecl_CommaKeyword_9_2_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6624,11 +6657,11 @@ protected class EOperationDecl_SemicolonKeyword_10 extends KeywordToken  {
 /************ begin Rule EParameterDecl ****************
  *
  * EParameterDecl returns ecore::EParameter:
- *   (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID;
+ *   eAnnotations+=EAnnotationDecl* eGenericType=EGenericTypeReferenceDecl name=ID;
  *
  **/
 
-// (eAnnotations+=EAnnotationDecl)* eGenericType=EGenericTypeReferenceDecl name=ID
+// eAnnotations+=EAnnotationDecl* eGenericType=EGenericTypeReferenceDecl name=ID
 protected class EParameterDecl_Group extends GroupToken {
 	
 	public EParameterDecl_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -6648,11 +6681,12 @@ protected class EParameterDecl_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getEParameterDeclRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
 
-// (eAnnotations+=EAnnotationDecl)*
+// eAnnotations+=EAnnotationDecl*
 protected class EParameterDecl_EAnnotationsAssignment_0 extends AssignmentToken  {
 	
 	public EParameterDecl_EAnnotationsAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
@@ -6684,10 +6718,11 @@ protected class EParameterDecl_EAnnotationsAssignment_0 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EParameterDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EParameterDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -6724,10 +6759,11 @@ protected class EParameterDecl_EGenericTypeAssignment_1 extends AssignmentToken 
 		return null;
 	}
 
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 		switch(index) {
-			case 0: return new EParameterDecl_EAnnotationsAssignment_0(parent, next, 0, consumed);
-			default: return parent.createParentFollower(next, index - 1, consumed);
+			case 0: return new EParameterDecl_EAnnotationsAssignment_0(parent, next, actIndex, consumed);
+			//default: return (consumed.isConsumed()) ? parent.createParentFollower(next,actIndex , index - 1, consumed) : null;
+			default: return parent.createParentFollower(next,actIndex , index - 1, consumed);
 		}	
 	}	
 }
@@ -6794,6 +6830,7 @@ protected class MapEntry_Group extends GroupToken {
 		
 	public IInstanceDescription tryConsume() {
 		if(!current.isInstanceOf(grammarAccess.getMapEntryRule().getType().getClassifier())) return null;
+  
 		return tryConsumeVal();
 	}
 }
@@ -6811,14 +6848,14 @@ protected class MapEntry_KeyAssignment_0 extends AssignmentToken  {
 
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index - 0, inst);
+			//default: return (inst.isConsumed()) ? parent.createParentFollower(this,index , index - 0, inst) : null;
+			default: return parent.createParentFollower(this,index , index - 0, inst);
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
-		return inst; 
+  
+		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("key",true)) == null) return null;

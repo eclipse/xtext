@@ -93,16 +93,16 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final RuleCall cOpt2INTTerminalRuleCall_2_1_0 = (RuleCall)cOpt2Assignment_2_1.eContents().get(0);
 		
 		//TestOptional:
-		//  "optional" (opt1=INT)? (":" opt2=INT)?;
+		//  "optional" opt1=INT? (":" opt2=INT)?;
 		public ParserRule getRule() { return rule; }
 
-		//"optional" (opt1=INT)? (":" opt2=INT)?
+		//"optional" opt1=INT? (":" opt2=INT)?
 		public Group getGroup() { return cGroup; }
 
 		//"optional"
 		public Keyword getOptionalKeyword_0() { return cOptionalKeyword_0; }
 
-		//(opt1=INT)?
+		//opt1=INT?
 		public Assignment getOpt1Assignment_1() { return cOpt1Assignment_1; }
 
 		//INT
@@ -129,16 +129,16 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 		private final RuleCall cItemINTTerminalRuleCall_1_0 = (RuleCall)cItemAssignment_1.eContents().get(0);
 		
 		//TestList:
-		//  "list" (item+=INT)*;
+		//  "list" item+=INT*;
 		public ParserRule getRule() { return rule; }
 
-		//"list" (item+=INT)*
+		//"list" item+=INT*
 		public Group getGroup() { return cGroup; }
 
 		//"list"
 		public Keyword getListKeyword_0() { return cListKeyword_0; }
 
-		//(item+=INT)*
+		//item+=INT*
 		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
 
 		//INT
@@ -193,7 +193,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	}
 
 	//TestOptional:
-	//  "optional" (opt1=INT)? (":" opt2=INT)?;
+	//  "optional" opt1=INT? (":" opt2=INT)?;
 	public TestOptionalElements getTestOptionalAccess() {
 		return (pTestOptional != null) ? pTestOptional : (pTestOptional = new TestOptionalElements());
 	}
@@ -203,7 +203,7 @@ public class TransientValuesTestGrammarAccess implements IGrammarAccess {
 	}
 
 	//TestList:
-	//  "list" (item+=INT)*;
+	//  "list" item+=INT*;
 	public TestListElements getTestListAccess() {
 		return (pTestList != null) ? pTestList : (pTestList = new TestListElements());
 	}
