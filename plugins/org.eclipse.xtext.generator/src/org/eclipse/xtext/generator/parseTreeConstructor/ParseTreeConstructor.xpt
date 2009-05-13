@@ -89,14 +89,19 @@ protected class ThisRootNode extends RootToken {
 	public IInstanceDescription tryConsume() {
 «IF isElementCallable()-»
 		if(!current.isInstanceOf(grammarAccess.«containingRule().gaRuleAccessor()».getType().getClassifier())) return null;
-«ENDIF-»
+«ENDIF-»  «REM»
 «IF calcFollowers().exists(e|e.ruleEnd)-»
 		IInstanceDescription inst = tryConsumeVal();
-		if(!inst.isConsumed()) return null;
+«IF metaType.name == "Association" && calcParentFollowers().size > 0-»
+		if(inst != null && !consumed.isConsumed()) return null;
+«ELSE-»
+		if(inst != null && !inst.isConsumed()) return null;
+«ENDIF-»
 		return inst; 
 «ELSE-»
 		return tryConsumeVal();
-«ENDIF-»
+«ENDIF-»«ENDREM»
+		return tryConsumeVal();
 	}
 «ENDIF-»
 «ENDDEFINE»
@@ -106,16 +111,17 @@ protected class ThisRootNode extends RootToken {
 «DEFINE createFollowerMethod(boolean parent, String currentName) FOR List[Follower]-»
 «IF size > 0-»
 «IF parent-»
-	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+	public AbstractToken2 createParentFollower(AbstractToken2 next,	int actIndex, int index, IInstanceDescription inst) {	
 «ELSE-»
 	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
 «ENDIF-»
 		switch(index) {
 «FOREACH reject(e|e.ruleEnd) AS e ITERATOR i-»
-			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», «parent ? "next" : "this"», «i.counter0», «currentName»);
+			case «i.counter0»: return new «e.follower.elementMethodName()»(«e.ruleCall ? "this" : "parent"», «parent ? "next" : "this"», «parent ? "actIndex" : i.counter0», «currentName»);
 «ENDFOREACH-»
 «IF exists(e|e.ruleEnd)-»
-			default: return parent.createParentFollower(«parent ? "next" : "this"», index - «size - 1», «currentName»);
+			//default: return («currentName».isConsumed()) ? parent.createParentFollower(«parent ? "next" : "this"»,«parent ? "actIndex" : "index"» , index - «size - 1», «currentName») : null;
+			default: return parent.createParentFollower(«parent ? "next" : "this"»,«parent ? "actIndex" : "index"» , index - «size - 1», «currentName»);
 «ELSE-»
 			default: return null;
 «ENDIF-»			

@@ -62,6 +62,11 @@ public abstract class AbstractParseTreeConstructor2 implements
 
 		public AbstractToken2 createParentFollower(AbstractToken2 next,
 				int index, IInstanceDescription inst) {
+			return createParentFollower(next, index, index, inst);
+		}
+
+		public AbstractToken2 createParentFollower(AbstractToken2 next,
+				int actIndex, int index, IInstanceDescription inst) {
 			return null;
 		}
 
@@ -199,7 +204,7 @@ public abstract class AbstractParseTreeConstructor2 implements
 		}
 
 		public AbstractToken2 createParentFollower(AbstractToken2 next,
-				int index, IInstanceDescription inst) {
+				int actIndex, int index, IInstanceDescription inst) {
 			return index == 0 ? new RootToken(next, inst) : null;
 		}
 
@@ -237,7 +242,7 @@ public abstract class AbstractParseTreeConstructor2 implements
 		StringBuffer b = new StringBuffer();
 		while ((x = x.getNext()) != null)
 			b.append("  ");
-		b.append(t.getClass().getSimpleName() + " -> " + i);
+		b.append(t.getClass().getSimpleName() + ":" + t.getNo() + " -> " + i);
 		return b.toString();
 	}
 
@@ -259,8 +264,6 @@ public abstract class AbstractParseTreeConstructor2 implements
 		AbstractToken2 f = getRootToken(inst);
 		int no = 0;
 		while (f != null) {
-			if (log.isTraceEnabled())
-				log.trace(debug(f, inst));
 			AbstractToken2 n = null;
 			IInstanceDescription i = null;
 			if ((n = f.createFollower(no, inst)) != null) {
@@ -270,10 +273,16 @@ public abstract class AbstractParseTreeConstructor2 implements
 			if (n instanceof RootToken && n.getNext() != null)
 				return n.getNext();
 			if (n != null && i != null) {
+				if (log.isTraceEnabled())
+					log.trace(debug(f, inst) + " -> found -> " + f.serialize());
 				f = n;
 				inst = i;
 				no = 0;
 			} else {
+				if (log.isTraceEnabled())
+					log
+							.trace(debug(f, inst) + " -> fail -> "
+									+ (f.getNo() + 1));
 				fails.add(f);
 				no = f.getNo() + 1;
 				inst = f.getCurrent();
