@@ -7,111 +7,220 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.WeakHashMap;
+
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.Token;
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.rules.ITokenScanner;
-import org.eclipse.xtext.concurrent.IUnitOfWork;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.Range;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+import org.eclipse.xtext.parser.antlr.Lexer;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
+ * 
  */
 public class XtextDamagerRepairer extends AbstractDamagerRepairer {
 
-	@Inject
-	public XtextDamagerRepairer(ITokenScanner scanner) {
-		super(scanner);
-	}
+	private final static Logger log = Logger.getLogger(XtextDamagerRepairer.class);
 
-	protected XtextDocument getDocument() {
-		return (XtextDocument) fDocument;
+	private Provider<Lexer> lexer;
+	private WeakHashMap<IDocument, TokenIterator> tokenIterators = new WeakHashMap<IDocument, TokenIterator>();
+
+	@Inject
+	public XtextDamagerRepairer(ITokenScanner scanner, Provider<Lexer> lexer) {
+		super(scanner);
+		this.lexer = lexer;
 	}
 
 	@Override
 	public void setDocument(IDocument document) {
-		if (document != null && !(document instanceof XtextDocument))
-			throw new IllegalArgumentException("document is invalid: " + document);
 		super.setDocument(document);
+		tokenIterators.put(document, TokenIterator.create(lexer.get(), document.get()));
 	}
 
 	@Override
 	public IRegion getDamageRegion(ITypedRegion partition, final DocumentEvent e, boolean documentPartitioningChanged) {
 		if (documentPartitioningChanged)
 			return partition;
+		try {
+			return computeRegion(e);
+		} catch (Exception e1) {
+			log.error(e1.getMessage(), e1);
+			return new Region(0, e.getDocument().getLength());
+		}
 
-		IRegion result = getDocument().readOnly(new IUnitOfWork<IRegion, XtextResource>(){
-			private final int offset = e.getOffset();
-			private final int endOffset = offset + e.getLength();
+	}
 
-			public IRegion exec(XtextResource resource) throws Exception {
-				AbstractNode node = resource.getParseResult().getRootNode();
-				AbstractNode start = null;
-				AbstractNode end = null;
-				// find latest node that covers the start of the change
-				while(node != null && start == null) {
-					if (node instanceof CompositeNode) {
-						if (((CompositeNode) node).getChildren().isEmpty())
-							break;
-						AbstractNode prevNode = node;
-						for(AbstractNode child: ((CompositeNode) node).getChildren()) {
-							if (child.getTotalOffset() <= offset && child.getTotalOffset() + child.getTotalLength() >= offset) {
-								node = child;
-								if (node instanceof LeafNode || node.getTotalOffset() == offset)
-									start = node;
-								break;
-							}
-						}
-						if (prevNode == node)
-							start = node;
-					} else {
-						throw new IllegalStateException("node is not in expected range but is not a composite.");
-					}
+	private IRegion computeRegion(final DocumentEvent e) {
+		TokenIterator previous = tokenIterators.get(e.fDocument);
+
+		// set previous iterator to offset
+		previous.goTo(e.getOffset());
+
+		TokenIterator newOne = TokenIterator.create(lexer.get(), e.getDocument().get(), previous);
+
+		// lengthDiff is the number of characters the trailing text (i.e. text
+		// after the change) is moved.
+		int lengthDiff = e.getText().length() - e.getLength();
+
+		// start offSet of the dirty region
+		int start = newOne.getOffset();
+
+		// go forward to the minimal end offSet
+		newOne.goTo(e.getOffset() + e.getText().length());
+
+		// keep previous in sync
+		previous.goTo(newOne.getOffset() + newOne.getLength());
+
+		try {
+			while (newOne.hasNext() && !(newOne.getOffset() + newOne.getLength() == previous.getOffset() + lengthDiff)) {
+				newOne.next();
+
+				// keep the previous iterator in sync, i.e. forward to the
+				while (newOne.getOffset() + newOne.getLength() > previous.getOffset() + lengthDiff) {
+					if (previous.hasNext())
+						previous.next();
+					else
+						// if the previous text exceeds, we know that we have to
+						// repair until the end of the document
+						return log(new Region(start, e.getDocument().getLength() - start));
 				}
-				// search up to the first, deepest node, that covers the end
-				node = start;
-				while(node != null && end == null) {
-					if (node.getTotalLength() + node.getTotalOffset() >= endOffset) {
-						if ((node instanceof CompositeNode) && ((CompositeNode) node).getChildren().isEmpty())
-							break;
-						while(end == null) {
-							if (node instanceof CompositeNode) {
-								for(int i = ((CompositeNode) node).getChildren().size() - 1; i >= 0; i--) {
-									AbstractNode child = ((CompositeNode) node).getChildren().get(i);
-									if (child.getTotalOffset() + child.getTotalLength() >= endOffset && child.getTotalOffset() <= endOffset) {
-										node = child;
-										if (node instanceof LeafNode || node.getTotalOffset() + node.getTotalLength() == endOffset)
-											end = node;
-										break;
-									}
-								}
-							} else {
-								end = node;
-							}
-						}
-					} else {
-						node = node.getParent();
-					}
-				}
-				// include region with syntax errors
-				int startOffset = start != null ? start.getTotalOffset() : offset;
-				int endOffset = end != null ? end.getTotalOffset() + end.getTotalLength() : this.endOffset;
-				Range range = new Range(startOffset, endOffset);
-				range.mergeAllErrors(resource.getParseResult().getRootNode());
-				// cover the difference between inserted text and removed text
-				return new Region(range.getFromOffset(), range.getToOffset() - range.getFromOffset() + e.getText().length() - e.getLength());
 			}
-		});
-		return result;
+			return log(new Region(start, newOne.getOffset() + newOne.getLength() - start));
+		} finally {
+			tokenIterators.put(e.getDocument(), newOne);
+		}
+	}
+
+	/**
+	 * @param region
+	 * @return
+	 */
+	private IRegion log(Region region) {
+		if (log.isDebugEnabled())
+			log.debug(" dirty :" + region.getOffset() + " .. " + region.getLength());
+		return region;
+	}
+
+	public static class TokenIterator {
+
+		private List<Integer> tokenLengths;
+		private int index = -1;
+		private int offset = 0;
+		private Lexer lexer;
+
+		/**
+		 * @param document
+		 */
+		private TokenIterator(Lexer lexer, int offset, List<Integer> parsed) {
+			this.tokenLengths = parsed;
+			if (!tokenLengths.isEmpty())
+				this.index = tokenLengths.size();// - 1;
+			this.offset = offset;
+			this.lexer = lexer;
+		}
+
+		public static TokenIterator create(Lexer lexer, String contents) {
+			lexer.setCharStream(new ANTLRStringStream(contents));
+			ArrayList<Integer> parsed = new ArrayList<Integer>();
+			TokenIterator tokenIterator = new TokenIterator(lexer, 0, parsed);
+			if (tokenIterator.hasNext())
+				tokenIterator.next();
+			return tokenIterator;
+		}
+
+		public static TokenIterator create(Lexer lexer, String txt, TokenIterator previous) {
+			int offset2 = previous.getOffset();
+			String input = txt.substring(offset2);
+			lexer.setCharStream(new ANTLRStringStream(input));
+
+			List<Integer> subList = new ArrayList<Integer>();
+			if (previous.getIndex() != -1) {
+				subList.addAll(previous.tokenLengths.subList(0, previous.getIndex()));
+			}
+
+			return new TokenIterator(lexer, offset2, subList);
+		}
+
+		public void goTo(int offset) {
+			while (!(getOffset() <= offset && getOffset() + getLength() > offset)) {
+				if (getOffset() > offset) {
+					backward();
+				} else {
+					if (hasNext()) {
+						next();
+					} else {
+						return;
+					}
+
+				}
+			}
+		}
+
+		public int getIndex() {
+			return index;
+		}
+
+		public int getOffset() {
+			return offset;
+		}
+
+		public int getLength() {
+			if (getIndex() == -1)
+				return 0;
+			while (tokenLengths.size() - 1 < index && !eof) {
+				consume();
+			}
+			return tokenLengths.get(getIndex());
+		}
+
+		public void next() {
+			if (hasNext()) {
+				index++;
+				if (index > 0)
+					offset = offset + tokenLengths.get(index - 1);
+			} else {
+				throw new IllegalStateException();
+			}
+		}
+
+		public boolean hasNext() {
+			return index + 1 < tokenLengths.size() || consume();
+		}
+
+		private boolean eof = false;
+
+		/**
+		 * @return
+		 */
+		private boolean consume() {
+			CommonToken token = (CommonToken) lexer.nextToken();
+			eof = eof || token.getType() == Token.EOF;
+			if (!eof) {
+				tokenLengths.add(token.getStopIndex() + 1 - token.getStartIndex());
+			}
+			return !eof;
+		}
+
+		public void backward() {
+			if (index > 0) {
+				offset = offset - tokenLengths.get(--index);
+			} else
+				throw new IllegalStateException();
+		}
+
 	}
 
 }

@@ -80,7 +80,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		if (file != null) {
 			path = file.getFullPath();
 			uri = URI.createPlatformResourceURI(path.toString(), true);
-		} else if (editorInput instanceof XtextReadonlyEditorInput){
+		} else if (editorInput instanceof XtextReadonlyEditorInput) {
 			uri = ((XtextReadonlyEditorInput) editorInput).getURI();
 		} else {
 			IStorageEditorInput storageInput = (IStorageEditorInput) editorInput;
@@ -88,8 +88,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				// TODO get the FQN of the resource
 				path = storageInput.getStorage().getFullPath();
 				uri = URI.createPlatformResourceURI(path.toString(), true);
-			}
-			catch (CoreException e) {
+			} catch (CoreException e) {
 				throw new WrappedException(e);
 			}
 		}
@@ -124,14 +123,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 			return create;
 		return null;
 	}
-	
+
 	private final XtextDocumentLocker stateAccess = new XtextDocumentLocker();
 
-	public <T> T readOnly(IUnitOfWork<T,XtextResource> work) {
+	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.readOnly(work);
 	}
 
-	public <T> T modify(IUnitOfWork<T,XtextResource> work) {
+	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		try {
 			return stateAccess.modify(work);
 		} finally {
@@ -139,7 +138,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
-	private void ensureThatStateIsNotReturned(Object exec, IUnitOfWork<?,XtextResource> uow) {
+	private void ensureThatStateIsNotReturned(Object exec, IUnitOfWork<?, XtextResource> uow) {
 		// TODO activate
 		// if (exec instanceof EObject) {
 		// if (((EObject) exec).eResource() == resource
@@ -187,7 +186,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
-	 *
+	 * 
 	 */
 	private final class XtextDocumentLocker extends IStateAccess.AbstractImpl<XtextResource> implements Processor {
 		@Override
@@ -195,15 +194,23 @@ public class XtextDocument extends Document implements IXtextDocument {
 			return resource;
 		}
 
-		protected void beforeReadOnly(XtextResource res, org.eclipse.xtext.concurrent.IUnitOfWork<?,XtextResource> work) {
+		protected void beforeReadOnly(XtextResource res, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
+			if (log.isDebugEnabled())
+				log.debug("read - " + Thread.currentThread().getName());
 			updateContentBeforeRead();
 		}
 
-		protected void afterReadOnly(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?,XtextResource> work) {
+		@Override
+		protected void beforeModify(XtextResource state, IUnitOfWork<?, XtextResource> work) {
+			if (log.isDebugEnabled())
+				log.debug("write - " + Thread.currentThread().getName());
+		}
+
+		protected void afterReadOnly(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 		}
 
-		protected void afterModify(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?,XtextResource> work) {
+		protected void afterModify(XtextResource res, Object result, org.eclipse.xtext.concurrent.IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 			notifyModelListeners(resource);
 		}
@@ -213,6 +220,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 				readLock.unlock();
 				writeLock.lock();
 				try {
+					if (log.isDebugEnabled())
+						log.debug("process - " + Thread.currentThread().getName());
 					return modify(transaction);
 				} finally {
 					readLock.lock();
@@ -228,8 +237,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	private final Object validationLock = new Object();
 	private Job validationJob;
+
 	private void checkAndUpdateMarkers() {
-		synchronized(validationLock) {
+		synchronized (validationLock) {
 			if (validationJob != null)
 				validationJob.cancel();
 			validationJob = new ValidationJob(this, file, CheckMode.FAST_ONLY, true);
@@ -245,9 +255,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 		return null;
 	}
-	
+
 	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {
 		return new IEObjectHandle.DefaultImpl<T>(obj, this);
 	}
-	
+
 }

@@ -13,6 +13,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.ui.core.DefaultLocationInFileProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.InjectableAdapterFactory;
 import org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider;
+import org.eclipse.xtext.ui.core.editor.FastLineBasedDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.IDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.XtextDamagerRepairer;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
@@ -93,6 +95,7 @@ public abstract class DefaultUIModule extends AbstractGenericModule {
 	}
 	
 	public Class<? extends IDamagerRepairer> bindIDamagerRepairer() {
+//		return FastLineBasedDamagerRepairer.class;
 		return XtextDamagerRepairer.class;
 	}
 	

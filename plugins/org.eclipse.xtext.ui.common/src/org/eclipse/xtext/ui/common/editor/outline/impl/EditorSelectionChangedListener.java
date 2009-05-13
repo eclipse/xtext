@@ -34,7 +34,7 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 
 	public void selectionChanged(SelectionChangedEvent event) {
 		ISelection selection = event.getSelection();
-		if (!selection.isEmpty() && selection instanceof ITextSelection) {
+		if (outlinePage.isLinkingEnabled() && !selection.isEmpty() && selection instanceof ITextSelection) {
 
 			final ITextSelection textSel = (ITextSelection) selection;
 
