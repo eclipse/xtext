@@ -3,38 +3,41 @@
 */
 package org.eclipse.xtext.ui.common.editor.contentassist.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private TwoContextsTestLanguageGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getMainModelRule().getType().getClassifier())) {
-			final AbstractToken t = new MainModel_Assignment_elements(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier())) {
-			final AbstractToken t = new AnElement_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public TwoContextsTestLanguageGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MainModel_ElementsAssignment(this, this, 0, inst);
+			case 1: return new AnElement_Group(this, this, 1, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule MainModel ****************
@@ -45,36 +48,47 @@ public class TwoContextsTestLanguageParsetreeConstructor extends AbstractParseTr
  **/
 
 // (elements+=AnElement)*
-protected class MainModel_Assignment_elements extends AssignmentToken  {
+protected class MainModel_ElementsAssignment extends AssignmentToken  {
 	
-	public MainModel_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public MainModel_ElementsAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getMainModelAccess().getElementsAssignment();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("elements");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnElement_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getMainModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier())) {
-				Solution s = new AnElement_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new MainModel_ElementsAssignment(parent, next, 0, consumed);
+			default: return parent.createParentFollower(next, index - 1, consumed);
+		}	
+	}	
 }
 
 /************ end Rule MainModel ****************/
@@ -90,139 +104,156 @@ protected class MainModel_Assignment_elements extends AssignmentToken  {
 // name=ID ("refersTo" referred=[AnElement])? ";"
 protected class AnElement_Group extends GroupToken {
 	
-	public AnElement_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AnElement_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAnElementAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new AnElement_2_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new AnElement_1_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new AnElement_0_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				if(s3 != null) {
-					last = s3.getPredecessor();
-					return s3;
-				} else {
-					s2 = s2.getPredecessor().nextSolution(this,s2);
-				}
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnElement_SemicolonKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAnElementRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // name=ID
-protected class AnElement_0_Assignment_name extends AssignmentToken  {
+protected class AnElement_NameAssignment_0 extends AssignmentToken  {
 	
-	public AnElement_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AnElement_NameAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAnElementAccess().getNameAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // ("refersTo" referred=[AnElement])?
-protected class AnElement_1_Group extends GroupToken {
+protected class AnElement_Group_1 extends GroupToken {
 	
-	public AnElement_1_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public AnElement_Group_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getAnElementAccess().getGroup_1();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new AnElement_1_1_Assignment_referred(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new AnElement_1_0_Keyword_refersTo(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
-	}
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnElement_ReferredAssignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
 }
 
 // "refersTo"
-protected class AnElement_1_0_Keyword_refersTo extends KeywordToken  {
+protected class AnElement_RefersToKeyword_1_0 extends KeywordToken  {
 	
-	public AnElement_1_0_Keyword_refersTo(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AnElement_RefersToKeyword_1_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAnElementAccess().getRefersToKeyword_1_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnElement_NameAssignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // referred=[AnElement]
-protected class AnElement_1_1_Assignment_referred extends AssignmentToken  {
+protected class AnElement_ReferredAssignment_1_1 extends AssignmentToken  {
 	
-	public AnElement_1_1_Assignment_referred(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AnElement_ReferredAssignment_1_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getAnElementAccess().getReferredAssignment_1_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("referred",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnElement_RefersToKeyword_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("referred",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referred");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 
 // ";"
-protected class AnElement_2_Keyword extends KeywordToken  {
+protected class AnElement_SemicolonKeyword_2 extends KeywordToken  {
 	
-	public AnElement_2_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public AnElement_SemicolonKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getAnElementAccess().getSemicolonKeyword_2();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnElement_Group_1(parent, this, 0, inst);
+			case 1: return new AnElement_NameAssignment_0(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 

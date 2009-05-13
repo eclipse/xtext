@@ -3,56 +3,44 @@
 */
 package org.eclipse.xtext.example.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class FowlerDslParsetreeConstructor extends AbstractParseTreeConstructor {
+public class FowlerDslParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private FowlerDslGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getStatemachineRule().getType().getClassifier())) {
-			final AbstractToken t = new Statemachine_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) {
-			final AbstractToken t = new Event_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) {
-			final AbstractToken t = new Command_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) {
-			final AbstractToken t = new State_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) {
-			final AbstractToken t = new Transition_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public FowlerDslGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Statemachine_Group(this, this, 0, inst);
+			case 1: return new Event_Group(this, this, 1, inst);
+			case 2: return new Command_Group(this, this, 2, inst);
+			case 3: return new State_Group(this, this, 3, inst);
+			case 4: return new Transition_Group(this, this, 4, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Statemachine ****************
@@ -65,196 +53,235 @@ public class FowlerDslParsetreeConstructor extends AbstractParseTreeConstructor 
 // "events" (events+=Event)* "end" "commands" (commands+=Command)* "end" (states+=State)*
 protected class Statemachine_Group extends GroupToken {
 	
-	public Statemachine_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Statemachine_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Statemachine_6_Assignment_states(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Statemachine_5_Keyword_end(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Statemachine_4_Assignment_commands(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new Statemachine_3_Keyword_commands(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new Statemachine_2_Keyword_end(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						while(s5 != null) {
-							Solution s6 = new Statemachine_1_Assignment_events(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-							while(s6 != null) {
-								Solution s7 = new Statemachine_0_Keyword_events(s6.getCurrent(), s6.getPredecessor()).firstSolution();
-								if(s7 != null) {
-									last = s7.getPredecessor();
-									return s7;
-								} else {
-									s6 = s6.getPredecessor().nextSolution(this,s6);
-								}
-							}
-							s5 = s5.getPredecessor().nextSolution(this,s5);
-						}
-						s4 = s4.getPredecessor().nextSolution(this,s4);
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Statemachine_StatesAssignment_6(parent, this, 0, inst);
+			case 1: return new Statemachine_EndKeyword_5(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getStatemachineRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "events"
-protected class Statemachine_0_Keyword_events extends KeywordToken  {
+protected class Statemachine_EventsKeyword_0 extends KeywordToken  {
 	
-	public Statemachine_0_Keyword_events(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Statemachine_EventsKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEventsKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // (events+=Event)*
-protected class Statemachine_1_Assignment_events extends AssignmentToken  {
+protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 	
-	public Statemachine_1_Assignment_events(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public Statemachine_EventsAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEventsAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("events",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("events");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Event_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("events",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("events");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) {
-				Solution s = new Event_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Statemachine_EventsAssignment_1(parent, next, 0, consumed);
+			case 1: return new Statemachine_EventsKeyword_0(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // "end"
-protected class Statemachine_2_Keyword_end extends KeywordToken  {
+protected class Statemachine_EndKeyword_2 extends KeywordToken  {
 	
-	public Statemachine_2_Keyword_end(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Statemachine_EndKeyword_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEndKeyword_2();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Statemachine_EventsAssignment_1(parent, this, 0, inst);
+			case 1: return new Statemachine_EventsKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // "commands"
-protected class Statemachine_3_Keyword_commands extends KeywordToken  {
+protected class Statemachine_CommandsKeyword_3 extends KeywordToken  {
 	
-	public Statemachine_3_Keyword_commands(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Statemachine_CommandsKeyword_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getCommandsKeyword_3();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Statemachine_EndKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // (commands+=Command)*
-protected class Statemachine_4_Assignment_commands extends AssignmentToken  {
+protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 	
-	public Statemachine_4_Assignment_commands(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public Statemachine_CommandsAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getCommandsAssignment_4();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("commands",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("commands");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Command_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("commands",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("commands");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) {
-				Solution s = new Command_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Statemachine_CommandsAssignment_4(parent, next, 0, consumed);
+			case 1: return new Statemachine_CommandsKeyword_3(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // "end"
-protected class Statemachine_5_Keyword_end extends KeywordToken  {
+protected class Statemachine_EndKeyword_5 extends KeywordToken  {
 	
-	public Statemachine_5_Keyword_end(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Statemachine_EndKeyword_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getEndKeyword_5();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Statemachine_CommandsAssignment_4(parent, this, 0, inst);
+			case 1: return new Statemachine_CommandsKeyword_3(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // (states+=State)*
-protected class Statemachine_6_Assignment_states extends AssignmentToken  {
+protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 	
-	public Statemachine_6_Assignment_states(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public Statemachine_StatesAssignment_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStatemachineAccess().getStatesAssignment_6();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("states",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("states");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("states",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("states");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) {
-				Solution s = new State_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Statemachine_StatesAssignment_6(parent, next, 0, consumed);
+			case 1: return new Statemachine_EndKeyword_5(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
@@ -271,110 +298,127 @@ protected class Statemachine_6_Assignment_states extends AssignmentToken  {
 // (resetting?="resetting")? name=ID code=ID
 protected class Event_Group extends GroupToken {
 	
-	public Event_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Event_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getEventAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Event_2_Assignment_code(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Event_1_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Event_0_Assignment_resetting(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				if(s3 != null) {
-					last = s3.getPredecessor();
-					return s3;
-				} else {
-					s2 = s2.getPredecessor().nextSolution(this,s2);
-				}
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Event_CodeAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getEventRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // (resetting?="resetting")?
-protected class Event_0_Assignment_resetting extends AssignmentToken  {
+protected class Event_ResettingAssignment_0 extends AssignmentToken  {
 	
-	public Event_0_Assignment_resetting(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public Event_ResettingAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEventAccess().getResettingAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("resetting",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("resetting");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("resetting",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("resetting");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getEventAccess().getResettingResettingKeyword_0_0();
-			return new Solution(obj);
+			return obj;
 		}
-
 		return null;
 	}
+
 }
 
 // name=ID
-protected class Event_1_Assignment_name extends AssignmentToken  {
+protected class Event_NameAssignment_1 extends AssignmentToken  {
 	
-	public Event_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Event_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEventAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Event_ResettingAssignment_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index - 1, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEventAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // code=ID
-protected class Event_2_Assignment_code extends AssignmentToken  {
+protected class Event_CodeAssignment_2 extends AssignmentToken  {
 	
-	public Event_2_Assignment_code(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Event_CodeAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getEventAccess().getCodeAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Event_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("code",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEventAccess().getCodeIDTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -391,79 +435,91 @@ protected class Event_2_Assignment_code extends AssignmentToken  {
 // name=ID code=ID
 protected class Command_Group extends GroupToken {
 	
-	public Command_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Command_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getCommandAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Command_1_Assignment_code(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Command_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Command_CodeAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getCommandRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // name=ID
-protected class Command_0_Assignment_name extends AssignmentToken  {
+protected class Command_NameAssignment_0 extends AssignmentToken  {
 	
-	public Command_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Command_NameAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getCommandAccess().getNameAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCommandAccess().getNameIDTerminalRuleCall_0_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // code=ID
-protected class Command_1_Assignment_code extends AssignmentToken  {
+protected class Command_CodeAssignment_1 extends AssignmentToken  {
 	
-	public Command_1_Assignment_code(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Command_CodeAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getCommandAccess().getCodeAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Command_NameAssignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("code",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCommandAccess().getCodeIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
@@ -480,224 +536,260 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 // "state" name=ID ("actions" "{" (actions+=[Command])+ "}")? (transitions+=Transition)* "end"
 protected class State_Group extends GroupToken {
 	
-	public State_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new State_4_Keyword_end(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new State_3_Assignment_transitions(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new State_2_Group(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new State_1_Assignment_name(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new State_0_Keyword_state(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						if(s5 != null) {
-							last = s5.getPredecessor();
-							return s5;
-						} else {
-							s4 = s4.getPredecessor().nextSolution(this,s4);
-						}
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_EndKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getStateRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "state"
-protected class State_0_Keyword_state extends KeywordToken  {
+protected class State_StateKeyword_0 extends KeywordToken  {
 	
-	public State_0_Keyword_state(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_StateKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getStateKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=ID
-protected class State_1_Assignment_name extends AssignmentToken  {
+protected class State_NameAssignment_1 extends AssignmentToken  {
 	
-	public State_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_StateKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // ("actions" "{" (actions+=[Command])+ "}")?
-protected class State_2_Group extends GroupToken {
+protected class State_Group_2 extends GroupToken {
 	
-	public State_2_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public State_Group_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getStateAccess().getGroup_2();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new State_2_3_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new State_2_2_Assignment_actions(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new State_2_1_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new State_2_0_Keyword_actions(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					if(s4 != null) {
-						last = s4.getPredecessor();
-						return s4;
-					} else {
-						s3 = s3.getPredecessor().nextSolution(this,s3);
-					}
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
-	}
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_RightCurlyBracketKeyword_2_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
 }
 
 // "actions"
-protected class State_2_0_Keyword_actions extends KeywordToken  {
+protected class State_ActionsKeyword_2_0 extends KeywordToken  {
 	
-	public State_2_0_Keyword_actions(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_ActionsKeyword_2_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getActionsKeyword_2_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // "{"
-protected class State_2_1_Keyword extends KeywordToken  {
+protected class State_LeftCurlyBracketKeyword_2_1 extends KeywordToken  {
 	
-	public State_2_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_LeftCurlyBracketKeyword_2_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getLeftCurlyBracketKeyword_2_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_ActionsKeyword_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // (actions+=[Command])+
-protected class State_2_2_Assignment_actions extends AssignmentToken  {
+protected class State_ActionsAssignment_2_2 extends AssignmentToken  {
 	
-	public State_2_2_Assignment_actions(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, IS_REQUIRED);
+	public State_ActionsAssignment_2_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getActionsAssignment_2_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("actions",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_ActionsAssignment_2_2(parent, this, 0, inst);
+			case 1: return new State_LeftCurlyBracketKeyword_2_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("actions",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStateAccess().getActionsCommandCrossReference_2_2_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getStateAccess().getActionsCommandCrossReference_2_2_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 // "}"
-protected class State_2_3_Keyword extends KeywordToken  {
+protected class State_RightCurlyBracketKeyword_2_3 extends KeywordToken  {
 	
-	public State_2_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_RightCurlyBracketKeyword_2_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getRightCurlyBracketKeyword_2_3();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_ActionsAssignment_2_2(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
 // (transitions+=Transition)*
-protected class State_3_Assignment_transitions extends AssignmentToken  {
+protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 	
-	public State_3_Assignment_transitions(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public State_TransitionsAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getStateAccess().getTransitionsAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("transitions",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("transitions");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Transition_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("transitions",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("transitions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) {
-				Solution s = new Transition_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new State_TransitionsAssignment_3(parent, next, 0, consumed);
+			case 1: return new State_Group_2(parent, next, 1, consumed);
+			case 2: return new State_NameAssignment_1(parent, next, 2, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // "end"
-protected class State_4_Keyword_end extends KeywordToken  {
+protected class State_EndKeyword_4 extends KeywordToken  {
 	
-	public State_4_Keyword_end(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public State_EndKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getStateAccess().getEndKeyword_4();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new State_TransitionsAssignment_3(parent, this, 0, inst);
+			case 1: return new State_Group_2(parent, this, 1, inst);
+			case 2: return new State_NameAssignment_1(parent, this, 2, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -714,101 +806,117 @@ protected class State_4_Keyword_end extends KeywordToken  {
 // event=[Event] "=>" state=[State]
 protected class Transition_Group extends GroupToken {
 	
-	public Transition_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Transition_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Transition_2_Assignment_state(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Transition_1_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Transition_0_Assignment_event(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				if(s3 != null) {
-					last = s3.getPredecessor();
-					return s3;
-				} else {
-					s2 = s2.getPredecessor().nextSolution(this,s2);
-				}
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Transition_StateAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTransitionRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // event=[Event]
-protected class Transition_0_Assignment_event extends AssignmentToken  {
+protected class Transition_EventAssignment_0 extends AssignmentToken  {
 	
-	public Transition_0_Assignment_event(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Transition_EventAssignment_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getEventAssignment_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("event",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("event",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("event");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionAccess().getEventEventCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getTransitionAccess().getEventEventCrossReference_0_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 // "=>"
-protected class Transition_1_Keyword extends KeywordToken  {
+protected class Transition_EqualsSignGreaterThanSignKeyword_1 extends KeywordToken  {
 	
-	public Transition_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Transition_EqualsSignGreaterThanSignKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getEqualsSignGreaterThanSignKeyword_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Transition_EventAssignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // state=[State]
-protected class Transition_2_Assignment_state extends AssignmentToken  {
+protected class Transition_StateAssignment_2 extends AssignmentToken  {
 	
-	public Transition_2_Assignment_state(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Transition_StateAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getTransitionAccess().getStateAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("state",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Transition_EqualsSignGreaterThanSignKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("state",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("state");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTransitionAccess().getStateStateCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getTransitionAccess().getStateStateCrossReference_2_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 

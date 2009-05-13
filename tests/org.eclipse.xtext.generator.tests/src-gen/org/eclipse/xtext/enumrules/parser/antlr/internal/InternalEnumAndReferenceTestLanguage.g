@@ -91,7 +91,7 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntityWithEnumAndReferenceRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {

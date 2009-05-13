@@ -3,74 +3,47 @@
 */
 package org.eclipse.xtext.reference.parseTreeConstruction;
 
-//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor2;
+
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class ReferenceGrammarParsetreeConstructor extends AbstractParseTreeConstructor {
+public class ReferenceGrammarParsetreeConstructor extends AbstractParseTreeConstructor2 {
 		
 	@Inject
 	private ReferenceGrammarGrammarAccess grammarAccess;
-	
-	@Override
-	protected Solution internalSerialize(EObject obj) {
-		IInstanceDescription inst = getDescr(obj);
-		if(inst.isInstanceOf(grammarAccess.getSpielplatzRule().getType().getClassifier())) {
-			final AbstractToken t = new Spielplatz_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getPersonRule().getType().getClassifier())) {
-			final AbstractToken t = new Person_Alternatives(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) {
-			final AbstractToken t = new Kind_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) {
-			final AbstractToken t = new Erwachsener_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) {
-			final AbstractToken t = new Spielzeug_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) {
-			final AbstractToken t = new Familie_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) {
-			final AbstractToken t = new Farbe_Assignment_wert(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		if(inst.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) {
-			final AbstractToken t = new CustomTypeParserRule_Group(inst, null);
-			Solution s = t.firstSolution();
-			while(s != null && !isConsumed(s, t)) s = s.getPredecessor().nextSolution(null, s);
-			if(s != null) return s;
-		}
-		return null;
+		
+	public ReferenceGrammarGrammarAccess getGrammarAccess() {
+		return grammarAccess;
 	}
+
+	protected AbstractToken2 getRootToken(IInstanceDescription inst) {
+		return new ThisRootNode(inst);	
+	}
+	
+protected class ThisRootNode extends RootToken {
+	public ThisRootNode(IInstanceDescription inst) {
+		super(inst);
+	}
+	
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_Group(this, this, 0, inst);
+			case 1: return new Person_Alternatives(this, this, 1, inst);
+			case 2: return new Kind_Group(this, this, 2, inst);
+			case 3: return new Erwachsener_Group(this, this, 3, inst);
+			case 4: return new Spielzeug_Group(this, this, 4, inst);
+			case 5: return new Familie_Group(this, this, 5, inst);
+			case 6: return new Farbe_WertAssignment(this, this, 6, inst);
+			case 7: return new CustomTypeParserRule_Group(this, this, 7, inst);
+			default: return null;
+		}	
+	}	
+}
 	
 
 /************ begin Rule Spielplatz ****************
@@ -83,321 +56,383 @@ public class ReferenceGrammarParsetreeConstructor extends AbstractParseTreeConst
 // ("spielplatz" groesse=INT (beschreibung=STRING)? "{" (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)* "}")?
 protected class Spielplatz_Group extends GroupToken {
 	
-	public Spielplatz_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public Spielplatz_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Spielplatz_5_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Spielplatz_4_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Spielplatz_3_Keyword(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new Spielplatz_2_Assignment_beschreibung(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new Spielplatz_1_Assignment_groesse(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						while(s5 != null) {
-							Solution s6 = new Spielplatz_0_Keyword_spielplatz(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-							if(s6 != null) {
-								last = s6.getPredecessor();
-								return s6;
-							} else {
-								s5 = s5.getPredecessor().nextSolution(this,s5);
-							}
-						}
-						s4 = s4.getPredecessor().nextSolution(this,s4);
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_RightCurlyBracketKeyword_5(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getSpielplatzRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "spielplatz"
-protected class Spielplatz_0_Keyword_spielplatz extends KeywordToken  {
+protected class Spielplatz_SpielplatzKeyword_0 extends KeywordToken  {
 	
-	public Spielplatz_0_Keyword_spielplatz(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_SpielplatzKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getSpielplatzKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // groesse=INT
-protected class Spielplatz_1_Assignment_groesse extends AssignmentToken  {
+protected class Spielplatz_GroesseAssignment_1 extends AssignmentToken  {
 	
-	public Spielplatz_1_Assignment_groesse(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_GroesseAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getGroesseAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("groesse",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_SpielplatzKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("groesse",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // (beschreibung=STRING)?
-protected class Spielplatz_2_Assignment_beschreibung extends AssignmentToken  {
+protected class Spielplatz_BeschreibungAssignment_2 extends AssignmentToken  {
 	
-	public Spielplatz_2_Assignment_beschreibung(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	public Spielplatz_BeschreibungAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getBeschreibungAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("beschreibung",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_GroesseAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("beschreibung",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // "{"
-protected class Spielplatz_3_Keyword extends KeywordToken  {
+protected class Spielplatz_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
-	public Spielplatz_3_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_LeftCurlyBracketKeyword_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getLeftCurlyBracketKeyword_3();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_BeschreibungAssignment_2(parent, this, 0, inst);
+			case 1: return new Spielplatz_GroesseAssignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // (kinder+=Kind|erzieher+=Erwachsener|spielzeuge+=Spielzeug|familie+=Familie|types+=CustomTypeParserRule)*
-protected class Spielplatz_4_Alternatives extends AlternativesToken {
+protected class Spielplatz_Alternatives_4 extends AlternativesToken {
 
-	public Spielplatz_4_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public Spielplatz_Alternatives_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getAlternatives_4();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new Spielplatz_4_0_Assignment_kinder(current, this);
-			case 1: return new Spielplatz_4_1_Assignment_erzieher(current, this);
-			case 2: return new Spielplatz_4_2_Assignment_spielzeuge(current, this);
-			case 3: return new Spielplatz_4_3_Assignment_familie(current, this);
-			case 4: return new Spielplatz_4_4_Assignment_types(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_KinderAssignment_4_0(parent, this, 0, inst);
+			case 1: return new Spielplatz_ErzieherAssignment_4_1(parent, this, 1, inst);
+			case 2: return new Spielplatz_SpielzeugeAssignment_4_2(parent, this, 2, inst);
+			case 3: return new Spielplatz_FamilieAssignment_4_3(parent, this, 3, inst);
+			case 4: return new Spielplatz_TypesAssignment_4_4(parent, this, 4, inst);
 			default: return null;
-		}
-	}
+		}	
+	}	
+		
 }
 
 // kinder+=Kind
-protected class Spielplatz_4_0_Assignment_kinder extends AssignmentToken  {
+protected class Spielplatz_KinderAssignment_4_0 extends AssignmentToken  {
 	
-	public Spielplatz_4_0_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_KinderAssignment_4_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getKinderAssignment_4_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("kinder");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("kinder",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) {
-				Solution s = new Kind_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // erzieher+=Erwachsener
-protected class Spielplatz_4_1_Assignment_erzieher extends AssignmentToken  {
+protected class Spielplatz_ErzieherAssignment_4_1 extends AssignmentToken  {
 	
-	public Spielplatz_4_1_Assignment_erzieher(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_ErzieherAssignment_4_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getErzieherAssignment_4_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("erzieher",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("erzieher");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("erzieher",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("erzieher");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) {
-				Solution s = new Erwachsener_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // spielzeuge+=Spielzeug
-protected class Spielplatz_4_2_Assignment_spielzeuge extends AssignmentToken  {
+protected class Spielplatz_SpielzeugeAssignment_4_2 extends AssignmentToken  {
 	
-	public Spielplatz_4_2_Assignment_spielzeuge(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_SpielzeugeAssignment_4_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getSpielzeugeAssignment_4_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("spielzeuge",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielzeug_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("spielzeuge",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) {
-				Solution s = new Spielzeug_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // familie+=Familie
-protected class Spielplatz_4_3_Assignment_familie extends AssignmentToken  {
+protected class Spielplatz_FamilieAssignment_4_3 extends AssignmentToken  {
 	
-	public Spielplatz_4_3_Assignment_familie(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_FamilieAssignment_4_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getFamilieAssignment_4_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("familie",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("familie");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("familie",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("familie");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) {
-				Solution s = new Familie_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // types+=CustomTypeParserRule
-protected class Spielplatz_4_4_Assignment_types extends AssignmentToken  {
+protected class Spielplatz_TypesAssignment_4_4 extends AssignmentToken  {
 	
-	public Spielplatz_4_4_Assignment_types(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_TypesAssignment_4_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getTypesAssignment_4_4();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("types",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("types");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new CustomTypeParserRule_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("types",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("types");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) {
-				Solution s = new CustomTypeParserRule_Group(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Spielplatz_Alternatives_4(parent, next, 0, consumed);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, next, 1, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 
 // "}"
-protected class Spielplatz_5_Keyword extends KeywordToken  {
+protected class Spielplatz_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
-	public Spielplatz_5_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielplatz_RightCurlyBracketKeyword_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielplatz_Alternatives_4(parent, this, 0, inst);
+			case 1: return new Spielplatz_LeftCurlyBracketKeyword_3(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -414,62 +449,88 @@ protected class Spielplatz_5_Keyword extends KeywordToken  {
 // Kind|Erwachsener
 protected class Person_Alternatives extends AlternativesToken {
 
-	public Person_Alternatives(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Person_Alternatives(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Alternatives getGrammarElement() {
 		return grammarAccess.getPersonAccess().getAlternatives();
 	}
 
-	protected AbstractToken createChild(int id) {
-		switch(id) {
-			case 0: return new Person_0_RuleCall_Kind(current, this);
-			case 1: return new Person_1_RuleCall_Erwachsener(current, this);
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Person_KindParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new Person_ErwachsenerParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
-		}
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getPersonRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // Kind
-protected class Person_0_RuleCall_Kind extends RuleCallToken {
+protected class Person_KindParserRuleCall_0 extends RuleCallToken {
 	
-	public Person_0_RuleCall_Kind(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Person_KindParserRuleCall_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getPersonAccess().getKindParserRuleCall_0();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Kind_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
-		return new Kind_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 // Erwachsener
-protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
+protected class Person_ErwachsenerParserRuleCall_1 extends RuleCallToken {
 	
-	public Person_1_RuleCall_Erwachsener(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Person_ErwachsenerParserRuleCall_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public RuleCall getGrammarElement() {
 		return grammarAccess.getPersonAccess().getErwachsenerParserRuleCall_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(Erwachsener_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
-		return new Erwachsener_Group(current, this).firstSolution();
+		return current;
 	}
+	
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			default: return parent.createParentFollower(next, index - 0, inst);
+		}	
+	}	
 }
 
 
@@ -486,127 +547,151 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 // "kind" "(" name=ID age=INT ")"
 protected class Kind_Group extends GroupToken {
 	
-	public Kind_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Kind_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getKindAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Kind_4_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Kind_3_Assignment_age(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Kind_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new Kind_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new Kind_0_Keyword_kind(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						if(s5 != null) {
-							last = s5.getPredecessor();
-							return s5;
-						} else {
-							s4 = s4.getPredecessor().nextSolution(this,s4);
-						}
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_RightParenthesisKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getKindRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "kind"
-protected class Kind_0_Keyword_kind extends KeywordToken  {
+protected class Kind_KindKeyword_0 extends KeywordToken  {
 	
-	public Kind_0_Keyword_kind(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Kind_KindKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getKindAccess().getKindKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // "("
-protected class Kind_1_Keyword extends KeywordToken  {
+protected class Kind_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
-	public Kind_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Kind_LeftParenthesisKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getKindAccess().getLeftParenthesisKeyword_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_KindKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // name=ID
-protected class Kind_2_Assignment_name extends AssignmentToken  {
+protected class Kind_NameAssignment_2 extends AssignmentToken  {
 	
-	public Kind_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Kind_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getKindAccess().getNameAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_LeftParenthesisKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // age=INT
-protected class Kind_3_Assignment_age extends AssignmentToken  {
+protected class Kind_AgeAssignment_3 extends AssignmentToken  {
 	
-	public Kind_3_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Kind_AgeAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getKindAccess().getAgeAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("age",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // ")"
-protected class Kind_4_Keyword extends KeywordToken  {
+protected class Kind_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public Kind_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Kind_RightParenthesisKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getKindAccess().getRightParenthesisKeyword_4();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Kind_AgeAssignment_3(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -623,127 +708,151 @@ protected class Kind_4_Keyword extends KeywordToken  {
 // "erwachsener" "(" name=ID age=INT ")"
 protected class Erwachsener_Group extends GroupToken {
 	
-	public Erwachsener_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Erwachsener_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getErwachsenerAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Erwachsener_4_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Erwachsener_3_Assignment_age(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Erwachsener_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new Erwachsener_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new Erwachsener_0_Keyword_erwachsener(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						if(s5 != null) {
-							last = s5.getPredecessor();
-							return s5;
-						} else {
-							s4 = s4.getPredecessor().nextSolution(this,s4);
-						}
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_RightParenthesisKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getErwachsenerRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "erwachsener"
-protected class Erwachsener_0_Keyword_erwachsener extends KeywordToken  {
+protected class Erwachsener_ErwachsenerKeyword_0 extends KeywordToken  {
 	
-	public Erwachsener_0_Keyword_erwachsener(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Erwachsener_ErwachsenerKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getErwachsenerAccess().getErwachsenerKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // "("
-protected class Erwachsener_1_Keyword extends KeywordToken  {
+protected class Erwachsener_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
-	public Erwachsener_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Erwachsener_LeftParenthesisKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getErwachsenerAccess().getLeftParenthesisKeyword_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_ErwachsenerKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // name=ID
-protected class Erwachsener_2_Assignment_name extends AssignmentToken  {
+protected class Erwachsener_NameAssignment_2 extends AssignmentToken  {
 	
-	public Erwachsener_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Erwachsener_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getErwachsenerAccess().getNameAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_LeftParenthesisKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // age=INT
-protected class Erwachsener_3_Assignment_age extends AssignmentToken  {
+protected class Erwachsener_AgeAssignment_3 extends AssignmentToken  {
 	
-	public Erwachsener_3_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Erwachsener_AgeAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getErwachsenerAccess().getAgeAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("age",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // ")"
-protected class Erwachsener_4_Keyword extends KeywordToken  {
+protected class Erwachsener_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public Erwachsener_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Erwachsener_RightParenthesisKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Erwachsener_AgeAssignment_3(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -760,135 +869,160 @@ protected class Erwachsener_4_Keyword extends KeywordToken  {
 // "spielzeug" "(" name=ID farbe=Farbe ")"
 protected class Spielzeug_Group extends GroupToken {
 	
-	public Spielzeug_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielzeug_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getSpielzeugAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Spielzeug_4_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Spielzeug_3_Assignment_farbe(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Spielzeug_2_Assignment_name(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new Spielzeug_1_Keyword(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new Spielzeug_0_Keyword_spielzeug(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						if(s5 != null) {
-							last = s5.getPredecessor();
-							return s5;
-						} else {
-							s4 = s4.getPredecessor().nextSolution(this,s4);
-						}
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielzeug_RightParenthesisKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getSpielzeugRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "spielzeug"
-protected class Spielzeug_0_Keyword_spielzeug extends KeywordToken  {
+protected class Spielzeug_SpielzeugKeyword_0 extends KeywordToken  {
 	
-	public Spielzeug_0_Keyword_spielzeug(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielzeug_SpielzeugKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSpielzeugAccess().getSpielzeugKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // "("
-protected class Spielzeug_1_Keyword extends KeywordToken  {
+protected class Spielzeug_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
-	public Spielzeug_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielzeug_LeftParenthesisKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSpielzeugAccess().getLeftParenthesisKeyword_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielzeug_SpielzeugKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // name=ID
-protected class Spielzeug_2_Assignment_name extends AssignmentToken  {
+protected class Spielzeug_NameAssignment_2 extends AssignmentToken  {
 	
-	public Spielzeug_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielzeug_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielzeugAccess().getNameAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielzeug_LeftParenthesisKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // farbe=Farbe
-protected class Spielzeug_3_Assignment_farbe extends AssignmentToken  {
+protected class Spielzeug_FarbeAssignment_3 extends AssignmentToken  {
 	
-	public Spielzeug_3_Assignment_farbe(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielzeug_FarbeAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getSpielzeugAccess().getFarbeAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("farbe",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("farbe");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Farbe_WertAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("farbe",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("farbe");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) {
-				Solution s = new Farbe_Assignment_wert(param, this).firstSolution();
-				while(s != null && !isConsumed(s,this)) s = s.getPredecessor().nextSolution(this,s);
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+				type = AssignmentType.PRC; 
+				consumed = obj;
+				return param;
 			}
 		}
-
 		return null;
 	}
+
+	public AbstractToken2 createParentFollower(AbstractToken2 next, int index, IInstanceDescription inst) {	
+		switch(index) {
+			case 0: return new Spielzeug_NameAssignment_2(parent, next, 0, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 // ")"
-protected class Spielzeug_4_Keyword extends KeywordToken  {
+protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 	
-	public Spielzeug_4_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Spielzeug_RightParenthesisKeyword_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Spielzeug_FarbeAssignment_3(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -905,279 +1039,309 @@ protected class Spielzeug_4_Keyword extends KeywordToken  {
 // "familie" "(" name=( "keyword" | STRING | ID ) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")"
 protected class Familie_Group extends GroupToken {
 	
-	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Familie_7_Keyword(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Familie_6_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			while(s2 != null) {
-				Solution s3 = new Familie_5_Assignment_kinder(s2.getCurrent(), s2.getPredecessor()).firstSolution();
-				while(s3 != null) {
-					Solution s4 = new Familie_4_Assignment_vater(s3.getCurrent(), s3.getPredecessor()).firstSolution();
-					while(s4 != null) {
-						Solution s5 = new Familie_3_Assignment_mutter(s4.getCurrent(), s4.getPredecessor()).firstSolution();
-						while(s5 != null) {
-							Solution s6 = new Familie_2_Assignment_name(s5.getCurrent(), s5.getPredecessor()).firstSolution();
-							while(s6 != null) {
-								Solution s7 = new Familie_1_Keyword(s6.getCurrent(), s6.getPredecessor()).firstSolution();
-								while(s7 != null) {
-									Solution s8 = new Familie_0_Keyword_familie(s7.getCurrent(), s7.getPredecessor()).firstSolution();
-									if(s8 != null) {
-										last = s8.getPredecessor();
-										return s8;
-									} else {
-										s7 = s7.getPredecessor().nextSolution(this,s7);
-									}
-								}
-								s6 = s6.getPredecessor().nextSolution(this,s6);
-							}
-							s5 = s5.getPredecessor().nextSolution(this,s5);
-						}
-						s4 = s4.getPredecessor().nextSolution(this,s4);
-					}
-					s3 = s3.getPredecessor().nextSolution(this,s3);
-				}
-				s2 = s2.getPredecessor().nextSolution(this,s2);
-			}
-			s1 = s1.getPredecessor().nextSolution(this,s1);
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_RightParenthesisKeyword_7(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getFamilieRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "familie"
-protected class Familie_0_Keyword_familie extends KeywordToken  {
+protected class Familie_FamilieKeyword_0 extends KeywordToken  {
 	
-	public Familie_0_Keyword_familie(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_FamilieKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getFamilieKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // "("
-protected class Familie_1_Keyword extends KeywordToken  {
+protected class Familie_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
-	public Familie_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_LeftParenthesisKeyword_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getLeftParenthesisKeyword_1();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_FamilieKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // name=( "keyword" | STRING | ID )
-protected class Familie_2_Assignment_name extends AssignmentToken  {
+protected class Familie_NameAssignment_2 extends AssignmentToken  {
 	
-	public Familie_2_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_NameAssignment_2(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getNameAssignment_2();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_LeftParenthesisKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
 		if("keyword".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0();
-			return new Solution(obj);
+			return obj;
 		}
-
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1();
-			return new Solution(obj);
+			return obj;
 		}
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 // mutter=[Erwachsener]
-protected class Familie_3_Assignment_mutter extends AssignmentToken  {
+protected class Familie_MutterAssignment_3 extends AssignmentToken  {
 	
-	public Familie_3_Assignment_mutter(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_MutterAssignment_3(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getMutterAssignment_3();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("mutter",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("mutter",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mutter");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 // vater=[Erwachsener]
-protected class Familie_4_Assignment_vater extends AssignmentToken  {
+protected class Familie_VaterAssignment_4 extends AssignmentToken  {
 	
-	public Familie_4_Assignment_vater(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_VaterAssignment_4(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getVaterAssignment_4();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("vater",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_MutterAssignment_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("vater",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vater");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 // kinder+=[Kind]
-protected class Familie_5_Assignment_kinder extends AssignmentToken  {
+protected class Familie_KinderAssignment_5 extends AssignmentToken  {
 	
-	public Familie_5_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_KinderAssignment_5(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getKinderAssignment_5();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_VaterAssignment_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("kinder",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 // ("," kinder+=[Kind])*
-protected class Familie_6_Group extends GroupToken {
+protected class Familie_Group_6 extends GroupToken {
 	
-	public Familie_6_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	public Familie_Group_6(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getGroup_6();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new Familie_6_1_Assignment_kinder(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new Familie_6_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
-	}
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_KinderAssignment_6_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
 }
 
 // ","
-protected class Familie_6_0_Keyword extends KeywordToken  {
+protected class Familie_CommaKeyword_6_0 extends KeywordToken  {
 	
-	public Familie_6_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_CommaKeyword_6_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getCommaKeyword_6_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_Group_6(parent, this, 0, inst);
+			case 1: return new Familie_KinderAssignment_5(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 // kinder+=[Kind]
-protected class Familie_6_1_Assignment_kinder extends AssignmentToken  {
+protected class Familie_KinderAssignment_6_1 extends AssignmentToken  {
 	
-	public Familie_6_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_KinderAssignment_6_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getKinderAssignment_6_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("kinder",!IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_CommaKeyword_6_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("kinder",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
 				element = grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0(); 
-				return new Solution(obj);
+				return obj;
 			}
 		}
 		return null;
 	}
+
 }
 
 
 // ")"
-protected class Familie_7_Keyword extends KeywordToken  {
+protected class Familie_RightParenthesisKeyword_7 extends KeywordToken  {
 	
-	public Familie_7_Keyword(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Familie_RightParenthesisKeyword_7(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Familie_Group_6(parent, this, 0, inst);
+			case 1: return new Familie_KinderAssignment_5(parent, this, 1, inst);
+			default: return null;
+		}	
 	}	
+		
 }
 
 
@@ -1192,51 +1356,54 @@ protected class Familie_7_Keyword extends KeywordToken  {
  **/
 
 // wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
-protected class Farbe_Assignment_wert extends AssignmentToken  {
+protected class Farbe_WertAssignment extends AssignmentToken  {
 	
-	public Farbe_Assignment_wert(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public Farbe_WertAssignment(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getFarbeAccess().getWertAssignment();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("wert",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("wert");
 
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getFarbeRule().getType().getClassifier())) return null;
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("wert",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("wert");
 		if("ROT".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getFarbeAccess().getWertROTKeyword_0_0();
-			return new Solution(obj);
+			return obj;
 		}
-
-
 		if("BLAU".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1();
-			return new Solution(obj);
+			return obj;
 		}
-
-
 		if("GELB".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2();
-			return new Solution(obj);
+			return obj;
 		}
-
-
 		if("GRÜN".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
 			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
-			return new Solution(obj);
+			return obj;
 		}
-
 		return null;
 	}
+
 }
 
 /************ end Rule Farbe ****************/
@@ -1252,66 +1419,80 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 // "type" name=ID
 protected class CustomTypeParserRule_Group extends GroupToken {
 	
-	public CustomTypeParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public CustomTypeParserRule_Group(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Group getGrammarElement() {
 		return grammarAccess.getCustomTypeParserRuleAccess().getGroup();
 	}
 
-	@Override
-	protected Solution createSolution() {	
-		Solution s1 = new CustomTypeParserRule_1_Assignment_name(current, this).firstSolution();
-		while(s1 != null) {
-			Solution s2 = new CustomTypeParserRule_0_Keyword_type(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-			if(s2 != null) {
-				last = s2.getPredecessor();
-				return s2;
-			} else {
-				s1 = s1.getPredecessor().nextSolution(this,s1);
-			}
-		}
-		return null;
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new CustomTypeParserRule_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getCustomTypeParserRuleRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
 	}
 }
 
 // "type"
-protected class CustomTypeParserRule_0_Keyword_type extends KeywordToken  {
+protected class CustomTypeParserRule_TypeKeyword_0 extends KeywordToken  {
 	
-	public CustomTypeParserRule_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public CustomTypeParserRule_TypeKeyword_0(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
 		return grammarAccess.getCustomTypeParserRuleAccess().getTypeKeyword_0();
+	}
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index - 0, inst);
+		}	
 	}	
+		
+	public IInstanceDescription tryConsume() {
+		IInstanceDescription inst = tryConsumeVal();
+		if(!inst.isConsumed()) return null;
+		return inst; 
+	}
 }
 
 // name=ID
-protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  {
+protected class CustomTypeParserRule_NameAssignment_1 extends AssignmentToken  {
 	
-	public CustomTypeParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	public CustomTypeParserRule_NameAssignment_1(AbstractToken2 parent, AbstractToken2 next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
 	}
 	
-	@Override
 	public Assignment getGrammarElement() {
 		return grammarAccess.getCustomTypeParserRuleAccess().getNameAssignment_1();
 	}
-	
-	@Override
-	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
+
+	public AbstractToken2 createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new CustomTypeParserRule_TypeKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
 			element = grammarAccess.getCustomTypeParserRuleAccess().getNameIDTerminalRuleCall_1_0();
-			return new Solution(obj);
+			return obj;
 		}
 		return null;
 	}
+
 }
 
 
