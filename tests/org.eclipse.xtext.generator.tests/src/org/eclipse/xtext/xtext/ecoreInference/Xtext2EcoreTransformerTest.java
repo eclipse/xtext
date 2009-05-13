@@ -1030,4 +1030,12 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 	}
 
+	public void testInheritFromEObject_03() throws Exception {
+		String grammar =
+				" grammar test with org.eclipse.xtext.common.Terminals" +
+				" import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				" Object returns ecore::EObject: {ecore::EAnnotation}; ";
+		XtextResource resource = getResourceFromString(grammar);
+		assertTrue(resource.getErrors().isEmpty());
+	}
 }
