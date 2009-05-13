@@ -4,7 +4,9 @@ import java.io.ByteArrayOutputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -40,5 +42,16 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 		assertFalse(model.equals(result));
 		String expectedModel = "grammar foo with org.eclipse.xtext.common.Terminals\n\nHONOLULU:\n  name=ID;";
 		assertEquals(expectedModel, result);
+	}
+
+	public void testSelf() {
+		Grammar g = getGrammarAccess().getGrammar();
+		for (AbstractRule r : g.getRules()) {
+			// AbstractRule r = GrammarUtil.findRuleForName(g, "GrammarID");
+			// System.out.println("serializing :" + r.getName());
+			String s = serialize(r);
+			assertNotNull(s, r.getName());
+			// System.out.println(s);
+		}
 	}
 }
